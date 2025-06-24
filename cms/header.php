@@ -18,8 +18,25 @@ if(!isset($page_title)) $page_title = 'Steam';
 </head>
 <body>
 <?php
+$json = __DIR__ . '/content/header.json';
 $header_file = __DIR__ . '/content/header.html';
-if(file_exists($header_file)) {
+if(file_exists($json)) {
+    $data = json_decode(file_get_contents($json), true);
+    if(!$data) $data = [];
+    $logo = isset($data['logo']) ? $data['logo'] : '/img/steam_logo_onblack.gif';
+    $buttons = isset($data['buttons']) ? $data['buttons'] : [];
+    echo "<div class=\"header\"><nobr>";
+    echo "<a href=\"/index.php\"><img src=\"".htmlspecialchars($logo)."\" alt=\"[Steam]\" height=\"54\" width=\"152\"></a>";
+    echo "<span class=\"navBar\">";
+    foreach($buttons as $b) {
+        $url = htmlspecialchars($b['url']);
+        $img = htmlspecialchars($b['img']);
+        $hover = htmlspecialchars($b['hover']);
+        $alt = htmlspecialchars($b['alt']);
+        echo "<a href=\"$url\"><img valign=\"bottom\" src=\"$img\" onMouseOver=\"this.src='$hover'\" onMouseOut=\"this.src='$img'\" alt=\"$alt\"></a>";
+    }
+    echo "</span></nobr></div>";
+} elseif(file_exists($header_file)) {
     readfile($header_file);
 }
 ?>
