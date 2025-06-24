@@ -31,16 +31,11 @@ textarea { width: 100%; height: 200px; }
 </head>
 <body>
 <h1>CMS Admin Panel</h1>
-<h2>Edit Header</h2>
-<form method="post">
-<textarea name="header"><?php echo htmlspecialchars(file_get_contents($header_file)); ?></textarea><br>
-<input type="submit" name="save_header" value="Save Header">
-</form>
-<h2>Edit Footer</h2>
-<form method="post">
-<textarea name="footer"><?php echo htmlspecialchars(file_get_contents($footer_file)); ?></textarea><br>
-<input type="submit" name="save_footer" value="Save Footer">
-</form>
+<ul>
+  <li><a href="header.php">Edit Header</a></li>
+  <li><a href="footer.php">Edit Footer</a></li>
+  <li><a href="news.php">Manage News</a></li>
+</ul>
 <h2>Existing Pages</h2>
 <ul>
 <?php foreach($pages as $p): $bn=basename($p); ?>
