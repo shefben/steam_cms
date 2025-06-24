@@ -315,7 +315,7 @@ function preloadImages() {
 										<td content csheight="49" width="209" height="81" valign="top" xpos="22">
 											<div align="center">
 												<p><span class="offerPRICE">PLAY&nbsp;IT&nbsp;NOW.<span class="statusGetTheGamesSubhed"><br>
-														</span></span><span class="statusContent"><span><a href="product_HL2bronsilvergold.html">CLICK&nbsp;HERE</a> for more details!</span></span></p>
+														</span></span><span class="statusContent"><span><a href="product_HL2bronsilvergold.php">CLICK&nbsp;HERE</a> for more details!</span></span></p>
 											</div>
 										</td>
 										<td width="33" height="81"></td>
@@ -335,7 +335,7 @@ function preloadImages() {
 										<td content csheight="49" width="122" height="57" valign="top" xpos="130">
 											<div align="left">
 												<p><span class="statusGetTheGamesSubhed">ORDER&nbsp;NOW &gt;<br>
-													</span><span class="statusGetTheGamesText">Click <a href="product_HL2bronsilvergold.html"><font color="black">here</font></a> for more details. &nbsp;</span></p>
+													</span><span class="statusGetTheGamesText">Click <a href="product_HL2bronsilvergold.php"><font color="black">here</font></a> for more details. &nbsp;</span></p>
 											</div>
 										</td>
 										<td width="12" height="57"></td>

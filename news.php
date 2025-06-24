@@ -1,121 +1,149 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html>
-
-<head>
-	<title>Steam News</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<meta http-equiv="pragma" content="no-cache">
-	<meta name="ROBOTS" content="ALL">
-	<meta name="DESCRIPTION" content="SteamPowered">
-	<meta name="KEYWORDS" content="Steam, account, account creation, signup">
-	<meta name="AUTHOR" content="Valve LLC">
-	<LINK rel="stylesheet" type="text/css" href="steampowered.css">
-	<link rel="Shortcut Icon" type="image/png" href="/webicon.png">
-	<script language="JavaScript" src="nav.js"></script>
-	<link href="rss.xml" rel="alternate" type="application/rss+xml" title="Valve RSS News Feed" />
-</head>
-
-<body>
-
-<!-- begin header -->
-<div class="header">
-<nobr><a href="index.php"><img src="/img/steam_logo_onblack.gif" align="top" alt="[Steam]" height="54" width="152"></a>
-<span class="navBar">
-	<a href="news.php"><img name="news" valign="bottom" height="22" width="54" src="img/news.gif"
-		onMouseOut="this.src='img/news.gif';" onMouseOver="this.src='img/MOnews.gif';"
-		alt="news"></a>
-
-	<a href="getsteamnow.php"><img valign="bottom" height="22" width="108" src="img/getSteamNow.gif"
-		onMouseOut="this.src='img/getSteamNow.gif'" onMouseOver="this.src='img/MOgetSteamNow.gif'"
-		alt="getSteamNow"></a>
-
-	<a href="cybercafes.php"><img valign="bottom" height="22" width="95" src="img/cafes.gif"
-		onMouseOut="this.src='img/cafes.gif'" onMouseOver="this.src='img/MOcafes.gif'"
-		alt="Cyber Cafes"></a>
-
-	<a href="support.php"><img valign="bottom" height="22" width="68" src="img/support.gif"
-		onMouseOut="this.src='img/support.gif'" onMouseOver="this.src='img/MOsupport.gif'"
-		alt="Support"></a>
-
-	<a href="forums.php"><img valign="bottom" height="22" width="68" src="img/forums.gif"
-		onMouseOut="this.src='img/forums.gif'" onMouseOver="this.src='img/MOforums.gif'"
-		alt="Forums"></a>
-
-	<a href="status/status.html"><img valign="bottom" height="22" width="65" src="img/status.gif"
-		onMouseOut="this.src='img/status.gif'" onMouseOver="this.src='img/MOstatus.gif'"
-		alt="Status"></a>
-</span>
-</nobr>
-</div>
-<!-- end header -->
-
+<?php $page_title = 'Steam News'; include 'cms/header.php'; ?>
 
 	<!-- news -->
 
 	<div class="content" id="container">
 	<h1>STEAM NEWS</H1>
-	<h2>LATEST <em>VALVE NEWS</em> &nbsp; <a href="rss.xml" title="RSS format news feed"><img border="0" width="27" height="13" align="absmiddle" src="/img/RSS.gif"></a></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+	<h2>LATEST <em>STEAM NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 	<br>
 	<div class="narrower">
-	<p><h3><a href="index.php?area=news&id=384" style="text-decoration: none; color: #BFBA50;">Half-Life 2 and Counter-Strike: Source Update Released</a></h3>
-<span style="font-size: 9px;">December 22, 2004, 3:37 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">Alfred Reynolds</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
-Half-Life 2 and Counter-Strike: Source updates are available and will be applied automatically when Steam is restarted. The changes include:<br><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Half-Life 2<br><li>Fixed sound stuttering problems caused by thread contention in sound system<br></ul><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Counter-Strike: Source<br><li>Fixed missing models when running the Video Stress Test<br></ul><div><br>&nbsp;</div><br></p>
 
-<p><h3><a href="index.php?area=news&id=383" style="text-decoration: none; color: #BFBA50;">Half-Life 2 Closed Captioning and Steam Now in Portuguese</a></h3>
-<span style="font-size: 9px;">December 21, 2004, 6:47 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">cliffe</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
-Half-Life 2 Portuguese text closed captioning system and Game UI and Steam in Portuguese are now available through the Steam Options dialog. CounterStrike: Source and Half-Life: Source will be made available in Portuguese soon.<div><br>&nbsp;</div><br></p>
+<p><h3><a href="index.php?area=news&id=106392647396669100" style="text-decoration: none; color: #BFBA50;">It's Alive!</a></h3>
+<span style="font-size: 9px;">September 18, 2003, 4:07 pm &middot; <a href="mailto:greg@valvesoftware.com" style="text-decoration: none;">Greg Coomer</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+As <em>many</em> of you have noticed, Steam is back up now. Launching Steam and getting into a game should work just fine. Friends does currently work while playing a game, but not from the desktop. The Friends servers require some networking changes before they're fully functional again. We're working on this now.<br>
+<br>
+As always, get in touch if you have any questions.<br>
+<br><br></p>
 
-<p><h3><a href="index.php?area=news&id=382" style="text-decoration: none; color: #BFBA50;">Source SDK Update Released</a></h3>
-<span style="font-size: 9px;">December 20, 2004, 5:09 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">cliffe</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
-A Source SDK update is available and will be applied automatically when Steam is restarted. The changes include:<br><br><b>Source SDK</b><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed "bCloseSuccessful" bug in Hammer with directory trees too deep<br><li>Added faceposer<br><li>Included view model sources for Half-Life 2<br><li>Revised directory structure - content and sources are kept separate<br><li>Added presets for expert compiles within Hammer<br><li>Fixed problems with launching the game from within Hammer<br><li>Hammer's Game Configurations UI now displays the active configuration on entry<br><li>Hammer now displays paths in a more readable manner<br><li>Create a Mod puts the mod content into the SourceMods folder (shows up in Steam's games list)<br><li>Added vconfig - a tool to handle specifying the current game you're editing<br><li>Fixes for various cases of path environment variables not working<br><li>Buildcubemaps fixed<br><li>Improved startup speed of the SDK launcher<br><li>Simplified debugging under Steam (eliminated the need to copy steam.dll and make steamapp.cfg)<br></ul><br>Visit <a href="http://www.valve-erc.com/srcsdk/prerelease_notes.html">this page</a> for more information on this release.<div><br>&nbsp;</div><br></p>
+<p><h3>Steam Is Down</h3>
+<span style="font-size: 9px;">September 18, 2003, 11:36 am &middot; <a href="mailto:greg@valvesoftware.com" style="text-decoration: none;">Greg Coomer</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+The Steam network is down right now.
+We're working on a fix and should have everything working again shortly. Sorry for the inconvenience.<br>
+<br><br></p>
 
-<p><h3><a href="index.php?area=news&id=379" style="text-decoration: none; color: #BFBA50;">Half-Life 2 Demo Released</a></h3>
-<span style="font-size: 9px;">December 20, 2004, 11:29 am &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">cliffe</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
-A free demo of Half-Life 2 has been released. Featuring some of the amazing digital actors and physical gameplay that has made Half-Life 2 the leading contender for Game of the Year 2004, the demo takes players through some of the early levels of the game and later transports them to the area of the game known as Ravenholm. The demo is available at <a href="http://www.ati.com">ATI.com</a> and requires a Steam account to install.<div><br>&nbsp;</div><br></p>
+<p><h3>Friends Downtime</h3>
 
-<p><h3><a href="index.php?area=news&id=381" style="text-decoration: none; color: #BFBA50;">Guardian Readers Declare Half-Life 2 Game of the Year</a></h3>
-<span style="font-size: 9px;">December 19, 2004, 12:02 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">cliffe</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
-Readers of the most popular UK newspaper website, The Guardian, voted Half-Life 2 Game of the Year 2004. Readers logged on to vote in The Guardian's Annual Readers' Poll and Half-Life 2 garnered more votes than any game in all the categories. <br><br>Visit The Guardian's main site <a href="http://www.guardian.co.uk/online/story/0,3605,1369063,00.html">here</a>. For the full results the poll is also listed on their dedicated <a href="http://blogs.guardian.co.uk/games/archives/cat_games_of_the_year_2004.html">Gamesblog</a>.<div><br>&nbsp;</div><br></p>
+<span style="font-size: 9px;">September 17, 2003, 5:31 pm &middot; <a href="mailto:ChrisB@valvesoftware.com" style="text-decoration: none;">Chris Bokitch</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+The Friends server will be down for the next day or so while we make improvements to it.<br>
+<br><br></p>
 
-<p><h3><a href="index.php?area=news&id=378" style="text-decoration: none; color: #BFBA50;">Source Dedicated Server Update</a></h3>
-<span style="font-size: 9px;">December 17, 2004, 5:22 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">cliffe</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
-A Source Dedicated Server update is available and will be applied automatically when Steam is restarted. The changes include:<br><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Source Dedicated Server<br><li>Fixed +ip not being applied when given on the command line<br><li>HL2 depot fix for upcoming SDK update<br></ul><div><br>&nbsp;</div><br></p>
+<p><h3>Login Failures</h3>
+<span style="font-size: 9px;">September 17, 2003, 1:17 pm &middot; <a href="mailto:ChrisB@valvesoftware.com" style="text-decoration: none;">Chris Bokitch</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+Some people might be getting the following message when attempting to login to Steam:<br>
+<br>
+<em>"Login to steam failed.  Either the specified account does not exist, or the password was wrong.  Please check your email address and password and try again."</em><br>
+<br>
+This is a bit misleading - your account exists and is fine.  The authentication servers are under heavy load right now.  This problem should be resolved shortly.  Thanks for your patience!<br>
+<br><br></p>
 
-<p><h3><a href="index.php?area=news&id=377" style="text-decoration: none; color: #BFBA50;">Counter-Strike: Source, Source Engine Update Available</a></h3>
-<span style="font-size: 9px;">December 16, 2004, 3:41 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">cliffe</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
-Counter-Strike: Source and Source Engine updates are available and will be applied automatically when Steam is restarted. The changes include:<br><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Counter-Strike: Source<br><li>Added map: de_prodigy<br><li>Improved player movement against walls<br><li>Improved choppy player movement when bouncing down slopes<br><li>Purchase icon for defuser is shown<br><li>Physics prop avoidance is scaled by the object's mass<br><li>Detail prop fade distance can be controlled on a per-map basis with env_detail_controller<br><li>Spectator GUI last mode is saved<br><li>Added spectate player by name<br><li>Grenades, weapons, etc., splash when they land in water<br><li>Frag grenade deafness is delayed so the explosion is heard<br><li>Fixed viewmodel lag<br><li>Added consistency checking player model bounds<br><li>Weapon reloads finish when the round restarts<br><li>Autobuy and rebuy trigger a reload if you don't buy a primary weapon<br><li>Rebuy doesn't drop pistols the player has picked up<br><li>Dropped weapon ammo isn't lost if the player has another weapon using that ammo<br><li>Re-added hostage hint messages<br><li>Smoke grenade canisters fade out and are removed when smoke is dense<br><li>Breakable glass is blown outward proportional to the damage recieved<br><li>Soundscapes update for observers<br><li>Fixed not being able to attach to ladder tops<br><li>Misc fixes to spray import<br><br></ul><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Source Engine<br><li>Fixed crash when trying to play an MP3 that doesn't exist or is an invalid format<br><li>Fixed a crash when playing MP3 files with ID3 tags<br><li>Fixed network being started early enough so UDP remote logging works<br><li>World rendering optimizations<br><li>Fixed problems with demo recording<br><li>Added command "setinfo <key> <value>" to allow clients to add custom user info fields (creates a new cvar flagged as FCVAR_USERINFO)<br><li>Enabled sv_downloadurl & sv_consistency on dedicated servers<br><li>Fixed  "kick <name>" command via rcon if the name is surrounded by quotes<br><li>Fixed bug in "logaddress_add" that wouldn't add the correct port if the port and address were surrounded by quotes<br><li>Added "player_say" event for 3rd party plugins<br><li>Fixed crash in dedicated servers when issuing a say before the map is run<br></ul><div><br>&nbsp;</div><br></p>
+<p><h3>A Note About WON and Counter-Strike 1.5</h3>
+<span style="font-size: 9px;">September 17, 2003, 11:35 am &middot; <a href="mailto:ChrisB@valvesoftware.com" style="text-decoration: none;">Chris Bokitch</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+There seems to be a lot of confusion over the proposed plan to pull the plug on WON.  WON <em>will be available</em> until the Steam service is working the way it was intended to.  We will not simply pull the plug.  If you wish to, you can reinstall Half-Life (if necessary) and play Counter-Strike 1.5 the way you always have.<br>
+<br>
+I hope that eases some fears.<br>
+<br>
+Some of the constructive feedback we've received has been quite valuable, and we're working to create a product that everyone will be happy with.<br>
+<br><br></p>
 
-<p><h3><a href="index.php?area=news&id=376" style="text-decoration: none; color: #BFBA50;">Half-Life 2 Wins Spike TV's PC Game of the Year Award</a></h3>
-<span style="font-size: 9px;">December 16, 2004, 12:11 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">Kellie Cosner</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
-On Tuesday, December 14th, <b>SpikeTV</b> held their <b>Second Annual Video Game Award</b> ceremony in Los Angeles, CA.<br><br><b>In addition to earning Best PC Game honors, <i>Half-Life 2</i></b> was recognized for <b>Best Graphics</b>.<div><br>&nbsp;</div><br></p>
+<p><h3>Status Update: New Installers to be Released Tomorrow</h3>
+<span style="font-size: 9px;">September 15, 2003, 5:18 pm &middot; <a href="mailto:greg@valvesoftware.com" style="text-decoration: none;">Greg Coomer</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+Well, the release process last week and over the weekend was pretty rocky. The community managed to get 500,000 accounts created and are currently seeing about 15,000 people playing Counter-Strike 1.6 at any given time. We know that the conversion process has been anything but smooth for many of our users. We're going to get this fixed. We've done our best to support the Half-Life community over the past 5 years, and we're still committed to doing whatever it takes to make the community happy. We've listened to the response, and we'll be repairing the problems with Steam until it performs the way we all want it to.<br>
+<br>
+Tomorrow we will release new installers which include the cache files for all of the games available via Steam (Day of Defeat, Team Fortress Classic, the dedicated server, etc). If you haven't already done so, please use the installer that includes Counter-Strike and Half-Life.<br>
+<br>
+Here's what's going on at Steam HQ:<br>
+<ul>
+<li>We ran into some pretty serious bandwidth and server limitations after the release last week, which has caused several other problems like long wait times and UI unresponsiveness. The load is starting to die down now and we're getting more content servers lined up, so these problems are becoming less frequent. As more people begin using the new installers which include the game caches, their experience using Steam will improve greatly. If you're having problems connecting to Steam or launching Counter-Strike, please download the latest version of the installer and give it a try.</li>
+<li>Some other Steam problems -- "JIT" error messages, expired ticket errors, etc -- will be fixed with a Steam update this week.</li>
+</ul>
+Other stuff:<br>
+<ul>
+<li>Counter-Strike 1.5 is still available, and will be for a couple of weeks. After we're confident that the Steam authentication servers are functioning as they should (and not before), we'll be turning off the WON servers and migrating everyone over to the new system.</li>
+<li>There have been some reports of the Conversion Wizard failing during account creation. If this happens for you, please try downloading and installing the most recent version of the Steam client from one of the mirrors listed on this site.</li>
+<li>We're preparing a new installer on CD for cyber-cafe owners. Contact biz@steampowered.com if you're interested in receiving this.</li>
+<li>We've heard from several people who are having trouble getting their MODs working with Steam. We've updated our FAQ with new information about this. Check it out and then email us if you're still having trouble.</li>
+</ul>
+<br>
+Feel free to get in touch with us you're having difficulty, or for whatever reason. Thanks for hanging in there with us through these first few days.<br>
 
-<p><h3><a href="index.php?area=news&id=373" style="text-decoration: none; color: #BFBA50;">Steam Client Update Released</a></h3>
-<span style="font-size: 9px;">December 14, 2004, 10:57 am &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">Alfred Reynolds</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
-A platform update is available and will be applied automatically when Steam is restarted. The changes include:<br><br>Steam <br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Source MODs will now automatically appear in the games list<br><li>Improved startup process for Steam<br><li>Fixed crash when creating a backup that would span multiple DVDs<br><li>Fixed a bug that would unnecessarily validate Steam caches after a cache corruption<br><li>Fixed Condition Zero: Deleted Scenes and Codename Gordon failing to backup correctly<br><li>Fixed a bug where the message "the game files will be deleted and re-acquired" would repeat<br><li>Fixed offline mode failing after not connecting to Steam for more than a month<br></ul><br>Half-Life 2 <br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Optimization to the Steam filesystem to reduce game launch and level transition time</ul><br>Source SDK <br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Simplified debug-launch process for MOD developers. MOD developers no longer need to place a config file in their directory<br><li>Added a registry key for MOD developers to use to locate a user's Steam installation located at HKEY_CURRENT_USER\Software\Valve\Steam\SourceModInstallPath<br></ul><div><br>&nbsp;</div><br></p>
-
-<p><h3><a href="index.php?area=news&id=372" style="text-decoration: none; color: #BFBA50;">Half-Life 2, HL2DM and Source Dedicated Server Update Released</a></h3>
-<span style="font-size: 9px;">December 10, 2004, 12:16 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">cliffe</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
-Half-Life 2, Half-Life 2: Deathmatch and Source Dedicated Server updates are available and will be applied automatically when Steam is restarted. The changes include:<br><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Half-Life 2<br><li>Solved disc in drive incompatibility error<br></ul><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Half-Life 2: Deathmatch<br><li>Fixed players entering the game with a score of -1<br><li>Fixed combine ball tracking teammates<br><li>Fixed not being able to grab level designer placed combine balls with the physics cannon<br><li>Fixed players randomly spawning without physcannons<br><li>Fixed multishot pistol exploit<br><li>Fixed wrong footstep sounds while in team mode<br><li>Fixed last RPG shot not tracking<br><li>Added cl_defaultweapon -- defaults to weapon_physcannon but can be changed to any other weapon you spawn with<br><li>Added HUD string to print team name<br><li>Added model specific death sounds<br><li>Switching to the physcannon is now instantaneous<br><li>Toned down 357 damage<br><li>Updated dm_overwatch<br></ul><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Source Dedicated Server<br><li>Fixed "failed to load server.dll" error with 3rd party mods<br><li>Fixed linux dedicated server crash on some GLIBC versions<br><li>Fixed dedicated server error in certain localized languages<br></ul><div><br>&nbsp;</div><br></p>
+<br><br>
 
 
-	<p align="center"><a href="news_archive.php" style="text-decoration: none;"><i>view the news archives</i></a> &middot; <a href="/rss.xml" style="text-decoration: none;"><i>rss news feed</i></a></p>
+<p><h3>Counter-Strike 1.6 Steam Installer Released</h3>
+<span style="font-size: 9px;">September 12, 2003, 7:01 pm &middot; <a href="mailto:greg@valvesoftware.com" style="text-decoration: none;">Greg Coomer</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+In addition to the Steam Client and Dedicated Server files released earlier this week, we are now releasing the Counter-Strike 1.6 Steam Installer, which includes all of the content necessary to play CS. Please check the "Get Steam Now" page for download locations.<br>
+<br><br>
+
+	<p><h3>Steam Client Released</h3>
+<span style="font-size: 9px;">September 12, 2003, 2:04 am &middot; <a href="mailto:greg@valvesoftware.com" style="text-decoration: none;">Greg Coomer</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+The Steam client has been released. Please check the "Get Steam Now" page for download locations.<br>
+<br><br></p>
+
+<p><h3>Yesterday's Server Release & Tonight's Client Release</h3>
+<span style="font-size: 9px;">September 11, 2003, 10:06 pm &middot; <a href="mailto:greg@valvesoftware.com" style="text-decoration: none;">Greg Coomer</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+The <a href="http://collective.valve-erc.com/index.php?news=1063262607-73177700">dedicated server release</a> went out last night. See the full update history <a href="/platform/update_history/Dedicated%20Server.html">here</a>.<br>
+<br>
+We're working right now on finalizing the Steam Client, and will be releasing it soon.<br>
+<br><br></p>
+
+<p><h3>Steam Dedicated Server Release Tonight; Steam Client Tomorrow</h3>
+<span style="font-size: 9px;">September 10, 2003, 12:07 pm &middot; <a href="mailto:greg@valvesoftware.com" style="text-decoration: none;">Greg Coomer</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+We've been making final changes to the Steam network throughout the night. Unfortunately, it's taken longer than we planned. However, the Steam dedicated server will be released this evening, and the Steam client release is now scheduled for tomorrow.<br>
+<br>
+We're working to get the release out as fast as we can -- sorry for the delay, and thanks for your patience.<br>
+<br><br></p>
+
+<p><h3>Steam Beta Ends Tonight</h3>
+<span style="font-size: 9px;">September 9, 2003, 4:49 pm &middot; <a href="mailto:Erik@valvesoftware.com" style="text-decoration: none;">Erik Johnson</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+As mentioned last week, the Steam beta is now ending. The beta system will be offline at 5:30 PDT.<br>
+<br>
+A dedicated game server will be released later this evening, and the full Steam client will be released tomorrow (Wednesday) at 11:00 am PDT.<br>
+<br>
+We would like to thank all of the Steam users who have helped us test Steam over the past few months -- your help has been invaluable. We hope you continue to enjoy Steam and all of Valve's games.<br>
+<br><br></p>
+
+<p><h3>Steam status</h3>
+<span style="font-size: 9px;">August 26, 2003, 1:23 pm &middot; <a href="mailto:Erik@valvesoftware.com" style="text-decoration: none;">Erik Johnson</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+The Steam beta is now drawing to an end. This means that there are some significant changes coming to the way that Steam will be run.<br>
+<br>
+The next major release of Steam will be the first step towards converting the entire Half-Life user base to Steam. This means that we will be resetting the Steam account database from scratch. After this, you will need to have a valid CD-Key to access games via Steam, so you will want to treat your Steam account as permanent. One CD-Key will grant you access to all of the games currently available in the Steam beta. The Friends database will remain intact, so if you create an account with the same name when the beta ends, you will retain your Friends list.<br>
+<br>
+The next step will be to release the remaining three Half-Life 2 movies, fix the remaining issues with the Riot Shield in Counter-Strike, and any remaining issues with Steam. This will happen almost immediately after the Steam beta ends.<br>
+<br>
+Some of the other features coming after the beta resets are:<br>
+<br>
+<ul>
+<li> New version of Cobble reworked by David Johnston.<br>
+<li> Full Skin support in Steam.<br>
+<li> More detailed information regarding the cache file on your drive.<br>
+<li> Vastly more efficient use of disk space and bandwidth in Steam.<br>
+<li> New conversion wizard to make better use of existing content on your drive.<br>
+</ul>
+<br>
+After this, well release an update to the entire user base that will convert them to Steam. Hopefully, the majority of the community will have converted before this. This will happen roughly two weeks from the time that the beta period of Steam has ended. Keep in mind, this does not mean we will be stopping or slowing development of Steam or our games that run upon them.<br>
+<br>
+Thanks to everyone who has participated in the beta up until now. Ill let everyone know when were ready for the next release here.<br>
+<br>
+Erik Johnson<br>
+Valve<br>
+<br><br></p>
+
+<p><h3>Counter-Strike 1.6 beta</h3>
+<span style="font-size: 9px;">July 15, 2003, 12:00 pm &middot; <a href="mailto:Erik@valvesoftware.com" style="text-decoration: none;">Erik Johnson</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+The latest version of Counter-Strike is available via Steam now! "Would you like a tactical riot shield with that?"<br>
+<br><br></p>
+
+<p><h3>Half-Life 2 Media</h3>
+<span style="font-size: 9px;">July 15, 2003, 12:00 pm &middot; <a href="mailto:Erik@valvesoftware.com" style="text-decoration: none;">Erik Johnson</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+Stay tuned for a blast of HL2 full-motion goodness, brought to you very soon via Steam.<br>
+<br><br></p>
+
+<p><h3>Got Bandwidth?</h3>
+<span style="font-size: 9px;">July 15, 2003, 12:00 pm &middot; <a href="mailto:Erik@valvesoftware.com" style="text-decoration: none;">Erik Johnson</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+Several partners have already signed up to host <a href="/index.php?area=status">content servers</a>. If you've got at least 50megabits/sec to spare, <a href="mailto:biz@steampowered.com">get in touch</a>!.<br>
+<br><br></p>
+
 
 	</div>
 	</div>
-	
-
-<!-- begin footer -->
-<div class="footer">
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-		<td><a href="/valvesoftware"><img src="img/valve_greenlogo.gif"></a></td>
-		<td>&nbsp;</td>
-		<td><span class="footerfix">&copy; 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="/valvesoftware/privacy.htm">Privacy Policy</a>. <a href="/valvesoftware/legal.htm">Legal</a>. <a href="subscriber_agreement.php">Steam Subscriber Agreement</a>.</span></td>
-		<td width="15%">&nbsp;</td>
-	</tr>
-	</table>
-</div>
-<!-- end footer -->
-
-</body>
-</html>
+<?php include 'cms/footer.php'; ?>
