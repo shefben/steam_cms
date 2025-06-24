@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+
+<head>
+	<title>Cyber Caf&eacute; Setup Instructions</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta name="ROBOTS" content="ALL">
+	<meta name="DESCRIPTION" content="SteamPowered">
+	<meta name="KEYWORDS" content="Steam, account, account creation, signup">
+	<meta name="AUTHOR" content="Valve LLC">
+	<LINK rel="stylesheet" type="text/css" href="steampowered.css">
+	<link rel="Shortcut Icon" type="image/png" href="/webicon.png">
+	<script language="JavaScript" src="nav.js"></script>
+	<link href="rss.xml" rel="alternate" type="application/rss+xml" title="Valve RSS News Feed" />
+</head>
+
+<body>
+
+<!-- begin header -->
+<div class="header">
+<nobr><a href="index.php"><img src="/img/steam_logo_onblack.gif" align="top" alt="[Steam]" height="54" width="152"></a>
+<span class="navBar">
+	<a href="news.php"><img name="news" valign="bottom" height="22" width="54" src="img/news.gif"
+		onMouseOut="this.src='img/news.gif';" onMouseOver="this.src='img/MOnews.gif';"
+		alt="news"></a>
+
+	<a href="getsteamnow.php"><img valign="bottom" height="22" width="108" src="img/getSteamNow.gif"
+		onMouseOut="this.src='img/getSteamNow.gif'" onMouseOver="this.src='img/MOgetSteamNow.gif'"
+		alt="getSteamNow"></a>
+
+	<a href="cybercafes.php"><img valign="bottom" height="22" width="95" src="img/cafes.gif"
+		onMouseOut="this.src='img/cafes.gif'" onMouseOver="this.src='img/MOcafes.gif'"
+		alt="Cyber Cafes"></a>
+
+	<a href="support.php"><img valign="bottom" height="22" width="68" src="img/support.gif"
+		onMouseOut="this.src='img/support.gif'" onMouseOver="this.src='img/MOsupport.gif'"
+		alt="Support"></a>
+
+	<a href="forums.php"><img valign="bottom" height="22" width="68" src="img/forums.gif"
+		onMouseOut="this.src='img/forums.gif'" onMouseOver="this.src='img/MOforums.gif'"
+		alt="Forums"></a>
+
+	<a href="status/status.html"><img valign="bottom" height="22" width="65" src="img/status.gif"
+		onMouseOut="this.src='img/status.gif'" onMouseOver="this.src='img/MOstatus.gif'"
+		alt="Status"></a>
+</span>
+</nobr>
+</div>
+<!-- end header -->
+
+<!-- end header -->
+
+<!-- cafe setup instructions -->
+
+<div class="content" id="container">
+<h1>CAF&Eacute; SETUP INSTRUCTIONS</H1>
+<h2>HOW TO<em> GET UP AND RUNNING WITH STEAM</em></h2><img src="img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+<div class="narrower">
+
+Here are instructions for setting up Steam in your caf&eacute;. Before you begin this process, you must be a member of the <a href="cybercafes.php">official Valve Cyber Caf&eacute; Program</a>. For additional information not covered here, please check the <a href="faq.php">caf&eacute; section of our FAQ</a>.<br>
+<br>
+<h3 style="text-transform:uppercase;">1. Download the Steam Installer (or use the supplied DVD-ROM)</h3>
+When you join the Cyber Caf&eacute; Program, we will send you a DVD-ROM containing the Steam installer. If you would rather not wait for that to arrive, you can download the Steam client installer from the <a href="getsteamnow.php">Get Steam Now</a> page on this site. If you choose to download this installer rather than using the DVD-ROM, be sure to save the installer to disk -- you'll need to use it on each licensed computer in your caf&eacute;.<br>
+<br>
+
+<h3 style="text-transform:uppercase;">2. Run the Steam Installer</h3>
+To make things simple, you will probably want to choose the same install location on every machine in your caf&eacute;. We recommend that you have at least 1GB of free space on the drive before installing Steam.<br>
+<br>
+<h3 style="text-transform:uppercase;">3. Create an Account</h3>
+Follow these steps to create a Steam account:<br>
+<br>
+<img src="img/square2.gif"> <strong>Email Address</strong><br>
+The first thing the Create Account wizard will ask you to do is enter a valid email address. Please note that for caf&eacute; Steam accounts, the address that you enter into this box does not actually need to be a valid email address. Instead, it should be an address like "computer1@the_name_of_your_cafe.com". Again, this does NOT need to be a valid email address -- it only needs to uniquely identify the specific machine in your caf&eacute;. The second machine on which you install Steam can use the address "computer2@the_name_of_your_cafe.com", and so on.<br>
+<br>
+<img src="img/square2.gif"> <strong style="margin-bottom:4px;">Choose a Password and Secret Question & Answer</strong><br>
+The normal security concerns apply when choosing your Steam password. Note that it is possible to use the same password on all of the machines in your caf&eacute; (but obviously, somewhat less secure).<br>
+<br>
+As an added security feature for cyber caf&eacute;s, Steam will require this password to be entered in order to log OUT. A customer in your caf&eacute; will therefore not be able to log out of Steam or log in as a different user. Also, Steam will run automatically when your computer starts up, and will log in to the Steam servers using the credentials you've supplied during account creation.<br>
+<br>
+<img src="img/square2.gif"> <strong>Enter a Nickname</strong><br>
+When entering a "Nickname" for each of your caf&eacute; computers, you should again use the name of the computer ("computer1" or similar). It is not necessary to enter a First or Last name.<br>
+<br>
+<img src="img/square2.gif"> <strong>Finished creating account</strong><br>
+That's it for account creation. All that's left is entering your Product Keys.<br>
+<br>
+<h3 style="text-transform:uppercase;">4. Enter Your Cyber Caf&eacute; Product Key</h3>
+When Valve adds you to the Official Cyber Caf&eacute; Program, you will receive (via email and/or FedEx) a set of Product Keys. You will receive one for each computer you wish to license.<br>
+<br>
+After Steam is installed, open the "My Games" list. There, you'll see a list of all Steam Games. Double-Click on one that you intend to offer in your caf&eacute;. Steam will ask you for a product key at this point. Each computer will use one of the keys in your list. (Once you have used each Product Key in this way, it will be associated with the Steam account that you've created on that computer. Your Product Keys will, from this point on, not be usable by other people to create accounts or to play Steam games.)<br>
+<br>
+<h3 style="text-transform:uppercase;">5. Repeat Steps 2-4 for Each Computer</h3>
+Repeat these steps for every licensed computer on your network, using unique "email addresses" and Nicknames each time.<br>
+<br>
+<h3 style="text-transform:uppercase;">6. Configure Internet Ports</h3>
+Note that Steam requires certain ports to be open from your gaming machines to the Internet. If you haven't already done so, check that the following ports are "open":<br>
+<br>
+UDP 1200<br>
+UDP 27000 to 27015 inclusive<br>
+TCP 27030 to 27039 inclusive<br>
+<br>
+<h3 style="text-transform:uppercase;">7. Start Playing!</h3>
+Log in to Steam and sit your first customer down. Be sure to have them try the Server Browser (for finding Internet game servers). Also, they can send instant messages through "Friends" to any other Steam user. Automatic updates will be sent to each of your computers automatically, and new games will be added as they become available.<br>
+<br><a href="mailto:cafesupport@valvesoftware.com">Let us know</a> if you have any difficulty.<br>
+<br>
+
+<a href="cybercafes.php">Return to main Cyber Caf&eacute; page</a>
+
+</div>
+</div>
+
+
+
+<!-- begin footer -->
+<div class="footer">
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><a href="/valvesoftware"><img src="img/valve_greenlogo.gif"></a></td>
+		<td>&nbsp;</td>
+		<td><span class="footerfix">&copy; 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="/valvesoftware/privacy.htm">Privacy Policy</a>. <a href="/valvesoftware/legal.htm">Legal</a>. <a href="subscriber_agreement.php">Steam Subscriber Agreement</a>.</span></td>
+		<td width="15%">&nbsp;</td>
+	</tr>
+	</table>
+</div>
+<!-- end footer -->
+
+</body>
+</html>

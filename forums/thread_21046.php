@@ -1,0 +1,1090 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head><title>Steam Users Forums - Here's How To Play 1.5 WITHOUT WON AUTHENTICATION</title>
+<meta http-equiv="MSThemeCompatible" content="Yes">
+<style type="text/css">
+BODY {
+	margin-top:0px;
+	margin-left:0px;
+	margin-right:0px;
+	SCROLLBAR-BASE-COLOR: #4C5844;
+	SCROLLBAR-ARROW-COLOR: #969F8E;
+}
+SELECT {
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif;
+	FONT-SIZE: 11px;
+	COLOR: #D8DED3;
+	BACKGROUND-COLOR: #3E4637
+}
+TEXTAREA, .bginput {
+	FONT-SIZE: 12px;
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif;
+	COLOR: #D8DED3;
+	BACKGROUND-COLOR: #3E4637
+}
+A:link, A:visited, A:active {
+	COLOR: #D8DED3;
+}
+A:hover {
+	COLOR: #FFFFFF;
+}
+#cat A:link, #cat A:visited, #cat A:active {
+	COLOR: #C4B550;
+	TEXT-DECORATION: none;
+}
+#cat A:hover {
+	COLOR: #C4B550;
+	TEXT-DECORATION: underline;
+}
+#ltlink A:link, #ltlink A:visited, #ltlink A:active {
+	COLOR: #D8DED3;
+	TEXT-DECORATION: none;
+}
+#ltlink A:hover {
+	COLOR: #FFFFFF;
+	TEXT-DECORATION: underline;
+}
+.thtcolor {
+	COLOR: #D8DED3;
+}
+</style>
+
+
+<script language="javascript" type="text/javascript">
+<!--
+function aimwindow(aimid) {
+	window.open("member.php?s=e62675246cca5d3ed901439e83940cf6&action=aimmessage&aim="+aimid,"_blank","toolbar=no,location=no,menubar=no,scrollbars=no,width=175,height=275,resizeable=yes,status=no")
+
+
+}
+// -->
+</script>
+</head>
+<body bgcolor="#4C5844" text="#A0AA95" id="all" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10" link="#000020" vlink="#000020" alink="#000020">
+<!-- header -->
+
+<!-- logo and buttons -->
+<center>
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+<tr>
+	<td nowrap bgcolor="#000000">
+	<a href="/index.php"><img src="/img/steam_logo_onblack.gif" align="top" alt="[Steam]" height="54" width="152" border="0"></a>&nbsp;
+	</td>
+	<td width="100%" height="54" valign="bottom" align="left" bgcolor="#000000">
+	<span style="margin-left:100px;position:absolute;top:32px;">
+	<a href="/index.php?area=news"><img name="news" valign="bottom" height="22" width="54" src="/img/news.gif" border="0" 
+		onMouseOut="this.src='/img/news.gif';" onMouseOver="this.src='/img/MOnews.gif';" 
+		alt="news"></a>
+
+	<a href="/index.php?area=getsteamnow"><img valign="bottom" height="22" width="108" src="/img/getSteamNow.gif" border="0" 
+		onMouseOut="this.src='/img/getSteamNow.gif'" onMouseOver="this.src='/img/MOgetSteamNow.gif'" 
+		alt="getSteamNow"></a>
+
+	<a href="/index.php?area=support"><img valign="bottom" height="22" width="68" src="/img/support.gif" border="0" 
+		onMouseOut="this.src='/img/support.gif'" onMouseOver="this.src='/img/MOsupport.gif'" 
+		alt="Support"></a>
+
+	<a href="/index.php?area=forums"><img valign="bottom" height="22" width="68" src="/img/forums.gif" border="0" 
+		onMouseOut="this.src='/img/forums.gif'" onMouseOver="this.src='/img/MOforums.gif'" 
+		alt="Forums"></a>
+
+	<a href="/status.html"><img valign="bottom" height="22" width="65" src="/img/status.gif" border="0" 
+		onMouseOut="this.src='/img/status.gif'" onMouseOver="this.src='/img/MOstatus.gif'" 
+		alt="Status"></a>
+	</span>
+	</td>
+</tr>
+<tr height="10">
+	<td colspan="2" valign="top" align="left" height="10"></td>
+</tr>
+<tr>
+	<td colspan="2" valign="top" align="left">
+
+		<div align="center">
+		<a href="usercp.php"><img src="images/top_profile.gif" alt="Here you can view your subscribed threads, work with private messages and edit your profile and preferences" border="0" width="53" height="25"></a>
+		<a href="register.php?action=signup"><img src="images/top_register.gif" alt="Registration is free!" border="0" width="53" height="25"></a> 
+		<a href="memberlist.php"><img src="images/top_members.gif" alt="Find other members" border="0" width="53" height="25"></a>
+		<a href="misc.php?action=faq"><img src="images/top_faq.gif" alt="Frequently Asked Questions" border="0" width="53" height="25"></a>
+		<a href="search.php"><img src="images/top_search.gif" alt="Search" border="0" width="53" height="25"></a>
+		<a href="index.php"><img src="images/top_home.gif" alt="Home" border="0" width="53" height="25"></a> &nbsp; </div>
+	
+	</td>
+</tr>
+</table>
+<!-- /logo and buttons -->
+
+<!-- content table -->
+<table bgcolor="#4C5844" width="95%" cellpadding="10" cellspacing="0" border="0">
+<tr>
+  <td>
+
+
+<!-- breadcrumb, nav links -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%"  align="center">
+<tr>
+	<td><img src="images/vb_bullet.gif" border="0" align="middle" alt="Steam Users Forums : Powered by vBulletin version 2.2.9">
+<font face="verdana, arial, helvetica" size="2" ><b><a href="index.php?s=e62675246cca5d3ed901439e83940cf6">Steam Users Forums</a> &gt; <a href="forumdisplay.php?s=e62675246cca5d3ed901439e83940cf6&forumid=5">Game Discussions</a> &gt; <a href="forumdisplay.php?s=e62675246cca5d3ed901439e83940cf6&forumid=7">Counter-Strike</a> &gt; Here's How To Play 1.5 WITHOUT WON AUTHENTICATION</b></font></td>
+	
+</tr>
+</table>
+<!-- /breadcrumb, nav links -->
+
+<a name="posttop"></a>
+
+<!-- End content area table (CREATED IN HEADER!!) -->   
+	</td>
+</tr>
+</table>
+
+<!-- spacer -->
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%">
+<!-- /spacer -->
+
+
+
+<!-- first unread and next/prev -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%"  align="center">
+<tr>
+	<td><font face="verdana,arial,helvetica" size="1" > &nbsp;</font></td>
+	<td align="right"><font face="verdana,arial,helvetica" size="1" >
+	<img src="images/prev.gif" alt="" border="0">
+	<a href="showthread.php?s=e62675246cca5d3ed901439e83940cf6&threadid=21046&goto=nextoldest">Last Thread</a>
+	&nbsp;
+	<a href="showthread.php?s=e62675246cca5d3ed901439e83940cf6&threadid=21046&goto=nextnewest">Next Thread</a>
+	<img src="images/next.gif" alt="" border="0">
+	</font></td>
+</tr>
+</table>
+<!-- first unread and next/prev -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" nowrap><font face="verdana,arial,helvetica" size="1"  color="#D8DED3" class="thtcolor"><b>Author</b></font></td>
+	<td bgcolor="#3E4637" width="100%">
+	<!-- Thread nav and post images -->
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="100%"><font face="verdana,arial,helvetica" size="1"  color="#D8DED3" class="thtcolor"><b>Thread</b></font></td>
+		<td><a href="newthread.php?s=e62675246cca5d3ed901439e83940cf6&action=newthread&forumid=7"><img src="images/newthread.gif" border="0" alt="Post New Thread"></a></td>
+		<td><font face="verdana, arial, helvetica" size="2" >&nbsp;&nbsp;</font></td>
+		<td><a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&threadid=21046"><img src="images/reply.gif" border="0" alt="Post A Reply"></a></td>
+	</tr>
+	</table>
+	<!-- /Thread nav and post images -->
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- /spacer -->
+</td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<!-- /spacer -->
+
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post135277"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>EasyRhinoHL</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 11</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b>Here's How To Play 1.5 WITHOUT WON AUTHENTICATION</b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >Check out <a href="http://www.**************/easyrhinohl/" target="_blank">http://www.**************/easyrhinohl/</a><br />
+<br />
+Only server needs to install, not the clients.  Clients will connect like normal.</font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+http://www.**************/easyrhinohl/<br />
+<br />
+USE 1.5 WITHOUT WON!!!</font></p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=135277">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=135277">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">04:11 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="EasyRhinoHL is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=26716" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for EasyRhinoHL"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=26716"><img src="images/sendpm.gif" border="0" alt="Click here to Send EasyRhinoHL a Private Message"></a>  <a href="http://www.geocities.com/easyrhinohl/" target="_blank"><img src="images/home.gif" alt="Visit EasyRhinoHL's homepage!" border="0"></a> <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=26716"><img src="images/find.gif" border="0" alt="Find more posts by EasyRhinoHL"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=26716"><img src="images/buddy.gif" border="0" alt="Add EasyRhinoHL to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=135277"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=135277"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post135296"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>FlippyCS</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 31</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >Now Why Would You Say This in an Official Steam Forums?</font></p>
+	
+	<p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=135296">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=135296">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">04:22 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="FlippyCS is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=26659" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for FlippyCS"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=26659"><img src="images/sendpm.gif" border="0" alt="Click here to Send FlippyCS a Private Message"></a>  <a href="http://webpages.charter.net/elitegaming" target="_blank"><img src="images/home.gif" alt="Visit FlippyCS's homepage!" border="0"></a> <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=26659"><img src="images/find.gif" border="0" alt="Find more posts by FlippyCS"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=26659"><img src="images/buddy.gif" border="0" alt="Add FlippyCS to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=135296"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=135296"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post135358"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Nasty</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Guest</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Not Yet<br>
+	Location: <br>
+	Posts: N/A</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >now the next trick, gettin thousands of servers to do this</font></p>
+	
+	<p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=135358">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=135358">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">05:01 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" >
+			     
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=135358"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=135358"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post135506"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Opes</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: Australia<br>
+	Posts: 5</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b>Re: Here's How To Play 1.5 WITHOUT WON AUTHENTICATION</b></font>
+	<p><font face="verdana, arial, helvetica" size="2" ><blockquote><font face="verdana,arial,helvetica" size="1" >quote:</font><hr><i>Originally posted by FlippyCS</i><br />
+<b>Now Why Would You Say This in an Official Steam Forums? </b><hr></blockquote> <br />
+<br />
+Since when would the out-of-date version of Counter-Strike worry them at all? I think that they should support this program/make their own version to make those players that don't have the time/bandwidth to be able to download CS 1.6<br />
+<br />
+Good work on the prog btw, my friend says it works great on his server :-)</font></p>
+	
+	<p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=135506">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=135506">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">06:58 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="Opes is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=26755" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for Opes"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=26755"><img src="images/sendpm.gif" border="0" alt="Click here to Send Opes a Private Message"></a>   <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=26755"><img src="images/find.gif" border="0" alt="Find more posts by Opes"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=26755"><img src="images/buddy.gif" border="0" alt="Add Opes to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=135506"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=135506"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post135582"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>EasyRhinoHL</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 11</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >Spread the word, folks...<br />
+<br />
+1.5 is BACK!!</font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+http://www.**************/easyrhinohl/<br />
+<br />
+USE 1.5 WITHOUT WON!!!</font></p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=135582">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=135582">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">08:03 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="EasyRhinoHL is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=26716" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for EasyRhinoHL"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=26716"><img src="images/sendpm.gif" border="0" alt="Click here to Send EasyRhinoHL a Private Message"></a>  <a href="http://www.geocities.com/easyrhinohl/" target="_blank"><img src="images/home.gif" alt="Visit EasyRhinoHL's homepage!" border="0"></a> <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=26716"><img src="images/find.gif" border="0" alt="Find more posts by EasyRhinoHL"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=26716"><img src="images/buddy.gif" border="0" alt="Add EasyRhinoHL to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=135582"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=135582"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post135588"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>A Zombie</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 76</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" ><blockquote><font face="verdana,arial,helvetica" size="1" >quote:</font><hr><i>Originally posted by EasyRhinoHL </i><br />
+<b>Spread the word, folks...<br />
+<br />
+1.5 is BACK!! </b><hr></blockquote><br />
+<font color="yellow">Have you been under a rock or something?<br />
+You can play 1.5 now without that software as WON is still up.</font><br />
+<br />
+<font color="white">BTW-Even though you have a disclaimer, I think just having that software on your site (if it is yours) violates the EULA.</font></font></p>
+	
+	<p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=135588">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=135588">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">08:12 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="A Zombie is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=20412" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for A Zombie"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=20412"><img src="images/sendpm.gif" border="0" alt="Click here to Send A Zombie a Private Message"></a>   <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=20412"><img src="images/find.gif" border="0" alt="Find more posts by A Zombie"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=20412"><img src="images/buddy.gif" border="0" alt="Add A Zombie to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=135588"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=135588"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post135593"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>bgesley426</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >TEH PAINTIST</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 393</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >WON WILL GO DOWN He did find a loophole but nigga please learn to adapt or give up and play something else<br />
+<br />
+<br />
+CS2 will come out within a year hopefully anyways. tho with OODLES AND OODLES OF BUGS O FUN</font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+Don't kick midgets<br />
+<br />
+.....stop it.</font></p></p>
+	<p><font face="verdana,arial,helvetica" size="1" ><i>Last edited by bgesley426 on 09-29-2003 at 08:26 AM</i></font></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=135593">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=135593">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">08:18 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="bgesley426 is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=15090" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for bgesley426"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=15090"><img src="images/sendpm.gif" border="0" alt="Click here to Send bgesley426 a Private Message"></a>   <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=15090"><img src="images/find.gif" border="0" alt="Find more posts by bgesley426"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=15090"><img src="images/buddy.gif" border="0" alt="Add bgesley426 to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=135593"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=135593"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post135620"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>EasyRhinoHL</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 11</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" ><blockquote><font face="verdana,arial,helvetica" size="1" >quote:</font><hr> A Zombie: <br />
+<br />
+Have you been under a rock or something?<br />
+<br />
+<hr></blockquote><br />
+<br />
+Yes, I've actually been under a rock...<br />
+<br />
+What is steam?  I don't know because I've been under a rock.<br />
+<br />
+Where did I find this software?  I don't know because I've been under a rock.<br />
+<br />
+Is WON going down soon? I don't know because I've been under a rock.<br />
+<br />
+Does having this help people prepare for when WON.net does go down? I don't know because I've been under a rock.<br />
+<br />
+<br />
+Think about it for a second... would I take the time to list this and post all of this information if I wasn't at least informed on the current situation with 1.5,1.6, and the WON network?<br />
+<br />
+I've been playing since CS Beta 5.2, I know this community, I know this game, I know how these updates work.<br />
+<br />
+I am not afraid of change, I am afraid that Steam is going to ruin CS b/c they want people to use HL2 instead anyways, which = more $$$ for ValvE.  Hey, they're a business -- they've got to do whats best for them.<br />
+<br />
+But I am a CS enthusiast, so I am doing whats best for me, and the other 100,000 CS "purists" out there that feel ValvE is getting lazy.<br />
+<br />
+<i>Maybe you should give me a little more credit, and not treat me like a retard, seeing as how I just made a f|_|ck1ng breakthrough here as far as WON authing goes</i></font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+http://www.**************/easyrhinohl/<br />
+<br />
+USE 1.5 WITHOUT WON!!!</font></p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=135620">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=135620">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">08:58 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="EasyRhinoHL is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=26716" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for EasyRhinoHL"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=26716"><img src="images/sendpm.gif" border="0" alt="Click here to Send EasyRhinoHL a Private Message"></a>  <a href="http://www.geocities.com/easyrhinohl/" target="_blank"><img src="images/home.gif" alt="Visit EasyRhinoHL's homepage!" border="0"></a> <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=26716"><img src="images/find.gif" border="0" alt="Find more posts by EasyRhinoHL"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=26716"><img src="images/buddy.gif" border="0" alt="Add EasyRhinoHL to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=135620"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=135620"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post136551"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>CarbinE</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 14</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >hahahahhahahaha your not funny and im laughing i dont get it HAHAHAHHAHA</font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+pizzown</font></p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=136551">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=136551">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">07:57 PM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="CarbinE is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=26897" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for CarbinE"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=26897"><img src="images/sendpm.gif" border="0" alt="Click here to Send CarbinE a Private Message"></a>   <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=26897"><img src="images/find.gif" border="0" alt="Find more posts by CarbinE"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=26897"><img src="images/buddy.gif" border="0" alt="Add CarbinE to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=136551"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=136551"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post136648"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>FlippyCS</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 31</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >Funny how, even if he gets the majority of the thousands of "Steam Flamers and 1.5 Fans" to covert to the 1.5, gonna be worse to see hundreds of people downloading his files from a free webhost. <br />
+<br />
+Can you say "Down Due to Bandwidth"?</font></p>
+	
+	<p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=136648">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=136648">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">08:39 PM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="FlippyCS is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=26659" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for FlippyCS"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=26659"><img src="images/sendpm.gif" border="0" alt="Click here to Send FlippyCS a Private Message"></a>  <a href="http://webpages.charter.net/elitegaming" target="_blank"><img src="images/home.gif" alt="Visit FlippyCS's homepage!" border="0"></a> <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=26659"><img src="images/find.gif" border="0" alt="Find more posts by FlippyCS"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=26659"><img src="images/buddy.gif" border="0" alt="Add FlippyCS to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=136648"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=136648"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post136940"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>EasyRhinoHL</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 11</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >You think I am gonna host that file on my real website?  You gotta be kiddin me... not worth the risk.<br />
+<br />
+Besides, the download is for server ops only, so its not like that many people will be downloading it.<br />
+<br />
+<br />
+Also, the windows zip is 25k and the linux gzip is 15k.<br />
+<br />
+Still think there will be a bandwidth problem?<br />
+<br />
+Negative</font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+http://www.**************/easyrhinohl/<br />
+<br />
+USE 1.5 WITHOUT WON!!!</font></p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=136940">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=136940">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-29-2003 <font color="#D8DED3">10:41 PM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="EasyRhinoHL is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=26716" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for EasyRhinoHL"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=26716"><img src="images/sendpm.gif" border="0" alt="Click here to Send EasyRhinoHL a Private Message"></a>  <a href="http://www.geocities.com/easyrhinohl/" target="_blank"><img src="images/home.gif" alt="Visit EasyRhinoHL's homepage!" border="0"></a> <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=26716"><img src="images/find.gif" border="0" alt="Find more posts by EasyRhinoHL"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=26716"><img src="images/buddy.gif" border="0" alt="Add EasyRhinoHL to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=136940"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=136940"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post137165"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>A Zombie</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 76</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >I just know that you are posting about something that is maybe illegal and your IP is logged at these forums.If valve were to take action and report you to your ISP you would probably lose your internet service.<br />
+I am now done with this thread.</font></p>
+	
+	<p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=137165">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=137165">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-30-2003 <font color="#D8DED3">12:24 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="A Zombie is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=20412" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for A Zombie"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=20412"><img src="images/sendpm.gif" border="0" alt="Click here to Send A Zombie a Private Message"></a>   <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=20412"><img src="images/find.gif" border="0" alt="Find more posts by A Zombie"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=20412"><img src="images/buddy.gif" border="0" alt="Add A Zombie to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=137165"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=137165"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post137345"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>mf4</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Jan 2003<br>
+	Location: <br>
+	Posts: 50</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" ><blockquote><font face="verdana,arial,helvetica" size="1" >quote:</font><hr><i>Originally posted by A Zombie </i><br />
+<b>I just know that you are posting about something that is maybe illegal and your IP is logged at these forums.If valve were to take action and report you to your ISP you would probably lose your internet service.<br />
+I am now done with this thread. </b><hr></blockquote> <br />
+<br />
+I'm sure you scared the pants off of him. *rolls eyes*</font></p>
+	
+	<p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=137345">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=137345">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-30-2003 <font color="#D8DED3">01:43 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="mf4 is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=1670" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for mf4"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=1670"><img src="images/sendpm.gif" border="0" alt="Click here to Send mf4 a Private Message"></a>   <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=1670"><img src="images/find.gif" border="0" alt="Find more posts by mf4"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=1670"><img src="images/buddy.gif" border="0" alt="Add mf4 to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=137345"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=137345"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post137519"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Gumbeh</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 10</font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" ><blockquote><font face="verdana,arial,helvetica" size="1" >quote:</font><hr><i>Originally posted by bgesley426 </i><br />
+<b> nigga please </b><hr></blockquote> <br />
+<br />
+isnt there a thing agaisnt racism?</font></p>
+	
+	<p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=e62675246cca5d3ed901439e83940cf6&postid=137519">Report this post to a moderator</a> | IP: <a href="postings.php?s=e62675246cca5d3ed901439e83940cf6&action=getip&postid=137519">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-30-2003 <font color="#D8DED3">03:05 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="Gumbeh is offline" align="absmiddle">
+			<a href="member.php?s=e62675246cca5d3ed901439e83940cf6&action=getinfo&userid=27080" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for Gumbeh"></a> <a href="private.php?s=e62675246cca5d3ed901439e83940cf6&action=newmessage&userid=27080"><img src="images/sendpm.gif" border="0" alt="Click here to Send Gumbeh a Private Message"></a>   <a href="search.php?s=e62675246cca5d3ed901439e83940cf6&action=finduser&userid=27080"><img src="images/find.gif" border="0" alt="Find more posts by Gumbeh"></a> <a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addlist&userlist=buddy&userid=27080"><img src="images/buddy.gif" border="0" alt="Add Gumbeh to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=e62675246cca5d3ed901439e83940cf6&action=editpost&postid=137519"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&postid=137519"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+
+
+<!-- spacer -->
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%">
+<!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="100%">
+	<!-- time zone and post buttons -->
+	<table border="0" cellspacing="0" cellpadding="0" bgcolor="#3E4637">
+	<tr>
+		<td width="100%"><font face="verdana,arial,helvetica" size="1"  color="#D8DED3"><b>All times are GMT. The time now is 11:04 PM.</b></font></td>
+		<td><a href="newthread.php?s=e62675246cca5d3ed901439e83940cf6&action=newthread&forumid=7"><img src="images/newthread.gif" border="0" alt="Post New Thread"></a></td>
+		<td><font face="verdana, arial, helvetica" size="2" >&nbsp;&nbsp;</font></td>
+		<td><a href="newreply.php?s=e62675246cca5d3ed901439e83940cf6&action=newreply&threadid=21046"><img src="images/reply.gif" border="0" alt="Post A Reply"></a></td>
+	</tr>
+	</table>
+	<!-- /time zone and post buttons -->
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- first unread and next/prev -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%"  align="center">
+<tr>
+	<td><font face="verdana,arial,helvetica" size="1" >&nbsp;</font></td>
+	<td align="right"><font face="verdana,arial,helvetica" size="1" >
+	<img src="images/prev.gif" alt="" border="0">
+	<a href="showthread.php?s=e62675246cca5d3ed901439e83940cf6&threadid=21046&goto=nextoldest">Last Thread</a>
+	&nbsp;
+	<a href="showthread.php?s=e62675246cca5d3ed901439e83940cf6&threadid=21046&goto=nextnewest">Next Thread</a>
+	<img src="images/next.gif" alt="" border="0">
+	</font></td>
+</tr>
+</table>
+<!-- first unread and next/prev -->
+
+<!-- /spacer -->
+</td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<!-- /spacer -->
+
+<!-- restart content table from header -->
+<table cellpadding="10" cellspacing="0" border="0" width="800" bgcolor="#4C5844" align="center">
+<tr>
+    <td>
+
+<!-- thread options links -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"   align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" align="center"><font face="verdana,arial,helvetica" size="1" >
+	<img src="images/printer.gif" alt="" border="0" align="absmiddle">
+	<a href="printthread.php?s=e62675246cca5d3ed901439e83940cf6&threadid=21046">Show Printable Version</a> |
+	<img src="images/sendtofriend.gif" alt="" border="0" align="absmiddle">
+	<a href="sendtofriend.php?s=e62675246cca5d3ed901439e83940cf6&threadid=21046">Email this Page</a> |
+	<img src="images/subscribe.gif" alt="" border="0" align="absmiddle">
+	<a href="member2.php?s=e62675246cca5d3ed901439e83940cf6&action=addsubscription&threadid=21046">Subscribe to this Thread</a>
+	</font></td>
+</tr>
+</table>
+</td></tr></table>
+<!-- /thread options links -->
+	
+<br>
+
+<!-- forum jump and rate thread -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%"  align="center">
+<tr>
+	<td></td>
+	<td align="right"><table cellpadding="0" cellspacing="0" border="0">
+<form action="threadrate.php" method="get"><tr><td>
+	<font face="verdana,arial,helvetica" size="1" >
+	<input type="hidden" name="s" value="e62675246cca5d3ed901439e83940cf6">
+	<input type="hidden" name="threadid" value="21046">
+	<b>Rate This Thread:</b><br>
+	<select name="vote">
+		<option value="-1" selected>Select a rating...</option>
+		<option value="5">5 .. Best</option>
+		<option value="4">4</option>
+		<option value="3">3 .. Average</option>
+		<option value="2">2</option>
+		<option value="1">1 .. Worst</option>
+	</select><!-- go button -->
+<input type="image" src="images/go.gif" border="0" 
+align="absbottom">
+	</font>
+</td></tr></form>
+</table></td>
+</tr>
+</table>
+<!-- /Rate this thread -->
+
+<br>
+
+<!-- forum rules and admin links -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%"  align="center">
+<tr valign="bottom">
+	<td><font face="verdana,arial,helvetica" size="1" ><b>Forum Rules:</b><table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0">
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" >
+		You <b>may not</b> post new threads<br>
+		You <b>may not</b> post replies<br>
+		You <b>may not</b> post attachments<br>
+		You <b>may not</b> edit your posts
+	</font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" >
+		HTML code is <b>OFF</b><br>
+		<a href="misc.php?s=e62675246cca5d3ed901439e83940cf6&action=bbcode" target="_blank">vB code</a> is <b>ON</b><br>
+		<a href="misc.php?s=e62675246cca5d3ed901439e83940cf6&action=showsmilies" target="_blank">Smilies</a> are <b>ON</b><br>
+		<a href="misc.php?s=e62675246cca5d3ed901439e83940cf6&action=bbcode#imgcode" target="_blank">[IMG]</a> code is <b>OFF</b>
+	</font></td>
+</tr>
+</table>
+</td></tr></table></font></td>
+	<td align="right">
+	&nbsp;
+	</td>
+</tr>
+</table>
+<!-- /forum rules and admin links -->
+
+<!-- footer -->
+
+  </td>
+</tr>
+</table>
+<!-- /content area table -->
+</center>
+
+
+<table width="802" height="77" border="0" cellspacing="0" cellpadding="0" align="center" cool="" showgridx="" SHOWGRIDY="" GRIDX="16" gridy="16">
+<tr height="2">
+<td width="802" height="2" colspan="4"></td>
+<td width="1" height="2"><spacer type="block" width="1" height="2"></td>
+</tr>
+<tr height="34">
+<td width="356" height="34" colspan="2"></td>
+<td width="555" height="34" valign="top" xpos="356"><img src="../img/valve_greenlogo.gif" width="136" height="30" align="center" border="0"></td>
+<td width="26" height="74" rowspan="2"></td>
+<td width="1" height="34"><spacer type="block" width="1" height="34"></td>
+</tr>
+</td>
+</tr>
+<tr height="40">
+<td width="24" height="40"></td>
+<td width="752" height="40" colspan="2" align="left" xpos="24" content valign="top" csheight="40">
+<div align="center">
+<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><a href="/">Home</a> | <a href="/index.php?area=news">News</a> | <a href="/getsteamnow.php">Get Steam Now</a> | <a href="/index.php?area=support">Support</a> | <a href="/index.php?area=forums">Forums</a> |&nbsp;<a href="/status.html">Status</a><br>
+									</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="1">(c) 2003 Valve, L.L.C. All rights reserved. Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve, L.L.C.</font></p
+</div>
+</td>
+<td width="1" height="40"><spacer type="block" width="1" height="40"></td>
+</tr>
+<tr height="1" cntrlrow>
+<td width="24" height="1"><spacer type="block" width="24" height="1"></td>
+<td width="332" height="1"><spacer type="block" width="332" height="1"></td>
+<td width="420" height="1"><spacer type="block" width="420" height="1"></td>
+<td width="26" height="1"><spacer type="block" width="26" height="1"></td>
+<td width="1" height="1"></td>
+</tr>
+</table>
+
+</body>
+</html>

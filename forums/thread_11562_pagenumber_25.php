@@ -1,0 +1,763 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head><title>Steam Users Forums - Steam Status</title>
+<meta http-equiv="MSThemeCompatible" content="Yes">
+<style type="text/css">
+BODY {
+	margin-top:0px;
+	margin-left:0px;
+	margin-right:0px;
+	SCROLLBAR-BASE-COLOR: #4C5844;
+	SCROLLBAR-ARROW-COLOR: #969F8E;
+}
+SELECT {
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif;
+	FONT-SIZE: 11px;
+	COLOR: #D8DED3;
+	BACKGROUND-COLOR: #3E4637
+}
+TEXTAREA, .bginput {
+	FONT-SIZE: 12px;
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif;
+	COLOR: #D8DED3;
+	BACKGROUND-COLOR: #3E4637
+}
+A:link, A:visited, A:active {
+	COLOR: #D8DED3;
+}
+A:hover {
+	COLOR: #FFFFFF;
+}
+#cat A:link, #cat A:visited, #cat A:active {
+	COLOR: #C4B550;
+	TEXT-DECORATION: none;
+}
+#cat A:hover {
+	COLOR: #C4B550;
+	TEXT-DECORATION: underline;
+}
+#ltlink A:link, #ltlink A:visited, #ltlink A:active {
+	COLOR: #D8DED3;
+	TEXT-DECORATION: none;
+}
+#ltlink A:hover {
+	COLOR: #FFFFFF;
+	TEXT-DECORATION: underline;
+}
+.thtcolor {
+	COLOR: #D8DED3;
+}
+</style>
+
+
+<script language="javascript" type="text/javascript">
+<!--
+function aimwindow(aimid) {
+	window.open("member.php?s=ed7a34d941833154035d1aca86f95cb8&action=aimmessage&aim="+aimid,"_blank","toolbar=no,location=no,menubar=no,scrollbars=no,width=175,height=275,resizeable=yes,status=no")
+
+
+}
+// -->
+</script>
+</head>
+<body bgcolor="#4C5844" text="#A0AA95" id="all" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10" link="#000020" vlink="#000020" alink="#000020">
+<!-- header -->
+
+<script>
+function popup(src,scroll,x,y,target)
+{
+	open(src,target,"scrollbars="+scroll+",width="+x+",height="+y+",menubar=0,resizable=yes")
+}
+</script>
+
+<!-- logo and buttons -->
+<center>
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+<tr>
+	<td nowrap bgcolor="#000000">
+	<a href="/index.php"><img src="/img/steam_logo_onblack.gif" align="top" alt="[Steam]" height="54" width="152" border="0"></a>&nbsp;
+	</td>
+	<td width="100%" height="54" valign="bottom" align="left" bgcolor="#000000">
+	<span style="margin-left:64px;position:absolute;top:32px;">
+	<a href="/index.php?area=news"><img name="news" valign="bottom" height="22" width="54" src="/img/news.gif" border="0" 
+		onMouseOut="this.src='/img/news.gif';" onMouseOver="this.src='/img/MOnews.gif';" 
+		alt="news"></a>
+
+	<a href="/index.php?area=getsteamnow"><img valign="bottom" height="22" width="108" src="/img/getSteamNow.gif" border="0" 
+		onMouseOut="this.src='/img/getSteamNow.gif'" onMouseOver="this.src='/img/MOgetSteamNow.gif'" 
+		alt="getSteamNow"></a>
+
+	<a href="/index.php?area=cybercafes"><img valign="bottom" height="22" width="95" src="/img/cafes.gif" border="0"
+		onMouseOut="this.src='/img/cafes.gif'" onMouseOver="this.src='/img/MOcafes.gif'"
+		alt="Cyber Cafes"></a>
+
+	<a href="/index.php?area=support"><img valign="bottom" height="22" width="68" src="/img/support.gif" border="0" 
+		onMouseOut="this.src='/img/support.gif'" onMouseOver="this.src='/img/MOsupport.gif'" 
+		alt="Support"></a>
+
+	<a href="/index.php?area=forums"><img valign="bottom" height="22" width="68" src="/img/forums.gif" border="0" 
+		onMouseOut="this.src='/img/forums.gif'" onMouseOver="this.src='/img/MOforums.gif'" 
+		alt="Forums"></a>
+
+	<a href="/status/status.html"><img valign="bottom" height="22" width="65" src="/img/status.gif" border="0" 
+		onMouseOut="this.src='/img/status.gif'" onMouseOver="this.src='/img/MOstatus.gif'" 
+		alt="Status"></a>
+	</span>
+	</td>
+</tr>
+<tr height="10">
+	<td colspan="2" valign="top" align="left" height="10"></td>
+</tr>
+<tr>
+	<td colspan="2" valign="top" align="left">
+
+		<div align="center">
+		<a href="usercp.php"><img src="images/top_profile.gif" alt="Here you can view your subscribed threads, work with private messages and edit your profile and preferences" border="0" width="53" height="25"></a>
+		<a href="register.php?action=signup"><img src="images/top_register.gif" alt="Registration is free!" border="0" width="53" height="25"></a> 
+		<a href="memberlist.php"><img src="images/top_members.gif" alt="Find other members" border="0" width="53" height="25"></a>
+		<a href="misc.php?action=faq"><img src="images/top_faq.gif" alt="Frequently Asked Questions" border="0" width="53" height="25"></a>
+		<a href="search.php"><img src="images/top_search.gif" alt="Search" border="0" width="53" height="25"></a>
+		<a href="index.php"><img src="images/top_home.gif" alt="Home" border="0" width="53" height="25"></a> &nbsp; </div>
+	
+	</td>
+</tr>
+</table>
+<!-- /logo and buttons -->
+
+<!-- content table -->
+<table bgcolor="#4C5844" width="95%" cellpadding="10" cellspacing="0" border="0">
+<tr>
+  <td>
+
+
+<!-- breadcrumb, nav links -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%"  align="center">
+<tr>
+	<td><img src="images/vb_bullet.gif" border="0" align="middle" alt="Steam Users Forums : Powered by vBulletin version 2.3.3">
+<font face="verdana, arial, helvetica" size="2" ><b><a href="index.php?s=ed7a34d941833154035d1aca86f95cb8">Steam Users Forums</a> &gt; <a href="forumdisplay.php?s=ed7a34d941833154035d1aca86f95cb8&amp;forumid=13">Steam Discussions</a> &gt; <a href="forumdisplay.php?s=ed7a34d941833154035d1aca86f95cb8&amp;forumid=14">General</a> &gt; Steam Status</b></font></td>
+	
+</tr>
+</table>
+<!-- /breadcrumb, nav links -->
+
+<a name="posttop"></a>
+
+<!-- End content area table (CREATED IN HEADER!!) -->   
+	</td>
+</tr>
+</table>
+
+<!-- spacer -->
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%">
+<!-- /spacer -->
+
+
+
+<!-- first unread and next/prev -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%"  align="center">
+<tr>
+	<td><font face="verdana,arial,helvetica" size="1" >Pages (25): <b>  <a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;perpage=15&amp;pagenumber=1" title="first page">&laquo; First</a> ...   <a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;perpage=15&amp;pagenumber=24" title="previous page">&laquo;</a>   <a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;perpage=15&amp;pagenumber=23">23</a>  <a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;perpage=15&amp;pagenumber=24">24</a>  <font size="2">[25]</font>    </b> &nbsp;</font></td>
+	<td align="right"><font face="verdana,arial,helvetica" size="1" >
+	<img src="images/prev.gif" alt="" border="0">
+	<a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;goto=nextoldest">Last Thread</a>
+	&nbsp;
+	<a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;goto=nextnewest">Next Thread</a>
+	<img src="images/next.gif" alt="" border="0">
+	</font></td>
+</tr>
+</table>
+<!-- first unread and next/prev -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="175" nowrap><font face="verdana,arial,helvetica" size="1"  color="#D8DED3" class="thtcolor"><b>Author</b></font></td>
+	<td bgcolor="#3E4637" width="100%">
+	<!-- Thread nav and post images -->
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="100%"><font face="verdana,arial,helvetica" size="1"  color="#D8DED3" class="thtcolor"><b>Thread</b></font></td>
+		<td><a href="newthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newthread&amp;forumid=14"><img src="images/newthread.gif" border="0" alt="Post New Thread"></a></td>
+		<td><font face="verdana, arial, helvetica" size="2" >&nbsp;&nbsp;</font></td>
+		<td><a href="newreply.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newreply&amp;threadid=11562"><img src="images/reply.gif" border="0" alt="Post A Reply"></a></td>
+	</tr>
+	</table>
+	<!-- /Thread nav and post images -->
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- /spacer -->
+</td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<!-- /spacer -->
+
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+
+<!--
+ 	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87570"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>jplove71</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: Phoenix, Arizona<br>
+	Posts: 2</font></td>
+ -->
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87570"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>jplove71</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br><br>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003</font></p></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" ><blockquote><font face="verdana,arial,helvetica" size="1" >quote:</font><hr><i>Originally posted by Thortok2000 </i><br />
+<b>I agree about giving a second chance, and the unlikelyhood that it will make that big of a difference in terms of how many hackers/cheaters are allowed.</b><hr></blockquote> I disagree...  Once a cheater/hacker/exploiter, always a cheater/hacker/exploiter.  People that feel the need to use any cheat/hack/exploit to play HL &amp; the Mods for it don't deserve a second chance because they will most likely cheat/hack/exploit again if they feel that they can get away with it.</font></p>
+	
+	<p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=ed7a34d941833154035d1aca86f95cb8&amp;postid=87570">Report this post to a moderator</a> | IP: <a href="postings.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getip&amp;postid=87570">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-10-2003 <font color="#D8DED3">07:17 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="jplove71 is offline" align="absmiddle">
+			<a href="member.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getinfo&amp;userid=14526" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for jplove71"></a> <a href="private.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newmessage&amp;userid=14526"><img src="images/sendpm.gif" border="0" alt="Click here to Send jplove71 a Private Message"></a>  <!--<a href="http://www.clancf.net" target="_blank"><img src="images/home.gif" alt="Visit jplove71's homepage!" border="0"></a>--> <a href="search.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=finduser&amp;userid=14526"><img src="images/find.gif" border="0" alt="Find more posts by jplove71"></a> <a href="member2.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=addlist&amp;userlist=buddy&amp;userid=14526"><img src="images/buddy.gif" border="0" alt="Add jplove71 to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=editpost&amp;postid=87570"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newreply&amp;postid=87570"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+
+<!--
+ 	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87582"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>NetGraph5</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: <br>
+	Posts: 5</font></td>
+ -->
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87582"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>NetGraph5</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br><br>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003</font></p></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >I have just gotten started running a server company and owning it I host the current 1.5 CS servers I have just recently started to use the steam server files for linux to host 1.6 servers how soon are the linux server files going to be released after the windows files our are they both being release at the same time ??? Also has there been a fix for the extreme cpu and ram usage for the server files. cause currently I can only run two 24 player servers a box which is kinda wierd cause the old cs server files i can run 4 to a box adn the box will not lagg.  I get 85% usage fromt he two steam linux servers with a max players of 24 on both. <br />
+<br />
+And info will be helpfull<br />
+<br />
+Thanks Ben</font></p>
+	
+	<p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=ed7a34d941833154035d1aca86f95cb8&amp;postid=87582">Report this post to a moderator</a> | IP: <a href="postings.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getip&amp;postid=87582">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-10-2003 <font color="#D8DED3">07:23 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="NetGraph5 is offline" align="absmiddle">
+			<a href="member.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getinfo&amp;userid=14528" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for NetGraph5"></a> <a href="private.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newmessage&amp;userid=14528"><img src="images/sendpm.gif" border="0" alt="Click here to Send NetGraph5 a Private Message"></a>  <!--<a href="http://www.netgraph5.com/forum/" target="_blank"><img src="images/home.gif" alt="Visit NetGraph5's homepage!" border="0"></a>--> <a href="search.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=finduser&amp;userid=14528"><img src="images/find.gif" border="0" alt="Find more posts by NetGraph5"></a> <a href="member2.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=addlist&amp;userlist=buddy&amp;userid=14528"><img src="images/buddy.gif" border="0" alt="Add NetGraph5 to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=editpost&amp;postid=87582"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newreply&amp;postid=87582"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+
+<!--
+ 	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87656"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Thortok2000</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Counter-Strike Player</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Jun 2003<br>
+	Location: Greenville, SC<br>
+	Posts: 892</font></td>
+ -->
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87656"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Thortok2000</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Counter-Strike Player</font><br><br>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Jun 2003</font></p></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" ><blockquote><font face="verdana,arial,helvetica" size="1" >quote:</font><hr><i>Originally posted by jplove71 </i><br />
+<b>I disagree...  Once a cheater/hacker/exploiter, always a cheater/hacker/exploiter.  People that feel the need to use any cheat/hack/exploit to play HL &amp; the Mods for it don't deserve a second chance because they will most likely cheat/hack/exploit again if they feel that they can get away with it. </b><hr></blockquote><br />
+<br />
+Then simply ban them again.  Big freakin' deal.  Besides, your key phrase was 'if they feel they can get away with it'.  They didn't the first time, they probably won't even try a second time.  At least, not in the exact same way, for sure.  Cheat detection hasn't declined simply because the ban lists are being reset.<br />
+<br />
+No server is cheater/hacker/exploiter proof without an admin, no matter how long the ban list is.</font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+“I don&apos;t know half of you as well as I should like; and I like less than half of you half as well as you deserve.” — Bilbo Baggins, from his speech on his eleventy-first birthday.</font></p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=ed7a34d941833154035d1aca86f95cb8&amp;postid=87656">Report this post to a moderator</a> | IP: <a href="postings.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getip&amp;postid=87656">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-10-2003 <font color="#D8DED3">08:42 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="Thortok2000 is offline" align="absmiddle">
+			<a href="member.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getinfo&amp;userid=10012" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for Thortok2000"></a> <a href="private.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newmessage&amp;userid=10012"><img src="images/sendpm.gif" border="0" alt="Click here to Send Thortok2000 a Private Message"></a>  <!--<a href="http://www.livejournal.com/~thortok2000" target="_blank"><img src="images/home.gif" alt="Visit Thortok2000's homepage!" border="0"></a>--> <a href="search.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=finduser&amp;userid=10012"><img src="images/find.gif" border="0" alt="Find more posts by Thortok2000"></a> <a href="member2.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=addlist&amp;userlist=buddy&amp;userid=10012"><img src="images/buddy.gif" border="0" alt="Add Thortok2000 to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=editpost&amp;postid=87656"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newreply&amp;postid=87656"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+
+<!--
+ 	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87660"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Thortok2000</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Counter-Strike Player</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Jun 2003<br>
+	Location: Greenville, SC<br>
+	Posts: 892</font></td>
+ -->
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87660"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Thortok2000</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Counter-Strike Player</font><br><br>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Jun 2003</font></p></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" ><blockquote><font face="verdana,arial,helvetica" size="1" >quote:</font><hr><i>Originally posted by NetGraph5 </i><br />
+<b>I have just gotten started running a server company and owning it I host the current 1.5 CS servers I have just recently started to use the steam server files for linux to host 1.6 servers how soon are the linux server files going to be released after the windows files our are they both being release at the same time ??? Also has there been a fix for the extreme cpu and ram usage for the server files. cause currently I can only run two 24 player servers a box which is kinda wierd cause the old cs server files i can run 4 to a box adn the box will not lagg.  I get 85% usage fromt he two steam linux servers with a max players of 24 on both. <br />
+<br />
+And info will be helpfull<br />
+<br />
+Thanks Ben </b><hr></blockquote><br />
+<br />
+All I know for certain is that your problems and requests will eventually be attended to.  Some of them (especially the cpu usage) should be fixed as soon as steam is final later today, but the rest I don't know when they'll be addressed.</font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+“I don&apos;t know half of you as well as I should like; and I like less than half of you half as well as you deserve.” — Bilbo Baggins, from his speech on his eleventy-first birthday.</font></p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=ed7a34d941833154035d1aca86f95cb8&amp;postid=87660">Report this post to a moderator</a> | IP: <a href="postings.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getip&amp;postid=87660">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-10-2003 <font color="#D8DED3">08:44 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="Thortok2000 is offline" align="absmiddle">
+			<a href="member.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getinfo&amp;userid=10012" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for Thortok2000"></a> <a href="private.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newmessage&amp;userid=10012"><img src="images/sendpm.gif" border="0" alt="Click here to Send Thortok2000 a Private Message"></a>  <!--<a href="http://www.livejournal.com/~thortok2000" target="_blank"><img src="images/home.gif" alt="Visit Thortok2000's homepage!" border="0"></a>--> <a href="search.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=finduser&amp;userid=10012"><img src="images/find.gif" border="0" alt="Find more posts by Thortok2000"></a> <a href="member2.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=addlist&amp;userlist=buddy&amp;userid=10012"><img src="images/buddy.gif" border="0" alt="Add Thortok2000 to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=editpost&amp;postid=87660"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newreply&amp;postid=87660"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+
+<!--
+ 	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87749"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Abysmal</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >badgers!</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Mar 2003<br>
+	Location: Northern Ireland<br>
+	Posts: 165</font></td>
+ -->
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87749"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Abysmal</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >badgers!</font><br><br>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Mar 2003</font></p></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >imo linux files should come out b4 windows, or at the same time. Consider that quite a fair percentage of servers are linux, i believe its around 70%.</font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+&lt;twix`friend&gt; out with friends :: &lt;G`&gt; why lie dickhead :: &lt;G`&gt; you off to wank on your face again then</font></p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=ed7a34d941833154035d1aca86f95cb8&amp;postid=87749">Report this post to a moderator</a> | IP: <a href="postings.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getip&amp;postid=87749">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-10-2003 <font color="#D8DED3">10:07 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="Abysmal is offline" align="absmiddle">
+			<a href="member.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getinfo&amp;userid=6922" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for Abysmal"></a> <a href="private.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newmessage&amp;userid=6922"><img src="images/sendpm.gif" border="0" alt="Click here to Send Abysmal a Private Message"></a>   <a href="search.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=finduser&amp;userid=6922"><img src="images/find.gif" border="0" alt="Find more posts by Abysmal"></a> <a href="member2.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=addlist&amp;userlist=buddy&amp;userid=6922"><img src="images/buddy.gif" border="0" alt="Add Abysmal to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=editpost&amp;postid=87749"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newreply&amp;postid=87749"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+
+<!--
+ 	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87751"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Thortok2000</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Counter-Strike Player</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Jun 2003<br>
+	Location: Greenville, SC<br>
+	Posts: 892</font></td>
+ -->
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post87751"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>Thortok2000</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Counter-Strike Player</font><br><br>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Jun 2003</font></p></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" ><blockquote><font face="verdana,arial,helvetica" size="1" >quote:</font><hr><i>Originally posted by Abysmal </i><br />
+<b>imo linux files should come out b4 windows, or at the same time. Consider that quite a fair percentage of servers are linux, i believe its around 70%. </b><hr></blockquote><br />
+<br />
+Well, it will probably come out at the same time, but will most likely come out before.  If you check out the news, they said they would release the dedicated server software before they released everything else.</font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+“I don&apos;t know half of you as well as I should like; and I like less than half of you half as well as you deserve.” — Bilbo Baggins, from his speech on his eleventy-first birthday.</font></p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=ed7a34d941833154035d1aca86f95cb8&amp;postid=87751">Report this post to a moderator</a> | IP: <a href="postings.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getip&amp;postid=87751">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-10-2003 <font color="#D8DED3">10:09 AM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="Thortok2000 is offline" align="absmiddle">
+			<a href="member.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getinfo&amp;userid=10012" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for Thortok2000"></a> <a href="private.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newmessage&amp;userid=10012"><img src="images/sendpm.gif" border="0" alt="Click here to Send Thortok2000 a Private Message"></a>  <!--<a href="http://www.livejournal.com/~thortok2000" target="_blank"><img src="images/home.gif" alt="Visit Thortok2000's homepage!" border="0"></a>--> <a href="search.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=finduser&amp;userid=10012"><img src="images/find.gif" border="0" alt="Find more posts by Thortok2000"></a> <a href="member2.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=addlist&amp;userlist=buddy&amp;userid=10012"><img src="images/buddy.gif" border="0" alt="Add Thortok2000 to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=editpost&amp;postid=87751"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newreply&amp;postid=87751"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0"><tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%"><!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+
+<!--
+ 	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post88056"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>lyndak</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br>
+	<p>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003<br>
+	Location: Cornwall<br>
+	Posts: 9</font></td>
+ -->
+	<td bgcolor="#3E4637" width="175" valign="top" nowrap>
+	<a name="post88056"></a>
+	
+	<font face="verdana, arial, helvetica" size="2" ><b>lyndak</b></font><br>
+	<font face="verdana,arial,helvetica" size="1" >Junior Member</font><br><br>
+	<font face="verdana,arial,helvetica" size="1" >Registered: Sep 2003</font></p></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="top">
+	<font face="verdana,arial,helvetica" size="1" > <b></b></font>
+	<p><font face="verdana, arial, helvetica" size="2" >Righton.</font></p>
+	
+	<p><p><font face="verdana, arial, helvetica" size="2" >__________________<br>
+MonsE: OMFG They have teh supar skulks!!!!11 F4 F4 F4!!11</font></p></p>
+	<p></p>
+	<p align="right"><font face="verdana,arial,helvetica" size="1" ><a href="report.php?s=ed7a34d941833154035d1aca86f95cb8&amp;postid=88056">Report this post to a moderator</a> | IP: <a href="postings.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getip&amp;postid=88056">Logged</a></font></p>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637" width="175" height="16" nowrap><font face="verdana,arial,helvetica" size="1" ><img src="images/posticon.gif" border="0" alt="Old Post">
+	09-10-2003 <font color="#D8DED3">01:54 PM</font></font></td>
+	
+	<td bgcolor="#3E4637" width="100%" valign="middle" height="16">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr valign="bottom">
+			<td><font face="verdana,arial,helvetica" size="1" ><img src="images/off.gif" border="0" alt="lyndak is offline" align="absmiddle">
+			<a href="member.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=getinfo&amp;userid=14611" target="_blank"><img src="images/profile.gif" border="0" alt="Click Here to See the Profile for lyndak"></a> <a href="private.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newmessage&amp;userid=14611"><img src="images/sendpm.gif" border="0" alt="Click here to Send lyndak a Private Message"></a>  <!--<a href="http://www.brotherhood-online.co.uk/" target="_blank"><img src="images/home.gif" alt="Visit lyndak's homepage!" border="0"></a>--> <a href="search.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=finduser&amp;userid=14611"><img src="images/find.gif" border="0" alt="Find more posts by lyndak"></a> <a href="member2.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=addlist&amp;userlist=buddy&amp;userid=14611"><img src="images/buddy.gif" border="0" alt="Add lyndak to your buddy list"></a>
+			<!-- $ post[icqicon] --> <!-- $ post[aimicon] --> <!-- $ post[yahooicon] --> 
+			</font></td>
+			<td align="right" nowrap><font face="verdana,arial,helvetica" size="1" >
+			<a href="editpost.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=editpost&amp;postid=88056"><img src="images/edit.gif" border="0" alt="Edit/Delete Message"></a>
+			<a href="newreply.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newreply&amp;postid=88056"><img src="images/quote.gif" border="0" alt="Reply w/Quote"></a>
+			</font></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- spacer --></td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+
+
+<!-- spacer -->
+<table bgcolor="#4C5844" width="800" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td><td width="100%">
+<!-- spacer -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"  width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" width="100%">
+	<!-- time zone and post buttons -->
+	<table border="0" cellspacing="0" cellpadding="0" bgcolor="#3E4637">
+	<tr>
+		<td width="100%"><font face="verdana,arial,helvetica" size="1"  color="#D8DED3"><b>All times are GMT. The time now is 08:15 PM.</b></font></td>
+		<td><a href="newthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newthread&amp;forumid=14"><img src="images/newthread.gif" border="0" alt="Post New Thread"></a></td>
+		<td><font face="verdana, arial, helvetica" size="2" >&nbsp;&nbsp;</font></td>
+		<td><a href="newreply.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=newreply&amp;threadid=11562"><img src="images/reply.gif" border="0" alt="Post A Reply"></a></td>
+	</tr>
+	</table>
+	<!-- /time zone and post buttons -->
+	</td>
+</tr>
+</table>
+</td></tr></table>
+
+<!-- first unread and next/prev -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%"  align="center">
+<tr>
+	<td><font face="verdana,arial,helvetica" size="1" >Pages (25): <b>  <a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;perpage=15&amp;pagenumber=1" title="first page">&laquo; First</a> ...   <a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;perpage=15&amp;pagenumber=24" title="previous page">&laquo;</a>   <a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;perpage=15&amp;pagenumber=23">23</a>  <a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;perpage=15&amp;pagenumber=24">24</a>  <font size="2">[25]</font>    </b>&nbsp;</font></td>
+	<td align="right"><font face="verdana,arial,helvetica" size="1" >
+	<img src="images/prev.gif" alt="" border="0">
+	<a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;goto=nextoldest">Last Thread</a>
+	&nbsp;
+	<a href="showthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562&amp;goto=nextnewest">Next Thread</a>
+	<img src="images/next.gif" alt="" border="0">
+	</font></td>
+</tr>
+</table>
+<!-- first unread and next/prev -->
+
+<!-- /spacer -->
+</td><td width="10"><img width="10" height="1" src="images/space.gif" alt=""></td></tr></table>
+<!-- /spacer -->
+
+<!-- restart content table from header -->
+<table cellpadding="10" cellspacing="0" border="0" width="800" bgcolor="#4C5844" align="center">
+<tr>
+    <td>
+
+<!-- thread options links -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"   align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0"  width="100%">
+<tr>
+	<td bgcolor="#3E4637" align="center"><font face="verdana,arial,helvetica" size="1" >
+	<img src="images/printer.gif" alt="" border="0" align="absmiddle">
+	<a href="printthread.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562">Show Printable Version</a> |
+	<img src="images/sendtofriend.gif" alt="" border="0" align="absmiddle">
+	<a href="sendtofriend.php?s=ed7a34d941833154035d1aca86f95cb8&amp;threadid=11562">Email this Page</a> |
+	<img src="images/subscribe.gif" alt="" border="0" align="absmiddle">
+	<a href="member2.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=addsubscription&amp;threadid=11562">Subscribe to this Thread</a>
+	</font></td>
+</tr>
+</table>
+</td></tr></table>
+<!-- /thread options links -->
+	
+<br>
+
+<!-- forum jump and rate thread -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%"  align="center">
+<tr>
+	<td></td>
+	<td align="right">&nbsp;</td>
+</tr>
+</table>
+<!-- /Rate this thread -->
+
+<br>
+
+<!-- forum rules and admin links -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%"  align="center">
+<tr valign="bottom">
+	<td><font face="verdana,arial,helvetica" size="1" ><b>Forum Rules:</b><table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0">
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" >
+		You <b>may not</b> post new threads<br>
+		You <b>may not</b> post replies<br>
+		You <b>may not</b> post attachments<br>
+		You <b>may not</b> edit your posts
+	</font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" >
+		HTML code is <b>OFF</b><br>
+		<a href="misc.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=bbcode" target="_blank">vB code</a> is <b>ON</b><br>
+		<a href="misc.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=showsmilies" target="_blank">Smilies</a> are <b>ON</b><br>
+		<a href="misc.php?s=ed7a34d941833154035d1aca86f95cb8&amp;action=bbcode#imgcode" target="_blank">[IMG]</a> code is <b>OFF</b>
+	</font></td>
+</tr>
+</table>
+</td></tr></table></font></td>
+	<td align="right">
+	&nbsp;
+	</td>
+</tr>
+</table>
+<!-- /forum rules and admin links -->
+
+<!-- footer -->
+
+  </td>
+</tr>
+</table>
+<!-- /content area table -->
+</center>
+
+
+<table width="802" height="77" border="0" cellspacing="0" cellpadding="0" align="center" cool="" showgridx="" SHOWGRIDY="" GRIDX="16" gridy="16">
+<tr height="2">
+<td width="802" height="2" colspan="4"></td>
+<td width="1" height="2"><spacer type="block" width="1" height="2"></td>
+</tr>
+<tr height="34">
+<td width="356" height="34" colspan="2"></td>
+<td width="555" height="34" valign="top" xpos="356"><img src="../img/valve_greenlogo.gif" width="136" height="30" align="center" border="0"></td>
+<td width="26" height="74" rowspan="2"></td>
+<td width="1" height="34"><spacer type="block" width="1" height="34"></td>
+</tr>
+</td>
+</tr>
+<tr height="40">
+<td width="24" height="40"></td>
+<td width="752" height="40" colspan="2" align="left" xpos="24" content valign="top" csheight="40">
+<div align="center">
+<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><a href="/">Home</a> | <a href="/index.php?area=news">News</a> | <a href="/getsteamnow.php">Get Steam Now</a> | <a href="/index.php?area=support">Support</a> | <a href="/index.php?area=forums">Forums</a> |&nbsp;<a href="/status.html">Status</a><br>
+									</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="1">(c) 2004 Valve Corporation. All rights reserved. Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve Corporation.</font></p
+</div>
+</td>
+<td width="1" height="40"><spacer type="block" width="1" height="40"></td>
+</tr>
+<tr height="1" cntrlrow>
+<td width="24" height="1"><spacer type="block" width="24" height="1"></td>
+<td width="332" height="1"><spacer type="block" width="332" height="1"></td>
+<td width="420" height="1"><spacer type="block" width="420" height="1"></td>
+<td width="26" height="1"><spacer type="block" width="26" height="1"></td>
+<td width="1" height="1"></td>
+</tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+
+<head>
+	<title>Steam News</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta name="ROBOTS" content="ALL">
+	<meta name="DESCRIPTION" content="SteamPowered">
+	<meta name="KEYWORDS" content="Steam, account, account creation, signup">
+	<meta name="AUTHOR" content="Valve LLC">
+	<LINK rel="stylesheet" type="text/css" href="steampowered.css">
+	<link rel="Shortcut Icon" type="image/png" href="/webicon.png">
+	<script language="JavaScript" src="nav.js"></script>
+	<link href="rss.xml" rel="alternate" type="application/rss+xml" title="Valve RSS News Feed" />
+</head>
+
+<body>
+
+<!-- begin header -->
+<div class="header">
+<nobr><a href="index.php"><img src="/img/steam_logo_onblack.gif" align="top" alt="[Steam]" height="54" width="152"></a>
+<span class="navBar">
+	<a href="news.php"><img name="news" valign="bottom" height="22" width="54" src="img/news.gif"
+		onMouseOut="this.src='img/news.gif';" onMouseOver="this.src='img/MOnews.gif';"
+		alt="news"></a>
+
+	<a href="getsteamnow.php"><img valign="bottom" height="22" width="108" src="img/getSteamNow.gif"
+		onMouseOut="this.src='img/getSteamNow.gif'" onMouseOver="this.src='img/MOgetSteamNow.gif'"
+		alt="getSteamNow"></a>
+
+	<a href="cybercafes.php"><img valign="bottom" height="22" width="95" src="img/cafes.gif"
+		onMouseOut="this.src='img/cafes.gif'" onMouseOver="this.src='img/MOcafes.gif'"
+		alt="Cyber Cafes"></a>
+
+	<a href="support.php"><img valign="bottom" height="22" width="68" src="img/support.gif"
+		onMouseOut="this.src='img/support.gif'" onMouseOver="this.src='img/MOsupport.gif'"
+		alt="Support"></a>
+
+	<a href="forums.php"><img valign="bottom" height="22" width="68" src="img/forums.gif"
+		onMouseOut="this.src='img/forums.gif'" onMouseOver="this.src='img/MOforums.gif'"
+		alt="Forums"></a>
+
+	<a href="status/status.html"><img valign="bottom" height="22" width="65" src="img/status.gif"
+		onMouseOut="this.src='img/status.gif'" onMouseOver="this.src='img/MOstatus.gif'"
+		alt="Status"></a>
+</span>
+</nobr>
+</div>
+<!-- end header -->
+
+
+	<!-- news -->
+
+	<div class="content" id="container">
+	<h1>STEAM NEWS</H1>
+	<h2>VALVE <em>NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+	<br>
+	<div class="narrower">
+	<p><h3><a href="index.php?area=news&id=333" style="text-decoration: none; color: #BFBA50;">Half-Life 2 to Ship to Retail Outlets Globally This Holiday Season</a></h3>
+<span style="font-size: 9px;">October 18, 2004, 12:57 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">valve</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+<b>VIVENDI UNIVERSAL GAMES ANNOUNCES PLANS TO LAUNCH THE MOST ANTICIPATED PC ACTION GAME OF 2004</b><br><i>Half-Life&reg; 2 to Ship to Retail Outlets Globally This Holiday Season</i><br> <br><i>LOS ANGELES (October 18, 2004)</i> - Vivendi Universal Games (VU Games) today announced that <i>Half-Life&reg; 2</i>, the sequel to one of the most critically acclaimed PC titles in gaming history, will ship to retail outlets around the world in November. The Company confirmed that <i>Half-Life 2</i>, developed by Valve Software, has gone gold with a planned retail street date of November 16, 2004. The countdown to the highly anticipated retail street date has begun around the world, as VU Games completes plans to ship localized versions of <i>Half-Life 2</i> simultaneously in English, French, Spanish, Italian, German, Traditional and Simplified Chinese, Korean, Thai and Japanese. <br><br>"<i>Half-Life 2</i> has surpassed our expectations in every sense - its high-quality graphics, ground-breaking physics and immersive first-person shooter gameplay set a new standard for PC action games," said Bruce Hack, CEO of VU Games. "<i>Half-Life 2</i> will go down as one of the best-selling PC titles, and we are thrilled to deliver this ground-breaking title to the worldwide gaming community this fall."<br><br>Hailed as "...the best game ever made" by PC Gamer, <i>Half-Life 2</i> earned a top-rated review score of 98, the highest score bestowed by the magazine in more than six years. The game has received numerous accolades for its technical excellence, captivating story and addictive game play, including more than 10 awards and nominations at the 2004 Electronic Entertainment Expo. In addition to being named "Best PC Game" by 1up.com (Ziff Davis) and Gamespy.com, the title also received a "Technological Excellence on PC" award from IGN.com. CNNMoney.com stated that "<i>Half-Life 2</i> will redefine what gamers expect from their games visually - and the gameplay is a lot of fun as well." <br><br>The global anticipation for <i>Half-Life 2</i> has reached unprecedented heights, as consumers around the world mark their calendars to buy the game at retail on November 16th. The <i>Half-Life 2</i> product will include Counter-Strike: Source.  VU Games will also release a <i>Half Life 2</i> Collector's Edition that will include <i>Half-Life 2</i> in DVD-ROM format, <i>Counter-Strike: Source</i>, <i>Half-Life: Source</i>, a free limited edition t-shirt, and a <i>Half-Life 2</i> Prima strategy guide book.<br><br>The original Half-Life game was launched in 1998 under VU Games' Sierra Entertainment publishing label. It earned more than 50 game-of-the-year awards and has been heralded as one of the best PC first-person shooter games of all-time. <br><br><br><u>About <i>Half-Life&reg;</i> and <i>Half-Life&reg; 2</i></u><br>In 1998, <i>Half-Life</i> revolutionized the game industry with its combination of pounding action and continuous, immersive storytelling.  Valve's debut title was named "Best PC Game Ever" by <i>PC Gamer</i> and launched a franchise with more than eight million retails units sold worldwide.  In 2004, <i>Half-Life 2</i> will take the suspense, challenge and visceral charge of the original to new heights of realism and responsiveness. <i>Half-Life 2</i> opens the door to a world where the player's presence affects everything around him, from the physical environments to the behaviors - even the emotions - of both friends and enemies.  The player again picks up the crowbar of research scientist, Gordon Freeman, who finds himself on an alien-infested Earth being picked to the bone, its resources depleted and its population dwindling.  Freeman is thrust into the unenviable role of rescuing the world from the wrong he unleashed back at Black Mesa.   And a lot of people - people he cares about - are counting on him.   The intense, real-time gameplay of <i>Half-Life 2</i> is made possible only by Source, Valve's new proprietary engine technology.   Source provides major enhancements in the advanced facial animation system, physics, graphics and AI.  <i>Half-Life 2</i> will be available for the PC.<br><br><br><u>About Vivendi Universal Games</u><br>Headquartered in Los Angeles, VU Games is a leading global developer, publisher and distributor of multi-platform interactive entertainment. Its development studios and publishing labels include Blizzard Entertainment, Sierra Entertainment, Fox Interactive and Massive Entertainment. VU Games' library of over 700 titles features multi-million unit selling properties such as <i>Warcraft&reg;, StarCraft&reg;, Diablo&reg; and World of Warcraft&reg; from Blizzard Entertainment&reg;; Crash Bandicoot&reg;, Spyro The Dragon&trade;, Empire Earth&reg;, Leisure Suit Larry&trade;, Tribes&reg; and Ground Control&reg;</i>.<br></p>
+
+<ul><li> <a href="news.php" style="text-decoration: none;"><i>return to news page</i></a></ul>
+	</div>
+	</div>
+	
+
+<!-- begin footer -->
+<div class="footer">
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td><a href="/valvesoftware"><img src="img/valve_greenlogo.gif"></a></td>
+		<td>&nbsp;</td>
+		<td><span class="footerfix">&copy; 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="/valvesoftware/privacy.htm">Privacy Policy</a>. <a href="/valvesoftware/legal.htm">Legal</a>. <a href="subscriber_agreement.php">Steam Subscriber Agreement</a>.</span></td>
+		<td width="15%">&nbsp;</td>
+	</tr>
+	</table>
+</div>
+<!-- end footer -->
+
+</body>
+</html>
