@@ -1,7 +1,9 @@
 <?php
-require_once __DIR__ . '/../db.php';
-$header_file = __DIR__ . '/../content/header.json';
-$data = file_exists($header_file) ? json_decode(file_get_contents($header_file), true) : ["logo"=>"/img/steam_logo_onblack.gif","buttons"=>[]];
+require_once 'admin_header.php';
+$default_logo = file_exists(__DIR__.'/../content/logo.png')?'/cms/content/logo.png':'/img/steam_logo_onblack.gif';
+$json = cms_get_setting('header_config', null);
+$data = $json?json_decode($json,true):['logo'=>$default_logo,'buttons'=>[]];
+if(!$data) $data=['logo'=>$default_logo,'buttons'=>[]];
 if(isset($_POST['save'])){
     $logo = trim($_POST['logo']);
     $buttons = $_POST['buttons'] ?? [];
@@ -17,16 +19,16 @@ if(isset($_POST['save'])){
         ];
     }
     $data = ['logo'=>$logo,'buttons'=>$out];
-    file_put_contents($header_file, json_encode($data, JSON_PRETTY_PRINT));
+    cms_set_setting('header_config', json_encode($data));
 }
 if(isset($_POST['add'])){
     $data['buttons'][] = ['url'=>'','img'=>'','hover'=>'','alt'=>''];
 }
 ?>
-<html>
-<head><title>Edit Header</title></head>
-<body>
-<h1>Edit Header</h1>
+<h2>Edit Header</h2>
+<p>Current logo:</p>
+<img src="<?php echo htmlspecialchars($data['logo']); ?>" alt="logo"><br>
+<a href="logo.php">Upload new logo</a>
 <form method="post">
 Logo URL: <input type="text" name="logo" value="<?php echo htmlspecialchars($data['logo']); ?>" size="50"><br><br>
 <table border="1" cellpadding="2">
@@ -46,5 +48,4 @@ Logo URL: <input type="text" name="logo" value="<?php echo htmlspecialchars($dat
 <input type="submit" name="save" value="Save">
 </form>
 <p><a href="index.php">Back</a></p>
-</body>
-</html>
+<?php include 'admin_footer.php'; ?>

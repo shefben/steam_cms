@@ -1,55 +1,69 @@
 <?php
 if (isset($_GET['area'])) {
-	$area = $_GET['area'];
+        $area = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['area']);
+} else {
+        header('Location: index.php?area=news');
+        exit;
 }
-else { $area = "main"; }
+require_once __DIR__.'/cms/db.php';
+$page = cms_get_custom_page($area);
+if($page){
+    $page_title = $page['title'];
+    include 'cms/header.php';
+    echo $page['content'];
+    include 'cms/footer.php';
+    exit;
+}
 if (isset($_GET['tab'])) {
-	$area = 'tab_'.$_GET['tab'];
-}
-elseif (isset($_GET['AppId'])) {
-	$area = 'app_'.$_GET['AppId'];
-}
-elseif (isset($_GET['SubId'])) {
-	$area = 'sub_'.$_GET['SubId'];
-}
-elseif (isset($_GET['publisher'])) {
-	$area = 'publisher_'.$_GET['publisher'];
+        $tab = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['tab']);
+        $area = 'tab_'.$tab;
+} elseif (isset($_GET['AppId'])) {
+        $id = preg_replace('/[^0-9]/','',$_GET['AppId']);
+        $area = 'app_'.$id;
+} elseif (isset($_GET['SubId'])) {
+        $id = preg_replace('/[^0-9]/','',$_GET['SubId']);
+        $area = 'sub_'.$id;
+} elseif (isset($_GET['publisher'])) {
+        $pub = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['publisher']);
+        $area = 'publisher_'.$pub;
 }
 elseif ($area == "all" && (isset($_GET['page'])) && (!isset($_GET['genre']))) {
-	$area = 'all_page'.$_GET['page'];
-}
-elseif ($area == "all" && (isset($_GET['genre'])) && (!isset($_GET['page']))) {
-	$area = 'all_genre'.$_GET['genre'];
-}
-elseif ($area == "all" && (isset($_GET['page'])) && (isset($_GET['genre']))) {
-	$area = 'all_genre'.$_GET['genre'].'_page'.$_GET['page'];
-}
-elseif ($area == "news" && (isset($_GET['id']))) {
-	$area = 'news_'.$_GET['id'];
-}
-elseif ($area == "faq" && (isset($_GET['id']))) {
-	$area = 'faq_'.$_GET['id'];
-}
-elseif ($area == "archives" && (isset($_GET['date']))) {
-	$area = 'archive_'.$_GET['date'];
-}
-elseif ($area == "search" && (isset($_GET['category'])) && (!isset($_GET['developer']))) {
-	$area = 'searchcategory_'.$_GET['category'];
-}
-elseif ($area == "search" && (isset($_GET['developer']))) {
-	$area = 'searchdeveloper_'.$_GET['developer'];
-}
-elseif ($area == "screenshots" && (isset($_GET['id']))) {
-	$area = 'screenshots_'.$_GET['id'];
-}
-elseif ($area == "redirect" && (isset($_GET['media']))) {
-	$area = 'redirect_'.$_GET['media'];
-}
-elseif ($area == "redirect" && (isset($_GET['app']))) {
-	$area = 'redirect_'.$_GET['app'];
-}
-elseif ($area == "redirect" && (isset($_GET['preload']))) {
-	$area = 'redirect_'.$_GET['preload'];
+        $p = preg_replace('/[^0-9]/','',$_GET['page']);
+        $area = 'all_page'.$p;
+} elseif ($area == "all" && (isset($_GET['genre'])) && (!isset($_GET['page']))) {
+        $g = preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['genre']);
+        $area = 'all_genre'.$g;
+} elseif ($area == "all" && (isset($_GET['page'])) && (isset($_GET['genre']))) {
+        $p = preg_replace('/[^0-9]/','',$_GET['page']);
+        $g = preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['genre']);
+        $area = 'all_genre'.$g.'_page'.$p;
+} elseif ($area == "news" && (isset($_GET['id']))) {
+        $id = preg_replace('/[^0-9]/','',$_GET['id']);
+        $area = 'news_'.$id;
+} elseif ($area == "faq" && (isset($_GET['id']))) {
+        $id = preg_replace('/[^0-9,]/','',$_GET['id']);
+        $area = 'faq_'.$id;
+} elseif ($area == "archives" && (isset($_GET['date']))) {
+        $d = preg_replace('/[^0-9-]/','',$_GET['date']);
+        $area = 'archive_'.$d;
+} elseif ($area == "search" && (isset($_GET['category'])) && (!isset($_GET['developer']))) {
+        $c = preg_replace('/[^0-9]/','',$_GET['category']);
+        $area = 'searchcategory_'.$c;
+} elseif ($area == "search" && (isset($_GET['developer']))) {
+        $dev = preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['developer']);
+        $area = 'searchdeveloper_'.$dev;
+} elseif ($area == "screenshots" && (isset($_GET['id']))) {
+        $id = preg_replace('/[^0-9]/','',$_GET['id']);
+        $area = 'screenshots_'.$id;
+} elseif ($area == "redirect" && (isset($_GET['media']))) {
+        $m = preg_replace('/[^a-zA-Z0-9_.-]/','',$_GET['media']);
+        $area = 'redirect_'.$m;
+} elseif ($area == "redirect" && (isset($_GET['app']))) {
+        $a = preg_replace('/[^a-zA-Z0-9_.-]/','',$_GET['app']);
+        $area = 'redirect_'.$a;
+} elseif ($area == "redirect" && (isset($_GET['preload']))) {
+        $p = preg_replace('/[^a-zA-Z0-9_.-]/','',$_GET['preload']);
+        $area = 'redirect_'.$p;
 }
 
 if ($area == "game")
@@ -62,10 +76,14 @@ if ($area == "free")
 	$area = 'tab_demos';
 if ($area == "all")
 	$area = 'all_initial';
-if (($area == "dormant") && (isset($_GET['account'])))
-	$area = 'dormant_account_'.$_GET['account'];
-if (($area == "faq") && (isset($_GET['section'])))
-	$area = 'faq_section_'.$_GET['section'];
+if (($area == "dormant") && (isset($_GET['account']))) {
+        $acct = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['account']);
+        $area = 'dormant_account_'.$acct;
+}
+if (($area == "faq") && (isset($_GET['section']))) {
+        $sec = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['section']);
+        $area = 'faq_section_'.$sec;
+}
 
 if (file_exists($area.".php") == false) {
 	$area = 'notfound';

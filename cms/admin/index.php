@@ -1,52 +1,23 @@
 <?php
-$header_file = __DIR__ . '/../content/header.html';
-$footer_file = __DIR__ . '/../content/footer.html';
-$pages_dir   = __DIR__ . '/../pages';
-if(!is_dir($pages_dir)) mkdir($pages_dir, 0777, true);
-
-if(isset($_POST['save_header'])) {
-    file_put_contents($header_file, $_POST['header']);
+require_once 'admin_header.php';
+$db = cms_get_db();
+// gather stats
+$stats = $db->query("SELECT SUM(views) as total FROM page_views")->fetch(PDO::FETCH_ASSOC);
+$total = $stats['total'] ?? 0;
+$popular = $db->query("SELECT page, SUM(views) as v FROM page_views GROUP BY page ORDER BY v DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+$popular_page = $popular ? $popular['page'] : 'N/A';
+$days = [];
+$rows = $db->query("SELECT date,SUM(views) v FROM page_views WHERE date>=DATE_SUB(CURDATE(),INTERVAL 30 DAY) GROUP BY date ORDER BY date")->fetchAll(PDO::FETCH_ASSOC);
+foreach($rows as $r){
+    $days[$r['date']] = (int)$r['v'];
 }
-if(isset($_POST['save_footer'])) {
-    file_put_contents($footer_file, $_POST['footer']);
-}
-if(isset($_POST['save_page']) && !empty($_POST['slug'])) {
-    $slug = preg_replace('/[^a-zA-Z0-9_-]/','',$_POST['slug']);
-    $content = $_POST['content'];
-    file_put_contents("$pages_dir/$slug.php", $content);
-}
-if(isset($_GET['delete'])) {
-    $f = basename($_GET['delete']);
-    @unlink("$pages_dir/$f");
-}
-$pages = glob("$pages_dir/*.php");
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<title>CMS Admin</title>
-<style>
-textarea { width: 100%; height: 200px; }
-</style>
-</head>
-<body>
-<h1>CMS Admin Panel</h1>
-<ul>
-  <li><a href="header.php">Edit Header</a></li>
-  <li><a href="footer.php">Edit Footer</a></li>
-  <li><a href="news.php">Manage News</a></li>
-</ul>
-<h2>Existing Pages</h2>
-<ul>
-<?php foreach($pages as $p): $bn=basename($p); ?>
-<li><?php echo $bn; ?> - <a href="?delete=<?php echo urlencode($bn); ?>">delete</a></li>
+<h2>Admin Dashboard</h2>
+<p>Total visits: <?php echo (int)$total; ?></p>
+<p>Most popular page: <?php echo htmlspecialchars($popular_page); ?></p>
+<div style="display:flex;align-items:flex-end;height:100px;">
+<?php foreach($days as $d=>$v): $h=$v ? ($v*5) : 1; ?>
+    <div title="<?php echo $d.' : '.$v; ?>" style="width:3px;margin:0 1px;background:#333;height:<?php echo $h; ?>px"></div>
 <?php endforeach; ?>
-</ul>
-<h2>Add/Edit Page</h2>
-<form method="post">
-Slug: <input name="slug"><br>
-<textarea name="content"></textarea><br>
-<input type="submit" name="save_page" value="Save Page">
-</form>
-</body>
-</html>
+</div>
+<?php include 'admin_footer.php'; ?>
