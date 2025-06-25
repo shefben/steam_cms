@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__ . '/../db.php';
-$db = cms_get_db();
+require_once 'admin_header.php';
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+cms_require_permission($id ? 'news_edit' : 'news_create');
+$db = cms_get_db();
 if($id){
     $stmt = $db->prepare('SELECT * FROM news WHERE id=?');
     $stmt->execute([$id]);
@@ -27,14 +28,9 @@ if(isset($_POST['save'])){
     exit;
 }
 ?>
-<html>
-<head>
-<title>Edit News</title>
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>tinymce.init({selector:'#content'});</script>
-</head>
-<body>
-<h1><?php echo $id ? 'Edit' : 'Add'; ?> Article</h1>
+<h2><?php echo $id ? 'Edit' : 'Add'; ?> Article</h2>
 <form method="post">
 Title: <input type="text" name="title" value="<?php echo htmlspecialchars($article['title']); ?>" size="60"><br><br>
 Author: <input type="text" name="author" value="<?php echo htmlspecialchars($article['author']); ?>"><br><br>
@@ -45,5 +41,4 @@ Date: <?php echo htmlspecialchars($article['date']); ?><br><br>
 <input type="submit" name="save" value="Save">
 </form>
 <p><a href="news.php">Back</a></p>
-</body>
-</html>
+<?php include 'admin_footer.php'; ?>
