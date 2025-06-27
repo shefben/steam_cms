@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo=new PDO($dsn,$user,$pass,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS news(id INT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,date TEXT,views INT DEFAULT 0,content TEXT)");
+            $pdo->exec("CREATE TABLE IF NOT EXISTS news(id INT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT)");
             $pdo->exec("CREATE TABLE IF NOT EXISTS faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,PRIMARY KEY(id1,id2))");
             $pdo->exec("CREATE TABLE IF NOT EXISTS faq_content(catid1 BIGINT,catid2 BIGINT,faqid1 BIGINT,faqid2 BIGINT,title TEXT,body TEXT,PRIMARY KEY(faqid1,faqid2))");
             $pdo->exec("CREATE TABLE IF NOT EXISTS ccafe_registration(
@@ -77,6 +77,18 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 content MEDIUMTEXT,
                 created DATETIME,
                 updated DATETIME
+            )");
+            $pdo->exec("CREATE TABLE IF NOT EXISTS media(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                filename TEXT,
+                uploaded DATETIME
+            )");
+            $pdo->exec("CREATE TABLE IF NOT EXISTS redirects(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                slug VARCHAR(200) UNIQUE,
+                target TEXT,
+                hits INT DEFAULT 0,
+                created DATETIME
             )");
             $pdo->exec("CREATE TABLE IF NOT EXISTS settings(`key` VARCHAR(64) PRIMARY KEY,value TEXT)");
             $pdo->exec("CREATE TABLE IF NOT EXISTS admin_users(
@@ -118,6 +130,22 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 ['url'=>'/forums.php','img'=>'/img/forums.gif','hover'=>'/img/MOforums.gif','alt'=>'Forums'],
                 ['url'=>'/status/status.html','img'=>'/img/status.gif','hover'=>'/img/MOstatus.gif','alt'=>'Status']
             ];
+            $default_nav = [
+                ['file'=>'index.php','label'=>'Dashboard','visible'=>1],
+                ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],
+                ['file'=>'news.php','label'=>'News','visible'=>1],
+                ['file'=>'faq.php','label'=>'FAQ','visible'=>1],
+                ['file'=>'cafe_signups.php','label'=>'Café Signups','visible'=>1],
+                ['file'=>'content_servers.php','label'=>'Servers','visible'=>1],
+                ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
+                ['file'=>'theme.php','label'=>'Theme','visible'=>1],
+                ['file'=>'settings.php','label'=>'Settings','visible'=>1],
+                ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
+                ['file'=>'nav_manager.php','label'=>'Navigation','visible'=>1],
+                ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
+                ['file'=>'logo.php','label'=>'Logo','visible'=>1],
+                ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
+            ];
             $defaults = [
                 'theme'=>'default',
                 'admin_theme'=>'v2',
@@ -130,7 +158,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 'header_config'=>json_encode(['logo'=>'/img/steam_logo_onblack.gif','buttons'=>$header_buttons]),
                 'footer_html'=>$footer,
                 'favicon'=>'/favicon.ico',
-                'error_html'=>$error_html
+                'error_html'=>$error_html,
+                'nav_items'=>json_encode($default_nav),
+                'gzip'=>'0',
+                'enable_cache'=>'0'
             ];
             $stmt = $pdo->prepare('INSERT INTO settings(`key`,value) VALUES(?,?)');
             foreach($defaults as $k=>$v){ $stmt->execute([$k,$v]); }

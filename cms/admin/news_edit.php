@@ -9,19 +9,18 @@ if($id){
     $article = $stmt->fetch(PDO::FETCH_ASSOC);
     if(!$article) { echo 'Article not found'; exit; }
 }else{
-    $article = ['title'=>'','author'=>getenv('USER')?:'Admin','content'=>''];
+$article = ['title'=>'','author'=>getenv('USER')?:'Admin','content'=>'','publish_date'=>date('Y-m-d H:i:s')];
 }
 if(isset($_POST['save'])){
     $title = $_POST['title'];
     $author = $_POST['author'];
     $content = $_POST['content'];
     if($id){
-        $stmt = $db->prepare('UPDATE news SET title=?, author=?, content=? WHERE id=?');
-        $stmt->execute([$title,$author,$content,$id]);
+        $stmt = $db->prepare('UPDATE news SET title=?, author=?, content=?, publish_date=? WHERE id=?');
+        $stmt->execute([$title,$author,$content,$_POST['publish_date'],$id]);
     }else{
-        $date = date('Y-m-d H:i:s');
-        $stmt = $db->prepare('INSERT INTO news(title,author,date,content,views) VALUES(?,?,?,?,0)');
-        $stmt->execute([$title,$author,$date,$content]);
+        $stmt = $db->prepare('INSERT INTO news(title,author,publish_date,content,views) VALUES(?,?,?,?,0)');
+        $stmt->execute([$title,$author,$_POST['publish_date'],$content]);
         $id = $db->lastInsertId();
     }
     header('Location: news.php');
@@ -34,9 +33,7 @@ if(isset($_POST['save'])){
 <form method="post">
 Title: <input type="text" name="title" value="<?php echo htmlspecialchars($article['title']); ?>" size="60"><br><br>
 Author: <input type="text" name="author" value="<?php echo htmlspecialchars($article['author']); ?>"><br><br>
-<?php if($id): ?>
-Date: <?php echo htmlspecialchars($article['date']); ?><br><br>
-<?php endif; ?>
+Publish Date: <input type="datetime-local" name="publish_date" value="<?php echo htmlspecialchars(date('Y-m-d\TH:i', strtotime($article['publish_date']))); ?>"><br><br>
 <textarea id="content" name="content" style="width:100%;height:300px;"><?php echo htmlspecialchars($article['content']); ?></textarea><br>
 <input type="submit" name="save" value="Save">
 </form>

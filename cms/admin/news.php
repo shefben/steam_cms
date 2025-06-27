@@ -8,25 +8,25 @@ if(isset($_POST['delete'])){
     $stmt = $db->prepare('DELETE FROM news WHERE id=?');
     $stmt->execute([ (int)$_POST['delete'] ]);
 }
-// move up/down by swapping dates
+// move up/down by swapping publish dates
 if(isset($_GET['move']) && isset($_GET['id'])){
     cms_require_permission('news_edit');
     $id = (int)$_GET['id'];
     $direction = $_GET['move'];
-    $posts = $db->query('SELECT id,date FROM news ORDER BY date DESC')->fetchAll(PDO::FETCH_ASSOC);
+    $posts = $db->query('SELECT id,publish_date FROM news ORDER BY publish_date DESC')->fetchAll(PDO::FETCH_ASSOC);
     for($i=0;$i<count($posts);$i++){
         if($posts[$i]['id']==$id){
             if($direction=='up' && $i>0){
                 $prev = $posts[$i-1];
                 $db->beginTransaction();
-                $db->prepare('UPDATE news SET date=? WHERE id=?')->execute([$prev['date'],$id]);
-                $db->prepare('UPDATE news SET date=? WHERE id=?')->execute([$posts[$i]['date'],$prev['id']]);
+                $db->prepare('UPDATE news SET publish_date=? WHERE id=?')->execute([$prev['publish_date'],$id]);
+                $db->prepare('UPDATE news SET publish_date=? WHERE id=?')->execute([$posts[$i]['publish_date'],$prev['id']]);
                 $db->commit();
             }elseif($direction=='down' && $i<count($posts)-1){
                 $next = $posts[$i+1];
                 $db->beginTransaction();
-                $db->prepare('UPDATE news SET date=? WHERE id=?')->execute([$next['date'],$id]);
-                $db->prepare('UPDATE news SET date=? WHERE id=?')->execute([$posts[$i]['date'],$next['id']]);
+                $db->prepare('UPDATE news SET publish_date=? WHERE id=?')->execute([$next['publish_date'],$id]);
+                $db->prepare('UPDATE news SET publish_date=? WHERE id=?')->execute([$posts[$i]['publish_date'],$next['id']]);
                 $db->commit();
             }
             break;
@@ -35,19 +35,19 @@ if(isset($_GET['move']) && isset($_GET['id'])){
     header('Location: news.php');
     exit;
 }
-$rows = $db->query('SELECT id,title,author,date,views FROM news ORDER BY date DESC')->fetchAll(PDO::FETCH_ASSOC);
+$rows = $db->query('SELECT id,title,author,publish_date,views FROM news ORDER BY publish_date DESC')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>News Articles</h2>
 <?php if(cms_has_permission('news_create')): ?>
 <p><a href="news_edit.php">Add New Article</a></p>
 <?php endif; ?>
 <table border="1" cellpadding="2">
-<tr><th>Title</th><th>Author</th><th>Date</th><th>Views</th><th colspan="3">Actions</th></tr>
+<tr><th>Title</th><th>Author</th><th>Publish Date</th><th>Views</th><th colspan="3">Actions</th></tr>
 <?php foreach($rows as $row): ?>
 <tr>
 <td><?php echo htmlspecialchars($row['title']); ?></td>
 <td><?php echo htmlspecialchars($row['author']); ?></td>
-<td><?php echo htmlspecialchars($row['date']); ?></td>
+<td><?php echo htmlspecialchars($row['publish_date']); ?></td>
 <td><?php echo (int)$row['views']; ?></td>
 <td>
 <?php if(cms_has_permission('news_edit')): ?>
