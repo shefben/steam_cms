@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo=new PDO($dsn,$user,$pass,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS news(id INT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT)");
+            $pdo->exec("CREATE TABLE IF NOT EXISTS news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT)");
             $pdo->exec("CREATE TABLE IF NOT EXISTS faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,PRIMARY KEY(id1,id2))");
             $pdo->exec("CREATE TABLE IF NOT EXISTS faq_content(catid1 BIGINT,catid2 BIGINT,faqid1 BIGINT,faqid2 BIGINT,title TEXT,body TEXT,PRIMARY KEY(faqid1,faqid2))");
             $pdo->exec("CREATE TABLE IF NOT EXISTS ccafe_registration(
