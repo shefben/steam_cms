@@ -1,6 +1,6 @@
 <?php
 $root = dirname(__DIR__,2);
-require_once "$root/db.php";
+require_once "$root/cms/db.php";
 $site_title = cms_get_setting("site_title","Steam");
 if(!isset($page_title) || $page_title==="") $page_title = $site_title;
 else $page_title = $site_title . " " . $page_title;

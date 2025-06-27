@@ -12,6 +12,9 @@ function cms_render_template($path, $vars=[]){
     if(file_exists($tpl_dir.'/config.php')){
         $config = include $tpl_dir.'/config.php';
     }
+    // expose useful paths to templates
+    $vars['CMS_ROOT'] = __DIR__;
+    $vars['THEME_DIR'] = $tpl_dir;
     $html = file_get_contents($path);
     $html = preg_replace_callback('/\{news_(full_article|partial_article|small_abstract|link_only)(?:\((\d+)\))?\}/i',
         function($m) use ($config){
