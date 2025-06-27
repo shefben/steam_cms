@@ -33,15 +33,20 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $dbname=$config['dbname'];
         $admin_user=trim($_POST['admin_user']);
         $admin_pass=trim($_POST['admin_pass']);
+        $admin_email=trim($_POST['admin_email']);
         try{
             $dsn="mysql:host=$host;port=$port;charset=utf8mb4";
             $pdo=new PDO($dsn,$user,$pass,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT)");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,PRIMARY KEY(id1,id2))");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS faq_content(catid1 BIGINT,catid2 BIGINT,faqid1 BIGINT,faqid2 BIGINT,title TEXT,body TEXT,PRIMARY KEY(faqid1,faqid2))");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS ccafe_registration(
+            $pdo->exec("DROP TABLE IF EXISTS news");
+            $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT)");
+            $pdo->exec("DROP TABLE IF EXISTS faq_categories");
+            $pdo->exec("CREATE TABLE faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,PRIMARY KEY(id1,id2))");
+            $pdo->exec("DROP TABLE IF EXISTS faq_content");
+            $pdo->exec("CREATE TABLE faq_content(catid1 BIGINT,catid2 BIGINT,faqid1 BIGINT,faqid2 BIGINT,title TEXT,body TEXT,PRIMARY KEY(faqid1,faqid2))");
+            $pdo->exec("DROP TABLE IF EXISTS ccafe_registration");
+            $pdo->exec("CREATE TABLE ccafe_registration(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 created DATETIME,
                 company TEXT,
@@ -71,27 +76,32 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 ship_phone TEXT,
                 wire_transfer TEXT
             )");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS custom_pages(
+            $pdo->exec("DROP TABLE IF EXISTS custom_pages");
+            $pdo->exec("CREATE TABLE custom_pages(
                 slug VARCHAR(255) PRIMARY KEY,
                 title TEXT,
                 content MEDIUMTEXT,
                 created DATETIME,
                 updated DATETIME
             )");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS media(
+            $pdo->exec("DROP TABLE IF EXISTS media");
+            $pdo->exec("CREATE TABLE media(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 filename TEXT,
                 uploaded DATETIME
             )");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS redirects(
+            $pdo->exec("DROP TABLE IF EXISTS redirects");
+            $pdo->exec("CREATE TABLE redirects(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 slug VARCHAR(200) UNIQUE,
                 target TEXT,
                 hits INT DEFAULT 0,
                 created DATETIME
             )");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS settings(`key` VARCHAR(64) PRIMARY KEY,value TEXT)");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS admin_users(
+            $pdo->exec("DROP TABLE IF EXISTS settings");
+            $pdo->exec("CREATE TABLE settings(`key` VARCHAR(64) PRIMARY KEY,value TEXT)");
+            $pdo->exec("DROP TABLE IF EXISTS admin_users");
+            $pdo->exec("CREATE TABLE admin_users(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(100),
                 email TEXT,
@@ -101,7 +111,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 created DATETIME,
                 password VARCHAR(255)
             )");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS page_views(
+            $pdo->exec("DROP TABLE IF EXISTS page_views");
+            $pdo->exec("CREATE TABLE page_views(
                 date DATE,
                 page VARCHAR(255),
                 views INT DEFAULT 0,
@@ -116,7 +127,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             }
             $hash=password_hash($admin_pass,PASSWORD_DEFAULT);
             $stmt=$pdo->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,created,password) VALUES(?,?,?,?,?,NOW(),?)');
-            $stmt->execute([$admin_user,'','','','all',$hash]);
+            $stmt->execute([$admin_user,$admin_email,'','','all',$hash]);
             // default settings
             $footer = file_get_contents(__DIR__.'/cms/content/footer.html');
             $nf = file_get_contents(__DIR__.'/notfound.php');
@@ -362,11 +373,15 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <form method="post">
             <div class="form-group">
                 <label for="admin_user">Admin Username</label>
-                <input id="admin_user" class="form-control" name="admin_user">
+                <input id="admin_user" class="form-control" name="admin_user" value="admin">
             </div>
             <div class="form-group">
                 <label for="admin_pass">Admin Password</label>
-                <input id="admin_pass" type="password" class="form-control" name="admin_pass">
+                <input id="admin_pass" type="password" class="form-control" name="admin_pass" value="steamcms">
+            </div>
+            <div class="form-group">
+                <label for="admin_email">Admin Email</label>
+                <input id="admin_email" type="email" class="form-control" name="admin_email" value="admin@steampowered.com">
             </div>
             <button class="btn btn-primary" type="submit">Install</button>
         </form>
