@@ -19,23 +19,41 @@ if(!cms_current_admin()){
         exit;
     }
 }
-$admin_theme = cms_get_setting('admin_theme','default');
+$admin_theme = cms_get_setting('admin_theme','v2');
 $theme_dir = dirname(__DIR__,2)."/themes/{$admin_theme}_admin";
 $theme_url = "/themes/{$admin_theme}_admin";
 if(!is_dir($theme_dir)){
     $theme_dir = dirname(__DIR__,2)."/themes/default_admin";
     $theme_url = "/themes/default_admin";
 }
-$nav_html = '<nav>'
-    .'<a href="index.php">Home</a> | '
-    .'<a href="main_content.php">Main Content</a> | '
-    .'<a href="news.php">News</a> | '
-    .'<a href="faq.php">FAQ</a> | '
-    .'<a href="forum.php">Forum</a> | '
-    .'<a href="custom_pages.php">Custom Pages</a> | '
-    .'<a href="settings.php">Site Settings</a> | '
-    .'<a href="admin_users.php">Administrators</a> | '
-    .'<a href="../logout.php">Logout</a>'
-    .'</nav>';
+$admin_id = cms_current_admin();
+$db = cms_get_db();
+$stmt = $db->prepare('SELECT username FROM admin_users WHERE id=?');
+$stmt->execute([$admin_id]);
+$admin_name = $stmt->fetchColumn() ?: 'admin';
+
+$nav_items = [
+    'index.php' => 'Dashboard',
+    'main_content.php' => 'Main Content',
+    'news.php' => 'News',
+    'faq.php' => 'FAQ',
+    'cafe_signups.php' => 'Café Signups',
+    'content_servers.php' => 'Servers',
+    'custom_pages.php' => 'Custom Pages',
+    'theme.php' => 'Theme',
+    'settings.php' => 'Settings',
+    'admin_users.php' => 'Administrators',
+    'error_page.php' => 'Error Page',
+    'logo.php' => 'Logo',
+    '../logout.php' => 'Logout'
+];
+
+$nav_html = '<ul class="nav-menu">';
+foreach($nav_items as $file=>$label){
+    $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
+    $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($label).'</a></li>';
+}
+$nav_html .= '</ul>';
+
 include "$theme_dir/header.php";
 ?>
