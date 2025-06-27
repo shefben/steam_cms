@@ -10,19 +10,20 @@ if(isset($_POST['save'])){
     $out = [];
     foreach($buttons as $b){
         if(isset($b['delete'])) continue;
-        if(trim($b['url'])=='' && trim($b['img'])=='') continue;
+        if(trim($b['url'])=='' && trim(($b['img']??''))=='' && trim(($b['text']??''))=='') continue;
         $out[] = [
             'url'=>trim($b['url']),
             'img'=>trim($b['img']),
             'hover'=>trim($b['hover']),
-            'alt'=>trim($b['alt'])
+            'alt'=>trim($b['alt']),
+            'text'=>trim($b['text'])
         ];
     }
     $data = ['logo'=>$logo,'buttons'=>$out];
     cms_set_setting('header_config', json_encode($data));
 }
 if(isset($_POST['add'])){
-    $data['buttons'][] = ['url'=>'','img'=>'','hover'=>'','alt'=>''];
+    $data['buttons'][] = ['url'=>'','img'=>'','hover'=>'','alt'=>'','text'=>''];
 }
 ?>
 <h2>Edit Header</h2>
@@ -32,10 +33,11 @@ if(isset($_POST['add'])){
 <form method="post">
 Logo URL: <input type="text" name="logo" value="<?php echo htmlspecialchars($data['logo']); ?>" size="50"><br><br>
 <table border="1" cellpadding="2">
-<tr><th>URL</th><th>Image</th><th>Hover</th><th>Alt</th><th>Delete</th></tr>
+<tr><th>URL</th><th>Text</th><th>Image</th><th>Hover</th><th>Alt</th><th>Delete</th></tr>
 <?php foreach($data['buttons'] as $i=>$b): ?>
 <tr>
 <td><input type="text" name="buttons[<?php echo $i; ?>][url]" value="<?php echo htmlspecialchars($b['url']); ?>"></td>
+<td><input type="text" name="buttons[<?php echo $i; ?>][text]" value="<?php echo htmlspecialchars($b['text'] ?? ''); ?>"></td>
 <td><input type="text" name="buttons[<?php echo $i; ?>][img]" value="<?php echo htmlspecialchars($b['img']); ?>"></td>
 <td><input type="text" name="buttons[<?php echo $i; ?>][hover]" value="<?php echo htmlspecialchars($b['hover']); ?>"></td>
 <td><input type="text" name="buttons[<?php echo $i; ?>][alt]" value="<?php echo htmlspecialchars($b['alt']); ?>"></td>
