@@ -13,10 +13,15 @@ function cms_get_db(){
 
 function cms_get_setting($key, $default=null){
     $db = cms_get_db();
-    $stmt = $db->prepare('SELECT value FROM settings WHERE `key`=?');
-    $stmt->execute([$key]);
-    $val = $stmt->fetchColumn();
-    return $val!==false ? $val : $default;
+    try{
+        $stmt = $db->prepare('SELECT value FROM settings WHERE `key`=?');
+        $stmt->execute([$key]);
+        $val = $stmt->fetchColumn();
+        return $val!==false ? $val : $default;
+    }catch(PDOException $e){
+        if($e->getCode()==='42S02') return $default; // table missing
+        throw $e;
+    }
 }
 
 function cms_set_setting($key,$value){
@@ -27,9 +32,14 @@ function cms_set_setting($key,$value){
 
 function cms_get_custom_page($slug){
     $db = cms_get_db();
-    $stmt = $db->prepare('SELECT title,content FROM custom_pages WHERE slug=?');
-    $stmt->execute([$slug]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    try{
+        $stmt = $db->prepare('SELECT title,content FROM custom_pages WHERE slug=?');
+        $stmt->execute([$slug]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }catch(PDOException $e){
+        if($e->getCode()==='42S02') return null; // table missing
+        throw $e;
+    }
 }
 
 function cms_record_visit($page){
