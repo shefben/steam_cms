@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo=new PDO($dsn,$user,$pass,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
-            $pdo->exec("CREATE TABLE IF NOT EXISTS news(id INT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT)");
+            $pdo->exec("CREATE TABLE IF NOT EXISTS news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT)");
             $pdo->exec("CREATE TABLE IF NOT EXISTS faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,PRIMARY KEY(id1,id2))");
             $pdo->exec("CREATE TABLE IF NOT EXISTS faq_content(catid1 BIGINT,catid2 BIGINT,faqid1 BIGINT,faqid2 BIGINT,title TEXT,body TEXT,PRIMARY KEY(faqid1,faqid2))");
             $pdo->exec("CREATE TABLE IF NOT EXISTS ccafe_registration(
@@ -109,7 +109,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             )");
             foreach(glob(__DIR__.'/sql/*.sql') as $file){
                 $sql=file_get_contents($file);
-                foreach(array_filter(array_map('trim',explode(';',$sql))) as $stmt){
+                foreach(preg_split('/;\s*(?:\r?\n|$)/',$sql) as $stmt){
+                    $stmt=trim($stmt);
                     if($stmt) $pdo->exec($stmt);
                 }
             }
@@ -182,42 +183,196 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     <meta charset="utf-8">
     <title>Install CMS</title>
     <style>
-        body{font-family:Arial, sans-serif;background:#1e3a52;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;}
-        .box{background:#2a475e;padding:20px;border-radius:8px;width:400px;}
-        input[type=text],input[type=password]{width:100%;padding:8px;margin-bottom:10px;border:1px solid #444;background:#fff;color:#000;}
-        .progress{height:6px;background:#444;margin-bottom:20px;}
-        .progress div{height:6px;background:#66c0f4;width:<?php echo $step*50; ?>%;}
-        .btn{background:#66c0f4;color:#1e3a52;border:none;padding:10px;width:100%;cursor:pointer;border-radius:4px;font-weight:bold;}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #171a21 0%, #2a475e 100%);
+            color: #c7d5e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .install-container {
+            background: #1e3a52;
+            border: 1px solid #3c4043;
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .install-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .install-header h1 {
+            color: #ffffff;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .install-header p {
+            color: #8f8f8f;
+            font-size: 16px;
+        }
+
+        .steam-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: #66c0f4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #3c4043;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #2a475e;
+            color: #ffffff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #66c0f4;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: #66c0f4;
+            color: #1e3a52;
+        }
+
+        .btn-primary:hover {
+            background: #5aa9e6;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .alert-danger {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #ffffff;
+        }
+
+        .alert-success {
+            background: rgba(39, 174, 96, 0.2);
+            border: 1px solid #27ae60;
+            color: #ffffff;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #3c4043;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #66c0f4;
+            transition: width 0.3s ease;
+        }
     </style>
 </head>
 <body>
-<div class="box">
-    <div class="progress"><div></div></div>
+<div class="install-container">
+    <div class="install-header">
+        <div class="steam-logo">CMS</div>
+        <h1>SteamCMS Installation</h1>
+        <p>Multi-era Steam website content management system</p>
+    </div>
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: <?php echo ($step/3)*100; ?>%;"></div>
+    </div>
     <?php if($errors): ?>
         <ul style="color:#ff8080;">
         <?php foreach($errors as $e) echo '<li>'.htmlspecialchars($e).'</li>'; ?>
         </ul>
     <?php endif; ?>
     <?php if($step==1): ?>
-        <h2>Step 1: Database</h2>
+        <h2 style="color:#ffffff; margin-bottom:20px;">Step 1: Database Configuration</h2>
         <form method="post">
-            <input name="host" placeholder="Host" value="localhost">
-            <input name="port" placeholder="Port" value="3306">
-            <input name="dbname" placeholder="Database" value="steamcms">
-            <input name="dbuser" placeholder="DB User" value="root">
-            <input type="password" name="dbpass" placeholder="DB Password">
-            <button class="btn" type="submit">Continue</button>
+            <div class="form-group">
+                <label for="host">Database Host</label>
+                <input id="host" class="form-control" name="host" value="localhost">
+            </div>
+            <div class="form-group">
+                <label for="port">Database Port</label>
+                <input id="port" class="form-control" name="port" value="3306">
+            </div>
+            <div class="form-group">
+                <label for="dbname">Database Name</label>
+                <input id="dbname" class="form-control" name="dbname" value="steamcms">
+            </div>
+            <div class="form-group">
+                <label for="dbuser">Database User</label>
+                <input id="dbuser" class="form-control" name="dbuser" value="root">
+            </div>
+            <div class="form-group">
+                <label for="dbpass">Database Password</label>
+                <input id="dbpass" type="password" class="form-control" name="dbpass">
+            </div>
+            <button class="btn btn-primary" type="submit">Continue</button>
         </form>
     <?php elseif($step==2): ?>
-        <h2>Step 2: Admin User</h2>
+        <h2 style="color:#ffffff; margin-bottom:20px;">Step 2: Admin User</h2>
         <form method="post">
-            <input name="admin_user" placeholder="Admin Username">
-            <input type="password" name="admin_pass" placeholder="Admin Password">
-            <button class="btn" type="submit">Install</button>
+            <div class="form-group">
+                <label for="admin_user">Admin Username</label>
+                <input id="admin_user" class="form-control" name="admin_user">
+            </div>
+            <div class="form-group">
+                <label for="admin_pass">Admin Password</label>
+                <input id="admin_pass" type="password" class="form-control" name="admin_pass">
+            </div>
+            <button class="btn btn-primary" type="submit">Install</button>
         </form>
     <?php else: ?>
-        <h2>Installation Complete</h2>
-        <p><a href="cms/login.php" style="color:#66c0f4;">Log in</a></p>
+        <h2 style="color:#ffffff; margin-bottom:20px;">Installation Complete</h2>
+        <p><a href="cms/login.php" class="btn btn-primary">Log in</a></p>
     <?php endif; ?>
 </div>
 </body>

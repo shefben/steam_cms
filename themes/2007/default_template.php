@@ -1,6 +1,6 @@
 <?php
 $page_title = 'PAGE TITLE';
-include __DIR__.'/../../cms/header.php';
+include $CMS_ROOT.'/header.php';
 ?>
 <center>
 <div class="contentBG_4">
@@ -13,4 +13,4 @@ include __DIR__.'/../../cms/header.php';
     <br clear="all">
 </div>
 </center>
-<?php include __DIR__.'/../../cms/footer.php'; ?>
+<?php include $CMS_ROOT.'/footer.php'; ?>
