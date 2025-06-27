@@ -57,6 +57,7 @@ foreach($nav_items as $item){
     if(!($item['visible']??1)) continue;
     $file = $item['file'];
     $label = $item['label'];
+
     $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
     $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($label).'</a></li>';
 }
