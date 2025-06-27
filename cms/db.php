@@ -132,6 +132,9 @@ function cms_header_buttons_html($theme){
             $alt = htmlspecialchars($b['alt']);
             $out .= "<a href=\"$url\"><img valign=\"bottom\" src=\"$img_h\" onMouseOver=\"this.src='$hover'\" onMouseOut=\"this.src='$img_h'\" alt=\"$alt\"></a>";
         }
+        if(cms_current_admin() || (isset($_COOKIE['cms_admin_id']) && isset($_COOKIE['cms_admin_hash']))){
+            $out .= "<a href=\"/cms/admin/index.php\" style=\"padding-right:5px;\"><img valign=\"bottom\" src=\"/img/admin.gif\" alt=\"Admin\"></a>";
+        }
     }
     return $out;
 }

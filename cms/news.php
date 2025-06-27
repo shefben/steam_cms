@@ -18,14 +18,14 @@ function cms_render_news($type,$count=null){
     $settings = cms_get_news_settings();
     if($count===null) $count = $settings['articles_per_page'];
     $db = cms_get_db();
-    $stmt = $db->prepare('SELECT id,title,author,date,content FROM news ORDER BY date DESC LIMIT ?');
+    $stmt = $db->prepare('SELECT id,title,author,publish_date,content FROM news WHERE publish_date<=NOW() ORDER BY publish_date DESC LIMIT ?');
     $stmt->execute([$count]);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $out = '';
     foreach($rows as $row){
         $title = htmlspecialchars($row['title']);
         $author = htmlspecialchars($row['author']);
-        $date = htmlspecialchars($row['date']);
+        $date = htmlspecialchars($row['publish_date']);
         $link = "news.php?news={$row['id']}";
         $content = $row['content'];
         switch($type){

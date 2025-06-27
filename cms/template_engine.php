@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__.'/news.php';
 function cms_render_template($path, $vars=[]){
+    $cache_enabled = cms_get_setting('enable_cache','0')==='1';
+    $cache_file = __DIR__.'/cache/'.md5($path).'.html';
+    if($cache_enabled && file_exists($cache_file) && filemtime($cache_file) >= filemtime($path)){
+        readfile($cache_file);
+        return;
+    }
     $tpl_dir = dirname($path);
     $config = [];
     if(file_exists($tpl_dir.'/config.php')){
@@ -17,6 +23,13 @@ function cms_render_template($path, $vars=[]){
         $html = str_replace('{content}',$vars['content'],$html);
     }
     extract($vars);
+    ob_start();
     eval('?>'.$html);
+    $output = ob_get_clean();
+    if($cache_enabled){
+        if(!is_dir(__DIR__.'/cache')) mkdir(__DIR__.'/cache');
+        file_put_contents($cache_file, $output);
+    }
+    echo $output;
 }
 ?>
