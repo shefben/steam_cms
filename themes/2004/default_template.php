@@ -1,8 +1,8 @@
 <?php
 $page_title = 'PAGE TITLE';
-include __DIR__.'/../../cms/header.php';
+include $CMS_ROOT.'/header.php';
 ?>
 <div class="content" id="container">
 {content}
 </div>
-<?php include __DIR__.'/../../cms/footer.php'; ?>
+<?php include $CMS_ROOT.'/footer.php'; ?>
