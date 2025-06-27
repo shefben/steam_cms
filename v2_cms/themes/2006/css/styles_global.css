@@ -1,0 +1,133 @@
+/* Steam 2006 Global Styles */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background-color: #2c5530;
+    color: #ffffff;
+}
+
+a {
+    color: #c6d73c;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Header Styles */
+.globalHeadBar_logo {
+    float: left;
+    margin-right: 10px;
+}
+
+.globalHeadBar {
+    background-color: #1e3b1f;
+    height: 35px;
+    overflow: hidden;
+    border-bottom: 2px solid #4a7c4f;
+}
+
+.globalNavItem {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 1px;
+}
+
+.globalNavLink {
+    display: block;
+    padding: 0 15px;
+    background-color: #2c5530;
+    color: #c6d73c;
+    font-weight: bold;
+    font-size: 11px;
+    text-decoration: none;
+}
+
+.globalNavLink:hover {
+    background-color: #4a7c4f;
+    color: #ffffff;
+}
+
+/* Content Styles */
+.contentBG_home {
+    width: 850px;
+    margin: 0 auto;
+    background-color: #1e3b1f;
+    border: 1px solid #4a7c4f;
+    padding: 20px;
+}
+
+.newsSection {
+    margin-bottom: 20px;
+}
+
+.newsItem {
+    background-color: #2c5530;
+    border: 1px solid #4a7c4f;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.newsTitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: #c6d73c;
+    margin-bottom: 8px;
+}
+
+.newsDate {
+    font-size: 10px;
+    color: #999999;
+    margin-bottom: 10px;
+}
+
+.newsContent {
+    line-height: 1.4;
+}
+
+/* Game Capsules */
+.gameCapsule {
+    float: left;
+    width: 184px;
+    margin: 5px;
+    background-color: #2c5530;
+    border: 1px solid #4a7c4f;
+    padding: 10px;
+}
+
+.capsuleImage {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.capsuleTitle {
+    font-weight: bold;
+    color: #c6d73c;
+    margin-bottom: 5px;
+}
+
+.capsulePrice {
+    color: #ffffff;
+    font-size: 11px;
+}
+
+/* Utility Classes */
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.marginBottom {
+    margin-bottom: 20px;
+}
