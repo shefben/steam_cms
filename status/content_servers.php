@@ -14,6 +14,9 @@ $total_available = get_total_available($servers);
 $max_capacity = 0; foreach($servers as $s){ if($s['total_capacity']>$max_capacity) $max_capacity=$s['total_capacity']; }
 $cs_theme = cms_get_setting('cs_theme','default');
 include __DIR__.'/../cms/header.php';
-$theme_file = __DIR__.'/themes/'.($cs_theme==='late2004'?'late2004':'default').'.php';
+$theme = 'default';
+if($cs_theme==='late2004') $theme='late2004';
+elseif($cs_theme==='2007') $theme='2007';
+$theme_file = __DIR__.'/themes/'.$theme.'.php';
 include $theme_file;
 include __DIR__.'/../cms/footer.php';

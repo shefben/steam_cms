@@ -106,4 +106,33 @@ function cms_require_any_permission($perms){
     include __DIR__.'/admin/admin_footer.php';
     exit;
 }
+
+function cms_header_buttons_html($theme){
+    $json = cms_get_setting('header_config', null);
+    $data = $json ? json_decode($json, true) : ['logo'=>'','buttons'=>[]];
+    if(!$data) $data = ['logo'=>'','buttons'=>[]];
+    $buttons = $data['buttons'];
+    $out = '';
+    if($theme === '2007'){
+        $sep = '';
+        foreach($buttons as $b){
+            $text = trim($b['text'] ?? $b['alt'] ?? '');
+            if($text === '') continue;
+            $url = htmlspecialchars($b['url']);
+            $out .= $sep.'<a class="headerLink" href="'.$url.'">'.htmlspecialchars($text).'</a>';
+            $sep = ' &nbsp; | &nbsp; ';
+        }
+    }elseif($theme === '2004'){
+        foreach($buttons as $b){
+            $img = trim($b['img']);
+            if($img === '') continue;
+            $url = htmlspecialchars($b['url']);
+            $img_h = htmlspecialchars($img);
+            $hover = htmlspecialchars($b['hover']);
+            $alt = htmlspecialchars($b['alt']);
+            $out .= "<a href=\"$url\"><img valign=\"bottom\" src=\"$img_h\" onMouseOver=\"this.src='$hover'\" onMouseOut=\"this.src='$img_h'\" alt=\"$alt\"></a>";
+        }
+    }
+    return $out;
+}
 ?>
