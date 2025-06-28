@@ -2,6 +2,12 @@
 if (isset($_GET['area'])) {
         $area = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['area']);
 } else {
+        require_once __DIR__.'/cms/db.php';
+        $theme = cms_get_setting('theme','default');
+        if($theme === '2004'){
+                require 'home.php';
+                exit;
+        }
         header('Location: index.php?area=news');
         exit;
 }
