@@ -18,8 +18,13 @@ function cms_render_news($type,$count=null){
     $settings = cms_get_news_settings();
     if($count===null) $count = $settings['articles_per_page'];
     $db = cms_get_db();
-    $stmt = $db->prepare('SELECT id,title,author,publish_date,content FROM news WHERE publish_date<=NOW() ORDER BY publish_date DESC LIMIT ?');
-    $stmt->execute([$count]);
+    // MySQL/MariaDB does not allow binding parameters for the LIMIT clause in
+    // some versions. Cast $count to an integer and inject it directly to avoid
+    // syntax errors when executing the query.
+    $limit = (int)$count;
+    $stmt = $db->prepare("SELECT id,title,author,publish_date,content FROM news "
+        . "WHERE publish_date<=NOW() ORDER BY publish_date DESC LIMIT $limit");
+    $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $out = '';
     foreach($rows as $row){
