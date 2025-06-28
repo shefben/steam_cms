@@ -169,6 +169,29 @@ body {
     flex: 1;
 }
 
+/* Generic Form Controls */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -264,6 +287,34 @@ body {
 .data-table .actions a {
     margin-right: 10px;
     font-size: 12px;
+}
+
+/* Generic table styling for legacy admin pages */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+tr:hover {
+    background: #f8f9fa;
 }
 
 /* Cards */
@@ -523,4 +574,16 @@ select.form-control,
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Drag-and-drop */
+.handle {
+    cursor: move;
+    color: #7f8c8d;
+}
+
+.sortable-placeholder {
+    background: #f0f0f0;
+    border: 2px dashed #ccc;
+    height: 40px;
 }
