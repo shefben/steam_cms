@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>CMS Admin</title>
     <link rel="stylesheet" href="<?php echo htmlspecialchars($theme_url); ?>/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 <body>
 <div class="admin-wrapper">
