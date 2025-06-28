@@ -21,10 +21,11 @@ if(!cms_current_admin()){
 }
 $admin_theme = cms_get_setting('admin_theme','v2');
 $theme_dir = dirname(__DIR__,2)."/themes/{$admin_theme}_admin";
-$theme_url = "/themes/{$admin_theme}_admin";
+$base_url = cms_base_url();
+$theme_url = ($base_url? $base_url : '')."/themes/{$admin_theme}_admin";
 if(!is_dir($theme_dir)){
     $theme_dir = dirname(__DIR__,2)."/themes/default_admin";
-    $theme_url = "/themes/default_admin";
+    $theme_url = ($base_url? $base_url : '')."/themes/default_admin";
 }
 $admin_id = cms_current_admin();
 $db = cms_get_db();
@@ -42,8 +43,9 @@ $default_nav = [
     ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
     ['file'=>'theme.php','label'=>'Theme','visible'=>1],
     ['file'=>'settings.php','label'=>'Settings','visible'=>1],
+    ['file'=>'header_bar.php','label'=>'Header Bar','visible'=>1],
+    ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
-    ['file'=>'nav_manager.php','label'=>'Navigation','visible'=>1],
     ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
     ['file'=>'logo.php','label'=>'Logo','visible'=>1],
     ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
@@ -52,6 +54,24 @@ $json = cms_get_setting('nav_items',null);
 $nav_items = $json ? json_decode($json,true) : $default_nav;
 if(!$nav_items) $nav_items = $default_nav;
 
+$icons = [
+    'index.php'        => '📊',
+    'main_content.php' => '📝',
+    'news.php'         => '📰',
+    'faq.php'          => '❓',
+    'cafe_signups.php' => '☕',
+    'content_servers.php' => '🖥️',
+    'custom_pages.php' => '📄',
+    'theme.php'        => '🎨',
+    'settings.php'     => '⚙️',
+    'header_bar.php'   => '📑',
+    'faq_categories.php'=> '📂',
+    'admin_users.php'  => '👥',
+    'error_page.php'   => '❌',
+    'logo.php'         => '🖼️',
+    '../logout.php'    => '🚪',
+];
+
 $nav_html = '<ul class="nav-menu">';
 foreach($nav_items as $item){
     if(!($item['visible']??1)) continue;
@@ -59,7 +79,8 @@ foreach($nav_items as $item){
     $label = $item['label'];
 
     $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
-    $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($label).'</a></li>';
+    $icon = $icons[$file] ?? '';
+    $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
 }
 $nav_html .= '</ul>';
 

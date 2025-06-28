@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>CMS Admin</title>
     <link rel="stylesheet" href="<?php echo htmlspecialchars($theme_url); ?>/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 <body>
 <div class="admin-wrapper">
@@ -12,6 +13,7 @@
         <h1>CMS Administration</h1>
         <div class="header-controls">
             <span class="user-info">Logged in as <?php echo htmlspecialchars($admin_name); ?></span>
+            <a href="<?php echo htmlspecialchars($base_url); ?>/index.php" class="btn btn-small">Home</a>
             <a href="../logout.php" class="btn btn-small">Logout</a>
         </div>
     </div>

@@ -16,14 +16,18 @@ function cms_render_template($path, $vars=[]){
     $vars['CMS_ROOT'] = __DIR__;
     $vars['THEME_DIR'] = $tpl_dir;
     $html = file_get_contents($path);
-    $html = preg_replace_callback('/\{news_(full_article|partial_article|small_abstract|link_only)(?:\((\d+)\))?\}/i',
-        function($m) use ($config){
-            $type = strtolower($m[1]);
-            $count = isset($m[2])? (int)$m[2] : ($config['news_count'] ?? null);
-            return cms_render_news($type,$count);
-        }, $html);
+    $process = function($text) use ($config){
+        return preg_replace_callback('/\{news_(full_article|partial_article|small_abstract|link_only)(?:\((\d+)\))?\}/i',
+            function($m) use ($config){
+                $type = strtolower($m[1]);
+                $count = isset($m[2])? (int)$m[2] : ($config['news_count'] ?? null);
+                return cms_render_news($type,$count);
+            }, $text);
+    };
+    $html = $process($html);
     if(isset($vars['content'])){
-        $html = str_replace('{content}',$vars['content'],$html);
+        $vars['content'] = $process($vars['content']);
+        $html = str_replace('{content}', $vars['content'], $html);
     }
     extract($vars);
     ob_start();

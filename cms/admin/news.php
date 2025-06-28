@@ -2,6 +2,14 @@
 require_once 'admin_header.php';
 cms_require_any_permission(['manage_news','news_create','news_edit','news_delete']);
 $db = cms_get_db();
+// save new order
+if(isset($_POST['reorder']) && isset($_POST['order'])){
+    cms_require_permission('news_edit');
+    $ids = array_map('intval', explode(',', $_POST['order']));
+    cms_set_setting('news_order', json_encode($ids));
+    header('Location: news.php');
+    exit;
+}
 // delete
 if(isset($_POST['delete'])){
     cms_require_permission('news_delete');
@@ -36,15 +44,28 @@ if(isset($_GET['move']) && isset($_GET['id'])){
     exit;
 }
 $rows = $db->query('SELECT id,title,author,publish_date,views FROM news ORDER BY publish_date DESC')->fetchAll(PDO::FETCH_ASSOC);
+$order = cms_get_setting('news_order', null);
+$order = $order ? json_decode($order, true) : [];
+usort($rows, function($a,$b) use($order){
+    $ia = array_search($a['id'],$order);
+    $ib = array_search($b['id'],$order);
+    if($ia===false) $ia = PHP_INT_MAX;
+    if($ib===false) $ib = PHP_INT_MAX;
+    return $ia <=> $ib;
+});
 ?>
 <h2>News Articles</h2>
 <?php if(cms_has_permission('news_create')): ?>
 <p><a href="news_edit.php">Add New Article</a></p>
 <?php endif; ?>
-<table border="1" cellpadding="2">
-<tr><th>Title</th><th>Author</th><th>Publish Date</th><th>Views</th><th colspan="3">Actions</th></tr>
+<form id="orderForm" method="post">
+<input type="hidden" name="order" id="order-input">
+<table id="news-table" class="data-table">
+<thead><tr><th></th><th>Title</th><th>Author</th><th>Date</th><th>Views</th><th colspan="2">Actions</th></tr></thead>
+<tbody id="news-body">
 <?php foreach($rows as $row): ?>
-<tr>
+<tr data-id="<?php echo $row['id']; ?>">
+<td class="handle">☰</td>
 <td><?php echo htmlspecialchars($row['title']); ?></td>
 <td><?php echo htmlspecialchars($row['author']); ?></td>
 <td><?php echo htmlspecialchars($row['publish_date']); ?></td>
@@ -59,14 +80,22 @@ $rows = $db->query('SELECT id,title,author,publish_date,views FROM news ORDER BY
     <form method="post" style="display:inline"><input type="hidden" name="delete" value="<?php echo $row['id']; ?>"><input type="submit" value="Delete"></form>
 <?php endif; ?>
 </td>
-<td>
-<?php if(cms_has_permission('news_edit')): ?>
-    <a href="?move=up&id=<?php echo $row['id']; ?>">Up</a> |
-    <a href="?move=down&id=<?php echo $row['id']; ?>">Down</a>
-<?php endif; ?>
-</td>
 </tr>
 <?php endforeach; ?>
+</tbody>
 </table>
+<button type="button" id="save-order" class="btn btn-success">Save Order</button>
+</form>
 <p><a href="index.php">Back</a></p>
+<script>
+$(function(){
+    $('#news-body').sortable({handle:'.handle',placeholder:'sortable-placeholder'});
+    $('#save-order').on('click',function(){
+        var ids=$('#news-body tr').map(function(){return $(this).data('id');}).get();
+        $('#order-input').val(ids.join(','));
+        $('<input>').attr({type:'hidden',name:'reorder',value:'1'}).appendTo('#orderForm');
+        $('#orderForm').submit();
+    });
+});
+</script>
 <?php include 'admin_footer.php'; ?>

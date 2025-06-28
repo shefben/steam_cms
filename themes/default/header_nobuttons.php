@@ -1,10 +1,11 @@
 <?php
 $root = dirname(__DIR__,2);
 require_once "$root/cms/db.php";
+$base = cms_base_url();
 $site_title = cms_get_setting("site_title","Steam");
 if(!isset($page_title) || $page_title==="") $page_title = $site_title;
 else $page_title = $site_title . " " . $page_title;
-$default_logo = file_exists($root.'/content/logo.png')?'/cms/content/logo.png':'/img/steam_logo_onblack.gif';
+$default_logo = file_exists($root.'/content/logo.png')? $base.'/cms/content/logo.png' : $base.'/img/steam_logo_onblack.gif';
 $data_json = cms_get_setting('header_config', null);
 $data = $data_json?json_decode($data_json,true):['logo'=>$default_logo];
 $logo = isset($data['logo'])?$data['logo']:$default_logo;
@@ -19,8 +20,8 @@ $logo = isset($data['logo'])?$data['logo']:$default_logo;
     <meta name="DESCRIPTION" content="SteamPowered">
     <meta name="KEYWORDS" content="Steam, account, account creation, signup">
     <meta name="AUTHOR" content="Valve Corporation">
-    <link rel="stylesheet" type="text/css" href="/steampowered02.css">
-    <link rel="Shortcut Icon" type="image/png" href="/webicon.png">
+    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($base); ?>/steampowered02.css">
+    <link rel="Shortcut Icon" type="image/png" href="<?php echo htmlspecialchars($base); ?>/webicon.png">
 </head>
 <body bgcolor="#4c5844" leftmargin="0" topmargin="0">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -33,7 +34,7 @@ $logo = isset($data['logo'])?$data['logo']:$default_logo;
                     <td width="1"><spacer type="block" width="1" height="18"></td>
                 </tr>
                 <tr height="36">
-                    <td width="335" valign="top" align="left"><a href="/index.php"><img src="<?php echo htmlspecialchars($logo); ?>" alt="[Steam]" width="152" height="54" border="0"></a></td>
+                    <td width="335" valign="top" align="left"><a href="<?php echo htmlspecialchars($base); ?>/index.php"><img src="<?php $l=$logo; if($l && $l[0]=='/') $l=$base.$l; echo htmlspecialchars($l); ?>" alt="[Steam]" width="152" height="54" border="0"></a></td>
                     <td width="1"><spacer type="block" width="1" height="36"></td>
                 </tr>
                 <tr height="1" cntrlrow>

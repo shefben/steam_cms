@@ -40,8 +40,12 @@ Category:
 Title:<br>
 <input type="text" name="title" value="<?php echo htmlspecialchars($faq['title']); ?>"><br><br>
 Body:<br>
-<textarea name="body" rows="10"><?php echo htmlspecialchars($faq['body']); ?></textarea><br>
+<textarea name="body" id="faq-body" rows="10"><?php echo htmlspecialchars($faq['body']); ?></textarea><br>
 <input type="submit" name="save" value="Save">
 </form>
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('faq-body');
+</script>
 <p><a href="faq.php">Back</a></p>
 <?php include 'admin_footer.php'; ?>
