@@ -2,7 +2,7 @@
 require_once __DIR__.'/db.php';
 
 function cms_get_news_settings(){
-    $def=['articles_per_page'=>8,'partial_words'=>120];
+    $def=['articles_per_page'=>10,'partial_words'=>120];
     return [
         'articles_per_page'=>(int)cms_get_setting('news_articles_per_page',$def['articles_per_page']),
         'partial_words'=>(int)cms_get_setting('news_partial_words',$def['partial_words'])
@@ -18,8 +18,13 @@ function cms_render_news($type,$count=null){
     $settings = cms_get_news_settings();
     if($count===null) $count = $settings['articles_per_page'];
     $db = cms_get_db();
-    $stmt = $db->prepare('SELECT id,title,author,publish_date,content FROM news WHERE publish_date<=NOW() ORDER BY publish_date DESC LIMIT ?');
-    $stmt->execute([$count]);
+    // MySQL/MariaDB does not allow binding parameters for the LIMIT clause in
+    // some versions. Cast $count to an integer and inject it directly to avoid
+    // syntax errors when executing the query.
+    $limit = (int)$count;
+    $stmt = $db->prepare("SELECT id,title,author,publish_date,content FROM news "
+        . "WHERE publish_date<=NOW() ORDER BY publish_date DESC LIMIT $limit");
+    $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $out = '';
     foreach($rows as $row){
@@ -30,11 +35,10 @@ function cms_render_news($type,$count=null){
         $content = $row['content'];
         switch($type){
             case 'full_article':
-                $out .= "<div class='news-full'>";
-                $out .= "<h3><a href='$link'>$title</a></h3>";
-                $out .= "<span class='meta'>$date &middot; $author</span>";
+                $out .= "<p><h3><a href='$link' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";
+                $out .= "<span style='font-size: 9px;'>$date &middot; $author<table width='100%' cellpadding='0' cellspacing='0'><tr><td height='1' width='100%' bgcolor='#808080'></td></tr><tr><td height='10' width='100%'></td></tr></table></span>";
                 $out .= $content;
-                $out .= "</div>";
+                $out .= "<div><br>&nbsp;</div><br></p>";
                 break;
             case 'partial_article':
                 $limit = $settings['partial_words'];
@@ -60,6 +64,16 @@ function cms_render_news($type,$count=null){
                 break;
             case 'link_only':
                 $out .= "<a href='$link'>$title</a><br>";
+                break;
+            case 'index_summary':
+                $text = trim(preg_replace('/\s+/', ' ', strip_tags($content)));
+                if(preg_match('/^(.+?[.!?])\s/', $text, $m)){
+                    $summary = $m[1];
+                }else{
+                    $words = preg_split('/\s+/', $text);
+                    $summary = implode(' ', array_slice($words, 0, 30));
+                }
+                $out .= "<strong><a href='$link' style='text-decoration: none;'>$title</a></strong><br>$summary<br><br>";
                 break;
         }
     }
