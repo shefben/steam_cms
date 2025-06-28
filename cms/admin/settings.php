@@ -56,17 +56,17 @@ if(isset($_POST['save'])){
 ?>
 <h2>Site Settings</h2>
 <form method="post" enctype="multipart/form-data">
-Site Title: <input type="text" name="site_title" value="<?php echo htmlspecialchars($site_title); ?>"><br><br>
-Admin Theme: <select name="admin_theme">
+Site Title: <input type="text" name="site_title" value="<?php echo htmlspecialchars($site_title); ?>" title="Displayed in browser titles"><br><br>
+Admin Theme: <select name="admin_theme" title="Color scheme for the admin panel">
 <?php foreach($themes as $t): ?>
 <option value="<?php echo htmlspecialchars($t); ?>" <?php echo $t==$admin_theme?'selected':''; ?>><?php echo htmlspecialchars($t); ?></option>
 <?php endforeach; ?>
 </select><br><br>
-SMTP Host: <input type="text" name="smtp_host" value="<?php echo htmlspecialchars($smtp_host); ?>"><br>
-SMTP Port: <input type="text" name="smtp_port" value="<?php echo htmlspecialchars($smtp_port); ?>"><br>
-SMTP User: <input type="text" name="smtp_user" value="<?php echo htmlspecialchars($smtp_user); ?>"><br>
-SMTP Password: <input type="password" name="smtp_pass" value="<?php echo htmlspecialchars($smtp_pass); ?>"><br><br>
-Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <input type="file" name="favicon" accept="image/x-icon"><br><br>
+SMTP Host: <input type="text" name="smtp_host" value="<?php echo htmlspecialchars($smtp_host); ?>" title="Mail server host"><br>
+SMTP Port: <input type="text" name="smtp_port" value="<?php echo htmlspecialchars($smtp_port); ?>" title="Mail server port"><br>
+SMTP User: <input type="text" name="smtp_user" value="<?php echo htmlspecialchars($smtp_user); ?>" title="Username for the mail server"><br>
+SMTP Password: <input type="password" name="smtp_pass" value="<?php echo htmlspecialchars($smtp_pass); ?>" title="Password for the mail server"><br><br>
+Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <input type="file" name="favicon" accept="image/x-icon" title="Upload a custom site favicon"><br><br>
 <h3>Sidebar Navigation</h3>
 <table class="data-table" cellpadding="2">
 <thead><tr><th>Order</th><th>File</th><th>Label</th><th>Visible</th></tr></thead>
@@ -74,9 +74,9 @@ Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <in
 <?php foreach($nav_items as $idx=>$it): ?>
 <tr>
 <td><?php echo $idx+1; ?></td>
-<td><input type="text" name="nav_items[<?php echo $idx; ?>][file]" value="<?php echo htmlspecialchars($it['file']); ?>"></td>
-<td><input type="text" name="nav_items[<?php echo $idx; ?>][label]" value="<?php echo htmlspecialchars($it['label']); ?>"></td>
-<td><input type="checkbox" name="nav_items[<?php echo $idx; ?>][visible]" <?php echo !empty($it['visible'])?'checked':''; ?>></td>
+<td><input type="text" name="nav_items[<?php echo $idx; ?>][file]" value="<?php echo htmlspecialchars($it['file']); ?>" title="Relative admin page path"></td>
+<td><input type="text" name="nav_items[<?php echo $idx; ?>][label]" value="<?php echo htmlspecialchars($it['label']); ?>" title="Display text in the sidebar"></td>
+<td><input type="checkbox" name="nav_items[<?php echo $idx; ?>][visible]" <?php echo !empty($it['visible'])?'checked':''; ?> title="Show this link in the sidebar"></td>
 </tr>
 <?php endforeach; ?>
 </tbody>

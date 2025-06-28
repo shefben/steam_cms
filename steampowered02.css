@@ -127,9 +127,10 @@ SUP	{
         position:relative;
         }
 .navBar{
-        margin-left:64px;
         position:absolute;
         top:32px;
+        left:64px;
+        right:0;
         font-weight:bold;
         }
 .navBar .admin-link{

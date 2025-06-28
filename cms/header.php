@@ -12,6 +12,22 @@ $type = 'buttons';
 $page = basename($_SERVER['PHP_SELF']);
 $no_header = array_filter(array_map('trim', preg_split('/\r?\n/', cms_get_setting('no_header_pages',''))));
 $bar_only = array_filter(array_map('trim', preg_split('/\r?\n/', cms_get_setting('header_bar_pages',''))));
+$logo_override_lines = array_filter(array_map('trim', preg_split('/\r?\n/', cms_get_setting('page_logo_overrides',''))));
+$custom_logo = null;
+$current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+foreach($logo_override_lines as $line){
+    $parts = array_map('trim', explode(':', $line, 3));
+    if(count($parts) === 3){
+        list($path,$year,$logo) = $parts;
+        if($current_path === $path && $year === $theme){
+            $custom_logo = $logo;
+            break;
+        }
+    }
+}
+if($custom_logo){
+    $GLOBALS['CMS_CUSTOM_LOGO'] = $custom_logo;
+}
 if(in_array($page,$no_header)){
     return;
 }
