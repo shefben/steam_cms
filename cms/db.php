@@ -117,6 +117,16 @@ function cms_require_any_permission($perms){
     exit;
 }
 
+function cms_base_url(){
+    $dir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+    if(substr($dir, -10) === '/cms/admin'){
+        $dir = substr($dir, 0, -10);
+    }elseif(substr($dir, -4) === '/cms'){
+        $dir = substr($dir, 0, -4);
+    }
+    return $dir === '/' ? '' : $dir;
+}
+
 function cms_header_buttons_html($theme){
     $json = cms_get_setting('header_config', null);
     $data = $json ? json_decode($json, true) : ['logo'=>'','buttons'=>[]];
@@ -143,7 +153,8 @@ function cms_header_buttons_html($theme){
             $out .= "<a href=\"$url\"><img valign=\"bottom\" src=\"$img_h\" onMouseOver=\"this.src='$hover'\" onMouseOut=\"this.src='$img_h'\" alt=\"$alt\"></a>";
         }
         if(cms_current_admin() || (isset($_COOKIE['cms_admin_id']) && isset($_COOKIE['cms_admin_hash']))){
-            $out .= "<a href=\"/cms/admin/index.php\" style=\"padding-right:5px;\"><img valign=\"bottom\" src=\"/img/admin.gif\" alt=\"Admin\"></a>";
+            $base = cms_base_url();
+            $out .= "<a href=\"{$base}/cms/admin/index.php\" class=\"admin-link\" style=\"padding-right:5px;\"><img valign=\"bottom\" src=\"{$base}/img/admin.gif\" alt=\"Admin\"></a>";
         }
     }
     return $out;

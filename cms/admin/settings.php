@@ -7,7 +7,9 @@ $smtp_port = cms_get_setting('smtp_port','');
 $smtp_user = cms_get_setting('smtp_user','');
 $smtp_pass = cms_get_setting('smtp_pass','');
 $admin_theme = cms_get_setting('admin_theme','default');
-$overrides = cms_get_setting('header_overrides','');
+$json_nav = cms_get_setting('nav_items', null);
+$nav_items = $json_nav ? json_decode($json_nav, true) : ($default_nav ?? []);
+if(!$nav_items) $nav_items = $default_nav ?? [];
 $footer_html = cms_get_setting('footer_html','');
 $favicon = cms_get_setting('favicon','/favicon.ico');
 $data_json = cms_get_setting('header_config',null);
@@ -24,7 +26,18 @@ if(isset($_POST['save'])){
     cms_set_setting('smtp_user',trim($_POST['smtp_user']));
     cms_set_setting('smtp_pass',trim($_POST['smtp_pass']));
     cms_set_setting('admin_theme',$_POST['admin_theme']);
-    cms_set_setting('header_overrides',trim($_POST['header_overrides']));
+    if(isset($_POST['nav_items'])){
+        $items = [];
+        foreach($_POST['nav_items'] as $it){
+            $items[] = [
+                'file'=>trim($it['file']),
+                'label'=>trim($it['label']),
+                'visible'=>isset($it['visible'])?1:0
+            ];
+        }
+        cms_set_setting('nav_items', json_encode($items));
+        $nav_items = $items;
+    }
     cms_set_setting('footer_html',$_POST['footer_html']);
     if(isset($_FILES['favicon']) && is_uploaded_file($_FILES['favicon']['tmp_name'])){
         $path = __DIR__.'/../content/favicon.ico';
@@ -53,9 +66,10 @@ if(isset($_POST['save'])){
     $smtp_user = trim($_POST['smtp_user']);
     $smtp_pass = trim($_POST['smtp_pass']);
     $admin_theme = $_POST['admin_theme'];
-    $overrides = trim($_POST['header_overrides']);
     $footer_html = $_POST['footer_html'];
     $header_data = ['logo'=>$logo,'buttons'=>$out];
+    // keep nav_items array for redisplay
+    $nav_items = $nav_items;
 }
 ?>
 <h2>Site Settings</h2>
@@ -71,8 +85,20 @@ SMTP Port: <input type="text" name="smtp_port" value="<?php echo htmlspecialchar
 SMTP User: <input type="text" name="smtp_user" value="<?php echo htmlspecialchars($smtp_user); ?>"><br>
 SMTP Password: <input type="password" name="smtp_pass" value="<?php echo htmlspecialchars($smtp_pass); ?>"><br><br>
 Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <input type="file" name="favicon" accept="image/x-icon"><br><br>
-Header overrides (one per line path,type):<br>
-<textarea name="header_overrides" style="width:100%;height:80px;"><?php echo htmlspecialchars($overrides); ?></textarea><br>
+<h3>Sidebar Navigation</h3>
+<table class="data-table" cellpadding="2">
+<thead><tr><th>Order</th><th>File</th><th>Label</th><th>Visible</th></tr></thead>
+<tbody>
+<?php foreach($nav_items as $idx=>$it): ?>
+<tr>
+<td><?php echo $idx+1; ?></td>
+<td><input type="text" name="nav_items[<?php echo $idx; ?>][file]" value="<?php echo htmlspecialchars($it['file']); ?>"></td>
+<td><input type="text" name="nav_items[<?php echo $idx; ?>][label]" value="<?php echo htmlspecialchars($it['label']); ?>"></td>
+<td><input type="checkbox" name="nav_items[<?php echo $idx; ?>][visible]" <?php echo !empty($it['visible'])?'checked':''; ?>></td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+</table><br>
 <h3>Header Configuration</h3>
 <p>Current logo:</p>
 <img src="<?php echo htmlspecialchars($header_data['logo']); ?>" alt="logo"><br>
