@@ -53,13 +53,16 @@ usort($rows,function($a,$b) use($order){
 <button type="button" id="save-faq" class="btn btn-success">Save Order</button>
 </form>
 <script>
-$(function(){
-    $('#faq-body').sortable({handle:'.handle',placeholder:'sortable-placeholder'});
-    $('#save-faq').on('click',function(){
-        var ids=$('#faq-body tr').map(function(){return $(this).data('id');}).get();
-        $('#faq-order').val(ids.join(','));
-        $('<input>').attr({type:'hidden',name:'reorder',value:'1'}).appendTo('#faqOrder');
-        $('#faqOrder').submit();
+document.addEventListener('DOMContentLoaded',function(){
+    new Sortable(document.getElementById('faq-body'),{handle:'.handle'});
+    document.getElementById('save-faq').addEventListener('click',function(){
+        var ids=[];
+        document.querySelectorAll('#faq-body tr').forEach(function(tr){ids.push(tr.dataset.id);});
+        document.getElementById('faq-order').value=ids.join(',');
+        var input=document.createElement('input');
+        input.type='hidden';input.name='reorder';input.value='1';
+        document.getElementById('faqOrder').appendChild(input);
+        document.getElementById('faqOrder').submit();
     });
 });
 </script>

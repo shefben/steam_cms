@@ -119,18 +119,24 @@ SUP	{
 	font-size: 11px;
 	}
 .header{
-	/* float:left; */
-	padding:0px;
-	background:#000000;
-	margin-bottom:16px;
-	width:100%;
-	}
+        /* float:left; */
+        padding:0px;
+        background:#000000;
+        margin-bottom:16px;
+        width:100%;
+        position:relative;
+        }
 .navBar{
-	margin-left:64px;
-	position:absolute;
-	top:32px;
-	font-weight:bold;
-	}
+        margin-left:64px;
+        position:absolute;
+        top:32px;
+        font-weight:bold;
+        }
+.navBar .admin-link{
+        position:absolute;
+        right:0;
+        top:0;
+        }
 .content{
 	padding:8px 24px 32px 80px;
 	margin-bottom:24px;

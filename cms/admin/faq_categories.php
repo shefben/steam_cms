@@ -69,13 +69,16 @@ usort($cats,function($a,$b) use($cat_order){
 <button type="button" id="save-cat" class="btn btn-success">Save Order</button>
 </form>
 <script>
-$(function(){
-    $('#cat-body').sortable({handle:'.handle',placeholder:'sortable-placeholder'});
-    $('#save-cat').on('click',function(){
-        var ids=$('#cat-body tr').map(function(){return $(this).data('id');}).get();
-        $('#cat-order').val(ids.join(','));
-        $('<input>').attr({type:'hidden',name:'reorder',value:'1'}).appendTo('#catOrder');
-        $('#catOrder').submit();
+document.addEventListener('DOMContentLoaded',function(){
+    new Sortable(document.getElementById('cat-body'),{handle:'.handle'});
+    document.getElementById('save-cat').addEventListener('click',function(){
+        var ids=[];
+        document.querySelectorAll('#cat-body tr').forEach(function(tr){ids.push(tr.dataset.id);});
+        document.getElementById('cat-order').value=ids.join(',');
+        var input=document.createElement('input');
+        input.type='hidden';input.name='reorder';input.value='1';
+        document.getElementById('catOrder').appendChild(input);
+        document.getElementById('catOrder').submit();
     });
 });
 </script>

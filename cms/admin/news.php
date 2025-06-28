@@ -88,13 +88,16 @@ usort($rows, function($a,$b) use($order){
 </form>
 <p><a href="index.php">Back</a></p>
 <script>
-$(function(){
-    $('#news-body').sortable({handle:'.handle',placeholder:'sortable-placeholder'});
-    $('#save-order').on('click',function(){
-        var ids=$('#news-body tr').map(function(){return $(this).data('id');}).get();
-        $('#order-input').val(ids.join(','));
-        $('<input>').attr({type:'hidden',name:'reorder',value:'1'}).appendTo('#orderForm');
-        $('#orderForm').submit();
+document.addEventListener('DOMContentLoaded',function(){
+    new Sortable(document.getElementById('news-body'),{handle:'.handle'});
+    document.getElementById('save-order').addEventListener('click',function(){
+        var ids=[];
+        document.querySelectorAll('#news-body tr').forEach(function(tr){ids.push(tr.dataset.id);});
+        document.getElementById('order-input').value=ids.join(',');
+        var input=document.createElement('input');
+        input.type='hidden';input.name='reorder';input.value='1';
+        document.getElementById('orderForm').appendChild(input);
+        document.getElementById('orderForm').submit();
     });
 });
 </script>

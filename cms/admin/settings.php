@@ -10,14 +10,7 @@ $admin_theme = cms_get_setting('admin_theme','default');
 $json_nav = cms_get_setting('nav_items', null);
 $nav_items = $json_nav ? json_decode($json_nav, true) : ($default_nav ?? []);
 if(!$nav_items) $nav_items = $default_nav ?? [];
-$no_header_pages = cms_get_setting('no_header_pages','');
-$header_bar_pages = cms_get_setting('header_bar_pages','');
-$no_footer_pages = cms_get_setting('no_footer_pages','');
-$footer_html = cms_get_setting('footer_html','');
 $favicon = cms_get_setting('favicon','/favicon.ico');
-$data_json = cms_get_setting('header_config',null);
-$header_data = $data_json?json_decode($data_json,true):['logo'=>'','buttons'=>[]];
-if(!$header_data) $header_data=['logo'=>'','buttons'=>[]];
 $themes = [];
 foreach(glob(dirname(__DIR__,2).'/themes/*_admin',GLOB_ONLYDIR) as $dir){
     $themes[] = basename($dir,'_admin');
@@ -41,30 +34,14 @@ if(isset($_POST['save'])){
         cms_set_setting('nav_items', json_encode($items));
         $nav_items = $items;
     }
-    cms_set_setting('no_header_pages', trim($_POST['no_header_pages']));
-    cms_set_setting('header_bar_pages', trim($_POST['header_bar_pages']));
-    cms_set_setting('no_footer_pages', trim($_POST['no_footer_pages']));
-    cms_set_setting('footer_html',$_POST['footer_html']);
+    // header and footer settings moved to header_footer.php
     if(isset($_FILES['favicon']) && is_uploaded_file($_FILES['favicon']['tmp_name'])){
         $path = __DIR__.'/../content/favicon.ico';
         move_uploaded_file($_FILES['favicon']['tmp_name'],$path);
         cms_set_setting('favicon','/cms/content/favicon.ico');
         $favicon = '/cms/content/favicon.ico';
     }
-    $logo = trim($_POST['logo']);
-    $buttons = $_POST['buttons'] ?? [];
-    $out = [];
-    foreach($buttons as $b){
-        if(isset($b['delete'])) continue;
-        if(trim($b['url'])=='' && trim($b['img'])=='') continue;
-        $out[] = [
-            'url'=>trim($b['url']),
-            'img'=>trim($b['img']),
-            'hover'=>trim($b['hover']),
-            'alt'=>trim($b['alt'])
-        ];
-    }
-    cms_set_setting('header_config', json_encode(['logo'=>$logo,'buttons'=>$out]));
+    // header navigation settings moved to header_footer.php
     echo '<p>Settings saved.</p>';
     $site_title = trim($_POST['site_title']);
     $smtp_host = trim($_POST['smtp_host']);
@@ -72,11 +49,7 @@ if(isset($_POST['save'])){
     $smtp_user = trim($_POST['smtp_user']);
     $smtp_pass = trim($_POST['smtp_pass']);
     $admin_theme = $_POST['admin_theme'];
-    $no_header_pages = trim($_POST['no_header_pages']);
-    $header_bar_pages = trim($_POST['header_bar_pages']);
-    $no_footer_pages = trim($_POST['no_footer_pages']);
-    $footer_html = $_POST['footer_html'];
-    $header_data = ['logo'=>$logo,'buttons'=>$out];
+    // header and footer settings moved to header_footer.php
     // keep nav_items array for redisplay
     $nav_items = $nav_items;
 }
@@ -108,45 +81,8 @@ Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <in
 <?php endforeach; ?>
 </tbody>
 </table><br>
-Pages without header bar (one per line):<br>
-<textarea name="no_header_pages" style="width:100%;height:60px;"><?php echo htmlspecialchars($no_header_pages); ?></textarea><br>
-Header bar only pages (one per line):<br>
-<textarea name="header_bar_pages" style="width:100%;height:60px;"><?php echo htmlspecialchars($header_bar_pages); ?></textarea><br>
-Pages without footer (one per line):<br>
-<textarea name="no_footer_pages" style="width:100%;height:60px;"><?php echo htmlspecialchars($no_footer_pages); ?></textarea><br>
-<h3>Header Configuration</h3>
-<p>Current logo:</p>
-<img src="<?php echo htmlspecialchars($header_data['logo']); ?>" alt="logo"><br>
-<a href="logo.php">Upload new logo</a><br>
-Logo URL: <input type="text" name="logo" value="<?php echo htmlspecialchars($header_data['logo']); ?>" size="50"><br><br>
-<table border="1" cellpadding="2">
-<tr><th>URL</th><th>Image</th><th>Hover</th><th>Alt</th><th>Delete</th></tr>
-<?php foreach($header_data['buttons'] as $i=>$b): ?>
-<tr>
-<td><input type="text" name="buttons[<?php echo $i; ?>][url]" value="<?php echo htmlspecialchars($b['url']); ?>"></td>
-<td><input type="text" name="buttons[<?php echo $i; ?>][img]" value="<?php echo htmlspecialchars($b['img']); ?>"></td>
-<td><input type="text" name="buttons[<?php echo $i; ?>][hover]" value="<?php echo htmlspecialchars($b['hover']); ?>"></td>
-<td><input type="text" name="buttons[<?php echo $i; ?>][alt]" value="<?php echo htmlspecialchars($b['alt']); ?>"></td>
-<td><input type="checkbox" name="buttons[<?php echo $i; ?>][delete]"></td>
-</tr>
-<?php endforeach; ?>
-</table>
-<input type="button" value="Add Button" onclick="addButton()"><br><br>
-<h3>Footer</h3>
-<textarea name="footer_html" style="width:100%;height:200px;"><?php echo htmlspecialchars($footer_html); ?></textarea><br>
+<!-- header and footer settings moved to header_footer.php -->
 <input type="submit" name="save" value="Save">
 </form>
-<script>
-function addButton(){
-    var table=document.querySelector('table');
-    var idx=table.rows.length-1;
-    var row=table.insertRow(-1);
-    row.innerHTML='<td><input type="text" name="buttons['+idx+'][url]"></td>'+
-        '<td><input type="text" name="buttons['+idx+'][img]"></td>'+
-        '<td><input type="text" name="buttons['+idx+'][hover]"></td>'+
-        '<td><input type="text" name="buttons['+idx+'][alt]"></td>'+
-        '<td><input type="checkbox" name="buttons['+idx+'][delete]"></td>';
-}
-</script>
 <p><a href="index.php">Back</a></p>
 <?php include 'admin_footer.php'; ?>

@@ -40,7 +40,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
             $pdo->exec("DROP TABLE IF EXISTS news");
-            $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT)");
+            $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT,is_official TINYINT(1) DEFAULT 1)");
             $pdo->exec("DROP TABLE IF EXISTS faq_categories");
             $pdo->exec("CREATE TABLE faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,PRIMARY KEY(id1,id2))");
             $pdo->exec("DROP TABLE IF EXISTS faq_content");
@@ -152,11 +152,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
                 ['file'=>'theme.php','label'=>'Theme','visible'=>1],
                 ['file'=>'settings.php','label'=>'Settings','visible'=>1],
-                ['file'=>'header_bar.php','label'=>'Header Bar','visible'=>1],
+                ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
                 ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
                 ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
                 ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
-                ['file'=>'logo.php','label'=>'Logo','visible'=>1],
                 ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
             ];
             $defaults = [
