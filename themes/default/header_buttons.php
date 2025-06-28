@@ -27,6 +27,10 @@ $default_logo = file_exists($root.'/content/logo.png') ? $base.'/cms/content/log
 $data_json = cms_get_setting('header_config', null);
 $data = $data_json?json_decode($data_json,true):['logo'=>$default_logo,'buttons'=>[]];
 if(!$data) $data=['logo'=>$default_logo,'buttons'=>[]];
+$override = $GLOBALS['CMS_CUSTOM_LOGO'] ?? null;
+if($override){
+    $data['logo'] = $override;
+}
 $logo = $data['logo'];
 if($logo && $logo[0]=='/') $logo = $base.$logo;
 $nav_html = cms_header_buttons_html('2004');

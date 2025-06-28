@@ -7,7 +7,8 @@ else $page_title = $site_title . " " . $page_title;
 $default_logo = file_exists($root.'/content/logo.png')?'/cms/content/logo.png':'/img/steam_logo_onblack.gif';
 $data_json = cms_get_setting('header_config', null);
 $data = $data_json?json_decode($data_json,true):['logo'=>$default_logo];
-$logo = isset($data['logo'])?$data['logo']:$default_logo;
+$override = $GLOBALS['CMS_CUSTOM_LOGO'] ?? null;
+$logo = $override ?: (isset($data['logo'])?$data['logo']:$default_logo);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>

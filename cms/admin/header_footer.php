@@ -12,6 +12,7 @@ $no_header_pages = cms_get_setting('no_header_pages','');
 $header_bar_pages = cms_get_setting('header_bar_pages','');
 $no_footer_pages = cms_get_setting('no_footer_pages','');
 $footer_html = cms_get_setting('footer_html','');
+$logo_overrides = cms_get_setting('page_logo_overrides','');
 
 if(isset($_POST['save'])){
     $logo = trim($_POST['logo']);
@@ -48,10 +49,12 @@ if(isset($_POST['save'])){
     cms_set_setting('header_bar_pages', trim($_POST['header_bar_pages']));
     cms_set_setting('no_footer_pages', trim($_POST['no_footer_pages']));
     cms_set_setting('footer_html', $_POST['footer_html']);
+    cms_set_setting('page_logo_overrides', trim($_POST['logo_overrides']));
     $no_header_pages = trim($_POST['no_header_pages']);
     $header_bar_pages = trim($_POST['header_bar_pages']);
     $no_footer_pages = trim($_POST['no_footer_pages']);
     $footer_html = $_POST['footer_html'];
+    $logo_overrides = trim($_POST['logo_overrides']);
     echo '<p>Settings saved.</p>';
 }
 if(isset($_POST['add'])){
@@ -63,7 +66,7 @@ if(isset($_POST['add'])){
 <p>Current logo:</p>
 <?php $logo = $data['logo']; if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
 <img src="<?php echo htmlspecialchars($logo); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>
-Logo URL: <input type="text" name="logo" id="logo-url" value="<?php echo htmlspecialchars($data['logo']); ?>" size="50"><br><br>
+Logo URL: <input type="text" name="logo" id="logo-url" value="<?php echo htmlspecialchars($data['logo']); ?>" size="50" title="Default header logo path"><br><br>
 <table id="buttons-table" class="data-table">
 <thead><tr><th></th><th>Preview</th><th>URL</th><th>Text</th><th>Image</th><th>Hover</th><th>Alt</th><th>Delete</th></tr></thead>
 <tbody>
@@ -77,11 +80,11 @@ Logo URL: <input type="text" name="logo" id="logo-url" value="<?php echo htmlspe
     <span class="text-preview preview"><?php echo htmlspecialchars($b['text'] ?: $b['url']); ?></span>
 <?php endif; ?>
 </td>
-<td><input type="text" name="buttons[<?php echo $i; ?>][url]" value="<?php echo htmlspecialchars($b['url']); ?>"></td>
-<td><input type="text" name="buttons[<?php echo $i; ?>][text]" value="<?php echo htmlspecialchars($b['text'] ?? ''); ?>"></td>
-<td><input type="hidden" name="buttons[<?php echo $i; ?>][img]" value="<?php echo htmlspecialchars($b['img']); ?>"><input type="file" name="img_file[<?php echo $i; ?>]" class="img-file"></td>
-<td><input type="hidden" name="buttons[<?php echo $i; ?>][hover]" value="<?php echo htmlspecialchars($b['hover']); ?>"><input type="file" name="hover_file[<?php echo $i; ?>]" class="hover-file"></td>
-<td><input type="text" name="buttons[<?php echo $i; ?>][alt]" value="<?php echo htmlspecialchars($b['alt']); ?>"></td>
+<td><input type="text" name="buttons[<?php echo $i; ?>][url]" value="<?php echo htmlspecialchars($b['url']); ?>" title="Link target when clicked"></td>
+<td><input type="text" name="buttons[<?php echo $i; ?>][text]" value="<?php echo htmlspecialchars($b['text'] ?? ''); ?>" title="Text fallback if no image"></td>
+<td><input type="hidden" name="buttons[<?php echo $i; ?>][img]" value="<?php echo htmlspecialchars($b['img']); ?>"><input type="file" name="img_file[<?php echo $i; ?>]" class="img-file" title="Button image"></td>
+<td><input type="hidden" name="buttons[<?php echo $i; ?>][hover]" value="<?php echo htmlspecialchars($b['hover']); ?>"><input type="file" name="hover_file[<?php echo $i; ?>]" class="hover-file" title="Hover state image"></td>
+<td><input type="text" name="buttons[<?php echo $i; ?>][alt]" value="<?php echo htmlspecialchars($b['alt']); ?>" title="Alt text for accessibility"></td>
 <td><input type="checkbox" name="buttons[<?php echo $i; ?>][delete]"></td>
 </tr>
 <?php endforeach; ?>
@@ -91,13 +94,15 @@ Logo URL: <input type="text" name="logo" id="logo-url" value="<?php echo htmlspe
 <button type="button" id="add-button" class="btn btn-primary">Add Button</button>
 <h3>Display Options</h3>
 Pages without header bar (one per line):<br>
-<textarea name="no_header_pages" style="width:100%;height:60px;"><?php echo htmlspecialchars($no_header_pages); ?></textarea><br>
+<textarea name="no_header_pages" style="width:100%;height:60px;" title="Hide entire header on these pages"><?php echo htmlspecialchars($no_header_pages); ?></textarea><br>
 Header bar only pages (one per line):<br>
-<textarea name="header_bar_pages" style="width:100%;height:60px;"><?php echo htmlspecialchars($header_bar_pages); ?></textarea><br>
+<textarea name="header_bar_pages" style="width:100%;height:60px;" title="Show only the header bar without navigation"><?php echo htmlspecialchars($header_bar_pages); ?></textarea><br>
 Pages without footer (one per line):<br>
-<textarea name="no_footer_pages" style="width:100%;height:60px;"><?php echo htmlspecialchars($no_footer_pages); ?></textarea><br>
+<textarea name="no_footer_pages" style="width:100%;height:60px;" title="Hide the footer on these pages"><?php echo htmlspecialchars($no_footer_pages); ?></textarea><br>
+Logo overrides (one per line URL:year:logo path):<br>
+<textarea name="logo_overrides" style="width:100%;height:60px;" title="Override logo on specified pages using format /url.php:2004:/img/logo.png"><?php echo htmlspecialchars($logo_overrides); ?></textarea><br>
 <h3>Footer</h3>
-<textarea name="footer_html" style="width:100%;height:200px;"><?php echo htmlspecialchars($footer_html); ?></textarea><br>
+<textarea name="footer_html" style="width:100%;height:200px;" title="Custom HTML inserted in the footer"><?php echo htmlspecialchars($footer_html); ?></textarea><br>
 <input type="submit" name="save" value="Save" class="btn btn-success">
 </form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>

@@ -154,7 +154,7 @@ function cms_header_buttons_html($theme){
         }
         if(cms_current_admin() || (isset($_COOKIE['cms_admin_id']) && isset($_COOKIE['cms_admin_hash']))){
             $base = cms_base_url();
-            $out .= "<a href=\"{$base}/cms/admin/index.php\" class=\"admin-link\" style=\"padding-right:5px;\"><img valign=\"bottom\" src=\"{$base}/img/admin.gif\" alt=\"Admin\"></a>";
+            $out .= "<a href=\"{$base}/cms/admin/index.php\" class=\"admin-link\"><img valign=\"bottom\" src=\"{$base}/img/admin.gif\" alt=\"Admin\"></a>";
         }
     }
     return $out;

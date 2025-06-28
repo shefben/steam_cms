@@ -20,6 +20,10 @@ $default_logo = file_exists($root.'/content/logo.png')?'/cms/content/logo.png':'
 $data_json = cms_get_setting('header_config', null);
 $data = $data_json?json_decode($data_json,true):['logo'=>$default_logo,'buttons'=>[]];
 if(!$data) $data=['logo'=>$default_logo,'buttons'=>[]];
+$override = $GLOBALS['CMS_CUSTOM_LOGO'] ?? null;
+if($override){
+    $data['logo'] = $override;
+}
 $nav_html = cms_header_buttons_html('2007');
 ?>
 <div class="headerBar" id="v4headerBar">
