@@ -9,16 +9,14 @@ if(!isset($page_title) || $page_title==="") $page_title = $site;
 else $page_title = $site." ".$page_title;
 $theme = cms_get_setting('theme','default');
 $type = 'buttons';
-$req = basename($_SERVER['PHP_SELF']);
-if(!empty($_SERVER['QUERY_STRING'])) $req .= '?' . $_SERVER['QUERY_STRING'];
-$overrides = cms_get_setting('header_overrides','');
-foreach(preg_split('/\r?\n/',$overrides) as $line){
-    if(!trim($line)) continue;
-    list($path,$t) = array_map('trim', explode(',', $line, 2));
-    if($path === $req){
-        $type = $t;
-        break;
-    }
+$page = basename($_SERVER['PHP_SELF']);
+$no_header = array_filter(array_map('trim', preg_split('/\r?\n/', cms_get_setting('no_header_pages',''))));
+$bar_only = array_filter(array_map('trim', preg_split('/\r?\n/', cms_get_setting('header_bar_pages',''))));
+if(in_array($page,$no_header)){
+    return;
+}
+if(in_array($page,$bar_only)){
+    $type = 'nobuttons';
 }
 $theme_dir = dirname(__DIR__)."/themes/$theme";
 $header = "$theme_dir/header_{$type}.php";

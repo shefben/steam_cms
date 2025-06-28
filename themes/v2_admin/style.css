@@ -587,3 +587,12 @@ select.form-control,
     border: 2px dashed #ccc;
     height: 40px;
 }
+
+.text-preview {
+    display:inline-block;
+    padding:4px 8px;
+    background:#ecf0f1;
+    border-radius:4px;
+    color:#2c3e50;
+    font-size:14px;
+}

@@ -53,7 +53,13 @@ Logo URL: <input type="text" name="logo" id="logo-url" value="<?php echo htmlspe
 <?php foreach($data['buttons'] as $i=>$b): ?>
 <tr class="button-row" data-index="<?php echo $i; ?>">
 <td class="handle">☰</td>
-<td><img src="<?php echo htmlspecialchars($b['img']); ?>" data-hover="<?php echo htmlspecialchars($b['hover']); ?>" class="preview" style="max-height:24px"></td>
+<td>
+<?php if(!empty($b['img'])): ?>
+    <img src="<?php echo htmlspecialchars($b['img']); ?>" data-hover="<?php echo htmlspecialchars($b['hover']); ?>" class="preview" style="max-height:24px">
+<?php else: ?>
+    <span class="text-preview preview"><?php echo htmlspecialchars($b['text'] ?: $b['url']); ?></span>
+<?php endif; ?>
+</td>
 <td><input type="text" name="buttons[<?php echo $i; ?>][url]" value="<?php echo htmlspecialchars($b['url']); ?>"></td>
 <td><input type="text" name="buttons[<?php echo $i; ?>][text]" value="<?php echo htmlspecialchars($b['text'] ?? ''); ?>"></td>
 <td><input type="hidden" name="buttons[<?php echo $i; ?>][img]" value="<?php echo htmlspecialchars($b['img']); ?>"><input type="file" name="img_file[<?php echo $i; ?>]" class="img-file"></td>
@@ -79,7 +85,7 @@ $(function(){
         var idx = $('#buttons-table tbody tr').length;
         var row = `<tr class="button-row" data-index="${idx}">
             <td class="handle">☰</td>
-            <td><img src="" data-hover="" class="preview" style="max-height:24px"></td>
+            <td><span class="text-preview preview"></span></td>
             <td><input type="text" name="buttons[${idx}][url]"></td>
             <td><input type="text" name="buttons[${idx}][text]"></td>
             <td><input type="hidden" name="buttons[${idx}][img]"><input type="file" name="img_file[${idx}]" class="img-file"></td>
@@ -94,6 +100,9 @@ $(function(){
         var img = this.files[0];
         var row = $(this).closest('tr');
         if(img){
+            if(!row.find('img.preview').length){
+                row.find('.preview').replaceWith('<img class="preview" style="max-height:24px">');
+            }
             var reader = new FileReader();
             reader.onload = function(e){
                 row.find('img.preview').attr('src',e.target.result);
@@ -106,12 +115,21 @@ $(function(){
         var img = this.files[0];
         var row = $(this).closest('tr');
         if(img){
+            if(!row.find('img.preview').length){
+                row.find('.preview').replaceWith('<img class="preview" style="max-height:24px">');
+            }
             var reader = new FileReader();
             reader.onload = function(e){
                 row.find('img.preview').attr('data-hover',e.target.result);
             };
             reader.readAsDataURL(img);
         }
+    });
+
+    $(document).on('input','input[type="text"]',function(){
+        var row=$(this).closest('tr');
+        var text=row.find('input[name*="[text]"]').val() || row.find('input[name*="[url]"]').val();
+        row.find('.text-preview').text(text);
     });
 
     $(document).on('mouseenter','img.preview',function(){

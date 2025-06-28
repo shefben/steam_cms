@@ -11,7 +11,7 @@ if(isset($_GET['delete'])){
 $rows=$db->query('SELECT id,company,firstname,lastname,state,email,created FROM ccafe_registration ORDER BY created DESC')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Cafe Signups</h2>
-<table>
+<table class="data-table">
 <tr><th>Company</th><th>Date</th><th>State</th><th>Email</th><th>Actions</th></tr>
 <?php foreach($rows as $r): ?>
 <tr>

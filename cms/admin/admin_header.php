@@ -21,10 +21,11 @@ if(!cms_current_admin()){
 }
 $admin_theme = cms_get_setting('admin_theme','v2');
 $theme_dir = dirname(__DIR__,2)."/themes/{$admin_theme}_admin";
-$theme_url = "/themes/{$admin_theme}_admin";
+$base_url = rtrim(dirname(dirname(dirname($_SERVER['PHP_SELF']))),'/');
+$theme_url = ($base_url? $base_url : '')."/themes/{$admin_theme}_admin";
 if(!is_dir($theme_dir)){
     $theme_dir = dirname(__DIR__,2)."/themes/default_admin";
-    $theme_url = "/themes/default_admin";
+    $theme_url = ($base_url? $base_url : '')."/themes/default_admin";
 }
 $admin_id = cms_current_admin();
 $db = cms_get_db();

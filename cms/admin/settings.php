@@ -7,7 +7,9 @@ $smtp_port = cms_get_setting('smtp_port','');
 $smtp_user = cms_get_setting('smtp_user','');
 $smtp_pass = cms_get_setting('smtp_pass','');
 $admin_theme = cms_get_setting('admin_theme','default');
-$overrides = cms_get_setting('header_overrides','');
+$no_header_pages = cms_get_setting('no_header_pages','');
+$header_bar_pages = cms_get_setting('header_bar_pages','');
+$no_footer_pages = cms_get_setting('no_footer_pages','');
 $footer_html = cms_get_setting('footer_html','');
 $favicon = cms_get_setting('favicon','/favicon.ico');
 $data_json = cms_get_setting('header_config',null);
@@ -24,7 +26,9 @@ if(isset($_POST['save'])){
     cms_set_setting('smtp_user',trim($_POST['smtp_user']));
     cms_set_setting('smtp_pass',trim($_POST['smtp_pass']));
     cms_set_setting('admin_theme',$_POST['admin_theme']);
-    cms_set_setting('header_overrides',trim($_POST['header_overrides']));
+    cms_set_setting('no_header_pages', trim($_POST['no_header_pages']));
+    cms_set_setting('header_bar_pages', trim($_POST['header_bar_pages']));
+    cms_set_setting('no_footer_pages', trim($_POST['no_footer_pages']));
     cms_set_setting('footer_html',$_POST['footer_html']);
     if(isset($_FILES['favicon']) && is_uploaded_file($_FILES['favicon']['tmp_name'])){
         $path = __DIR__.'/../content/favicon.ico';
@@ -53,7 +57,9 @@ if(isset($_POST['save'])){
     $smtp_user = trim($_POST['smtp_user']);
     $smtp_pass = trim($_POST['smtp_pass']);
     $admin_theme = $_POST['admin_theme'];
-    $overrides = trim($_POST['header_overrides']);
+    $no_header_pages = trim($_POST['no_header_pages']);
+    $header_bar_pages = trim($_POST['header_bar_pages']);
+    $no_footer_pages = trim($_POST['no_footer_pages']);
     $footer_html = $_POST['footer_html'];
     $header_data = ['logo'=>$logo,'buttons'=>$out];
 }
@@ -71,8 +77,12 @@ SMTP Port: <input type="text" name="smtp_port" value="<?php echo htmlspecialchar
 SMTP User: <input type="text" name="smtp_user" value="<?php echo htmlspecialchars($smtp_user); ?>"><br>
 SMTP Password: <input type="password" name="smtp_pass" value="<?php echo htmlspecialchars($smtp_pass); ?>"><br><br>
 Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <input type="file" name="favicon" accept="image/x-icon"><br><br>
-Header overrides (one per line path,type):<br>
-<textarea name="header_overrides" style="width:100%;height:80px;"><?php echo htmlspecialchars($overrides); ?></textarea><br>
+Pages without header bar (one per line):<br>
+<textarea name="no_header_pages" style="width:100%;height:60px;"><?php echo htmlspecialchars($no_header_pages); ?></textarea><br>
+Header bar only pages (one per line):<br>
+<textarea name="header_bar_pages" style="width:100%;height:60px;"><?php echo htmlspecialchars($header_bar_pages); ?></textarea><br>
+Pages without footer (one per line):<br>
+<textarea name="no_footer_pages" style="width:100%;height:60px;"><?php echo htmlspecialchars($no_footer_pages); ?></textarea><br>
 <h3>Header Configuration</h3>
 <p>Current logo:</p>
 <img src="<?php echo htmlspecialchars($header_data['logo']); ?>" alt="logo"><br>
