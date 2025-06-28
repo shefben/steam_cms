@@ -152,8 +152,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
                 ['file'=>'theme.php','label'=>'Theme','visible'=>1],
                 ['file'=>'settings.php','label'=>'Settings','visible'=>1],
+                ['file'=>'header_bar.php','label'=>'Header Bar','visible'=>1],
+                ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
                 ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
-                ['file'=>'nav_manager.php','label'=>'Navigation','visible'=>1],
                 ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
                 ['file'=>'logo.php','label'=>'Logo','visible'=>1],
                 ['file'=>'../logout.php','label'=>'Logout','visible'=>1]

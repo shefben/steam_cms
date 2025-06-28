@@ -1,6 +1,7 @@
 <?php
 require_once 'admin_header.php';
-$default_logo = file_exists(__DIR__.'/../content/logo.png')?'/cms/content/logo.png':'/img/steam_logo_onblack.gif';
+$base = cms_base_url();
+$default_logo = file_exists(__DIR__.'/../content/logo.png') ? $base.'/cms/content/logo.png' : $base.'/img/steam_logo_onblack.gif';
 $json = cms_get_setting('header_config', null);
 $data = $json?json_decode($json,true):['logo'=>$default_logo,'buttons'=>[]];
 if(!$data) $data=['logo'=>$default_logo,'buttons'=>[]];
@@ -43,7 +44,8 @@ if(isset($_POST['add'])){
 ?>
 <h2>Edit Header</h2>
 <p>Current logo:</p>
-<img src="<?php echo htmlspecialchars($data['logo']); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>
+<?php $logo = $data['logo']; if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
+<img src="<?php echo htmlspecialchars($logo); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>
 <a href="logo.php">Upload new logo</a>
 <form method="post" enctype="multipart/form-data">
 Logo URL: <input type="text" name="logo" id="logo-url" value="<?php echo htmlspecialchars($data['logo']); ?>" size="50"><br><br>

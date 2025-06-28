@@ -13,6 +13,7 @@
         <h1>CMS Administration</h1>
         <div class="header-controls">
             <span class="user-info">Logged in as <?php echo htmlspecialchars($admin_name); ?></span>
+            <a href="<?php echo htmlspecialchars($base_url); ?>/index.php" class="btn btn-small">Home</a>
             <a href="../logout.php" class="btn btn-small">Logout</a>
         </div>
     </div>

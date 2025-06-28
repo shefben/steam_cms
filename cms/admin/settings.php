@@ -7,6 +7,9 @@ $smtp_port = cms_get_setting('smtp_port','');
 $smtp_user = cms_get_setting('smtp_user','');
 $smtp_pass = cms_get_setting('smtp_pass','');
 $admin_theme = cms_get_setting('admin_theme','default');
+$json_nav = cms_get_setting('nav_items', null);
+$nav_items = $json_nav ? json_decode($json_nav, true) : ($default_nav ?? []);
+if(!$nav_items) $nav_items = $default_nav ?? [];
 $no_header_pages = cms_get_setting('no_header_pages','');
 $header_bar_pages = cms_get_setting('header_bar_pages','');
 $no_footer_pages = cms_get_setting('no_footer_pages','');
@@ -26,6 +29,18 @@ if(isset($_POST['save'])){
     cms_set_setting('smtp_user',trim($_POST['smtp_user']));
     cms_set_setting('smtp_pass',trim($_POST['smtp_pass']));
     cms_set_setting('admin_theme',$_POST['admin_theme']);
+    if(isset($_POST['nav_items'])){
+        $items = [];
+        foreach($_POST['nav_items'] as $it){
+            $items[] = [
+                'file'=>trim($it['file']),
+                'label'=>trim($it['label']),
+                'visible'=>isset($it['visible'])?1:0
+            ];
+        }
+        cms_set_setting('nav_items', json_encode($items));
+        $nav_items = $items;
+    }
     cms_set_setting('no_header_pages', trim($_POST['no_header_pages']));
     cms_set_setting('header_bar_pages', trim($_POST['header_bar_pages']));
     cms_set_setting('no_footer_pages', trim($_POST['no_footer_pages']));
@@ -62,6 +77,8 @@ if(isset($_POST['save'])){
     $no_footer_pages = trim($_POST['no_footer_pages']);
     $footer_html = $_POST['footer_html'];
     $header_data = ['logo'=>$logo,'buttons'=>$out];
+    // keep nav_items array for redisplay
+    $nav_items = $nav_items;
 }
 ?>
 <h2>Site Settings</h2>
@@ -77,6 +94,20 @@ SMTP Port: <input type="text" name="smtp_port" value="<?php echo htmlspecialchar
 SMTP User: <input type="text" name="smtp_user" value="<?php echo htmlspecialchars($smtp_user); ?>"><br>
 SMTP Password: <input type="password" name="smtp_pass" value="<?php echo htmlspecialchars($smtp_pass); ?>"><br><br>
 Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <input type="file" name="favicon" accept="image/x-icon"><br><br>
+<h3>Sidebar Navigation</h3>
+<table class="data-table" cellpadding="2">
+<thead><tr><th>Order</th><th>File</th><th>Label</th><th>Visible</th></tr></thead>
+<tbody>
+<?php foreach($nav_items as $idx=>$it): ?>
+<tr>
+<td><?php echo $idx+1; ?></td>
+<td><input type="text" name="nav_items[<?php echo $idx; ?>][file]" value="<?php echo htmlspecialchars($it['file']); ?>"></td>
+<td><input type="text" name="nav_items[<?php echo $idx; ?>][label]" value="<?php echo htmlspecialchars($it['label']); ?>"></td>
+<td><input type="checkbox" name="nav_items[<?php echo $idx; ?>][visible]" <?php echo !empty($it['visible'])?'checked':''; ?>></td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+</table><br>
 Pages without header bar (one per line):<br>
 <textarea name="no_header_pages" style="width:100%;height:60px;"><?php echo htmlspecialchars($no_header_pages); ?></textarea><br>
 Header bar only pages (one per line):<br>

@@ -21,7 +21,7 @@ if(!cms_current_admin()){
 }
 $admin_theme = cms_get_setting('admin_theme','v2');
 $theme_dir = dirname(__DIR__,2)."/themes/{$admin_theme}_admin";
-$base_url = rtrim(dirname(dirname(dirname($_SERVER['PHP_SELF']))),'/');
+$base_url = cms_base_url();
 $theme_url = ($base_url? $base_url : '')."/themes/{$admin_theme}_admin";
 if(!is_dir($theme_dir)){
     $theme_dir = dirname(__DIR__,2)."/themes/default_admin";
@@ -43,8 +43,9 @@ $default_nav = [
     ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
     ['file'=>'theme.php','label'=>'Theme','visible'=>1],
     ['file'=>'settings.php','label'=>'Settings','visible'=>1],
+    ['file'=>'header_bar.php','label'=>'Header Bar','visible'=>1],
+    ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
-    ['file'=>'nav_manager.php','label'=>'Navigation','visible'=>1],
     ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
     ['file'=>'logo.php','label'=>'Logo','visible'=>1],
     ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
@@ -63,8 +64,9 @@ $icons = [
     'custom_pages.php' => '📄',
     'theme.php'        => '🎨',
     'settings.php'     => '⚙️',
+    'header_bar.php'   => '📑',
+    'faq_categories.php'=> '📂',
     'admin_users.php'  => '👥',
-    'nav_manager.php'  => '🧭',
     'error_page.php'   => '❌',
     'logo.php'         => '🖼️',
     '../logout.php'    => '🚪',
