@@ -2,16 +2,18 @@
 require_once __DIR__.'/db.php';
 
 function cms_get_news_settings(){
-    $def=['articles_per_page'=>10,'partial_words'=>120];
+    $def=['articles_per_page'=>10,'partial_words'=>120,'source'=>'both'];
     return [
         'articles_per_page'=>(int)cms_get_setting('news_articles_per_page',$def['articles_per_page']),
-        'partial_words'=>(int)cms_get_setting('news_partial_words',$def['partial_words'])
+        'partial_words'=>(int)cms_get_setting('news_partial_words',$def['partial_words']),
+        'source'=>cms_get_setting('news_source',$def['source'])
     ];
 }
 
 function cms_save_news_settings($data){
     cms_set_setting('news_articles_per_page',$data['articles_per_page']);
     cms_set_setting('news_partial_words',$data['partial_words']);
+    cms_set_setting('news_source',$data['source']);
 }
 
 function cms_render_news($type,$count=null){
@@ -22,8 +24,14 @@ function cms_render_news($type,$count=null){
     // some versions. Cast $count to an integer and inject it directly to avoid
     // syntax errors when executing the query.
     $limit = (int)$count;
-    $stmt = $db->prepare("SELECT id,title,author,publish_date,content FROM news "
-        . "WHERE publish_date<=NOW() ORDER BY publish_date DESC LIMIT $limit");
+    $where = ['publish_date<=NOW()'];
+    if($settings['source']==='official'){
+        $where[] = 'is_official=1';
+    }elseif($settings['source']==='custom'){
+        $where[] = 'is_official=0';
+    }
+    $sql = "SELECT id,title,author,publish_date,content FROM news WHERE ".implode(' AND ',$where)." ORDER BY publish_date DESC LIMIT $limit";
+    $stmt = $db->prepare($sql);
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $out = '';

@@ -112,7 +112,7 @@ function preloadImages() {
 					<table width="801" border="0" cellspacing="0" cellpadding="0" bgcolor="#3e4637" cool gridx="16" gridy="16" height="657" showgridx showgridy>
                                                 <tr height="53">
                                                         <td colspan="15" valign="top" align="left">
-                                                                <span class="navBar"><?php echo cms_header_buttons_html('2007'); ?></span>
+                                                                <span class="navBar"></span>
                                                         </td>
                                                 </tr>
 						<tr height="364">

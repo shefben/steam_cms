@@ -6,6 +6,7 @@ $settings = cms_get_news_settings();
 if(isset($_POST['save'])){
     $settings['articles_per_page'] = (int)$_POST['articles'];
     $settings['partial_words'] = (int)$_POST['partial_words'];
+    $settings['source'] = $_POST['source'];
     cms_save_news_settings($settings);
 }
 ?>
@@ -13,6 +14,11 @@ if(isset($_POST['save'])){
 <form method="post">
 Articles per tag: <input type="number" name="articles" value="<?php echo $settings['articles_per_page']; ?>"><br><br>
 Partial article word limit: <input type="number" name="partial_words" value="<?php echo $settings['partial_words']; ?>"><br><br>
+Display source: <select name="source">
+    <option value="official" <?php echo $settings['source']=='official'?'selected':''; ?>>show only official steampowered news</option>
+    <option value="custom" <?php echo $settings['source']=='custom'?'selected':''; ?>>show only custom news</option>
+    <option value="both" <?php echo $settings['source']=='both'?'selected':''; ?>>show both types of news</option>
+</select><br><br>
 <input type="submit" name="save" value="Save">
 </form>
 <p><a href="index.php">Back</a></p>

@@ -136,12 +136,13 @@ SUP	{
 	font-size: 11px;
 	}
 .header{
-	/* float:left; */
-	padding:0px;
-	background:#000000;
-	margin-bottom:16px;
-	width:100%;
-	}
+        /* float:left; */
+        padding:0px;
+        background:#000000;
+        margin-bottom:16px;
+        width:100%;
+        position:relative;
+        }
 .navBar{
         margin-left:64px;
         position:absolute;

@@ -19,7 +19,7 @@ if(isset($_POST['save'])){
         $stmt = $db->prepare('UPDATE news SET title=?, author=?, content=?, publish_date=? WHERE id=?');
         $stmt->execute([$title,$author,$content,$_POST['publish_date'],$id]);
     }else{
-        $stmt = $db->prepare('INSERT INTO news(title,author,publish_date,content,views) VALUES(?,?,?,?,0)');
+        $stmt = $db->prepare('INSERT INTO news(title,author,publish_date,content,views,is_official) VALUES(?,?,?,?,0,0)');
         $stmt->execute([$title,$author,$_POST['publish_date'],$content]);
         $id = $db->lastInsertId();
     }

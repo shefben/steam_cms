@@ -1,13 +1,13 @@
 <?php
 require_once __DIR__.'/cms/template_engine.php';
 $db = cms_get_db();
-$rows = $db->query('SELECT id,title,date FROM news ORDER BY date DESC')->fetchAll(PDO::FETCH_ASSOC);
+$rows = $db->query('SELECT id,title,publish_date FROM news ORDER BY publish_date DESC')->fetchAll(PDO::FETCH_ASSOC);
 $content = '<h1>STEAM NEWS</h1>';
 $content .= '<h2>ARCHIVED <em>VALVE NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br>';
 $content .= '<div class="narrower">';
 $current = '';
 foreach($rows as $row){
-    $ts = strtotime($row['date']);
+    $ts = strtotime($row['publish_date']);
     if(!$ts) continue;
     $month = date('F Y',$ts);
     if($month != $current){
