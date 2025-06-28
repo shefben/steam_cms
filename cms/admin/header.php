@@ -46,7 +46,6 @@ if(isset($_POST['add'])){
 <p>Current logo:</p>
 <?php $logo = $data['logo']; if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
 <img src="<?php echo htmlspecialchars($logo); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>
-<a href="logo.php">Upload new logo</a>
 <form method="post" enctype="multipart/form-data">
 Logo URL: <input type="text" name="logo" id="logo-url" value="<?php echo htmlspecialchars($data['logo']); ?>" size="50"><br><br>
 <table id="buttons-table" class="data-table">
@@ -78,9 +77,8 @@ Logo URL: <input type="text" name="logo" id="logo-url" value="<?php echo htmlspe
 </form>
 <script>
 $(function(){
-    $('#buttons-table tbody').sortable({
-        handle: '.handle',
-        placeholder: 'sortable-placeholder'
+    new Sortable(document.querySelector('#buttons-table tbody'), {
+        handle: '.handle'
     });
 
     $('#add-button').on('click', function(){
