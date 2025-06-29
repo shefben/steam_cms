@@ -13,6 +13,26 @@ if (isset($_GET['area'])) {
         exit;
 }
 require_once __DIR__.'/cms/db.php';
+
+// if a specific FAQ entry was requested, serve it directly
+if($area === 'faq' && isset($_GET['id'])){
+    $id = preg_replace('/[^0-9,]/','',$_GET['id']);
+    $custom = cms_get_custom_page('faq_'.$id);
+    if($custom){
+        $page_title = $custom['title'];
+        include 'cms/header.php';
+        echo $custom['content'];
+        include 'cms/footer.php';
+        exit;
+    }
+    $path = "faq_pages/faq_{$id}.php";
+    if(file_exists($path)){
+        include $path;
+        exit;
+    }
+    $area = 'notfound';
+}
+
 $page = cms_get_custom_page($area);
 if($page){
     $page_title = $page['title'];
@@ -47,9 +67,6 @@ elseif ($area == "all" && (isset($_GET['page'])) && (!isset($_GET['genre']))) {
 } elseif ($area == "news" && (isset($_GET['id']))) {
         $id = preg_replace('/[^0-9]/','',$_GET['id']);
         $area = 'news_'.$id;
-} elseif ($area == "faq" && (isset($_GET['id']))) {
-        $id = preg_replace('/[^0-9,]/','',$_GET['id']);
-        $area = 'faq_'.$id;
 } elseif ($area == "archives" && (isset($_GET['date']))) {
         $d = preg_replace('/[^0-9-]/','',$_GET['date']);
         $area = 'archive_'.$d;
