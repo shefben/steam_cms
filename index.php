@@ -14,21 +14,29 @@ if (isset($_GET['area'])) {
 }
 require_once __DIR__.'/cms/db.php';
 
-// if a specific FAQ entry was requested, serve it directly
+// if a specific FAQ entry was requested, render it from the database
 if($area === 'faq' && isset($_GET['id'])){
-    $id = preg_replace('/[^0-9,]/','',$_GET['id']);
-    $custom = cms_get_custom_page('faq_'.$id);
-    if($custom){
-        $page_title = $custom['title'];
-        include 'cms/header.php';
-        echo $custom['content'];
-        include 'cms/footer.php';
-        exit;
-    }
-    $path = "faq_pages/faq_{$id}.php";
-    if(file_exists($path)){
-        include $path;
-        exit;
+    $parts = array_map('intval', explode(',', preg_replace('/[^0-9,]/','',$_GET['id'])));
+    if(count($parts) === 4){
+        list($cat1,$cat2,$faq1,$faq2) = $parts;
+        $stmt = cms_get_db()->prepare('SELECT title,body FROM faq_content WHERE catid1=? AND catid2=? AND faqid1=? AND faqid2=?');
+        $stmt->execute([$cat1,$cat2,$faq1,$faq2]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($row){
+            $page_title = 'FAQ';
+            include 'cms/header.php';
+            echo "<div class=\"content\" id=\"container\">";
+            echo '<h1>FREQUENTLY ASKED QUESTIONS</h1><div class="narrower">';
+            echo '<h3>'.htmlspecialchars($row['title']).'</h3>';
+            echo $row['body'];
+            if(isset($_GET['return'])){
+                $sec = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['return']);
+                echo '<ul><li><a href="index.php?area=faq&section='.$sec.'">Return to '.htmlspecialchars(ucfirst($sec)).' FAQ</a></li></ul>';
+            }
+            echo '</div></div>';
+            include 'cms/footer.php';
+            exit;
+        }
     }
     $area = 'notfound';
 }
@@ -115,10 +123,7 @@ if (($area == "faq") && (isset($_GET['section']))) {
 // try to locate the requested page
 $file = "$area.php";
 if(!file_exists($file)){
-    // some content lives in subdirectories (eg. faq pages)
-    if(strpos($area,'faq_')===0 && file_exists("faq_pages/$file")){
-        $file = "faq_pages/$file";
-    }elseif(strpos($area,'news_')===0 && file_exists("news_pages/$file")){
+    if(strpos($area,'news_')===0 && file_exists("news_pages/$file")){
         $file = "news_pages/$file";
     }else{
         $file = 'notfound.php';
