@@ -156,6 +156,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
                 ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
                 ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
+                ['file'=>'support_2003.php','label'=>'2003 Support','visible'=>1],
                 ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
             ];
             $defaults = [
