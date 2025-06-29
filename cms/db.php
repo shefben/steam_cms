@@ -144,17 +144,16 @@ function cms_header_buttons_html($theme){
         }
     }elseif($theme === '2004'){
         foreach($buttons as $b){
-            $img = trim($b['img']);
-            if($img === '') continue;
+            $text = trim($b['text'] ?? $b['alt'] ?? '');
+            if($text === '') continue;
             $url = htmlspecialchars($b['url']);
-            $img_h = htmlspecialchars($img);
-            $hover = htmlspecialchars($b['hover']);
-            $alt = htmlspecialchars($b['alt']);
-            $out .= "<a href=\"$url\"><img valign=\"bottom\" src=\"$img_h\" onMouseOver=\"this.src='$hover'\" onMouseOut=\"this.src='$img_h'\" alt=\"$alt\"></a>";
+            $title = htmlspecialchars($text);
+            $label = htmlspecialchars($text);
+            $out .= '<div class="globalNavItem"><a href="'.$url.'" title="'.$title.'"><span class="globalNavLink">'.$label.'</span></a></div>';
         }
         if(cms_current_admin() || (isset($_COOKIE['cms_admin_id']) && isset($_COOKIE['cms_admin_hash']))){
             $base = cms_base_url();
-            $out .= "<a href=\"{$base}/cms/admin/index.php\" class=\"admin-link\"><img valign=\"bottom\" src=\"{$base}/img/admin.gif\" alt=\"Admin\"></a>";
+            $out .= '<div class="globalNavItem"><a href="'.$base.'/cms/admin/index.php" title="Admin"><span class="globalNavLink">ADMIN</span></a></div>';
         }
     }
     return $out;

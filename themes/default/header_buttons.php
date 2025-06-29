@@ -17,6 +17,52 @@ else $page_title = $site_title . " " . $page_title;
     <meta name="KEYWORDS" content="Steam, account, account creation, signup">
     <meta name="AUTHOR" content="Valve LLC">
     <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($base); ?>/steampowered.css">
+    <style>
+    .globalHeadBar
+    {
+        background:#000000;
+        margin: 0px;
+        width: 80%;
+        padding-top: 30px;
+        padding-bottom: 9px;
+        float: left;
+    }
+    .globalHeadBar_logo {
+        background:#000000;
+        margin: 0px;
+        width: 20%;
+        padding-top: 4px;
+        padding-bottom: 9px;
+        float: left;
+    }
+    .globalNavItem {
+        display:inline;
+        vertical-align: top;
+        margin-bottom: 0px;
+    }
+    .globalNavItem a {
+        display:inline;
+        margin-right: 15px;
+        margin-left: 15px;
+        padding-bottom: 9px;
+        background-color: #000000;
+        text-decoration:none;
+    }
+    .globalNavItem a:hover {
+        background-color: #4C5844;
+        text-decoration:none;
+    }
+    .globalNavLink {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.8em;
+        color: #FFFFFF;
+        letter-spacing: 1px;
+        background-color: #000000;
+        text-decoration: none;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+    </style>
     <link rel="Shortcut Icon" type="image/png" href="<?php echo htmlspecialchars($base); ?>/webicon.png">
     <script language="JavaScript" src="<?php echo htmlspecialchars($base); ?>/nav.js"></script>
     <link href="<?php echo htmlspecialchars($base); ?>/rss.xml" rel="alternate" type="application/rss+xml" title="Valve RSS News Feed" />
@@ -34,7 +80,8 @@ if($override){
 $logo = $data['logo'];
 if($logo && $logo[0]=='/') $logo = $base.$logo;
 $nav_html = cms_header_buttons_html('2004');
-echo "<div class=\"header\"><nobr>";
-echo "<a href=\"{$base}/index.php\"><img src=\"".htmlspecialchars($logo)."\" alt=\"[Steam]\" height=\"54\" width=\"152\"></a>";
-echo "<span class=\"navBar\">$nav_html</span></nobr></div>";
+echo '<div style="min-width:850px;">';
+echo '<div class="globalHeadBar_logo"><a href="'.htmlspecialchars($base).'/index.php"><img alt="Steam main" border="0" src="'.htmlspecialchars($logo).'"></a></div>';
+echo '<div class="globalHeadBar">'.$nav_html.'</div>';
+echo '</div>';
 ?>
