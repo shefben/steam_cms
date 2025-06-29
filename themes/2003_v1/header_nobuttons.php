@@ -20,7 +20,7 @@ $logo = $override ?: (isset($data['logo'])?$data['logo']:$default_logo);
     <meta name="DESCRIPTION" content="SteamPowered">
     <meta name="KEYWORDS" content="Steam, account, account creation, signup">
     <meta name="AUTHOR" content="Valve Corporation">
-    <link rel="stylesheet" type="text/css" href="/steampowered02.css">
+    <link rel="stylesheet" type="text/css" href="/archived_steampowered/2003/v1/steam.css">
     <link rel="Shortcut Icon" type="image/png" href="/webicon.png">
 </head>
 <body bgcolor="#4c5844" leftmargin="0" topmargin="0">

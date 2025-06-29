@@ -4,7 +4,8 @@ if (isset($_GET['area'])) {
 } else {
         require_once __DIR__.'/cms/db.php';
         $theme = cms_get_setting('theme','default');
-        if($theme === '2004'){
+        $tpl = __DIR__.'/themes/'.$theme.'/index_template.php';
+        if(file_exists($tpl)){
                 require 'home.php';
                 exit;
         }
@@ -91,9 +92,18 @@ if (($area == "faq") && (isset($_GET['section']))) {
         $area = 'faq_section_'.$sec;
 }
 
-if (file_exists($area.".php") == false) {
-	$area = 'notfound';
+// try to locate the requested page
+$file = "$area.php";
+if(!file_exists($file)){
+    // some content lives in subdirectories (eg. faq pages)
+    if(strpos($area,'faq_')===0 && file_exists("faq_pages/$file")){
+        $file = "faq_pages/$file";
+    }elseif(strpos($area,'news_')===0 && file_exists("news_pages/$file")){
+        $file = "news_pages/$file";
+    }else{
+        $file = 'notfound.php';
+    }
 }
 
-include $area.".php";
+include $file;
 ?>

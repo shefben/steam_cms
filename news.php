@@ -3,6 +3,7 @@ require_once __DIR__ . '/cms/template_engine.php';
 $page_title = 'Steam News';
 $content = '';
 $db = cms_get_db();
+$theme = cms_get_setting('theme','2004');
 
 $content .= '<h1>STEAM NEWS</h1>';
 if(isset($_GET['news'])){
@@ -31,7 +32,7 @@ if(isset($_GET['news'])){
     $content .= '<p align="center"><a href="news_archive.php" style="text-decoration: none;"><i>view the news archives</i></a> &middot; <a href="rss.xml" style="text-decoration: none;"><i>rss news feed</i></a></p>';
     $content .= '</div>';
 }
-cms_render_template(__DIR__.'/themes/2004/default_template.php',[
+cms_render_template(__DIR__.'/themes/'.$theme.'/default_template.php',[
     'content'=>$content,
     'page_title'=>$page_title
 ]);

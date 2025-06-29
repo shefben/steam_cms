@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/cms/template_engine.php';
 $db = cms_get_db();
+$theme = cms_get_setting('theme','2004');
 $rows = $db->query('SELECT id,title,publish_date FROM news ORDER BY publish_date DESC')->fetchAll(PDO::FETCH_ASSOC);
 $content = '<h1>STEAM NEWS</h1>';
 $content .= '<h2>ARCHIVED <em>VALVE NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br>';
@@ -22,4 +23,4 @@ foreach($rows as $row){
 if($current) $content .= "</ul>\n";
 $content .= '<p align="center"><br><a href="news.php" style="text-decoration: none;"><i>return to the current news</i></a></p>';
 $content .= '</div>';
-cms_render_template(__DIR__.'/themes/2004/default_template.php',[ 'page_title'=>'Steam News', 'content'=>$content]);
+cms_render_template(__DIR__.'/themes/'.$theme.'/default_template.php',[ 'page_title'=>'Steam News', 'content'=>$content]);
