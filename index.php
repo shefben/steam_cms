@@ -67,6 +67,9 @@ elseif ($area == "all" && (isset($_GET['page'])) && (!isset($_GET['genre']))) {
 } elseif ($area == "news" && (isset($_GET['id']))) {
         $id = preg_replace('/[^0-9]/','',$_GET['id']);
         $area = 'news_'.$id;
+} elseif ($area == "faq" && (isset($_GET['id']))) {
+        $id = preg_replace('/[^0-9,]/','',$_GET['id']);
+        $area = 'faq_'.$id;
 } elseif ($area == "archives" && (isset($_GET['date']))) {
         $d = preg_replace('/[^0-9-]/','',$_GET['date']);
         $area = 'archive_'.$d;
