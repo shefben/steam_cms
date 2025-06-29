@@ -1,0 +1,355 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:cc="http://web.resource.org/cc/" xmlns="http://purl.org/rss/1.0/">
+	<channel rdf:about="http://www.steampowered.com">
+		<title>Valve RSS News Feed</title> 
+		<link>http://www.steampowered.com/</link> 
+		<description>All Valve news, all the time!</description> 
+		<language>en</language> 
+		<pubDate>Fri, 25 Aug 2006 04:34:51 -0800</pubDate> 
+		<generator>http://www.steampowered.com/</generator> 
+		<items>
+			<rdf:Seq>
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=730" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=728" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=727" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=726" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=725" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=724" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=722" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=717" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=715" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=714" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=713" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=712" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=711" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=710" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=709" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=707" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=706" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=705" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=700" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=699" />
+			</rdf:Seq>
+		</items>
+	</channel>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=730">
+		<title>GTI Racing and Xpand Rally Available on Steam</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=730</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 24 Aug 2006 04:30:00 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-24T04:30:00-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Racing games, <a href="http://storefront.steampowered.com/v/index.php?area=game&AppId=3000">GTI Racing</a> and <a href="http://storefront.steampowered.com/v/index.php?area=game&AppId=3010">Xpand Rally</a> have come to Steam.  Purchase either for $19.95, or both for $29.95.  Also available in North America as a package with Logitech&#146;s MOMO Racing wheel and pedal set for $124.95 (+shipping).
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=728">
+		<title>Counter-Strike: Source Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=728</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 24 Aug 2006 02:10:53 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-24T02:10:53-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Counter-Strike: Source have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Counter-Strike: Source</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>The radar display has been enhanced<br><li><i>de_train</i> has received a High Dynamic Range (HDR) lighting treatment, as well as some bug fixes and layout tweaks<br><li>The player's eye height while crouching now matches their in-game player model eye position more closely<br><li>SourceTV now shows the weapon in first-person view<br><li>SourceTV supports the <i>tv_transmitall</i> command<br><li>Assorted exploit fixes</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=727">
+		<title>DEFCON On Steam In September</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=727</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 23 Aug 2006 01:00:08 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-23T01:00:08-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+<a href="http://www.valvesoftware.com/" target="_blank">Valve</a> and <a href="http://www.introversion.co.uk/" target="_blank">Introversion</a> today announced an agreement to deliver <a href="http://www.everybody-dies.com/" target="_blank">DEFCON</a>, a new online strategy game from the creators of the award-winning Darwinia, via Steam, Valve&#146;s pioneering broadband platform for games and digital content. In addition, Introversion's first game and cult hit <a href="http://storefront.steampowered.com/v2/index.php?area=game&AppId=1510" target="_blank">Uplink</a> is now available via Steam.<br><br>Introversion, the award-winning, maverick developer of the hit PC game, Darwinia, will be releasing its eagerly-awaited third title, DEFCON, in September 2006 via Steam and at retail outlets around the globe for $14.95. Uplink is now available as a stand-alone title via Steam for just $9.95 and is also included with Darwinia, the 2006 Independent Developer Festival winner, for a package price of $19.95.<br><br>"Steam has made Introversion a commercial success, and brought critical acclaim to Darwinia", said Thomas Arundel, commercial director of Introversion Software. "DEFCON is proof once again that the creation of exciting, unique games does not rely on years and years of development, nor a 100 strong dev team. With the release of DEFCON, Introversion continues to demonstrate that indie developers are at the forefront of exciting, innovative gaming experiences" <br><br>"As evidenced by the success of Darwinia, Steam is an excellent outlet for independent developers, such as Introversion, who are breaking new ground with the industry&#146;s pioneering titles," said Gabe Newell, co-founder and president of Valve. "With over 10 million registered users, the library of games offered via Steam continues to expand with games from all genres."<br><br>DEFCON is an online, competitive, multiplayer strategy game based around the theme of global thermonuclear war. The player assumes the role of a General hidden deep within an underground bunker, his mission being to successfully exterminate the enemy's civilian population whilst simultaneously disabling the enemy's ability to retaliate.<br><br>For more information, please visit <a href="http://www.steamgames.com/" target="_blank">www.steamgames.com</a>.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=726">
+		<title>PopCap Games Coming To Steam</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=726</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 22 Aug 2006 01:00:30 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-22T01:00:30-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Valve&reg;, creators of the Steam broadband gaming platform, and PopCap Games&reg;, the leading developer and publisher of casual games, today announced an agreement to deliver PopCap's games via Steam. <br><br>PopCap's titles such as Bejeweled and Zuma are benchmarks of the casual games industry; generating over 175 million downloads and three billion player minutes per month. Steam is the first full-featured broadband platform for the delivery and management of games and digital content, and has pioneered its broadband services to over 10 million customers, generating over six billion player minutes per month, with core titles such as Half-Life&reg; 2 and Counter-StrikeTM. <br><br>"The addition of PopCap Games' expansive library of leading casual games is an important step for the growth of Steam and direct distribution channels," said Gabe Newell, co-founder and president of Valve. "The benefits of Steam will now be provided to a much wider group of games and game customers. PopCap games by themselves are larger by an order of magnitude than the next-gen consoles online gaming services."<br><br>"We know that our games appeal to all gamers, and not just some narrow 'puzzle game' niche," said Bryan Fiete, PopCap's co-founder and Chief Technology Officer. "This is a great opportunity to put our content in front of a large and passionate audience. We're thrilled to be the first casual game publisher to distribute our games via this new channel; we're all Steam users here in the studio, and it's going to be very cool to see our own titles up alongside such awesome content as Half-Life 2."<br><br>Initially, 17 of PopCap's products will be made available via Steam on August 30, 2006. Keeping with PopCap tradition, each PopCap game offered via Steam will be available for a free trial period as well as for purchase. And PopCap collection packages will also be offered. <br><br><strong>About Steam</strong><br>The leading online platform for PC games and digital entertainment, Steam delivers new releases and online services to over 10 million PC users around the world. For more information, please visit <a href="http://www.steamgames.com/">www.steamgames.com</a>. <br><br><strong>About PopCap</strong><br><a href="http://www.popcap.com/">PopCap Games</a> is the leading provider of casual games in the world. Based in Seattle, Washington, PopCap was founded in 2000 by three friends from the online games industry, and has grown tremendously in the past five years. PopCap's games have been downloaded more than 175 million times, and its flagship title Bejeweled&reg; has sold more than 5 million units across all major platforms. PopCap games are available for Web, PC and Mac, videogame consoles, cell-phones, PDAs and other mobile devices, in-flight on leading airlines, and more.<br><br><strong>About Valve</strong><br>Valve is an entertainment software and technology company founded in 1996 and based in Bellevue, Washington. The company's portfolio of entertainment properties includes Half-Life&reg;, Counter-StrikeTM, Day of Defeat&reg;, Team Fortress&reg; and Portal. Valve's catalog of products accounts for over 20 million retail units sold worldwide, and over 80% of PC online action gameplay. In addition, Valve is a developer of leading-edge technologies, such as the Source game engine and Steam, a broadband platform for the delivery and management of digital content. For more information, please visit <a href="http://www.valvesoftware.com/">www.valvesoftware.com</a>.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=725">
+		<title>Source Engine Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=725</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Mon, 21 Aug 2006 07:22:47 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-21T07:22:47-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to the Source Engine have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Source Engine</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed regression in Half-Life 2: Episode One where the player was unable to progress</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=724">
+		<title>Day of Defeat: Source, Source Engine and SourceTV Updates Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=724</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 18 Aug 2006 02:03:02 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-18T02:03:02-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Day of Defeat: Source and the Source Engine, along with some improvements to SourceTV have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Day of Defeat: Source</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Improved hitbox detection for player body parts that extend outside of the bounding box<br><li>Fixed players being able to capture areas from farther away than intended<br><li>Fixed an exploit where player could plant the bomb and switch teams, causing the bomb to explode and give the point ownership to the wrong team<br><li>Fixed bell sound playing on knife impacts<br><li>Fixed players switching to the tnt view model if they picked it up while a smoke grenade was deployed<br><li>Fixed several map exploits<br><li>Fixed minimap cap areas showing the number of players present even if those players were on the owning team<br><li>Fixed a case where user could crash the server with a client command<br><li>Fixed a case where dod_Jagd would not respond to mp_timelimit changelevels<br><li>Fixed an exploit that could be used to throw grenades farther than intended<br><li>Fixed logging events kill_planter and kill_defuser showing incorrect data<br><li>Fixed several cvars not being saved in the config ( death effects options, hud_centerid )<br><li>Fixed animation issue where player would not have an animation if they expended all ammo<br><li>Fixed issue where a player would be stuck on spawn if they were defusing when the round restarted</ul><br><b>Source Engine</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed jittery animations while recording a demo file</ul><br><b>SourceTV</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added a convar "tv_transmitall" to transmit all entities (like HLTV)<br><li>Fixed console messages forwarding for rcon<br><li>Fixed spectator client crash during round restart<br><li>Fixed flicking decal and smoke effects<br><li>Fixed connection retry command<br><li>Fixed recording and broadcasting player voices. "tv_relayvoice 0" turns it off now<br><li>Fixed missing entities due to wrong PVS culling</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=722">
+		<title>X2: The Threat and X3: Reunion update available</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=722</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 16 Aug 2006 04:55:17 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-16T04:55:17-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to X2: The Threat & X3: Reunion have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>X2: The Threat & X3: Reunion</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added German, French, Spanish and Italian localization</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=717">
+		<title>Source SDK Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=717</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 11 Aug 2006 01:35:02 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-11T01:35:02-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to the Source SDK have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Source SDK</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed compilation issues for Linux dedicated server in SDK<br><li>Removed 3D Lighting Preview menu choice from Hammer<br><li>Fixed SDK Launcher bugs when performing outdated MOD check<br><li>SDK Wizard now creates 'maps' directory underneath the new mod directory. This prevents a map compilation error<br><li>The 'cs_milita.vmf' distributed with was loading in a bad state if the grid is set to be displayed at startup. New version has grid off</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=715">
+		<title>Source SDK Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=715</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 4 Aug 2006 02:53:51 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-4T02:53:51-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+A major update to the Source SDK has been released on Steam. Included in this update are major features and fixes for the tools in the Source SDK. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Major New Features</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Half-Life 2: Episode One enhancements</li><br><li>NPC behavior enhancements</li><br><li>New Tool application called 'Source SDK Base'</li><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Uses the latest shipping version of the Source Engine (HL2: Episode One)</li><br><li>This content will be updated whenever a new version of the Source Engine ships</li><br><li>Mod makers should always use its SteamAppId (215) in their single player and multi-player mods</li><br></ul><li>Many other improvements and bug fixes</li></ul><br><p>For a full list of changes, see the <a href="http://developer.valvesoftware.com/wiki/Source_SDK_Release_Notes">Source SDK Release Notes</a> on the Valve Developer Community site.</p>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=714">
+		<title>Shadowgrounds Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=714</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 4 Aug 2006 02:39:37 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-4T02:39:37-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Shadowgrounds have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Shadowgrounds</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Forcefully added Save folder to default profiles</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=713">
+		<title>The Ship Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=713</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 2 Aug 2006 10:11:23 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-2T10:11:23-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to The Ship have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>The Ship</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed crash when changing key bindings</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=712">
+		<title>The Ship Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=712</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 1 Aug 2006 02:10:00 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-1T02:10:00-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to The Ship have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>The Ship</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed a number of client and server stability issues<br><li>Added Linux Dedicated Server (Beta)<br><li>Fixed ERRORNAME bug<br><li>Tightened Kick/Ban system defaults<br><li>Added console chat for admins<br><li>Fix for suicide exploit - suicide via the 'kill' command has a 60 second delay<br><li>Fixed another version of the dripping hands bug<br><li>Fixed incorrect MFK displayed in inventory, shops and containers for purse bomb<br><li>Added missing fallback water textures for older video cards<br><li>Fixed hands disappearing from a few player models<br><li>Lighting on characters improved<br><li>Fixed bug to maintain bot presence on a server<br><li>Fixed bug where you were given different hat/glasses/hair when not killed by your Hunter<br><li>Increased warm-up time before game begins on a server from 30 to 60 seconds<br><li>Axe containers now appear empty when no axe is in them</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=711">
+		<title>Red Orchestra: Five Free Days Starts Tomorrow</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=711</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 1 Aug 2006 12:38:31 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-08-1T12:38:31-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Five Free Days of Red Orchestra begins tomorrow via <a href="http://www.steamgames.com/">www.steamgames.com</a>, with pre-loading available now. Those who try Red Orchestra during the Free Days will have access to the full game, including the brand new map (Lyes Krovy) and new gameplay enhancements from Tripwire.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=710">
+		<title>Half-Life 2: Deathmatch Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=710</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 27 Jul 2006 10:55:32 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-07-27T10:55:32-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Half-Life 2: Deathmatch have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Half-Life 2: Deathmatch</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added spectator mode. If the server has mp_allowspectators set to 1, type <i>spectate</i> to enter spectator mode</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=709">
+		<title>SiN Episodes: Emergence Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=709</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 27 Jul 2006 02:48:11 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-07-27T02:48:11-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to SiN Episodes: Emergence have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>SiN Episodes: Emergence</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed crash when uploading stats<br><li>Fixed crash when shooting assault rifle grenades through teleporters in Arena Vertigo</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=707">
+		<title>Red Orchestra Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=707</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 27 Jul 2006 11:46:53 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-07-27T11:46:53-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Red Orchestra have been released. The updates will be applied automatically when your Steam client is restarted.  The specific changes include:<br><br><b>Red Orchestra</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added the new map LvesKrovy, featuring close quarters combat<br><li>Added smoke grenades for German and Russian commanders<br><li>Streamlined the interface to make it easier for new players to get into the game<br><li>Changed the tank cannon round switching system to more closely match tanks of the period<br><li>Removed the "No Decisive Victory" win condition. One team will always win now<br><li>Enhanced the scoreboard<br><li>Improved the 3rd person upper body movement while prone<br><li>Fixed choppy VOIP while using Hardware 3d or EAX sound setting<br><li>Fixed players bouncing off of other players that were prone<br><li>Fixed a glitch that would cause red squares on terrain where blood had been<br><li>Fixed an exploit where commanders could call in artillery strikes on a position that they marked in a previous round<br><li>Fixed grenades being unable to fire when changing stances<br><li>Fixed problems relating to server settings for spectating restrictions</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=706">
+		<title>Iron Warriors and Birth of America are now available on Steam</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=706</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 26 Jul 2006 03:49:00 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-07-26T03:49:00-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Iron Warriors and Birth of America are now available on Steam. Purchase during the first week to receive a $5 discount.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=705">
+		<title>SiN Episodes: Emergence SDK Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=705</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 26 Jul 2006 02:47:03 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-07-26T02:47:03-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Ritual Entertainment has just released the SDK for "SiN Episodes: Emergence" over Steam. The SDK allows players to create new single-player levels, new Arena Mode maps, and additional content for the "SiN Episodes" universe. The SDK can be installed from the Tools tab inside the Steam client.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=700">
+		<title>Steam client update released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=700</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 25 Jul 2006 12:45:06 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-07-25T12:45:06-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to the Steam Client have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Steam Client</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed high CPU use during gameplay on some Hyperthreaded systems<br><li>Fixed 100% CPU load at login screen<br><li>Fixed the wrong dialog being shown when an error occured changing the contact email address<br><li>Fixed the Half-Life 2: Demo preloader stopping at 20%<br><li>Fixed a silent crash on exit when preloader is running</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=699">
+		<title>X3: Reunion and X2: The Threat are now available on Steam</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=699</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 21 Jul 2006 09:25:15 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2006-07-21T09:25:15-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+The space game <a href="http://storefront.steampowered.com/v2/index.php?area=game&AppId=2810">X3: Reunion</a> and its predecessor <a href="http://storefront.steampowered.com/v2/index.php?area=game&AppId=2800">X2: The Threat</a> are now available via Steam. Regularly $19.95 and $14.95 respectively, they are being offered with an additional 10% discount during their first week of release.  Both feature lush graphics and have been called the best in class by several publications.
+			]]> 
+		</content:encoded>
+	</item>
+</rdf:RDF>

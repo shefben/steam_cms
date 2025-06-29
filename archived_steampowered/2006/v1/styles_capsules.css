@@ -1,0 +1,443 @@
+.capsule {
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	font-size: 1.6em;
+	color: #FFFFFF;
+	float: left;
+	height: 133px;
+	width: 280px;
+	background-color: #000000;
+	margin: 5px;
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-bottom: 0px;
+	padding-left: 1px;
+	cursor: pointer;
+}
+.capsule a {
+	color: #FFFFFF;
+	text-decoration: none;
+	margin-right: 5px;
+	line-height: 25px;
+}
+.capsule a:hover {
+	background-color: #FFFFFF;
+}
+.capsuleImage {
+	width: 280px;
+	height: 105px;	
+	display: block;
+}
+.capsuleText {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: lighter;
+	text-transform: none;
+	color: #999999;
+	width: 203px;
+	line-height: 10px;
+	height: 25px;
+	padding: 3px 0px 0px 3px;
+	display: block;
+	text-align: left;
+	margin: 0px auto 0px 0px;
+	float:left;
+}
+.capsuleCost {
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	font-size: 16px;
+	color: #FFFFFF;
+	width: 64px;
+	height: 25px;
+	padding: 3px 5px 0px 5px;
+	display: block;
+	text-align: right;
+	margin: 0px 0px 0px auto;
+	float:left;
+	font-weight: bold;
+}
+/* */
+.capsuleLarge {
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	font-size: 1.6em;
+	color: #FFFFFF;
+	float: left;
+	height: 276px;
+	width: 572px;
+	background-color: #000000;
+	margin: 5px;
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-bottom: 0px;
+	padding-left: 1px;
+	cursor: pointer;
+}
+.capsuleLargeImage {
+	width: 572px;
+	height: 221px;	
+	display: block;
+}
+.capsuleLargeText {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: lighter;
+	text-transform: none;
+	color: #999999;
+	width: 458px;
+	line-height: 14px;
+	height: 30px;
+	padding: 3px 0px 0px 3px;
+	display: block;
+	text-align: left;
+	margin: 0px auto 0px 0px;
+	float:left;
+}
+.capsuleLargeCost {
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	font-size: 20px;
+	color: #FFFFFF;
+	width: 101px;
+	height: 30px;
+	padding: 3px 5px 0px 5px;
+	display: block;
+	text-align: right;
+	margin: 0px 0px 0px auto;
+	float:left;
+	font-weight: bold;
+}
+/* */
+.capsuleGroup {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
+.capsuleLink {
+	text-decoration: none;
+}
+.capsuleGroup {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
+/* - */
+.offer_1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: bolder;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	padding-left: 10px;	
+}
+.offer_2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: lighter;
+	text-transform: uppercase;
+	color: #FFFFFF;
+}
+.offer_3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: lighter;
+	text-transform: none;
+	color: #999999;
+	line-height: 10px;
+	height: 25px;
+	padding-left: 3px;
+	padding-top: 3px;
+}
+/* =========================================================== */
+/* MEDIA CAPSULE CSS */
+.capsuleMedia {
+	float: left;
+	height: 276px;
+	width: 280px;
+	background-color: #424242;
+	margin: 5px;
+	padding-top: 1px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	border: 1px solid #000000;
+	vertical-align: top;
+	background-attachment: scroll;
+	background-image: url('http://storefront.steampowered.com:80/v/img/capsules/_releases.jpg');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+.capsuleMediaTitle {
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	color: #6F9FC8;
+	font-size: 16px;
+	padding-top: 2px;
+	padding-left: 5px;
+	letter-spacing: 1px;
+	text-align: left;
+}
+.capsuleMediaLinks {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #CCCCCC;
+	padding-top: 5px;
+	padding-left: 5px;
+	line-height: 16px;
+	text-align: left;
+}
+.capsuleMediaLink {
+	text-decoration: underline;
+	color: #BBBBBB;
+}
+A:link.capsuleMediaLink {
+	color: #BBBBBB;
+}
+A:hover.capsuleMediaLink {
+	color: #6F9FC8;
+}
+
+/* =========================================================== */
+/* NEWS CAPSULE CSS */
+.capsuleNews {
+	float: left;
+	height: 131px;
+	width: 280px;
+	background-color: #000000;
+	margin: 5px;
+	border: 1px solid #000000;
+	vertical-align: top;
+	padding: 0px;
+}
+.capsuleNewsTitle {
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	font-size: 16px;
+	color: #6F9FC8;
+	background-color: #494A4C;
+	height: 25px;
+	text-transform: uppercase;
+	padding-top: 3px;
+	padding-left: 5px;
+	text-align: left;
+}
+/* =========================================================== */
+/* GEAR CAPSULE */
+.capsuleGear {
+	float: left;
+	height: 131px;
+	width: 280px !important;
+	width: 282px;
+	background-color: #000000;
+	margin: 5px 5px 10px 5px;
+	background-attachment: scroll;
+	background-image: url('img/capsules/_gear.jpg');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	border: 1px solid #000000;
+	padding: 0px;
+}
+.capsuleGearTitle {
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	color: #6F9FC8;
+	font-size: 14px;
+	padding-top: 8px;
+	padding-left: 5px;
+	letter-spacing: 2px;
+	text-align: left;
+	margin-left: 110px;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	font-weight: bold;
+}
+.capsuleGearText {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #999999;
+	padding-top: 0px;
+	padding-left: 5px;
+	line-height: 16px;
+	text-align: left;
+	margin-left: 110px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+}
+.capsuleGearText a {
+	color: #6F9FC8;
+	text-decoration:underline;
+}
+/* =========================================================== */
+/* GEAR CAPSULE */
+.capsuleStuff {
+	float: left;
+	height: 131px;
+	width: 280px !important;
+	width: 282px;
+	background-color: #000000;
+	margin: 5px 5px 10px 5px;
+	background-attachment: scroll;
+	background-image: url('img/capsules/_stuff.jpg');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	border: 1px solid #000000;
+	padding: 0px;
+}
+.capsuleStuffTitle {
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	color: #8BC53F;
+	font-size: 14px;
+	padding-top: 8px;
+	padding-left: 5px;
+	letter-spacing: 2px;
+	text-align: left;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	font-weight: bold;
+}
+.capsuleStuffText {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #999999;
+	padding-top: 0px;
+	padding-left: 5px;
+	line-height: 16px;
+	text-align: left;
+	margin-left: 5px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	padding-right: 15px;
+	padding-bottom: 0px;
+}
+.capsuleStuffText a {
+	color: #8BC53F;
+	text-decoration:underline;
+}
+/* =========================================================== */
+/* CAPSULE */
+.capsuleArea {
+	display: block;
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	font-size: 1.6em;
+	color: #FFFFFF;
+	text-decoration: none;
+	float: left;
+	height: 133px;
+	width: 280px;
+	margin: 5px 5px 5px 5px;
+	padding: 1px 1px 0px 1px;
+	background-color: #000000;
+	text-align: right;
+	line-height: 25px;
+}
+a.capsuleArea {
+	background-color: #000000;
+	text-decoration: none;
+}
+a:hover.capsuleArea {
+	background-color: #333333;
+	text-decoration: none;
+}
+.capsuleArea_lg {
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	font-size: 2.4em;
+	color: #FFFFFF;
+	text-decoration: none;
+	float: left;
+	clear: both;
+	height: 276px;
+	width: 572px;
+	margin: 5px;
+	display:block;
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-bottom: 0px;
+	padding-left: 1px;
+	background-color: #000000;
+	text-align: right;
+	line-height: 50px;
+}
+a.capsuleArea_lg {
+	background-color: #000000;
+	text-decoration: none;
+}
+a:hover.capsuleArea_lg {
+	background-color: #333333;
+	text-decoration: none;
+}
+.capsuleArea_new {
+	font-family: "trebuchet ms", "arial narrow", "helvetica narrow";
+	font-size: 1.4em;
+	color: #FFFFFF;
+	text-decoration: none;
+	float: left;
+	height: 276px;
+	width: 280px;
+	margin: 5px;
+	display:block;
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-bottom: 0px;
+	padding-left: 1px;
+	background-color: #000000;
+	text-align: right;
+}
+.capsuleArea_new h1 {
+	padding: 0px;
+	text-align: left;
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #EDA312;
+	letter-spacing: 3px;
+}
+.capsuleArea_header {
+	float: none;
+	clear: both;
+	height: auto;
+	width: 572px;
+	margin: 5px;
+	display:block;
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-bottom: 0px;
+	padding-left: 1px;
+}
+.capsuleArea_header p {
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	font-size: 12px;
+	color: #FFFFFF;
+	text-decoration: none;
+	text-align: left;
+	margin: 9px 0px 0px;
+	padding: 0px;
+}
+.btn_getSteam {
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #000000;
+	background-image: url('img/btn_getSteam.gif');
+	padding: 6px 0px 0px 60px;
+	margin: 0px 0px 0px 45px;
+	width: 152px !important;
+	width: 212px;
+	height: 27px !important;
+	height: 33px;
+	text-align: left;
+	overflow: hidden;
+}
+.btn_getSteam_sub {
+	margin-left: 45px;
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	font-size: 11px;
+	margin-top: 5px;
+	
+}
