@@ -1,0 +1,55 @@
+<table cool="" width="569" height="312" showgridx="" showgridy="" gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+							<tbody><tr height="16">
+								<td width="568" height="16" colspan="3"></td>
+								<td width="1" height="16"><spacer type="block" width="1" height="16"></spacer></td>
+							</tr>
+							<tr height="295">
+								<td width="16" height="295"></td>
+								<td width="537" height="295" align="left" xpos="16" content="" valign="top" csheight="295">
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>Step By Step </b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="black" size="4"><b>::</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b> </b>Manual Uninstall Instructions For Steam</font></p>
+									<p></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>How do I manually remove Steam from my system if the uninstaller does not work?</b><b><br>
+											</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">As for a manual removal:<br>
+											
+										
+										
+										
+										- delete the Steam directory<br>
+											
+										
+										
+										
+										- delete the cache (if they were not in the Steam directory)<br>
+											
+										
+										
+										
+										- delete shortcuts from the desktop<br>
+											
+										
+										
+										
+										- delete shortcuts from start up menu<br>
+											
+										
+										
+										
+										- from the registry   &nbsp;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run, delete the Steam value<br>
+											
+										
+										
+										- from the registry </font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall, remove the Steam key<br>
+										</font></p>
+									<p><font size="2"> </font></p>
+									<p></p>
+								</td>
+								<td width="15" height="295"></td>
+								<td width="1" height="295"><spacer type="block" width="1" height="295"></spacer></td>
+							</tr>
+							<tr height="1" cntrlrow="">
+								<td width="16" height="1"><spacer type="block" width="16" height="1"></spacer></td>
+								<td width="537" height="1"><spacer type="block" width="537" height="1"></spacer></td>
+								<td width="15" height="1"><spacer type="block" width="15" height="1"></spacer></td>
+								<td width="1" height="1"></td>
+							</tr>
+						</tbody></table>

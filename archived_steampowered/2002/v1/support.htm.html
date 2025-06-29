@@ -1,0 +1,421 @@
+<html>
+<head>
+<title>Support</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<script language="JavaScript">
+<!--
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function MM_goToURL() { //v3.0
+  var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
+  for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+//-->
+</script>
+<style type="text/css">
+<!--
+a {color: #E4C55A; text-decoration: none}
+a:hover {color: #F9DF84; text-decoration:;
+font-weight: regular}
+-->
+</style>
+<csscriptdict>
+<script><!--CSInit = new Array;function CSScriptInit() {if(typeof(skipPage) != "undefined") { if(skipPage) return; }
+idxArray = new Array;
+for(var i=0;i<CSInit.length;i++)
+	idxArray[i] = i;
+CSAction2(CSInit, idxArray);}CSAg = window.navigator.userAgent; CSBVers = parseInt(CSAg.charAt(CSAg.indexOf("/")+1),10);
+function IsIE() { return CSAg.indexOf("MSIE") > 0;}
+function CSIEStyl(s) { return document.all.tags("div")[s].style; }
+function CSNSStyl(s) { return CSFindElement(s,0); }
+function CSFindElement(n,ly) { if (CSBVers < 4) return document[n];
+	var curDoc = ly ? ly.document : document; var elem = curDoc[n];
+	if (!elem) { for (var i=0;i<curDoc.layers.length;i++) {
+		elem = CSFindElement(n,curDoc.layers[i]); if (elem) return elem; }}
+	return elem;
+}function CSClickReturn () {
+	var bAgent = window.navigator.userAgent; 
+	var bAppName = window.navigator.appName;
+	if ((bAppName.indexOf("Explorer") >= 0) && (bAgent.indexOf("Mozilla/3") >= 0) && (bAgent.indexOf("Mac") >= 0))
+		return true; // dont follow link
+	else return false; // dont follow link
+}function CSButtonReturn () {
+	var bAgent = window.navigator.userAgent; 
+	var bAppName = window.navigator.appName;
+	if ((bAppName.indexOf("Explorer") >= 0) && (bAgent.indexOf("Mozilla/3") >= 0) && (bAgent.indexOf("Mac") >= 0))
+		return false; // follow link
+	else return true; // follow link
+}CSIm = new Object();
+function CSIShow(n,i) {
+	if (document.images) {
+		if (CSIm[n]) {
+			var img = (!IsIE()) ? CSFindElement(n,0) : document[n];
+			if (img && typeof(CSIm[n][i].src) != "undefined") {img.src = CSIm[n][i].src;}
+			if(i != 0)
+				self.status = CSIm[n][3];
+			else
+				self.status = " ";
+			return true;
+		}
+	}
+	return false;
+}
+function CSILoad(action) {
+	im = action[1];
+	if (document.images) {
+		CSIm[im] = new Object();
+		for (var i=2;i<5;i++) {
+			if (action[i] != '') { CSIm[im][i-2] = new Image(); CSIm[im][i-2].src = action[i]; }
+			else CSIm[im][i-2] = 0;
+		}
+		CSIm[im][3] = action[5];
+	}
+}
+CSStopExecution = false;
+function CSAction(array) { 
+	return CSAction2(CSAct, array);
+}
+function CSAction2(fct, array) { 
+	var result;
+	for (var i=0;i<array.length;i++) {
+		if(CSStopExecution) return false; 
+		var actArray = fct[array[i]];
+		if(actArray == null) return false; 
+		var tempArray = new Array;
+		for(var j=1;j<actArray.length;j++) {
+			if((actArray[j] != null) && (typeof(actArray[j]) == "object") && (actArray[j].length == 2)) {
+				if(actArray[j][0] == "VAR") {
+					tempArray[j] = CSStateArray[actArray[j][1]];
+				}
+				else {
+					if(actArray[j][0] == "ACT") {
+						tempArray[j] = CSAction(new Array(new String(actArray[j][1])));
+					}
+				else
+					tempArray[j] = actArray[j];
+				}
+			}
+			else
+				tempArray[j] = actArray[j];
+		}			
+		result = actArray[0](tempArray);
+	}
+	return result;
+}
+CSAct = new Object;// --></script>
+</csscriptdict>
+<csactiondict>
+<script><!--
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button',/*URL*/'../Home/Update%20images/Tabs-Home_out.gif',/*URL*/'../Home/Update%20images/Tabs-Home_over.gif',/*URL*/'../Home/Update%20images/Tabs-Home_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button2',/*URL*/'../Home/Update%20images/Tabs-News_out.gif',/*URL*/'../Home/Update%20images/Tabs-News_over.gif',/*URL*/'../Home/Update%20images/Tabs-News_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button3',/*URL*/'../Home/Update%20images/Tabs-Games_Avail_out.gif',/*URL*/'../Home/Update%20images/Tabs-Games_Avail_over.gif',/*URL*/'../Home/Update%20images/Tabs-Games_Avail_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button4',/*URL*/'../Home/Update%20images/Tabs-Message_Board_out.gif',/*URL*/'../Home/Update%20images/Tabs-Message_Board_over.gif',/*URL*/'../Home/Update%20images/Tabs-Message_Board_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button5',/*URL*/'../Home/Update%20images/Tabs-FAQ_out.gif',/*URL*/'../Home/Update%20images/Tabs-FAQ_over.gif',/*URL*/'../Home/Update%20images/Tabs-FAQ_in.gif','');
+
+// --></script>
+</csactiondict>
+</head>
+<body alink="#b8c2ae" bgcolor="silver" link="#b8c2ae" onload="CSScriptInit();MM_preloadImages('../images/support%20site%20images/News.gif','../images/support%20site%20images/Games.gif','../images/support%20site%20images/Support.gif','../images/support%20site%20images/Message.gif','../images/support%20site%20images/About.gif')" vlink="#b8c2ae">
+<table border="0" cellpadding="5" cellspacing="2" height="100%" width="100%">
+<tr align="CENTER" valign="CENTER">
+<td><map name="Textimage-News4dbfb53"><area coords="19,2,182,19" href="#" shape="rect" target="_top"/></map><map name="bottom-logo496a198"></map>
+<table bgcolor="silver" border="0" cellpadding="0" cellspacing="0" cool="" gridx="20" gridy="20" height="1723" showgridx="" showgridy="" width="679">
+<tr height="116">
+<td align="left" colspan="14" height="116" valign="top" width="678" xpos="0"><img border="0" height="116" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Steam-Logo.gif" width="677"/></td>
+<td height="116" width="1"><spacer height="116" type="block" width="1"/></td>
+</tr>
+<tr height="24">
+<td align="left" colspan="4" height="24" valign="top" width="28" xpos="0"><img border="0" height="24" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Home_Border.gif" width="28"/></td>
+<td align="left" height="24" valign="top" width="62" xpos="28"><csobj cl="../Home/Update%20images/Tabs-Home_in.gif" h="24" ht="../Home/Update%20images/Tabs-Home_over.gif" t="Button" w="62"><a href="Home.htm" onclick="CSIShow(/*CMP*/'button',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button',0)" onmouseover="return CSIShow(/*CMP*/'button',1)" target="_top"><img border="0" height="24" name="button" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Home_out.gif" width="62"/></a></csobj></td>
+<td align="left" colspan="2" height="24" valign="top" width="60" xpos="90"><csobj cl="../Home/Update%20images/Tabs-News_in.gif" h="24" ht="../Home/Update%20images/Tabs-News_over.gif" t="Button" w="60"><a href="News/News.htm" onclick="CSIShow(/*CMP*/'button2',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button2',0)" onmouseover="return CSIShow(/*CMP*/'button2',1)" target="_top"><img border="0" height="24" name="button2" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-News_out.gif" width="60"/></a></csobj></td>
+<td align="left" height="24" valign="top" width="129" xpos="150"><csobj cl="../Home/Update%20images/Tabs-Games_Avail_in.gif" h="24" ht="../Home/Update%20images/Tabs-Games_Avail_over.gif" t="Button" w="129"><a href="Games_Available/Games.htm" onclick="CSIShow(/*CMP*/'button3',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button3',0)" onmouseover="return CSIShow(/*CMP*/'button3',1)" target="_top"><img border="0" height="24" name="button3" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Games_Avail_out.gif" width="129"/></a></csobj></td>
+<td align="left" colspan="2" height="24" valign="top" width="76" xpos="279"><img border="0" height="24" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Support_in.gif" width="76"/></td>
+<td align="left" height="24" valign="top" width="122" xpos="355"><csobj cl="../Home/Update%20images/Tabs-Message_Board_in.gif" h="24" ht="../Home/Update%20images/Tabs-Message_Board_over.gif" t="Button" w="122"><a href="http://www.chatbear.com/cgi-bin/board.pl?boardid=1041" onclick="CSIShow(/*CMP*/'button4',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button4',0)" onmouseover="return CSIShow(/*CMP*/'button4',1)" target="_top"><img border="0" height="24" name="button4" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Message_Board_out.gif" width="122"/></a></csobj></td>
+<td align="left" height="24" valign="top" width="64" xpos="477"><csobj cl="../Home/Update%20images/Tabs-FAQ_in.gif" h="24" ht="../Home/Update%20images/Tabs-FAQ_over.gif" t="Button" w="64"><a href="Faq/FAQ.htm" onclick="CSIShow(/*CMP*/'button5',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button5',0)" onmouseover="return CSIShow(/*CMP*/'button5',1)" target="_top"><img border="0" height="24" name="button5" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-FAQ_out.gif" width="64"/></a></csobj></td>
+<td align="left" colspan="2" height="24" valign="top" width="137" xpos="541"><img border="0" height="24" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-FAQ_Border.gif" width="135"/></td>
+<td height="24" width="1"><spacer height="24" type="block" width="1"/></td>
+</tr>
+<tr height="65">
+<td colspan="2" height="1453" rowspan="2" width="19"><spacer height="1453" type="block" width="19"/></td>
+<td align="left" colspan="11" height="65" valign="top" width="632" xpos="19">
+<table bgcolor="#6a6f82" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="65" showgridx="" showgridy="" width="632">
+<tr height="24">
+<td height="64" rowspan="2" width="204"><spacer height="64" type="block" width="204"/></td>
+<td height="24" width="427"><spacer height="24" type="block" width="427"/></td>
+<td height="24" width="1"><spacer height="24" type="block" width="1"/></td>
+</tr>
+<tr height="40">
+<td align="left" height="40" valign="top" width="427" xpos="204"><img border="0" height="40" src="http://steamsupport.valvesoftware.com/Home/Update%20images/PageTitles-support.gif" width="223"/></td>
+<td height="40" width="1"><spacer height="40" type="block" width="1"/></td>
+</tr>
+<tr cntrlrow="" height="1">
+<td height="1" width="204"><spacer height="1" type="block" width="204"/></td>
+<td height="1" width="427"><spacer height="1" type="block" width="427"/></td>
+<td height="1" width="1"><spacer height="1" type="block" width="1"/></td>
+</tr>
+</table>
+</td>
+<td height="1453" rowspan="2" width="27"><spacer height="1453" type="block" width="27"/></td>
+<td height="65" width="1"><spacer height="65" type="block" width="1"/></td>
+</tr>
+<tr height="1388">
+<td align="left" height="1388" valign="top" width="8" xpos="19">
+<table bgcolor="#6a6f82" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="1388" showgridx="" showgridy="" width="8">
+<tr height="1387">
+<td height="1387" width="7"><spacer height="1387" type="block" width="7"/></td>
+<td height="1387" width="1"><spacer height="1387" type="block" width="1"/></td>
+</tr>
+<tr cntrlrow="" height="1">
+<td height="1" width="7"><spacer height="1" type="block" width="7"/></td>
+<td height="1" width="1"><spacer height="1" type="block" width="1"/></td>
+</tr>
+</table>
+</td>
+<td align="left" bgcolor="#6a6f82" colspan="10" content="" csheight="1388" height="1388" valign="top" width="624" xpos="27">
+<p><br/>
+</p>
+<p><b><font color="white" face="Times New Roman,Georgia,Times" size="3">Driver Updates:<br/>
+</font></b><font face="Times New Roman,Georgia,Times" size="2"><br/>
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										NVIDIA<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2"><a href="http://www.nvidia.com/view.asp?PAGE=drivers" target="_new">http://www.nvidia.com/view.asp?PAGE=drivers</a><a href="http://www.nvidia.com/view.asp?PAGE=drivers"><br/>
+</a><br/>
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										MATROX<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2"><a href="http://www.matrox.com/mga/support/drivers/home.cfm" target="_new">http://www.matrox.com/mga/support/drivers/home.cfm</a><a href="http://www.matrox.com/mga/support/drivers/home.cfm"><br/>
+</a><br/>
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										ATI<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2"><a href="http://support.ati.com/drivers/index.html?parent=0&amp;folder=66&amp;doc=53" target="_new">http://support.ati.com/drivers/index.html?parent=0&amp;folder=66&amp;doc=53</a><a href="http://support.ati.com/drivers/index.html?parent=0&amp;folder=66&amp;doc=53"><br/>
+</a><br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										DIAMOND<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2"><a href="http://www.diamondmm.com/default.asp?menu=support&amp;submenu=Legacy_Graphics" target="_new">http://www.diamondmm.com/default.asp?menu=support&amp;submenu=Legacy_Graphics</a><a href="http://www.diamondmm.com/default.asp?menu=support&amp;submenu=Legacy_Graphics"><br/>
+</a><br/>
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										MICROSOFT DIRECT X<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2"><a href="http://www.microsoft.com/directx/download.asp" target="_new">http://www.microsoft.com/directx/download.asp</a><a href="http://www.microsoft.com/directx/download.asp"><br/>
+</a><br/>
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										CREATIVE LABS<br/>
+</font><a href="http://www.americas.creative.com/support/welcome.asp?RD=download" target="_new"><font face="Times New Roman,Georgia,Times" size="2">http://www.americas.creative.com/support/welcome.asp?RD=download<br/>
+</font></a><br/>
+</p>
+<p><br/>
+<font color="white" face="Times New Roman,Georgia,Times" size="3"><b>Video Cards</b></font></p>
+<p><font face="Times New Roman,Georgia,Times" size="2">Make sure the most <b>current version of DirectX</b> is installed on your computer. The latest version of DirectX can be found at <a href="http://www.microsoft.com/directx/homeuser/downloads/default.asp" target="_new">http://www.microsoft.com/directx/homeuser/downloads/default.asp</a><a href="http://www.microsoft.com/directx/homeuser/downloads/default.asp" target="_new"><br/>
+</a></font></p>
+<p><font face="Times New Roman,Georgia,Times" size="2">If you are running a <b>pre-OSR2 release of Windows95</b>, get the OpenGL 1.1 fix in order to run Half-Life in OpenGL mode. The fix can be found at <a href="ftp://ftp.microsoft.com/softlib/mslfiles/opengl95.exe" target="_new">ftp://ftp.microsoft.com/softlib/mslfiles/opengl95.exe</a><a href="ftp://ftp.microsoft.com/softlib/mslfiles/opengl95.exe" target="_new"><br/>
+</a><br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">Half-Life has the ability to use both OpenGL and Direct3D. Many cards with support for 3D acceleration will provide both OpenGL and Direct3D drivers. Which one is better depends upon the quality and performance of the drivers themselves, and will vary from card to card.<br/>
+<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">In general, make sure you have the latest versions of the device drivers for your display hardware. Most graphics card vendors make them freely available on the Internet, and a collection of links to sites of many popular cards is installed on your hard drive along with Half-Life.<br/>
+<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">The following section explains the known driver and compatibility issues for specific chipsets at the time of Half-Life's shipping. If you have any questions about which chipset is incorporated in your graphics card, consult the documentation that accompanied your card, or contact the card manufacturer.<br/>
+<br/>
+</font></p>
+<p><font color="white" face="Times New Roman,Georgia,Times" size="3"><b>GeForce</b></font><font color="white" face="Times New Roman,Georgia,Times" size="2"><br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">If you are using a NVidia based GeForce video card, download the latest reference drivers from <a href="http://www.nvidia.com" target="_new">http://www.nvidia.com</a>. This will fix the problem with models showing up as all white.<br/>
+<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">3DFX Banshee, Voodoo 1, Voodoo 2, Voodoo 2 SLI<br/>
+<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">When running Half-Life in OpenGL, you must select '3Dfx Mini Driver' from the drivers list in the Video Options menu if you have a 3Dfx card (Voodoo, Voodoo2, Rush or Banshee). Choosing the 'Default' driver may severely impact Half-Life's performance.<br/>
+<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">Get the latest drivers from your card manufacturer or get the latest drivers directly from the 3DFX site. Make sure that you have Glide version 2.54 or above. Half-Life does not support Direct3D on Voodoo cards.<br/>
+<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">The Voodoo 2 running in SLI mode on Windows/NT is prone to crashing. The solution to this instability is to get an updated driver from 3DFX, disable SLI mode, or run under Windows 95/98.<br/>
+<br/>
+</font></p>
+<p><font color="white" face="Times New Roman,Georgia,Times" size="3"><b>NVIDIA Riva 128</b></font><font color="white" face="Times New Roman,Georgia,Times" size="2"><br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">You must have Windows 95 OSR 2 or later, Windows 98 or Windows NT. As of shipping, Half-Life Riva 128 OpenGL support requires the latest reference driver from NVIDIA. Get this driver off of their site, <a href="BetaSupport/ http:/www.nvidia.com" target="_new">http://www.nvidia.com</a>. Direct3D support is currently unavailable. Contact NVIDIA for a Direct3D driver that supports Half-Life.<br/>
+<br/>
+</font></p>
+<p><font color="white" face="Times New Roman,Georgia,Times" size="3"><b>NVIDIA TNT</b></font><font color="white" face="Times New Roman,Georgia,Times" size="2"><br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">Half-Life supports the TNT in OpenGL and Direct3D modes. Get the latest driver off of NVIDIA's site.<br/>
+<br/>
+</font></p>
+<p><font color="white" face="Times New Roman,Georgia,Times" size="3"><b>Matrox G200</b></font><font color="white" face="Times New Roman,Georgia,Times" size="2"><br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">Half-Life supports the G200 in Direct3D. Get the latest driver from Matrox's site, <a href="http://www.matrox.com" target="_new">http://www.matrox.com</a>. Matrox will also be providing a GL mini-driver that will support OpenGL in Half-Life. Check with Matrox for details.</font><br/>
+<br/>
+</p>
+<p><font color="white" face="Times New Roman,Georgia,Times" size="3"><b>S3 Savage</b></font><font color="white" face="Times New Roman,Georgia,Times" size="2"><br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">Half-Life supports the Savage in Direct3D. You can get the latest drivers from S3's site, <a href="http://www.s3.com/" target="_new">http://www.s3.com</a>. S3 will also be providing a GL driver that will support Half-Life. Check with S3 for details.<br/>
+<br/>
+</font><font face="Times New Roman,Georgia,Times" size="2">Make sure you have installed the most recent drivers for all your hardware before playing Half-Life, Counterstrike, Team Fortress or DMC.</font></p>
+</td>
+<td height="1388" width="1"><spacer height="1388" type="block" width="1"/></td>
+</tr>
+<tr height="43">
+<td height="43" width="2"><spacer height="43" type="block" width="2"/></td>
+<td align="left" colspan="13" height="43" valign="top" width="676" xpos="2"><img border="0" height="43" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Page-Bottom.gif" width="675"/></td>
+<td height="43" width="1"><spacer height="43" type="block" width="1"/></td>
+</tr>
+<tr height="38">
+<td colspan="9" height="38" width="298"><spacer height="38" type="block" width="298"/></td>
+<td align="left" colspan="2" height="38" valign="top" width="179" xpos="298"><img border="0" height="29" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Bottom-VALVE1.gif" width="81"/></td>
+<td colspan="3" height="38" width="201"><spacer height="38" type="block" width="201"/></td>
+<td height="38" width="1"><spacer height="38" type="block" width="1"/></td>
+</tr>
+<tr height="20">
+<td colspan="6" height="20" width="133"><spacer height="20" type="block" width="133"/></td>
+<td align="left" colspan="7" height="20" valign="top" width="518" xpos="133"><img border="0" height="19" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Bottom-Links.gif" usemap="#Bottom-Linksa403e65" width="412"/></td>
+<td height="20" width="27"><spacer height="20" type="block" width="27"/></td>
+<td height="20" width="1"><spacer height="20" type="block" width="1"/></td>
+</tr>
+<tr height="28">
+<td align="left" colspan="14" height="28" valign="top" width="678" xpos="0"><img border="0" height="28" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Bottom-COPY1.gif" width="678"/></td>
+<td height="28" width="1"><spacer height="28" type="block" width="1"/></td>
+</tr>
+<tr cntrlrow="" height="1">
+<td height="1" width="2"><spacer height="1" type="block" width="2"/></td>
+<td height="1" width="17"><spacer height="1" type="block" width="17"/></td>
+<td height="1" width="8"><spacer height="1" type="block" width="8"/></td>
+<td height="1" width="1"><spacer height="1" type="block" width="1"/></td>
+<td height="1" width="62"><spacer height="1" type="block" width="62"/></td>
+<td height="1" width="43"><spacer height="1" type="block" width="43"/></td>
+<td height="1" width="17"><spacer height="1" type="block" width="17"/></td>
+<td height="1" width="129"><spacer height="1" type="block" width="129"/></td>
+<td height="1" width="19"><spacer height="1" type="block" width="19"/></td>
+<td height="1" width="57"><spacer height="1" type="block" width="57"/></td>
+<td height="1" width="122"><spacer height="1" type="block" width="122"/></td>
+<td height="1" width="64"><spacer height="1" type="block" width="64"/></td>
+<td height="1" width="110"><spacer height="1" type="block" width="110"/></td>
+<td height="1" width="27"><spacer height="1" type="block" width="27"/></td>
+<td height="1" width="1"><spacer height="1" type="block" width="1"/></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<map name="Bottom-Linksa403e65"><area coords="353,4,407,15" href="mailto:steamsupport@valvesoftware.com" shape="rect" target="_top"/><area coords="314,4,343,15" href="../Faq/FAQ.htm" shape="rect" target="_top"/><area coords="231,4,306,15" href="http://www.chatbear.com/?1041 " shape="rect" target="_top"/><area coords="182,4,217,15" href="support.htm" shape="rect" target="_top"/><area coords="85,4,170,15" href="../Games_Available/Games.htm" shape="rect" target="_top"/><area coords="47,4,78,15" href="../News/News.htm" shape="rect" target="_top"/><area coords="8,4,38,15" href="../Home.htm" shape="rect" target="_top"/></map>
+</body>
+</html> 

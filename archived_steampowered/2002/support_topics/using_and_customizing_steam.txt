@@ -1,0 +1,54 @@
+<table cool="" width="569" height="818" showgridx="" showgridy="" gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+							<tbody><tr height="16">
+								<td width="568" height="16" colspan="3"></td>
+								<td width="1" height="16"><spacer type="block" width="1" height="16"></spacer></td>
+							</tr>
+							<tr height="801">
+								<td width="16" height="801"></td>
+								<td width="537" height="801" align="left" xpos="16" content="" valign="top" csheight="801">
+									<p><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4">Step&nbsp;By Step</font></b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b></b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="black" size="4"><b>:: </b></font><font size="4" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Using And Customizing Steam</font></p>
+									<p></p>
+									<p><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">I prefer to not have desktop icons.<br>
+											</font></b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">There is an option in the “Configuration” section of the Steam application, which disallows displaying Steam game icons on the desktop.</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+											<br>
+											<b>What is the system doing when it is down-loading the minimum footprint?</b><b><br>
+											</b>Even though the Steam components are installed on your computer and running, the application/game is not. There are some minimum number of files or components that the application/game needs in order to even display the splash screen. The files necessary to minimally start the game are referred to as the "minimum footprint" and are being acquired while this dialog is displayed. This is a short and one-time only process.</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>What is the purpose of Enable Cache Loading?</b><b><br>
+											</b></font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">This menu contains a number of "advanced" features, one of which is "enable cache loading". This option instructs Steam to continue to use your internet connection when the application/game is not running and you are either using another application or your pc is idle. Enabling this option significantly improves your application/games performance.</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font></p>
+									<p><b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">What is the purpose of the "Refresh" button?<br>
+											</font></b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">This is only present in the beta version of the Steam UI. Use it only when directed to by Steam engineering as part of the beta process.</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font></p>
+									<p><b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">How can I go back to fullscreen mode?<br>
+											</font></b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">This can be changed in the game in the video mode settings. Uncheck the "Run in</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">window" check box.</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font></p>
+									<p><b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Can I play games in multi-player mode?<br>
+											</font></b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Yes. The only limitation during the beta is that you must play with other beta sponsored servers users.</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font></p>
+									<p><b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Can I save my games?<br>
+											</font></b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Yes. Steam doesn't do anything to take capabilities away from the application or game. In fact you may be presented with Steam specific options in the future that you wouldn't have with a retail product.</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font></p>
+									<p><b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">What is the difference between "Subscriptions" and "My Games"?<br>
+											</font></b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Subscriptions supplies users with a list of games available for subscription. “My Games” displays games in which you have subscribed.</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+										</font></p>
+									<p></p>
+								</td>
+								<td width="15" height="801"></td>
+								<td width="1" height="801"><spacer type="block" width="1" height="801"></spacer></td>
+							</tr>
+							<tr height="1" cntrlrow="">
+								<td width="16" height="1"><spacer type="block" width="16" height="1"></spacer></td>
+								<td width="537" height="1"><spacer type="block" width="537" height="1"></spacer></td>
+								<td width="15" height="1"><spacer type="block" width="15" height="1"></spacer></td>
+								<td width="1" height="1"></td>
+							</tr>
+						</tbody></table>

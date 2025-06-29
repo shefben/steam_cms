@@ -1,0 +1,105 @@
+<table cool="" width="569" height="1201" showgridx="" showgridy="" gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+							<tbody><tr height="16">
+								<td width="568" height="16" colspan="3"></td>
+								<td width="1" height="16"><spacer type="block" width="1" height="16"></spacer></td>
+							</tr>
+							<tr height="1184">
+								<td width="16" height="1184"></td>
+								<td width="537" height="1184" align="left" xpos="16" content="" valign="top" csheight="1184">
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>Step By Step </b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="black" size="4"><b>::</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b> </b>Steam And Your Computer</font></p>
+									<p></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>How much space will Steam take up on my hard drive if I accept the default cache size?</b><b><br>
+											</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">In general it depends on the application, however the default is selected for optimum application/game performance. In the case of Half-Life products, the default is 512MB.<br>
+											<b><br>
+												<br>
+												
+												
+												
+											
+											
+											How do I remove the beta software from my computer?<br>
+											</b>Open the Account window in the Valve interface and click “Delete Account”. You will be asked to enter your password and if you are sure you want to delete the account. Click “OK” and the application will be moved from your PC.<br>
+											<br>
+											<br>
+											<b>Where are the files stored on my PC?<br>
+											</b>As part of the start-up you will be asked to create a Steam directory. This directory can be placed anywhere on you local hard drive. The default location is C/:Steam/. All information is stored in this directory.<br>
+											<br>
+										</font></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>Does the Steam Application install over or modify any of my current Counter-Strike files, including the client.dll or anything resulting in a modification of counter-strikes core files?<br>
+											</b>No. Running steam will not disturb or ruin existing installations of the games.<br>
+										</font><br>
+									</p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>Will my computer run a Valve game?</b><b><br>
+											</b>These are the minimum system requirements to run the games:<br>
+										</font></p>
+									<p>- <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Pentium 200 MHz with 32MB RAM<br>
+											
+											
+											
+										- </font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Microsoft Windows 98/ME/2000/NT 4.0 or 2000<br>
+											
+											
+											
+										- </font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">SVGA, high-color (16 bit) video card<br>
+											
+											
+											
+										- </font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">2G HD space<br>
+											
+											
+											
+										- </font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Win-compatible soundcard<br>
+											
+											
+											
+										- </font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Mouse, keyboard<br>
+											
+											
+											
+										- </font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">32-bit Internet service with 384K+; DSL, Cable Modem, T1 or higher<br>
+										</font></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Recommended system:<br>
+										</font></p>
+									<p>- <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Pentium II 200+ MHz, 128 MB RAM<br>
+											
+											
+											
+										- </font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">3D accelerator card (OpenGL or Direct 3D)<br>
+											
+											
+											
+										- </font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">32-bit Internet service with 512K+<br>
+											<br>
+										</font></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>Does this software work with a DHCP connection?<br>
+											</b>Yes. The technology works with DHCP connections. Our electronic ticket system accounts for changes in your assigned IP address. If you IP address changes between sessions you will be asked to enter your password.<br>
+											<br>
+										</font></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>What is the minimum Internet connection speed required?</b><b><br>
+											</b>The&nbsp;term “broadband” refers to any Internet connection capable of sustained throughput of at least 256Kbps. We have designed it to deliver the optimum experience at 384Kbps. The technology will work at lower speeds but the experience will be slower and may require longer waiting periods before content is available. The only forms of phone line transmission omitted by this restriction is ISDN (128Kbps) and traditional dial-up modems (&lt;56Kbps).<br>
+										</font><br>
+									</p>
+									<p><font size="2"><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Can I put my cache folder anywhere?</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
+												</font></b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Yes. After you extract and open the Steam.exe, you have the option of creating a cache folder in the desired location.<br>
+											<br>
+										</font></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>How to I move/rename a Steam cache directory?<br>
+											</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">1. In the Steam "Configure" page, UN-check "Accept default cache size and location on subscribe"<br>
+										</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">2. Close Steam (and the game if it is running)<br>
+										</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">3. Move/rename the cache directory<br>
+										</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">4. Launch Steam, then launch the corresponding game<br>
+										</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">4a. Steam will ask you for the location of the cache directory, point it to the new one<br>
+											5. If you want to accept the default cache size, re-check "Accept default cache size and location on subscribe"<br>
+											<br>
+										</font></p>
+								</td>
+								<td width="15" height="1184"></td>
+								<td width="1" height="1184"><spacer type="block" width="1" height="1184"></spacer></td>
+							</tr>
+							<tr height="1" cntrlrow="">
+								<td width="16" height="1"><spacer type="block" width="16" height="1"></spacer></td>
+								<td width="537" height="1"><spacer type="block" width="537" height="1"></spacer></td>
+								<td width="15" height="1"><spacer type="block" width="15" height="1"></spacer></td>
+								<td width="1" height="1"></td>
+							</tr>
+						</tbody></table>

@@ -1,0 +1,34 @@
+<table cool="" width="569" height="527" showgridx="" showgridy="" gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+							<tbody><tr height="16">
+								<td width="568" height="16" colspan="3"></td>
+								<td width="1" height="16"><spacer type="block" width="1" height="16"></spacer></td>
+							</tr>
+							<tr height="510">
+								<td width="16" height="510"></td>
+								<td width="537" height="510" align="left" xpos="16" content="" valign="top" csheight="510">
+									<p><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4">Get Answers </font></b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b></b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="black" size="4"><b>:: </b></font><font size="4" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">What is Steam</font></p>
+									<p></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Steam is a digital content management system that provides content delivery, component revision control and data security to developers of such content. Steam is embedded within a Steam-enabled application giving it a virtual file system from which it can obtain "resources" (not files) from a local cache, CD or from the Internet.<br>
+											<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Communicating with the Steam backend servers, digital rights management allow access to subscription (pay or free) content while at the same time ensuring the user always has current content. Advanced content "preloaders" are used to load the caches during application execution as well as during normal PC (or console) operation. These preloaders are controllable in terms of bandwidth consumption and CPU usage such that the user may control the intrusiveness of the system.<br>
+											<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Caching content locally eliminates the "typical" issues associated with streaming content, that is, the data only needs to be read once. As the cache fills, a Least Recently Used algorithm purges old content allowing new content to take it's place. Additionally, "trickle" downloading allows content to be delivered unobtrusively such that the content "just appears" to the user when it's ready. In the case of Half-Life or Counter-Strike, no more rushing to an ftp site just to fight with others for the opportunity to download the latest update, map or mod. It will "just be there" when Valve says it will.<br>
+											<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Steam, in the end, provides game and application developers a much simpler method for delivering content to their users, whether it's for a controlled beta or all out publishing.<br>
+										</font><br>
+									</p>
+									<p></p>
+								</td>
+								<td width="15" height="510"></td>
+								<td width="1" height="510"><spacer type="block" width="1" height="510"></spacer></td>
+							</tr>
+							<tr height="1" cntrlrow="">
+								<td width="16" height="1"><spacer type="block" width="16" height="1"></spacer></td>
+								<td width="537" height="1"><spacer type="block" width="537" height="1"></spacer></td>
+								<td width="15" height="1"><spacer type="block" width="15" height="1"></spacer></td>
+								<td width="1" height="1"></td>
+							</tr>
+						</tbody></table>

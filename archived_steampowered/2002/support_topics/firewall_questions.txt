@@ -1,0 +1,46 @@
+<table cool="" width="569" height="632" showgridx="" showgridy="" gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+							<tbody><tr height="16">
+								<td width="568" height="16" colspan="3"></td>
+								<td width="1" height="16"><spacer type="block" width="1" height="16"></spacer></td>
+							</tr>
+							<tr height="615">
+								<td width="16" height="615"></td>
+								<td width="537" height="615" align="left" xpos="16" content="" valign="top" csheight="613">
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>Troubleshooting </b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="black" size="4"><b>::</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b> </b>Firewall Questions</font></p>
+									<p></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>Can I play if my computer is behind a firewall?</b><b><br>
+											</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Yes, but we may uses Internet ports that may be blocked by some firewalls.<br>
+										</font></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">You may have to reconfigure your networking equipment to open these ports. Home networks are made up of one or more computers behind a firewall, a router, a hub, or some combination of these.<br>
+										</font></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">A corporate firewall may cause problems running our system. We have designed security and password access systems that take this into account to try and improve accessibility. If you cannot access the games and your PC is behind a corporate firewall then you will need to discuss possible solutions with your corporate sys-admin.<br>
+											<br>
+										</font></p>
+									<p><b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">I try to open Steam and I get this message “Sorry- unable to connect to a Steam server. Please check your network connections and firewall settings.</font>”<br>
+										</b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">If you get this message, check your ports. Steam requires that your firewall have the following ports open:<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><i>Auto-updating:</i><br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">TCP &amp; UDP - 20<br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">TCP &amp; UDP - 21<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><i>Game play:</i><br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">TCP - 2207<br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">TCP - 5273<br>
+										</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">UDP - 27015<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Users need to make sure the necessary ports are open in BOTH directions on their firewalls.<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">If your ports are open the Steam server may be down. Go to the <a href="/web/20021015094002/http://www.steampowered.com/support/index.html">Home page</a> for the latest info.<br>
+										</font></p>
+									<p></p>
+								</td>
+								<td width="15" height="615"></td>
+								<td width="1" height="615"><spacer type="block" width="1" height="615"></spacer></td>
+							</tr>
+							<tr height="1" cntrlrow="">
+								<td width="16" height="1"><spacer type="block" width="16" height="1"></spacer></td>
+								<td width="537" height="1"><spacer type="block" width="537" height="1"></spacer></td>
+								<td width="15" height="1"><spacer type="block" width="15" height="1"></spacer></td>
+								<td width="1" height="1"></td>
+							</tr>
+						</tbody></table>

@@ -1,0 +1,235 @@
+<html>
+<head>
+<title>Games Available</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<script language="JavaScript">
+<!--
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function MM_goToURL() { //v3.0
+  var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
+  for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+//-->
+</script>
+<style type="text/css">
+<!--
+a {color: #E4C55A; text-decoration: none}
+a:hover {color: #F9DF84; text-decoration:;
+font-weight: regular}
+-->
+</style>
+<csscriptdict>
+<script><!--CSInit = new Array;function CSScriptInit() {if(typeof(skipPage) != "undefined") { if(skipPage) return; }
+idxArray = new Array;
+for(var i=0;i<CSInit.length;i++)
+	idxArray[i] = i;
+CSAction2(CSInit, idxArray);}CSAg = window.navigator.userAgent; CSBVers = parseInt(CSAg.charAt(CSAg.indexOf("/")+1),10);
+function IsIE() { return CSAg.indexOf("MSIE") > 0;}
+function CSIEStyl(s) { return document.all.tags("div")[s].style; }
+function CSNSStyl(s) { return CSFindElement(s,0); }
+function CSFindElement(n,ly) { if (CSBVers < 4) return document[n];
+	var curDoc = ly ? ly.document : document; var elem = curDoc[n];
+	if (!elem) { for (var i=0;i<curDoc.layers.length;i++) {
+		elem = CSFindElement(n,curDoc.layers[i]); if (elem) return elem; }}
+	return elem;
+}function CSClickReturn () {
+	var bAgent = window.navigator.userAgent; 
+	var bAppName = window.navigator.appName;
+	if ((bAppName.indexOf("Explorer") >= 0) && (bAgent.indexOf("Mozilla/3") >= 0) && (bAgent.indexOf("Mac") >= 0))
+		return true; // dont follow link
+	else return false; // dont follow link
+}function CSButtonReturn () {
+	var bAgent = window.navigator.userAgent; 
+	var bAppName = window.navigator.appName;
+	if ((bAppName.indexOf("Explorer") >= 0) && (bAgent.indexOf("Mozilla/3") >= 0) && (bAgent.indexOf("Mac") >= 0))
+		return false; // follow link
+	else return true; // follow link
+}CSIm = new Object();
+function CSIShow(n,i) {
+	if (document.images) {
+		if (CSIm[n]) {
+			var img = (!IsIE()) ? CSFindElement(n,0) : document[n];
+			if (img && typeof(CSIm[n][i].src) != "undefined") {img.src = CSIm[n][i].src;}
+			if(i != 0)
+				self.status = CSIm[n][3];
+			else
+				self.status = " ";
+			return true;
+		}
+	}
+	return false;
+}
+function CSILoad(action) {
+	im = action[1];
+	if (document.images) {
+		CSIm[im] = new Object();
+		for (var i=2;i<5;i++) {
+			if (action[i] != '') { CSIm[im][i-2] = new Image(); CSIm[im][i-2].src = action[i]; }
+			else CSIm[im][i-2] = 0;
+		}
+		CSIm[im][3] = action[5];
+	}
+}
+CSStopExecution = false;
+function CSAction(array) { 
+	return CSAction2(CSAct, array);
+}
+function CSAction2(fct, array) { 
+	var result;
+	for (var i=0;i<array.length;i++) {
+		if(CSStopExecution) return false; 
+		var actArray = fct[array[i]];
+		if(actArray == null) return false; 
+		var tempArray = new Array;
+		for(var j=1;j<actArray.length;j++) {
+			if((actArray[j] != null) && (typeof(actArray[j]) == "object") && (actArray[j].length == 2)) {
+				if(actArray[j][0] == "VAR") {
+					tempArray[j] = CSStateArray[actArray[j][1]];
+				}
+				else {
+					if(actArray[j][0] == "ACT") {
+						tempArray[j] = CSAction(new Array(new String(actArray[j][1])));
+					}
+				else
+					tempArray[j] = actArray[j];
+				}
+			}
+			else
+				tempArray[j] = actArray[j];
+		}			
+		result = actArray[0](tempArray);
+	}
+	return result;
+}
+CSAct = new Object;// --></script>
+</csscriptdict>
+<csactiondict>
+<script><!--CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button',/*URL*/'../Home/Update%20images/Tabs-Home_out.gif',/*URL*/'../Home/Update%20images/Tabs-Home_over.gif',/*URL*/'../Home/Update%20images/Tabs-Home_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button3',/*URL*/'../Home/Update%20images/Tabs-Games_Avail_out.gif',/*URL*/'../Home/Update%20images/Tabs-Games_Avail_over.gif',/*URL*/'../Home/Update%20images/Tabs-Games_Avail_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button4',/*URL*/'../Home/Update%20images/Tabs-Support_out.gif',/*URL*/'../Home/Update%20images/Tabs-Support_over.gif',/*URL*/'../Home/Update%20images/Tabs-Support_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button5',/*URL*/'../Home/Update%20images/Tabs-Message_Board_out.gif',/*URL*/'../Home/Update%20images/Tabs-Message_Board_over.gif',/*URL*/'../Home/Update%20images/Tabs-Message_Board_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button6',/*URL*/'../Home/Update%20images/Tabs-FAQ_out.gif',/*URL*/'../Home/Update%20images/Tabs-FAQ_over.gif',/*URL*/'../Home/Update%20images/Tabs-FAQ_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button2',/*URL*/'../Home/Update%20images/Tabs-News_out.gif',/*URL*/'../Home/Update%20images/Tabs-News_over.gif',/*URL*/'../Home/Update%20images/Tabs-News_in.gif','');
+// --></script>
+</csactiondict>
+</head>
+<body alink="#b8c2ae" bgcolor="silver" link="#b8c2ae" onload="CSScriptInit();MM_preloadImages('../images/support%20site%20images/News.gif','../images/support%20site%20images/Games.gif','../images/support%20site%20images/Support.gif','../images/support%20site%20images/Message.gif','../images/support%20site%20images/About.gif')" vlink="#b8c2ae">
+<table border="0" cellpadding="5" cellspacing="2" height="100%" width="100%">
+<tr align="CENTER" valign="CENTER">
+<td>
+<table border="0" cellpadding="0" cellspacing="0" cool="" gridx="20" gridy="20" height="790" showgridx="" showgridy="" width="679">
+<tr height="116">
+<td align="left" colspan="12" height="116" valign="top" width="678" xpos="0"><img border="0" height="116" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Steam-Logo.gif" width="677"/></td>
+<td height="116" width="1"><spacer height="116" type="block" width="1"/></td>
+</tr>
+<tr height="1">
+<td align="left" colspan="2" height="24" rowspan="2" valign="top" width="28" xpos="0"><img border="0" height="24" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Tabs-Home_Border.gif" width="28"/></td>
+<td align="left" height="24" rowspan="2" valign="top" width="62" xpos="28"><csobj cl="../Home/Update%20images/Tabs-Home_in.gif" h="24" ht="../Home/Update%20images/Tabs-Home_over.gif" t="Button" w="62"><a href="Home.htm" onclick="CSIShow(/*CMP*/'button',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button',0)" onmouseover="return CSIShow(/*CMP*/'button',1)" target="_top"><img border="0" height="24" name="button" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Tabs-Home_out.gif" width="62"/></a></csobj></td>
+<td colspan="2" height="1" width="60"></td>
+<td align="left" height="24" rowspan="2" valign="top" width="129" xpos="150"><csobj cl="../Home/Update%20images/Tabs-Games_Avail_in.gif" h="24" ht="../Home/Update%20images/Tabs-Games_Avail_over.gif" t="Button" w="129"><a href="Games_Available/Games.htm" onclick="CSIShow(/*CMP*/'button3',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button3',0)" onmouseover="return CSIShow(/*CMP*/'button3',1)" target="_top"><img border="0" height="24" name="button3" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Tabs-Games_Avail_out.gif" width="129"/></a></csobj></td>
+<td align="left" colspan="2" height="24" rowspan="2" valign="top" width="76" xpos="279"><csobj cl="../Home/Update%20images/Tabs-Support_in.gif" h="24" ht="../Home/Update%20images/Tabs-Support_over.gif" t="Button" w="76"><a href="BetaSupport/support.htm" onclick="CSIShow(/*CMP*/'button4',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button4',0)" onmouseover="return CSIShow(/*CMP*/'button4',1)" target="_top"><img border="0" height="24" name="button4" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Tabs-Support_out.gif" width="76"/></a></csobj></td>
+<td align="left" height="24" rowspan="2" valign="top" width="122" xpos="355"><csobj cl="../Home/Update%20images/Tabs-Message_Board_in.gif" h="24" ht="../Home/Update%20images/Tabs-Message_Board_over.gif" t="Button" w="122"><a href="http://www.chatbear.com/cgi-bin/board.pl?boardid=1041&amp;view=flatold" onclick="CSIShow(/*CMP*/'button5',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button5',0)" onmouseover="return CSIShow(/*CMP*/'button5',1)" target="_top"><img border="0" height="24" name="button5" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Tabs-Message_Board_out.gif" width="122"/></a></csobj></td>
+<td align="left" height="24" rowspan="2" valign="top" width="64" xpos="477"><csobj cl="../Home/Update%20images/Tabs-FAQ_in.gif" h="24" ht="../Home/Update%20images/Tabs-FAQ_over.gif" t="Button" w="64"><a href="Faq/FAQ.htm" onclick="CSIShow(/*CMP*/'button6',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button6',0)" onmouseover="return CSIShow(/*CMP*/'button6',1)" target="_top"><img border="0" height="24" name="button6" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Tabs-FAQ_out.gif" width="64"/></a></csobj></td>
+<td align="left" colspan="2" height="24" rowspan="2" valign="top" width="137" xpos="541"><img border="0" height="24" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Tabs-FAQ_Border.gif" width="135"/></td>
+<td height="1" width="1"><spacer height="1" type="block" width="1"/></td>
+</tr>
+<tr height="23">
+<td align="left" colspan="2" height="23" valign="top" width="60" xpos="90"><csobj cl="../Home/Update%20images/Tabs-News_in.gif" h="23" ht="../Home/Update%20images/Tabs-News_over.gif" t="Button" w="60"><a href="News/News.htm" onclick="CSIShow(/*CMP*/'button2',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button2',0)" onmouseover="return CSIShow(/*CMP*/'button2',1)" target="_top"><img border="0" height="23" name="button2" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Tabs-News_out.gif" width="60"/></a></csobj></td>
+<td height="23" width="1"><spacer height="23" type="block" width="1"/></td>
+</tr>
+<tr height="511">
+<td height="556" rowspan="2" width="19"></td>
+<td align="left" colspan="10" height="511" valign="top" width="632" xpos="19">
+<table bgcolor="#6a6f82" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="511" showgridx="" showgridy="" width="632">
+<tr height="79">
+<td colspan="4" height="79" width="631"><spacer height="79" type="block" width="631"/></td>
+<td height="79" width="1"><spacer height="79" type="block" width="1"/></td>
+</tr>
+<tr height="31">
+<td colspan="2" height="31" width="259"><spacer height="31" type="block" width="259"/></td>
+<td align="left" content="" csheight="31" height="31" valign="top" width="112" xpos="259"><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>Day of Defeat</b></font></td>
+<td height="31" width="260"><spacer height="31" type="block" width="260"/></td>
+<td height="31" width="1"><spacer height="31" type="block" width="1"/></td>
+</tr>
+<tr height="400">
+<td height="400" width="49"><spacer height="400" type="block" width="49"/></td>
+<td align="left" colspan="3" height="400" valign="top" width="582" xpos="49"><img border="0" height="400" src="http://steamsupport.valvesoftware.com:80/Games_Available/Game-images/dodshot.jpg" width="533"/></td>
+<td height="400" width="1"><spacer height="400" type="block" width="1"/></td>
+</tr>
+<tr cntrlrow="" height="1">
+<td height="1" width="49"><spacer height="1" type="block" width="49"/></td>
+<td height="1" width="210"><spacer height="1" type="block" width="210"/></td>
+<td height="1" width="112"><spacer height="1" type="block" width="112"/></td>
+<td height="1" width="260"><spacer height="1" type="block" width="260"/></td>
+<td height="1" width="1"><spacer height="1" type="block" width="1"/></td>
+</tr>
+</table>
+</td>
+<td height="556" rowspan="2" width="27"></td>
+<td height="511" width="1"><spacer height="511" type="block" width="1"/></td>
+</tr>
+<tr height="45">
+<td align="left" bgcolor="#6a6f82" colspan="10" content="" csheight="45" height="45" valign="top" width="632" xpos="19">                                                                                                                        <font face="Times New Roman,Georgia,Times" size="2"><br/>
+									
+									                                                                                                      <a href="Games_Available/DMC.htm" target="_top" title="Half-Life">Back </a></font><font face="Times New Roman,Georgia,Times" size="2">                                                  <a href="Games_Available/Games.htm#anchorDoD"> Game Description</a></font></td>
+<td height="45" width="1"><spacer height="45" type="block" width="1"/></td>
+</tr>
+<tr height="29">
+<td colspan="7" height="29" width="298"></td>
+<td align="left" colspan="2" height="29" valign="top" width="179" xpos="298"><img border="0" height="29" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Bottom-VALVE1.gif" width="81"/></td>
+<td colspan="3" height="29" width="201"></td>
+<td height="29" width="1"><spacer height="29" type="block" width="1"/></td>
+</tr>
+<tr height="19">
+<td colspan="4" height="19" width="133"></td>
+<td align="left" colspan="7" height="19" valign="top" width="518" xpos="133"><img border="0" height="19" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Bottom-Links.gif" usemap="#Bottom-Linksf0f783f" width="412"/></td>
+<td height="19" width="27"></td>
+<td height="19" width="1"><spacer height="19" type="block" width="1"/></td>
+</tr>
+<tr height="45">
+<td align="left" colspan="12" height="45" valign="top" width="678" xpos="0"><img border="0" height="28" src="http://steamsupport.valvesoftware.com:80/Home/Update%20images/Bottom-COPY1.gif" width="678"/></td>
+<td height="45" width="1"><spacer height="45" type="block" width="1"/></td>
+</tr>
+<tr cntrlrow="" height="1">
+<td height="1" width="19"><spacer height="1" type="block" width="19"/></td>
+<td height="1" width="9"><spacer height="1" type="block" width="9"/></td>
+<td height="1" width="62"><spacer height="1" type="block" width="62"/></td>
+<td height="1" width="43"><spacer height="1" type="block" width="43"/></td>
+<td height="1" width="17"><spacer height="1" type="block" width="17"/></td>
+<td height="1" width="129"><spacer height="1" type="block" width="129"/></td>
+<td height="1" width="19"><spacer height="1" type="block" width="19"/></td>
+<td height="1" width="57"><spacer height="1" type="block" width="57"/></td>
+<td height="1" width="122"><spacer height="1" type="block" width="122"/></td>
+<td height="1" width="64"><spacer height="1" type="block" width="64"/></td>
+<td height="1" width="110"><spacer height="1" type="block" width="110"/></td>
+<td height="1" width="27"><spacer height="1" type="block" width="27"/></td>
+<td height="1" width="1"></td>
+</tr>
+</table>
+<map name="Textimage-News4dbfb53"><area coords="19,2,182,19" href="#" shape="rect" target="_top"/></map></td>
+</tr>
+</table>
+<map name="Bottom-Linksf0f783f"><area coords="350,4,404,15" href="mailto:steamsupport@valvesoftware.com" shape="rect"/><area coords="313,3,341,14" href="../Faq/FAQ.htm" shape="rect" target="_top"/><area coords="233,4,309,16" href="http://www.chatbear.com/cgi-bin/board.pl?boardid=1041&amp;view=flatold" shape="rect" target="_top"/><area coords="179,5,219,16" href="../BetaSupport/support.htm" shape="rect" target="_top"/><area coords="81,5,171,16" href="Games.htm" shape="rect" target="_top"/><area coords="48,5,75,16" href="../News/News.htm" shape="rect" target="_top"/><area coords="0,4,40,15" href="../Home.htm" shape="rect" target="_top"/></map>
+</body>
+</html> 

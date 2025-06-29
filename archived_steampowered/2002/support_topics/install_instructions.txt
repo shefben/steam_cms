@@ -1,0 +1,94 @@
+<table cool="" width="569" height="1939" showgridx="" showgridy="" gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+							<tbody><tr height="15">
+								<td width="568" height="15" colspan="3"></td>
+								<td width="1" height="15"><spacer type="block" width="1" height="15"></spacer></td>
+							</tr>
+							<tr height="1923">
+								<td width="16" height="1923"></td>
+								<td width="539" height="1923" align="left" xpos="16" content="" valign="top" csheight="1896">
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><b><font size="4">Step By Step </font></b></font><font color="black" size="4" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><b>:: </b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4">Install&nbsp;Instructions</font></p>
+									<p></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>Instructions for Installing Steam  - </b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>Directions for setting up a Steam account</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">&nbsp;<br>
+										</font></p>
+									<div align="center">
+										<div class="Section1" align="left">
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Step 1)<span style="mso-tab-count:1">&nbsp; </span>Go to the site included in your invite email and run the setup.exe by double clicking<br>
+													
+												
+												
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on the icon.</font></p>
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Step 2)<span style="mso-tab-count:1">&nbsp; Choose "Run this program from its current location" and click "Ok".</span></font></p>
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Step 3)<span style="mso-tab-count:1">&nbsp; Click "Yes" on the security warning window.</span></font></p>
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Step 4)<span style="mso-tab-count:1">&nbsp; </span>Choose the directory where you would like to install steam.</font></p>
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Step 5)<span style="mso-tab-count:1">&nbsp; </span>First time users click on the “Create Account” button.<span style="mso-spacerun: yes">&nbsp; </span>Existing users enter your<br>
+													
+												
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Name (email address) and Password created when you set up the account<br>
+													
+												
+												
+												 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;click “Log In”.</font></p>
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><br>
+													<b>... and, for First-time Users</b></font></p>
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Step 6)<span style="mso-tab-count:1">&nbsp; </span>Please check that you have read the Valve license agreement and click the<br>
+													
+												
+												
+												
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; “I Agree” button.</font></p>
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Step 7)<span style="mso-tab-count:1">&nbsp; </span>Enter your E-mail Address, Password, and Special Offer Key on the registration<br>
+													
+												
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screen and click the “finish” button.<span style="mso-spacerun: yes">&nbsp; </span>Your Special Offer Key is an eight digit<br>
+													
+												
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alphanumeric sequence that was generated based on the e-mail address you<br>
+													
+												
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;supplied for the beta.<span style="mso-spacerun: yes">&nbsp; </span>The Special Offer Key was sent to the e-mail supplied.</font></p>
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">You can choose any password.<span style="mso-spacerun:
+yes">&nbsp; </span>This will be your way to login to your account for future access.<span style="mso-spacerun: yes">&nbsp; </span>You will not be require to reenter the Special Offer Key again unless we make a major change to the system during beta that requires you to delete your account.<span style="mso-spacerun:
+yes">&nbsp; </span>Please retain your Special Offer Key until the end of the beta.<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span></font></p>
+										</div>
+										<div class="Section1">
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><img src="/web/20021015104754im_/http://www.steampowered.com/support/Images/Valve1.jpg" width="533" height="361" border="0"> &nbsp;</font></p>
+										</div>
+										<div class="Section1" align="left">
+											<dl>
+												<dt class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Step 8)<span style="mso-tab-count:1">&nbsp;</span>The main user interface should appear.<span style="mso-spacerun: yes">&nbsp; </span>Subscribe to the game(s) of your choice and<br>
+														
+													
+													
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;follow the directions. &nbsp;&nbsp;</font>
+											</dt></dl>
+										</div>
+										<div class="Section1">
+											<p class="MsoNormal"></p>
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><img src="/web/20021015104754im_/http://www.steampowered.com/support/Images/Valve2.jpg" width="533" height="361" border="0"></font></p>
+											<p class="MsoNormal"></p>
+										</div>
+										<div class="Section1" align="left">
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Step 9) Pick a game to play on the “My Games” page.<span style="mso-spacerun: yes">&nbsp; </span>If you “right mouse click” on the<br>
+													
+												
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;game icon you will have the options to start the game in full screen, widowed mode or<br>
+													
+												
+												
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start a dedicated game server.</font></p>
+										</div>
+										<div class="Section1">
+											<p class="MsoNormal"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">&nbsp; <img src="/web/20021015104754im_/http://www.steampowered.com/support/Images/Valve3.jpg" width="533" height="361" border="0"></font></p>
+										</div>
+									</div>
+								</td>
+								<td width="13" height="1923"></td>
+								<td width="1" height="1923"><spacer type="block" width="1" height="1923"></spacer></td>
+							</tr>
+							<tr height="1" cntrlrow="">
+								<td width="16" height="1"><spacer type="block" width="16" height="1"></spacer></td>
+								<td width="539" height="1"><spacer type="block" width="539" height="1"></spacer></td>
+								<td width="13" height="1"><spacer type="block" width="13" height="1"></spacer></td>
+								<td width="1" height="1"></td>
+							</tr>
+						</tbody></table>

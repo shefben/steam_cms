@@ -1,0 +1,66 @@
+<table cool="" width="569" height="908" showgridx="" showgridy="" gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+							<tbody><tr height="16">
+								<td width="568" height="16" colspan="3"></td>
+								<td width="1" height="16"><spacer type="block" width="1" height="16"></spacer></td>
+							</tr>
+							<tr height="891">
+								<td width="16" height="891"></td>
+								<td width="537" height="891" align="left" xpos="16" content="" valign="top" csheight="891">
+									<p><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4">Troubleshooting </font></b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b></b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="black" size="4"><b>:: </b></font><font size="4" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Cache Questions</font></p>
+									<p></p>
+									<p><b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">How do I change the screen settings on my computer?<br>
+												
+												
+												-</font></b><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"> Click the Start button.<br>
+											
+											
+											-</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"> Select Settings &gt; Control Panel.<br>
+											
+											
+											-</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"> Double-click the Display icon to view the Display Properties control panel.<br>
+											
+											
+											-</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"> Click the Settings tab.<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">To change the number of colors your screen uses: In the Color Palette (Windows 95)/Colors (Windows 98) list, select the number of colors that you want your monitor to display.<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">To change the screen resolution: Under Desktop area (Windows 95)/Screen area (Windows 98), drag the slider until the correct resolution setting appears.<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><b>Note:</b> Your monitor and display adapter determine the maximum number of colors that can appear on your screen, and whether you can change your screen resolution.<br>
+										</font><br>
+									</p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>Can I put my cache folder anywhere?<br>
+											</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Yes. After you extract and open the Steam.exe, you have the option of creating a cache folder in the desired location.<br>
+											<br>
+										</font></p>
+									<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b>How to I move/rename a Steam cache directory?<br>
+											</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">1. In the Steam "Configure" page, UN-check "Accept default cache size and location on subscribe"<br>
+										</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">2. Close Steam (and the game if it is running)<br>
+										</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">3. Move/rename the cache directory<br>
+										</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">4. Launch Steam, then launch the corresponding game<br>
+										</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">4a. Steam will ask you for the location of the cache directory, point it to the new one<br>
+										</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">5. If you want to accept the default cache size, re-check "Accept default cache size and location on subscribe"<br>
+											<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><b>What is the purpose of Enable Cache Loading?<br>
+											</b></font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">This menu contains a number of "advanced" features, one of which is "enable cache loading". This option instructs Steam to continue to use your internet connection when the application/game is not running and you are either using another application or your pc is idle. Enabling this option significantly improves your application/games performance.<br>
+											<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><b>When would I set the cache size smaller then recommended?<br>
+											</b></font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">As mentioned above, reducing the size of the cache potentially reduces your application/games performance and should only be done when disk space is tight. Making the cache size smaller than 1/2 of it's recommended size is *highly* discouraged.<br>
+											<br>
+										</font></p>
+									<p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><b>Why does it seem to take extra time create a cache file on my PC?<br>
+											</b></font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Operating systems support NTFS and FAT32 file formats on the hard disk. If your operating system is Windows 2000 or Windows XP and the hard disk is configured in a FAT32 file format then you will see a delay in the creation of the cache file. Depending on network speeds this could take minutes to complete. Although it may not appear to be working the system is creating the cache file. This will only be seen the first time you create the cache file. This is not an issue when using NTFS file formats on all operating systems and FAT32 file formats on Windows 98 or Windows ME.<br>
+										</font></p>
+								</td>
+								<td width="15" height="891"></td>
+								<td width="1" height="891"><spacer type="block" width="1" height="891"></spacer></td>
+							</tr>
+							<tr height="1" cntrlrow="">
+								<td width="16" height="1"><spacer type="block" width="16" height="1"></spacer></td>
+								<td width="537" height="1"><spacer type="block" width="537" height="1"></spacer></td>
+								<td width="15" height="1"><spacer type="block" width="15" height="1"></spacer></td>
+								<td width="1" height="1"></td>
+							</tr>
+						</tbody></table>
