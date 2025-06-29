@@ -474,3 +474,49 @@ HR.status	{
 	width:100%;
 	text-align:left;
 	}
+
+/* New text-based navigation header */
+.globalHeadBar {
+        background:#000000;
+        margin: 0px;
+        width: 80%;
+        padding-top: 30px;
+        padding-bottom: 9px;
+        float: left;
+}
+.globalHeadBar_logo {
+        background:#000000;
+        margin: 0px;
+        width: 20%;
+        padding-top: 4px;
+        padding-bottom: 9px;
+        float: left;
+}
+.globalNavItem {
+        display:inline;
+        vertical-align: top;
+        margin-bottom: 0px;
+}
+.globalNavItem a {
+        display:inline;
+        margin-right: 15px;
+        margin-left: 15px;
+        padding-bottom: 9px;
+        background-color: #000000;
+        text-decoration:none;
+}
+.globalNavItem a:hover {
+        background-color: #4C5844;
+        text-decoration:none;
+}
+.globalNavLink {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.8em;
+        color: #FFFFFF;
+        letter-spacing: 1px;
+        background-color: #000000;
+        text-decoration: none;
+        padding-top: 3px;
+        padding-bottom: 3px;
+}
+
