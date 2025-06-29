@@ -47,6 +47,7 @@ $default_nav = [
     ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
     ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
+    ['file'=>'support_2003.php','label'=>'2003 Support','visible'=>1],
     ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
 ];
 $json = cms_get_setting('nav_items',null);
@@ -67,6 +68,7 @@ $icons = [
     'faq_categories.php'=> '📂',
     'admin_users.php'  => '👥',
     'error_page.php'   => '❌',
+    'support_2003.php' => '🛠️',
     '../logout.php'    => '🚪',
 ];
 
