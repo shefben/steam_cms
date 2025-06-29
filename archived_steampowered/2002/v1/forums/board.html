@@ -1,0 +1,816 @@
+<html>
+<head>
+<meta content="en-gb" http-equiv="Content-Language"/>
+<title>Messageboard from Chatbear</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<script language="JavaScript">
+<!--
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function MM_goToURL() { //v3.0
+  var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
+  for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+//-->
+</script>
+<style type="text/css">
+<!--
+a {color: #B8C2AE; text-decoration: none}
+a:hover {color: #FAAE4C; text-decoration:;
+font-weight: regular}
+-->
+</style>
+<csscriptdict>
+<script><!--
+CSInit = new Array;
+function CSScriptInit() {
+if(typeof(skipPage) != "undefined") { if(skipPage) return; }
+idxArray = new Array;
+for(var i=0;i<CSInit.length;i++)
+	idxArray[i] = i;
+CSAction2(CSInit, idxArray);}
+CSAg = window.navigator.userAgent; CSBVers = parseInt(CSAg.charAt(CSAg.indexOf("/")+1),10);
+function IsIE() { return CSAg.indexOf("MSIE") > 0;}
+function CSIEStyl(s) { return document.all.tags("div")[s].style; }
+function CSNSStyl(s) { return CSFindElement(s,0); }
+function CSFindElement(n,ly) { if (CSBVers < 4) return document[n];
+	var curDoc = ly ? ly.document : document; var elem = curDoc[n];
+	if (!elem) { for (var i=0;i<curDoc.layers.length;i++) {
+		elem = CSFindElement(n,curDoc.layers[i]); if (elem) return elem; }}
+	return elem;
+}
+
+function CSClickReturn () {
+	var bAgent = window.navigator.userAgent; 
+	var bAppName = window.navigator.appName;
+	if ((bAppName.indexOf("Explorer") >= 0) && (bAgent.indexOf("Mozilla/3") >= 0) && (bAgent.indexOf("Mac") >= 0))
+		return true; // dont follow link
+	else return false; // dont follow link
+}
+
+function CSButtonReturn () {
+	var bAgent = window.navigator.userAgent; 
+	var bAppName = window.navigator.appName;
+	if ((bAppName.indexOf("Explorer") >= 0) && (bAgent.indexOf("Mozilla/3") >= 0) && (bAgent.indexOf("Mac") >= 0))
+		return false; // follow link
+	else return true; // follow link
+}
+
+CSIm = new Object();
+function CSIShow(n,i) {
+	if (document.images) {
+		if (CSIm[n]) {
+			var img = (!IsIE()) ? CSFindElement(n,0) : document[n];
+			if (img && typeof(CSIm[n][i].src) != "undefined") {img.src = CSIm[n][i].src;}
+			if(i != 0)
+				self.status = CSIm[n][3];
+			else
+				self.status = " ";
+			return true;
+		}
+	}
+	return false;
+}
+function CSILoad(action) {
+	im = action[1];
+	if (document.images) {
+		CSIm[im] = new Object();
+		for (var i=2;i<5;i++) {
+			if (action[i] != '') { CSIm[im][i-2] = new Image(); CSIm[im][i-2].src = action[i]; }
+			else CSIm[im][i-2] = 0;
+		}
+		CSIm[im][3] = action[5];
+	}
+}
+CSStopExecution = false;
+function CSAction(array) { 
+	return CSAction2(CSAct, array);
+}
+function CSAction2(fct, array) { 
+	var result;
+	for (var i=0;i<array.length;i++) {
+		if(CSStopExecution) return false; 
+		var actArray = fct[array[i]];
+		if(actArray == null) return false; 
+		var tempArray = new Array;
+		for(var j=1;j<actArray.length;j++) {
+			if((actArray[j] != null) && (typeof(actArray[j]) == "object") && (actArray[j].length == 2)) {
+				if(actArray[j][0] == "VAR") {
+					tempArray[j] = CSStateArray[actArray[j][1]];
+				}
+				else {
+					if(actArray[j][0] == "ACT") {
+						tempArray[j] = CSAction(new Array(new String(actArray[j][1])));
+					}
+				else
+					tempArray[j] = actArray[j];
+				}
+			}
+			else
+				tempArray[j] = actArray[j];
+		}			
+		result = actArray[0](tempArray);
+	}
+	return result;
+}
+CSAct = new Object;
+
+
+// --></script>
+</csscriptdict>
+<csactiondict>
+<script><!--
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Home_out.gif',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Home_over.gif',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Home_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button2',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-News_out.gif',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-News_over.gif',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-News_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button3',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Games_Avail_out.gif',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Games_Avail_over.gif',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Games_Avail_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button4',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Support_out.gif',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Support_over.gif',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Support_in.gif','');
+CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button5',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-FAQ_out.gif',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-FAQ_over.gif',/*URL*/'http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-FAQ_in.gif','');
+
+// --></script>
+</csactiondict>
+</head>
+<body alink="#27346f" bgcolor="silver" link="#27346f" onload="CSScriptInit();MM_preloadImages('http://steamsupport.valvesoftware.com/images/support%20site%20images/News.gif','http://steamsupport.valvesoftware.com/images/support%20site%20images/Games.gif','http://steamsupport.valvesoftware.com/images/support%20site%20images/Support.gif','http://steamsupport.valvesoftware.com/images/support%20site%20images/Message.gif','http://steamsupport.valvesoftware.com/images/support%20site%20images/About.gif')" text="white" vlink="#27346f">
+<table border="0" cellpadding="5" cellspacing="2" height="100%" width="100%">
+<tr align="CENTER" valign="CENTER">
+<td valign="top">
+<a href="shared/banners.pl?id=1"><img alt="Chatbear - Get your own free messageboard!" border="0" height="60" src="shared/chatbearad.gif" width="468"/></a>
+<div align="center">
+<center>
+<table bgcolor="#C0C0C0" border="0" cellpadding="0" cellspacing="0" cool="" gridx="20" gridy="20" showgridx="" showgridy="" width="679">
+<tr height="116">
+<td align="left" colspan="8" height="116" valign="top" width="678" xpos="0"><img border="0" height="116" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Steam-Logo.gif" width="677"/></td>
+<td height="116" width="1"><spacer height="116" type="block" width="1"/></td>
+</tr>
+<tr height="2">
+<td align="left" height="24" valign="top" width="28" xpos="0"><img border="0" height="24" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Home_Border.gif" width="28"/></td>
+<td align="left" height="24" valign="top" width="62" xpos="28"><csobj cl="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Home_in.gif" h="24" ht="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Home_over.gif" t="Button" w="62"><a href="http://steamsupport.valvesoftware.com/Home.htm" onclick="CSIShow(/*CMP*/'button',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button',0)" onmouseover="return CSIShow(/*CMP*/'button',1)" target="_top"><img border="0" height="24" name="button" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Home_out.gif" width="62"/></a></csobj></td>
+<td align="left" height="2" valign="top" width="60" xpos="90"><csobj cl="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-News_in.gif" h="24" ht="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-News_over.gif" t="Button" w="60"><a href="http://steamsupport.valvesoftware.com/News/News.htm" onclick="CSIShow(/*CMP*/'button2',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button2',0)" onmouseover="return CSIShow(/*CMP*/'button2',1)" target="_top"><img border="0" height="24" name="button2" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-News_out.gif" width="60"/></a></csobj></td>
+<td align="left" height="2" valign="top" width="129" xpos="150"><csobj cl="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Games_Avail_in.gif" h="24" ht="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Games_Avail_over.gif" t="Button" w="129"><a href="http://steamsupport.valvesoftware.com/Games_Available/Games.htm" onclick="CSIShow(/*CMP*/'button3',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button3',0)" onmouseover="return CSIShow(/*CMP*/'button3',1)" target="_top"><img border="0" height="24" name="button3" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Games_Avail_out.gif" width="129"/></a></csobj></td>
+<td align="left" height="2" valign="top" width="76" xpos="279"><csobj cl="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Support_in.gif" h="24" ht="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Support_over.gif" t="Button" w="76"><a href="http://steamsupport.valvesoftware.com/BetaSupport/support.htm" onclick="CSIShow(/*CMP*/'button4',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button4',0)" onmouseover="return CSIShow(/*CMP*/'button4',1)" target="_top"><img border="0" height="24" name="button4" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Support_out.gif" width="76"/></a></csobj></td>
+<td align="left" height="2" valign="top" width="122" xpos="355"><img border="0" height="24" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-Message_Board_in.gif" width="122"/></td>
+<td align="left" height="2" valign="top" width="64" xpos="477"><csobj cl="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-FAQ_in.gif" h="24" ht="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-FAQ_over.gif" t="Button" w="64"><a href="http://steamsupport.valvesoftware.com/Faq/FAQ.htm" onclick="CSIShow(/*CMP*/'button5',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button5',0)" onmouseover="return CSIShow(/*CMP*/'button5',1)" target="_top"><img border="0" height="24" name="button5" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-FAQ_out.gif" width="64"/></a></csobj></td>
+<td align="left" height="2" valign="top" width="176" xpos="541"><img border="0" height="24" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Tabs-FAQ_Border.gif" width="135"/></td>
+<td height="2" width="1"><spacer height="235" type="block" width="1"/></td>
+</tr>
+</table>
+</center>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" width="651">
+<tr>
+<td width="5"><font color="#B8C2AE"> </font></td>
+<td bgcolor="#6a6f82" width="631">
+<table border="0" cellpadding="5" cellspacing="0" width="100%">
+<tr>
+<td width="100%">
+<div align="center">
+<center>
+<table border="0" cellpadding="3" cellspacing="0" width="100%">
+<tr>
+<td bgcolor="#3C4770" width="50%"><font face="Arial" size="2">
+<a href="users/signup.shtml">Signup</a> :
+      <a href="cgi-bin/forgotten.pl">Forgotten Password</a> 
+      : <a href="cgi-bin/account.pl">Options</a></font></td>
+<td bgcolor="#3C4770" width="50%">
+<p align="right"><font face="Arial" size="2">You have ?
+      <a href="cgi-bin/privmsg.pl">Private Messages</a></font></p></td>
+</tr>
+<tr>
+<td colspan="2" width="100%"><font color="#636D5A" face="Arial" size="2">
+      .</font></td>
+</tr>
+</table>
+</center>
+</div>
+<p align="left"> <div align="center">
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td align="left" width="50%">
+<font color="#FFFFFF" face="Arial" size="4"><b>Counter-Strike 1.4</b></font><br/>
+<font face="Arial" size="1">Last Visit: Never -- Currently: Feb 6, 05:09</font>
+</td>
+<td width="50%">
+<p align="right"><font face="Arial" size="2"><a href="cgi-bin/board.pl?action=postmessage&amp;boardid=1449&amp;id=0&amp;threadid=0&amp;view=flatold"><img border="0" height="19" src="images/buttons/grey/postnewtopic.gif" width="88"/></a>
+<a href="cgi-bin/board.pl?boardid=1449&amp;view=flatold"><img border="0" height="19" src="images/buttons/grey/boardlistings.gif" width="82"/></a>
+<a href="cgi-bin/search.pl?boardid=1449"><img border="0" height="19" src="images/buttons/grey/search.gif" width="48"/>
+</a></font></p></td>
+</tr>
+<tr>
+<td colspan="2" width="100%">
+<font color="6b6d84" face="Arial" size="1">.</font>
+</td>
+</tr>
+</table>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font color="#6b6d84" size="1">.<font></font></font></td>
+<td bgcolor="#001052" width="48%"><b><font color="#E2E3E6" face="Arial" size="2">Subject</font></b></td>
+<td align="center" bgcolor="#001052" width="10%"><b><font color="#E2E3E6" face="Arial" size="2">Posts</font></b></td>
+<td align="left" bgcolor="#001052" width="20%"><b><font color="#E2E3E6" face="Arial" size="2">Updated</font></b></td>
+<td align="right" bgcolor="#001052" width="20%"><b><font color="#E2E3E6" face="Arial" size="2">Author</font></b></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 3, 17:01"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=973,1012755699,19794&amp;id=144085&amp;boardid=1449&amp;view=flatold">1st round pistol clip bug fixed?</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">14</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 6, 05:03</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Renaissance%20Man&amp;boardid=1449" title="Posts: 40 ; Rank: Bearcub">Renaissance Man</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 20:08"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=368,1012939724,8379&amp;id=146467&amp;boardid=1449&amp;view=flatold">Can The Deads be turned off?</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">5</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 6, 04:51</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=InDe3D&amp;boardid=1449" title="Posts: 2 ; Rank: Bearcub">InDe3D</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 6, 04:46"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=521,1012970776,11913&amp;id=146961&amp;boardid=1449&amp;view=flatold">Playing CS in 1280x1024/1600x1200 and up</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">1</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 6, 04:46</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Inferno&amp;boardid=1449" title="Posts: 9 ; Rank: Bearcub">Inferno</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 22:51"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=534,1012863065,2637&amp;id=145569&amp;boardid=1449&amp;view=flatold">Sniper Bobbing</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">23</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 6, 03:34</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Dave&amp;boardid=1449" title="Posts: 15 ; Rank: Bearcub">Dave</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 22:28"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=725,1012948096,20076&amp;id=146644&amp;boardid=1449&amp;view=flatold">No sound if Win key is pressed</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">2</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 6, 03:23</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Dave&amp;boardid=1449" title="Posts: 15 ; Rank: Bearcub">Dave</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 6, 00:23"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=390,1012954995,29084&amp;id=146762&amp;boardid=1449&amp;view=flatold">Cheating in 1.4?</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">5</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 6, 02:12</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Sysreq&amp;boardid=1449" title="Posts: 2 ; Rank: Bearcub">Sysreq</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Jan 19, 03:13"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=980,1011410017,22509&amp;id=126360&amp;boardid=1449&amp;view=flatold">suggestion (that we can all agree on)</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">13</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 6, 02:01</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=rizzuh&amp;boardid=1449" title="Posts: 8 ; Rank: Bearcub">rizzuh</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Jan 30, 21:03"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=750,1012424588,7093&amp;id=139807&amp;boardid=1449&amp;view=flatold">Inset window</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">4</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 6, 00:32</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=HEE%20LARVEY&amp;boardid=1449" title="Posts: 2 ; Rank: Bearcub">HEE LARVEY</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 22:36"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=705,1012948607,20946&amp;id=146660&amp;boardid=1449&amp;view=flatold">Bomb Idea?</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">3</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 6, 00:29</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Dave&amp;boardid=1449" title="Posts: 15 ; Rank: Bearcub">Dave</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 22:37"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=599,1012948662,20946&amp;id=146664&amp;boardid=1449&amp;view=flatold">CS Mouse Sensitivity</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">2</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 6, 00:11</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=xr_Bishop&amp;boardid=1449" title="Posts: 1 ; Rank: Bearcub">xr_Bishop</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 2, 07:19"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=849,1012634382,29895&amp;id=142829&amp;boardid=1449&amp;view=flatold">Hostage Idea for CS 1.4</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">26</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 23:48</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=TheGameGod&amp;boardid=1449" title="Posts: 4 ; Rank: Bearcub">TheGameGod</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Jan 22, 07:26"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=297,1011684408,18343&amp;id=129513&amp;boardid=1449&amp;view=flatold">glock still a plastic child's toy...</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">34</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 23:33</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=[SMS]Morpheus&amp;boardid=1449" title="Posts: 39 ; Rank: Bearcub">[SMS]Morpheus</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 02:02"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=115,1012874570,15242&amp;id=145778&amp;boardid=1449&amp;view=flatold">bug: inset map</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">2</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 22:44</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=ChewDawg&amp;boardid=1449" title="Posts: 1 ; Rank: Bearcub">ChewDawg</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Jan 17, 16:22"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=410,1011284578,27197&amp;id=124532&amp;boardid=1449&amp;view=flatold">My thoughts on jumping....</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">129</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 22:42</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Mr.%20Mysterious&amp;boardid=1449" title="Posts: 18 ; Rank: Bearcub">Mr. Mysterious</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 22:35"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=14,1012862117,1157&amp;id=145542&amp;boardid=1449&amp;view=flatold">What is wrong with having 3 speeds?</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">11</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 22:35</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=MightyMouse-DG-&amp;boardid=1449" title="Posts: 22 ; Rank: Bearcub">MightyMouse-DG-</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 23:14"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=394,1012864498,4748&amp;id=145600&amp;boardid=1449&amp;view=flatold">LETS HAVE DEATHMATCH!!</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">8</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 22:25</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Dave&amp;boardid=1449" title="Posts: 15 ; Rank: Bearcub">Dave</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 22:19"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=453,1012947595,19277&amp;id=146630&amp;boardid=1449&amp;view=flatold">Continuous crashes</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">1</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 22:19</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Katscan&amp;boardid=1449" title="Posts: 1 ; Rank: Bearcub">Katscan</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Jan 19, 01:59"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=198,1011405588,9486&amp;id=126299&amp;boardid=1449&amp;view=flatold">Analysis of new Running/Player Movement</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">18</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 22:19</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=zerosine&amp;boardid=1449" title="Posts: 36 ; Rank: Bearcub">zerosine</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 01:05"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=72,1012871126,11725&amp;id=145722&amp;boardid=1449&amp;view=flatold">Giving cash to team-mates?</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">7</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 16:28</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=fB|-BlackCaT-&amp;boardid=1449" title="Posts: 13 ; Rank: Bearcub">fB|-BlackCaT-</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 15:05"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=149,1012921552,21817&amp;id=146236&amp;boardid=1449&amp;view=flatold">Accuracy and Flashbang issues</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">2</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 15:26</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Pakin&amp;boardid=1449" title="Posts: 87 ; Rank: Bearcub">Pakin</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 3, 01:21"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=49,1012699281,1595&amp;id=143583&amp;boardid=1449&amp;view=flatold">weapons and skill!!</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">19</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 13:39</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=psycho_thrasher&amp;boardid=1449" title="Posts: 60 ; Rank: Bearcub">psycho_thrasher</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 01:55"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=249,1012874151,14924&amp;id=145773&amp;boardid=1449&amp;view=flatold">Valid AWP Arguements.</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">7</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 13:34</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=bah&amp;boardid=1449" title="Posts: 33 ; Rank: Bearcub">bah</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 01:16"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=347,1012785418,22663&amp;id=144596&amp;boardid=1449&amp;view=flatold">Valid Arguements for CS team</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">35</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 11:46</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=bah&amp;boardid=1449" title="Posts: 33 ; Rank: Bearcub">bah</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 2, 03:46"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=389,1012621568,15580&amp;id=142683&amp;boardid=1449&amp;view=flatold">Mouse lag in CS but not DOD</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">18</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 10:10</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=EJ&amp;boardid=1449" title="Posts: 33 ; Rank: Bearcub">EJ</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 1, 21:14"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=893,1012598042,13253&amp;id=142288&amp;boardid=1449&amp;view=flatold">REQUEST: I wish to be able to lie down</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">10</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 08:07</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=fisk&amp;boardid=1449" title="Posts: 1 ; Rank: Bearcub">fisk</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 03:57"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=330,1012881457,21996&amp;id=145856&amp;boardid=1449&amp;view=flatold">1 bug, 1 suggestion, 1 step at a time</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">2</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 06:28</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=shamrock&amp;boardid=1449" title="Posts: 2 ; Rank: Bearcub">shamrock</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Jan 22, 13:00"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=338,1011704439,7461&amp;id=129711&amp;boardid=1449&amp;view=flatold">illegal operation</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">2</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 05:02</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=tazeth&amp;boardid=1449" title="Posts: 4 ; Rank: Bearcub">tazeth</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 00:14"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=450,1012868058,8668&amp;id=145685&amp;boardid=1449&amp;view=flatold">Odd bug when loading</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">3</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 02:43</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=[RYE]Pissed&amp;boardid=1449" title="Posts: 6 ; Rank: Bearcub">[RYE]Pissed</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 5, 02:06"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=691,1012874790,15423&amp;id=145781&amp;boardid=1449&amp;view=flatold">Last weap bug....</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">1</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 02:06</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Dominatrix&amp;boardid=1449" title="Posts: 2 ; Rank: Bearcub">Dominatrix</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 16:59"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=701,1012841972,6441&amp;id=145147&amp;boardid=1449&amp;view=flatold">Kamikaze</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">6</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 01:41</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=morkil&amp;boardid=1449" title="Posts: 13 ; Rank: Bearcub">morkil</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 22:40"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=92,1012862426,1550&amp;id=145551&amp;boardid=1449&amp;view=flatold">Throwing knife</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">3</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 01:36</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Dave&amp;boardid=1449" title="Posts: 15 ; Rank: Bearcub">Dave</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 22:11"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=278,1012860714,31399&amp;id=145516&amp;boardid=1449&amp;view=flatold">Maps must change with new Jump code...</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">9</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 01:29</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=TBivo&amp;boardid=1449" title="Posts: 3 ; Rank: Bearcub">TBivo</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 19:08"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=481,1012849737,16591&amp;id=145317&amp;boardid=1449&amp;view=flatold">New rcon command request</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">4</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 00:48</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Apexs&amp;boardid=1449" title="Posts: 26 ; Rank: Bearcub">Apexs</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 18:45"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=902,1012848356,14814&amp;id=145280&amp;boardid=1449&amp;view=flatold">Walking in 1.4 (and AWP) long post</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">17</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 5, 00:24</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=TheFly&amp;boardid=1449" title="Posts: 13 ; Rank: Bearcub">TheFly</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 23:31"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=330,1012865466,5705&amp;id=145620&amp;boardid=1449&amp;view=flatold">BUG:dead spectator gui</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">1</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 4, 23:31</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Lestat&amp;boardid=1449" title="Posts: 79 ; Rank: Bearcub">Lestat</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 22:48"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=689,1012862909,2420&amp;id=145565&amp;boardid=1449&amp;view=flatold">Mp3s</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">1</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 4, 22:48</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=Dave&amp;boardid=1449" title="Posts: 15 ; Rank: Bearcub">Dave</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 21:53"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=850,1012859595,29771&amp;id=145489&amp;boardid=1449&amp;view=flatold">condump &lt;filename&gt; !!!</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">2</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 4, 22:38</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=TBivo&amp;boardid=1449" title="Posts: 3 ; Rank: Bearcub">TBivo</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 2, 10:08"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=10,1012644528,6400&amp;id=142924&amp;boardid=1449&amp;view=flatold">Flash grenade suggestions</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">12</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 4, 22:22</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=edd91&amp;boardid=1449" title="Posts: 42 ; Rank: Bearcub">edd91</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 2, 16:12"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=691,1012666342,27464&amp;id=143097&amp;boardid=1449&amp;view=flatold">Valve with us ?</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">17</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 4, 21:20</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=redeye&amp;boardid=1449" title="Posts: 53 ; Rank: Bearcub">redeye</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<div align="center">
+<center>
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="2%"><font face="Arial" size="2"><font color="red">*</font></font></td>
+<td width="48%"><font face="Arial" size="2" title="Feb 4, 21:18"><a href="cgi-bin/board.pl?action=viewthread&amp;threadid=643,1012857530,26373&amp;id=145452&amp;boardid=1449&amp;view=flatold">Voice Config</a></font></td>
+<td align="center" width="10%"><font face="Arial" size="2">1</font></td>
+<td align="left" width="20%"><font face="Arial" size="2">Feb 4, 21:18</font></td>
+<td align="right" width="20%"><font face="Arial" size="2"><a href="http://www.bearkey.com/account/info.pl?action=general&amp;user=KrisProLs&amp;boardid=1449" title="Posts: 2 ; Rank: Bearcub">KrisProLs</a></font></td>
+</tr>
+</table>
+</center>
+</div>
+<br/><center><font face="Arial" size="2"><b>916 Topic(s). 23 page(s). Viewing page 1.</b><br/>&lt; Prev [ <b>1</b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=40">2</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=80">3</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=120">4</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=160">5</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=200">6</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=240">7</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=280">8</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=320">9</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=360">10</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=400">11</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=440">12</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=480">13</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=520">14</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=560">15</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=600">16</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=640">17</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=680">18</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=720">19</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=760">20</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=800">21</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=840">22</a></b> <b><a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=880">23</a></b> ] <a href="cgi-bin/board.pl?action=boardlisting&amp;boardid=1449&amp;view=flatold&amp;start=40">Next &gt;</a></font></center>
+<div align="center">
+<table border="0" cellspacing="0" width="600">
+<tr>
+<td width="50%"><font color="#6b6d84" face="Arial" size="1">.</font></td>
+<td width="50%"><font color="#6b6d84" face="Arial" size="1">.</font></td>
+</tr>
+<tr>
+<td align="right" width="50%">
+<p align="left"><font face="Arial" size="1"></font></p></td>
+<td align="right" width="50%"><font face="Arial"><font size="1"><b>Moderators
+		on this board:<br/>
+</b></font><font face="Arial" size="1"><a href="cgi-bin/board.pl?action=userinfo&amp;user=AdrianF&amp;boardid=1449">AdrianF</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=autolycus&amp;boardid=1449">autolycus</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=BigD&amp;boardid=1449">BigD</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=EricS&amp;boardid=1449">EricS</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=Erik Johnson&amp;boardid=1449">Erik Johnson</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=Geshel&amp;boardid=1449">Geshel</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=Ido Magal&amp;boardid=1449">Ido Magal</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=Leon Hartwig&amp;boardid=1449">Leon Hartwig</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=Mike Thompson&amp;boardid=1449">Mike Thompson</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=MikeD&amp;boardid=1449">MikeD</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=Mona Lisa&amp;boardid=1449">Mona Lisa</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=Rick Ellis&amp;boardid=1449">Rick Ellis</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=Taylor&amp;boardid=1449">Taylor</a>, <a href="cgi-bin/board.pl?action=userinfo&amp;user=YvanCHARPENTIER&amp;boardid=1449">YvanCHARPENTIER</a></font></font></td>
+</tr>
+<tr>
+<td colspan="2" width="100%">
+<br/><font face="Arial" size="1"><font color="red">*</font> Updated or new since last visit.</font>
+</td>
+</tr>
+</table>
+</div>
+</p>
+<p align="center"><font size="2"><b><a href="new/donations.shtml">Please Donate to Chatbear!</a></b> - 1 second(s) - <a href="users/terms.shtml">Terms and Conditions</a>.</font></p>
+</td>
+</tr>
+</table>
+<td width="14"> </td>
+</td>
+</tr>
+</table>
+<img border="0" height="43" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Page-Bottom.gif" width="675"/>
+<div align="center">
+<center>
+<table bgcolor="#C0C0C0" border="0" cellpadding="0" cellspacing="0" cool="" gridx="20" gridy="20" showgridx="" showgridy="" width="679">
+<tr height="29">
+<td colspan="2" height="29" width="288"><spacer height="29" type="block" width="288"/></td>
+<td align="left" height="29" valign="top" xpos="288">
+<p align="center"><img border="0" height="29" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Bottom-VALVE1.gif" width="81"/></p>
+</td>
+<td colspan="2" height="29" width="306"><spacer height="29" type="block" width="306"/></td>
+<td height="29" width="1"><spacer height="29" type="block" width="1"/></td>
+</tr>
+<tr height="19">
+<td height="19" width="132"><spacer height="19" type="block" width="132"/></td>
+<td align="left" colspan="3" height="19" valign="top" width="463" xpos="132">
+<map name="Bottom-Linksa735b1c"><area coords="355,5,401,16" href="mailto:steamsupport@valvesoftware.com" shape="rect" target="_top"/><area coords="319,4,346,15" href="http://steamsupport.valvesoftware.com/Faq/FAQ.htm" shape="rect" target="_top"/><area coords="234,4,312,15" href="http://www.chatbear.com/?1041" shape="rect" target="_top"/><area coords="178,5,219,16" href="http://steamsupport.valvesoftware.com/BetaSupport/support.htm" shape="rect"/><area coords="88,3,167,14" href="http://steamsupport.valvesoftware.com/Games_Available/Games.htm" shape="rect" target="_top"/><area coords="44,4,76,15" href="http://steamsupport.valvesoftware.com/News/News.htm" shape="rect" target="_top"/><area coords="6,3,40,15" href="http://steamsupport.valvesoftware.com/Home.htm" shape="rect" target="_top"/></map><img border="0" height="19" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Bottom-Links.gif" usemap="#Bottom-Linksa735b1c" width="412"/></td>
+<td height="19" width="83"><spacer height="19" type="block" width="83"/></td>
+<td height="19" width="1"><spacer height="19" type="block" width="1"/></td>
+</tr>
+<tr>
+<td align="left" colspan="5" valign="top" width="100%" xpos="0">
+<p align="center"><img border="0" height="28" src="http://steamsupport.valvesoftware.com/Home/Update%20images/Bottom-COPY1.gif" width="678"/></p>
+</td>
+<td width="1"><spacer type="block" width="1"/></td>
+</tr>
+</table>
+</center>
+</div>
+</td></tr></table></body>
+</html>
