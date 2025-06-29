@@ -18,22 +18,8 @@ else $page_title = $site_title . " " . $page_title;
     <meta name="AUTHOR" content="Valve LLC">
     <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($base); ?>/steampowered.css">
     <style>
-    .globalHeadBar
-    {
-        background:#000000;
-        margin: 0px;
-        width: 80%;
-        padding-top: 30px;
-        padding-bottom: 9px;
-        float: left;
-    }
-    .globalHeadBar_logo {
-        background:#000000;
-        margin: 0px;
-        width: 20%;
-        padding-top: 4px;
-        padding-bottom: 9px;
-        float: left;
+    .navBar {
+        margin-left: 140px;
     }
     .globalNavItem {
         display:inline;
@@ -80,8 +66,8 @@ if($override){
 $logo = $data['logo'];
 if($logo && $logo[0]=='/') $logo = $base.$logo;
 $nav_html = cms_header_buttons_html('2004');
-echo '<div style="min-width:850px;">';
-echo '<div class="globalHeadBar_logo"><a href="'.htmlspecialchars($base).'/index.php"><img alt="Steam main" border="0" src="'.htmlspecialchars($logo).'"></a></div>';
-echo '<div class="globalHeadBar">'.$nav_html.'</div>';
+echo "<div class=\"header\" ><nobr>";
+echo '<div><a href="'.htmlspecialchars($base).'/index.php"><img alt="Steam main" border="0" src="'.htmlspecialchars($logo).'"></a></div>';
+echo '<div class=\'navBar\'>'.$nav_html.'</div>';
 echo '</div>';
 ?>
