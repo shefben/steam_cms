@@ -50,19 +50,19 @@ if(isset($_GET['edit'])){
 </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
-tinymce.init({selector:'#content'});
+CKEDITOR.replace('content');
 $('#addBtn').on('click',function(){
     $('#slug').prop('readonly',false).val('');
     $('#title').val('');
-    tinymce.get('content').setContent('');
+    CKEDITOR.instances.content.setData('');
     $('#editor').show();
 });
 <?php if($edit): ?>
 $('#slug').val('<?php echo addslashes($edit['slug']); ?>').prop('readonly',true);
 $('#title').val('<?php echo addslashes($edit['title']); ?>');
-tinymce.get('content').setContent(`<?php echo addslashes($edit['content']); ?>`);
+CKEDITOR.instances.content.setData(`<?php echo addslashes($edit['content']); ?>`);
 $('#editor').show();
 <?php endif; ?>
 $('#cancel').on('click',function(){ $('#editor').hide(); });

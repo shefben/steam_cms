@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo->exec("DROP TABLE IF EXISTS faq_categories");
             $pdo->exec("CREATE TABLE faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,PRIMARY KEY(id1,id2))");
             $pdo->exec("DROP TABLE IF EXISTS faq_content");
-            $pdo->exec("CREATE TABLE faq_content(catid1 BIGINT,catid2 BIGINT,faqid1 BIGINT,faqid2 BIGINT,title TEXT,body TEXT,PRIMARY KEY(faqid1,faqid2))");
+            $pdo->exec("CREATE TABLE faq_content(catid1 BIGINT,catid2 BIGINT,faqid1 BIGINT,faqid2 BIGINT,title TEXT,body TEXT,views INT DEFAULT 0,PRIMARY KEY(faqid1,faqid2))");
             $pdo->exec("DROP TABLE IF EXISTS ccafe_registration");
             $pdo->exec("CREATE TABLE ccafe_registration(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -110,6 +110,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 permissions TEXT,
                 created DATETIME,
                 password VARCHAR(255)
+            )");
+            $pdo->exec("DROP TABLE IF EXISTS admin_tokens");
+            $pdo->exec("CREATE TABLE admin_tokens(
+                token_hash VARCHAR(64) PRIMARY KEY,
+                user_id INT,
+                expires DATETIME
             )");
             $pdo->exec("DROP TABLE IF EXISTS page_views");
             $pdo->exec("CREATE TABLE page_views(

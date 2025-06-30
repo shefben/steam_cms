@@ -1,49 +1,55 @@
 <?php
 $root = dirname(__DIR__,2);
 require_once "$root/cms/db.php";
+$base = cms_base_url();
 $site_title = cms_get_setting("site_title","Steam");
-if(!isset($page_title) || $page_title==="") $page_title = $site_title;
-else $page_title = $site_title . " " . $page_title;
-$default_logo = file_exists($root.'/content/logo.png')?'/cms/content/logo.png':'/img/steam_logo_onblack.gif';
-$data_json = cms_get_setting('header_config', null);
-$data = $data_json?json_decode($data_json,true):['logo'=>$default_logo];
-$override = $GLOBALS['CMS_CUSTOM_LOGO'] ?? null;
-$logo = $override ?: (isset($data['logo'])?$data['logo']:$default_logo);
+if(!isset($page_title) || $page_title==='') $page_title = $site_title; else $page_title = $site_title.' '.$page_title;
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo htmlspecialchars($page_title); ?></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="DESCRIPTION" content="SteamPowered">
-    <meta name="KEYWORDS" content="Steam, account, account creation, signup">
-    <meta name="AUTHOR" content="Valve Corporation">
-    <link rel="stylesheet" type="text/css" href="/steampowered02.css">
-    <link rel="Shortcut Icon" type="image/png" href="/webicon.png">
+<style type="text/css">
+a { color: #d8ded3; text-decoration: none }
+a:hover { color: #fff; font-weight: normal }
+</style>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title><?php echo htmlspecialchars($page_title); ?></title>
+<style media="screen" type="text/css">
+#layer1 { position: absolute; top: 230px; left: 171px; width: 734px; height: 523px; visibility: visible }
+</style>
+<link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v1/steam.css">
 </head>
-<body bgcolor="#4c5844" leftmargin="0" topmargin="0">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr height="55">
-        <td bgcolor="black" height="55">
-            <table width="383" border="0" cellspacing="0" cellpadding="0">
-                <tr height="18">
-                    <td width="47" rowspan="2"></td>
-                    <td width="335"></td>
-                    <td width="1"><spacer type="block" width="1" height="18"></td>
-                </tr>
-                <tr height="36">
-                    <td width="335" valign="top" align="left"><a href="/index.php"><img src="<?php echo htmlspecialchars($logo); ?>" alt="[Steam]" width="152" height="54" border="0"></a></td>
-                    <td width="1"><spacer type="block" width="1" height="36"></td>
-                </tr>
-                <tr height="1" cntrlrow>
-                    <td width="47"><spacer type="block" width="47" height="1"></td>
-                    <td width="335"><spacer type="block" width="335" height="1"></td>
-                    <td width="1"></td>
-                </tr>
-            </table>
-        </td>
-    </tr>
+<body bgcolor="#626d5c" text="black">
+<div align="center">
+<table bgcolor="black" border="0" cellpadding="0" cellspacing="0" width="800">
+<tr><td colspan="5" height="10" width="799"></td><td height="10" width="1"></td></tr>
+<tr>
+<td colspan="3" height="2" width="660"></td>
+<td align="left" colspan="2" height="26" rowspan="2" valign="top" width="139"><img border="0" height="26" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v1/images/Type_SupportSite2.jpg" width="128"></td>
+<td height="2" width="1"></td>
+</tr>
+<tr>
+<td height="60" rowspan="2" width="15"></td>
+<td align="left" height="60" rowspan="2" valign="top" width="320"><img border="0" height="52" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v1/images/SteamTM.jpg" width="202"></td>
+<td height="24" width="325"></td>
+<td height="24" width="1"></td>
+</tr>
+<tr>
+<td align="left" colspan="2" height="36" valign="top" width="451">
+<div align="right">
+<a href="<?php echo htmlspecialchars($base); ?>/index.php">Home</a> |
+<a href="<?php echo htmlspecialchars($base); ?>/support/index.php">Support</a> |
+<a href="http://www.steampowered.com/forums?boardid=1041">Forums</a> |
+<a href="<?php echo htmlspecialchars($base); ?>/support/bugfixes.php">Bugs</a> |
+<a href="<?php echo htmlspecialchars($base); ?>/support/index.php#TroubleshootingAnchor">Troubleshooting</a> |
+<a href="<?php echo htmlspecialchars($base); ?>/support/index.php#ContactAnchor">Contact</a>
+</div>
+</td>
+<td height="36" width="13"></td>
+<td height="36" width="1"></td>
+</tr>
+<tr height="1">
+<td width="15"></td><td width="320"></td><td width="325"></td><td width="126"></td><td width="13"></td><td width="1"></td>
+</tr>
 </table>
-<?php echo cms_header_buttons_html('2003'); ?>
+<br>

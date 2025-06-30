@@ -7,7 +7,11 @@ if(isset($_POST['reorder']) && isset($_POST['order'])){
     cms_require_permission('news_edit');
     $ids = array_map('intval', explode(',', $_POST['order']));
     cms_set_setting('news_order', json_encode($ids));
-    header('Location: news.php');
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        echo 'ok';
+    }else{
+        header('Location: news.php');
+    }
     exit;
 }
 // delete
@@ -89,15 +93,19 @@ usort($rows, function($a,$b) use($order){
 <p><a href="index.php">Back</a></p>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
-    new Sortable(document.getElementById('news-body'),{handle:'.handle'});
-    document.getElementById('save-order').addEventListener('click',function(){
+    var body=document.getElementById('news-body');
+    function sendOrder(){
         var ids=[];
-        document.querySelectorAll('#news-body tr').forEach(function(tr){ids.push(tr.dataset.id);});
-        document.getElementById('order-input').value=ids.join(',');
-        var input=document.createElement('input');
-        input.type='hidden';input.name='reorder';input.value='1';
-        document.getElementById('orderForm').appendChild(input);
-        document.getElementById('orderForm').submit();
+        body.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.id);});
+        var data=new URLSearchParams();
+        data.set('reorder','1');
+        data.set('order',ids.join(','));
+        fetch('news.php',{method:'POST',body:data});
+    }
+    new Sortable(body,{handle:'.handle',onEnd:sendOrder});
+    document.getElementById('save-order').addEventListener('click',function(e){
+        e.preventDefault();
+        sendOrder();
     });
 });
 </script>

@@ -4,7 +4,8 @@ if (isset($_GET['area'])) {
 } else {
         require_once __DIR__.'/cms/db.php';
         $theme = cms_get_setting('theme','default');
-        if($theme === '2004'){
+        $tpl = __DIR__."/themes/$theme/index_template.php";
+        if(file_exists($tpl)){
                 require 'home.php';
                 exit;
         }
@@ -48,7 +49,8 @@ elseif ($area == "all" && (isset($_GET['page'])) && (!isset($_GET['genre']))) {
         $area = 'news_'.$id;
 } elseif ($area == "faq" && (isset($_GET['id']))) {
         $id = preg_replace('/[^0-9,]/','',$_GET['id']);
-        $area = 'faq_'.$id;
+        $_GET['id'] = $id;
+        $area = 'faq_entry';
 } elseif ($area == "archives" && (isset($_GET['date']))) {
         $d = preg_replace('/[^0-9-]/','',$_GET['date']);
         $area = 'archive_'.$d;

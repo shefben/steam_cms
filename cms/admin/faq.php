@@ -5,7 +5,11 @@ $db=cms_get_db();
 if(isset($_POST['reorder']) && isset($_POST['order'])){
     cms_require_permission('faq_edit');
     cms_set_setting('faq_order', $_POST['order']);
-    header('Location: faq.php');
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        echo 'ok';
+    }else{
+        header('Location: faq.php');
+    }
     exit;
 }
 if(isset($_POST['delete'])){
@@ -31,13 +35,14 @@ usort($rows,function($a,$b) use($order){
 <form id="faqOrder" method="post">
 <input type="hidden" name="order" id="faq-order">
 <table id="faq-table" class="data-table">
-<thead><tr><th></th><th>Category</th><th>Title</th><th>Actions</th></tr></thead>
+<thead><tr><th></th><th>Category</th><th>Title</th><th>Views</th><th>Actions</th></tr></thead>
 <tbody id="faq-body">
 <?php foreach($rows as $r): ?>
 <tr data-id="<?php echo $r['faqid1'].'-'.$r['faqid2']; ?>">
 <td class="handle">☰</td>
 <td><?php echo htmlspecialchars($r['catname']); ?></td>
 <td><?php echo htmlspecialchars($r['title']); ?></td>
+<td><?php echo (int)$r['views']; ?></td>
 <td>
 <?php if(cms_has_permission('faq_edit')): ?>
     <a href="faq_edit.php?faqid1=<?php echo $r['faqid1']; ?>&faqid2=<?php echo $r['faqid2']; ?>">Edit</a>
@@ -54,15 +59,19 @@ usort($rows,function($a,$b) use($order){
 </form>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
-    new Sortable(document.getElementById('faq-body'),{handle:'.handle'});
-    document.getElementById('save-faq').addEventListener('click',function(){
+    var body=document.getElementById('faq-body');
+    function sendOrder(){
         var ids=[];
-        document.querySelectorAll('#faq-body tr').forEach(function(tr){ids.push(tr.dataset.id);});
-        document.getElementById('faq-order').value=ids.join(',');
-        var input=document.createElement('input');
-        input.type='hidden';input.name='reorder';input.value='1';
-        document.getElementById('faqOrder').appendChild(input);
-        document.getElementById('faqOrder').submit();
+        body.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.id);});
+        var data=new URLSearchParams();
+        data.set('reorder','1');
+        data.set('order',ids.join(','));
+        fetch('faq.php',{method:'POST',body:data});
+    }
+    new Sortable(body,{handle:'.handle',onEnd:sendOrder});
+    document.getElementById('save-faq').addEventListener('click',function(e){
+        e.preventDefault();
+        sendOrder();
     });
 });
 </script>

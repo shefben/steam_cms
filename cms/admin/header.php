@@ -5,6 +5,21 @@ $default_logo = file_exists(__DIR__.'/../content/logo.png') ? $base.'/cms/conten
 $json = cms_get_setting('header_config', null);
 $data = $json?json_decode($json,true):['logo'=>$default_logo,'buttons'=>[]];
 if(!$data) $data=['logo'=>$default_logo,'buttons'=>[]];
+if(isset($_POST['reorder']) && isset($_POST['order'])){
+    cms_require_permission('manage_settings');
+    $indices = array_map('intval', explode(',', $_POST['order']));
+    $buttons = $data['buttons'];
+    $reordered = [];
+    foreach($indices as $i){
+        if(isset($buttons[$i])) $reordered[] = $buttons[$i];
+    }
+    $data['buttons'] = $reordered;
+    cms_set_setting('header_config', json_encode($data));
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        echo 'ok';
+    }
+    exit;
+}
 if(isset($_POST['save'])){
     $logo = trim($_POST['logo']);
     $buttons = $_POST['buttons'] ?? [];
@@ -77,9 +92,16 @@ Logo URL: <input type="text" name="logo" id="logo-url" value="<?php echo htmlspe
 </form>
 <script>
 $(function(){
-    new Sortable(document.querySelector('#buttons-table tbody'), {
-        handle: '.handle'
-    });
+    var tbody = document.querySelector('#buttons-table tbody');
+    function sendOrder(){
+        var ids=[];
+        tbody.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.index);});
+        var data=new URLSearchParams();
+        data.set('reorder','1');
+        data.set('order',ids.join(','));
+        fetch('header.php',{method:'POST',body:data});
+    }
+    new Sortable(tbody, {handle: '.handle', onEnd: sendOrder});
 
     $('#add-button').on('click', function(){
         var idx = $('#buttons-table tbody tr').length;
