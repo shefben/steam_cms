@@ -2,15 +2,11 @@
 session_start();
 require_once __DIR__ . '/../db.php';
 if(!cms_current_admin()){
-    if(isset($_COOKIE['cms_admin_id'],$_COOKIE['cms_admin_hash'])){
-        $id=(int)$_COOKIE['cms_admin_id'];
-        $hash=$_COOKIE['cms_admin_hash'];
-        $db=cms_get_db();
-        $stmt=$db->prepare('SELECT password FROM admin_users WHERE id=?');
-        $stmt->execute([$id]);
-        $pw=$stmt->fetchColumn();
-        if($pw && $pw===$hash){
-            $_SESSION['admin_id']=$id;
+    if(isset($_COOKIE['cms_admin_token'])){
+        $uid=cms_validate_admin_token($_COOKIE['cms_admin_token']);
+        if($uid){
+            session_regenerate_id(true);
+            $_SESSION['admin_id']=$uid;
         }
     }
     if(!cms_current_admin()){
@@ -47,7 +43,6 @@ $default_nav = [
     ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
     ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
-    ['file'=>'support_2003.php','label'=>'2003 Support','visible'=>1],
     ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
 ];
 $json = cms_get_setting('nav_items',null);
@@ -68,7 +63,6 @@ $icons = [
     'faq_categories.php'=> '📂',
     'admin_users.php'  => '👥',
     'error_page.php'   => '❌',
-    'support_2003.php' => '🛠️',
     '../logout.php'    => '🚪',
 ];
 
