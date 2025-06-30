@@ -8,6 +8,21 @@ $json = cms_get_setting('header_config', null);
 $data = $json?json_decode($json,true):['logo'=>$default_logo,'buttons'=>[]];
 if(!$data) $data=['logo'=>$default_logo,'buttons'=>[]];
 
+if(isset($_POST['reorder']) && isset($_POST['order'])){
+    $indices = array_map('intval', explode(',', $_POST['order']));
+    $buttons = $data['buttons'];
+    $reordered = [];
+    foreach($indices as $i){
+        if(isset($buttons[$i])) $reordered[] = $buttons[$i];
+    }
+    $data['buttons'] = $reordered;
+    cms_set_setting('header_config', json_encode($data));
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        echo 'ok';
+    }
+    exit;
+}
+
 $no_header_pages = cms_get_setting('no_header_pages','');
 $header_bar_pages = cms_get_setting('header_bar_pages','');
 $no_footer_pages = cms_get_setting('no_footer_pages','');
@@ -107,7 +122,16 @@ Logo overrides (one per line URL:year:logo path):<br>
 </form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
-var sortable = new Sortable(document.querySelector('#buttons-table tbody'), {handle: '.handle'});
+var tbody = document.querySelector('#buttons-table tbody');
+function sendOrder(){
+    var ids=[];
+    tbody.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.index);});
+    var data=new URLSearchParams();
+    data.set('reorder','1');
+    data.set('order',ids.join(','));
+    fetch('header_footer.php',{method:'POST',body:data});
+}
+var sortable = new Sortable(tbody, {handle: '.handle', onEnd: sendOrder});
 
 document.getElementById('add-button').addEventListener('click', function(){
     var tbody = document.querySelector('#buttons-table tbody');
