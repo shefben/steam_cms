@@ -5,7 +5,11 @@ $db = cms_get_db();
 if(isset($_POST['reorder']) && isset($_POST['order'])){
     cms_require_permission('faqcat_edit');
     cms_set_setting('faq_cat_order', $_POST['order']);
-    header('Location: faq_categories.php');
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        echo 'ok';
+    }else{
+        header('Location: faq_categories.php');
+    }
     exit;
 }
 
@@ -70,15 +74,19 @@ usort($cats,function($a,$b) use($cat_order){
 </form>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
-    new Sortable(document.getElementById('cat-body'),{handle:'.handle'});
-    document.getElementById('save-cat').addEventListener('click',function(){
+    var body=document.getElementById('cat-body');
+    function sendOrder(){
         var ids=[];
-        document.querySelectorAll('#cat-body tr').forEach(function(tr){ids.push(tr.dataset.id);});
-        document.getElementById('cat-order').value=ids.join(',');
-        var input=document.createElement('input');
-        input.type='hidden';input.name='reorder';input.value='1';
-        document.getElementById('catOrder').appendChild(input);
-        document.getElementById('catOrder').submit();
+        body.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.id);});
+        var data=new URLSearchParams();
+        data.set('reorder','1');
+        data.set('order',ids.join(','));
+        fetch('faq_categories.php',{method:'POST',body:data});
+    }
+    new Sortable(body,{handle:'.handle',onEnd:sendOrder});
+    document.getElementById('save-cat').addEventListener('click',function(e){
+        e.preventDefault();
+        sendOrder();
     });
 });
 </script>
