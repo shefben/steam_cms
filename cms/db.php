@@ -50,6 +50,30 @@ function cms_record_visit($page){
     $stmt->execute([$date,$page]);
 }
 
+function cms_create_admin_token($user_id){
+    $token = bin2hex(random_bytes(32));
+    $hash = hash('sha256', $token);
+    $db = cms_get_db();
+    $stmt = $db->prepare('INSERT INTO admin_tokens(token_hash,user_id,expires) VALUES(?, ?, DATE_ADD(NOW(), INTERVAL 7 DAY))');
+    $stmt->execute([$hash, $user_id]);
+    return $token;
+}
+
+function cms_validate_admin_token($token){
+    $hash = hash('sha256', $token);
+    $db = cms_get_db();
+    $stmt = $db->prepare('SELECT user_id FROM admin_tokens WHERE token_hash=? AND expires>NOW()');
+    $stmt->execute([$hash]);
+    return $stmt->fetchColumn();
+}
+
+function cms_clear_admin_token($token){
+    $hash = hash('sha256', $token);
+    $db = cms_get_db();
+    $stmt = $db->prepare('DELETE FROM admin_tokens WHERE token_hash=?');
+    $stmt->execute([$hash]);
+}
+
 function cms_current_admin(){
     return $_SESSION['admin_id'] ?? 0;
 }
@@ -151,7 +175,7 @@ function cms_header_buttons_html($theme){
             $label = htmlspecialchars($text);
             $out .= '<div class="globalNavItem"><a href="'.$url.'" title="'.$title.'"><span class="globalNavLink">'.$label.'</span></a></div>';
         }
-        if(cms_current_admin() || (isset($_COOKIE['cms_admin_id']) && isset($_COOKIE['cms_admin_hash']))){
+        if(cms_current_admin() || isset($_COOKIE['cms_admin_token'])){
             $base = cms_base_url();
             $out .= '<div class="globalNavItem"><a href="'.$base.'/cms/admin/index.php" title="Admin"><span class="globalNavLink">ADMIN</span></a></div>';
         }

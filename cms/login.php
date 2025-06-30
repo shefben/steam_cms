@@ -12,10 +12,15 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     $stmt->execute([$user]);
     $row=$stmt->fetch(PDO::FETCH_ASSOC);
     if($row && password_verify($pass,$row['password'])){
+        session_regenerate_id(true);
         $_SESSION['admin_id']=$row['id'];
         if($stay){
-            setcookie('cms_admin_id',$row['id'],time()+60*60*24*30,'/');
-            setcookie('cms_admin_hash',$row['password'],time()+60*60*24*30,'/');
+            $token=cms_create_admin_token($row['id']);
+            setcookie('cms_admin_token',$token,[
+                'expires'=>time()+60*60*24*7,
+                'path'=>'/',
+                'httponly'=>true
+            ]);
         }
         header('Location: '.$dest);
         exit;
