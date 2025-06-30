@@ -9,6 +9,9 @@ if(!file_exists($tpl)){
 }
 
 $page = cms_get_custom_page($theme.'_index');
+if(!$page){
+    $page = cms_get_custom_page('default_index');
+}
 if($page){
     $page_title = $page['title'];
     $content = $page['content'];
