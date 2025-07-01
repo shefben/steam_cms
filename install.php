@@ -508,7 +508,6 @@ HTML;
                 ['http://www.computergames.ro/','COMPUTER GAMES ONLINE SRL','silviu@computergames.ro','Silviu Stroie','Unirii 75 Blvd, bl. H1','sc. C, et. 5, ap. 97 Sector 3','','Bucharest','Romania',''],
                 ['http://www.unalis.com.tw/','UNALIS CORPORATION','leon@unalis.com.tw','Leon Chang','10F, No 168 SEC 2','Min Sheng E. Rd.','','Taipei','Taiwan','']
             ];
-            $ord=1;
             foreach($defaultReps as $r){
                 $r[9]=$ord++; // ensure ord column receives an integer
                 $repStmt->execute($r);
