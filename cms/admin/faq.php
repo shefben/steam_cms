@@ -59,6 +59,7 @@ usort($rows,function($a,$b) use($order){
 </form>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
+    new Sortable(document.getElementById('faq-body'),{handle:'.handle'});
     var body=document.getElementById('faq-body');
     function sendOrder(){
         var ids=[];
