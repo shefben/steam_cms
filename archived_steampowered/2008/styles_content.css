@@ -1,0 +1,148 @@
+﻿/* CSS Document */
+.contentBG {
+	width: 860px;
+	background-attachment: scroll;
+	/* background-image: url('http://www.steampowered.com/status/img/img_contentBG_4.jpg'); */
+	background-color:#424242;
+	background-repeat: repeat-y;
+	background-position: 0px 0px;
+	margin-top: 24px;
+	text-align:left;
+	font-size: 1.1em;
+	line-height: 1.45em;
+}
+/* - */
+.headerBG {
+	background-attachment: scroll;
+	background-image: url('img/img_headerBG.jpg');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	height: 110px;
+}
+.leftCol_4 {
+	padding-left: 0px;
+	width:auto;
+	margin-left: 24px;
+	margin-right: 24px;
+}
+.leftCol_4 hr {
+	border-top-width: 4px;
+	border-top-style: dotted;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #282828;
+	height: 4px;
+	margin:12px 0px 12px 0px;
+}
+.leftBody {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+/* ============================================================ */
+/* ============================================================ */
+.capsule {
+	margin:8px 0px 0px 0px;
+	font-size:90%;
+}
+
+.fullCol {
+
+	float:left;
+	width:900px;
+	padding-top: 0px;
+	padding-right: 10px;
+}
+.fullContentBG {
+
+	width: 910px;
+	background-attachment: scroll;
+	background-image: url('img/img_content_bg_full.jpg.html');
+	background-repeat: repeat-y;
+	background-position: 0px 0px;
+	margin-top: 15px;
+	text-align:left;
+}
+.fullHeaderBG {
+
+	background-attachment: scroll;
+	background-image: url('img/img_content_header_full.jpg.html');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	height: 120px;
+}
+/* ================================================== */
+/* ================================================== */
+					FANCY TABS
+/* ================================================== */
+/* ================================================== */
+.pagetabs {
+	float:left;
+}
+.pagetabs ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+.pagetabs li {
+	float:left;
+	color: #BCBCBC;
+	font-weight: bold;
+	background:url('img/norm_right.gif.html') no-repeat right top;
+	margin: 0px 12px 0px 0px;
+	padding: 0px;
+	list-style-type: none;
+	text-transform: uppercase;
+	font-size:0.9em;
+}
+.pagetabs a {
+    display:block;
+	color: #BCBCBC;
+	text-decoration: none;
+	background:url('img/norm_left.gif.html') no-repeat left top;
+    padding:5px 12px 1px 12px;
+}
+.pagetabs a:hover{
+	color:white;
+}
+.pagetabs #current {
+    background-image:url('img/norm_right_on.gif.html');
+    }
+.pagetabs #current a {
+	text-decoration: none;
+    background-image:url('img/norm_left_on.gif.html');
+}
+.what {
+	background-color:#242529;
+}
+.what th {
+	background-color:#424242;
+	padding:8px;
+}
+.what td {
+	padding:8px;
+}
+
+
+a.achievement{
+    position:relative; /*this is the key*/
+    z-index:2; background-color:#ccc;
+    color:#000;
+    text-decoration:none;
+    cursor:default;
+}
+
+a.achievement:hover{z-index:3; background-color:#ff0;
+    cursor:default;
+}
+
+a.achievement span{display: none}
+
+a.achievement:hover span{ /*the span will display just on :hover state*/
+    display:block;
+    position:absolute;
+    top:1em; left:2em;
+    border:1px solid #424242;
+    background-color:#000; color:#000;
+    text-align: center
+}

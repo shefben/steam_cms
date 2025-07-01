@@ -1,0 +1,203 @@
+/* CSS Document */
+.contentBG_csMarket {
+	width: 772px;
+	background-attachment: scroll;
+	background-image: url('img/img_contentBG_csMarket.jpg');
+	background-repeat: repeat-y;
+	background-position: 0px 0px;
+	margin-top: 15px;
+	text-align:left;
+}
+/* - */
+.headerBG_csMarket {
+	background-attachment: scroll;
+	background-image: url('img/img_headerBG_csMarket.jpg');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	height: auto;
+}
+/* ======================================================== */
+.leftCol_csMarket {
+	padding-left: 25px;
+	float:left;
+	width:auto;
+	padding-top: 5px;
+}
+.leftCol_csMarket h1 {
+	letter-spacing: 2px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 19px;
+	font-weight: bold;
+	color: #FFFFFF;
+	line-height: 10px;
+	text-align: left;
+	padding: 0px;
+	margin: 5px 0px 7px;
+}
+.leftCol_csMarket p {
+	color: #A0A0A0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 0px 0px 10px;
+	padding: 0px;
+}
+.leftCol_csMarket p a {
+	color: #6F9FC8;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 0px;
+	padding: 0px;
+}
+.leftCol_csMarket a, .leftCol_csMarket a:visited {
+	color: #6F9FC8;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 0px;
+	padding: 0px;
+}
+.leftCol_csMarket p a:hover {
+	color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 0px;
+	padding: 0px;
+}
+.leftCol_csMarket h5 {
+	letter-spacing: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+	color: #FFFFFF;
+	line-height: 16px;
+	text-align: left;
+	padding: 0px;
+	margin: 0px 0px 0px 10px;
+}
+/* ======================================================== */
+.csMarket_bargainPrice {
+	text-align: center;
+	width: 100px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #FFFFFF;
+	line-height: 17px;
+	margin: 25px 0px 0px;
+}
+.csMarket_bargainPrice_sm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #C8C8C8;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.csMarket_bargainTitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 31px;
+	font-weight: bold;
+	color: #000000;
+	margin-top: 50px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 14px;
+	padding: 0px;
+	line-height: 28px;
+}
+.csMarket_bargainSubTitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: #505050;
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 14px;
+	line-height: 16px;
+}
+.csMarket_bargainDescription {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 14px;
+}
+/* ======================================================== */
+.csMarket_listItem {
+	background-color: #353535;
+	height: auto;
+	width: 700px;
+	margin: 0px;
+	padding: 0px;
+
+}
+
+.csMarket_listItem_details {
+	background-color: #353535;
+	height: auto;
+	width: 700px;
+	margin: 0px;
+	padding: 0px;
+
+}
+
+/* ======================================================== */
+.csMarket_forms select {
+	display: inline;
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	width: 150px;
+}
+.csMarket_hr {
+	height: 1px;
+	width: 700px;
+	padding:0;
+	margin:1px 0px 1px 0px;
+	border-width:1px 0px 0px 0px;
+	border-color:#000000;
+	border-style:solid;
+}
+
+.csMarket_hr hr {
+	padding:0;
+	margin:0;
+	width:700px;
+	height:1px;
+	color:#000000;
+	display:block;
+}
+	
+.csMarket_purchaseInfo {
+	margin-left: 50px;
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	font-size: 11px;
+	color: #787878;
+}
+.csMarket_priceHead {
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	font-size: 11px;
+	color: #787878;
+}
+.csMarket_priceCurrent {
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	font-size: 11px;
+	color: #FFFFFF;
+}
+.csMarket_priceProjected_up {
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	font-size: 11px;
+	color: #ED1212;
+}
+.csMarket_priceProjected_dn {
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	font-size: 11px;
+	color: #8BC53F;
+}
+.csMarket_a_bold {
+	font-size:13px;
+	color:#ffffff;
+	font-weight:bold;
+}

@@ -101,6 +101,26 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo->exec("DROP TABLE IF EXISTS settings");
             $pdo->exec("CREATE TABLE settings(`key` VARCHAR(64) PRIMARY KEY,value TEXT)");
             $pdo->exec("DROP TABLE IF EXISTS admin_users");
+$pdo->exec("DROP TABLE IF EXISTS player_sessions");
+$pdo->exec("CREATE TABLE player_sessions (
+    id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id       BIGINT UNSIGNED NOT NULL,
+    session_start DATETIME        NOT NULL,
+    session_end   DATETIME        NOT NULL,
+    INDEX(user_id, session_start)
+)");
+$pdo->exec("DROP TABLE IF EXISTS player_history");
+$pdo->exec("CREATE TABLE player_history (
+    ts           TIMESTAMP PRIMARY KEY,
+    players      INT UNSIGNED NOT NULL,
+    game_servers INT UNSIGNED NOT NULL
+)");
+$pdo->exec("DROP TABLE IF EXISTS bw_history");
+$pdo->exec("CREATE TABLE bw_history (
+    ts     TIMESTAMP PRIMARY KEY,
+    mbps   INT UNSIGNED NOT NULL 
+)");
+
             $pdo->exec("CREATE TABLE admin_users(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(100),
