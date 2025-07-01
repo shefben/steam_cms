@@ -27,8 +27,10 @@ if(isset($_POST['save'])){
     exit;
 }
 ?>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script>tinymce.init({selector:'#content'});</script>
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('content');
+</script>
 <h2><?php echo $id ? 'Edit' : 'Add'; ?> Article</h2>
 <form method="post">
 Title: <input type="text" name="title" value="<?php echo htmlspecialchars($article['title']); ?>" size="60"><br><br>

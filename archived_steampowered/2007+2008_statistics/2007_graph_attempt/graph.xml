@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<root>
+<horizontalDivs>6</horizontalDivs>
+  <graphWidth>622</graphWidth>
+  <graphHeight>238</graphHeight>
+  <spacing>5</spacing>
+  <dataSet>
+    <member_1>
+      <p label="00:00" v="0"/>
+      <p label="00:20" v="20"/>
+      <p label="00:40" v="45"/>
+      <p label="01:00" v="80"/>
+      <p label="01:20" v="110"/>
+      <p label="01:40" v="135"/>
+      <p label="02:00" v="110"/>
+      <p label="02:20" v="100"/>
+      <p label="02:40" v="95"/>
+      <p label="03:00" v="97"/>
+      <p label="03:20" v="100"/>
+      <p label="03:40" v="120"/>
+      <p label="04:00" v="135"/>
+      <p label="04:20" v="150"/>
+      <p label="04:40" v="160"/>
+      <p label="05:00" v="165"/>
+      <p label="05:20" v="160"/>
+      <p label="05:40" v="140"/>
+      <p label="06:00" v="120"/>
+      <p label="06:20" v="100"/>
+      <p label="06:40" v="90"/>
+      <p label="07:00" v="80"/>
+      <p label="07:20" v="75"/>
+      <p label="07:40" v="70"/>
+      <p label="08:00" v="68"/>
+      <p label="08:20" v="70"/>
+      <p label="08:40" v="75"/>
+      <p label="09:00" v="90"/>
+      <p label="09:20" v="110"/>
+      <p label="09:40" v="135"/>
+      <p label="10:00" v="150"/>
+      <p label="10:20" v="160"/>
+      <p label="10:40" v="155"/>
+      <p label="11:00" v="140"/>
+      <p label="11:20" v="125"/>
+      <p label="11:40" v="110"/>
+      <p label="12:00" v="100"/>
+      <p label="12:20" v="95"/>
+      <p label="12:40" v="90"/>
+      <p label="13:00" v="85"/>
+    </member_1>
+  </dataSet>
+</root>

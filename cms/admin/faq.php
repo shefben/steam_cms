@@ -35,13 +35,14 @@ usort($rows,function($a,$b) use($order){
 <form id="faqOrder" method="post">
 <input type="hidden" name="order" id="faq-order">
 <table id="faq-table" class="data-table">
-<thead><tr><th></th><th>Category</th><th>Title</th><th>Actions</th></tr></thead>
+<thead><tr><th></th><th>Category</th><th>Title</th><th>Views</th><th>Actions</th></tr></thead>
 <tbody id="faq-body">
 <?php foreach($rows as $r): ?>
 <tr data-id="<?php echo $r['faqid1'].'-'.$r['faqid2']; ?>">
 <td class="handle">☰</td>
 <td><?php echo htmlspecialchars($r['catname']); ?></td>
 <td><?php echo htmlspecialchars($r['title']); ?></td>
+<td><?php echo (int)$r['views']; ?></td>
 <td>
 <?php if(cms_has_permission('faq_edit')): ?>
     <a href="faq_edit.php?faqid1=<?php echo $r['faqid1']; ?>&faqid2=<?php echo $r['faqid2']; ?>">Edit</a>

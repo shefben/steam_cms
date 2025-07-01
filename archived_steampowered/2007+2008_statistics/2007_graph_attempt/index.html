@@ -1,0 +1,67 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>body{margin:0;background:#1b1b1b;font:11px Tahoma;color:#fff}</style></head><body>
+<div style="position:relative; display:inline-block; font-family:'Tahoma','Lucida Console',monospace; background:#2f2f2f;">
+    <img id="graph-img" src="graph.php" alt="graph">
+    <canvas id="graph-overlay" style="position:absolute; top:0; left:0;"></canvas>
+</div>
+
+<script>
+(async () => {
+  const cvs   = document.getElementById('graph-overlay');
+  const img   = document.getElementById('graph-img');
+  const ctx   = cvs.getContext('2d');
+  const data  = await fetch('graph_data.php').then(r=>r.json());
+
+  const BLUE  = '#3aa1d9';
+  const GRID  = '#3f444a';
+  const FONT  = '11px Tahoma, monospace';
+
+  img.onload = () => { cvs.width = img.width; cvs.height = img.height; };
+
+  cvs.addEventListener('mousemove', e=>{
+    const r = cvs.getBoundingClientRect();
+    const x = e.clientX - r.left;
+
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+
+    /* vertical bar */
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,cvs.height);
+    ctx.strokeStyle = GRID; ctx.lineWidth=1; ctx.stroke();
+
+    data.forEach(series=>{
+      const seg = (series.length-1);
+      const xr  = x/cvs.width*seg;
+      const i   = Math.floor(xr);
+      const t   = xr-i;
+      if(i<0||i>=seg) return;
+
+      const p1=series[i], p2=series[i+1];
+      const v  = p1.v+(p2.v-p1.v)*t;
+      const lbl= t<.5? p1.label : p2.label;
+
+      const y  = cvs.height - v/getYmax(data)*cvs.height;
+
+      /* dot */
+      ctx.beginPath(); ctx.arc(x,y,4,0,2*Math.PI);
+      ctx.fillStyle=BLUE; ctx.fill();
+
+      /* tooltip */
+      const txt = `${lbl.toUpperCase()}  ${Math.round(v).toLocaleString()} USER`;
+      ctx.font = FONT; const pad=4,
+            w = ctx.measureText(txt).width+pad*2,
+            h = 18,
+            bx= Math.min(x+10,cvs.width-w-2),
+            by= Math.max(4,y-h-8);
+
+      ctx.fillStyle='#000'; ctx.fillRect(bx,by,w,h);
+      ctx.strokeStyle='#666'; ctx.strokeRect(bx,by,w,h);
+      ctx.fillStyle='#fff'; ctx.fillText(txt,bx+pad,by+5);
+    });
+  });
+
+  cvs.addEventListener('mouseleave',()=>ctx.clearRect(0,0,cvs.width,cvs.height));
+
+  function getYmax(d){return d.flat().reduce((m,p)=>p.v>m?p.v:m,0);}
+})();
+</script>
+</body></html>

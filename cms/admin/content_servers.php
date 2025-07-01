@@ -5,7 +5,20 @@ $db = db_connect();
 $servers = get_servers($db);
 $main_ip = get_setting($db,'main_network_ip');
 $main_port = get_setting($db,'main_network_port');
-$cs_theme = get_setting($db,'cs_theme') ?: 'default';
+$themes = [];
+cms_refresh_themes();
+$themes = cms_get_themes();
+$cs_theme = get_setting($db,'cs_theme') ?: ($themes[0] ?? 'default');
+if(!in_array($cs_theme,$themes) && $themes){
+    $cs_theme = $themes[0];
+    set_setting($db,'cs_theme',$cs_theme);
+}
+if(!$main_ip && !$main_port && $servers){
+    $main_ip = $servers[0]['ip'];
+    $main_port = $servers[0]['port'];
+    set_setting($db,'main_network_ip',$main_ip);
+    set_setting($db,'main_network_port',$main_port);
+}
 if($_SERVER['REQUEST_METHOD']==='POST'){
     if(isset($_POST['add'])){
         $stmt=$db->prepare('INSERT INTO content_servers(name,ip,port,total_capacity,region) VALUES(?,?,?,?,?)');
@@ -28,9 +41,20 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         header('Location: content_servers.php'); exit;
     }
     if(isset($_POST['set_settings'])){
-        set_setting($db,'main_network_ip',$_POST['main_network_ip']);
-        set_setting($db,'main_network_port',$_POST['main_network_port']);
         set_setting($db,'cs_theme',$_POST['cs_theme']);
+        header('Location: content_servers.php'); exit;
+    }
+    if(isset($_POST['set_main_server'])){
+        $sid = (int)$_POST['main_server'];
+        $stmt = $db->prepare('SELECT ip,port FROM content_servers WHERE id=?');
+        $stmt->bind_param('i',$sid);
+        $stmt->execute();
+        $stmt->bind_result($ip,$port);
+        if($stmt->fetch()){
+            set_setting($db,'main_network_ip',$ip);
+            set_setting($db,'main_network_port',$port);
+        }
+        $stmt->close();
         header('Location: content_servers.php'); exit;
     }
 }
@@ -38,10 +62,11 @@ $servers = get_servers($db);
 ?>
 <h2>Content Servers</h2>
 <table border="1">
-<tr><th>Name</th><th>IP</th><th>Port</th><th>Capacity</th><th>Region</th><th>Actions</th></tr>
+<tr><th>Select</th><th>Name</th><th>IP</th><th>Port</th><th>Capacity</th><th>Region</th><th>Actions</th></tr>
 <?php foreach($servers as $s): ?>
 <tr>
 <form method="post">
+<td><input type="radio" name="main_server" value="<?php echo $s['id']; ?>" form="mainForm" <?php echo ($s['ip']==$main_ip && $s['port']==$main_port)?'checked':''; ?>></td>
 <td><input type="text" name="name" value="<?php echo htmlspecialchars($s['name']); ?>"></td>
 <td><input type="text" name="ip" value="<?php echo htmlspecialchars($s['ip']); ?>"></td>
 <td><input type="number" name="port" value="<?php echo $s['port']; ?>"></td>
@@ -56,6 +81,10 @@ $servers = get_servers($db);
 </tr>
 <?php endforeach; ?>
 </table>
+<form id="mainForm" method="post">
+<input type="hidden" name="set_main_server" value="1">
+<button type="submit">Save Default Server</button>
+</form>
 <h3>Add New Server</h3>
 <form method="post">
 <input type="text" name="name" placeholder="Name">
@@ -67,11 +96,10 @@ $servers = get_servers($db);
 </form>
 <h3>Settings</h3>
 <form method="post">
-IP <input type="text" name="main_network_ip" value="<?php echo htmlspecialchars($main_ip); ?>">
-Port <input type="number" name="main_network_port" value="<?php echo $main_port; ?>">
 Theme <select name="cs_theme">
-<option value="default" <?php echo $cs_theme=='default'?'selected':''; ?>>Default</option>
-<option value="late2004" <?php echo $cs_theme=='late2004'?'selected':''; ?>>Late 2004</option>
+<?php foreach($themes as $t): ?>
+    <option value="<?php echo htmlspecialchars($t); ?>" <?php echo $t==$cs_theme?'selected':''; ?>><?php echo htmlspecialchars($t); ?></option>
+<?php endforeach; ?>
 </select>
 <input type="hidden" name="set_settings" value="1">
 <input type="submit" value="Update">

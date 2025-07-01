@@ -2,15 +2,11 @@
 session_start();
 require_once __DIR__ . '/../db.php';
 if(!cms_current_admin()){
-    if(isset($_COOKIE['cms_admin_id'],$_COOKIE['cms_admin_hash'])){
-        $id=(int)$_COOKIE['cms_admin_id'];
-        $hash=$_COOKIE['cms_admin_hash'];
-        $db=cms_get_db();
-        $stmt=$db->prepare('SELECT password FROM admin_users WHERE id=?');
-        $stmt->execute([$id]);
-        $pw=$stmt->fetchColumn();
-        if($pw && $pw===$hash){
-            $_SESSION['admin_id']=$id;
+    if(isset($_COOKIE['cms_admin_token'])){
+        $uid=cms_validate_admin_token($_COOKIE['cms_admin_token']);
+        if($uid){
+            session_regenerate_id(true);
+            $_SESSION['admin_id']=$uid;
         }
     }
     if(!cms_current_admin()){
@@ -38,8 +34,9 @@ $default_nav = [
     ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],
     ['file'=>'news.php','label'=>'News','visible'=>1],
     ['file'=>'faq.php','label'=>'FAQ','visible'=>1],
-    ['file'=>'cafe_signups.php','label'=>'Café Signups','visible'=>1],
+    ['file'=>'cybercafe.php','label'=>'Cyber Cafe Management','visible'=>1],
     ['file'=>'content_servers.php','label'=>'Servers','visible'=>1],
+    ['file'=>'contentserver_banners.php','label'=>'ContentServer Banner Management','visible'=>1],
     ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
     ['file'=>'theme.php','label'=>'Theme','visible'=>1],
     ['file'=>'settings.php','label'=>'Settings','visible'=>1],
@@ -47,7 +44,6 @@ $default_nav = [
     ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
     ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
-    ['file'=>'support_2003.php','label'=>'2003 Support','visible'=>1],
     ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
 ];
 $json = cms_get_setting('nav_items',null);
@@ -59,8 +55,9 @@ $icons = [
     'main_content.php' => '📝',
     'news.php'         => '📰',
     'faq.php'          => '❓',
-    'cafe_signups.php' => '☕',
+    'cybercafe.php'    => '☕',
     'content_servers.php' => '🖥️',
+    'contentserver_banners.php' => '🖼️',
     'custom_pages.php' => '📄',
     'theme.php'        => '🎨',
     'settings.php'     => '⚙️',
@@ -68,7 +65,6 @@ $icons = [
     'faq_categories.php'=> '📂',
     'admin_users.php'  => '👥',
     'error_page.php'   => '❌',
-    'support_2003.php' => '🛠️',
     '../logout.php'    => '🚪',
 ];
 
@@ -76,6 +72,7 @@ $nav_html = '<ul class="nav-menu">';
 foreach($nav_items as $item){
     if(!($item['visible']??1)) continue;
     $file = $item['file'];
+    if($file === 'support_2003.php' || $file === 'cafe_signups.php') continue;
     $label = $item['label'];
 
     $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
