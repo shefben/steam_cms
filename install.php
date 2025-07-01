@@ -179,6 +179,18 @@ $pdo->exec("CREATE TABLE bw_history (
                     if($stmt) $pdo->exec($stmt);
                 }
             }
+            // use first inserted content server as default network target
+            try {
+                $res = $pdo->query("SELECT ip,port FROM content_servers ORDER BY id ASC LIMIT 1");
+                $server = $res ? $res->fetch(PDO::FETCH_ASSOC) : false;
+                if($server){
+                    $stmt = $pdo->prepare('INSERT INTO settings(`key`,value) VALUES(?,?)');
+                    $stmt->execute(['main_network_ip',$server['ip']]);
+                    $stmt->execute(['main_network_port',$server['port']]);
+                }
+            } catch (PDOException $e) {
+                // table might not exist; ignore
+            }
             $hash=password_hash($admin_pass,PASSWORD_DEFAULT);
             $stmt=$pdo->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,created,password) VALUES(?,?,?,?,?,NOW(),?)');
             $stmt->execute([$admin_user,$admin_email,'','','all',$hash]);
@@ -498,7 +510,8 @@ HTML;
             ];
             $ord=1;
             foreach($defaultReps as $r){
-                $repStmt->execute(array_merge($r,[$ord++]));
+                $r[9]=$ord++; // ensure ord column receives an integer
+                $repStmt->execute($r);
             }
             $stmt2 = $pdo->prepare('REPLACE INTO themes(name) VALUES(?)');
             foreach(glob(__DIR__.'/themes/*', GLOB_ONLYDIR) as $dir){
