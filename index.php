@@ -13,7 +13,8 @@ if (isset($_GET['area'])) {
         exit;
 }
 require_once __DIR__.'/cms/db.php';
-$page = cms_get_custom_page($area);
+$theme = cms_get_setting('theme','default');
+$page = cms_get_custom_page($area,$theme);
 if($page){
     $page_title = $page['title'];
     include 'cms/header.php';
@@ -93,9 +94,14 @@ if (($area == "faq") && (isset($_GET['section']))) {
         $area = 'faq_section_'.$sec;
 }
 
-if (file_exists($area.".php") == false) {
-	$area = 'notfound';
+if (file_exists($area.".php")) {
+        include $area.".php";
+        exit;
 }
 
-include $area.".php";
+$page_title = 'Invalid Area';
+$error_html = cms_get_setting('error_html','<p>Page not found.</p>');
+include 'cms/header.php';
+echo $error_html;
+include 'cms/footer.php';
 ?>

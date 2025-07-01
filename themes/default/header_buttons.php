@@ -51,7 +51,7 @@ else $page_title = $site_title . " " . $page_title;
     </style>
     <link rel="Shortcut Icon" type="image/png" href="<?php echo htmlspecialchars($base); ?>/webicon.png">
     <script language="JavaScript" src="<?php echo htmlspecialchars($base); ?>/nav.js"></script>
-    <link href="<?php echo htmlspecialchars($base); ?>/rss.xml" rel="alternate" type="application/rss+xml" title="Valve RSS News Feed" />
+    <link href="<?php echo htmlspecialchars($base); ?>/news_rss.php" rel="alternate" type="application/rss+xml" title="Valve RSS News Feed" />
 </head>
 <body>
 <?php

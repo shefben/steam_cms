@@ -30,12 +30,19 @@ function cms_set_setting($key,$value){
     $stmt->execute([$key,$value]);
 }
 
-function cms_get_custom_page($slug){
+function cms_get_custom_page($slug,$theme=null){
     $db = cms_get_db();
     try{
-        $stmt = $db->prepare('SELECT title,content FROM custom_pages WHERE slug=?');
+        $stmt = $db->prepare('SELECT title,content,theme FROM custom_pages WHERE slug=?');
         $stmt->execute([$slug]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if(!$row) return null;
+        if($theme!==null && $row['theme']!==null && $row['theme']!==''){
+            $themes = array_map('trim', explode(',', $row['theme']));
+            if(!in_array($theme,$themes,true)) return null;
+        }
+        unset($row['theme']);
+        return $row;
     }catch(PDOException $e){
         if($e->getCode()==='42S02') return null; // table missing
         throw $e;
@@ -181,5 +188,22 @@ function cms_header_buttons_html($theme){
         }
     }
     return $out;
+}
+
+function cms_refresh_themes(){
+    $db = cms_get_db();
+    $stmt = $db->prepare('REPLACE INTO themes(name) VALUES(?)');
+    $base = dirname(__DIR__);
+    foreach(glob($base.'/themes/*', GLOB_ONLYDIR) as $dir){
+        $name = basename($dir);
+        if(substr($name,-6) === '_admin') continue;
+        $stmt->execute([$name]);
+    }
+}
+
+function cms_get_themes(){
+    $db = cms_get_db();
+    $res = $db->query('SELECT name FROM themes ORDER BY name');
+    return $res ? $res->fetchAll(PDO::FETCH_COLUMN) : [];
 }
 ?>
