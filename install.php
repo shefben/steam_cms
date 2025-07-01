@@ -509,6 +509,7 @@ HTML;
                 ['http://www.unalis.com.tw/','UNALIS CORPORATION','leon@unalis.com.tw','Leon Chang','10F, No 168 SEC 2','Min Sheng E. Rd.','','Taipei','Taiwan','']
             ];
             foreach($defaultReps as $r){
+                $r[9]=$ord++; // ensure ord column receives an integer
                 $repStmt->execute($r);
             }
             $stmt2 = $pdo->prepare('REPLACE INTO themes(name) VALUES(?)');
