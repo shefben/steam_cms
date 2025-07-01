@@ -1,30 +1,31 @@
 <?php
 require_once 'admin_header.php';
 cms_require_permission('manage_pages');
-$theme = cms_get_setting('theme','default');
-$slug = $theme.'_index';
+
+$slug = 'cafe_pricing';
 $db = cms_get_db();
-$msg = '';
+
 if(isset($_POST['save_page'])){
     $title = trim($_POST['title']);
     $content = $_POST['content'];
-    $stmt = $db->prepare('SELECT slug FROM custom_pages WHERE slug=?');
-    $stmt->execute([$slug]);
-    if($stmt->fetchColumn()){
-        $u = $db->prepare('UPDATE custom_pages SET title=?,content=?,updated=NOW() WHERE slug=?');
-        $u->execute([$title,$content,$slug]);
+    $exists = $db->prepare('SELECT slug FROM custom_pages WHERE slug=?');
+    $exists->execute([$slug]);
+    if($exists->fetchColumn()){
+        $stmt = $db->prepare('UPDATE custom_pages SET title=?,content=?,updated=NOW() WHERE slug=?');
+        $stmt->execute([$title,$content,$slug]);
     }else{
-        $u = $db->prepare('INSERT INTO custom_pages(slug,title,content,created,updated) VALUES(?,?,?,?,NOW())');
-        $u->execute([$slug,$title,$content,date('Y-m-d H:i:s')]);
+        $stmt = $db->prepare('INSERT INTO custom_pages(slug,title,content,created,updated) VALUES(?,?,?,?,NOW())');
+        $stmt->execute([$slug,$title,$content,date('Y-m-d H:i:s')]);
     }
-    $msg = 'Home page saved.';
+    $msg = 'Page saved.';
 }
-$page = cms_get_custom_page($slug,$theme);
-$title = $page['title'] ?? 'Home';
+
+$page = cms_get_custom_page($slug);
+$title = $page['title'] ?? 'Cyber Café Pricing and Licensing';
 $content = $page['content'] ?? '';
 ?>
-<h2>Edit Home Page</h2>
-<?php if($msg): ?><p><?php echo htmlspecialchars($msg); ?></p><?php endif; ?>
+<h2>Cafe Pricing</h2>
+<?php if(isset($msg)) echo '<p>'.htmlspecialchars($msg).'</p>'; ?>
 <form method="post">
 Title:<br>
 <input type="text" name="title" value="<?php echo htmlspecialchars($title); ?>" style="width:100%;"><br><br>

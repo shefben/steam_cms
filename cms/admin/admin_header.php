@@ -34,8 +34,9 @@ $default_nav = [
     ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],
     ['file'=>'news.php','label'=>'News','visible'=>1],
     ['file'=>'faq.php','label'=>'FAQ','visible'=>1],
-    ['file'=>'cafe_signups.php','label'=>'Café Signups','visible'=>1],
+    ['file'=>'cybercafe.php','label'=>'Cyber Cafe Management','visible'=>1],
     ['file'=>'content_servers.php','label'=>'Servers','visible'=>1],
+    ['file'=>'contentserver_banners.php','label'=>'ContentServer Banner Management','visible'=>1],
     ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
     ['file'=>'theme.php','label'=>'Theme','visible'=>1],
     ['file'=>'settings.php','label'=>'Settings','visible'=>1],
@@ -54,8 +55,9 @@ $icons = [
     'main_content.php' => '📝',
     'news.php'         => '📰',
     'faq.php'          => '❓',
-    'cafe_signups.php' => '☕',
+    'cybercafe.php'    => '☕',
     'content_servers.php' => '🖥️',
+    'contentserver_banners.php' => '🖼️',
     'custom_pages.php' => '📄',
     'theme.php'        => '🎨',
     'settings.php'     => '⚙️',
@@ -70,6 +72,7 @@ $nav_html = '<ul class="nav-menu">';
 foreach($nav_items as $item){
     if(!($item['visible']??1)) continue;
     $file = $item['file'];
+    if($file === 'support_2003.php' || $file === 'cafe_signups.php') continue;
     $label = $item['label'];
 
     $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';

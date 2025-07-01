@@ -8,9 +8,9 @@ if(!file_exists($tpl)){
     $tpl = __DIR__.'/themes/2004/index_template.php';
 }
 
-$page = cms_get_custom_page($theme.'_index');
+$page = cms_get_custom_page($theme.'_index',$theme);
 if(!$page){
-    $page = cms_get_custom_page('default_index');
+    $page = cms_get_custom_page('default_index',$theme);
 }
 if($page){
     $page_title = $page['title'];
