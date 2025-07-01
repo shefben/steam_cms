@@ -4,7 +4,6 @@ if (isset($_GET['area'])) {
 } else {
         require_once __DIR__.'/cms/db.php';
         $theme = cms_get_setting('theme','default');
-        $tpl = __DIR__.'/themes/'.$theme.'/index_template.php';
         if(file_exists($tpl)){
                 require 'home.php';
                 exit;
@@ -41,7 +40,8 @@ if($area === 'faq' && isset($_GET['id'])){
     $area = 'notfound';
 }
 
-$page = cms_get_custom_page($area);
+$theme = cms_get_setting('theme','default');
+$page = cms_get_custom_page($area,$theme);
 if($page){
     $page_title = $page['title'];
     include 'cms/header.php';
@@ -77,7 +77,8 @@ elseif ($area == "all" && (isset($_GET['page'])) && (!isset($_GET['genre']))) {
         $area = 'news_'.$id;
 } elseif ($area == "faq" && (isset($_GET['id']))) {
         $id = preg_replace('/[^0-9,]/','',$_GET['id']);
-        $area = 'faq_'.$id;
+        $_GET['id'] = $id;
+        $area = 'faq_entry';
 } elseif ($area == "archives" && (isset($_GET['date']))) {
         $d = preg_replace('/[^0-9-]/','',$_GET['date']);
         $area = 'archive_'.$d;
@@ -120,15 +121,14 @@ if (($area == "faq") && (isset($_GET['section']))) {
         $area = 'faq_section_'.$sec;
 }
 
-// try to locate the requested page
-$file = "$area.php";
-if(!file_exists($file)){
-    if(strpos($area,'news_')===0 && file_exists("news_pages/$file")){
-        $file = "news_pages/$file";
-    }else{
-        $file = 'notfound.php';
-    }
+if (file_exists($area.".php")) {
+        include $area.".php";
+        exit;
 }
 
-include $file;
+$page_title = 'Invalid Area';
+$error_html = cms_get_setting('error_html','<p>Page not found.</p>');
+include 'cms/header.php';
+echo $error_html;
+include 'cms/footer.php';
 ?>

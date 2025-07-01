@@ -91,7 +91,7 @@ function preloadImages() {
 							<td width="262" height="52" rowspan="2"></td>
 							<td content csheight="29" width="391" height="52" rowspan="2" valign="top" xpos="262">
 								<div align="left">
-									<font size="2"><span class="statusContent">Steam delivers Valve&rsquo;s games to your desktop and connects you to a massive gaming community. Check out the full <a href="features.php">feature list</a> now.</span></font></div>
+                                                                        <font size="2"><span class="statusContent">Steam delivers Valve&rsquo;s games to your desktop and connects you to a massive gaming community. Check out the full <a href="index.php?area=features">feature list</a> now.</span></font></div>
 							</td>
 							<td width="146" height="3" colspan="2"></td>
 							<td width="1" height="3"><spacer type="block" width="1" height="3"></td>
@@ -495,7 +495,7 @@ function preloadImages() {
 							<td width="1" height="11"><spacer type="block" width="1" height="11"></td>
 						</tr>
 						<tr height="92">
-							<td content csheight="92" width="800" height="92" valign="top" xpos="0"><div class="footer">&copy; 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="valvesoftware/privacy.htm">Privacy Policy</a>. <a href="valvesoftware/legal.htm">Legal</a>. <a href="subscriber_agreement.php">Steam Subscriber Agreement</a>.</div>
+							<td content csheight="92" width="800" height="92" valign="top" xpos="0"><div class="footer">&copy; 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="valvesoftware/privacy.htm">Privacy Policy</a>. <a href="valvesoftware/legal.htm">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</div>
 								<p></p>
 								<div align="right">
 									<p><img src="../img/index02/creditcardonsteam.gif" alt="" width="279" height="20" border="0"></p>

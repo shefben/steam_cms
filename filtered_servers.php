@@ -1,3 +1,30 @@
-<?php $page_title = 'Filtered Servers'; include 'cms/header.php'; ?>
+<?php $page_title = 'Filtered Servers'; ?>
 
-<?php include 'cms/footer.php'; ?>
+<html>
+<head>
+	<style>
+	<!--
+	body { scrollbar-base-color: #4C5844; }
+	body, p, td, h1 { font-family: Verdana; font-size: 12px; }
+	h1 { font-size: 14px; font-weight: bold; }
+	body { background:#4C5844; color:#D8DED3; }
+	.content { background:#3E4637; }
+	a { color: White; }
+	-->
+	</style>
+
+</head>
+<body leftmargin=\"20\" topmargin=\"20\" rightmargin=\"20\" bottommargin=\"20\" marginwidth=\"20\" marginheight=\"20\">
+
+<table width=\"100%\" height=\"100%\" cellspacing=\"0\" cellpadding=\"10\" class=\"content\">
+<tr>
+	<td width=\"100%\" align=\"left\" valign=\"top\" style=\"border: Solid 1px #56634D;\">
+	<h1>"Filtered" Content Servers</h1>
+	Some content servers on Steam's network are not public. These servers are called "filtered" because they only serve content to a select group of users (filtering out all others). <br><br>
+	On the content server status page, these servers are not counted in the Total Available Bandwidth or the Total Used Bandwidth numbers.<br>
+	</td>
+</tr>
+</table>
+
+</body>
+</html>

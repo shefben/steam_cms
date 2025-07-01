@@ -36,7 +36,7 @@ The Official Valve Cyber Caf&eacute; Program is here. One low monthly fee gets y
 <br>
 <img src="img/yellowSquare.gif"> &nbsp;<a href="cybercafe_program.php">Features and Benefits</a><br>
 <br>
-<img src="img/yellowSquare.gif"> &nbsp;<a href="cafe_pricing.php">Pricing and Licensing</a><br>
+<img src="img/yellowSquare.gif"> &nbsp;<a href="index.php?area=cafe_pricing">Pricing and Licensing</a><br>
 <br>
 <img src="img/yellowSquare.gif"> &nbsp;<a href="cafe_signup.php">Cyber Caf&eacute; Sign-Up Form</a><br>
 <br>
@@ -46,7 +46,7 @@ The Official Valve Cyber Caf&eacute; Program is here. One low monthly fee gets y
 
 Find an Official Valve Cyber Caf&eacute; and play our latest games.<br>
 <br>
-<img src="img/yellowSquare.gif"> &nbsp;<a href="cafe_directory.php">Browse the Cyber Caf&eacute; Directory</a><br>
+<img src="img/yellowSquare.gif"> &nbsp;<a href="index.php?area=cafe_directory">Browse the Cyber Caf&eacute; Directory</a><br>
 <br>
 <br>
 

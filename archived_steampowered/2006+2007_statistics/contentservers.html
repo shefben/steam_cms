@@ -1,0 +1,1490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Steam: Content Server Statistics</title>
+<link href="styles_global.css" rel="stylesheet" type="text/css"/>
+<link href="styles_content.css" rel="stylesheet" type="text/css"/>
+<script language="JavaScript" src="status/pop.js"></script>
+<script src="swfobject.js" type="text/javascript"></script>
+<style type="text/css">
+div.statsTop {
+	width:auto;
+	text-align:center;
+}
+.statsTop table {
+	margin-left:15px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:normal;
+	color:#787878;
+}
+.statsTop td {
+	padding-top:2px;
+	padding-bottom:3px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+.statsTopHi {
+	color:#c98d33;
+	font-weight:bold;
+}
+.statsTopSmall {
+	font-size:11px;
+}
+TABLE.statusGraph {
+	cell-spacing:0px;
+	cell-padding:0px;
+	height:4px;
+	margin:4px 0px 0px 0px;
+}
+TD.CurrentLoad {
+	background:#C98D33;
+	height:4px;
+}
+TD.AvailableBytesPerSecond {
+	background:#5B5B5B;
+}
+a#detailLink{
+	color:#c98d33;
+	font-size:13px;
+}
+.capsule {
+	width:611px;
+	margin-bottom:8px;
+	padding-top:14px;
+}
+.capsule a,.capsule a:visited, .capsule a:hover {
+	color:#c98d33;
+}
+a.filter_link, a:visited.filter_link {
+	color:#5B5B5B;
+}
+.capsuleRegionName {
+	font-size:14px;
+	font-weight:bold;
+	padding-bottom:4px;
+	padding-top:5px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+.capsule_table td {
+	font-size:11px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+<body>
+<!-- header bar -->
+<!--
+<div class="globalHeadBar_logo"><a href="http://www.steampowered.com"><img src="img/logo_steam_header.jpg" alt="Steam main" border="0" /></a></div>
+<div class="globalHeadBar">
+<div class="globalNavItem"><a href="http://storefront.steampowered.com/v2/"><span class="globalNavLink">GAMES</span></a></div>
+<div class="globalNavItem"><a href="http://www.steampowered.com/index.php?area=news"><span class="globalNavLink">NEWS</span></a></div>
+<div class="globalNavItem"><a href="http://www.steampowered.com/index.php?area=getsteamnow"><span class="globalNavLink">GET STEAM NOW</span></a></div>
+<div class="globalNavItem"><a href="http://www.steampowered.com/index.php?area=cybercafes"><span class="globalNavLink">CYBER CAF&Eacute;S</span></a></div>
+<div class="globalNavItem"><a href="http://support.steampowered.com/"><span class="globalNavLink">SUPPORT</span></a></div>
+<div class="globalNavItem"><a href="http://steampowered.com/index.php?area=forums"><span class="globalNavLink">FORUMS</span></a></div>
+<div class="globalNavItem"><a href="http://steampowered.com/stats/"><span class="globalNavLink">STATS</span></a></div>
+</div>
+<br clear="all" />&nbsp;
+-->
+<div style="min-width:850px;">
+<div class="globalHeadBar_logo"><a href="http://www.steampowered.com"><img alt="Steam main" border="0" src="img/logo_steam_header.jpg"/></a></div>
+<div class="globalHeadBar">
+<div class="globalNavItem"><a href="v/index.php?cc=--" title="Home"><span class="globalNavLink">HOME</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=news&amp;cc=--" title="News"><span class="globalNavLink">NEWS</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=getsteamnow&amp;cc=--" title="Get Steam"><span class="globalNavLink">GET STEAM NOW</span></a></div>
+<div class="globalNavItem"><a href="https://cafe.steampowered.com/" title="Cyber Cafes"><span class="globalNavLink">CYBER CAFÉS</span></a></div>
+<div class="globalNavItem"><a href="http://support.steampowered.com/" title="Support"><span class="globalNavLink">SUPPORT</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=forums&amp;cc=--" title="Forums"><span class="globalNavLink">FORUMS</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=stats&amp;cc=--" title="Status"><span class="globalNavLink">STATS</span></a></div>
+</div>
+</div>
+<br clear="all"/>
+<!-- end header bar -->
+<center>
+<div class="contentBG_4">
+<div class="headerBG_4">
+<!-- Main Content -->
+<div class="leftCol_4">
+<p> </p>
+<h1>CONTENT SERVER STATS</h1>
+<p><img height="10" src="img/hr_stats_clr.gif" width="636"/></p>
+<div class="statsTop">
+<table border="0" cellpadding="0" cellspacing="0" width="638">
+<tr>
+<td align="center" colspan="4"><span class="statsTopSmall">Updated: Jan 5, 2007 - 03:00pm</span></td>
+</tr>
+</table>
+</div>
+<p><span class="copyHead">Content Server Bandwidth </span>(most recent 48 hours)</p>
+<table border="0" cellpadding="0" cellspacing="0" width="680">
+<tr>
+<td>
+<div id="stats">
+<p>If you wish to view these stats, you will need to <a href="http://www.adobe.com/go/getflashplayer" target="_blank">Download</a>  the Flash plugin.</p>
+</div> <script type="text/javascript">
+		var so = new SWFObject("swf/graph.swf?dataURL=stats/cs_bandwidth.xml", "movie", "670", "310", "8", "#424242");
+		so.write("stats");
+		</script>
+</td>
+</tr>
+</table>
+<div class="statsTop">
+<table border="0" cellpadding="0" cellspacing="0" width="612">
+<tr>
+<td align="left" width="100%"><table border="0" cellpadding="5" cellspacing="0">
+<tr>
+<td align="left"> </td>
+<td align="right" width="85">current</td>
+<td align="right" width="85">peak</td>
+<td> </td>
+</tr>
+<tr>
+<td align="left">Used Bandwidth:</td>
+<td align="right"><span class="statsTopHi">8,277</span></td>
+<td align="right"><span class="statsTopHi">8,892</span></td>
+<td align="left">   Mbit</td>
+</tr>
+<tr>
+<td align="left">Available Bandwidth:</td>
+<td align="right"><span class="statsTopHi">30,640</span></td>
+<td align="right"><span class="statsTopHi">30,640</span></td>
+<td align="left">   Mbit</td>
+</tr>
+</table></td>
+</tr>
+</table>
+</div>
+<script language="javascript">
+		function toggleDetailStats()
+		{
+			thediv = document.getElementById("detailStats");
+			if(thediv.style.display == "block")
+			{
+				thediv.style.display = "none";
+			}
+			else
+			{
+				thediv.style.display = "block";
+			}
+		}
+		</script>
+<p align="center" style="width:auto; text-align:center;"><a href="javascript:void(0)" id="detailLink" onclick="toggleDetailStats()" onmouseout="window.status='';return true" onmouseover="window.status='Show Detailed Statistics';return true">View individual server statistics</a></p>
+<div id="detailStats" style="display:none; width:630px; margin-left:40px;">
+<div class="capsule" name="Australia">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Australia</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.egn.com.au">EGN Australia</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="8%"></td>
+<td class="AvailableBytesPerSecond" width="92%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://games.bigpond.com">Gamearena #1</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://games.bigpond.com">Gamearena #2</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://games.bigpond.com">Gamearena #3</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://games.bigpond.com">Gamearena #4</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://games.bigpond.com">Gamearena #5</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://img.gamespace.net.au/steam/">Gamespace</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="50%"></td>
+<td class="AvailableBytesPerSecond" width="50%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://games.internode.on.net">Internode #1</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="13%"></td>
+<td class="AvailableBytesPerSecond" width="87%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Denmark">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Denmark</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://boomtown.net">Boomtown</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="9%"></td>
+<td class="AvailableBytesPerSecond" width="91%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://boomtown.net">Boomtown #2</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="68%"></td>
+<td class="AvailableBytesPerSecond" width="32%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="France">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">France</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.gamikzone.com">GamikZone</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="34%"></td>
+<td class="AvailableBytesPerSecond" width="66%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Germany">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Germany</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.4netplayers.de">4Netplayers #1</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="4%"></td>
+<td class="AvailableBytesPerSecond" width="96%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.4netplayers.de">4Netplayers #2</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="10%"></td>
+<td class="AvailableBytesPerSecond" width="90%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.arena7.de/?steamsite">arena7.de</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="13%"></td>
+<td class="AvailableBytesPerSecond" width="87%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.clanserver4u.de">clanserver4u.de - #1</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="10%"></td>
+<td class="AvailableBytesPerSecond" width="90%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.clanserver4u.de">clanserver4u.de - #2</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="20%"></td>
+<td class="AvailableBytesPerSecond" width="80%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.clanserver4u.de">clanserver4u.de - #3</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="16%"></td>
+<td class="AvailableBytesPerSecond" width="84%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.clanserver4u.de">clanserver4u.de - #4</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="7%"></td>
+<td class="AvailableBytesPerSecond" width="93%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.clanserver4u.de">clanserver4u.de - #5</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="1%"></td>
+<td class="AvailableBytesPerSecond" width="99%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.cs-arena.com">CS-Arena.com</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.cs-arena.com">CS-Arena.com #2</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="AvailableBytesPerSecond" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.cs-arena.com">CS-Arena.com #3</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="4%"></td>
+<td class="AvailableBytesPerSecond" width="96%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.cs-arena.com">CS-Arena.com #4</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="2%"></td>
+<td class="AvailableBytesPerSecond" width="98%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.cs-arena.com">CS-Arena.com #5</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="7%"></td>
+<td class="AvailableBytesPerSecond" width="93%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.cs-arena.com">CS-Arena.com #6</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.ngz-server.de/?referrer=steampowered">NGZ-Server.de #1</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="8%"></td>
+<td class="AvailableBytesPerSecond" width="92%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.ngz-server.de/?referrer=steampowered">NGZ-Server.de #2</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="24%"></td>
+<td class="AvailableBytesPerSecond" width="76%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.ngz-server.de/?referrer=steampowered">NGZ-Server.de #3</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="44%"></td>
+<td class="AvailableBytesPerSecond" width="56%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.ngz-server.de/?referrer=steampowered">NGZ-Server.de #4</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.ngz-server.de/?referrer=steampowered">NGZ-Server.de #5</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="44%"></td>
+<td class="AvailableBytesPerSecond" width="56%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.servercamp.de/?referrer=steam">Server-Camp.de #1</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="6%"></td>
+<td class="AvailableBytesPerSecond" width="94%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.servercamp.de/?referrer=steam">Server-Camp.de #2</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="9%"></td>
+<td class="AvailableBytesPerSecond" width="91%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.servercamp.de/?referrer=steam">Server-Camp.de #3</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="AvailableBytesPerSecond" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.teamplay.de/?referrer=steam">Teamplay.de #1</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="20%"></td>
+<td class="AvailableBytesPerSecond" width="80%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.teamplay.de/?referrer=steam">Teamplay.de #2</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="10%"></td>
+<td class="AvailableBytesPerSecond" width="90%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.teamplay.de/?referrer=steam">Teamplay.de #3</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #70</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="48%"></td>
+<td class="AvailableBytesPerSecond" width="52%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #71</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="48%"></td>
+<td class="AvailableBytesPerSecond" width="52%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.xg1.net">XG1.net</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="3%"></td>
+<td class="AvailableBytesPerSecond" width="97%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Greece">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Greece</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://noobwars.gr">GNET-FORTHnet #1</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="1%"></td>
+<td class="AvailableBytesPerSecond" width="99%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://noobwars.gr">GNET-FORTHnet #2</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://noobwars.gr">GNET-FORTHnet #3</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Greenland">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Greenland</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.barista.gl">barista.gl</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Hungary">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Hungary</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.obinet.hu">ObiNet.hu</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="25%"></td>
+<td class="AvailableBytesPerSecond" width="75%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Iceland">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Iceland</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.ogvodafone.is">Og Vodafone #1</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="AvailableBytesPerSecond" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Japan">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Japan</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #60</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="9%"></td>
+<td class="AvailableBytesPerSecond" width="91%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #61</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="3%"></td>
+<td class="AvailableBytesPerSecond" width="97%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Netherlands">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Netherlands</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #17</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="45%"></td>
+<td class="AvailableBytesPerSecond" width="55%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #22</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="AvailableBytesPerSecond" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #23</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="48%"></td>
+<td class="AvailableBytesPerSecond" width="52%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #25</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="39%"></td>
+<td class="AvailableBytesPerSecond" width="61%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #54</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="49%"></td>
+<td class="AvailableBytesPerSecond" width="51%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #55</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="49%"></td>
+<td class="AvailableBytesPerSecond" width="51%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #56</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="46%"></td>
+<td class="AvailableBytesPerSecond" width="54%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #57</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="45%"></td>
+<td class="AvailableBytesPerSecond" width="55%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #58</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="47%"></td>
+<td class="AvailableBytesPerSecond" width="53%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="New Zealand">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">New Zealand</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.recoil.net.nz">Recoil</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Romania">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Romania</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.computergames.ro">ComputerGames.ro</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="17%"></td>
+<td class="AvailableBytesPerSecond" width="83%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.computergames.ro">ComputerGames.ro #2</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="47%"></td>
+<td class="AvailableBytesPerSecond" width="53%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.computergames.ro">ComputerGames.ro #3</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="7%"></td>
+<td class="AvailableBytesPerSecond" width="93%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.computergames.ro">ComputerGames.ro #4</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="5%"></td>
+<td class="AvailableBytesPerSecond" width="95%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.computergames.ro">ComputerGames.ro #5</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="74%"></td>
+<td class="AvailableBytesPerSecond" width="26%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Russia - Central">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Russia - Central</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://reborn.ru">Reborn.ru</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Russia - West">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Russia - West</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://streamarena.ru">STREAMarena.ru #1</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="23%"></td>
+<td class="AvailableBytesPerSecond" width="77%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://streamarena.ru">STREAMarena.ru #2</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="16%"></td>
+<td class="AvailableBytesPerSecond" width="84%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://streamarena.ru">STREAMarena.ru #3</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="13%"></td>
+<td class="AvailableBytesPerSecond" width="87%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="South Korea">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">South Korea</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.gnasoft.com">GNA Soft</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="1%"></td>
+<td class="AvailableBytesPerSecond" width="99%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.gnasoft.com">GNA Soft</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="4%"></td>
+<td class="AvailableBytesPerSecond" width="96%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.gnasoft.com">GNA Soft</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="5%"></td>
+<td class="AvailableBytesPerSecond" width="95%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.gnasoft.com">GNA Soft</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="2%"></td>
+<td class="AvailableBytesPerSecond" width="98%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.gnasoft.com">GNA Soft</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="4%"></td>
+<td class="AvailableBytesPerSecond" width="96%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="United Kingdom">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">United Kingdom</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.hypernia.net">Hypernia.net Europe</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="36%"></td>
+<td class="AvailableBytesPerSecond" width="64%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.pulsegaming.com/banners/select.html">Pulse Gaming</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="5%"></td>
+<td class="AvailableBytesPerSecond" width="95%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #16</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="47%"></td>
+<td class="AvailableBytesPerSecond" width="53%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #31</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="45%"></td>
+<td class="AvailableBytesPerSecond" width="55%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #49</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="59%"></td>
+<td class="AvailableBytesPerSecond" width="41%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #50</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="57%"></td>
+<td class="AvailableBytesPerSecond" width="43%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #51</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="45%"></td>
+<td class="AvailableBytesPerSecond" width="55%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #52</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="41%"></td>
+<td class="AvailableBytesPerSecond" width="59%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #53</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="37%"></td>
+<td class="AvailableBytesPerSecond" width="63%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #59</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="39%"></td>
+<td class="AvailableBytesPerSecond" width="61%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="United States - Northeast">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">United States - Northeast</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #5</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="29%"></td>
+<td class="AvailableBytesPerSecond" width="71%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #6</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="32%"></td>
+<td class="AvailableBytesPerSecond" width="68%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #7</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="64%"></td>
+<td class="AvailableBytesPerSecond" width="36%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #8</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="26%"></td>
+<td class="AvailableBytesPerSecond" width="74%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #14</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="44%"></td>
+<td class="AvailableBytesPerSecond" width="56%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #15</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="28%"></td>
+<td class="AvailableBytesPerSecond" width="72%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #18</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="32%"></td>
+<td class="AvailableBytesPerSecond" width="68%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #19</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="31%"></td>
+<td class="AvailableBytesPerSecond" width="69%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #24</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="30%"></td>
+<td class="AvailableBytesPerSecond" width="70%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #44</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="34%"></td>
+<td class="AvailableBytesPerSecond" width="66%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #45</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="31%"></td>
+<td class="AvailableBytesPerSecond" width="69%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #46</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="31%"></td>
+<td class="AvailableBytesPerSecond" width="69%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #47</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="31%"></td>
+<td class="AvailableBytesPerSecond" width="69%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #48</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="58%"></td>
+<td class="AvailableBytesPerSecond" width="42%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="United States - Northwest">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">United States - Northwest</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://rentals.nuclearfallout.net">NuclearFallout</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="7%"></td>
+<td class="AvailableBytesPerSecond" width="93%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #39</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="27%"></td>
+<td class="AvailableBytesPerSecond" width="73%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #40</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="29%"></td>
+<td class="AvailableBytesPerSecond" width="71%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #68</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="8%"></td>
+<td class="AvailableBytesPerSecond" width="92%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #69</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="9%"></td>
+<td class="AvailableBytesPerSecond" width="91%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="United States - Southeast">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">United States - Southeast</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.insomnia365.com">Insomnia365</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="2%"></td>
+<td class="AvailableBytesPerSecond" width="98%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #20</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="21%"></td>
+<td class="AvailableBytesPerSecond" width="79%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #21</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="17%"></td>
+<td class="AvailableBytesPerSecond" width="83%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="United States - Southwest">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">United States - Southwest</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.krypt.com/steam/index.html">Krypt.com</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="50%"></td>
+<td class="AvailableBytesPerSecond" width="50%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #1</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="51%"></td>
+<td class="AvailableBytesPerSecond" width="49%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #2</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="43%"></td>
+<td class="AvailableBytesPerSecond" width="57%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #3</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="45%"></td>
+<td class="AvailableBytesPerSecond" width="55%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #4</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="22%"></td>
+<td class="AvailableBytesPerSecond" width="78%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #9</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="43%"></td>
+<td class="AvailableBytesPerSecond" width="57%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #10</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="45%"></td>
+<td class="AvailableBytesPerSecond" width="55%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #11</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="12%"></td>
+<td class="AvailableBytesPerSecond" width="88%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #12</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="5%"></td>
+<td class="AvailableBytesPerSecond" width="95%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #13</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="16%"></td>
+<td class="AvailableBytesPerSecond" width="84%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #29</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="38%"></td>
+<td class="AvailableBytesPerSecond" width="62%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #30</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="52%"></td>
+<td class="AvailableBytesPerSecond" width="48%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #32</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="61%"></td>
+<td class="AvailableBytesPerSecond" width="39%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #33</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="40%"></td>
+<td class="AvailableBytesPerSecond" width="60%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #34</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="36%"></td>
+<td class="AvailableBytesPerSecond" width="64%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #35</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="26%"></td>
+<td class="AvailableBytesPerSecond" width="74%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #36</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="56%"></td>
+<td class="AvailableBytesPerSecond" width="44%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #38</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="71%"></td>
+<td class="AvailableBytesPerSecond" width="29%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #41</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="43%"></td>
+<td class="AvailableBytesPerSecond" width="57%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #42</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="41%"></td>
+<td class="AvailableBytesPerSecond" width="59%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #43</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="44%"></td>
+<td class="AvailableBytesPerSecond" width="56%"></td>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td align="right" width="210"><a href="http://www.steampowered.com">Valve #62</a>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="47%"></td>
+<td class="AvailableBytesPerSecond" width="53%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+<div class="capsule" name="Valve HQ">
+<table align="center" border="0" cellpadding="5" cellspacing="0" class="capsule_table" width="630">
+<tr><td align="center" colspan="2"><span class="capsuleRegionName">Valve HQ</span></td></tr>
+<tr>
+<td align="right" width="210"><a href="http://www.valvesoftware.com">Valve ContentServer #0</a> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('http://www.steampowered.com/status/filtered_servers.htm')">filtered</a>]</font>  </td>
+<td align="left" width="420"><table cellspacing="0" class="statusGraph" width="405">
+<tr>
+<td class="CurrentLoad" width="0%"></td>
+<td class="AvailableBytesPerSecond" width="100%"></td>
+</tr></table>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<p><img height="10" src="img/hr_stats.gif" width="636"/></p>
+<div class="statsOverview">
+<table border="0" cellpadding="2" cellspacing="0" width="638">
+<tr>
+<td width="302"><img src="img/ico/ico_arrow_blue.gif"/> <a href="http://www.steampowered.com/v/index.php?area=stats">Player and Server Statistics</a></td>
+<td width="328"><img src="img/ico/ico_arrow_blue.gif"/> <a href="http://www.dayofdefeat.com/stats/">Day of Defeat Gameplay Stats </a></td>
+</tr>
+<tr>
+<td><img src="img/ico/ico_arrow_blue.gif"/> <a href="http://www.steampowered.com/status/survey.html">Steam Hardware Survey</a></td>
+<td><img src="img/ico/ico_arrow_blue.gif"/> <a href="stats/ep1/">Half-Life 2: Episode One Gameplay Stats </a></td>
+</tr>
+<tr>
+<td><img src="img/ico/ico_arrow_blue.gif"/> <a href="http://steampowered.com/stats/csmarket">Counter-Strike Weapons Market</a></td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+</tr>
+</table>
+</div>
+<!--	  
+<div class="statsSub">
+	 <table width="638" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<td width="103"></td>
+	    <td width="53" align="right">current</td>
+	    <td width="62" align="right">min</td>
+	    <td width="55" align="right">max</td>
+	    <td width="365" align="right">Average unique users per month: %uniqueUsers% </td>
+	  </tr>
+	  <tr>
+	    <td>Player Count </td>
+	    <td align="right">%pCur%</td>
+	    <td align="right">%pMin%</td>
+	    <td align="right">%pMax%</td>
+	    <td align="right">Average player minutes per month: %AvgPlayerMinutes%</td>
+	  </tr>
+	  <tr>
+	    <td>Server Count </td>
+	    <td align="right">%sCur%</td>
+	    <td align="right">%sMin%</td>
+	    <td align="right">%sMax%</td>
+	    <td>&nbsp;</td>
+	    </tr>
+	</table>
+</div>
+-->
+<br/>
+</div>
+<br clear="left"/>
+</div>
+<br clear="all"/>
+</div>
+<!-- Footer Content -->
+<div class="footer">
+<table background="img/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="706px">
+<tr>
+<td background="img/img_footer_l.jpg" height="73" width="12"> </td>
+<td align="center" width="110"><a href="http://www.valvesoftware.com"><img alt="link: Valve Software" border="0" height="26" src="img/logo_valve_footer.jpg" width="92"/></a></td>
+<td><div class="legal">© 2006 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br/>
+<a href="http://www.valvesoftware.com/privacy.htm"> Privacy Policy.</a> <a href="http://www.valvesoftware.com/legal.htm">Legal.</a> <a href="http://www.steampowered.com/index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a></div></td>
+<td background="img/img_footer_r.jpg" height="73" width="14"> </td>
+</tr>
+</table>
+</div>
+<!-- End Footer Content -->
+<br/>
+</center>
+</body>
+<script src="http://storefront.steampowered.com/v/includes/hideshow.js" type="text/javascript"></script>
+</html>
+<!-- hamsterateria server -->
+<!-- total exec time: 0.101417064667 -->
+<!-- db exec time: 0.000253677368164 -->
