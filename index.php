@@ -4,7 +4,6 @@ if (isset($_GET['area'])) {
 } else {
         require_once __DIR__.'/cms/db.php';
         $theme = cms_get_setting('theme','default');
-        $tpl = __DIR__."/themes/$theme/index_template.php";
         if(file_exists($tpl)){
                 require 'home.php';
                 exit;
@@ -13,6 +12,34 @@ if (isset($_GET['area'])) {
         exit;
 }
 require_once __DIR__.'/cms/db.php';
+
+// if a specific FAQ entry was requested, render it from the database
+if($area === 'faq' && isset($_GET['id'])){
+    $parts = array_map('intval', explode(',', preg_replace('/[^0-9,]/','',$_GET['id'])));
+    if(count($parts) === 4){
+        list($cat1,$cat2,$faq1,$faq2) = $parts;
+        $stmt = cms_get_db()->prepare('SELECT title,body FROM faq_content WHERE catid1=? AND catid2=? AND faqid1=? AND faqid2=?');
+        $stmt->execute([$cat1,$cat2,$faq1,$faq2]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($row){
+            $page_title = 'FAQ';
+            include 'cms/header.php';
+            echo "<div class=\"content\" id=\"container\">";
+            echo '<h1>FREQUENTLY ASKED QUESTIONS</h1><div class="narrower">';
+            echo '<h3>'.htmlspecialchars($row['title']).'</h3>';
+            echo $row['body'];
+            if(isset($_GET['return'])){
+                $sec = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['return']);
+                echo '<ul><li><a href="index.php?area=faq&section='.$sec.'">Return to '.htmlspecialchars(ucfirst($sec)).' FAQ</a></li></ul>';
+            }
+            echo '</div></div>';
+            include 'cms/footer.php';
+            exit;
+        }
+    }
+    $area = 'notfound';
+}
+
 $theme = cms_get_setting('theme','default');
 $page = cms_get_custom_page($area,$theme);
 if($page){
