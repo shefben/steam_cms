@@ -2,7 +2,7 @@
 $page_title = 'Network Status';
 
 include __DIR__.'/cms/header.php';
-require_once __DIR__.'cms/utilities/functions.php';
+require_once __DIR__.'/cms/utilities/functions.php';
 
 $now   = time();
 $start = $now - 48*3600;

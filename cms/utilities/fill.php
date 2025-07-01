@@ -1,12 +1,44 @@
 <?php
 // --- Configuration – adjust if you can handle it ---
-$cfg = include '../config.php';
-$db == mysqli($cfg['host'], $cfg['user'], $cfg['pass'], $cfg['dbname'], $cfg['port']);
+  static $db;
+    if ($db) return $db;
 
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
+    $config_path = __DIR__ . '/../config.php';  // use __DIR__ or you deserve the pain
+    if (!file_exists($config_path)) {
+        die('CMS not installed. Please run install.php');
+    }
 
+    $cfg = include $config_path;
+    if (!is_array($cfg)) {
+        die('Invalid config file. Expected an array.');
+    }
+
+    $db = new mysqli($cfg['host'], $cfg['user'], $cfg['pass'], $cfg['dbname'], $cfg['port']);
+
+    if ($db->connect_error) {
+        die('Connection failed: ' . $db->connect_error);
+    }
+
+// 2) Create tables if missing
+$db->query("
+  CREATE TABLE IF NOT EXISTS content_servers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    ip VARCHAR(100),
+    port INT,
+    total_capacity INT
+  )
+");
+$db->query("
+  CREATE TABLE IF NOT EXISTS server_stats (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    server_id INT,
+    available_bandwidth INT,
+    unique_connections INT,
+    last_checked DATETIME,
+    status VARCHAR(10)
+  )
+");
 // 4) Helper to fetch servers
 function get_servers($db){
     $res = $db->query("

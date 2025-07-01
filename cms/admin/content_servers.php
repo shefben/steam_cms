@@ -71,7 +71,7 @@ IP <input type="text" name="main_network_ip" value="<?php echo htmlspecialchars(
 Port <input type="number" name="main_network_port" value="<?php echo $main_port; ?>">
 Theme <select name="cs_theme">
 <option value="default" <?php echo $cs_theme=='default'?'selected':''; ?>>Default</option>
-<option value="late2004" <?php echo $cs_theme=='late2004'?'selected':''; ?>>Late 2004</option>
+<option value="2004" <?php echo $cs_theme=='2004'?'selected':''; ?>> 2004</option>
 </select>
 <input type="hidden" name="set_settings" value="1">
 <input type="submit" value="Update">
