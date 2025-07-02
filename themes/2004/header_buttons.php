@@ -2,6 +2,7 @@
 $root = dirname(__DIR__,2);
 require_once "$root/cms/db.php";
 $base = cms_base_url();
+$theme_url = $theme_url ?? (($base? $base : '').'/themes/2004');
 $site_title = cms_get_setting("site_title","Steam");
 if(!isset($page_title) || $page_title==="") $page_title = $site_title;
 else $page_title = $site_title . " " . $page_title;
@@ -16,7 +17,7 @@ else $page_title = $site_title . " " . $page_title;
     <meta name="DESCRIPTION" content="SteamPowered">
     <meta name="KEYWORDS" content="Steam, account, account creation, signup">
     <meta name="AUTHOR" content="Valve LLC">
-    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($base); ?>/steampowered.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($theme_url); ?>/steampowered.css">
     <style>
     .navBar {
         margin-left: 140px;

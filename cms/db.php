@@ -173,7 +173,7 @@ function cms_header_buttons_html($theme){
             $out .= $sep.'<a class="headerLink" href="'.$url.'">'.htmlspecialchars($text).'</a>';
             $sep = ' &nbsp; | &nbsp; ';
         }
-    }elseif($theme === '2004'){
+    }elseif($theme === '2004' || $theme === '2005_v1' || $theme === '2005_v2'){
         foreach($buttons as $b){
             $text = trim($b['text'] ?? $b['alt'] ?? '');
             if($text === '') continue;

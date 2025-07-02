@@ -83,6 +83,17 @@ function cms_render_news($type,$count=null){
                 }
                 $out .= "<strong><a href='$link' style='text-decoration: none;'>$title</a></strong><br>$summary<br><br>";
                 break;
+            case 'index_summary_date':
+                $text = trim(preg_replace('/\s+/', ' ', strip_tags($content)));
+                if(preg_match('/^(.+?[.!?])\s/', $text, $m)){
+                    $summary = $m[1];
+                }else{
+                    $words = preg_split('/\s+/', $text);
+                    $summary = implode(' ', array_slice($words, 0, 30));
+                }
+                $date_fmt = date('m/d/y', strtotime($row['publish_date']));
+                $out .= "<strong><a href='$link' style='text-decoration: none;'>$title</a></strong><br>($date_fmt)<br>$summary<br><br>";
+                break;
         }
     }
     return $out;

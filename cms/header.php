@@ -35,6 +35,8 @@ if(in_array($page,$bar_only)){
     $type = 'nobuttons';
 }
 $theme_dir = dirname(__DIR__)."/themes/$theme";
+$base_url = cms_base_url();
+$theme_url = ($base_url ? $base_url : '')."/themes/$theme";
 $header = "$theme_dir/header_{$type}.php";
 if(!file_exists($header)) $header = dirname(__DIR__).'/themes/default/header_buttons.php';
 include $header;
