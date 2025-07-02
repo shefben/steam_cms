@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title>Steam</title>
+		<link href="english.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#3e3e3e" topmargin="0" leftmargin="0" >
+		<div align="center">
+			<table width="601" border="0" cellspacing="0" cellpadding="0" background="img/nowplaying01_HL2/MSG_HL2.PlayNow_Q!01.jpg" cool gridx="16" gridy="16" height="559" showgridx showgridy>
+				<tr height="403">
+					<td width="600" height="403" colspan="5"></td>
+					<td width="1" height="403"><spacer type="block" width="1" height="403"></td>
+				</tr>
+				<tr height="41">
+					<td width="10" height="104" rowspan="2"></td>
+					<td content csheight="41" width="580" height="41" colspan="3" valign="top" xpos="10">
+						<div align="center">
+							<span class="hed1"><a href="steam://run/220">NOW PLAYING.</a></span></div>
+					</td>
+					<td width="10" height="104" rowspan="2"></td>
+					<td width="1" height="41"><spacer type="block" width="1" height="41"></td>
+				</tr>
+				<tr height="63">
+					<td content csheight="23" width="580" height="63" colspan="3" valign="top" xpos="10">
+						<div align="center">
+							<a href="steam://run/220"><font size="2">Get it now.</font></a></div>
+					</td>
+					<td width="1" height="63"><spacer type="block" width="1" height="63"></td>
+				</tr>
+				<tr height="51">
+					<td width="31" height="51" colspan="2"></td>
+					<td content csheight="29" width="558" height="51" valign="top" xpos="31">
+						<div align="center">
+							<span class="footer">&copy; Valve Corporation. All rights reserved. Valve, Half-Life, and the Lambda logo are trademarks<br>
+								and/or registered trademarks of Valve Corporation.&nbsp; </span></div>
+					</td>
+					<td width="11" height="51" colspan="2"></td>
+					<td width="1" height="51"><spacer type="block" width="1" height="51"></td>
+				</tr>
+				<tr height="1" cntrlrow>
+					<td width="10" height="1"><spacer type="block" width="10" height="1"></td>
+					<td width="21" height="1"><spacer type="block" width="21" height="1"></td>
+					<td width="558" height="1"><spacer type="block" width="558" height="1"></td>
+					<td width="1" height="1"><spacer type="block" width="1" height="1"></td>
+					<td width="10" height="1"><spacer type="block" width="10" height="1"></td>
+					<td width="1" height="1"></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

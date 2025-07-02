@@ -13,19 +13,267 @@
 
 <body>
 
-<div class="headerimg"><a href="/platform/update_history/Counter-Strike Source.html" target="_new"><img align="absmiddle" border="0" width="17" height="18" src="/img/ie_dark.gif" title="Open this page in a new window" alt="Open this page in a new window"></a></div>
+<div class="headerimg"><a href="/platform/update_history/Counter-Strike Source.html" target="_new"><img align="absmiddle" border="0" width="17" height="18" src="http://www.steampowered.com/img/ie_dark.gif" title="Open this page in a new window" alt="Open this page in a new window"></a></div>
 
 <img src="images/css.gif"><br>
 
-<div class="header" style="padding-top: 5px; padding-bottom: 5px;">Latest update: November 30, 2004</div>
+<div class="header" style="padding-top: 5px; padding-bottom: 5px;">Latest update: October 03, 2005</div>
 
 <span class="note">
 
 <hr align="left" style="width: 100%;"></span>
 <div style="padding-bottom: 5px;"><strong style="color: #eeeeee;">Full Change History:</strong></div>
 
-<span class="linky" onclick="showBranch('November 30, 2004')" id="November 30, 2004-link">[-] November 30, 2004</span> (current release)<br>
-<div id="November 30, 2004" style="display: block; padding-left: 32px">
+<span class="linky" onclick="showBranch('October 03, 2005')" id="October 03, 2005-link">[-] October 03, 2005</span> (current release)<br>
+<div id="October 03, 2005" style="display: block; padding-left: 32px">
+Bug fixes<hr align="left"><ul><li> Fixed loading error when trying to debug Source MODs using the SDK</li>
+<li> Fixed a startup crash in Windows 98</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('August 10, 2005')" id="August 10, 2005-link">[+] August 10, 2005</span> <br>
+<div id="August 10, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Added validation of custom player model and weapon materials. Custom materials must be VertexLitGeneric with only $baseTexture and $bumpmap variables defined</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed "not logged in" error not displaying properly</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('August 04, 2005')" id="August 04, 2005-link">[+] August 04, 2005</span> <br>
+<div id="August 04, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> People that turned off cl_smooth should enable it after this release.</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed prediction errors on the client when navigating.</li>
+<li> Fixed bug where server sent updates slower than specified in cl_updaterate</li>
+<li> Fixed prediction errors when cl_updaterate is a large number.</li>
+<li> Option -heapsize now works correctly on machines with more than 4GB of memory.</li>
+<li> Fixed exploit with demo recording clearing flashbang and smoke effects</li>
+<li> Fixed minor exploit allowing thirdperson even if cheats were disabled on the server</li>
+<li> Fixed bug allowing movement at run speeds while ducked</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('July 20, 2005')" id="July 20, 2005-link">[+] July 20, 2005</span> <br>
+<div id="July 20, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Optimized game to lower CPU usage</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('July 13, 2005')" id="July 13, 2005-link">[+] July 13, 2005</span> <br>
+<div id="July 13, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Made the new Terrorist model leaner</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed model's feet sliding while running</li>
+<li> Fixed model scale problem resulting in under-sized players</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('July 06, 2005')" id="July 06, 2005-link">[+] July 06, 2005</span> <br>
+<div id="July 06, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> New Source remake of classic Counter-Strike map cs_assault</li>
+<li> New "Phoenix Connection" Terrorist model (replaces existing model)</li>
+<li> Walk/run cycles now include whole-body motion</li>
+<li> Players automatically raise their weapon and aim through the sights when they stop to fire</li>
+<li> Weapon-specific reload animations with removable ammo clips added</li>
+<li> Shotgun reloads animate each individual shell reload</li>
+<li> Shotgun reloads animate each individual shell reload</li>
+<li> Added upper-body recoil animations for shotguns and AWP</li>
+<li> New grenade throw and knife animations</li>
+<li> Added item_nvgs and item_<ammotype> entities for fy_ maps</li>
+<li> Spectator UI now resizes controls to account for long map names</li>
+<li> A notification is now displayed to all players when auto-balancing teams</li>
+<li> Added message for players who try to defuse the bomb while another player is already doing so</li>
+<li> Can no longer stab with the knife while defusing or during freeze time at the start of a round</li>
+<li> Player count in dedicated server interface now includes bots</li>
+<li> Dedicated servers can now use the "timeleft" command</li>
+<li> Bots can use sloped ladders now</li>
+<li> Bots open +use doors better</li>
+<li> Bots don't think they're stuck when hiding</li>
+<li> Bots using knives can break breakables while pursuing enemies now</li>
+</ul>Bug fixes<hr align="left"><ul><li> Dedicated servers no longer crash when setting "name" via the console</li>
+<li> Fixed bug that would occasionally make player weapons disappear</li>
+<li> Low-violence death animations no longer float if the player dies
+
+while in the air</li>
+<li> Fixed view jitter caused by prediction errors when near physics objects</li>
+<li> Spectators now hear weapon pickup sounds</li>
+<li> Armor is now given with game_player_equip</li>
+<li> Extra pistol ammo no longer given at round restart</li>
+<li> Weaker flashbangs effects no longer cancel out stronger ones</li>
+<li> Fixed bug that casued hostage scenario HUD icon showing 1 hostage left when all were rescued or dead</li>
+<li> game_player_equip removes player equipment before adding new items</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('May 19, 2005')" id="May 19, 2005-link">[+] May 19, 2005</span> <br>
+<div id="May 19, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Made the radio menu more responsive</li>
+<li> When bullets hit grates and chain-link fences they play the appropriate effects</li>
+<li> Bots will not join or leave during the round when bot_quota_mode is "match" or "fill"</li>
+<li> Improved bot ladder usage</li>
+<li> Bullet decals are now scaled based on distance, to make them more visible at long range</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed bots filling a server and preventing players from joining after round change</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('May 12, 2005')" id="May 12, 2005-link">[+] May 12, 2005</span> <br>
+<div id="May 12, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> New map: de_inferno</li>
+<li> New map: de_port</li>
+<li> C4 red flash displays properly if the bomb is planted under water now</li>
+<li> C4 explosion damage is no longer affected by water</li>
+<li> When a map is loaded, an associated .cfg file is automatically evaluated.  This cfg file must be located in the cstrike/maps/cfg folder and be named &lt;mapname&gt;.cfg.  For instance, the file cstrike/maps/cfg/de_dust.cfg will be evaluated when the map de_dust is loaded.  This is useful for per-map rules, bot rosters, etc.</li>
+<li> Added new route to roof of hostage shack in cs_compound, and improved bot navigation in the map</li>
+<li> Players must now target another player for at least a half second before the player ID text hint shows up</li>
+<li> Grates/chain link fences no longer affect bullets</li>
+<li> Counter-Strike player ragdolls are now affected by ragdoll magnets</li>
+<li> Bots no longer attack enemies that are very far away unless they have a sniper rifle, or the enemies are shooting at them. Instead, they track the enemy and move to a better attack position</li>
+<li> Bots understand +use doors now and will pause to open a door before continuing through it on their way to whatever they were doing</li>
+<li> Bots use less CPU now, especially when in combat with far away enemies</li>
+<li> Extended the syntax of the bot_add, bot_kick, and bot_kill commands to also accept "t" or "ct" arguments.</li>
+<li> Updated Counter-Terrorists player model with new headgear and color scheme</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed a bot crash caused by finding too many hiding spots in a region</li>
+<li> Fixed bug where bots would stop and become unresponsive if they wanted to hide in an area with no hiding spots</li>
+<li> Improved bot navigation on the windows and ledges of cs_italy</li>
+<li> Fixed recording value of cl_interp in demo files and restore value during playback</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('April 13, 2005')" id="April 13, 2005-link">[+] April 13, 2005</span> <br>
+<div id="April 13, 2005" style="display: none; padding-left: 32px">
+Bug fixes<hr align="left"><ul><li> fixed incorrect player names appearing in the scoreboard.</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('April 05, 2005')" id="April 05, 2005-link">[+] April 05, 2005</span> <br>
+<div id="April 05, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Enabled support for SourceTV</li>
+<li> Improved map overview support</li>
+<li> The message of the day file is now required to be in the main game directory</li>
+<li> Death notices are no longer displayed while blind</li>
+<li> Bots immediately change their names to match the bot_prefix when it changes</li>
+<li> Bots join dedicated servers immediately if the bot_quota is nonzero</li>
+<li> Added mp_logdetail at the request of server administrators</li>
+<li> Player sprays now persist through round restarts.  The number of rounds a spray survives is determined by r_spray_lifetime</li>
+<li> Added sv_visiblemaxplayers</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed a rare bug that caused some bullet impacts to be counted twice</li>
+<li> Fixed an issue with player names being out of sync with the server</li>
+<li> Fixed “purple checkerboard” problem for Message of the Day scrollbars</li>
+<li> Fixed some localization issues related to player chat</li>
+<li> Death notices retain the correct team color even if the player quickly changes teams</li>
+<li> Fixed bug where bots would repeatedly fail to join with an invalid Steam ID</li>
+<li> Fixed a bug causing the first message from a plug-in message to be colored incorrectly</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('March 25, 2005')" id="March 25, 2005-link">[+] March 25, 2005</span> <br>
+<div id="March 25, 2005" style="display: none; padding-left: 32px">
+Bug fixes<hr align="left"><ul><li> Fixed crash when turning on the budget panel in Counter-Strike: Source.</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('March 23, 2005')" id="March 23, 2005-link">[+] March 23, 2005</span> <br>
+<div id="March 23, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Added buy favorite system</li>
+<li> Added location names to voice chat</li>
+</ul>Bug fixes<hr align="left"><ul><li> Soundscape files will be loaded properly for custom maps</li>
+<li> Fixed tinnitus effect for HE grenades playing twice</li>
+<li> Fixed the Five-Seven's price not matching the value in the buy menu</li>
+<li> Fixed case where money and chat HUD icons sometimes being the wrong color at round start</li>
+<li> Target IDs will no longer show when mp_fadetoblack is active</li>
+<li> When mp_humanteam is active human teams will be allowed to spectate</li>
+<li> The "hostage" field of the "hostage_rescued" event is filled in correctly</li>
+<li> Equipping the silencer is canceled if the player switches weapons</li>
+<li> Fixed problems with the hostage shack door in cs_compound</li>
+<li> Fixed "Hostage Rescue Zone" not showing up properly in chat and under the radar</li>
+<li> Players can only change their names once every 10 seconds, with a max of 5 times every 10 minutes</li>
+<li> "Enemy Spotted" hint text doesn't show for players behind smoke clouds</li>
+<li> Flashbang effect can't be reduced by hitting escape or turning off the HUD</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('March 09, 2005')" id="March 09, 2005-link">[+] March 09, 2005</span> <br>
+<div id="March 09, 2005" style="display: none; padding-left: 32px">
+Bug fixes<hr align="left"><ul><li> Fixed an issue which was affecting player movement prediction</li>
+<li> Stopped players on de_dust2 being able to hide inside of rocks</li>
+<li> Added clipbrushes to de_train to prevent players from reaching certain areas</li>
+<li> Enabled bots to navigate their way out of the carts in cs_compound</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('February 24, 2005')" id="February 24, 2005-link">[+] February 24, 2005</span> <br>
+<div id="February 24, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> New hostage resuce map cs_compound</li>
+<li> Added Source version of de_train</li>
+<li> Upgraded version of the CT player model</li>
+<li> Location names are shown in radio/team chat, and under the radar</li>
+<li> Server tickrate can be specified with -tickrate</li>
+<li> Added radio command aliases</li>
+<li> Added mp_humanteam cvar [any | ct | t] (forces human players onto specified team – useful for humans vs bots)</li>
+<li> Added new “match” mode for bot_quota -- If bot_quota_mode = “match”, bot count = (human count) * bot_quota</li>
+<li> Bots no longer automatically follow humans (bot_auto_follow now defaults to 0)</li>
+<li> Bots are balanced before humans with mp_autoteambalance</li>
+<li> Bots can open simple +use doors</li>
+<li> Bots change their names to match the prefix when bot_prefix changes</li>
+<li> Several improvements to bot behavior when paths become blocked -- solves problems specific to cs_havana</li>
+<li> Bots won’t throw grenades if something is blocking their throw</li>
+<li> Bots are better at only breaking objects that are in their way</li>
+<li> Fixed bug where a bot occasionally “dithered” rapidly between two or more targets without firing</li>
+<li> bot_kick and bot_kill console commands use the bot's base name without the bot_prefix</li>
+<li> de_piranesi - bots avoid the breakable crates better.</li>
+<li> A bomb exploding just as the round restarts no longer kills players at the start of the next round</li>
+<li> Grenades being thrown when the player dies no longer disappear</li>
+<li> Increased mp_limitteams bounds to 0-30, where 0 will disable this functionality</li>
+<li> Players’ arms and hands can be hit by bullets now</li>
+<li> Target ID font is proportional, and it doesn't become resize incorrectly after a resolution change</li>
+<li> Overviews don't show player locations when mp_fadetoblack is on</li>
+<li> Players with spaces in their names can be selected in the spectator GUI</li>
+<li> Observers can change their name at round restart</li>
+<li> Throwing a grenade right at round restart no longer results in holding a “ghost” grenade viewmodel at respawn</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('January 17, 2005')" id="January 17, 2005-link">[+] January 17, 2005</span> <br>
+<div id="January 17, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Added Counter-Strike bots. For a more detailed description, click <a target=_blank href="/?area=CSS_bots">here</a>.</li>
+<li> Added new bomb defusal map de_tides.</li>
+<li> Updated version of de_cbble to allow bots to navigate ladders.</li>
+<li> Updated version of de_dust2 to allow 40 players.</li>
+<li> Optimization to the way that dynamic props are checked.  On higher end CPUs, this can result in more than a 5% total frame rate increase.</li>
+<li> Weapon models are now checked at startup to make sure they are within limits for size.</li>
+<li> Added “motdfile” cvar, which sets the filename for the message of the day on the server.</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed a bug that would allow a player to throw two flashbangs at once.</li>
+<li> Fixed bug where players would get twice the normal money at the start of a round.</li>
+<li> Updated version of cs_office. Fixes minor issue with projector.</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('December 15, 2004')" id="December 15, 2004-link">[+] December 15, 2004</span> <br>
+<div id="December 15, 2004" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Added map: de_prodigy</li>
+<li> Improved player movement against walls</li>
+<li> Improved choppy player movement when bouncing down slopes</li>
+<li> Purchase icon for defuser is shown</li>
+<li> Physics prop avoidance is scaled by the object's mass</li>
+<li> Detail prop fade distance can be controlled on a per-map basis with env_detail_controller</li>
+<li> Spectator GUI last mode is saved</li>
+<li> Added spectate player by name</li>
+<li> Grenades, weapons, etc splash when they land in water</li>
+<li> Frag grenade deafness is delayed so the explosion is heard</li>
+<li> Fixed viewmodel lag</li>
+<li> Added consistency checking player model bounds</li>
+<li> Weapon reloads finish when the round restarts</li>
+<li> Autobuy and rebuy trigger a reload if you don't buy a primary weapon</li>
+<li> Rebuy doesn't drop pistols the player has picked up</li>
+<li> Dropped weapon ammo isn't lost if the player has another weapon using that ammo</li>
+<li> Re-added hostage hint messages</li>
+<li> Smoke grenade canisters fade out and are removed when smoke is dense</li>
+<li> Breakable glass is blown outward proportional to the damage recieved</li>
+<li> Soundscapes update for observers</li>
+<li> Fixed not being able to attach to ladder tops</li>
+<li> Misc fixes to spray import</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('November 30, 2004')" id="November 30, 2004-link">[+] November 30, 2004</span> <br>
+<div id="November 30, 2004" style="display: none; padding-left: 32px">
 Changes/Additions<hr align="left"><ul><li> HTTP and non-HTTP map auto downloading functionality</li>
 <li> Enhanced dedicated server logging capabilities</li>
 <li> Various tweaks and fixes</li>
@@ -200,7 +448,7 @@ Changes/Additions<hr align="left"><ul><li> Improved Steam behavior for listen se
 
 <span class="linky" onclick="showBranch('August 11, 2004')" id="August 11, 2004-link">[+] August 11, 2004</span> <br>
 <div id="August 11, 2004" style="display: none; padding-left: 32px">
-Changes/Additions<hr align="left"><ul><li> Released for play at cyber caf&eacute;s</li>
+Changes/Additions<hr align="left"><ul><li> Released for play at cyber cafés</li>
 </ul>
 </div>
 

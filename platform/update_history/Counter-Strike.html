@@ -13,19 +13,50 @@
 
 <body>
 
-<div class="headerimg"><a href="/platform/update_history/Counter-Strike.html" target="_new"><img align="absmiddle" border="0" width="17" height="18" src="/img/ie_dark.gif" title="Open this page in a new window" alt="Open this page in a new window"></a></div>
+<div class="headerimg"><a href="/platform/update_history/Counter-Strike.html" target="_new"><img align="absmiddle" border="0" width="17" height="18" src="http://www.steampowered.com/img/ie_dark.gif" title="Open this page in a new window" alt="Open this page in a new window"></a></div>
 
 <img src="images/counter-strike.gif"><br>
 
-<div class="header" style="padding-top: 5px; padding-bottom: 5px;">Latest update: August 11, 2004</div>
+<div class="header" style="padding-top: 5px; padding-bottom: 5px;">Latest update: October 03, 2005</div>
 
 <span class="note">
 
 <hr align="left" style="width: 100%;"></span>
 <div style="padding-bottom: 5px;"><strong style="color: #eeeeee;">Full Change History:</strong></div>
 
-<span class="linky" onclick="showBranch('August 11, 2004')" id="August 11, 2004-link">[-] August 11, 2004</span> (current release)<br>
-<div id="August 11, 2004" style="display: block; padding-left: 32px">
+<span class="linky" onclick="showBranch('October 03, 2005')" id="October 03, 2005-link">[-] October 03, 2005</span> (current release)<br>
+<div id="October 03, 2005" style="display: block; padding-left: 32px">
+Bug fixes<hr align="left"><ul><li> Fixed name exploit causing client crash</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('September 15, 2005')" id="September 15, 2005-link">[+] September 15, 2005</span> <br>
+<div id="September 15, 2005" style="display: none; padding-left: 32px">
+Bug fixes<hr align="left"><ul><li> Fixed game not loading problem in machines with more than 4GB of ram</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('August 08, 2005')" id="August 08, 2005-link">[+] August 08, 2005</span> <br>
+<div id="August 08, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Servers will default to starting up using VAC2</li>
+<li> Added "sv_uploadmax" cvar to limit the max size (in MB) a client can use for a custom resource (i.e spray decals)</li>
+<li> Don't allow servers to execute "alias" commands on clients (prevents an infinite loop exploit using alias commands from servers)</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed menu exploit on join that spawned you into the server but moved you around as you were in spectator mode</li>
+<li> Fixed possible lockup when refreshing a login ticket</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('June 07, 2005')" id="June 07, 2005-link">[+] June 07, 2005</span> <br>
+<div id="June 07, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Added a challenge number to A2S_PLAYER and A2S_RULES server queries</li>
+<li> Changed A2S_INFO server query to require the string "Source Engine Query" appended to the end of the query packet</li>
+<li> Removed support for "info", "infostring", "details", "players" and "rules" queries, use A2S_INFO, A2S_PLAYERS and A2S_RULES instead</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed several exploits triggered by malicious server operators (found by Stan Bubrouski)</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('August 11, 2004')" id="August 11, 2004-link">[+] August 11, 2004</span> <br>
+<div id="August 11, 2004" style="display: none; padding-left: 32px">
 Changes/Additions<hr align="left"><ul><li> Force spec_pip off if forcechase cam modes are set</li>
 <li> Improved lag compensation for the player with the last player slot (ie. player 10 on a 10 player server)</li>
 <li> Changed engine to respond to new server info query</li>

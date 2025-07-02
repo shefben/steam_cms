@@ -13,19 +13,38 @@
 
 <body>
 
-<div class="headerimg"><a href="/platform/update_history/Dedicated Server.html" target="_new"><img align="absmiddle" border="0" width="17" height="18" src="/img/ie_dark.gif" title="Open this page in a new window" alt="Open this page in a new window"></a></div>
+<div class="headerimg"><a href="/platform/update_history/Dedicated Server.html" target="_new"><img align="absmiddle" border="0" width="17" height="18" src="http://www.steampowered.com/img/ie_dark.gif" title="Open this page in a new window" alt="Open this page in a new window"></a></div>
 
 <B>UPDATE NEWS - DEDICATED SERVER</B>
 
-<div class="header" style="padding-top: 5px; padding-bottom: 5px;">Latest update: May 03, 2004</div>
+<div class="header" style="padding-top: 5px; padding-bottom: 5px;">Latest update: August 11, 2005</div>
 
 <span class="note">
 
 <hr align="left" style="width: 100%;"></span>
 <div style="padding-bottom: 5px;"><strong style="color: #eeeeee;">Full Change History:</strong></div>
 
-<span class="linky" onclick="showBranch('May 03, 2004')" id="May 03, 2004-link">[-] May 03, 2004</span> (current release)<br>
-<div id="May 03, 2004" style="display: block; padding-left: 32px">
+<span class="linky" onclick="showBranch('August 11, 2005')" id="August 11, 2005-link">[-] August 11, 2005</span> (current release)<br>
+<div id="August 11, 2005" style="display: block; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Implemented a client cvar value querying API (to replace the alias method various 3rd party tools were using). Servers can call enginefuncs_t::pfnQueryClientCvarValue() and will get a callback for that cvar value via NEW_DLL_FUNCTIONS::pfnCvarValue().</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed "-sport" parameter being ignored</li>
+<li> Fixed RCON failing when you were not connected to the server itself</li>
+<li> Fixed game servers failing to connect to VAC servers on machines with multiple network interfaces</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('June 07, 2005')" id="June 07, 2005-link">[+] June 07, 2005</span> <br>
+<div id="June 07, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> As part of the next version of VAC which is currently in testing, the Linux game server now must have GLIBC 2.3.2 or above installed</li>
+<li> Added a challenge number to A2S_PLAYER and A2S_RULES server queries</li>
+<li> Changed A2S_INFO server query to require the string "Source Engine Query" appended to the end of the query packet</li>
+<li> Removed support for "info", "infostring", "details", "players" and "rules" queries, use A2S_INFO, A2S_PLAYERS and A2S_RULES instead</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed several exploits triggered by malicious server operators (found by Stan Bubrouski)</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('May 03, 2004')" id="May 03, 2004-link">[+] May 03, 2004</span> <br>
+<div id="May 03, 2004" style="display: none; padding-left: 32px">
 Changes/Additions<hr align="left"><ul><li> Updated HLTV with sv_downloadurl</li>
 </ul>
 </div>

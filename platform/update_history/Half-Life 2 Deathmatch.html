@@ -13,19 +13,98 @@
 
 <body>
 
-<div class="headerimg"><a href="/platform/update_history/Half-Life 2 Deathmatch.html" target="_new"><img align="absmiddle" border="0" width="17" height="18" src="/img/ie_dark.gif" title="Open this page in a new window" alt="Open this page in a new window"></a></div>
+<div class="headerimg"><a href="/platform/update_history/Half-Life 2 Deathmatch.html" target="_new"><img align="absmiddle" border="0" width="17" height="18" src="http://www.steampowered.com/img/ie_dark.gif" title="Open this page in a new window" alt="Open this page in a new window"></a></div>
 
 <B>UPDATE NEWS - HALF-LIFE 2: DEATHMATCH</B>
 
-<div class="header" style="padding-top: 5px; padding-bottom: 5px;">Latest update: November 30, 2004</div>
+<div class="header" style="padding-top: 5px; padding-bottom: 5px;">Latest update: June 01, 2005</div>
 
 <span class="note">
 
 <hr align="left" style="width: 100%;"></span>
 <div style="padding-bottom: 5px;"><strong style="color: #eeeeee;">Full Change History:</strong></div>
 
-<span class="linky" onclick="showBranch('November 30, 2004')" id="November 30, 2004-link">[-] November 30, 2004</span> (current release)<br>
-<div id="November 30, 2004" style="display: block; padding-left: 32px">
+<span class="linky" onclick="showBranch('June 01, 2005')" id="June 01, 2005-link">[-] June 01, 2005</span> (current release)<br>
+<div id="June 01, 2005" style="display: block; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Score in teamplay mode no longer wraps back to zero 0 when it goes past 127</li>
+<li> Added cvar "cl_autowepswitch" to allow automatic weapon switching to be turned off</li>
+<li> Flashlight no longer turns off when auxiliary power is drained</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed bug in player bounding boxes while crouching</li>
+<li> Auxiliary power now resets when a player respawns after drowning</li>
+<li> Fixed explosive barrels to allow burning after respawn</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('April 26, 2005')" id="April 26, 2005-link">[+] April 26, 2005</span> <br>
+<div id="April 26, 2005" style="display: none; padding-left: 32px">
+Bug fixes<hr align="left"><ul><li> Fixed an exploit in dm_runnoff where players could repeatedly call in airstrikes</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('April 25, 2005')" id="April 25, 2005-link">[+] April 25, 2005</span> <br>
+<div id="April 25, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Added new map, dm_runoff</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('April 13, 2005')" id="April 13, 2005-link">[+] April 13, 2005</span> <br>
+<div id="April 13, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Three Half-Life 2: Deathmatch maps are now available via Steam.
+The new maps are:
+<ul>
+<li>Winner: dm_underpass by Scott M Jordan, USA 
+<li>1st Runner Up: dm_resistance* by Jonathan Linker, Germany 
+<li>2nd Runner Up: dm_powerhouse by Michael Schulz, Germany
+</ul>
+<i>*Based upon "Bodies" from Blood.</i></li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('February 24, 2005')" id="February 24, 2005-link">[+] February 24, 2005</span> <br>
+<div id="February 24, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Fixed model exploit that would allow players to select an invalid player model</li>
+<li> Added weapon type to server log</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('February 17, 2005')" id="February 17, 2005-link">[+] February 17, 2005</span> <br>
+<div id="February 17, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Added SLAM, Stunstick and Crowbar</li>
+<li> Added new map dm_steamlab</li>
+<li> Fixed game_score entity not awarding points</li>
+<li> Added team specific spawn points ( info_player_combine, info_player_rebel)</li>
+<li> Optimized weapon firing effects bandwidth usage</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('December 10, 2004')" id="December 10, 2004-link">[+] December 10, 2004</span> <br>
+<div id="December 10, 2004" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Fixed players entering the game with a score of -1</li>
+<li> Fixed combine ball tracking teammates</li>
+<li> Fixed not being able to grab level designer placed combine balls with the physics cannon</li>
+<li> Fixed players randomly spawning without physcannons</li>
+<li> Fixed multishot pistol exploit</li>
+<li> Fixed wrong footstep sounds while in team mode</li>
+<li> Fixed last RPG shot not tracking</li>
+<li> Added cl_defaultweapon -- defaults to weapon_physcannon but can be changed to any other weapon you spawn with</li>
+<li> Added HUD string to print team name</li>
+<li> Added model specific death sounds</li>
+<li> Switching to the physcannon is now instantaneous</li>
+<li> Toned down 357 damage</li>
+<li> Updated dm_overwatch</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('December 02, 2004')" id="December 02, 2004-link">[+] December 02, 2004</span> <br>
+<div id="December 02, 2004" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Players now play grenade throw animation and RPG fire animation</li>
+<li> Items and weapons punted from their original spawn position now return after x time has passed (sv_hl2mp_weapon_respawn_time, sv_hl2mp_item_respawn_time)</li>
+<li> Improved player crouch animations</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('November 30, 2004')" id="November 30, 2004-link">[+] November 30, 2004</span> Initial Release<br>
+<div id="November 30, 2004" style="display: none; padding-left: 32px">
 Changes/Additions<hr align="left"><ul><li> HL2DM released!</li>
 </ul>
 </div>
