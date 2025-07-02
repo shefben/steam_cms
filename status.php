@@ -4,7 +4,7 @@ $page_title = 'Network Status';
 include __DIR__.'/cms/header.php';
 require_once __DIR__.'/cms/utilities/functions.php';
 require_once __DIR__.'/cms/db.php';
-$theme = cms_get_setting('theme','default');
+$theme = cms_get_setting('theme','2004');
 if(!in_array($theme,['2003','2004','2005'])){
     readfile(__DIR__.'/archived_steampowered/2006+2007_statistics/index.html');
     include __DIR__.'/cms/footer.php';

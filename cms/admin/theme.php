@@ -1,7 +1,7 @@
 <?php
 require_once 'admin_header.php';
 cms_require_permission('manage_settings');
-$theme = cms_get_setting('theme','default');
+$theme = cms_get_setting('theme','2004');
 $show = cms_get_setting('support2003_show','1');
 $html = cms_get_setting('support2003_html','<div class="notification"><b>:: REQUIRED UPDATE AVAILABLE</b></div>');
 $themes = [];

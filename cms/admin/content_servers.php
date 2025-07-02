@@ -8,7 +8,7 @@ $main_port = get_setting($db,'main_network_port');
 $themes = [];
 cms_refresh_themes();
 $themes = cms_get_themes();
-$cs_theme = get_setting($db,'cs_theme') ?: ($themes[0] ?? 'default');
+$cs_theme = get_setting($db,'cs_theme') ?: ($themes[0] ?? '2004');
 if(!in_array($cs_theme,$themes) && $themes){
     $cs_theme = $themes[0];
     set_setting($db,'cs_theme',$cs_theme);

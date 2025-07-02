@@ -1,7 +1,7 @@
 <?php
 require_once 'admin_header.php';
 cms_require_permission('manage_pages');
-$theme = cms_get_setting('theme','default');
+$theme = cms_get_setting('theme','2004');
 $slug = $theme.'_index';
 $db = cms_get_db();
 $msg = '';

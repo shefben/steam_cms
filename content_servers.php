@@ -14,14 +14,14 @@ $total_available = get_total_available($servers);
 $max_capacity = 0; foreach($servers as $s){ if($s['total_capacity']>$max_capacity) $max_capacity=$s['total_capacity']; }
 cms_refresh_themes();
 $themes = cms_get_themes();
-$cs_theme = cms_get_setting('cs_theme','default');
+$cs_theme = cms_get_setting('cs_theme','2004');
 if(!in_array($cs_theme,$themes)){
-    $cs_theme = $themes[0] ?? 'default';
+    $cs_theme = $themes[0] ?? '2004';
 }
 include __DIR__.'/cms/header.php';
 $theme_dir = __DIR__.'/themes/'.$cs_theme;
 if(!is_file($theme_dir.'/contentserver_block.php')){
-    $theme_dir = __DIR__.'/themes/default';
+    $theme_dir = __DIR__.'/themes/2004';
 }
 $theme_file = $theme_dir.'/contentserver_block.php';
 include $theme_file;

@@ -43,7 +43,7 @@ if($area === 'faq' && isset($_GET['id'])){
     $area = 'notfound';
 }
 
-$theme = cms_get_setting('theme','default');
+$theme = cms_get_setting('theme','2004');
 $page = cms_get_custom_page($area,$theme);
 if($page){
     $page_title = $page['title'];
