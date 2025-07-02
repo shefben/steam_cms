@@ -9,7 +9,8 @@
 	<meta name="DESCRIPTION" content="SteamPowered">
 	<meta name="KEYWORDS" content="Steam, account, account creation, signup">
 	<meta name="AUTHOR" content="Valve LLC">
-	<LINK rel="stylesheet" type="text/css" href="steampowered.css">
+	<link rel="stylesheet" type="text/css" href="steampowered.css">
+	<!-- css2 --> 
 	<link rel="Shortcut Icon" type="image/png" href="/webicon.png">
 	<script language="JavaScript" src="nav.js"></script>
 	<link href="http://www.steampowered.com/rss.xml" rel="alternate" type="application/rss+xml" title="Valve RSS News Feed" />
@@ -21,6 +22,10 @@
 <div class="header">
 <nobr><a href="index.php"><img src="/img/steam_logo_onblack.gif" align="top" alt="[Steam]" height="54" width="152"></a>
 <span class="navBar">
+	<a href="http://storefront.steampowered.com/v2/"><img name="games" valign="bottom" height="22" width="66" src="img/games.gif"
+		onMouseOut="this.src='img/games.gif';" onMouseOver="this.src='img/MOgames.gif';"
+		alt="news"></a> 
+
 	<a href="index.php?area=news"><img name="news" valign="bottom" height="22" width="54" src="img/news.gif"
 		onMouseOut="this.src='img/news.gif';" onMouseOver="this.src='img/MOnews.gif';"
 		alt="news"></a>
@@ -33,7 +38,7 @@
 		onMouseOut="this.src='img/cafes.gif'" onMouseOver="this.src='img/MOcafes.gif'"
 		alt="Cyber Cafes"></a>
 
-	<a href="http://steampowered.custhelp.com/"><img valign="bottom" height="22" width="68" src="img/support.gif"
+	<a href="http://support.steampowered.com/"><img valign="bottom" height="22" width="68" src="img/support.gif"
 		onMouseOut="this.src='img/support.gif'" onMouseOver="this.src='img/MOsupport.gif'"
 		alt="Support"></a>
 
@@ -57,7 +62,9 @@
 	<h2>VALVE <em>NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 	<br>
 	<div class="narrower">
-	<p>That news item could not be found in the database.</p>
+	<p><h3><a href="index.php?area=news&id=482" style="text-decoration: none; color: #BFBA50;">Day of Defeat: Source Update Available</a></h3>
+<span style="font-size: 9px;">November 22, 2005, 12:39 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">Alfred Reynolds</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+An update to Day of Defeat: Source has been released. The update will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Day of Defeat: Source</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Updated gameinfo.txt to support the Source SDK</ul><br><br></p>
 
 <ul><li> <a href="index.php?area=news" style="text-decoration: none;"><i>return to news page</i></a></ul>
 	</div>
@@ -70,7 +77,7 @@
 	<tr>
 		<td><a href="http://www.valvesoftware.com"><img src="img/valve_greenlogo.gif"></a></td>
 		<td>&nbsp;</td>
-		<td><span class="footerfix">&copy; 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
+		<td><span class="footerfix">&copy; 2005 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
 		<td width="15%">&nbsp;</td>
 	</tr>
 	</table>

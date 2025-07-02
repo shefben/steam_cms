@@ -62,7 +62,9 @@
 	<h2>VALVE <em>NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 	<br>
 	<div class="narrower">
-	<p>That news item could not be found in the database.</p>
+	<p><h3><a href="index.php?area=news&id=450" style="text-decoration: none; color: #BFBA50;">Day of Defeat: Source and Source Engine Updates Available</a></h3>
+<span style="font-size: 9px;">September 27, 2005, 7:09 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">Alfred Reynolds</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+Updates to Day of Defeat: Source and the Source Engine have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Source Engine</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed some video cards being incorrectly set to DX9 when they should have been DX8. This would cause a significant performance problem for affected hardware<br><li>Changed refresh behavior of server browser. Old behavior was generating too much traffic when list was not open<br><li>Fixed bug where VAC would sometimes hold onto .dlls after a game had been shut down completely<br><li>Fixed a crash which could sometimes occur immediately after launching a game<br></ul><br><b>Day of Defeat: Source</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added the default mapcycle.txt to servers running Day of Defeat: Source<br><li>Fixed crash bug when using %s in your player name<br></ul><br><b>Source Dedicated Server</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed bug in dedicated server engine that incorrectly displayed their anti-cheat status (servers were showing as insecure, but were running in secure mode)</ul><br><br></p>
 
 <ul><li> <a href="index.php?area=news" style="text-decoration: none;"><i>return to news page</i></a></ul>
 	</div>

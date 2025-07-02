@@ -33,7 +33,7 @@
 		onMouseOut="this.src='img/cafes.gif'" onMouseOver="this.src='img/MOcafes.gif'"
 		alt="Cyber Cafes"></a>
 
-	<a href="http://steampowered.custhelp.com/"><img valign="bottom" height="22" width="68" src="img/support.gif"
+	<a href="http://support.steampowered.com/"><img valign="bottom" height="22" width="68" src="img/support.gif"
 		onMouseOut="this.src='img/support.gif'" onMouseOver="this.src='img/MOsupport.gif'"
 		alt="Support"></a>
 
@@ -57,7 +57,9 @@
 	<h2>VALVE <em>NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 	<br>
 	<div class="narrower">
-	<p>That news item could not be found in the database.</p>
+	<p><h3><a href="index.php?area=news&id=394" style="text-decoration: none; color: #BFBA50;">Source Dedicated Server Update</a></h3>
+<span style="font-size: 9px;">February 18, 2005, 4:37 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">cliffe</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+A Source Dedicated Server update is available and will be applied automatically when Steam is restarted. The changes include:<br><br><b>Source Dedicated Server</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added Half-Life 2: Deathmatch to the dedicated server UI</li><br><li>Temporarily disabled SourceTV beta for backend changes</li><br></ul><br></p>
 
 <ul><li> <a href="index.php?area=news" style="text-decoration: none;"><i>return to news page</i></a></ul>
 	</div>
@@ -70,7 +72,7 @@
 	<tr>
 		<td><a href="http://www.valvesoftware.com"><img src="img/valve_greenlogo.gif"></a></td>
 		<td>&nbsp;</td>
-		<td><span class="footerfix">&copy; 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
+		<td><span class="footerfix">&copy; 2005 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
 		<td width="15%">&nbsp;</td>
 	</tr>
 	</table>

@@ -33,7 +33,7 @@
 		onMouseOut="this.src='img/cafes.gif'" onMouseOver="this.src='img/MOcafes.gif'"
 		alt="Cyber Cafes"></a>
 
-	<a href="http://steampowered.custhelp.com/"><img valign="bottom" height="22" width="68" src="img/support.gif"
+	<a href="http://support.steampowered.com/"><img valign="bottom" height="22" width="68" src="img/support.gif"
 		onMouseOut="this.src='img/support.gif'" onMouseOver="this.src='img/MOsupport.gif'"
 		alt="Support"></a>
 
@@ -70,7 +70,7 @@
 	<tr>
 		<td><a href="http://www.valvesoftware.com"><img src="img/valve_greenlogo.gif"></a></td>
 		<td>&nbsp;</td>
-		<td><span class="footerfix">&copy; 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
+		<td><span class="footerfix">&copy; 2005 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
 		<td width="15%">&nbsp;</td>
 	</tr>
 	</table>

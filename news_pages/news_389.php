@@ -62,7 +62,9 @@
 	<h2>VALVE <em>NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 	<br>
 	<div class="narrower">
-	<p>That news item could not be found in the database.</p>
+	<p><h3><a href="index.php?area=news&id=389" style="text-decoration: none; color: #BFBA50;">Counter-Strike: Source Update Released</a></h3>
+<span style="font-size: 9px;">January 17, 2005, 3:12 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">Alfred Reynolds</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+A Counter-Strike: Source update is available and will be applied automatically when Steam is restarted. The changes include:<br><br><b>Counter-Strike: Source</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added Counter-Strike bots. For a more detailed description, click <a href="/?area=CSS_bots">here</a></li><br><li>Added new bomb defusal map de_tides</li><br><li>Updated version of de_cbble to allow bots to navigate ladders</li><br><li>Updated version of cs_office. Fixes minor issue with projector</li><br><li>Updated version of de_dust2 to allow 40 players</li><br><li>Optimization to the way that dynamic props are checked.  On higher end CPUs, this can result in more than a 5% total frame rate increase</li><br><li>Fixed bug where players would get twice the normal money at the start of a round</li><br><li>Weapon models are now checked at startup to make sure they are within limits for size</li><br><li>Fixed a bug that would allow a player to throw two flashbangs at once</li><br><li>Added "motdfile" cvar, which sets the filename for the message of the day on the server</li><br><li>Fixed logic that will automatically kick players for killing hostage or being idle for a long time</li><br></ul><br></p>
 
 <ul><li> <a href="index.php?area=news" style="text-decoration: none;"><i>return to news page</i></a></ul>
 	</div>

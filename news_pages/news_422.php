@@ -62,7 +62,9 @@
 	<h2>VALVE <em>NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 	<br>
 	<div class="narrower">
-	<p>That news item could not be found in the database.</p>
+	<p><h3><a href="index.php?area=news&id=422" style="text-decoration: none; color: #BFBA50;">HL1 Engine Update</a></h3>
+<span style="font-size: 9px;">June 7, 2005, 4:12 pm &middot; <a href="mailto:contact@valvesoftware.com" style="text-decoration: none;">Alfred Reynolds</a><table width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" width="100%" bgcolor="#808080"></td></tr><tr><td height="10" width="100%"></td></tr></table></span>
+Updates to the HL1 Engine have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>HL1 Engine</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed several exploits triggered by malicious server operators (found by Stan Bubrouski)<br><li>As part of the next version of VAC, which is currently in testing, the Linux game server now must have GLIBC 2.3.2 or above installed<br></ul><br><b>HL1 Engine Master Server Query Protocol</b><br><i>These changes bring the HL1 engine's querying protocol in line with that of the Source engine. If you connect to Steam enabled game servers using a third party tool, you may need to contact the vendor for an update.</i><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added a challenge number to A2S_PLAYER and A2S_RULES server queries.<br><i>Setting "sv_enableoldqueries" to 1 (currently the default) allows old style (no challenge/response) queries to work</i><br><li>Changed A2S_INFO server query to require the string "Source Engine Query" appended to the end of the query packet<br><li>Removed support for "info", "infostring", "details", "players" and "rules" queries, use A2S_INFO, A2S_PLAYERS and A2S_RULES instead<br></ul><br></p>
 
 <ul><li> <a href="index.php?area=news" style="text-decoration: none;"><i>return to news page</i></a></ul>
 	</div>
