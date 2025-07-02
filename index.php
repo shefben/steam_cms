@@ -2,13 +2,16 @@
 if (isset($_GET['area'])) {
         $area = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['area']);
 } else {
+        // Render the home page when no specific area is requested.  The
+        // home page logic lives in home.php which will determine the
+        // appropriate theme and template to use.  Previously this block
+        // attempted to check for a template using an undefined variable
+        // $tpl which resulted in a redirect to the news page.  The news
+        // page expects a template that doesn't exist in the default theme
+        // leading to a blank page on first load.  Simply delegate to
+        // home.php.
         require_once __DIR__.'/cms/db.php';
-        $theme = cms_get_setting('theme','default');
-        if(file_exists($tpl)){
-                require 'home.php';
-                exit;
-        }
-        header('Location: index.php?area=news');
+        require 'home.php';
         exit;
 }
 require_once __DIR__.'/cms/db.php';
