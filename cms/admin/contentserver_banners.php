@@ -1,15 +1,37 @@
 <?php
 require_once 'admin_header.php';
 cms_require_permission('manage_settings');
+
 $base_dir = dirname(__DIR__,2);
-$img_dir = $base_dir.'/platform/banner/img';
-$disabled_dir = $img_dir.'/disabled';
-if(!is_dir($disabled_dir)) mkdir($disabled_dir,0777,true);
 $base_url = cms_base_url();
+
+// years to manage
+$years = [
+    '2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','custom'
+];
+
 function list_imgs($dir){
     return glob($dir.'/*.{gif,jpg,png,GIF,JPG,PNG}', GLOB_BRACE) ?: [];
 }
+
+// gather banner lists for each year
+$enabled_imgs = $disabled_imgs = [];
+foreach($years as $y){
+    $img_dir = "$base_dir/platform/banner/$y/img";
+    $disabled_dir = "$img_dir/disabled";
+    if(!is_dir($img_dir)) mkdir($img_dir,0777,true);
+    if(!is_dir($disabled_dir)) mkdir($disabled_dir,0777,true);
+    $enabled_imgs[$y] = list_imgs($img_dir);
+    $disabled_imgs[$y] = list_imgs($disabled_dir);
+}
+
+$errors = [];
 if($_SERVER['REQUEST_METHOD']==='POST'){
+    $year = $_POST['year'] ?? '';
+    if(!in_array($year,$years,true)) $year = $years[0];
+
+    $img_dir = "$base_dir/platform/banner/$year/img";
+    $disabled_dir = "$img_dir/disabled";
     if(isset($_POST['toggle'])){
         $name = basename($_POST['file']);
         if($_POST['status']==='disable'){
@@ -43,78 +65,107 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             header('Location: contentserver_banners.php');
             exit;
         }else{
-            $error = 'Banner must be 340x50 pixels.';
+            $errors[$year] = 'Banner must be 340x50 pixels.';
         }
     }
 }
-$enabled_imgs = list_imgs($img_dir);
-$disabled_imgs = list_imgs($disabled_dir);
+
 ?>
 <h2>ContentServer Banner Management</h2>
-<?php if(isset($error)): ?>
-<div id="upload-error" style="color:red;"><?php echo htmlspecialchars($error); ?></div>
-<?php else: ?>
-<div id="upload-error" style="color:red;display:none;"></div>
-<?php endif; ?>
-<form id="uploadForm" method="post" enctype="multipart/form-data">
-<input type="file" name="banner" id="banner" required>
-<button type="submit" name="upload" value="1">Upload</button>
-</form>
-<table border="1" cellpadding="2">
-<tr><th>Enabled</th><th>Image</th><th>Actions</th></tr>
-<?php foreach($enabled_imgs as $img): $n=basename($img); ?>
-<tr>
-<td>
-<form method="post">
-<input type="hidden" name="file" value="<?php echo htmlspecialchars($n); ?>">
-<input type="hidden" name="status" value="disable">
-<input type="checkbox" onchange="this.form.submit()" checked>
-<input type="hidden" name="toggle" value="1">
-</form>
-</td>
-<td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/img/'.$n); ?>" width="340" height="50" alt=""></td>
-<td>
-<form method="post" style="display:inline">
-<button name="delete" value="<?php echo htmlspecialchars($n); ?>" onclick="return confirm('Delete banner?');">Delete</button>
-</form>
-</td>
-</tr>
+
+<ul class="tab-links">
+<?php foreach($years as $i=>$y): ?>
+    <li><a href="#" class="tab-link<?php echo $i===0?' active':''; ?>" data-tab="<?php echo htmlspecialchars($y); ?>"><?php echo htmlspecialchars($y); ?></a></li>
 <?php endforeach; ?>
-<?php foreach($disabled_imgs as $img): $n=basename($img); ?>
-<tr>
-<td>
-<form method="post">
-<input type="hidden" name="file" value="<?php echo htmlspecialchars($n); ?>">
-<input type="hidden" name="status" value="enable">
-<input type="checkbox" onchange="this.form.submit()">
-<input type="hidden" name="toggle" value="1">
-</form>
-</td>
-<td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/img/disabled/'.$n); ?>" width="340" height="50" alt=""></td>
-<td>
-<form method="post" style="display:inline">
-<button name="delete" value="<?php echo htmlspecialchars($n); ?>" onclick="return confirm('Delete banner?');">Delete</button>
-</form>
-</td>
-</tr>
+</ul>
+
+<?php foreach($years as $i=>$y): ?>
+<div id="tab-<?php echo htmlspecialchars($y); ?>" class="tab-content" style="<?php echo $i===0?'':'display:none;'; ?>">
+    <?php $err = $errors[$y] ?? null; ?>
+    <?php if($err): ?>
+    <div class="upload-error" style="color:red;"><?php echo htmlspecialchars($err); ?></div>
+    <?php else: ?>
+    <div class="upload-error" style="color:red;display:none;"></div>
+    <?php endif; ?>
+    <form class="uploadForm" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
+        <input type="file" name="banner" required>
+        <button type="submit" name="upload" value="1">Upload</button>
+    </form>
+    <table border="1" cellpadding="2">
+        <tr><th>Enabled</th><th>Image</th><th>Actions</th></tr>
+        <?php foreach($enabled_imgs[$y] as $img): $n=basename($img); ?>
+        <tr>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
+                    <input type="hidden" name="file" value="<?php echo htmlspecialchars($n); ?>">
+                    <input type="hidden" name="status" value="disable">
+                    <input type="checkbox" onchange="this.form.submit()" checked>
+                    <input type="hidden" name="toggle" value="1">
+                </form>
+            </td>
+            <td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/'.$y.'/img/'.$n); ?>" width="340" height="50" alt=""></td>
+            <td>
+                <form method="post" style="display:inline">
+                    <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
+                    <button name="delete" value="<?php echo htmlspecialchars($n); ?>" onclick="return confirm('Delete banner?');">Delete</button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+        <?php foreach($disabled_imgs[$y] as $img): $n=basename($img); ?>
+        <tr>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
+                    <input type="hidden" name="file" value="<?php echo htmlspecialchars($n); ?>">
+                    <input type="hidden" name="status" value="enable">
+                    <input type="checkbox" onchange="this.form.submit()">
+                    <input type="hidden" name="toggle" value="1">
+                </form>
+            </td>
+            <td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/'.$y.'/img/disabled/'.$n); ?>" width="340" height="50" alt=""></td>
+            <td>
+                <form method="post" style="display:inline">
+                    <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
+                    <button name="delete" value="<?php echo htmlspecialchars($n); ?>" onclick="return confirm('Delete banner?');">Delete</button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
 <?php endforeach; ?>
-</table>
+
 <p><a href="index.php">Back</a></p>
+
 <script>
-$('#uploadForm').on('submit', function(e){
-  var file = $('#banner')[0].files[0];
-  if(!file) return;
-  e.preventDefault();
-  var img = new Image();
-  img.onload = function(){
-    if(this.width!=340 || this.height!=50){
-      $('#upload-error').text('Image must be 340x50 pixels.').show();
-    } else {
-      $('#uploadForm')[0].submit();
-    }
-  };
-  img.onerror = function(){ $('#upload-error').text('Invalid image.').show(); };
-  img.src = URL.createObjectURL(file);
+$('.tab-link').on('click', function(e){
+    e.preventDefault();
+    var tab = $(this).data('tab');
+    $('.tab-content').hide();
+    $('#tab-' + tab).show();
+    $('.tab-link').removeClass('active');
+    $(this).addClass('active');
+});
+
+$('.uploadForm').on('submit', function(e){
+    var file = $(this).find('input[type=file]')[0].files[0];
+    if(!file) return;
+    e.preventDefault();
+    var form = this;
+    var err = $(this).prevAll('.upload-error').first();
+    var img = new Image();
+    img.onload = function(){
+        if(this.width!=340 || this.height!=50){
+            err.text('Image must be 340x50 pixels.').show();
+        } else {
+            form.submit();
+        }
+    };
+    img.onerror = function(){ err.text('Invalid image.').show(); };
+    img.src = URL.createObjectURL(file);
 });
 </script>
 <?php include 'admin_footer.php'; ?>
