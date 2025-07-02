@@ -72,10 +72,18 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
 ?>
 <h2>ContentServer Banner Management</h2>
+<style>
+    .tab-links{list-style:none;margin:10px 0 0;padding:0;display:flex;}
+    .tab-links li{margin-right:4px;}
+    .tab-link{display:block;padding:8px 15px;background:#ccc;color:#000;text-decoration:none;border:1px solid #888;border-bottom:none;transform:skewX(-20deg);border-radius:4px 4px 0 0;}
+    .tab-link span{display:block;transform:skewX(20deg);}
+    .tab-link.active{background:#fff;}
+    .tab-content{border:1px solid #888;padding:10px;background:#fff;}
+</style>
 
 <ul class="tab-links">
 <?php foreach($years as $i=>$y): ?>
-    <li><a href="#" class="tab-link<?php echo $i===0?' active':''; ?>" data-tab="<?php echo htmlspecialchars($y); ?>"><?php echo htmlspecialchars($y); ?></a></li>
+    <li><a href="#" class="tab-link<?php echo $i===0?' active':''; ?>" data-tab="<?php echo htmlspecialchars($y); ?>"><span><?php echo htmlspecialchars($y); ?></span></a></li>
 <?php endforeach; ?>
 </ul>
 
@@ -141,31 +149,33 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 <p><a href="index.php">Back</a></p>
 
 <script>
-$('.tab-link').on('click', function(e){
-    e.preventDefault();
-    var tab = $(this).data('tab');
-    $('.tab-content').hide();
-    $('#tab-' + tab).show();
-    $('.tab-link').removeClass('active');
-    $(this).addClass('active');
-});
+document.addEventListener('DOMContentLoaded', function(){
+    $('.tab-link').on('click', function(e){
+        e.preventDefault();
+        var tab = $(this).data('tab');
+        $('.tab-content').hide();
+        $('#tab-' + tab).show();
+        $('.tab-link').removeClass('active');
+        $(this).addClass('active');
+    });
 
-$('.uploadForm').on('submit', function(e){
-    var file = $(this).find('input[type=file]')[0].files[0];
-    if(!file) return;
-    e.preventDefault();
-    var form = this;
-    var err = $(this).prevAll('.upload-error').first();
-    var img = new Image();
-    img.onload = function(){
-        if(this.width!=340 || this.height!=50){
-            err.text('Image must be 340x50 pixels.').show();
-        } else {
-            form.submit();
-        }
-    };
-    img.onerror = function(){ err.text('Invalid image.').show(); };
-    img.src = URL.createObjectURL(file);
+    $('.uploadForm').on('submit', function(e){
+        var file = $(this).find('input[type=file]')[0].files[0];
+        if(!file) return;
+        e.preventDefault();
+        var form = this;
+        var err = $(this).prevAll('.upload-error').first();
+        var img = new Image();
+        img.onload = function(){
+            if(this.width!=340 || this.height!=50){
+                err.text('Image must be 340x50 pixels.').show();
+            } else {
+                form.submit();
+            }
+        };
+        img.onerror = function(){ err.text('Invalid image.').show(); };
+        img.src = URL.createObjectURL(file);
+    });
 });
 </script>
 <?php include 'admin_footer.php'; ?>
