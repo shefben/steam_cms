@@ -2,7 +2,7 @@
 require_once __DIR__.'/cms/template_engine.php';
 require_once __DIR__.'/cms/db.php';
 
-$theme = cms_get_setting('theme','default');
+$theme = cms_get_setting('theme','2004');
 $tpl = __DIR__."/themes/$theme/index_template.php";
 if(!file_exists($tpl)){
     $tpl = __DIR__.'/themes/2004/index_template.php';

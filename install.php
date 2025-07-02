@@ -246,7 +246,7 @@ HTML;
                 ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
             ];
             $defaults = [
-                'theme'=>'default',
+                'theme'=>'2004',
                 'admin_theme'=>'v2',
                 'site_title'=>'Steam',
                 'smtp_host'=>'',
