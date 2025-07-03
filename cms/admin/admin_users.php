@@ -58,7 +58,7 @@ $rows=$db->query('SELECT * FROM admin_users')->fetchAll(PDO::FETCH_ASSOC);
 <button type="submit">Submit</button> <button type="button" id="cancel">Cancel</button>
 </form>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
 $('#addBtn').on('click',function(){
     $('#eid').val('0');

@@ -31,7 +31,7 @@ Title:<br>
 <textarea id="content" name="content" style="width:100%;height:400px;"><?php echo htmlspecialchars($content); ?></textarea><br>
 <input type="submit" name="save_page" value="Save">
 </form>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('content');

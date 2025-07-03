@@ -1,0 +1,103 @@
+<?php /* 2005 storefront body */ ?>
+<table align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="img\storefront\sp_top_left.gif"/></td>
+<td bgcolor="#FFFFFF" rowspan="3" valign="top">
+<table align="center" border="0" cellpadding="0" cellspacing="0" style="height: 100%;" width="736">
+<tr>
+<td align="left" nowrap="" valign="top" width="10"></td>
+<td align="left" nowrap="" valign="top" width="118">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td height="10"></td>
+</tr>
+<tr>
+<td nowrap="">
+<?php foreach($links as $ln): ?>
+  <?php if($ln['type']==='spacer'): ?>
+    <div class="menu_spacer"></div>
+  <?php elseif(empty($ln['hidden'])): ?>
+    <span><a class="menu_item" href="<?php echo htmlspecialchars($ln['url'])?>"><?php echo htmlspecialchars($ln['label'])?></a></span><br/>
+  <?php endif; ?>
+<?php endforeach; ?>
+</td>
+</tr>
+</table>
+</td>
+<td width="8"><nobr></nobr></td>
+<td align="left" style="height: 100%" valign="top" width="100%">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td valign="top">
+<br/>
+<div style="position: relative; width: 590px; height: 511px;">
+  <!-- Top Game Image -->
+  <?php if(!empty($featured['top'])): ?>
+  <a href="../index.php?area=game&AppId=<?php echo $featured['top']?>&">
+    <img src="../archived_steampowered/2005/storefront/capsules/<?php echo $featured['top']?>.jpg"
+         style="position: absolute; left: 1px; top: 1px; width: 588px; height: 98px; border: 0;"
+         border="0"/>
+  </a>
+  <?php endif; ?>
+  
+  <!-- Horizontal Bar 1 -->
+  <img src="../archived_steampowered/2005/storefront/capsules/img/2006_08-August/horizontal_top_middle.png"
+       style="position: absolute; left: 0; top: 99px; width: 590px; height: 13px; border: 0;" 
+       border="0"/>
+  
+  <!-- Middle Game Image -->
+  <?php if(!empty($featured['middle'])): ?>
+  <a href="../index.php?area=game&AppId=<?php echo $featured['middle']?>&">
+    <img src="../archived_steampowered/2005/storefront/capsules/<?php echo $featured['middle']?>.jpg"
+         style="position: absolute; left: 0; top: 112px; width: 589px; height: 228px; border: 0;"
+         border="0"/>
+  </a>
+  <?php endif; ?>
+  
+  <!-- Horizontal Bar 2 -->
+  <img src="../archived_steampowered/2005/storefront/capsules/img/2006_08-August/horizontal_bar_lower.png"
+       style="position: absolute; left: 0; top: 340px; width: 590px; height: 12px; border: 0;" 
+       border="0"/>
+  
+  <!-- Bottom-Left Game Image -->
+  <?php if(!empty($featured['bottom_left'])): ?>
+  <a href="../index.php?area=game&AppId=<?php echo $featured['bottom_left']?>&">
+    <img src="../archived_steampowered/2005/storefront/capsules/<?php echo $featured['bottom_left']?>.jpg"
+         style="position: absolute; left: 0; top: 352px; width: 288px; height: 158px; border: 0;"
+         border="0"/>
+  </a>
+  <?php endif; ?>
+  
+  <!-- Vertical Bar -->
+  <img src="../archived_steampowered/2005/storefront/capsules/img/2006_08-August/btm_middle_bar.png"
+       style="position: absolute; left: 288px; top: 352px; width: 13px; height: 158px; border: 0;" 
+       border="0"/>
+  
+  <!-- Bottom-Right Game Image -->
+  <?php if(!empty($featured['bottom_right'])): ?>
+  <a href="../index.php?area=game&AppId=<?php echo $featured['bottom_right']?>&">
+    <img src="../archived_steampowered/2005/storefront/capsules/<?php echo $featured['bottom_right']?>.jpg"
+         style="position: absolute; left: 301px; top: 352px; width: 289px; height: 158px; border: 0;"
+         border="0"/>
+  </a>
+  <?php endif; ?>
+</div>
+<br/>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="img\storefront\sp_top_right.gif"/></td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF"></td>
+<td bgcolor="#FFFFFF"></td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="img\storefront\sp_bottom_left.gif"/></td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="img\storefront\sp_bottom_right.gif"/></td>
+</tr>
+</table>
