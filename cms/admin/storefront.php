@@ -1,33 +1,9 @@
 <?php
 require_once 'admin_header.php';
+cms_require_permission('manage_store');
 $db = cms_get_db();
-$links = json_decode(cms_get_setting('store_links','[]'), true) ?: [];
 $featured = json_decode(cms_get_setting('store_featured','{}'), true) ?: [];
 
-if(isset($_POST['save_links'])){
-    $links = [];
-    foreach($_POST['type'] as $i=>$t){
-        if(!empty($_POST['remove'][$i])) continue;
-        $item = ['type'=>$t];
-        if($t==='link'){
-            $item['label'] = trim($_POST['label'][$i] ?? '');
-            $item['url'] = trim($_POST['url'][$i] ?? '');
-            $item['hidden'] = isset($_POST['hidden'][$i]) ? 1 : 0;
-        }else{
-            $item['hidden'] = isset($_POST['hidden'][$i]) ? 1 : 0;
-        }
-        $links[] = $item;
-    }
-    cms_set_setting('store_links', json_encode($links));
-}
-if(isset($_POST['add_link'])){
-    $links[] = ['type'=>'link','label'=>trim($_POST['new_label']), 'url'=>trim($_POST['new_url']), 'hidden'=>0];
-    cms_set_setting('store_links', json_encode($links));
-}
-if(isset($_POST['add_spacer'])){
-    $links[] = ['type'=>'spacer','hidden'=>0];
-    cms_set_setting('store_links', json_encode($links));
-}
 if(isset($_POST['save_featured'])){
     $featured = [
         'top'=>(int)$_POST['feat_top'],
@@ -79,39 +55,6 @@ $developers = $db->query('SELECT * FROM store_developers ORDER BY name')->fetchA
 <li><a href="#developers">Developers</a></li>
 </ul>
 <div id="main">
-<form method="post">
-<table class="table" id="link-table">
-<tr><th></th><th>Type</th><th>Label</th><th>URL</th><th>Hide</th><th>Remove</th></tr>
-<?php foreach($links as $i=>$l): ?>
-<tr>
-  <td class="move">↕</td>
-  <td>
-    <?php echo $l['type']; ?>
-    <input type="hidden" name="type[]" value="<?php echo $l['type']?>">
-  </td>
-  <?php if($l['type']==='link'): ?>
-  <td><input type="text" name="label[]" value="<?php echo htmlspecialchars($l['label'])?>"></td>
-  <td><input type="text" name="url[]" value="<?php echo htmlspecialchars($l['url'])?>"></td>
-  <?php else: ?>
-  <td colspan="2">Spacer</td>
-  <?php endif; ?>
-  <td><input type="checkbox" name="hidden[]" value="1" <?php if(!empty($l['hidden'])) echo 'checked';?>></td>
-  <td><input type="checkbox" name="remove[]" value="1"></td>
-</tr>
-<?php endforeach; ?>
-</table>
-<div style="margin-top:10px">
-  <input type="submit" name="save_links" value="Save" class="btn btn-primary">
-</div>
-</form>
-<hr>
-<form method="post" style="margin-top:10px">
-  <input type="text" name="new_label" placeholder="Label">
-  <input type="text" name="new_url" placeholder="URL">
-  <input type="submit" name="add_link" value="Add Link" class="btn">
-  <input type="submit" name="add_spacer" value="Add Spacer" class="btn">
-</form>
-<hr>
 <form method="post" style="margin-top:10px">
   <fieldset style="border:1px solid #ccc;padding:10px;width:340px;">
     <legend>Featured Apps</legend>
@@ -258,19 +201,5 @@ $('select[id^=f]').on('change mousemove',function(e){
   }
 });
 $('select[id^=f]').on('mouseleave',function(){ $('#img_'+this.id).hide(); });
-// simple row drag using up/down buttons
-$('#link-table').on('mousedown','.move',function(e){
-  var row=$(this).closest('tr');
-  var startY=e.pageY;
-  var moving=false;
-  $(document).on('mousemove.reorder',function(ev){
-    moving=true;
-    if(ev.pageY<startY && row.prev().length){row.insertBefore(row.prev());startY=ev.pageY;}
-    if(ev.pageY>startY && row.next().length){row.insertAfter(row.next());startY=ev.pageY;}
-  }).on('mouseup.reorder',function(){
-    $(document).off('.reorder');
-    if(!moving) row.prev().length?row.insertBefore(row.prev()):null;
-  });
-});
 </script>
 <?php include 'admin_footer.php'; ?>
