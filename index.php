@@ -16,6 +16,12 @@ if (isset($_GET['area'])) {
 }
 require_once __DIR__.'/cms/db.php';
 
+if(in_array($area,['store','browse','search','game','all'])){
+    $file=['store'=>'index','browse'=>'browse','search'=>'search','game'=>'game','all'=>'all'][$area];
+    include __DIR__.'/storefront/'.$file.'.php';
+    exit;
+}
+
 // if a specific FAQ entry was requested, render it from the database
 if($area === 'faq' && isset($_GET['id'])){
     $parts = array_map('intval', explode(',', preg_replace('/[^0-9,]/','',$_GET['id'])));
