@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+	<title>Steam Games</title>
+	<script language="JavaScript" src="site/javascript.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta name="ROBOTS" content="ALL">
+	<meta name="DESCRIPTION" content="SteamPowered">
+	<meta name="KEYWORDS" content="Steam, account, account creation, signup">
+
+	<meta name="AUTHOR" content="Valve LLC">
+	<link rel="stylesheet" type="text/css" href="storefront.css">
+	<link rel="Shortcut Icon" type="image/png" href="http://www.steampowered.com/webicon.png">
+	<script language="JavaScript" src="nav.js"></script>
+	<link href="http://www.steampowered.com/rss.xml" rel="alternate" type="application/rss+xml" title="Valve RSS News Feed" />
+</head>
+
+<body style="background: #4c5844; margin: 0px 0px 0px 0px; line-height: 12px; font-size: 8px; font-family: Verdana, Arial, Helvetica;">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="height: 100%;">
+<tr>
+	<td>
+
+		<!-- begin header -->
+		<div style="padding: 0px; background: #000000; margin-bottom: 16px; width: 100%;">
+		
+		<nobr><a href="http://www.steampowered.com/index.php"><img src="http://www.steampowered.com/img/steam_logo_onblack.gif" align="top" alt="[Steam]" height="54" width="152" border="0"></a>
+		<span style="margin-left: 64px; position: absolute; top: 32px; font-weight: bold;">
+		
+			<a href="http://storefront.steampowered.com/v2/"><img border="0" name="games" valign="bottom" height="22" width="66" src="http://www.steampowered.com/img/games.gif"
+				onMouseOut="this.src='http://www.steampowered.com/img/games.gif';" onMouseOver="this.src='http://www.steampowered.com/img/MOgames.gif';"
+				alt="games" title="games"></a>
+		
+			<a href="http://www.steampowered.com/index.php?area=news"><img border="0" name="news" valign="bottom" height="22" width="54" src="http://www.steampowered.com/img/news.gif"
+				onMouseOut="this.src='http://www.steampowered.com/img/news.gif';" onMouseOver="this.src='http://www.steampowered.com/img/MOnews.gif';"
+				alt="news"></a>
+		
+			<a href="http://www.steampowered.com/index.php?area=getsteamnow"><img border="0" valign="bottom" height="22" width="108" src="http://www.steampowered.com/img/getSteamNow.gif"
+				onMouseOut="this.src='http://www.steampowered.com/img/getSteamNow.gif'" onMouseOver="this.src='http://www.steampowered.com/img/MOgetSteamNow.gif'"
+				alt="getSteamNow"></a>
+		
+			<a href="http://www.steampowered.com/index.php?area=cybercafes"><img border="0" valign="bottom" height="22" width="95" src="http://www.steampowered.com/img/cafes.gif"
+				onMouseOut="this.src='http://www.steampowered.com/img/cafes.gif'" onMouseOver="this.src='http://www.steampowered.com/img/MOcafes.gif'"
+				alt="Cyber Cafes"></a>
+		
+			<a href="http://support.steampowered.com/"><img border="0" valign="bottom" height="22" width="68" src="http://www.steampowered.com/img/support.gif"
+				onMouseOut="this.src='http://www.steampowered.com/img/support.gif'" onMouseOver="this.src='http://www.steampowered.com/img/MOsupport.gif'"
+				alt="Support"></a>
+		
+			<a href="http://www.steampowered.com/index.php?area=forums"><img border="0" valign="bottom" height="22" width="68" src="http://www.steampowered.com/img/forums.gif"
+				onMouseOut="this.src='http://www.steampowered.com/img/forums.gif'" onMouseOver="this.src='http://www.steampowered.com/img/MOforums.gif'"
+				alt="Forums"></a>
+		
+			<a href="http://www.steampowered.com/status/status.html"><img border="0" valign="bottom" height="22" width="65" src="http://www.steampowered.com/img/status.gif"
+				onMouseOut="this.src='http://www.steampowered.com/img/status.gif'" onMouseOver="this.src='http://www.steampowered.com/img/MOstatus.gif'"
+				alt="Status"></a>
+
+		</span>
+		</nobr>
+		</div>
+		<!-- end header -->
+
+	</td>
+</tr>
+<tr>
+	<td height="100%">
+	
+		<table cellspacing="0" cellpadding="0" align="center" style="height: 100%;">
+		<tr>
+			<td style="width: 10px; height: 10px;" bgcolor="#FFFFFF" valign="top"><img src="http://www.steampowered.com/img/storefront/sp_top_left.gif"></td>
+			<td rowspan="3" bgcolor="#FFFFFF" valign="top">
+		
+				<table width="736" border="0" cellspacing="0" cellpadding="0" style="height: 100%;" align="center">
+				<tr>
+					<td width="10" align="left" valign="top" nowrap></td>
+					<td width="118" align="left" valign="top" nowrap>
+				
+						<table cellspacing="0" cellpadding="0">
+		<tr>
+			<td height="10"></td>
+		</tr>
+		<tr>
+			<td nowrap>
+
+				<span ><a href="index.php?" class="menu_item" >Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+				<div class="menu_spacer">&nbsp;</div>
+				<span ><font face="Wingdings 3"><span class="menu_pointer">&#132;</span></font> <a href="index.php?area=browse&" class="menu_item_current" >Browse Games</a>&nbsp;</span><br>
+				<span ><a href="index.php?area=all&" class="menu_item" >All Games</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+				<span ><a href="index.php?area=search&" class="menu_item" >Search</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+
+			</td>
+		</tr>
+		</table>
+				
+					</td>
+					<td width="8"><nobr>&nbsp;&nbsp;</nobr></td>
+					<td width="100%" align="left" valign="top" style="height: 100%">
+				
+				<table cellpadding="0" cellspacing="0">
+<tr>
+	<td width="600" height="50" background="img/title_grey.jpg"><span class="page_title">&nbsp;&nbsp;Browse Games</span></td>
+</tr>
+<tr>
+	<td height="10"></td>
+</tr>
+<tr>
+	<td><span class="normal_text">
+
+	<!-- 
+
+	<form action="index.php">
+	<input type="hidden" name="area" value="search">
+	
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="10" height="10" background="img/search_blue_left_top.gif" nowrap></td>
+		<td width="100%" bgcolor="#009ca5"></td>
+		<td width="10" height="10" background="img/search_blue_right_top.gif" nowrap></td>
+	</tr>
+	<tr>
+		<td width="10" background="img/search_blue_left.gif" nowrap></td>
+		<td width="100%" bgcolor="#009ca5">
+
+			<table width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+				<td width="100%">
+
+					<table width="100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td width="100%"><span class="search_form_text">Search Term(s)</span></td>
+					</tr>
+					<tr>
+						<td width="100%"><input type="text" name="term" value="" maxlength="64" style="width: 100%;"></td>
+					</tr>
+					<tr>
+						<td height="5"></td>
+					</tr>
+					<tr>
+						<td width="100%">
+
+							<table width="100%" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="33%"><span class="search_form_text">Developer</span></span></td>
+								<td width="10" nowrap></td>
+								<td width="33%"><span class="search_form_text">Category</span></td>
+								<td width="10" nowrap></td>
+								<td width="33%"><span class="search_form_text">Price</span></td>
+							</tr>
+							<tr>
+								<td width="33%">
+
+									<select name="developer" style="width: 100%;">
+									<option id="dev_list" value="">-</option>
+						<option id="dev_list" value="Action Half-Life Team">Action Half-Life Team</option>
+						<option id="dev_list" value="Adam Foster">Adam Foster</option>
+						<option id="dev_list" value="Adrenaline Gamer">Adrenaline Gamer</option>
+						<option id="dev_list" value="BG2 Team">BG2 Team</option>
+						<option id="dev_list" value="Black Cat Games">Black Cat Games</option>
+						<option id="dev_list" value="BrainBread Team">BrainBread Team</option>
+						<option id="dev_list" value="Digital Paintball Team">Digital Paintball Team</option>
+						<option id="dev_list" value="Dystopia Team">Dystopia Team</option>
+						<option id="dev_list" value="Earth's Special Forces Team">Earth's Special Forces Team</option>
+						<option id="dev_list" value="Firearms Team">Firearms Team</option>
+						<option id="dev_list" value="Frontline Force Team">Frontline Force Team</option>
+						<option id="dev_list" value="Garry">Garry</option>
+						<option id="dev_list" value="Gearbox">Gearbox</option>
+						<option id="dev_list" value="Hidden: Source Team">Hidden: Source Team</option>
+						<option id="dev_list" value="HL2:CTF Team">HL2:CTF Team</option>
+						<option id="dev_list" value="Hostile Intent Team">Hostile Intent Team</option>
+						<option id="dev_list" value="I.O.S. Team">I.O.S. Team</option>
+						<option id="dev_list" value="Introversion Software">Introversion Software</option>
+						<option id="dev_list" value="Malfador Machinations">Malfador Machinations</option>
+						<option id="dev_list" value="Mark Healey">Mark Healey</option>
+						<option id="dev_list" value="Nuclear Vision">Nuclear Vision</option>
+						<option id="dev_list" value="Outerlight Ltd.">Outerlight Ltd.</option>
+						<option id="dev_list" value="Plan of Attack Team">Plan of Attack Team</option>
+						<option id="dev_list" value="Science and Industry Team">Science and Industry Team</option>
+						<option id="dev_list" value="Sonalysts">Sonalysts</option>
+						<option id="dev_list" value="Sven Co-Op Team" SELECTED>Sven Co-Op Team</option>
+						<option id="dev_list" value="The Battle Grounds Team">The Battle Grounds Team</option>
+						<option id="dev_list" value="The Specialists Team">The Specialists Team</option>
+						<option id="dev_list" value="The Trenches Team">The Trenches Team</option>
+						<option id="dev_list" value="Tripwire">Tripwire</option>
+						<option id="dev_list" value="Unknown Worlds">Unknown Worlds</option>
+						<option id="dev_list" value="Valve">Valve</option>
+						<option id="dev_list" value="Vampire Slayer">Vampire Slayer</option>
+						<option id="dev_list" value="Zombie Panic Team">Zombie Panic Team</option>
+									</select>
+
+								</td>
+								<td width="10" nowrap></td>
+								<td width="33%">
+
+									<select name="category" style="width: 100%;">
+									<option id="cat_list" value="" SELECTED>-</option>
+						<option id="cat_list" value="7">Mods (require HL1)</option>
+						<option id="cat_list" value="6">Mods (require HL2)</option>
+						<option id="cat_list" value="1">Multi-player</option>
+						<option id="cat_list" value="3">New releases</option>
+						<option id="cat_list" value="4">Pre-release</option>
+						<option id="cat_list" value="2">Single-player</option>
+									</select>
+
+								</td>
+								<td width="10" nowrap></td>
+								<td width="33%">
+
+									<select name="price" style="width: 100%;">
+									<option id="price" value="" SELECTED>-</option>
+									<option id="price" value="1">Third-party</option>
+									<option id="price" value="1001">$10 or less</option>
+									<option id="price" value="2001">$20 or less</option>
+									<option id="price" value="3001">$30 or less</option>
+									<option id="price" value="4001">$40 or less</option>
+									<option id="price" value="5001">$50 or less</option>
+									<option id="price" value="999991">All</option>
+									</select>
+
+								</td>
+							</tr>
+							</table>
+
+						</td>
+					</tr>
+					</table>
+
+				</td>
+				<td width="10" nowrap></td>
+				<td><input type="submit" value="Search"></td>
+			</tr>
+			</table>
+
+		</td>
+		<td width="10" background="img/search_blue_right.gif" nowrap></td>
+	</tr>
+	<tr>
+		<td width="10" height="10" background="img/search_blue_left_bottom.gif" nowrap></td>
+		<td width="100%" bgcolor="#009ca5"></td>
+		<td width="10" height="10" background="img/search_blue_right_bottom.gif" nowrap></td>
+	</tr>
+	</table>
+	</form>
+
+	
+
+	 -->
+
+	<font face="Wingdings 3" style="font-family: Wingdings 3; font-size: 12px; color: Red;">&nbsp;}}</font> <span style="color: #909090; font-family: Tahoma; font-weight: bold; font-size: 10px;">Browsing games developed by Sven Co-Op Team<br><br></span>
+
+	<table cellpadding="0" cellspacing="0" width="100%" style="display: block;">
+	<tr>
+		<td width="5" height="20" nowrap background="img/endcap_blue_l.gif"></td>
+		<td class="h" nowrap width="100%" bgcolor="#5A6A50" height="20" onclick="location.href='index.php?area=search&term=&type=&category=&developer=Sven Co-Op Team&price=&order=&sort_by=Name&sort_last=Developer&sort_order=ASC&&browse=1'"><a href="index.php?area=search&term=&type=&category=&developer=Sven Co-Op Team&price=&order=&sort_by=Name&sort_last=Developer&sort_order=ASC&&browse=1" class="header_link_user_admin"><strong>Name</strong> </a></td>
+		<td width="5" height="20" nowrap background="img/endcap_blue_r.gif"></td>
+
+		<td width="5" nowrap></td>
+
+		<td width="5" height="20" nowrap background="img/endcap_blue_l.gif"></td>
+		<td class="h" nowrap bgcolor="#5A6A50" onclick="location.href='index.php?area=search&term=&type=&category=&developer=Sven Co-Op Team&price=&order=&sort_by=Developer&sort_last=Developer&sort_order=ASC&&browse=1'"><a href="index.php?area=search&term=&type=&category=&developer=Sven Co-Op Team&price=&order=&sort_by=Developer&sort_last=Developer&sort_order=ASC&&browse=1" class="header_link_user_admin"><strong>Developer</strong> <font face="Wingdings 3" style="font-family: Wingdings 3; font-size: 9px;">&#112;</font></a></td>
+		<td width="5" height="20" nowrap background="img/endcap_blue_r.gif"></td>
+
+		<!--
+		<td width="5" nowrap></td>
+
+		<td width="5" height="20" nowrap background="img/endcap_blue_l.gif"></td>
+		<td nowrap bgcolor="#5A6A50"><a href="index.php?area=search&term=&type=&category=&developer=Sven Co-Op Team&price=&order=&sort_by=ReleaseDate&sort_last=Developer&sort_order=ASC&&browse=1" class="header_link_user_admin"><strong>Available</strong> </a></td>
+		<td width="5" height="20" nowrap background="img/endcap_blue_r.gif"></td>
+		-->
+
+		<td width="5" nowrap></td>
+
+		<td width="5" height="20" nowrap background="img/endcap_blue_l.gif"></td>
+		<td class="h" nowrap bgcolor="#5A6A50" onclick="location.href='index.php?area=search&term=&type=&category=&developer=Sven Co-Op Team&price=&order=&sort_by=Metascore&sort_last=Developer&sort_order=ASC&&browse=1'"><a href="index.php?area=search&term=&type=&category=&developer=Sven Co-Op Team&price=&order=&sort_by=Metascore&sort_last=Developer&sort_order=ASC&&browse=1" class="header_link_user_admin"><strong>Metascore&reg;</strong> </a></td>
+		<td width="5" height="20" nowrap background="img/endcap_blue_r.gif"></td>
+
+		<td width="5" nowrap></td>
+
+		<td width="5" height="20" nowrap background="img/endcap_blue_l.gif"></td>
+		<td class="h" nowrap bgcolor="#5A6A50" onclick="location.href='index.php?area=search&term=&type=&category=&developer=Sven Co-Op Team&price=&order=&sort_by=Price&sort_last=Developer&sort_order=ASC&&browse=1'"><a href="index.php?area=search&term=&type=&category=&developer=Sven Co-Op Team&price=&order=&sort_by=Price&sort_last=Developer&sort_order=ASC&&browse=1" class="header_link_user_admin"><strong>Price</strong> </a></td>
+		<td width="5" height="20" nowrap background="img/endcap_blue_r.gif"></td>
+	</tr>
+	<tr>
+		<td colspan="15" height="2"></td>
+	</tr>
+	<tr class="h" onclick=" location.href='index.php?area=game&AppId=90005&&browse=1' " id="row_90005" bgcolor="#ffffff" onMouseOver="HiLiteRow('row_90005', '#ECF39D');" onMouseOut="HiLiteRow('row_90005', '#ffffff');" >
+	<td nowrap width="5" height="20"></td>
+	<td class="h" nowrap width="100%">Sven Co-Op</td>
+	<td colspan="3" width="15"></td>
+	<td class="h" nowrap>Sven Co-Op Team</td>
+	<!--
+	<td colspan="3" width="15"></td>
+	<td class="h" nowrap align="center"><span class="ReleaseDateAvailable">Available</span></td>
+	-->
+	<td colspan="3" width="15"></td>
+	<td class="h" nowrap align="center">--</td>
+	<td colspan="3" width="15"></td>
+	<td class="h" nowrap align="right"><span class="free_app">Third-party</span></td>
+	<td colspan="3" width="5"></td>
+</tr>
+	</table>
+
+	<br><span class="foot_text">&nbsp;</span><br><br>
+
+	</span></td>
+</tr>
+</table><br>
+				
+					</td>
+				</tr>
+				</table>
+				
+			</td>
+			<td style="width: 10px; height: 10px;" bgcolor="#FFFFFF" valign="top"><img src="http://www.steampowered.com/img/storefront/sp_top_right.gif"></td>
+		</tr>
+		<tr>
+			<td bgcolor="#FFFFFF"></td>
+			<td bgcolor="#FFFFFF"></td>
+		</tr>
+		<tr>
+			<td style="width: 10px; height: 10px;" bgcolor="#FFFFFF" valign="bottom"><img src="http://www.steampowered.com/img/storefront/sp_bottom_left.gif"></td>
+			<td style="width: 10px; height: 10px;" bgcolor="#FFFFFF" valign="bottom"><img src="http://www.steampowered.com/img/storefront/sp_bottom_right.gif"></td>
+		</tr>
+		</table>
+
+	</td>
+</tr>
+<tr>
+	<td>
+	
+		<!-- begin footer -->
+		<div style="float: center; padding: 8px 0px 8px 0px; background: #4c5844; margin-bottom: 0px; width: 100%; font-size: 7pt; line-height: 8pt; color: #75806f; position: relative;">
+			<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td><a href="http://www.valvesoftware.com"><img src="http://www.steampowered.com/img/valve_greenlogo.gif" border="0"></a></td>
+		
+				<td>&nbsp;</td>
+				<td><span style="font-size: 7pt; line-height: 8pt; color: #75806f;">&copy; 2006 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. All other trademarks are property of their respective owners. <a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="http://www.steampowered.com/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
+				<td width="15%">&nbsp;</td>
+			</tr>
+			</table>
+		
+		</div>
+		<!-- end footer -->
+
+	</td>
+</tr>
+</table>
+	
+</body>
+</html>
+
+<!-- Proxy IP --> <!--  -->
+<!-- Real IP --> <!--  -->
+<!-- Date --> <!-- Tue Mar 28 4:37:20 PST 2006 -->
