@@ -6,8 +6,9 @@ $db = cms_get_db();
 $theme = cms_get_setting('theme','2004');
 
 $content .= '<h1>STEAM NEWS</h1>';
-if(isset($_GET['news'])){
-    $id = (int)$_GET['news'];
+if(isset($_GET['news']) || isset($_GET['id'])){
+    $id = isset($_GET['news']) ? (int)$_GET['news'] : (int)$_GET['id'];
+    $is_archive = (isset($_GET['archive']) && $_GET['archive'] === 'yes');
     $stmt = $db->prepare('SELECT * FROM news WHERE id=?');
     $stmt->execute([$id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -17,14 +18,15 @@ if(isset($_GET['news'])){
         $title = htmlspecialchars($row['title']);
         $date = htmlspecialchars($row['publish_date']);
         $author = htmlspecialchars($row['author']);
-        $content .= "<p><h3><a href='news.php?news={$id}' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";
+        $self_link = cms_news_url($id, $is_archive);
+        $content .= "<p><h3><a href='$self_link' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";
         $content .= "<span style='font-size: 9px;'>$date &middot; $author<table width='100%' cellpadding='0' cellspacing='0'><tr><td height='1' width='100%' bgcolor='#808080'></td></tr><tr><td height='10' width='100%'></td></tr></table></span>";
         $content .= $row['content'];
         $content .= '<div><br>&nbsp;</div><br></p>';
     }else{
         $content .= '<p>That news item could not be found in the database.</p>';
     }
-    $content .= '<ul><li> <a href="news.php" style="text-decoration: none;"><i>return to news page</i></a></ul>';
+    $content .= '<ul><li> <a href="index.php?area=news" style="text-decoration: none;"><i>return to news page</i></a></ul>';
     $content .= '</div>';
 }else{
     $content .= '<h2>LATEST <em>VALVE NEWS</em> &nbsp; <a href="/rss.xml" title="RSS format news feed"><img border="0" width="27" height="13" align="absmiddle" src="/img/RSS.gif"></a></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br><div class="narrower">';

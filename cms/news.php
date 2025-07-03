@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__.'/db.php';
 
+function cms_news_url($id, $archive = false){
+    $id = (int)$id;
+    return 'index.php?area=news' . ($archive ? '&archive=yes' : '') . '&id=' . $id;
+}
+
 function cms_get_news_settings(){
     $def=['articles_per_page'=>10,'partial_words'=>120,'source'=>'both'];
     return [
@@ -39,7 +44,7 @@ function cms_render_news($type,$count=null){
         $title = htmlspecialchars($row['title']);
         $author = htmlspecialchars($row['author']);
         $date = htmlspecialchars($row['publish_date']);
-        $link = "news.php?news={$row['id']}";
+        $link = cms_news_url($row['id']);
         $content = $row['content'];
         switch($type){
             case 'full_article':

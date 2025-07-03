@@ -17,10 +17,11 @@ foreach($rows as $row){
         $current = $month;
     }
     $short = date('M j, g:ia',$ts);
-    $content .= '<li><a href="news.php?news='.$row['id'].'" style="text-decoration: none;">'
+    $link = cms_news_url($row['id'], true);
+    $content .= '<li><a href="'.$link.'" style="text-decoration: none;">'
         .htmlspecialchars($row['title']).'</a> <span style="color: #808080; font-size: 10px;">['.$short.']</span></li>';
 }
-if($current) $content .= "</ul>\n";
-$content .= '<p align="center"><br><a href="news.php" style="text-decoration: none;"><i>return to the current news</i></a></p>';
+$content .= $current ? "</ul>\n" : '';
+$content .= '<p style="text-align:center;"><em><a href="/index.php?area=news">return to the current news</a></em></p>';
 $content .= '</div>';
 cms_render_template(__DIR__.'/themes/'.$theme.'/default_template.php',[ 'page_title'=>'Steam News', 'content'=>$content]);
