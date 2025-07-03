@@ -27,7 +27,7 @@ a:hover {
 
 .menu_spacer {
 	width: 100%; 
-	background-image: url('img\dash.gif'); 
+	background-image: url('img/dash.gif'); 
 	background-repeat: repeat-x;
 	line-height:16px;
 	height:20px;
@@ -35,7 +35,7 @@ a:hover {
 
 .line_spacer {
 	width: 100%; 
-	background-image: url('img\dash.gif'); 
+	background-image: url('img/dash.gif'); 
 	background-repeat: repeat-x;
 	height: 20px;
 }
