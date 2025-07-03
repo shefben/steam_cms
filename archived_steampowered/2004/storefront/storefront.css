@@ -37,7 +37,6 @@ TD {
 	font-size:10px;
 	vertical-align:top;
 	font-weight:bold;
-	line-height:140%;
 }
 TD.pricing {
 	vertical-align:bottom;
@@ -64,7 +63,7 @@ UL {
 	margin-top:0px;
 	margin-bottom:0px;
 	list-style-type:square;
-	list-style-image: url('http://storefront.steampowered.com/gfx/bullet.gif');
+	list-style-image: url(gfx/bullet.gif);
 }
 A {
 	color:white;
@@ -74,21 +73,21 @@ A {
 	vertical-align:middle;
 	width:140px;
 	height:29px;
-	background:url('http://storefront.steampowered.com/gfx/tab_active.gif') no-repeat bottom left;
+	background:url(gfx/tab_active.gif) no-repeat bottom left;
 	padding-left:8px;
 }
 .tab_active_sm {
 	vertical-align:middle;
 	width:70px;
 	height:29px;
-	background:url('http://storefront.steampowered.com/gfx/tab_active_sm.gif') no-repeat bottom left;
+	background:url(gfx/tab_active_sm.gif) no-repeat bottom left;
 	padding-left:8px;
 }
 .tab_enabled {
 	vertical-align:middle;
 	width:140px;
 	height:29px;
-	background:url('http://storefront.steampowered.com/gfx/tab_enabled.gif') no-repeat bottom left;
+	background:url(gfx/tab_enabled.gif) no-repeat bottom left;
 	border-bottom: 2px Solid #889180;
 	padding-left:6px;
 	padding-top:4px;
@@ -108,13 +107,40 @@ A {
 	font-family:trebuchet ms,verdana,arial;
 }
 .purchase {
-	background: url('http://storefront.steampowered.com/gfx/button_purchase.gif') no-repeat top left;
+	background: url(gfx/button_purchase.gif) no-repeat top left;
 	height:28px;
 	vertical-align:middle;
 	padding-left:8px;
 }
 .purchase2 {
-	background: url('http://storefront.steampowered.com/gfx/button_purchase.gif') no-repeat top right;
+	background: url(gfx/button_purchase.gif) no-repeat top right;
+}
+.purchase3 {
+	background: url(gfx/button_purchase2.gif) no-repeat top left;
+	height:28px;
+	vertical-align:middle;
+	padding-left:8px;
+}
+.purchase4 {
+	background: url(gfx/button_purchase2.gif) no-repeat top right;
+}
+.purchase5 {
+	background: url(gfx/button_purchase3.gif) no-repeat top left;
+	height:28px;
+	vertical-align:middle;
+	padding-left:8px;
+}
+.purchase6 {
+	background: url(gfx/button_purchase3.gif) no-repeat top right;
+}
+.purchased {
+	background: #000000;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:8px;
+	padding-bottom:8px;
+	text-align: center;
+	vertical-align:right;
 }
 .capsule {
 	background:#4A5942;
@@ -148,7 +174,7 @@ A {
 	margin-top:-28px;
 	width:164px;
 	height:104px;
-	background: url('http://storefront.steampowered.com/gfx/violator.gif');
+	background: url(gfx/violator.gif);
 }
 
 .discount2 {
@@ -157,24 +183,17 @@ A {
 	margin-top: 0px;
 	height:104px;
 }
-
-.captop div, .captop, .capbot div, .capbot .captop3 div, .captop3 {
-	width: 100%;
-	font-family:trebuchet ms bold; verdana, arial;
-	font-weight:bolder;
-	font-size:1px;
-}
 .captop2 div  { font-size:16px; padding-top:4px; padding-bottom:4px; text-align:left;}
-.captop div  { background: url('http://storefront.steampowered.com/gfx/tl.gif') no-repeat top left; font-size:16px; padding-top:4px; padding-bottom:4px; text-align:left;}
-.captop      { background: url('http://storefront.steampowered.com/gfx/tr.gif') no-repeat top right; }
-.capbot div  { height: 7px;background: url('http://storefront.steampowered.com/gfx/bl.gif') no-repeat bottom left; }
-.capbot      { height: 7px;background: url('http://storefront.steampowered.com/gfx/br.gif') no-repeat bottom right; }
+.captop div  { background: url(gfx/tl.gif) no-repeat top left; font-size:16px; padding-top:4px; padding-bottom:4px; text-align:left;}
+.captop      { background: url(gfx/tr.gif) no-repeat top right; }
+.capbot div  { height: 7px;background: url(gfx/bl.gif) no-repeat bottom left; }
+.capbot      { height: 7px;background: url(gfx/br.gif) no-repeat bottom right; }
 .capcontent  { margin: 0 7px;}
 
-.captop3 div  { background: url('http://storefront.steampowered.com/gfx/tl_3.gif') no-repeat top left; font-size:16px; padding-top:4px; padding-bottom:4px; text-align:left;}
-.captop3      { background: url('http://storefront.steampowered.com/gfx/tr_3.gif') no-repeat top right; }
-.capbot3 div  { height: 7px;background: url('http://storefront.steampowered.com/gfx/bl_3.gif') no-repeat bottom left; }
-.capbot3      { height: 7px;background: url('http://storefront.steampowered.com/gfx/br_3.gif') no-repeat bottom right; }
+.captop3 div  { background: url(gfx/tl_3.gif) no-repeat top left; font-size:16px; padding-top:4px; padding-bottom:4px; text-align:left;}
+.captop3      { background: url(gfx/tr_3.gif) no-repeat top right; }
+.capbot3 div  { height: 7px;background: url(gfx/bl_3.gif) no-repeat bottom left; }
+.capbot3      { height: 7px;background: url(gfx/br_3.gif) no-repeat bottom right; }
 
 
 .inner {
