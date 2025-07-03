@@ -4,10 +4,26 @@ base = pathlib.Path('archived_steampowered/2005/storefront')
 cat_html = base / 'browse_games_catagories.html'
 all_html = base / 'all_games.html'
 app_dir = base / 'app_pages'
+cat_search_dir = base / 'search_catagory_pages'
 
 html_cat = cat_html.read_text()
-categories = re.findall(r'category=(\d+)&amp;">([^<]+)</a>', html_cat)
+categories = {int(cid):name for cid,name in re.findall(r'category=(\d+)&amp;">([^<]+)</a>', html_cat)}
 developers = [name for name,_ in re.findall(r'developer=([^&]+)&amp;">([^<]+)</a>', html_cat)]
+
+# parse search-category pages to build app->category mapping
+app_cat_map = {}
+for page in cat_search_dir.glob('searchcategory_*.php'):
+    text = page.read_text(errors='ignore')
+    m = re.search(r'id="cat_list" value="(\d+)"\s+SELECTED>([^<]+)<', text)
+    if not m:
+        continue
+    cid = int(m.group(1))
+    cname = m.group(2).strip()
+    if cid not in categories:
+        categories[cid] = cname
+    appids = re.findall(r'id="row_(\d+)"', text)
+    for aid in appids:
+        app_cat_map.setdefault(int(aid), set()).add(cid)
 
 html_all = all_html.read_text()
 row_re = re.compile(r'<tr[^>]*id="row_(\d+)".*?>\s*(.*?)</tr>', re.DOTALL)
@@ -56,8 +72,11 @@ out.append("CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,v
 out.append("CREATE TABLE store_developers(id INT AUTO_INCREMENT PRIMARY KEY,name TEXT);")
 out.append("CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availability TEXT,price DECIMAL(10,2),metacritic TEXT DEFAULT NULL,description TEXT,sysreq TEXT,images TEXT,packages TEXT);")
 out.append("CREATE TABLE app_categories(appid INT,category_id INT,PRIMARY KEY(appid,category_id));")
-for i, (cid, name) in enumerate(categories, 1):
-    out.append(f"INSERT INTO store_categories(id,name,ord,visible) VALUES({cid},'{name.replace("'","''")}',{i},1);")
+for i, (cid, name) in enumerate(categories.items(), 1):
+    out.append(
+        f"INSERT INTO store_categories(id,name,ord,visible) "
+        f"VALUES({cid},'{name.replace("'","''")}',{i},1);"
+    )
 for name in developers:
     out.append(f"INSERT INTO store_developers(name) VALUES('{name.replace("'","''")}');")
 for app in apps:
@@ -70,16 +89,9 @@ for app in apps:
         f"INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,images,packages) "
         f"VALUES({app['appid']},{json.dumps(app['name'])},{json.dumps(app['developer'])},{json.dumps(app['availability'])},{app['price']},{mscore},{desc},{sysreq},{images},{packs});")
 
-default_links = [
-    {"type":"link","label":"Home","url":"index.php","hidden":0},
-    {"type":"spacer","hidden":0},
-    {"type":"link","label":"Browse Games","url":"index.php?area=browse&","hidden":0},
-    {"type":"link","label":"All Games","url":"index.php?area=all&","hidden":0},
-    {"type":"link","label":"Search","url":"index.php?area=search&","hidden":0},
-    {"type":"spacer","hidden":0},
-    {"type":"link","label":"Media","url":"index.php?Area=media&","hidden":0}
-]
-out.append("INSERT INTO settings(`key`,value) VALUES('store_links'," + json.dumps(json.dumps(default_links)) + ");")
+for aid, cids in sorted(app_cat_map.items()):
+    for cid in sorted(cids):
+        out.append(f"INSERT INTO app_categories(appid,category_id) VALUES({aid},{cid});")
 featured = {"top":2400,"middle":380,"bottom_left":1200,"bottom_right":1300}
 out.append("INSERT INTO settings(`key`,value) VALUES('store_featured'," + json.dumps(json.dumps(featured)) + ");")
 

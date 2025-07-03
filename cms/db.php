@@ -92,6 +92,7 @@ function cms_all_permissions(){
         'manage_pages'     => 'Manage Custom Pages',
         'manage_signups'   => 'Manage Café Signups',
         'manage_news'      => 'Manage All News',
+        'manage_store'     => 'Manage Storefront',
         'news_create'      => 'Create News',
         'news_edit'        => 'Edit News',
         'news_delete'      => 'Delete News',
