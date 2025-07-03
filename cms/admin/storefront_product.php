@@ -1,5 +1,6 @@
 <?php
 require_once 'admin_header.php';
+cms_require_permission('manage_store');
 $db = cms_get_db();
 $appid = (int)($_GET['id'] ?? 0);
 $stmt = $db->prepare('SELECT * FROM store_apps WHERE appid=?');
