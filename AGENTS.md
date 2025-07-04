@@ -5,7 +5,7 @@ AGENTS.md -- Codex o3 Agent Framework
 
 *** ** * ** ***
 
-## 1 · Mission \& End-Game
+1 · Mission \& End-Game
 -----------------------
 
 Re-create every public **steampowered.com** site captured between 2002 and 2010---**pixel for pixel, link for link** ---while providing a fully featured, professionally styled **administrator UI** .
@@ -14,7 +14,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-## 2 · Top-Level Objectives
+2 · Top-Level Objectives
 ------------------------
 
 | Priority |           Objective            |                                                                                          Notes                                                                                          |
@@ -30,7 +30,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-## 3 · Tech Stack
+3 · Tech Stack
 --------------
 
 * **PHP 8.x** (strict types, PSR-12)
@@ -47,7 +47,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-## 4 · Admin Design Principles
+4 · Admin Design Principles
 ---------------------------
 
 1. **Full Styling** -- All admin routes (`/admin/**`) load their own stylesheet(s) and, where it improves UX, jQuery-powered widgets (drag-and-drop ordering, live search, modal dialogs).
@@ -60,7 +60,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-## 5 · Database Canon
+5 · Database Canon
 ------------------
 
 * Absolutely **no** JSON blobs, serialized blobs, or key/value tables.
@@ -73,7 +73,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-## 6 · Theme \& Template Handling
+6 · Theme \& Template Handling
 ------------------------------
 
 * **Table:** `themes (id, year, variant, name, assets_path, is_default)`
@@ -84,9 +84,14 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 * Each template includes editable blocks mapped to DB records (`news_block`, `promo_banner`, `nav_primary`, ...).
 
+* **Asset Mover Script** — For every theme import the agent must **create (if absent) or append to** a single Python helper `tools/move_assets.py`.  
+  * First execution scaffolds the script; later runs append new copy/move rules only.  
+  * The script relocates every asset (images / CSS / JS) required by the theme into `/themes/{year}_{variant}/assets/images/`, preserving sub-directory structure.  
+  * After moving, it automatically **rewrites all asset paths** inside the generated templates so they remain correct, and logs changes for review.
+
 *** ** * ** ***
 
-## 7 · Content Lifecycle
+7 · Content Lifecycle
 ---------------------
 
 1. **Importers** parse each archived HTML file into structured rows:
@@ -102,7 +107,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-## 8 · Testing \& Composer Commands
+8 · Testing \& Composer Commands
 --------------------------------
 
 ```bash  
@@ -118,7 +123,7 @@ CI must execute the same Composer scripts; agents should ensure green runs befor
 
 *** ** * ** ***
 
-## 9 · Security \& Performance
+9 · Security \& Performance
 ---------------------------
 
 * CSRF tokens on every POST/PUT/DELETE in admin.
@@ -131,14 +136,14 @@ CI must execute the same Composer scripts; agents should ensure green runs befor
 
 *** ** * ** ***
 
-## 10 · Typical Agent Workflow
+10 · Typical Agent Workflow
 ---------------------------
 
 ```text  
 1. Take user story ("Import 2007-blue variant").
 2. Add/adjust DB schema via migration.
 3. Write importer script to parse 2007-blue HTML → DB.
-4. Slice CSS/images into /themes/2007_blue/.
+4. Slice CSS/images into /themes/2007_blue/ and append corresponding rules to `tools/move_assets.py`.
 5. Create Twig templates & blocks.
 6. Build admin controls for enabling theme & curating 2007 data.
 7. Add PHPUnit + Cypress tests.
@@ -148,7 +153,7 @@ CI must execute the same Composer scripts; agents should ensure green runs befor
 
 *** ** * ** ***
 
-## 11 · Task \& Release Documentation
+11 · Task \& Release Documentation
 -------------
 * **backlog.md** – Updated whenever a prompt can’t be fully completed; lists outstanding items with next-step suggestions.
 * **CHANGELOG.md** – Auto-generated from Conventional Commits in Keep a Changelog format.
@@ -156,7 +161,7 @@ CI must execute the same Composer scripts; agents should ensure green runs befor
 
 *** ** * ** ***
 
-## 12 · Glossary
+12 · Glossary
 -------------
 
 * **Theme** -- Asset + template set replicating one archived design.
@@ -169,7 +174,7 @@ CI must execute the same Composer scripts; agents should ensure green runs befor
 
 *** ** * ** ***
 
-## 13 · Hard Rules Checklist
+13 · Hard Rules Checklist
 -------------------------
 
 | ✔ / ✖ |                            Rule                            |
