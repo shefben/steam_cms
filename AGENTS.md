@@ -1,11 +1,11 @@
 AGENTS.md -- Codex o3 Agent Framework
 =====================================
 
-*SteamPowered (2002 -- 2010) CMS Re-Creation*
+# *SteamPowered (2002 -- 2010) CMS Re-Creation*
 
 *** ** * ** ***
 
-1 · Mission \& End-Game
+## 1 · Mission \& End-Game
 -----------------------
 
 Re-create every public **steampowered.com** site captured between 2002 and 2010---**pixel for pixel, link for link** ---while providing a fully featured, professionally styled **administrator UI** .
@@ -14,7 +14,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-2 · Top-Level Objectives
+## 2 · Top-Level Objectives
 ------------------------
 
 | Priority |           Objective            |                                                                                          Notes                                                                                          |
@@ -26,10 +26,11 @@ All historical pages (one or more themes per year) live under `archived_steampow
 | **P4**   | **Hybrid content control**     | Admins decide to show (a) archived/official, (b) custom, or (c) a blend---per content type.                                                                                             |
 | **P5**   | **Link integrity**             | When importing/templating archived pages, **fix all internal links** so they resolve to the equivalent CMS route. Absolute or external links remain untouched.                          |
 | **P6**   | **Automated validation**       | Provide repeatable Composer / PHPUnit / static-analysis commands so agents can run the full test suite locally.                                                                         |
+| **P8**   | **Task & Release Docs**        | Agent auto-maintains three repo Markdown files: `backlog.md` (unfinished prompt tasks), `CHANGELOG.md` (release notes), and `FEATURES.md` (implemented capabilities).                   |
 
 *** ** * ** ***
 
-3 · Tech Stack
+## 3 · Tech Stack
 --------------
 
 * **PHP 8.x** (strict types, PSR-12)
@@ -46,7 +47,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-4 · Admin Design Principles
+## 4 · Admin Design Principles
 ---------------------------
 
 1. **Full Styling** -- All admin routes (`/admin/**`) load their own stylesheet(s) and, where it improves UX, jQuery-powered widgets (drag-and-drop ordering, live search, modal dialogs).
@@ -59,7 +60,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-5 · Database Canon
+## 5 · Database Canon
 ------------------
 
 * Absolutely **no** JSON blobs, serialized blobs, or key/value tables.
@@ -72,7 +73,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-6 · Theme \& Template Handling
+## 6 · Theme \& Template Handling
 ------------------------------
 
 * **Table:** `themes (id, year, variant, name, assets_path, is_default)`
@@ -85,7 +86,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-7 · Content Lifecycle
+## 7 · Content Lifecycle
 ---------------------
 
 1. **Importers** parse each archived HTML file into structured rows:
@@ -101,7 +102,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-8 · Testing \& Composer Commands
+## 8 · Testing \& Composer Commands
 --------------------------------
 
 ```bash  
@@ -117,7 +118,7 @@ CI must execute the same Composer scripts; agents should ensure green runs befor
 
 *** ** * ** ***
 
-9 · Security \& Performance
+## 9 · Security \& Performance
 ---------------------------
 
 * CSRF tokens on every POST/PUT/DELETE in admin.
@@ -130,7 +131,7 @@ CI must execute the same Composer scripts; agents should ensure green runs befor
 
 *** ** * ** ***
 
-10 · Typical Agent Workflow
+## 10 · Typical Agent Workflow
 ---------------------------
 
 ```text  
@@ -147,7 +148,15 @@ CI must execute the same Composer scripts; agents should ensure green runs befor
 
 *** ** * ** ***
 
-11 · Glossary
+## 11 · Task \& Release Documentation
+-------------
+* **backlog.md** – Updated whenever a prompt can’t be fully completed; lists outstanding items with next-step suggestions.
+* **CHANGELOG.md** – Auto-generated from Conventional Commits in Keep a Changelog format.
+* **FEATURES.md** – Living catalogue of implemented features with brief descriptions and source/test links.
+
+*** ** * ** ***
+
+## 12 · Glossary
 -------------
 
 * **Theme** -- Asset + template set replicating one archived design.
@@ -160,7 +169,7 @@ CI must execute the same Composer scripts; agents should ensure green runs befor
 
 *** ** * ** ***
 
-12 · Hard Rules Checklist
+## 13 · Hard Rules Checklist
 -------------------------
 
 | ✔ / ✖ |                            Rule                            |
