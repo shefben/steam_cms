@@ -15,6 +15,9 @@ function cms_render_template($path, $vars=[]){
     // expose useful paths to templates
     $vars['CMS_ROOT'] = __DIR__;
     $vars['THEME_DIR'] = $tpl_dir;
+    $theme = cms_get_setting('theme', '2004');
+    $base_url = cms_base_url();
+    $vars['THEME_URL'] = ($base_url ? $base_url : '') . "/themes/$theme";
     $html = file_get_contents($path);
     $process = function($text) use ($config){
         return preg_replace_callback('/\{news_(full_article|partial_article|small_abstract|link_only|index_summary|index_summary_date|index_brief)(?:\((\d+)\))?\}/i',
@@ -25,6 +28,9 @@ function cms_render_template($path, $vars=[]){
             }, $text);
     };
     $html = $process($html);
+    // ensure theme-specific stylesheet paths
+    $css_path = $vars['THEME_URL'] . '/steampowered02.css';
+    $html = str_replace(['../steampowered02.css','/steampowered02.css'], $css_path, $html);
     if(isset($vars['content'])){
         $vars['content'] = $process($vars['content']);
         $html = str_replace('{content}', $vars['content'], $html);

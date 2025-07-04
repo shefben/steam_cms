@@ -57,6 +57,10 @@ usort($rows, function($a,$b) use($order){
     if($ib===false) $ib = PHP_INT_MAX;
     return $ia <=> $ib;
 });
+$page = max(1, (int)($_GET['page'] ?? 1));
+$perPage = 15;
+$total = count($rows);
+$pages = max(1, (int)ceil($total/$perPage));
 ?>
 <h2>News Articles</h2>
 <?php if(cms_has_permission('news_create')): ?>
@@ -67,8 +71,8 @@ usort($rows, function($a,$b) use($order){
 <table id="news-table" class="data-table">
 <thead><tr><th></th><th>Title</th><th>Author</th><th>Date</th><th>Views</th><th colspan="2">Actions</th></tr></thead>
 <tbody id="news-body">
-<?php foreach($rows as $row): ?>
-<tr data-id="<?php echo $row['id']; ?>">
+<?php foreach($rows as $i=>$row): $p = floor($i/$perPage)+1; ?>
+<tr data-id="<?php echo $row['id']; ?>" data-page="<?php echo $p; ?>"<?php if($p!=$page) echo ' style="display:none"'; ?>>
 <td class="handle">☰</td>
 <td><?php echo htmlspecialchars($row['title']); ?></td>
 <td><?php echo htmlspecialchars($row['author']); ?></td>
@@ -90,10 +94,21 @@ usort($rows, function($a,$b) use($order){
 </table>
 <button type="button" id="save-order" class="btn btn-success">Save Order</button>
 </form>
+<div class="pagination">
+<?php if($page>1): ?><a href="?page=<?php echo $page-1; ?>">&laquo; Prev</a><?php endif; ?>
+<?php if($page<$pages): ?><a href="?page=<?php echo $page+1; ?>">Next &raquo;</a><?php endif; ?>
+</div>
 <p><a href="index.php">Back</a></p>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
     var body=document.getElementById('news-body');
+    var currentPage=<?php echo $page; ?>;
+    function showPage(p){
+        body.querySelectorAll('tr').forEach(function(tr){
+            tr.style.display=(p==='all' || tr.dataset.page==p)?'':'none';
+        });
+        currentPage=p==='all'?currentPage:p;
+    }
     function sendOrder(){
         var ids=[];
         body.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.id);});
@@ -102,10 +117,23 @@ document.addEventListener('DOMContentLoaded',function(){
         data.set('order',ids.join(','));
         fetch('news.php',{method:'POST',body:data});
     }
-    new Sortable(body,{handle:'.handle',onEnd:sendOrder});
+    new Sortable(body,{
+        handle:'.handle',
+        onStart:function(){showPage('all');},
+        onEnd:function(){sendOrder();showPage(currentPage);}
+    });
+    showPage(currentPage);
     document.getElementById('save-order').addEventListener('click',function(e){
         e.preventDefault();
         sendOrder();
+    });
+    document.querySelectorAll('.pagination a').forEach(function(a){
+        a.addEventListener('click',function(e){
+            e.preventDefault();
+            var p=parseInt(this.href.split('=')[1]);
+            showPage(p);
+            history.replaceState(null,'','?page='+p);
+        });
     });
 });
 </script>

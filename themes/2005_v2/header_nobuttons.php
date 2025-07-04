@@ -29,14 +29,13 @@ $logo = $override ?: (isset($data['logo'])?$data['logo']:$default_logo);
         background:#000000;
         margin: 0px;
         width: 80%;
-        padding-top: 30px;
+        padding-top: 47px;
         padding-bottom: 9px;
         float: left;
     }
     .globalHeadBar_logo {
         background:#000000;
         margin: 0px;
-        width: 20%;
         padding-top: 4px;
         padding-bottom: 9px;
         float: left;

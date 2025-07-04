@@ -27,6 +27,11 @@ usort($rows,function($a,$b) use($order){
     if($ib===false) $ib = PHP_INT_MAX;
     return $ia <=> $ib;
 });
+$page = max(1, (int)($_GET['page'] ?? 1));
+$perPage = 15;
+$total = count($rows);
+$pages = max(1, (int)ceil($total/$perPage));
+$rows = array_slice($rows, ($page-1)*$perPage, $perPage);
 ?>
 <h2>FAQs</h2>
 <?php if(cms_has_permission('faq_add')): ?>
@@ -57,9 +62,12 @@ usort($rows,function($a,$b) use($order){
 </table>
 <button type="button" id="save-faq" class="btn btn-success">Save Order</button>
 </form>
+<div class="pagination">
+<?php if($page>1): ?><a href="?page=<?php echo $page-1; ?>">&laquo; Prev</a><?php endif; ?>
+<?php if($page<$pages): ?><a href="?page=<?php echo $page+1; ?>">Next &raquo;</a><?php endif; ?>
+</div>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
-    new Sortable(document.getElementById('faq-body'),{handle:'.handle'});
     var body=document.getElementById('faq-body');
     function sendOrder(){
         var ids=[];
