@@ -14,11 +14,16 @@ $links = [
     ['type' => 'link', 'label' => 'All Games', 'url' => $sf_base . '/all.php'],
     ['type' => 'link', 'label' => 'Search', 'url' => $sf_base . '/search.php'],
 ];
-$featured = json_decode(cms_get_setting('store_featured','{}'), true) ?: [];
+$db = cms_get_db();
+$capsules = [];
+$res = $db->query('SELECT position,appid,image FROM store_capsules');
+foreach($res as $row){
+    $capsules[$row['position']] = $row;
+}
 
 ob_start();
 if (file_exists($body_tpl)) {
-    cms_render_template($body_tpl, ['links' => $links, 'featured' => $featured]);
+    cms_render_template($body_tpl, ['links' => $links, 'capsules' => $capsules]);
 }
 $body = ob_get_clean();
 
