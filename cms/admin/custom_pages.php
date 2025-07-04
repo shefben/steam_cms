@@ -23,7 +23,7 @@ if(isset($_GET['delete'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['delete']);
     $db->prepare('DELETE FROM custom_pages WHERE slug=?')->execute([$slug]);
 }
-$pages=$db->query('SELECT slug,title FROM custom_pages ORDER BY slug')->fetchAll(PDO::FETCH_ASSOC);
+$pages=$db->query("SELECT slug,title FROM custom_pages WHERE slug NOT LIKE '%_index' ORDER BY slug")->fetchAll(PDO::FETCH_ASSOC);
 $edit=null;
 if(isset($_GET['edit'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['edit']);

@@ -1,6 +1,6 @@
 <?php
 $page_title = $page_title ?? 'Welcome to Steam';
-include dirname(__DIR__).'/2004/header_nobuttons.php';
+include $THEME_DIR.'/header_nobuttons.php';
 ?>
 <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
 <tr height="55">
@@ -21,23 +21,6 @@ include dirname(__DIR__).'/2004/header_nobuttons.php';
 </tr>
 <tr>
 <td align="center" valign="top"><br/>
-<table background="<?php echo cms_base_url(); ?>/themes/2005_v1/img/index02/TopBanner.gif" border="0" cellpadding="0" cellspacing="0" height="75" width="800">
-<tr height="22"><td colspan="4" height="22" width="799"></td><td height="22" width="1"></td></tr>
-<tr height="3">
-<td height="52" rowspan="2" width="262"></td>
-<td height="52" rowspan="2" valign="top" width="391" xpos="262">
-<div align="left"><font size="2"><span class="statusContent">Steam delivers Valve’s games to your desktop and connects you to a massive gaming community. Check out the full <a href="index.php?area=features">feature list</a> now.</span></font></div>
-</td>
-<td colspan="2" height="3" width="146"></td>
-<td height="3" width="1"></td>
-</tr>
-<tr height="49">
-<td height="49" width="9"></td>
-<td align="left" height="49" valign="top" width="137" xpos="662"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="24" src="<?php echo cms_base_url(); ?>/themes/2005_v1/img/index02/but_getsteamnow02.gif" width="124"/></a></td>
-<td height="49" width="1"></td>
-</tr>
-<tr height="1"><td width="262"></td><td width="391"></td><td width="9"></td><td width="137"></td><td width="1"></td></tr>
-</table>
 <table bgcolor="#3e4637" border="0" cellpadding="0" cellspacing="0" height="657" width="801">
 <tr height="53">
 <td align="left" colspan="3" height="53" valign="top" width="173" xpos="0"><img alt="" border="0" height="41" src="<?php echo cms_base_url(); ?>/themes/2005_v1/img/index02/Banner_NAV/Banner_Nav_01.gif" width="173"/></td>
