@@ -1,26 +1,21 @@
 <?php
-require_once __DIR__.'/../cms/header.php';
+require_once __DIR__.'/../cms/template_engine.php';
 $db=cms_get_db();
 $sql = 'SELECT a.*, GROUP_CONCAT(sc.name ORDER BY sc.ord SEPARATOR ", ") as cats '
-      'FROM store_apps a '
-      'LEFT JOIN app_categories ac ON a.appid=ac.appid '
-      'LEFT JOIN store_categories sc ON ac.category_id=sc.id '
-      'GROUP BY a.appid ORDER BY a.name';
+      .'FROM store_apps a '
+      .'LEFT JOIN app_categories ac ON a.appid=ac.appid '
+      .'LEFT JOIN store_categories sc ON ac.category_id=sc.id '
+      .'GROUP BY a.appid ORDER BY a.name';
 $apps=$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+$theme = cms_get_setting('theme','2005_v2');
+$tpl_body = __DIR__.'/templates/2005_all.html';
+ob_start();
+cms_render_template($tpl_body, ['apps'=>$apps]);
+$body = ob_get_clean();
+
+$tpl = __DIR__.'/../themes/'.$theme.'/default_template.php';
+if(!file_exists($tpl)) $tpl = __DIR__.'/../themes/2005_v2/default_template.php';
+cms_render_template($tpl, ['page_title'=>'All Games','content'=>$body]);
 ?>
-<h1>All Games</h1>
-<table class="table">
-<tr><th>ID</th><th>Name</th><th>Categories</th><th>Developer</th><th>Price</th><th>Avail</th></tr>
-<?php foreach($apps as $a): ?>
-<tr>
-  <td><a href="../index.php?area=game&AppId=<?php echo $a['appid']?>&"><?php echo $a['appid']?></a></td>
-  <td><?php echo htmlspecialchars($a['name'])?></td>
-  <td><?php echo htmlspecialchars($a['cats'])?></td>
-  <td><?php echo htmlspecialchars($a['developer'])?></td>
-  <td><?php echo $a['price']?></td>
-  <td><?php echo htmlspecialchars($a['availability'])?></td>
-</tr>
-<?php endforeach; ?>
-</table>
-<?php include __DIR__.'/../cms/footer.php'; ?>
 

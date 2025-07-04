@@ -16,8 +16,8 @@ if (isset($_GET['area'])) {
 }
 require_once __DIR__.'/cms/db.php';
 
-if(in_array($area,['store','browse','search','game','all'])){
-    $file=['store'=>'index','browse'=>'browse','search'=>'search','game'=>'game','all'=>'all'][$area];
+if(in_array($area,['store','browse','search','game','package','all'])){
+    $file=['store'=>'index','browse'=>'browse','search'=>'search','game'=>'game','package'=>'package','all'=>'all'][$area];
     include __DIR__.'/storefront/'.$file.'.php';
     exit;
 }
