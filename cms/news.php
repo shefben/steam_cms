@@ -30,6 +30,13 @@ function cms_render_news($type,$count=null){
     // syntax errors when executing the query.
     $limit = (int)$count;
     $where = ['publish_date<=NOW()'];
+    $year_only = cms_get_setting('news_year_only','1') === '1';
+    if($year_only){
+        $theme = cms_get_setting('theme','2004');
+        if(preg_match('/^(\d{4})/', $theme, $m)){
+            $where[] = 'YEAR(publish_date)='.(int)$m[1];
+        }
+    }
     if($settings['source']==='official'){
         $where[] = 'is_official=1';
     }elseif($settings['source']==='custom'){
@@ -99,7 +106,21 @@ function cms_render_news($type,$count=null){
                 $date_fmt = date('m/d/y', strtotime($row['publish_date']));
                 $out .= "<strong><a href='$link' style='text-decoration: none;'>$title</a></strong><br>($date_fmt)<br>$summary<br><br>";
                 break;
+            case 'index_brief':
+                $text = trim(preg_replace('/\s+/', ' ', strip_tags($content)));
+                $words = preg_split('/\s+/', $text);
+                $words = array_slice($words, 0, 16);
+                if(count($words) > 8){
+                    array_splice($words, 8, 0, '<br>');
+                }
+                $summary = implode(' ', $words);
+                $summary = str_replace(' <br>', '<br>', $summary);
+                $out .= "<strong><a href='$link' style='text-decoration: none;'>$title</a></strong><br>$summary<br><br>";
+                break;
         }
+    }
+    if($type==='index_brief'){
+        $out .= "<p align=\"right\"><sub><a href=\"index.php?area=news\" style=\"text-decoration: none;\">read more &gt;</a></sub></p>";
     }
     return $out;
 }

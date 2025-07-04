@@ -8,6 +8,7 @@ $smtp_user = cms_get_setting('smtp_user','');
 $smtp_pass = cms_get_setting('smtp_pass','');
 $root_path = cms_get_setting('root_path','');
 $admin_theme = cms_get_setting('admin_theme','default');
+$news_year_only = cms_get_setting('news_year_only','1');
 $json_nav = cms_get_setting('nav_items', null);
 $nav_items = $json_nav ? json_decode($json_nav, true) : ($default_nav ?? []);
 if(!$nav_items) $nav_items = $default_nav ?? [];
@@ -24,6 +25,7 @@ if(isset($_POST['save'])){
     cms_set_setting('smtp_pass',trim($_POST['smtp_pass']));
     cms_set_setting('root_path',trim($_POST['root_path']));
     cms_set_setting('admin_theme',$_POST['admin_theme']);
+    cms_set_setting('news_year_only', $_POST['news_year_only']);
     if(isset($_POST['nav_items'])){
         $items = [];
         foreach($_POST['nav_items'] as $it){
@@ -52,6 +54,7 @@ if(isset($_POST['save'])){
     $smtp_pass = trim($_POST['smtp_pass']);
     $root_path = trim($_POST['root_path']);
     $admin_theme = $_POST['admin_theme'];
+    $news_year_only = $_POST['news_year_only'];
     // header and footer settings moved to header_footer.php
     // keep nav_items array for redisplay
     $nav_items = $nav_items;
@@ -64,6 +67,11 @@ Admin Theme: <select name="admin_theme" title="Color scheme for the admin panel"
 <?php foreach($themes as $t): ?>
 <option value="<?php echo htmlspecialchars($t); ?>" <?php echo $t==$admin_theme?'selected':''; ?>><?php echo htmlspecialchars($t); ?></option>
 <?php endforeach; ?>
+</select><br><br>
+Only display news for specific year of theme:
+<select name="news_year_only">
+    <option value="1" <?php echo $news_year_only==='1'?'selected':''; ?>>Yes</option>
+    <option value="0" <?php echo $news_year_only==='0'?'selected':''; ?>>No</option>
 </select><br><br>
 SMTP Host: <input type="text" name="smtp_host" value="<?php echo htmlspecialchars($smtp_host); ?>" title="Mail server host"><br>
 SMTP Port: <input type="text" name="smtp_port" value="<?php echo htmlspecialchars($smtp_port); ?>" title="Mail server port"><br>

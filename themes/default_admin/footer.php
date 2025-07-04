@@ -14,6 +14,10 @@ $(function(){
     sub.slideToggle('fast');
     link.attr('aria-expanded', sub.is(':visible'));
   });
+  if(window.location.pathname.indexOf('storefront')!==-1){
+    $('#sf-sub').show();
+    link.attr('aria-expanded','true');
+  }
 });
 </script>
 </html>
