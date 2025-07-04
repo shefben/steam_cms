@@ -7,6 +7,19 @@ if(file_exists(__DIR__.'/cms/config.php')){
 $step = isset($_GET['step']) ? (int)$_GET['step'] : 1;
 $errors = [];
 
+/**
+ * Convert a loose, human-readable date (e.g. “Wed, 24 Aug 2005”
+ * or “February 24, 2005, 12:33 pm”) to ‘Y-m-d H:i:s’.
+ * If PHP can’t parse it, return the original string unchanged.
+ */
+function normalizeDate(string $raw): string
+{
+    // strip outer quotes that str_getcsv removed earlier
+    $clean = trim($raw, " \t\n\r\0\x0B'\"");
+    $ts    = strtotime($clean);
+    return $ts !== false ? date('Y-m-d H:i:s', $ts) : $raw;
+}
+
 if($_SERVER['REQUEST_METHOD']=='POST'){
     if($step==1){
         $host=trim($_POST['host']);
@@ -209,22 +222,31 @@ $pdo->exec("CREATE TABLE bw_history (
                     $stmt = trim($stmt);
                     if($stmt==='') continue;
 
-                    if(stripos($stmt,'INSERT INTO news')===0 &&
-                       preg_match('/^INSERT INTO news\([^\)]*\) VALUES \((.*)\)$/i',$stmt,$m)){
-                        $parts = str_getcsv($m[1], ',', "'");
-                        if(isset($parts[3])){
-                            $ts = strtotime($parts[3]);
-                            if($ts!==false){
-                                $parts[3] = date('Y-m-d H:i:s',$ts);
-                                $id = $parts[0];
-                                $title = "'".str_replace("'","''",$parts[1])."'";
-                                $author = "'".str_replace("'","''",$parts[2])."'";
-                                $date = "'".$parts[3]."'";
-                                $content = "'".str_replace("'","''",$parts[4])."'";
-                                $stmt = "INSERT INTO news(id,title,author,publish_date,content) VALUES ($id,$title,$author,$date,$content)";
-                            }
-                        }
-                    }
+                   if(stripos($stmt,'INSERT INTO news')===0){
+        // isolate the part after “VALUES”
+        $vals = trim(substr($stmt, stripos($stmt,'VALUES')+6));
+        $vals = rtrim($vals, ';');
+        $rows = preg_split('/\),\s*\(/', trim($vals, '()'));   // split rows
+
+        $newsStmt = $pdo->prepare(
+            'INSERT INTO news(id,title,author,publish_date,content) VALUES(?,?,?,?,?)'
+        );
+
+        foreach($rows as $row){
+            $parts = str_getcsv($row, ',', "'");
+            if(count($parts) < 5) continue;
+
+            // undo doubled single-quotes, trim whitespace
+            $id      = trim($parts[0]);
+            $title   = str_replace("''","'", $parts[1]);
+            $author  = str_replace("''","'", $parts[2]);
+            $date    = normalizeDate($parts[3]);
+            $content = str_replace("''","'", $parts[4]);
+
+            $newsStmt->execute([$id,$title,$author,$date,$content]);
+        }
+        continue;  // skip $pdo->exec($stmt) — we’ve handled it.
+    }
 
                     if(stripos($stmt,'INSERT INTO custom_pages')===0 &&
                        preg_match('/^INSERT INTO custom_pages\([^\)]*\) VALUES\s*(.*)$/i',$stmt,$m)){
@@ -233,9 +255,14 @@ $pdo->exec("CREATE TABLE bw_history (
                         $cpStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,created,updated) VALUES(?,?,?,?,?)');
                         foreach($rows as $row){
                             $parts = str_getcsv($row, ',', "'");
-                            if(count($parts)>=5){
-                                $created = strtoupper($parts[3])=='NOW()' ? date('Y-m-d H:i:s') : $parts[3];
-                                $updated = strtoupper($parts[4])=='NOW()' ? date('Y-m-d H:i:s') : $parts[4];
+            if(count($parts)>=5){
+                // translate NOW() or any informal date formats
+                $created = strtoupper($parts[3])=='NOW()'
+                           ? date('Y-m-d H:i:s')
+                           : normalizeDate($parts[3]);
+                $updated = strtoupper($parts[4])=='NOW()'
+                           ? date('Y-m-d H:i:s')
+                           : normalizeDate($parts[4]);
                                 $cpStmt->execute([$parts[0],$parts[1],$parts[2],$created,$updated]);
                             }
                         }
