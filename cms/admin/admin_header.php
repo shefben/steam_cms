@@ -82,6 +82,8 @@ $icons = [
 
 $sf_root = null;
 $sf_pages = [];
+$faq_root = null;
+$faq_pages = [];
 foreach ($nav_items as $k => $item) {
     if (!($item['visible'] ?? 1)) continue;
     if ($item['file'] === 'storefront.php') {
@@ -89,6 +91,12 @@ foreach ($nav_items as $k => $item) {
         unset($nav_items[$k]);
     } elseif (preg_match('/^storefront.*\.php/', $item['file'])) {
         $sf_pages[] = $item;
+        unset($nav_items[$k]);
+    } elseif ($item['file'] === 'faq.php') {
+        $faq_root = $item;
+        unset($nav_items[$k]);
+    } elseif ($item['file'] === 'faq_categories.php') {
+        $faq_pages[] = $item;
         unset($nav_items[$k]);
     }
 }
@@ -119,6 +127,26 @@ if ($has_sf) {
     if ($sf_pages) {
         $nav_html .= '<ul class="sub-menu" id="sf-sub" style="display:none">';
         foreach ($sf_pages as $it) {
+            $file = $it['file'];
+            $label = $it['label'];
+            $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
+            $icon = $icons[$file] ?? '';
+            $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
+        }
+        $nav_html .= '</ul>';
+    }
+    $nav_html .= '</li>';
+}
+$has_faq = $faq_root || $faq_pages;
+if ($has_faq) {
+    $root_file = $faq_root['file'] ?? 'faq.php';
+    $root_label = $faq_root['label'] ?? 'FAQ';
+    $active = strpos($_SERVER['PHP_SELF'], $root_file)!==false ? ' class="active"' : '';
+    $icon = $icons[$root_file] ?? '';
+    $nav_html .= '<li id="faq-parent"><a href="'.$root_file.'"'.$active.' aria-label="FAQ menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
+    if ($faq_pages) {
+        $nav_html .= '<ul class="sub-menu" id="faq-sub" style="display:none">';
+        foreach ($faq_pages as $it) {
             $file = $it['file'];
             $label = $it['label'];
             $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';

@@ -55,7 +55,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo->exec("DROP TABLE IF EXISTS news");
             $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT,is_official TINYINT(1) DEFAULT 1)");
             $pdo->exec("DROP TABLE IF EXISTS faq_categories");
-            $pdo->exec("CREATE TABLE faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,PRIMARY KEY(id1,id2))");
+            $pdo->exec("CREATE TABLE faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,hidden TINYINT(1) DEFAULT 0,PRIMARY KEY(id1,id2))");
             $pdo->exec("DROP TABLE IF EXISTS faq_content");
             $pdo->exec("CREATE TABLE faq_content(catid1 BIGINT,catid2 BIGINT,faqid1 BIGINT,faqid2 BIGINT,title TEXT,body TEXT,views INT DEFAULT 0,PRIMARY KEY(faqid1,faqid2))");
             $pdo->exec("DROP TABLE IF EXISTS ccafe_registration");
