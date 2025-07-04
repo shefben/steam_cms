@@ -17,7 +17,7 @@ function cms_render_template($path, $vars=[]){
     $vars['THEME_DIR'] = $tpl_dir;
     $html = file_get_contents($path);
     $process = function($text) use ($config){
-        return preg_replace_callback('/\{news_(full_article|partial_article|small_abstract|link_only|index_summary|index_summary_date)(?:\((\d+)\))?\}/i',
+        return preg_replace_callback('/\{news_(full_article|partial_article|small_abstract|link_only|index_summary|index_summary_date|index_brief)(?:\((\d+)\))?\}/i',
             function($m) use ($config){
                 $type = strtolower($m[1]);
                 $count = isset($m[2])? (int)$m[2] : ($config['news_count'] ?? null);

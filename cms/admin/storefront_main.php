@@ -22,18 +22,20 @@ $apps = $db->query('SELECT appid,name FROM store_apps ORDER BY name')->fetchAll(
 
 $img_base = dirname(__DIR__, 2) . '/storefront/images/capsules';
 $images = ['top'=>[], 'middle'=>[], 'bottom_left'=>[], 'bottom_right'=>[]];
-$it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($img_base));
-foreach ($it as $file) {
-    if ($file->isFile() && preg_match('#/(\d{4}_\d{2}-[^/]+)/(top|middle|bottom_left|bottom_right)_capsule\.png$#', $file->getPathname(), $m)) {
-        $folder = $m[1];
-        $pos = $m[2];
-        if (preg_match('/(\d{4})_(\d{2})/', $folder, $mm)) {
-            $label = $mm[1] . '-' . $mm[2];
-        } else {
-            $label = $folder;
+if(is_dir($img_base)){
+    $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($img_base));
+    foreach ($it as $file) {
+        if ($file->isFile() && preg_match('#/(\d{4}_\d{2}-[^/]+)/(top|middle|bottom_left|bottom_right)_capsule\.png$#', $file->getPathname(), $m)) {
+            $folder = $m[1];
+            $pos = $m[2];
+            if (preg_match('/(\d{4})_(\d{2})/', $folder, $mm)) {
+                $label = $mm[1] . '-' . $mm[2];
+            } else {
+                $label = $folder;
+            }
+            $rel = $folder . '/' . $pos . '_capsule.png';
+            $images[$pos][] = ['file' => $rel, 'label' => $label];
         }
-        $rel = $folder . '/' . $pos . '_capsule.png';
-        $images[$pos][] = ['file' => $rel, 'label' => $label];
     }
 }
 ?>
