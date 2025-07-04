@@ -1,144 +1,174 @@
-# Codex o3 Agent – SteamPowered (2002–2010) CMS Re-Creation  
-*Guidelines & Operating Manual*
+AGENTS.md -- Codex o3 Agent Framework
+=====================================
 
----
+*SteamPowered (2002 -- 2010) CMS Re-Creation*
 
-## 1. Mission Statement
-Re-create the public‐facing **steampowered.com** experience from 2002 – 2010 *and* deliver a modern, professional **CMS admin panel** that makes every data point—news, themes, product listings, promos—*fully* editable while preserving the original look-and-feel of each year.
+*** ** * ** ***
 
----
+1 · Mission \& End-Game
+-----------------------
 
-## 2. Primary Objectives
-| Priority | Goal | Key Points |
-|----------|------|------------|
-| **P0** | **Pixel-perfect front-end fidelity** | Match archived HTML / CSS exactly for each yearly theme (2002 → 2010). |
-| **P1** | **Professional Admin UX** | Admin screens must ship with complete CSS styling—*never plain HTML*. Use responsive layouts, accessible color contrasts, intuitive navigation, and clear form validation feedback. |
-| **P2** | **Data-first architecture** | **All** configuration, content, and state is persisted in the relational database (MariaDB/MySQL). **Do not** store app data in JSON or flat files. |
-| **P3** | **Extensible and Templated** | All unique front-end pages must be templated for our **custom template engine**. These templates must be reusable and designed to support content injection, partial overrides, and extension logic. |
-| **P4** | **Manipulable Content** | All example/archive pages must be parsed into structured, editable formats. The CMS must allow precise manipulation of each element—adding, removing, reordering—without touching the raw HTML. |
+Re-create every public **steampowered.com** site captured between 2002 and 2010---**pixel for pixel, link for link** ---while providing a fully featured, professionally styled **administrator UI** .
 
----
+All historical pages (one or more themes per year) live under `archived_steampowered/` and must be available as selectable **CMS themes**; switching theme/year should never break functionality or styling.
 
-## 3. Tech Stack Overview
-* **Language:** PHP 8.x, modern PSR-12 style  
-* **DB:** MariaDB / MySQL 8.x (InnoDB)  
-* **Template Engine:** Custom (Twig-compatible syntax)  
-* **Styles:** Vanilla CSS + optional SCSS build step (no Tailwind / Bootstrap; replicate Valve’s original styling)  
-* **Version Control:** Git, main branch = `trunk`  
+*** ** * ** ***
 
----
+2 · Top-Level Objectives
+------------------------
 
-## 4. Admin Panel Design Principles
-1. **Full CSS Styling Required**  
-   - Every screen ships with dedicated style rules within `/public/admin/css/`.  
-   - Use BEM naming or scoped data attributes; avoid global collisions with public themes.  
+| Priority |           Objective            |                                                                                          Notes                                                                                          |
+|----------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **P0**   | **Perfect front-end fidelity** | Replicate original layouts, CSS, imagery, and interactive behaviour for every theme/year/version.                                                                                       |
+| **P1**   | **Professional Admin UX**      | *No bare HTML.* All admin pages \& GUI controls **must** be styled with dedicated **CSS** and enhanced with **jQuery** where appropriate (tooltips, AJAX forms, sortable tables, etc.). |
+| **P2**   | **Data-first design**          | *Every* piece of content---archived or custom---resides in relational tables and is delivered dynamically.                                                                              |
+| **P3**   | **Templated everything**       | Each public page is a template in our engine; themes override only what they must.                                                                                                      |
+| **P4**   | **Hybrid content control**     | Admins decide to show (a) archived/official, (b) custom, or (c) a blend---per content type.                                                                                             |
+| **P5**   | **Link integrity**             | When importing/templating archived pages, **fix all internal links** so they resolve to the equivalent CMS route. Absolute or external links remain untouched.                          |
+| **P6**   | **Automated validation**       | Provide repeatable Composer / PHPUnit / static-analysis commands so agents can run the full test suite locally.                                                                         |
 
-2. **Intuitive Navigation**  
-   - Persistent left sidebar + breadcrumb header.  
-   - Keyboard-accessible components, tab order, ARIA labels.  
+*** ** * ** ***
 
-3. **Smart Forms**  
-   - Instant inline validation.  
-   - Re-usable form field components (text, slug, markdown, WYSIWYG, datetime, image upload).  
+3 · Tech Stack
+--------------
 
-4. **Visual Continuity**  
-   - Colors/fonts echo the 2002–2010 public themes while maintaining modern accessibility contrast.  
+* **PHP 8.x** (strict types, PSR-12)
 
----
+* **MariaDB / MySQL 8.x**
 
-## 5. Database-First Rule Set
-**All data must be fully normalized. The following practices are strictly prohibited:**
-- ❌ No JSON blobs  
-- ❌ No flat config files  
-- ❌ No serialized data  
-- ❌ **Absolutely no key/value rows** (e.g., `settings (key, value)` is forbidden)
+* **Custom Twig-compatible template engine**
 
-Instead:
-- Use strongly-typed, structured tables with descriptive column names.
-- Create dedicated schema for each content type (e.g., `news_articles`, `product_listings`, `theme_assets`, `page_blocks`, `nav_links`).
+* **jQuery 3.x** (bundled for admin only)
 
-**All content must be manageable through the CMS.**
+* **Vanilla CSS / optional SCSS build** (no Tailwind/Bootstrap on front-end; admin may use Bootstrap 5 if needed)
 
----
+* **Git** (default branch `trunk`)
 
-## 6. Page Templating
-Every unique page must:
-- Be rendered using the **custom template engine**.
-- Be constructed from modular components (headers, footers, content blocks).
-- Be fully **extensible and overridable**, supporting child themes and layout inheritance.
-- Be automatically linked to editable sections in the CMS (e.g., page title, meta, content blocks).
+*** ** * ** ***
 
-> Example:  
-> The 2004 Subscriber Agreement must not be hardcoded. Instead, it's parsed into editable chunks, stored in a dedicated `pages` table, and rendered via `page_subscriber_agreement.twig`.
+4 · Admin Design Principles
+---------------------------
 
----
+1. **Full Styling** -- All admin routes (`/admin/**`) load their own stylesheet(s) and, where it improves UX, jQuery-powered widgets (drag-and-drop ordering, live search, modal dialogs).
 
-## 7. Parsed Page Requirements
-All pre-existing legacy HTML content must:
-- Be parsed into structured records at import.  
-- Preserve content hierarchy (headings, lists, tables, etc).  
-- Be injected into CMS-controlled templates with editable regions.  
-- Allow admin to add/remove paragraphs, images, sections easily.
+2. **Responsive \& Accessible** -- WCAG 2.1 AA minimum.
 
-> Never store full raw HTML blobs.  
-> Each visual section should map to a discrete record or field.
+3. **Component Library** -- Re-usable Vue-free jQuery components: `Modal`, `DataTable`, `TabForm`, `SlugInput`, etc.
 
----
+4. **Visual Continuity** -- Admin palette nods to era-specific Steam greens/greys while staying modern.
 
-## 8. Yearly Theme Handling
-* Table: `themes (id, year, name, css_path, assets_path, is_default)`  
-* Each request resolves the active theme by (a) user profile override, (b) global default, (c) fallback to 2003.  
-* Public controllers inject theme-specific view paths; templates use `/themes/{year}/templates/*.twig`.  
+*** ** * ** ***
 
----
+5 · Database Canon
+------------------
 
-## 9. Coding Conventions
-* PSR-12, strict types, short array syntax, `declare(strict_types=1);`.  
-* Controllers thin; domain logic lives in Services.  
-* Use PDO prepared statements or a lightweight ORM (e.g., Doctrine DBAL—not Active Record).  
+* Absolutely **no** JSON blobs, serialized blobs, or key/value tables.
 
----
+* Normalise aggressively; use foreign keys, unique constraints, and enum/lut tables.
 
-## 10. Security & Performance
-* CSRF tokens on all mutating admin requests.  
-* Content Security Policy headers to mitigate XSS.  
-* Redis page-fragment caching for heavy archive pages.  
-* Prepared statements everywhere—*no* string-built SQL.  
+* Seed script loads **all archived HTML** (parsed) into tables during installation.
 
----
+> **Important:** Every import job must rewrite historic URLs so `/app/123/` → `index.php?area=app&id=123` (or equivalent route).
 
-## 11. Typical Agent Task Workflow
-```text
-1. Receive user story (e.g., “Add 2006 theme”).
-2. Design DB changes → create migration & seeder.
-3. Slice original 2006 CSS/graphics → store in /themes/2006/.
-4. Build templated page using our engine with injected editable blocks.
-5. Build admin UI for enabling/disabling theme and editing content blocks.
-6. Write feature tests (PHPUnit) + Cypress admin E2E.
-7. Commit with Conventional Commits prefix (feat:, fix:, chore:).
+*** ** * ** ***
+
+6 · Theme \& Template Handling
+------------------------------
+
+* **Table:** `themes (id, year, variant, name, assets_path, is_default)`
+
+* **Resolver order:** user override → site default → fallback 2003.
+
+* **Filesystem:** `/themes/{year}_{variant}/templates/*.twig`, `/themes/{year}_{variant}/assets/...`
+
+* Each template includes editable blocks mapped to DB records (`news_block`, `promo_banner`, `nav_primary`, ...).
+
+*** ** * ** ***
+
+7 · Content Lifecycle
+---------------------
+
+1. **Importers** parse each archived HTML file into structured rows:
+
+   * `news_articles`, `pages_static`, `products`, `categories`, `faqs`, `banners`, ...
+2. **Link Fixer** adjusts `href`/`src` to CMS routes or theme asset paths.
+
+3. **Seeder** populates DB; new installs ship with full historical corpus.
+
+4. **Admin CRUD** lets staff create additional news, pages, banners, etc.
+
+5. **Display Logic** (per content type) chooses dataset: archived, custom, or combined.
+
+*** ** * ** ***
+
+8 · Testing \& Composer Commands
+--------------------------------
+
+```bash  
+
+# Run static analysis & coding standards
+composer run-script lint          # phpcs + phpstan
+
+# Execute unit tests
+composer test                     # phpunit --colors=always
 ```
 
----
+CI must execute the same Composer scripts; agents should ensure green runs before committing.
 
-## 12. Non-Functional Requirements
-* Accessibility: WCAG 2.1 AA minimum in admin panel.
-* Logging: Monolog, daily rotation; errors to `error_log` table.
-* Backups: Nightly SQL dump script included in `/scripts/backup/`.
+*** ** * ** ***
 
----
+9 · Security \& Performance
+---------------------------
 
-## 13. Glossary
-* Theme – A full HTML/CSS asset set replicating a specific historical year.
-* CMS – Admin interface to manage all site data.
-* Migration – SQL file describing an atomic schema change.
-* Page Template – A custom-engine parsed layout with defined injection points.
-* Parsed Page – A legacy HTML page restructured into editable CMS-managed blocks.
+* CSRF tokens on every POST/PUT/DELETE in admin.
 
----
+* CSP, X-Frame-Options, XSS filters on public and admin.
 
-## 14. Final Reminders
-    ✅ All content must be stored in proper tables.
-    ❌ Do not use `key/value` settings for anything.
-    ✅ All pages must be templated and extendable.
-    ❌ Never store content in JSON or serialized blobs.
-    ✅ Admin panel HTML must always be styled. Plain HTML is unacceptable.
+* Prepared statements (Doctrine DBAL or PDO).
+
+* Optional Redis page-fragment cache for heavy storefront listings.
+
+*** ** * ** ***
+
+10 · Typical Agent Workflow
+---------------------------
+
+```text  
+1. Take user story ("Import 2007-blue variant").
+2. Add/adjust DB schema via migration.
+3. Write importer script to parse 2007-blue HTML → DB.
+4. Slice CSS/images into /themes/2007_blue/.
+5. Create Twig templates & blocks.
+6. Build admin controls for enabling theme & curating 2007 data.
+7. Add PHPUnit + Cypress tests.
+8. Validate with Composer scripts.
+9. Commit with Conventional Commit message.
+```
+
+*** ** * ** ***
+
+11 · Glossary
+-------------
+
+* **Theme** -- Asset + template set replicating one archived design.
+
+* **Variant** -- Alternate look in the same calendar year (e.g., 2003-holiday).
+
+* **Parsed Page** -- Legacy HTML broken into structured DB fields.
+
+* **Hybrid Mode** -- Public pages mixing archived and custom content.
+
+*** ** * ** ***
+
+12 · Hard Rules Checklist
+-------------------------
+
+| ✔ / ✖ |                            Rule                            |
+|-------|------------------------------------------------------------|
+| ✔     | Admin HTML **always fully styled** with CSS + jQuery.      |
+| ✔     | All public/admin content served from DB, never hard-coded. |
+| ✔     | Historical content loaded into DB during install.          |
+| ✔     | Links rewritten to valid CMS routes.                       |
+| ✖     | No key/value, JSON, or serialized blobs in DB.             |
+
+*If in doubt---template it, style it, and load it from the database.*
