@@ -10,7 +10,7 @@ $db = cms_get_db();
 $term       = trim($_GET['term'] ?? '');
 $type       = $_GET['type'] ?? '';
 $category   = $_GET['category'] ?? '';
-$developer  = isset($_GET['developer']) ? (int)$_GET['developer'] : 0;
+$developer  = trim($_GET['developer'] ?? '');
 $price      = $_GET['price'] ?? '';
 $order      = $_GET['order'] ?? '';
 $sort_by    = $_GET['sort_by'] ?? 'Name';
@@ -44,7 +44,7 @@ $base_params = [
 $where = [];
 $params = [];
 if($term !== ''){ $where[] = 'a.name LIKE ?'; $params[] = "%$term%"; }
-if($developer){ $where[] = 'a.appid IN (SELECT appid FROM developer_apps WHERE developer_id=?)'; $params[] = $developer; }
+if($developer !== ''){ $where[] = 'a.developer=?'; $params[] = $developer; }
 if($category !== ''){ $where[] = 'a.appid IN (SELECT appid FROM app_categories WHERE category_id=?)'; $params[] = (int)$category; }
 if($price !== ''){
     if(strpos($price,'-')!==false){ list($min,$max)=array_map('intval',explode('-', $price,2)); $where[]='a.price BETWEEN ? AND ?'; $params[]=$min/100; $params[]=$max/100; }
@@ -66,7 +66,7 @@ $stmt->execute($params);
 $apps = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Dropdown values
-$developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+$developers = $db->query('SELECT name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
 $categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
 $prices = [
     ''       => '-',
