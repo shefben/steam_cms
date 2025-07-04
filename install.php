@@ -172,11 +172,42 @@ $pdo->exec("CREATE TABLE bw_history (
                 views INT DEFAULT 0,
                 PRIMARY KEY(date,page)
             )");
+            function split_sql_statements($sql){
+                $stmts = [];
+                $buffer = '';
+                $inBlock = false;
+                foreach(preg_split("/\r?\n/", $sql) as $line){
+                    $trim = trim($line);
+                    if($inBlock){
+                        if(strpos($trim, '*/') !== false){
+                            $inBlock = false;
+                        }
+                        continue;
+                    }
+                    if($trim === '' || str_starts_with($trim, '--') || $trim[0] === '#') {
+                        continue;
+                    }
+                    if(str_starts_with($trim, '/*')) {
+                        $inBlock = true;
+                        continue;
+                    }
+                    $buffer .= $line."\n";
+                    if(preg_match('/;\s*$/', $trim)){
+                        $stmts[] = trim($buffer);
+                        $buffer = '';
+                    }
+                }
+                if(trim($buffer) !== '') {
+                    $stmts[] = trim($buffer);
+                }
+                return $stmts;
+            }
+
             foreach(glob(__DIR__.'/sql/*.sql') as $file){
                 $sql=file_get_contents($file);
-                foreach(preg_split('/;\s*(?:\r?\n|$)/',$sql) as $stmt){
+                foreach(split_sql_statements($sql) as $stmt){
                     $stmt = trim($stmt);
-                    if(!$stmt) continue;
+                    if($stmt==='') continue;
 
                     if(stripos($stmt,'INSERT INTO news')===0 &&
                        preg_match('/^INSERT INTO news\([^\)]*\) VALUES \((.*)\)$/i',$stmt,$m)){
