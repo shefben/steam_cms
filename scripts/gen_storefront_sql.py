@@ -92,10 +92,11 @@ for app in apps:
 out = []
 out.append("CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,visible TINYINT DEFAULT 1);")
 out.append("CREATE TABLE store_developers(id INT AUTO_INCREMENT PRIMARY KEY,name TEXT);")
-out.append("CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availability TEXT,price DECIMAL(10,2),metacritic TEXT DEFAULT NULL,description TEXT,sysreq TEXT,main_image TEXT,images TEXT);")
+out.append("CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availability TEXT,price DECIMAL(10,2),metacritic TEXT DEFAULT NULL,description TEXT,sysreq TEXT,main_image TEXT,images TEXT,show_metascore TINYINT DEFAULT 0);")
 out.append("CREATE TABLE subscriptions(subid INT PRIMARY KEY,name TEXT,price DECIMAL(10,2));")
 out.append("CREATE TABLE subscription_apps(subid INT,appid INT,PRIMARY KEY(subid,appid));")
 out.append("CREATE TABLE app_categories(appid INT,category_id INT,PRIMARY KEY(appid,category_id));")
+out.append("CREATE TABLE store_capsules(position VARCHAR(20) PRIMARY KEY, image TEXT, appid INT);")
 for i, (cid, name) in enumerate(categories.items(), 1):
     out.append(
         f"INSERT INTO store_categories(id,name,ord,visible) "
@@ -110,8 +111,8 @@ for app in apps:
     sysreq = json.dumps(app.get('sysreq',''))
     main_img = json.dumps(app.get('main_image',''))
     out.append(
-        f"INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images) "
-        f"VALUES({app['appid']},{json.dumps(app['name'])},{json.dumps(app['developer'])},{json.dumps(app['availability'])},{app['price']},{mscore},{desc},{sysreq},{main_img},{images});")
+        f"INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images,show_metascore) "
+        f"VALUES({app['appid']},{json.dumps(app['name'])},{json.dumps(app['developer'])},{json.dumps(app['availability'])},{app['price']},{mscore},{desc},{sysreq},{main_img},{images},0);")
 
 for subid, info in sorted(subs.items()):
     out.append(f"INSERT INTO subscriptions(subid,name,price) VALUES({subid},{json.dumps(info['name'])},{info['price']});")
@@ -124,6 +125,11 @@ for aid, cids in sorted(app_cat_map.items()):
         out.append(f"INSERT INTO app_categories(appid,category_id) VALUES({aid},{cid});")
 featured = {"top":2400,"middle":380,"bottom_left":1200,"bottom_right":1300}
 out.append("INSERT INTO settings(`key`,value) VALUES('store_featured'," + json.dumps(json.dumps(featured)) + ");")
+out.append("INSERT INTO store_capsules(position,image,appid) VALUES"
+            "('top','2006_08-August/top_capsule.png',2400),"
+            "('middle','2006_08-August/middle_capsule.png',380),"
+            "('bottom_left','2006_08-August/bottom_left_capsule.png',1200),"
+            "('bottom_right','2006_08-August/bottom_right_capsule.png',1300);")
 
 pathlib.Path('sql/install_storefront.sql').write_text('\n'.join(out))
 print('Wrote', len(out), 'lines to sql/install_storefront.sql')

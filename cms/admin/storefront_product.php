@@ -17,8 +17,9 @@ if(isset($_POST['save'])){
     $dev_name->execute([$dev_id]);
     $dev_name = $dev_name->fetchColumn();
     $avail = $_POST['availability'];
-    $upd = $db->prepare('UPDATE store_apps SET name=?,price=?,description=?,developer=?,availability=? WHERE appid=?');
-    $upd->execute([$name,$price,$desc,$dev_name,$avail,$appid]);
+    $show_ms = isset($_POST['show_metascore']) ? 1 : 0;
+    $upd = $db->prepare('UPDATE store_apps SET name=?,price=?,description=?,developer=?,availability=?,show_metascore=? WHERE appid=?');
+    $upd->execute([$name,$price,$desc,$dev_name,$avail,$show_ms,$appid]);
     header('Location: storefront.php#products');
     exit;
 }
@@ -44,6 +45,7 @@ $images = json_decode($app['images'] ?: '[]', true);
 <?php endforeach; ?>
 </select></label><br>
 <label>Description<br><textarea name="description" rows="5" cols="60"><?php echo htmlspecialchars($app['description'])?></textarea></label>
+<br><label><input type="checkbox" name="show_metascore" value="1" <?php if($app['show_metascore']) echo 'checked';?>> Show Metascore</label>
 <div>
 <?php foreach($images as $img): ?>
 <img src="../archived_steampowered/2005/storefront/screenshots/<?php echo $img?>" width="100">
