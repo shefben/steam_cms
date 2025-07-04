@@ -60,26 +60,27 @@
                                             <tr>
                                                 <td width="33%">
                                                     <select name="developer" style="width:100%;">
-                                                        <option value="" selected>-</option>
+                                                        <option id="dev_list" value="" selected>-</option>
                                                         <?php foreach($developers as $d): ?>
-                                                        <option value="<?php echo $d['id']; ?>"<?php if($developer==$d['id']) echo ' selected'; ?>><?php echo htmlspecialchars($d['name']); ?></option>
+                                                        <option id="dev_list" value="<?php echo htmlspecialchars($d['name']); ?>"<?php if($developer === $d['name']) echo ' selected'; ?>><?php echo htmlspecialchars($d['name']); ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </td>
                                                 <td width="10" nowrap></td>
                                                 <td width="33%">
                                                     <select name="category" style="width:100%;">
-                                                        <option value="" selected>-</option>
+                                                        <option id="cat_list" value="" selected>-</option>
                                                         <?php foreach($categories as $c): ?>
-                                                        <option value="<?php echo $c['id']; ?>"<?php if($category==$c['id']) echo ' selected'; ?>><?php echo htmlspecialchars($c['name']); ?></option>
+                                                        <option id="cat_list" value="<?php echo $c['id']; ?>"<?php if($category==$c['id']) echo ' selected'; ?>><?php echo htmlspecialchars($c['name']); ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </td>
                                                 <td width="10" nowrap></td>
                                                 <td width="33%">
                                                     <select name="price" style="width:100%;">
+                                                        <option id="price" value="" selected>-</option>
                                                         <?php foreach($prices as $val=>$label): ?>
-                                                        <option value="<?php echo $val; ?>"<?php if($val!=='' && $price==$val) echo ' selected'; ?>><?php echo $label; ?></option>
+                                                        <option id="price" value="<?php echo $val; ?>"<?php if($val!=='' && $price==$val) echo ' selected'; ?>><?php echo $label; ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </td>
