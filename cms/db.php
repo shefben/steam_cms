@@ -150,6 +150,10 @@ function cms_require_any_permission($perms){
 }
 
 function cms_base_url(){
+    $root = rtrim(cms_get_setting('root_path',''), '/');
+    if($root !== ''){
+        return $root === '/' ? '' : $root;
+    }
     $dir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
     if(substr($dir, -10) === '/cms/admin'){
         $dir = substr($dir, 0, -10);

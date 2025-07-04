@@ -78,10 +78,14 @@ $icons = [
     '../logout.php'    => '🚪',
 ];
 
+$sf_root = null;
 $sf_pages = [];
 foreach ($nav_items as $k => $item) {
     if (!($item['visible'] ?? 1)) continue;
-    if (preg_match('/^storefront.*\.php/', $item['file'])) {
+    if ($item['file'] === 'storefront.php') {
+        $sf_root = $item;
+        unset($nav_items[$k]);
+    } elseif (preg_match('/^storefront.*\.php/', $item['file'])) {
         $sf_pages[] = $item;
         unset($nav_items[$k]);
     }
@@ -97,16 +101,25 @@ foreach ($nav_items as $item) {
     $icon = $icons[$file] ?? '';
     $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
 }
-if ($sf_pages) {
-    $nav_html .= '<li id="sf-parent"><a href="#" aria-label="StoreFront menu">🏬 StoreFront</a><ul class="sub-menu" id="sf-sub" style="display:none">';
-    foreach ($sf_pages as $it) {
-        $file = $it['file'];
-        $label = $it['label'];
-        $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
-        $icon = $icons[$file] ?? '';
-        $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
+$has_sf = $sf_root || $sf_pages;
+if ($has_sf) {
+    $root_file = $sf_root['file'] ?? 'storefront.php';
+    $root_label = $sf_root['label'] ?? 'Storefront';
+    $active = strpos($_SERVER['PHP_SELF'], $root_file)!==false ? ' class="active"' : '';
+    $icon = $icons[$root_file] ?? '';
+    $nav_html .= '<li id="sf-parent"><a href="'.$root_file.'"'.$active.' aria-label="StoreFront menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
+    if ($sf_pages) {
+        $nav_html .= '<ul class="sub-menu" id="sf-sub" style="display:none">';
+        foreach ($sf_pages as $it) {
+            $file = $it['file'];
+            $label = $it['label'];
+            $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
+            $icon = $icons[$file] ?? '';
+            $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
+        }
+        $nav_html .= '</ul>';
     }
-    $nav_html .= '</ul></li>';
+    $nav_html .= '</li>';
 }
 $nav_html .= '</ul>';
 

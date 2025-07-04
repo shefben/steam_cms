@@ -202,6 +202,8 @@ DIV.box	{
 	width:180px;
 	position:relative;
 	font-size:8pt;
+        max-height:200px;
+        overflow:auto;
 	}
 .list{
 	width:80%;
