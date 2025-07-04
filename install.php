@@ -174,35 +174,32 @@ $pdo->exec("CREATE TABLE bw_history (
             )");
             function split_sql_statements($sql){
                 $stmts = [];
-                $len = strlen($sql);
-                $current = '';
-                $inSingle = false;
-                $inDouble = false;
-                for($i=0;$i<$len;$i++){
-                    $ch = $sql[$i];
-                    if($ch === "'" && !$inDouble){
-                        if($inSingle && $i+1<$len && $sql[$i+1]==="'"){
-                            $current .= "''";
-                            $i++;
-                            continue;
+                $buffer = '';
+                $inBlock = false;
+                foreach(preg_split("/\r?\n/", $sql) as $line){
+                    $trim = trim($line);
+                    if($inBlock){
+                        if(strpos($trim, '*/') !== false){
+                            $inBlock = false;
                         }
-                        $inSingle = !$inSingle;
-                    }elseif($ch === '"' && !$inSingle){
-                        if($inDouble && $i+1<$len && $sql[$i+1]==='"'){
-                            $current .= '""';
-                            $i++;
-                            continue;
-                        }
-                        $inDouble = !$inDouble;
+                        continue;
                     }
-                    if($ch === ';' && !$inSingle && !$inDouble){
-                        $stmts[] = trim($current);
-                        $current = '';
-                    }else{
-                        $current .= $ch;
+                    if($trim === '' || str_starts_with($trim, '--') || $trim[0] === '#') {
+                        continue;
+                    }
+                    if(str_starts_with($trim, '/*')) {
+                        $inBlock = true;
+                        continue;
+                    }
+                    $buffer .= $line."\n";
+                    if(preg_match('/;\s*$/', $trim)){
+                        $stmts[] = trim($buffer);
+                        $buffer = '';
                     }
                 }
-                if(trim($current) !== '') $stmts[] = trim($current);
+                if(trim($buffer) !== '') {
+                    $stmts[] = trim($buffer);
+                }
                 return $stmts;
             }
 

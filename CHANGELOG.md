@@ -13,3 +13,4 @@ All notable changes to this project will be documented in this file.
 - Fixed storefront menu auto-expansion and navigation order
 
 - Added two-line word limit for index news snippets
+- Improved installer SQL parser for HTML-heavy statements
