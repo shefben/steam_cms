@@ -66,7 +66,7 @@ if(isset($_POST['save'])){
         $db->prepare('INSERT INTO app_categories(appid,category_id) VALUES(?,?)')->execute([$appid,(int)$cat]);
     }
     $db->commit();
-    header('Location: storefront.php#products');
+    header('Location: storefront_products.php');
     exit;
 }
 $developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
