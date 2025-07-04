@@ -6,6 +6,7 @@ $smtp_host = cms_get_setting('smtp_host','');
 $smtp_port = cms_get_setting('smtp_port','');
 $smtp_user = cms_get_setting('smtp_user','');
 $smtp_pass = cms_get_setting('smtp_pass','');
+$root_path = cms_get_setting('root_path','');
 $admin_theme = cms_get_setting('admin_theme','default');
 $json_nav = cms_get_setting('nav_items', null);
 $nav_items = $json_nav ? json_decode($json_nav, true) : ($default_nav ?? []);
@@ -21,6 +22,7 @@ if(isset($_POST['save'])){
     cms_set_setting('smtp_port',trim($_POST['smtp_port']));
     cms_set_setting('smtp_user',trim($_POST['smtp_user']));
     cms_set_setting('smtp_pass',trim($_POST['smtp_pass']));
+    cms_set_setting('root_path',trim($_POST['root_path']));
     cms_set_setting('admin_theme',$_POST['admin_theme']);
     if(isset($_POST['nav_items'])){
         $items = [];
@@ -48,6 +50,7 @@ if(isset($_POST['save'])){
     $smtp_port = trim($_POST['smtp_port']);
     $smtp_user = trim($_POST['smtp_user']);
     $smtp_pass = trim($_POST['smtp_pass']);
+    $root_path = trim($_POST['root_path']);
     $admin_theme = $_POST['admin_theme'];
     // header and footer settings moved to header_footer.php
     // keep nav_items array for redisplay
@@ -66,6 +69,7 @@ SMTP Host: <input type="text" name="smtp_host" value="<?php echo htmlspecialchar
 SMTP Port: <input type="text" name="smtp_port" value="<?php echo htmlspecialchars($smtp_port); ?>" title="Mail server port"><br>
 SMTP User: <input type="text" name="smtp_user" value="<?php echo htmlspecialchars($smtp_user); ?>" title="Username for the mail server"><br>
 SMTP Password: <input type="password" name="smtp_pass" value="<?php echo htmlspecialchars($smtp_pass); ?>" title="Password for the mail server"><br><br>
+Root Path: <input type="text" name="root_path" value="<?php echo htmlspecialchars($root_path); ?>" title="Prefix for all local links"><br><br>
 Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <input type="file" name="favicon" accept="image/x-icon" title="Upload a custom site favicon"><br><br>
 <h3>Sidebar Navigation</h3>
 <table class="data-table" cellpadding="2">

@@ -259,6 +259,11 @@ HTML;
                 ['file'=>'theme.php','label'=>'Theme','visible'=>1],
                 ['file'=>'settings.php','label'=>'Settings','visible'=>1],
                 ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
+                ['file'=>'storefront_main.php','label'=>'Main Page','visible'=>1],
+                ['file'=>'storefront.php','label'=>'Storefront','visible'=>1],
+                ['file'=>'storefront.php#products','label'=>'Products','visible'=>1],
+                ['file'=>'storefront.php#categories','label'=>'Categories','visible'=>1],
+                ['file'=>'storefront_developers.php','label'=>'Developers','visible'=>1],
                 ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
                 ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
                 ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
@@ -278,6 +283,7 @@ HTML;
                 'favicon'=>'/favicon.ico',
                 'error_html'=>$error_html,
                 'nav_items'=>json_encode($default_nav),
+                'root_path'=>'',
                 'gzip'=>'0',
                 'enable_cache'=>'0'
             ];
