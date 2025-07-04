@@ -1,0 +1,13 @@
+<h1>Browse Games</h1>
+<h2>Categories</h2>
+<ul>
+<?php foreach($categories as $c): ?>
+ <li><a href="../index.php?area=search&Browse=1&category=<?php echo $c['id']?>&"><?php echo htmlspecialchars($c['name'])?></a></li>
+<?php endforeach; ?>
+</ul>
+<h2>Developers</h2>
+<ul>
+<?php foreach($developers as $d): ?>
+ <li><a href="../index.php?area=search&Browse=1&developer=<?php echo urlencode($d)?>&"><?php echo htmlspecialchars($d)?></a></li>
+<?php endforeach; ?>
+</ul>

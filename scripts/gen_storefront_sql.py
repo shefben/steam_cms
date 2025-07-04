@@ -1,4 +1,5 @@
 import re, pathlib, json, html
+from collections import defaultdict
 
 base = pathlib.Path('archived_steampowered/2005/storefront')
 cat_html = base / 'browse_games_catagories.html'
@@ -25,6 +26,23 @@ for page in cat_search_dir.glob('searchcategory_*.php'):
     for aid in appids:
         app_cat_map.setdefault(int(aid), set()).add(cid)
 
+# parse metascore information from sorting page
+meta_scores = {}
+meta_file = base / 'all_misc_sorting_pages' / 'all_sort_Metascore_Developer_ASC.php'
+if meta_file.exists():
+    meta_text = meta_file.read_text()
+    meta_text = re.sub(r'<!--.*?-->', '', meta_text, flags=re.DOTALL)
+    row_re_ms = re.compile(r'<tr[^>]*id="row_(\d+)".*?>\s*(.*?)</tr>', re.DOTALL)
+    for aid, row in row_re_ms.findall(meta_text):
+        cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
+        if len(cells) >= 8:
+            score = re.sub('<.*?>', '', cells[5]).strip()
+            if score and score != '--':
+                meta_scores[int(aid)] = score
+
+subs = {}
+sub_map = defaultdict(set)
+
 html_all = all_html.read_text()
 row_re = re.compile(r'<tr[^>]*id="row_(\d+)".*?>\s*(.*?)</tr>', re.DOTALL)
 apps = []
@@ -37,7 +55,14 @@ for appid, row in row_re.findall(html_all):
         price = re.sub('<.*?>', '', cells[7]).strip()
         price = '0' if price == '-' or not price else price.replace('$', '')
         dev = next((d for d in developers if d.startswith(dev_raw.replace('...', '').strip())), dev_raw)
-        apps.append({"appid": int(appid), "name": name, "developer": dev, "availability": avail, "price": price})
+        apps.append({
+            "appid": int(appid),
+            "name": name,
+            "developer": dev,
+            "availability": avail,
+            "price": price,
+            "metacritic": meta_scores.get(int(appid), '')
+        })
 
 # parse app pages for description, screenshots, packages and system requirements
 for app in apps:
@@ -52,16 +77,13 @@ for app in apps:
     imgs = re.findall(r'screenshots/([0-9_]+_thumb.jpg)', text)
     if imgs:
         app['images'] = imgs
+        app['main_image'] = imgs[0]
     packs = []
-    titles = re.findall(r'<span class="package_title">([^<]+)</span>', text)
-    for i in range(0, len(titles)-1, 2):
-        name = titles[i]
-        price_txt = titles[i+1]
-        if price_txt.startswith('$'):
-            price_val = price_txt[1:]
-            packs.append({"name": name, "price": price_val})
-    if packs:
-        app['packages'] = packs
+    for name, price_val, subid in re.findall(r'<span class="package_title">([^<]+)</span>.*?<span class="package_title">\$([0-9\.]+)</span>.*?steam://purchase/(\d+)', text, re.DOTALL):
+        sub_id = int(subid)
+        packs.append({"subid": sub_id, "name": name, "price": price_val})
+        subs.setdefault(sub_id, {"name": name, "price": price_val})
+        sub_map[sub_id].add(app['appid'])
     m = re.search(r'purchase_header">system Requirements</span><br>\s*<span[^>]*>(.*?)</span>', text, re.IGNORECASE | re.DOTALL)
     if m:
         req = html.unescape(re.sub('<.*?>', '', m.group(1))).strip()
@@ -70,7 +92,9 @@ for app in apps:
 out = []
 out.append("CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,visible TINYINT DEFAULT 1);")
 out.append("CREATE TABLE store_developers(id INT AUTO_INCREMENT PRIMARY KEY,name TEXT);")
-out.append("CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availability TEXT,price DECIMAL(10,2),metacritic TEXT DEFAULT NULL,description TEXT,sysreq TEXT,images TEXT,packages TEXT);")
+out.append("CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availability TEXT,price DECIMAL(10,2),metacritic TEXT DEFAULT NULL,description TEXT,sysreq TEXT,main_image TEXT,images TEXT);")
+out.append("CREATE TABLE subscriptions(subid INT PRIMARY KEY,name TEXT,price DECIMAL(10,2));")
+out.append("CREATE TABLE subscription_apps(subid INT,appid INT,PRIMARY KEY(subid,appid));")
 out.append("CREATE TABLE app_categories(appid INT,category_id INT,PRIMARY KEY(appid,category_id));")
 for i, (cid, name) in enumerate(categories.items(), 1):
     out.append(
@@ -82,12 +106,18 @@ for name in developers:
 for app in apps:
     desc = json.dumps(app.get('description',''))
     images = json.dumps(json.dumps(app.get('images', [])))
-    packs = json.dumps(json.dumps(app.get('packages', [])))
     mscore = json.dumps(app.get('metacritic',''))
     sysreq = json.dumps(app.get('sysreq',''))
+    main_img = json.dumps(app.get('main_image',''))
     out.append(
-        f"INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,images,packages) "
-        f"VALUES({app['appid']},{json.dumps(app['name'])},{json.dumps(app['developer'])},{json.dumps(app['availability'])},{app['price']},{mscore},{desc},{sysreq},{images},{packs});")
+        f"INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images) "
+        f"VALUES({app['appid']},{json.dumps(app['name'])},{json.dumps(app['developer'])},{json.dumps(app['availability'])},{app['price']},{mscore},{desc},{sysreq},{main_img},{images});")
+
+for subid, info in sorted(subs.items()):
+    out.append(f"INSERT INTO subscriptions(subid,name,price) VALUES({subid},{json.dumps(info['name'])},{info['price']});")
+for subid, aids in sorted(sub_map.items()):
+    for aid in sorted(aids):
+        out.append(f"INSERT INTO subscription_apps(subid,appid) VALUES({subid},{aid});")
 
 for aid, cids in sorted(app_cat_map.items()):
     for cid in sorted(cids):
