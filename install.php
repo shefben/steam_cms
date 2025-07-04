@@ -175,8 +175,27 @@ $pdo->exec("CREATE TABLE bw_history (
             foreach(glob(__DIR__.'/sql/*.sql') as $file){
                 $sql=file_get_contents($file);
                 foreach(preg_split('/;\s*(?:\r?\n|$)/',$sql) as $stmt){
-                    $stmt=trim($stmt);
-                    if($stmt) $pdo->exec($stmt);
+                    $stmt = trim($stmt);
+                    if(!$stmt) continue;
+
+                    if(stripos($stmt,'INSERT INTO news')===0 &&
+                       preg_match('/^INSERT INTO news\([^\)]*\) VALUES \((.*)\)$/i',$stmt,$m)){
+                        $parts = str_getcsv($m[1], ',', "'");
+                        if(isset($parts[3])){
+                            $ts = strtotime($parts[3]);
+                            if($ts!==false){
+                                $parts[3] = date('Y-m-d H:i:s',$ts);
+                                $id = $parts[0];
+                                $title = "'".str_replace("'","''",$parts[1])."'";
+                                $author = "'".str_replace("'","''",$parts[2])."'";
+                                $date = "'".$parts[3]."'";
+                                $content = "'".str_replace("'","''",$parts[4])."'";
+                                $stmt = "INSERT INTO news(id,title,author,publish_date,content) VALUES ($id,$title,$author,$date,$content)";
+                            }
+                        }
+                    }
+
+                    $pdo->exec($stmt);
                 }
             }
             // use first inserted content server as default network target
