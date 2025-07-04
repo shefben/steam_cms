@@ -18,3 +18,6 @@
 - FAQ categories can be reordered and edited inline with AJAX
 - Public FAQ respects category order and visibility
 - FAQ admin listing paginated for easier browsing
+- 2005 headers use theme CSS with corrected padding and logo styling
+- News management paginated with sortable ordering across pages
+- Custom page list excludes theme-specific index pages
