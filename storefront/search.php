@@ -10,7 +10,7 @@ $db = cms_get_db();
 $term       = trim($_GET['term'] ?? '');
 $type       = $_GET['type'] ?? '';
 $category   = $_GET['category'] ?? '';
-$developer  = $_GET['developer'] ?? '';
+$developer  = isset($_GET['developer']) ? (int)$_GET['developer'] : 0;
 $price      = $_GET['price'] ?? '';
 $order      = $_GET['order'] ?? '';
 $sort_by    = $_GET['sort_by'] ?? 'Name';
@@ -44,7 +44,7 @@ $base_params = [
 $where = [];
 $params = [];
 if($term !== ''){ $where[] = 'a.name LIKE ?'; $params[] = "%$term%"; }
-if($developer !== ''){ $where[] = 'a.developer=?'; $params[] = $developer; }
+if($developer){ $where[] = 'a.appid IN (SELECT appid FROM developer_apps WHERE developer_id=?)'; $params[] = $developer; }
 if($category !== ''){ $where[] = 'a.appid IN (SELECT appid FROM app_categories WHERE category_id=?)'; $params[] = (int)$category; }
 if($price !== ''){
     if(strpos($price,'-')!==false){ list($min,$max)=array_map('intval',explode('-', $price,2)); $where[]='a.price BETWEEN ? AND ?'; $params[]=$min/100; $params[]=$max/100; }
@@ -66,7 +66,7 @@ $stmt->execute($params);
 $apps = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Dropdown values
-$developers = $db->query('SELECT name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_COLUMN);
+$developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
 $categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
 $prices = [
     ''       => '-',
@@ -93,6 +93,7 @@ function sort_link($label,$col,$params,$current,$order){
 
 $theme = cms_get_setting('theme','2005_v2');
 $tpl_body = __DIR__.'/templates/2005_search.html';
+$links = cms_load_store_links(__FILE__);
 ob_start();
 cms_render_template($tpl_body, [
     'base_params'=>$base_params,
@@ -106,6 +107,7 @@ cms_render_template($tpl_body, [
     'price'=>$price,
     'sort_last'=>$sort_last,
     'sort_order'=>$sort_order,
+    'links'=>$links,
 ]);
 $body = ob_get_clean();
 

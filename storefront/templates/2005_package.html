@@ -10,13 +10,17 @@
                     <table cellspacing="0" cellpadding="0">
                     <tr><td height="10"></td></tr>
                     <tr><td nowrap>
-                        <span><a href="index.php?" class="menu_item">Home</a></span><br>
-                        <div class="menu_spacer">&nbsp;</div>
-                        <span><a href="index.php?area=browse&amp;" class="menu_item">Browse Games</a></span><br>
-                        <span><a href="index.php?area=all&amp;" class="menu_item">All Games</a></span><br>
-                        <span><font face="Wingdings 3"><span class="menu_pointer">&#132;</span></font> <a href="index.php?area=search&amp;" class="menu_item_current">Search</a></span><br>
-                        <div class="menu_spacer">&nbsp;</div>
-                        <span><a href="index.php?area=media&amp;" class="menu_item">Media</a></span><br>
+                        <?php foreach($links as $ln): ?>
+                          <?php if($ln['type']==='spacer'): ?>
+                            <div class="menu_spacer">&nbsp;</div>
+                          <?php elseif(empty($ln['hidden'])): ?>
+                            <?php if(!empty($ln['current'])): ?>
+                              <span><font face="Wingdings 3"><span class="menu_pointer">&#132;</span></font> <a href="<?php echo htmlspecialchars($ln['url'])?>" class="menu_item_current"><?php echo htmlspecialchars($ln['label'])?></a></span><br>
+                            <?php else: ?>
+                              <span><a href="<?php echo htmlspecialchars($ln['url'])?>" class="menu_item"><?php echo htmlspecialchars($ln['label'])?></a></span><br>
+                            <?php endif; ?>
+                          <?php endif; ?>
+                        <?php endforeach; ?>
                     </td></tr>
                     </table>
                 </td>

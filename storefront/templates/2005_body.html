@@ -17,7 +17,11 @@
   <?php if($ln['type']==='spacer'): ?>
     <div class="menu_spacer"></div>
   <?php elseif(empty($ln['hidden'])): ?>
-    <span><a class="menu_item" href="<?php echo htmlspecialchars($ln['url'])?>"><?php echo htmlspecialchars($ln['label'])?></a></span><br/>
+    <?php if(!empty($ln['current'])): ?>
+      <span><font face="Wingdings 3"><span class="menu_pointer">&#132;</span></font> <a class="menu_item_current" href="<?php echo htmlspecialchars($ln['url'])?>"><?php echo htmlspecialchars($ln['label'])?></a></span><br/>
+    <?php else: ?>
+      <span><a class="menu_item" href="<?php echo htmlspecialchars($ln['url'])?>"><?php echo htmlspecialchars($ln['label'])?></a></span><br/>
+    <?php endif; ?>
   <?php endif; ?>
 <?php endforeach; ?>
 </td>
@@ -33,7 +37,7 @@
 <div style="position: relative; width: 590px; height: 511px;">
   <!-- Top Game Image -->
   <?php if(!empty($capsules['top'])): ?>
-  <a href="../index.php?area=game&AppId=<?php echo $capsules['top']['appid']?>&">
+  <a href="../index.php?area=game&AppId=<?php echo $capsules['top']['appid']?>">
     <img src="images/capsules/<?php echo $capsules['top']['image']?>"
          style="position: absolute; left: 1px; top: 1px; width: 588px; height: 98px; border: 0;"
          alt="Top capsule" border="0"/>
@@ -47,7 +51,7 @@
   
   <!-- Middle Game Image -->
   <?php if(!empty($capsules['middle'])): ?>
-  <a href="../index.php?area=game&AppId=<?php echo $capsules['middle']['appid']?>&">
+  <a href="../index.php?area=game&AppId=<?php echo $capsules['middle']['appid']?>">
     <img src="images/capsules/<?php echo $capsules['middle']['image']?>"
          style="position: absolute; left: 0; top: 112px; width: 589px; height: 228px; border: 0;"
          alt="Middle capsule" border="0"/>
@@ -61,7 +65,7 @@
   
   <!-- Bottom-Left Game Image -->
   <?php if(!empty($capsules['bottom_left'])): ?>
-  <a href="../index.php?area=game&AppId=<?php echo $capsules['bottom_left']['appid']?>&">
+  <a href="../index.php?area=game&AppId=<?php echo $capsules['bottom_left']['appid']?>">
     <img src="images/capsules/<?php echo $capsules['bottom_left']['image']?>"
          style="position: absolute; left: 0; top: 352px; width: 288px; height: 158px; border: 0;"
          alt="Bottom left capsule" border="0"/>
@@ -75,7 +79,7 @@
   
   <!-- Bottom-Right Game Image -->
   <?php if(!empty($capsules['bottom_right'])): ?>
-  <a href="../index.php?area=game&AppId=<?php echo $capsules['bottom_right']['appid']?>&">
+  <a href="../index.php?area=game&AppId=<?php echo $capsules['bottom_right']['appid']?>">
     <img src="images/capsules/<?php echo $capsules['bottom_right']['image']?>"
          style="position: absolute; left: 301px; top: 352px; width: 289px; height: 158px; border: 0;"
          alt="Bottom right capsule" border="0"/>

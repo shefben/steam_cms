@@ -207,4 +207,26 @@ function cms_get_themes(){
     $res = $db->query('SELECT name FROM themes ORDER BY name');
     return $res ? $res->fetchAll(PDO::FETCH_COLUMN) : [];
 }
+
+function cms_store_sidebar_links(){
+    $db = cms_get_db();
+    try {
+        $res = $db->query('SELECT id,label,url,type,ord FROM store_sidebar_links WHERE visible=1 ORDER BY ord,id');
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e){
+        if($e->getCode()==='42S02') return [];
+        throw $e;
+    }
+}
+
+function cms_load_store_links($file){
+    $path = '/storefront/' . basename($file);
+    $links = cms_store_sidebar_links();
+    foreach($links as &$l){
+        if($l['type']==='link'){
+            $l['current'] = (parse_url($l['url'], PHP_URL_PATH) === $path);
+        }
+    }
+    return $links;
+}
 ?>
