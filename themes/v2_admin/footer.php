@@ -17,6 +17,18 @@ $(function(){
     $('#sf-sub').show();
     link.attr('aria-expanded','true');
   }
+
+  var faqLink = $('#faq-parent > a');
+  faqLink.on('click',function(e){
+    e.preventDefault();
+    var sub = $('#faq-sub');
+    sub.slideToggle('fast');
+    faqLink.attr('aria-expanded', sub.is(':visible'));
+  });
+  if(window.location.pathname.indexOf('faq')!==-1){
+    $('#faq-sub').show();
+    faqLink.attr('aria-expanded','true');
+  }
 });
 </script>
 </body>

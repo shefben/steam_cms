@@ -7,7 +7,16 @@
 <div class="narrower">
 <?php
 $db = cms_get_db();
-$cats = $db->query('SELECT * FROM faq_categories ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+$cats = $db->query('SELECT * FROM faq_categories WHERE hidden=0 ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+$cat_order = cms_get_setting('faq_cat_order','');
+$cat_order = $cat_order !== '' ? explode(',', $cat_order) : [];
+usort($cats,function($a,$b) use($cat_order){
+    $ia = array_search($a['id1'].','.$a['id2'],$cat_order);
+    $ib = array_search($b['id1'].','.$b['id2'],$cat_order);
+    if($ia===false) $ia = PHP_INT_MAX;
+    if($ib===false) $ib = PHP_INT_MAX;
+    return $ia <=> $ib;
+});
 $faqs = $db->query('SELECT * FROM faq_content ORDER BY title')->fetchAll(PDO::FETCH_ASSOC);
 $bycat = [];
 foreach($faqs as $f){

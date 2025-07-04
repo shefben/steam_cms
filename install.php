@@ -55,7 +55,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo->exec("DROP TABLE IF EXISTS news");
             $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT,is_official TINYINT(1) DEFAULT 1)");
             $pdo->exec("DROP TABLE IF EXISTS faq_categories");
-            $pdo->exec("CREATE TABLE faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,PRIMARY KEY(id1,id2))");
+            $pdo->exec("CREATE TABLE faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,hidden TINYINT(1) DEFAULT 0,PRIMARY KEY(id1,id2))");
             $pdo->exec("DROP TABLE IF EXISTS faq_content");
             $pdo->exec("CREATE TABLE faq_content(catid1 BIGINT,catid2 BIGINT,faqid1 BIGINT,faqid2 BIGINT,title TEXT,body TEXT,views INT DEFAULT 0,PRIMARY KEY(faqid1,faqid2))");
             $pdo->exec("DROP TABLE IF EXISTS ccafe_registration");
@@ -302,17 +302,7 @@ Please select an option from the top menu.
 </div>
 </div>
 HTML;
-            $sa_html = <<<'HTML'
-<!-- steam subscriber agreement (truncated) -->
-<div class="content" id="container">
-<h1>STEAM&trade; SUBSCRIBER AGREEMENT</h1>
-This Agreement is written only in the English language, which language will be controlling in all respects.<br>
-<br>
-<h2>1. REGISTRATION AND ACTIVATION.</h2>
-Steam is an online service ("Steam") offered by Valve Corporation.<br>
-<!-- full agreement text omitted for brevity -->
-</div>
-HTML;
+            $sa_html = file_get_contents(__DIR__ . '/cms/content/subscriber_agreement.html');
             $header_buttons = [
                 ['url'=>'/news.php','img'=>'/img/news.gif','hover'=>'/img/MOnews.gif','alt'=>'news'],
                 ['url'=>'/getsteamnow.php','img'=>'/img/getSteamNow.gif','hover'=>'/img/MOgetSteamNow.gif','alt'=>'getSteamNow'],
@@ -335,8 +325,8 @@ HTML;
                 ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
                 ['file'=>'storefront_main.php','label'=>'Main Page','visible'=>1],
                 ['file'=>'storefront.php','label'=>'Storefront','visible'=>1],
-                ['file'=>'storefront.php#products','label'=>'Products','visible'=>1],
-                ['file'=>'storefront.php#categories','label'=>'Categories','visible'=>1],
+                ['file'=>'storefront_products.php','label'=>'Products','visible'=>1],
+                ['file'=>'storefront_categories.php','label'=>'Categories','visible'=>1],
                 ['file'=>'storefront_developers.php','label'=>'Developers','visible'=>1],
                 ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
                 ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
