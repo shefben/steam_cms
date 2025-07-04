@@ -32,53 +32,53 @@
 <br/>
 <div style="position: relative; width: 590px; height: 511px;">
   <!-- Top Game Image -->
-  <?php if(!empty($featured['top'])): ?>
-  <a href="../index.php?area=game&AppId=<?php echo $featured['top']?>&">
-    <img src="../archived_steampowered/2005/storefront/capsules/<?php echo $featured['top']?>.jpg"
+  <?php if(!empty($capsules['top'])): ?>
+  <a href="../index.php?area=game&AppId=<?php echo $capsules['top']['appid']?>&">
+    <img src="images/capsules/<?php echo $capsules['top']['image']?>"
          style="position: absolute; left: 1px; top: 1px; width: 588px; height: 98px; border: 0;"
-         border="0"/>
+         alt="Top capsule" border="0"/>
   </a>
   <?php endif; ?>
   
   <!-- Horizontal Bar 1 -->
-  <img src="../archived_steampowered/2005/storefront/capsules/img/2006_08-August/horizontal_top_middle.png"
+  <img src="images/capsules/2006_08-August/horizontal_top_middle.png"
        style="position: absolute; left: 0; top: 99px; width: 590px; height: 13px; border: 0;" 
        border="0"/>
   
   <!-- Middle Game Image -->
-  <?php if(!empty($featured['middle'])): ?>
-  <a href="../index.php?area=game&AppId=<?php echo $featured['middle']?>&">
-    <img src="../archived_steampowered/2005/storefront/capsules/<?php echo $featured['middle']?>.jpg"
+  <?php if(!empty($capsules['middle'])): ?>
+  <a href="../index.php?area=game&AppId=<?php echo $capsules['middle']['appid']?>&">
+    <img src="images/capsules/<?php echo $capsules['middle']['image']?>"
          style="position: absolute; left: 0; top: 112px; width: 589px; height: 228px; border: 0;"
-         border="0"/>
+         alt="Middle capsule" border="0"/>
   </a>
   <?php endif; ?>
   
   <!-- Horizontal Bar 2 -->
-  <img src="../archived_steampowered/2005/storefront/capsules/img/2006_08-August/horizontal_bar_lower.png"
+  <img src="images/capsules/2006_08-August/horizontal_bar_lower.png"
        style="position: absolute; left: 0; top: 340px; width: 590px; height: 12px; border: 0;" 
        border="0"/>
   
   <!-- Bottom-Left Game Image -->
-  <?php if(!empty($featured['bottom_left'])): ?>
-  <a href="../index.php?area=game&AppId=<?php echo $featured['bottom_left']?>&">
-    <img src="../archived_steampowered/2005/storefront/capsules/<?php echo $featured['bottom_left']?>.jpg"
+  <?php if(!empty($capsules['bottom_left'])): ?>
+  <a href="../index.php?area=game&AppId=<?php echo $capsules['bottom_left']['appid']?>&">
+    <img src="images/capsules/<?php echo $capsules['bottom_left']['image']?>"
          style="position: absolute; left: 0; top: 352px; width: 288px; height: 158px; border: 0;"
-         border="0"/>
+         alt="Bottom left capsule" border="0"/>
   </a>
   <?php endif; ?>
   
   <!-- Vertical Bar -->
-  <img src="../archived_steampowered/2005/storefront/capsules/img/2006_08-August/btm_middle_bar.png"
+  <img src="images/capsules/2006_08-August/btm_middle_bar.png"
        style="position: absolute; left: 288px; top: 352px; width: 13px; height: 158px; border: 0;" 
        border="0"/>
   
   <!-- Bottom-Right Game Image -->
-  <?php if(!empty($featured['bottom_right'])): ?>
-  <a href="../index.php?area=game&AppId=<?php echo $featured['bottom_right']?>&">
-    <img src="../archived_steampowered/2005/storefront/capsules/<?php echo $featured['bottom_right']?>.jpg"
+  <?php if(!empty($capsules['bottom_right'])): ?>
+  <a href="../index.php?area=game&AppId=<?php echo $capsules['bottom_right']['appid']?>&">
+    <img src="images/capsules/<?php echo $capsules['bottom_right']['image']?>"
          style="position: absolute; left: 301px; top: 352px; width: 289px; height: 158px; border: 0;"
-         border="0"/>
+         alt="Bottom right capsule" border="0"/>
   </a>
   <?php endif; ?>
 </div>

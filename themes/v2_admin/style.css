@@ -82,6 +82,16 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
+.nav-menu .sub-menu {
+    list-style: none;
+    padding-left: 15px;
+    background: #34495e;
+}
+.nav-menu .sub-menu a {
+    padding: 10px 20px;
+    font-size: 13px;
+}
+
 .nav-menu a {
     display: block;
     padding: 15px 20px;

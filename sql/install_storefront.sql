@@ -1,9 +1,10 @@
 CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,visible TINYINT DEFAULT 1);
 CREATE TABLE store_developers(id INT AUTO_INCREMENT PRIMARY KEY,name TEXT);
-CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availability TEXT,price DECIMAL(10,2),metacritic TEXT DEFAULT NULL,description TEXT,sysreq TEXT,main_image TEXT,images TEXT);
+CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availability TEXT,price DECIMAL(10,2),metacritic TEXT DEFAULT NULL,description TEXT,sysreq TEXT,main_image TEXT,images TEXT,show_metascore TINYINT DEFAULT 0);
 CREATE TABLE subscriptions(subid INT PRIMARY KEY,name TEXT,price DECIMAL(10,2));
 CREATE TABLE subscription_apps(subid INT,appid INT,PRIMARY KEY(subid,appid));
 CREATE TABLE app_categories(appid INT,category_id INT,PRIMARY KEY(appid,category_id));
+CREATE TABLE store_capsules(position VARCHAR(20) PRIMARY KEY, image TEXT, appid INT);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(2,'Single-player',1,1);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(1,'Multi-player',2,1);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(3,'New releases',3,1);
@@ -258,3 +259,8 @@ INSERT INTO app_categories(appid,category_id) VALUES(90025,6);
 INSERT INTO app_categories(appid,category_id) VALUES(90026,1);
 INSERT INTO app_categories(appid,category_id) VALUES(90026,6);
 INSERT INTO settings(`key`,value) VALUES('store_featured',"{\"top\": 2400, \"middle\": 380, \"bottom_left\": 1200, \"bottom_right\": 1300}");
+INSERT INTO store_capsules(position,image,appid) VALUES
+('top','2006_08-August/top_capsule.png',2400),
+('middle','2006_08-August/middle_capsule.png',380),
+('bottom_left','2006_08-August/bottom_left_capsule.png',1200),
+('bottom_right','2006_08-August/bottom_right_capsule.png',1300);
