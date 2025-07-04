@@ -94,6 +94,7 @@ foreach ($nav_items as $k => $item) {
 }
 
 $nav_html = '<ul class="nav-menu">';
+$logout = null;
 foreach ($nav_items as $item) {
     if(!($item['visible']??1)) continue;
     $file = $item['file'];
@@ -101,7 +102,12 @@ foreach ($nav_items as $item) {
     $label = $item['label'];
     $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
     $icon = $icons[$file] ?? '';
-    $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
+    $item_html = '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
+    if($file === '../logout.php'){
+        $logout = $item_html;
+        continue;
+    }
+    $nav_html .= $item_html;
 }
 $has_sf = $sf_root || $sf_pages;
 if ($has_sf) {
@@ -123,6 +129,7 @@ if ($has_sf) {
     }
     $nav_html .= '</li>';
 }
+$nav_html .= $logout ? $logout : '';
 $nav_html .= '</ul>';
 
 include "$theme_dir/header.php";
