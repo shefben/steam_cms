@@ -26,3 +26,4 @@ All notable changes to this project will be documented in this file.
 - News admin page paginated with cross-page drag support
 - Theme index pages hidden from custom page list
 - Template engine rewrites stylesheet links to theme assets
+- Improved stylesheet path rewriting to handle relative references

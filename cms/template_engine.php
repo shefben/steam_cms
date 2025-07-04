@@ -30,7 +30,7 @@ function cms_render_template($path, $vars=[]){
     $html = $process($html);
     // ensure theme-specific stylesheet paths
     $css_path = $vars['THEME_URL'] . '/steampowered02.css';
-    $html = str_replace(['../steampowered02.css','/steampowered02.css'], $css_path, $html);
+    $html = preg_replace('~(?:\.\./)?steampowered02\.css~i', $css_path, $html);
     if(isset($vars['content'])){
         $vars['content'] = $process($vars['content']);
         $html = str_replace('{content}', $vars['content'], $html);

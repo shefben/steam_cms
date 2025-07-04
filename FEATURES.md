@@ -21,3 +21,4 @@
 - 2005 headers use theme CSS with corrected padding and logo styling
 - News management paginated with sortable ordering across pages
 - Custom page list excludes theme-specific index pages
+- Template engine enforces theme stylesheet even with relative links
