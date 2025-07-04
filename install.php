@@ -195,6 +195,22 @@ $pdo->exec("CREATE TABLE bw_history (
                         }
                     }
 
+                    if(stripos($stmt,'INSERT INTO custom_pages')===0 &&
+                       preg_match('/^INSERT INTO custom_pages\([^\)]*\) VALUES\s*(.*)$/i',$stmt,$m)){
+                        $values = rtrim($m[1], ';');
+                        $rows = preg_split('/\),\s*\(/', trim($values, '()'));
+                        $cpStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,created,updated) VALUES(?,?,?,?,?)');
+                        foreach($rows as $row){
+                            $parts = str_getcsv($row, ',', "'");
+                            if(count($parts)>=5){
+                                $created = strtoupper($parts[3])=='NOW()' ? date('Y-m-d H:i:s') : $parts[3];
+                                $updated = strtoupper($parts[4])=='NOW()' ? date('Y-m-d H:i:s') : $parts[4];
+                                $cpStmt->execute([$parts[0],$parts[1],$parts[2],$created,$updated]);
+                            }
+                        }
+                        continue;
+                    }
+
                     $pdo->exec($stmt);
                 }
             }
