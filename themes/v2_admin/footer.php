@@ -29,6 +29,18 @@ $(function(){
     $('#faq-sub').show();
     faqLink.attr('aria-expanded','true');
   }
+
+  var cafeLink = $('#cafe-parent > a');
+  cafeLink.on('click',function(e){
+    e.preventDefault();
+    var sub = $('#cafe-sub');
+    sub.slideToggle('fast');
+    cafeLink.attr('aria-expanded', sub.is(':visible'));
+  });
+  if(window.location.pathname.indexOf('cafe_')!==-1){
+    $('#cafe-sub').show();
+    cafeLink.attr('aria-expanded','true');
+  }
 });
 </script>
 </body>

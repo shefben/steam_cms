@@ -22,3 +22,7 @@
 - News management paginated with sortable ordering across pages
 - Custom page list excludes theme-specific index pages
 - Template engine enforces theme stylesheet even with relative links
+- Installer creates content server tables and default settings
+- Cafe directory and FAQ pages paginated for manageability
+- Sidebar links grouped under expandable Cafe menu
+- Not-found routes return the admin-configured error page

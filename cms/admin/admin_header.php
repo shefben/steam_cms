@@ -34,7 +34,10 @@ $default_nav = [
     ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],
     ['file'=>'news.php','label'=>'News','visible'=>1],
     ['file'=>'faq.php','label'=>'FAQ','visible'=>1],
-    ['file'=>'cybercafe.php','label'=>'Cyber Cafe Management','visible'=>1],
+    ['file'=>'cafe_signups.php','label'=>'Cafe Signup Requests','visible'=>1],
+    ['file'=>'cafe_directory.php','label'=>'Cafe Directory','visible'=>1],
+    ['file'=>'cafe_pricing.php','label'=>'Cafe Pricing','visible'=>1],
+    ['file'=>'cafe_representatives.php','label'=>'Cafe Representatives','visible'=>1],
     ['file'=>'content_servers.php','label'=>'Servers','visible'=>1],
     ['file'=>'contentserver_banners.php','label'=>'ContentServer Banner Management','visible'=>1],
     ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
@@ -61,7 +64,10 @@ $icons = [
     'main_content.php' => '📝',
     'news.php'         => '📰',
     'faq.php'          => '❓',
-    'cybercafe.php'    => '☕',
+    'cafe_signups.php' => '☕',
+    'cafe_directory.php' => '📑',
+    'cafe_pricing.php' => '💲',
+    'cafe_representatives.php' => '🤝',
     'content_servers.php' => '🖥️',
     'contentserver_banners.php' => '🖼️',
     'custom_pages.php' => '📄',
@@ -84,6 +90,7 @@ $sf_root = null;
 $sf_pages = [];
 $faq_root = null;
 $faq_pages = [];
+$cafe_pages = [];
 foreach ($nav_items as $k => $item) {
     if (!($item['visible'] ?? 1)) continue;
     if ($item['file'] === 'storefront.php') {
@@ -98,6 +105,9 @@ foreach ($nav_items as $k => $item) {
     } elseif ($item['file'] === 'faq_categories.php') {
         $faq_pages[] = $item;
         unset($nav_items[$k]);
+    } elseif (preg_match('/^cafe_.*\.php/', $item['file'])) {
+        $cafe_pages[] = $item;
+        unset($nav_items[$k]);
     }
 }
 
@@ -106,7 +116,7 @@ $logout = null;
 foreach ($nav_items as $item) {
     if(!($item['visible']??1)) continue;
     $file = $item['file'];
-    if ($file === 'support_2003.php' || $file === 'cafe_signups.php') continue;
+    if ($file === 'support_2003.php') continue;
     $label = $item['label'];
     $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
     $icon = $icons[$file] ?? '';
@@ -156,6 +166,23 @@ if ($has_faq) {
         $nav_html .= '</ul>';
     }
     $nav_html .= '</li>';
+}
+$has_cafe = !empty($cafe_pages);
+if($has_cafe){
+    $icon = '☕';
+    $active = '';
+    foreach($cafe_pages as $it){
+        if(strpos($_SERVER['PHP_SELF'],$it['file'])!==false){$active=' class="active"';break;}
+    }
+    $nav_html .= '<li id="cafe-parent"><a href="#"'.$active.' aria-label="Cafe menu">'.htmlspecialchars($icon.' Cyber Cafe Management').'</a>';
+    $nav_html .= '<ul class="sub-menu" id="cafe-sub" style="display:none">';
+    foreach($cafe_pages as $it){
+        $file=$it['file'];$label=$it['label'];
+        $ac=strpos($_SERVER['PHP_SELF'],$file)!==false?' class="active"':'';
+        $icon=$icons[$file]??'';
+        $nav_html.='<li><a href="'.$file.'"'.$ac.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
+    }
+    $nav_html.='</ul></li>';
 }
 $nav_html .= $logout ? $logout : '';
 $nav_html .= '</ul>';

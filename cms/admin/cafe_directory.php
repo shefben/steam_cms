@@ -20,7 +20,12 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         header('Location: cafe_directory.php'); exit;
     }
 }
-$entries=$db->query('SELECT * FROM cafe_directory ORDER BY ord,id')->fetchAll(PDO::FETCH_ASSOC);
+$all=$db->query('SELECT * FROM cafe_directory ORDER BY ord,id')->fetchAll(PDO::FETCH_ASSOC);
+$page=max(1,(int)($_GET['page']??1));
+$per=15;
+$total=count($all);
+$pages=max(1,ceil($total/$per));
+$entries=array_slice($all,($page-1)*$per,$per);
 ?>
 <h2>Cafe Directory</h2>
 <table border="1">
@@ -42,6 +47,10 @@ $entries=$db->query('SELECT * FROM cafe_directory ORDER BY ord,id')->fetchAll(PD
 </form></tr>
 <?php endforeach; ?>
 </table>
+<div class="pagination">
+<?php if($page>1): ?><a href="?page=<?php echo $page-1;?>">&laquo; Prev</a><?php endif; ?>
+<?php if($page<$pages): ?><a href="?page=<?php echo $page+1; ?>">Next &raquo;</a><?php endif; ?>
+</div>
 <h3>Add Entry</h3>
 <form method="post">
 Order <input type="number" name="ord" value="0" style="width:50px">

@@ -27,3 +27,7 @@ All notable changes to this project will be documented in this file.
 - Theme index pages hidden from custom page list
 - Template engine rewrites stylesheet links to theme assets
 - Improved stylesheet path rewriting to handle relative references
+- Added missing content server tables to installer
+- Cafe directory now paginated
+- Admin sidebar reorganized with dropdown for Cafe management
+- Visiting unknown pages now returns 404 with custom error content

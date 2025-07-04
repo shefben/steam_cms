@@ -54,6 +54,24 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo->exec("USE `$dbname`");
             $pdo->exec("DROP TABLE IF EXISTS news");
             $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT,is_official TINYINT(1) DEFAULT 1)");
+            $pdo->exec("DROP TABLE IF EXISTS content_servers");
+            $pdo->exec("CREATE TABLE content_servers(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(255),
+                ip VARCHAR(100),
+                port INT,
+                total_capacity INT,
+                region VARCHAR(100)
+            )");
+            $pdo->exec("DROP TABLE IF EXISTS server_stats");
+            $pdo->exec("CREATE TABLE server_stats(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                server_id INT,
+                available_bandwidth INT,
+                unique_connections INT,
+                last_checked DATETIME,
+                status VARCHAR(10)
+            )");
             $pdo->exec("DROP TABLE IF EXISTS faq_categories");
             $pdo->exec("CREATE TABLE faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,hidden TINYINT(1) DEFAULT 0,PRIMARY KEY(id1,id2))");
             $pdo->exec("DROP TABLE IF EXISTS faq_content");
@@ -591,16 +609,15 @@ HTML;
 
             $repStmt = $pdo->prepare('INSERT INTO cafe_representatives(url,website,email,rep_name,address,city_province,zip,country,phone,ord) VALUES(?,?,?,?,?,?,?,?,?,?)');
             $defaultReps = [
-                ['http://www.transferbg.com/','TRANSFER GROUP LTD.','transfer@transferbg.com','Vasil Enfedzhiyan','80 Danail Nikolaev Street','Plovdiv  4000','','Bulgaria','Bulgaria','359 32 624 080'],
-                ['http://www.ledzone.com/index_steam.html','NAMCO LIMITED','steam@ledzone.com ','Reina Yagishita','Tokyu-Plaza Annex 2F','7-3-3, Nishi-kamata, Ota-ku','144-0051','Tokyo','Japan',''],
-                ['http://www.valvepcbang.com/','GNA Soft Co., Ltd.','west@gnasoft.com','Sean Lee','249-4 Urban Light Bldg 7th Floor','Nonhyundong Gangnamgu','135-010','Seoul','Korea',''],
-                ['http://www.boomtown.net/','BOOMTOWN','JAPC@cafe.boomtown.net','Jakob Christiansen','Larslejsstrde 6','Kobenhavn C, Copenhagen','0900','Denmark','Norway, Sweden, Finland, Denmark, Iceland','+45-51909111'],
-                ['http://www.computergames.ro/','COMPUTER GAMES ONLINE SRL','silviu@computergames.ro','Silviu Stroie','Unirii 75 Blvd, bl. H1','sc. C, et. 5, ap. 97 Sector 3','','Bucharest','Romania',''],
-                ['http://www.unalis.com.tw/','UNALIS CORPORATION','leon@unalis.com.tw','Leon Chang','10F, No 168 SEC 2','Min Sheng E. Rd.','','Taipei','Taiwan','']
+                ['http://www.transferbg.com/','TRANSFER GROUP LTD.','transfer@transferbg.com','Vasil Enfedzhiyan','80 Danail Nikolaev Street','Plovdiv','4000','Bulgaria','359 32 624 080'],
+                ['http://www.ledzone.com/index_steam.html','NAMCO LIMITED','steam@ledzone.com','Reina Yagishita','Tokyu-Plaza Annex 2F','Tokyo','144-0051','Japan',''],
+                ['http://www.valvepcbang.com/','GNA Soft Co., Ltd.','west@gnasoft.com','Sean Lee','249-4 Urban Light Bldg 7th Floor','Seoul','135-010','Korea',''],
+                ['http://www.boomtown.net/','BOOMTOWN','JAPC@cafe.boomtown.net','Jakob Christiansen','Larslejsstrde 6','Kobenhavn C, Copenhagen','0900','Denmark','+45-51909111'],
+                ['http://www.computergames.ro/','COMPUTER GAMES ONLINE SRL','silviu@computergames.ro','Silviu Stroie','Unirii 75 Blvd, bl. H1','Bucharest','','Romania',''],
+                ['http://www.unalis.com.tw/','UNALIS CORPORATION','leon@unalis.com.tw','Leon Chang','10F, No 168 SEC 2','Taipei','','Taiwan','']
             ];
             foreach($defaultReps as $r){
-                $r[9]=$ord++; // ensure ord column receives an integer
-                $repStmt->execute($r);
+                $repStmt->execute(array_merge($r,[$ord++]));
             }
             $stmt2 = $pdo->prepare('REPLACE INTO themes(name) VALUES(?)');
             foreach(glob(__DIR__.'/themes/*', GLOB_ONLYDIR) as $dir){
