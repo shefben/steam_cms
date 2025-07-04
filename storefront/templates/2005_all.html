@@ -1,14 +1,62 @@
-<h1>All Games</h1>
-<table class="table">
-<tr><th>ID</th><th>Name</th><th>Categories</th><th>Developer</th><th>Price</th><th>Avail</th></tr>
-<?php foreach($apps as $a): ?>
-<tr>
-  <td><a href="../index.php?area=game&AppId=<?php echo $a['appid']?>&"><?php echo $a['appid']?></a></td>
-  <td><?php echo htmlspecialchars($a['name'])?></td>
-  <td><?php echo htmlspecialchars($a['cats'])?></td>
-  <td><?php echo htmlspecialchars($a['developer'])?></td>
-  <td><?php echo $a['price']?></td>
-  <td><?php echo htmlspecialchars($a['availability'])?></td>
-</tr>
-<?php endforeach; ?>
-</table>
+<tr><td height="100%">
+    <table align="center" cellspacing="0" cellpadding="0" style="height:100%;">
+    <tr>
+        <td bgcolor="#FFFFFF" valign="top" style="width:10px;height:10px"><img src="img/storefront/sp_top_left.gif"></td>
+        <td bgcolor="#FFFFFF" valign="top" rowspan="3">
+            <table align="center" width="736" cellspacing="0" cellpadding="0" border="0" style="height:100%;">
+            <tr>
+                <td width="10" valign="top" align="left" nowrap></td>
+                <td width="118" valign="top" align="left" nowrap>
+                    <table cellspacing="0" cellpadding="0">
+                    <tr><td height="10"></td></tr>
+                    <tr><td nowrap>
+                        <?php foreach($links as $ln): ?>
+                          <?php if($ln['type']==='spacer'): ?>
+                            <div class="menu_spacer">&nbsp;</div>
+                          <?php elseif(empty($ln['hidden'])): ?>
+                            <?php if(!empty($ln['current'])): ?>
+                              <span><font face="Wingdings 3"><span class="menu_pointer">&#132;</span></font> <a href="<?php echo htmlspecialchars($ln['url'])?>" class="menu_item_current"><?php echo htmlspecialchars($ln['label'])?></a></span><br>
+                            <?php else: ?>
+                              <span><a href="<?php echo htmlspecialchars($ln['url'])?>" class="menu_item"><?php echo htmlspecialchars($ln['label'])?></a></span><br>
+                            <?php endif; ?>
+                          <?php endif; ?>
+                        <?php endforeach; ?>
+                    </td></tr>
+                    </table>
+                </td>
+                <td width="8"><nobr>&nbsp;&nbsp;</nobr></td>
+                <td width="100%" valign="top" align="left">
+                    <table cellpadding="0" cellspacing="0">
+                    <tr><td width="600" height="50" background="img/title_grey.jpg"><span class="page_title">&nbsp;&nbsp;All Games</span></td></tr>
+                    <tr><td height="10"></td></tr>
+                    <tr><td>
+                    <span class="normal_text">
+                        <table class="table">
+                        <tr><th>ID</th><th>Name</th><th>Categories</th><th>Developer</th><th>Price</th><th>Avail</th></tr>
+                        <?php foreach($apps as $a): ?>
+                        <tr>
+                          <td><a href="../index.php?area=game&AppId=<?php echo $a['appid'] ?>"><?php echo $a['appid'] ?></a></td>
+                          <td><?php echo htmlspecialchars($a['name']) ?></td>
+                          <td><?php echo htmlspecialchars($a['cats']) ?></td>
+                          <td><?php echo htmlspecialchars($a['developer']) ?></td>
+                          <td><?php echo $a['price'] ?></td>
+                          <td><?php echo htmlspecialchars($a['availability']) ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                        </table>
+                    </span>
+                    </td></tr>
+                    </table>
+                </td>
+            </tr>
+            </table>
+        </td>
+        <td bgcolor="#FFFFFF" valign="top" style="width:10px;height:10px"><img src="img/storefront/sp_top_right.gif"></td>
+    </tr>
+    <tr><td bgcolor="#FFFFFF"></td><td bgcolor="#FFFFFF"></td></tr>
+    <tr>
+        <td bgcolor="#FFFFFF" valign="bottom" style="width:10px;height:10px"><img src="img/storefront/sp_bottom_left.gif"></td>
+        <td bgcolor="#FFFFFF" valign="bottom" style="width:10px;height:10px"><img src="img/storefront/sp_bottom_right.gif"></td>
+    </tr>
+    </table>
+</td></tr>

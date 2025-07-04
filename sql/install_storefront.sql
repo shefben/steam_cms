@@ -5,6 +5,19 @@ CREATE TABLE subscriptions(subid INT PRIMARY KEY,name TEXT,price DECIMAL(10,2));
 CREATE TABLE subscription_apps(subid INT,appid INT,PRIMARY KEY(subid,appid));
 CREATE TABLE app_categories(appid INT,category_id INT,PRIMARY KEY(appid,category_id));
 CREATE TABLE store_capsules(position VARCHAR(20) PRIMARY KEY, image TEXT, appid INT);
+CREATE TABLE store_sidebar_links(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    label TEXT,
+    url TEXT,
+    type ENUM('link','spacer') DEFAULT 'link',
+    ord INT,
+    visible TINYINT DEFAULT 1
+);
+CREATE TABLE developer_apps(
+    developer_id INT,
+    appid INT,
+    PRIMARY KEY(developer_id,appid)
+);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(2,'Single-player',1,1);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(1,'Multi-player',2,1);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(3,'New releases',3,1);
@@ -264,3 +277,11 @@ INSERT INTO store_capsules(position,image,appid) VALUES
 ('middle','2006_08-August/middle_capsule.png',380),
 ('bottom_left','2006_08-August/bottom_left_capsule.png',1200),
 ('bottom_right','2006_08-August/bottom_right_capsule.png',1300);
+INSERT INTO store_sidebar_links(label,url,type,ord) VALUES
+('Home','/storefront/index.php','link',1),
+('', '', 'spacer',2),
+('Browse Games','/storefront/browse.php','link',3),
+('All Games','/storefront/all.php','link',4),
+('Search','/storefront/search.php','link',5);
+INSERT INTO developer_apps(developer_id,appid)
+SELECT d.id, a.appid FROM store_apps a JOIN store_developers d ON a.developer=d.name;

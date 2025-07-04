@@ -17,6 +17,7 @@ $is_demo = (bool)$db->query('SELECT 1 FROM app_categories WHERE appid='.$appid.'
 
 $theme = cms_get_setting('theme','2005_v2');
 $tpl_body = __DIR__.'/templates/'.($app['show_metascore']? '2005_game_metascore.html' : '2005_game.html');
+$links = cms_load_store_links(__FILE__);
 ob_start();
 cms_render_template($tpl_body, [
     'app'=>$app,
@@ -25,6 +26,7 @@ cms_render_template($tpl_body, [
     'is_demo'=>$is_demo,
     'appid'=>$appid,
     'sysreq'=>$sysreq,
+    'links'=>$links,
 ]);
 $body = ob_get_clean();
 

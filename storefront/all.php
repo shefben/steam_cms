@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../cms/template_engine.php';
+require_once __DIR__.'/../cms/db.php';
 $db=cms_get_db();
 $sql = 'SELECT a.*, GROUP_CONCAT(sc.name ORDER BY sc.ord SEPARATOR ", ") as cats '
       .'FROM store_apps a '
@@ -10,8 +11,9 @@ $apps=$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 $theme = cms_get_setting('theme','2005_v2');
 $tpl_body = __DIR__.'/templates/2005_all.html';
+$links = cms_load_store_links(__FILE__);
 ob_start();
-cms_render_template($tpl_body, ['apps'=>$apps]);
+cms_render_template($tpl_body, ['apps'=>$apps,'links'=>$links]);
 $body = ob_get_clean();
 
 $tpl = __DIR__.'/../themes/'.$theme.'/default_template.php';

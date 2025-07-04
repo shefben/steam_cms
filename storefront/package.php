@@ -37,6 +37,7 @@ $apps = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $theme = cms_get_setting('theme','2005_v2');
 $tpl_body = __DIR__.'/templates/2005_package.html';
+$links = cms_load_store_links(__FILE__);
 ob_start();
 cms_render_template($tpl_body, [
     'package'=>$package,
@@ -45,6 +46,7 @@ cms_render_template($tpl_body, [
     'sort_last'=>$sort_last,
     'sort_order'=>$sort_order,
     'subId'=>$subId,
+    'links'=>$links,
 ]);
 $body = ob_get_clean();
 
