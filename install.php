@@ -172,11 +172,45 @@ $pdo->exec("CREATE TABLE bw_history (
                 views INT DEFAULT 0,
                 PRIMARY KEY(date,page)
             )");
+            function split_sql_statements($sql){
+                $stmts = [];
+                $len = strlen($sql);
+                $current = '';
+                $inSingle = false;
+                $inDouble = false;
+                for($i=0;$i<$len;$i++){
+                    $ch = $sql[$i];
+                    if($ch === "'" && !$inDouble){
+                        if($inSingle && $i+1<$len && $sql[$i+1]==="'"){
+                            $current .= "''";
+                            $i++;
+                            continue;
+                        }
+                        $inSingle = !$inSingle;
+                    }elseif($ch === '"' && !$inSingle){
+                        if($inDouble && $i+1<$len && $sql[$i+1]==='"'){
+                            $current .= '""';
+                            $i++;
+                            continue;
+                        }
+                        $inDouble = !$inDouble;
+                    }
+                    if($ch === ';' && !$inSingle && !$inDouble){
+                        $stmts[] = trim($current);
+                        $current = '';
+                    }else{
+                        $current .= $ch;
+                    }
+                }
+                if(trim($current) !== '') $stmts[] = trim($current);
+                return $stmts;
+            }
+
             foreach(glob(__DIR__.'/sql/*.sql') as $file){
                 $sql=file_get_contents($file);
-                foreach(preg_split('/;\s*(?:\r?\n|$)/',$sql) as $stmt){
+                foreach(split_sql_statements($sql) as $stmt){
                     $stmt = trim($stmt);
-                    if(!$stmt) continue;
+                    if($stmt==='') continue;
 
                     if(stripos($stmt,'INSERT INTO news')===0 &&
                        preg_match('/^INSERT INTO news\([^\)]*\) VALUES \((.*)\)$/i',$stmt,$m)){
