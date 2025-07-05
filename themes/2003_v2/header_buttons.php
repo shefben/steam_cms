@@ -15,17 +15,17 @@ if(!isset($page_title) || $page_title==='') $page_title = $site_title; else $pag
     <meta name="DESCRIPTION" content="Valve - Steam account signup">
     <meta name="KEYWORDS" content="Steam, account, account creation, signup">
     <meta name="AUTHOR" content="Valve LLC">
-    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v2/steampowered.css">
-    <script language="JavaScript" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v2/nav.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/steampowered.css">
+    <script language="JavaScript" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/nav.js"></script>
 </head>
 <body>
 <div class="header">
-<nobr><a href="<?php echo htmlspecialchars($base); ?>/index.php"><img align="top" alt="[Steam]" height="54" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v2/img/steam_logo_onblack.gif" width="152"></a>
+<nobr><a href="<?php echo htmlspecialchars($base); ?>/index.php"><img align="top" alt="[Steam]" height="54" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/img/steam_logo_onblack.gif" width="152"></a>
 <span class="navBar">
-<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=getsteamnow" onmouseout="out(0)" onmouseover="over(0)"><img alt="getSteamNow" height="22" name="getSteamNow" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v2/img/getSteamNow.gif" valign="bottom" width="108"></a>
-<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=forums" onmouseout="out(1)" onmouseover="over(1)"><img alt="Forums" height="22" name="forums" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v2/img/forums.gif" valign="bottom" width="68"></a>
-<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=support" onmouseout="out(2)" onmouseover="over(2)"><img alt="Support" height="22" name="support" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v2/img/support.gif" valign="bottom" width="68"></a>
-<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=status" onmouseout="out(14)" onmouseover="over(14)"><img alt="Status" height="22" name="status" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v2/img/status.gif" valign="bottom" width="65"></a>
+<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=getsteamnow" onmouseout="out(0)" onmouseover="over(0)"><img alt="getSteamNow" height="22" name="getSteamNow" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/img/getSteamNow.gif" valign="bottom" width="108"></a>
+<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=forums" onmouseout="out(1)" onmouseover="over(1)"><img alt="Forums" height="22" name="forums" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/img/forums.gif" valign="bottom" width="68"></a>
+<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=support" onmouseout="out(2)" onmouseover="over(2)"><img alt="Support" height="22" name="support" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/img/support.gif" valign="bottom" width="68"></a>
+<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=status" onmouseout="out(14)" onmouseover="over(14)"><img alt="Status" height="22" name="status" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/img/status.gif" valign="bottom" width="65"></a>
 </span>
 </nobr>
 </div>

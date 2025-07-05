@@ -26,3 +26,8 @@
 - Cafe directory and FAQ pages paginated for manageability
 - Sidebar links grouped under expandable Cafe menu
 - Not-found routes return the admin-configured error page
+- Storefront SQL generator pulls pricing from package info
+- 2005 v2 theme index replicated from archive
+- Batch script copies 2005 v2 assets and CSS
+- 2003 themes use archived layouts with dynamic news
+- 2003 v2 theme assets served from theme directory

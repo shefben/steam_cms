@@ -8,7 +8,12 @@ if(!file_exists($tpl)){
     $tpl = __DIR__.'/themes/2004/index_template.php';
 }
 
-$page = cms_get_custom_page($theme.'_index',$theme);
+$slug_clean  = str_replace('_','',$theme).'_index';
+$slug_legacy = $theme.'_index';
+$page = cms_get_custom_page($slug_clean,$theme);
+if(!$page && $slug_clean!==$slug_legacy){
+    $page = cms_get_custom_page($slug_legacy,$theme);
+}
 if(!$page){
     $page = cms_get_custom_page('default_index',$theme);
 }

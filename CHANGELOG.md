@@ -31,3 +31,8 @@ All notable changes to this project will be documented in this file.
 - Cafe directory now paginated
 - Admin sidebar reorganized with dropdown for Cafe management
 - Visiting unknown pages now returns 404 with custom error content
+- Pricing imported from packages when generating storefront SQL
+- Added 2005 v2 archived index template and asset copy script
+- Legacy 2003 templates updated with archived HTML
+- Missing pages redirect to dedicated error page
+- Fixed 2003 v2 theme to load images and styles from its theme directory

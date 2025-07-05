@@ -1,8 +1,9 @@
 <?php
-$page_title = $page_title ?? 'Steam';
-include $CMS_ROOT.'/header.php';
+$page_title = $page_title ?? 'Steam Powered';
+$base = cms_base_url();
+$html = file_get_contents(__DIR__.'/../../archived_steampowered/2003/v1/empty_page.html');
+$html = str_replace('steam.css',$base.'/themes/2003_v1/steam.css',$html);
+$html = preg_replace('#images/#',$base.'/themes/2003_v1/images/', $html);
+$html = preg_replace('#<!-- being content area --><!-- end content area -->#','{content}', $html);
+echo $html;
 ?>
-<table bgcolor="#4c5844" border="0" cellpadding="0" cellspacing="0" width="800">
-<tr><td>{content}</td></tr>
-</table>
-<?php include $CMS_ROOT.'/footer.php'; ?>

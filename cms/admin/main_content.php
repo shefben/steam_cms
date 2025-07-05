@@ -2,24 +2,32 @@
 require_once 'admin_header.php';
 cms_require_permission('manage_pages');
 $theme = cms_get_setting('theme','2004');
-$slug = $theme.'_index';
+$slug_clean = str_replace('_','',$theme).'_index';
+$slug_legacy = $theme.'_index';
 $db = cms_get_db();
 $msg = '';
+$slug = $slug_clean;
 if(isset($_POST['save_page'])){
     $title = trim($_POST['title']);
     $content = $_POST['content'];
-    $stmt = $db->prepare('SELECT slug FROM custom_pages WHERE slug=?');
-    $stmt->execute([$slug]);
-    if($stmt->fetchColumn()){
+    $stmt = $db->prepare('SELECT slug FROM custom_pages WHERE slug=? OR slug=? LIMIT 1');
+    $stmt->execute([$slug_clean,$slug_legacy]);
+    $existing = $stmt->fetchColumn();
+    if($existing){
+        $slug = $existing;
         $u = $db->prepare('UPDATE custom_pages SET title=?,content=?,updated=NOW() WHERE slug=?');
         $u->execute([$title,$content,$slug]);
     }else{
         $u = $db->prepare('INSERT INTO custom_pages(slug,title,content,created,updated) VALUES(?,?,?,?,NOW())');
-        $u->execute([$slug,$title,$content,date('Y-m-d H:i:s')]);
+        $u->execute([$slug_clean,$title,$content,date('Y-m-d H:i:s')]);
     }
     $msg = 'Home page saved.';
 }
-$page = cms_get_custom_page($slug,$theme);
+
+$page = cms_get_custom_page($slug_clean,$theme);
+if(!$page && $slug_legacy!==$slug_clean){
+    $page = cms_get_custom_page($slug_legacy,$theme);
+}
 $title = $page['title'] ?? 'Home';
 $content = $page['content'] ?? '';
 ?>

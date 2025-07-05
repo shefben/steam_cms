@@ -60,13 +60,23 @@ function check_online($ip, $port){
 }
 
 function get_servers($db){
-    $res = $db->query("SHOW COLUMNS FROM content_servers LIKE 'region'");
+    try {
+        $res = $db->query("SHOW COLUMNS FROM content_servers LIKE 'region'");
+    } catch(mysqli_sql_exception $e){
+        if($e->getCode()===1146) return [];
+        throw $e;
+    }
     $has_region = $res && $res->num_rows > 0;
     if($res) $res->free();
     $select = "cs.id, cs.name, cs.ip, cs.port, cs.total_capacity";
     if($has_region) $select .= ", cs.region";
     $sql = "SELECT $select, ss.available_bandwidth, ss.unique_connections, ss.last_checked, ss.status FROM content_servers cs LEFT JOIN server_stats ss ON cs.id=ss.server_id";
-    $res = $db->query($sql);
+    try {
+        $res = $db->query($sql);
+    } catch(mysqli_sql_exception $e){
+        if($e->getCode()===1146) return [];
+        throw $e;
+    }
     $servers = [];
     while ($row = $res->fetch_assoc()){
         if(!isset($row['region'])) $row['region'] = 'Unknown';

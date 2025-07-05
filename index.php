@@ -135,10 +135,6 @@ if (file_exists($area.".php")) {
         exit;
 }
 
-$page_title = 'Invalid Area';
-$code = function_exists('http_response_code') ? http_response_code(404) : header('HTTP/1.0 404 Not Found');
-$error_html = cms_get_setting('error_html','<p>Page not found.</p>');
-include 'cms/header.php';
-echo $error_html;
-include 'cms/footer.php';
+header('Location: error.php');
+exit;
 ?>
