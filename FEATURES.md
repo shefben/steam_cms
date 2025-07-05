@@ -42,3 +42,7 @@
 - Sidebar links persisted in database with default order
 - Logo selector shows miniature previews in dropdown
 - Random banner endpoint loads custom images across all years
+- Automated script scans themes for archived assets and updates move_assets.py
+- Capsule admin interface uses searchable dropdowns with image previews
+- Obsolete "2003" theme removed; v1 and v2 variants remain
+- Early themes no longer depend on archived HTML files for rendering

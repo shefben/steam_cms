@@ -6,8 +6,10 @@ $db = cms_get_db();
 $page = max(1, (int)($_GET['p'] ?? 1));
 $per = 25;
 $offset = ($page-1)*$per;
-$stmt = $db->prepare('SELECT * FROM store_apps ORDER BY appid LIMIT ? OFFSET ?');
-$stmt->execute([$per,$offset]);
+$stmt = $db->prepare('SELECT * FROM store_apps ORDER BY appid LIMIT :lim OFFSET :off');
+$stmt->bindValue(':lim', $per, PDO::PARAM_INT);
+$stmt->bindValue(':off', $offset, PDO::PARAM_INT);
+$stmt->execute();
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $total = $db->query('SELECT COUNT(*) FROM store_apps')->fetchColumn();
 ?>

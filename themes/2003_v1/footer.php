@@ -7,7 +7,7 @@ $base = cms_base_url();
 <tr><td colspan="4" height="19" width="799"></td><td height="19" width="1"></td></tr>
 <tr>
 <td colspan="2" height="24" width="360"></td>
-<td align="left" height="24" valign="top" width="424"><img border="0" height="23" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v1/images/Valve_CircleR.gif" width="82"></td>
+<td align="left" height="24" valign="top" width="424"><img border="0" height="23" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v1/images/Valve_CircleR.gif" width="82"></td>
 <td rowspan="2" width="15"></td>
 <td height="24" width="1"></td>
 </tr>

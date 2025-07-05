@@ -32,7 +32,7 @@ $rows = $db->query('SELECT * FROM store_developers ORDER BY name')
     <?php foreach ($rows as $r): ?>
     <tr>
         <td><?php echo htmlspecialchars($r['name']); ?></td>
-        <td><?php echo htmlspecialchars($r['website']); ?></td>
+        <td><?php echo htmlspecialchars($r['website'] ?? ''); ?></td>
         <td class="actions">
             <a href="storefront_developer.php?id=<?php echo $r['id']; ?>">Edit</a>
             <form method="post" style="display:inline" onsubmit="return confirm('Delete developer?');">

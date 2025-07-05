@@ -17,7 +17,7 @@ a:hover { color: #fff; font-weight: normal }
 <style media="screen" type="text/css">
 #layer1 { position: absolute; top: 230px; left: 171px; width: 734px; height: 523px; visibility: visible }
 </style>
-<link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v1/steam.css">
+<link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($base); ?>/themes/2003_v1/steam.css">
 </head>
 <body bgcolor="#626d5c" text="black">
 <div align="center">
@@ -25,12 +25,12 @@ a:hover { color: #fff; font-weight: normal }
 <tr><td colspan="5" height="10" width="799"></td><td height="10" width="1"></td></tr>
 <tr>
 <td colspan="3" height="2" width="660"></td>
-<td align="left" colspan="2" height="26" rowspan="2" valign="top" width="139"><img border="0" height="26" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v1/images/Type_SupportSite2.jpg" width="128"></td>
+<td align="left" colspan="2" height="26" rowspan="2" valign="top" width="139"><img border="0" height="26" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v1/images/Type_SupportSite2.jpg" width="128"></td>
 <td height="2" width="1"></td>
 </tr>
 <tr>
 <td height="60" rowspan="2" width="15"></td>
-<td align="left" height="60" rowspan="2" valign="top" width="320"><img border="0" height="52" src="<?php echo htmlspecialchars($base); ?>/archived_steampowered/2003/v1/images/SteamTM.jpg" width="202"></td>
+<td align="left" height="60" rowspan="2" valign="top" width="320"><img border="0" height="52" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v1/images/SteamTM.jpg" width="202"></td>
 <td height="24" width="325"></td>
 <td height="24" width="1"></td>
 </tr>
