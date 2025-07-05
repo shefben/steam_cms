@@ -4,6 +4,7 @@ cms_require_permission('manage_settings');
 
 $base = cms_base_url();
 $default_logo = file_exists(__DIR__.'/../content/logo.png') ? $base.'/cms/content/logo.png' : $base.'/img/steam_logo_onblack.gif';
+$logo_files = array_map('basename', glob(__DIR__.'/../img/steam_logo_onblack*.gif'));
 $json = cms_get_setting('header_config', null);
 $data = $json?json_decode($json,true):['logo'=>$default_logo,'buttons'=>[]];
 if(!$data) $data=['logo'=>$default_logo,'buttons'=>[]];
@@ -29,8 +30,22 @@ $no_footer_pages = cms_get_setting('no_footer_pages','');
 $footer_html = cms_get_setting('footer_html','');
 $logo_overrides = cms_get_setting('page_logo_overrides','');
 
+if(isset($_POST['upload_logo']) && isset($_FILES['new_logo']) && is_uploaded_file($_FILES['new_logo']['tmp_name'])){
+    $num = 1;
+    do {
+        $fname = 'steam_logo_onblack_' . $num . '.gif';
+        $path = __DIR__ . '/../img/' . $fname;
+        $num++;
+    } while(file_exists($path));
+    move_uploaded_file($_FILES['new_logo']['tmp_name'], $path);
+    $data['logo'] = '/img/' . $fname;
+    cms_set_setting('header_config', json_encode($data));
+    $logo_files[] = $fname;
+    echo '<p>Logo uploaded.</p>';
+}
+
 if(isset($_POST['save'])){
-    $logo = trim($_POST['logo']);
+    $logo = isset($_POST['logo_choice']) ? trim($_POST['logo_choice']) : trim($_POST['logo']);
     $buttons = $_POST['buttons'] ?? [];
     $out = [];
     foreach($buttons as $i=>$b){
@@ -81,26 +96,26 @@ if(isset($_POST['add'])){
 <p>Current logo:</p>
 <?php $logo = $data['logo']; if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
 <img src="<?php echo htmlspecialchars($logo); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>
-Logo URL: <input type="text" name="logo" id="logo-url" value="<?php echo htmlspecialchars($data['logo']); ?>" size="50" title="Default header logo path"><br><br>
+<select name="logo_choice" id="logo-choice">
+  <?php foreach($logo_files as $f): $p='/img/'.$f; ?>
+  <option value="<?php echo $p; ?>" data-img="<?php echo $base.$p; ?>" style="background:url('<?php echo $base.$p; ?>') no-repeat left center;padding-left:50px;min-height:20px;" <?php if($data['logo']==$p) echo 'selected'; ?>><?php echo $f; ?></option>
+  <?php endforeach; ?>
+</select>
+<input type="file" name="new_logo" id="new-logo" style="display:inline">
+<button type="submit" name="upload_logo" value="1" class="btn btn-secondary">Upload</button>
+<input type="hidden" name="logo" id="logo-url" value="<?php echo htmlspecialchars($data['logo']); ?>"><br><br>
 <table id="buttons-table" class="data-table">
-<thead><tr><th></th><th>Preview</th><th>URL</th><th>Text</th><th>Image</th><th>Hover</th><th>Alt</th><th>Delete</th></tr></thead>
+<thead><tr><th></th><th>URL</th><th>Text</th><th>Delete</th></tr></thead>
 <tbody>
 <?php foreach($data['buttons'] as $i=>$b): ?>
 <tr class="button-row" data-index="<?php echo $i; ?>">
 <td class="handle">☰</td>
-<td>
-<?php if(!empty($b['img'])): ?>
-    <img src="<?php echo htmlspecialchars($b['img']); ?>" data-hover="<?php echo htmlspecialchars($b['hover']); ?>" class="preview" style="max-height:24px">
-<?php else: ?>
-    <span class="text-preview preview"><?php echo htmlspecialchars($b['text'] ?: $b['url']); ?></span>
-<?php endif; ?>
-</td>
-<td><input type="text" name="buttons[<?php echo $i; ?>][url]" value="<?php echo htmlspecialchars($b['url']); ?>" title="Link target when clicked"></td>
-<td><input type="text" name="buttons[<?php echo $i; ?>][text]" value="<?php echo htmlspecialchars($b['text'] ?? ''); ?>" title="Text fallback if no image"></td>
-<td><input type="hidden" name="buttons[<?php echo $i; ?>][img]" value="<?php echo htmlspecialchars($b['img']); ?>"><input type="file" name="img_file[<?php echo $i; ?>]" class="img-file" title="Button image"></td>
-<td><input type="hidden" name="buttons[<?php echo $i; ?>][hover]" value="<?php echo htmlspecialchars($b['hover']); ?>"><input type="file" name="hover_file[<?php echo $i; ?>]" class="hover-file" title="Hover state image"></td>
-<td><input type="text" name="buttons[<?php echo $i; ?>][alt]" value="<?php echo htmlspecialchars($b['alt']); ?>" title="Alt text for accessibility"></td>
+<td><input type="text" name="buttons[<?php echo $i; ?>][url]" value="<?php echo htmlspecialchars($b['url']); ?>" title="Link target when clicked" style="width:250px"></td>
+<td><input type="text" name="buttons[<?php echo $i; ?>][text]" value="<?php echo htmlspecialchars($b['text'] ?? ''); ?>" title="Text fallback" style="width:200px"></td>
 <td><input type="checkbox" name="buttons[<?php echo $i; ?>][delete]"></td>
+<input type="hidden" name="buttons[<?php echo $i; ?>][img]" value="<?php echo htmlspecialchars($b['img']); ?>">
+<input type="hidden" name="buttons[<?php echo $i; ?>][hover]" value="<?php echo htmlspecialchars($b['hover']); ?>">
+<input type="hidden" name="buttons[<?php echo $i; ?>][alt]" value="<?php echo htmlspecialchars($b['alt']); ?>">
 </tr>
 <?php endforeach; ?>
 </tbody>
@@ -140,64 +155,26 @@ document.getElementById('add-button').addEventListener('click', function(){
     row.className = 'button-row';
     row.dataset.index = idx;
     row.innerHTML = `<td class="handle">☰</td>`+
-        `<td><span class="text-preview preview"></span></td>`+
-        `<td><input type="text" name="buttons[${idx}][url]"></td>`+
-        `<td><input type="text" name="buttons[${idx}][text]"></td>`+
-        `<td><input type="hidden" name="buttons[${idx}][img]"><input type="file" name="img_file[${idx}]" class="img-file"></td>`+
-        `<td><input type="hidden" name="buttons[${idx}][hover]"><input type="file" name="hover_file[${idx}]" class="hover-file"></td>`+
-        `<td><input type="text" name="buttons[${idx}][alt]"></td>`+
-        `<td><input type="checkbox" name="buttons[${idx}][delete]"></td>`;
+        `<td><input type="text" name="buttons[${idx}][url]" style="width:250px"></td>`+
+        `<td><input type="text" name="buttons[${idx}][text]" style="width:200px"></td>`+
+        `<td><input type="checkbox" name="buttons[${idx}][delete]"></td>`+
+        `<input type="hidden" name="buttons[${idx}][img]">`+
+        `<input type="hidden" name="buttons[${idx}][hover]">`+
+        `<input type="hidden" name="buttons[${idx}][alt]">`;
     tbody.appendChild(row);
 });
 
-document.addEventListener('change', function(e){
-    if(e.target.classList.contains('img-file')){
-        var row = e.target.closest('tr');
-        var img = e.target.files[0];
-        if(img){
-            if(!row.querySelector('img.preview')){
-                row.querySelector('.preview').outerHTML = '<img class="preview" style="max-height:24px">';
-            }
-            var reader = new FileReader();
-            reader.onload = function(ev){ row.querySelector('img.preview').src = ev.target.result; };
-            reader.readAsDataURL(img);
-        }
-    }else if(e.target.classList.contains('hover-file')){
-        var row = e.target.closest('tr');
-        var img = e.target.files[0];
-        if(img){
-            if(!row.querySelector('img.preview')){
-                row.querySelector('.preview').outerHTML = '<img class="preview" style="max-height:24px">';
-            }
-            var reader = new FileReader();
-            reader.onload = function(ev){ row.querySelector('img.preview').dataset.hover = ev.target.result; };
-            reader.readAsDataURL(img);
-        }
-    }
+document.getElementById('logo-choice').addEventListener('change', function(){
+    var opt = this.options[this.selectedIndex];
+    document.getElementById('logo-url').value = opt.value;
+    document.getElementById('logo-preview').src = opt.dataset.img;
 });
 
-document.addEventListener('input', function(e){
-    if(e.target.matches('input[type="text"]')){
-        var row = e.target.closest('tr');
-        var text = row.querySelector('input[name*="[text]"]').value || row.querySelector('input[name*="[url]"]').value;
-        var preview = row.querySelector('.text-preview');
-        if(preview) preview.textContent = text;
-    }
-});
 
-document.addEventListener('mouseover', function(e){
-    if(e.target.matches('img.preview')){
-        var hover = e.target.dataset.hover;
-        if(hover){ e.target.dataset.orig = e.target.src; e.target.src = hover; }
-    }
-});
 
-document.addEventListener('mouseout', function(e){
-    if(e.target.matches('img.preview')){
-        var orig = e.target.dataset.orig;
-        if(orig){ e.target.src = orig; }
-    }
-});
+
+
+
 </script>
 <p><a href="index.php">Back</a></p>
 <?php include 'admin_footer.php'; ?>

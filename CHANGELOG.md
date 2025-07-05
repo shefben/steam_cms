@@ -36,3 +36,13 @@ All notable changes to this project will be documented in this file.
 - Legacy 2003 templates updated with archived HTML
 - Missing pages redirect to dedicated error page
 - Fixed 2003 v2 theme to load images and styles from its theme directory
+- Storefront uses archived stylesheet and images
+- Storefront seed SQL includes pricing
+- Header & Footer admin simplified button table and supports logo uploads
+- Storefront images copied from archive via move_assets.py
+- Added dash.gif copy rule to asset mover
+- Sidebar links editable with drag-and-drop ordering
+- Added featured capsule selector with live preview in admin
+- Header button table simplified with drag ordering and logo selector
+- Sidebar links stored in new table with default entries
+- Logo dropdown shows mini previews

@@ -31,3 +31,13 @@
 - Batch script copies 2005 v2 assets and CSS
 - 2003 themes use archived layouts with dynamic news
 - 2003 v2 theme assets served from theme directory
+- Archived storefront CSS loaded via theme with auto path rewriting
+- Storefront seed SQL includes pricing data
+- Admin can upload/select logos for header bar
+- Python script copies storefront border images from archive
+- Asset mover also copies dash.gif used for menu spacers
+- Sidebar links sortable with hide and spacer options
+- Storefront featured capsules configurable with live image preview
+- Header buttons table simplified with drag ordering and logo selector
+- Sidebar links persisted in database with default order
+- Logo selector shows miniature previews in dropdown

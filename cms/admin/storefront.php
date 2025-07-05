@@ -54,18 +54,17 @@ if(isset($_POST['save_sidebar'])){
         $label = trim($_POST['label'][$i]);
         $url = trim($_POST['url'][$i]);
         $type = $_POST['type'][$i]=='spacer'?'spacer':'link';
-        $ord = (int)$_POST['ord'][$i];
-        $db->prepare('UPDATE store_sidebar_links SET label=?,url=?,type=?,ord=? WHERE id=?')->execute([$label,$url,$type,$ord,$id]);
+        $ord = $i+1;
+        $vis = empty($_POST['hide'][$i]) ? 1 : 0;
+        $db->prepare('UPDATE store_sidebar_links SET label=?,url=?,type=?,ord=?,visible=? WHERE id=?')->execute([$label,$url,$type,$ord,$vis,$id]);
     }
 }
-if(isset($_POST['add_sidebar'])){
-    $label = trim($_POST['new_label']);
-    $url   = trim($_POST['new_url']);
-    $type  = $_POST['new_type']=='spacer'?'spacer':'link';
-    $ord   = (int)$_POST['new_ord'];
-    if($label!=='' || $type==='spacer'){
-        $db->prepare('INSERT INTO store_sidebar_links(label,url,type,ord) VALUES(?,?,?,?)')->execute([$label,$url,$type,$ord]);
-    }
+if(isset($_POST['add_sidebar']) || isset($_POST['add_spacer'])){
+    $label = isset($_POST['add_spacer']) ? '' : trim($_POST['new_label']);
+    $url   = isset($_POST['add_spacer']) ? '' : trim($_POST['new_url']);
+    $type  = isset($_POST['add_spacer']) ? 'spacer' : 'link';
+    $ord   = count($db->query('SELECT id FROM store_sidebar_links')->fetchAll()) + 1;
+    $db->prepare('INSERT INTO store_sidebar_links(label,url,type,ord,visible) VALUES(?,?,?,?,1)')->execute([$label,$url,$type,$ord]);
 }
 
 $categories = $db->query('SELECT * FROM store_categories ORDER BY ord,id')->fetchAll(PDO::FETCH_ASSOC);
@@ -182,20 +181,25 @@ if($pages>1){
 </div>
 <div id="sidebar" style="display:none">
 <form method="post">
-<table class="table">
-<tr><th>Order</th><th>Label</th><th>URL</th><th>Type</th><th>Delete</th></tr>
+<table class="table" id="sidebar-list">
+<tr><th></th><th>Label</th><th>URL</th><th>Type</th><th>Hide</th><th>Remove</th></tr>
 <?php foreach($sidebar_links as $s): ?>
 <tr>
- <td><input type="number" name="ord[]" value="<?php echo $s['ord']?>" style="width:50px"></td>
- <td><input type="text" name="label[]" value="<?php echo htmlspecialchars($s['label'])?>"></td>
- <td><input type="text" name="url[]" value="<?php echo htmlspecialchars($s['url'])?>"></td>
+ <td class="handle">&#9776;<input type="hidden" name="ord[]" value="<?php echo $s['ord']?>"></td>
+ <td><input type="text" name="label[]" class="editable" value="<?php echo htmlspecialchars($s['label'])?>" readonly<?php if($s['type']=='spacer') echo ' disabled';?>></td>
+ <td><input type="text" name="url[]" class="editable" value="<?php echo htmlspecialchars($s['url'])?>" readonly<?php if($s['type']=='spacer') echo ' disabled';?>></td>
  <td>
   <select name="type[]">
    <option value="link"<?php if($s['type']=='link') echo ' selected';?>>Link</option>
    <option value="spacer"<?php if($s['type']=='spacer') echo ' selected';?>>Spacer</option>
   </select>
  </td>
- <td><input type="checkbox" name="del[]" value="1"></td>
+ <td><input type="checkbox" name="hide[]" value="1" <?php if(!$s['visible']) echo 'checked';?>></td>
+ <td>
+  <?php if($s['type']!='spacer'): ?><button type="button" class="edit btn btn-secondary">Edit</button><?php endif; ?>
+  <button type="button" class="remove btn btn-danger">Remove</button>
+  <input type="hidden" name="del[]" value="">
+ </td>
  <input type="hidden" name="sid[]" value="<?php echo $s['id']?>">
 </tr>
 <?php endforeach; ?>
@@ -203,12 +207,11 @@ if($pages>1){
 <div style="margin-top:10px"><input type="submit" name="save_sidebar" value="Save" class="btn btn-primary"></div>
 </form>
 <hr>
-<form method="post" style="margin-top:10px">
- <input type="number" name="new_ord" value="<?php echo count($sidebar_links)+1; ?>" style="width:50px">
+<form method="post" id="addForm" style="margin-top:10px">
  <input type="text" name="new_label" placeholder="Label">
  <input type="text" name="new_url" placeholder="URL">
- <select name="new_type"><option value="link">Link</option><option value="spacer">Spacer</option></select>
- <input type="submit" name="add_sidebar" value="Add" class="btn">
+ <button name="add_sidebar" value="1" class="btn">Add Link</button>
+ <button name="add_spacer" value="1" class="btn">Add Spacer</button>
 </form>
 </div>
 <div id="developers" style="display:none">
@@ -256,6 +259,23 @@ $('select[id^=f]').on('change mousemove',function(e){
   if(img){
     $(target).attr('src','../archived_steampowered/2005/storefront/screenshots/'+img).css({top:e.pageY+5,left:e.pageX+5}).show();
   }
+});
+function updateOrders(){
+  $('#sidebar-list tr').each(function(i){
+    $(this).find('input[name="ord[]"]').val(i+1);
+  });
+}
+Sortable.create(document.querySelector('#sidebar-list'),{handle:'.handle',animation:150,onSort:updateOrders});
+updateOrders();
+$('#sidebar-list').on('click','.remove',function(){
+  var row=$(this).closest('tr');
+  row.find('input[name="del[]"]').val('1');
+  row.hide();
+});
+$('#sidebar-list').on('click','.edit',function(){
+  var row=$(this).closest('tr');
+  row.find('.editable').prop('readonly',false);
+  $(this).prop('disabled',true);
 });
 $('select[id^=f]').on('mouseleave',function(){ $('#img_'+this.id).hide(); });
 </script>

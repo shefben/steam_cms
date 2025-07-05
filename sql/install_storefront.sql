@@ -4,6 +4,14 @@ CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availabil
 CREATE TABLE subscriptions(subid INT PRIMARY KEY,name TEXT,price DECIMAL(10,2));
 CREATE TABLE subscription_apps(subid INT,appid INT,PRIMARY KEY(subid,appid));
 CREATE TABLE app_categories(appid INT,category_id INT,PRIMARY KEY(appid,category_id));
+CREATE TABLE store_sidebar_links(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    label TEXT,
+    url TEXT,
+    type VARCHAR(10) DEFAULT 'link',
+    ord INT,
+    visible TINYINT DEFAULT 1
+);
 CREATE TABLE store_capsules(position VARCHAR(20) PRIMARY KEY, image TEXT, appid INT);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(2,'Single-player',1,1);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(1,'Multi-player',2,1);
@@ -260,3 +268,11 @@ INSERT INTO app_categories(appid,category_id) VALUES(90026,1);
 INSERT INTO app_categories(appid,category_id) VALUES(90026,6);
 INSERT INTO settings(`key`,value) VALUES('store_featured',"{\"top\": 2400, \"middle\": 380, \"bottom_left\": 1200, \"bottom_right\": 1300}");
 INSERT INTO store_capsules(position,image,appid) VALUES('top','2006_08-August/top_capsule.png',2400),('middle','2006_08-August/middle_capsule.png',380),('bottom_left','2006_08-August/bottom_left_capsule.png',1200),('bottom_right','2006_08-August/bottom_right_capsule.png',1300);
+INSERT INTO store_sidebar_links(label,url,type,ord,visible) VALUES
+ ('Home','/storefront/index.php','link',1,1),
+ ('','', 'spacer',2,1),
+ ('Browser Games','/storefront/browse.php','link',3,1),
+ ('All Games','/storefront/allgames.php','link',4,1),
+ ('Search','/storefront/search.php','link',5,1),
+ ('','', 'spacer',6,1),
+ ('Media','/storefront/media.php','link',7,1);
