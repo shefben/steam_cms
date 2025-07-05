@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Introduce root path site setting and base URL handling
 - Removed news box height limit in 2004 theme for exact layout
 - Added setting to limit news by theme year
+- Random banner endpoint pulls from custom folder regardless of theme
 - Implemented index_brief news token for 2004 theme
 - Created separate storefront admin pages for products, categories and sidebar
 - Fixed storefront menu auto-expansion and navigation order
