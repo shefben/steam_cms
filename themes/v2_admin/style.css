@@ -609,6 +609,26 @@ select.form-control,
     font-size:14px;
 }
 
+.capsule-box-group {
+    border:1px solid #777;
+    padding:10px;
+    margin-bottom:15px;
+}
+.capsule-box {
+    display:flex;
+    align-items:center;
+    margin-bottom:10px;
+    gap:10px;
+}
+.capsule-box img.capsule-preview {
+    width:120px;
+    height:auto;
+    border:1px solid #555;
+}
+.capsule-box select {
+    min-width:220px;
+}
+
 /* Link color */
 a, a:visited { color: #f1c40f; }
 

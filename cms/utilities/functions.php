@@ -25,7 +25,7 @@ function db_connect() {
 }
 
 function get_setting($db, $key) {
-    $stmt = $db->prepare("SELECT setting_value FROM settings WHERE setting_key=?");
+    $stmt = $db->prepare("SELECT value FROM settings WHERE `key`=?");
     $stmt->bind_param('s', $key);
     $stmt->execute();
     $stmt->bind_result($val);
@@ -35,7 +35,7 @@ function get_setting($db, $key) {
 }
 
 function set_setting($db, $key, $val) {
-    $stmt = $db->prepare("REPLACE INTO settings(setting_key, setting_value) VALUES(?,?)");
+    $stmt = $db->prepare("REPLACE INTO settings(`key`, value) VALUES(?,?)");
     $stmt->bind_param('ss', $key, $val);
     $stmt->execute();
     $stmt->close();

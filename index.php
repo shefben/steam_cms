@@ -83,7 +83,7 @@ elseif ($area == "all" && (isset($_GET['page'])) && (!isset($_GET['genre']))) {
         $area = 'all_genre'.$g.'_page'.$p;
 } elseif ($area == "news" && (isset($_GET['id']))) {
         $id = preg_replace('/[^0-9]/','',$_GET['id']);
-        $area = 'news_'.$id;
+        $_GET['id'] = $id; // keep area as "news" so news.php handles the article
 } elseif ($area == "faq" && (isset($_GET['id']))) {
         $id = preg_replace('/[^0-9,]/','',$_GET['id']);
         $_GET['id'] = $id;

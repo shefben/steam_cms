@@ -12,6 +12,22 @@ if(isset($_POST['update'])){
     exit('OK');
 }
 
+if (isset($_POST['save_caps'])) {
+    foreach (['top','middle','bottom_left','bottom_right'] as $pos) {
+        $appid = (int)($_POST['appid'][$pos] ?? 0);
+        $img = $db->prepare('SELECT image FROM store_capsules WHERE position=?');
+        $img->execute([$pos]);
+        $path = $img->fetchColumn() ?: '';
+        $stmt = $db->prepare('REPLACE INTO store_capsules(position,image,appid) VALUES(?,?,?)');
+        $stmt->execute([$pos,$path,$appid]);
+    }
+    $rows = $db->query('SELECT * FROM store_capsules')->fetchAll(PDO::FETCH_ASSOC);
+    $caps = [];
+    foreach ($rows as $r) {
+        $caps[$r['position']] = $r;
+    }
+}
+
 
 $rows = $db->query('SELECT * FROM store_capsules')->fetchAll(PDO::FETCH_ASSOC);
 $caps = [];
@@ -40,6 +56,30 @@ if(is_dir($img_base)){
 }
 ?>
 <h2>Main Page</h2>
+<form method="post" style="margin-bottom:15px;">
+  <fieldset class="capsule-box-group">
+    <legend>Capsule Links</legend>
+    <?php foreach(['top'=>'Top','middle'=>'Middle','bottom_left'=>'Bottom Left','bottom_right'=>'Bottom Right'] as $p=>$label):
+      $app = $caps[$p]['appid'] ?? 0;
+      $img = $caps[$p]['image'] ?? '';
+    ?>
+    <div class="capsule-box">
+      <img src="../storefront/images/capsules/<?php echo htmlspecialchars($img); ?>" alt="<?php echo $label; ?> preview" class="capsule-preview">
+      <div>
+        <input type="text" class="filter" data-select="sel_<?php echo $p; ?>" placeholder="Filter apps"><br>
+        <select id="sel_<?php echo $p; ?>" name="appid[<?php echo $p; ?>]" size="5" class="capsule-select">
+          <?php foreach($apps as $a): ?>
+          <?php $imgs = json_decode($a['images'] ?? '[]', true); $imgp = $imgs ? $imgs[0] : ''; ?>
+          <option value="<?php echo $a['appid']; ?>" data-img="<?php echo htmlspecialchars($imgp); ?>" <?php if($app==$a['appid']) echo 'selected'; ?>><?php echo $a['appid'].' - '.htmlspecialchars($a['name']); ?></option>
+          <?php endforeach; ?>
+        </select>
+        <img id="img_sel_<?php echo $p; ?>" style="display:none;position:absolute;z-index:1000" alt="preview">
+      </div>
+    </div>
+    <?php endforeach; ?>
+    <button type="submit" name="save_caps" class="btn btn-primary" style="margin-top:10px;">Save Capsules</button>
+  </fieldset>
+</form>
 <div id="caps" style="position:relative;width:590px;height:511px;">
   <?php foreach([
         'top' => 'left:1px;top:1px;width:588px;height:98px',
@@ -142,5 +182,21 @@ $('#uyear').on('change',function(){
     }
   }
 });
+$('.filter').on('input',function(){
+  var sel=$('#'+$(this).data('select')+' option');
+  var val=$(this).val().toLowerCase();
+  sel.each(function(){
+    $(this).toggle($(this).text().toLowerCase().indexOf(val)>=0);
+  });
+});
+$('.capsule-select').on('mousemove change',function(e){
+  var opt=$(this).find('option:selected');
+  var img=opt.data('img');
+  var tgt='#img_'+this.id;
+  if(img){
+    $(tgt).attr('src','../archived_steampowered/2005/storefront/screenshots/'+img).css({top:e.pageY+5,left:e.pageX+5}).show();
+  }
+});
+$('.capsule-select').on('mouseleave',function(){ $('#img_'+this.id).hide(); });
 </script>
 <?php include 'admin_footer.php';?>

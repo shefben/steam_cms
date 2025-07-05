@@ -47,3 +47,13 @@ All notable changes to this project will be documented in this file.
 - Header button table simplified with drag ordering and logo selector
 - Sidebar links stored in new table with default entries
 - Logo dropdown shows mini previews
+- Automated scan populates move_assets.py with archived theme assets
+* Fixed warnings on developer list with missing website fields.
+* Corrected product pagination query parameters.
+* Added capsule selection dropdowns in storefront admin.
+- Fixed settings retrieval for content server page with correct column names.
+- Removed obsolete "2003" theme and updated theme checks.
+- Resolved parse error when using the 2003_v2 theme index page.
+- Fixed 2003_v1 and 2002_v2 themes to load HTML from their own directories rather than the archive.
+- Restored 2003 compatibility check on network status page.
+- News listing shows full articles again with a line break inserted around 230 characters.
