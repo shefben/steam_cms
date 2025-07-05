@@ -23,6 +23,9 @@ $logo = $override ?: (isset($data['logo'])?$data['logo']:$default_logo);
     <meta name="KEYWORDS" content="Steam, account, account creation, signup">
     <meta name="AUTHOR" content="Valve Corporation">
     <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($theme_url); ?>/steampowered03.css">
+<?php if (strpos($_SERVER['SCRIPT_NAME'], '/storefront/') !== false): ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($theme_url); ?>/assets/storefront.css">
+<?php endif; ?>
     <style>
     .globalHeadBar
     {
