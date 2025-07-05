@@ -1,6 +1,6 @@
 <?php
 require_once 'admin_header.php';
-require_once dirname(__DIR__,2).'/status/functions.php';
+require_once dirname(__DIR__,2).'/cms/utilities/functions.php';
 $db = db_connect();
 $servers = get_servers($db);
 $main_ip = get_setting($db,'main_network_ip');
