@@ -334,7 +334,10 @@ HTML;
                 ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],
                 ['file'=>'news.php','label'=>'News','visible'=>1],
                 ['file'=>'faq.php','label'=>'FAQ','visible'=>1],
-                ['file'=>'cybercafe.php','label'=>'Cyber Cafe Management','visible'=>1],
+                ['file'=>'cafe_signups.php','label'=>'Cafe Signup Requests','visible'=>1],
+                ['file'=>'cafe_directory.php','label'=>'Cafe Directory','visible'=>1],
+                ['file'=>'cafe_pricing.php','label'=>'Cafe Pricing','visible'=>1],
+                ['file'=>'cafe_representatives.php','label'=>'Cafe Representatives','visible'=>1],
                 ['file'=>'content_servers.php','label'=>'Servers','visible'=>1],
                 ['file'=>'contentserver_banners.php','label'=>'ContentServer Banner Management','visible'=>1],
                 ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
@@ -343,6 +346,7 @@ HTML;
                 ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
                 ['file'=>'storefront_main.php','label'=>'Main Page','visible'=>1],
                 ['file'=>'storefront.php','label'=>'Storefront','visible'=>1],
+                ['file'=>'storefront_sidebar.php','label'=>'Sidebar','visible'=>1],
                 ['file'=>'storefront_products.php','label'=>'Products','visible'=>1],
                 ['file'=>'storefront_categories.php','label'=>'Categories','visible'=>1],
                 ['file'=>'storefront_developers.php','label'=>'Developers','visible'=>1],
@@ -415,6 +419,14 @@ xxxxxx xxxxx xxxxx x xxx xxxxxxx xxxxxx xxx xxxxxx x xxxxxx xxxxxxx. xxxxxx xxxx
 </div>
 HTML;
             $pageStmt->execute(['features','Features',$features_html,'2003_v1,2003_v2,2004',date('Y-m-d H:i:s')]);
+
+            $index03 = file_get_contents(__DIR__.'/archived_steampowered/2003/v1/index.html');
+            if(preg_match('/<table bgcolor="#4c5844".*?<\/table>/s',$index03,$m)){
+                $index_body = $m[0];
+            } else {
+                $index_body = $index03;
+            }
+            $pageStmt->execute(['2003_v1_index','2003 Home',$index_body,'2003_v1',date('Y-m-d H:i:s')]);
 
             $e3_html = <<<'HTML'
 <!-- e3 movies -->
@@ -548,12 +560,33 @@ HTML;
             $pageStmt->execute(['css_b1','Counter-Strike: Source Beta 1 FAQ',$css_html,'2003,2003_v1,2003_v2,2004,2005',date('Y-m-d H:i:s')]);
 
             $pricing_html = <<<'HTML'
-<!-- cyber cafe pricing (truncated) -->
 <div class="content" id="container">
-<h1>PRICING AND LICENSING</h1>
-<h2>VALVE'S <em>OFFICIAL CYBER CAF&Eacute; PROGRAM</em></h2>
-<p>Valve's Official Cyber Caf&eacute; Program makes things simple for the caf&eacute; owner.</p>
-<!-- full pricing text omitted for brevity -->
+<h1>PRICING AND LICENSING</H1>
+<h2>VALVE'S<em> OFFICIAL CYBER CAF&Eacute; PROGRAM</em></h2><img src="img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+<div class="narrower">
+
+Valve's Official Cyber Caf&eacute; Program makes things simple for the caf&eacute; owner.<br>
+<br>
+<h3 style="text-transform:uppercase;">One low monthly fee</h3>
+For a low monthly fee per licensed computer, your caf&eacute; gets access to all of Valve's games. See the <a href="cybercafe_program.php">full list of Features and Benefits</a> for the details of what's included. Payment is handled in three-month blocks, in advance, either by recurring automatic billing or by invoice. <!-- For full details about licensing, payment, and the details of the Caf&eacute; Program, please see the official <a href="cafe_signup.php">Valve Cyber Caf&eacute; Agreement</a>. --><br>
+<br>
+<!--
+<h3 style="text-transform:uppercase;">APRIL CYBER CAF&Eacute; PROMOTION</h3>
+During the month of April 2004, Valve is extending a <a href="/?area=cybercafe_promotion">special offer to Cyber Caf&eacute;s</a>. During this time, a 12-month cyber caf&eacute; license for Valve's games is being offered at a savings of 33%. <a href="/?area=cybercafe_promotion">See this page for details</a>.<br>
+<Br>
+-->
+<h3 style="text-transform:uppercase;">Fully licensed software</h3>
+Software purchased at retail is not licensed for commercial use such as cyber caf&eacute; play. If you operate a gaming center, our program is the legal way to obtain a commercial license and offer Valve's games to your customers.<br>
+<br>
+<h3 style="text-transform:uppercase;">As Always, Tournament Licenses Are Free</h3>
+If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valvesoftware.com">let us know</a> and we'll issue you a Tournament License, free of charge.<br>
+<br>
+<a href="cafe_signup.php">Sign up now for the CyberCaf&eacute; Program!</a><br>
+<br>
+<a href="cybercafes.php">Return to main Cyber Caf&eacute; page</a>
+
+</div>
 </div>
 HTML;
             $pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,date('Y-m-d H:i:s')]);

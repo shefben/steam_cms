@@ -52,8 +52,8 @@ for appid, row in row_re.findall(html_all):
         name = re.sub('<.*?>', '', cells[1]).strip()
         dev_raw = re.sub('<.*?>', '', cells[3]).strip()
         avail = re.sub('<.*?>', '', cells[5]).strip()
-        price = re.sub('<.*?>', '', cells[7]).strip()
-        price = '0' if price == '-' or not price else price.replace('$', '')
+        price_text = re.sub('<.*?>', '', cells[7]).strip()
+        price = price_text.replace('$', '') if price_text and price_text not in ('-', 'Third-party', 'Free', 'In account') else '0'
         dev = next((d for d in developers if d.startswith(dev_raw.replace('...', '').strip())), dev_raw)
         apps.append({
             "appid": int(appid),
@@ -88,6 +88,11 @@ for app in apps:
     if m:
         req = html.unescape(re.sub('<.*?>', '', m.group(1))).strip()
         app['sysreq'] = req
+    if app['price'] == '0' and packs:
+        try:
+            app['price'] = str(min(float(p['price']) for p in packs))
+        except ValueError:
+            pass
 
 out = []
 out.append("CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,visible TINYINT DEFAULT 1);")

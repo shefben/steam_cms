@@ -215,7 +215,7 @@ function cms_get_themes(){
 function cms_store_sidebar_links(){
     $db = cms_get_db();
     try {
-        $res = $db->query('SELECT id,label,url,type,ord FROM store_sidebar_links WHERE visible=1 ORDER BY ord,id');
+        $res = $db->query('SELECT id,label,url,type,ord,visible FROM store_sidebar_links WHERE visible=1 ORDER BY ord,id');
         return $res->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e){
         if($e->getCode()==='42S02') return [];
