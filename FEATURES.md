@@ -41,3 +41,4 @@
 - Header buttons table simplified with drag ordering and logo selector
 - Sidebar links persisted in database with default order
 - Logo selector shows miniature previews in dropdown
+- Random banner endpoint loads custom images across all years
