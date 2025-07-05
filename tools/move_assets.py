@@ -41,3 +41,25 @@ for src_rel, dest_rel in ASSETS.items():
     shutil.copy2(src, dest)
     print(f'Copied {src_rel} -> {dest_rel}')
 
+# Move storefront capsule images into consolidated folders
+CAPS_SRC = os.path.join(ROOT, 'archived_steampowered/2005/storefront/capsules/img')
+CAPS_DEST = os.path.join(ROOT, 'storefront/images/capsules')
+for folder in os.listdir(CAPS_SRC):
+    src_dir = os.path.join(CAPS_SRC, folder)
+    if not os.path.isdir(src_dir):
+        continue
+    parts = folder.split('_')
+    if len(parts) < 2:
+        continue
+    year = parts[0]
+    month = parts[1].split('-')[0]
+    date = f'{month}_01_{year}.png'
+    for pos in ['top', 'middle', 'bottom_right', 'bottom_left']:
+        src = os.path.join(src_dir, f'{pos}_capsule.png')
+        if not os.path.exists(src):
+            continue
+        dest = os.path.join(CAPS_DEST, pos, date)
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        shutil.copy2(src, dest)
+        print(f'Copied {src} -> {dest}')
+

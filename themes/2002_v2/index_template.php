@@ -1,9 +1,6 @@
 <?php
 $page_title = $page_title ?? 'Welcome to Steam';
-$html = file_get_contents(__DIR__.'/index.html');
-// fix relative asset paths
-$html = str_replace('Images/','/themes/2002_v2/Images/',$html);
-// inject dynamic title
-$html = preg_replace('/<title>.*?<\/title>/', '<title>'.htmlspecialchars($page_title).'</title>', $html);
-echo $html;
+include $CMS_ROOT.'/header.php';
 ?>
+{content}
+<?php include $CMS_ROOT.'/footer.php'; ?>
