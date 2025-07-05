@@ -267,7 +267,7 @@ INSERT INTO app_categories(appid,category_id) VALUES(90025,6);
 INSERT INTO app_categories(appid,category_id) VALUES(90026,1);
 INSERT INTO app_categories(appid,category_id) VALUES(90026,6);
 INSERT INTO settings(`key`,value) VALUES('store_featured',"{\"top\": 2400, \"middle\": 380, \"bottom_left\": 1200, \"bottom_right\": 1300}");
-INSERT INTO store_capsules(position,image,appid) VALUES('top','2006_08-August/top_capsule.png',2400),('middle','2006_08-August/middle_capsule.png',380),('bottom_left','2006_08-August/bottom_left_capsule.png',1200),('bottom_right','2006_08-August/bottom_right_capsule.png',1300);
+INSERT INTO store_capsules(position,image,appid) VALUES('top','top/08_01_2006.png',2400),('middle','middle/08_01_2006.png',380),('bottom_left','bottom_left/08_01_2006.png',1200),('bottom_right','bottom_right/08_01_2006.png',1300);
 INSERT INTO store_sidebar_links(label,url,type,ord,visible) VALUES
  ('Home','/storefront/index.php','link',1,1),
  ('','', 'spacer',2,1),

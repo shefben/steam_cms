@@ -131,10 +131,10 @@ for aid, cids in sorted(app_cat_map.items()):
 featured = {"top":2400,"middle":380,"bottom_left":1200,"bottom_right":1300}
 out.append("INSERT INTO settings(`key`,value) VALUES('store_featured'," + json.dumps(json.dumps(featured)) + ");")
 out.append("INSERT INTO store_capsules(position,image,appid) VALUES"
-            "('top','2006_08-August/top_capsule.png',2400),"
-            "('middle','2006_08-August/middle_capsule.png',380),"
-            "('bottom_left','2006_08-August/bottom_left_capsule.png',1200),"
-            "('bottom_right','2006_08-August/bottom_right_capsule.png',1300);")
+            "('top','top/08_01_2006.png',2400),"
+            "('middle','middle/08_01_2006.png',380),"
+            "('bottom_left','bottom_left/08_01_2006.png',1200),"
+            "('bottom_right','bottom_right/08_01_2006.png',1300);")
 
 pathlib.Path('sql/install_storefront.sql').write_text('\n'.join(out))
 print('Wrote', len(out), 'lines to sql/install_storefront.sql')

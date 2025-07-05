@@ -38,20 +38,17 @@ $apps = $db->query('SELECT appid,name FROM store_apps ORDER BY name')->fetchAll(
 
 $img_base = dirname(__DIR__, 2) . '/storefront/images/capsules';
 $images = ['top'=>[], 'middle'=>[], 'bottom_left'=>[], 'bottom_right'=>[]];
-if(is_dir($img_base)){
-    $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($img_base));
-    foreach ($it as $file) {
-        if ($file->isFile() && preg_match('#/(\d{4}_\d{2}-[^/]+)/(top|middle|bottom_left|bottom_right)_capsule\.png$#', $file->getPathname(), $m)) {
-            $folder = $m[1];
-            $pos = $m[2];
-            if (preg_match('/(\d{4})_(\d{2})/', $folder, $mm)) {
-                $label = $mm[1] . '-' . $mm[2];
-            } else {
-                $label = $folder;
-            }
-            $rel = $folder . '/' . $pos . '_capsule.png';
-            $images[$pos][] = ['file' => $rel, 'label' => $label];
+foreach (array_keys($images) as $pos) {
+    $dir = $img_base . '/' . $pos;
+    if (!is_dir($dir)) continue;
+    foreach (glob($dir.'/*.png') as $file) {
+        $base = basename($file, '.png');
+        if (preg_match('/(\d{2})_\d{2}_(\d{4})/', $base, $m)) {
+            $label = $m[2] . '-' . $m[1];
+        } else {
+            $label = $base;
         }
+        $images[$pos][] = ['file' => $pos.'/'.basename($file), 'label' => $label];
     }
 }
 ?>
@@ -64,7 +61,8 @@ if(is_dir($img_base)){
       $img = $caps[$p]['image'] ?? '';
     ?>
     <div class="capsule-box">
-      <img src="../storefront/images/capsules/<?php echo htmlspecialchars($img); ?>" alt="<?php echo $label; ?> preview" class="capsule-preview">
+      <img id="preview_<?php echo $p; ?>" src="../storefront/images/capsules/<?php echo htmlspecialchars($img); ?>" alt="<?php echo $label; ?> preview" class="capsule-preview">
+      <button type="button" class="btn change-btn" data-pos="<?php echo $p; ?>">Change Capsule</button>
       <div>
         <input type="text" class="filter" data-select="sel_<?php echo $p; ?>" placeholder="Filter apps"><br>
         <select id="sel_<?php echo $p; ?>" name="appid[<?php echo $p; ?>]" size="5" class="capsule-select">
@@ -93,110 +91,143 @@ if(is_dir($img_base)){
   <img src="../storefront/images/capsules/<?php echo htmlspecialchars($img); ?>" data-pos="<?php echo $p?>" data-app="<?php echo $appid?>" style="position:absolute;<?php echo $style; ?>;border:0;cursor:pointer;" alt="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule" aria-label="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule preview">
   <?php endforeach; ?>
 </div>
-<div id="menu" role="menu" aria-label="Capsule options" style="display:none;position:absolute;background:#fff;border:1px solid #000;z-index:1000"></div>
-<div id="uploadForm" role="dialog" aria-label="Upload capsule" style="display:none;position:fixed;top:10%;left:10%;background:#fff;border:1px solid #000;padding:10px;z-index:2000">
-  <form id="uform" enctype="multipart/form-data">
-    <input type="hidden" name="position">
-    <label>Year <select id="uyear" name="year"></select></label>
-    <label>Month <select id="umonth" name="month" disabled></select></label><br>
-    <label>App <select name="appid">
-      <?php foreach($apps as $a): ?>
-      <option value="<?php echo $a['appid'];?>"><?php echo $a['appid'].' - '.htmlspecialchars($a['name']);?></option>
-      <?php endforeach; ?>
-    </select></label><br>
-    <input type="file" name="file" id="ufile"><br>
-    <img id="upreview" style="max-width:200px;display:none" alt="preview"><br>
-    <button type="submit">Upload</button> <button type="button" id="uclose">Cancel</button>
-  </form>
-</div>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
-<script>
-var images = <?php echo json_encode($images);?>;
-var apps = <?php echo json_encode($apps);?>;
-var menu = $('#menu');
+  <div id="capsuleModal" class="capsule-modal" aria-label="Change capsule">
+    <div class="dialog">
+      <div id="capChoose">
+        <button type="button" id="btnSelectExisting" class="btn btn-secondary">Choose Existing Image</button>
+        <button type="button" id="btnUploadNew" class="btn btn-secondary">Upload New Image</button>
+      </div>
+      <div id="capExisting" style="display:none;">
+        <div id="existingList" class="image-list"></div>
+        <label>App
+          <select id="existingAppid"></select>
+        </label>
+        <div class="modal-actions">
+          <button type="button" id="existingAccept" class="btn btn-primary">Accept</button>
+          <button type="button" class="btn btn-secondary cancel">Cancel</button>
+        </div>
+      </div>
+      <div id="capUpload" style="display:none;">
+        <label>Month <input type="text" id="upMonth" size="2"></label>
+        <label>Day <input type="text" id="upDay" size="2"></label>
+        <label>Year <input type="text" id="upYear" size="4"></label><br>
+        <label>App <select id="uploadAppid"></select></label><br>
+        <input type="file" id="uploadFile"><br>
+        <div class="modal-actions">
+          <button type="button" id="uploadAccept" class="btn btn-primary">OK</button>
+          <button type="button" class="btn btn-secondary cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+  #capsuleModal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;}
+  #capsuleModal .dialog{background:#fff;padding:20px;border:1px solid #333;max-width:600px;}
+  #capsuleModal .image-list{display:flex;flex-wrap:wrap;margin-bottom:10px;}
+  #capsuleModal .img-choice{width:96px;border:1px solid #555;margin:4px;cursor:pointer;}
+  #capsuleModal .img-choice.selected{outline:2px solid #007bff;}
+  </style>
+  <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
+  <script>
+  var images = <?php echo json_encode($images);?>;
+  var apps = <?php echo json_encode($apps);?>;
 
-$('img[data-pos]').on('click',function(e){
-  var pos = $(this).data('pos');
-  var app = $(this).data('app');
-  var list = '<ul style="list-style:none;margin:0;padding:4px">';
-  $.each(images[pos] || [], function(i,img){
-      list += '<li class="choice" data-file="'+img.file+'" style="padding:4px;cursor:pointer">'
-          +'<img src="../storefront/images/capsules/'+img.file+'" width="48" height="24" alt="'+img.label+' thumbnail"><br>'
-          +img.label+'</li>';
-  });
-  list += '<li id="upload">Upload...</li></ul>';
-  menu.html(list).css({top:e.pageY,left:e.pageX}).show();
-  menu.data({img:$(this), pos:pos, appid:app});
-});
-menu.on('click','.choice',function(){
-  var file=$(this).data('file');
-  var img=menu.data('img');
-  var pos=menu.data('pos');
-  var appid=menu.data('appid');
-  $.post('storefront_main.php',{update:1,position:pos,image:file,appid:appid},function(){
-      img.attr('src','../storefront/images/capsules/'+file);
-      menu.hide();
-  });
-});
-menu.on('click','#upload',function(){
-  $('#uform')[0].reset();
-  $('#uform [name=position]').val(menu.data('pos'));
-  $('#uyear').val('');
-  $('#umonth').prop('disabled',true).empty();
-  $('#upreview').hide();
-  $('#uploadForm').show();
-});
-$('#uform').on('submit',function(e){
-  e.preventDefault();
-  var fd=new FormData(this);
-  $.ajax({url:'upload_capsule.php',type:'POST',data:fd,processData:false,contentType:false,success:function(path){
-      var img=menu.data('img');
-      var pos=menu.data('pos');
-      img.attr('src','../storefront/images/capsules/'+path);
-      img.data('app',fd.get('appid'));
-      images[pos]=images[pos]||[];
-      var label=fd.get('year')+'-'+('0'+fd.get('month')).slice(-2);
-      images[pos].push({file:path,label:label});
-      $('#uploadForm').hide();
-      menu.hide();
-  }});
-});
-$('#uclose').on('click',function(){ $('#uploadForm').hide(); });
-$(document).on('click',function(e){ if(!$(e.target).closest('#menu').length) menu.hide(); });
-$('#ufile').on('change',function(){
-  if(this.files && this.files[0]){
-    $('#upreview').attr('src',URL.createObjectURL(this.files[0])).show();
+  function populateAppLists() {
+    var opts='';
+    $.each(apps,function(i,a){ opts+='<option value="'+a.appid+'">'+a.appid+' - '+$('<div>').text(a.name).html()+'</option>';});
+    $('#existingAppid,#uploadAppid').html(opts);
   }
-});
-var months=['','January','February','March','April','May','June','July','August','September','October','November','December'];
-for(var y=new Date().getFullYear();y>=2002;y--){
-  $('#uyear').append('<option value="'+y+'">'+y+'</option>');
-}
-$('#uyear').on('change',function(){
-  var y=$(this).val();
-  $('#umonth').empty().prop('disabled',!y);
-  if(y){
-    for(var m=1;m<=12;m++){
-      var mm=('0'+m).slice(-2);
-      $('#umonth').append('<option value="'+mm+'">'+months[m]+'</option>');
+  populateAppLists();
+
+  $('.change-btn').on('click',function(){
+    var pos=$(this).data('pos');
+    $('#capsuleModal').data('pos',pos).show();
+    $('#capChoose').show();
+    $('#capExisting,#capUpload').hide();
+  });
+
+  $('#btnSelectExisting').on('click',function(){
+    var pos=$('#capsuleModal').data('pos');
+    var html='';
+    $.each(images[pos]||[],function(i,img){
+       html+='<img src="../storefront/images/capsules/'+img.file+'" class="img-choice" data-file="'+img.file+'" alt="thumbnail">';
+    });
+    $('#existingList').html(html);
+    $('#existingAppid').val('');
+    $('#capChoose').hide();
+    $('#capExisting').show();
+  });
+
+  $('#existingList').on('click','.img-choice',function(){
+    $('#existingList .img-choice').removeClass('selected');
+    $(this).addClass('selected');
+    $('#capExisting').data('file',$(this).data('file'));
+  });
+
+  $('#existingAccept').on('click',function(){
+    var pos=$('#capsuleModal').data('pos');
+    var file=$('#capExisting').data('file');
+    var appid=$('#existingAppid').val();
+    if(!file||!appid){ alert('Select image and app'); return; }
+    $.post('storefront_main.php',{update:1,position:pos,image:file,appid:appid},function(){
+       $('#preview_'+pos).attr('src','../storefront/images/capsules/'+file);
+       $('#sel_'+pos).val(appid);
+       $('img[data-pos='+pos+']').attr('src','../storefront/images/capsules/'+file).data('app',appid);
+       $('#capsuleModal').hide();
+    });
+  });
+
+  $('#btnUploadNew').on('click',function(){
+    $('#uploadFile').val('');
+    $('#upMonth,#upDay,#upYear').val('');
+    $('#uploadAppid').val('');
+    $('#capChoose').hide();
+    $('#capUpload').show();
+  });
+
+  $('#uploadAccept').on('click',function(){
+    var pos=$('#capsuleModal').data('pos');
+    var m=$('#upMonth').val(), d=$('#upDay').val(), y=$('#upYear').val();
+    var appid=$('#uploadAppid').val();
+    var file=$('#uploadFile')[0].files[0];
+    if(!m||!d||!y||!appid||!file){ alert('All fields required'); return; }
+    var fd=new FormData();
+    fd.append('position',pos);
+    fd.append('month',m);
+    fd.append('day',d);
+    fd.append('year',y);
+    fd.append('appid',appid);
+    fd.append('file',file);
+    $.ajax({url:'upload_capsule.php',type:'POST',data:fd,processData:false,contentType:false,success:function(rel){
+       $('#preview_'+pos).attr('src','../storefront/images/capsules/'+rel);
+       $('#sel_'+pos).val(appid);
+       $('img[data-pos='+pos+']').attr('src','../storefront/images/capsules/'+rel).data('app',appid);
+       images[pos]=images[pos]||[];
+       images[pos].push({file:rel,label:y+'-'+m+'-'+d});
+       $('#capsuleModal').hide();
+    }});
+  });
+
+  $('.cancel').on('click',function(){
+    $('#capsuleModal').hide();
+  });
+
+  $('.filter').on('input',function(){
+    var sel=$('#'+$(this).data('select')+' option');
+    var val=$(this).val().toLowerCase();
+    sel.each(function(){
+      $(this).toggle($(this).text().toLowerCase().indexOf(val)>=0);
+    });
+  });
+
+  $('.capsule-select').on('mousemove change',function(e){
+    var opt=$(this).find('option:selected');
+    var img=opt.data('img');
+    var tgt='#img_'+this.id;
+    if(img){
+      $(tgt).attr('src','../archived_steampowered/2005/storefront/screenshots/'+img).css({top:e.pageY+5,left:e.pageX+5}).show();
     }
-  }
-});
-$('.filter').on('input',function(){
-  var sel=$('#'+$(this).data('select')+' option');
-  var val=$(this).val().toLowerCase();
-  sel.each(function(){
-    $(this).toggle($(this).text().toLowerCase().indexOf(val)>=0);
   });
-});
-$('.capsule-select').on('mousemove change',function(e){
-  var opt=$(this).find('option:selected');
-  var img=opt.data('img');
-  var tgt='#img_'+this.id;
-  if(img){
-    $(tgt).attr('src','../archived_steampowered/2005/storefront/screenshots/'+img).css({top:e.pageY+5,left:e.pageX+5}).show();
-  }
-});
-$('.capsule-select').on('mouseleave',function(){ $('#img_'+this.id).hide(); });
-</script>
+  $('.capsule-select').on('mouseleave',function(){ $('#img_'+this.id).hide(); });
+  </script>
 <?php include 'admin_footer.php';?>
