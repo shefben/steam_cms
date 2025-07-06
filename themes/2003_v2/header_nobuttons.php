@@ -15,8 +15,8 @@ if(!isset($page_title) || $page_title==='') $page_title = $site_title; else $pag
     <meta name="DESCRIPTION" content="Valve - Steam account signup">
     <meta name="KEYWORDS" content="Steam, account, account creation, signup">
     <meta name="AUTHOR" content="Valve LLC">
-    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/steampowered.css">
-    <script language="JavaScript" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/nav.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($css_url); ?>">
+    <script language="JavaScript" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/js/nav.js"></script>
 </head>
 <body>
 <?php

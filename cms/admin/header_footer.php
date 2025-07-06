@@ -8,6 +8,7 @@ $theme = $_GET['theme'] ?? ($_POST['theme'] ?? ($theme_list[0] ?? ''));
 $logo_files = array_map('basename', glob(__DIR__.'/../img/steam_logo_onblack*.gif'));
 $data = cms_get_theme_header_data($theme);
 $footer_html = cms_get_theme_footer($theme);
+$css_path = cms_get_theme_css($theme);
 
 if(isset($_POST['reorder']) && isset($_POST['order'])){
     $indices = array_map('intval', explode(',', $_POST['order']));
@@ -50,6 +51,7 @@ if(isset($_POST['upload_logo']) && isset($_FILES['new_logo']) && is_uploaded_fil
 if(isset($_POST['save'])){
     $theme = $_POST['theme'];
     $logo = isset($_POST['logo_choice']) ? trim($_POST['logo_choice']) : trim($_POST['logo']);
+    $css_path = trim($_POST['css_path']);
     $buttons = $_POST['buttons'] ?? [];
     $out = [];
     foreach($buttons as $i=>$b){
@@ -86,6 +88,7 @@ if(isset($_POST['save'])){
         $ins->execute([$theme,$ord,$logo,$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$spacer]);
     }
     $db->prepare('REPLACE INTO theme_footers(theme,html) VALUES(?,?)')->execute([$theme,$_POST['footer_html']]);
+    $db->prepare('UPDATE themes SET css_path=? WHERE name=?')->execute([$css_path,$theme]);
     cms_set_setting('no_header_pages', trim($_POST['no_header_pages']));
     cms_set_setting('header_bar_pages', trim($_POST['header_bar_pages']));
     cms_set_setting('no_footer_pages', trim($_POST['no_footer_pages']));
@@ -110,6 +113,7 @@ if(isset($_POST['add'])){
 </select></label>
 <form method="post" enctype="multipart/form-data">
 <input type="hidden" name="theme" value="<?php echo htmlspecialchars($theme); ?>">
+Stylesheet path: <input type="text" name="css_path" value="<?php echo htmlspecialchars($css_path); ?>" style="width:300px" title="Theme CSS file"><br>
 <p>Current logo:</p>
 <?php $logo = $data['logo']; if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
 <img src="<?php echo htmlspecialchars($logo); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>

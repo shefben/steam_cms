@@ -29,12 +29,13 @@ if(isset($_GET['news']) || isset($_GET['id'])){
     $content .= '<ul><li> <a href="index.php?area=news" style="text-decoration: none;"><i>return to news page</i></a></ul>';
     $content .= '</div>';
 }else{
-    $content .= '<h2>LATEST <em>VALVE NEWS</em> &nbsp; <a href="/rss.xml" title="RSS format news feed"><img border="0" width="27" height="13" align="absmiddle" src="/img/RSS.gif"></a></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br><div class="narrower">';
+$content .= '<h2>LATEST <em>VALVE NEWS</em> &nbsp; <a href="/rss.xml" title="RSS format news feed"><img border="0" width="27" height="13" align="absmiddle" src="/img/RSS.gif"></a></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br><div class="narrower">';
     $content .= '{news_full_article}';
     $content .= '<p align="center"><a href="news_archive.php" style="text-decoration: none;"><i>view the news archives</i></a> &middot; <a href="rss.xml" style="text-decoration: none;"><i>rss news feed</i></a></p>';
     $content .= '</div>';
 }
-cms_render_template(__DIR__.'/themes/'.$theme.'/default_template.php',[
-    'content'=>$content,
-    'page_title'=>$page_title
+$tpl = cms_theme_layout('default.tpl', $theme);
+cms_render_template($tpl, [
+    'content'    => $content,
+    'page_title' => $page_title
 ]);

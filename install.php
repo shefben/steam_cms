@@ -113,6 +113,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 title TEXT,
                 content MEDIUMTEXT,
                 theme TEXT DEFAULT NULL,
+                template VARCHAR(255) DEFAULT NULL,
                 created DATETIME,
                 updated DATETIME
             )");
@@ -158,7 +159,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo->exec("DROP TABLE IF EXISTS settings");
             $pdo->exec("CREATE TABLE settings(`key` VARCHAR(64) PRIMARY KEY,value TEXT)");
             $pdo->exec("DROP TABLE IF EXISTS themes");
-            $pdo->exec("CREATE TABLE themes(name VARCHAR(255) PRIMARY KEY)");
+            $pdo->exec("CREATE TABLE themes(name VARCHAR(255) PRIMARY KEY, css_path TEXT DEFAULT NULL)");
             $pdo->exec("DROP TABLE IF EXISTS theme_headers");
             $pdo->exec("CREATE TABLE theme_headers(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -290,7 +291,7 @@ $pdo->exec("CREATE TABLE bw_history (
                        preg_match('/^INSERT INTO custom_pages\([^\)]*\) VALUES\s*(.*)$/i',$stmt,$m)){
                         $values = rtrim($m[1], ';');
                         $rows = preg_split('/\),\s*\(/', trim($values, '()'));
-                        $cpStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,created,updated) VALUES(?,?,?,?,?)');
+                        $cpStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,template,created,updated) VALUES(?,?,?,?,?,?)');
                         foreach($rows as $row){
                             $parts = str_getcsv($row, ',', "'");
             if(count($parts)>=5){
@@ -301,7 +302,7 @@ $pdo->exec("CREATE TABLE bw_history (
                 $updated = strtoupper($parts[4])=='NOW()'
                            ? date('Y-m-d H:i:s')
                            : normalizeDate($parts[4]);
-                                $cpStmt->execute([$parts[0],$parts[1],$parts[2],$created,$updated]);
+                                $cpStmt->execute([$parts[0],$parts[1],$parts[2],null,$created,$updated]);
                             }
                         }
                         continue;
@@ -396,8 +397,8 @@ HTML;
             ];
             $stmt = $pdo->prepare('INSERT INTO settings(`key`,value) VALUES(?,?)');
             foreach($defaults as $k=>$v){ $stmt->execute([$k,$v]); }
-            $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,theme,created,updated) VALUES(?,?,?,?,?,NOW())');
-            $pageStmt->execute(['subscriber_agreement','Steam Subscriber Agreement',$sa_html,null,date('Y-m-d H:i:s')]);
+            $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated) VALUES(?,?,?,?,?, ?,NOW())');
+            $pageStmt->execute(['subscriber_agreement','Steam Subscriber Agreement',$sa_html,null,null,date('Y-m-d H:i:s')]);
 
             $header_buttons_seed = [
                 ['url'=>'/news.php','text'=>'news'],
@@ -703,11 +704,20 @@ HTML;
             foreach($defaultReps as $r){
                 $repStmt->execute(array_merge($r,[$ord++]));
             }
-            $stmt2 = $pdo->prepare('REPLACE INTO themes(name) VALUES(?)');
+            $stmt2 = $pdo->prepare('REPLACE INTO themes(name, css_path) VALUES(?,?)');
             foreach(glob(__DIR__.'/themes/*', GLOB_ONLYDIR) as $dir){
                 $name = basename($dir);
                 if(substr($name,-6) === '_admin') continue;
-                $stmt2->execute([$name]);
+                $css = 'steampowered02.css';
+                if(!file_exists("$dir/css/$css")){
+                    $css = file_exists("$dir/css/steampowered.css") ? 'steampowered.css' : '';
+                    if($css === ''){
+                        $files = glob("$dir/css/*.css");
+                        $css = $files ? basename($files[0]) : '';
+                    }
+                }
+                $css_path = $css ? 'css/'.$css : '';
+                $stmt2->execute([$name,$css_path]);
             }
             $cfg = "<?php\nreturn [\n    'host'=>'$host',\n    'port'=>'$port',\n    'dbname'=>'$dbname',\n    'user'=>'$user',\n    'pass'=>'$pass'\n];\n?>";
             file_put_contents(__DIR__.'/cms/config.php',$cfg);
