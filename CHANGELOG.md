@@ -68,3 +68,7 @@ All notable changes to this project will be documented in this file.
 - Reverted storefront pages to static PHP templates
 - Storefront assets load from new per-theme folders
 - Template engine supports theme_subdir for partials
+- Asset mover updated to migrate 2004 storefront assets and 2005 theme files
+- Custom page templates now use {BASE} for theme paths
+- Header buttons use text labels instead of images
+- Footer and header templates moved into installer

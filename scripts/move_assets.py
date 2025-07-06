@@ -25,11 +25,21 @@ ASSETS = {
     'archived_steampowered/2003/v1/images/Type_steampowered.gif': 'themes/2003_v1/assets/images/Type_steampowered.gif',
     'archived_steampowered/2003/v1/images/Valve_CircleR.gif': 'themes/2003_v1/assets/images/Valve_CircleR.gif',
     'archived_steampowered/2003/v1/steam.css': 'themes/2003_v1/assets/steam.css',
+    'archived_steampowered/2005/v1/nav.js': 'themes/2005_v1/nav.js',
+    'archived_steampowered/2005/v1/steampowered02.css': 'themes/2005_v1/steampowered02.css',
+    'archived_steampowered/2005/v2/steampowered03.css': 'themes/2005_v2/steampowered03.css',
     'archived_steampowered/2005/storefront/img/dash.gif': 'themes/2005_v2/assets/img/dash.gif',
     'archived_steampowered/2005/storefront/img/storefront/sp_bottom_left.gif': 'img/storefront/sp_bottom_left.gif',
     'archived_steampowered/2005/storefront/img/storefront/sp_bottom_right.gif': 'img/storefront/sp_bottom_right.gif',
     'archived_steampowered/2005/storefront/img/storefront/sp_top_left.gif': 'img/storefront/sp_top_left.gif',
     'archived_steampowered/2005/storefront/img/storefront/sp_top_right.gif': 'img/storefront/sp_top_right.gif',
+}
+
+DIRS = {
+    'archived_steampowered/2005/v1/img': 'themes/2005_v1/img',
+    'archived_steampowered/2005/v2/img': 'themes/2005_v2/img',
+    'archived_steampowered/2004/storefront/img': 'themes/2004/storefront/img',
+    'archived_steampowered/2004/storefront/images': 'themes/2004/storefront/images',
 }
 for src_rel, dest_rel in ASSETS.items():
     src = os.path.join(ROOT, src_rel)
@@ -40,6 +50,15 @@ for src_rel, dest_rel in ASSETS.items():
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     shutil.copy2(src, dest)
     print(f'Copied {src_rel} -> {dest_rel}')
+
+for src_rel, dest_rel in DIRS.items():
+    src = os.path.join(ROOT, src_rel)
+    dest = os.path.join(ROOT, dest_rel)
+    if not os.path.exists(src):
+        print(f'Source dir missing: {src}')
+        continue
+    shutil.copytree(src, dest, dirs_exist_ok=True)
+    print(f'Copied directory {src_rel} -> {dest_rel}')
 
 # Move storefront capsule images into consolidated folders
 CAPS_SRC = os.path.join(ROOT, 'archived_steampowered/2005/storefront/capsules/img')
