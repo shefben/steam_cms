@@ -232,6 +232,22 @@ function cms_get_theme_setting(string $theme, string $name, $default = null){
     }
 }
 
+function cms_get_theme_config(string $theme): array
+{
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT name, value FROM theme_settings WHERE theme=?');
+        $stmt->execute([$theme]);
+        $rows = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+        return $rows ?: [];
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S02') {
+            return [];
+        }
+        throw $e;
+    }
+}
+
 function cms_set_theme_setting(string $theme, string $name, $value){
     $db = cms_get_db();
     $stmt = $db->prepare('REPLACE INTO theme_settings(theme,name,value) VALUES(?,?,?)');

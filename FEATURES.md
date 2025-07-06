@@ -63,3 +63,4 @@
 - Header and footer render via {header} / {footer} tags
 - Theme settings stored in new theme_settings table
 - Theme SQL migrations auto-applied from themes/<name>/sql
+- Template engine reads theme configuration from database
