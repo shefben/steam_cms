@@ -1,2 +1,0 @@
-- Move existing theme assets into css/js/images folders
-- Move storefront assets into theme storefront folders

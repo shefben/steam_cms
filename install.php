@@ -327,7 +327,18 @@ $pdo->exec("CREATE TABLE bw_history (
             $stmt=$pdo->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,created,password) VALUES(?,?,?,?,?,NOW(),?)');
             $stmt->execute([$admin_user,$admin_email,'','','all',$hash]);
             // default settings
-            $footer = file_get_contents(__DIR__.'/cms/content/footer.html');
+            $footer = <<<'HTML'
+<div class="footer">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td><a href="/valvesoftware"><img src="{BASE}/img/valve_greenlogo.gif"></a></td>
+            <td>&nbsp;</td>
+            <td><span class="footerfix">© 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="/valvesoftware/privacy.htm">Privacy Policy</a>. <a href="/valvesoftware/legal.htm">Legal</a>. <a href="/subscriber_agreement.php">Steam Subscriber Agreement</a>.</span></td>
+            <td width="15%">&nbsp;</td>
+        </tr>
+    </table>
+</div>
+HTML;
             $error_html = <<<HTML
 <!-- invalid_area -->
 
@@ -343,12 +354,12 @@ Please select an option from the top menu.
 HTML;
             $sa_html = file_get_contents(__DIR__ . '/cms/content/subscriber_agreement.html');
             $header_buttons = [
-                ['url'=>'/news.php','img'=>'/img/news.gif','hover'=>'/img/MOnews.gif','alt'=>'news'],
-                ['url'=>'/getsteamnow.php','img'=>'/img/getSteamNow.gif','hover'=>'/img/MOgetSteamNow.gif','alt'=>'getSteamNow'],
-                ['url'=>'/cybercafes.php','img'=>'/img/cafes.gif','hover'=>'/img/MOcafes.gif','alt'=>'Cyber Cafes'],
-                ['url'=>'/support.php','img'=>'/img/support.gif','hover'=>'/img/MOsupport.gif','alt'=>'Support'],
-                ['url'=>'/forums.php','img'=>'/img/forums.gif','hover'=>'/img/MOforums.gif','alt'=>'Forums'],
-                ['url'=>'/status/status.html','img'=>'/img/status.gif','hover'=>'/img/MOstatus.gif','alt'=>'Status']
+                ['url'=>'/news.php','text'=>'news'],
+                ['url'=>'/getsteamnow.php','text'=>'getSteamNow'],
+                ['url'=>'/cybercafes.php','text'=>'Cyber Cafes'],
+                ['url'=>'/support.php','text'=>'Support'],
+                ['url'=>'/forums.php','text'=>'Forums'],
+                ['url'=>'/status/status.html','text'=>'Status']
             ];
             $default_nav = [
                 ['file'=>'index.php','label'=>'Dashboard','visible'=>1],

@@ -56,3 +56,7 @@
 - Default.tpl automatically used for non-index pages
 - Storefront templates use theme_subdir asset lookup
 - Dedicated storefront folders per theme
+- Asset mover script copies archived theme directories and stylesheets
+- Custom page links honor configurable root path
+- Header navigation uses text labels, no image sprites
+- Footer HTML seeded during install
