@@ -1,0 +1,417 @@
+
+/* Default overwrites */
+* { margin: 0px; padding: 0px; }
+
+body {
+	font-size: 62.5%;
+	background-color: #4C5844;
+	margin: 0px;
+	padding: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #CFCBC2;
+	text-align: left;
+}
+p {	text-align: left; }
+
+ul li {
+	list-style-type: none;
+	padding: 5px 0px 5px 0px;
+	line-height: 11px;
+}
+a {
+	font-size: 10px;
+	font-weight: bold;
+	color: #6EBCFF;
+	text-decoration: none;	
+}
+a:hover {
+	color: #FFFFFF;
+}
+h2, h3 {
+	font-family:"Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #CFCBC2;
+	text-transform: uppercase;
+	margin: 0px;
+}
+
+/* ================================================================================================== */
+/* ---- [ Buttons ] ---- */
+.btn_blue {
+	font-size: 10px;
+	font-weight: bold;
+	color: #6EBCFF;
+	border: 1px solid #44617A;
+	background-color: #2A2A2A;
+	text-decoration: none;
+	padding: 5px 7px 5px 14px;
+	background-image: url('images/ico/ico_arrow_blue.gif');
+	background-repeat: no-repeat;
+	background-position: 2px center;
+}
+.btn_blue:hover {
+	color: #FFFFFF;
+	border: 1px solid #999999;
+}
+.btn_green {
+	font-size: 10px;
+	font-weight: bold;
+	color: #8BC53F;
+	border: 1px solid #8BC53F;
+	background-color: #2A2A2A;
+	text-decoration: none;
+	padding: 5px 7px 5px 14px;
+	background-image: url('images/ico/ico_arrow_green.gif');
+	background-repeat: no-repeat;
+	background-position: 2px center;
+}
+.btn_green:hover {
+	color: #FFFFFF;
+	border: 1px solid #999999;
+}
+.btn_disabled {
+	font-size: 10px;
+	font-weight: bold;
+	color: #bfb9b2;
+	border: 1px solid #a69f96;
+	background-color: #9d968c;
+	text-decoration: none;
+	padding: 5px 7px 5px 14px;
+	background-image: url('images/ico/ico_arrow_disabled.gif');
+	background-repeat: no-repeat;
+	background-position: 2px center;
+}
+.btn_yellow {
+	font-size: 10px;
+	font-weight: bold;
+	color: #FFC53F;
+	border: 1px solid #FFC53F;
+	background-color: #2A2A2A;
+	text-decoration: none;
+	padding: 5px 7px 5px 14px;
+	background-image: url('images/ico/ico_arrow_yellow.gif');
+	background-repeat: no-repeat;
+	background-position: 2px center;
+}
+.btn_yellow:hover {
+	color: #FFFFFF;
+	border: 1px solid #999999;
+}
+/* ================================================================================================== */
+/* ---- [ Column layout ] ---- */
+#all {
+	min-height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	background-image: url('images/background.gif');
+	background-repeat: repeat-y;
+	background-position: center top;
+}
+#all_narrow {
+	min-height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	background-image: url('images/background_narrow.gif');
+	background-repeat: repeat-y;
+	background-position: center top;
+}
+#col_parent {
+	width: 947px;
+	height: 100%;
+	padding-bottom: 110px; /* needs to be set to 0 if hiding footer */
+	padding-top: 4px; /* needs to be set to 0 if hiding header */
+	text-align: left;
+}
+#col_parent_narrow {
+	width: 761px;
+	height: 100%;
+	padding-bottom: 110px; /* needs to be set to 0 if hiding footer */
+	padding-top: 4px; /* needs to be set to 0 if hiding header */
+	text-align: left;
+}
+
+/* ======================================================= */
+/* ---- [ Left Column ] ---- */
+#col_left {
+	width: 163px;
+	margin-left: 25px !important;
+	margin-left: 12px;
+	text-align: left;
+	float: left;
+	padding-bottom: 10px;
+}
+#col_left h2 {
+	text-align: left;
+	margin-bottom: 4px;
+}
+
+/* ======================================================= */
+/* ---- [ Center Column ] ---- */
+#col_center {
+	width: 477px;
+	margin-left: 17px;
+	float: left;
+	background-image: url('images/col_center_bg.jpg');
+	background-repeat: no-repeat;
+}
+#col_center_norm {
+	width: 477px;
+	float: left;
+	margin-top: 20px;
+}
+#col_center_features {
+	width: 477px;
+	margin-left: 17px;
+	float: left;
+	background-image: url('images/col_genre_bg.jpg');
+	background-repeat: no-repeat;
+	margin-bottom: 10px;
+}
+#col_center_features_wide {
+	width: 717px;
+	margin-left: 17px;
+	float: left;
+	background-image: url('images/col_genre_bg.jpg');
+	background-repeat: no-repeat;
+	margin-bottom: 10px;
+}
+#col_center_capsule_lrg {
+	width: 467px;
+	margin: 5px;
+	float: left;
+	text-align: left;
+}
+#col_center_capsule_huge {
+	width: 467px;
+	height: 366px;
+	margin: 5px !important;
+	margin: 5px 5px 5px 2px;
+	float: left;
+	vertical-align:top;
+}
+/* ======================================================= */
+/* ---- [ Right Column ] ---- */
+#col_right {
+	width: 223px;
+	margin-left: 17px;
+	text-align: left;
+	float: left;
+	padding-bottom: 10px;
+}
+#col_right h2 {
+	background-color: #3B3B3B;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #3B3B3B;
+	text-align: right;
+	padding: 26px 5px 5px 0px;
+	line-height: 14px;
+	vertical-align: baseline;
+	margin-bottom: 4px;
+}
+#col_right h3 {
+	width: 223px;
+	background-image: url('images/h2_under.gif');
+	background-repeat: repeat-x;
+	background-position: bottom;
+	margin-bottom: 8px;
+}
+#col_right_game {
+	width: 223px;
+	margin-left: 17px!important;
+	margin-left: 15px;
+	text-align: left;
+	float: left;
+	padding-bottom: 10px;
+}
+#col_right_game h2 {
+	background-color: #2A2A2A;
+	text-align: right;
+	padding: 26px 5px 5px 0px;
+	line-height: 14px;
+	vertical-align: baseline;
+	margin-bottom: 4px;
+}
+#col_right_subnav {
+	/*margin: 5px 5px 5px 17px;*/
+	text-align: left;
+	float: left;
+}
+/* ---- [ News styles ] ---- */
+.col_right_news {
+	margin-top: 45px;
+}
+.col_right_news h3 strong {
+	color: #C26413;
+}
+.col_right_news h4 {
+	font-size: 9px;
+	color: #4A4945;
+	font-weight: normal;
+	margin-bottom: 8px;
+}
+.col_right_news p {
+	font-size: 11px;
+	line-height: 18px;
+}
+.col_right_news p a {
+	color: #CFCBC2;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+/* ================================================================================================== */
+/* ---- [ Footer + Header ] ---- */
+#footer {
+	width: 100%;
+	background-color: #000000;
+	position: absolute;
+	bottom: 0px;
+	height: 100px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #333333;
+}
+#footer_text p {
+	color: #666666;
+}
+#footer_text p a {
+	color: #44617A;
+}
+#footer_text p a:hover {
+	color: #FFFFFF;
+}
+#footer_logo {
+	height: 60px;
+	margin: 30px 30px 0px 30px;
+	float: left;
+}
+#footer_text {
+	height:60px;
+	width: 600px;
+	margin: 20px 0px 0px 0px;
+	float: left;
+}
+#footer_text select {
+	background-color: #808183;
+	border: 1px solid #44617A;
+	color: #232323;
+	font-size: 10px;
+	padding: 1px 0px 1px 4px;
+	margin-bottom: 3px;
+}
+#header {
+	width: 100%;
+	background-color: #000000;
+	position: absolute;
+	top: 0px;
+	height: 40px;
+}
+
+/* ================================================================================================== */
+/* ---- [ Buckets ] ---- */
+#global_area_search input {
+	background-color: #ABACAD;
+	border: 1px solid #44617A;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #232323;
+	font-size: 10px;
+	padding: 4px;
+	margin: 0px;
+	width: 12em;
+}
+#global_area_search img {
+	cursor:pointer;
+}
+
+/* ======================================================= */
+#global_area_browse {
+	margin-top: 35px;
+}
+
+/* ======================================================= */
+#global_area_freeloads {
+	margin-top: 35px;
+}
+/* ======================================================= */
+#global_area_gift_left {
+	margin-top: 35px;
+	
+}
+#global_area_gift_left h1 
+{
+	height: 50px;
+	padding: 12px 0px 0px 50px;
+	font-family:"Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #CCB784;
+	text-transform: uppercase;
+	background-image: url('images/gift/Gift_Promo_v4.gif');
+	background-repeat: no-repeat;
+	background-position: left;
+}
+#global_area_gift_left p 
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #CFCBC2;
+	font-size: 10px;
+}
+/* ======================================================= */
+#global_area_install_steam {
+	margin-top:35px;
+}
+
+#error_display, #receipt_error_display
+{
+	font-size: 11px;
+	color: #990000;
+	display: none;
+	margin-bottom: 4px;
+	background-color: #CEC7BD;
+	line-height: 18px;
+}
+
+#error_display a {
+	color: #000000;
+	text-decoration:underline;
+}
+	
+
+
+/* autocomplete */
+
+div.autocomplete {
+	margin: 0px;  
+	padding: 0px;  
+	width: 250px;
+	background: #BBBBBB;
+	border: 1px solid #ACACAC;
+	position: absolute;
+	color: #000000;
+	z-index: 500;
+}
+
+div.autocomplete ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+div.autocomplete ul li.selected {
+	color: white;
+	background-color: #3D3D3D;
+}
+
+div.autocomplete ul li {
+	margin: 0;
+	padding: 2px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	display: block;
+	list-style-type: none;
+	cursor: pointer;
+}

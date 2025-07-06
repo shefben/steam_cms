@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Steam-style Banner Example</title>
+<style>
+/* --- core banner box --- */
+.banner {
+    background:#5e6656;          /* grey-green bar you see behind the text   */
+    padding:6px 14px;            /* match the inset in your screenshot        */
+    text-transform:uppercase;
+    width:100%;                  /* full-width strip (adjust as needed)       */
+    box-sizing:border-box;
+    color:#aeb3a6;               /* default (lighter) text colour             */
+font:12px/36px Verdana,Arial,sans-serif;
+            letter-spacing:.4px;padding-left:7px;position:relative;
+            white-space:nowrap;overflow:hidden;
+}
+
+/* --- little white block to the left of “GET” --- */
+.banner::after{
+    content:"";
+    display:inline-block;
+    width:46px;                  /* tweak until it matches your asset */
+    height:4px;
+    background:#000000;
+    margin:-20px -5px 0 0;            /* bit of breathing room to the right        */
+    vertical-align:middle;
+}
+
+/* --- emphasised parts --- */
+.banner .primary{
+    color:#ffffff;               /* bright white                             */
+    
+}
+.banner .secondary{
+    color:#d8dcd4;               /* slightly dimmer but still bold           */
+}
+</style>
+</head>
+<body>
+
+<div class="banner">
+    <span class="primary">Get</span>
+    <span class="secondary">Answers</span>
+    to your questions<br>
+</div>
+
+</body>
+</html>
