@@ -159,6 +159,26 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo->exec("CREATE TABLE settings(`key` VARCHAR(64) PRIMARY KEY,value TEXT)");
             $pdo->exec("DROP TABLE IF EXISTS themes");
             $pdo->exec("CREATE TABLE themes(name VARCHAR(255) PRIMARY KEY)");
+            $pdo->exec("DROP TABLE IF EXISTS theme_headers");
+            $pdo->exec("CREATE TABLE theme_headers(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                theme VARCHAR(50),
+                ord INT DEFAULT 0,
+                logo TEXT,
+                text TEXT,
+                img TEXT,
+                hover TEXT,
+                depressed TEXT,
+                url TEXT,
+                visible TINYINT(1) DEFAULT 1,
+                spacer TEXT,
+                INDEX(theme)
+            )");
+            $pdo->exec("DROP TABLE IF EXISTS theme_footers");
+            $pdo->exec("CREATE TABLE theme_footers(
+                theme VARCHAR(50) PRIMARY KEY,
+                html MEDIUMTEXT
+            )");
             $pdo->exec("DROP TABLE IF EXISTS admin_users");
 $pdo->exec("DROP TABLE IF EXISTS player_sessions");
 $pdo->exec("CREATE TABLE player_sessions (
@@ -378,6 +398,37 @@ HTML;
             foreach($defaults as $k=>$v){ $stmt->execute([$k,$v]); }
             $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,theme,created,updated) VALUES(?,?,?,?,?,NOW())');
             $pageStmt->execute(['subscriber_agreement','Steam Subscriber Agreement',$sa_html,null,date('Y-m-d H:i:s')]);
+
+            $header_buttons_seed = [
+                ['url'=>'/news.php','text'=>'news'],
+                ['url'=>'/getsteamnow.php','text'=>'getSteamNow'],
+                ['url'=>'/cybercafes.php','text'=>'Cyber Cafes'],
+                ['url'=>'/support.php','text'=>'Support'],
+                ['url'=>'/forums.php','text'=>'Forums'],
+                ['url'=>'/status/status.html','text'=>'Status'],
+            ];
+            $logos = [
+                '2002_v2'=>'/img/steam_logo_onblack.gif',
+                '2003_v1'=>'/themes/2003_v1/images/SteamTM.jpg',
+                '2003_v2'=>'/themes/2003_v2/img/steam_logo_onblack.gif',
+                '2004'=>'/img/steam_logo_onblack.gif',
+                '2005_v1'=>'/img/steam_logo_onblack.gif',
+                '2005_v2'=>'/img/steam_logo_onblack.gif'
+            ];
+            $thStmt = $pdo->prepare('INSERT INTO theme_headers(theme,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,1,?)');
+            foreach($logos as $theme=>$logo){
+                $ord=0;
+                $spacer = in_array($theme,['2002_v2','2003_v1']) ? ' | ' : '';
+                foreach($header_buttons_seed as $btn){
+                    $thStmt->execute([$theme,$ord,$logo,$btn['text'],null,null,null,$btn['url'],$spacer]);
+                    $ord++;
+                }
+            }
+            $tfStmt = $pdo->prepare('INSERT INTO theme_footers(theme,html) VALUES(?,?)');
+            $tfStmt->execute(['2003_v2','<div class="footer"><a href="http://www.valvesoftware.com"><img align="left" src="{BASE}/themes/2003_v2/img/valve_greenlogo.gif"></a> 2003 Valve, L.L.C. All rights reserved. Read our <a href="http://www.valvesoftware.com/privacy.htm">privacy policy</a>.<br>        Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve, L.L.C.</div>']);
+            $tfStmt->execute(['2004','']);
+            $tfStmt->execute(['2005_v1','']);
+            $tfStmt->execute(['2005_v2','']);
 
             $features_html = <<<'HTML'
 <!-- features -->

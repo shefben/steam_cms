@@ -46,3 +46,6 @@
 - Capsule admin interface uses searchable dropdowns with image previews
 - Obsolete "2003" theme removed; v1 and v2 variants remain
 - Early themes no longer depend on archived HTML files for rendering
+- Theme-specific headers and footers stored in dedicated tables with admin selector
+- Navigation buttons available via {nav_buttons} template tag
+- Navigation buttons display images when paths provided and support customizable spacers

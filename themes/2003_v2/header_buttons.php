@@ -19,13 +19,15 @@ if(!isset($page_title) || $page_title==='') $page_title = $site_title; else $pag
     <script language="JavaScript" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/nav.js"></script>
 </head>
 <body>
+<?php
+$header = cms_get_theme_header_data('2003_v2');
+$override = $GLOBALS['CMS_CUSTOM_LOGO'] ?? null;
+$logo = $override ?: ($header['logo'] ?: '/themes/2003_v2/img/steam_logo_onblack.gif');
+$nav_html = cms_header_buttons_html('2003_v2');
+if($logo && $logo[0]=='/') $logo = $base.$logo;
+?>
 <div class="header">
-<nobr><a href="<?php echo htmlspecialchars($base); ?>/index.php"><img align="top" alt="[Steam]" height="54" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/img/steam_logo_onblack.gif" width="152"></a>
-<span class="navBar">
-<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=getsteamnow" onmouseout="out(0)" onmouseover="over(0)"><img alt="getSteamNow" height="22" name="getSteamNow" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/img/getSteamNow.gif" valign="bottom" width="108"></a>
-<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=forums" onmouseout="out(1)" onmouseover="over(1)"><img alt="Forums" height="22" name="forums" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/img/forums.gif" valign="bottom" width="68"></a>
-<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=support" onmouseout="out(2)" onmouseover="over(2)"><img alt="Support" height="22" name="support" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/img/support.gif" valign="bottom" width="68"></a>
-<a href="<?php echo htmlspecialchars($base); ?>/index.php?area=status" onmouseout="out(14)" onmouseover="over(14)"><img alt="Status" height="22" name="status" src="<?php echo htmlspecialchars($base); ?>/themes/2003_v2/img/status.gif" valign="bottom" width="65"></a>
-</span>
+<nobr><a href="<?php echo htmlspecialchars($base); ?>/index.php"><img align="top" alt="[Steam]" height="54" src="<?php echo htmlspecialchars($logo); ?>" width="152"></a>
+<span class="navBar"><?php echo $nav_html; ?></span>
 </nobr>
 </div>
