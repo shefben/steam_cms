@@ -19,14 +19,11 @@ function cms_render_template($path, $vars = [])
         return;
     }
     $tpl_dir = dirname($path);
-    $config = [];
-    if (file_exists($tpl_dir.'/config.php')) {
-        $config = include $tpl_dir.'/config.php';
-    }
+    $theme = cms_get_setting('theme', '2004');
+    $config = cms_get_theme_config($theme);
     // expose useful paths to templates
     $vars['CMS_ROOT'] = __DIR__;
     $vars['THEME_DIR'] = $tpl_dir;
-    $theme = cms_get_setting('theme', '2004');
     $subdir = $vars['theme_subdir'] ?? '';
     $base_url = cms_base_url();
     $vars['THEME_URL'] = ($base_url ? $base_url : '') . "/themes/$theme" . ($subdir ? "/$subdir" : '');

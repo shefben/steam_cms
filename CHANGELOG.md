@@ -73,3 +73,4 @@ All notable changes to this project will be documented in this file.
 - Header buttons use text labels instead of images
 - Footer and header templates moved into installer
 - Added database-driven header tag and theme settings
+- Template engine loads theme configuration from database instead of theme files
