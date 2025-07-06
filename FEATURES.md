@@ -64,3 +64,5 @@
 - Theme settings stored in new theme_settings table
 - Theme SQL migrations auto-applied from themes/<name>/sql
 - Template engine reads theme configuration from database
+- Twig templates established for 2006 and 2007 home pages with shared header/footer partials
+- Sidebar content configurable via new tags (join-steam, news, catalog)

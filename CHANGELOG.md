@@ -74,3 +74,5 @@ All notable changes to this project will be documented in this file.
 - Footer and header templates moved into installer
 - Added database-driven header tag and theme settings
 - Template engine loads theme configuration from database instead of theme files
+- Added Twig-based templates for 2006/2007 themes with movable assets
+- Added shared tag support for 2006/2007 theme sidebars and join-steam text

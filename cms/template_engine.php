@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/news.php';
+require_once dirname(__DIR__).'/vendor/autoload.php';
 
 function cms_theme_layout(string $file, ?string $theme = null)
 {
@@ -69,6 +70,37 @@ function cms_render_template($path, $vars = [])
             $c = file_get_contents($file);
             return $process($c);
         }, $text);
+
+        // simple text replacement tags loaded from theme settings
+        $simple_tags = [
+            'join_steam_text',
+            'new_on_steam_header',
+            'latest_news_header',
+            'catalog_header',
+            'publisher_catalogs_header',
+            'coming_soon_header'
+        ];
+        foreach ($simple_tags as $tag) {
+            $val = cms_get_theme_setting($theme, $tag, $config[$tag] ?? '');
+            $text = str_replace('{' . $tag . '}', $val, $text);
+        }
+
+        // complex block tags pulled from theme settings (HTML snippets)
+        $block_tags = [
+            'new_on_steam_list',
+            'latest_news_list_2006',
+            'latest_news_list_2007',
+            'catalog_list',
+            'publisher_catalogs_list',
+            'coming_soon_list'
+        ];
+        foreach ($block_tags as $tag) {
+            $val = cms_get_theme_setting($theme, $tag, $config[$tag] ?? '');
+            $text = str_replace('{' . $tag . '}', $val, $text);
+        }
+
+        $btn = cms_get_theme_setting($theme, 'join_steam_button', $config['join_steam_button'] ?? '<div class="btn_getSteam_slvr">Get Steam Now !</div>');
+        $text = str_replace('{join_steam_button}', $btn, $text);
         return $text;
     };
     $html = $process($html);
@@ -98,10 +130,9 @@ function cms_render_template($path, $vars = [])
         $vars['content'] = $process($vars['content']);
         $html = str_replace('{content}', $vars['content'], $html);
     }
-    extract($vars);
-    ob_start();
-    eval('?>'.$html);
-    $output = ob_get_clean();
+    $loader = new \Twig\Loader\ArrayLoader(['tpl' => $html]);
+    $twig = new \Twig\Environment($loader);
+    $output = $twig->render('tpl', $vars);
     if ($cache_enabled) {
         if (!is_dir(__DIR__.'/cache')) {
             mkdir(__DIR__.'/cache');
