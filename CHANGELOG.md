@@ -60,3 +60,11 @@ All notable changes to this project will be documented in this file.
 - Added theme_headers and theme_footers tables with admin editing per theme
 - Added {nav_buttons} template tag for navigation buttons
 - Navigation buttons now show images when available and use theme-defined spacers
+- Footer template tag {footer} outputs DB-defined HTML
+- Theme CSS paths stored in themes table and editable via admin
+- Templates loaded from theme layouts with partials support
+- Custom pages choose layout file from dropdown
+- Default pages render through layout/default.tpl when no template chosen
+- Reverted storefront pages to static PHP templates
+- Storefront assets load from new per-theme folders
+- Template engine supports theme_subdir for partials

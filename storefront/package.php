@@ -47,9 +47,10 @@ cms_render_template($tpl_body, [
     'sort_order'=>$sort_order,
     'subId'=>$subId,
     'links'=>$links,
+    'theme_subdir' => 'storefront',
 ]);
 $body = ob_get_clean();
 
 $tpl = __DIR__.'/../themes/'.$theme.'/default_template.php';
 if(!file_exists($tpl)) $tpl = __DIR__.'/../themes/2005_v2/default_template.php';
-cms_render_template($tpl, ['page_title'=>$package['name'], 'content'=>$body]);
+cms_render_template($tpl, ['page_title'=>$package['name'], 'content'=>$body, 'theme_subdir' => 'storefront']);
