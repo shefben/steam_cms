@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 - Add storefront dropdown navigation in admin sidebar
 - Templated 2005 v1 index page with dynamic news, 2004 header, and dynamic footer
 - Introduce root path site setting and base URL handling
+- Twig templating integrated; {BASE} placeholders now auto-convert
+- Twig templates now load from each theme's `layout` folder
 - Removed news box height limit in 2004 theme for exact layout
 - Added setting to limit news by theme year
 - Random banner endpoint pulls from custom folder regardless of theme

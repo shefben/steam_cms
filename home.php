@@ -3,7 +3,7 @@ require_once __DIR__.'/cms/template_engine.php';
 require_once __DIR__.'/cms/db.php';
 
 $theme = cms_get_setting('theme','2004');
-$tpl = cms_theme_layout('index.tpl', $theme);
+$tpl = cms_theme_layout('index.twig', $theme);
 
 $slug_clean  = str_replace('_','',$theme).'_index';
 $slug_legacy = $theme.'_index';

@@ -4,7 +4,7 @@ cms_require_permission('manage_pages');
 $db=cms_get_db();
 $themes = cms_get_themes();
 $current_theme = cms_get_setting('theme','2004');
-$template_files = array_map('basename', glob(__DIR__.'/../themes/'.$current_theme.'/layouts/*.tpl'));
+$template_files = array_map('basename', glob(__DIR__.'/../themes/'.$current_theme.'/layout/*.twig'));
 if(isset($_POST['save_page'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_POST['slug']);
     $title=trim($_POST['title']);
@@ -57,7 +57,7 @@ if(isset($_GET['edit'])){
 </fieldset>
 <label>Template:
     <select name="template" id="template">
-        <option value="">default.tpl</option>
+        <option value="">default.twig</option>
         <?php foreach($template_files as $f): ?>
             <option value="<?php echo htmlspecialchars($f); ?>"<?php if(isset($edit['template']) && $edit['template']===$f) echo ' selected'; ?>><?php echo htmlspecialchars($f); ?></option>
         <?php endforeach; ?>

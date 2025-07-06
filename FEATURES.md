@@ -64,3 +64,6 @@
 - Theme settings stored in new theme_settings table
 - Theme SQL migrations auto-applied from themes/<name>/sql
 - Template engine reads theme configuration from database
+- Templates now rendered with Twig, using {BASE} variable for root path
+- {BASE} placeholders automatically converted to Twig variables for DB content
+- Twig layouts now reside in each theme's `layout` directory

@@ -1,79 +1,93 @@
 <?php
 require_once __DIR__.'/news.php';
+require_once __DIR__.'/../includes/twig.php';
+
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
 function cms_theme_layout(string $file, ?string $theme = null)
 {
     $theme = $theme ?? cms_get_setting('theme', '2004');
-    $base = dirname(__DIR__)."/themes/$theme/layouts/$file";
+    $file = preg_replace('/\.tpl$/', '.twig', $file);
+    $base = dirname(__DIR__)."/themes/$theme/layout/$file";
     if (!file_exists($base)) {
-        $base = dirname(__DIR__)."/themes/2004/layouts/$file";
+        $base = dirname(__DIR__)."/themes/2004/layout/$file";
     }
     return $base;
 }
-function cms_render_template($path, $vars = [])
+function cms_twig_env(string $tpl_dir): Environment
 {
-    $cache_enabled = cms_get_setting('enable_cache', '0')==='1';
+    static $env;
+    if (!$env) {
+        $loader = new FilesystemLoader($tpl_dir);
+        $env = new Environment($loader);
+        $env->addFunction(new TwigFunction('header', function(bool $withButtons = true) {
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_header($theme, $withButtons);
+        }, ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('footer', function() {
+            $theme = cms_get_setting('theme', '2004');
+            $html  = cms_get_theme_footer($theme);
+            $html  = str_ireplace('{BASE}', '{{ BASE }}', $html);
+            $env   = cms_twig_env('.');
+            return $env->createTemplate($html)->render(['BASE' => cms_base_url()]);
+        }, ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('nav_buttons', function(string $theme = '', string $style = '') {
+            $theme = $theme !== '' ? $theme : cms_get_setting('theme', '2004');
+            return cms_header_buttons_html($theme, $style);
+        }, ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('news', function(string $type, ?int $count = null) {
+            $theme = cms_get_setting('theme', '2004');
+            $cfg = cms_get_theme_config($theme);
+            $count = $count ?? ($cfg['news_count'] ?? null);
+            return cms_render_news($type, $count);
+        }, ['is_safe' => ['html']]));
+    } else {
+        /** @var FilesystemLoader $loader */
+        $loader = $env->getLoader();
+        $loader->setPaths([$tpl_dir]);
+    }
+    return $env;
+}
+
+function cms_render_string(string $html, array $vars, string $tpl_dir): string
+{
+    $html = str_ireplace('{BASE}', '{{ BASE }}', $html);
+    $env  = cms_twig_env($tpl_dir);
+    return $env->createTemplate($html)->render($vars);
+}
+
+function cms_render_template(string $path, array $vars = []): void
+{
+    $cache_enabled = cms_get_setting('enable_cache', '0') === '1';
     $cache_file = __DIR__.'/cache/'.md5($path).'.html';
     if ($cache_enabled && file_exists($cache_file) && filemtime($cache_file) >= filemtime($path)) {
         readfile($cache_file);
         return;
     }
-    $tpl_dir = dirname($path);
+
     $theme = cms_get_setting('theme', '2004');
-    $config = cms_get_theme_config($theme);
-    // expose useful paths to templates
-    $vars['CMS_ROOT'] = __DIR__;
-    $vars['THEME_DIR'] = $tpl_dir;
+    $tpl_dir = dirname($path);
     $subdir = $vars['theme_subdir'] ?? '';
     $base_url = cms_base_url();
-    $vars['THEME_URL'] = ($base_url ? $base_url : '') . "/themes/$theme" . ($subdir ? "/$subdir" : '');
-    $css_file = cms_get_theme_css($theme);
-    $vars['CSS_PATH'] = ($base_url ? $base_url : '') . "/themes/$theme/" . ltrim($css_file, '/');
-    $html = file_get_contents($path);
-    $process = function ($text) use ($config, $theme, &$process) {
-        $text = preg_replace_callback(
-            '/\{news_(full_article|partial_article|small_abstract|link_only|index_summary|index_summary_date|index_brief|index_bodygreen|index_2006)(?:\((\d+)\))?\}/i',
-            function ($m) use ($config) {
-                $type = strtolower($m[1]);
-                $count = isset($m[2])? (int)$m[2] : ($config['news_count'] ?? null);
-                return cms_render_news($type, $count);
-            },
-            $text
-        );
-        $text = preg_replace_callback(
-            '/\{nav_buttons(?:\(([^}]+)\))?\}/i',
-            function ($m) {
-                $args = isset($m[1]) ? array_map('trim', explode(',', $m[1], 2)) : [];
-                $theme = $args[0] !== '' ? $args[0] : cms_get_setting('theme', '2004');
-                $style = $args[1] ?? '';
-                return cms_header_buttons_html($theme, $style);
-            },
-            $text
-        );
-        $text = preg_replace_callback('/\{header_nobuttons\}/i', function() use ($theme) {
-            return cms_render_header($theme, false);
-        }, $text);
-        $text = preg_replace_callback('/\{header\}/i', function() use ($theme) {
-            return cms_render_header($theme, true);
-        }, $text);
-        $text = preg_replace('/\{footer\}/i', cms_get_theme_footer($theme), $text);
-        $text = preg_replace_callback('/\{partial_([a-zA-Z0-9_-]+)\}/i', function ($m) use ($theme, $subdir, &$process) {
-            $suffix = $subdir ? "/$subdir" : '';
-            $file = dirname(__DIR__)."/themes/$theme{$suffix}/partials/{$m[1]}.tpl";
-            if (!file_exists($file)) {
-                $file = dirname(__DIR__)."/themes/2004{$suffix}/partials/{$m[1]}.tpl";
-                if (!file_exists($file)) {
-                    return '';
-                }
-            }
-            $c = file_get_contents($file);
-            return $process($c);
-        }, $text);
-        return $text;
-    };
-    $html = $process($html);
-    // ensure theme-specific stylesheet paths
-    $css_base = basename($css_file);
+
+    $vars += [
+        'CMS_ROOT'  => __DIR__,
+        'THEME_DIR' => $tpl_dir,
+        'THEME_URL' => ($base_url ? $base_url : '') . "/themes/$theme" . ($subdir ? "/$subdir" : ''),
+        'CSS_PATH'  => ($base_url ? $base_url : '') . "/themes/$theme/" . ltrim(cms_get_theme_css($theme), '/'),
+        'BASE'      => $base_url,
+    ];
+
+    if (isset($vars['content'])) {
+        $vars['content'] = cms_render_string($vars['content'], $vars, $tpl_dir);
+    }
+
+    $env = cms_twig_env($tpl_dir);
+    $html = $env->render(basename($path), $vars);
+
+    $css_base = basename(cms_get_theme_css($theme));
     $css_path = $vars['CSS_PATH'];
     $html = preg_replace('~(?:\.\./)?' . preg_quote($css_base, '~') . '~i', $css_path, $html);
     $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars) {
@@ -94,19 +108,12 @@ function cms_render_template($path, $vars = [])
         }
         return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
     }, $html);
-    if (isset($vars['content'])) {
-        $vars['content'] = $process($vars['content']);
-        $html = str_replace('{content}', $vars['content'], $html);
-    }
-    extract($vars);
-    ob_start();
-    eval('?>'.$html);
-    $output = ob_get_clean();
+
     if ($cache_enabled) {
         if (!is_dir(__DIR__.'/cache')) {
             mkdir(__DIR__.'/cache');
         }
-        file_put_contents($cache_file, $output);
+        file_put_contents($cache_file, $html);
     }
-    echo $output;
+    echo $html;
 }
