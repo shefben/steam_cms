@@ -25,7 +25,7 @@ All historical pages (one or more themes per year) live under `archived_steampow
 | **P3**   | **Templated everything**       | Each public page is a template in our engine; themes override only what they must.                                                                                                      |
 | **P4**   | **Hybrid content control**     | Admins decide to show (a) archived/official, (b) custom, or (c) a blend---per content type.                                                                                             |
 | **P5**   | **Link integrity**             | When importing/templating archived pages, **fix all internal links** so they resolve to the equivalent CMS route. Absolute or external links remain untouched.                          |
-| **P6**   | **Automated validation**       | Provide repeatable Composer / PHPUnit / static-analysis commands so agents can run the full test suite locally.                                                                         |
+| **P6**   | **Automated validation**       | Provide repeatable CLI / PHPUnit / static-analysis commands so agents can run the full test suite locally **without Composer**.                                                         |
 | **P8**   | **Task & Release Docs**        | Agent auto-maintains three repo Markdown files: `backlog.md` (unfinished prompt tasks), `CHANGELOG.md` (release notes), and `FEATURES.md` (implemented capabilities).                   |
 
 *** ** * ** ***
@@ -34,15 +34,11 @@ All historical pages (one or more themes per year) live under `archived_steampow
 --------------
 
 * **PHP 8.x** (strict types, PSR-12)
-
+* **No Symfony / Composer frameworks** — the project remains framework-free; any third-party code must be vendored manually.
 * **MariaDB / MySQL 8.x**
-
-* **Custom Twig-compatible template engine**
-
+* **Twig 3.21.1** (source-only, located at `includes/thirdparty/Twig-3.21.1/src/`; autoloaded manually)
 * **jQuery 3.x** (bundled for admin only)
-
 * **Vanilla CSS / optional SCSS build** (no Tailwind/Bootstrap on front-end; admin may use Bootstrap 5 if needed)
-
 * **Git** (default branch `trunk`)
 
 *** ** * ** ***
@@ -107,19 +103,18 @@ All historical pages (one or more themes per year) live under `archived_steampow
 
 *** ** * ** ***
 
-8 · Testing \& Composer Commands
+8 · Testing \& QA Commands
 --------------------------------
 
 ```bash  
-
-# Run static analysis & coding standards
-composer run-script lint          # phpcs + phpstan
+# Run static analysis & coding standards (stand-alone PHARs vendored in /tools)
+phpcs --standard=PSR12 src/
+phpstan analyse src/ tests/
 
 # Execute unit tests
-composer test                     # phpunit --colors=always
+phpunit --colors=always
 ```
-
-CI must execute the same Composer scripts; agents should ensure green runs before committing.
+CI must execute the same QA scripts; agents should ensure green runs before committing.
 
 *** ** * ** ***
 
