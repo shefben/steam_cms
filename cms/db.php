@@ -42,7 +42,7 @@ function cms_get_custom_page($slug,$theme=null){
             if(!in_array($theme,$themes,true)) return null;
         }
         unset($row['theme']);
-        if(!isset($row['template']) || $row['template']==='') $row['template'] = 'default.tpl';
+        if(!isset($row['template']) || $row['template']==='') $row['template'] = 'default.twig';
         return $row;
     }catch(PDOException $e){
         if($e->getCode()==='42S02') return null; // table missing
@@ -198,7 +198,7 @@ function cms_get_theme_footer($theme){
         $stmt->execute([$theme]);
         $html = $stmt->fetchColumn();
         if($html===false) return '';
-        return str_replace('{BASE}', cms_base_url(), $html);
+        return $html;
     } catch(PDOException $e){
         if($e->getCode()==='42S02') return '';
         throw $e;

@@ -34,7 +34,7 @@ $content .= '<h2>LATEST <em>VALVE NEWS</em> &nbsp; <a href="/rss.xml" title="RSS
     $content .= '<p align="center"><a href="news_archive.php" style="text-decoration: none;"><i>view the news archives</i></a> &middot; <a href="rss.xml" style="text-decoration: none;"><i>rss news feed</i></a></p>';
     $content .= '</div>';
 }
-$tpl = cms_theme_layout('default.tpl', $theme);
+$tpl = cms_theme_layout('default.twig', $theme);
 cms_render_template($tpl, [
     'content'    => $content,
     'page_title' => $page_title

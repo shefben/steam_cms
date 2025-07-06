@@ -33,7 +33,7 @@ if($row){
 }
 $content .= '</div>';
 
-$tpl = cms_theme_layout('default.tpl', $theme);
+$tpl = cms_theme_layout('default.twig', $theme);
 cms_render_template($tpl, [
     'page_title' => $page_title,
     'content'    => $content
