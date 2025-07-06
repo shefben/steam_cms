@@ -1,7 +1,4 @@
-<?php
-$page_title = $page_title ?? 'Welcome to Steam';
-include $THEME_DIR.'/header_nobuttons.php';
-?>
+{header_nobuttons}
 <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
 <tr height="55">
 <td bgcolor="black" height="55">
@@ -115,4 +112,4 @@ include $THEME_DIR.'/header_nobuttons.php';
 </td>
 </tr>
 </table>
-<?php include $CMS_ROOT.'/footer.php'; ?>
+{footer}

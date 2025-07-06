@@ -60,3 +60,6 @@
 - Custom page links honor configurable root path
 - Header navigation uses text labels, no image sprites
 - Footer HTML seeded during install
+- Header and footer render via {header} / {footer} tags
+- Theme settings stored in new theme_settings table
+- Theme SQL migrations auto-applied from themes/<name>/sql

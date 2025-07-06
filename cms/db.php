@@ -219,6 +219,25 @@ function cms_get_theme_css($theme){
     }
 }
 
+function cms_get_theme_setting(string $theme, string $name, $default = null){
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT value FROM theme_settings WHERE theme=? AND name=?');
+        $stmt->execute([$theme,$name]);
+        $val = $stmt->fetchColumn();
+        return $val!==false ? $val : $default;
+    } catch(PDOException $e){
+        if($e->getCode()==='42S02') return $default;
+        throw $e;
+    }
+}
+
+function cms_set_theme_setting(string $theme, string $name, $value){
+    $db = cms_get_db();
+    $stmt = $db->prepare('REPLACE INTO theme_settings(theme,name,value) VALUES(?,?,?)');
+    $stmt->execute([$theme,$name,$value]);
+}
+
 function cms_header_buttons_html($theme, string $spacer_style = ''){
     $data = cms_get_theme_header_data($theme);
     $buttons = $data['buttons'];
@@ -256,6 +275,21 @@ function cms_header_buttons_html($theme, string $spacer_style = ''){
     return $out;
 }
 
+function cms_render_header(string $theme, bool $with_buttons = true): string {
+    $data = cms_get_theme_header_data($theme);
+    $base = cms_base_url();
+    $logo = $data['logo'] ?: '/img/steam_logo_onblack.gif';
+    if($logo && $logo[0]=='/') $logo = $base.$logo;
+    $out = '<div class="header"><nobr>';
+    $out .= '<div><a href="'.$base.'/index.php"><img alt="Steam" src="'.htmlspecialchars($logo).'"></a></div>';
+    if($with_buttons){
+        $nav = cms_header_buttons_html($theme);
+        $out .= '<div class="navBar">'.$nav.'</div>';
+    }
+    $out .= '</nobr></div>';
+    return $out;
+}
+
 function cms_refresh_themes(){
     $db = cms_get_db();
     $stmt = $db->prepare('REPLACE INTO themes(name, css_path) VALUES(?,?)');
@@ -273,6 +307,29 @@ function cms_refresh_themes(){
         }
         $css_path = $css ? 'css/'.$css : '';
         $stmt->execute([$name,$css_path]);
+
+        $cfg_file = "$dir/config.php";
+        if(file_exists($cfg_file)){
+            $cfg = include $cfg_file;
+            if(is_array($cfg)){
+                foreach($cfg as $k=>$v){
+                    cms_set_theme_setting($name, $k, (string)$v);
+                }
+            }
+        }
+
+        $sql_dir = "$dir/sql";
+        if(is_dir($sql_dir)){
+            foreach(glob($sql_dir.'/*.sql') as $sql){
+                $hash = md5_file($sql);
+                $key  = 'sql_'.basename($sql);
+                $stored = cms_get_theme_setting($name, $key, '');
+                if($stored !== $hash){
+                    $db->exec(file_get_contents($sql));
+                    cms_set_theme_setting($name, $key, $hash);
+                }
+            }
+        }
     }
 }
 
