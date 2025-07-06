@@ -149,7 +149,7 @@ select {
 .formArea {
 	width: 295px;
 	height: 15px;
-	background-image: url('img\btn_right_wd.jpg');
+	background-image: url('img/btn_right_wd.jpg');
 	margin: 0px;
 	padding-left: 15px;
 	padding-top: 5px;
@@ -213,7 +213,7 @@ A:hover.menu_item_pub {	color: #e6e6e6;}
 	margin-right: 15px;
 	margin-top: 4px;
 	background-attachment: scroll;
-	background-image:  url('img\ico\ico_arrow_green.gif');
+	background-image:  url('img/ico/ico_arrow_green.gif');
 	background-repeat: no-repeat;
 	background-position: 0px 3px;
 	padding-left: 6px;

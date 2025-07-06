@@ -3,7 +3,7 @@ require_once __DIR__.'/db.php';
 
 function cms_news_url($id, $archive = false){
     $id = (int)$id;
-    return 'index.php?area=news' . ($archive ? '&archive=yes' : '') . '&id=' . $id;
+    return '{BASE}/index.php?area=news' . ($archive ? '&archive=yes' : '') . '&id=' . $id;
 }
 
 function cms_get_news_settings(){
@@ -117,6 +117,29 @@ function cms_render_news($type,$count=null){
                 $date_fmt = date('m/d/y', strtotime($row['publish_date']));
                 $out .= "<strong><a href='$link' style='text-decoration: none;'>$title</a></strong><br>($date_fmt)<br>$summary<br><br>";
                 break;
+            case 'index_bodygreen':
+                $text = trim(preg_replace('/\s+/', ' ', strip_tags($content)));
+                if(preg_match('/^(.+?[.!?])\s/', $text, $m)){
+                    $summary = $m[1];
+                }else{
+                    $words = preg_split('/\s+/', $text);
+                    $summary = implode(' ', array_slice($words, 0, 30));
+                }
+                $date_fmt = date('m/d/y', strtotime($row['publish_date']));
+                $out .= "<a class=\"BodyGreen\" href='$link' style='color: Black; font-weight: bold;'>$title</a><br>";
+                $out .= "<sup class=\"BODYGreen\"><i>($date_fmt)</i></sup><br>";
+                $out .= "<span class=\"BODYGreen\">$summary<br></span><br>";
+                break;
+            case 'index_2006':
+                $text = trim(preg_replace('/\s+/', ' ', strip_tags($content)));
+                if(preg_match('/^(.+?[.!?])\s/', $text, $m)){
+                    $summary = $m[1];
+                }else{
+                    $words = preg_split('/\s+/', $text);
+                    $summary = implode(' ', array_slice($words, 0, 30));
+                }
+                $out .= "<a class='rightLink_news' href='$link'><img border='0' height='7' src='{BASE}/themes/2006_v1/images/ico_arrow_yellow.gif' width='7'>$title<p>$summary</p></a>";
+                break;
             case 'index_brief':
                 $text = trim(preg_replace('/\s+/', ' ', strip_tags($content)));
                 $words = preg_split('/\s+/', $text);
@@ -131,7 +154,10 @@ function cms_render_news($type,$count=null){
         }
     }
     if($type==='index_brief'){
-        $out .= "<p align=\"right\"><sub><a href=\"index.php?area=news\" style=\"text-decoration: none;\">read more &gt;</a></sub></p>";
+        $out .= "<p align=\"right\"><sub><a href=\"{BASE}/index.php?area=news\" style=\"text-decoration: none;\">read more &gt;</a></sub></p>";
+    }
+    if($type==='index_summary_date'){
+        $out .= "<p align=\"righ\t\"><sub><a class=\"BodyGreen\" href=\"{BASE}/index.php?area=news\" style=\"color: Black; font-weight: bold;\">read more &gt;</a>&nbsp;</sub></p>";
     }
     return $out;
 }
