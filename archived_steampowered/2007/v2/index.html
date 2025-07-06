@@ -1,0 +1,730 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>Welcome to Steam</title>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="styles_global.css" rel="stylesheet" type="text/css">
+<link href="styles_home.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="minmax.js"></script>
+<script language="JavaScript" src="cookies.js"></script>
+<script language="JavaScript" src="collapse.js"></script>
+<script language="JavaScript" src="swfobject.js"></script>
+<script language="JavaScript" src="corners.js"></script>
+<script language="JavaScript" src="javascript.js"></script>
+<style>
+		.inline { display: inline; }
+		div.capsuleImage { position:relative; }
+		div.capsuleLargeImage { position:relative; }
+	</style>
+</link></link></head>
+<body>
+<!-- image preloads -->
+<div style="display: none;">
+<img alt="" src="img/btn/btn_getSteam_ovr.gif"/>
+<img alt="" src="img/btn_right_wd_over.jpg"/>
+</div>
+<!-- header bar -->
+<script>
+	function language_check()
+	{
+		var value = readCookie( 'language' );
+		if ( value != '' && value != null )
+		{
+			document.getElementById( 'language_select' ).style.display = 'none';
+		}
+	}
+
+	function set_default_language()
+	{
+		// disabled for now
+		// createCookie( 'language', 'english', 365 );
+	}
+
+	</script>
+<div id="language_select" name="language_select" style="width: 100%; height: 55px; background-color: #c26413; vertical-align: middle;">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr height="55">
+<td width="119"><img align="left" src="img/main/worldMap_languageSel.gif"/></td>
+<td width="20"></td>
+<td>
+<form action="index.php" style="margins: 0px;">
+<input name="area" type="hidden" value="main"/>
+<input name="cc" type="hidden" value="US"/>
+<span style="font-family: Verdana; color: #222222; font-size: 10px;">Select your preferred language.</span><br/>
+<select name="l" onchange="submit();" style="margin-top: 3px;">
+<option value="">- choose language -</option>
+<option id="l_danish" value="danish">Danish</option>
+<option id="l_dutch" value="dutch">Dutch</option>
+<option id="l_english" value="english">English</option>
+<option id="l_finnish" value="finnish">Finnish</option>
+<option id="l_french" value="french">French</option>
+<option id="l_german" value="german">German</option>
+<option id="l_italian" value="italian">Italian</option>
+<option id="l_japanese" value="japanese">Japanese</option>
+<option id="l_korean" value="korean">Korean</option>
+<option id="l_norwegian" value="norwegian">Norwegian</option>
+<option id="l_polish" value="polish">Polish</option>
+<option id="l_portuguese" value="portuguese">Portuguese</option>
+<option id="l_russian" value="russian">Russian</option>
+<option id="l_schinese" value="schinese">Simplified Chinese</option>
+<option id="l_tchinese" value="tchinese">Traditional Chinese</option>
+<option id="l_spanish" value="spanish">Spanish</option>
+<option id="l_swedish" value="swedish">Swedish</option>
+<option id="l_thai" value="thai">Thai</option>
+</select>
+</form>
+</td>
+</tr>
+</table>
+</div>
+<script>
+	language_check();
+	// set_default_language();
+	</script>
+<div style="min-width:850px;">
+<div class="globalHeadBar_logo"><a href=""><img alt="Steam main" border="0" src="img/logo_steam_header.jpg"/></a></div>
+<div class="globalHeadBar">
+<div class="globalNavItem"><a href="v/index.php?cc=US" title="HOME"><span class="globalNavLink">HOME</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=news&amp;cc=US" title="NEWS"><span class="globalNavLink">NEWS</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=getsteamnow&amp;cc=US" title="GET STEAM NOW"><span class="globalNavLink">GET STEAM NOW</span></a></div>
+<div class="globalNavItem"><a href="https://cafe.steampowered.com/" title="CYBER CAFÉS"><span class="globalNavLink">CYBER CAFÉS</span></a></div>
+<div class="globalNavItem"><a href="http://support.steampowered.com/" title="SUPPORT"><span class="globalNavLink">SUPPORT</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=forums&amp;cc=US" title="FORUMS"><span class="globalNavLink">FORUMS</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=stats&amp;cc=US" title="STATS"><span class="globalNavLink">STATS</span></a></div>
+</div>
+</div>
+<br clear="all">
+<!-- end header bar -->
+<center>
+<div class="contentBG_home">
+<div class="headerBG_main">
+<!-- Left Collumn Content -->
+<div class="leftCol_home">
+<div class="leftCol_home_indent">
+<div id="get_steam_now">
+<table border="0" cellpadding="0" cellspacing="0" class="capsuleArea_header" height="73" width="574">
+<tr>
+<td height="73" valign="middle" width="250">
+<div class="btn_getSteam_slvr" onclick="location.href='index.php?area=getsteamnow&amp;cc=US'" onmouseout="this.style.background='url(img/btn/btn_getSteam.gif)'" onmouseover="this.style.background='url(img/btn/btn_getSteam_ovr.gif)'" style="CURSOR: pointer;" title="Click for Details">Get Steam Now !</div>
+</td>
+<td height="73" valign="top"><p>Join Steam for free and get games delivered straight to your desktop with automatic updates and a massive gaming community.</p></td>
+</tr>
+</table>
+</div>
+<!-- banner -->
+<div id="first_2_banner" style="display: none;">
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="publisherArea_header" height="134" width="560">
+<tr>
+<td align="center" height="134" width="575"></td>
+</tr>
+</table>
+</div>
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1200&amp;cc=US';" onmouseout="this.className='capsule'; window.status='';" onmouseover="this.className='capsule_ovr'; window.status='index.php?area=game&amp;AppId=1200&amp;cc=US';">
+<div class="capsuleImage"><img alt="Buy Red Orchestra: Ostfront 41-45" border="0" height="105" src="gfx/apps/1200/capsule_sm.jpg" width="280"/></div>
+<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95</div></div>
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=6980&amp;cc=US';" onmouseout="this.className='capsule'; window.status='';" onmouseover="this.className='capsule_ovr'; window.status='index.php?area=game&amp;AppId=6980&amp;cc=US';">
+<div class="capsuleImage"><img alt="Buy Thief: Deadly Shadows" border="0" height="105" src="gfx/apps/6980/capsule_sm.jpg" width="280"/></div>
+<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95</div></div>
+</div>
+<div class="inline" id="capsule_large">
+<br clear="all"/>
+<!-- Large capsule -->
+<div class="capsule_large_area">
+<div id="capsule_large_content">
+<div class="capsuleLarge" onclick="location.href='index.php?area=game&amp;AppId=9340&amp;cc=US';" onmouseout="this.className='capsuleLarge'; window.status='';" onmouseover="this.className='capsuleLarge_ovr'; window.status='index.php?area=game&amp;AppId=9340&amp;cc=US';">
+<div class="capsuleLargeImage"><img alt="Company of Heroes: Opposing Fronts" border="0" galleryimg="no" height="221" src="gfx/apps/9340/capsule_lrg.jpg" width="572"/></div>
+<div class="capsuleLargeText"></div><div class="capsuleLargeCost">$39.95</div></div>
+</div>
+</div>
+</div>
+<script type="text/javascript">;
+						var so = new SWFObject("swf/capsule_lg.swf?t=2", "movie", "578", "255", "8", "#282828");
+						so.addVariable("img1", "9340");
+						so.addVariable("txt1", "Company of Heroes: Opposing Fronts");
+						so.addVariable("price1", "&#36;39.95");
+						so.addVariable("type1", "apps");
+						so.addVariable("timestamp1", "1191021226");
+						so.addVariable("img2", "4780");
+						so.addVariable("txt2", "Medieval II: Total War&trade; Kingdoms");
+						so.addVariable("price2", "&#36;29.95");
+						so.addVariable("type2", "apps");
+						so.addVariable("timestamp2", "1188331962");
+						so.addVariable("img3", "2630");
+						so.addVariable("txt3", "Call of Duty&reg; 2");
+						so.addVariable("price3", "&#36;19.95");
+						so.addVariable("type3", "apps");
+						so.addVariable("timestamp3", "1191879372");
+						so.addVariable("img4", "451");
+						so.addVariable("txt4", "BioShock&trade;");
+						so.addVariable("price4", "&#36;49.95");
+						so.addVariable("type4", "subs");
+						so.addVariable("timestamp4", "1191513831");
+						so.addVariable("img5", "506");
+						so.addVariable("txt5", "Enemy Territory: QUAKE Wars&trade;");
+						so.addVariable("price5", "&#36;49.95");
+						so.addVariable("type5", "subs");
+						so.addVariable("timestamp5", "1191368593");
+						so.addVariable("img6", "496");
+						so.addVariable("txt6", "PopCap Favorites");
+						so.addVariable("price6", "&#36;39.95");
+						so.addVariable("type6", "subs");
+						so.addVariable("timestamp6", "1190853685");
+						so.addVariable("img7", "4500");
+						so.addVariable("txt7", "S.T.A.L.K.E.R.: Shadow of Chernobyl");
+						so.addVariable("price7", "&#36;29.95");
+						so.addVariable("type7", "apps");
+						so.addVariable("timestamp7", "1191875051");
+						so.addVariable("img8", "469");
+						so.addVariable("txt8", "The Orange Box");
+						so.addVariable("price8", "&#36;49.95");
+						so.addVariable("type8", "subs");
+						so.addVariable("desc_b8", "Pre-purchase Now");
+						so.addVariable("desc_c8", "SAVE $5");
+						so.addVariable("discount8", "&#36;44.95");
+						so.addVariable("timestamp8", "1190130649");
+						so.addVariable("urlparams", "cc=US");
+						so.write("capsule_large_content");
+						</script>
+<div class="leftCol_home_indent">
+<br clear="all"/>
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=7260&amp;cc=US';" onmouseout="this.className='capsule'; window.status='';" onmouseover="this.className='capsule_ovr'; window.status='index.php?area=game&amp;AppId=7260&amp;cc=US';">
+<div class="capsuleImage"><img alt="Loki" border="0" height="105" src="gfx/apps/7260/capsule_sm.jpg" width="280"/></div>
+<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$39.95</div></div>
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=8400&amp;cc=US';" onmouseout="this.className='capsule'; window.status='';" onmouseover="this.className='capsule_ovr'; window.status='index.php?area=game&amp;AppId=8400&amp;cc=US';">
+<div class="capsuleImage"><img alt="Buy Geometry Wars: Retro Evolved" border="0" height="105" src="gfx/apps/8400/capsule_sm.jpg" width="280"/></div>
+<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$3.95</div></div>
+<br clear="all"/>
+<script language="javascript">
+
+function addEvent(el, ev, fn, useCapture)
+{
+	if(el.addEventListener)
+	{
+		el.addEventListener(ev, fn, useCapture);
+	}
+	else if(el.attachEvent)
+	{
+		var ret = el.attachEvent("on"+ev, fn);
+		return ret;
+	}
+	else
+	{
+		el["on"+ev] = fn;
+	}
+}
+
+var allTabs = new Array();
+function setupTabs()
+{
+	if(!document.getElementsByTagName)
+	{
+		return;
+	}
+	var pageSpans = document.getElementsByTagName('span');
+	var focalTab = 3; // tab to focus initially
+	var count = 0;
+	for(var x = 0; x < pageSpans.length; x++)
+	{
+		tempClassName = " "+pageSpans[x].className+" ";
+		if(tempClassName.indexOf(" tab_link ") != -1)
+		{
+			count++;
+			allTabs.push(pageSpans[x].id);
+			if(count == focalTab)
+			{
+				document.getElementById(pageSpans[x].id+'_li').className = 'main_tab_on';
+				contentTab = document.getElementById(pageSpans[x].id+'_content');
+				if(contentTab)
+				{
+					contentTab.style.display = '';
+				}
+			}
+			else
+			{
+				document.getElementById(pageSpans[x].id+'_li').className = 'main_tab_off';
+				contentTab = document.getElementById(pageSpans[x].id+'_content');
+				if(contentTab)
+				{
+					contentTab.style.display = 'none';
+				}
+			}
+			addEvent(pageSpans[x], "mouseover", tab_hilite, false);
+			addEvent(pageSpans[x], "mouseout", tab_lolite, false);
+			addEvent(pageSpans[x], "click", tab_display, false);
+		}
+	}
+}
+function tab_hilite(e)
+{
+	var el = window.event ? window.event.srcElement : e ? e.target : null;
+	if(!el)
+	{
+		return;
+	}
+	el = getGoodElement(el,"span","tab_link",0);
+	if(el)
+	{
+		contentEl = document.getElementById(el.id+'_content');
+		if(contentEl.style.display == 'none')
+		{
+			el.style.color = "#FFFFFF";
+		}
+	}
+}
+function tab_lolite(e)
+{
+	var el = window.event ? window.event.srcElement : e ? e.target : null;
+	if(!el)
+	{
+		return;
+	}
+	el = getGoodElement(el,"span","tab_link",0);
+	if(el)
+	{
+		contentEl = document.getElementById(el.id+'_content');
+		if(contentEl.style.display == 'none')
+		{
+			el.style.color = "#BCBCBC";
+		}
+	}
+}
+function tab_display(e)
+{
+	var el = window.event ? window.event.srcElement : e ? e.target : null;
+	if(!el)
+	{
+		return;
+	}
+	el = getGoodElement(el,"span","tab_link",0);
+	if(el)
+	{
+		for(x=0;x<allTabs.length;x++)
+		{
+			document.getElementById(allTabs[x]+'_li').className = 'main_tab_off';
+			document.getElementById(allTabs[x]+'_content').style.display = 'none';
+		}
+
+		tabContent = document.getElementById(el.id+'_content');
+		tabContent.style.display = '';
+		document.getElementById(el.id+'_li').className = 'main_tab_on';
+		if(e && e.stopPropagation)
+		{
+			e.stopPropagation();
+		}
+		if(window.event)
+		{
+			window.event.cancelBubble = true;
+		}
+	}
+}		
+function getGoodElement(el,nn,cn,next)
+{
+	if(next == 1)
+	{
+		el = el.parentNode;
+	}
+	while(el.nodeName.toLowerCase() != nn && el.nodeName.toLowerCase() != "body")
+	{
+		el = el.parentNode;
+	}
+	thisClass = ' '+el.className+' ';
+	if(el.nodeName.toLowerCase() != "body" && thisClass.indexOf(' '+cn+' ') == -1)
+	{
+		return getGoodElement(el,nn,cn,1);
+	}
+	else if(thisClass.indexOf(' '+cn+' ') != -1)
+	{
+		return el;
+	}
+	return false;
+}
+addEvent(window, "load", setupTabs, false);
+var isIE = !window.opera && navigator.userAgent.indexOf('MSIE') != -1;
+
+</script>
+<div class="listArea">
+<br clear="all"/>
+<div>
+<ul id="main_tab_list">
+<li class="main_tab_off" id="tab_1_li"><span class="tab_link" id="tab_1">Top Sellers</span></li>
+<li class="main_tab_off" id="tab_2_li"><span class="tab_link" id="tab_2">Top Rated</span></li>
+<li class="main_tab_off" id="tab_3_li"><span class="tab_link" id="tab_3">New releases</span></li>
+</ul>
+</div>
+<br clear="left"/>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td height="6"><img height="6" src="img/_spacer.gif" width="6"/></td>
+<td align="right" height="6"><img height="6" src="img/home/listArea_tr.gif" width="6"/></td>
+</tr>
+<tr id="tab_1_content" style="display:none;">
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=package&amp;SubId=469&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy The Orange Box" border="0" height="45" src="gfx/subs/469/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">The Orange Box</div><br/>
+<div class="listArea_gamePrice"><span style="color: #444444;"><strike>$49.95</strike></span> $44.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=240&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Counter-Strike: Source" border="0" height="45" src="gfx/apps/240/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Counter-Strike: Source</div><br/>
+<div class="listArea_gamePrice">$19.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=10&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Counter-Strike" border="0" height="45" src="gfx/apps/10/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Counter-Strike</div><br/>
+<div class="listArea_gamePrice">$9.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=3480&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Peggle Deluxe" border="0" height="45" src="gfx/apps/3480/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Peggle Deluxe</div><br/>
+<div class="listArea_gamePrice"><span style="color: #444444;"><strike>$19.95</strike></span> $9.95</div>
+</div>
+</td>
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=10000&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Enemy Territory: QUAKE Wars™" border="0" height="45" src="gfx/apps/10000/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Enemy Territory: QUAKE Wars™</div><br/>
+<div class="listArea_gamePrice">$49.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=7670&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy BioShock™" border="0" height="45" src="gfx/apps/7670/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">BioShock™</div><br/>
+<div class="listArea_gamePrice">$49.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=9340&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Company of Heroes: Opposing Fronts" border="0" height="45" src="gfx/apps/9340/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Company of Heroes: Opposing Fronts</div><br/>
+<div class="listArea_gamePrice">$39.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=4500&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy S.T.A.L.K.E.R.: Shadow of Chernobyl" border="0" height="45" src="gfx/apps/4500/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">S.T.A.L.K.E.R.: Shadow of Chernobyl</div><br/>
+<div class="listArea_gamePrice">$29.95</div>
+</div>
+</td>
+</tr>
+<tr id="tab_2_content" style="display:none;">
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=7670&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy BioShock™" border="0" height="45" src="gfx/apps/7670/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">BioShock™</div><br/>
+<div class="listArea_gamePrice">$49.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=220&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Half-Life 2" border="0" height="45" src="gfx/apps/220/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Half-Life 2</div><br/>
+<div class="listArea_gamePrice"><span style="color: #444444;"><strike>$29.95</strike></span> $19.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=3900&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Sid Meier's Civilization® IV" border="0" height="45" src="gfx/apps/3900/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Sid Meier's Civilization® IV</div><br/>
+<div class="listArea_gamePrice">$39.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=4760&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Rome: Total War - Gold" border="0" height="45" src="gfx/apps/4760/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Rome: Total War - Gold</div><br/>
+<div class="listArea_gamePrice">$19.95</div>
+</div>
+</td>
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=70&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Half-Life" border="0" height="45" src="gfx/apps/70/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Half-Life</div><br/>
+<div class="listArea_gamePrice">$9.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=2310&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy QUAKE" border="0" height="45" src="gfx/apps/2310/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">QUAKE</div><br/>
+<div class="listArea_gamePrice">$9.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=4560&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Company of Heroes" border="0" height="45" src="gfx/apps/4560/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Company of Heroes</div><br/>
+<div class="listArea_gamePrice">$29.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=2620&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Call of Duty" border="0" height="45" src="gfx/apps/2620/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Call of Duty</div><br/>
+<div class="listArea_gamePrice">$19.95</div>
+</div>
+</td>
+</tr>
+<tr id="tab_3_content">
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=7260&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Loki" border="0" height="45" src="gfx/apps/7260/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Loki</div><br/>
+<div class="listArea_gamePrice">$39.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=6270&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Ducati World Championship" border="0" height="45" src="gfx/apps/6270/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Ducati World Championship</div><br/>
+<div class="listArea_gamePrice">$19.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=3483&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Peggle Extreme" border="0" height="45" src="gfx/apps/3483/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Peggle Extreme</div><br/>
+<div class="listArea_gamePrice"></div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=2690&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Empires: Dawn of the Modern World" border="0" height="45" src="gfx/apps/2690/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Empires: Dawn of the Modern World</div><br/>
+<div class="listArea_gamePrice">$19.95</div>
+</div>
+</td>
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=9340&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Company of Heroes: Opposing Fronts" border="0" height="45" src="gfx/apps/9340/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Company of Heroes: Opposing Fronts</div><br/>
+<div class="listArea_gamePrice">$39.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=7250&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Sherlock Holmes - The Awakened" border="0" height="45" src="gfx/apps/7250/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Sherlock Holmes - The Awakened</div><br/>
+<div class="listArea_gamePrice">$29.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=4500&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy S.T.A.L.K.E.R.: Shadow of Chernobyl" border="0" height="45" src="gfx/apps/4500/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">S.T.A.L.K.E.R.: Shadow of Chernobyl</div><br/>
+<div class="listArea_gamePrice">$29.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=3260&amp;cc=US';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Buy Safecracker: The Ultimate Puzzle Adventure" border="0" height="45" src="gfx/apps/3260/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Safecracker: The Ultimate Puzzle Adventure</div><br/>
+<div class="listArea_gamePrice">$9.95</div>
+</div>
+</td>
+</tr>
+<tr>
+<td height="6"><img height="6" src="img/home/listArea_bl.gif" width="6"/></td>
+<td align="right" height="6"><img height="6" src="img/home/listArea_br.gif" width="6"/></td>
+</tr>
+</table>
+</div>
+<br clear="all">
+<br clear="left">
+<div id="gear_and_stuff" style="display: inline;">
+<div align="center" class="Gear">
+<div class="GearTitle">Get The Gear!</div>
+<div class="GearText">Get your hands on the brand-new Half-Life® 2: Episode Two poster at the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> now!!! Also featuring official shirts, posters, hats and more!</div>
+</div>
+<div align="center" class="Stuff">
+<div class="StuffTitle">Free Stuff!</div>
+<div class="StuffText">In addition to a catalog of great games, your free Steam account gives you access to game <a href="v/index.php?area=free&amp;tab=demos&amp;cc=US">demos</a>, <a href="v/index.php?area=free&amp;tab=mods&amp;cc=US">mods</a>, <a href="v/index.php?area=free&amp;tab=videos&amp;cc=US">trailers</a> and more. Browse our <a href="v/index.php?area=free&amp;cc=US">Free Stuff</a> page for more details.</div>
+</div>
+</div>
+</br></br></div>
+</div>
+<!-- End Left Collumn Content -->
+<!-- Right Collumn Content -->
+<div class="rightCol_home">
+<div class="rightFindSearch">
+<form action="index.php" id="searchform" name="searchform">
+<input name="area" type="hidden" value="search"/>
+<input name="genre" type="hidden" value=""/>
+<input name="cc" type="hidden" value="US"/>
+<table border="0" cellpadding="0" cellspacing="0" width="300">
+<tr>
+<td width="20"> </td>
+<td width="200"><input id="searchterm" maxlength="64" name="term" size="35" type="text"/></td>
+<td><a class="btn_search" href="v/index.php?cc=US" onclick="document.searchform.submit();">Search</a></td>
+</tr>
+</table>
+</form>
+</div>
+<div class="usr_edit_right_header"><div style="float:left; ">Find More...</div></div>
+<div class="rightFindMore">
+<table align="center" border="0" cellpadding="0" cellspacing="0" height="99">
+<tr>
+<td align="center" rowspan="2" width="20"> </td>
+<td align="center" height="57">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="findMore_btnLeft" width="5"> </td>
+<td align="center" class="findMore_btnBG" valign="top">
+<div class="btn_games" onclick="location.href='index.php?area=all&amp;initial=1&amp;cc=US';" onmouseout="this.className='btn_games';" onmouseover="this.className='btn_games_ovr';">
+<div class="ico_game"> </div>
+											Games										</div>
+</td>
+<td class="findMore_btnRight" width="5"> </td>
+</tr>
+</table>
+</td>
+<td align="center" height="57">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="findMore_btnLeft" width="5"> </td>
+<td align="center" class="findMore_btnBG" valign="top">
+<div class="btn_games" onclick="location.href='index.php?area=free&amp;tab=demos&amp;cc=US';" onmouseout="this.className='btn_games';" onmouseover="this.className='btn_games_ovr';">
+<div class="ico_demo"> </div>
+											Demos										</div>
+</td>
+<td class="findMore_btnRight" width="5"> </td>
+</tr>
+</table>
+</td>
+<td align="center" height="57">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="findMore_btnLeft" width="5"> </td>
+<td align="center" class="findMore_btnBG" valign="top">
+<div class="btn_games" onclick="location.href='index.php?area=free&amp;tab=videos&amp;cc=US';" onmouseout="this.className='btn_games';" onmouseover="this.className='btn_games_ovr';">
+<div class="ico_trailer"> </div>
+											Trailers										</div>
+</td>
+<td class="findMore_btnRight" width="5"> </td>
+</tr>
+</table>
+</td>
+<td align="center" rowspan="2" width="20"> </td>
+</tr>
+<tr>
+<td align="left" colspan="3">
+<p>
+								Games by genre: 
+								<a href="v/index.php?area=all&amp;genre=1&amp;cc=US">Action</a>, <a href="v/index.php?area=all&amp;genre=3&amp;cc=US">RPG</a>, <a href="v/index.php?area=all&amp;genre=4&amp;cc=US">Casual</a>, <a href="v/index.php?area=all&amp;genre=23&amp;cc=US">Indie</a>, <a href="v/index.php?area=all&amp;genre=9&amp;cc=US">Racing</a> </p>
+</td>
+</tr>
+</table>
+</div>
+<div id="spotlight_section">
+<div class="usr_edit_right_header"><div style="float:left; ">Spotlight</div></div>
+<div class="spotlight">
+<h1 id="spotlightTitle">Orange Box TV Commercial</h1> <div class="spotlight_game">
+<div class="listArea_gameImage"><img alt="Orange Box TV Commercial" border="0" src="img/promo/spotlight_sm_orangeBoxCommercial.jpg" title="Orange Box TV Commercial"/></div> </div>
+<div id="spotlightText"><p>The Orange Box will be available October 10. Check out the US TV ad now playing in the US.</p></div> <div class="spotlight_footer">
+<div class="spotlight_btn" onclick="window.open( 'index.php?area=game&amp;AppId=995&amp;cc=US', '_self' );" onmouseout="this.className='spotlight_btn';" onmouseover="this.className='spotlight_btn_ovr';">Watch the Video</div> </div>
+</div>
+</div>
+<div class="usr_edit_right_header"><div style="float:left; ">Latest News</div></div>
+<div class="rightLink_news_area" style="height: auto;">
+<ul>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=1245&amp;cc=US">Team Fortress 2 Update Released</a></li>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=1244&amp;cc=US">Save 50% on RIP Trilogy</a></li>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=1243&amp;cc=US">Team Fortress 2 Update Released</a></li>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=1237&amp;cc=US">Now on Steam - Loki</a></li>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=1239&amp;cc=US">Sid Meier's Civilization IV: Beyond the Swor ...</a></li>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=1240&amp;cc=US">Steam client update released</a></li>
+</ul>
+<a class="rightLink_moreNews" href="v/index.php?area=news&amp;cc=US"><img border="0" height="11" src="img/ico/ico_arrow_green_wd.gif" width="22">  Read more news</img></a>
+</div>
+<div id="publisher_catalog" style="display: inline;">
+<div class="usr_edit_right_header"><div style="float:left; ">Publisher Catalogs</div></div>
+<div class="rightLink_columns"><ul><li><a href="v/index.php?publisher=2kgames&amp;cc=US" title="Buy 2K Games games">2K Games</a>
+<li><a href="v/index.php?publisher=activision&amp;cc=US" title="Buy Activision games">Activision</a>
+<li><a href="v/index.php?publisher=eidos&amp;cc=US" title="Buy Eidos Interactive games">Eidos Interactive</a>
+<li><a href="v/index.php?publisher=id&amp;cc=US" title="Buy id Software games">id Software</a>
+<li><a href="v/index.php?publisher=majesco&amp;cc=US" title="Buy Majesco games">Majesco</a>
+<li><a href="v/index.php?publisher=popcap&amp;cc=US" title="Buy PopCap Games, Inc. games">PopCap Games, Inc.</a>
+<li><a href="v/index.php?publisher=strategyfirst&amp;cc=US" title="Buy Strategy First games">Strategy First</a>
+<li><a href="v/index.php?publisher=thq&amp;cc=US" title="Buy THQ games">THQ</a>
+<li><a href="v/index.php?publisher=valve&amp;cc=US" title="Buy Valve games">Valve</a>
+</li></li></li></li></li></li></li></li></li></ul></div> <br clear="left">
+<div class="rightColHr"></div>
+</br></div>
+<div class="usr_edit_right_header" id="browseCatalog" onclick="toggle_section( 'browseCatalog' );" style="cursor: pointer;">
+<div style="float:left; ">Browse The Catalog</div>
+<div class="usr_edit_right_control" style="cursor: pointer;"><img border="0" height="14" id="browseCatalog_header" width="14"/></div>
+</div>
+<div id="browseCatalog_content">
+<div class="rightLink_columns">
+<ul>
+<li><a href="v/index.php?area=all&amp;initial=1&amp;cc=US">All Games</a></li>
+<li><a href="v/index.php?area=browse&amp;cc=US">Browse Games</a></li>
+<li><a href="v/index.php?area=free&amp;cc=US">Free Stuff</a></li>
+<li><a href="v/index.php?area=free&amp;tab=demos&amp;cc=US">Demos</a></li>
+<li><a href="v/index.php?area=free&amp;tab=videos&amp;cc=US">Videos</a></li>
+</ul>
+</div>
+<br clear="left">
+<div class="rightColHr"></div>
+</br></div>
+<script>
+					check_section( 'browseCatalog', 'open' );
+					</script>
+<div class="usr_edit_right_header" id="newOnSteam" onclick="toggle_section( 'new_on_steam' );" style="cursor: pointer;">
+<div style="float:left; ">New On Steam</div>
+<div class="usr_edit_right_control" style="cursor: pointer;"><img border="0" height="14" id="new_on_steam_header" width="14"/></div>
+</div>
+<div class="rightLink_newOnSteam" id="new_on_steam_content">
+<ul><li class="media"><a href="v/index.php?area=game&amp;AppId=995&amp;cc=US">The Orange Box Commercial <span class="rightLink_newDate_gr"> (Oct 5, 2007)</span></a></li>
+<li class="game"><a href="v/index.php?area=game&amp;AppId=7260&amp;cc=US">Loki <span class="rightLink_newDate_gr"> (Oct 5, 2007)</span></a></li>
+<li class="game"><a href="v/index.php?area=game&amp;AppId=11000&amp;cc=US">Loki Demo - Norse Warrior <span class="rightLink_newDate_gr"> (Oct 5, 2007)</span></a></li>
+<li class="game"><a href="v/index.php?area=game&amp;AppId=7280&amp;cc=US">Loki Demo - Egyptian Sorcerer <span class="rightLink_newDate_gr"> (Oct 5, 2007)</span></a></li>
+<li class="media"><a href="v/index.php?area=game&amp;AppId=991&amp;cc=US">Loki HD Trailer <span class="rightLink_newDate_gr"> (Oct 5, 2007)</span></a></li>
+<li class="game"><a href="v/index.php?area=game&amp;AppId=9340&amp;cc=US">Company of Heroes: Opposing Fronts <span class="rightLink_newDate_gr"> (Sep 27, 2007)</span></a></li>
+<li class="game"><a href="v/index.php?area=game&amp;AppId=6270&amp;cc=US">Ducati World Championship <span class="rightLink_newDate_gr"> (Sep 21, 2007)</span></a></li>
+<li class="media"><a href="v/index.php?area=game&amp;AppId=990&amp;cc=US">Enemy Territory: QUAKE Wars™… <span class="rightLink_newDate_gr"> (Sep 14, 2007)</span></a></li>
+<li class="game"><a href="v/index.php?area=game&amp;AppId=7290&amp;cc=US">Sherlock Holmes - The Awakened Demo <span class="rightLink_newDate_gr"> (Sep 14, 2007)</span></a></li>
+<li class="game"><a href="v/index.php?area=game&amp;AppId=10010&amp;cc=US">Enemy Territory: QUAKE Wars™… <span class="rightLink_newDate_gr"> (Sep 14, 2007)</span></a></li>
+</ul>
+<a class="rightLink_moreNews" href="v/new.xml" target="_blank"><img border="0" height="11" src="img/ico/ico_arrow_green_wd.gif" width="22">  <img align="absmiddle" border="0" src="img/ico/ico_rss2.gif"/>  New on Steam RSS feed</img></a>
+<br clear="all"/>
+</div>
+<script>
+					check_section( 'new_on_steam', 'closed' );
+					</script>
+<div class="usr_edit_right_header" id="newOnSteam" onclick="toggle_section('soon_on_steam');" style="cursor: pointer;">
+<div style="float:left; ">Coming Soon To Steam</div>
+<div class="usr_edit_right_control"><img border="0" height="14" id="soon_on_steam_header" width="14"/></div>
+</div>
+<div id="soon_on_steam_content"><a class="rightLink" href="v/index.php?area=game&amp;AppId=420&amp;cc=US"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif">  Half-Life 2: Episode Two <span class="rightLink_newDate_gr"> (Oct 2007)</span></img></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=440&amp;cc=US"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif">  Team Fortress 2 <span class="rightLink_newDate_gr"> (Oct 2007)</span></img></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=400&amp;cc=US"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif">  Portal <span class="rightLink_newDate_gr"> (Oct 2007)</span></img></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=10000&amp;cc=US"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"/>  Enemy Territory: QUAKE Wars™ <span class="rightLink_newDate_gr"> (Oct 2007)</span></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=8600&amp;cc=US"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"/>  RACE 07 <span class="rightLink_newDate_gr"> (Oct 2007)</span></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=8041&amp;cc=US"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"/>  Kane &amp; Lynch: Dead Men™ <span class="rightLink_newDate_gr"> (Nov 2007)</span></a>
+<br clear="all"/></div>
+<script>check_section('soon_on_steam','closed');</script>
+</div>
+<!-- End Right Collumn Content -->
+</div>
+<br clear="left">
+</br></div>
+<!-- Footer Content -->
+<div class="footer">
+<table background="img/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
+<tr>
+<td background="img/img_footer_l.jpg" height="73" width="12"> </td>
+<td align="center" width="110"><a href="http://www.valvesoftware.com"><img alt="link: Valve Software" border="0" height="26" src="img/logo_valve_footer.jpg" width="92"/></a></td>
+<td>
+<div class="legal">
+<form action="index.php">
+<input name="area" type="hidden" value="main"/>
+<input name="cc" type="hidden" value="US"/>
+<select name="l" onchange="submit();">
+<option value=""></option><option id="l_danish" value="danish">Danish</option>
+<option id="l_dutch" value="dutch">Dutch</option>
+<option id="l_english" value="english">English</option>
+<option id="l_finnish" value="finnish">Finnish</option>
+<option id="l_french" value="french">French</option>
+<option id="l_german" value="german">German</option>
+<option id="l_italian" value="italian">Italian</option>
+<option id="l_japanese" value="japanese">Japanese</option>
+<option id="l_korean" value="korean">Korean</option>
+<option id="l_norwegian" value="norwegian">Norwegian</option>
+<option id="l_polish" value="polish">Polish</option>
+<option id="l_portuguese" value="portuguese">Portuguese</option>
+<option id="l_russian" value="russian">Russian</option>
+<option id="l_schinese" value="schinese">Simplified Chinese</option>
+<option id="l_tchinese" value="tchinese">Traditional Chinese</option>
+<option id="l_spanish" value="spanish">Spanish</option>
+<option id="l_swedish" value="swedish">Swedish</option>
+<option id="l_thai" value="thai">Thai</option>
+</select><br>
+</br></form>				© 2007 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br>
+<a href="http://www.valvesoftware.com/privacy.htm"> Privacy Policy.</a> <a href="http://www.valvesoftware.com/legal.htm">Legal.</a> <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a>
+</br></div>
+</td>
+<td background="img/img_footer_r.jpg" height="73" width="14"> </td>
+</tr>
+</table>
+</div>
+<!-- End Footer Content -->
+<br>
+</br></center>
+</br></body>
+</html>
+<!-- static / index_us / Tue, 09 Oct 2007 00:20:20 -0700-->

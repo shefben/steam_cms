@@ -1,0 +1,17 @@
+body {
+	font-size: 62.5%;
+	background-color: #424242;
+	margin: 0px;
+	padding: 0px;
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	color: #FFFFFF;
+	text-align: left;
+}.buttonTest {
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #000000;
+}
+.gameTitle {
+	color: #6F9FC8;
+}

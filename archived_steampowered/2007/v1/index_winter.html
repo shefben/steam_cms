@@ -1,0 +1,610 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Welcome to Steam</title>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="styles_global.css" rel="stylesheet" type="text/css">
+<link href="styles_home.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="minmax.js"></script>
+<script language="JavaScript" src="cookies.js"></script>
+<script language="JavaScript" src="collapse.js"></script>
+<script language="JavaScript" src="swfobject.js"></script>
+<script language="JavaScript" src="corners.js"></script>
+<style>
+		.inline { display: inline; }
+		div.capsuleImage { position:relative; }
+		div.capsuleLargeImage { position:relative; }
+	</style>
+</link></link></head>
+<body>
+<!-- image preloads -->
+<div style="display: none;">
+<img alt="" src="img/btn/btn_getSteam_ovr.gif"/>
+<img alt="" src="img/btn_right_wd_over.jpg"/>
+</div>
+<!-- header bar -->
+<div style="min-width:850px;">
+<div class="globalHeadBar_logo"><a href="http://www.steampowered.com"><img alt="Steam main" border="0" src="img/logo_steam_header.jpg"/></a></div>
+<div class="globalHeadBar">
+<div class="globalNavItem"><a href="v/index.php" title="Home"><span class="globalNavLink">HOME</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=news&amp;" title="News"><span class="globalNavLink">NEWS</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=getsteamnow&amp;" title="Get Steam"><span class="globalNavLink">GET STEAM NOW</span></a></div>
+<div class="globalNavItem"><a href="https://cafe.steampowered.com/" title="Cyber Cafes"><span class="globalNavLink">CYBER CAFÉS</span></a></div>
+<div class="globalNavItem"><a href="http://support.steampowered.com/" title="Support"><span class="globalNavLink">SUPPORT</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=forums&amp;" title="Forums"><span class="globalNavLink">FORUMS</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=stats&amp;" title="Status"><span class="globalNavLink">STATS</span></a></div>
+</div>
+</div>
+<br clear="all"/>
+<!-- end header bar -->
+<center>
+<div class="contentBG_home">
+<div class="headerBG_main">
+<!-- Left Collumn Content -->
+<div class="leftCol_home">
+<div class="leftCol_home_indent">
+<div id="get_steam_now">
+<table border="0" cellpadding="0" cellspacing="0" class="capsuleArea_header" height="73" width="574">
+<tr>
+<td height="73" valign="middle" width="250">
+<div class="btn_getSteam_slvr" onclick="location.href='index.php?area=getsteamnow'" onmouseout="this.style.background='url(img/btn/btn_getSteam.gif)'" onmouseover="this.style.background='url(img/btn/btn_getSteam_ovr.gif)'" style="CURSOR: pointer;" title="Click for Details">Get Steam Now !</div>
+</td>
+<td height="73" valign="top"><p>Join Steam for free and get games delivered straight to your desktop with automatic updates and a massive gaming community.</p></td>
+</tr>
+</table>
+</div>
+<span style="color: Silver;">
+<!-- banner -->
+<div id="first_2_banner" style="display: none;">
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="publisherArea_header" height="134" width="560">
+<tr>
+<td align="center" height="134" width="575"></td>
+</tr>
+</table>
+</div>
+<div id="capsule_0" style="display: none;">
+<!-- capsule 0 -->
+<div class="capsuleHuge" onclick="location.href='index.php?area=game&amp;AppId=2100&amp;';" onmouseout="this.className='capsuleHuge'; window.status='';" onmouseover="this.className='capsuleHuge_ovr'; window.status='index.php?area=game&amp;AppId=2100&amp;';">
+<div class="capsuleHugeImage"><img alt="Dark Messiah Might and Magic™" border="0" galleryimg="no" height="418" src="gfx/apps/2100/capsule_lrg.jpg" width="572"/></div>
+<div align="left" class="capsuleLargeText">The Critics are raving!</div><div align="right" class="capsuleLargeCost">$49.95</div></div>
+</div>
+<div id="first_three">
+<div class="inline" id="capsule_1">
+<!-- capsule 1 -->
+<div class="capsule" onclick="location.href='index.php?area=package&amp;SubId=116&amp;';" onmouseout="this.className='capsule'; window.status='';" onmouseover="this.className='capsule_ovr'; window.status='index.php?area=package&amp;SubId=116&amp;';">
+<div class="capsuleImage"><img alt="Xpand Rally + GTI Racing Pack" border="0" height="105" src="gfx/subs/116/capsule_sm.jpg" width="280"/></div>
+<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$29.95</div></div>
+</div>
+<div class="inline" id="capsule_2">
+<!-- capsule 2 -->
+<div class="capsule" onclick="location.href='index.php?area=package&amp;SubId=201&amp;';" onmouseout="this.className='capsule'; window.status='';" onmouseover="this.className='capsule_ovr'; window.status='index.php?area=package&amp;SubId=201&amp;';">
+<div class="capsuleImage"><img alt="Holiday 2006 Collection" border="0" height="105" src="gfx/subs/201/capsule_sm.jpg" width="280"/></div>
+<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$49.95</div></div>
+</div>
+</div>
+</span></div>
+<div id="first_three">
+<div class="inline" id="capsule_large">
+<br clear="all"/>
+<!-- Large capsule -->
+<div class="capsule_large_area">
+<div id="capsule_large_content">
+<div class="capsuleLarge" onclick="location.href='index.php?area=game&amp;AppId=2100&amp;';" onmouseout="this.className='capsuleLarge'; window.status='';" onmouseover="this.className='capsuleLarge_ovr'; window.status='index.php?area=game&amp;AppId=2100&amp;';">
+<div class="capsuleLargeImage"><img alt="Dark Messiah Might and Magic™" border="0" galleryimg="no" height="221" src="gfx/apps/2100/capsule_lrg.jpg" width="572"/></div>
+<div class="capsuleLargeText">The Critics are raving!</div><div class="capsuleLargeCost">$49.95</div></div>
+</div>
+</div>
+</div>
+<script type="text/javascript">;
+   var so = new SWFObject("swf/capsule_lg.swf", "movie", "578", "255", "8", "#282828");
+   so.addVariable("img1", "2100");
+   so.addVariable("txt1", "Dark Messiah Might and Magic&trade;");
+   so.addVariable("price1", "&#36;49.95");
+   so.addVariable("type1", "apps");
+   so.addVariable("img2", "4230");
+   so.addVariable("txt2", "RACE - The WTCC Game");
+   so.addVariable("price2", "&#36;44.95");
+   so.addVariable("type2", "apps");
+   so.addVariable("img3", "3970");
+   so.addVariable("txt3", "Prey");
+   so.addVariable("price3", "&#36;49.95");
+   so.addVariable("type3", "apps");
+   so.addVariable("img4", "4700");
+   so.addVariable("txt4", "Medieval II: Total War&trade;");
+   so.addVariable("price4", "&#36;49.95");
+   so.addVariable("type4", "apps");
+   so.addVariable("img5", "4000");
+   so.addVariable("txt5", "Garry's Mod");
+   so.addVariable("price5", "&#36;9.95");
+   so.addVariable("type5", "apps");
+   so.addVariable("urlparams", "");
+   so.write("capsule_large_content");
+</script>
+</div>
+<div class="leftCol_home_indent">
+<div class="inline" id="capsule_3_4">
+<br clear="all"/>
+<!-- capsule 3 -->
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1520&amp;';" onmouseout="this.className='capsule'; window.status='';" onmouseover="this.className='capsule_ovr'; window.status='index.php?area=game&amp;AppId=1520&amp;';">
+<div class="capsuleImage"><img alt="DEFCON" border="0" height="105" src="gfx/apps/1520/capsule_sm.jpg" width="280"/></div>
+<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$14.95</div></div>
+<div class="inline" id="capsule_4">
+<!-- capsule 4 -->
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1510&amp;';" onmouseout="this.className='capsule'; window.status='';" onmouseover="this.className='capsule_ovr'; window.status='index.php?area=game&amp;AppId=1510&amp;';">
+<div class="capsuleImage"><img alt="Uplink" border="0" height="105" src="gfx/apps/1510/capsule_sm.jpg" width="280"/></div>
+<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$9.95</div></div>
+</div>
+</div>
+<script language="javascript">
+
+function addEvent(el, ev, fn, useCapture)
+{
+	if(el.addEventListener)
+	{
+		el.addEventListener(ev, fn, useCapture);
+	}
+	else if(el.attachEvent)
+	{
+		var ret = el.attachEvent("on"+ev, fn);
+		return ret;
+	}
+	else
+	{
+		el["on"+ev] = fn;
+	}
+}
+
+var allTabs = new Array();
+function setupTabs()
+{
+	if(!document.getElementsByTagName)
+	{
+		return;
+	}
+	var pageDivs = document.getElementsByTagName("div");
+	var focalTab = 1; // tab to focus initially
+	var count = 0;
+	for(var x = 0; x < pageDivs.length; x++)
+	{
+		tempClassName = " "+pageDivs[x].className+" ";
+		if(tempClassName.indexOf(" listArea_tab ") != -1)
+		{
+			count++;
+			allTabs.push(pageDivs[x].id);
+			if(count == focalTab)
+			{
+				pageDivs[x].className = 'listArea_tab_focus';
+				document.getElementById(pageDivs[x].id+'_image_l').src = 'img/home/listArea_tab_focus_l.gif';
+				document.getElementById(pageDivs[x].id+'_image_r').src = 'img/home/listArea_tab_focus_r.gif';
+				contentTab = document.getElementById(pageDivs[x].id+'_content');
+				if(contentTab)
+				{
+					contentTab.style.display = '';
+				}
+			}
+			else
+			{
+				document.getElementById(pageDivs[x].id+'_image_l').src = 'img/home/listArea_tab_l.gif';
+				document.getElementById(pageDivs[x].id+'_image_r').src = 'img/home/listArea_tab_r.gif';
+				contentTab = document.getElementById(pageDivs[x].id+'_content');
+				if(contentTab)
+				{
+					contentTab.style.display = 'none';
+				}
+			}
+			addEvent(pageDivs[x], "mouseover", tab_hilite, false);
+			addEvent(pageDivs[x], "mouseout", tab_lolite, false);
+			addEvent(pageDivs[x], "click", tab_display, false);
+		}
+	}
+}
+function tab_hilite(e)
+{
+	var el = window.event ? window.event.srcElement : e ? e.target : null;
+	if(!el)
+	{
+		return;
+	}
+	el = getGoodElement(el,"div","listArea_tab",0);
+	if(el)
+	{
+		contentEl = document.getElementById(el.id+'_content');
+		if(contentEl.style.display == 'none')
+		{
+			el.className = 'listArea_tab_ovr';
+		}
+	}
+}
+function tab_lolite(e)
+{
+	var el = window.event ? window.event.srcElement : e ? e.target : null;
+	if(!el)
+	{
+		return;
+	}
+	el = getGoodElement(el,"div","listArea_tab_ovr",0);
+	if(el)
+	{
+		contentEl = document.getElementById(el.id+'_content');
+		if(contentEl.style.display == 'none')
+		{
+			el.className = 'listArea_tab';
+		}
+	}
+}
+function tab_display(e)
+{
+	var el = window.event ? window.event.srcElement : e ? e.target : null;
+	if(!el)
+	{
+		return;
+	}
+	el = getGoodElement(el,"div","listArea_tab_ovr",0);
+	if(el)
+	{
+		for(x=0;x<allTabs.length;x++)
+		{
+			document.getElementById(allTabs[x]).className = 'listArea_tab';
+			document.getElementById(allTabs[x]+'_image_l').src = 'img/home/listArea_tab_l.gif';
+			document.getElementById(allTabs[x]+'_image_r').src = 'img/home/listArea_tab_r.gif';
+			document.getElementById(allTabs[x]+'_content').style.display = 'none';
+		}
+
+		tabContent = document.getElementById(el.id+'_content');
+		tabContent.style.display = '';
+		el.className = 'listArea_tab_focus';
+		document.getElementById(el.id+'_image_l').src = 'img/home/listArea_tab_focus_l.gif';
+		document.getElementById(el.id+'_image_r').src = 'img/home/listArea_tab_focus_r.gif';
+		if(e && e.stopPropagation)
+		{
+			e.stopPropagation();
+		}
+		if(window.event)
+		{
+			window.event.cancelBubble = true;
+		}
+	}
+}		
+function getGoodElement(el,nn,cn,next)
+{
+	if(next == 1)
+	{
+		el = el.parentNode;
+	}
+	while(el.nodeName.toLowerCase() != nn && el.nodeName.toLowerCase() != "body")
+	{
+		el = el.parentNode;
+	}
+	thisClass = ' '+el.className+' ';
+	if(el.nodeName.toLowerCase() != "body" && thisClass.indexOf(' '+cn+' ') == -1)
+	{
+		return getGoodElement(el,nn,cn,1);
+	}
+	else if(thisClass.indexOf(' '+cn+' ') != -1)
+	{
+		return el;
+	}
+	return false;
+}
+addEvent(window, "load", setupTabs, false);
+var isIE = !window.opera && navigator.userAgent.indexOf('MSIE') != -1;
+
+
+</script>
+<div class="listArea">
+<br clear="all"/>
+<div class="listArea_tab" id="tab_1">
+<img align="absmiddle" id="tab_1_image_l" src="img/home/listArea_tab_l.gif"/><span class="listArea_tab_txt">Top Sellers</span><img align="absmiddle" id="tab_1_image_r" src="img/home/listArea_tab_r.gif"/>
+</div>
+<div class="listArea_tab" id="tab_2">
+<img align="absmiddle" id="tab_2_image_l" src="img/home/listArea_tab_l.gif"/><span class="listArea_tab_txt">Top Rated</span><img align="absmiddle" id="tab_2_image_r" src="img/home/listArea_tab_r.gif"/>
+</div>
+<!--
+	<div id="tab_3" class="listArea_tab">
+		<img id="tab_3_image_l" src="img/home/listArea_tab_l.gif" align="absmiddle"><span class="listArea_tab_txt">Hot Demos</span><img id="tab_3_image_r" src="img/home/listArea_tab_r.gif" align="absmiddle">
+	</div>
+	-->
+<br clear="left"/>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td height="6"><img height="6" src="img/_spacer.gif" width="6"/></td>
+<td align="right" height="6"><img height="6" src="img/home/listArea_tr.gif" width="6"/></td>
+</tr>
+<tr id="tab_1_content">
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=4000&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Garry's Mod" border="0" height="45" src="gfx/apps/4000/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Garry's Mod</div><br/>
+<div class="listArea_gamePrice">$9.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=10&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Counter-Strike" border="0" height="45" src="gfx/apps/10/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Counter-Strike</div><br/>
+<div class="listArea_gamePrice">$9.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=380&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Half-Life 2: Episode One" border="0" height="45" src="gfx/apps/380/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Half-Life 2: Episode One</div><br/>
+<div class="listArea_gamePrice">$19.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=300&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Day of Defeat: Source" border="0" height="45" src="gfx/apps/300/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Day of Defeat: Source</div><br/>
+<div class="listArea_gamePrice">$19.95</div>
+</div>
+</td>
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=240&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Counter-Strike: Source" border="0" height="45" src="gfx/apps/240/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Counter-Strike: Source</div><br/>
+<div class="listArea_gamePrice">$19.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=4230&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="RACE - The WTCC Game" border="0" height="45" src="gfx/apps/4230/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">RACE - The WTCC Game</div><br/>
+<div class="listArea_gamePrice">$44.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=package&amp;SubId=42&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Source Multiplayer Pack" border="0" height="45" src="gfx/subs/42/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Source Multiplayer Pack</div><br/>
+<div class="listArea_gamePrice">$29.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=4700&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Medieval II: Total War™" border="0" height="45" src="gfx/apps/4700/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Medieval II: Total War™</div><br/>
+<div class="listArea_gamePrice">$49.95</div>
+</div>
+</td>
+</tr>
+<tr id="tab_2_content" style="display:none;">
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=70&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Half-Life" border="0" height="45" src="gfx/apps/70/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Half-Life</div><br/>
+<div class="listArea_gamePrice">$9.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=3900&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Sid Meier's Civilization® IV" border="0" height="45" src="gfx/apps/3900/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Sid Meier's Civilization® IV</div><br/>
+<div class="listArea_gamePrice">$49.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=4700&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Medieval II: Total War™" border="0" height="45" src="gfx/apps/4700/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Medieval II: Total War™</div><br/>
+<div class="listArea_gamePrice">$49.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=10&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Counter-Strike" border="0" height="45" src="gfx/apps/10/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Counter-Strike</div><br/>
+<div class="listArea_gamePrice">$9.95</div>
+</div>
+</td>
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=220&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Half-Life 2" border="0" height="45" src="gfx/apps/220/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Half-Life 2</div><br/>
+<div class="listArea_gamePrice">$29.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=2620&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Call of Duty" border="0" height="45" src="gfx/apps/2620/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Call of Duty</div><br/>
+<div class="listArea_gamePrice">$19.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=3910&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Sid Meier's Civilization® III Complete" border="0" height="45" src="gfx/apps/3910/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Sid Meier's Civilization® III Complete</div><br/>
+<div class="listArea_gamePrice">$29.95</div>
+</div>
+<div class="listArea_game" onclick="location.href='index.php?area=game&amp;AppId=240&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Counter-Strike: Source" border="0" height="45" src="gfx/apps/240/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Counter-Strike: Source</div><br/>
+<div class="listArea_gamePrice">$19.95</div>
+</div>
+</td>
+</tr>
+<tr id="tab_3_content" style="display:none;">
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=package&amp;SubId=116&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Xpand Rally + GTI Racing Pack" border="0" height="45" src="gfx/subs/116/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Xpand Rally + GTI Racing Pack</div><br/>
+<div class="listArea_gamePrice">$29.95</div>
+</div>
+<p>hot demos</p>
+</td>
+<td valign="top">
+<div class="listArea_game" onclick="location.href='index.php?area=package&amp;SubId=116&amp;';" onmouseout="this.className='listArea_game';" onmouseover="this.className='listArea_game_ovr';">
+<div class="listArea_gameImage"><img alt="Xpand Rally + GTI Racing Pack" border="0" height="45" src="gfx/subs/116/capsule_sm_120.jpg" width="120"/></div>
+<div class="listArea_gameTitle">Xpand Rally + GTI Racing Pack</div><br/>
+<div class="listArea_gamePrice">$29.95</div>
+</div>
+<!-- tab_demos_right -->
+</td>
+</tr>
+<tr>
+<td height="6"><img height="6" src="img/home/listArea_bl.gif" width="6"/></td>
+<td align="right" height="6"><img height="6" src="img/home/listArea_br.gif" width="6"/></td>
+</tr>
+</table>
+</div>
+<div class="inline" style="display: none;">
+<br clear="all">
+<!-- capsule 5 -->
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1200&amp;';" onmouseout="this.className='capsule'; window.status='';" onmouseover="this.className='capsule_ovr'; window.status='index.php?area=game&amp;AppId=1200&amp;';">
+<div class="capsuleImage"><img alt="Red Orchestra: Ostfront 41-45" border="0" height="105" src="gfx/apps/1200/capsule_sm.jpg" width="280"/></div>
+<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$24.95</div></div>
+</br></div>
+<div class="inline" style="display: none;">
+<!-- capsule 6 -->
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=240&amp;';" onmouseout="this.className='capsule'; window.status='';" onmouseover="this.className='capsule_ovr'; window.status='index.php?area=game&amp;AppId=240&amp;';">
+<div class="capsuleImage"><img alt="Counter-Strike: Source" border="0" height="105" src="gfx/apps/240/capsule_sm.jpg" width="280"/></div>
+<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95</div></div>
+</div>
+
+<br clear="left">
+<div id="gear_and_stuff" style="display: inline;">
+<div align="center" class="Gear">
+<div class="GearTitle">Get The Gear!</div>
+<div class="GearText">Get your hands on the brand-new Half-Life® 2: Episode Two poster at the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> now!!! Also featuring official shirts, posters, hats and more!</div>
+</div>
+<div align="center" class="Stuff">
+<div class="StuffTitle">Free Stuff!</div>
+<div class="StuffText">In addition to a catalog of great games, your free Steam account gives you access to game <a href="v/index.php?area=free&amp;tab=demos&amp;">demos</a>, <a href="v/index.php?area=free&amp;tab=mods&amp;">mods</a>, <a href="v/index.php?area=free&amp;tab=videos&amp;">trailers</a> and more. Browse our <a href="v/index.php?area=free&amp;">Free Stuff</a> page for more details.</div>
+</div>
+</div>
+</br></div>
+</div>
+<!-- End Left Collumn Content -->
+<!-- Right Collumn Content -->
+<div class="rightCol_home">
+<div class="rightFindSearch">
+<form action="index.php" id="searchform" name="searchform">
+<input name="area" type="hidden" value="search"/>
+<input name="genre" type="hidden" value=""/>
+<table border="0" cellpadding="0" cellspacing="0" width="300">
+<tr>
+<td width="20"> </td>
+<td width="200"><input id="searchterm" maxlength="64" name="term" size="35" type="text"/></td>
+<td><a class="btn_search" href="v/" onclick="document.searchform.submit();">Search</a></td>
+</tr>
+</table>
+</form>
+</div>
+<div class="usr_edit_right_header"><div style="float:left; ">Find More...</div></div>
+<div class="rightFindMore">
+<table align="center" border="0" cellpadding="0" cellspacing="0" height="57" width="310">
+<tr>
+<td align="center"> </td>
+<td align="center" width="90"><a href="v/index.php?area=all&amp;"><img border="0" height="16" src="img/ico/ico_mouse_lg.gif" width="26"/><br/>Games</a></td>
+<td align="center" width="90"><a href="v/index.php?area=free&amp;tab=demos&amp;"><img border="0" height="16" src="img/ico/ico_demo.gif" width="26"/><br/>Demos</a></td>
+<td align="center" width="90"><a href="v/index.php?area=free&amp;tab=videos&amp;"><img border="0" height="16" src="img/ico/ico_film_lg.gif" width="26"/><br/>Trailers</a></td>
+<td align="center"> </td>
+</tr>
+</table>
+</div>
+<div class="usr_edit_right_header"><div style="float:left; ">Spotlight</div></div>
+<div class="spotlight">
+<h1>PayPal Now on Steam</h1>
+<div class="spotlight_game">
+<div class="listArea_gameImage"><img alt="Paypal + Steam" border="0" height="45" src="img/promo/paypal.jpg" width="270"/></div>
+</div>
+<div>
+<p>Now you can shop on Steam and pay using your PayPal account.</p>
+</div><img alt="" height="8" src="img/home/spotlight_bg_cap.gif" width="288"/></div>
+<div class="usr_edit_right_header"><div style="float:left; ">Latest News</div></div>
+<div class="rightLink_news_area" style="height: auto;">
+<ul>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=853&amp;">Garry's Mod Update Released</a></li>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=852&amp;">Race - The WTCC Game Update Released</a></li>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=851&amp;">Source Engine update released</a></li>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=850&amp;">Garry's Mod Available Now</a></li>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=849&amp;">Source Engine update released</a></li>
+<li><a class="rightLink_news" href="v/index.php?area=news&amp;id=848&amp;">Race - The WTCC Game Update Released</a></li>
+</ul>
+<a class="rightLink_moreNews" href="v/index.php?area=news&amp;"><img border="0" height="11" src="img/ico/ico_arrow_green_wd.gif" width="22">  Read more news</img></a>
+</div>
+<div id="publisher_catalog" style="display: block;">
+<div class="usr_edit_right_header"><div style="float:left; ">Publisher Catalogs</div></div>
+<div class="rightLink_find_area">
+<a class="rightLink_find" href="v/index.php?publisher=2kgames&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28">   2K Games </img></a>
+<a class="rightLink_find" href="v/index.php?publisher=majesco&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28">   Majesco </img></a>
+<a class="rightLink_find" href="v/index.php?publisher=strategyfirst&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28"/>   Strategy First </a>
+</div>
+<div class="rightLink_find_area">
+<a class="rightLink_find" href="v/index.php?publisher=activision&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28"/>   Activision </a>
+<a class="rightLink_find" href="v/index.php?publisher=popcap&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28"/>   Popcap </a>
+<a class="rightLink_find" href="v/index.php?publisher=valve&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28"/>   Valve </a>
+</div>
+<br clear="left">
+<div class="rightColHr"></div>
+</br></div>
+<div class="usr_edit_right_header" id="browseCatalog" onclick="toggle_section( 'browseCatalog' );" style="cursor: pointer;">
+<div style="float:left; ">Browse The Catalog</div>
+<div class="usr_edit_right_control" style="cursor: pointer;"><img border="0" height="14" id="browseCatalog_header" width="14"/></div>
+</div>
+<div id="browseCatalog_content">
+<div class="rightLink_find_area">
+<a class="rightLink_browse" href="v/index.php?area=all&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28">   All Games </img></a>
+<a class="rightLink_browse" href="v/index.php?area=browse&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28"/>   Browse Games </a>
+<a class="rightLink_browse" href="v/index.php?area=free&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28"/>   Free Stuff</a>
+</div>
+<div class="rightLink_find_area">
+<a class="rightLink_find" href="v/index.php?area=free&amp;tab=demos&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28"/>   Demos </a>
+<a class="rightLink_find" href="v/index.php?area=free&amp;tab=videos&amp;"><img border="0" height="11" src="img/ico/ico_arrow_grey.gif" width="28"/>   Videos </a>
+</div>
+<br clear="left">
+<div class="rightColHr"></div>
+</br></div>
+<script>
+					check_section( 'browseCatalog', 'open' );
+					</script>
+<div class="usr_edit_right_header" id="newOnSteam" onclick="toggle_section( 'new_on_steam' );" style="cursor: pointer;">
+<div style="float:left; ">New On Steam</div>
+<div class="usr_edit_right_control" style="cursor: pointer;"><img border="0" height="14" id="new_on_steam_header" width="14"/></div>
+</div>
+<div id="new_on_steam_content">
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=3970&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif">  Prey <span class="rightLink_newDate_gr"> (Nov 30, 2006)</span></img></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=943&amp;"><img align="absmiddle" border="0" src="img/ico/ico_film_13.gif"/>  Prey Trailer <span class="rightLink_newDate_gr"> (Nov 30, 2006)</span></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=4000&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"/>  Garry's Mod <span class="rightLink_newDate_gr"> (Nov 29, 2006)</span></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=4230&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"/>  RACE - The WTCC Game <span class="rightLink_newDate_gr"> (Nov 24, 2006)</span></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=4800&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"/>  Heroes of Annihilated Empires <span class="rightLink_newDate_gr"> (Nov 22, 2006)</span></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=2420&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"/>  The Ship Single Player <span class="rightLink_newDate_gr"> (Nov 20, 2006)</span></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=4810&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"/>  Heroes of Annihilated Empires Demo <span class="rightLink_newDate_gr"> (Nov 16, 2006)</span></a>
+<a class="rightLink" href="v/index.php?area=game&amp;AppId=4700&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"/>  Medieval II: Total War™ <span class="rightLink_newDate_gr"> (Nov 15, 2006)</span></a>
+<br clear="all"/>
+</div>
+<script>
+					check_section( 'new_on_steam', 'closed' );
+					</script>
+</div>
+<!-- End Right Collumn Content -->
+</div>
+<br clear="left">
+</br></div>
+<!-- Footer Content -->
+<div class="footer">
+<form action="index.php">
+<input name="area" type="hidden" value="main"/>
+<table background="img/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
+<tr>
+<td background="img/img_footer_l.jpg" height="73" width="12"> </td>
+<td align="center" width="110"><a href="http://www.valvesoftware.com"><img alt="link: Valve Software" border="0" height="26" src="img/logo_valve_footer.jpg" width="92"/></a></td>
+<td>
+<div class="legal">
+<select name="l" onchange="submit();">
+<option selected="" value="english">English</option>
+<option id="l_french" value="french">French</option>
+<option id="l_german" value="german">German</option>
+<option id="l_italian" value="italian">Italian</option>
+<option id="l_japanese" value="japanese">Japanese</option>
+<option id="l_korean" value="korean">Korean</option>
+<option id="l_polish" value="polish">Polish</option>
+<option id="l_portuguese" value="portuguese">Portuguese</option>
+<option id="l_russian" value="russian">Russian</option>
+<option id="l_schinese" value="schinese">Simplified Chinese</option>
+<option id="l_tchinese" value="tchinese">Traditional Chinese</option>
+<option id="l_spanish" value="spanish">Spanish</option>
+<option id="l_thai" value="thai">Thai</option>
+</select><br>
+
+				© 2006 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br>
+<a href="http://www.valvesoftware.com/privacy.htm"> Privacy Policy.</a> <a href="http://www.valvesoftware.com/legal.htm">Legal.</a> <a href="http://www.steampowered.com/index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a>
+</br></br></div>
+</td>
+<td background="img/img_footer_r.jpg" height="73" width="14"> </td>
+</tr>
+</table>
+</form>
+</div>
+<!-- End Footer Content  -->
+<br>
+</br></center>
+</body>
+</html>
+<!-- using cluster #50 -->
+<!-- Fri, 01 Dec 2006 01:28:40 -0800 -->
+<!-- adversus server -->
+<!-- total exec time: 0.11993598938 -->
+<!-- db exec time: 0.012836933136 -->

@@ -1,0 +1,225 @@
+/* CSS Document */
+
+#home_area_steamPromo {
+	width: 897px;
+	height: 118px;
+	margin-left: 25px !important;
+	margin-left: 12px;
+	margin-top: 25px;
+	margin-bottom: 15px;
+	float: left;
+	background-image: url('images/steam_promo_1.jpg');
+	background-repeat: no-repeat;
+}
+#home_area_steamPromo_portal {
+	width: 897px;
+	height: 118px;
+	margin-left: 25px !important;
+	margin-left: 12px;
+	margin-top: 25px;
+	margin-bottom: 15px;
+	float: left;
+	background-image: url('images/steam_promo_2.jpg');
+	background-repeat: no-repeat;
+	cursor:pointer;
+}
+#home_area_steamPromo_getSteam {
+	width: 897px;
+	margin-left: 25px !important;
+	margin-left: 12px;
+	margin-bottom: 2px;
+	float: left;
+}
+#portalPromo_leftCol 
+{
+	width: 345px;
+	text-align:right;
+	float: left;
+	margin-top: 35px;
+}
+#portalPromo_leftCol h1 
+{
+	font-size: 20px;
+	margin:0px;
+	padding:0px;
+	color: #FFFFFF;
+}
+#portalPromo_centerCol 
+{
+	width: 220px;
+	float: left;
+}
+#portalPromo_rightCol 
+{
+	width: 310px;
+	float: left;
+	text-align:left;
+	margin-top: 45px;
+}
+#portalPromo_rightCol p 
+{
+	font-size:11px;
+}
+#portalPromo_rightCol p strong 
+{
+	color:#FFFFFF;
+}
+/* ================================================================================================== */
+/* ---- [ Left Column ] ---- */
+#home_area_news {
+	margin-top: 35px;
+}
+#home_area_catalogs {
+	margin-top: 35px;
+}
+#home_area_steam {
+	margin-top: 35px;
+}
+
+/* ================================================================================================== */
+/* ---- [ Right Column ] ---- */
+#home_area_spotlight {
+}
+#home_area_spotlight_img {
+	width: 223px;
+	height: 45px;
+}
+#home_area_spotlight h3 {
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-image: none;
+	text-transform: none;
+}
+#home_area_steam_news 
+{
+	margin-top: 0px;
+	margin-bottom: 45px;
+}
+#home_area_news_list li a 
+{
+	font-size: 9px;
+}
+#home_area_videos_list li a 
+{
+	font-size: 9px;
+}
+#home_area_demos_list li a 
+{
+	font-size: 9px;
+}
+/* ======================================================= */
+#home_area_videos {
+	margin-bottom: 45px;
+}
+#home_area_videos_banner {
+	width: 46px;
+	height: 46px;
+	float: left;
+	background-image: url('images/banner_video.gif');
+}
+/* ======================================================= */
+#home_area_demos {
+	margin-bottom: 45px;
+}
+#home_area_demos_banner {
+	width: 46px;
+	height: 46px;
+	float: left;
+	background-image: url('images/banner_demo.gif');
+}
+
+/* ================================================================================================== */
+/* ---- [ Center Column ] ---- */
+#home_area_capsule_lrg {
+	width: 467px;
+	height: 225px;
+	background-color: #4A4945;
+	margin: 5px !important;
+	margin: 5px 5px 5px 2px;
+	float: left;
+}
+#home_area_capsule_huge {
+	width: 467px;
+	height: 366px;
+	margin: 5px !important;
+	margin: 5px 5px 5px 2px;
+	float: left;
+	vertical-align:top;
+}
+.home_area_capsule_sm {
+	width: 231px;
+	margin-left: 5px !important;
+	margin-left: 3px;
+	float: left;
+}
+.home_area_capsule_sm a
+{
+	color: #CFCBC2;
+}
+.home_area_capsule_sm a:hover
+{
+	color: #FFFFFF;
+}
+.home_area_capsule_sm img{
+	width: 231px;
+	height: 87px;
+	background-color: #000000;
+}
+.home_area_capsule_sm h4 {
+	margin: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	text-align: left;
+	font-weight: normal;
+}
+.home_area_capsule_sm h5 {
+	margin: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height:10px;
+	text-align: left;
+	font-weight: normal;
+	height: 10px;
+}
+#col_center_features h5 {
+	margin: 5px 0px 5px 5px;
+	font-family:"Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #CFCBC2;
+	text-transform: uppercase;
+}
+/* ======================== */
+/* ---- [ Web Comics ] ---- */
+.home_area_extras_header h2 {
+	background-image: url('images/h2_under.gif');
+	background-repeat: repeat-x;
+	background-position: bottom;
+	padding-bottom: 3px;
+	margin-top: 25px;
+}
+.home_area_extras_bg {
+	background-color:#2F3030;
+	height:65px;
+	margin: 2px 0px 2px 0px;
+	padding: 0px;
+}
+.home_area_extras_bg img {
+	padding: 0px;
+	margin: 0px 10px 0px 0px;
+}
+.home_area_extras_bg a {
+	margin-top: 0px;
+	padding-top: 8px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #6EBCFF;
+	text-transform: none;
+}
+.home_area_extras_bg a:hover {
+	color:#FFFFFF;
+}
