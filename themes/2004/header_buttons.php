@@ -56,16 +56,10 @@ else $page_title = $site_title . " " . $page_title;
 </head>
 <body>
 <?php
-$default_logo = file_exists($root.'/content/logo.png')?'/cms/content/logo.png':'/img/steam_logo_onblack.gif';
-$data_json = cms_get_setting('header_config', null);
-$data = $data_json?json_decode($data_json,true):['logo'=>$default_logo,'buttons'=>[]];
-if(!$data) $data=['logo'=>$default_logo,'buttons'=>[]];
+$header = cms_get_theme_header_data('2004');
 $override = $GLOBALS['CMS_CUSTOM_LOGO'] ?? null;
-if($override){
-    $data['logo'] = $override;
-}
+$logo = $override ?: ($header['logo'] ?: '/img/steam_logo_onblack.gif');
 $nav_html = cms_header_buttons_html('2004');
-$logo = $data['logo'];
 if($logo && $logo[0]=='/') $logo = $base.$logo;
 echo "<div class=\"header\" ><nobr>";
 echo '<div><a href="'.htmlspecialchars($base).'/index.php"><img alt="Steam main" border="0" src="'.htmlspecialchars($logo).'"></a></div>';

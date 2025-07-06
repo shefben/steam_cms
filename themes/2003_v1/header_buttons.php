@@ -37,12 +37,7 @@ a:hover { color: #fff; font-weight: normal }
 <tr>
 <td align="left" colspan="2" height="36" valign="top" width="451">
 <div align="right">
-<a href="<?php echo htmlspecialchars($base); ?>/index.php">Home</a> |
-<a href="<?php echo htmlspecialchars($base); ?>/support/index.php">Support</a> |
-<a href="http://www.steampowered.com/forums?boardid=1041">Forums</a> |
-<a href="<?php echo htmlspecialchars($base); ?>/support/bugfixes.php">Bugs</a> |
-<a href="<?php echo htmlspecialchars($base); ?>/support/index.php#TroubleshootingAnchor">Troubleshooting</a> |
-<a href="<?php echo htmlspecialchars($base); ?>/support/index.php#ContactAnchor">Contact</a>
+<?php echo cms_header_buttons_html('2003_v1','color:#d8ded3'); ?>
 </div>
 </td>
 <td height="36" width="13"></td>

@@ -57,3 +57,6 @@ All notable changes to this project will be documented in this file.
 - Fixed 2003_v1 and 2002_v2 themes to load HTML from their own directories rather than the archive.
 - Restored 2003 compatibility check on network status page.
 - News listing shows full articles again with a line break inserted around 230 characters.
+- Added theme_headers and theme_footers tables with admin editing per theme
+- Added {nav_buttons} template tag for navigation buttons
+- Navigation buttons now show images when available and use theme-defined spacers

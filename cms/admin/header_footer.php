@@ -3,11 +3,11 @@ require_once 'admin_header.php';
 cms_require_permission('manage_settings');
 
 $base = cms_base_url();
-$default_logo = file_exists(__DIR__.'/../content/logo.png') ? $base.'/cms/content/logo.png' : $base.'/img/steam_logo_onblack.gif';
+$theme_list = array_filter(cms_get_themes(), fn($t)=>substr($t,-6) !== '_admin');
+$theme = $_GET['theme'] ?? ($_POST['theme'] ?? ($theme_list[0] ?? ''));
 $logo_files = array_map('basename', glob(__DIR__.'/../img/steam_logo_onblack*.gif'));
-$json = cms_get_setting('header_config', null);
-$data = $json?json_decode($json,true):['logo'=>$default_logo,'buttons'=>[]];
-if(!$data) $data=['logo'=>$default_logo,'buttons'=>[]];
+$data = cms_get_theme_header_data($theme);
+$footer_html = cms_get_theme_footer($theme);
 
 if(isset($_POST['reorder']) && isset($_POST['order'])){
     $indices = array_map('intval', explode(',', $_POST['order']));
@@ -17,7 +17,12 @@ if(isset($_POST['reorder']) && isset($_POST['order'])){
         if(isset($buttons[$i])) $reordered[] = $buttons[$i];
     }
     $data['buttons'] = $reordered;
-    cms_set_setting('header_config', json_encode($data));
+    $db = cms_get_db();
+    $db->prepare('DELETE FROM theme_headers WHERE theme=?')->execute([$theme]);
+    $ins = $db->prepare('INSERT INTO theme_headers(theme,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,1,?)');
+    foreach($reordered as $ord=>$b){
+        $ins->execute([$theme,$ord,$data['logo'],$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$data['spacer'] ?? '']);
+    }
     if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
         echo 'ok';
     }
@@ -27,7 +32,6 @@ if(isset($_POST['reorder']) && isset($_POST['order'])){
 $no_header_pages = cms_get_setting('no_header_pages','');
 $header_bar_pages = cms_get_setting('header_bar_pages','');
 $no_footer_pages = cms_get_setting('no_footer_pages','');
-$footer_html = cms_get_setting('footer_html','');
 $logo_overrides = cms_get_setting('page_logo_overrides','');
 
 if(isset($_POST['upload_logo']) && isset($_FILES['new_logo']) && is_uploaded_file($_FILES['new_logo']['tmp_name'])){
@@ -39,12 +43,12 @@ if(isset($_POST['upload_logo']) && isset($_FILES['new_logo']) && is_uploaded_fil
     } while(file_exists($path));
     move_uploaded_file($_FILES['new_logo']['tmp_name'], $path);
     $data['logo'] = '/img/' . $fname;
-    cms_set_setting('header_config', json_encode($data));
     $logo_files[] = $fname;
     echo '<p>Logo uploaded.</p>';
 }
 
 if(isset($_POST['save'])){
+    $theme = $_POST['theme'];
     $logo = isset($_POST['logo_choice']) ? trim($_POST['logo_choice']) : trim($_POST['logo']);
     $buttons = $_POST['buttons'] ?? [];
     $out = [];
@@ -74,17 +78,24 @@ if(isset($_POST['save'])){
         ];
     }
     $data = ['logo'=>$logo,'buttons'=>$out];
-    cms_set_setting('header_config', json_encode($data));
+    $db = cms_get_db();
+    $db->prepare('DELETE FROM theme_headers WHERE theme=?')->execute([$theme]);
+    $ins = $db->prepare('INSERT INTO theme_headers(theme,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,1,?)');
+    $spacer = $data['spacer'] ?? '';
+    foreach($out as $ord=>$b){
+        $ins->execute([$theme,$ord,$logo,$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$spacer]);
+    }
+    $db->prepare('REPLACE INTO theme_footers(theme,html) VALUES(?,?)')->execute([$theme,$_POST['footer_html']]);
     cms_set_setting('no_header_pages', trim($_POST['no_header_pages']));
     cms_set_setting('header_bar_pages', trim($_POST['header_bar_pages']));
     cms_set_setting('no_footer_pages', trim($_POST['no_footer_pages']));
-    cms_set_setting('footer_html', $_POST['footer_html']);
     cms_set_setting('page_logo_overrides', trim($_POST['logo_overrides']));
     $no_header_pages = trim($_POST['no_header_pages']);
     $header_bar_pages = trim($_POST['header_bar_pages']);
     $no_footer_pages = trim($_POST['no_footer_pages']);
     $footer_html = $_POST['footer_html'];
     $logo_overrides = trim($_POST['logo_overrides']);
+    $data = cms_get_theme_header_data($theme);
     echo '<p>Settings saved.</p>';
 }
 if(isset($_POST['add'])){
@@ -92,7 +103,13 @@ if(isset($_POST['add'])){
 }
 ?>
 <h2>Header &amp; Footer</h2>
+<label>Theme: <select id="theme-select" name="theme" onchange="location.href='header_footer.php?theme='+this.value;">
+<?php foreach($theme_list as $t): ?>
+  <option value="<?php echo htmlspecialchars($t); ?>" <?php if($t==$theme) echo 'selected'; ?>><?php echo htmlspecialchars($t); ?></option>
+<?php endforeach; ?>
+</select></label>
 <form method="post" enctype="multipart/form-data">
+<input type="hidden" name="theme" value="<?php echo htmlspecialchars($theme); ?>">
 <p>Current logo:</p>
 <?php $logo = $data['logo']; if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
 <img src="<?php echo htmlspecialchars($logo); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>
@@ -144,7 +161,8 @@ function sendOrder(){
     var data=new URLSearchParams();
     data.set('reorder','1');
     data.set('order',ids.join(','));
-    fetch('header_footer.php',{method:'POST',body:data});
+    var theme=document.getElementById('theme-select').value;
+    fetch('header_footer.php?theme='+encodeURIComponent(theme),{method:'POST',body:data});
 }
 var sortable = new Sortable(tbody, {handle: '.handle', onEnd: sendOrder});
 

@@ -163,34 +163,80 @@ function cms_base_url(){
     return $dir === '/' ? '' : $dir;
 }
 
-function cms_header_buttons_html($theme){
-    $json = cms_get_setting('header_config', null);
-    $data = $json ? json_decode($json, true) : ['logo'=>'','buttons'=>[]];
-    if(!$data) $data = ['logo'=>'','buttons'=>[]];
+function cms_get_theme_header_data($theme){
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT logo,text,img,hover,depressed,url,visible,spacer FROM theme_headers WHERE theme=? ORDER BY ord,id');
+        $stmt->execute([$theme]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if(!$rows) return ['logo'=>'','spacer'=>'','buttons'=>[]];
+        $logo = $rows[0]['logo'];
+        $spacer = $rows[0]['spacer'];
+        $buttons = [];
+        foreach($rows as $r){
+            $buttons[] = [
+                'text'=>$r['text'],
+                'img'=>$r['img'],
+                'hover'=>$r['hover'],
+                'depressed'=>$r['depressed'],
+                'url'=>$r['url'],
+                'visible'=>$r['visible']
+            ];
+        }
+        return ['logo'=>$logo,'spacer'=>$spacer,'buttons'=>$buttons];
+    } catch(PDOException $e){
+        if($e->getCode()==='42S02') return ['logo'=>'','spacer'=>'','buttons'=>[]];
+        throw $e;
+    }
+}
+
+function cms_get_theme_footer($theme){
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT html FROM theme_footers WHERE theme=?');
+        $stmt->execute([$theme]);
+        $html = $stmt->fetchColumn();
+        if($html===false) return '';
+        return str_replace('{BASE}', cms_base_url(), $html);
+    } catch(PDOException $e){
+        if($e->getCode()==='42S02') return '';
+        throw $e;
+    }
+}
+
+function cms_header_buttons_html($theme, string $spacer_style = ''){
+    $data = cms_get_theme_header_data($theme);
     $buttons = $data['buttons'];
+    $spacer  = $data['spacer'] ?? '';
     $out = '';
-    if($theme === '2007'){
-        $sep = '';
-        foreach($buttons as $b){
-            $text = trim($b['text'] ?? $b['alt'] ?? '');
-            if($text === '') continue;
-            $url = htmlspecialchars($b['url']);
-            $out .= $sep.'<a class="headerLink" href="'.$url.'">'.htmlspecialchars($text).'</a>';
-            $sep = ' &nbsp; | &nbsp; ';
-        }
-    }elseif($theme === '2004' || $theme === '2005_v1' || $theme === '2005_v2'){
-        foreach($buttons as $b){
-            $text = trim($b['text'] ?? $b['alt'] ?? '');
-            if($text === '') continue;
-            $url = htmlspecialchars($b['url']);
+    $first = true;
+    foreach($buttons as $b){
+        if(!$b['visible']) continue;
+        $text = trim($b['text']);
+        $url  = htmlspecialchars($b['url']);
+        $segment = '';
+        if($b['img']){
+            $img = htmlspecialchars($b['img']);
+            $alt = htmlspecialchars($text);
+            $segment = '<a href="'.$url.'"><img src="'.$img.'" alt="'.$alt.'"></a>';
+        }else{
             $title = htmlspecialchars($text);
-            $label = htmlspecialchars($text);
-            $out .= '<div class="globalNavItem"><a href="'.$url.'" title="'.$title.'"><span class="globalNavLink">'.$label.'</span></a></div>';
+            $segment = '<a href="'.$url.'" title="'.$title.'">'.$title.'</a>';
         }
-        if(cms_current_admin() || isset($_COOKIE['cms_admin_token'])){
-            $base = cms_base_url();
-            $out .= '<div class="globalNavItem"><a href="'.$base.'/cms/admin/index.php" title="Admin"><span class="globalNavLink">ADMIN</span></a></div>';
+        if(!$first && $spacer !== ''){
+            $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
+            $out .= '<span class="navSpacer"'.$style.'>'.htmlspecialchars($spacer).'</span>';
         }
+        $out .= $segment;
+        $first = false;
+    }
+    if(cms_current_admin() || isset($_COOKIE['cms_admin_token'])){
+        if(!$first && $spacer !== ''){
+            $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
+            $out .= '<span class="navSpacer"'.$style.'>'.htmlspecialchars($spacer).'</span>';
+        }
+        $base = cms_base_url();
+        $out .= '<a href="'.$base.'/cms/admin/index.php" title="Admin">ADMIN</a>';
     }
     return $out;
 }

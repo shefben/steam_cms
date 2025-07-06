@@ -20,12 +20,20 @@ function cms_render_template($path, $vars=[]){
     $vars['THEME_URL'] = ($base_url ? $base_url : '') . "/themes/$theme";
     $html = file_get_contents($path);
     $process = function($text) use ($config){
-        return preg_replace_callback('/\{news_(full_article|partial_article|small_abstract|link_only|index_summary|index_summary_date|index_brief)(?:\((\d+)\))?\}/i',
+        $text = preg_replace_callback('/\{news_(full_article|partial_article|small_abstract|link_only|index_summary|index_summary_date|index_brief)(?:\((\d+)\))?\}/i',
             function($m) use ($config){
                 $type = strtolower($m[1]);
                 $count = isset($m[2])? (int)$m[2] : ($config['news_count'] ?? null);
                 return cms_render_news($type,$count);
             }, $text);
+        $text = preg_replace_callback('/\{nav_buttons(?:\(([^}]+)\))?\}/i',
+            function($m){
+                $args = isset($m[1]) ? array_map('trim', explode(',', $m[1], 2)) : [];
+                $theme = $args[0] !== '' ? $args[0] : cms_get_setting('theme','2004');
+                $style = $args[1] ?? '';
+                return cms_header_buttons_html($theme, $style);
+            }, $text);
+        return $text;
     };
     $html = $process($html);
     // ensure theme-specific stylesheet paths

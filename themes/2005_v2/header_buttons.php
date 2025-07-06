@@ -6,11 +6,9 @@ $theme_url = $theme_url ?? (($base? $base : '').'/themes/2005_v2');
 $site_title = cms_get_setting("site_title","Steam");
 if(!isset($page_title) || $page_title==="") $page_title = $site_title;
 else $page_title = $site_title . " " . $page_title;
-$default_logo = file_exists($root.'/content/logo.png')? $base.'/cms/content/logo.png' : $base.'/img/steam_logo_onblack.gif';
-$data_json = cms_get_setting('header_config', null);
-$data = $data_json?json_decode($data_json,true):['logo'=>$default_logo];
+$header = cms_get_theme_header_data('2005_v2');
 $override = $GLOBALS['CMS_CUSTOM_LOGO'] ?? null;
-$logo = $override ?: (isset($data['logo'])?$data['logo']:$default_logo);
+$logo = $override ?: ($header['logo'] ?: '/img/steam_logo_onblack.gif');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
