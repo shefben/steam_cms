@@ -1,5 +1,5 @@
 <?php
-session_start();
+use Dom\HTMLCollection;session_start();
 if(file_exists(__DIR__.'/cms/config.php')){
     echo 'CMS already installed.';
     exit;
@@ -331,9 +331,9 @@ $pdo->exec("CREATE TABLE bw_history (
 <div class="footer">
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <td><a href="/valvesoftware"><img src="{BASE}/img/valve_greenlogo.gif"></a></td>
+            <td><a href="/valvesoftware"><img src="{BASE}/themes/2004/images/valve_greenlogo.gif"></a></td>
             <td>&nbsp;</td>
-            <td><span class="footerfix">© 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="/valvesoftware/privacy.htm">Privacy Policy</a>. <a href="/valvesoftware/legal.htm">Legal</a>. <a href="/subscriber_agreement.php">Steam Subscriber Agreement</a>.</span></td>
+            <td><span class="footerfix">© 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="{BASE}/index.php?area=privacy">Privacy Policy</a>. <a href="{BASE}/index.php?area=legal">Legal</a>. <a href="{BASE}/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
             <td width="15%">&nbsp;</td>
         </tr>
     </table>
@@ -396,7 +396,7 @@ HTML;
                 'smtp_user'=>'',
                 'smtp_pass'=>'',
                 'header_overrides'=>'',
-                'header_config'=>json_encode(['logo'=>'/img/steam_logo_onblack.gif','buttons'=>$header_buttons]),
+                'header_config'=>json_encode(['logo'=>'{BASE}/themes/2004/images/valve_head.gif','buttons'=>$header_buttons]),
                 'footer_html'=>$footer,
                 'favicon'=>'/favicon.ico',
                 'error_html'=>$error_html,
@@ -411,98 +411,418 @@ HTML;
             $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated) VALUES(?,?,?,?,?, ?,NOW())');
             $pageStmt->execute(['subscriber_agreement','Steam Subscriber Agreement',$sa_html,null,null,date('Y-m-d H:i:s')]);
 
-            $header_buttons_seed = [
-                ['url'=>'/news.php','text'=>'news'],
-                ['url'=>'/getsteamnow.php','text'=>'getSteamNow'],
-                ['url'=>'/cybercafes.php','text'=>'Cyber Cafes'],
-                ['url'=>'/support.php','text'=>'Support'],
-                ['url'=>'/forums.php','text'=>'Forums'],
-                ['url'=>'/status/status.html','text'=>'Status'],
+            /* -----------------------------------------------------------
+             *  HEADER-BAR SEEDS
+             * --------------------------------------------------------- */
+
+            $default_buttons = [
+                ['url'=>'{BASE}/index.php?area=news',          'text'=>'news'],
+                ['url'=>'{BASE}/index.php?area=getsteamnow',   'text'=>'getSteamNow'],
+                ['url'=>'{BASE}/index.php?area=cybercafes',    'text'=>'Cyber Cafes'],
+                ['url'=>'{BASE}/support.php',       'text'=>'Support'],
+                ['url'=>'{BASE}/index.php?area=forums',        'text'=>'Forums'],
+                ['url'=>'{BASE}/status/status.php','text'=>'Status'],
             ];
+
+            /* theme-specific overrides                                    */
+            $button_overrides = [
+                /* 2003_v1 → Support | Forums | Contact ------------------ */
+                '2003_v1' => [
+                    ['url'=>'{BASE}/support.php',   'text'=>'Support'],
+                    ['url'=>'{BASE}/index.php?area=forums',    'text'=>'Forums'],
+                    ['url'=>'{BASE}/contact.php',   'text'=>'Contact'],
+                ],
+
+                /* 2002_v2 → Try Steam Now! | Steam Support Site | Valve Home */
+                '2002_v2' => [
+                    ['url'=>'{BASE}/getsteamnow.php','text'=>'Try Steam Now!'],
+                    ['url'=>'{BASE}/support.php',   'text'=>'Steam Support Site'],
+                    ['url'=>'http://www.valvesoftware.com','text'=>'Valve Home'],
+                ],
+            ];
+
+            /* -----------------------------------------------------------
+             *  LOGOS PER THEME
+             * --------------------------------------------------------- */
             $logos = [
-                '2002_v2'=>'/img/steam_logo_onblack.gif',
-                '2003_v1'=>'/themes/2003_v1/images/SteamTM.jpg',
-                '2003_v2'=>'/themes/2003_v2/img/steam_logo_onblack.gif',
-                '2004'=>'/img/steam_logo_onblack.gif',
-                '2005_v1'=>'/img/steam_logo_onblack.gif',
-                '2005_v2'=>'/img/steam_logo_onblack.gif'
+                '2002_v1' => '',   // special-case: no header bar
+                '2002_v2' => '{BASE}/themes/2002_v2/images/LOGO_Steam2.gif',
+                '2003_v1' => '{BASE}/themes/2003_v1/images/LOGO_Steam2.gif',
+                '2003_v2' => '{BASE}/themes/2003_v2/images/valve_head.gif',
+                '2004'    => '{BASE}/themes/2004/images/valve_head.gif',
+                '2005_v1' => '{BASE}/themes/2005_v1/images/Logo_VALVE.gif',
+                '2005_v2' => '{BASE}/themes/2005_v2/images/Logo_VALVE.gif',
+                '2006_v1' => '{BASE}/themes/2006_v1/images/logo_steam_header.jpg',
+                '2006_v2' => '{BASE}/themes/2006_v2/images/logo_steam_header.jpg',
             ];
-            $thStmt = $pdo->prepare('INSERT INTO theme_headers(theme,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,1,?)');
-            foreach($logos as $theme=>$logo){
-                $ord=0;
-                $spacer = in_array($theme,['2002_v2','2003_v1']) ? ' | ' : '';
-                foreach($header_buttons_seed as $btn){
-                    $thStmt->execute([$theme,$ord,$logo,$btn['text'],null,null,null,$btn['url'],$spacer]);
-                    $ord++;
+
+            /* -----------------------------------------------------------
+             *  INSERT
+             * --------------------------------------------------------- */
+            $thStmt = $pdo->prepare(
+                'INSERT INTO theme_headers
+                 (theme,ord,logo,text,img,hover,depressed,url,visible,spacer)
+                 VALUES (?,?,?,?,?,?,?,?,1,?)'
+            );
+
+            foreach ($logos as $theme => $logo) {
+
+                /* 2002_v1 has **no** header bar ----------------------------------- */
+                if ($theme === '2002_v1') {
+                    continue;
+                }
+
+                /* pick button seed: override or default --------------------------- */
+                $buttons = $button_overrides[$theme] ?? $default_buttons;
+
+                $ord     = 0;
+                $spacer  = in_array($theme, ['2002_v2','2003_v1']) ? ' | ' : '';
+
+                foreach ($buttons as $btn) {
+                    $thStmt->execute([
+                        $theme,
+                        $ord++,
+                        $logo,
+                        $btn['text'],
+                        null,           // img
+                        null,           // hover
+                        null,           // depressed
+                        $btn['url'],
+                        $spacer
+                    ]);
                 }
             }
+
             $tfStmt = $pdo->prepare('INSERT INTO theme_footers(theme,html) VALUES(?,?)');
-            $tfStmt->execute(['2003_v2','<div class="footer"><a href="http://www.valvesoftware.com"><img align="left" src="{BASE}/themes/2003_v2/img/valve_greenlogo.gif"></a> 2003 Valve, L.L.C. All rights reserved. Read our <a href="http://www.valvesoftware.com/privacy.htm">privacy policy</a>.<br>        Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve, L.L.C.</div>']);
-            $tfStmt->execute(['2004','']);
-            $tfStmt->execute(['2005_v1','']);
-            $tfStmt->execute(['2005_v2','']);
+            $tfStmt->execute(['2003_v1',<<<'HTML'
+<tbody><tr height="19">
+<td colspan="4" height="19" width="799"></td>
+<td height="19" width="1"><spacer height="19" type="block" width="1"></spacer></td>
+</tr>
+<tr height="24">
+<td colspan="2" height="24" width="360"></td>
+<td align="left" height="24" valign="top" width="424" xpos="360"><img border="0" height="23" src="{BASE}/themes/2003_v1/images/Valve_CircleR.gif" width="82"></td>
+<td height="77" rowspan="2" width="15"></td>
+<td height="24" width="1"><spacer height="24" type="block" width="1"></spacer></td>
+</tr>
+<tr height="53">
+<td height="53" width="17"></td>
+<td align="left" colspan="2" content="" csheight="53" height="53" valign="top" width="767" xpos="17">
+<div align="center">
+<p><font color="white" size="2"><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"></font></b><a href="{BASE}/support/supportindex.html" target="_self">Support</a> | <a href="{BASE}/forums" target="_self">Forums </a>| <a href="index.php#contactanchor2" target="_self">Contact<br>
+</a></font><font color="#969f8e" size="1">(c) 2003 Valve, L.L.C. All rights reserved. Steam, the Steam logo, Valve, and the Valve logo are trademarks<br>
+                                and/or registered trademarks of Valve, L.L.C.</font></p>
+</div>
+</td>
+<td height="53" width="1"><spacer height="53" type="block" width="1"></spacer></td>
+</tr>
+<tr cntrlrow="" height="1">
+<td height="1" width="17"><spacer height="1" type="block" width="17"></spacer></td>
+<td height="1" width="343"><spacer height="1" type="block" width="343"></spacer></td>
+<td height="1" width="424"><spacer height="1" type="block" width="424"></spacer></td>
+<td height="1" width="15"><spacer height="1" type="block" width="15"></spacer></td>
+<td height="1" width="1"></td>
+</tr>
+</tbody>
+HTML]);
+            $tfStmt->execute(['2003_v2',<<<'HTML'
+<div class="footer">
+<a href="http://www.valvesoftware.com"><img align="left" src="{BASE}images/valve_greenlogo.gif"></a> ©2003 Valve, L.L.C. All rights reserved. Read our <a href="{BASE}/index.php?area=privacy">privacy policy</a>.<br>
+Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve, L.L.C.
+</div>']);
+$tfStmt->execute(['2004','<div class="footer">
+<a href="http://www.valvesoftware.com"><img src="{BASE}/images/valve_greenlogo.gif" align="left"></a> ©2004 Valve Corporation. All rights reserved. <a href="{BASE}/index.php?area=privacy">Privacy Policy</a>. <a href="{BASE}/index.php?area=legal">Legal</a>. <a href="{BASE}/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.<br>
+Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve Corporation.
+</div>
+HTML]);
+            $tfStmt->execute(['2005_v1',<<<'HTML'
+<span class="footerfix">© 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="{BASE}/index.php?area=privacy">Privacy Policy</a>. <a href="{BASE}/index.php?area=legal">Legal</a>. <a href="{BASE}/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span>
+HTML]);
+            $tfStmt->execute(['2005_v2',<<<'HTML'
+<tbody><tr height="11">
+<td height="11" width="800"></td>
+<td height="11" width="1"><spacer height="11" type="block" width="1"></spacer></td>
+</tr>
+<tr height="100">
+<td content="" csheight="100" height="100" valign="top" width="800" xpos="0">
+<div class="footer">
+                                © 2005 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="{BASE}/index.php?area=privacy">Privacy Policy.</a> &nbsp;<a href="{BASE}/index.php?area=legal">Legal.</a> &nbsp;<a href="{BASE}/index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a></div>
+<p></p>
+<div align="right">
+<p><img alt="" border="0" height="20" src="{BASE}/themes/2005_v2/images/creditcardonsteam.gif" width="279"></p>
+</div>
+</td>
+<td height="100" width="1"><spacer height="100" type="block" width="1"></spacer></td>
+</tr>
+<tr cntrlrow="" height="1">
+<td height="1" width="800"><spacer height="1" type="block" width="800"></spacer></td>
+<td height="1" width="1"></td>
+</tr>
+</tbody>
+HTML]);
+            $tfStmt->execute(['2006_v1',<<<'HTML'
+<div class="footer">
+<table background="{BASE}/themes/2006_v1/images/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
+<tbody><tr>
+<td background="{BASE}/themes/2006_v1/images/img_footer_l.jpg" height="73" width="12">&nbsp;</td>
+<td align="center" width="110"><a href="http://www.valvesoftware.com"><img alt="link: Valve Software" border="0" height="26" src="{BASE}/themes/2006_v1/images/logo_valve_footer.jpg" width="92"></a></td>
+<td>
+<div class="legal">© 2006 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br>
+<a href="{BASE}/index.php?area=privacy"> Privacy Policy.</a> <a href="{BASE}/index.php?area=legal">Legal.</a> <a href="{BASE}/index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a></div>
+</td>
+<td background="{BASE}/themes/2006_v1/images/img_footer_r.jpg" height="73" width="14">&nbsp;</td>
+</tr>
+</tbody></table>
+</div>
+HTML]);
+            $tfStmt->execute(['2006_v2',<<<'HTML'
+<div class="footer">
+<table background="{BASE}/themes/2006_v2/images/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
+<tbody><tr>
+<td background="{BASE}/themes/2006_v2/images/img_footer_l.jpg" height="73" width="12">&nbsp;</td>
+<td align="center" width="110"><a href="http://www.valvesoftware.com"><img alt="link: Valve Software" border="0" height="26" src="{BASE}/themes/2006_v2/images/logo_valve_footer.jpg" width="92"></a></td>
+<td>
+<div class="legal">© 2006 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br>
+<a href="{BASE}/index.php?area=privacy"> Privacy Policy.</a> <a href="{BASE}/index.php?area=legal">Legal.</a> <a href="{BASE}/index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a></div>
+</td>
+<td background="{BASE}/themes/2006_v2/images/img_footer_r.jpg" height="73" width="14">&nbsp;</td>
+</tr>
+</tbody></table>
+</div>
+HTML]);
+            $tfStmt->execute(['2007',<<<'HTML'
+<div class="footer">
+<table background="{BASE}/themes/2007/images/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
+<tbody><tr>
+<td background="{BASE}/themes/2007/images/img_footer_l.jpg" height="73" width="12">&nbsp;</td>
+<td align="center" width="110"><a href="http://www.valvesoftware.com"><img alt="link: Valve Software" border="0" height="26" src="{BASE}/themes/2007/images/logo_valve_footer.jpg" width="92"></a></td>
+<td>
+<div class="legal">
+<form action="{BASE}/index.php">
+<input name="area" type="hidden" value="main">
+<input name="cc" type="hidden" value="US">
+<select name="l" onchange="submit();">
+<option id="l_danish" value="danish">Danish</option>
+<option id="l_dutch" value="dutch">Dutch</option>
+<option id="l_english" selected="" value="english">English</option>
+<option id="l_finnish" value="finnish">Finnish</option>
+<option id="l_french" value="french">French</option>
+<option id="l_german" value="german">German</option>
+<option id="l_italian" value="italian">Italian</option>
+<option id="l_japanese" value="japanese">Japanese</option>
+<option id="l_korean" value="korean">Korean</option>
+<option id="l_norwegian" value="norwegian">Norwegian</option>
+<option id="l_polish" value="polish">Polish</option>
+<option id="l_portuguese" value="portuguese">Portuguese</option>
+<option id="l_russian" value="russian">Russian</option>
+<option id="l_schinese" value="schinese">Simplified Chinese</option>
+<option id="l_tchinese" value="tchinese">Traditional Chinese</option>
+<option id="l_spanish" value="spanish">Spanish</option>
+<option id="l_swedish" value="swedish">Swedish</option>
+<option id="l_thai" value="thai">Thai</option>
+</select><br>
+<br></form>				© 2006 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br>
+<a href="{BASE}/index.php?area=privacy"> Privacy Policy.</a> <a href="{BASE}/index.php?area=legal">Legal.</a> <a href="{BASE}/index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a>
+<br></div>
+</td>
+<td background="{BASE}/themes/2007/images/img_footer_r.jpg" height="73" width="14">&nbsp;</td>
+</tr>
+</tbody></table>
+</div>
+HTML]);
 
             $features_html = <<<'HTML'
 <!-- features -->
 
 <div class="content" id="container">
 <h1>FEATURES</H1>
-<h2>WHAT <em>CAN STEAM DO?</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>WHAT <em>CAN STEAM DO?</em></h2><img src="{BASE}/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <div class="narrower">
 Once you've installed Steam, all of the following features are available on your desktop <i>and while you're playing Steam games</i>.
 <br><br>
 <h3>EASY AND FAST ACCESS TO GAMES</h3>
-<img width="88" height="88" align="left" vspace="4" src="/img/thumb_games.gif">
+<img width="88" height="88" align="left" vspace="4" src="{BASE}/images/thumb_games.gif">
 After installing Steam, you'll have instant access to Valve's full library of games. And when you choose one to play, you don't have to wait for the whole thing to download -- you can start playing in a matter of minutes.<br clear="all">
 <br clear="all">
 <h3>AUTOMATIC UPDATES</h3>
-<img width="88" height="88" align="left" vspace="4" src="/img/thumb_updates.gif">
+<img width="88" height="88" align="left" vspace="4" src="{BASE}/images/thumb_updates.gif">
 Say goodbye to game patches forever--they're a thing of the past. Steam will keep all of its games up-to-date for as long as you want to keep playing them. No more hunting for download sites just to get up and running!<br clear="all">
 <br clear="all">
 <h3>INSTANT MESSAGING, EVEN IN GAME</h3>
-<img width="88" height="88" align="left" vspace="4" src="/img/thumb_im.gif">
+<img width="88" height="88" align="left" vspace="4" src="{BASE}/images/thumb_im.gif">
 Keep in touch with your buddies through "Friends," Steam's instant-messenger. It even works while you or your friends are playing games -- you don't have to stop playing to communicate.<br clear="all">
 <br clear="all">
 <h3>SERVER BROWSER - FIND YOUR FRIENDS' GAMES</h3>
-<img width="88" height="88" align="left" vspace="4" src="/img/thumb_servers.gif">
+<img width="88" height="88" align="left" vspace="4" src="{BASE}/images/thumb_servers.gif">
 Now it's incredibly easy to find a quality game server -- one that's fast, that's running your favorite game, and even one that has your friends already playing on it.<br clear="all">
 <br clear="all">
 <h3>PARLOR GAMES</h3>
-<img width="88" height="88" align="left" vspace="4" src="/img/thumb_chess.gif">
+<img width="88" height="88" align="left" vspace="4" src="{BASE}/images/thumb_chess.gif">
 Maybe you're dodging your homework. Maybe you're just bored while waiting for another turn in Counter-Strike. Either way -- why not enjoy a nice game of Chess? Or Checkers? Or Go? Or Hearts... Or....<br clear="all">
 <br clear="all">
 
 <!-- <h3>AND LOTS MORE</h3>
-<img width="88" height="88" align="left" vspace="4" src="/img/thumb_xxx.gif">
+<img width="88" height="88" align="left" vspace="4" src="{BASE}/images/thumb_xxx.gif">
 xxxxxx xxxxx xxxxx x xxx xxxxxxx xxxxxx xxx xxxxxx x xxxxxx xxxxxxx. xxxxxx xxxxx xxxxx x xxx xxxxxxx xxxxxx xxx xxxxxx x xxxxxx xxxxxxx.
 
 -->
 </div><br clear="all">
-<a href="getsteamnow.php"><img src="/img/but_getsteamnow.gif" height="24" width="124" alt="get steam now"></a><br>
+<a href="{BASE}/index.php?area=getsteamnow"><img src="{BASE}/images/but_getsteamnow.gif" height="24" width="124" alt="get steam now"></a><br>
 </div>
 HTML;
             $pageStmt->execute(['features','Features',$features_html,'2003_v1,2003_v2,2004',date('Y-m-d H:i:s')]);
-
-            $index03 = file_get_contents(__DIR__.'/archived_steampowered/2003/v1/index.html');
-            if(preg_match('/<table bgcolor="#4c5844".*?<\/table>/s',$index03,$m)){
-                $index_body = $m[0];
-            } else {
-                $index_body = $index03;
-            }
+            $index_body = <<<'HTML'
+<tr height="373">
+<td colspan="2" height="373" width="81"><spacer height="373" type="block" width="81"></spacer></td>
+<td align="left" colspan="2" content="" csheight="356" height="373" valign="top" width="636" xpos="81">
+<div align="center">
+<div align="left">
+<table border="0" cellpadding="0" cellspacing="2" width="141">
+<tbody><tr>
+<td>
+<p><font color="#c4cabe" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>OVER</b></font><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>VIEW</b></font></p>
+</td>
+</tr>
+<tr>
+<td><img border="0" height="5" src="{BASE}/images/Graphic_box.jpg" width="33"></td>
+</tr>
+</tbody></table>
+<p><font color="#969f8e" size="2">Steam is a broadband business platform for direct software delivery and content management. At its core, Steam is a distributed file system and shared set of technology components that can be implemented into any software application.<br>
+<br>
+</font></p>
+<p><font color="#969f8e" size="2">With Steam, developers are given integrated tools for direct-content publishing, flexible billing, ensured-version control, anti-cheating, anti-piracy, and more.<br>
+<br>
+</font></p>
+<p><font color="#969f8e" size="2">Steam consumers enjoy the benefit of starting their favorite applications within minutes of confirming their purchase. They can access their applications from any PC. They are no longer challenged to find the latest updates for these applications. And they no longer need to wonder if their device drivers are compatible with the latest software.<br>
+<br>
+</font></p>
+<p><font color="#969f8e" size="2">The Steam SDK also includes an integrated set of communications tools and Valve�s Graphic User Interface (V-GUI) that provide built-in support for a variety of services such as instant messaging, configuration, and server browsing.<br>
+</font></p>
+</div>
+<p><font color="#bfba50" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>Coming Soon!</b></font></p>
+</div>
+</td>
+<td height="373" width="82"><spacer height="373" type="block" width="82"></spacer></td>
+<td height="373" width="1"><spacer height="373" type="block" width="1"></spacer></td>
+</tr>
+<tr height="225">
+<td height="225" width="15"><spacer height="225" type="block" width="15"></spacer></td>
+<td align="left" colspan="2" height="225" valign="top" width="387" xpos="15">
+<table border="0" cellpadding="0" cellspacing="0" height="211" width="382">
+<tbody><tr height="211">
+<td background="{BASE}/images/Box_01.gif" height="211" width="382">
+<div align="center">
+<table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="208" showgridx="" showgridy="" width="360">
+<tbody><tr height="10">
+<td colspan="3" height="10" width="359"></td>
+<td height="10" width="1"><spacer height="10" type="block" width="1"></spacer></td>
+</tr>
+<tr height="197">
+<td height="197" width="3"></td>
+<td align="left" content="" csheight="193" height="197" valign="top" width="336" xpos="3">
+<div align="left">
+<table border="0" cellpadding="0" cellspacing="2" width="64">
+<tbody><tr>
+<td>
+<p><font color="#c4cabe" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>MORE&nbsp;</b></font><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>INFORMATION</b></font></p>
+</td>
+</tr>
+<tr>
+<td><img border="0" height="5" src="{BASE}/images/Graphic_box.jpg" width="33"></td>
+</tr>
+</tbody></table>
+<a name="contactanchor2"></a>
+<p><font color="#969f8e" size="2">For technical inquiries, please email:</font><font color="#c4cabe" size="2"><br>
+</font><font size="2"><a href="mailto:tech@steampowered.com">tech@steampowered.com</a><a href="mailto:tech@steampowered.com"><br>
+</a><a href="mailto:tech@steampowered.com"><br>
+</a></font><font color="#969f8e" size="2">For press inquiries, please mail:</font><font size="2"><br>
+<a href="mailto:press@steampowered.com">press@steampowered.com</a><a href="mailto:press@steampowered.com"><br>
+</a><a href="mailto:press@steampowered.com"><br>
+</a></font><font color="#969f8e" size="2">For business inquires, please email:</font><font color="white" size="2"><br>
+</font><font size="2"><a href="mailto:biz@steampowered.com">biz@steampowered.com</a></font></p>
+</div>
+</td>
+<td height="197" width="20"></td>
+<td height="197" width="1"><spacer height="197" type="block" width="1"></spacer></td>
+</tr>
+<tr cntrlrow="" height="1">
+<td height="1" width="3"><spacer height="1" type="block" width="3"></spacer></td>
+<td height="1" width="336"><spacer height="1" type="block" width="336"></spacer></td>
+<td height="1" width="20"><spacer height="1" type="block" width="20"></spacer></td>
+<td height="1" width="1"></td>
+</tr>
+</tbody></table>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+<td align="left" colspan="2" height="225" valign="top" width="397" xpos="402">
+<table border="0" cellpadding="0" cellspacing="0" height="211" width="382">
+<tbody><tr height="211">
+<td background="{BASE}/themes/2003_v1/images/Box_01.gif" height="211" width="382">
+<div align="center">
+<table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="196" showgridx="" showgridy="" width="360">
+<tbody><tr height="4">
+<td colspan="3" height="4" width="359"></td>
+<td height="4" width="1"><spacer height="4" type="block" width="1"></spacer></td>
+</tr>
+<tr height="191">
+<td height="191" width="3"></td>
+<td align="left" content="" csheight="191" height="191" valign="top" width="347" xpos="3">
+<div align="left">
+<table border="0" cellpadding="0" cellspacing="2" width="249">
+<tbody><tr>
+<td>
+<p><font color="#c4cabe" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>STEAM </b></font><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>PARTNERS</b></font><font color="#c4cabe" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>&nbsp;</b></font></p>
+</td>
+</tr>
+<tr>
+<td><img border="0" height="5" src="{BASE}/images/Graphic_box.jpg" width="33"></td>
+</tr>
+</tbody></table>
+<br>
+<b><span class="2ndword">Become a Steam content provider!</span></b><font color="#c4cabe" size="2"><br>
+<br>
+</font><font color="#969f8e" size="2"><b>Basic Requirements:</b></font><font color="#c4cabe" size="2"><br>
+</font><font color="black" size="2"><b>::</b></font><font color="#c4cabe" size="2"> </font><font color="#969f8e" size="2">100 megabits of bandwidth (OC-3 level)</font><font color="#c4cabe" size="2"><br>
+</font><font color="black" size="2"><b>::</b></font><font color="#c4cabe" size="2"> </font><font color="#969f8e" size="2">1 gigabyte RAM</font><font color="#c4cabe" size="2"><br>
+</font><font color="black" size="2"><b>::</b> </font><font color="#969f8e" size="2">1GHz processor (or better</font><font color="#c4cabe" size="2">)<br>
+</font><font color="black" size="2"><b>::</b> </font><font color="#969f8e" size="2">WINDOWS&nbsp;2000 SERVER</font><font color="#c4cabe" size="2"><br>
+</font><font color="#969f8e" size="2">Contact: <a href="mailto:biz@steampowered.com">biz@steampowered.com</a></font></div>
+</td>
+<td height="191" width="9"></td>
+<td height="191" width="1"><spacer height="191" type="block" width="1"></spacer></td>
+</tr>
+<tr cntrlrow="" height="1">
+<td height="1" width="3"><spacer height="1" type="block" width="3"></spacer></td>
+<td height="1" width="347"><spacer height="1" type="block" width="347"></spacer></td>
+<td height="1" width="9"><spacer height="1" type="block" width="9"></spacer></td>
+<td height="1" width="1"></td>
+</tr>
+</tbody></table>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+<td height="225" width="1"><spacer height="225" type="block" width="1"></spacer></td>
+</tr>
+HTML;
             $pageStmt->execute(['2003_v1_index','2003 Home',$index_body,'2003_v1',date('Y-m-d H:i:s')]);
 
             $e3_html = <<<'HTML'
 <!-- e3 movies -->
 <div class="content" id="container">
 <h1>Half-Life 2: E3 2003</H1>
-<h2>MOVIES<em> FROM THE ELECTRONIC ENTERTAINMENT EXPO</em></h2><img src="img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>MOVIES<em> FROM THE ELECTRONIC ENTERTAINMENT EXPO</em></h2><img src="{BASE}/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
 <div class="narrower">
 Half-Life 2 debuted last year at E3, and won <a href="http://www.gamecriticsawards.com/past.html">Best of Show, Best PC Game, Best Action Game, and Special Commendation for Graphics</a>. On this page you can download video footage (captured directly from the game engine) showing all of the gameplay demos from the 2003 E3 booth.<br><br>
 <nobr>
-<img style="border:6px solid black;" width="180" height="100" src="img/movie_thumbs/hl2_movie1.jpg"> &nbsp;
-<img style="border:6px solid black;" width="180" height="100" src="img/movie_thumbs/hl2_movie2.jpg"> &nbsp;
-<img style="border:6px solid black;" width="180" height="100" src="img/movie_thumbs/hl2_movie3.jpg">
+<img style="border:6px solid black;" width="180" height="100" src="{BASE}/images/movie_thumbs/hl2_movie1.jpg"> &nbsp;
+<img style="border:6px solid black;" width="180" height="100" src="{BASE}/images/movie_thumbs/hl2_movie2.jpg"> &nbsp;
+<img style="border:6px solid black;" width="180" height="100" src="{BASE}/images/movie_thumbs/hl2_movie3.jpg">
 </nobr><br>
 <br>
 These files are high-resolution, so they are pretty large. A <a href="http://bitconjurer.org/BitTorrent/download.html">BitTorrent</a> client is needed to download them, so please install that first.<br><br>
@@ -530,41 +850,41 @@ Note that these movies are in Bink .exe format. If your computer has trouble pla
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['e3_movies','Half-Life 2 E3 Movies',$e3_html,'2003,2003_v1,2003_v2',date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['e3_movies','Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2',date('Y-m-d H:i:s')]);
 
             $forums_html = <<<'HTML'
 <!-- forums -->
 <div class="content" id="container">
 <h1>FORUMS</h1>
-<h2>FOR <em>SUPPORT AND DISCUSSION</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>FOR <em>SUPPORT AND DISCUSSION</em></h2><img src="{BASE}/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <div class="narrower">
 <br>
 <p>Before posting a problem in the forums, please use the new interactive Steam Support system..  It contains answers for many of the most common problems and questions.</p>
 <p align="center"><a href="support.php">Use the Steam Support system.</a></p>
 <p>Below are some forum usage guidelines. They are posted here as a general reminder in an effort to keep the forums friendly and usable for everyone.</p>
 <ul><em>
-<li style="list-style-image:url(/img/square2.gif);"> The forums are for everyone, new and advanced user alike.<br>
+<li style="list-style-image:url({BASE}/images/square2.gif);"> The forums are for everyone, new and advanced user alike.<br>
 <br>
-<li style="list-style-image:url(/img/square2.gif);"> Before you post a question, use the <a href="/forums/search.php" target="_blank">forum search feature</a> to determine whether your topic has already been covered.<br>
+<li style="list-style-image:url({BASE}/images/square2.gif);"> Before you post a question, use the <a href="/forums/search.php" target="_blank">forum search feature</a> to determine whether your topic has already been covered.<br>
 <br>
-<li style="list-style-image:url(/img/square2.gif);"> Do not start flame wars. If you have a problem with someone, message that person and carry on a private discussion. Also, if someone has engaged in behavior that is a detriment to the message board -- spamming, flaming people, etc -- contact one of the forum moderators. Flaming the offensive user will only increase the problem.<br>
+<li style="list-style-image:url({BASE}/images/square2.gif);"> Do not start flame wars. If you have a problem with someone, message that person and carry on a private discussion. Also, if someone has engaged in behavior that is a detriment to the message board -- spamming, flaming people, etc -- contact one of the forum moderators. Flaming the offensive user will only increase the problem.<br>
 <br>
-<li style="list-style-image:url(/img/square2.gif);"> Please post in the correct forum.<br>
+<li style="list-style-image:url({BASE}/images/square2.gif);"> Please post in the correct forum.<br>
 <br>
-<li style="list-style-image:url(/img/square2.gif);"> Administrators/Moderators reserve the right to change, edit, or delete any content at any time if they feel it is inappropriate.<br>
+<li style="list-style-image:url({BASE}/images/square2.gif);"> Administrators/Moderators reserve the right to change, edit, or delete any content at any time if they feel it is inappropriate.<br>
 </em></ul>
 <p>The bottom line is: respect others and you will be treated with respect. Be rude and disrespectful, and you'll not find much help here.</p>
-<p align="center"><a href="/forums/"> I agree to these terms.</a></p>
+<p align="center"><a href="{BASE}/forums/"> I agree to these terms.</a></p>
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['forums','Forums',$forums_html,'2003,2003_v1,2003_v2,2004,2005',date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['forums','Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2',date('Y-m-d H:i:s')]);
 
             $ded_html = <<<'HTML'
 <!-- dedicated server -->
 <div class="content" id="container">
 <h1>Dedicated Server update files</h1>
-<h2>WINDOWS<em> AND LINUX VERSIONS</em></h2><img src="img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>WINDOWS<em> AND LINUX VERSIONS</em></h2><img src="{BASE}/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
 <div class="narrower">
 For those server admins who have trouble with the Steam HLDS update tool, or have trouble getting the dedicated server update through Steam, here are the changed files.<br>
@@ -573,24 +893,24 @@ For those server admins who have trouble with the Steam HLDS update tool, or hav
 NOTE: This release includes only those files which have changed since the last dedicated server release. This download is an update only -- it requires that you have a Half-Life dedicated game server already installed. If you're looking for the full dedicated server Steam installer, you can find it on the <a href="/?area=getsteamnow">Get Steam Now</a> page (towards the bottom).<br><br>
 <b>NOTE: This download requires you to have <a href="http://www.bitconjurer.org/BitTorrent/download.html">BitTorrent</a> installed.</b><br>
 <br>
-<a href="/HLserver/mar22/czero_dedicated_server_032204.zip.torrent">Windows Dedicated Server Update</a><br>
+<a href="{BASE}/files/HLserver/mar22/czero_dedicated_server_032204.zip.torrent">Windows Dedicated Server Update</a><br>
 <br>
-<a href="/HLserver/mar22/czero_dedicated_server_linux_032204.tgz.torrent">Linux Dedicated Server Update</a><br>
+<a href="{BASE}/files/HLserver/mar22/czero_dedicated_server_linux_032204.tgz.torrent">Linux Dedicated Server Update</a><br>
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['dedicated_server','Dedicated Server update files',$ded_html,'2003,2003_v1,2003_v2,2004,2005',date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['dedicated_server','Dedicated Server update files',$ded_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2',date('Y-m-d H:i:s')]);
 
             $css_html = <<<'HTML'
 <!-- CS:S Beta 1 FAQ -->
 <div class="content" id="container">
 <h1>COUNTER-STRIKE: SOURCE</h1>
-<h2>BETA 1 <em>QUESTIONS AND ANSWERS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>BETA 1 <em>QUESTIONS AND ANSWERS</em></h2><img src="{BASE}/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
 <div class="narrower">
 <ul>
-<li style="list-style-image:url(/img/square2.gif);"> <a href="#q1"><em>When will Counter-Strike: Source beta 1 be released?</em></a>
-<li style="list-style-image:url(/img/square2.gif);"> <a href="#q2"><em>How can I get Counter-Strike: Source beta 1?</em></a>
+<li style="list-style-image:url({BASE}/images/square2.gif);"> <a href="#q1"><em>When will Counter-Strike: Source beta 1 be released?</em></a>
+<li style="list-style-image:url({BASE}/images/square2.gif);"> <a href="#q2"><em>How can I get Counter-Strike: Source beta 1?</em></a>
 <li> <a href="#q3"><em>I am a member of the Valve Cyber Caf&eacute; Program, or I own Condition Zero.  How will I know when Counter-Strike: Source beta 1 is available?</em></a>
 <li> <a href="#q8"><em>If I purchased the ATI/Half-Life 2 Video Card bundle, how do I participate in the Counter-Strike: Source Beta??</em></a>
 <li> <a href="#q4"><em>Can I get access to the beta if I am not part of the Valve Cyber Caf&eacute; Program, and do not own Condition Zero?</em></a>
@@ -603,8 +923,8 @@ HTML;
         <td colspan="2" align="center"><hr style="width: 100%;"></td>
 </tr>
 <tr bgcolor="#606060">
-        <td><a href="/img/cs_source_01.jpg"><img src="/img/cs_source_01_tn.jpg"></td>
-        <td><a href="/img/cs_source_02.jpg"><img src="/img/cs_source_02_tn.jpg"></td>
+        <td><a href="{BASE}/images/cs_source_01.jpg"><img src="{BASE}/images/cs_source_01_tn.jpg"></td>
+        <td><a href="{BASE}/images/cs_source_02.jpg"><img src="{BASE}/images/cs_source_02_tn.jpg"></td>
 </tr>
 <tr>
         <td colspan="2" align="center"><hr style="width: 100%;"></td>
@@ -613,30 +933,30 @@ HTML;
 <p>Starting later this summer, Valve will be conducting a limited-time beta of Counter-Strike: Source via Steam.</p>
 <p>The beta will first be open to subscribers of the Valve Cyber Caf&eacute; Program, and then extended to owners of Counter-Strike: Condition Zero and owners of ATI Half-Life 2 vouchers.</p>
 <p>If you do not already have a Steam account, you can create a Steam account and use your ATI/Half-Life 2 product key printed on the coupon that came with the video card.  Once you have entered the key, you will be prompted to join the beta.</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="getsteamnow.php">Click here to install Steam</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{BASE}/index.php?area=getsteamnow">Click here to install Steam</a></p>
 <p>If you have a Steam account and have not yet registered your ATI/Half-Life 2 product key printed on the coupon that came with the video card, you can register your key below and join the beta.</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="steam://open/registerproduct/">Click here register your ATI key</a></p>
 <p>No.</p>
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['css_b1','Counter-Strike: Source Beta 1 FAQ',$css_html,'2003,2003_v1,2003_v2,2004,2005',date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['css_b1','Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2',date('Y-m-d H:i:s')]);
 
             $pricing_html = <<<'HTML'
 <div class="content" id="container">
 <h1>PRICING AND LICENSING</H1>
-<h2>VALVE'S<em> OFFICIAL CYBER CAF&Eacute; PROGRAM</em></h2><img src="img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>VALVE'S<em> OFFICIAL CYBER CAF&Eacute; PROGRAM</em></h2><img src="{base}/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
 <div class="narrower">
 
 Valve's Official Cyber Caf&eacute; Program makes things simple for the caf&eacute; owner.<br>
 <br>
 <h3 style="text-transform:uppercase;">One low monthly fee</h3>
-For a low monthly fee per licensed computer, your caf&eacute; gets access to all of Valve's games. See the <a href="cybercafe_program.php">full list of Features and Benefits</a> for the details of what's included. Payment is handled in three-month blocks, in advance, either by recurring automatic billing or by invoice. <!-- For full details about licensing, payment, and the details of the Caf&eacute; Program, please see the official <a href="cafe_signup.php">Valve Cyber Caf&eacute; Agreement</a>. --><br>
+For a low monthly fee per licensed computer, your caf&eacute; gets access to all of Valve's games. See the <a href="{base}/index.php?area=cybercafe_program">full list of Features and Benefits</a> for the details of what's included. Payment is handled in three-month blocks, in advance, either by recurring automatic billing or by invoice. <!-- For full details about licensing, payment, and the details of the Caf&eacute; Program, please see the official <a href="cafe_signup.php">Valve Cyber Caf&eacute; Agreement</a>. --><br>
 <br>
 <!--
 <h3 style="text-transform:uppercase;">APRIL CYBER CAF&Eacute; PROMOTION</h3>
-During the month of April 2004, Valve is extending a <a href="/?area=cybercafe_promotion">special offer to Cyber Caf&eacute;s</a>. During this time, a 12-month cyber caf&eacute; license for Valve's games is being offered at a savings of 33%. <a href="/?area=cybercafe_promotion">See this page for details</a>.<br>
+During the month of April 2004, Valve is extending a <a href="{base}/index.php?area=cybercafe_promotion">special offer to Cyber Caf&eacute;s</a>. During this time, a 12-month cyber caf&eacute; license for Valve's games is being offered at a savings of 33%. <a href="/?area=cybercafe_promotion">See this page for details</a>.<br>
 <Br>
 -->
 <h3 style="text-transform:uppercase;">Fully licensed software</h3>
@@ -645,9 +965,9 @@ Software purchased at retail is not licensed for commercial use such as cyber ca
 <h3 style="text-transform:uppercase;">As Always, Tournament Licenses Are Free</h3>
 If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valvesoftware.com">let us know</a> and we'll issue you a Tournament License, free of charge.<br>
 <br>
-<a href="cafe_signup.php">Sign up now for the CyberCaf&eacute; Program!</a><br>
+<a href="{base}/index.php?area=cafe_signup">Sign up now for the CyberCaf&eacute; Program!</a><br>
 <br>
-<a href="cybercafes.php">Return to main Cyber Caf&eacute; page</a>
+<a href="{base}/index.php?area=cybercafes">Return to main Cyber Caf&eacute; page</a>
 
 </div>
 </div>
@@ -742,7 +1062,7 @@ HTML;
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Install CMS</title>
