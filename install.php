@@ -185,23 +185,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $pdo->exec("DROP TABLE IF EXISTS admin_users");
             $pdo->exec("DROP TABLE IF EXISTS player_sessions");
             $pdo->exec("CREATE TABLE player_sessions (
-    id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    user_id       BIGINT UNSIGNED NOT NULL,
-    session_start DATETIME        NOT NULL,
-    session_end   DATETIME        NOT NULL,
-    INDEX(user_id, session_start)
-)");
-            $pdo->exec("DROP TABLE IF EXISTS player_history");
-            $pdo->exec("CREATE TABLE player_history (
-    ts           TIMESTAMP PRIMARY KEY,
-    players      INT UNSIGNED NOT NULL,
-    game_servers INT UNSIGNED NOT NULL
-)");
-            $pdo->exec("DROP TABLE IF EXISTS bw_history");
-            $pdo->exec("CREATE TABLE bw_history (
-    ts     TIMESTAMP PRIMARY KEY,
-    mbps   INT UNSIGNED NOT NULL 
-)");
+                id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                user_id       BIGINT UNSIGNED NOT NULL,
+                session_start DATETIME        NOT NULL,
+                session_end   DATETIME        NOT NULL,
+                INDEX(user_id, session_start)
+            )");
+                        $pdo->exec("DROP TABLE IF EXISTS player_history");
+                        $pdo->exec("CREATE TABLE player_history (
+                ts           TIMESTAMP PRIMARY KEY,
+                players      INT UNSIGNED NOT NULL,
+                game_servers INT UNSIGNED NOT NULL
+            )");
+                        $pdo->exec("DROP TABLE IF EXISTS bw_history");
+                        $pdo->exec("CREATE TABLE bw_history (
+                ts     TIMESTAMP PRIMARY KEY,
+                mbps   INT UNSIGNED NOT NULL 
+            )");
 
             $pdo->exec("CREATE TABLE admin_users(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -294,9 +294,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         continue;  // skip $pdo->exec($stmt) — we’ve handled it.
                     }
 
-                    $sql = file_get_contents($file);
-                    $pdo->exec($sql);
-
+                    require_once 'sql/install_custom_pages.php';
 
                     $pdo->exec($stmt);
                 }
@@ -342,7 +340,7 @@ Please select an option from the top menu.
 </div>
 </div>
 HTML;
-            $sa_html = file_get_contents(__DIR__ . '/cms/content/subscriber_agreement.html');
+            $sa_html = file_get_contents(__DIR__ . '/sql/subscriber_agreement.html');
             $header_buttons = [
                 ['url' => '/news.php','text' => 'news'],
                 ['url' => '/getsteamnow.php','text' => 'getSteamNow'],
@@ -663,145 +661,6 @@ xxxxxx xxxxx xxxxx x xxx xxxxxxx xxxxxx xxx xxxxxx x xxxxxx xxxxxxx. xxxxxx xxxx
 </div>
 HTML;
             $pageStmt->execute(['features','Features',$features_html,'2003_v1,2003_v2,2004',date('Y-m-d H:i:s')]);
-            $index_body = <<<'HTML'
-<tr height="373">
-<td colspan="2" height="373" width="81"><spacer height="373" type="block" width="81"></spacer></td>
-<td align="left" colspan="2" content="" csheight="356" height="373" valign="top" width="636" xpos="81">
-<div align="center">
-<div align="left">
-<table border="0" cellpadding="0" cellspacing="2" width="141">
-<tbody><tr>
-<td>
-<p><font color="#c4cabe" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>OVER</b></font><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>VIEW</b></font></p>
-</td>
-</tr>
-<tr>
-<td><img border="0" height="5" src="{BASE}/images/Graphic_box.jpg" width="33"></td>
-</tr>
-</tbody></table>
-<p><font color="#969f8e" size="2">Steam is a broadband business platform for direct software delivery and content management. At its core, Steam is a distributed file system and shared set of technology components that can be implemented into any software application.<br>
-<br>
-</font></p>
-<p><font color="#969f8e" size="2">With Steam, developers are given integrated tools for direct-content publishing, flexible billing, ensured-version control, anti-cheating, anti-piracy, and more.<br>
-<br>
-</font></p>
-<p><font color="#969f8e" size="2">Steam consumers enjoy the benefit of starting their favorite applications within minutes of confirming their purchase. They can access their applications from any PC. They are no longer challenged to find the latest updates for these applications. And they no longer need to wonder if their device drivers are compatible with the latest software.<br>
-<br>
-</font></p>
-<p><font color="#969f8e" size="2">The Steam SDK also includes an integrated set of communications tools and Valve�s Graphic User Interface (V-GUI) that provide built-in support for a variety of services such as instant messaging, configuration, and server browsing.<br>
-</font></p>
-</div>
-<p><font color="#bfba50" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>Coming Soon!</b></font></p>
-</div>
-</td>
-<td height="373" width="82"><spacer height="373" type="block" width="82"></spacer></td>
-<td height="373" width="1"><spacer height="373" type="block" width="1"></spacer></td>
-</tr>
-<tr height="225">
-<td height="225" width="15"><spacer height="225" type="block" width="15"></spacer></td>
-<td align="left" colspan="2" height="225" valign="top" width="387" xpos="15">
-<table border="0" cellpadding="0" cellspacing="0" height="211" width="382">
-<tbody><tr height="211">
-<td background="{BASE}/images/Box_01.gif" height="211" width="382">
-<div align="center">
-<table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="208" showgridx="" showgridy="" width="360">
-<tbody><tr height="10">
-<td colspan="3" height="10" width="359"></td>
-<td height="10" width="1"><spacer height="10" type="block" width="1"></spacer></td>
-</tr>
-<tr height="197">
-<td height="197" width="3"></td>
-<td align="left" content="" csheight="193" height="197" valign="top" width="336" xpos="3">
-<div align="left">
-<table border="0" cellpadding="0" cellspacing="2" width="64">
-<tbody><tr>
-<td>
-<p><font color="#c4cabe" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>MORE&nbsp;</b></font><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>INFORMATION</b></font></p>
-</td>
-</tr>
-<tr>
-<td><img border="0" height="5" src="{BASE}/images/Graphic_box.jpg" width="33"></td>
-</tr>
-</tbody></table>
-<a name="contactanchor2"></a>
-<p><font color="#969f8e" size="2">For technical inquiries, please email:</font><font color="#c4cabe" size="2"><br>
-</font><font size="2"><a href="mailto:tech@steampowered.com">tech@steampowered.com</a><a href="mailto:tech@steampowered.com"><br>
-</a><a href="mailto:tech@steampowered.com"><br>
-</a></font><font color="#969f8e" size="2">For press inquiries, please mail:</font><font size="2"><br>
-<a href="mailto:press@steampowered.com">press@steampowered.com</a><a href="mailto:press@steampowered.com"><br>
-</a><a href="mailto:press@steampowered.com"><br>
-</a></font><font color="#969f8e" size="2">For business inquires, please email:</font><font color="white" size="2"><br>
-</font><font size="2"><a href="mailto:biz@steampowered.com">biz@steampowered.com</a></font></p>
-</div>
-</td>
-<td height="197" width="20"></td>
-<td height="197" width="1"><spacer height="197" type="block" width="1"></spacer></td>
-</tr>
-<tr cntrlrow="" height="1">
-<td height="1" width="3"><spacer height="1" type="block" width="3"></spacer></td>
-<td height="1" width="336"><spacer height="1" type="block" width="336"></spacer></td>
-<td height="1" width="20"><spacer height="1" type="block" width="20"></spacer></td>
-<td height="1" width="1"></td>
-</tr>
-</tbody></table>
-</div>
-</td>
-</tr>
-</tbody></table>
-</td>
-<td align="left" colspan="2" height="225" valign="top" width="397" xpos="402">
-<table border="0" cellpadding="0" cellspacing="0" height="211" width="382">
-<tbody><tr height="211">
-<td background="{BASE}/themes/2003_v1/images/Box_01.gif" height="211" width="382">
-<div align="center">
-<table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="196" showgridx="" showgridy="" width="360">
-<tbody><tr height="4">
-<td colspan="3" height="4" width="359"></td>
-<td height="4" width="1"><spacer height="4" type="block" width="1"></spacer></td>
-</tr>
-<tr height="191">
-<td height="191" width="3"></td>
-<td align="left" content="" csheight="191" height="191" valign="top" width="347" xpos="3">
-<div align="left">
-<table border="0" cellpadding="0" cellspacing="2" width="249">
-<tbody><tr>
-<td>
-<p><font color="#c4cabe" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>STEAM </b></font><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>PARTNERS</b></font><font color="#c4cabe" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>&nbsp;</b></font></p>
-</td>
-</tr>
-<tr>
-<td><img border="0" height="5" src="{BASE}/images/Graphic_box.jpg" width="33"></td>
-</tr>
-</tbody></table>
-<br>
-<b><span class="2ndword">Become a Steam content provider!</span></b><font color="#c4cabe" size="2"><br>
-<br>
-</font><font color="#969f8e" size="2"><b>Basic Requirements:</b></font><font color="#c4cabe" size="2"><br>
-</font><font color="black" size="2"><b>::</b></font><font color="#c4cabe" size="2"> </font><font color="#969f8e" size="2">100 megabits of bandwidth (OC-3 level)</font><font color="#c4cabe" size="2"><br>
-</font><font color="black" size="2"><b>::</b></font><font color="#c4cabe" size="2"> </font><font color="#969f8e" size="2">1 gigabyte RAM</font><font color="#c4cabe" size="2"><br>
-</font><font color="black" size="2"><b>::</b> </font><font color="#969f8e" size="2">1GHz processor (or better</font><font color="#c4cabe" size="2">)<br>
-</font><font color="black" size="2"><b>::</b> </font><font color="#969f8e" size="2">WINDOWS&nbsp;2000 SERVER</font><font color="#c4cabe" size="2"><br>
-</font><font color="#969f8e" size="2">Contact: <a href="mailto:biz@steampowered.com">biz@steampowered.com</a></font></div>
-</td>
-<td height="191" width="9"></td>
-<td height="191" width="1"><spacer height="191" type="block" width="1"></spacer></td>
-</tr>
-<tr cntrlrow="" height="1">
-<td height="1" width="3"><spacer height="1" type="block" width="3"></spacer></td>
-<td height="1" width="347"><spacer height="1" type="block" width="347"></spacer></td>
-<td height="1" width="9"><spacer height="1" type="block" width="9"></spacer></td>
-<td height="1" width="1"></td>
-</tr>
-</tbody></table>
-</div>
-</td>
-</tr>
-</tbody></table>
-</td>
-<td height="225" width="1"><spacer height="225" type="block" width="1"></spacer></td>
-</tr>
-HTML;
-            $pageStmt->execute(['2003_v1_index','2003 Home',$index_body,'2003_v1',date('Y-m-d H:i:s')]);
 
             $e3_html = <<<'HTML'
 <!-- e3 movies -->
