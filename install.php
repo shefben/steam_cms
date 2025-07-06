@@ -160,6 +160,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $pdo->exec("CREATE TABLE settings(`key` VARCHAR(64) PRIMARY KEY,value TEXT)");
             $pdo->exec("DROP TABLE IF EXISTS themes");
             $pdo->exec("CREATE TABLE themes(name VARCHAR(255) PRIMARY KEY, css_path TEXT DEFAULT NULL)");
+            $pdo->exec("DROP TABLE IF EXISTS theme_settings");
+            $pdo->exec("CREATE TABLE theme_settings(theme VARCHAR(50), name VARCHAR(50), value TEXT, PRIMARY KEY(theme,name))");
             $pdo->exec("DROP TABLE IF EXISTS theme_headers");
             $pdo->exec("CREATE TABLE theme_headers(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -1049,6 +1051,22 @@ HTML;
                 }
                 $css_path = $css ? 'css/'.$css : '';
                 $stmt2->execute([$name,$css_path]);
+                $cfg_file = "$dir/config.php";
+                if(file_exists($cfg_file)){
+                    $cfg = include $cfg_file;
+                    if(is_array($cfg)){
+                        $set = $pdo->prepare('REPLACE INTO theme_settings(theme,name,value) VALUES(?,?,?)');
+                        foreach($cfg as $k=>$v){
+                            $set->execute([$name,$k,(string)$v]);
+                        }
+                    }
+                }
+                $sql_dir = "$dir/sql";
+                if(is_dir($sql_dir)){
+                    foreach(glob($sql_dir.'/*.sql') as $sql){
+                        $pdo->exec(file_get_contents($sql));
+                    }
+                }
             }
             $cfg = "<?php\nreturn [\n    'host'=>'$host',\n    'port'=>'$port',\n    'dbname'=>'$dbname',\n    'user'=>'$user',\n    'pass'=>'$pass'\n];\n?>";
             file_put_contents(__DIR__.'/cms/config.php',$cfg);

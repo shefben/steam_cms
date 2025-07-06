@@ -53,6 +53,12 @@ function cms_render_template($path, $vars = [])
             },
             $text
         );
+        $text = preg_replace_callback('/\{header_nobuttons\}/i', function() use ($theme) {
+            return cms_render_header($theme, false);
+        }, $text);
+        $text = preg_replace_callback('/\{header\}/i', function() use ($theme) {
+            return cms_render_header($theme, true);
+        }, $text);
         $text = preg_replace('/\{footer\}/i', cms_get_theme_footer($theme), $text);
         $text = preg_replace_callback('/\{partial_([a-zA-Z0-9_-]+)\}/i', function ($m) use ($theme, $subdir, &$process) {
             $suffix = $subdir ? "/$subdir" : '';

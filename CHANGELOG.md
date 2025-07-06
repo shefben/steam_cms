@@ -72,3 +72,4 @@ All notable changes to this project will be documented in this file.
 - Custom page templates now use {BASE} for theme paths
 - Header buttons use text labels instead of images
 - Footer and header templates moved into installer
+- Added database-driven header tag and theme settings
