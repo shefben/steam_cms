@@ -1,0 +1,119 @@
+/* ========= Header and graphic ============= */
+#error_area_header {
+	width: 717px;
+	height: 93px;
+	background-image: url('images/header_error_bg.jpg');
+	background-repeat: no-repeat;
+	float: left;
+	margin: 0px 0px 0px 17px;
+	margin-bottom: 25px;
+	
+}
+#error_area_header h1 {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #DFDCD6;
+	font-size: 28px;
+	font-weight: bold;
+	font-style: italic;
+	padding: 35px 0px 0px 15px;
+}
+#error_area_header h2 {
+	font-size: 10px;
+	color: #DFDCD6;
+	padding: 0px 0px 0px 15px;
+	margin: 0px;
+}
+
+#error_area_filter {
+	width: 695px;
+	float: left;
+	margin: 0px 0px 0px 17px;
+	margin-bottom: 0px;
+	background-color: #404040;
+	padding: 10px;
+	font-size: 11px;
+	border-top: 1px Solid #6F9FC8;
+	border-bottom: 1px Solid #505050;
+}
+#col_error {
+	width: 751px;
+	float: left;
+}
+#col_agegate {
+	width: 896px;
+	float: left;
+	margin: 30px 0px 0px 0px;
+	text-align: center;
+}
+/* ========= Description Box ============= */
+#error_description_box 
+{
+	border: 1px solid #4A4945;
+	width: 670px;
+	padding: 20px;
+	margin-left: 17px;
+}
+#error_description_box img
+{
+	float: left;
+	padding-right: 20px;
+	height: 45px;
+}
+#error_description_text
+{
+	font-size: 12px;
+}
+/* ========= Age Gate Description Box ============= */
+#agegate_description_box,#macbeta_description_box
+{
+	border: 1px solid #4A4945;
+	width: 856px;
+	padding: 20px;
+	margin-left: 25px;
+}
+#macbeta_description_box {
+	text-align:left;
+	line-height:18px;
+	color:#bbbbbb;
+	margin-bottom:60px;
+}
+
+#macbeta_description_box .question {
+	font-weight:bold;
+}
+.indent30 {
+	padding-left:30px;
+}
+
+#agegate_description_box select {
+	background-color: #ABACAD;
+	border: 1px solid #44617A;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #232323;
+	font-size: 10px;
+	padding: 1px;
+	margin: 0px;
+	width: 80px;
+}
+#agegate_description_box input {
+	font-size: 10px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #6EBCFF;
+	border: 1px solid #44617A;
+	background-color: #2A2A2A;
+	text-decoration: none;
+	padding: 1px 7px 1px 7px;
+}
+#agegate_description_box h2 {
+	margin: 0px 0px 15px 0px;
+}
+#agegate_description_box p,#macbeta_description_box p {
+	text-align: center;
+	margin: 20px 0px 0px 0px;
+	color: #626366;
+}
+#macbeta_description_box p {
+	text-align:left;
+	margin: 0px 0px 0px 20px;
+}

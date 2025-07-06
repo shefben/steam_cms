@@ -1,6 +1,6 @@
 <?php
-use Dom\HTMLCollection;session_start();
-if(file_exists(__DIR__.'/cms/config.php')){
+session_start();
+if (file_exists(__DIR__.'/cms/config.php')) {
     echo 'CMS already installed.';
     exit;
 }
@@ -20,36 +20,36 @@ function normalizeDate(string $raw): string
     return $ts !== false ? date('Y-m-d H:i:s', $ts) : $raw;
 }
 
-if($_SERVER['REQUEST_METHOD']=='POST'){
-    if($step==1){
-        $host=trim($_POST['host']);
-        $port=trim($_POST['port']);
-        $user=trim($_POST['dbuser']);
-        $pass=trim($_POST['dbpass']);
-        $dbname=trim($_POST['dbname']);
-        try{
-            $dsn="mysql:host=$host;port=$port;charset=utf8mb4";
-            $pdo=new PDO($dsn,$user,$pass,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($step == 1) {
+        $host = trim($_POST['host']);
+        $port = trim($_POST['port']);
+        $user = trim($_POST['dbuser']);
+        $pass = trim($_POST['dbpass']);
+        $dbname = trim($_POST['dbname']);
+        try {
+            $dsn = "mysql:host=$host;port=$port;charset=utf8mb4";
+            $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-            $_SESSION['cms_install']=compact('host','port','user','pass','dbname');
+            $_SESSION['cms_install'] = compact('host', 'port', 'user', 'pass', 'dbname');
             header('Location: install.php?step=2');
             exit;
-        }catch(PDOException $e){
-            $errors[]=$e->getMessage();
+        } catch (PDOException $e) {
+            $errors[] = $e->getMessage();
         }
-    }elseif($step==2 && isset($_SESSION['cms_install'])){
-        $config=$_SESSION['cms_install'];
-        $host=$config['host'];
-        $port=$config['port'];
-        $user=$config['user'];
-        $pass=$config['pass'];
-        $dbname=$config['dbname'];
-        $admin_user=trim($_POST['admin_user']);
-        $admin_pass=trim($_POST['admin_pass']);
-        $admin_email=trim($_POST['admin_email']);
-        try{
-            $dsn="mysql:host=$host;port=$port;charset=utf8mb4";
-            $pdo=new PDO($dsn,$user,$pass,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
+    } elseif ($step == 2 && isset($_SESSION['cms_install'])) {
+        $config = $_SESSION['cms_install'];
+        $host = $config['host'];
+        $port = $config['port'];
+        $user = $config['user'];
+        $pass = $config['pass'];
+        $dbname = $config['dbname'];
+        $admin_user = trim($_POST['admin_user']);
+        $admin_pass = trim($_POST['admin_pass']);
+        $admin_email = trim($_POST['admin_email']);
+        try {
+            $dsn = "mysql:host=$host;port=$port;charset=utf8mb4";
+            $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
             $pdo->exec("DROP TABLE IF EXISTS news");
@@ -183,22 +183,22 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 html MEDIUMTEXT
             )");
             $pdo->exec("DROP TABLE IF EXISTS admin_users");
-$pdo->exec("DROP TABLE IF EXISTS player_sessions");
-$pdo->exec("CREATE TABLE player_sessions (
+            $pdo->exec("DROP TABLE IF EXISTS player_sessions");
+            $pdo->exec("CREATE TABLE player_sessions (
     id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id       BIGINT UNSIGNED NOT NULL,
     session_start DATETIME        NOT NULL,
     session_end   DATETIME        NOT NULL,
     INDEX(user_id, session_start)
 )");
-$pdo->exec("DROP TABLE IF EXISTS player_history");
-$pdo->exec("CREATE TABLE player_history (
+            $pdo->exec("DROP TABLE IF EXISTS player_history");
+            $pdo->exec("CREATE TABLE player_history (
     ts           TIMESTAMP PRIMARY KEY,
     players      INT UNSIGNED NOT NULL,
     game_servers INT UNSIGNED NOT NULL
 )");
-$pdo->exec("DROP TABLE IF EXISTS bw_history");
-$pdo->exec("CREATE TABLE bw_history (
+            $pdo->exec("DROP TABLE IF EXISTS bw_history");
+            $pdo->exec("CREATE TABLE bw_history (
     ts     TIMESTAMP PRIMARY KEY,
     mbps   INT UNSIGNED NOT NULL 
 )");
@@ -226,89 +226,77 @@ $pdo->exec("CREATE TABLE bw_history (
                 views INT DEFAULT 0,
                 PRIMARY KEY(date,page)
             )");
-            function split_sql_statements($sql){
+            function split_sql_statements($sql)
+            {
                 $stmts = [];
                 $buffer = '';
                 $inBlock = false;
-                foreach(preg_split("/\r?\n/", $sql) as $line){
+                foreach (preg_split("/\r?\n/", $sql) as $line) {
                     $trim = trim($line);
-                    if($inBlock){
-                        if(strpos($trim, '*/') !== false){
+                    if ($inBlock) {
+                        if (strpos($trim, '*/') !== false) {
                             $inBlock = false;
                         }
                         continue;
                     }
-                    if($trim === '' || str_starts_with($trim, '--') || $trim[0] === '#') {
+                    if ($trim === '' || str_starts_with($trim, '--') || $trim[0] === '#') {
                         continue;
                     }
-                    if(str_starts_with($trim, '/*')) {
+                    if (str_starts_with($trim, '/*')) {
                         $inBlock = true;
                         continue;
                     }
                     $buffer .= $line."\n";
-                    if(preg_match('/;\s*$/', $trim)){
+                    if (preg_match('/;\s*$/', $trim)) {
                         $stmts[] = trim($buffer);
                         $buffer = '';
                     }
                 }
-                if(trim($buffer) !== '') {
+                if (trim($buffer) !== '') {
                     $stmts[] = trim($buffer);
                 }
                 return $stmts;
             }
 
-            foreach(glob(__DIR__.'/sql/*.sql') as $file){
-                $sql=file_get_contents($file);
-                foreach(split_sql_statements($sql) as $stmt){
+            foreach (glob(__DIR__.'/sql/*.sql') as $file) {
+                $sql = file_get_contents($file);
+                foreach (split_sql_statements($sql) as $stmt) {
                     $stmt = trim($stmt);
-                    if($stmt==='') continue;
-
-                   if(stripos($stmt,'INSERT INTO news')===0){
-        // isolate the part after “VALUES”
-        $vals = trim(substr($stmt, stripos($stmt,'VALUES')+6));
-        $vals = rtrim($vals, ';');
-        $rows = preg_split('/\),\s*\(/', trim($vals, '()'));   // split rows
-
-        $newsStmt = $pdo->prepare(
-            'INSERT INTO news(id,title,author,publish_date,content) VALUES(?,?,?,?,?)'
-        );
-
-        foreach($rows as $row){
-            $parts = str_getcsv($row, ',', "'");
-            if(count($parts) < 5) continue;
-
-            // undo doubled single-quotes, trim whitespace
-            $id      = trim($parts[0]);
-            $title   = str_replace("''","'", $parts[1]);
-            $author  = str_replace("''","'", $parts[2]);
-            $date    = normalizeDate($parts[3]);
-            $content = str_replace("''","'", $parts[4]);
-
-            $newsStmt->execute([$id,$title,$author,$date,$content]);
-        }
-        continue;  // skip $pdo->exec($stmt) — we’ve handled it.
-    }
-
-                    if(stripos($stmt,'INSERT INTO custom_pages')===0 &&
-                       preg_match('/^INSERT INTO custom_pages\([^\)]*\) VALUES\s*(.*)$/i',$stmt,$m)){
-                        $values = rtrim($m[1], ';');
-                        $rows = preg_split('/\),\s*\(/', trim($values, '()'));
-                        $cpStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,template,created,updated) VALUES(?,?,?,?,?,?)');
-                        foreach($rows as $row){
-                            $parts = str_getcsv($row, ',', "'");
-            if(count($parts)>=5){
-                // translate NOW() or any informal date formats
-                $created = strtoupper($parts[3])=='NOW()'
-                           ? date('Y-m-d H:i:s')
-                           : normalizeDate($parts[3]);
-                $updated = strtoupper($parts[4])=='NOW()'
-                           ? date('Y-m-d H:i:s')
-                           : normalizeDate($parts[4]);
-                                $cpStmt->execute([$parts[0],$parts[1],$parts[2],null,$created,$updated]);
-                            }
-                        }
+                    if ($stmt === '') {
                         continue;
                     }
+
+                    if (stripos($stmt, 'INSERT INTO news') === 0) {
+                        // isolate the part after “VALUES”
+                        $vals = trim(substr($stmt, stripos($stmt, 'VALUES') + 6));
+                        $vals = rtrim($vals, ';');
+                        $rows = preg_split('/\),\s*\(/', trim($vals, '()'));   // split rows
+
+                        $newsStmt = $pdo->prepare(
+                            'INSERT INTO news(id,title,author,publish_date,content) VALUES(?,?,?,?,?)'
+                        );
+
+                        foreach ($rows as $row) {
+                            $parts = str_getcsv($row, ',', "'");
+                            if (count($parts) < 5) {
+                                continue;
+                            }
+
+                            // undo doubled single-quotes, trim whitespace
+                            $id      = trim($parts[0]);
+                            $title   = str_replace("''", "'", $parts[1]);
+                            $author  = str_replace("''", "'", $parts[2]);
+                            $date    = normalizeDate($parts[3]);
+                            $content = str_replace("''", "'", $parts[4]);
+
+                            $newsStmt->execute([$id,$title,$author,$date,$content]);
+                        }
+                        continue;  // skip $pdo->exec($stmt) — we’ve handled it.
+                    }
+
+                    $sql = file_get_contents($file);
+                    $pdo->exec($sql);
+
 
                     $pdo->exec($stmt);
                 }
@@ -317,7 +305,7 @@ $pdo->exec("CREATE TABLE bw_history (
             try {
                 $res = $pdo->query("SELECT ip,port FROM content_servers ORDER BY id ASC LIMIT 1");
                 $server = $res ? $res->fetch(PDO::FETCH_ASSOC) : false;
-                if($server){
+                if ($server) {
                     $stmt = $pdo->prepare('INSERT INTO settings(`key`,value) VALUES(?,?)');
                     $stmt->execute(['main_network_ip',$server['ip']]);
                     $stmt->execute(['main_network_port',$server['port']]);
@@ -325,8 +313,8 @@ $pdo->exec("CREATE TABLE bw_history (
             } catch (PDOException $e) {
                 // table might not exist; ignore
             }
-            $hash=password_hash($admin_pass,PASSWORD_DEFAULT);
-            $stmt=$pdo->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,created,password) VALUES(?,?,?,?,?,NOW(),?)');
+            $hash = password_hash($admin_pass, PASSWORD_DEFAULT);
+            $stmt = $pdo->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,created,password) VALUES(?,?,?,?,?,NOW(),?)');
             $stmt->execute([$admin_user,$admin_email,'','','all',$hash]);
             // default settings
             $footer = <<<'HTML'
@@ -356,60 +344,62 @@ Please select an option from the top menu.
 HTML;
             $sa_html = file_get_contents(__DIR__ . '/cms/content/subscriber_agreement.html');
             $header_buttons = [
-                ['url'=>'/news.php','text'=>'news'],
-                ['url'=>'/getsteamnow.php','text'=>'getSteamNow'],
-                ['url'=>'/cybercafes.php','text'=>'Cyber Cafes'],
-                ['url'=>'/support.php','text'=>'Support'],
-                ['url'=>'/forums.php','text'=>'Forums'],
-                ['url'=>'/status/status.html','text'=>'Status']
+                ['url' => '/news.php','text' => 'news'],
+                ['url' => '/getsteamnow.php','text' => 'getSteamNow'],
+                ['url' => '/cybercafes.php','text' => 'Cyber Cafes'],
+                ['url' => '/support.php','text' => 'Support'],
+                ['url' => '/forums.php','text' => 'Forums'],
+                ['url' => '/status/status.html','text' => 'Status']
             ];
             $default_nav = [
-                ['file'=>'index.php','label'=>'Dashboard','visible'=>1],
-                ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],
-                ['file'=>'news.php','label'=>'News','visible'=>1],
-                ['file'=>'faq.php','label'=>'FAQ','visible'=>1],
-                ['file'=>'cafe_signups.php','label'=>'Cafe Signup Requests','visible'=>1],
-                ['file'=>'cafe_directory.php','label'=>'Cafe Directory','visible'=>1],
-                ['file'=>'cafe_pricing.php','label'=>'Cafe Pricing','visible'=>1],
-                ['file'=>'cafe_representatives.php','label'=>'Cafe Representatives','visible'=>1],
-                ['file'=>'content_servers.php','label'=>'Servers','visible'=>1],
-                ['file'=>'contentserver_banners.php','label'=>'ContentServer Banner Management','visible'=>1],
-                ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
-                ['file'=>'theme.php','label'=>'Theme','visible'=>1],
-                ['file'=>'settings.php','label'=>'Settings','visible'=>1],
-                ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
-                ['file'=>'storefront_main.php','label'=>'Main Page','visible'=>1],
-                ['file'=>'storefront.php','label'=>'Storefront','visible'=>1],
-                ['file'=>'storefront_sidebar.php','label'=>'Sidebar','visible'=>1],
-                ['file'=>'storefront_products.php','label'=>'Products','visible'=>1],
-                ['file'=>'storefront_categories.php','label'=>'Categories','visible'=>1],
-                ['file'=>'storefront_developers.php','label'=>'Developers','visible'=>1],
-                ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
-                ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
-                ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
-                ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
+                ['file' => 'index.php','label' => 'Dashboard','visible' => 1],
+                ['file' => 'main_content.php','label' => 'Main Content','visible' => 1],
+                ['file' => 'news.php','label' => 'News','visible' => 1],
+                ['file' => 'faq.php','label' => 'FAQ','visible' => 1],
+                ['file' => 'cafe_signups.php','label' => 'Cafe Signup Requests','visible' => 1],
+                ['file' => 'cafe_directory.php','label' => 'Cafe Directory','visible' => 1],
+                ['file' => 'cafe_pricing.php','label' => 'Cafe Pricing','visible' => 1],
+                ['file' => 'cafe_representatives.php','label' => 'Cafe Representatives','visible' => 1],
+                ['file' => 'content_servers.php','label' => 'Servers','visible' => 1],
+                ['file' => 'contentserver_banners.php','label' => 'ContentServer Banner Management','visible' => 1],
+                ['file' => 'custom_pages.php','label' => 'Custom Pages','visible' => 1],
+                ['file' => 'theme.php','label' => 'Theme','visible' => 1],
+                ['file' => 'settings.php','label' => 'Settings','visible' => 1],
+                ['file' => 'header_footer.php','label' => 'Header & Footer','visible' => 1],
+                ['file' => 'storefront_main.php','label' => 'Main Page','visible' => 1],
+                ['file' => 'storefront.php','label' => 'Storefront','visible' => 1],
+                ['file' => 'storefront_sidebar.php','label' => 'Sidebar','visible' => 1],
+                ['file' => 'storefront_products.php','label' => 'Products','visible' => 1],
+                ['file' => 'storefront_categories.php','label' => 'Categories','visible' => 1],
+                ['file' => 'storefront_developers.php','label' => 'Developers','visible' => 1],
+                ['file' => 'faq_categories.php','label' => 'FAQ Categories','visible' => 1],
+                ['file' => 'admin_users.php','label' => 'Administrators','visible' => 1],
+                ['file' => 'error_page.php','label' => 'Error Page','visible' => 1],
+                ['file' => '../logout.php','label' => 'Logout','visible' => 1]
             ];
             $defaults = [
-                'theme'=>'2004',
-                'admin_theme'=>'v2',
-                'site_title'=>'Steam',
-                'smtp_host'=>'',
-                'smtp_port'=>'',
-                'smtp_user'=>'',
-                'smtp_pass'=>'',
-                'header_overrides'=>'',
-                'header_config'=>json_encode(['logo'=>'{BASE}/themes/2004/images/valve_head.gif','buttons'=>$header_buttons]),
-                'footer_html'=>$footer,
-                'favicon'=>'/favicon.ico',
-                'error_html'=>$error_html,
-                'nav_items'=>json_encode($default_nav),
-                'root_path'=>'',
-                'gzip'=>'0',
-                'enable_cache'=>'0',
-                'news_year_only'=>'1'
+                'theme' => '2004',
+                'admin_theme' => 'v2',
+                'site_title' => 'Steam',
+                'smtp_host' => '',
+                'smtp_port' => '',
+                'smtp_user' => '',
+                'smtp_pass' => '',
+                'header_overrides' => '',
+                'header_config' => json_encode(['logo' => '{BASE}/themes/2004/images/valve_head.gif','buttons' => $header_buttons]),
+                'footer_html' => $footer,
+                'favicon' => '/favicon.ico',
+                'error_html' => $error_html,
+                'nav_items' => json_encode($default_nav),
+                'root_path' => '',
+                'gzip' => '0',
+                'enable_cache' => '0',
+                'news_year_only' => '1'
             ];
             $stmt = $pdo->prepare('INSERT INTO settings(`key`,value) VALUES(?,?)');
-            foreach($defaults as $k=>$v){ $stmt->execute([$k,$v]); }
+            foreach ($defaults as $k => $v) {
+                $stmt->execute([$k,$v]);
+            }
             $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated) VALUES(?,?,?,?,?, ?,NOW())');
             $pageStmt->execute(['subscriber_agreement','Steam Subscriber Agreement',$sa_html,null,null,date('Y-m-d H:i:s')]);
 
@@ -418,28 +408,28 @@ HTML;
              * --------------------------------------------------------- */
 
             $default_buttons = [
-                ['url'=>'{BASE}/index.php?area=news',          'text'=>'news'],
-                ['url'=>'{BASE}/index.php?area=getsteamnow',   'text'=>'getSteamNow'],
-                ['url'=>'{BASE}/index.php?area=cybercafes',    'text'=>'Cyber Cafes'],
-                ['url'=>'{BASE}/support.php',       'text'=>'Support'],
-                ['url'=>'{BASE}/index.php?area=forums',        'text'=>'Forums'],
-                ['url'=>'{BASE}/status/status.php','text'=>'Status'],
+                ['url' => '{BASE}/index.php?area=news',          'text' => 'news'],
+                ['url' => '{BASE}/index.php?area=getsteamnow',   'text' => 'getSteamNow'],
+                ['url' => '{BASE}/index.php?area=cybercafes',    'text' => 'Cyber Cafes'],
+                ['url' => '{BASE}/support.php',       'text' => 'Support'],
+                ['url' => '{BASE}/index.php?area=forums',        'text' => 'Forums'],
+                ['url' => '{BASE}/status/status.php','text' => 'Status'],
             ];
 
             /* theme-specific overrides                                    */
             $button_overrides = [
                 /* 2003_v1 → Support | Forums | Contact ------------------ */
                 '2003_v1' => [
-                    ['url'=>'{BASE}/support.php',   'text'=>'Support'],
-                    ['url'=>'{BASE}/index.php?area=forums',    'text'=>'Forums'],
-                    ['url'=>'{BASE}/contact.php',   'text'=>'Contact'],
+                    ['url' => '{BASE}/support.php',   'text' => 'Support'],
+                    ['url' => '{BASE}/index.php?area=forums',    'text' => 'Forums'],
+                    ['url' => '{BASE}/contact.php',   'text' => 'Contact'],
                 ],
 
                 /* 2002_v2 → Try Steam Now! | Steam Support Site | Valve Home */
                 '2002_v2' => [
-                    ['url'=>'{BASE}/getsteamnow.php','text'=>'Try Steam Now!'],
-                    ['url'=>'{BASE}/support.php',   'text'=>'Steam Support Site'],
-                    ['url'=>'http://www.valvesoftware.com','text'=>'Valve Home'],
+                    ['url' => '{BASE}/getsteamnow.php','text' => 'Try Steam Now!'],
+                    ['url' => '{BASE}/support.php',   'text' => 'Steam Support Site'],
+                    ['url' => 'http://www.valvesoftware.com','text' => 'Valve Home'],
                 ],
             ];
 
@@ -1020,9 +1010,9 @@ HTML;
                 [null,"Snor'z Game Systems Ltd (IGUK)",'01902 781451','Unit 10 Marsh Lane Parade - Stafford Road','Wolverhampton','WV10 6RT'],
                 ['http://www.lan-den.net','landen ltd(IGUK)','(190) 5 2-6260','Top floor,22-24 New street','worcester','WR1 2DN']
             ];
-            $ord=1;
-            foreach($defaultCafes as $c){
-                $dirStmt->execute(array_merge($c,[$ord++]));
+            $ord = 1;
+            foreach ($defaultCafes as $c) {
+                $dirStmt->execute(array_merge($c, [$ord++]));
             }
 
             $repStmt = $pdo->prepare('INSERT INTO cafe_representatives(url,website,email,rep_name,address,city_province,zip,country,phone,ord) VALUES(?,?,?,?,?,?,?,?,?,?)');
@@ -1034,17 +1024,19 @@ HTML;
                 ['http://www.computergames.ro/','COMPUTER GAMES ONLINE SRL','silviu@computergames.ro','Silviu Stroie','Unirii 75 Blvd, bl. H1','Bucharest','','Romania',''],
                 ['http://www.unalis.com.tw/','UNALIS CORPORATION','leon@unalis.com.tw','Leon Chang','10F, No 168 SEC 2','Taipei','','Taiwan','']
             ];
-            foreach($defaultReps as $r){
-                $repStmt->execute(array_merge($r,[$ord++]));
+            foreach ($defaultReps as $r) {
+                $repStmt->execute(array_merge($r, [$ord++]));
             }
             $stmt2 = $pdo->prepare('REPLACE INTO themes(name, css_path) VALUES(?,?)');
-            foreach(glob(__DIR__.'/themes/*', GLOB_ONLYDIR) as $dir){
+            foreach (glob(__DIR__.'/themes/*', GLOB_ONLYDIR) as $dir) {
                 $name = basename($dir);
-                if(substr($name,-6) === '_admin') continue;
+                if (substr($name, -6) === '_admin') {
+                    continue;
+                }
                 $css = 'steampowered02.css';
-                if(!file_exists("$dir/css/$css")){
+                if (!file_exists("$dir/css/$css")) {
                     $css = file_exists("$dir/css/steampowered.css") ? 'steampowered.css' : '';
-                    if($css === ''){
+                    if ($css === '') {
                         $files = glob("$dir/css/*.css");
                         $css = $files ? basename($files[0]) : '';
                     }
@@ -1052,29 +1044,29 @@ HTML;
                 $css_path = $css ? 'css/'.$css : '';
                 $stmt2->execute([$name,$css_path]);
                 $cfg_file = "$dir/config.php";
-                if(file_exists($cfg_file)){
+                if (file_exists($cfg_file)) {
                     $cfg = include $cfg_file;
-                    if(is_array($cfg)){
+                    if (is_array($cfg)) {
                         $set = $pdo->prepare('REPLACE INTO theme_settings(theme,name,value) VALUES(?,?,?)');
-                        foreach($cfg as $k=>$v){
+                        foreach ($cfg as $k => $v) {
                             $set->execute([$name,$k,(string)$v]);
                         }
                     }
                 }
                 $sql_dir = "$dir/sql";
-                if(is_dir($sql_dir)){
-                    foreach(glob($sql_dir.'/*.sql') as $sql){
+                if (is_dir($sql_dir)) {
+                    foreach (glob($sql_dir.'/*.sql') as $sql) {
                         $pdo->exec(file_get_contents($sql));
                     }
                 }
             }
             $cfg = "<?php\nreturn [\n    'host'=>'$host',\n    'port'=>'$port',\n    'dbname'=>'$dbname',\n    'user'=>'$user',\n    'pass'=>'$pass'\n];\n?>";
-            file_put_contents(__DIR__.'/cms/config.php',$cfg);
+            file_put_contents(__DIR__.'/cms/config.php', $cfg);
             unset($_SESSION['cms_install']);
             header('Location: install.php?step=3');
             exit;
-        }catch(PDOException $e){
-            $errors[]=$e->getMessage();
+        } catch (PDOException $e) {
+            $errors[] = $e->getMessage();
         }
     }
 }
@@ -1227,14 +1219,16 @@ HTML;
         <p>Multi-era Steam website content management system</p>
     </div>
     <div class="progress-bar">
-        <div class="progress-fill" style="width: <?php echo ($step/3)*100; ?>%;"></div>
+        <div class="progress-fill" style="width: <?php echo ($step / 3) * 100; ?>%;"></div>
     </div>
-    <?php if($errors): ?>
+    <?php if ($errors): ?>
         <ul style="color:#ff8080;">
-        <?php foreach($errors as $e) echo '<li>'.htmlspecialchars($e).'</li>'; ?>
+        <?php foreach ($errors as $e) {
+            echo '<li>'.htmlspecialchars($e).'</li>';
+        } ?>
         </ul>
     <?php endif; ?>
-    <?php if($step==1): ?>
+    <?php if ($step == 1): ?>
         <h2 style="color:#ffffff; margin-bottom:20px;">Step 1: Database Configuration</h2>
         <form method="post">
             <div class="form-group">
@@ -1259,7 +1253,7 @@ HTML;
             </div>
             <button class="btn btn-primary" type="submit">Continue</button>
         </form>
-    <?php elseif($step==2): ?>
+    <?php elseif ($step == 2): ?>
         <h2 style="color:#ffffff; margin-bottom:20px;">Step 2: Admin User</h2>
         <form method="post">
             <div class="form-group">

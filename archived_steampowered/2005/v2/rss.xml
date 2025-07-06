@@ -1,0 +1,355 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:cc="http://web.resource.org/cc/" xmlns="http://purl.org/rss/1.0/">
+	<channel rdf:about="http://www.steampowered.com">
+		<title>Valve RSS News Feed</title> 
+		<link>http://www.steampowered.com/</link> 
+		<description>All Valve news, all the time!</description> 
+		<language>en</language> 
+		<pubDate>Thu, 22 Dec 2005 07:07:57 -0800</pubDate> 
+		<generator>http://www.steampowered.com/</generator> 
+		<items>
+			<rdf:Seq>
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=497" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=496" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=495" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=494" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=493" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=492" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=491" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=490" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=489" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=488" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=487" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=486" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=485" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=484" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=483" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=482" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=481" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=480" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=479" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=478" />
+			</rdf:Seq>
+		</items>
+	</channel>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=497">
+		<title>Day of Defeat: Source Update Available</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=497</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 22 Dec 2005 06:59:45 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-22T06:59:45-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Day of Defeat: Source have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li> Allied Garand is now more accurate <br><li> Allied 30cal machine gun is now more accurate <br><li> Made the garand sight ring larger when in iron sights. <br><li> Moved Axis k98 rifle iron sight model away from the player slightly. <br><li> View model no longer sways in iron sight mode <br><li> Decreased the recoil on the Allied Garand when in iron sights. <br><li> Fixed bug where Allied 30cal machine gun would remove stamina when firing an empty gun <br><li> Improved weapon pickup to search in radius around crosshair <br><li> Fixed prediction bug where players would get stuck together <br><li> Added an end of round statistics panel to highlight the most valuable contributors to the winning team. <br><li> Increased footstep volume <br><li> Updated firing sounds for both Allied and Axis machine guns. <br><li> Game now uploads a stats blob to steam on level change or shutdown. Contains info about scoring, weapon and class performance and server settings. We'll be creating a web page for the community to view these stats soon. (These are not statistics about individual players, just aggregate across the entire Day of Defeat Source community.) <br><li> Added life id to damage record in console <br><li> Fixed bug that would produce '0 damage in x hits' in damage record <br><li> Added cvar "hud_takesshots" - Setting this to 1 will take a screen shot at the end of the game with the scoreboard included. <br><li> Updated the death notice hud element <br><li> Fixed logging error where player index was used instead of userid for cap and block messages <br><li> Winning and losing teams can now chat during the bonus round * no longer show (dead) prefix during this period. <br><li> Fixed bug where last character of a players name would be cut off. <br><li> Added defense icon to death notice defense event instead of "Defended" text <br><li> Fixed bug where you could jump while in the process of going prone <br><li> Fixed animation bug when an assault player dropped his primary weapon and didn't have a pistol or grenades. <br><li> Force exact file consistency on smoke grenade materials and weapon scripts <br><li> Optimizations to lag compensation <br><li> Added voice command variations <br><li> Optimizations to debris physboxes</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=496">
+		<title>VALVE UNVEILS 64-BIT SOURCE&trade; GAMING TECHNOLOGY DEVELOPED IN CONJUNCTION WITH AMD</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=496</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 22 Dec 2005 04:30:42 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-22T04:30:42-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Available Now: 64-Bit Half-Life&reg; 2 and Lost Coast&trade;<br><br>Bellevue, WA.  December 22, 2005  Valve, a leading entertainment and technology studio, unveiled a 64-bit version of its Source game engine technology today. The first 64-bit Valve games released will be native 64-bit versions of Half-Life 2 and Lost Coast, and have been developed to take advantage of AMD Athlon&trade; 64 FX processor-based systems - the ultimate 64-bit gaming platform for PC enthusiasts.<br><br>The 64-bit versions of these games are being offered to all Half-Life 2 owners via Steam&trade;, Valves online platform for delivering games and digital content directly to users around the world. <br><br>"Bringing the Source technology to the AMD64 processor platform is an important step in the evolution of our game content and tools," said Gabe Newell, Valves co-founder and president. "This investment in future processing will allow us, and third party developers working with Source, to push the boundaries of the gaming experience."<br><br>"AMD Athlon 64 FX processors are targeted for systems designed to provide the ultimate experience for a new generation of power users running demanding applications " said Bob Brewer, corporate vice president, Desktop Division, AMDs Microprocessor Solutions Sector. "Combining the performance of AMD64 processors with the 64-bit version of Valves technology results in advanced and powerful games. This winning collaboration brings customers an amazing product based on the best of AMD64 technology and Valves software development."<br><br>The AMD Athlon 64 FX processor is the first Windows&reg;-compatible 64-bit PC processor designed specifically for PC enthusiasts. The AMD Athlon 64 FX processor helps enthusiasts immerse themselves in their digital world.  They can play games at a level previously only reserved for the world of simulations, or create and manipulate digital media like a pro.  The AMD Athlon 64 FX processor brings the next generation of digital media and games to life. <br><br>Half-Life 2 has been named Game of the Year by over 35 publications worldwide, and has sold over 4 million copies worldwide. Source, Valves proprietary engine technology, provides technical advances in rendering, artificial intelligence, character animation, and networking.<br><br>About Valve<br>Valve is an entertainment software and technology company founded in 1996 and based in Bellevue, Washington. The company's portfolio of entertainment titles includes Half-Life&reg;, Counter-Strike&trade;, Day of Defeat&reg;, and Team Fortress&reg;. Valve's portfolio of titles accounts for over 19 million retail units sold worldwide, and over 80% of the PC online action market. In addition, Valve is a developer of leading-edge technologies, such as the Source game engine and Steam, a broadband platform for the delivery and management of digital content. For more information, please visit www.valvesoftware.com
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=495">
+		<title>Counter-Strike: Source Update Available</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=495</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 20 Dec 2005 05:10:36 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-20T05:10:36-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Counter-Strike: Source have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added G.I.G.N and Guerilla player models<br><li>Sniper rifles that are in the process of zooming in don't get the zoomed-in accuracy bonus<br><li>Fixed crosshairs when running in a widescreen aspect ratio<br><li>Added a 'nextlevel' server side command to force intermission and a switch to the specified map after the current round<br><li>Fixed bug where players were able to throw grenades through thin walls<br><li>Added a server message for teammate attacks<br><li>Fixed buy menu not having mouse focus<br><li>Fixed buy menu re-opening when you try to close it.<br><li>Fixed centerprint panel and frames per second panel not resizing correctly after a resolution change.<br><li>'&' chars in player names show in the scoreboard and spectator UI<br><li>In-eye spectators see punch angles<br><li>Fixed bots thinking they are still on a higher nav area when they fall off<br><li>Added nav area ID to the bot debug prints<br><li>Extended the bot_add*, bot_kick, and bot_kill commands to accept skill (easy, normal, hard, expert) and/or weapon preference (sniper, shotgun, etc) arguments.  For example, typing bot_add_ct expert will add a random bot of expert difficulty to the CT team.<br><li>Added <em>difficulty</em>, <em>weaponclass</em>, and <em>skill</em> modifiers to the bot_prefix string<br><li>Navigation mesh editing - raising/lowering corners correctly snaps adjacent corners to the same height<br></ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=494">
+		<title>Darwinia Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=494</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 15 Dec 2005 01:57:44 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-15T01:57:44-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Darwinia have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Darwinia</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed crash due to missing Rocket weapon sounds<br></ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=493">
+		<title>Darwinia Available Now On Steam</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=493</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 14 Dec 2005 03:18:13 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-14T03:18:13-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Introversion's Darwinia is now available to gamers worldwide via Steam. Darwinia is a captivating mix of multiple genres including real-time strategy, arcade, and puzzle games. <a href="http://storefront.steampowered.com/v2/?area=game&AppId=1500">Click here to get your copy now</a>.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=492">
+		<title>Darwinia Demo Available Now</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=492</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 13 Dec 2005 02:34:42 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-13T02:34:42-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+A new demo for Darwinia is now available. Darwinia, developed by <a href="http://www.introversion.co.uk/">Introversion</a>, has been nominated for numerous Best Independent and Best Strategy Game of the Year Awards for 2005. This demo showcases the innovative gameplay that has got the judges taking notice. <a href="steam://install/1502">Click here to try Darwinia for free</a>.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=491">
+		<title>Half-Life 1 Engine Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=491</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 7 Dec 2005 06:26:40 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-7T06:26:40-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to the Half-Life 1 Engine have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Half-Life 1 Engine</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed "This Steam account is being used in another location" error when starting a listen server with LAN mode disabled</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=490">
+		<title>Source Dedicated Server Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=490</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Mon, 5 Dec 2005 06:25:09 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-5T06:25:09-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to the Source Dedicated Server have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Source Dedicated Server</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixes incorrect Steam ID logging on player connect<br><li>Fixes rare assert on player connect<br><li>Fixes <i>srcds_i486</i> Linux binary not loading correctly<br></ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=489">
+		<title>Source Engine Update Available</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=489</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 2 Dec 2005 03:24:39 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-2T03:24:39-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to the Source Engine have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Source Engine</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed "Extra App ID set to 211, but no SteamAppId" error when launching Source SDK tools</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=488">
+		<title>Darwinia Now Available for Pre-Purchase</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=488</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 1 Dec 2005 05:41:05 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-1T05:41:05-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Darwinia, the latest multi-genre creation from UK-based Introversion, is now available for <a href="http://storefront.steampowered.com/v2/index.php?area=game&AppId=1500">pre-purchase</a> via Steam. Those who <a href="http://storefront.steampowered.com/v2/index.php?area=game&AppId=1500">pre-purchase</a> the game will save 10%. In addition, a new Darwinia <a href="http://storefront.steampowered.com/video/darwinia-steam.wmv">gameplay trailer</a> (52MB) is now available. If you don't have a Steam account, <a href="http://www.steampowered.com/index.php?area=getsteamnow">click here</a>.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=487">
+		<title>Counter-Strike: Source Update Available</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=487</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 1 Dec 2005 05:40:08 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-12-1T05:40:08-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Counter-Strike: Source have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>New Map</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added de_nuke with High Dynamic Range (HDR) lighting<br></ul><br><br><b>Counter-Strike: Source Enhancements and Bug Fixes</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>The Bomb (C4) can no longer be planted on breakables, movable physics props, or other players<br><li>Fixed problem where players were not always grabbing onto ladders that were approached from above<br><li>Crouching while traversing a ladder reduces the players speed (matches CS 1.6 behavior)<br><li>Improved door logic to prevent doors from opening into the player using them<br><li>View-smoothing is now done when going down stairs as well as up <br><li>Bomb-related sounds play for everyone correctly now (not just the bomb-planter)<br><li>First-person spectators are blinded and deafened just like the person they are observing<br><li>Fixed incorrect bullet penetration calculation through concrete+grate materials<br><li>Fixed changeteam exploit<br><li>Fixed DX7 early prop fade-out<br><li>Fixed rare player animation issue while holding grenades<br><li>Fixed apparent lockup/hang due to the disconnect dialog showing up over the quit menu and hiding it<br><li>Fixed crash when shooting explosive objects that would result in the shooters immediate death<br><li>Opening the buy menu and equipment menu on the same frame no longer leaves the buy menu in a bad state<br><li>DEagle no longer always plays deploy animation when starting to spectate its owner<br><li>Non-localized HintText displays correctly again<br><li>Added "mp_disable_autokick <userid>" so players with rcon access aren't idle-kicked<br><li>soundscape_flush no longer forgets about soundscape entities<br><li>Exposed VIP player index to plugins/mods <br></ul><br><br><b>Counter-Strike: Source Bot Changes</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Several navigation improvements (jumping, ladders, general movement)<br><li>Various CPU performance optimizations<br><li>Bots are more attentive to enemy noises now<br><li>Bots throw their grenades when surprised by an enemy correctly now<br><li>Bots can open doors when attacking with a knife now<br><li>Fixed bug preventing CT bots from hiding to guard a bomb defuser <br><li>Fixed a few issues where bots were trying to plant the bomb in bad places <br><li>Bots now break breakables they touch while stuck or crouched<br><li>Fixed bots not knowing if the cs_havana window is shut<br><li>Adding the bot_join_delay ConVar to delay bots joining after a map change<br></ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=486">
+		<title>Day of Defeat: Source and Rag Doll Kung Fu Update Available</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=486</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 30 Nov 2005 05:30:29 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-11-30T05:30:29-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Day of Defeat: Source and Rag Doll Kung Fu have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Day of Defeat: Source</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added new map <i>dod_argentan</i><br></ul><br><b>Rag Doll Kung Fu</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed not being able to play past the second level transition<br></ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=485">
+		<title>Half-Life 1 Engine Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=485</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 29 Nov 2005 05:26:38 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-11-29T05:26:38-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to the Half-Life 1 Engine have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Half-Life 1 Engine</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed regression causing Asian language versions to display corrupt characters<br></ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=484">
+		<title>Rag Doll Kung Fu Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=484</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Mon, 28 Nov 2005 02:20:16 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-11-28T02:20:16-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to Rag Doll Kung Fu have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Rag Doll Kung Fu</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Enabled setting max players mid game, to stop people joining if it would disrupt a good game<br><li>Rebalanced the damage calculations, based on feedback from forums<br><li>Hands now do more damage than before, and combo hits now do less damage each consecutive hit, to stop the deadly phenomena that has been nicknamed 'spamming'<br></ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=483">
+		<title>Red Orchestra: Ostfront 41-45 Announced, Coming To Steam</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=483</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 22 Nov 2005 04:43:52 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-11-22T04:43:52-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Tripwire Interactive today announced a new World War II PC game, Red Orchestra: Ostfront 41-45. Tripwire will deliver its award-winning first person shooter via Steam, Valve's online content delivery system. The original Red Orchestra won Nvidia's "$1,000,000 Make Something Unreal" contest. Red Orchestra: Ostfront 41-45 is a standalone follow-up, built on Epic's Unreal 2.5 EngineTM, that introduces new gameplay and features.<br><br>Red Orchestra lets players choose from 28 infantry weapons or crew one of 14 different fully-realised vehicles on the Russian Front between 1941-45. The combination of roles across more than one dozen maps, based on real-world locations and battles, allows Red Orchestra to finally achieve its goal of delivering a full first-person, WWII combat simulation.<br><br>In its Christmas 2005 issue, PC Gamer UK touts that Red Orchestra is "showing awesome potential" and that "We already knew the mod was genius, but this is even better" as part of its two-page preview of RO: O41-45.<br><br>"Digital content delivery is the future of gaming, and we are very excited to be a part of that future," said Tripwire Interactive President John Gibson. "Working with Valve to release the game over Steam allows Tripwire to remain independent and keep control of the games content and development. This allows Tripwire to continue to offer our fans the same uncompromising level of realism, authenticity, and gameplay they have come to expect from Red Orchestra while continuing to innovate and push the boundaries of the military FPS and simulation genres."<br><br>"We're pleased to have the winner of the 'Make Something Unreal' mod tournament bringing their full-fledged game to market on Steam," said Jason Holtman, director of business development at Valve. "This shows that a talented and passionate group of developers can take a game from concept to public distribution outside of the traditional publishing and funding model and deliver it to over 6 million customers."<br><br>Watch for information on the Red Orchestra: Ostfront 41-45 release date on Steam. Further details will be made available on <a href="http://www.redorchestragame.com/">www.redorchestragame.com</a> and <a href="http://www.steampowered.com/">www.steampowered.com</a> over the coming weeks and months.<br><br>For further information, please contact <a href="mailto:pr@tripwireinteractive.com">pr@tripwireinteractive.com</a>.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=482">
+		<title>Day of Defeat: Source Update Available</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=482</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 22 Nov 2005 12:39:05 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-11-22T12:39:05-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+An update to Day of Defeat: Source has been released. The update will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Day of Defeat: Source</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Updated gameinfo.txt to support the Source SDK</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=481">
+		<title>Half-Life 1 Engine Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=481</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Mon, 21 Nov 2005 05:42:48 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-11-21T05:42:48-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Updates to the Half-Life 1 Engine have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include:<br><br><b>Half-Life 1 Engine</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed Asian language versions displaying corrupt characters<br><li>Fixed Condition Zero: Deleted Scenes not loading cz_alamo2 correctly<br><li>Fixed being unable to launch Half-Life: Blue Shift if you didn't own Half-Life 1<br></ul><br><b>Half-Life 1 Dedicated Server</b><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Added new clientcvar2 cvar query interface for developers<br><li>Fixed "-sport" and "+ip" command line options being ignored on startup<br></ul><br><i><b>Linux users</b> - Hldsupdatetool and our game engines now require <b>GLIBC 2.3.2</b> or later, the update tool will verify you meet this requirement before installing the game software.</i>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=480">
+		<title>CPL Announces 2006 Counter-Strike Summer Event</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=480</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 16 Nov 2005 03:04:05 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-11-16T03:04:05-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+The CPL has announced its 2006 Summer Event, which will include a CS event that offers $300,000 in cash prizes to be distributed to the top 64 teams, with $90,000 going to the winning team. To enter your team, visit <a href="http://www.TheCPL.com/register/">www.TheCPL.com/register/</a>.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=479">
+		<title>Half-Life 2 For Xbox Now Shipping</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=479</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 15 Nov 2005 04:53:43 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-11-15T04:53:43-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Half-Life&reg; 2 for Xbox is now shipping to retail outlets and will become available at shops around the world over the coming days. Here are links to a few reviews:<br><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li> <a href="http://xbox.ign.com/articles/666/666049p1.html">IGN</a><br><li> <a href="http://xbox.gamespy.com/xbox/half-life-2/666612p1.html">Gamespy</a><br><li> <a href="http://www.xboxcore.com/reviews/158.html">XboxCore</a><br><li> <a href="http://www.game-over.net/reviews.php?page=xboxreviews&id=257">GameOver</a></ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=478">
+		<title>Darwinia Available On Steam December 14</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=478</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 15 Nov 2005 04:50:26 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2005-11-15T04:50:26-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Valve and Introversion today announce that <i>Darwinia</i>, Introversion's multi-genre title, will be available to gamers worldwide on December 14, 2005 via Steam for $19.95. <i>Darwinia</i> is a captivating mix of multiple genres including real-time strategy, arcade, and puzzle games. PC Gamer magazine UK says, "Darwinia will remind you why you love gaming so much." And Eurogamer.com calls Darwinia, "This year's underground classic." For more information on <i>Darwinia</i>, please visit <a href="http://www.darwinia.co.uk/" >www.darwinia.co.uk</a>.
+			]]> 
+		</content:encoded>
+	</item>
+</rdf:RDF>

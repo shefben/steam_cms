@@ -1,0 +1,223 @@
+#v4headerBar {
+	text-align:left;
+	margin:0;
+	padding:0;
+	background-color:#111111;
+	width:100%;
+	color:#545454;
+	font-family:tahoma, helvetica, arial, trebuchet ms, sans-serif;
+	font-size:10px;
+	margin-bottom:7px;
+	height: 64px;
+	*height: 54px;
+}
+
+a.v4headerLink,a.v4headerLink:active,a.v4headerLink:visited,a.v4headerLink:hover {
+	font-family:tahoma, helvetica, arial, trebuchet ms, sans-serif;
+	font-size:10px;
+	text-decoration:none;
+	color:#959595;
+	font-weight:normal;
+	line-height: 32px;
+	*line-height: 0px;
+}
+
+#v4headerRight {
+	float:right;
+	padding:0;
+	margin:0;
+	padding-right:27px;
+}
+
+#v4headerLinks {
+	margin-bottom:0;
+	padding-bottom:0;
+	white-space: nowrap;
+	background-color:#111111;
+	height: 19px;
+	clear: none;
+	float: left;
+}
+	
+#v4headerMenuItems {
+	float: left;
+	clear: none;
+}
+
+#v4headerStatusItems {
+	float: right;
+	clear: none;
+	color:#959595;
+	font-weight:normal;
+	line-height: 32px;
+	margin-right: 32px;
+	*line-height: 12px;
+	
+}
+
+a.beta_mode_link,a.beta_mode_link:active,a.beta_mode_link:visited,a.beta_mode_link:hover {
+	text-decoration:none;
+	color:#950000;
+	line-height: 32px;
+	*line-height: 0px;
+}
+
+#debug_log {
+	position: absolute;
+	right: 4px;
+	top: 32px;
+	background-color: #333333;
+	border: 1px solid #950000;
+	padding: 6px;
+}
+
+
+#v4HeaderCartIcon {
+	block-level:inline;
+	float:left;
+	clear:none;
+	padding-top:10px;
+	padding-right:2px;
+}
+
+#v4headerRight .personaName {
+	color:#cfcfcf;
+}
+
+.v4headerLinkActive, .v4headerLinkActive:hover {
+	color:#cfcfcf;
+	font-weight:bold;
+}
+
+.v4loginLink, .v4loginLink:hover {
+	font-size: 10px;
+	font-weight: normal;
+	color: #959595;
+	text-decoration: none;	
+}
+
+#active_user_name
+{
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: normal;
+}
+#steamLogo {
+	float:left;
+	margin:0;
+	padding:0;
+	width:105px;
+	height:54px;
+}
+
+#steamText {
+	margin:0;
+	padding:0;
+	height:35px;
+}
+
+#steamText>img {
+	clear: none;
+	float: left;
+}
+
+#steamText>div
+{
+	clear: none;
+	float: right;
+	margin-right: 32px;
+}
+
+#v4headerLinks>p {
+	padding-left:6px;
+	clear: none;
+	float: left;
+	white-space: nowrap;
+}
+
+#cart_status_row
+{
+	margin-top:6px;
+	margin-bottom:2px;
+	clear: both;
+	white-space: nowrap;
+	width: 100%;
+}
+
+#cart_status_center
+{
+	width:947px;
+	height: 12px;
+}
+
+#cart_status_center_narrow
+{
+	width:761px;
+	height: 12px;
+}
+
+#cart_status_data
+{
+	float: right;
+	text-align: right;
+	margin-right: 26px;
+}
+
+
+#cart_status_icon {
+	float:right;
+	width:20px;
+	height:20px;
+	padding-left:5px;
+	margin-top:-4px;
+}
+
+#cart_status_data a {
+	color:#8bc53f;
+	font-family:tahoma, helvetica, arial, trebuchet ms, sans-serif;
+	font-weight: normal;
+	font-size:11px;
+	text-decoration:underline;
+}
+
+#client_active_user_name
+{
+	float: right;
+	margin-left: 8px;
+}
+#client_active_user_name a
+{
+	color:#FFFFFF;
+	font-weight:normal;
+	font-family:tahoma, helvetica, arial, trebuchet ms, sans-serif;
+	font-size:11px;
+	text-decoration:underline;
+}
+
+#client_active_user_name #client_beta_link, #web_beta_link
+{
+	color: #990000;
+}
+
+#client_wallet_balance
+{
+	float: right;
+	margin-left: 8px;
+}
+
+#client_wallet_balance a
+{
+	color:#FFFFFF;
+	font-weight:normal;
+	font-family:tahoma, helvetica, arial, trebuchet ms, sans-serif;
+	font-size:11px;
+	text-decoration:underline;
+}
+
+#header_wallet_balance
+{
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: normal;
+}
+

@@ -137,19 +137,28 @@ p a:hover {
 }
 select {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 1.1em;
+	font-size: 10px;
 	color: #000000;
 	text-decoration: none;
-	background-color: #e6e6e6;
+	background-color: #9C9EA0;
+	border: 1px solid #000000;
 	text-align: left;
 	margin: 0px;
-	padding: 0px;
+	padding: 2px;
 	width: 200px;
+}
+input {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	background-color: #9C9EA0;
+	border: 1px solid #000000;
+	padding: 2px;
 }
 .formArea {
 	width: 295px;
 	height: 15px;
-	background-image: url('img/btn_right_wd.jpg');
+	background-image: url(img/btn_right_wd.jpg);
 	margin: 0px;
 	padding-left: 15px;
 	padding-top: 5px;
@@ -213,7 +222,7 @@ A:hover.menu_item_pub {	color: #e6e6e6;}
 	margin-right: 15px;
 	margin-top: 4px;
 	background-attachment: scroll;
-	background-image:  url('img/ico/ico_arrow_green.gif');
+	background-image:  url("img/ico/ico_arrow_green.gif");
 	background-repeat: no-repeat;
 	background-position: 0px 3px;
 	padding-left: 6px;
@@ -249,4 +258,129 @@ A:hover.menu_item_pub {	color: #e6e6e6;}
 	border-left-style: solid;
 	border-right-color: #424242;
 	border-left-color: #424242;
+}
+/* =========================================== */
+/* class for right-collumn collapsible headers */
+.usr_edit_right_header {
+	margin: 1px 0px 0px 0px;
+	padding: 4px 10px 2px 15px;
+	height: 16px;
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #BBBDBF;
+	letter-spacing: 1px;
+	background-attachment: scroll;
+	background-image: url(img/img_rightHeader.gif);
+	background-repeat: repeat-y;
+	background-position: 0px 0px;
+	clear:both;
+	overflow: visible;
+	line-height: 12px;
+}
+.usr_edit_right_control {
+	float: right;
+	display: inline;
+}
+/* =========================================== */
+/* Right Collumn News Links*/
+.rightLink_news_area {
+	overflow: hidden;
+	width: 310px;
+	clear: both;
+	margin-top: 5px;
+}
+.rightLink_news_area li {
+	list-style-position: outside;
+	list-style-image: url(img/ico/ico_arrow_grey.gif);
+	margin: 0px;
+	margin-left: 30px !important;
+	margin-left: 22px;
+	margin-top: 3px;
+	padding: 0px;
+	text-indent: -1px !important;
+	text-indent: 6px;
+	line-height: 16px;
+}
+.rightLink_news {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	display:block;
+	margin: 0px;
+	padding: 0px 0px 0px 0px;
+	width:295px !important;
+	width:310px;
+	text-transform: none;
+	color: #6F9FC8;
+	text-decoration:none;
+	height: auto;
+}
+.rightLink_moreNews {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	display:block;
+	margin: 0px 0px 7px 0px;
+	padding: 7px 0px 0px 0px;
+	width:295px !important;
+	width:310px;
+	text-transform: uppercase;
+	color: #8BC53F;
+	text-decoration:none;
+	height: auto;
+}
+.rightLink_moreUpdates {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	display:block;
+	margin: 0px 0px 7px 0px;
+	padding: 7px 0px 0px 0px;
+	width:225px !important;
+	width:240px;
+	text-transform: uppercase;
+	color: #6F9FC8;
+	text-decoration:none;
+	height: auto;
+}
+a:hover.rightLink_news, a:hover.rightLink_moreNews, a:hover.rightLink_moreUpdates {
+	color: #FFFFFF;
+}
+.rightLink_news p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	display:block;
+	width:260px;
+	margin-top: 1px;
+	padding-top: 0px;
+	padding-left: 0px;
+	text-transform: none;
+	color: #999999;
+	text-decoration:none;
+	margin-right: 0px;
+	margin-left: 10px;
+	padding-right: 0px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+	cursor:pointer;
+}
+.rightFindSearch {
+	margin: 10px 0px 20px 0px;
+}
+a.btn_search {
+	color: #6F9FC8;
+	background-color: #000000;
+	text-decoration: none;
+	padding: 3px 6px;
+	margin: 0px;
+	font-size: 10px;
+	text-transform: capitalize;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	letter-spacing: 0em;
+	line-height: 10px;
+}
+a.btn_search:hover {
+	color: #FFFFFF;
+	background-color: #333333;
+	text-decoration: none;
 }
