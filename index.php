@@ -53,9 +53,9 @@ $theme = cms_get_setting('theme','2004');
 $page = cms_get_custom_page($area,$theme);
 if($page){
     $page_title = $page['title'];
-    include 'cms/header.php';
-    echo $page['content'];
-    include 'cms/footer.php';
+    $content = $page['content'];
+    $tpl = cms_theme_layout($page['template'], $theme);
+    cms_render_template($tpl, ['page_title'=>$page_title,'content'=>$content]);
     exit;
 }
 if (isset($_GET['tab'])) {

@@ -20,7 +20,7 @@ $logo = $override ?: ($header['logo'] ?: '/img/steam_logo_onblack.gif');
     <meta name="DESCRIPTION" content="SteamPowered">
     <meta name="KEYWORDS" content="Steam, account, account creation, signup">
     <meta name="AUTHOR" content="Valve Corporation">
-    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($theme_url); ?>/steampowered02.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($css_url); ?>">
     <style>
     .globalHeadBar
     {

@@ -49,3 +49,10 @@
 - Theme-specific headers and footers stored in dedicated tables with admin selector
 - Navigation buttons available via {nav_buttons} template tag
 - Navigation buttons display images when paths provided and support customizable spacers
+- Footer HTML can be output using a {footer} template tag
+- Stylesheet paths stored per theme and editable in admin
+- Layout templates selectable per page
+- Partial template tags load from theme
+- Default.tpl automatically used for non-index pages
+- Storefront templates use theme_subdir asset lookup
+- Dedicated storefront folders per theme

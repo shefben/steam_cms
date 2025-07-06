@@ -2,6 +2,8 @@
 require_once __DIR__.'/cms/template_engine.php';
 require_once __DIR__.'/cms/db.php';
 
+$theme = cms_get_setting('theme','2004');
+
 $page_title = 'FAQ';
 $content = '<h1>FREQUENTLY ASKED QUESTIONS</h1>';
 $content .= '<h2>QUESTIONS, <em>ANSWERS, TROUBLESHOOTING...</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br><div class="narrower">';
@@ -31,7 +33,8 @@ if($row){
 }
 $content .= '</div>';
 
-cms_render_template(__DIR__.'/themes/2004/default_template.php', [
-    'page_title'=>$page_title,
-    'content'=>$content
+$tpl = cms_theme_layout('default.tpl', $theme);
+cms_render_template($tpl, [
+    'page_title' => $page_title,
+    'content'    => $content
 ]);

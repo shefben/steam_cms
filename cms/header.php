@@ -37,6 +37,8 @@ if(in_array($page,$bar_only)){
 $theme_dir = dirname(__DIR__)."/themes/$theme";
 $base_url = cms_base_url();
 $theme_url = ($base_url ? $base_url : '')."/themes/$theme";
+$css_file = cms_get_theme_css($theme);
+$css_url  = $theme_url.'/'.ltrim($css_file, '/');
 $header = "$theme_dir/header_{$type}.php";
 if(!file_exists($header)) $header = dirname(__DIR__).'/themes/2004/header_buttons.php';
 include $header;

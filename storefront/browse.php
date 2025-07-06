@@ -9,11 +9,12 @@ $links = cms_load_store_links(__FILE__);
 $theme = cms_get_setting('theme','2005_v2');
 $tpl_body = __DIR__.'/templates/2005_browse.html';
 
+$params = ['categories'=>$categories,'developers'=>$developers,'links'=>$links, 'theme_subdir' => 'storefront'];
 ob_start();
-cms_render_template($tpl_body, ['categories'=>$categories,'developers'=>$developers,'links'=>$links]);
+cms_render_template($tpl_body, $params);
 $body = ob_get_clean();
 
 $tpl = __DIR__.'/../themes/'.$theme.'/default_template.php';
 if(!file_exists($tpl)) $tpl = __DIR__.'/../themes/2005_v2/default_template.php';
-cms_render_template($tpl, ['page_title'=>'Browse Games','content'=>$body]);
+cms_render_template($tpl, ['page_title'=>'Browse Games','content'=>$body, 'theme_subdir' => 'storefront']);
 ?>

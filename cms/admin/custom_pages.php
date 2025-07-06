@@ -3,20 +3,23 @@ require_once 'admin_header.php';
 cms_require_permission('manage_pages');
 $db=cms_get_db();
 $themes = cms_get_themes();
+$current_theme = cms_get_setting('theme','2004');
+$template_files = array_map('basename', glob(__DIR__.'/../themes/'.$current_theme.'/layouts/*.tpl'));
 if(isset($_POST['save_page'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_POST['slug']);
     $title=trim($_POST['title']);
     $content=$_POST['content'];
+    $template = in_array($_POST['template'] ?? '', $template_files, true) ? $_POST['template'] : null;
     $selThemes = isset($_POST['themes']) ? array_intersect($themes,$_POST['themes']) : [];
     $themeStr = $selThemes ? implode(',', $selThemes) : null;
     $exists=$db->prepare('SELECT slug FROM custom_pages WHERE slug=?');
     $exists->execute([$slug]);
     if($exists->fetch()){
-        $stmt=$db->prepare('UPDATE custom_pages SET title=?,content=?,theme=?,updated=NOW() WHERE slug=?');
-        $stmt->execute([$title,$content,$themeStr,$slug]);
+        $stmt=$db->prepare('UPDATE custom_pages SET title=?,content=?,theme=?,template=?,updated=NOW() WHERE slug=?');
+        $stmt->execute([$title,$content,$themeStr,$template,$slug]);
     }else{
-        $stmt=$db->prepare('INSERT INTO custom_pages(slug,title,content,theme,created,updated) VALUES(?,?,?,?,?,NOW())');
-        $stmt->execute([$slug,$title,$content,$themeStr,date('Y-m-d H:i:s')]);
+        $stmt=$db->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated) VALUES(?,?,?,?,?,?,NOW())');
+        $stmt->execute([$slug,$title,$content,$themeStr,$template,date('Y-m-d H:i:s')]);
     }
 }
 if(isset($_GET['delete'])){
@@ -52,6 +55,14 @@ if(isset($_GET['edit'])){
     <label><input type="checkbox" name="themes[]" value="<?php echo htmlspecialchars($t); ?>" class="themeChk"> <?php echo htmlspecialchars($t); ?></label>
 <?php endforeach; ?>
 </fieldset>
+<label>Template:
+    <select name="template" id="template">
+        <option value="">default.tpl</option>
+        <?php foreach($template_files as $f): ?>
+            <option value="<?php echo htmlspecialchars($f); ?>"<?php if(isset($edit['template']) && $edit['template']===$f) echo ' selected'; ?>><?php echo htmlspecialchars($f); ?></option>
+        <?php endforeach; ?>
+    </select>
+</label><br>
 <textarea name="content" id="content" style="width:100%;height:300px;"></textarea><br>
 <input type="submit" name="save_page" value="Save">
 <button type="button" id="cancel">Cancel</button>
@@ -66,11 +77,13 @@ $('#addBtn').on('click',function(){
     $('#title').val('');
     CKEDITOR.instances.content.setData('');
     $('.themeChk').prop('checked',false);
+    $('#template').val('');
     $('#editor').show();
 });
 <?php if($edit): ?>
 $('#slug').val('<?php echo addslashes($edit['slug']); ?>').prop('readonly',true);
 $('#title').val('<?php echo addslashes($edit['title']); ?>');
+$('#template').val('<?php echo addslashes($edit['template'] ?? ''); ?>');
 CKEDITOR.instances.content.setData(`<?php echo addslashes($edit['content']); ?>`);
 <?php if($edit && $edit['theme']):
       $jsThemes = json_encode(explode(',', $edit['theme'])); ?>

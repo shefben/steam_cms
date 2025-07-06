@@ -17,7 +17,7 @@ else $page_title = $site_title . " " . $page_title;
     <meta name="DESCRIPTION" content="SteamPowered">
     <meta name="KEYWORDS" content="Steam, account, account creation, signup">
     <meta name="AUTHOR" content="Valve LLC">
-    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($theme_url); ?>/steampowered.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($css_url); ?>">
     <style>
     .navBar {
         margin-left: 140px;
@@ -51,7 +51,7 @@ else $page_title = $site_title . " " . $page_title;
     }
     </style>
     <link rel="Shortcut Icon" type="image/png" href="/webicon.png">
-    <script language="JavaScript" src="/nav.js"></script>
+    <script language="JavaScript" src="<?php echo htmlspecialchars($theme_url); ?>/js/nav.js"></script>
     <link href="<?php echo htmlspecialchars($base); ?>/news_rss.php" rel="alternate" type="application/rss+xml" title="Valve RSS News Feed" />
 </head>
 <body>

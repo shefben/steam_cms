@@ -33,7 +33,7 @@ function cms_set_setting($key,$value){
 function cms_get_custom_page($slug,$theme=null){
     $db = cms_get_db();
     try{
-        $stmt = $db->prepare('SELECT title,content,theme FROM custom_pages WHERE slug=?');
+        $stmt = $db->prepare('SELECT title,content,theme,template FROM custom_pages WHERE slug=?');
         $stmt->execute([$slug]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if(!$row) return null;
@@ -42,6 +42,7 @@ function cms_get_custom_page($slug,$theme=null){
             if(!in_array($theme,$themes,true)) return null;
         }
         unset($row['theme']);
+        if(!isset($row['template']) || $row['template']==='') $row['template'] = 'default.tpl';
         return $row;
     }catch(PDOException $e){
         if($e->getCode()==='42S02') return null; // table missing
@@ -204,6 +205,20 @@ function cms_get_theme_footer($theme){
     }
 }
 
+function cms_get_theme_css($theme){
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT css_path FROM themes WHERE name=?');
+        $stmt->execute([$theme]);
+        $css = $stmt->fetchColumn();
+        if($css===false || $css==='') return 'steampowered02.css';
+        return $css;
+    } catch(PDOException $e){
+        if(in_array($e->getCode(), ['42S02','42S22'])) return 'steampowered02.css';
+        throw $e;
+    }
+}
+
 function cms_header_buttons_html($theme, string $spacer_style = ''){
     $data = cms_get_theme_header_data($theme);
     $buttons = $data['buttons'];
@@ -243,12 +258,21 @@ function cms_header_buttons_html($theme, string $spacer_style = ''){
 
 function cms_refresh_themes(){
     $db = cms_get_db();
-    $stmt = $db->prepare('REPLACE INTO themes(name) VALUES(?)');
+    $stmt = $db->prepare('REPLACE INTO themes(name, css_path) VALUES(?,?)');
     $base = dirname(__DIR__);
     foreach(glob($base.'/themes/*', GLOB_ONLYDIR) as $dir){
         $name = basename($dir);
         if(substr($name,-6) === '_admin') continue;
-        $stmt->execute([$name]);
+        $css = 'steampowered02.css';
+        if(!file_exists("$dir/css/$css")){
+            $css = file_exists("$dir/css/steampowered.css") ? 'steampowered.css' : '';
+            if($css === ''){
+                $files = glob("$dir/css/*.css");
+                $css = $files ? basename($files[0]) : '';
+            }
+        }
+        $css_path = $css ? 'css/'.$css : '';
+        $stmt->execute([$name,$css_path]);
     }
 }
 

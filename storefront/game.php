@@ -18,8 +18,7 @@ $is_demo = (bool)$db->query('SELECT 1 FROM app_categories WHERE appid='.$appid.'
 $theme = cms_get_setting('theme','2005_v2');
 $tpl_body = __DIR__.'/templates/'.($app['show_metascore']? '2005_game_metascore.html' : '2005_game.html');
 $links = cms_load_store_links(__FILE__);
-ob_start();
-cms_render_template($tpl_body, [
+$params = [
     'app'=>$app,
     'images'=>$images,
     'packages'=>$packages,
@@ -27,9 +26,12 @@ cms_render_template($tpl_body, [
     'appid'=>$appid,
     'sysreq'=>$sysreq,
     'links'=>$links,
-]);
+    'theme_subdir' => 'storefront',
+];
+ob_start();
+cms_render_template($tpl_body, $params);
 $body = ob_get_clean();
 
 $tpl = __DIR__.'/../themes/'.$theme.'/default_template.php';
 if(!file_exists($tpl)) $tpl = __DIR__.'/../themes/2005_v2/default_template.php';
-cms_render_template($tpl, ['page_title'=>$app['name'], 'content'=>$body]);
+cms_render_template($tpl, ['page_title'=>$app['name'], 'content'=>$body, 'theme_subdir' => 'storefront']);

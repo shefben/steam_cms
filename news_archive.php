@@ -24,4 +24,5 @@ foreach($rows as $row){
 $content .= $current ? "</ul>\n" : '';
 $content .= '<p style="text-align:center;"><em><a href="/index.php?area=news">return to the current news</a></em></p>';
 $content .= '</div>';
-cms_render_template(__DIR__.'/themes/'.$theme.'/default_template.php',[ 'page_title'=>'Steam News', 'content'=>$content]);
+$tpl = cms_theme_layout('default.tpl', $theme);
+cms_render_template($tpl, ['page_title'=>'Steam News', 'content'=>$content]);
