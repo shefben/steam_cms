@@ -325,7 +325,7 @@ $content2004 = <<<HTML
 <br>
 <br><div class="boxTop">Latest News</div><br clear="all">
 <div class="box">
-{news_index_brief(3)}
+{{news_index_brief(3)}}
 </div>
 <h2 id="afterBox">HARDWARE <em>SURVEY</em></h2><img src="{BASE}/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
 Check out the <a href="{BASE}/status/survey.html">results of the "Half-Life 2 Hardware Survey"</a>. More than half a million respondents have taken part so far.<br>
