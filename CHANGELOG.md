@@ -66,7 +66,7 @@ All notable changes to this project will be documented in this file.
 - Theme CSS paths stored in themes table and editable via admin
 - Templates loaded from theme layouts with partials support
 - Custom pages choose layout file from dropdown
-- Default pages render through layout/default.tpl when no template chosen
+- Default pages render through layout/default.twig when no template chosen
 - Reverted storefront pages to static PHP templates
 - Storefront assets load from new per-theme folders
 - Template engine supports theme_subdir for partials
@@ -82,4 +82,6 @@ All notable changes to this project will be documented in this file.
 - Admin page now toggles shared or theme-specific capsules and loads from DB
 - Added spotlight tab tables and admin UI for theme 2007_v2
 
-- Template engine auto-loads CSS and JS assets from theme folders
+- Removed automatic CSS and JS loading; themes must link assets explicitly
+- Asset URLs in inline styles are rewritten to theme folders
+- 2006_v1 theme seed data for join steam, find links and new on steam list

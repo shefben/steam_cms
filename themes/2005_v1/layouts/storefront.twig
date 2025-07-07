@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Steam Games</title>
+    <link href="storefront.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background: #4c5844; margin:0; line-height:12px; font-size:8px; font-family: Verdana, Arial, Helvetica;">
+{{ header() }}
+<table align="center" cellpadding="0" cellspacing="0">
+<tr>
+    <td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="img/storefront/sp_top_left.gif"/></td>
+    <td bgcolor="#FFFFFF" rowspan="3" valign="top">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" style="height:100%;" width="736">
+            <tr>
+                <td align="left" nowrap valign="top" width="10"></td>
+                <td align="left" nowrap valign="top" width="118">
+                    <table cellpadding="0" cellspacing="0">
+                        <tr><td height="10"></td></tr>
+                        <tr><td nowrap>
+                            {{ store_sidebar()|raw }}
+                        </td></tr>
+                    </table>
+                </td>
+                <td width="8"><nobr></nobr></td>
+                <td align="left" valign="top" width="100%">
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr><td valign="top">
+                            <br/>
+                            {{ featured_capsules()|raw }}
+                            {{ content|raw }}
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </td>
+    <td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="img/storefront/sp_top_right.gif"/></td>
+</tr>
+<tr>
+    <td bgcolor="#FFFFFF"></td>
+    <td bgcolor="#FFFFFF"></td>
+</tr>
+<tr>
+    <td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="img/storefront/sp_bottom_left.gif"/></td>
+    <td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="img/storefront/sp_bottom_right.gif"/></td>
+</tr>
+</table>
+{{ footer() }}
+</body>
+</html>

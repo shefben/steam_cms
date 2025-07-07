@@ -65,7 +65,7 @@ $insertArray[] = [
     'Steam Powered',           // title
     $content2002v1,              // content
     '2002_v1',                 // theme
-    'index.tpl',               // template
+    'index.twig',               // template
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -107,7 +107,7 @@ $insertArray[] = [
     'Steam Powered',           // title
     $content2002v2,              // content
     '2002_v2',                 // theme
-    'index.tpl',               // template
+    'index.twig',               // template
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -256,7 +256,7 @@ $insertArray[] = [
     'Steam Powered',
     $content2003v1,
     '2003_v1',
-    'index.tpl',
+    'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -303,7 +303,7 @@ $insertArray[] = [
     'Welcome to Steam',
     $content2003v2,
     '2003_v2',
-    'index.tpl',
+    'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -350,7 +350,7 @@ $insertArray[] = [
     'Welcome to Steam',
     $content2004,
     '2004',
-    'index.tpl',
+    'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -737,7 +737,7 @@ $insertArray[] = [
     'Welcome to Steam',
     $content2005v1,
     '2005_v1',
-    'index.tpl',
+    'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -999,7 +999,7 @@ $insertArray[] = [
     'Welcome to Steam',
     $content2005v2,
     '2005_v2',
-    'index.tpl',
+    'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
