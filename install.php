@@ -398,8 +398,6 @@ HTML;
             foreach ($defaults as $k => $v) {
                 $stmt->execute([$k,$v]);
             }
-            $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated) VALUES(?,?,?,?,?, ?,NOW())');
-            $pageStmt->execute(['subscriber_agreement','Steam Subscriber Agreement',$sa_html,null,null,date('Y-m-d H:i:s')]);
 
             /* -----------------------------------------------------------
              *  HEADER-BAR SEEDS

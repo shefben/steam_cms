@@ -1003,126 +1003,83 @@ $insertArray[] = [
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
-$content2006v1 = <<<HTML
-<div class="contentBG_1">
-<div class="headerBG_1">
-<!-- Left Collumn Content -->
-<div class="leftCol_1">
-<table border="0" cellpadding="0" cellspacing="0" class="capsuleArea_header" width="560">
-<tbody><!-- Begin Join Steam Area -->
-<tr>
-<td width="172"><img height="63" src="img/logo_steam_main.jpg" width="172"></td>
-<td valign="top"><p>Join Steam for free and get games delivered straight to your desktop with automatic updates and a massive gaming community.</p></td>
-</tr>
-<!-- End Join Steam Area -->
-</tbody></table>
-<span style="color: Silver;">
-<!-- capsule 1 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1510&amp;';" onmouseout="this.style.background='#000000'; window.status='';" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=1510&amp;';" style="background: rgb(0, 0, 0);">
-<div class="capsuleImage"><img alt="Uplink" border="0" height="105" src="gfx/apps/1510/capsule_sm.jpg" width="280"></div>
-<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$9.95&nbsp;</div></div>
-<!-- capsule 2 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=3010&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=3010&amp;';" style="background: rgb(0, 0, 0);">
-<div class="capsuleImage"><img alt="Xpand Rally" border="0" height="105" src="gfx/apps/3010/capsule_sm.jpg" width="280"></div>
-<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95&nbsp;</div></div>
-<br clear="all">
-<!-- Large capsule -->
-<div class="capsuleLarge" onclick="location.href='index.php?area=game&amp;AppId=380&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=380&amp;';" style="background: rgb(0, 0, 0);">
-<div class="capsuleLargeImage"><img alt="Half-Life 2: Episode One" border="0" galleryimg="no" height="221" src="gfx/apps/380/capsule_lrg.jpg" width="572"></div>
-<div class="capsuleLargeText"></div><div class="capsuleLargeCost">$19.95&nbsp;</div></div>
-<br clear="all">
-<!-- capsule 3 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=2400&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=2400&amp;';" style="background: rgb(0, 0, 0);">
-<div class="capsuleImage"><img alt="The Ship" border="0" height="105" src="gfx/apps/2400/capsule_sm.jpg" width="280"></div>
-<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95&nbsp;</div></div>
-<!-- capsule 4 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=2810&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=2810&amp;';" style="background: rgb(0, 0, 0);">
-<div class="capsuleImage"><img alt="X³: Reunion" border="0" height="105" src="gfx/apps/2810/capsule_sm.jpg" width="280"></div>
-<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95&nbsp;</div></div>
-<br clear="all">
-<!-- capsule 5 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1300&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=1300&amp;';" style="background: rgb(0, 0, 0);">
-<div class="capsuleImage"><img alt="SiN Episodes: Emergence" border="0" height="105" src="gfx/apps/1300/capsule_sm.jpg" width="280"></div>
-<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$14.95&nbsp;</div></div>
-<!-- capsule 6 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1500&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=1500&amp;';" style="background: rgb(0, 0, 0);">
-<div class="capsuleImage"><img alt="Darwinia" border="0" height="105" src="gfx/apps/1500/capsule_sm.jpg" width="280"></div>
-<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95&nbsp;</div></div>
-</span>
-<br clear="left">
-<div align="center" class="capsuleGear">
-<div class="capsuleGearTitle">Get The Gear!</div>
-<div class="capsuleGearText">Check out the new Logitech® MOMO® Racing wheel! Visit the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> for official shirts, posters, hats and more!</div>
-</div>
-<div align="center" class="capsuleStuff">
-<div class="capsuleStuffTitle">Free Stuff!</div>
-<div class="capsuleStuffText">In addition to a catalog of great games, your free Steam account gives you access to <a href="http://storefront.steampowered.com/v/index.php?area=search&amp;browse=1&amp;category=&amp;price=1&amp;">games + demos</a>, <a href="http://storefront.steampowered.com/v/index.php?area=media&amp;">HD movies + trailers</a>, and more.</div>
-</div>
-</div>
-<!-- End Left Column Content -->
-<!-- Right Column Content -->
-<div class="rightCol_1">
-<div align="center" class="btn_getSteam" onclick="location.href='index.php?area=getsteamnow'" onmouseout="this.style.background='url(img/btn_getSteam.gif)'" onmouseover="this.style.background='url(img/btn_getSteam_ovr.gif)'" style="CURSOR: pointer;" title="Click for Details">
-Get Steam Now !
-</div>
-<div class="btn_getSteam_sub">Everything you need to start playing now!</div>
-<br>
-<h1><!-- Begin New on Steam Header Area --><img align="absmiddle" alt="NEW!" height="16" src="img/ico/ico_new_16.gif" width="16"> New On Steam <!-- End New on Steam Header Area --></h1><!-- Begin New on Steam Area -->
-<a class="rightLink" href="v/index.php?area=game&amp;AppId=3000&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"> GTI Racing <span class="rightLink_newDate_gr"> (Aug 24, 2006)</span></a>
-<a class="rightLink" href="v/index.php?area=game&amp;AppId=3010&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"> Xpand Rally <span class="rightLink_newDate_gr"> (Aug 24, 2006)</span></a>
-<a class="rightLink" href="v/index.php?area=game&amp;AppId=927&amp;"><img align="absmiddle" border="0" src="img/ico/ico_film_13.gif"> GTI Racing Trailer <span class="rightLink_newDate_gr"> (Aug 24, 2006)</span></a>
-<a class="rightLink" href="v/index.php?area=game&amp;AppId=1510&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"> Uplink <span class="rightLink_newDate_gr"> (Aug 23, 2006)</span></a>
-<a class="rightLink" href="v/index.php?area=game&amp;AppId=929&amp;"><img align="absmiddle" border="0" src="img/ico/ico_film_13.gif"> Uplink Trailer <span class="rightLink_newDate_gr"> (Aug 23, 2006)</span></a>
-<a class="rightLink" href="v/index.php?area=game&amp;AppId=928&amp;"><img align="absmiddle" border="0" src="img/ico/ico_film_13.gif"> Source Forts Trailer <span class="rightLink_newDate_gr"> (Aug 4, 2006)</span></a>
-<a class="rightLink" href="v/index.php?area=game&amp;AppId=90034&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"> Source Forts <span class="rightLink_newDate_gr"> (Aug 1, 2006)</span></a>
-<a class="rightLink" href="v/index.php?area=game&amp;AppId=924&amp;"><img align="absmiddle" border="0" src="img/ico/ico_film_13.gif"> Red Orchestra Infantry Tutorial <span class="rightLink_newDate_gr"> (Jul 28, 2006)</span></a><!-- End New on Steam Area -->
-<div class="rightColHr"></div>
-<h1><!-- Begin Find Header Area --><img align="absmiddle" alt="Find" height="16" src="img/ico/ico_srch_16.gif" width="16"> Find <!-- End Find Header Area --> </h1>
-<!-- Begin Find Left List Area -->
-<div class="rightLink_find_area">
-<a class="rightLink_find" href="v/index.php?area=all&amp;"><img border="0" height="7" src="img/ico/ico_arrow_yellow.gif" width="7"> All Games </a>
-<a class="rightLink_find" href="v/index.php?area=browse&amp;"><img border="0" height="7" src="img/ico/ico_arrow_yellow.gif" width="7"> Browse Games </a>
-<a class="rightLink_find" href="v/index.php?area=search&amp;"><img border="0" height="7" src="img/ico/ico_arrow_yellow.gif" width="7"> Search</a>
-</div>
-<!-- End Find Left List Area -->
-<!-- Begin Find Right List Area -->
-<div class="rightLink_find_area">
-<a class="rightLink_find" href="v/index.php?area=media&amp;"><img border="0" height="7" src="img/ico/ico_arrow_yellow.gif" width="7"> Videos </a>
-<a class="rightLink_find" href="v/index.php?area=search&amp;browse=1&amp;category=10&amp;"><img border="0" height="7" src="img/ico/ico_arrow_yellow.gif" width="7"> Demos </a>
-<a class="rightLink_find" href="http://store.valvesoftware.com" target="_blank"><img border="0" height="7" src="img/ico/ico_arrow_yellow.gif" width="7"> Gear </a>
-</div><!-- End Find Right List Area -->
-<br clear="all">
-<div class="rightColHr"></div>
-<h1><img align="absmiddle" alt="News" height="16" src="img/ico/ico_docs_16.gif" width="16">
-<!-- Begin Latest News Header Area -->
-Latest News
-<!-- End Latest News Header Area -->
-</h1>
-<!-- Begin Latest News Area -->
 
-<div class="rightLink_news_area" style="height: auto;">
-{news_index_2006(5)}
-</div>
-<a class="rightLink" href="v/index.php?area=news&amp;"><img align="absmiddle" border="0" height="7" src="img/ico/ico_arrow_blue_wd.gif" width="22"> Read more news</a>
-<!-- End Latest News Area -->
-<div class="rightColHr" style="padding-bottom: 0px; margin-bottom: 0px;"></div>
-</div>
-<!-- End Right Column Content -->
-</div>
-<br clear="left">
+$sa_html = <<<HTML
+<h1>STEAM SUBSCRIBER AGREEMENT</h1>
+<br>
+<p>Steam is an online service ("Steam") offered by Valve Corporation ("Valve"). </p>
+<p>You become a subscriber of Steam ("Subscriber") by installing the Steam client software and completing the Steam registration. Additionally, as a Subscriber you may obtain one or more subscriptions to certain software and content ("Subscriptions") available to Subscribers. This Steam Subscriber Agreement ("Agreement") is a legal document that explains your rights and obligations as a Subscriber. Please read it carefully. </p>
+<p>Each Subscription allows you access to certain software and other content under the terms of each such Subscription and this Agreement. Additional terms provided with each such Subscription ("Subscription Terms") may apply to the use of a given Subscription, and are incorporated into this Agreement. Further, additional terms (for example, fees and billing procedures) may be posted on <a href="https://web.archive.org/web/20040212023250/http://www.steampowered.com/">http://www.steampowered.com</a> or within the Steam service ("Rules of Use"), and are incorporated into this Agreement. As a Subscriber, you agree to all of the terms and conditions of the Valve Privacy Policy, which are also incorporated into this Agreement. A copy of the Valve Privacy Policy can be found at <a href="https://web.archive.org/web/20040212023250/http://www.valvesoftware.com/privacy.htm">http://www.valvesoftware.com/privacy.htm</a>. A copy of the online conduct rules can be found at <a href="https://web.archive.org/web/20040212023250/http://www.steampowered.com/steam_online_conduct.htm">http://www.steampowered.com/steam_online_conduct.htm</a>.</p>
+<p>When you complete Steam's registration process, you create a Steam account (&quot;Account&quot;). Your Account also includes the billing information you provide to us for the purchase of Subscriptions. Accounts are only available to individuals over the age of 12. If you are under the age of 13, a parent or guardian must obtain an Account on your behalf, and such parent or guardian agrees to take full responsibility for all liabilities and obligations under this Agreement. You are solely responsible for all activity on your Account and for the security of your computer system. You agree not to reveal your password to other users. If you permit others to use your Account, you are responsible for their illegal or improper use by. Your Account and Subscription(s) are subject to the Agreement and any Subscription Terms. You may not sell or charge others for the right to use your Account, or otherwise share or transfer your Account. </p>
+<br>
+<h2>SOFTWARE LICENSE</h2>
+<p>Steam and your Subscription(s) require the installation of the Steam client and the automatic download of software, other content and updates thereto onto your computer (&quot;Steam Software&quot;). You may not use Steam Software for any purpose other than the permitted access to Steam and your Subscriptions. You understand that Steam may update, create new versions or otherwise enhance the Steam Software and accordingly, the system requirements to use the Steam Software may change over time. You understand that neither this Agreement nor the terms associated with a particular Subscription entitles you to future updates, new versions or other enhancements of the Steam Software associated with a particular Subscription although Valve may choose to provide certain future updates, new versions or other enhancements of the Steam Software in its sole discretion. </p>
+<p>Valve hereby grants, and you accept, a limited, non-exclusive license and right to use the Steam Software for your personal use in accordance with this Agreement and the Subscription Terms. The Steam Software is licensed, not sold. Your license confers no title or ownership in the Steam Software. This license is effective until termination in accordance with this Agreement. </p>
+<p>The Steam Software is the copyrighted work of Valve Corporation and/or its licensors. All rights reserved, except as expressly stated herein. The Steam Software is protected by the copyright laws of the United States, international copyright treaties and conventions and other laws. The Steam Software contains certain licensed materials and Valve's licensors may protect their rights in the event of any violation of this Agreement. </p>
+<p>You may not, in whole or in part, copy, photocopy, reproduce, translate, reverse engineer, derive source code, modify, disassemble, decompile, create derivative works based on, or remove any proprietary notices or labels from the Steam Software without the prior consent, in writing, of Valve. <strong></strong></p>
+<p>You are entitled to use the Steam Software for your own use, but you are not entitled to: (i) sell, grant a security interest in or transfer reproductions of the Steam Software to other parties in any way, nor to rent, lease or license the Steam Software to others without the prior written consent of Valve; (ii) host or provide matchmaking services for the Steam Software or emulate or redirect the communication protocols used by Valve in any network feature of the Steam Software, through protocol emulation, tunneling, modifying or adding components to the Steam Software, use of a utility program or any other techniques now known or hereafter developed, for any purpose including, but not limited to network play over the Internet, network play utilizing commercial or non-commercial gaming networks or as part of content aggregation networks, without the prior written consent of Valve; or (iii) exploit the Steam Software or any of its parts for any commercial purpose including, but not limited to, use at a cyber caf&eacute;, computer gaming center or any other location-based site. <strong></strong></p>
+<br>
+<h2>BILLING, PAYMENT AND OTHER SUBSCRIPTIONS </h2>
+<p>You may become a Subscriber of Steam without paying Valve to access any services, software and other content Valve offers for free. However, Valve will charge Subscription fees to access certain services, software and content areas of Steam. You must be a Subscriber of Steam and pay any required Subscription fees to use such services, software and other content. If you must pay a Subscription fee to access part of Steam this information will be posted in the Rules of Use. All fees are stated in U.S. dollars unless otherwise specified. You may subscribe by providing us with a valid payment and billing information. Current Subscription fees and other billing information is available at http://www.steampowered.com </p>
+<p>A. Payment by Credit Card</p>
+<p>You may use a credit card to pay for your Subscription(s). When you provide credit card information to Valve, you represent to Valve that you are the authorized user of the credit card that is used to pay Subscription or other fees and authorize Valve to charge your credit card for any Subscription or other fees incurred by you. For recurring monthly Subscriptions, each month that you use such Subscription(s), you agree and reaffirm that Valve is authorized to charge your credit card for the Subscription fee. You agree to notify Valve promptly of any changes to your credit card account number, its expiration date and/or your billing address, and you agree to notify Valve promptly if your credit card expires or is canceled for any reason. </p>
+<p>B. Charges to Your Credit Card</p>
+<p><strong>YOUR SUBSCRIPTION FEES ARE PAYABLE IN ADVANCE AND ARE NOT REFUNDABLE IN WHOLE OR IN PART </strong>. Valve reserves the right to change our fees or billing methods at any time and Valve will provide notice of any such change at least thirty (30) days advance. All changes will be posted as amendments to this Agreement or in the Rules of Use and you are responsible for reviewing the billing section of Steam to obtain timely notice of such changes. Your non-cancellation of your Account thirty (30) days after posting of the changes on Steam means that you accept such changes. If any change is unacceptable to you, you may cancel your Account or a particular Subscription at any time as described below, but Valve will not refund any fees that may have accrued to your Account before cancellation of your Account or Subscription, and Valve will not prorate fees for any cancellation. If your use of Steam is subject to use or sales tax, then Valve may also charge you for any such taxes, in addition to the Subscription or other fees published in the Rules of Use.. </p>
+<p>As the Account holder, you are responsible for all charges incurred, including applicable taxes, and all purchases made by you or anyone that uses your Account, including your family or friends. Information on how to cancel your Account or a particular Subscription can be found at http://www.steampowered.com/. Valve reserves the right to collect fees, surcharges or costs incurred before you cancel your Account or a particular Subscription. In the event that your Account or a particular subscription is terminated or canceled, no refund, including any Subscription fees, will be granted. Any delinquent or unpaid Accounts must be settled before Valve will allow you to register again. </p>
+<p>C. Retail Purchase</p>
+<p>In some cases, Valve may offer a Subscription to purchasers of retail packaged product versions of Valve products. In such event, your "CD-Key" or "Product Key" accompanying such product will be used to validate your Subscription. </p>
+<p>D. Free Subscriptions</p>
+<p>In some cases, Valve may offer a free Subscription to certain services, software and content. As with all Subscriptions, You are always responsible for any Internet service provider, telephone, and other connection fees that you may incur when using Steam, even when Valve offers a free Subscription. <br>
+    <br>
+<p>E. Third Party Sites</p>
+Steam may provide links to other third party sites. Some of these sites may charge separate fees, which are not included in any Subscription or other fees that you may pay to Valve. Steam may also provide access to third-party vendors, who provide content, goods and/or services on Steam or the Internet. Any separate charges or obligations you incur in your dealings with these third parties are your responsibility.</p>
+<br>
+<h2>ONLINE CONDUCT, CHEATING AND ILLEGAL BEHAVIOR </h2>
+<p>You agree that you will be personally responsible for the use of your Account and for all of the communication and activity on Steam that results from use of your Account. Your online conduct and interaction with other subscribers should be guided by common sense and basic etiquette. Specific requirements may also be found in the Rules of Use, the Subscription Terms, or in terms of use required by third parties who host particular games or other services. </p>
+<p>Steam and the Steam Software may include functionality designed to identify software or hardware processes or functionality that may give a player an unfair competitive advantage when playing multiplayer versions of any Steam Software, other Valve products, or modifications thereof (" Cheats "). You agree that you will not directly or indirectly disable, circumvent, or otherwise interfere with the operation of software designed to prevent or report the use of Cheats. You acknowledge and agree that either Valve or any online multiplayer host may refuse to allow you to participate in certain online multiplayer games if you use Cheats in connection with Steam or the Steam Software. Further, you acknowledge and agree that an online multiplayer host may report your use of Cheats to Valve, and Valve may communicate your history of use of Cheats to other online multiplayer hosts for Valve products. </p>
+<p>Valve may terminate your Account or a particular Subscription for any conduct or activity that Valve believes is illegal, Cheating or otherwise negatively affects the enjoyment of Steam by other Subscribers. You acknowledge that Valve is not required to provide you notice before terminating your Subscriptions(s) and/or Account, but it may choose to do so. <strong></strong></p>
+<br>
+<h2>THIRD PARTY CONTENT </h2>
+<p>&quot;Third Party Content&quot; means software and other content provided by third parties, other then Valve, that is designed to work in conjunction with the Steam Software (e.g. mods of Valve game products). Valve does not screen Third Party Content available on Steam or through other sources. You bear the entire risk for any use of Third Party Content including any Third Party Content made available via Steam. Valve does not assume any responsibility or liability for Third Party Content. </p>
+<br>
+<h2>USER GENERATED CONTENT </h2>
+<p>"User Generated Content" means any content made available to other users through your use of multi-user features of Steam and may include, but is not limited to, chat, forum posts, screen names, game selections and player performances. You expressly grant Valve the complete and irrevocable right to quote, re-post, use, reproduce, modify, distribute, transmit, broadcast, and otherwise communicate, and publicly display and perform the User Generated Content in any form, anywhere, with or without attribution to you, and without any notice or compensation to you of any kind. <strong></strong></p>
+<br>
+<h2>DEDICATED SERVER </h2>
+<p>Your Subscription(s) may contain access to the Valve Dedicated Server. You may use the Valve Dedicated Server on an unlimited number of computers for the purpose of hosting online multiplayer games of Valve products. If you wish to operate the Valve Dedicated Server, you will be solely responsible for procuring any Internet access, bandwidth, or hardware for such activities and will bear all costs associated therewith. <strong></strong></p>
+<br>
+<h2>WARRANTIES AND LIMITATION OF LIABILITY </h2>
+<p>The entire risk arising out of use or performance of Steam and the Steam Software remains with you, the user. Valve expressly disclaim any warranty for Steam and the Steam Software. STEAM AND The STEAM SOFTWARE IS provided ON AN &quot;as is&quot; AND "AS AVAILABLE" BASIS without warranty of any kind, either express or implied, including, without limitation, the implied warranties of merchantability, fitness for a particular purpose, or noninfringement. ANY WARRANTY AGAINST INFRINGEMENT THAT MAY BE PROVIDED IN SECTION 2-312(3) OF THE UNIFORM COMMERCIAL CODE AND/OR IN ANY OTHER COMPARABLE STATE STATUTE IS EXPRESSLY DISCLAIMED. </p>
+<p>VALVE DOES NOT GUARANTEE CONTINOUS, ERROR-FREE, VIRUS-FREE OR SECURE OPERATION AND ACCESS TO STEAM, THE STEAM SOFTWARE, YOUR ACCOUNT AND YOUR SUBSCRIPTIONS(S). YOU ASSUME THE ENTIRE RISK WITH RESPECT TO THE PERFORMANCE AND RESULTS OF THE STEAM SOFTWARE IN CONNECTION WITH YOUR HARDWARE. </p>
+<p>NEITHER VALVE, ITS LICENSORS, AND THEIR AFFILIATES SHALL BE LIABLE IN ANY WAY FOR LOSS OR DAMAGE OF ANY KIND RESULTING FROM THE USE OR INABILITY TO USE STEAM, YOUR ACCOUNT, YOUR SUBSCRIPTIONS AND THE STEAM SOFTWARE INCLUDING, BUT NOT LIMITED TO, LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES . yOU ACKNOWLEDGE AND AGREE THAT YOUR SOLE AND EXCLUSIVE REMEDY FOR ANY DISPUTE WITH vALVE IS TO DISCONTINUE USE OF sTEAM AND CANCEL YOUR ACCOUNT. BECAUSE SOME STATES OR JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR THE LIMITATION OF LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL DAMAGES, IN SUCH STATES OR JURISDICTIONS, VALVE, ITS LICENSORS, AND THEIR AFFILIATES LIABILITY SHALL BE LIMITED TO THE FULL EXTENT PERMITTED BY LAW. </p>
+<br>
+<h2>INDEMNIFICATION </h2>
+<p>You agree to defend, indemnify and hold harmless Valve, its licensors and their affiliates from all liabilities, claims and expenses, including attorneys' fees, that arise from or in connection with breach of this Agreement, use of Steam or any Subscription, , or any User Generated Content by you or any person(s) using your Account. Valve reserves the right, at its own expense, to assume the exclusive defense and control of any matter otherwise subject to indemnification by you. In that event, you shall have no further obligation to provide indemnification to Valve in that matter. This Section regarding Indemnification shall survive termination of this Agreement. <strong></strong></p>
+<br>
+<h2>AMENDMENTS TO THIS AGREEMENT </h2>
+<p>Valve may amend this Agreement at any time in its sole discretion. As a Subscriber, you agree that Valve may amend the terms of this Agreement. If Valve amends the Agreement, such amendment shall be effective thirty (30) days after posting the new amended Agreement on Steam. You agree to review the Agreement periodically to become aware of such amendments. You can view the Agreement at any time at http://www.steampowered.com/. Your failure to cancel your Account thirty (30) days after an amended Agreement is posted on Steam will mean that you accept all such amendments. If you don't agree to the amendments, or to any of the terms in this Agreement, your only remedy is to cancel your Account or a particular Subscription. <strong></strong></p>
+<br>
+<h2>TERMINATION </h2>
+<p>Either you or Valve has the right to terminate or cancel your Account or a particular Subscription at any time. You understand and agree that the cancellation of your Account or a particular Subscription is your sole right and remedy with respect to any dispute with Valve. </p>
+<p>Information on how to cancel your Account or a particular Subscription can be found at http://www.steampowered.com/. Valve reserves the right to collect fees, surcharges or costs incurred prior to the cancellation of your Account or a particular Subscription. In addition, you are responsible for any charges incurred to third-party vendors or content providers before your cancellation. In the event that your Account or a particular subscription is terminated or canceled by you, no refund, including any Subscription fees, will be granted. In the event that your Account or a particular Subscription is terminated or cancelled by Valve for a violation of this Agreement or improper or illegal activity, no refund, including any Subscription fees, will be granted. In the event that your Account or a particular Subscription is terminated or cancelled by Valve for convenience, Valve may, but is not obligated to, provide a prorated refund of any prepaid Subscription fees paid to Valve. <strong></strong></p>
+<br>
+<h2>MISCELLANEOUS </h2>
+<p>You agree that this Agreement shall be deemed to have been made and executed in the State of Washington, and any dispute arising hereunder shall be resolved in accordance with the law of Washington. You agree that any claim asserted in any legal proceeding by you against Valve shall be commenced and maintained in any state or federal court located in King County, Washington, having subject matter jurisdiction with respect to the dispute between the parties. In the event that any provision of this Agreement shall be held by a court or other tribunal of competent jurisdiction to be unenforceable, such provision will be enforced to the maximum extent permissible and the remaining portions of this Agreement shall remain in full force and effect. This Agreement constitutes and contains the entire agreement between the parties with respect to the subject matter hereof and supersedes any prior oral or written agreements. You agree that this Agreement is not intended to confer and does not confer any rights or remedies upon any person other than the parties to this Agreement. </p>
+<p align="left">You agree to comply with all applicable import/export laws and regulations of the United States and its governmental and regulatory agencies (including, without limitation, the Bureau of Export Administration and the U.S. Department of Commerce). You agree not to export the Steam Software or allow use of your Account by individuals of any terrorist supporting countries to which encryption exports are restricted by the Bureau of Export Administration, currently, Cuba, Iran, Iraq, Libya, North Korea, Sudan or Syria. You represent and warrant that you are not located in, under the control of, or a national or resident of any such prohibited country. </p>
+<p>I hereby agree to be bound by the Agreement. I also acknowledge and agree that this Agreement (including the Subscription Terms, Rules of Use, and Privacy Policy) is the complete and exclusive statement of the agreement between Valve and me, and that the Agreement supersedes any prior or contemporaneous agreement, or other communications, whether oral or written, between Valve and myself. </p>
+
 </div>
 HTML;
 
 $insertArray[] = [
-    '2006v1_index',
-    'Welcome to Steam',
-    $content2006v1,
-    '2006_v1',
-    'index.tpl',
+    'subscriber_agreement',
+    'Steam Subscriber Agreement',
+    $sa_html,
+    null,
+    null,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
-
 
 $stmtcp = $pdo->prepare(
     'INSERT INTO custom_pages (slug, title, content, theme, template, created, updated)
