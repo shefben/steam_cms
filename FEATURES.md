@@ -53,7 +53,7 @@
 - Stylesheet paths stored per theme and editable in admin
 - Layout templates selectable per page
 - Partial template tags load from theme
-- Default.tpl automatically used for non-index pages
+- Default.twig automatically used for non-index pages
 - Storefront templates use theme_subdir asset lookup
 - Dedicated storefront folders per theme
 - Asset mover script copies archived theme directories and stylesheets
@@ -72,4 +72,6 @@
 - Capsule images stored per theme or globally with admin toggle
 - Editable spotlight tabs with drag-and-drop game ordering for theme 2007_v2
 
-- Theme assets (css/js) automatically included without manual paths
+- Themes must explicitly include their CSS and JS files in templates
+- Inline style URL paths automatically point to theme images
+- Archived 2006_v1 homepage content seeded for dynamic tags

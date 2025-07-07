@@ -17,8 +17,7 @@ ob_start();
 cms_render_template($tpl_body, $params);
 $body = ob_get_clean();
 
-$tpl = __DIR__.'/../themes/'.$theme.'/default_template.php';
-if(!file_exists($tpl)) $tpl = __DIR__.'/../themes/2005_v2/default_template.php';
+$tpl = cms_theme_layout('default.twig', $theme);
 cms_render_template($tpl, ['page_title'=>'All Games','content'=>$body, 'theme_subdir' => 'storefront']);
 ?>
 
