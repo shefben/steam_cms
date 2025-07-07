@@ -67,3 +67,9 @@
 - Templates now rendered with Twig, using {BASE} variable for root path
 - {BASE} placeholders automatically converted to Twig variables for DB content
 - Twig layouts now reside in each theme's `layout` directory
+- Core content tags for join steam promo, new on steam, latest news and catalog sections
+- Additional tags for publisher catalogs, coming soon, capsules and tabs
+- Capsule images stored per theme or globally with admin toggle
+- Editable spotlight tabs with drag-and-drop game ordering for theme 2007_v2
+
+- Theme assets (css/js) automatically included without manual paths
