@@ -260,13 +260,16 @@ function cms_header_buttons_html($theme, string $spacer_style = ''){
     $spacer  = $data['spacer'] ?? '';
     $out = '';
     $first = true;
+    $base = cms_base_url();
     foreach($buttons as $b){
         if(!$b['visible']) continue;
         $text = trim($b['text']);
-        $url  = htmlspecialchars($b['url']);
+        $url  = str_ireplace('{BASE}', $base, $b['url']);
+        $url  = htmlspecialchars($url);
         $segment = '';
         if($b['img']){
-            $img = htmlspecialchars($b['img']);
+            $imgPath = str_ireplace('{BASE}', $base, $b['img']);
+            $img = htmlspecialchars($imgPath);
             $alt = htmlspecialchars($text);
             $segment = '<a href="'.$url.'"><img src="'.$img.'" alt="'.$alt.'"></a>';
         }else{
@@ -295,6 +298,7 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
     $data = cms_get_theme_header_data($theme);
     $base = cms_base_url();
     $logo = $data['logo'] ?: '/img/steam_logo_onblack.gif';
+    $logo = str_ireplace('{BASE}', $base, $logo);
     if($logo && $logo[0]=='/') $logo = $base.$logo;
     $out = '<div class="header"><nobr>';
     $out .= '<div><a href="'.$base.'/index.php"><img alt="Steam" src="'.htmlspecialchars($logo).'"></a></div>';
