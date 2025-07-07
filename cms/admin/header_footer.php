@@ -134,9 +134,9 @@ Stylesheet path: <input type="text" name="css_path" value="<?php echo htmlspecia
 <td><input type="text" name="buttons[<?php echo $i; ?>][url]" value="<?php echo htmlspecialchars($b['url']); ?>" title="Link target when clicked" style="width:250px"></td>
 <td><input type="text" name="buttons[<?php echo $i; ?>][text]" value="<?php echo htmlspecialchars($b['text'] ?? ''); ?>" title="Text fallback" style="width:200px"></td>
 <td><input type="checkbox" name="buttons[<?php echo $i; ?>][delete]"></td>
-<input type="hidden" name="buttons[<?php echo $i; ?>][img]" value="<?php echo htmlspecialchars($b['img']); ?>">
-<input type="hidden" name="buttons[<?php echo $i; ?>][hover]" value="<?php echo htmlspecialchars($b['hover']); ?>">
-<input type="hidden" name="buttons[<?php echo $i; ?>][alt]" value="<?php echo htmlspecialchars($b['alt']); ?>">
+<input type="hidden" name="buttons[<?php echo $i; ?>][img]" value="<?php echo htmlspecialchars($b['img'] ?? ''); ?>">
+<input type="hidden" name="buttons[<?php echo $i; ?>][hover]" value="<?php echo htmlspecialchars($b['hover'] ?? ''); ?>">
+<input type="hidden" name="buttons[<?php echo $i; ?>][alt]" value="<?php echo htmlspecialchars($b['alt'] ?? ''); ?>">
 </tr>
 <?php endforeach; ?>
 </tbody>
