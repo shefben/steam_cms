@@ -76,3 +76,10 @@ All notable changes to this project will be documented in this file.
 - Footer and header templates moved into installer
 - Added database-driven header tag and theme settings
 - Template engine loads theme configuration from database instead of theme files
+- Added base Twig templates for 2006_v1, 2006_v2, 2007_v1 and 2007_v2 themes
+- Reworked 2006-2007 Twig layouts with full HTML and new content tags
+- Introduced storefront_capsules_all and storefront_capsules_per_theme tables
+- Admin page now toggles shared or theme-specific capsules and loads from DB
+- Added spotlight tab tables and admin UI for theme 2007_v2
+
+- Template engine auto-loads CSS and JS assets from theme folders

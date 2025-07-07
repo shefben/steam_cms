@@ -3,32 +3,29 @@ require_once 'admin_header.php';
 cms_require_permission('manage_store');
 $db=cms_get_db();
 $pos = $_POST['position'] ?? '';
-$year = (int)($_POST['year'] ?? 0);
-$month = (int)($_POST['month'] ?? 0);
-$day = (int)($_POST['day'] ?? 0);
 $appid = (int)($_POST['appid'] ?? 0);
-if (!$pos || !$year || !$month || !$day || !isset($_FILES['file'])) {
+$theme = cms_get_setting('theme', '2006_v1');
+$useAll = cms_get_setting('capsules_same_all', '1') === '1';
+if (!$pos || !$appid || !isset($_FILES['file'])) {
     http_response_code(400);
     exit('bad');
 }
-
-$basePath = dirname(__DIR__, 2) . '/storefront/images/capsules';
-$folder = $basePath . '/' . $pos;
-$fileName = sprintf('%02d_%02d_%04d.png', $month, $day, $year);
-if (file_exists($folder . '/' . $fileName)) {
-    $i = 1;
-    while (file_exists($folder . '/' . preg_replace('/\.png$/', "_${i}.png", $fileName))) {
-        $i++;
-    }
-    $fileName = preg_replace('/\.png$/', "_${i}.png", $fileName);
+$target = $useAll ? 'all' : $theme;
+$basePath = dirname(__DIR__, 2) . '/images/capsules/' . $target;
+if (!is_dir($basePath)) {
+    mkdir($basePath, 0777, true);
 }
-if (!is_dir($folder)) {
-    mkdir($folder, 0777, true);
-}
-$path = $folder . '/' . $fileName;
+$fileName = $appid . '.png';
+$path = $basePath . '/' . $fileName;
 move_uploaded_file($_FILES['file']['tmp_name'], $path);
 
-$rel = $pos . '/' . $fileName;
-$stmt = $db->prepare('REPLACE INTO store_capsules(position,image,appid) VALUES(?,?,?)');
-$stmt->execute([$pos, $rel, $appid]);
+$rel = $target . '/' . $fileName;
+$size = $pos === 'large' ? 'large' : 'small';
+if ($useAll) {
+    $stmt = $db->prepare('REPLACE INTO storefront_capsules_all(position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,0,0)');
+    $stmt->execute([$pos, $size, $rel, $appid]);
+} else {
+    $stmt = $db->prepare('REPLACE INTO storefront_capsules_per_theme(theme,position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,?,0,0)');
+    $stmt->execute([$theme, $pos, $size, $rel, $appid]);
+}
 echo $rel;
