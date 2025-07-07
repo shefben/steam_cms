@@ -340,8 +340,7 @@ Please select an option from the top menu.
 </div>
 </div>
 HTML;
-            $sa_html = file_get_contents(__DIR__ . '/sql/subscriber_agreement.html');
-            $header_buttons = [
+                        $header_buttons = [
                 ['url' => '/news.php','text' => 'news'],
                 ['url' => '/getsteamnow.php','text' => 'getSteamNow'],
                 ['url' => '/cybercafes.php','text' => 'Cyber Cafes'],
@@ -398,6 +397,7 @@ HTML;
             foreach ($defaults as $k => $v) {
                 $stmt->execute([$k,$v]);
             }
+            $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated) VALUES(?,?,?,?,?,?,?)');
 
             /* -----------------------------------------------------------
              *  HEADER-BAR SEEDS
@@ -658,7 +658,7 @@ xxxxxx xxxxx xxxxx x xxx xxxxxxx xxxxxx xxx xxxxxx x xxxxxx xxxxxxx. xxxxxx xxxx
 <a href="{BASE}/index.php?area=getsteamnow"><img src="{BASE}/images/but_getsteamnow.gif" height="24" width="124" alt="get steam now"></a><br>
 </div>
 HTML;
-            $pageStmt->execute(['features','Features',$features_html,'2003_v1,2003_v2,2004',date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['features','Features',$features_html,'2003_v1,2003_v2,2004','default.tpl',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
 
             $e3_html = <<<'HTML'
 <!-- e3 movies -->
@@ -699,7 +699,7 @@ Note that these movies are in Bink .exe format. If your computer has trouble pla
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['e3_movies','Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2',date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['e3_movies','Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2','default.tpl',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
 
             $forums_html = <<<'HTML'
 <!-- forums -->
@@ -727,7 +727,7 @@ HTML;
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['forums','Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2',date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['forums','Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2','default.tpl',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
 
             $ded_html = <<<'HTML'
 <!-- dedicated server -->
@@ -748,7 +748,7 @@ NOTE: This release includes only those files which have changed since the last d
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['dedicated_server','Dedicated Server update files',$ded_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2',date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['dedicated_server','Dedicated Server update files',$ded_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.tpl',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
 
             $css_html = <<<'HTML'
 <!-- CS:S Beta 1 FAQ -->
@@ -789,7 +789,7 @@ HTML;
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['css_b1','Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2',date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['css_b1','Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.tpl',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
 
             $pricing_html = <<<'HTML'
 <div class="content" id="container">
@@ -821,7 +821,7 @@ If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valv
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.tpl',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
 
             $dirStmt = $pdo->prepare('INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord) VALUES(?,?,?,?,?,?,?)');
             $defaultCafes = [

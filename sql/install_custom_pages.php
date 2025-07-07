@@ -1082,7 +1082,8 @@ $insertArray[] = [
 ];
 
 $stmtcp = $pdo->prepare(
-    'INSERT INTO custom_pages (slug, title, content, theme, template, created, updated)
+    'INSERT INTO custom_pages 
+    (slug, title, content, theme, template, created, updated)
      VALUES (?, ?, ?, ?, ?, ?, ?)'
 );
 
