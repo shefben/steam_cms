@@ -440,7 +440,7 @@ $content2005v1 = <<<HTML
 <tr height="169">
 <td colspan="2" content="" csheight="146" height="169" valign="top" width="146" xpos="7">
 <p><span class="statusContent3">INCLUDES:</span><br>
-<span class="statusContent">? </span><font size="2"><span class="statusContent">Half-Life® 2*<br>
+<span class="statusContent">? </span><font size="2"><span class="statusContent">Half-LifeÂ® 2*<br>
 </span></font><span class="statusContent">? </span><font size="2"><span class="statusContent">Counter-Strike?:<br>
                                                         Source?</span></font></p>
 </td>
@@ -645,7 +645,7 @@ $content2005v1 = <<<HTML
 <div class="INDEX02Body">
 <p class="Body"><font color="white" size="2"><span class="statusContent2"><b>Games Your Customers Want?</b><br>
 </span></font></p>
-<p class="Body"><font size="2"><span class="statusContent">I</span></font><font size="2"><span class="statusContent">f you run a cyber café or gaming venue, Steam makes it easy for you to bring Valve&#39s games to your customers. Over 1000 gaming venues have signed up for Valve?s Cyber Café Program.</span></font></p>
+<p class="Body"><font size="2"><span class="statusContent">I</span></font><font size="2"><span class="statusContent">f you run a cyber cafÃ© or gaming venue, Steam makes it easy for you to bring Valve&#39s games to your customers. Over 1000 gaming venues have signed up for Valve?s Cyber CafÃ© Program.</span></font></p>
 <p class="Body"><font size="2"><span class="statusContent">&gt;&nbsp;<a href="{BASE}/index.php?area=cybercafes">find out more now</a></span></font></p>
 </div>
 </td>
@@ -810,9 +810,9 @@ $content2005v2 = <<<HTML
 <td class="BODYGreen" colspan="4" content="" csheight="92" height="126" valign="top" width="146" xpos="18">
 <div class="BODYGreen">
 <p><span>Visit the official sites:<br>
-</span><span>· <a href="http://www.half-life.com/" title="Half-Life 2"><font color="black"><b>Half-Life 2<br>
-</b></font></a></span><span>· <a href="http://www.counter-strike.net/" title="Counter-Strike"><font color="black"><b>Counter-Strike<br>
-</b></font></a></span><span>· <a href="http://www.dayofdefeat.com"><font color="black"><b>Day of Defeat<br>
+</span><span>Â· <a href="http://www.half-life.com/" title="Half-Life 2"><font color="black"><b>Half-Life 2<br>
+</b></font></a></span><span>Â· <a href="http://www.counter-strike.net/" title="Counter-Strike"><font color="black"><b>Counter-Strike<br>
+</b></font></a></span><span>Â· <a href="http://www.dayofdefeat.com"><font color="black"><b>Day of Defeat<br>
 <br>
 </b></font></a></span><span>Buy the games <a href="{BASE}/index.php?area=product_packageoffers" title="Buy the Games!"><font color="black"><b>HERE</b></font></a></span><span class="BODYGreen"><span class="BODYGreen">!</span></span><span class="INDEX02Body2"><span class="BODYGreen"> </span></span></p>
 </div>
@@ -823,9 +823,9 @@ $content2005v2 = <<<HTML
 <tr height="30">
 <td class="BODYGreen" colspan="6" content="" csheight="40" height="85" rowspan="2" valign="top" width="150" xpos="18">
 <div class="BODYGreen">
-<p><span>· <a href={BASE}/themes/2005_v2/images/index03/SOURCE_Info+Licensing.pdf" title="Source Licensing +&nbsp;Info"><font color="black"><b>Info+Licensing</b></font></a><font color="black"><b> </b>(PDF)</font><a href={BASE}/themes/2005_v2/images/index03/SOURCE_Info+Licensing.pdf" title="Source Licensing +&nbsp;Info"><font color="black"><br>
-</font></a></span><span>· <a href="http://collective.valve-erc.com/" title="Valve-ERC"><font color="black"><b>MOD&nbsp;Resources<br>
-</b></font></a></span><span>· <a href="http://www.valve-erc.com/srcsdk/" title="Source SDK Documentation"><font color="black"><b>SDK&nbsp;Documentation</b></font></a></span></p>
+<p><span>Â· <a href={BASE}/themes/2005_v2/images/index03/SOURCE_Info+Licensing.pdf" title="Source Licensing +&nbsp;Info"><font color="black"><b>Info+Licensing</b></font></a><font color="black"><b> </b>(PDF)</font><a href={BASE}/themes/2005_v2/images/index03/SOURCE_Info+Licensing.pdf" title="Source Licensing +&nbsp;Info"><font color="black"><br>
+</font></a></span><span>Â· <a href="http://collective.valve-erc.com/" title="Valve-ERC"><font color="black"><b>MOD&nbsp;Resources<br>
+</b></font></a></span><span>Â· <a href="http://www.valve-erc.com/srcsdk/" title="Source SDK Documentation"><font color="black"><b>SDK&nbsp;Documentation</b></font></a></span></p>
 </div>
 </td>
 <td colspan="15" height="30" width="632"></td>
@@ -877,9 +877,9 @@ $content2005v2 = <<<HTML
 <td height="109" rowspan="2" width="18"></td>
 <td class="BODYGreen" colspan="3" content="" csheight="40" height="109" rowspan="2" valign="top" width="144" xpos="18">
 <div class="BODYGreen">
-<p><span>· <a href="http://www.valvesoftware.com" title="Valve Homepage"><font color="black"><b>About Valve<br>
-</b></font></a></span><span>· <a href="http://www.valvesoftware.com/awardslist.htm" title="Awards"><font color="black"><b>Awards<br>
-</b></font></a></span><span>· <a href="{BASE}/index.php?area=contact" title="Contact Us"><font color="black"><b>Contact Us</b></font></a></span></p>
+<p><span>Â· <a href="http://www.valvesoftware.com" title="Valve Homepage"><font color="black"><b>About Valve<br>
+</b></font></a></span><span>Â· <a href="http://www.valvesoftware.com/awardslist.htm" title="Awards"><font color="black"><b>Awards<br>
+</b></font></a></span><span>Â· <a href="{BASE}/index.php?area=contact" title="Contact Us"><font color="black"><b>Contact Us</b></font></a></span></p>
 </div>
 </td>
 <td colspan="5" height="109" rowspan="2" width="30"></td>
@@ -936,7 +936,7 @@ $content2005v2 = <<<HTML
 <td colspan="2" height="97" width="19"></td>
 <td colspan="9" content="" csheight="69" height="97" valign="top" width="316" xpos="19">
 <p><b><span class="BODYGreen"><span class="BODYGreen">Games Your Customers Want</span></span><br>
-</b><span class="INDEX02Body2"><span class="BODYGreen">If you run a cyber café or gaming venue, Steam makes it easy for you to bring Valve?s games to your customers. Over 1000 gaming venues have signed up for Valve?s <a href="{BASE}/index.php?area=cybercafes" title="Cyber Cafe Program"><b><font color="black">Cyber Café&nbsp;Program</font></b></a></span></span><span class="BODYGreen"><span class="BODYGreen">.</span></span><span class="INDEX02Body2"><span class="BODYGreen"> </span></span></p>
+</b><span class="INDEX02Body2"><span class="BODYGreen">If you run a cyber cafÃ© or gaming venue, Steam makes it easy for you to bring Valve?s games to your customers. Over 1000 gaming venues have signed up for Valve?s <a href="{BASE}/index.php?area=cybercafes" title="Cyber Cafe Program"><b><font color="black">Cyber CafÃ©&nbsp;Program</font></b></a></span></span><span class="BODYGreen"><span class="BODYGreen">.</span></span><span class="INDEX02Body2"><span class="BODYGreen"> </span></span></p>
 </td>
 <td colspan="2" height="97" width="25"></td>
 <td height="97" width="1"><spacer height="97" type="block" width="1"></spacer></td>
@@ -1022,45 +1022,45 @@ $content2006v1 = <<<HTML
 <div class="capsuleImage"><img alt="Uplink" border="0" height="105" src="gfx/apps/1510/capsule_sm.jpg" width="280"></div>
 <div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$9.95&nbsp;</div></div>
 <!-- capsule 2 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=3010&amp;';" onmouseout="this.style.background='#000000'; window.status='';" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=3010&amp;';" style="background: rgb(0, 0, 0);">
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=3010&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=3010&amp;';" style="background: rgb(0, 0, 0);">
 <div class="capsuleImage"><img alt="Xpand Rally" border="0" height="105" src="gfx/apps/3010/capsule_sm.jpg" width="280"></div>
 <div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95&nbsp;</div></div>
 <br clear="all">
 <!-- Large capsule -->
-<div class="capsuleLarge" onclick="location.href='index.php?area=game&amp;AppId=380&amp;';" onmouseout="this.style.background='#000000'; window.status='';" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=380&amp;';" style="background: rgb(0, 0, 0);">
+<div class="capsuleLarge" onclick="location.href='index.php?area=game&amp;AppId=380&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=380&amp;';" style="background: rgb(0, 0, 0);">
 <div class="capsuleLargeImage"><img alt="Half-Life 2: Episode One" border="0" galleryimg="no" height="221" src="gfx/apps/380/capsule_lrg.jpg" width="572"></div>
 <div class="capsuleLargeText"></div><div class="capsuleLargeCost">$19.95&nbsp;</div></div>
 <br clear="all">
 <!-- capsule 3 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=2400&amp;';" onmouseout="this.style.background='#000000'; window.status='';" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=2400&amp;';" style="background: rgb(0, 0, 0);">
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=2400&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=2400&amp;';" style="background: rgb(0, 0, 0);">
 <div class="capsuleImage"><img alt="The Ship" border="0" height="105" src="gfx/apps/2400/capsule_sm.jpg" width="280"></div>
 <div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95&nbsp;</div></div>
 <!-- capsule 4 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=2810&amp;';" onmouseout="this.style.background='#000000'; window.status='';" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=2810&amp;';" style="background: rgb(0, 0, 0);">
-<div class="capsuleImage"><img alt="X³: Reunion" border="0" height="105" src="gfx/apps/2810/capsule_sm.jpg" width="280"></div>
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=2810&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=2810&amp;';" style="background: rgb(0, 0, 0);">
+<div class="capsuleImage"><img alt="XÂ³: Reunion" border="0" height="105" src="gfx/apps/2810/capsule_sm.jpg" width="280"></div>
 <div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95&nbsp;</div></div>
 <br clear="all">
 <!-- capsule 5 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1300&amp;';" onmouseout="this.style.background='#000000'; window.status='';" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=1300&amp;';" style="background: rgb(0, 0, 0);">
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1300&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=1300&amp;';" style="background: rgb(0, 0, 0);">
 <div class="capsuleImage"><img alt="SiN Episodes: Emergence" border="0" height="105" src="gfx/apps/1300/capsule_sm.jpg" width="280"></div>
 <div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$14.95&nbsp;</div></div>
 <!-- capsule 6 -->
-<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1500&amp;';" onmouseout="this.style.background='#000000'; window.status='';" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=1500&amp;';" style="background: rgb(0, 0, 0);">
+<div class="capsule" onclick="location.href='index.php?area=game&amp;AppId=1500&amp;';" onmouseout="this.style.background='#000000'; window.status=";" onmouseover="this.style.background='#666666'; window.status='index.php?area=game&amp;AppId=1500&amp;';" style="background: rgb(0, 0, 0);">
 <div class="capsuleImage"><img alt="Darwinia" border="0" height="105" src="gfx/apps/1500/capsule_sm.jpg" width="280"></div>
 <div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$19.95&nbsp;</div></div>
 </span>
 <br clear="left">
 <div align="center" class="capsuleGear">
 <div class="capsuleGearTitle">Get The Gear!</div>
-<div class="capsuleGearText">Check out the new Logitech® MOMO® Racing wheel! Visit the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> for official shirts, posters, hats and more!</div>
+<div class="capsuleGearText">Check out the new LogitechÂ® MOMOÂ® Racing wheel! Visit the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> for official shirts, posters, hats and more!</div>
 </div>
 <div align="center" class="capsuleStuff">
 <div class="capsuleStuffTitle">Free Stuff!</div>
 <div class="capsuleStuffText">In addition to a catalog of great games, your free Steam account gives you access to <a href="http://storefront.steampowered.com/v/index.php?area=search&amp;browse=1&amp;category=&amp;price=1&amp;">games + demos</a>, <a href="http://storefront.steampowered.com/v/index.php?area=media&amp;">HD movies + trailers</a>, and more.</div>
 </div>
 </div>
-<!-- End Left Collumn Content -->
-<!-- Right Collumn Content -->
+<!-- End Left Column Content -->
+<!-- Right Column Content -->
 <div class="rightCol_1">
 <div align="center" class="btn_getSteam" onclick="location.href='index.php?area=getsteamnow'" onmouseout="this.style.background='url(img/btn_getSteam.gif)'" onmouseover="this.style.background='url(img/btn_getSteam_ovr.gif)'" style="CURSOR: pointer;" title="Click for Details">
 Get Steam Now !
@@ -1077,7 +1077,7 @@ Get Steam Now !
 <a class="rightLink" href="v/index.php?area=game&amp;AppId=90034&amp;"><img align="absmiddle" border="0" src="img/ico/ico_mouse_13.gif"> Source Forts <span class="rightLink_newDate_gr"> (Aug 1, 2006)</span></a>
 <a class="rightLink" href="v/index.php?area=game&amp;AppId=924&amp;"><img align="absmiddle" border="0" src="img/ico/ico_film_13.gif"> Red Orchestra Infantry Tutorial <span class="rightLink_newDate_gr"> (Jul 28, 2006)</span></a><!-- End New on Steam Area -->
 <div class="rightColHr"></div>
-<h1><img align="absmiddle" alt="Find" height="16" src="img/ico/ico_srch_16.gif" width="16"><!-- Begin Find Header Area --> Find <!-- End Find Header Area --> </h1>
+<h1><!-- Begin Find Header Area --><img align="absmiddle" alt="Find" height="16" src="img/ico/ico_srch_16.gif" width="16"> Find <!-- End Find Header Area --> </h1>
 <!-- Begin Find Left List Area -->
 <div class="rightLink_find_area">
 <a class="rightLink_find" href="v/index.php?area=all&amp;"><img border="0" height="7" src="img/ico/ico_arrow_yellow.gif" width="7"> All Games </a>
@@ -1107,7 +1107,7 @@ Latest News
 <!-- End Latest News Area -->
 <div class="rightColHr" style="padding-bottom: 0px; margin-bottom: 0px;"></div>
 </div>
-<!-- End Right Collumn Content -->
+<!-- End Right Column Content -->
 </div>
 <br clear="left">
 </div>
@@ -1124,12 +1124,12 @@ $insertArray[] = [
 ];
 
 
-$stmt = $pdo->prepare(
+$stmtcp = $pdo->prepare(
     'INSERT INTO custom_pages (slug, title, content, theme, template, created, updated)
      VALUES (?, ?, ?, ?, ?, ?, ?)'
 );
 
 foreach ($insertArray as $row) {
-    $stmt->execute($row);
+    $stmtcp->execute($row);
 }
 ?>
