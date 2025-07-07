@@ -43,6 +43,119 @@ function cms_twig_env(string $tpl_dir): Environment
             $count = $count ?? ($cfg['news_count'] ?? null);
             return cms_render_news($type, $count);
         }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('join_steam_text', function() {
+            return cms_get_setting('join_steam_text', 'Join Steam for free and get games delivered straight to your desktop with automatic updates and a massive gaming community.');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('join_steam_block', function(string $style = '2006') {
+            $text = cms_get_setting('join_steam_text', 'Join Steam for free and get games delivered straight to your desktop with automatic updates and a massive gaming community.');
+            if ($style === '2007') {
+                return '<table class="capsuleArea_header" height="73" width="574"><tr><td height="73" valign="middle" width="250"><div class="btn_getSteam_slvr" onclick="location.href=\'index.php?area=getsteamnow\'">Get Steam Now !</div></td><td height="73" valign="top"><p>'.$text.'</p></td></tr></table>';
+            }
+            return '<table class="capsuleArea_header" width="560"><tr><td width="172"><img src="img/logo_steam_main.jpg" width="172" height="63" alt=""></td><td valign="top"><p>'.$text.'</p></td></tr></table>';
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('new_on_steam_title', function() {
+            return cms_get_setting('new_on_steam_title', 'New On Steam');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('latest_news_title', function() {
+            return cms_get_setting('latest_news_title', 'Latest News');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('find_title', function() {
+            return cms_get_setting('find_title', 'Find');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('browse_catalog_title', function() {
+            return cms_get_setting('browse_catalog_title', 'Browse The Catalog');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('new_on_steam_list', function() {
+            return cms_get_setting('new_on_steam_list', '');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('latest_news_list', function() {
+            return cms_get_setting('latest_news_list', '');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('find_list', function() {
+            return cms_get_setting('find_list', '');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('publisher_catalogs_title', function() {
+            return cms_get_setting('publisher_catalogs_title', 'Publisher Catalogs');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('publisher_catalogs_list', function() {
+            return cms_get_setting('publisher_catalogs_list', '');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('coming_soon_title', function() {
+            return cms_get_setting('coming_soon_title', 'Coming Soon To Steam');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('coming_soon_list', function() {
+            return cms_get_setting('coming_soon_list', '');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('capsule_block', function(string $key) {
+            $theme = cms_get_setting('theme', '2006_v1');
+            $useAll = cms_get_setting('capsules_same_all', '1') === '1';
+            $db = cms_get_db();
+            if ($useAll) {
+                $stmt = $db->prepare('SELECT * FROM storefront_capsules_all WHERE position=?');
+                $stmt->execute([$key]);
+            } else {
+                $stmt = $db->prepare('SELECT * FROM storefront_capsules_per_theme WHERE theme=? AND position=?');
+                $stmt->execute([$theme, $key]);
+            }
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if(!$row){ return ''; }
+            $img = 'images/capsules/'.$row['image_path'];
+            $url = 'index.php?area=app&id='.(int)$row['appid'];
+            $price = $row['price'];
+            return '<a href="'.$url.'"><img src="'.$img.'" alt=""></a><span class="price">$'.htmlspecialchars($price).'</span>';
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('gear_block', function() {
+            return cms_get_setting('gear_block', '');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('free_block', function() {
+            return cms_get_setting('free_block', '');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('tabs_block', function() {
+            $theme = cms_get_setting('theme', '2004');
+            if ($theme !== '2007_v2') {
+                return cms_get_setting('tabs_block', '');
+            }
+            $db = cms_get_db();
+            $stmt = $db->prepare('SELECT * FROM storefront_tabs WHERE theme=? ORDER BY ord,id');
+            $stmt->execute([$theme]);
+            $tabs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if (!$tabs) { return ''; }
+            $html = '<div class="tabs-block"><ul class="tab-links">';
+            $content = '';
+            foreach ($tabs as $i => $tab) {
+                $active = $i === 0 ? ' class="active"' : '';
+                $html .= '<li'.$active.'><a href="#tab_'.$tab['id'].'">'.htmlspecialchars($tab['title']).'</a></li>';
+                $g = $db->prepare('SELECT g.appid,a.name,a.price FROM storefront_tab_games g JOIN store_apps a ON g.appid=a.appid WHERE g.tab_id=? ORDER BY g.ord');
+                $g->execute([$tab['id']]);
+                $content .= '<div id="tab_'.$tab['id'].'" class="tab-panel" style="display:'.($i? 'none':'block').'"><ul>';
+                foreach ($g as $row) {
+                    $url = 'index.php?area=app&id='.(int)$row['appid'];
+                    $price = $row['price'];
+                    $content .= '<li><a href="'.$url.'">'.htmlspecialchars($row['name']).'</a> - $'.htmlspecialchars($price).'</li>';
+                }
+                $content .= '</ul></div>';
+            }
+            $html .= '</ul>'.$content.'</div>';
+            $html .= "<script>document.querySelectorAll('.tabs-block .tab-links a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var id=this.getAttribute('href');this.parentElement.parentElement.querySelectorAll('li').forEach(function(li){li.classList.remove('active');});this.parentElement.classList.add('active');var block=this.closest('.tabs-block');block.querySelectorAll('.tab-panel').forEach(function(p){p.style.display=p.id==id.substring(1)?'block':'none';});});});</script>";
+            return $html;
+        }, ['is_safe' => ['html']]));
     } else {
         /** @var FilesystemLoader $loader */
         $loader = $env->getLoader();
@@ -108,6 +221,41 @@ function cms_render_template(string $path, array $vars = []): void
         }
         return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
     }, $html);
+
+    $theme_dir = dirname(__DIR__)."/themes/$theme";
+    if (is_dir($theme_dir.'/css')) {
+        $add = '';
+        foreach (glob($theme_dir.'/css/*.css') as $css) {
+            $name = basename($css);
+            if (stripos($html, $name) === false) {
+                $add .= '<link rel="stylesheet" type="text/css" href="'.$vars['THEME_URL'].'/css/'.$name.'">' . "\n";
+            }
+        }
+        if ($add !== '') {
+            if (stripos($html, '</head>') !== false) {
+                $html = preg_replace('/<\/head>/i', $add.'</head>', $html, 1);
+            } else {
+                $html = $add.$html;
+            }
+        }
+    }
+
+    if (is_dir($theme_dir.'/js')) {
+        $add = '';
+        foreach (glob($theme_dir.'/js/*.js') as $js) {
+            $name = basename($js);
+            if (stripos($html, $name) === false) {
+                $add .= '<script src="'.$vars['THEME_URL'].'/js/'.$name.'"></script>' . "\n";
+            }
+        }
+        if ($add !== '') {
+            if (stripos($html, '</body>') !== false) {
+                $html = preg_replace('/<\/body>/i', $add.'</body>', $html, 1);
+            } else {
+                $html .= $add;
+            }
+        }
+    }
 
     if ($cache_enabled) {
         if (!is_dir(__DIR__.'/cache')) {

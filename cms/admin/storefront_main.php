@@ -2,66 +2,146 @@
 require_once 'admin_header.php';
 cms_require_permission('manage_store');
 $db=cms_get_db();
+$theme = cms_get_setting('theme', '2004');
+$use_all = cms_get_setting('capsules_same_all', '1') === '1';
+$positions = ['top1','top2','large','under1','under2','bottom1','bottom2'];
+$is2006 = preg_match('/^200[67]/',$theme) === 1;
+$showTabs = $theme === '2007_v2';
 
 if(isset($_POST['update'])){
     $pos=$_POST['position'];
     $img=trim($_POST['image']);
     $appid=(int)$_POST['appid'];
-    $stmt=$db->prepare('REPLACE INTO store_capsules(position,image,appid) VALUES(?,?,?)');
-    $stmt->execute([$pos,$img,$appid]);
+    $size=$pos==='large'?'large':'small';
+    if($use_all){
+        $stmt=$db->prepare('REPLACE INTO storefront_capsules_all(position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,0,0)');
+        $stmt->execute([$pos,$size,$img,$appid]);
+    }else{
+        $stmt=$db->prepare('REPLACE INTO storefront_capsules_per_theme(theme,position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,?,0,0)');
+        $stmt->execute([$theme,$pos,$size,$img,$appid]);
+    }
     exit('OK');
 }
 
 if (isset($_POST['save_caps'])) {
-    foreach (['top','middle','bottom_left','bottom_right'] as $pos) {
+    $use_all = isset($_POST['use_all']);
+    cms_set_setting('capsules_same_all', $use_all ? '1' : '0');
+    foreach ($positions as $pos) {
         $appid = (int)($_POST['appid'][$pos] ?? 0);
-        $img = $db->prepare('SELECT image FROM store_capsules WHERE position=?');
-        $img->execute([$pos]);
-        $path = $img->fetchColumn() ?: '';
-        $stmt = $db->prepare('REPLACE INTO store_capsules(position,image,appid) VALUES(?,?,?)');
-        $stmt->execute([$pos,$path,$appid]);
+        $price = isset($_POST['price'][$pos]) ? floatval($_POST['price'][$pos]) : null;
+        $img = $_POST['current_image'][$pos] ?? '';
+        $size = $pos === 'large' ? 'large' : 'small';
+        if ($use_all) {
+            $stmt = $db->prepare('REPLACE INTO storefront_capsules_all(position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,?,0)');
+            $stmt->execute([$pos,$size,$img,$appid,$price]);
+        } else {
+            $stmt = $db->prepare('REPLACE INTO storefront_capsules_per_theme(theme,position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,?,?,0)');
+            $stmt->execute([$theme,$pos,$size,$img,$appid,$price]);
+        }
+        if ($appid && $price !== null) {
+            $db->prepare('UPDATE store_apps SET price=? WHERE appid=?')->execute([$price,$appid]);
+        }
     }
-    $rows = $db->query('SELECT * FROM store_capsules')->fetchAll(PDO::FETCH_ASSOC);
-    $caps = [];
-    foreach ($rows as $r) {
-        $caps[$r['position']] = $r;
+}
+
+if ($showTabs && isset($_POST['save_tabs'])) {
+    $tabsIn = $_POST['tab'] ?? [];
+    foreach ($tabsIn as $i => $tab) {
+        $id = (int)($tab['id'] ?? 0);
+        if (!empty($tab['delete'])) {
+            if ($id) {
+                $db->prepare('DELETE FROM storefront_tabs WHERE id=?')->execute([$id]);
+                $db->prepare('DELETE FROM storefront_tab_games WHERE tab_id=?')->execute([$id]);
+            }
+            continue;
+        }
+        $title = trim($tab['title'] ?? '');
+        $ord = $i + 1;
+        if ($id) {
+            $db->prepare('UPDATE storefront_tabs SET title=?, ord=? WHERE id=?')->execute([$title,$ord,$id]);
+        } else {
+            $stmt = $db->prepare('INSERT INTO storefront_tabs(theme,title,ord) VALUES(?,?,?)');
+            $stmt->execute([$theme,$title,$ord]);
+            $id = $db->lastInsertId();
+        }
+        $db->prepare('DELETE FROM storefront_tab_games WHERE tab_id=?')->execute([$id]);
+        if (!empty($tab['games'])) {
+            $o=1;
+            foreach ($tab['games'] as $appid) {
+                $appid = (int)$appid;
+                $db->prepare('INSERT INTO storefront_tab_games(tab_id,appid,ord) VALUES(?,?,?)')->execute([$id,$appid,$o++]);
+            }
+        }
     }
 }
 
 
-$rows = $db->query('SELECT * FROM store_capsules')->fetchAll(PDO::FETCH_ASSOC);
+
+$rows = [];
+if ($use_all) {
+    $rows = $db->query('SELECT * FROM storefront_capsules_all')->fetchAll(PDO::FETCH_ASSOC);
+} else {
+    $stmt = $db->prepare('SELECT * FROM storefront_capsules_per_theme WHERE theme=?');
+    $stmt->execute([$theme]);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 $caps = [];
 foreach ($rows as $r) {
-    $caps[$r['position']] = $r;
+    $caps[$r['position']] = $r + ['image' => $r['image_path']];
 }
-$apps = $db->query('SELECT appid,name FROM store_apps ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+$caps += array_fill_keys($positions, ['appid'=>0,'image'=>'']);
+$apps = $db->query('SELECT appid,name,price,images FROM store_apps ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+$price_map = [];
+foreach ($apps as $a) { $price_map[$a['appid']] = $a['price']; }
 
-$img_base = dirname(__DIR__, 2) . '/storefront/images/capsules';
-$images = ['top'=>[], 'middle'=>[], 'bottom_left'=>[], 'bottom_right'=>[]];
-foreach (array_keys($images) as $pos) {
-    $dir = $img_base . '/' . $pos;
-    if (!is_dir($dir)) continue;
-    foreach (glob($dir.'/*.png') as $file) {
-        $base = basename($file, '.png');
-        if (preg_match('/(\d{2})_\d{2}_(\d{4})/', $base, $m)) {
-            $label = $m[2] . '-' . $m[1];
-        } else {
-            $label = $base;
+$img_base = dirname(__DIR__, 2) . '/images/capsules';
+$list = [];
+if ($use_all) {
+    foreach (glob($img_base.'/*', GLOB_ONLYDIR) as $dir) {
+        foreach (glob($dir.'/*.png') as $file) {
+            $list[] = basename(dirname($file)).'/'.basename($file);
         }
-        $images[$pos][] = ['file' => $pos.'/'.basename($file), 'label' => $label];
+    }
+} else {
+    $dir = $img_base.'/'.$theme;
+    if (is_dir($dir)) {
+        foreach (glob($dir.'/*.png') as $file) {
+            $list[] = $theme.'/'.basename($file);
+        }
     }
 }
+$tabs = [];
+if ($showTabs) {
+    $stmt = $db->prepare('SELECT * FROM storefront_tabs WHERE theme=? ORDER BY ord,id');
+    $stmt->execute([$theme]);
+    $tabs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($tabs as &$t) {
+        $g = $db->prepare('SELECT appid FROM storefront_tab_games WHERE tab_id=? ORDER BY ord');
+        $g->execute([$t["id"]]);
+        $t['games'] = $g->fetchAll(PDO::FETCH_COLUMN);
+    }
+    unset($t);
+}
+$images = [];
+foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $images[$pos][] = ['file'=>$f,'label'=>$f]; } }
 ?>
 <h2>Main Page</h2>
 <form method="post" style="margin-bottom:15px;">
   <fieldset class="capsule-box-group">
     <legend>Capsule Links</legend>
-    <?php foreach(['top'=>'Top','middle'=>'Middle','bottom_left'=>'Bottom Left','bottom_right'=>'Bottom Right'] as $p=>$label):
+    <label><input type="checkbox" name="use_all" value="1" <?php if($use_all) echo 'checked'; ?>> Use same capsules across all themes</label>
+    <?php
+      $labels = $is2006
+        ? ['top1'=>'Top 1','top2'=>'Top 2','large'=>'Large','under1'=>'Under 1','under2'=>'Under 2','bottom1'=>'Bottom 1','bottom2'=>'Bottom 2']
+        : ['top'=>'Top','middle'=>'Middle','bottom_left'=>'Bottom Left','bottom_right'=>'Bottom Right'];
+      foreach($labels as $p=>$label):
       $app = $caps[$p]['appid'] ?? 0;
       $img = $caps[$p]['image'] ?? '';
+      $price = $price_map[$app] ?? '';
     ?>
     <div class="capsule-box">
-      <img id="preview_<?php echo $p; ?>" src="../storefront/images/capsules/<?php echo htmlspecialchars($img); ?>" alt="<?php echo $label; ?> preview" class="capsule-preview">
+      <img id="preview_<?php echo $p; ?>" src="../images/capsules/<?php echo htmlspecialchars($img); ?>" alt="<?php echo $label; ?> preview" class="capsule-preview">
+      <input type="hidden" name="current_image[<?php echo $p; ?>]" value="<?php echo htmlspecialchars($img); ?>">
       <button type="button" class="btn change-btn" data-pos="<?php echo $p; ?>">Change Capsule</button>
       <div>
         <input type="text" class="filter" data-select="sel_<?php echo $p; ?>" placeholder="Filter apps"><br>
@@ -72,23 +152,33 @@ foreach (array_keys($images) as $pos) {
           <?php endforeach; ?>
         </select>
         <img id="img_sel_<?php echo $p; ?>" style="display:none;position:absolute;z-index:1000" alt="preview">
+        <label>Price <input type="text" name="price[<?php echo $p; ?>]" value="<?php echo htmlspecialchars($price); ?>" size="6"></label>
       </div>
     </div>
     <?php endforeach; ?>
     <button type="submit" name="save_caps" class="btn btn-primary" style="margin-top:10px;">Save Capsules</button>
   </fieldset>
 </form>
-<div id="caps" style="position:relative;width:590px;height:511px;">
-  <?php foreach([
+<div id="caps" style="position:relative;width:590px;height:<?php echo $is2006?580:511;?>px;">
+  <?php $styleMap = $is2006 ? [
+        'top1' => 'left:0;top:0;width:288px;height:105px',
+        'top2' => 'left:301px;top:0;width:289px;height:105px',
+        'large' => 'left:0;top:112px;width:590px;height:221px',
+        'under1' => 'left:0;top:344px;width:288px;height:105px',
+        'under2' => 'left:301px;top:344px;width:289px;height:105px',
+        'bottom1' => 'left:0;top:456px;width:288px;height:105px',
+        'bottom2' => 'left:301px;top:456px;width:289px;height:105px'
+      ] : [
         'top' => 'left:1px;top:1px;width:588px;height:98px',
         'middle' => 'left:0;top:112px;width:589px;height:228px',
         'bottom_left' => 'left:0;top:352px;width:288px;height:158px',
         'bottom_right' => 'left:301px;top:352px;width:289px;height:158px'
-      ] as $p=>$style):
+      ];
+      foreach($styleMap as $p=>$style):
         $img=$caps[$p]['image']??'';
         $appid=$caps[$p]['appid']??0;
   ?>
-  <img src="../storefront/images/capsules/<?php echo htmlspecialchars($img); ?>" data-pos="<?php echo $p?>" data-app="<?php echo $appid?>" style="position:absolute;<?php echo $style; ?>;border:0;cursor:pointer;" alt="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule" aria-label="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule preview">
+  <img src="../images/capsules/<?php echo htmlspecialchars($img); ?>" data-pos="<?php echo $p?>" data-app="<?php echo $appid?>" style="position:absolute;<?php echo $style; ?>;border:0;cursor:pointer;" alt="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule" aria-label="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule preview">
   <?php endforeach; ?>
 </div>
   <div id="capsuleModal" class="capsule-modal" aria-label="Change capsule">
@@ -108,9 +198,6 @@ foreach (array_keys($images) as $pos) {
         </div>
       </div>
       <div id="capUpload" style="display:none;">
-        <label>Month <input type="text" id="upMonth" size="2"></label>
-        <label>Day <input type="text" id="upDay" size="2"></label>
-        <label>Year <input type="text" id="upYear" size="4"></label><br>
         <label>App <select id="uploadAppid"></select></label><br>
         <input type="file" id="uploadFile"><br>
         <div class="modal-actions">
@@ -120,6 +207,41 @@ foreach (array_keys($images) as $pos) {
       </div>
     </div>
   </div>
+<?php if ($showTabs): ?>
+<h3>Spotlight Tabs</h3>
+<form method="post" id="tabsForm" style="margin-top:10px;">
+ <table class="table" id="tabs-table">
+  <thead><tr><th></th><th>Title</th><th>Games</th><th>Remove</th></tr></thead>
+  <tbody>
+  <?php foreach($tabs as $i=>$t): ?>
+   <tr class="tab-row">
+    <td class="handle">&#9776;</td>
+    <td><input type="text" name="tab[<?php echo $i;?>][title]" value="<?php echo htmlspecialchars($t['title']);?>"></td>
+    <td>
+      <table class="table games-table"><tbody>
+      <?php foreach($t['games'] as $g): ?>
+       <tr><td class="handle">&#9776;</td><td>
+          <select name="tab[<?php echo $i;?>][games][]">
+           <?php foreach($apps as $a): ?>
+            <option value="<?php echo $a['appid']; ?>" <?php if($a['appid']==$g) echo 'selected';?>><?php echo $a['appid'].' - '.htmlspecialchars($a['name']); ?></option>
+           <?php endforeach; ?>
+          </select>
+       </td><td><button type="button" class="remove-game btn btn-small">x</button></td></tr>
+      <?php endforeach; ?>
+      </tbody></table>
+      <button type="button" class="add-game btn btn-secondary" data-tab="<?php echo $i;?>">Add Game</button>
+    </td>
+    <td><button type="button" class="remove-tab btn btn-danger btn-small">Remove</button></td>
+    <input type="hidden" name="tab[<?php echo $i;?>][id]" value="<?php echo $t['id']; ?>">
+    <input type="hidden" name="tab[<?php echo $i;?>][delete]" value="">
+   </tr>
+  <?php endforeach; ?>
+  </tbody>
+ </table>
+ <button type="button" id="add-tab" class="btn btn-secondary">Add Tab</button>
+ <input type="submit" name="save_tabs" value="Save Tabs" class="btn btn-primary">
+</form>
+<?php endif; ?>
   <style>
   #capsuleModal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;}
   #capsuleModal .dialog{background:#fff;padding:20px;border:1px solid #333;max-width:600px;}
@@ -128,6 +250,7 @@ foreach (array_keys($images) as $pos) {
   #capsuleModal .img-choice.selected{outline:2px solid #007bff;}
   </style>
   <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
   <script>
   var images = <?php echo json_encode($images);?>;
   var apps = <?php echo json_encode($apps);?>;
@@ -150,7 +273,7 @@ foreach (array_keys($images) as $pos) {
     var pos=$('#capsuleModal').data('pos');
     var html='';
     $.each(images[pos]||[],function(i,img){
-       html+='<img src="../storefront/images/capsules/'+img.file+'" class="img-choice" data-file="'+img.file+'" alt="thumbnail">';
+       html+='<img src="../images/capsules/'+img.file+'" class="img-choice" data-file="'+img.file+'" alt="thumbnail">';
     });
     $('#existingList').html(html);
     $('#existingAppid').val('');
@@ -170,16 +293,15 @@ foreach (array_keys($images) as $pos) {
     var appid=$('#existingAppid').val();
     if(!file||!appid){ alert('Select image and app'); return; }
     $.post('storefront_main.php',{update:1,position:pos,image:file,appid:appid},function(){
-       $('#preview_'+pos).attr('src','../storefront/images/capsules/'+file);
+       $('#preview_'+pos).attr('src','../images/capsules/'+file);
        $('#sel_'+pos).val(appid);
-       $('img[data-pos='+pos+']').attr('src','../storefront/images/capsules/'+file).data('app',appid);
+       $('img[data-pos='+pos+']').attr('src','../images/capsules/'+file).data('app',appid);
        $('#capsuleModal').hide();
     });
   });
 
   $('#btnUploadNew').on('click',function(){
     $('#uploadFile').val('');
-    $('#upMonth,#upDay,#upYear').val('');
     $('#uploadAppid').val('');
     $('#capChoose').hide();
     $('#capUpload').show();
@@ -187,23 +309,19 @@ foreach (array_keys($images) as $pos) {
 
   $('#uploadAccept').on('click',function(){
     var pos=$('#capsuleModal').data('pos');
-    var m=$('#upMonth').val(), d=$('#upDay').val(), y=$('#upYear').val();
     var appid=$('#uploadAppid').val();
     var file=$('#uploadFile')[0].files[0];
-    if(!m||!d||!y||!appid||!file){ alert('All fields required'); return; }
+    if(!appid||!file){ alert('All fields required'); return; }
     var fd=new FormData();
     fd.append('position',pos);
-    fd.append('month',m);
-    fd.append('day',d);
-    fd.append('year',y);
     fd.append('appid',appid);
     fd.append('file',file);
     $.ajax({url:'upload_capsule.php',type:'POST',data:fd,processData:false,contentType:false,success:function(rel){
-       $('#preview_'+pos).attr('src','../storefront/images/capsules/'+rel);
+       $('#preview_'+pos).attr('src','../images/capsules/'+rel);
        $('#sel_'+pos).val(appid);
-       $('img[data-pos='+pos+']').attr('src','../storefront/images/capsules/'+rel).data('app',appid);
+       $('img[data-pos='+pos+']').attr('src','../images/capsules/'+rel).data('app',appid);
        images[pos]=images[pos]||[];
-       images[pos].push({file:rel,label:y+'-'+m+'-'+d});
+       images[pos].push({file:rel,label:appid});
        $('#capsuleModal').hide();
     }});
   });
@@ -229,5 +347,40 @@ foreach (array_keys($images) as $pos) {
     }
   });
   $('.capsule-select').on('mouseleave',function(){ $('#img_'+this.id).hide(); });
+
+<?php if ($showTabs): ?>
+  var tabIndex = <?php echo count($tabs); ?>;
+  function gameRow(idx){
+    var opts='';
+    $.each(apps,function(i,a){opts+='<option value="'+a.appid+'">'+a.appid+' - '+$('<div>').text(a.name).html()+'</option>';});
+    return '<tr><td class="handle">&#9776;</td><td><select name="tab['+idx+'][games][]">'+opts+'</select></td><td><button type="button" class="remove-game btn btn-small">x</button></td></tr>';
+  }
+  function initTabSort(row){
+    Sortable.create($(row).find('.games-table tbody')[0],{handle:'.handle',animation:150});
+  }
+  $('#add-tab').on('click',function(){
+    var idx=tabIndex++;
+    var row='<tr class="tab-row">'+
+      '<td class="handle">&#9776;</td>'+
+      '<td><input type="text" name="tab['+idx+'][title]"></td>'+
+      '<td><table class="table games-table"><tbody></tbody></table><button type="button" class="add-game btn btn-secondary" data-tab="'+idx+'">Add Game</button></td>'+
+      '<td><button type="button" class="remove-tab btn btn-danger btn-small">Remove</button></td>'+
+      '<input type="hidden" name="tab['+idx+'][id]" value="0"><input type="hidden" name="tab['+idx+'][delete]" value="">'+
+      '</tr>';
+    $('#tabs-table tbody').append(row);
+    initTabSort($('#tabs-table tbody tr').last());
+  });
+  $('#tabsForm').on('click','.add-game',function(){
+    var idx=$(this).data('tab');
+    $(this).siblings('table').find('tbody').append(gameRow(idx));
+  });
+  $('#tabsForm').on('click','.remove-game',function(){ $(this).closest('tr').remove(); });
+  $('#tabsForm').on('click','.remove-tab',function(){
+    $(this).closest('tr').find('input[name$="[delete]"]').val('1');
+    $(this).closest('tr').hide();
+  });
+  Sortable.create(document.querySelector('#tabs-table tbody'),{handle:'.handle',animation:150});
+  $('#tabs-table tbody tr').each(function(){initTabSort(this);});
+<?php endif; ?>
   </script>
 <?php include 'admin_footer.php';?>
