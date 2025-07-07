@@ -6,13 +6,21 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
 
-function cms_theme_layout(string $file, ?string $theme = null)
+function cms_theme_layout(?string $file, ?string $theme = null)
 {
-    $theme = $theme ?? cms_get_setting('theme', '2004');
-    $file = preg_replace('/\.tpl$/', '.twig', $file);
+    $theme = $theme ?: cms_get_setting('theme', '2004');
+    $file  = $file ?: 'default.twig';
+    $file  = preg_replace('/\.tpl$/', '.twig', $file);
+
     $base = dirname(__DIR__)."/themes/$theme/layout/$file";
     if (!file_exists($base)) {
+        $base = dirname(__DIR__)."/themes/$theme/layout/default.twig";
+    }
+    if (!file_exists($base)) {
         $base = dirname(__DIR__)."/themes/2004/layout/$file";
+    }
+    if (!file_exists($base)) {
+        $base = dirname(__DIR__)."/themes/2004/layout/default.twig";
     }
     return $base;
 }
@@ -39,9 +47,21 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('news', function(string $type, ?int $count = null) {
             $theme = cms_get_setting('theme', '2004');
-            $cfg = cms_get_theme_config($theme);
+            $cfg   = cms_get_theme_config($theme);
             $count = $count ?? ($cfg['news_count'] ?? null);
             return cms_render_news($type, $count);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('news_index_brief', function(int $count = 3) {
+            return cms_render_news('index_brief', $count);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('news_index_bodygreen', function(int $count = 5) {
+            return cms_render_news('index_bodygreen', $count);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('news_index_2006', function(int $count = 5) {
+            return cms_render_news('index_2006', $count);
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('join_steam_text', function() {
