@@ -113,6 +113,19 @@ function cms_twig_env(string $tpl_dir): Environment
             return cms_get_setting('find_list', '');
         }, ['is_safe' => ['html']]));
 
+        $env->addFunction(new TwigFunction('categories_list', function() {
+            $db = cms_get_db();
+            $rows = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
+            $out = '<div class="categories_list">';
+            foreach ($rows as $row) {
+                $id = (int)$row['id'];
+                $name = htmlspecialchars($row['name']);
+                $out .= '<a class="category_link" href="index.php?area=search&browse=1&category='.$id.'">'.$name.'</a><br/>';
+            }
+            $out .= '</div>';
+            return $out;
+        }, ['is_safe' => ['html']]));
+
         $env->addFunction(new TwigFunction('publisher_catalogs_title', function() {
             return cms_get_setting('publisher_catalogs_title', 'Publisher Catalogs');
         }, ['is_safe' => ['html']]));
@@ -146,6 +159,25 @@ function cms_twig_env(string $tpl_dir): Environment
             $url = 'index.php?area=app&id='.(int)$row['appid'];
             $price = $row['price'];
             return '<a href="'.$url.'"><img src="'.$img.'" alt=""></a><span class="price">$'.htmlspecialchars($price).'</span>';
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('large_capsule_block', function(string $key = 'large') {
+            $theme = cms_get_setting('theme', '2006_v1');
+            $useAll = cms_get_setting('capsules_same_all', '1') === '1';
+            $db = cms_get_db();
+            if ($useAll) {
+                $stmt = $db->prepare('SELECT * FROM storefront_capsules_all WHERE position=?');
+                $stmt->execute([$key]);
+            } else {
+                $stmt = $db->prepare('SELECT * FROM storefront_capsules_per_theme WHERE theme=? AND position=?');
+                $stmt->execute([$theme, $key]);
+            }
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if(!$row){ return ''; }
+            $img = 'images/capsules/'.$row['image_path'];
+            $url = 'index.php?area=app&id='.(int)$row['appid'];
+            $price = $row['price'];
+            return '<div class="large-capsule"><a href="'.$url.'"><img src="'.$img.'" alt=""></a><span class="price">$'.htmlspecialchars($price).'</span></div>';
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('store_sidebar', function () {
