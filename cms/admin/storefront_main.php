@@ -140,7 +140,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
       $price = $price_map[$app] ?? '';
     ?>
     <div class="capsule-box">
-      <img id="preview_<?php echo $p; ?>" src="../images/capsules/<?php echo htmlspecialchars($img); ?>" alt="<?php echo $label; ?> preview" class="capsule-preview">
+      <img id="preview_<?php echo $p; ?>" src="../../images/capsules/<?php echo htmlspecialchars($img); ?>" alt="<?php echo $label; ?> preview" class="capsule-preview">
       <input type="hidden" name="current_image[<?php echo $p; ?>]" value="<?php echo htmlspecialchars($img); ?>">
       <button type="button" class="btn change-btn" data-pos="<?php echo $p; ?>">Change Capsule</button>
       <div>
@@ -178,7 +178,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
         $img=$caps[$p]['image']??'';
         $appid=$caps[$p]['appid']??0;
   ?>
-  <img src="../images/capsules/<?php echo htmlspecialchars($img); ?>" data-pos="<?php echo $p?>" data-app="<?php echo $appid?>" style="position:absolute;<?php echo $style; ?>;border:0;cursor:pointer;" alt="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule" aria-label="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule preview">
+  <img src="../../images/capsules/<?php echo htmlspecialchars($img); ?>" data-pos="<?php echo $p?>" data-app="<?php echo $appid?>" style="position:absolute;<?php echo $style; ?>;border:0;cursor:pointer;" alt="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule" aria-label="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule preview">
   <?php endforeach; ?>
 </div>
   <div id="capsuleModal" class="capsule-modal" aria-label="Change capsule">
@@ -243,7 +243,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
 </form>
 <?php endif; ?>
   <style>
-  #capsuleModal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;}
+  #capsuleModal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:1000;}
   #capsuleModal .dialog{background:#fff;padding:20px;border:1px solid #333;max-width:600px;}
   #capsuleModal .image-list{display:flex;flex-wrap:wrap;margin-bottom:10px;}
   #capsuleModal .img-choice{width:96px;border:1px solid #555;margin:4px;cursor:pointer;}
@@ -264,7 +264,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
 
   $('.change-btn').on('click',function(){
     var pos=$(this).data('pos');
-    $('#capsuleModal').data('pos',pos).show();
+    $('#capsuleModal').data('pos',pos).css('display','flex');
     $('#capChoose').show();
     $('#capExisting,#capUpload').hide();
   });
@@ -273,7 +273,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
     var pos=$('#capsuleModal').data('pos');
     var html='';
     $.each(images[pos]||[],function(i,img){
-       html+='<img src="../images/capsules/'+img.file+'" class="img-choice" data-file="'+img.file+'" alt="thumbnail">';
+       html+='<img src="../../images/capsules/'+img.file+'" class="img-choice" data-file="'+img.file+'" alt="thumbnail">';
     });
     $('#existingList').html(html);
     $('#existingAppid').val('');
@@ -293,9 +293,9 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
     var appid=$('#existingAppid').val();
     if(!file||!appid){ alert('Select image and app'); return; }
     $.post('storefront_main.php',{update:1,position:pos,image:file,appid:appid},function(){
-       $('#preview_'+pos).attr('src','../images/capsules/'+file);
+       $('#preview_'+pos).attr('src','../../images/capsules/'+file);
        $('#sel_'+pos).val(appid);
-       $('img[data-pos='+pos+']').attr('src','../images/capsules/'+file).data('app',appid);
+       $('img[data-pos='+pos+']').attr('src','../../images/capsules/'+file).data('app',appid);
        $('#capsuleModal').hide();
     });
   });
@@ -317,9 +317,9 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
     fd.append('appid',appid);
     fd.append('file',file);
     $.ajax({url:'upload_capsule.php',type:'POST',data:fd,processData:false,contentType:false,success:function(rel){
-       $('#preview_'+pos).attr('src','../images/capsules/'+rel);
+       $('#preview_'+pos).attr('src','../../images/capsules/'+rel);
        $('#sel_'+pos).val(appid);
-       $('img[data-pos='+pos+']').attr('src','../images/capsules/'+rel).data('app',appid);
+       $('img[data-pos='+pos+']').attr('src','../../images/capsules/'+rel).data('app',appid);
        images[pos]=images[pos]||[];
        images[pos].push({file:rel,label:appid});
        $('#capsuleModal').hide();
@@ -328,6 +328,12 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
 
   $('.cancel').on('click',function(){
     $('#capsuleModal').hide();
+  });
+
+  $('#capsuleModal').on('click', function(e){
+    if(e.target === this) {
+      $(this).hide();
+    }
   });
 
   $('.filter').on('input',function(){

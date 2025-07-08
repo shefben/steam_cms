@@ -115,7 +115,9 @@ if(isset($_POST['add'])){
 <input type="hidden" name="theme" value="<?php echo htmlspecialchars($theme); ?>">
 Stylesheet path: <input type="text" name="css_path" value="<?php echo htmlspecialchars($css_path); ?>" style="width:300px" title="Theme CSS file"><br>
 <p>Current logo:</p>
-<?php $logo = $data['logo']; if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
+<?php $logo = $data['logo'];
+$logo = str_ireplace('{BASE}', $base, $logo);
+if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
 <img src="<?php echo htmlspecialchars($logo); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>
 <select name="logo_choice" id="logo-choice">
   <?php foreach($logo_files as $f): $p='/img/'.$f; ?>

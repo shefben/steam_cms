@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 - Add storefront dropdown navigation in admin sidebar
+- Fixed capsule modal positioning and added overlay click to close
+- Corrected capsule image paths in storefront admin
+- Pagination links spaced apart for clarity
+- Drag-and-drop ordering restored for cafe and category pages
+- FAQ sidebar includes "Frequently Asked Questions" link
+- Category delete action now uses a button
+- Logo preview resolves {BASE} correctly
 - Templated 2005 v1 index page with dynamic news, 2004 header, and dynamic footer
 - Introduce root path site setting and base URL handling
 - Twig templating integrated; {BASE} placeholders now auto-convert

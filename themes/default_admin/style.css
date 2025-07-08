@@ -39,3 +39,5 @@ a, a:visited { color: #f1c40f; }
     min-width:220px;
 }
 
+.pagination a { margin: 0 8px; }
+

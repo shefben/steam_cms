@@ -44,6 +44,11 @@
 - Random banner endpoint loads custom images across all years
 - Automated script scans themes for archived assets and updates move_assets.py
 - Capsule admin interface uses searchable dropdowns with image previews
+- Capsule modal centers on screen and closes when clicking outside
+- Drag-and-drop ordering for cafe reps, directory, and categories
+- Pagination links styled with spacing
+- FAQ sidebar includes direct link to question list
+- Logo preview path adapts to current theme
 - Obsolete "2003" theme removed; v1 and v2 variants remain
 - Early themes no longer depend on archived HTML files for rendering
 - Theme-specific headers and footers stored in dedicated tables with admin selector

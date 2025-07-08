@@ -111,6 +111,10 @@ foreach ($nav_items as $k => $item) {
     }
 }
 
+if ($faq_root) {
+    array_unshift($faq_pages, ['file' => $faq_root['file'], 'label' => 'Frequently Asked Questions']);
+}
+
 $nav_html = '<ul class="nav-menu">';
 $logout = null;
 foreach ($nav_items as $item) {
