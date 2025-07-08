@@ -629,6 +629,10 @@ select.form-control,
     min-width:220px;
 }
 
+.pagination a {
+    margin: 0 8px;
+}
+
 /* Link color */
 a, a:visited { color: #f1c40f; }
 
