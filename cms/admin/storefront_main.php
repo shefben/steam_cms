@@ -188,7 +188,9 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
         <button type="button" id="btnUploadNew" class="btn btn-secondary">Upload New Image</button>
       </div>
       <div id="capExisting" style="display:none;">
-        <div id="existingList" class="image-list"></div>
+        <label>Image
+          <select id="existingFile"></select>
+        </label>
         <label>App
           <select id="existingAppid"></select>
         </label>
@@ -245,9 +247,6 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   <style>
   #capsuleModal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:1000;}
   #capsuleModal .dialog{background:#fff;padding:20px;border:1px solid #333;max-width:600px;}
-  #capsuleModal .image-list{display:flex;flex-wrap:wrap;margin-bottom:10px;}
-  #capsuleModal .img-choice{width:96px;border:1px solid #555;margin:4px;cursor:pointer;}
-  #capsuleModal .img-choice.selected{outline:2px solid #007bff;}
   </style>
   <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
@@ -271,25 +270,27 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
 
   $('#btnSelectExisting').on('click',function(){
     var pos=$('#capsuleModal').data('pos');
-    var html='';
+    var grouped={};
     $.each(images[pos]||[],function(i,img){
-       html+='<img src="../../images/capsules/'+img.file+'" class="img-choice" data-file="'+img.file+'" alt="thumbnail">';
+       var p=img.file.split('/')[0];
+       if(!grouped[p]) grouped[p]=[];
+       grouped[p].push(img.file);
     });
-    $('#existingList').html(html);
+    var opts='';
+    $.each(grouped,function(group,files){
+       opts+='<optgroup label="'+group+'">';
+       $.each(files,function(_,f){ opts+='<option value="'+f+'">'+f+'</option>'; });
+       opts+='</optgroup>';
+    });
+    $('#existingFile').html(opts);
     $('#existingAppid').val('');
     $('#capChoose').hide();
     $('#capExisting').show();
   });
 
-  $('#existingList').on('click','.img-choice',function(){
-    $('#existingList .img-choice').removeClass('selected');
-    $(this).addClass('selected');
-    $('#capExisting').data('file',$(this).data('file'));
-  });
-
   $('#existingAccept').on('click',function(){
     var pos=$('#capsuleModal').data('pos');
-    var file=$('#capExisting').data('file');
+    var file=$('#existingFile').val();
     var appid=$('#existingAppid').val();
     if(!file||!appid){ alert('Select image and app'); return; }
     $.post('storefront_main.php',{update:1,position:pos,image:file,appid:appid},function(){
