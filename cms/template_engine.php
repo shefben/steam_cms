@@ -6,6 +6,103 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
 
+function cms_split_title(string $title): string
+{
+    $words = preg_split('/\s+/', trim($title));
+    $wordCount = count($words);
+
+    if ($wordCount === 1) {
+        $len = strlen($words[0]);
+        $half = (int)ceil($len / 2);
+        $first = substr($words[0], 0, $half);
+        $second = substr($words[0], $half);
+    } elseif ($wordCount === 2) {
+        $first = $words[0];
+        $second = $words[1];
+    } else {
+        $firstCount = (int)ceil($wordCount / 3);
+        $first = implode(' ', array_slice($words, 0, $firstCount));
+        $second = implode(' ', array_slice($words, $firstCount));
+    }
+
+    $firstEsc = htmlspecialchars($first, ENT_QUOTES);
+    $secondEsc = htmlspecialchars($second, ENT_QUOTES);
+
+    return '<h2 id="page1">' . $firstEsc . '<em>' . $secondEsc . '</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt="">';
+}
+
+function cms_split_title_entry(string $name): string
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('SELECT title_content FROM custom_titles WHERE title_name=? LIMIT 1');
+    $stmt->execute([$name]);
+    $title = $stmt->fetchColumn();
+    if ($title === false) {
+        return '';
+    }
+    return cms_split_title((string)$title);
+}
+
+function cms_random_content(string $tag): string
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('SELECT content FROM random_content WHERE tag_name=?');
+    $stmt->execute([$tag]);
+    $rows = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    if (!$rows) {
+        return '';
+    }
+    return $rows[array_rand($rows)];
+}
+
+function cms_scheduled_content(string $tag): string
+{
+    $db  = cms_get_db();
+    $stmt = $db->prepare('SELECT * FROM scheduled_content WHERE tag_name=? AND active=1');
+    $stmt->execute([$tag]);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $out  = '';
+    $now  = new DateTime();
+    foreach ($rows as $row) {
+        $start = $row['start_date'] ? new DateTime($row['start_date']) : null;
+        $end   = $row['end_date'] ? new DateTime($row['end_date']) : null;
+        if ($start && $now < $start) {
+            continue;
+        }
+        if ($end && $now > $end) {
+            continue;
+        }
+
+        switch ($row['schedule_type']) {
+            case 'every_n_days':
+                $n = (int)($row['every_n_days'] ?? 0);
+                if ($n <= 0) {
+                    continue 2;
+                }
+                $base = $start ?: new DateTime($row['created_at']);
+                $diff = $base->diff($now)->days;
+                if ($diff % $n !== 0) {
+                    continue 2;
+                }
+                break;
+            case 'day_of_month':
+                if ((int)$now->format('j') !== (int)$row['day_of_month']) {
+                    continue 2;
+                }
+                break;
+            case 'fixed_range':
+                $s = $row['fixed_start_datetime'] ? new DateTime($row['fixed_start_datetime']) : null;
+                $e = $row['fixed_end_datetime'] ? new DateTime($row['fixed_end_datetime']) : null;
+                if (($s && $now < $s) || ($e && $now > $e)) {
+                    continue 2;
+                }
+                break;
+        }
+        $out .= $row['content'];
+    }
+    return $out;
+}
+
 function cms_theme_layout(?string $file, ?string $theme = null)
 {
     $theme = $theme ?: cms_get_setting('theme', '2004');
@@ -111,6 +208,14 @@ function cms_twig_env(string $tpl_dir): Environment
 
         $env->addFunction(new TwigFunction('find_list', function() {
             return cms_get_setting('find_list', '');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('split_title', function(string $title) {
+            return cms_split_title($title);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('split_title_entry', function(string $name) {
+            return cms_split_title_entry($name);
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('categories_list', function() {
@@ -276,6 +381,21 @@ function cms_twig_env(string $tpl_dir): Environment
             $html .= "<script>document.querySelectorAll('.tabs-block .tab-links a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var id=this.getAttribute('href');this.parentElement.parentElement.querySelectorAll('li').forEach(function(li){li.classList.remove('active');});this.parentElement.classList.add('active');var block=this.closest('.tabs-block');block.querySelectorAll('.tab-panel').forEach(function(p){p.style.display=p.id==id.substring(1)?'block':'none';});});});</script>";
             return $html;
         }, ['is_safe' => ['html']]));
+        $env->registerUndefinedFunctionCallback(function (string $name) {
+            if (str_starts_with($name, 'random_')) {
+                $tag = substr($name, 7);
+                return new TwigFunction($name, function () use ($tag) {
+                    return cms_random_content($tag);
+                }, ['is_safe' => ['html']]);
+            }
+            if (str_starts_with($name, 'scheduled_')) {
+                $tag = substr($name, 10);
+                return new TwigFunction($name, function () use ($tag) {
+                    return cms_scheduled_content($tag);
+                }, ['is_safe' => ['html']]);
+            }
+            return false;
+        });
     } else {
         /** @var FilesystemLoader $loader */
         $loader = $env->getLoader();

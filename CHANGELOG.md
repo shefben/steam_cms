@@ -92,3 +92,13 @@ All notable changes to this project will be documented in this file.
 - Removed automatic CSS and JS loading; themes must link assets explicitly
 - Asset URLs in inline styles are rewritten to theme folders
 - 2006_v1 theme seed data for join steam, find links and new on steam list
+- Added random_content and scheduled_content tables with dynamic Twig tags
+- New admin pages for managing random and scheduled content
+- Added `split_title` Twig tag to split headings into emphasized halves
+- Added `custom_titles` table and `split_title_entry` Twig tag
+- Added admin CRUD interface for custom titles
+- Scheduled content admin validates schedule type
+- Capsule admin groups existing images by theme
+- Asset mover script covers 2006/2007 examples
+- Converted map_contest.php to Twig template
+- Added TAGS.md with reference for all template tags
