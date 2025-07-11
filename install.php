@@ -156,6 +156,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 hits INT DEFAULT 0,
                 created DATETIME
             )");
+            $pdo->exec("DROP TABLE IF EXISTS random_content");
+            $pdo->exec("CREATE TABLE random_content(
+                uniqueid INT AUTO_INCREMENT PRIMARY KEY,
+                tag_name VARCHAR(25) NOT NULL,
+                content TEXT NOT NULL
+            )");
+            $pdo->exec("DROP TABLE IF EXISTS scheduled_content");
+            $pdo->exec("CREATE TABLE scheduled_content(
+                content_id INT AUTO_INCREMENT PRIMARY KEY,
+                theme_name VARCHAR(64),
+                description VARCHAR(255) NOT NULL,
+                tag_name VARCHAR(25) NOT NULL,
+                content TEXT NOT NULL,
+                schedule_type ENUM('every_n_days','day_of_month','fixed_range') NOT NULL,
+                every_n_days INT DEFAULT NULL,
+                day_of_month TINYINT DEFAULT NULL,
+                start_date DATE DEFAULT NULL,
+                end_date DATE DEFAULT NULL,
+                fixed_start_datetime DATETIME DEFAULT NULL,
+                fixed_end_datetime DATETIME DEFAULT NULL,
+                active BOOLEAN DEFAULT TRUE,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )");
+            $pdo->exec("DROP TABLE IF EXISTS custom_titles");
+            $pdo->exec("CREATE TABLE custom_titles(
+                uniqueid INT AUTO_INCREMENT PRIMARY KEY,
+                title_name VARCHAR(100) UNIQUE,
+                themes VARCHAR(255),
+                title_content TEXT NOT NULL
+            )");
             $pdo->exec("DROP TABLE IF EXISTS settings");
             $pdo->exec("CREATE TABLE settings(`key` VARCHAR(64) PRIMARY KEY,value TEXT)");
             $pdo->exec("DROP TABLE IF EXISTS themes");
@@ -352,6 +383,9 @@ HTML;
                 ['file' => 'content_servers.php','label' => 'Servers','visible' => 1],
                 ['file' => 'contentserver_banners.php','label' => 'ContentServer Banner Management','visible' => 1],
                 ['file' => 'custom_pages.php','label' => 'Custom Pages','visible' => 1],
+                ['file' => 'custom_titles.php','label' => 'Custom Titles','visible' => 1],
+                ['file' => 'random_content.php','label' => 'Random Content','visible' => 1],
+                ['file' => 'scheduled_content.php','label' => 'Scheduled Content','visible' => 1],
                 ['file' => 'theme.php','label' => 'Theme','visible' => 1],
                 ['file' => 'settings.php','label' => 'Settings','visible' => 1],
                 ['file' => 'header_footer.php','label' => 'Header & Footer','visible' => 1],

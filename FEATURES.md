@@ -80,3 +80,10 @@
 - Themes must explicitly include their CSS and JS files in templates
 - Inline style URL paths automatically point to theme images
 - Archived 2006_v1 homepage content seeded for dynamic tags
+- Random and scheduled content tags pulled from database
+- `split_title` tag splits headings into styled halves
+- `split_title_entry` tag renders titles stored in the `custom_titles` table
+- Admin page to manage custom title entries
+- Scheduled content admin checks schedule type fields
+- Capsule editor lists existing images by theme
+- Comprehensive tag guide available in TAGS.md
