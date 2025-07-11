@@ -1,4 +1,4 @@
 <?php
 return [
-    'news_count' => 10
+    'news_count' => 5
 ];

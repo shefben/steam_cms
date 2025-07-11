@@ -13,7 +13,7 @@ $content2002v1 = <<<HTML
 </li><li type="square"><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>Become A Beta Tester!</b></font><font size="3"><br>
 
 
-                                        If you&#39re interested in becoming a Beta Tester, fill out our <a href="{BASE}/index.php?area=betatest" target="_new">Survey</a><br>
+                                        If you&#39re interested in becoming a Beta Tester, fill out our <a href="index.php?area=betatest" target="_new">Survey</a><br>
 </font><font size="2"></font><font size="3"><br>
 </font>
 </li><li type="square"><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>From the Dev Team:<br>
@@ -87,7 +87,7 @@ $content2002v2 = <<<HTML
 <p><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">The Steam SDK also includes an integrated set of communications tools and Valve&#39s Graphic User Interface (V-GUI) that provide built-in support for a variety of services such as instant messaging, configuration, and server browsing.</font><font color="black" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><br>
 </font></p>
 </div>
-<p><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b><a href="{BASE}/index.php?area=getsteamnow">Try Steam Now!</a></b></font></p>
+<p><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b><a href="index.php?area=getsteamnow">Try Steam Now!</a></b></font></p>
 <p><font size="4"><a href="(Empty Reference!)"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><br>
 </font></a></font></p>
 <div align="left" style="width: 762; height: 178">
@@ -125,7 +125,7 @@ $content2003v1 = <<<HTML
 </td>
 </tr>
 <tr>
-<td><img border="0" height="5" src="{BASE}/images/Graphic_box.jpg" width="33"></td>
+<td><img border="0" height="5" src="images/Graphic_box.jpg" width="33"></td>
 </tr>
 </tbody></table>
 <p><font color="#969f8e" size="2">Steam is a broadband business platform for direct software delivery and content management. At its core, Steam is a distributed file system and shared set of technology components that can be implemented into any software application.<br>
@@ -151,7 +151,7 @@ $content2003v1 = <<<HTML
 <td align="left" colspan="2" height="225" valign="top" width="387" xpos="15">
 <table border="0" cellpadding="0" cellspacing="0" height="211" width="382">
 <tbody><tr height="211">
-<td background="{BASE}/themes/2003_v1/images/Box_01.gif" height="211" width="382">
+<td background="themes/2003_v1/images/Box_01.gif" height="211" width="382">
 <div align="center">
 <table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="208" showgridx="" showgridy="" width="360">
 <tbody><tr height="10">
@@ -169,7 +169,7 @@ $content2003v1 = <<<HTML
 </td>
 </tr>
 <tr>
-<td><img border="0" height="5" src="{BASE}/images/Graphic_box.jpg" width="33"></td>
+<td><img border="0" height="5" src="images/Graphic_box.jpg" width="33"></td>
 </tr>
 </tbody></table>
 <a name="contactanchor2"></a>
@@ -201,7 +201,7 @@ $content2003v1 = <<<HTML
 <td align="left" colspan="2" height="225" valign="top" width="397" xpos="402">
 <table border="0" cellpadding="0" cellspacing="0" height="211" width="382">
 <tbody><tr height="211">
-<td background="{BASE}/themes/2003_v1/images/Box_01.gif" height="211" width="382">
+<td background="themes/2003_v1/images/Box_01.gif" height="211" width="382">
 <div align="center">
 <table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="196" showgridx="" showgridy="" width="360">
 <tbody><tr height="4">
@@ -219,7 +219,7 @@ $content2003v1 = <<<HTML
 </td>
 </tr>
 <tr>
-<td><img border="0" height="5" src="{BASE}/images/Graphic_box.jpg" width="33"></td>
+<td><img border="0" height="5" src="images/Graphic_box.jpg" width="33"></td>
 </tr>
 </tbody></table>
 <br>
@@ -262,9 +262,9 @@ $insertArray[] = [
 ];
 
 $content2003v2 = <<<HTML
-<div class="content" id="container" style="background-image:url({BASE}/themes/2003_v2/images/shieldguy.gif); background-position:top right; background-repeat:no-repeat;">
-<img height="78" id="steam" src="{BASE}/themes/2003_v2/images/steam_logo_alpha.gif" width="244"><br><br>
-<h2 id="page1">BECOME <em>PART OF THE STEAM COMMUNITY</em></h2><img alt="" height="6" src="{BASE}/images/Graphic_box.jpg" width="24"><br>
+<div class="content" id="container" style="background-image:url(themes/2003_v2/images/shieldguy.gif); background-position:top right; background-repeat:no-repeat;">
+<img height="78" id="steam" src="themes/2003_v2/images/steam_logo_alpha.gif" width="244"><br><br>
+<h2 id="page1">BECOME <em>PART OF THE STEAM COMMUNITY</em></h2><img alt="" height="6" src="images/Graphic_box.jpg" width="24"><br>
 <ul>
 <li>Play the latest Valve games (like Counter-Strike 1.6 beta!)</li>
 <li>Get automatic updates (no more patching!)</li>
@@ -272,29 +272,29 @@ $content2003v2 = <<<HTML
 <li>Find the best servers &amp; find your friends&#39 games</li>
 <li>Receive Steam-Only special offers</li>
 </ul>
-<a href="{BASE}/index.php?area=getsteamnow"><img alt="get steam now" height="24" src="{BASE}/themes/2003_v2/images/but_getsteamnow.gif" width="124"></a><br><br>
-<a href="{BASE}/index.php?area=features"><img alt="screenshots" height="214" id="screenshots" src="{BASE}/themes/2003_v2/images/triple_screenshot.gif" width="535"></a><br>
+<a href="index.php?area=getsteamnow"><img alt="get steam now" height="24" src="themes/2003_v2/images/but_getsteamnow.gif" width="124"></a><br><br>
+<a href="index.php?area=features"><img alt="screenshots" height="214" id="screenshots" src="themes/2003_v2/images/triple_screenshot.gif" width="535"></a><br>
 <br><div class="boxTop">Latest News</div><br clear="all">
 <div class="box">
 {news_index_brief(3)}
 </div>
-<h2 id="afterBox">WHAT <em>IS STEAM?</em></h2><img alt="" height="6" src="{BASE}/images/Graphic_box.jpg" width="24"><br>
+<h2 id="afterBox">WHAT <em>IS STEAM?</em></h2><img alt="" height="6" src="images/Graphic_box.jpg" width="24"><br>
 Steam is Valve&#39s new way of getting games into your hands ASAP. Games like <i>Half-Life</i>, <i>Counter-Strike</i>, and <i>Counter-Strike Condition Zero</i> are all being made available through Steam.<br>
 <nobr>
-<a href="http://half-life.com" onmouseout="out(5)" onmouseover="over(5)"><img align="absmiddle" alt="Half-Life" height="36" name="logo_hl" src="{BASE}/themes/2003_v2/images/logo_hl.gif" vspace="8" width="36"></a> &nbsp;
-<a href="http://www.counter-strike.net" onmouseout="out(6)" onmouseover="over(6)"><img alt="Counter-Strike" height="36" name="logo_cs" src="{BASE}/themes/2003_v2/images/logo_cs.gif" width="36"></a> &nbsp;
-<a href="http://www.cs-conditionzero.com/" onmouseout="out(7)" onmouseover="over(7)"><img alt="Counter-Strike: Condition Zero" height="36" name="logo_cz" src="{BASE}/themes/2003_v2/images/logo_cz.gif" width="45"></a> &nbsp;
-<a href="http://www.teamfortressclassic.com" onmouseout="out(8)" onmouseover="over(8)"><img alt="Team Fortress Classic" height="36" name="logo_tfc" src="{BASE}/themes/2003_v2/images/logo_tfc.gif" width="36"></a> &nbsp;</nobr>
+<a href="http://half-life.com" onmouseout="out(5)" onmouseover="over(5)"><img align="absmiddle" alt="Half-Life" height="36" name="logo_hl" src="themes/2003_v2/images/logo_hl.gif" vspace="8" width="36"></a> &nbsp;
+<a href="http://www.counter-strike.net" onmouseout="out(6)" onmouseover="over(6)"><img alt="Counter-Strike" height="36" name="logo_cs" src="themes/2003_v2/images/logo_cs.gif" width="36"></a> &nbsp;
+<a href="http://www.cs-conditionzero.com/" onmouseout="out(7)" onmouseover="over(7)"><img alt="Counter-Strike: Condition Zero" height="36" name="logo_cz" src="themes/2003_v2/images/logo_cz.gif" width="45"></a> &nbsp;
+<a href="http://www.teamfortressclassic.com" onmouseout="out(8)" onmouseover="over(8)"><img alt="Team Fortress Classic" height="36" name="logo_tfc" src="themes/2003_v2/images/logo_tfc.gif" width="36"></a> &nbsp;</nobr>
 <nobr>
-<a href="http://hlopposingforce.sierra.com/" onmouseout="out(9)" onmouseover="over(9)"><img alt="Half-Life: Opposing Force" height="36" name="logo_opfor" src="{BASE}/themes/2003_v2/images/logo_opfor.gif" width="36"></a> &nbsp;
-<a href="http://www.dayofdefeatmod.com/" onmouseout="out(10)" onmouseover="over(10)"><img alt="Day of Defeat" height="36" name="logo_dod" src="{BASE}/themes/2003_v2/images/logo_dod.gif" width="36"></a> &nbsp;&nbsp;
-<a href="http://www.planethalflife.com/features/motw/ricochet.shtm" onmouseout="out(11)" onmouseover="over(11)"><img alt="Ricochet" height="36" name="logo_r" src="{BASE}/themes/2003_v2/images/logo_r.gif" width="36"></a> &nbsp;&nbsp;
-<a href="{BASE}/index.php" onmouseout="out(12)" onmouseover="over(12)"><img alt="Deathmatch Classic" height="36" name="logo_dmc" src="{BASE}/themes/2003_v2/images/logo_dmc.gif" width="36"></a></nobr>
+<a href="http://hlopposingforce.sierra.com/" onmouseout="out(9)" onmouseover="over(9)"><img alt="Half-Life: Opposing Force" height="36" name="logo_opfor" src="themes/2003_v2/images/logo_opfor.gif" width="36"></a> &nbsp;
+<a href="http://www.dayofdefeatmod.com/" onmouseout="out(10)" onmouseover="over(10)"><img alt="Day of Defeat" height="36" name="logo_dod" src="themes/2003_v2/images/logo_dod.gif" width="36"></a> &nbsp;&nbsp;
+<a href="http://www.planethalflife.com/features/motw/ricochet.shtm" onmouseout="out(11)" onmouseover="over(11)"><img alt="Ricochet" height="36" name="logo_r" src="themes/2003_v2/images/logo_r.gif" width="36"></a> &nbsp;&nbsp;
+<a href="index.php" onmouseout="out(12)" onmouseover="over(12)"><img alt="Deathmatch Classic" height="36" name="logo_dmc" src="themes/2003_v2/images/logo_dmc.gif" width="36"></a></nobr>
 <br>
 Steam games are automatically kept up-to-date with the latest content and revisions. Steam also includes an instant-message client which even works while you&#39re in-game.<br><br>
 At its core, Steam is a distributed file system and shared set of technology components that can be implemented into any software application.<br><br>
 With Steam, developers are given integrated tools for direct-content publishing, flexible billing, ensured-version control, anti-cheating, anti-piracy, and more.
-Check out the full <a href="{BASE}/index.php?area=features">feature list</a>, and <a href="{BASE}/index.php?area=getsteamnow">install Steam</a> today!
+Check out the full <a href="index.php?area=features">feature list</a>, and <a href="index.php?area=getsteamnow">install Steam</a> today!
 </div>
 HTML;
 
@@ -309,31 +309,39 @@ $insertArray[] = [
 ];
 
 $content2004 = <<<HTML
-<div class="content" id="container" style="background-image:url({BASE}/themes/2004/images/cz_guy.gif); background-position:top right; background-repeat:no-repeat;">
-<img id="steam" width="244" height="78" src="{BASE}/themes/2004/images/steam_logo_alpha.gif"><br><br>
-<h2 id="page1">BECOME <em>PART OF THE STEAM COMMUNITY</em></h2><img src="{BASE}/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2 >BECOME <em>PART OF THE STEAM COMMUNITY</em></h2><img src="images/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <ul>
-<li>Play the latest Valve games (like Counter-Strike: Condition Zero!)</li>
-<li>Get automatic updates (no more patching!)</li>
-<li>Chat with friends, even while you play</li>
-<li>Find the best servers PLACEHOLDER_2004 find your friends'' games</li>
-<li>Receive Steam-Only special offers</li>
+	<li>Play the latest Valve games (like Counter-Strike: Condition Zero!)</li>
+	<li>Get automatic updates (no more patching!)</li>
+	<li>Chat with friends, even while you play</li>
+	<li>Find the best servers &amp; find your friends' games</li>
+	<li>Receive Steam-Only special offers</li>
 </ul>
-<a href="{BASE}/index.php?area=getsteamnow"><img src="{BASE}/themes/2004/images/but_getsteamnow.gif" height="24" width="124" alt="GET STEAM NOW"></a><br><br>
+<!-- <h2 id="page1">PRELOAD <em>HALF-LIFE® 2 NOW!</em></h2><img src="/web/20040920021739im_/http://www.steampowered.com/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<ul>
+	Pre-load now. Purchase when ready. Play the moment<br>
+	Half-Life® 2 is made available! <br>
+	Half-Life 2 is pre-loading around the clock <br>
+	and around the globe. If you already have Steam, <br>
+	<u>
+	<a href="https://web.archive.org/web/20040920021739/steam://preload/220">CLICK&nbsp;HERE</a></u> to pre-load now. <br>
+	<br>
+	If you don't already have Steam, <a href="/web/20040920021739/http://www.steampowered.com/?area=getsteamnow">INSTALL  IT TODAY</a>!<br>
+	<br>
+</ul>-->
+<a href="index.php?area=getsteamnow"><img src="images/but_getsteamnow.gif" height="24" width="124" alt="GET STEAM NOW"></a><br><br>
 <br>
-<a href="{BASE}/index.php?area=get_cz"><img width="483" height="133" src="{BASE}/themes/2004/images/cz_launch.gif" alt="Condition Zero now available for pre-order on Steam!"></a><br>
+<a href="http://steampowered.com/?area=get_cz"><img width="483" height="133" src="images/cz_launch.gif" alt="Condition Zero now available for pre-order on Steam!"></a><br>
+
 <br>
-<br><div class="boxTop">Latest News</div><br clear="all">
-<div class="box">
-{{news_index_brief(3)}}
-</div>
-<h2 id="afterBox">HARDWARE <em>SURVEY</em></h2><img src="{BASE}/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
-Check out the <a href="{BASE}/status/survey.html">results of the "Half-Life 2 Hardware Survey"</a>. More than half a million respondents have taken part so far.<br>
+<br clear="all">
+<h2 id="afterBox">HARDWARE <em>SURVEY</em></h2><img src="images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+Check out the <a href="http://steampowered.com/status/survey.html">results of the "Half-Life 2 Hardware Survey"</a>. More than half a million respondents have taken part so far.<br>
 <br>
-<h2 >WHAT <em>IS STEAM?</em></h2><img src="{BASE}/images/Graphic_box.jpg" height="6" width="24" alt=""><br>
-Steam is Valve''s new way of getting games into your hands ASAP. Games like Half-Life, Counter-Strike, and Counter-Strike: Condition Zero are all being made available through Steam.<br>
+<h2>WHAT <em>IS STEAM?</em></h2><img src="images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+Steam is Valve's new way of getting games into your hands ASAP. Games like Half-Life, Counter-Strike, and Counter-Strike: Condition Zero are all being made available through Steam.<br>
 <br>
-Steam games are automatically kept up-to-date with the latest content and revisions. Steam also includes an instant-message client which even works while you''re in-game.<br>
+Steam games are automatically kept up-to-date with the latest content and revisions. Steam also includes an instant-message client which even works while you're in-game.<br>
 <br>
 <!--
 At its core, Steam is a distributed file system and shared set of technology components that can be implemented into any software application.<br>
@@ -341,8 +349,7 @@ At its core, Steam is a distributed file system and shared set of technology com
 With Steam, developers are given integrated tools for direct-content publishing, flexible billing, ensured-version control, anti-cheating, anti-piracy, and more.<br>
 <br>
 -->
-Check out the full <a href="{BASE}/index.php?area=features">feature list</a>, and <a href="{BASE}/index.php?area=getsteamnow">install Steam</a> today!<br>
-</div>
+Check out the full <a href="/index.php?area=features">feature list</a>, and <a href="/index.php?area=getsteamnow">install Steam</a> today!<br>
 HTML;
 
 $insertArray[] = [
@@ -356,7 +363,7 @@ $insertArray[] = [
 ];
 
 $content2005v1 = <<<HTML
-<table background="{BASE}/themes/2005_v1/images/TopBanner.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="75" showgridx="" showgridy="" width="800">
+<table background="themes/2005_v1/images/TopBanner.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="75" showgridx="" showgridy="" width="800">
 <tbody><tr height="22">
 <td colspan="4" height="22" width="799"></td>
 <td height="22" width="1"><spacer height="22" type="block" width="1"></spacer></td>
@@ -365,14 +372,14 @@ $content2005v1 = <<<HTML
 <td height="52" rowspan="2" width="262"></td>
 <td content="" csheight="29" height="52" rowspan="2" valign="top" width="391" xpos="262">
 <div align="left">
-<font size="2"><span class="statusContent">Steam delivers Valve&#39s games to your desktop and connects you to a massive gaming community. Check out the full <a href="{BASE}/index.php?area=features">feature list</a> now.</span></font></div>
+<font size="2"><span class="statusContent">Steam delivers Valve&#39s games to your desktop and connects you to a massive gaming community. Check out the full <a href="index.php?area=features">feature list</a> now.</span></font></div>
 </td>
 <td colspan="2" height="3" width="146"></td>
 <td height="3" width="1"><spacer height="3" type="block" width="1"></spacer></td>
 </tr>
 <tr height="49">
 <td height="49" width="9"></td>
-<td align="left" height="49" valign="top" width="137" xpos="662"><a href="{BASE}/index.php?area=getsteamnow"><img alt="" border="0" height="24" src="{BASE}/themes/2005_v1/images/but_getsteamnow02.gif" width="124"></a></td>
+<td align="left" height="49" valign="top" width="137" xpos="662"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="24" src="themes/2005_v1/images/but_getsteamnow02.gif" width="124"></a></td>
 <td height="49" width="1"><spacer height="49" type="block" width="1"></spacer></td>
 </tr>
 <tr cntrlrow="" height="1">
@@ -385,25 +392,25 @@ $content2005v1 = <<<HTML
 </tbody></table>
 <table bgcolor="#3e4637" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="657" showgridx="" showgridy="" width="801">
 <tbody><tr height="53">
-<td align="left" colspan="3" height="53" valign="top" width="173" xpos="0"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_01.gif" width="173"></td>
-<td align="left" height="53" valign="top" width="28" xpos="173"><a href="{BASE}/index.php?area=news" onmouseout="changeImages( /*CMP*/"Banner_Nav_02",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_02.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_02",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_02-over.gif");return true"><img alt="news" border="0" height="41" name="Banner_Nav_02" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_02.gif" width="28"></a></td>
-<td align="left" height="53" valign="top" width="30" xpos="201"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_03.gif" width="30"></td>
-<td align="left" colspan="3" height="53" valign="top" width="81" xpos="231"><a href="{BASE}/index.php?area=getsteamnow" onmouseout="changeImages( /*CMP*/"Banner_Nav_04",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_04.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_04",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_04-over.gif");return true"><img alt="getSteamNow" border="0" height="41" name="Banner_Nav_04" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_04.gif" width="81"></a></td>
-<td align="left" height="53" valign="top" width="32" xpos="312"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_05.gif" width="32"></td>
-<td align="left" height="53" valign="top" width="66" xpos="344"><a href="{BASE}/index.php?area=cybercafes" onmouseout="changeImages( /*CMP*/"Banner_Nav_06",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_06.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_06",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_06-over.gif");return true"><img alt="Cyber Cafes" border="0" height="41" name="Banner_Nav_06" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_06.gif" width="66"></a></td>
-<td align="left" height="53" valign="top" width="32" xpos="410"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_07.gif" width="32"></td>
-<td align="left" colspan="2" height="53" valign="top" width="45" xpos="442"><a href="{BASE}/support/entry.php" onmouseout="changeImages( /*CMP*/"Banner_Nav_08",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_08.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_08",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_08-over.gif");return true"><img alt="Support" border="0" height="41" name="Banner_Nav_08" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_08.gif" width="45"></a></td>
-<td align="left" height="53" valign="top" width="27" xpos="487"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_09.gif" width="27"></td>
-<td align="left" height="53" valign="top" width="40" xpos="514"><a href="{BASE}/index.php?area=forums" onmouseout="changeImages( /*CMP*/"Banner_Nav_10",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_10.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_10",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_10-over.gif");return true"><img alt="Forums" border="0" height="41" name="Banner_Nav_10" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_10.gif" width="40"></a></td>
-<td align="left" height="53" valign="top" width="30" xpos="554"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_11.gif" width="30"></td>
-<td align="left" height="53" valign="top" width="36" xpos="584"><a href="status/status.html" onmouseout="changeImages( /*CMP*/"Banner_Nav_12",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_12.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_12",/*URL*/"{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_12-over.gif");return true"><img alt="Status" border="0" height="41" name="Banner_Nav_12" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_12.gif" width="36"></a></td>
-<td align="left" colspan="2" height="53" valign="top" width="180" xpos="620"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v1/images/Banner_NAV/Banner_Nav_13.gif" width="180"></td>
+<td align="left" colspan="3" height="53" valign="top" width="173" xpos="0"><img alt="" border="0" height="41" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_01.gif" width="173"></td>
+<td align="left" height="53" valign="top" width="28" xpos="173"><a href="index.php?area=news" onmouseout="changeImages( /*CMP*/"Banner_Nav_02",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_02.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_02",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_02-over.gif");return true"><img alt="news" border="0" height="41" name="Banner_Nav_02" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_02.gif" width="28"></a></td>
+<td align="left" height="53" valign="top" width="30" xpos="201"><img alt="" border="0" height="41" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_03.gif" width="30"></td>
+<td align="left" colspan="3" height="53" valign="top" width="81" xpos="231"><a href="index.php?area=getsteamnow" onmouseout="changeImages( /*CMP*/"Banner_Nav_04",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_04.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_04",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_04-over.gif");return true"><img alt="getSteamNow" border="0" height="41" name="Banner_Nav_04" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_04.gif" width="81"></a></td>
+<td align="left" height="53" valign="top" width="32" xpos="312"><img alt="" border="0" height="41" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_05.gif" width="32"></td>
+<td align="left" height="53" valign="top" width="66" xpos="344"><a href="index.php?area=cybercafes" onmouseout="changeImages( /*CMP*/"Banner_Nav_06",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_06.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_06",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_06-over.gif");return true"><img alt="Cyber Cafes" border="0" height="41" name="Banner_Nav_06" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_06.gif" width="66"></a></td>
+<td align="left" height="53" valign="top" width="32" xpos="410"><img alt="" border="0" height="41" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_07.gif" width="32"></td>
+<td align="left" colspan="2" height="53" valign="top" width="45" xpos="442"><a href="support/entry.php" onmouseout="changeImages( /*CMP*/"Banner_Nav_08",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_08.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_08",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_08-over.gif");return true"><img alt="Support" border="0" height="41" name="Banner_Nav_08" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_08.gif" width="45"></a></td>
+<td align="left" height="53" valign="top" width="27" xpos="487"><img alt="" border="0" height="41" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_09.gif" width="27"></td>
+<td align="left" height="53" valign="top" width="40" xpos="514"><a href="index.php?area=forums" onmouseout="changeImages( /*CMP*/"Banner_Nav_10",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_10.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_10",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_10-over.gif");return true"><img alt="Forums" border="0" height="41" name="Banner_Nav_10" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_10.gif" width="40"></a></td>
+<td align="left" height="53" valign="top" width="30" xpos="554"><img alt="" border="0" height="41" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_11.gif" width="30"></td>
+<td align="left" height="53" valign="top" width="36" xpos="584"><a href="status/status.html" onmouseout="changeImages( /*CMP*/"Banner_Nav_12",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_12.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_12",/*URL*/"themes/2005_v1/images/Banner_NAV/Banner_Nav_12-over.gif");return true"><img alt="Status" border="0" height="41" name="Banner_Nav_12" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_12.gif" width="36"></a></td>
+<td align="left" colspan="2" height="53" valign="top" width="180" xpos="620"><img alt="" border="0" height="41" src="themes/2005_v1/images/Banner_NAV/Banner_Nav_13.gif" width="180"></td>
 <td height="53" width="1"><spacer height="53" type="block" width="1"></spacer></td>
 </tr>
 <tr height="364">
 <td height="394" rowspan="2" width="11"><spacer height="394" type="block" width="11"></spacer></td>
 <td align="left" colspan="18" height="364" valign="top" width="789" xpos="11">
-<table background="{BASE}/themes/2005_v1/images/gamesbar.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="349" showgridx="" showgridy="" width="779">
+<table background="themes/2005_v1/images/gamesbar.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="349" showgridx="" showgridy="" width="779">
 <tbody><tr height="9">
 <td colspan="6" height="9" width="778"></td>
 <td height="9" width="1"><spacer height="9" type="block" width="1"></spacer></td>
@@ -411,7 +418,7 @@ $content2005v1 = <<<HTML
 <tr height="282">
 <td colspan="3" height="282" width="264"></td>
 <td align="left" height="339" rowspan="2" valign="top" width="171" xpos="264">
-<table background="{BASE}/themes/2005_v1/images/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
+<table background="themes/2005_v1/images/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
 <tbody><tr height="5">
 <td height="329" rowspan="7" width="6"></td>
 <td height="247" rowspan="5" width="1"></td>
@@ -427,7 +434,7 @@ $content2005v1 = <<<HTML
 <td height="37" width="1"><spacer height="37" type="block" width="1"></spacer></td>
 </tr>
 <tr height="11">
-<td align="left" colspan="3" height="11" valign="top" width="155" xpos="7"><img alt="" border="0" height="2" src="{BASE}/themes/2005_v1/images/rule01.gif" width="150"></td>
+<td align="left" colspan="3" height="11" valign="top" width="155" xpos="7"><img alt="" border="0" height="2" src="themes/2005_v1/images/rule01.gif" width="150"></td>
 <td height="11" width="1"><spacer height="11" type="block" width="1"></spacer></td>
 </tr>
 <tr height="25">
@@ -447,11 +454,11 @@ $content2005v1 = <<<HTML
 <td height="169" width="1"><spacer height="169" type="block" width="1"></spacer></td>
 </tr>
 <tr height="40">
-<td align="left" colspan="4" height="40" valign="top" width="156" xpos="6"><a href="steam://purchase/9"><img alt="" border="0" height="35" src="{BASE}/themes/2005_v1/images/but_withsteam.gif" width="150"></a></td>
+<td align="left" colspan="4" height="40" valign="top" width="156" xpos="6"><a href="steam://purchase/9"><img alt="" border="0" height="35" src="themes/2005_v1/images/but_withsteam.gif" width="150"></a></td>
 <td height="40" width="1"><spacer height="40" type="block" width="1"></spacer></td>
 </tr>
 <tr height="42">
-<td align="left" colspan="4" height="42" valign="top" width="156" xpos="6"><a href="{BASE}/index.php?area=getsteamnow"><img alt="" border="0" height="35" src="{BASE}/themes/2005_v1/images/but_withoutsteam.gif" width="150"></a></td>
+<td align="left" colspan="4" height="42" valign="top" width="156" xpos="6"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="35" src="themes/2005_v1/images/but_withoutsteam.gif" width="150"></a></td>
 <td height="42" width="1"><spacer height="42" type="block" width="1"></spacer></td>
 </tr>
 <tr cntrlrow="" height="1">
@@ -465,7 +472,7 @@ $content2005v1 = <<<HTML
 </tbody></table>
 </td>
 <td align="left" height="339" rowspan="2" valign="top" width="170" xpos="435">
-<table background="{BASE}/themes/2005_v1/images/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
+<table background="themes/2005_v1/images/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
 <tbody><tr height="5">
 <td height="329" rowspan="7" width="6"></td>
 <td height="247" rowspan="5" width="1"></td>
@@ -480,7 +487,7 @@ $content2005v1 = <<<HTML
 <td height="37" width="1"><spacer height="37" type="block" width="1"></spacer></td>
 </tr>
 <tr height="11">
-<td align="left" colspan="4" height="11" valign="top" width="151" xpos="7"><img alt="" border="0" height="2" src="{BASE}/themes/2005_v1/images/rule01.gif" width="150"></td>
+<td align="left" colspan="4" height="11" valign="top" width="151" xpos="7"><img alt="" border="0" height="2" src="themes/2005_v1/images/rule01.gif" width="150"></td>
 <td height="11" width="1"><spacer height="11" type="block" width="1"></spacer></td>
 </tr>
 <tr height="25">
@@ -503,11 +510,11 @@ $content2005v1 = <<<HTML
 <td height="169" width="1"><spacer height="169" type="block" width="1"></spacer></td>
 </tr>
 <tr height="41">
-<td align="left" colspan="5" height="41" valign="top" width="152" xpos="6"><a href="steam://purchase/10"><img alt="" border="0" height="35" src="{BASE}/themes/2005_v1/images/but_withsteam.gif" width="150"></a></td>
+<td align="left" colspan="5" height="41" valign="top" width="152" xpos="6"><a href="steam://purchase/10"><img alt="" border="0" height="35" src="themes/2005_v1/images/but_withsteam.gif" width="150"></a></td>
 <td height="41" width="1"><spacer height="41" type="block" width="1"></spacer></td>
 </tr>
 <tr height="41">
-<td align="left" colspan="5" height="41" valign="top" width="152" xpos="6"><a href="{BASE}/index.php?area=getsteamnow"><img alt="" border="0" height="35" src="{BASE}/themes/2005_v1/images/but_withoutsteam.gif" width="150"></a></td>
+<td align="left" colspan="5" height="41" valign="top" width="152" xpos="6"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="35" src="themes/2005_v1/images/but_withoutsteam.gif" width="150"></a></td>
 <td height="41" width="1"><spacer height="41" type="block" width="1"></spacer></td>
 </tr>
 <tr cntrlrow="" height="1">
@@ -523,7 +530,7 @@ $content2005v1 = <<<HTML
 </tbody></table>
 </td>
 <td align="left" height="339" rowspan="2" valign="top" width="173" xpos="605">
-<table background="{BASE}/themes/2005_v1/images/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
+<table background="themes/2005_v1/images/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
 <tbody><tr height="5">
 <td height="329" rowspan="7" width="6"></td>
 <td height="247" rowspan="5" width="4"></td>
@@ -538,7 +545,7 @@ $content2005v1 = <<<HTML
 <td height="37" width="1"><spacer height="37" type="block" width="1"></spacer></td>
 </tr>
 <tr height="11">
-<td align="left" colspan="3" height="11" valign="top" width="152" xpos="10"><img alt="" border="0" height="2" src="{BASE}/themes/2005_v1/images/rule01.gif" width="150"></td>
+<td align="left" colspan="3" height="11" valign="top" width="152" xpos="10"><img alt="" border="0" height="2" src="themes/2005_v1/images/rule01.gif" width="150"></td>
 <td height="11" width="1"><spacer height="11" type="block" width="1"></spacer></td>
 </tr>
 <tr height="25">
@@ -559,12 +566,12 @@ $content2005v1 = <<<HTML
 </td>
 </tr>
 <tr height="41">
-<td align="left" colspan="3" height="41" valign="top" width="151" xpos="6"><a href="steam://purchase/13"><img alt="" border="0" height="35" src="{BASE}/themes/2005_v1/images/but_withsteam.gif" width="150"></a></td>
+<td align="left" colspan="3" height="41" valign="top" width="151" xpos="6"><a href="steam://purchase/13"><img alt="" border="0" height="35" src="themes/2005_v1/images/but_withsteam.gif" width="150"></a></td>
 <td colspan="2" height="82" rowspan="2" width="6"></td>
 <td height="41" width="1"><spacer height="41" type="block" width="1"></spacer></td>
 </tr>
 <tr height="41">
-<td align="left" colspan="3" height="41" valign="top" width="151" xpos="6"><a href="{BASE}/index.php?area=getsteamnow"><img alt="" border="0" height="35" src="{BASE}/themes/2005_v1/images/but_withoutsteam.gif" width="150"></a></td>
+<td align="left" colspan="3" height="41" valign="top" width="151" xpos="6"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="35" src="themes/2005_v1/images/but_withoutsteam.gif" width="150"></a></td>
 <td height="41" width="1"><spacer height="41" type="block" width="1"></spacer></td>
 </tr>
 <tr cntrlrow="" height="1">
@@ -585,7 +592,7 @@ $content2005v1 = <<<HTML
 <td content="" csheight="49" height="57" valign="top" width="122" xpos="130">
 <div align="left">
 <p><span class="statusGetTheGamesSubhed">ORDER&nbsp;NOW &gt;<br>
-</span><span class="statusGetTheGamesText">Click <a href="{BASE}/index.php?area=product_HL2bronsilvergold"><font color="black">here</font></a> for more details. &nbsp;</span></p>
+</span><span class="statusGetTheGamesText">Click <a href="index.php?area=product_HL2bronsilvergold"><font color="black">here</font></a> for more details. &nbsp;</span></p>
 </div>
 </td>
 <td height="57" width="12"></td>
@@ -605,9 +612,9 @@ $content2005v1 = <<<HTML
 <td height="364" width="1"><spacer height="364" type="block" width="1"></spacer></td>
 </tr>
 <tr height="30">
-<td align="left" colspan="6" height="30" valign="top" width="271" xpos="11"><img alt="" border="0" height="25" src="{BASE}/themes/2005_v1/images/Hed_LatestNews.gif" width="263"></td>
+<td align="left" colspan="6" height="30" valign="top" width="271" xpos="11"><img alt="" border="0" height="25" src="themes/2005_v1/images/Hed_LatestNews.gif" width="263"></td>
 <td align="left" colspan="5" height="239" rowspan="2" valign="top" width="171" xpos="282">
-<table background="{BASE}/themes/2005_v1/images/CEL_TechSupport.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
+<table background="themes/2005_v1/images/CEL_TechSupport.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
 <tbody><tr height="30">
 <td colspan="3" height="30" width="163"></td>
 <td height="30" width="1"><spacer height="30" type="block" width="1"></spacer></td>
@@ -619,7 +626,7 @@ $content2005v1 = <<<HTML
 <p class="Body"><font color="white" size="2"><span class="statusContent2"><b>Questions, Answers, Etc?</b><br>
 </span></font></p>
 <p class="Body"><font size="2"><span class="statusContent">Steam&#39s support pages offer message boards, a list of frequently asked questions, and the Steam Troubleshooter to help identify and resolve any technical support issues you may be experiencing.</span></font></p>
-<p class="Body"><font size="2"><span class="statusContent">&gt; <a href="{BASE}/support/entry.php">visit support now</a> </span></font></p>
+<p class="Body"><font size="2"><span class="statusContent">&gt; <a href="support/entry.php">visit support now</a> </span></font></p>
 </div>
 </td>
 <td height="197" width="7"></td>
@@ -634,7 +641,7 @@ $content2005v1 = <<<HTML
 </tbody></table>
 </td>
 <td align="left" colspan="5" height="239" rowspan="2" valign="top" width="167" xpos="453">
-<table background="{BASE}/themes/2005_v1/images/CEL_CyberCafe.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
+<table background="themes/2005_v1/images/CEL_CyberCafe.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
 <tbody><tr height="30">
 <td colspan="3" height="30" width="163"></td>
 <td height="30" width="1"><spacer height="30" type="block" width="1"></spacer></td>
@@ -646,7 +653,7 @@ $content2005v1 = <<<HTML
 <p class="Body"><font color="white" size="2"><span class="statusContent2"><b>Games Your Customers Want?</b><br>
 </span></font></p>
 <p class="Body"><font size="2"><span class="statusContent">I</span></font><font size="2"><span class="statusContent">f you run a cyber café or gaming venue, Steam makes it easy for you to bring Valve&#39s games to your customers. Over 1000 gaming venues have signed up for Valve?s Cyber Café Program.</span></font></p>
-<p class="Body"><font size="2"><span class="statusContent">&gt;&nbsp;<a href="{BASE}/index.php?area=cybercafes">find out more now</a></span></font></p>
+<p class="Body"><font size="2"><span class="statusContent">&gt;&nbsp;<a href="index.php?area=cybercafes">find out more now</a></span></font></p>
 </div>
 </td>
 <td height="197" width="6"></td>
@@ -662,7 +669,7 @@ $content2005v1 = <<<HTML
 </td>
 <td height="239" rowspan="2" width="6"><spacer height="239" type="block" width="6"></spacer></td>
 <td align="left" height="239" rowspan="2" valign="top" width="174" xpos="626">
-<table background="{BASE}/themes/2005_v1/images/CEL_GetSteamNow.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
+<table background="themes/2005_v1/images/CEL_GetSteamNow.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
 <tbody><tr height="29">
 <td colspan="3" height="29" width="163"></td>
 <td height="29" width="1"><spacer height="29" type="block" width="1"></spacer></td>
@@ -675,7 +682,7 @@ $content2005v1 = <<<HTML
 </span></font></p>
 <p class="Body"><font size="2"><span class="statusContent">S</span></font><span class="statusContent">tart playing Valve&#39s award-winning games within minutes. With Steam, you&#39ll also get access to an instant messenger, automatic updates, and more. If you don&#39t already have Steam.</span></p>
 </div>
-<p><font size="2"><span class="statusContent">&gt;&nbsp;</span></font><span class="statusContent"><a href="{BASE}/index.php?area=getsteamnow">install it now</a></span></p>
+<p><font size="2"><span class="statusContent">&gt;&nbsp;</span></font><span class="statusContent"><a href="index.php?area=getsteamnow">install it now</a></span></p>
 </td>
 <td height="198" width="3"></td>
 <td height="198" width="1"><spacer height="198" type="block" width="1"></spacer></td>
@@ -743,7 +750,7 @@ $insertArray[] = [
 ];
 
 $content2005v2 = <<<HTML
-<table background="{BASE}/themes/2005_v2/images/TopBanner.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="75" showgridx="" showgridy="" width="800">
+<table background="themes/2005_v2/images/TopBanner.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="75" showgridx="" showgridy="" width="800">
  <tbody><tr height="22">
  <td colspan="4" height="22" width="799"></td>
  <td height="22" width="1"><spacer height="22" type="block" width="1"></spacer></td>
@@ -752,14 +759,14 @@ $content2005v2 = <<<HTML
  <td height="52" rowspan="2" width="251"></td>
  <td content="" csheight="29" height="52" rowspan="2" valign="top" width="405" xpos="251">
  <div align="left">
- <font size="2"><span class="statusContent">Steam delivers Valve?s games to your desktop and connects you to a massive gaming community. Check out the full <a href="{BASE}/index.php?area=features"><b>FEATURE LIST</b></a> now.</span></font></div>
+ <font size="2"><span class="statusContent">Steam delivers Valve?s games to your desktop and connects you to a massive gaming community. Check out the full <a href="index.php?area=features"><b>FEATURE LIST</b></a> now.</span></font></div>
  </td>
  <td colspan="2" height="3" width="143"></td>
  <td height="3" width="1"><spacer height="3" type="block" width="1"></spacer></td>
  </tr>
  <tr height="49">
  <td height="49" width="6"></td>
- <td align="left" height="49" valign="top" width="137" xpos="662"><a href="{BASE}/index.php?area=getsteamnow"><img alt="" border="0" height="24" src="{BASE}/themes/2005_v2/images/but_getsteamnow02.gif" width="124"></a></td>
+ <td align="left" height="49" valign="top" width="137" xpos="662"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="24" src="themes/2005_v2/images/but_getsteamnow02.gif" width="124"></a></td>
  <td height="49" width="1"><spacer height="49" type="block" width="1"></spacer></td>
  </tr>
  <tr cntrlrow="" height="1">
@@ -773,25 +780,25 @@ $content2005v2 = <<<HTML
 <table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="921" showgridx="" showgridy="" width="803">
 <tbody><tr height="52">
 <td colspan="2" height="52" width="2"></td>
-<td align="left" height="52" valign="top" width="173" xpos="2"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_01.gif" width="173"></td>
-<td align="left" height="52" valign="top" width="28" xpos="175"><a href="{BASE}/index.php?area=news" onmouseout="changeImages( /*CMP*/"Banner_Nav_02",/*URL*/"{BASE}/themes/2005_v2/images/index02/Banner_NAV/Banner_Nav_02.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_02",/*URL*/"{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_02-over.gif");return true" title="News"><img alt="news" border="0" height="41" name="Banner_Nav_02" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_02.gif" width="28"></a></td>
-<td align="left" height="52" valign="top" width="30" xpos="203"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_03.gif" width="30"></td>
-<td align="left" height="52" valign="top" width="81" xpos="233"><a href="{BASE}/index.php?area=getsteamnow" onmouseout="changeImages( /*CMP*/"Banner_Nav_04",/*URL*/"{BASE}/themes/2005_v2/images/index02/Banner_NAV/Banner_Nav_04.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_04",/*URL*/"{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_04-over.gif");return true" title="Get Steam Now"><img alt="getSteamNow" border="0" height="41" name="Banner_Nav_04" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_04.gif" width="81"></a></td>
-<td align="left" height="52" valign="top" width="32" xpos="314"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_05.gif" width="32"></td>
-<td align="left" height="52" valign="top" width="66" xpos="346"><a href="{BASE}/index.php?area=cybercafes" onmouseout="changeImages( /*CMP*/"Banner_Nav_06",/*URL*/"{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_06.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_06",/*URL*/"{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_06-over.gif");return true" title="Cyber Cafes"><img alt="Cyber Cafes" border="0" height="41" name="Banner_Nav_06" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_06.gif" width="66"></a></td>
-<td align="left" height="52" valign="top" width="32" xpos="412"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_07.gif" width="32"></td>
-<td align="left" height="52" valign="top" width="45" xpos="444"><a href="{BASE}/support/entry.php" onmouseout="changeImages( /*CMP*/"Banner_Nav_08",/*URL*/"{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_08.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_08",/*URL*/"{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_08-over.gif");return true" title="Support"><img alt="Support" border="0" height="41" name="Banner_Nav_08" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_08.gif" width="45"></a></td>
-<td align="left" height="52" valign="top" width="27" xpos="489"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_09.gif" width="27"></td>
-<td align="left" height="52" valign="top" width="40" xpos="516"><a href="{BASE}/index.php?area=forums" onmouseout="changeImages( /*CMP*/"Banner_Nav_10",/*URL*/"{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_10.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_10",/*URL*/"{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_10-over.gif");return true" title="Forums"><img alt="Forums" border="0" height="41" name="Banner_Nav_10" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_10.gif" width="40"></a></td>
-<td align="left" height="52" valign="top" width="30" xpos="556"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_11.gif" width="30"></td>
-<td align="left" height="52" valign="top" width="36" xpos="586"><a href="status/status.html" onmouseout="changeImages( /*CMP*/"Banner_Nav_12",/*URL*/"{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_12.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_12",/*URL*/"{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_12-over.gif");return true" title="Status"><img alt="Status" border="0" height="41" name="Banner_Nav_12" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_12.gif" width="36"></a></td>
-<td align="left" height="52" valign="top" width="180" xpos="622"><img alt="" border="0" height="41" src="{BASE}/themes/2005_v2/images/Banner_NAV/Banner_Nav_13.gif" width="180"></td>
+<td align="left" height="52" valign="top" width="173" xpos="2"><img alt="" border="0" height="41" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_01.gif" width="173"></td>
+<td align="left" height="52" valign="top" width="28" xpos="175"><a href="index.php?area=news" onmouseout="changeImages( /*CMP*/"Banner_Nav_02",/*URL*/"themes/2005_v2/images/index02/Banner_NAV/Banner_Nav_02.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_02",/*URL*/"themes/2005_v2/images/Banner_NAV/Banner_Nav_02-over.gif");return true" title="News"><img alt="news" border="0" height="41" name="Banner_Nav_02" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_02.gif" width="28"></a></td>
+<td align="left" height="52" valign="top" width="30" xpos="203"><img alt="" border="0" height="41" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_03.gif" width="30"></td>
+<td align="left" height="52" valign="top" width="81" xpos="233"><a href="index.php?area=getsteamnow" onmouseout="changeImages( /*CMP*/"Banner_Nav_04",/*URL*/"themes/2005_v2/images/index02/Banner_NAV/Banner_Nav_04.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_04",/*URL*/"themes/2005_v2/images/Banner_NAV/Banner_Nav_04-over.gif");return true" title="Get Steam Now"><img alt="getSteamNow" border="0" height="41" name="Banner_Nav_04" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_04.gif" width="81"></a></td>
+<td align="left" height="52" valign="top" width="32" xpos="314"><img alt="" border="0" height="41" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_05.gif" width="32"></td>
+<td align="left" height="52" valign="top" width="66" xpos="346"><a href="index.php?area=cybercafes" onmouseout="changeImages( /*CMP*/"Banner_Nav_06",/*URL*/"themes/2005_v2/images/Banner_NAV/Banner_Nav_06.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_06",/*URL*/"themes/2005_v2/images/Banner_NAV/Banner_Nav_06-over.gif");return true" title="Cyber Cafes"><img alt="Cyber Cafes" border="0" height="41" name="Banner_Nav_06" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_06.gif" width="66"></a></td>
+<td align="left" height="52" valign="top" width="32" xpos="412"><img alt="" border="0" height="41" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_07.gif" width="32"></td>
+<td align="left" height="52" valign="top" width="45" xpos="444"><a href="support/entry.php" onmouseout="changeImages( /*CMP*/"Banner_Nav_08",/*URL*/"themes/2005_v2/images/Banner_NAV/Banner_Nav_08.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_08",/*URL*/"themes/2005_v2/images/Banner_NAV/Banner_Nav_08-over.gif");return true" title="Support"><img alt="Support" border="0" height="41" name="Banner_Nav_08" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_08.gif" width="45"></a></td>
+<td align="left" height="52" valign="top" width="27" xpos="489"><img alt="" border="0" height="41" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_09.gif" width="27"></td>
+<td align="left" height="52" valign="top" width="40" xpos="516"><a href="index.php?area=forums" onmouseout="changeImages( /*CMP*/"Banner_Nav_10",/*URL*/"themes/2005_v2/images/Banner_NAV/Banner_Nav_10.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_10",/*URL*/"themes/2005_v2/images/Banner_NAV/Banner_Nav_10-over.gif");return true" title="Forums"><img alt="Forums" border="0" height="41" name="Banner_Nav_10" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_10.gif" width="40"></a></td>
+<td align="left" height="52" valign="top" width="30" xpos="556"><img alt="" border="0" height="41" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_11.gif" width="30"></td>
+<td align="left" height="52" valign="top" width="36" xpos="586"><a href="status/status.html" onmouseout="changeImages( /*CMP*/"Banner_Nav_12",/*URL*/"themes/2005_v2/images/Banner_NAV/Banner_Nav_12.gif");return true" onmouseover="changeImages( /*CMP*/"Banner_Nav_12",/*URL*/"themes/2005_v2/images/Banner_NAV/Banner_Nav_12-over.gif");return true" title="Status"><img alt="Status" border="0" height="41" name="Banner_Nav_12" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_12.gif" width="36"></a></td>
+<td align="left" height="52" valign="top" width="180" xpos="622"><img alt="" border="0" height="41" src="themes/2005_v2/images/Banner_NAV/Banner_Nav_13.gif" width="180"></td>
 <td height="52" width="1"><spacer height="52" type="block" width="1"></spacer></td>
 </tr>
 <tr height="868">
 <td height="868" width="1"></td>
 <td align="left" colspan="14" height="868" valign="top" width="801" xpos="1">
-<table background="{BASE}/themes/2005_v2/images/index04/Call2ActionBkg02.jpg" bgcolor="white" border="0" cellpadding="0" cellspacing="0" height="613" width="801">
+<table background="themes/2005_v2/images/index04/Call2ActionBkg02.jpg" bgcolor="white" border="0" cellpadding="0" cellspacing="0" height="613" width="801">
 <tbody><tr>
 <td valign="top">
 <table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="868" showgridx="" showgridy="" width="801">
@@ -801,7 +808,7 @@ $content2005v2 = <<<HTML
 </tr>
 <tr height="2">
 <td colspan="14" height="2" width="441"></td>
-<td align="left" colspan="7" height="128" rowspan="2" valign="top" width="354" xpos="441"><a href="{BASE}/index.php?area=product_packageoffers" onmouseout="changeImages("LINK_PlayHL2Now_01",""{BASE}/themes/2005_v2/images/index03/LINK_PlayHL2Now_01.gif");return true" onmouseover="changeImages("LINK_PlayHL2Now_01","{BASE}/themes/2005_v2/images/index04/LINK_PlayHL2Now_01-over.gif");return true" title="Get the Games!"><img alt="" border="0" height="33" id="LINK_PlayHL2Now_01" name="LINK_PlayHL2Now_01" src="img\index03\LINK_PlayHL2Now_01.gif" width="328"></a></td>
+<td align="left" colspan="7" height="128" rowspan="2" valign="top" width="354" xpos="441"><a href="index.php?area=product_packageoffers" onmouseout="changeImages("LINK_PlayHL2Now_01",""themes/2005_v2/images/index03/LINK_PlayHL2Now_01.gif");return true" onmouseover="changeImages("LINK_PlayHL2Now_01","themes/2005_v2/images/index04/LINK_PlayHL2Now_01-over.gif");return true" title="Get the Games!"><img alt="" border="0" height="33" id="LINK_PlayHL2Now_01" name="LINK_PlayHL2Now_01" src="img\index03\LINK_PlayHL2Now_01.gif" width="328"></a></td>
 <td height="128" rowspan="2" width="5"></td>
 <td height="2" width="1"><spacer height="2" type="block" width="1"></spacer></td>
 </tr>
@@ -814,7 +821,7 @@ $content2005v2 = <<<HTML
 </b></font></a></span><span>· <a href="http://www.counter-strike.net/" title="Counter-Strike"><font color="black"><b>Counter-Strike<br>
 </b></font></a></span><span>· <a href="http://www.dayofdefeat.com"><font color="black"><b>Day of Defeat<br>
 <br>
-</b></font></a></span><span>Buy the games <a href="{BASE}/index.php?area=product_packageoffers" title="Buy the Games!"><font color="black"><b>HERE</b></font></a></span><span class="BODYGreen"><span class="BODYGreen">!</span></span><span class="INDEX02Body2"><span class="BODYGreen"> </span></span></p>
+</b></font></a></span><span>Buy the games <a href="index.php?area=product_packageoffers" title="Buy the Games!"><font color="black"><b>HERE</b></font></a></span><span class="BODYGreen"><span class="BODYGreen">!</span></span><span class="INDEX02Body2"><span class="BODYGreen"> </span></span></p>
 </div>
 </td>
 <td colspan="9" height="126" width="277"></td>
@@ -823,7 +830,7 @@ $content2005v2 = <<<HTML
 <tr height="30">
 <td class="BODYGreen" colspan="6" content="" csheight="40" height="85" rowspan="2" valign="top" width="150" xpos="18">
 <div class="BODYGreen">
-<p><span>· <a href={BASE}/themes/2005_v2/images/index03/SOURCE_Info+Licensing.pdf" title="Source Licensing +&nbsp;Info"><font color="black"><b>Info+Licensing</b></font></a><font color="black"><b> </b>(PDF)</font><a href={BASE}/themes/2005_v2/images/index03/SOURCE_Info+Licensing.pdf" title="Source Licensing +&nbsp;Info"><font color="black"><br>
+<p><span>· <a href=themes/2005_v2/images/index03/SOURCE_Info+Licensing.pdf" title="Source Licensing +&nbsp;Info"><font color="black"><b>Info+Licensing</b></font></a><font color="black"><b> </b>(PDF)</font><a href=themes/2005_v2/images/index03/SOURCE_Info+Licensing.pdf" title="Source Licensing +&nbsp;Info"><font color="black"><br>
 </font></a></span><span>· <a href="http://collective.valve-erc.com/" title="Valve-ERC"><font color="black"><b>MOD&nbsp;Resources<br>
 </b></font></a></span><span>· <a href="http://www.valve-erc.com/srcsdk/" title="Source SDK Documentation"><font color="black"><b>SDK&nbsp;Documentation</b></font></a></span></p>
 </div>
@@ -833,9 +840,9 @@ $content2005v2 = <<<HTML
 </tr>
 <tr height="55">
 <td colspan="10" height="55" width="372"></td>
-<td align="left" height="55" valign="top" width="56" xpos="540"><img alt="" border="0" height="16" src="{BASE}/themes/2005_v2/images/index04/LINK_ClickHere_01_01.gif" width="56"></td>
-<td align="left" height="55" valign="top" width="50" xpos="596"><a href="{BASE}/index.php?area=product_packageoffers" onmouseout="changeImages("LINK_ClickHere_01_02","{BASE}/themes/2005_v2/images/index04/LINK_ClickHere_01_02.gif");return true" onmouseover="changeImages("LINK_ClickHere_01_02","{BASE}/themes/2005_v2/images/index04/LINK_ClickHere_01_02-over.gif");return true" title="Click here now!"><img alt="" border="0" height="16" id="LINK_ClickHere_01_02" name="LINK_ClickHere_01_02" src="{BASE}/themes/2005_v2/images/index04/LINK_ClickHere_01_02.gif" width="48"></a></td>
-<td align="left" colspan="2" height="55" valign="top" width="149" xpos="646"><img alt="" border="0" height="16" src="{BASE}/themes/2005_v2/images/index04/LINK_ClickHere_01_03.gif" width="124"></td>
+<td align="left" height="55" valign="top" width="56" xpos="540"><img alt="" border="0" height="16" src="themes/2005_v2/images/index04/LINK_ClickHere_01_01.gif" width="56"></td>
+<td align="left" height="55" valign="top" width="50" xpos="596"><a href="index.php?area=product_packageoffers" onmouseout="changeImages("LINK_ClickHere_01_02","themes/2005_v2/images/index04/LINK_ClickHere_01_02.gif");return true" onmouseover="changeImages("LINK_ClickHere_01_02","themes/2005_v2/images/index04/LINK_ClickHere_01_02-over.gif");return true" title="Click here now!"><img alt="" border="0" height="16" id="LINK_ClickHere_01_02" name="LINK_ClickHere_01_02" src="themes/2005_v2/images/index04/LINK_ClickHere_01_02.gif" width="48"></a></td>
+<td align="left" colspan="2" height="55" valign="top" width="149" xpos="646"><img alt="" border="0" height="16" src="themes/2005_v2/images/index04/LINK_ClickHere_01_03.gif" width="124"></td>
 <td height="55" width="5"></td>
 <td height="55" width="1"><spacer height="55" type="block" width="1"></spacer></td>
 </tr>
@@ -857,7 +864,7 @@ $content2005v2 = <<<HTML
 <td colspan="16" height="24" width="503"></td>
 <td class="BODYGreen" colspan="4" content="" csheight="92" height="110" rowspan="3" valign="top" width="189" xpos="503">
 <div class="BODYGreen">
-<p><span>Featuring 6 incredible games from Valve. Click <a href="{BASE}/index.php?area=product_packageoffers" title="Buy the Games!"><font color="black"><b>HERE</b></font></a></span><span class="BODYGreen"><span class="BODYGreen"> now!</span></span><span class="INDEX02Body2"><span class="BODYGreen"> </span></span></p>
+<p><span>Featuring 6 incredible games from Valve. Click <a href="index.php?area=product_packageoffers" title="Buy the Games!"><font color="black"><b>HERE</b></font></a></span><span class="BODYGreen"><span class="BODYGreen"> now!</span></span><span class="INDEX02Body2"><span class="BODYGreen"> </span></span></p>
 </div>
 </td>
 <td colspan="2" height="110" rowspan="3" width="108"></td>
@@ -867,7 +874,7 @@ $content2005v2 = <<<HTML
 <td colspan="9" height="47" width="192"></td>
 <td class="BODYGreen" colspan="3" content="" csheight="92" height="156" rowspan="3" valign="top" width="148" xpos="192">
 <div class="BODYGreen">
-<p><span>Includes Counter-Strike 1.6, the world&#39s #1 online action game, plus single player games. Get your copy <a href="{BASE}/index.php?area=product_packageoffers" title="Buy the Games!"><font color="black"><b>NOW</b></font></a>.</span></p>
+<p><span>Includes Counter-Strike 1.6, the world&#39s #1 online action game, plus single player games. Get your copy <a href="index.php?area=product_packageoffers" title="Buy the Games!"><font color="black"><b>NOW</b></font></a>.</span></p>
 </div>
 </td>
 <td colspan="4" height="86" rowspan="2" width="163"></td>
@@ -879,7 +886,7 @@ $content2005v2 = <<<HTML
 <div class="BODYGreen">
 <p><span>· <a href="http://www.valvesoftware.com" title="Valve Homepage"><font color="black"><b>About Valve<br>
 </b></font></a></span><span>· <a href="http://www.valvesoftware.com/awardslist.htm" title="Awards"><font color="black"><b>Awards<br>
-</b></font></a></span><span>· <a href="{BASE}/index.php?area=contact" title="Contact Us"><font color="black"><b>Contact Us</b></font></a></span></p>
+</b></font></a></span><span>· <a href="index.php?area=contact" title="Contact Us"><font color="black"><b>Contact Us</b></font></a></span></p>
 </div>
 </td>
 <td colspan="5" height="109" rowspan="2" width="30"></td>
@@ -927,7 +934,7 @@ $content2005v2 = <<<HTML
 <td height="110" width="18"></td>
 <td colspan="9" content="" csheight="67" height="110" valign="top" width="316" xpos="18">
 <p><span class="BODYGreen"><b>Questions, Answers, Etc.</b></span><br>
-<span class="BODYGreen">Steam?s <a href="{BASE}/support/" title="Customer Service"><font color="black"><b>Support Pages</b></font></a> offer message boards, a list of frequently asked questions, and the Steam Troubleshooter to help identify and resolve any technical support issues you may be experiencing.</span></p>
+<span class="BODYGreen">Steam?s <a href="support/" title="Customer Service"><font color="black"><b>Support Pages</b></font></a> offer message boards, a list of frequently asked questions, and the Steam Troubleshooter to help identify and resolve any technical support issues you may be experiencing.</span></p>
 </td>
 <td colspan="3" height="110" width="26"></td>
 <td height="110" width="1"><spacer height="110" type="block" width="1"></spacer></td>
@@ -936,7 +943,7 @@ $content2005v2 = <<<HTML
 <td colspan="2" height="97" width="19"></td>
 <td colspan="9" content="" csheight="69" height="97" valign="top" width="316" xpos="19">
 <p><b><span class="BODYGreen"><span class="BODYGreen">Games Your Customers Want</span></span><br>
-</b><span class="INDEX02Body2"><span class="BODYGreen">If you run a cyber café or gaming venue, Steam makes it easy for you to bring Valve?s games to your customers. Over 1000 gaming venues have signed up for Valve?s <a href="{BASE}/index.php?area=cybercafes" title="Cyber Cafe Program"><b><font color="black">Cyber Café&nbsp;Program</font></b></a></span></span><span class="BODYGreen"><span class="BODYGreen">.</span></span><span class="INDEX02Body2"><span class="BODYGreen"> </span></span></p>
+</b><span class="INDEX02Body2"><span class="BODYGreen">If you run a cyber café or gaming venue, Steam makes it easy for you to bring Valve?s games to your customers. Over 1000 gaming venues have signed up for Valve?s <a href="index.php?area=cybercafes" title="Cyber Cafe Program"><b><font color="black">Cyber Café&nbsp;Program</font></b></a></span></span><span class="BODYGreen"><span class="BODYGreen">.</span></span><span class="INDEX02Body2"><span class="BODYGreen"> </span></span></p>
 </td>
 <td colspan="2" height="97" width="25"></td>
 <td height="97" width="1"><spacer height="97" type="block" width="1"></spacer></td>

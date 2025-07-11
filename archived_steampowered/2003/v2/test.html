@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Welcome to Steam</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="pragma"        content="no-cache" />
+    <meta name="ROBOTS"     content="ALL" />
+    <meta name="DESCRIPTION"content="Valve - Steam account signup" />
+    <meta name="KEYWORDS"   content="Steam, account, account creation, signup" />
+    <meta name="AUTHOR"     content="Valve LLC" />
+    <link rel="stylesheet" type="text/css" href="steampowered.css" />
+    <script type="text/javascript" src="nav.js"></script>
+
+    <!-- layout tweaks for 2003-era browsers -->
+    <style type="text/css">
+        /* ❶ news panel floats outside #container */
+        #newsBlock {
+            float: right;
+            width: 240px;
+            margin: 0 0 100px 20px;   /* left gutter + little footer gap   */
+            /* push it down to match old vertical position (tweak if needed) */
+            margin-top: 180px;       /* ≈ height of logo + list + button  */
+        }
+/* === main green panel (matches 2004 Steam site) ====================== */
+#container{
+padding: 8px 24px 32px 80px;
+    margin: 0px 0px 24px 68px;
+    background: #994999;
+    line-height: 16px;
+    width: 70%;
+
+
+}
+        /* ❷ clear floats below main column so footer starts cleanly      */
+        .clearfix { clear: both; height:0; font-size:0; line-height:0; }
+    </style>
+</head>
+
+<body>
+
+<!-- ===================  header  =================== -->
+<div class="header">
+    <nobr>
+        <a href="http://www.valvesoftware.com">
+            <img src="img/valve_head.gif" alt="[Valve]" width="152" height="54" align="top" />
+        </a>
+        <span class="navBar">
+            <a href="index.php?area=getsteamnow"  onmouseover="over(0)"  onmouseout="out(0)">
+                <img name="getSteamNow" src="img/getSteamNow.gif" alt="getSteamNow" width="108" height="22" valign="bottom" />
+            </a>
+            <a href="index.php?area=forums"      onmouseover="over(1)"  onmouseout="out(1)">
+                <img name="forums"     src="img/forums.gif"    alt="Forums"    width="68"  height="22" valign="bottom" />
+            </a>
+            <a href="index.php?area=support"     onmouseover="over(2)"  onmouseout="out(2)">
+                <img name="support"    src="img/support.gif"   alt="Support"   width="68"  height="22" valign="bottom" />
+            </a>
+            <a href="index.php?area=status"      onmouseover="over(14)" onmouseout="out(14)">
+                <img name="status"     src="img/status.gif"    alt="Status"    width="65"  height="22" valign="bottom" />
+            </a>
+        </span>
+    </nobr>
+</div>
+<!-- ================  /header  ===================== -->
+
+
+<!-- ==============  floated news panel  ============ -->
+<div id="newsBlock">
+    <div class="boxTop">Latest News</div>
+    <div class="box">
+        <strong>Counter-Strike 1.6 beta</strong><br />
+        The latest version of Counter-Strike is available via Steam now!  
+        “Would you like a tactical riot shield with that?”<br /><br />
+
+        <strong>Half-Life 2 Media</strong><br />
+        Stay tuned for a blast of HL2 full-motion goodness, brought to you very soon via Steam.<br /><br />
+
+        <strong>Got Bandwidth?</strong><br />
+        Several partners have already signed up to host
+        <a href="index.php?area=status">content servers</a>.  
+        If you’ve got at least 50 Mbit/sec to spare,
+        <a href="mailto:biz@steampowered.com">get in touch</a>!
+    </div>
+</div>
+
+
+<!-- =================  main column  ================= -->
+<div class="content" id="container"
+     style="background:#994999; top right no-repeat;">
+
+    <img id="steam" src="img/steam_logo_alpha.gif" width="244" height="78" /><br /><br />
+
+    <h2>BECOME <em>PART OF THE STEAM COMMUNITY</em></h2>
+    <img src="img/Graphic_box.jpg" width="24" height="6" alt="" /><br />
+
+    <ul>
+        <li>Play the latest Valve games (like Counter-Strike 1.6 beta!)</li>
+        <li>Get automatic updates (no more patching!)</li>
+        <li>Chat with friends, even while you play</li>
+        <li>Find the best servers &amp; find your friends' games</li>
+        <li>Receive Steam-only special offers</li>
+    </ul>
+
+    <a href="index.php?area=getsteamnow">
+        <img src="http://steampowered.com/img/but_getsteamnow.gif"
+             alt="get steam now" width="124" height="24" />
+    </a><br /><br />
+
+    <a href="index.php?area=features">
+        <img id="screenshots" src="http://steampowered.com/img/triple_screenshot.gif"
+             alt="screenshots" width="535" height="214" />
+    </a><br /><br />
+
+    <!-- WHAT IS STEAM section -->
+    <h2>WHAT <em>IS STEAM?</em></h2>
+    <img src="img/Graphic_box.jpg" width="24" height="6" alt="" /><br />
+
+    Steam is Valve's new way of getting games into your hands ASAP.  
+    Games like <em>Half-Life</em>, <em>Counter-Strike</em>, and
+    <em>Counter-Strike Condition Zero</em> are all being made available through Steam.<br />
+
+    <nobr>
+        <a href="http://half-life.com"                 onmouseover="over(5)"  onmouseout="out(5)">
+            <img name="logo_hl"  src="img/logo_hl.gif"  alt="Half-Life"                     width="36" height="36" align="absmiddle" vspace="8" />
+        </a>&nbsp;
+        <a href="http://www.counter-strike.net"        onmouseover="over(6)"  onmouseout="out(6)">
+            <img name="logo_cs"  src="img/logo_cs.gif"  alt="Counter-Strike"                width="36" height="36" />
+        </a>&nbsp;
+        <a href="http://www.cs-conditionzero.com/"     onmouseover="over(7)"  onmouseout="out(7)">
+            <img name="logo_cz"  src="img/logo_cz.gif"  alt="Counter-Strike: Condition Zero" width="45" height="36" />
+        </a>&nbsp;
+        <a href="http://www.teamfortressclassic.com"   onmouseover="over(8)"  onmouseout="out(8)">
+            <img name="logo_tfc" src="img/logo_tfc.gif" alt="Team Fortress Classic"         width="36" height="36" />
+        </a>
+    </nobr><br />
+
+    Steam games are automatically kept up-to-date with the latest content and revisions.  
+    Steam also includes an instant-message client which even works while you’re in-game.<br /><br />
+
+    At its core, Steam is a distributed file system and shared set of technology components that can be implemented into any software application.<br /><br />
+    With Steam, developers are given integrated tools for direct-content publishing, flexible billing, ensured-version control, anti-cheating, anti-piracy, and more.<br /><br />
+
+    Check out the full <a href="index.php?area=features">feature list</a>,
+    and <a href="index.php?area=getsteamnow">install Steam</a> today!
+</div>
+
+<!-- clear floats so footer doesn’t ride up -->
+<div class="clearfix"></div>
+
+
+<!-- =================  footer  ===================== -->
+<div class="footer">
+    <a href="http://www.valvesoftware.com">
+        <img src="img/valve_greenlogo.gif" align="left" alt="" />
+    </a>
+    ©2003 Valve L.L.C. All rights reserved.  
+    Read our <a href="http://www.valvesoftware.com/privacy.htm">privacy policy</a>.<br />
+    Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve L.L.C.
+</div>
+<!-- ===============  /footer  ====================== -->
+
+</body>
+</html>
