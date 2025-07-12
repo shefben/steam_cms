@@ -42,6 +42,7 @@
 - Sidebar links persisted in database with default order
 - Logo selector shows miniature previews in dropdown
 - Random banner endpoint loads custom images across all years
+- Disabled banners in content server admin display with gray overlay and can be re-enabled in place
 - Automated script scans themes for archived assets and updates move_assets.py
 - Capsule admin interface uses searchable dropdowns with image previews
 - Capsule modal centers on screen and closes when clicking outside
