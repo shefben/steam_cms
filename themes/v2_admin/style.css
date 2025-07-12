@@ -648,3 +648,22 @@ a, a:visited { color: #f1c40f; }
 .breadcrumb span {
     color:#7f8c8d;
 }
+
+/* Charts */
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+.chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+.chart-controls {
+    text-align: right;
+    margin-bottom: 5px;
+}
+.chart-controls button {
+    margin-left: 5px;
+}

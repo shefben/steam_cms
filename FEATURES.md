@@ -9,6 +9,7 @@
 - Individual storefront admin pages for featured items, products, categories and sidebar
 - Pixel-perfect 2004 layout with full-height news box
 - Admin action logging with database-backed audit trail
+- Dashboard charts visualize visits and popular pages with weekly/monthly toggles
 
 - 2004 index snippets auto-wrap after two lines
 - Logout link pinned to bottom of admin sidebar for consistent navigation
@@ -93,3 +94,5 @@
 - Capsule editor lists existing images by theme
 - Comprehensive tag guide available in TAGS.md
 - Capsule uploader provides client-side image cropping
+- News list filters by title and author via AJAX
+- Styled login page with jQuery validation and password reset request
