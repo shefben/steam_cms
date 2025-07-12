@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - Introduce root path site setting and base URL handling
 - Twig templating integrated; {BASE} placeholders now auto-convert
 - Twig templates now load from each theme's `layout` folder
+- Capsule uploads now support client-side cropping via Cropper.js
 - Removed news box height limit in 2004 theme for exact layout
 - Added setting to limit news by theme year
 - Random banner endpoint pulls from custom folder regardless of theme

@@ -208,7 +208,9 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
       <div id="capUpload" style="display:none;">
         <label>App <select id="uploadAppid"></select></label><br>
         <input type="file" id="uploadFile" accept="image/png"><br>
-        <img id="uploadPreview" style="display:none;max-width:100%;margin-top:10px" alt="preview"><br>
+        <div id="cropContainer" style="display:none;max-width:100%;margin-top:10px">
+          <img id="cropImage" style="max-width:100%;" alt="crop">
+        </div><br>
         <div class="modal-actions">
           <button type="button" id="uploadAccept" class="btn btn-primary">OK</button>
           <button type="button" class="btn btn-secondary cancel">Cancel</button>
@@ -256,11 +258,14 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   #capsuleModal .dialog{background:#fff;padding:20px;border:1px solid #333;max-width:600px;}
   </style>
   <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
+  <link rel="stylesheet" href="<?php echo htmlspecialchars($theme_url); ?>/cropper.min.css">
+  <script src="<?php echo htmlspecialchars($theme_url); ?>/js/cropper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
   <script>
   var images = <?php echo json_encode($images);?>;
   var apps = <?php echo json_encode($apps);?>;
   var dims = <?php echo json_encode($dimsMap); ?>;
+  var cropper = null;
 
   function populateAppLists() {
     var opts='';
@@ -271,15 +276,17 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
 
   $('.change-btn').on('click',function(){
     var pos=$(this).data('pos');
+    if(cropper){ cropper.destroy(); cropper=null; }
     $('#capsuleModal').data('pos',pos).css('display','flex');
     $('#capChoose').show();
     $('#capExisting,#capUpload').hide();
-    $('#uploadPreview').hide();
+    $('#cropContainer').hide();
     $('#uploadAccept').prop('disabled',true);
   });
 
   $('#btnSelectExisting').on('click',function(){
     var pos=$('#capsuleModal').data('pos');
+    if(cropper){ cropper.destroy(); cropper=null; }
     var grouped={};
     $.each(images[pos]||[],function(i,img){
        var p=img.file.split('/')[0];
@@ -296,7 +303,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
     $('#existingAppid').val('');
     $('#capChoose').hide();
     $('#capExisting').show();
-    $('#uploadPreview').hide();
+    $('#cropContainer').hide();
     $('#uploadAccept').prop('disabled',false);
   });
 
@@ -310,15 +317,17 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
        $('#sel_'+pos).val(appid);
        $('img[data-pos='+pos+']').attr('src','../../images/capsules/'+file).data('app',appid);
        $('#capsuleModal').hide();
-       $('#uploadPreview').hide();
+       $('#cropContainer').hide();
        $('#uploadAccept').prop('disabled',false);
+       if(cropper){ cropper.destroy(); cropper=null; }
     });
   });
 
   $('#btnUploadNew').on('click',function(){
     $('#uploadFile').val('');
     $('#uploadAppid').val('');
-    $('#uploadPreview').hide();
+    if(cropper){ cropper.destroy(); cropper=null; }
+    $('#cropContainer').hide();
     $('#uploadAccept').prop('disabled',true);
     $('#capChoose').hide();
     $('#capUpload').show();
@@ -327,21 +336,19 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   $('#uploadFile').on('change',function(){
     var pos=$('#capsuleModal').data('pos');
     var file=this.files[0];
-    if(!file){$('#uploadPreview').hide();return;}
+    if(!file){
+      if(cropper){ cropper.destroy(); cropper=null; }
+      $('#cropContainer').hide();
+      return;
+    }
     var reader=new FileReader();
     reader.onload=function(e){
-      $('#uploadPreview').attr('src',e.target.result).show();
-      var img=new Image();
-      img.onload=function(){
-        var dw=dims[pos].width, dh=dims[pos].height;
-        if(this.width!==dw||this.height!==dh){
-          $('#uploadAccept').prop('disabled',true);
-          alert('Image must be '+dw+'x'+dh+' pixels');
-        }else{
-          $('#uploadAccept').prop('disabled',false);
-        }
-      };
-      img.src=e.target.result;
+      $('#cropImage').attr('src',e.target.result);
+      $('#cropContainer').show();
+      var dw=dims[pos].width, dh=dims[pos].height;
+      if(cropper){ cropper.destroy(); }
+      cropper=new Cropper(document.getElementById('cropImage'),{aspectRatio:dw/dh,viewMode:1});
+      $('#uploadAccept').prop('disabled',false);
     };
     reader.readAsDataURL(file);
   });
@@ -350,32 +357,39 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
     if($(this).prop('disabled')) return;
     var pos=$('#capsuleModal').data('pos');
     var appid=$('#uploadAppid').val();
-    var file=$('#uploadFile')[0].files[0];
-    if(!appid||!file){ alert('All fields required'); return; }
-    var fd=new FormData();
-    fd.append('position',pos);
-    fd.append('appid',appid);
-    fd.append('file',file);
-    $.ajax({url:'upload_capsule.php',type:'POST',data:fd,processData:false,contentType:false,success:function(rel){
-       $('#preview_'+pos).attr('src','../../images/capsules/'+rel);
-       $('#sel_'+pos).val(appid);
-       $('img[data-pos='+pos+']').attr('src','../../images/capsules/'+rel).data('app',appid);
-       images[pos]=images[pos]||[];
-       images[pos].push({file:rel,label:appid});
-       $('#capsuleModal').hide();
-    }});
+    if(!appid||!cropper){ alert('All fields required'); return; }
+    var dw=dims[pos].width, dh=dims[pos].height;
+    cropper.getCroppedCanvas({width:dw,height:dh}).toBlob(function(blob){
+      var fd=new FormData();
+      fd.append('position',pos);
+      fd.append('appid',appid);
+      fd.append('file',blob,'capsule.png');
+      $.ajax({url:'upload_capsule.php',type:'POST',data:fd,processData:false,contentType:false,success:function(rel){
+         $('#preview_'+pos).attr('src','../../images/capsules/'+rel);
+         $('#sel_'+pos).val(appid);
+         $('img[data-pos='+pos+']').attr('src','../../images/capsules/'+rel).data('app',appid);
+         images[pos]=images[pos]||[];
+         images[pos].push({file:rel,label:appid});
+         $('#capsuleModal').hide();
+         $('#cropContainer').hide();
+         cropper.destroy();
+         cropper=null;
+      }});
+    },'image/png');
   });
 
   $('.cancel').on('click',function(){
     $('#capsuleModal').hide();
-    $('#uploadPreview').hide();
+    if(cropper){ cropper.destroy(); cropper=null; }
+    $('#cropContainer').hide();
     $('#uploadAccept').prop('disabled',false);
   });
 
   $('#capsuleModal').on('click', function(e){
     if(e.target === this) {
       $(this).hide();
-      $('#uploadPreview').hide();
+      if(cropper){ cropper.destroy(); cropper=null; }
+      $('#cropContainer').hide();
       $('#uploadAccept').prop('disabled',false);
     }
   });

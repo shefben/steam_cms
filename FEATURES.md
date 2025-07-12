@@ -92,3 +92,4 @@
 - Scheduled content admin checks schedule type fields
 - Capsule editor lists existing images by theme
 - Comprehensive tag guide available in TAGS.md
+- Capsule uploader provides client-side image cropping
