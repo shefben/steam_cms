@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Admin news list supports filtering by title and author with AJAX pagination
 - Added preview endpoint with theme selection and admin-only access
 - Admin login styled with theme CSS, includes jQuery validation and reset link
+- News articles can be scheduled and auto-published when publish date is reached
 - Admin sidebar links now support drag-and-drop sorting with dynamic add/remove
 - Custom page template fallback now loads `default.twig` from the active theme
 - Add storefront dropdown navigation in admin sidebar

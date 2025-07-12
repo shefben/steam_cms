@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
             $pdo->exec("DROP TABLE IF EXISTS news");
-            $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT,is_official TINYINT(1) DEFAULT 1,status VARCHAR(20) DEFAULT 'draft')");
+            $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,publish_at DATETIME,views INT DEFAULT 0,content TEXT,is_official TINYINT(1) DEFAULT 1,status VARCHAR(20) DEFAULT 'draft')");
             $pdo->exec("DROP TABLE IF EXISTS content_servers");
             $pdo->exec("CREATE TABLE content_servers(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -332,7 +332,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $rows = preg_split('/\),\s*\(/', trim($vals, '()'));   // split rows
 
                         $newsStmt = $pdo->prepare(
-                            'INSERT INTO news(id,title,author,publish_date,content,status) VALUES(?,?,?,?,?,?)'
+                            'INSERT INTO news(id,title,author,publish_date,publish_at,content,status) VALUES(?,?,?,?,?,?,?)'
                         );
 
                         foreach ($rows as $row) {
@@ -348,7 +348,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $date    = normalizeDate($parts[3]);
                             $content = str_replace("''", "'", $parts[4]);
 
-                            $newsStmt->execute([$id,$title,$author,$date,$content,'published']);
+                            $newsStmt->execute([
+                                $id,
+                                $title,
+                                $author,
+                                $date,
+                                $date,
+                                $content,
+                                'published'
+                            ]);
                         }
                         continue;  // skip $pdo->exec($stmt) — we’ve handled it.
                     }

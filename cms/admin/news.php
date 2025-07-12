@@ -30,20 +30,20 @@ if(isset($_GET['move']) && isset($_GET['id'])){
     cms_require_permission('news_edit');
     $id = (int)$_GET['id'];
     $direction = $_GET['move'];
-    $posts = $db->query('SELECT id,publish_date FROM news ORDER BY publish_date DESC')->fetchAll(PDO::FETCH_ASSOC);
+    $posts = $db->query('SELECT id,publish_at FROM news ORDER BY publish_at DESC')->fetchAll(PDO::FETCH_ASSOC);
     for($i=0;$i<count($posts);$i++){
         if($posts[$i]['id']==$id){
             if($direction=='up' && $i>0){
                 $prev = $posts[$i-1];
                 $db->beginTransaction();
-                $db->prepare('UPDATE news SET publish_date=? WHERE id=?')->execute([$prev['publish_date'],$id]);
-                $db->prepare('UPDATE news SET publish_date=? WHERE id=?')->execute([$posts[$i]['publish_date'],$prev['id']]);
+                $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$prev['publish_at'],$id]);
+                $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$posts[$i]['publish_at'],$prev['id']]);
                 $db->commit();
             }elseif($direction=='down' && $i<count($posts)-1){
                 $next = $posts[$i+1];
                 $db->beginTransaction();
-                $db->prepare('UPDATE news SET publish_date=? WHERE id=?')->execute([$next['publish_date'],$id]);
-                $db->prepare('UPDATE news SET publish_date=? WHERE id=?')->execute([$posts[$i]['publish_date'],$next['id']]);
+                $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$next['publish_at'],$id]);
+                $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$posts[$i]['publish_at'],$next['id']]);
                 $db->commit();
             }
             break;
@@ -52,7 +52,7 @@ if(isset($_GET['move']) && isset($_GET['id'])){
     header('Location: news.php');
     exit;
 }
-$sql = 'SELECT id,title,author,publish_date,views FROM news WHERE 1';
+$sql = 'SELECT id,title,author,publish_date,status,views FROM news WHERE 1';
 $params = [];
 if ($titleFilter !== '') {
     $sql .= ' AND title LIKE ?';
@@ -62,7 +62,7 @@ if ($authorFilter !== '') {
     $sql .= ' AND author LIKE ?';
     $params[] = '%' . $authorFilter . '%';
 }
-$sql .= ' ORDER BY publish_date DESC';
+$sql .= ' ORDER BY publish_at DESC';
 $stmt = $db->prepare($sql);
 $stmt->execute($params);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -88,6 +88,7 @@ foreach ($rows as $i => $row) {
     $tbodyHtml .= '<td>' . htmlspecialchars($row['title']) . '</td>';
     $tbodyHtml .= '<td>' . htmlspecialchars($row['author']) . '</td>';
     $tbodyHtml .= '<td>' . htmlspecialchars($row['publish_date']) . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($row['status']) . '</td>';
     $tbodyHtml .= '<td>' . (int)$row['views'] . '</td>';
     $tbodyHtml .= '<td>';
     if (cms_has_permission('news_edit')) {
@@ -130,7 +131,7 @@ if (isset($_GET['ajax'])) {
 <form id="orderForm" method="post">
 <input type="hidden" name="order" id="order-input">
 <table id="news-table" class="data-table">
-<thead><tr><th></th><th>Title</th><th>Author</th><th>Date</th><th>Views</th><th colspan="2">Actions</th></tr></thead>
+<thead><tr><th></th><th>Title</th><th>Author</th><th>Date</th><th>Status</th><th>Views</th><th colspan="2">Actions</th></tr></thead>
 <tbody id="news-body">
 <?php echo $tbodyHtml; ?>
 </tbody>
