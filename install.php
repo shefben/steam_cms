@@ -237,6 +237,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 mbps   INT UNSIGNED NOT NULL 
             )");
 
+            $pdo->exec("DROP TABLE IF EXISTS admin_roles");
+            $pdo->exec("CREATE TABLE admin_roles(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) UNIQUE,
+                permissions TEXT
+            )");
+
             $pdo->exec("CREATE TABLE admin_users(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(100),
@@ -244,6 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 first_name TEXT,
                 last_name TEXT,
                 permissions TEXT,
+                role_id INT DEFAULT NULL,
                 created DATETIME,
                 password VARCHAR(255)
             )");
@@ -353,8 +361,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // table might not exist; ignore
             }
             $hash = password_hash($admin_pass, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,created,password) VALUES(?,?,?,?,?,NOW(),?)');
-            $stmt->execute([$admin_user,$admin_email,'','','all',$hash]);
+            $stmt = $pdo->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,role_id,created,password) VALUES(?,?,?,?,?,?,NOW(),?)');
+            $stmt->execute([$admin_user,$admin_email,'','', '', 1,$hash]);
             // default settings
             $footer = <<<'HTML'
 © 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
