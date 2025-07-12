@@ -98,3 +98,4 @@
 - News list filters by title and author via AJAX
 - Styled login page with jQuery validation and password reset request
 - Role-based administrator permissions with editable roles
+- Draft autosave for news and custom pages with restore option

@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - Logo preview resolves {BASE} correctly
 - Templated 2005 v1 index page with dynamic news, 2004 header, and dynamic footer
 - Introduce root path site setting and base URL handling
+- Added draft status and auto-saving for news and custom pages
 - Twig templating integrated; {BASE} placeholders now auto-convert
 - Twig templates now load from each theme's `layout` folder
 - Capsule uploads now support client-side cropping via Cropper.js
