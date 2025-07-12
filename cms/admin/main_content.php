@@ -7,6 +7,24 @@ $slug_legacy = $theme.'_index';
 $db = cms_get_db();
 $msg = '';
 $slug = $slug_clean;
+if(isset($_POST['autosave'])){
+    $title = trim($_POST['title']);
+    $content = $_POST['content'];
+    $stmt = $db->prepare('SELECT slug FROM custom_pages WHERE slug=? OR slug=? LIMIT 1');
+    $stmt->execute([$slug_clean,$slug_legacy]);
+    $existing = $stmt->fetchColumn();
+    if($existing){
+        $slug = $existing;
+        $u = $db->prepare('UPDATE custom_pages SET title=?,content=?,updated=NOW(),status="draft" WHERE slug=?');
+        $u->execute([$title,$content,$slug]);
+    }else{
+        $u = $db->prepare('INSERT INTO custom_pages(slug,title,content,created,updated,status) VALUES(?,?,?,?,NOW(),"draft")');
+        $u->execute([$slug_clean,$title,$content,date('Y-m-d H:i:s')]);
+    }
+    header('Content-Type: application/json');
+    echo json_encode(['time'=>date('H:i:s')]);
+    exit;
+}
 if(isset($_POST['save_page'])){
     $title = trim($_POST['title']);
     $content = $_POST['content'];
@@ -15,10 +33,10 @@ if(isset($_POST['save_page'])){
     $existing = $stmt->fetchColumn();
     if($existing){
         $slug = $existing;
-        $u = $db->prepare('UPDATE custom_pages SET title=?,content=?,updated=NOW() WHERE slug=?');
+        $u = $db->prepare('UPDATE custom_pages SET title=?,content=?,updated=NOW(),status="published" WHERE slug=?');
         $u->execute([$title,$content,$slug]);
     }else{
-        $u = $db->prepare('INSERT INTO custom_pages(slug,title,content,created,updated) VALUES(?,?,?,?,NOW())');
+        $u = $db->prepare('INSERT INTO custom_pages(slug,title,content,created,updated,status) VALUES(?,?,?,?,NOW(),"published")');
         $u->execute([$slug_clean,$title,$content,date('Y-m-d H:i:s')]);
     }
     $msg = 'Home page saved.';
@@ -38,10 +56,21 @@ Title:<br>
 <input type="text" name="title" value="<?php echo htmlspecialchars($title); ?>" style="width:100%;"><br><br>
 <textarea id="content" name="content" style="width:100%;height:400px;"><?php echo htmlspecialchars($content); ?></textarea><br>
 <input type="submit" name="save_page" value="Save">
+<span id="lastSaved" style="margin-left:10px;color:green;"></span>
 </form>
 <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('content');
+function autoSave(){
+    var data={
+        autosave:1,
+        title:document.querySelector('input[name=title]').value,
+        content:CKEDITOR.instances.content.getData()
+    };
+    fetch('main_content.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data)})
+    .then(r=>r.json()).then(function(res){document.getElementById('lastSaved').textContent='Last saved '+res.time;});
+}
+setInterval(autoSave,30000);
 </script>
 <?php include 'admin_footer.php'; ?>
