@@ -417,4 +417,14 @@ function cms_load_store_links($file){
     }
     return $links;
 }
+
+function cms_admin_log(string $action, ?int $userId = null): void
+{
+    $db = cms_get_db();
+    if ($userId === null) {
+        $userId = cms_current_admin();
+    }
+    $stmt = $db->prepare('INSERT INTO admin_logs(`user`, action, ts) VALUES(?,?,NOW())');
+    $stmt->execute([$userId, $action]);
+}
 ?>

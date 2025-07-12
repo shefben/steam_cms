@@ -7,6 +7,7 @@ if(isset($_POST['reorder']) && isset($_POST['order'])){
     cms_require_permission('news_edit');
     $ids = array_map('intval', explode(',', $_POST['order']));
     cms_set_setting('news_order', json_encode($ids));
+    cms_admin_log('Reordered news articles');
     if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
         echo 'ok';
     }else{
@@ -18,7 +19,9 @@ if(isset($_POST['reorder']) && isset($_POST['order'])){
 if(isset($_POST['delete'])){
     cms_require_permission('news_delete');
     $stmt = $db->prepare('DELETE FROM news WHERE id=?');
-    $stmt->execute([ (int)$_POST['delete'] ]);
+    $delId = (int)$_POST['delete'];
+    $stmt->execute([$delId]);
+    cms_admin_log('Deleted news article '.$delId);
 }
 // move up/down by swapping publish dates
 if(isset($_GET['move']) && isset($_GET['id'])){

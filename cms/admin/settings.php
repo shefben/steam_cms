@@ -46,6 +46,7 @@ if(isset($_POST['save'])){
         $favicon = '/cms/content/favicon.ico';
     }
     // header navigation settings moved to header_footer.php
+    cms_admin_log('Updated site settings');
     echo '<p>Settings saved.</p>';
     $site_title = trim($_POST['site_title']);
     $smtp_host = trim($_POST['smtp_host']);
