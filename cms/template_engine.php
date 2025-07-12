@@ -491,3 +491,69 @@ function cms_render_template(string $path, array $vars = []): void
     }
     echo $html;
 }
+
+function cms_render_template_theme(string $path, string $theme, array $vars = []): void
+{
+    $tpl_dir = dirname($path);
+    $subdir   = $vars['theme_subdir'] ?? '';
+    $base_url = cms_base_url();
+
+    $vars += [
+        'CMS_ROOT'  => __DIR__,
+        'THEME_DIR' => $tpl_dir,
+        'THEME_URL' => ($base_url ? $base_url : '') . "/themes/$theme" . ($subdir ? "/$subdir" : ''),
+        'CSS_PATH'  => ($base_url ? $base_url : '') . "/themes/$theme/" . ltrim(cms_get_theme_css($theme), '/'),
+        'BASE'      => $base_url,
+    ];
+
+    if (isset($vars['content'])) {
+        $vars['content'] = cms_render_string($vars['content'], $vars, $tpl_dir);
+    }
+
+    $env = cms_twig_env($tpl_dir);
+    cms_set_current_template(basename($path));
+    $html = $env->render(basename($path), $vars);
+
+    $css_base = basename(cms_get_theme_css($theme));
+    $css_path = $vars['CSS_PATH'];
+    $html = preg_replace('~(?:\.\./)?' . preg_quote($css_base, '~') . '~i', $css_path, $html);
+    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars) {
+        $path = $m[2];
+        if (preg_match('~^(?:https?:)?//|^/~', $path)) {
+            return $m[0];
+        }
+        $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        if ($ext === 'css') {
+            $dir = 'css';
+        } elseif ($ext === 'js') {
+            $dir = 'js';
+        } else {
+            $dir = 'images';
+        }
+        if (!preg_match('~^(css|js|images)/~', $path)) {
+            $path = $dir.'/'.$path;
+        }
+        return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
+    }, $html);
+
+    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars) {
+        $path = $m[2];
+        if (preg_match('~^(?:https?:)?//|^/~', $path)) {
+            return $m[0];
+        }
+        $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        if ($ext === 'css') {
+            $dir = 'css';
+        } elseif ($ext === 'js') {
+            $dir = 'js';
+        } else {
+            $dir = 'images';
+        }
+        if (!preg_match('~^(css|js|images)/~', $path)) {
+            $path = $dir.'/'.$path;
+        }
+        return 'url('.$m[1].$vars['THEME_URL'].'/'.$path.$m[1].')';
+    }, $html);
+
+    echo $html;
+}

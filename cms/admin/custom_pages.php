@@ -100,6 +100,7 @@ if(isset($_GET['edit'])){
 <textarea name="content" id="content" style="width:100%;height:300px;"></textarea><br>
 <input type="submit" name="save_page" value="Save">
 <span id="lastSaved" style="margin-left:10px;color:green;"></span>
+<button type="button" id="previewBtn" style="display:none;">Preview</button>
 <button type="button" id="restoreDraft" style="display:none;">Restore Draft</button>
 <button type="button" id="cancel">Cancel</button>
 </form>
@@ -112,7 +113,7 @@ function autoSave(){
     var data=$('form').serializeArray();
     data.push({name:'autosave',value:1});
     data.push({name:'content',value:CKEDITOR.instances.content.getData()});
-    $.post('custom_pages.php<?php echo isset($edit)?'?edit='.urlencode($edit['slug']):''; ?>',data,function(res){
+    return $.post('custom_pages.php<?php echo isset($edit)?'?edit='.urlencode($edit['slug']):''; ?>',data,function(res){
         $('#lastSaved').text('Last saved '+res.time);
     },'json');
 }
@@ -125,6 +126,11 @@ $('#restoreDraft').show().on('click',function(){
         CKEDITOR.instances.content.setData(d.content);
     },'json');
 });
+$('#previewBtn').show().on('click',function(){
+    autoSave().then(function(){
+        window.open('preview.php?type=page&slug=<?php echo urlencode($edit['slug']); ?>&theme=<?php echo $current_theme; ?>','_blank');
+    });
+});
 <?php endif; ?>
 $('#addBtn').on('click',function(){
     $('#slug').prop('readonly',false).val('');
@@ -132,6 +138,7 @@ $('#addBtn').on('click',function(){
     CKEDITOR.instances.content.setData('');
     $('.themeChk').prop('checked',false);
     $('#template').val('');
+    $('#previewBtn').hide();
     $('#editor').show();
 });
 <?php if($edit): ?>
