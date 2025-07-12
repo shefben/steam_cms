@@ -3,7 +3,7 @@ require_once __DIR__.'/cms/db.php';
 require_once __DIR__.'/cms/news.php';
 header('Content-Type: application/rss+xml; charset=utf-8');
 $db = cms_get_db();
-$items = $db->query("SELECT id,title,content,publish_date FROM news WHERE publish_date<=NOW() ORDER BY publish_date DESC LIMIT 20")->fetchAll(PDO::FETCH_ASSOC);
+$items = $db->query("SELECT id,title,content,publish_date FROM news WHERE publish_date<=NOW() AND status='published' ORDER BY publish_date DESC LIMIT 20")->fetchAll(PDO::FETCH_ASSOC);
 $site = cms_get_setting('site_title','Steam');
 $base = 'http://'.$_SERVER['HTTP_HOST'];
 echo "<?xml version='1.0' encoding='UTF-8'?>\n";

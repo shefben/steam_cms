@@ -3,6 +3,7 @@ require_once 'admin_header.php';
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 cms_require_permission($id ? 'news_edit' : 'news_create');
 $db = cms_get_db();
+$theme = cms_get_setting('theme','2004');
 if(isset($_GET['ajax']) && $id){
     $stmt = $db->prepare('SELECT * FROM news WHERE id=?');
     $stmt->execute([$id]);
@@ -66,7 +67,7 @@ function autoSave(){
         publish_date:document.querySelector('input[name=publish_date]').value,
         content:CKEDITOR.instances.content.getData()
     };
-    fetch('news_edit.php<?php echo $id?"?id=$id":""; ?>',{
+    return fetch('news_edit.php<?php echo $id?"?id=$id":""; ?>',{
         method:'POST',
         headers:{'Content-Type':'application/x-www-form-urlencoded'},
         body:new URLSearchParams(data)
@@ -87,6 +88,7 @@ Publish Date: <input type="datetime-local" name="publish_date" value="<?php echo
 <textarea id="content" name="content" style="width:100%;height:300px;"><?php echo htmlspecialchars($article['content']); ?></textarea><br>
 <input type="submit" name="save" value="Save">
 <span id="lastSaved" style="margin-left:10px;color:green;"></span>
+<button type="button" id="previewBtn">Preview</button>
 <?php if($id): ?>
 <button type="button" id="restoreDraft">Restore Draft</button>
 <?php endif; ?>
@@ -101,6 +103,11 @@ document.getElementById('restoreDraft').addEventListener('click',function(){
         document.querySelector('input[name=author]').value=d.author;
         document.querySelector('input[name=publish_date]').value=d.publish_date.replace(' ','T');
         CKEDITOR.instances.content.setData(d.content);
+    });
+});
+document.getElementById('previewBtn').addEventListener('click',function(){
+    autoSave().then(function(){
+        window.open('preview.php?type=news&id=<?php echo $id; ?>&theme=<?php echo $theme; ?>','_blank');
     });
 });
 </script>
