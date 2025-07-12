@@ -33,12 +33,12 @@ function cms_set_setting($key,$value){
 function cms_get_custom_page($slug,$theme=null){
     $db = cms_get_db();
     try {
-        $stmt = $db->prepare('SELECT title,content,theme,template FROM custom_pages WHERE slug=?');
+        $stmt = $db->prepare('SELECT title,content,theme,template FROM custom_pages WHERE slug=? AND status="published"');
         $stmt->execute([$slug]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         if ($e->getCode() === '42S22') { // column missing
-            $stmt = $db->prepare('SELECT title,content,theme FROM custom_pages WHERE slug=?');
+            $stmt = $db->prepare('SELECT title,content,theme FROM custom_pages WHERE slug=? AND status="published"');
             $stmt->execute([$slug]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if (!$row) return null;
@@ -124,10 +124,19 @@ function cms_has_permission($perm){
     $id = cms_current_admin();
     if(!$id) return false;
     $db = cms_get_db();
-    $row = $db->prepare('SELECT permissions FROM admin_users WHERE id=?');
+    $row = $db->prepare('SELECT role_id, permissions FROM admin_users WHERE id=?');
     $row->execute([$id]);
-    $perms = $row->fetchColumn();
-    if($perms===false) return false;
+    $info = $row->fetch(PDO::FETCH_ASSOC);
+    if(!$info) return false;
+
+    $perms = $info['permissions'];
+    if($info['role_id']){
+        $stmt = $db->prepare('SELECT permissions FROM admin_roles WHERE id=?');
+        $stmt->execute([$info['role_id']]);
+        $perms = $stmt->fetchColumn();
+    }
+
+    if($perms===false || $perms==='') return false;
     if($perms==='all') return true;
     $list = array_map('trim', explode(',', $perms));
     if(in_array($perm,$list)) return true;

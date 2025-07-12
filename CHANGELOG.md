@@ -3,9 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Introduced role-based permission system with new roles admin page
 - Admin dashboard graphs now use Chart.js with weekly/monthly toggles
 - Admin news list supports filtering by title and author with AJAX pagination
 - Admin login styled with theme CSS, includes jQuery validation and reset link
+- Admin sidebar links now support drag-and-drop sorting with dynamic add/remove
 - Custom page template fallback now loads `default.twig` from the active theme
 - Add storefront dropdown navigation in admin sidebar
 - Fixed capsule modal positioning and added overlay click to close
@@ -21,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - Templated 2005 v1 index page with dynamic news, 2004 header, and dynamic footer
 - Introduce root path site setting and base URL handling
 - Notification table tracks messages for admins
+- Added draft status and auto-saving for news and custom pages
 - Twig templating integrated; {BASE} placeholders now auto-convert
 - Twig templates now load from each theme's `layout` folder
 - Capsule uploads now support client-side cropping via Cropper.js

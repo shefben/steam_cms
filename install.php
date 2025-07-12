@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
             $pdo->exec("DROP TABLE IF EXISTS news");
-            $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT,is_official TINYINT(1) DEFAULT 1)");
+            $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,views INT DEFAULT 0,content TEXT,is_official TINYINT(1) DEFAULT 1,status VARCHAR(20) DEFAULT 'draft')");
             $pdo->exec("DROP TABLE IF EXISTS content_servers");
             $pdo->exec("CREATE TABLE content_servers(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -115,7 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 theme TEXT DEFAULT NULL,
                 template VARCHAR(255) DEFAULT NULL,
                 created DATETIME,
-                updated DATETIME
+                updated DATETIME,
+                status VARCHAR(20) DEFAULT 'draft'
             )");
             $pdo->exec("DROP TABLE IF EXISTS cafe_directory");
             $pdo->exec("CREATE TABLE cafe_directory(
@@ -236,6 +237,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 mbps   INT UNSIGNED NOT NULL 
             )");
 
+            $pdo->exec("DROP TABLE IF EXISTS admin_roles");
+            $pdo->exec("CREATE TABLE admin_roles(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) UNIQUE,
+                permissions TEXT
+            )");
+
             $pdo->exec("CREATE TABLE admin_users(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(100),
@@ -243,6 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 first_name TEXT,
                 last_name TEXT,
                 permissions TEXT,
+                role_id INT DEFAULT NULL,
                 created DATETIME,
                 password VARCHAR(255)
             )");
@@ -323,7 +332,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $rows = preg_split('/\),\s*\(/', trim($vals, '()'));   // split rows
 
                         $newsStmt = $pdo->prepare(
-                            'INSERT INTO news(id,title,author,publish_date,content) VALUES(?,?,?,?,?)'
+                            'INSERT INTO news(id,title,author,publish_date,content,status) VALUES(?,?,?,?,?,?)'
                         );
 
                         foreach ($rows as $row) {
@@ -339,7 +348,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $date    = normalizeDate($parts[3]);
                             $content = str_replace("''", "'", $parts[4]);
 
-                            $newsStmt->execute([$id,$title,$author,$date,$content]);
+                            $newsStmt->execute([$id,$title,$author,$date,$content,'published']);
                         }
                         continue;  // skip $pdo->exec($stmt) — we’ve handled it.
                     }
@@ -362,8 +371,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // table might not exist; ignore
             }
             $hash = password_hash($admin_pass, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,created,password) VALUES(?,?,?,?,?,NOW(),?)');
-            $stmt->execute([$admin_user,$admin_email,'','','all',$hash]);
+            $stmt = $pdo->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,role_id,created,password) VALUES(?,?,?,?,?,?,NOW(),?)');
+            $stmt->execute([$admin_user,$admin_email,'','', '', 1,$hash]);
             // default settings
             $footer = <<<'HTML'
 © 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
@@ -442,7 +451,7 @@ HTML;
             foreach ($defaults as $k => $v) {
                 $stmt->execute([$k,$v]);
             }
-            $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated) VALUES(?,?,?,?,?,?,?)');
+            $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,?,?)');
 
             /* -----------------------------------------------------------
              *  HEADER-BAR SEEDS
@@ -704,7 +713,7 @@ xxxxxx xxxxx xxxxx x xxx xxxxxxx xxxxxx xxx xxxxxx x xxxxxx xxxxxxx. xxxxxx xxxx
 <a href="index.php?area=getsteamnow"><img src="images/but_getsteamnow.gif" height="24" width="124" alt="get steam now"></a><br>
 </div>
 HTML;
-            $pageStmt->execute(['features','Features',$features_html,'2003_v1,2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['features','Features',$features_html,'2003_v1,2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
             $e3_html = <<<'HTML'
 <!-- e3 movies -->
@@ -745,7 +754,7 @@ Note that these movies are in Bink .exe format. If your computer has trouble pla
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['e3_movies','Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['e3_movies','Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
             $forums_html = <<<'HTML'
 <!-- forums -->
@@ -773,7 +782,7 @@ HTML;
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['forums','Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['forums','Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
             $ded_html = <<<'HTML'
 <!-- dedicated server -->
@@ -794,7 +803,7 @@ NOTE: This release includes only those files which have changed since the last d
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['dedicated_server','Dedicated Server update files',$ded_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['dedicated_server','Dedicated Server update files',$ded_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
             $css_html = <<<'HTML'
 <!-- CS:S Beta 1 FAQ -->
@@ -835,7 +844,7 @@ HTML;
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['css_b1','Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['css_b1','Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
             $pricing_html = <<<'HTML'
 <div class="content" id="container">
@@ -867,7 +876,7 @@ If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valv
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
+            $pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
             $dirStmt = $pdo->prepare('INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord) VALUES(?,?,?,?,?,?,?)');
             $defaultCafes = [
