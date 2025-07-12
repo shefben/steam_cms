@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Custom page template fallback now loads `default.twig` from the active theme
 - Add storefront dropdown navigation in admin sidebar
 - Fixed capsule modal positioning and added overlay click to close
 - Corrected capsule image paths in storefront admin
