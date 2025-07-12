@@ -15,14 +15,18 @@ if(isset($_POST['action']) && $_POST['action']==='save'){
             $hash=password_hash($_POST['password'],PASSWORD_DEFAULT);
             $db->prepare('UPDATE admin_users SET password=? WHERE id=?')->execute([$hash,$id]);
         }
+        cms_admin_log('Updated admin user '.$id);
     }else{
         $hash=password_hash($_POST['password'],PASSWORD_DEFAULT);
         $stmt=$db->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,created,password) VALUES(?,?,?,?,?,NOW(),?)');
         $stmt->execute([trim($_POST['username']),$email,$first,$last,$perm,$hash]);
+        cms_admin_log('Created admin user '.trim($_POST['username']));
     }
 }
 if(isset($_POST['delete'])){
-    $db->prepare('DELETE FROM admin_users WHERE id=?')->execute([intval($_POST['delete'])]);
+    $delId = intval($_POST['delete']);
+    $db->prepare('DELETE FROM admin_users WHERE id=?')->execute([$delId]);
+    cms_admin_log('Deleted admin user '.$delId);
 }
 $rows=$db->query('SELECT * FROM admin_users')->fetchAll(PDO::FETCH_ASSOC);
 ?>

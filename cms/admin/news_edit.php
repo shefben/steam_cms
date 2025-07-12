@@ -18,10 +18,12 @@ if(isset($_POST['save'])){
     if($id){
         $stmt = $db->prepare('UPDATE news SET title=?, author=?, content=?, publish_date=? WHERE id=?');
         $stmt->execute([$title,$author,$content,$_POST['publish_date'],$id]);
+        cms_admin_log('Updated news article '.$id);
     }else{
         $stmt = $db->prepare('INSERT INTO news(title,author,publish_date,content,views,is_official) VALUES(?,?,?,?,0,0)');
         $stmt->execute([$title,$author,$_POST['publish_date'],$content]);
         $id = $db->lastInsertId();
+        cms_admin_log('Created news article '.$id);
     }
     header('Location: news.php');
     exit;

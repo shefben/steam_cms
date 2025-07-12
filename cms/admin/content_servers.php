@@ -25,6 +25,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $stmt->bind_param('ssiss',$_POST['name'],$_POST['ip'],$_POST['port'],$_POST['capacity'],$_POST['region']);
         $stmt->execute();
         $stmt->close();
+        cms_admin_log('Added content server '.trim($_POST['name']));
         header('Location: content_servers.php'); exit;
     }
     if(isset($_POST['update'])){
@@ -32,16 +33,19 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $stmt->bind_param('ssissi',$_POST['name'],$_POST['ip'],$_POST['port'],$_POST['capacity'],$_POST['region'],$_POST['id']);
         $stmt->execute();
         $stmt->close();
+        cms_admin_log('Updated content server '.intval($_POST['id']));
         header('Location: content_servers.php'); exit;
     }
     if(isset($_POST['delete'])){
         $id=(int)$_POST['delete'];
         $db->query('DELETE FROM content_servers WHERE id='.$id);
         $db->query('DELETE FROM server_stats WHERE server_id='.$id);
+        cms_admin_log('Deleted content server '.$id);
         header('Location: content_servers.php'); exit;
     }
     if(isset($_POST['set_settings'])){
         set_setting($db,'cs_theme',$_POST['cs_theme']);
+        cms_admin_log('Updated content server settings');
         header('Location: content_servers.php'); exit;
     }
     if(isset($_POST['set_main_server'])){

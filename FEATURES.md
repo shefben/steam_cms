@@ -8,6 +8,7 @@
 - Year-based news filtering configurable per theme year
 - Individual storefront admin pages for featured items, products, categories and sidebar
 - Pixel-perfect 2004 layout with full-height news box
+- Admin action logging with database-backed audit trail
 
 - 2004 index snippets auto-wrap after two lines
 - Logout link pinned to bottom of admin sidebar for consistent navigation

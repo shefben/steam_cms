@@ -252,6 +252,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 user_id INT,
                 expires DATETIME
             )");
+            $pdo->exec("DROP TABLE IF EXISTS admin_logs");
+            $pdo->exec("CREATE TABLE admin_logs(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user INT,
+                action TEXT,
+                ts DATETIME DEFAULT CURRENT_TIMESTAMP
+            )");
             $pdo->exec("DROP TABLE IF EXISTS page_views");
             $pdo->exec("CREATE TABLE page_views(
                 date DATE,

@@ -17,14 +17,17 @@ if(isset($_POST['save_page'])){
     if($exists->fetch()){
         $stmt=$db->prepare('UPDATE custom_pages SET title=?,content=?,theme=?,template=?,updated=NOW() WHERE slug=?');
         $stmt->execute([$title,$content,$themeStr,$template,$slug]);
+        cms_admin_log('Updated custom page '.$slug);
     }else{
         $stmt=$db->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated) VALUES(?,?,?,?,?,?,NOW())');
         $stmt->execute([$slug,$title,$content,$themeStr,$template,date('Y-m-d H:i:s')]);
+        cms_admin_log('Created custom page '.$slug);
     }
 }
 if(isset($_GET['delete'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['delete']);
     $db->prepare('DELETE FROM custom_pages WHERE slug=?')->execute([$slug]);
+    cms_admin_log('Deleted custom page '.$slug);
 }
 $pages=$db->query("SELECT slug,title FROM custom_pages WHERE slug NOT LIKE '%_index' ORDER BY slug")->fetchAll(PDO::FETCH_ASSOC);
 $edit=null;
