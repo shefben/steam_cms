@@ -54,34 +54,29 @@ $paramsWithLimit = array_merge($params, [$perPage, $offset]);
 $stmt = $db->prepare("SELECT * FROM admin_users $where ORDER BY username LIMIT ? OFFSET ?");
 $stmt->execute($paramsWithLimit);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$tbodyHtml = '';
+foreach ($rows as $r) {
+    $tbodyHtml .= '<tr>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($r['username']) . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($r['email']) . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($r['created']) . '</td>';
+    $tbodyHtml .= '<td>';
+    if ($r['role_id']) {
+        $tbodyHtml .= htmlspecialchars($roleMap[$r['role_id']] ?? 'Unknown');
+    } else {
+        $tbodyHtml .= htmlspecialchars($r['permissions']);
+    }
+    $tbodyHtml .= '</td>';
+    $tbodyHtml .= '<td class="actions">';
+    $tbodyHtml .= '<button class="editBtn btn btn-small" data-id="' . $r['id'] . '">Edit</button> ';
+    $tbodyHtml .= '<form method="post" style="display:inline"><input type="hidden" name="delete" value="' . $r['id'] . '"><input type="submit" value="Delete" class="btn btn-small btn-danger"></form>';
+    $tbodyHtml .= '</td>';
+    $tbodyHtml .= '</tr>';
+}
+
+ob_start();
 ?>
-<h2>Administrators</h2>
-<form method="get" style="margin-bottom:10px;">
-    <input type="text" name="q" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search by username or email">
-    <button type="submit">Search</button>
-</form>
-<button id="addBtn">Add Administrator</button>
-<table>
-<tr><th>Username</th><th>Email</th><th>Created</th><th>Role/Permissions</th><th>Actions</th></tr>
-<?php foreach($rows as $r): ?>
-<tr>
-<td><?php echo htmlspecialchars($r['username']); ?></td>
-<td><?php echo htmlspecialchars($r['email']); ?></td>
-<td><?php echo htmlspecialchars($r['created']); ?></td>
-<td>
-<?php if($r['role_id']): ?>
-    <?php echo htmlspecialchars($roleMap[$r['role_id']] ?? 'Unknown'); ?>
-<?php else: ?>
-    <?php echo htmlspecialchars($r['permissions']); ?>
-<?php endif; ?>
-</td>
-<td>
-<button class="editBtn" data-id="<?php echo $r['id']; ?>">Edit</button>
-<form method="post" style="display:inline"><input type="hidden" name="delete" value="<?php echo $r['id']; ?>"><input type="submit" value="Delete"></form>
-</td>
-</tr>
-<?php endforeach; ?>
-</table>
 <div class="pagination">
 <?php
 $query = $_GET;
@@ -95,6 +90,28 @@ if ($page < $pages) {
 }
 ?>
 </div>
+<?php
+$paginationHtml = ob_get_clean();
+
+if (isset($_GET['ajax'])) {
+    header('Content-Type: application/json');
+    echo json_encode(['tbody' => $tbodyHtml, 'pagination' => $paginationHtml, 'rows' => $rows]);
+    exit;
+}
+?>
+<h2>Administrators</h2>
+<form method="get" id="search-form" style="margin-bottom:10px;">
+    <label>Search: <input type="text" id="search-box" name="q" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search by username or email"></label>
+    <button type="submit" class="btn btn-small">Search</button>
+</form>
+<button id="addBtn" class="btn btn-primary">Add Administrator</button>
+<table class="data-table">
+<thead><tr><th>Username</th><th>Email</th><th>Created</th><th>Role/Permissions</th><th>Actions</th></tr></thead>
+<tbody id="users-body">
+<?php echo $tbodyHtml; ?>
+</tbody>
+</table>
+<?php echo $paginationHtml; ?>
 <div id="editor" style="display:none;border:1px solid #333;padding:10px;background:#eee;">
 <form method="post">
 <input type="hidden" name="id" id="eid" value="0">
@@ -119,7 +136,42 @@ if ($page < $pages) {
 </form>
 </div>
 <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
+<?php echo "<script>var data=" . json_encode($rows) . ", currentPage=$page;</script>"; ?>
 <script>
+function bindActions(){
+    $('.editBtn').off('click').on('click',function(){
+        var id=$(this).data('id');
+        for(var i=0;i<data.length;i++) if(data[i].id==id){
+            $('#eid').val(data[i].id);
+            $('#eusername').val(data[i].username);
+            $('#eemail').val(data[i].email);
+            $('#efirst').val(data[i].first_name);
+            $('#elast').val(data[i].last_name);
+            $('#erole').val(data[i].role_id?data[i].role_id:'');
+            $('#eperm').val(data[i].permissions);
+            break;
+        }
+        togglePerm();
+        $('#editor').show();
+    });
+    $('.pagination a').off('click').on('click',function(e){
+        e.preventDefault();
+        var p=parseInt(new URL(this.href).searchParams.get('page'))||1;
+        loadPage(p);
+    });
+}
+function loadPage(p){
+    var q=$('#search-box').val();
+    $.get('admin_users.php',{ajax:1,q:q,page:p},function(res){
+        $('#users-body').html(res.tbody);
+        $('.pagination').replaceWith(res.pagination);
+        data=res.rows;
+        bindActions();
+        currentPage=p;
+    },'json');
+}
+$('#search-box').on('input',function(){ loadPage(1); });
+$('#search-form').on('submit',function(e){ e.preventDefault(); loadPage(1); });
 $('#addBtn').on('click',function(){
     $('#eid').val('0');
     $('#eusername').val('');
@@ -133,27 +185,12 @@ $('#addBtn').on('click',function(){
     togglePerm();
     $('#editor').show();
 });
-$('.editBtn').on('click',function(){
-    var id=$(this).data('id');
-    <?php echo "var data=".json_encode($rows).";"; ?>
-    for(var i=0;i<data.length;i++) if(data[i].id==id){
-        $('#eid').val(data[i].id);
-        $('#eusername').val(data[i].username);
-        $('#eemail').val(data[i].email);
-        $('#efirst').val(data[i].first_name);
-        $('#elast').val(data[i].last_name);
-        $('#erole').val(data[i].role_id?data[i].role_id:'');
-        $('#eperm').val(data[i].permissions);
-        break;
-    }
-    togglePerm();
-    $('#editor').show();
-});
 $('#cancel').on('click',function(){ $('#editor').hide(); });
 $('#erole').on('change',togglePerm);
 function togglePerm(){
     if($('#erole').val()==='') $('#permRow').show();
     else $('#permRow').hide();
 }
+bindActions();
 </script>
 <?php include 'admin_footer.php'; ?>
