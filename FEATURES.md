@@ -93,5 +93,6 @@
 - Scheduled content admin checks schedule type fields
 - Capsule editor lists existing images by theme
 - Comprehensive tag guide available in TAGS.md
+- Capsule uploader provides client-side image cropping
 - News list filters by title and author via AJAX
 - Styled login page with jQuery validation and password reset request
