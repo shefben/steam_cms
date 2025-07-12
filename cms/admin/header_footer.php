@@ -5,8 +5,10 @@ cms_require_permission('manage_settings');
 $base = cms_base_url();
 $theme_list = array_filter(cms_get_themes(), fn($t)=>substr($t,-6) !== '_admin');
 $theme = $_GET['theme'] ?? ($_POST['theme'] ?? ($theme_list[0] ?? ''));
+$page = $_GET['page'] ?? ($_POST['page'] ?? '');
 $logo_files = array_map('basename', glob(__DIR__.'/../img/steam_logo_onblack*.gif'));
-$data = cms_get_theme_header_data($theme);
+$data = cms_get_theme_header_data($theme, $page);
+$spacer = $data['spacer'] ?? '';
 $footer_html = cms_get_theme_footer($theme);
 $css_path = cms_get_theme_css($theme);
 
@@ -19,10 +21,10 @@ if(isset($_POST['reorder']) && isset($_POST['order'])){
     }
     $data['buttons'] = $reordered;
     $db = cms_get_db();
-    $db->prepare('DELETE FROM theme_headers WHERE theme=?')->execute([$theme]);
-    $ins = $db->prepare('INSERT INTO theme_headers(theme,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,1,?)');
+    $db->prepare('DELETE FROM theme_headers WHERE theme=? AND page=?')->execute([$theme, $page]);
+    $ins = $db->prepare('INSERT INTO theme_headers(theme,page,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,?,1,?)');
     foreach($reordered as $ord=>$b){
-        $ins->execute([$theme,$ord,$data['logo'],$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$data['spacer'] ?? '']);
+        $ins->execute([$theme,$page,$ord,$data['logo'],$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$spacer]);
     }
     if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
         echo 'ok';
@@ -79,13 +81,13 @@ if(isset($_POST['save'])){
             'text'=>trim($b['text'])
         ];
     }
-    $data = ['logo'=>$logo,'buttons'=>$out];
+    $spacer = trim($_POST['spacer'] ?? $spacer);
+    $data = ['logo'=>$logo,'buttons'=>$out, 'spacer'=>$spacer];
     $db = cms_get_db();
-    $db->prepare('DELETE FROM theme_headers WHERE theme=?')->execute([$theme]);
-    $ins = $db->prepare('INSERT INTO theme_headers(theme,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,1,?)');
-    $spacer = $data['spacer'] ?? '';
+    $db->prepare('DELETE FROM theme_headers WHERE theme=? AND page=?')->execute([$theme,$page]);
+    $ins = $db->prepare('INSERT INTO theme_headers(theme,page,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,?,1,?)');
     foreach($out as $ord=>$b){
-        $ins->execute([$theme,$ord,$logo,$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$spacer]);
+        $ins->execute([$theme,$page,$ord,$logo,$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$spacer]);
     }
     $db->prepare('REPLACE INTO theme_footers(theme,html) VALUES(?,?)')->execute([$theme,$_POST['footer_html']]);
     $db->prepare('UPDATE themes SET css_path=? WHERE name=?')->execute([$css_path,$theme]);
@@ -98,7 +100,8 @@ if(isset($_POST['save'])){
     $no_footer_pages = trim($_POST['no_footer_pages']);
     $footer_html = $_POST['footer_html'];
     $logo_overrides = trim($_POST['logo_overrides']);
-    $data = cms_get_theme_header_data($theme);
+    $data = cms_get_theme_header_data($theme, $page);
+    $spacer = $data['spacer'] ?? '';
     echo '<p>Settings saved.</p>';
 }
 if(isset($_POST['add'])){
@@ -106,13 +109,17 @@ if(isset($_POST['add'])){
 }
 ?>
 <h2>Header &amp; Footer</h2>
-<label>Theme: <select id="theme-select" name="theme" onchange="location.href='header_footer.php?theme='+this.value;">
+<label>Theme: <select id="theme-select" name="theme" onchange="location.href='header_footer.php?theme='+this.value+'&page='+encodeURIComponent(document.getElementById('page-input').value);">
 <?php foreach($theme_list as $t): ?>
   <option value="<?php echo htmlspecialchars($t); ?>" <?php if($t==$theme) echo 'selected'; ?>><?php echo htmlspecialchars($t); ?></option>
 <?php endforeach; ?>
 </select></label>
+<label style="margin-left:10px;">Page:
+  <input type="text" id="page-input" name="page" value="<?php echo htmlspecialchars($page); ?>" placeholder="index" style="width:120px">
+</label>
 <form method="post" enctype="multipart/form-data">
 <input type="hidden" name="theme" value="<?php echo htmlspecialchars($theme); ?>">
+<input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
 Stylesheet path: <input type="text" name="css_path" value="<?php echo htmlspecialchars($css_path); ?>" style="width:300px" title="Theme CSS file"><br>
 <p>Current logo:</p>
 <?php $logo = $data['logo'];
@@ -145,6 +152,8 @@ if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
 </table>
 <br>
 <button type="button" id="add-button" class="btn btn-primary">Add Button</button>
+<br>
+Spacer between links: <input type="text" name="spacer" value="<?php echo htmlspecialchars($spacer); ?>" style="width:150px" title="HTML allowed between nav links"><br>
 <h3>Display Options</h3>
 Pages without header bar (one per line):<br>
 <textarea name="no_header_pages" style="width:100%;height:60px;" title="Hide entire header on these pages"><?php echo htmlspecialchars($no_header_pages); ?></textarea><br>
@@ -168,7 +177,8 @@ function sendOrder(){
     data.set('reorder','1');
     data.set('order',ids.join(','));
     var theme=document.getElementById('theme-select').value;
-    fetch('header_footer.php?theme='+encodeURIComponent(theme),{method:'POST',body:data});
+    var page=document.getElementById('page-input').value;
+    fetch('header_footer.php?theme='+encodeURIComponent(theme)+'&page='+encodeURIComponent(page),{method:'POST',body:data});
 }
 var sortable = new Sortable(tbody, {handle: '.handle', onEnd: sendOrder});
 

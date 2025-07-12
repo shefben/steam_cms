@@ -147,9 +147,9 @@ function cms_twig_env(string $tpl_dir): Environment
             $env   = cms_twig_env('.');
             return $env->createTemplate($html)->render(['BASE' => cms_base_url()]);
         }, ['is_safe' => ['html']]));
-        $env->addFunction(new TwigFunction('nav_buttons', function(string $theme = '', string $style = '') {
+        $env->addFunction(new TwigFunction('nav_buttons', function(string $theme = '', string $style = '', ?string $spacer = null) {
             $theme = $theme !== '' ? $theme : cms_get_setting('theme', '2004');
-            return cms_header_buttons_html($theme, $style);
+            return cms_header_buttons_html($theme, $style, $spacer);
         }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('news', function(string $type, ?int $count = null) {
             $theme = cms_get_setting('theme', '2004');
@@ -438,6 +438,7 @@ function cms_render_template(string $path, array $vars = []): void
     }
 
     $env = cms_twig_env($tpl_dir);
+    cms_set_current_template(basename($path));
     $html = $env->render(basename($path), $vars);
 
     $css_base = basename(cms_get_theme_css($theme));

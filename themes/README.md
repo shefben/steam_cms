@@ -25,7 +25,7 @@ The template engine exposes a set of Twig functions used to render dynamic conte
 |-----|-------------------|---------------------|
 | `header(withButtons=true)` | – | Render the theme header including the navigation buttons. Used at the top of every layout. |
 | `footer()` | – | Output the theme footer. Placed at the bottom of layouts. |
-| `nav_buttons(theme, style)` | `theme` (string), `style` (string) | Load navigation links from another theme or with an alternate style. Useful when a layout wants buttons from a different year. |
+| `nav_buttons(theme, style, spacer)` | `theme` (string), `style` (string), `spacer` (string) | Load navigation links. The active template decides which page-specific buttons to show. The spacer argument overrides the stored value. |
 | `news(type, count)` | `type` can be `full_article`, `partial_article`, `small_abstract`, `link_only`, `index_summary`, `index_summary_date`, `index_bodygreen`, `index_2006`, `index_brief`. `count` limits the number of items. | Generic news renderer. The helpers `news_index_brief`, `news_index_bodygreen` and `news_index_2006` call this with preset types. |
 | `news_index_brief(count)` | – | Convenience wrapper for `news('index_brief', count)`. Appears on early home pages. |
 | `news_index_bodygreen(count)` | – | Wrapper for `news('index_bodygreen', count)`. |

@@ -197,6 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $pdo->exec("CREATE TABLE theme_headers(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 theme VARCHAR(50),
+                page VARCHAR(50) DEFAULT '',
                 ord INT DEFAULT 0,
                 logo TEXT,
                 text TEXT,
@@ -206,7 +207,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 url TEXT,
                 visible TINYINT(1) DEFAULT 1,
                 spacer TEXT,
-                INDEX(theme)
+                INDEX(theme),
+                INDEX(page)
             )");
             $pdo->exec("DROP TABLE IF EXISTS theme_footers");
             $pdo->exec("CREATE TABLE theme_footers(
@@ -475,8 +477,8 @@ HTML;
              * --------------------------------------------------------- */
             $thStmt = $pdo->prepare(
                 'INSERT INTO theme_headers
-                 (theme,ord,logo,text,img,hover,depressed,url,visible,spacer)
-                 VALUES (?,?,?,?,?,?,?,?,1,?)'
+                 (theme,page,ord,logo,text,img,hover,depressed,url,visible,spacer)
+                 VALUES (?,?,?,?,?,?,?,?,?,1,?)'
             );
 
             foreach ($logos as $theme => $logo) {
@@ -495,6 +497,7 @@ HTML;
                 foreach ($buttons as $btn) {
                     $thStmt->execute([
                         $theme,
+                        '',
                         $ord++,
                         $logo,
                         $btn['text'],

@@ -53,7 +53,9 @@
 - Early themes no longer depend on archived HTML files for rendering
 - Theme-specific headers and footers stored in dedicated tables with admin selector
 - Navigation buttons available via {nav_buttons} template tag
+- Navigation buttons can be customized per page and theme; template detection is automatic
 - Navigation buttons display images when paths provided and support customizable spacers
+- Spacer text or HTML can be set per theme and overridden via the nav_buttons tag
 - Footer HTML can be output using a {footer} template tag
 - Stylesheet paths stored per theme and editable in admin
 - Layout templates selectable per page
