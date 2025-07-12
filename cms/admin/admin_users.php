@@ -34,9 +34,32 @@ if(isset($_POST['delete'])){
     $db->prepare('DELETE FROM admin_users WHERE id=?')->execute([$delId]);
     cms_admin_log('Deleted admin user '.$delId);
 }
-$rows=$db->query('SELECT * FROM admin_users')->fetchAll(PDO::FETCH_ASSOC);
+$search = trim($_GET['q'] ?? '');
+$where = '';
+$params = [];
+if ($search !== '') {
+    $where = 'WHERE username LIKE ? OR email LIKE ?';
+    $params = ["%$search%", "%$search%"];
+}
+
+$stmt = $db->prepare("SELECT COUNT(*) FROM admin_users $where");
+$stmt->execute($params);
+$total = (int)$stmt->fetchColumn();
+$perPage = 20;
+$page = max(1, (int)($_GET['page'] ?? 1));
+$pages = max(1, (int)ceil($total / $perPage));
+$offset = ($page - 1) * $perPage;
+
+$paramsWithLimit = array_merge($params, [$perPage, $offset]);
+$stmt = $db->prepare("SELECT * FROM admin_users $where ORDER BY username LIMIT ? OFFSET ?");
+$stmt->execute($paramsWithLimit);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Administrators</h2>
+<form method="get" style="margin-bottom:10px;">
+    <input type="text" name="q" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search by username or email">
+    <button type="submit">Search</button>
+</form>
 <button id="addBtn">Add Administrator</button>
 <table>
 <tr><th>Username</th><th>Email</th><th>Created</th><th>Role/Permissions</th><th>Actions</th></tr>
@@ -59,6 +82,19 @@ $rows=$db->query('SELECT * FROM admin_users')->fetchAll(PDO::FETCH_ASSOC);
 </tr>
 <?php endforeach; ?>
 </table>
+<div class="pagination">
+<?php
+$query = $_GET;
+if ($page > 1) {
+    $query['page'] = $page - 1;
+    echo '<a href="?' . http_build_query($query) . '">&laquo; Prev</a>';
+}
+if ($page < $pages) {
+    $query['page'] = $page + 1;
+    echo ' <a href="?' . http_build_query($query) . '">Next &raquo;</a>';
+}
+?>
+</div>
 <div id="editor" style="display:none;border:1px solid #333;padding:10px;background:#eee;">
 <form method="post">
 <input type="hidden" name="id" id="eid" value="0">
