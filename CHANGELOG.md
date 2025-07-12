@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Corrected capsule image paths in storefront admin
 - Pagination links spaced apart for clarity
 - Drag-and-drop ordering restored for cafe and category pages
+- Content server banner admin now overlays disabled images and toggles them between year and disabled folders
 - FAQ sidebar includes "Frequently Asked Questions" link
 - Category delete action now uses a button
 - Logo preview resolves {BASE} correctly
