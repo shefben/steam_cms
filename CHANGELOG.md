@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Admin dashboard graphs now use Chart.js with weekly/monthly toggles
 - Admin news list supports filtering by title and author with AJAX pagination
 - Admin login styled with theme CSS, includes jQuery validation and reset link
+- Admin sidebar links now support drag-and-drop sorting with dynamic add/remove
 - Custom page template fallback now loads `default.twig` from the active theme
 - Add storefront dropdown navigation in admin sidebar
 - Fixed capsule modal positioning and added overlay click to close

@@ -17,6 +17,21 @@ $themes = [];
 foreach(glob(dirname(__DIR__,2).'/themes/*_admin',GLOB_ONLYDIR) as $dir){
     $themes[] = basename($dir,'_admin');
 }
+if(isset($_POST['reorder']) && isset($_POST['items'])){
+    $items = json_decode($_POST['items'], true) ?: [];
+    $clean = [];
+    foreach($items as $it){
+        $clean[] = [
+            'file' => trim($it['file'] ?? ''),
+            'label' => trim($it['label'] ?? ''),
+            'visible' => !empty($it['visible']) ? 1 : 0,
+        ];
+    }
+    cms_set_setting('nav_items', json_encode($clean));
+    $nav_items = $clean;
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){ echo 'ok'; }
+    exit;
+}
 if(isset($_POST['save'])){
     cms_set_setting('site_title',trim($_POST['site_title']));
     cms_set_setting('smtp_host',trim($_POST['smtp_host']));
@@ -81,21 +96,80 @@ SMTP Password: <input type="password" name="smtp_pass" value="<?php echo htmlspe
 Root Path: <input type="text" name="root_path" value="<?php echo htmlspecialchars($root_path); ?>" title="Prefix for all local links"><br><br>
 Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <input type="file" name="favicon" accept="image/x-icon" title="Upload a custom site favicon"><br><br>
 <h3>Sidebar Navigation</h3>
-<table class="data-table" cellpadding="2">
-<thead><tr><th>Order</th><th>File</th><th>Label</th><th>Visible</th></tr></thead>
-<tbody>
+<table id="nav-table" class="data-table" cellpadding="2">
+<thead>
+    <tr><th></th><th>#</th><th>File</th><th>Label</th><th>Visible</th><th>Remove</th></tr>
+</thead>
+<tbody id="nav-body">
 <?php foreach($nav_items as $idx=>$it): ?>
-<tr>
-<td><?php echo $idx+1; ?></td>
-<td><input type="text" name="nav_items[<?php echo $idx; ?>][file]" value="<?php echo htmlspecialchars($it['file']); ?>" title="Relative admin page path"></td>
-<td><input type="text" name="nav_items[<?php echo $idx; ?>][label]" value="<?php echo htmlspecialchars($it['label']); ?>" title="Display text in the sidebar"></td>
-<td><input type="checkbox" name="nav_items[<?php echo $idx; ?>][visible]" <?php echo !empty($it['visible'])?'checked':''; ?> title="Show this link in the sidebar"></td>
+<tr data-index="<?php echo $idx; ?>">
+    <td class="handle">&#9776;</td>
+    <td class="order"><?php echo $idx+1; ?></td>
+    <td><input type="text" name="nav_items[<?php echo $idx; ?>][file]" value="<?php echo htmlspecialchars($it['file']); ?>" title="Relative admin page path"></td>
+    <td><input type="text" name="nav_items[<?php echo $idx; ?>][label]" value="<?php echo htmlspecialchars($it['label']); ?>" title="Display text in the sidebar"></td>
+    <td><input type="checkbox" name="nav_items[<?php echo $idx; ?>][visible]" <?php echo !empty($it['visible'])?'checked':''; ?> title="Show this link in the sidebar"></td>
+    <td><button type="button" class="remove btn btn-small">Remove</button></td>
 </tr>
 <?php endforeach; ?>
 </tbody>
-</table><br>
+</table>
+<button type="button" id="add-nav-item" class="btn btn-primary">Add Link</button><br><br>
 <!-- header and footer settings moved to header_footer.php -->
 <input type="submit" name="save" value="Save">
 </form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+    var tbody=document.getElementById('nav-body');
+    function renumber(){
+        tbody.querySelectorAll('tr').forEach(function(tr,i){
+            tr.querySelector('.order').textContent=i+1;
+            tr.querySelectorAll('input').forEach(function(inp){
+                var m=inp.name.match(/^nav_items\[\d+\]\[(.+)\]/);
+                if(m) inp.name='nav_items['+i+']['+m[1]+']';
+            });
+        });
+    }
+    function collect(){
+        var items=[];
+        tbody.querySelectorAll('tr').forEach(function(tr){
+            items.push({
+                file:tr.querySelector('input[name$="[file]"]').value,
+                label:tr.querySelector('input[name$="[label]"]').value,
+                visible:tr.querySelector('input[name$="[visible]"]').checked?1:0
+            });
+        });
+        return items;
+    }
+    function sendOrder(){
+        var data=new URLSearchParams();
+        data.set('reorder','1');
+        data.set('items',JSON.stringify(collect()));
+        fetch('settings.php',{method:'POST',body:data,headers:{'X-Requested-With':'XMLHttpRequest'}});
+    }
+    new Sortable(tbody,{handle:'.handle',animation:150,onEnd:function(){renumber();sendOrder();}});
+    document.getElementById('add-nav-item').addEventListener('click',function(){
+        var idx=tbody.querySelectorAll('tr').length;
+        var tr=document.createElement('tr');
+        tr.innerHTML='<td class="handle">&#9776;</td>'+
+                     '<td class="order">'+(idx+1)+'</td>'+
+                     '<td><input type="text" name="nav_items['+idx+'][file]" style="width:150px"></td>'+
+                     '<td><input type="text" name="nav_items['+idx+'][label]" style="width:150px"></td>'+
+                     '<td><input type="checkbox" name="nav_items['+idx+'][visible]" checked></td>'+
+                     '<td><button type="button" class="remove btn btn-small">Remove</button></td>';
+        tbody.appendChild(tr);
+        renumber();
+        sendOrder();
+    });
+    tbody.addEventListener('click',function(e){
+        if(e.target.classList.contains('remove')){
+            e.preventDefault();
+            e.target.closest('tr').remove();
+            renumber();
+            sendOrder();
+        }
+    });
+});
+</script>
 <p><a href="index.php">Back</a></p>
 <?php include 'admin_footer.php'; ?>
