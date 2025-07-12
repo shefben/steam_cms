@@ -15,6 +15,7 @@ if (isset($_GET['area'])) {
         exit;
 }
 require_once __DIR__.'/cms/db.php';
+require_once __DIR__.'/cms/template_engine.php';
 
 if(in_array($area,['store','browse','search','game','package','all'])){
     $file=['store'=>'index','browse'=>'browse','search'=>'search','game'=>'game','package'=>'package','all'=>'all'][$area];

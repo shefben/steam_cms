@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - Fixed storefront menu auto-expansion and navigation order
 
 - Added two-line word limit for index news snippets
+- Fixed fatal error when loading custom pages by including template engine
 - Improved installer SQL parser for HTML-heavy statements
 - Added full subscriber agreement text and batch script for capsules
 - Cleaned 2005v1 index template and fixed header include
