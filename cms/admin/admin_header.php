@@ -49,7 +49,8 @@ $default_nav = [
     ['file'=>'settings.php','label'=>'Settings','visible'=>1],
     ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
     ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
-    ['file'=>'admin_users.php','label'=>'Administrators','visible'=>1],
+    ['file'=>'admin_users.php','label'=>'Administrators','visible'=>cms_has_permission('manage_admins')?1:0],
+    ['file'=>'activity_log.php','label'=>'Activity Log','visible'=>cms_has_permission('manage_admins')?1:0],
     ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
     ['file'=>'storefront.php','label'=>'Storefront','visible'=>1],
     ['file'=>'storefront_main.php','label'=>'Main Page','visible'=>1],
@@ -89,6 +90,7 @@ $icons = [
     'storefront_developers.php' => '👥',
     'faq_categories.php'=> '📂',
     'admin_users.php'  => '👥',
+    'activity_log.php' => '📜',
     'error_page.php'   => '❌',
     '../logout.php'    => '🚪',
 ];
