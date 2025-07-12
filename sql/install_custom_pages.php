@@ -68,6 +68,7 @@ $insertArray[] = [
     'index.twig',               // template
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
+    'published',
 ];
 
 $content2002v2 = <<<HTML
@@ -110,6 +111,7 @@ $insertArray[] = [
     'index.twig',               // template
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
+    'published',
 ];
 
 $content2003v1 = <<<HTML
@@ -259,6 +261,7 @@ $insertArray[] = [
     'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
+    'published',
 ];
 
 $content2003v2 = <<<HTML
@@ -306,6 +309,7 @@ $insertArray[] = [
     'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
+    'published',
 ];
 
 $content2004 = <<<HTML
@@ -360,6 +364,7 @@ $insertArray[] = [
     'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
+    'published',
 ];
 
 $content2005v1 = <<<HTML
@@ -747,6 +752,7 @@ $insertArray[] = [
     'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
+    'published',
 ];
 
 $content2005v2 = <<<HTML
@@ -1009,6 +1015,7 @@ $insertArray[] = [
     'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
+    'published',
 ];
 
 $sa_html = <<<HTML
@@ -1086,12 +1093,13 @@ $insertArray[] = [
     null,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
+    'published',
 ];
 
 $stmtcp = $pdo->prepare(
-    'INSERT INTO custom_pages 
-    (slug, title, content, theme, template, created, updated)
-     VALUES (?, ?, ?, ?, ?, ?, ?)'
+    'INSERT INTO custom_pages
+    (slug, title, content, theme, template, created, updated, status)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
 );
 
 foreach ($insertArray as $row) {

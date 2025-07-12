@@ -50,7 +50,7 @@ if(isset($_GET['move']) && isset($_GET['id'])){
     header('Location: news.php');
     exit;
 }
-$rows = $db->query('SELECT id,title,author,publish_date,views FROM news ORDER BY publish_date DESC')->fetchAll(PDO::FETCH_ASSOC);
+$rows = $db->query('SELECT id,title,author,publish_date,views,status,updated FROM news ORDER BY publish_date DESC')->fetchAll(PDO::FETCH_ASSOC);
 $order = cms_get_setting('news_order', null);
 $order = $order ? json_decode($order, true) : [];
 usort($rows, function($a,$b) use($order){
@@ -72,7 +72,7 @@ $pages = max(1, (int)ceil($total/$perPage));
 <form id="orderForm" method="post">
 <input type="hidden" name="order" id="order-input">
 <table id="news-table" class="data-table">
-<thead><tr><th></th><th>Title</th><th>Author</th><th>Date</th><th>Views</th><th colspan="2">Actions</th></tr></thead>
+<thead><tr><th></th><th>Title</th><th>Author</th><th>Date</th><th>Status</th><th>Updated</th><th>Views</th><th colspan="2">Actions</th></tr></thead>
 <tbody id="news-body">
 <?php foreach($rows as $i=>$row): $p = floor($i/$perPage)+1; ?>
 <tr data-id="<?php echo $row['id']; ?>" data-page="<?php echo $p; ?>"<?php if($p!=$page) echo ' style="display:none"'; ?>>
@@ -80,6 +80,8 @@ $pages = max(1, (int)ceil($total/$perPage));
 <td><?php echo htmlspecialchars($row['title']); ?></td>
 <td><?php echo htmlspecialchars($row['author']); ?></td>
 <td><?php echo htmlspecialchars($row['publish_date']); ?></td>
+<td><?php echo htmlspecialchars($row['status']); ?></td>
+<td><?php echo htmlspecialchars($row['updated']); ?></td>
 <td><?php echo (int)$row['views']; ?></td>
 <td>
 <?php if(cms_has_permission('news_edit')): ?>

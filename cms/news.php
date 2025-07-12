@@ -29,7 +29,7 @@ function cms_render_news($type,$count=null){
     // some versions. Cast $count to an integer and inject it directly to avoid
     // syntax errors when executing the query.
     $limit = (int)$count;
-    $where = ['publish_date<=NOW()'];
+    $where = ['publish_date<=NOW()', "status='published'"]; 
     $year_only = cms_get_setting('news_year_only','1') === '1';
     if($year_only){
         $theme = cms_get_setting('theme','2004');

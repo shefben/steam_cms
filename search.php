@@ -5,13 +5,13 @@ $results = [];
 if($query!=''){
     $db = cms_get_db();
     $like = '%'.$query.'%';
-    $stmt = $db->prepare("SELECT 'news' AS type, id, title, content AS text FROM news WHERE (title LIKE ? OR content LIKE ?) AND publish_date<=NOW()");
+    $stmt = $db->prepare("SELECT 'news' AS type, id, title, content AS text FROM news WHERE (title LIKE ? OR content LIKE ?) AND publish_date<=NOW() AND status='published'");
     $stmt->execute([$like,$like]);
     $results = array_merge($results,$stmt->fetchAll(PDO::FETCH_ASSOC));
     $stmt = $db->prepare("SELECT 'faq' AS type, concat(catid1,'.',faqid1) AS id, title, body AS text FROM faq_content WHERE title LIKE ? OR body LIKE ?");
     $stmt->execute([$like,$like]);
     $results = array_merge($results,$stmt->fetchAll(PDO::FETCH_ASSOC));
-    $stmt = $db->prepare("SELECT 'page' AS type, slug as id, title, content as text FROM custom_pages WHERE title LIKE ? OR content LIKE ?");
+    $stmt = $db->prepare("SELECT 'page' AS type, slug as id, title, content as text FROM custom_pages WHERE (title LIKE ? OR content LIKE ?) AND status='published'");
     $stmt->execute([$like,$like]);
     $results = array_merge($results,$stmt->fetchAll(PDO::FETCH_ASSOC));
 }

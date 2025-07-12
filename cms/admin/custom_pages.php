@@ -5,6 +5,28 @@ $db=cms_get_db();
 $themes = cms_get_themes();
 $current_theme = cms_get_setting('theme','2004');
 $template_files = array_map('basename', glob(__DIR__.'/../themes/'.$current_theme.'/layout/*.twig'));
+
+if(isset($_POST['autosave'])){
+    $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_POST['slug']);
+    $title=trim($_POST['title']);
+    $content=$_POST['content'];
+    $template = in_array($_POST['template'] ?? '', $template_files, true) ? $_POST['template'] : null;
+    $selThemes = isset($_POST['themes']) ? array_intersect($themes,$_POST['themes']) : [];
+    $themeStr = $selThemes ? implode(',', $selThemes) : null;
+    $exists=$db->prepare('SELECT slug FROM custom_pages WHERE slug=?');
+    $exists->execute([$slug]);
+    if($exists->fetch()){
+        $stmt=$db->prepare('UPDATE custom_pages SET title=?,content=?,theme=?,template=?,status="draft",updated=NOW() WHERE slug=?');
+        $stmt->execute([$title,$content,$themeStr,$template,$slug]);
+    }else{
+        $stmt=$db->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,NOW(),NOW(),"draft")');
+        $stmt->execute([$slug,$title,$content,$themeStr,$template]);
+    }
+    cms_admin_log('Autosaved page draft '.$slug);
+    header('Content-Type: application/json');
+    echo json_encode(['slug'=>$slug,'updated'=>date('Y-m-d H:i:s')]);
+    exit;
+}
 if(isset($_POST['save_page'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_POST['slug']);
     $title=trim($_POST['title']);
@@ -15,12 +37,12 @@ if(isset($_POST['save_page'])){
     $exists=$db->prepare('SELECT slug FROM custom_pages WHERE slug=?');
     $exists->execute([$slug]);
     if($exists->fetch()){
-        $stmt=$db->prepare('UPDATE custom_pages SET title=?,content=?,theme=?,template=?,updated=NOW() WHERE slug=?');
+        $stmt=$db->prepare('UPDATE custom_pages SET title=?,content=?,theme=?,template=?,status="published",updated=NOW() WHERE slug=?');
         $stmt->execute([$title,$content,$themeStr,$template,$slug]);
         cms_admin_log('Updated custom page '.$slug);
     }else{
-        $stmt=$db->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated) VALUES(?,?,?,?,?,?,NOW())');
-        $stmt->execute([$slug,$title,$content,$themeStr,$template,date('Y-m-d H:i:s')]);
+        $stmt=$db->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,NOW(),NOW(),"published")');
+        $stmt->execute([$slug,$title,$content,$themeStr,$template]);
         cms_admin_log('Created custom page '.$slug);
     }
 }
@@ -36,6 +58,11 @@ if(isset($_GET['edit'])){
     $stmt=$db->prepare('SELECT * FROM custom_pages WHERE slug=?');
     $stmt->execute([$slug]);
     $edit=$stmt->fetch(PDO::FETCH_ASSOC);
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        header('Content-Type: application/json');
+        echo json_encode($edit);
+        exit;
+    }
 }
 ?>
 <h2>Custom Pages</h2>
@@ -67,7 +94,9 @@ if(isset($_GET['edit'])){
     </select>
 </label><br>
 <textarea name="content" id="content" style="width:100%;height:300px;"></textarea><br>
+<p>Last saved: <span id="lastSaved"><?php echo isset($edit['updated']) ? htmlspecialchars($edit['updated']) : ''; ?></span></p>
 <input type="submit" name="save_page" value="Save">
+<button type="button" id="restoreBtn">Restore Draft</button>
 <button type="button" id="cancel">Cancel</button>
 </form>
 </div>
@@ -75,6 +104,32 @@ if(isset($_GET['edit'])){
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('content');
+function autoSave(){
+    var form = document.querySelector('#editor form');
+    if(!form) return;
+    var data = new FormData(form);
+    data.append('autosave','1');
+    fetch('custom_pages.php',{method:'POST',body:data,headers:{'X-Requested-With':'XMLHttpRequest'}})
+    .then(r=>r.json()).then(function(res){
+        document.getElementById('lastSaved').textContent=res.updated;
+        if(!document.getElementById('slug').readOnly){
+            document.getElementById('slug').value=res.slug;
+        }
+    });
+}
+setInterval(autoSave,30000);
+document.getElementById('restoreBtn').addEventListener('click',function(e){
+    e.preventDefault();
+    var slug=document.getElementById('slug').value;
+    if(!slug) return;
+    fetch('custom_pages.php?edit='+encodeURIComponent(slug),{headers:{'X-Requested-With':'XMLHttpRequest'}})
+    .then(r=>r.json()).then(function(d){
+        document.getElementById('title').value=d.title;
+        CKEDITOR.instances.content.setData(d.content);
+        document.getElementById('template').value=d.template||'';
+        document.getElementById('lastSaved').textContent=d.updated;
+    });
+});
 $('#addBtn').on('click',function(){
     $('#slug').prop('readonly',false).val('');
     $('#title').val('');

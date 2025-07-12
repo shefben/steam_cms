@@ -11,7 +11,7 @@ foreach($rows as $r){
     $days[$r['date']] = (int)$r['v'];
 }
 // other counts
-$news_count = (int)$db->query("SELECT COUNT(*) FROM news")->fetchColumn();
+$news_count = (int)$db->query("SELECT COUNT(*) FROM news WHERE status='published'")->fetchColumn();
 $faq_count = (int)$db->query("SELECT COUNT(*) FROM faq_content")->fetchColumn();
 $user_count = (int)$db->query("SELECT COUNT(*) FROM admin_users")->fetchColumn();
 $signup_count = (int)$db->query("SELECT COUNT(*) FROM ccafe_registration")->fetchColumn();
