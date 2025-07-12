@@ -636,3 +636,15 @@ select.form-control,
 /* Link color */
 a, a:visited { color: #f1c40f; }
 
+.breadcrumb {
+    background:#ecf0f1;
+    padding:6px 20px;
+    font-size:13px;
+}
+.breadcrumb a {
+    color:#2c3e50;
+    text-decoration:none;
+}
+.breadcrumb span {
+    color:#7f8c8d;
+}

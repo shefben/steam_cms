@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/breadcrumbs.php';
 if(!cms_current_admin()){
     if(isset($_COOKIE['cms_admin_token'])){
         $uid=cms_validate_admin_token($_COOKIE['cms_admin_token']);

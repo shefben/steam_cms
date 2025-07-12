@@ -17,6 +17,7 @@
             <a href="../logout.php" class="btn btn-small">Logout</a>
         </div>
     </div>
+    <?php echo cms_admin_breadcrumb(); ?>
 </header>
 <div class="admin-layout">
 <nav class="admin-sidebar">

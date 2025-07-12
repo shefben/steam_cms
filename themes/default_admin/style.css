@@ -41,3 +41,16 @@ a, a:visited { color: #f1c40f; }
 
 .pagination a { margin: 0 8px; }
 
+.breadcrumb {
+    background:#e0e0e0;
+    padding:4px 10px;
+    font-size:12px;
+    margin-top:4px;
+}
+.breadcrumb a {
+    color:#333;
+    text-decoration:none;
+}
+.breadcrumb span {
+    color:#666;
+}
