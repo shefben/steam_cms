@@ -33,12 +33,12 @@ function cms_set_setting($key,$value){
 function cms_get_custom_page($slug,$theme=null){
     $db = cms_get_db();
     try {
-        $stmt = $db->prepare('SELECT title,content,theme,template FROM custom_pages WHERE slug=?');
+        $stmt = $db->prepare('SELECT title,content,theme,template FROM custom_pages WHERE slug=? AND status="published"');
         $stmt->execute([$slug]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         if ($e->getCode() === '42S22') { // column missing
-            $stmt = $db->prepare('SELECT title,content,theme FROM custom_pages WHERE slug=?');
+            $stmt = $db->prepare('SELECT title,content,theme FROM custom_pages WHERE slug=? AND status="published"');
             $stmt->execute([$slug]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if (!$row) return null;
