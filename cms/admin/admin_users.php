@@ -7,6 +7,26 @@ $roleMap = [];
 foreach($roles as $r){
     $roleMap[$r['id']] = $r['name'];
 }
+// search & pagination parameters
+$search = trim($_GET['q'] ?? '');
+$page   = max(1, (int)($_GET['page'] ?? 1));
+$perPage = 20;
+$where = '';
+$params = [];
+if($search !== ''){
+    $where = 'WHERE username LIKE ? OR email LIKE ?';
+    $params = ['%'.$search.'%','%'.$search.'%'];
+}
+$count = $db->prepare("SELECT COUNT(*) FROM admin_users $where");
+$count->execute($params);
+$total = (int)$count->fetchColumn();
+$pages = max(1, (int)ceil($total / $perPage));
+$offset = ($page-1)*$perPage;
+$params[] = $perPage;
+$params[] = $offset;
+$stmt = $db->prepare("SELECT * FROM admin_users $where ORDER BY username LIMIT ? OFFSET ?");
+$stmt->execute($params);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if(isset($_POST['action']) && $_POST['action']==='save'){
     $id = intval($_POST['id']);
     $email = trim($_POST['email']);
@@ -34,31 +54,55 @@ if(isset($_POST['delete'])){
     $db->prepare('DELETE FROM admin_users WHERE id=?')->execute([$delId]);
     cms_admin_log('Deleted admin user '.$delId);
 }
-$rows=$db->query('SELECT * FROM admin_users')->fetchAll(PDO::FETCH_ASSOC);
+
+$tbodyHtml = '';
+foreach($rows as $r){
+    $tbodyHtml .= '<tr>';
+    $tbodyHtml .= '<td>'.htmlspecialchars($r['username']).'</td>';
+    $tbodyHtml .= '<td>'.htmlspecialchars($r['email']).'</td>';
+    $tbodyHtml .= '<td>'.htmlspecialchars($r['created']).'</td>';
+    $tbodyHtml .= '<td>';
+    if($r['role_id']){
+        $tbodyHtml .= htmlspecialchars($roleMap[$r['role_id']] ?? 'Unknown');
+    }else{
+        $tbodyHtml .= htmlspecialchars($r['permissions']);
+    }
+    $tbodyHtml .= '</td><td>';
+    $tbodyHtml .= '<button class="editBtn" data-id="'.$r['id'].'">Edit</button>';
+    $tbodyHtml .= '<form method="post" style="display:inline"><input type="hidden" name="delete" value="'.$r['id'].'"><input type="submit" value="Delete"></form>';
+    $tbodyHtml .= '</td></tr>';
+}
+
+ob_start();
+?>
+<div class="pagination">
+<?php
+$query = $_GET;
+if($page>1){ $query['page']=$page-1; echo '<a href="?'.http_build_query($query).'">&laquo; Prev</a>'; }
+if($page<$pages){ $query['page']=$page+1; echo ' <a href="?'.http_build_query($query).'">Next &raquo;</a>'; }
+?>
+</div>
+<?php
+$paginationHtml = ob_get_clean();
+
+if(isset($_GET['ajax'])){
+    header('Content-Type: application/json');
+    echo json_encode(['tbody'=>$tbodyHtml,'pagination'=>$paginationHtml,'rows'=>$rows]);
+    exit;
+}
 ?>
 <h2>Administrators</h2>
+<div id="search-bar" style="margin-bottom:10px;">
+    <input type="text" id="search-box" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search...">
+</div>
 <button id="addBtn">Add Administrator</button>
-<table>
-<tr><th>Username</th><th>Email</th><th>Created</th><th>Role/Permissions</th><th>Actions</th></tr>
-<?php foreach($rows as $r): ?>
-<tr>
-<td><?php echo htmlspecialchars($r['username']); ?></td>
-<td><?php echo htmlspecialchars($r['email']); ?></td>
-<td><?php echo htmlspecialchars($r['created']); ?></td>
-<td>
-<?php if($r['role_id']): ?>
-    <?php echo htmlspecialchars($roleMap[$r['role_id']] ?? 'Unknown'); ?>
-<?php else: ?>
-    <?php echo htmlspecialchars($r['permissions']); ?>
-<?php endif; ?>
-</td>
-<td>
-<button class="editBtn" data-id="<?php echo $r['id']; ?>">Edit</button>
-<form method="post" style="display:inline"><input type="hidden" name="delete" value="<?php echo $r['id']; ?>"><input type="submit" value="Delete"></form>
-</td>
-</tr>
-<?php endforeach; ?>
+<table class="data-table">
+<thead><tr><th>Username</th><th>Email</th><th>Created</th><th>Role/Permissions</th><th>Actions</th></tr></thead>
+<tbody id="users-body">
+<?php echo $tbodyHtml; ?>
+</tbody>
 </table>
+<?php echo $paginationHtml; ?>
 <div id="editor" style="display:none;border:1px solid #333;padding:10px;background:#eee;">
 <form method="post">
 <input type="hidden" name="id" id="eid" value="0">
@@ -84,6 +128,38 @@ $rows=$db->query('SELECT * FROM admin_users')->fetchAll(PDO::FETCH_ASSOC);
 </div>
 <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
+var data = <?php echo json_encode($rows); ?>;
+function bindEditButtons(){
+    $('.editBtn').on('click',function(){
+        var id=$(this).data('id');
+        for(var i=0;i<data.length;i++) if(data[i].id==id){
+            $('#eid').val(data[i].id);
+            $('#eusername').val(data[i].username);
+            $('#eemail').val(data[i].email);
+            $('#efirst').val(data[i].first_name);
+            $('#elast').val(data[i].last_name);
+            $('#erole').val(data[i].role_id?data[i].role_id:'');
+            $('#eperm').val(data[i].permissions);
+            break;
+        }
+        togglePerm();
+        $('#editor').show();
+    });
+}
+function bindPagination(){
+    $('.pagination a').on('click',function(e){
+        e.preventDefault();
+        var p=parseInt(new URL(this.href).searchParams.get('page'));
+        var q=$('#search-box').val();
+        $.get('admin_users.php',{ajax:1,q:q,page:p},function(res){
+            $('#users-body').html(res.tbody);
+            $('.pagination').replaceWith(res.pagination);
+            data=res.rows;
+            bindPagination();
+            bindEditButtons();
+        },'json');
+    });
+}
 $('#addBtn').on('click',function(){
     $('#eid').val('0');
     $('#eusername').val('');
@@ -97,21 +173,17 @@ $('#addBtn').on('click',function(){
     togglePerm();
     $('#editor').show();
 });
-$('.editBtn').on('click',function(){
-    var id=$(this).data('id');
-    <?php echo "var data=".json_encode($rows).";"; ?>
-    for(var i=0;i<data.length;i++) if(data[i].id==id){
-        $('#eid').val(data[i].id);
-        $('#eusername').val(data[i].username);
-        $('#eemail').val(data[i].email);
-        $('#efirst').val(data[i].first_name);
-        $('#elast').val(data[i].last_name);
-        $('#erole').val(data[i].role_id?data[i].role_id:'');
-        $('#eperm').val(data[i].permissions);
-        break;
-    }
-    togglePerm();
-    $('#editor').show();
+bindEditButtons();
+bindPagination();
+$('#search-box').on('input',function(){
+    var q=$(this).val();
+    $.get('admin_users.php',{ajax:1,q:q},function(res){
+        $('#users-body').html(res.tbody);
+        $('.pagination').replaceWith(res.pagination);
+        data=res.rows;
+        bindPagination();
+        bindEditButtons();
+    },'json');
 });
 $('#cancel').on('click',function(){ $('#editor').hide(); });
 $('#erole').on('change',togglePerm);
