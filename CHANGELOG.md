@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Admin dashboard graphs now use Chart.js with weekly/monthly toggles
 - Admin news list supports filtering by title and author with AJAX pagination
 - Admin login styled with theme CSS, includes jQuery validation and reset link
 - Custom page template fallback now loads `default.twig` from the active theme
