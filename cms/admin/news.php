@@ -2,6 +2,8 @@
 require_once 'admin_header.php';
 cms_require_any_permission(['manage_news','news_create','news_edit','news_delete']);
 $db = cms_get_db();
+$titleFilter = trim($_GET['title'] ?? '');
+$authorFilter = trim($_GET['author'] ?? '');
 // save new order
 if(isset($_POST['reorder']) && isset($_POST['order'])){
     cms_require_permission('news_edit');
@@ -50,7 +52,20 @@ if(isset($_GET['move']) && isset($_GET['id'])){
     header('Location: news.php');
     exit;
 }
-$rows = $db->query('SELECT id,title,author,publish_date,views FROM news ORDER BY publish_date DESC')->fetchAll(PDO::FETCH_ASSOC);
+$sql = 'SELECT id,title,author,publish_date,views FROM news WHERE 1';
+$params = [];
+if ($titleFilter !== '') {
+    $sql .= ' AND title LIKE ?';
+    $params[] = '%' . $titleFilter . '%';
+}
+if ($authorFilter !== '') {
+    $sql .= ' AND author LIKE ?';
+    $params[] = '%' . $authorFilter . '%';
+}
+$sql .= ' ORDER BY publish_date DESC';
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $order = cms_get_setting('news_order', null);
 $order = $order ? json_decode($order, true) : [];
 usort($rows, function($a,$b) use($order){
@@ -64,51 +79,76 @@ $page = max(1, (int)($_GET['page'] ?? 1));
 $perPage = 15;
 $total = count($rows);
 $pages = max(1, (int)ceil($total/$perPage));
+$tbodyHtml = '';
+foreach ($rows as $i => $row) {
+    $p = floor($i / $perPage) + 1;
+    $style = $p != $page ? ' style="display:none"' : '';
+    $tbodyHtml .= "<tr data-id='{$row['id']}' data-page='{$p}'{$style}>";
+    $tbodyHtml .= '<td class="handle">☰</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($row['title']) . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($row['author']) . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($row['publish_date']) . '</td>';
+    $tbodyHtml .= '<td>' . (int)$row['views'] . '</td>';
+    $tbodyHtml .= '<td>';
+    if (cms_has_permission('news_edit')) {
+        $tbodyHtml .= '<a href="news_edit.php?id=' . $row['id'] . '">Edit</a>';
+    }
+    $tbodyHtml .= '</td><td>';
+    if (cms_has_permission('news_delete')) {
+        $tbodyHtml .= '<form method="post" style="display:inline">';
+        $tbodyHtml .= '<input type="hidden" name="delete" value="' . $row['id'] . '">';
+        $tbodyHtml .= '<input type="submit" value="Delete">';
+        $tbodyHtml .= '</form>';
+    }
+    $tbodyHtml .= '</td></tr>';
+}
+
+ob_start();
+?>
+<div class="pagination">
+<?php if ($page>1): ?><a href="?page=<?php echo $page-1; ?>&title=<?php echo urlencode($titleFilter); ?>&author=<?php echo urlencode($authorFilter); ?>">&laquo; Prev</a><?php endif; ?>
+<?php if ($page<$pages): ?><a href="?page=<?php echo $page+1; ?>&title=<?php echo urlencode($titleFilter); ?>&author=<?php echo urlencode($authorFilter); ?>">Next &raquo;</a><?php endif; ?>
+</div>
+<?php
+$paginationHtml = ob_get_clean();
+
+if (isset($_GET['ajax'])) {
+    header('Content-Type: application/json');
+    echo json_encode(['tbody' => $tbodyHtml, 'pagination' => $paginationHtml]);
+    exit;
+}
 ?>
 <h2>News Articles</h2>
 <?php if(cms_has_permission('news_create')): ?>
 <p><a href="news_edit.php">Add New Article</a></p>
 <?php endif; ?>
+<div id="filter-bar" style="margin-bottom:10px;">
+    <label>Title: <input type="text" id="filter-title" value="<?php echo htmlspecialchars($titleFilter); ?>"></label>
+    <label>Author: <input type="text" id="filter-author" value="<?php echo htmlspecialchars($authorFilter); ?>"></label>
+    <button type="button" id="apply-filter" class="btn btn-primary">Filter</button>
+</div>
 <form id="orderForm" method="post">
 <input type="hidden" name="order" id="order-input">
 <table id="news-table" class="data-table">
 <thead><tr><th></th><th>Title</th><th>Author</th><th>Date</th><th>Views</th><th colspan="2">Actions</th></tr></thead>
 <tbody id="news-body">
-<?php foreach($rows as $i=>$row): $p = floor($i/$perPage)+1; ?>
-<tr data-id="<?php echo $row['id']; ?>" data-page="<?php echo $p; ?>"<?php if($p!=$page) echo ' style="display:none"'; ?>>
-<td class="handle">☰</td>
-<td><?php echo htmlspecialchars($row['title']); ?></td>
-<td><?php echo htmlspecialchars($row['author']); ?></td>
-<td><?php echo htmlspecialchars($row['publish_date']); ?></td>
-<td><?php echo (int)$row['views']; ?></td>
-<td>
-<?php if(cms_has_permission('news_edit')): ?>
-    <a href="news_edit.php?id=<?php echo $row['id']; ?>">Edit</a>
-<?php endif; ?>
-</td>
-<td>
-<?php if(cms_has_permission('news_delete')): ?>
-    <form method="post" style="display:inline"><input type="hidden" name="delete" value="<?php echo $row['id']; ?>"><input type="submit" value="Delete"></form>
-<?php endif; ?>
-</td>
-</tr>
-<?php endforeach; ?>
+<?php echo $tbodyHtml; ?>
 </tbody>
 </table>
 <button type="button" id="save-order" class="btn btn-success">Save Order</button>
 </form>
-<div class="pagination">
-<?php if($page>1): ?><a href="?page=<?php echo $page-1; ?>">&laquo; Prev</a><?php endif; ?>
-<?php if($page<$pages): ?><a href="?page=<?php echo $page+1; ?>">Next &raquo;</a><?php endif; ?>
-</div>
+<?php echo $paginationHtml; ?>
 <p><a href="index.php">Back</a></p>
+<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
     var body=document.getElementById('news-body');
     var currentPage=<?php echo $page; ?>;
+    var sortable;
     function showPage(p){
         body.querySelectorAll('tr').forEach(function(tr){
-            tr.style.display=(p==='all' || tr.dataset.page==p)?'':'none';
+            tr.style.display=(p==='all' || tr.dataset.page==p)?'' : 'none';
         });
         currentPage=p==='all'?currentPage:p;
     }
@@ -120,23 +160,38 @@ document.addEventListener('DOMContentLoaded',function(){
         data.set('order',ids.join(','));
         fetch('news.php',{method:'POST',body:data});
     }
-    new Sortable(body,{
-        handle:'.handle',
-        onStart:function(){showPage('all');},
-        onEnd:function(){sendOrder();showPage(currentPage);}
+    function initSortable(){
+        if(sortable){sortable.destroy();}
+        sortable=new Sortable(body,{handle:'.handle',onStart:function(){showPage('all');},onEnd:function(){sendOrder();showPage(currentPage);}});
+    }
+    function bindPagination(){
+        document.querySelectorAll('.pagination a').forEach(function(a){
+            a.addEventListener('click',function(e){
+                e.preventDefault();
+                var p=parseInt(new URL(this.href).searchParams.get('page'));
+                showPage(p);
+                history.replaceState(null,'','?page='+p);
+            });
+        });
+    }
+    $('#apply-filter').on('click',function(){
+        var title=$('#filter-title').val();
+        var author=$('#filter-author').val();
+        $.get('news.php',{ajax:1,title:title,author:author},function(res){
+            $('#news-body').html(res.tbody);
+            $('.pagination').replaceWith(res.pagination);
+            body=document.getElementById('news-body');
+            bindPagination();
+            initSortable();
+            showPage(1);
+        },'json');
     });
+    bindPagination();
+    initSortable();
     showPage(currentPage);
     document.getElementById('save-order').addEventListener('click',function(e){
         e.preventDefault();
         sendOrder();
-    });
-    document.querySelectorAll('.pagination a').forEach(function(a){
-        a.addEventListener('click',function(e){
-            e.preventDefault();
-            var p=parseInt(this.href.split('=')[1]);
-            showPage(p);
-            history.replaceState(null,'','?page='+p);
-        });
     });
 });
 </script>
