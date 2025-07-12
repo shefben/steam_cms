@@ -30,6 +30,19 @@ $stmt = $db->prepare('SELECT username FROM admin_users WHERE id=?');
 $stmt->execute([$admin_id]);
 $admin_name = $stmt->fetchColumn() ?: 'admin';
 
+$notes = cms_get_unread_notifications($admin_id);
+$notifications_html = '';
+if ($notes) {
+    $notifications_html = '<div class="notifications"><ul>';
+    foreach ($notes as $n) {
+        $id = (int)$n['id'];
+        $type = htmlspecialchars($n['type']);
+        $msg = htmlspecialchars($n['message']);
+        $notifications_html .= "<li><strong>{$type}</strong>: {$msg} <button class=\"notify-dismiss\" data-id=\"{$id}\" aria-label=\"Dismiss\">&times;</button></li>";
+    }
+    $notifications_html .= '</ul></div>';
+}
+
 $default_nav = [
     ['file'=>'index.php','label'=>'Dashboard','visible'=>1],
     ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],

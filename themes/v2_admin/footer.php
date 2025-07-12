@@ -15,6 +15,14 @@ $(function(){
         e.preventDefault();
         $('#faq-sub').slideToggle(150);
     });
+    $('.notify-dismiss').on('click', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        var $li = $(this).closest('li');
+        $.post('notifications.php', {id:id}).done(function(){
+            $li.fadeOut(150, function(){ $(this).remove(); });
+        });
+    });
 });
 </script>
 </body>

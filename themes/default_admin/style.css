@@ -68,3 +68,10 @@ a, a:visited { color: #f1c40f; }
 }
 .chart-controls{text-align:right;margin-bottom:5px;}
 .chart-controls button{margin-left:5px;}
+
+/* Notifications */
+.notifications{background:#fff;padding:10px;border-bottom:1px solid #ccc;}
+.notifications ul{list-style:none;margin:0;padding:0;}
+.notifications li{padding:5px 0;border-bottom:1px dotted #999;display:flex;justify-content:space-between;align-items:center;}
+.notifications li:last-child{border-bottom:none;}
+.notify-dismiss{background:transparent;border:none;color:#c00;cursor:pointer;font-size:14px;}

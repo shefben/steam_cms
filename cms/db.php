@@ -427,6 +427,35 @@ function cms_load_store_links($file){
     return $links;
 }
 
+function cms_get_unread_notifications(int $userId): array
+{
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT id,type,message,target_role FROM notifications WHERE read_at IS NULL AND (target_user IS NULL OR target_user=?) ORDER BY created DESC');
+        $stmt->execute([$userId]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S02') {
+            return [];
+        }
+        throw $e;
+    }
+    $out = [];
+    foreach ($rows as $r) {
+        if (!$r['target_role'] || $r['target_role'] === 'all' || cms_has_permission($r['target_role'])) {
+            $out[] = $r;
+        }
+    }
+    return $out;
+}
+
+function cms_mark_notification_read(int $id): void
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('UPDATE notifications SET read_at=NOW() WHERE id=?');
+    $stmt->execute([$id]);
+}
+
 function cms_admin_log(string $action, ?int $userId = null): void
 {
     $db = cms_get_db();
