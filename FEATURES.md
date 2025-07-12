@@ -9,6 +9,7 @@
 - Individual storefront admin pages for featured items, products, categories and sidebar
 - Pixel-perfect 2004 layout with full-height news box
 - Admin action logging with database-backed audit trail
+- Activity log page lists audit entries with filters and pagination
 - Dashboard charts visualize visits and popular pages with weekly/monthly toggles
 
 - 2004 index snippets auto-wrap after two lines
