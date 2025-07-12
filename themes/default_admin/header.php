@@ -10,5 +10,6 @@
     <h1>CMS Administration</h1>
     <?php echo $nav_html; ?>
     <?php echo cms_admin_breadcrumb(); ?>
+    <?php echo $notifications_html; ?>
 </header>
 <main>

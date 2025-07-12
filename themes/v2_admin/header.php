@@ -18,6 +18,7 @@
         </div>
     </div>
     <?php echo cms_admin_breadcrumb(); ?>
+    <?php echo $notifications_html; ?>
 </header>
 <div class="admin-layout">
 <nav class="admin-sidebar">

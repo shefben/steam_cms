@@ -259,6 +259,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 action TEXT,
                 ts DATETIME DEFAULT CURRENT_TIMESTAMP
             )");
+            $pdo->exec("DROP TABLE IF EXISTS notifications");
+            $pdo->exec("CREATE TABLE notifications(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                type VARCHAR(50) NOT NULL,
+                message TEXT NOT NULL,
+                target_user INT DEFAULT NULL,
+                target_role VARCHAR(50) DEFAULT NULL,
+                created DATETIME DEFAULT CURRENT_TIMESTAMP,
+                read_at DATETIME DEFAULT NULL
+            )");
             $pdo->exec("DROP TABLE IF EXISTS page_views");
             $pdo->exec("CREATE TABLE page_views(
                 date DATE,
