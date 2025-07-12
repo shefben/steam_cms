@@ -103,3 +103,5 @@ All notable changes to this project will be documented in this file.
 - Asset mover script covers 2006/2007 examples
 - Converted map_contest.php to Twig template
 - Added TAGS.md with reference for all template tags
+- Navigation buttons support per-page overrides via new page field and auto-detect the current template
+- Spacer HTML can be configured per theme and overridden when calling {nav_buttons}

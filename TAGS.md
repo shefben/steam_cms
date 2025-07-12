@@ -6,7 +6,7 @@ This document describes the built-in Twig tags available in the CMS templates. E
 
 - **`header(withButtons = true)`** – Renders the site header. Buttons come from the `theme_headers` table (`logo`, `text`, `img`, `hover`, `depressed`, `url`, `visible`, `spacer`). The `theme` is picked from the current setting.
 - **`footer()`** – Outputs the theme footer HTML stored in the `theme_footers` table (`html`).
-- **`nav_buttons(theme = '', style = '')`** – Generates a navigation bar using entries from `theme_headers`. The optional `theme` overrides the current theme.
+- **`nav_buttons(theme = '', style = '', spacer = null)`** – Generates a navigation bar using entries from `theme_headers`. The current template determines which page-specific buttons to load. The optional `theme` overrides the current theme, and `spacer` overrides the spacer stored in the database.
 
 ## News Tags
 

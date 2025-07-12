@@ -164,12 +164,24 @@ function cms_base_url(){
     return $dir === '/' ? '' : $dir;
 }
 
-function cms_get_theme_header_data($theme){
+function cms_set_current_template(string $tpl): void {
+    $GLOBALS['cms_current_template'] = basename($tpl, '.twig');
+}
+
+function cms_get_current_page(): string {
+    return $GLOBALS['cms_current_template'] ?? ($_GET['area'] ?? basename($_SERVER['SCRIPT_NAME'], '.php'));
+}
+
+function cms_get_theme_header_data($theme, string $page = ''){
     $db = cms_get_db();
     try {
-        $stmt = $db->prepare('SELECT logo,text,img,hover,depressed,url,visible,spacer FROM theme_headers WHERE theme=? ORDER BY ord,id');
-        $stmt->execute([$theme]);
+        $stmt = $db->prepare('SELECT logo,text,img,hover,depressed,url,visible,spacer FROM theme_headers WHERE theme=? AND page=? ORDER BY ord,id');
+        $stmt->execute([$theme, $page]);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if(!$rows && $page !== ''){
+            $stmt->execute([$theme, '']);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
         if(!$rows) return ['logo'=>'','spacer'=>'','buttons'=>[]];
         $logo = $rows[0]['logo'];
         $spacer = $rows[0]['spacer'];
@@ -254,10 +266,11 @@ function cms_set_theme_setting(string $theme, string $name, $value){
     $stmt->execute([$theme,$name,$value]);
 }
 
-function cms_header_buttons_html($theme, string $spacer_style = ''){
-    $data = cms_get_theme_header_data($theme);
+function cms_header_buttons_html($theme, string $spacer_style = '', ?string $spacer_override = null){
+    $page    = cms_get_current_page();
+    $data    = cms_get_theme_header_data($theme, $page);
     $buttons = $data['buttons'];
-    $spacer  = $data['spacer'] ?? '';
+    $spacer  = $spacer_override !== null ? $spacer_override : ($data['spacer'] ?? '');
     $out = '';
     $first = true;
     $base = cms_base_url();
@@ -278,7 +291,7 @@ function cms_header_buttons_html($theme, string $spacer_style = ''){
         }
         if(!$first && $spacer !== ''){
             $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
-            $out .= '<span class="navSpacer"'.$style.'>'.htmlspecialchars($spacer).'</span>';
+            $out .= '<span class="navSpacer"'.$style.'>'.$spacer.'</span>';
         }
         $out .= $segment;
         $first = false;
@@ -286,7 +299,7 @@ function cms_header_buttons_html($theme, string $spacer_style = ''){
     if(cms_current_admin() || isset($_COOKIE['cms_admin_token'])){
         if(!$first && $spacer !== ''){
             $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
-            $out .= '<span class="navSpacer"'.$style.'>'.htmlspecialchars($spacer).'</span>';
+            $out .= '<span class="navSpacer"'.$style.'>'.$spacer.'</span>';
         }
         $base = cms_base_url();
         $out .= '<a href="'.$base.'/cms/admin/index.php" title="Admin">ADMIN</a>';
