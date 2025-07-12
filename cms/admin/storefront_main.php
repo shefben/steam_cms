@@ -174,6 +174,12 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
         'bottom_left' => 'left:0;top:352px;width:288px;height:158px',
         'bottom_right' => 'left:301px;top:352px;width:289px;height:158px'
       ];
+      $dimsMap = [];
+      foreach ($styleMap as $pos=>$style){
+        if(preg_match('/width:(\\d+)px;height:(\\d+)px/',$style,$m)){
+          $dimsMap[$pos] = ['width'=>(int)$m[1],'height'=>(int)$m[2]];
+        }
+      }
       foreach($styleMap as $p=>$style):
         $img=$caps[$p]['image']??'';
         $appid=$caps[$p]['appid']??0;
@@ -201,7 +207,8 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
       </div>
       <div id="capUpload" style="display:none;">
         <label>App <select id="uploadAppid"></select></label><br>
-        <input type="file" id="uploadFile"><br>
+        <input type="file" id="uploadFile" accept="image/png"><br>
+        <img id="uploadPreview" style="display:none;max-width:100%;margin-top:10px" alt="preview"><br>
         <div class="modal-actions">
           <button type="button" id="uploadAccept" class="btn btn-primary">OK</button>
           <button type="button" class="btn btn-secondary cancel">Cancel</button>
@@ -253,6 +260,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   <script>
   var images = <?php echo json_encode($images);?>;
   var apps = <?php echo json_encode($apps);?>;
+  var dims = <?php echo json_encode($dimsMap); ?>;
 
   function populateAppLists() {
     var opts='';
@@ -266,6 +274,8 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
     $('#capsuleModal').data('pos',pos).css('display','flex');
     $('#capChoose').show();
     $('#capExisting,#capUpload').hide();
+    $('#uploadPreview').hide();
+    $('#uploadAccept').prop('disabled',true);
   });
 
   $('#btnSelectExisting').on('click',function(){
@@ -286,6 +296,8 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
     $('#existingAppid').val('');
     $('#capChoose').hide();
     $('#capExisting').show();
+    $('#uploadPreview').hide();
+    $('#uploadAccept').prop('disabled',false);
   });
 
   $('#existingAccept').on('click',function(){
@@ -298,17 +310,44 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
        $('#sel_'+pos).val(appid);
        $('img[data-pos='+pos+']').attr('src','../../images/capsules/'+file).data('app',appid);
        $('#capsuleModal').hide();
+       $('#uploadPreview').hide();
+       $('#uploadAccept').prop('disabled',false);
     });
   });
 
   $('#btnUploadNew').on('click',function(){
     $('#uploadFile').val('');
     $('#uploadAppid').val('');
+    $('#uploadPreview').hide();
+    $('#uploadAccept').prop('disabled',true);
     $('#capChoose').hide();
     $('#capUpload').show();
   });
 
+  $('#uploadFile').on('change',function(){
+    var pos=$('#capsuleModal').data('pos');
+    var file=this.files[0];
+    if(!file){$('#uploadPreview').hide();return;}
+    var reader=new FileReader();
+    reader.onload=function(e){
+      $('#uploadPreview').attr('src',e.target.result).show();
+      var img=new Image();
+      img.onload=function(){
+        var dw=dims[pos].width, dh=dims[pos].height;
+        if(this.width!==dw||this.height!==dh){
+          $('#uploadAccept').prop('disabled',true);
+          alert('Image must be '+dw+'x'+dh+' pixels');
+        }else{
+          $('#uploadAccept').prop('disabled',false);
+        }
+      };
+      img.src=e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
   $('#uploadAccept').on('click',function(){
+    if($(this).prop('disabled')) return;
     var pos=$('#capsuleModal').data('pos');
     var appid=$('#uploadAppid').val();
     var file=$('#uploadFile')[0].files[0];
@@ -329,11 +368,15 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
 
   $('.cancel').on('click',function(){
     $('#capsuleModal').hide();
+    $('#uploadPreview').hide();
+    $('#uploadAccept').prop('disabled',false);
   });
 
   $('#capsuleModal').on('click', function(e){
     if(e.target === this) {
       $(this).hide();
+      $('#uploadPreview').hide();
+      $('#uploadAccept').prop('disabled',false);
     }
   });
 
