@@ -29,12 +29,12 @@ function cms_render_news($type,$count=null){
     // some versions. Cast $count to an integer and inject it directly to avoid
     // syntax errors when executing the query.
     $limit = (int)$count;
-    $where = ['publish_date<=NOW()','status="published"'];
+    $where = ['publish_at<=NOW()','status="published"'];
     $year_only = cms_get_setting('news_year_only','1') === '1';
     if($year_only){
         $theme = cms_get_setting('theme','2004');
         if(preg_match('/^(\d{4})/', $theme, $m)){
-            $where[] = 'YEAR(publish_date)='.(int)$m[1];
+            $where[] = 'YEAR(publish_at)='.(int)$m[1];
         }
     }
     if($settings['source']==='official'){
@@ -42,7 +42,7 @@ function cms_render_news($type,$count=null){
     }elseif($settings['source']==='custom'){
         $where[] = 'is_official=0';
     }
-    $sql = "SELECT id,title,author,publish_date,content FROM news WHERE ".implode(' AND ',$where)." ORDER BY publish_date DESC LIMIT $limit";
+    $sql = "SELECT id,title,author,publish_date,content FROM news WHERE ".implode(' AND ',$where)." ORDER BY publish_at DESC LIMIT $limit";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);

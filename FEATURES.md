@@ -8,6 +8,7 @@
 - Year-based news filtering configurable per theme year
 - Individual storefront admin pages for featured items, products, categories and sidebar
 - Pixel-perfect 2004 layout with full-height news box
+- Scheduled publishing for news items with daily cron script
 - Admin action logging with database-backed audit trail
 - Activity log page lists audit entries with filters and pagination
 - Dashboard charts visualize visits and popular pages with weekly/monthly toggles
