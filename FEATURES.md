@@ -63,6 +63,7 @@
 - Partial template tags load from theme
 - Default.twig automatically used for non-index pages
 - Storefront templates use theme_subdir asset lookup
+- Custom pages without a template column fall back to the active theme's default.twig
 - Dedicated storefront folders per theme
 - Asset mover script copies archived theme directories and stylesheets
 - Custom page links honor configurable root path

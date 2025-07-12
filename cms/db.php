@@ -32,22 +32,35 @@ function cms_set_setting($key,$value){
 
 function cms_get_custom_page($slug,$theme=null){
     $db = cms_get_db();
-    try{
+    try {
         $stmt = $db->prepare('SELECT title,content,theme,template FROM custom_pages WHERE slug=?');
         $stmt->execute([$slug]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if(!$row) return null;
-        if($theme!==null && $row['theme']!==null && $row['theme']!==''){
-            $themes = array_map('trim', explode(',', $row['theme']));
-            if(!in_array($theme,$themes,true)) return null;
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S22') { // column missing
+            $stmt = $db->prepare('SELECT title,content,theme FROM custom_pages WHERE slug=?');
+            $stmt->execute([$slug]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$row) return null;
+            if ($theme !== null && $row['theme'] !== null && $row['theme'] !== '') {
+                $themes = array_map('trim', explode(',', $row['theme']));
+                if (!in_array($theme, $themes, true)) return null;
+            }
+            unset($row['theme']);
+            $row['template'] = null;
+            return $row;
         }
-        unset($row['theme']);
-        if(!isset($row['template']) || $row['template']==='') $row['template'] = 'default.twig';
-        return $row;
-    }catch(PDOException $e){
-        if($e->getCode()==='42S02') return null; // table missing
+        if ($e->getCode() === '42S02') return null; // table missing
         throw $e;
     }
+    if (!$row) return null;
+    if ($theme !== null && $row['theme'] !== null && $row['theme'] !== '') {
+        $themes = array_map('trim', explode(',', $row['theme']));
+        if (!in_array($theme, $themes, true)) return null;
+    }
+    unset($row['theme']);
+    if (!isset($row['template']) || $row['template'] === '') $row['template'] = null;
+    return $row;
 }
 
 function cms_record_visit($page){
