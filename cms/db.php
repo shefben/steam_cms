@@ -190,30 +190,41 @@ function cms_get_theme_header_data($theme, string $page = ''){
     try {
         $stmt = $db->prepare('SELECT logo,text,img,hover,depressed,url,visible,spacer FROM theme_headers WHERE theme=? AND page=? ORDER BY ord,id');
         $stmt->execute([$theme, $page]);
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if(!$rows && $page !== ''){
+    } catch(PDOException $e){
+        if($e->getCode()==='42S22') {
+            // older schema without page column
+            $stmt = $db->prepare('SELECT logo,text,img,hover,depressed,url,visible,spacer FROM theme_headers WHERE theme=? ORDER BY ord,id');
+            $stmt->execute([$theme]);
+        } elseif($e->getCode()==='42S02') {
+            return ['logo'=>'','spacer'=>'','buttons'=>[]];
+        } else {
+            throw $e;
+        }
+    }
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if(!$rows && $page !== ''){
+        try {
             $stmt->execute([$theme, '']);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // ignore if schema lacks page column
         }
-        if(!$rows) return ['logo'=>'','spacer'=>'','buttons'=>[]];
-        $logo = $rows[0]['logo'];
-        $spacer = $rows[0]['spacer'];
-        $buttons = [];
-        foreach($rows as $r){
-            $buttons[] = [
-                'text'=>$r['text'],
-                'img'=>$r['img'],
-                'hover'=>$r['hover'],
-                'depressed'=>$r['depressed'],
-                'url'=>$r['url'],
-                'visible'=>$r['visible']
-            ];
-        }
-        return ['logo'=>$logo,'spacer'=>$spacer,'buttons'=>$buttons];
-    } catch(PDOException $e){
-        if($e->getCode()==='42S02') return ['logo'=>'','spacer'=>'','buttons'=>[]];
-        throw $e;
     }
+    if(!$rows) return ['logo'=>'','spacer'=>'','buttons'=>[]];
+    $logo = $rows[0]['logo'];
+    $spacer = $rows[0]['spacer'];
+    $buttons = [];
+    foreach($rows as $r){
+        $buttons[] = [
+            'text'=>$r['text'],
+            'img'=>$r['img'],
+            'hover'=>$r['hover'],
+            'depressed'=>$r['depressed'],
+            'url'=>$r['url'],
+            'visible'=>$r['visible']
+        ];
+    }
+    return ['logo'=>$logo,'spacer'=>$spacer,'buttons'=>$buttons];
 }
 
 function cms_get_theme_footer($theme){
