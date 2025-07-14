@@ -65,6 +65,38 @@ if ($authorFilter !== '') {
 $sql .= ' ORDER BY publish_at DESC';
 $stmt = $db->prepare($sql);
 $stmt->execute($params);
+
+// handle CSV/JSON export before further processing
+$export = $_GET['export'] ?? '';
+if ($export === 'csv' || $export === 'json') {
+    $expSql = str_replace(
+        'SELECT id,title,author,publish_date,status,views',
+        'SELECT id,title,author,publish_date,status,views,content',
+        $sql
+    );
+    $expStmt = $db->prepare($expSql);
+    $expStmt->execute($params);
+    $data = $expStmt->fetchAll(PDO::FETCH_ASSOC);
+    $file = 'news_export.' . ($export === 'csv' ? 'csv' : 'json');
+    if ($export === 'csv') {
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename=' . $file);
+        $out = fopen('php://output', 'w');
+        if ($data) {
+            fputcsv($out, array_keys($data[0]));
+            foreach ($data as $r) {
+                fputcsv($out, $r);
+            }
+        }
+        fclose($out);
+    } else {
+        header('Content-Type: application/json');
+        header('Content-Disposition: attachment; filename=' . $file);
+        echo json_encode($data);
+    }
+    exit;
+}
+
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $order = cms_get_setting('news_order', null);
 $order = $order ? json_decode($order, true) : [];
@@ -123,6 +155,13 @@ if (isset($_GET['ajax'])) {
 <?php if(cms_has_permission('news_create')): ?>
 <p><a href="news_edit.php">Add New Article</a></p>
 <?php endif; ?>
+<p>
+    <a class="btn btn-secondary" href="news.php?export=csv">Export CSV</a>
+    <a class="btn btn-secondary" href="news.php?export=json">Export JSON</a>
+    <?php if(cms_has_permission('news_create')): ?>
+    <a class="btn btn-secondary" href="news_import.php">Import</a>
+    <?php endif; ?>
+</p>
 <div id="filter-bar" style="margin-bottom:10px;">
     <label>Title: <input type="text" id="filter-title" value="<?php echo htmlspecialchars($titleFilter); ?>"></label>
     <label>Author: <input type="text" id="filter-author" value="<?php echo htmlspecialchars($authorFilter); ?>"></label>

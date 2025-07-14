@@ -12,8 +12,36 @@ $stmt->bindValue(':off', $offset, PDO::PARAM_INT);
 $stmt->execute();
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $total = $db->query('SELECT COUNT(*) FROM store_apps')->fetchColumn();
+
+$export = $_GET['export'] ?? '';
+if ($export === 'csv' || $export === 'json') {
+    $dataStmt = $db->query('SELECT appid,name,developer,price,availability FROM store_apps ORDER BY appid');
+    $data = $dataStmt->fetchAll(PDO::FETCH_ASSOC);
+    $file = 'products.' . ($export === 'csv' ? 'csv' : 'json');
+    if ($export === 'csv') {
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename=' . $file);
+        $out = fopen('php://output', 'w');
+        if ($data) {
+            fputcsv($out, array_keys($data[0]));
+            foreach ($data as $r) {
+                fputcsv($out, $r);
+            }
+        }
+        fclose($out);
+    } else {
+        header('Content-Type: application/json');
+        header('Content-Disposition: attachment; filename=' . $file);
+        echo json_encode($data);
+    }
+    exit;
+}
 ?>
 <h2>Store Products</h2>
+<p>
+    <a class="btn btn-secondary" href="storefront_products.php?export=csv">Export CSV</a>
+    <a class="btn btn-secondary" href="storefront_products.php?export=json">Export JSON</a>
+</p>
 <table class="table">
 <tr><th>ID</th><th>Image</th><th>Name</th><th>Developer</th><th>Price</th><th>Avail</th><th></th></tr>
 <?php foreach($rows as $r): ?>
