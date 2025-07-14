@@ -53,7 +53,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
             $pdo->exec("DROP TABLE IF EXISTS news");
-            $pdo->exec("CREATE TABLE news(id BIGINT AUTO_INCREMENT PRIMARY KEY,title TEXT,author TEXT,publish_date DATETIME,publish_at DATETIME,views INT DEFAULT 0,content TEXT,is_official TINYINT(1) DEFAULT 1,status VARCHAR(20) DEFAULT 'draft')");
+            $pdo->exec("CREATE TABLE news(
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                title TEXT,
+                author TEXT,
+                publish_date DATETIME,
+                publish_at DATETIME,
+                views INT DEFAULT 0,
+                content TEXT,
+                is_official TINYINT(1) DEFAULT 1,
+                status VARCHAR(20) DEFAULT 'draft',
+                INDEX(publish_date)
+            )");
             $pdo->exec("DROP TABLE IF EXISTS content_servers");
             $pdo->exec("CREATE TABLE content_servers(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -253,20 +264,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 permissions TEXT,
                 role_id INT DEFAULT NULL,
                 created DATETIME,
-                password VARCHAR(255)
+                password VARCHAR(255),
+                FOREIGN KEY (role_id) REFERENCES admin_roles(id)
             )");
             $pdo->exec("DROP TABLE IF EXISTS admin_tokens");
             $pdo->exec("CREATE TABLE admin_tokens(
                 token_hash VARCHAR(64) PRIMARY KEY,
                 user_id INT,
-                expires DATETIME
+                expires DATETIME,
+                FOREIGN KEY (user_id) REFERENCES admin_users(id) ON DELETE CASCADE
             )");
             $pdo->exec("DROP TABLE IF EXISTS admin_logs");
             $pdo->exec("CREATE TABLE admin_logs(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 user INT,
                 action TEXT,
-                ts DATETIME DEFAULT CURRENT_TIMESTAMP
+                ts DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user) REFERENCES admin_users(id) ON DELETE SET NULL
             )");
             $pdo->exec("DROP TABLE IF EXISTS notifications");
             $pdo->exec("CREATE TABLE notifications(

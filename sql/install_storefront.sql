@@ -1,6 +1,7 @@
 CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,visible TINYINT DEFAULT 1);
 CREATE TABLE store_developers(id INT AUTO_INCREMENT PRIMARY KEY,name TEXT);
 CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availability TEXT,price DECIMAL(10,2),metacritic TEXT DEFAULT NULL,description TEXT,sysreq TEXT,main_image TEXT,images TEXT,show_metascore TINYINT DEFAULT 0);
+CREATE INDEX idx_storefront_products_appid ON store_apps(appid);
 CREATE TABLE subscriptions(subid INT PRIMARY KEY,name TEXT,price DECIMAL(10,2));
 CREATE TABLE subscription_apps(subid INT,appid INT,PRIMARY KEY(subid,appid));
 CREATE TABLE app_categories(appid INT,category_id INT,PRIMARY KEY(appid,category_id));
@@ -27,6 +28,21 @@ CREATE TABLE storefront_tab_games(
     appid INT,
     ord INT
 );
+ALTER TABLE subscription_apps
+    ADD CONSTRAINT fk_subscription_apps_sub FOREIGN KEY (subid) REFERENCES subscriptions(subid) ON DELETE CASCADE,
+    ADD CONSTRAINT fk_subscription_apps_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+ALTER TABLE app_categories
+    ADD CONSTRAINT fk_app_categories_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE,
+    ADD CONSTRAINT fk_app_categories_cat FOREIGN KEY (category_id) REFERENCES store_categories(id) ON DELETE CASCADE;
+ALTER TABLE store_capsules
+    ADD CONSTRAINT fk_store_capsules_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+ALTER TABLE storefront_capsules_all
+    ADD CONSTRAINT fk_storefront_capsules_all_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+ALTER TABLE storefront_capsules_per_theme
+    ADD CONSTRAINT fk_storefront_capsules_per_theme_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+ALTER TABLE storefront_tab_games
+    ADD CONSTRAINT fk_storefront_tab_games_tab FOREIGN KEY (tab_id) REFERENCES storefront_tabs(id) ON DELETE CASCADE,
+    ADD CONSTRAINT fk_storefront_tab_games_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
 INSERT INTO storefront_tabs(theme,title,ord) VALUES
 ('2007_v2','Top Sellers',1),
 ('2007_v2','Top Rated',2);
