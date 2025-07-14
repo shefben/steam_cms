@@ -16,6 +16,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         session_regenerate_id(true);
         $_SESSION['admin_id']=$row['id'];
         $_SESSION['admin_lang']=$row['language'] ?: 'en';
+        cms_admin_log('login success');
         if($stay){
             $token=cms_create_admin_token($row['id']);
             setcookie('cms_admin_token',$token,[
@@ -27,6 +28,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         header('Location: '.$dest);
         exit;
     }else{
+        cms_admin_log('login failed', 0);
         $err='Invalid credentials';
     }
 }

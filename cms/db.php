@@ -502,4 +502,26 @@ function cms_admin_log(string $action, ?int $userId = null): void
     $stmt = $db->prepare('INSERT INTO admin_logs(`user`, action, ts) VALUES(?,?,NOW())');
     $stmt->execute([$userId, $action]);
 }
+
+function cms_get_help_text(string $page, string $field): string
+{
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT content FROM help_texts WHERE page=? AND field=?');
+        $stmt->execute([$page, $field]);
+        $txt = $stmt->fetchColumn();
+        return $txt !== false ? $txt : '';
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S02') return '';
+        throw $e;
+    }
+}
+
+function cms_help_icon(string $page, string $field): string
+{
+    $text = cms_get_help_text($page, $field);
+    if ($text === '') return '';
+    $esc = htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    return '<span class="help-icon" data-help="' . $esc . '" tabindex="0" role="button" aria-label="Help">?</span>';
+}
 ?>

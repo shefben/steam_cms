@@ -76,7 +76,7 @@ if(isset($_POST['save'])){
     $nav_items = $nav_items;
 }
 ?>
-<h2>Site Settings</h2>
+<h2>Site Settings <?php echo cms_help_icon('settings','site'); ?></h2>
 <form method="post" enctype="multipart/form-data">
 Site Title: <input type="text" name="site_title" value="<?php echo htmlspecialchars($site_title); ?>" title="Displayed in browser titles"><br><br>
 Admin Theme: <select name="admin_theme" title="Color scheme for the admin panel">
@@ -95,7 +95,7 @@ SMTP User: <input type="text" name="smtp_user" value="<?php echo htmlspecialchar
 SMTP Password: <input type="password" name="smtp_pass" value="<?php echo htmlspecialchars($smtp_pass); ?>" title="Password for the mail server"><br><br>
 Root Path: <input type="text" name="root_path" value="<?php echo htmlspecialchars($root_path); ?>" title="Prefix for all local links"><br><br>
 Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <input type="file" name="favicon" accept="image/x-icon" title="Upload a custom site favicon"><br><br>
-<h3>Sidebar Navigation</h3>
+<h3>Sidebar Navigation <?php echo cms_help_icon('settings','sidebar'); ?></h3>
 <table id="nav-table" class="data-table" cellpadding="2">
 <thead>
     <tr><th></th><th>#</th><th>File</th><th>Label</th><th>Visible</th><th>Remove</th></tr>
