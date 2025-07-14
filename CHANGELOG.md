@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - Pagination links spaced apart for clarity
 - Added activity log admin page with user and action filters
 - Added admin activity logging table and hooks for critical actions
+- Added contextual help icons powered by new help_texts table
 - Drag-and-drop ordering restored for cafe and category pages
 - News export and import with CSV/JSON support and transactions
 - Content server banner admin now overlays disabled images and toggles them between year and disabled folders
