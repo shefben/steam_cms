@@ -119,3 +119,4 @@ All notable changes to this project will be documented in this file.
 - Added TAGS.md with reference for all template tags
 - Navigation buttons support per-page overrides via new page field and auto-detect the current template
 - Spacer HTML can be configured per theme and overridden when calling {nav_buttons}
+- Added theme upload feature allowing ZIP installation from the admin panel

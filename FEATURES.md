@@ -103,3 +103,4 @@
 - Role-based administrator permissions with editable roles
 - Draft autosave for news and custom pages with restore option
 - Preview drafts in chosen theme from admin editor
+- Upload zipped themes from the admin interface
