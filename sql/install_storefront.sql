@@ -168,6 +168,25 @@ INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,descri
 INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images,show_metascore) VALUES(90018,"The Trenches","The Trenches Team","Available",0,"","","","0000000186_thumb.jpg","[\"0000000186_thumb.jpg\", \"0000000185_thumb.jpg\", \"0000000184_thumb.jpg\", \"0000000183_thumb.jpg\", \"0000000182_thumb.jpg\"]",0);
 INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images,show_metascore) VALUES(90020,"Vampire Slayer","Vampire Slayer","Available",0,"","","","0000000181_thumb.jpg","[\"0000000181_thumb.jpg\", \"0000000180_thumb.jpg\", \"0000000179_thumb.jpg\"]",0);
 INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images,show_metascore) VALUES(90012,"Zombie Panic","Zombie Panic Team","Available",0,"","","","0000000036_thumb.jpg","[\"0000000036_thumb.jpg\", \"0000000035_thumb.jpg\", \"0000000034_thumb.jpg\", \"0000000033_thumb.jpg\", \"0000000032_thumb.jpg\"]",0);
+-- Added missing apps for storefront references
+INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images,show_metascore) VALUES
+(380,'Half-Life 2: Episode One','Valve','Available',0,'','','','','[]',0),
+(1200,'Red Orchestra: Ostfront 41-45','Unknown','Available',0,'','','','','[]',0),
+(1300,'SiN Episodes: Emergence','Unknown','Available',0,'','','','','[]',0),
+(1510,'Uplink','Unknown','Available',0,'','','','','[]',0),
+(2100,'Dark Messiah of Might & Magic','Unknown','Available',0,'','','','','[]',0),
+(2400,'The Ship: Murder Party','Unknown','Available',0,'','','','','[]',0),
+(2510,'Shadowgrounds Demo','Unknown','Available',0,'','','','','[]',0),
+(2810,'X3: Reunion','Unknown','Available',0,'','','','','[]',0),
+(3000,'Unknown App 3000','Unknown','Available',0,'','','','','[]',0),
+(3010,'Xpand Rally','Unknown','Available',0,'','','','','[]',0),
+(3900,'Sid Meier''s Civilization IV','Unknown','Available',0,'','','','','[]',0),
+(4700,'Total War: MEDIEVAL II – Definitive Edition','Unknown','Available',0,'','','','','[]',0),
+(6980,'Thief: Deadly Shadows','Unknown','Available',0,'','','','','[]',0),
+(7260,'Loki','Unknown','Available',0,'','','','','[]',0),
+(8400,'Geometry Wars: Retro Evolved','Unknown','Available',0,'','','','','[]',0),
+(900352,'Unknown App 900352','Unknown','Available',0,'','','','','[]',0),
+(9340,'Company of Heroes: Opposing Fronts','Unknown','Available',0,'','','','','[]',0);
 INSERT INTO subscriptions(subid,name,price) VALUES(7,"Counter-Strike",19.95);
 INSERT INTO subscriptions(subid,name,price) VALUES(25,"Day of Defeat: Source",19.95);
 INSERT INTO subscriptions(subid,name,price) VALUES(29,"Team Fortress Classic",9.95);
