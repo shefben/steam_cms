@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 - Introduced role-based permission system with new roles admin page
+- Permissions on role and user forms presented as selectable checkboxes with all/none toggles
 - Admin dashboard graphs now use Chart.js with weekly/monthly toggles
 - Admin news list supports filtering by title and author with AJAX pagination
 - Added preview endpoint with theme selection and admin-only access
@@ -120,3 +121,4 @@ All notable changes to this project will be documented in this file.
 - Added TAGS.md with reference for all template tags
 - Navigation buttons support per-page overrides via new page field and auto-detect the current template
 - Spacer HTML can be configured per theme and overridden when calling {nav_buttons}
+- Added theme upload feature allowing ZIP installation from the admin panel
