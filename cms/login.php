@@ -43,29 +43,29 @@ if(!is_dir($theme_dir)){
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Admin Login</title>
+<title><?php echo htmlspecialchars(cms_admin_label('login_title','Admin Login')); ?></title>
     <link rel="stylesheet" href="<?php echo htmlspecialchars($theme_url); ?>/style.css">
 </head>
 <body class="login-page">
 <main>
-<h2>Admin Login</h2>
+<h2><?php echo htmlspecialchars(cms_admin_label('login_title','Admin Login')); ?></h2>
 <?php if($err) echo '<p class="error">'.htmlspecialchars($err).'</p>'; ?>
 <form method="post" id="login-form" novalidate>
     <div>
-        <label for="username">Username</label>
+        <label for="username"><?php echo htmlspecialchars(cms_admin_label('login_username','Username')); ?></label>
         <input type="text" name="username" id="username" autocomplete="username">
     </div>
     <div>
-        <label for="password">Password</label>
+        <label for="password"><?php echo htmlspecialchars(cms_admin_label('login_password','Password')); ?></label>
         <input type="password" name="password" id="password" autocomplete="current-password">
     </div>
     <div>
-        <label for="stay"><input type="checkbox" name="stay" id="stay"> Stay logged in</label>
+        <label for="stay"><input type="checkbox" name="stay" id="stay"> <?php echo htmlspecialchars(cms_admin_label('login_stay','Stay logged in')); ?></label>
     </div>
     <div>
-        <button type="submit">Login</button>
+        <button type="submit"><?php echo htmlspecialchars(cms_admin_label('login_button','Login')); ?></button>
     </div>
-    <p><a href="password_reset_request.php">Forgot password?</a></p>
+    <p><a href="password_reset_request.php"><?php echo htmlspecialchars(cms_admin_label('login_forgot','Forgot password?')); ?></a></p>
 </form>
 </main>
 <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>

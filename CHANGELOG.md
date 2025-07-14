@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Added language preference for admin users and localized navigation labels
 - Introduced role-based permission system with new roles admin page
 - Admin dashboard graphs now use Chart.js with weekly/monthly toggles
 - Admin news list supports filtering by title and author with AJAX pagination

@@ -99,6 +99,35 @@ function cms_current_admin(){
     return $_SESSION['admin_id'] ?? 0;
 }
 
+function cms_get_admin_language($id=null){
+    if($id===null) $id = cms_current_admin();
+    if(!$id) return 'en';
+    $db = cms_get_db();
+    try{
+        $stmt = $db->prepare('SELECT language FROM admin_users WHERE id=?');
+        $stmt->execute([$id]);
+        $lang = $stmt->fetchColumn();
+        return $lang ?: 'en';
+    }catch(PDOException $e){
+        if($e->getCode()==='42S22') return 'en';
+        throw $e;
+    }
+}
+
+function cms_admin_label(string $key, string $default){
+    static $cache = [];
+    $lang = cms_get_admin_language();
+    if(!isset($cache[$lang])){
+        $json = cms_get_setting('translations_'.$lang,'{}');
+        $cache[$lang] = json_decode($json,true) ?: [];
+    }
+    return $cache[$lang][$key] ?? $default;
+}
+
+function cms_available_languages(){
+    return ['en','es','fr','de'];
+}
+
 function cms_all_permissions(){
     return [
         'manage_admins'    => 'Manage Administrators',

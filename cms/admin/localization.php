@@ -21,7 +21,7 @@ if(isset($_POST['save'])){
 <form method="get" style="margin-bottom:10px;">
 <select name="lang">
 <?php
-$languages = ['en','es','fr','de'];
+$languages = cms_available_languages();
 foreach($languages as $l){
     $sel = $l==$lang?'selected':'';
     echo "<option value='$l' $sel>$l</option>";

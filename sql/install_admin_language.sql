@@ -1,0 +1,1 @@
+ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS language VARCHAR(8) DEFAULT 'en';

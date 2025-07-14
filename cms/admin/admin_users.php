@@ -3,6 +3,10 @@ require_once 'admin_header.php';
 cms_require_permission('manage_admins');
 $db = cms_get_db();
 $roles = $db->query('SELECT id,name FROM admin_roles ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+$languages = [];
+foreach(cms_available_languages() as $lc){
+    $languages[$lc] = ucfirst($lc);
+}
 $roleMap = [];
 foreach($roles as $r){
     $roleMap[$r['id']] = $r['name'];
@@ -14,9 +18,10 @@ if(isset($_POST['action']) && $_POST['action']==='save'){
     $last = trim($_POST['last_name']);
     $role = $_POST['role_id'] !== '' ? intval($_POST['role_id']) : null;
     $perm = $role ? '' : trim($_POST['permissions']);
+    $lang = $_POST['language'] ?? 'en';
     if($id){
-        $stmt=$db->prepare('UPDATE admin_users SET email=?,first_name=?,last_name=?,permissions=?,role_id=? WHERE id=?');
-        $stmt->execute([$email,$first,$last,$perm,$role,$id]);
+        $stmt=$db->prepare('UPDATE admin_users SET email=?,first_name=?,last_name=?,language=?,permissions=?,role_id=? WHERE id=?');
+        $stmt->execute([$email,$first,$last,$lang,$perm,$role,$id]);
         if($_POST['password']!=='' && $_POST['password']===$_POST['confirm']){
             $hash=password_hash($_POST['password'],PASSWORD_DEFAULT);
             $db->prepare('UPDATE admin_users SET password=? WHERE id=?')->execute([$hash,$id]);
@@ -24,8 +29,8 @@ if(isset($_POST['action']) && $_POST['action']==='save'){
         cms_admin_log('Updated admin user '.$id);
     }else{
         $hash=password_hash($_POST['password'],PASSWORD_DEFAULT);
-        $stmt=$db->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,role_id,created,password) VALUES(?,?,?,?,?,?,NOW(),?)');
-        $stmt->execute([trim($_POST['username']),$email,$first,$last,$perm,$role,$hash]);
+        $stmt=$db->prepare('INSERT INTO admin_users(username,email,first_name,last_name,language,permissions,role_id,created,password) VALUES(?,?,?,?,?,?,?,NOW(),?)');
+        $stmt->execute([trim($_POST['username']),$email,$first,$last,$lang,$perm,$role,$hash]);
         cms_admin_log('Created admin user '.trim($_POST['username']));
     }
 }
@@ -119,6 +124,11 @@ if (isset($_GET['ajax'])) {
 <label>Email: <input type="text" name="email" id="eemail"></label><br>
 <label>First Name: <input type="text" name="first_name" id="efirst"></label><br>
 <label>Last Name: <input type="text" name="last_name" id="elast"></label><br>
+<label>Language: <select name="language" id="elang">
+    <?php foreach($languages as $code=>$name): ?>
+        <option value="<?php echo $code; ?>"><?php echo htmlspecialchars($name); ?></option>
+    <?php endforeach; ?>
+</select></label><br>
 <label>Role: <select name="role_id" id="erole">
     <option value="">Custom Permissions</option>
     <?php foreach($roles as $ro): ?>
@@ -149,6 +159,7 @@ function bindActions(){
             $('#elast').val(data[i].last_name);
             $('#erole').val(data[i].role_id?data[i].role_id:'');
             $('#eperm').val(data[i].permissions);
+            $('#elang').val(data[i].language || 'en');
             break;
         }
         togglePerm();
@@ -180,6 +191,7 @@ $('#addBtn').on('click',function(){
     $('#elast').val('');
     $('#erole').val('');
     $('#eperm').val('');
+    $('#elang').val('en');
     $('#epass').val('');
     $('#econf').val('');
     togglePerm();
