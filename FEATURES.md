@@ -104,4 +104,5 @@
 - Permission checkboxes with all/none toggle on role and user forms
 - Draft autosave for news and custom pages with restore option
 - Preview drafts in chosen theme from admin editor
+- News list export to CSV or JSON with import preview
 - Upload zipped themes from the admin interface
