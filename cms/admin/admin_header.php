@@ -145,7 +145,7 @@ foreach ($nav_items as $item) {
     if(!($item['visible']??1)) continue;
     $file = $item['file'];
     if ($file === 'support_2003.php') continue;
-    $label = $item['label'];
+    $label = cms_admin_translate($item['label']);
     $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
     $icon = $icons[$file] ?? '';
     $item_html = '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
@@ -158,7 +158,7 @@ foreach ($nav_items as $item) {
 $has_sf = $sf_root || $sf_pages;
 if ($has_sf) {
     $root_file = $sf_root['file'] ?? 'storefront.php';
-    $root_label = $sf_root['label'] ?? 'Storefront';
+    $root_label = cms_admin_translate($sf_root['label'] ?? 'Storefront');
     $active = strpos($_SERVER['PHP_SELF'], $root_file)!==false ? ' class="active"' : '';
     $icon = $icons[$root_file] ?? '';
     $nav_html .= '<li id="sf-parent"><a href="'.$root_file.'"'.$active.' aria-label="StoreFront menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
@@ -166,7 +166,7 @@ if ($has_sf) {
         $nav_html .= '<ul class="sub-menu" id="sf-sub" style="display:none">';
         foreach ($sf_pages as $it) {
             $file = $it['file'];
-            $label = $it['label'];
+            $label = cms_admin_translate($it['label']);
             $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
             $icon = $icons[$file] ?? '';
             $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
@@ -178,7 +178,7 @@ if ($has_sf) {
 $has_faq = $faq_root || $faq_pages;
 if ($has_faq) {
     $root_file = $faq_root['file'] ?? 'faq.php';
-    $root_label = $faq_root['label'] ?? 'FAQ';
+    $root_label = cms_admin_translate($faq_root['label'] ?? 'FAQ');
     $active = strpos($_SERVER['PHP_SELF'], $root_file)!==false ? ' class="active"' : '';
     $icon = $icons[$root_file] ?? '';
     $nav_html .= '<li id="faq-parent"><a href="'.$root_file.'"'.$active.' aria-label="FAQ menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
@@ -186,7 +186,7 @@ if ($has_faq) {
         $nav_html .= '<ul class="sub-menu" id="faq-sub" style="display:none">';
         foreach ($faq_pages as $it) {
             $file = $it['file'];
-            $label = $it['label'];
+            $label = cms_admin_translate($it['label']);
             $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
             $icon = $icons[$file] ?? '';
             $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
@@ -202,10 +202,10 @@ if($has_cafe){
     foreach($cafe_pages as $it){
         if(strpos($_SERVER['PHP_SELF'],$it['file'])!==false){$active=' class="active"';break;}
     }
-    $nav_html .= '<li id="cafe-parent"><a href="#"'.$active.' aria-label="Cafe menu">'.htmlspecialchars($icon.' Cyber Cafe Management').'</a>';
+    $nav_html .= '<li id="cafe-parent"><a href="#"'.$active.' aria-label="Cafe menu">'.htmlspecialchars($icon.' '.cms_admin_translate('Cyber Cafe Management')).'</a>';
     $nav_html .= '<ul class="sub-menu" id="cafe-sub" style="display:none">';
     foreach($cafe_pages as $it){
-        $file=$it['file'];$label=$it['label'];
+        $file=$it['file'];$label=cms_admin_translate($it['label']);
         $ac=strpos($_SERVER['PHP_SELF'],$file)!==false?' class="active"':'';
         $icon=$icons[$file]??'';
         $nav_html.='<li><a href="'.$file.'"'.$ac.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';

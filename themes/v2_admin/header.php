@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo htmlspecialchars(cms_admin_language()); ?>">
 <head>
     <meta charset="utf-8">
     <title>CMS Admin</title>
@@ -10,7 +10,7 @@
 <div class="admin-wrapper">
 <header class="admin-header">
     <div class="header-content">
-        <h1>CMS Administration</h1>
+        <h1><?php echo htmlspecialchars(cms_admin_translate('CMS Administration')); ?></h1>
         <div class="header-controls">
             <span class="user-info">Logged in as <?php echo htmlspecialchars($admin_name); ?></span>
             <a href="<?php echo htmlspecialchars($base_url); ?>/index.php" class="btn btn-small">Home</a>

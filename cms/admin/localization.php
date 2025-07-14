@@ -3,7 +3,9 @@ require_once 'admin_header.php';
 cms_require_permission('manage_settings');
 
 $lang = isset($_GET['lang']) ? preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['lang']) : 'en';
-$json = cms_get_setting('translations_'.$lang, '{}');
+$isAdmin = isset($_GET['admin']) ? true : false;
+$keyPrefix = $isAdmin ? 'admin_translations_' : 'translations_';
+$json = cms_get_setting($keyPrefix.$lang, '{}');
 $data = json_decode($json, true) ?: [];
 
 if(isset($_POST['save'])){
@@ -12,12 +14,12 @@ if(isset($_POST['save'])){
         if(trim($k)=='') continue;
         $out[$k] = $_POST['val'][$idx];
     }
-    cms_set_setting('translations_'.$lang, json_encode($out));
+    cms_set_setting($keyPrefix.$lang, json_encode($out));
     $data = $out;
     echo '<p>Translations saved.</p>';
 }
 ?>
-<h2>Localization Manager (<?php echo htmlspecialchars($lang); ?>)</h2>
+<h2>Localization Manager (<?php echo htmlspecialchars($lang); ?><?php echo $isAdmin ? ' - Admin' : ''; ?>)</h2>
 <form method="get" style="margin-bottom:10px;">
 <select name="lang">
 <?php
@@ -30,6 +32,13 @@ foreach($languages as $l){
 </select>
 <input type="submit" value="Switch">
 </form>
+<p>
+<?php if(!$isAdmin): ?>
+    <a href="?lang=<?php echo urlencode($lang); ?>&admin=1">Edit Admin Strings</a>
+<?php else: ?>
+    <a href="?lang=<?php echo urlencode($lang); ?>">Edit Public Strings</a>
+<?php endif; ?>
+</p>
 <form method="post">
 <table border="1" cellpadding="2">
 <tr><th>Key</th><th>Value</th></tr>

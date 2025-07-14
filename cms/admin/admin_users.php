@@ -13,6 +13,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'save') {
     $first = trim($_POST['first_name']);
     $last = trim($_POST['last_name']);
     $role = $_POST['role_id'] !== '' ? intval($_POST['role_id']) : null;
+    $lang = trim($_POST['language'] ?? 'en');
     $permList = $_POST['perm'] ?? [];
     if ($role) {
         $perm = '';
@@ -24,17 +25,20 @@ if (isset($_POST['action']) && $_POST['action'] === 'save') {
         }
     }
     if ($id) {
-        $stmt = $db->prepare('UPDATE admin_users SET email=?,first_name=?,last_name=?,permissions=?,role_id=? WHERE id=?');
-        $stmt->execute([$email,$first,$last,$perm,$role,$id]);
+        $stmt = $db->prepare('UPDATE admin_users SET email=?,first_name=?,last_name=?,language=?,permissions=?,role_id=? WHERE id=?');
+        $stmt->execute([$email,$first,$last,$lang,$perm,$role,$id]);
         if ($_POST['password'] !== '' && $_POST['password'] === $_POST['confirm']) {
             $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $db->prepare('UPDATE admin_users SET password=? WHERE id=?')->execute([$hash,$id]);
         }
         cms_admin_log('Updated admin user ' . $id);
+        if ($id === cms_current_admin()) {
+            $_SESSION['admin_lang'] = $lang;
+        }
     } else {
         $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $stmt = $db->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,role_id,created,password) VALUES(?,?,?,?,?,?,NOW(),?)');
-        $stmt->execute([trim($_POST['username']),$email,$first,$last,$perm,$role,$hash]);
+        $stmt = $db->prepare('INSERT INTO admin_users(username,email,first_name,last_name,language,permissions,role_id,created,password) VALUES(?,?,?,?,?,?,NOW(),?)');
+        $stmt->execute([trim($_POST['username']),$email,$first,$last,$lang,$perm,$role,$hash]);
         cms_admin_log('Created admin user ' . trim($_POST['username']));
     }
 }
@@ -128,6 +132,12 @@ if (isset($_GET['ajax'])) {
 <label>Email: <input type="text" name="email" id="eemail"></label><br>
 <label>First Name: <input type="text" name="first_name" id="efirst"></label><br>
 <label>Last Name: <input type="text" name="last_name" id="elast"></label><br>
+<label>Language: <select name="language" id="elang">
+    <option value="en">en</option>
+    <option value="es">es</option>
+    <option value="fr">fr</option>
+    <option value="de">de</option>
+</select></label><br>
 <label>Role: <select name="role_id" id="erole">
     <option value="">Custom Permissions</option>
     <?php foreach ($roles as $ro) : ?>
@@ -164,6 +174,7 @@ function bindActions(){
             $('#eemail').val(data[i].email);
             $('#efirst').val(data[i].first_name);
             $('#elast').val(data[i].last_name);
+            $('#elang').val(data[i].language||'en');
             $('#erole').val(data[i].role_id?data[i].role_id:'');
             var p=data[i].permissions==='all'?Object.keys(cmsPerms):data[i].permissions.split(',');
             $('.permChk').prop('checked',false);
@@ -197,6 +208,7 @@ $('#addBtn').on('click',function(){
     $('#eemail').val('');
     $('#efirst').val('');
     $('#elast').val('');
+    $('#elang').val('en');
     $('#erole').val('');
     $('.permChk').prop('checked',false);
     $('#epass').val('');
