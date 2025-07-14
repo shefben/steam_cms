@@ -101,6 +101,7 @@
 - Admin dashboard shows unread notifications with dismiss action
 - Admin sidebar links editable with drag-and-drop ordering and add/remove buttons
 - Role-based administrator permissions with editable roles
+- Permission checkboxes with all/none toggle on role and user forms
 - Draft autosave for news and custom pages with restore option
 - Preview drafts in chosen theme from admin editor
 - Upload zipped themes from the admin interface

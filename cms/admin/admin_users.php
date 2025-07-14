@@ -4,35 +4,44 @@ cms_require_permission('manage_admins');
 $db = cms_get_db();
 $roles = $db->query('SELECT id,name FROM admin_roles ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
 $roleMap = [];
-foreach($roles as $r){
+foreach ($roles as $r) {
     $roleMap[$r['id']] = $r['name'];
 }
-if(isset($_POST['action']) && $_POST['action']==='save'){
+if (isset($_POST['action']) && $_POST['action'] === 'save') {
     $id = intval($_POST['id']);
     $email = trim($_POST['email']);
     $first = trim($_POST['first_name']);
     $last = trim($_POST['last_name']);
     $role = $_POST['role_id'] !== '' ? intval($_POST['role_id']) : null;
-    $perm = $role ? '' : trim($_POST['permissions']);
-    if($id){
-        $stmt=$db->prepare('UPDATE admin_users SET email=?,first_name=?,last_name=?,permissions=?,role_id=? WHERE id=?');
+    $permList = $_POST['perm'] ?? [];
+    if ($role) {
+        $perm = '';
+    } else {
+        if (count($permList) === count(cms_all_permissions())) {
+            $perm = 'all';
+        } else {
+            $perm = implode(',', array_map('trim', $permList));
+        }
+    }
+    if ($id) {
+        $stmt = $db->prepare('UPDATE admin_users SET email=?,first_name=?,last_name=?,permissions=?,role_id=? WHERE id=?');
         $stmt->execute([$email,$first,$last,$perm,$role,$id]);
-        if($_POST['password']!=='' && $_POST['password']===$_POST['confirm']){
-            $hash=password_hash($_POST['password'],PASSWORD_DEFAULT);
+        if ($_POST['password'] !== '' && $_POST['password'] === $_POST['confirm']) {
+            $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $db->prepare('UPDATE admin_users SET password=? WHERE id=?')->execute([$hash,$id]);
         }
-        cms_admin_log('Updated admin user '.$id);
-    }else{
-        $hash=password_hash($_POST['password'],PASSWORD_DEFAULT);
-        $stmt=$db->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,role_id,created,password) VALUES(?,?,?,?,?,?,NOW(),?)');
+        cms_admin_log('Updated admin user ' . $id);
+    } else {
+        $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $stmt = $db->prepare('INSERT INTO admin_users(username,email,first_name,last_name,permissions,role_id,created,password) VALUES(?,?,?,?,?,?,NOW(),?)');
         $stmt->execute([trim($_POST['username']),$email,$first,$last,$perm,$role,$hash]);
-        cms_admin_log('Created admin user '.trim($_POST['username']));
+        cms_admin_log('Created admin user ' . trim($_POST['username']));
     }
 }
-if(isset($_POST['delete'])){
+if (isset($_POST['delete'])) {
     $delId = intval($_POST['delete']);
     $db->prepare('DELETE FROM admin_users WHERE id=?')->execute([$delId]);
-    cms_admin_log('Deleted admin user '.$delId);
+    cms_admin_log('Deleted admin user ' . $delId);
 }
 $search = trim($_GET['q'] ?? '');
 $where = '';
@@ -121,13 +130,21 @@ if (isset($_GET['ajax'])) {
 <label>Last Name: <input type="text" name="last_name" id="elast"></label><br>
 <label>Role: <select name="role_id" id="erole">
     <option value="">Custom Permissions</option>
-    <?php foreach($roles as $ro): ?>
+    <?php foreach ($roles as $ro) : ?>
         <option value="<?php echo $ro['id']; ?>"><?php echo htmlspecialchars($ro['name']); ?></option>
     <?php endforeach; ?>
 </select></label><br>
 <div id="permRow">
-<label>Permissions: <input type="text" name="permissions" id="eperm"></label><br>
-<small>Available: <?php echo implode(', ', array_keys(cms_all_permissions())); ?></small><br>
+<fieldset id="uPermBox" style="border:1px solid #ccc;padding:6px;max-height:200px;overflow:auto;">
+<legend>Permissions</legend>
+<?php foreach (cms_all_permissions() as $key => $label) : ?>
+    <label style="display:block;"><input type="checkbox" class="permChk" name="perm[]" value="<?php echo $key; ?>"> <?php echo htmlspecialchars($label); ?></label>
+<?php endforeach; ?>
+<div style="margin-top:4px;">
+    <button type="button" id="permAll" class="btn btn-small">All</button>
+    <button type="button" id="permNone" class="btn btn-small">None</button>
+</div>
+</fieldset>
 </div>
 <label>Password: <input type="password" name="password" id="epass"></label><br>
 <label>Confirm: <input type="password" name="confirm" id="econf"></label><br>
@@ -136,7 +153,7 @@ if (isset($_GET['ajax'])) {
 </form>
 </div>
 <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
-<?php echo "<script>var data=" . json_encode($rows) . ", currentPage=$page;</script>"; ?>
+<?php echo "<script>var data=" . json_encode($rows) . ", currentPage=$page, cmsPerms=" . json_encode(cms_all_permissions()) . ";</script>"; ?>
 <script>
 function bindActions(){
     $('.editBtn').off('click').on('click',function(){
@@ -148,7 +165,9 @@ function bindActions(){
             $('#efirst').val(data[i].first_name);
             $('#elast').val(data[i].last_name);
             $('#erole').val(data[i].role_id?data[i].role_id:'');
-            $('#eperm').val(data[i].permissions);
+            var p=data[i].permissions==='all'?Object.keys(cmsPerms):data[i].permissions.split(',');
+            $('.permChk').prop('checked',false);
+            for(var j=0;j<p.length;j++){ var k=p[j].trim(); if(k) $('.permChk[value="'+k+'"]').prop('checked',true); }
             break;
         }
         togglePerm();
@@ -179,7 +198,7 @@ $('#addBtn').on('click',function(){
     $('#efirst').val('');
     $('#elast').val('');
     $('#erole').val('');
-    $('#eperm').val('');
+    $('.permChk').prop('checked',false);
     $('#epass').val('');
     $('#econf').val('');
     togglePerm();
@@ -187,6 +206,8 @@ $('#addBtn').on('click',function(){
 });
 $('#cancel').on('click',function(){ $('#editor').hide(); });
 $('#erole').on('change',togglePerm);
+$('#permAll').on('click',function(){ $('.permChk').prop('checked',true); });
+$('#permNone').on('click',function(){ $('.permChk').prop('checked',false); });
 function togglePerm(){
     if($('#erole').val()==='') $('#permRow').show();
     else $('#permRow').hide();
