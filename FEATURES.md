@@ -106,3 +106,4 @@
 - Preview drafts in chosen theme from admin editor
 - News list export to CSV or JSON with import preview
 - Upload zipped themes from the admin interface
+- Contextual help icons on admin forms loading content from database

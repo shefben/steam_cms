@@ -285,6 +285,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 views INT DEFAULT 0,
                 PRIMARY KEY(date,page)
             )");
+            $pdo->exec("DROP TABLE IF EXISTS help_texts");
+            $pdo->exec("CREATE TABLE help_texts(
+                page VARCHAR(64),
+                field VARCHAR(64),
+                content TEXT,
+                PRIMARY KEY(page,field)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
             function split_sql_statements($sql)
             {
                 $stmts = [];
