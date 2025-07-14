@@ -427,6 +427,43 @@ function cms_load_store_links($file){
     return $links;
 }
 
+function cms_admin_language(?int $userId = null): string
+{
+    if ($userId === null) {
+        if (isset($_SESSION['admin_lang'])) {
+            return $_SESSION['admin_lang'];
+        }
+        $userId = cms_current_admin();
+    }
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT language FROM admin_users WHERE id=?');
+        $stmt->execute([$userId]);
+        $lang = $stmt->fetchColumn();
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S22') {
+            return 'en';
+        }
+        throw $e;
+    }
+    $lang = $lang ?: 'en';
+    if ($userId === cms_current_admin()) {
+        $_SESSION['admin_lang'] = $lang;
+    }
+    return $lang;
+}
+
+function cms_admin_translate(string $key): string
+{
+    $lang = cms_admin_language();
+    static $cache = [];
+    if (!isset($cache[$lang])) {
+        $json = cms_get_setting('admin_translations_' . $lang, '{}');
+        $cache[$lang] = json_decode($json, true) ?: [];
+    }
+    return $cache[$lang][$key] ?? $key;
+}
+
 function cms_get_unread_notifications(int $userId): array
 {
     $db = cms_get_db();

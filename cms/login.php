@@ -9,12 +9,13 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     $user=trim($_POST['username']);
     $pass=$_POST['password'];
     $stay=isset($_POST['stay']);
-    $stmt=$db->prepare('SELECT id,password FROM admin_users WHERE username=?');
+    $stmt=$db->prepare('SELECT id,password,language FROM admin_users WHERE username=?');
     $stmt->execute([$user]);
     $row=$stmt->fetch(PDO::FETCH_ASSOC);
     if($row && password_verify($pass,$row['password'])){
         session_regenerate_id(true);
         $_SESSION['admin_id']=$row['id'];
+        $_SESSION['admin_lang']=$row['language'] ?: 'en';
         if($stay){
             $token=cms_create_admin_token($row['id']);
             setcookie('cms_admin_token',$token,[
@@ -40,7 +41,7 @@ if(!is_dir($theme_dir)){
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo htmlspecialchars($_SESSION['admin_lang'] ?? 'en'); ?>">
 <head>
     <meta charset="utf-8">
     <title>Admin Login</title>
@@ -48,24 +49,24 @@ if(!is_dir($theme_dir)){
 </head>
 <body class="login-page">
 <main>
-<h2>Admin Login</h2>
+<h2><?php echo htmlspecialchars(cms_admin_translate('Admin Login')); ?></h2>
 <?php if($err) echo '<p class="error">'.htmlspecialchars($err).'</p>'; ?>
 <form method="post" id="login-form" novalidate>
     <div>
-        <label for="username">Username</label>
+        <label for="username"><?php echo htmlspecialchars(cms_admin_translate('Username')); ?></label>
         <input type="text" name="username" id="username" autocomplete="username">
     </div>
     <div>
-        <label for="password">Password</label>
+        <label for="password"><?php echo htmlspecialchars(cms_admin_translate('Password')); ?></label>
         <input type="password" name="password" id="password" autocomplete="current-password">
     </div>
     <div>
-        <label for="stay"><input type="checkbox" name="stay" id="stay"> Stay logged in</label>
+        <label for="stay"><input type="checkbox" name="stay" id="stay"> <?php echo htmlspecialchars(cms_admin_translate('Stay logged in')); ?></label>
     </div>
     <div>
-        <button type="submit">Login</button>
+        <button type="submit"><?php echo htmlspecialchars(cms_admin_translate('Login')); ?></button>
     </div>
-    <p><a href="password_reset_request.php">Forgot password?</a></p>
+    <p><a href="password_reset_request.php"><?php echo htmlspecialchars(cms_admin_translate('Forgot password?')); ?></a></p>
 </form>
 </main>
 <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>

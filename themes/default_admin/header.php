@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo htmlspecialchars(cms_admin_language()); ?>">
 <head>
     <meta charset="utf-8">
     <title>CMS Admin</title>
@@ -7,7 +7,7 @@
 </head>
 <body>
 <header>
-    <h1>CMS Administration</h1>
+    <h1><?php echo htmlspecialchars(cms_admin_translate('CMS Administration')); ?></h1>
     <?php echo $nav_html; ?>
     <?php echo cms_admin_breadcrumb(); ?>
     <?php echo $notifications_html; ?>
