@@ -15,6 +15,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     if($row && password_verify($pass,$row['password'])){
         session_regenerate_id(true);
         $_SESSION['admin_id']=$row['id'];
+        cms_admin_log('login success');
         if($stay){
             $token=cms_create_admin_token($row['id']);
             setcookie('cms_admin_token',$token,[
@@ -26,6 +27,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         header('Location: '.$dest);
         exit;
     }else{
+        cms_admin_log('login failed', 0);
         $err='Invalid credentials';
     }
 }

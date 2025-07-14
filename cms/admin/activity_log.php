@@ -4,8 +4,10 @@ cms_require_permission('manage_admins');
 $db = cms_get_db();
 
 $users = $db->query('SELECT id, username FROM admin_users ORDER BY username')->fetchAll(PDO::FETCH_ASSOC);
+$types = $db->query("SELECT DISTINCT SUBSTRING_INDEX(action,' ',1) AS t FROM admin_logs ORDER BY t")->fetchAll(PDO::FETCH_COLUMN);
 $user = isset($_GET['user']) ? (int)$_GET['user'] : 0;
 $action = trim($_GET['action'] ?? '');
+$type = trim($_GET['type'] ?? '');
 
 $where = [];
 $params = [];
@@ -16,6 +18,10 @@ if($user){
 if($action !== ''){
     $where[] = 'l.action LIKE ?';
     $params[] = '%' . $action . '%';
+}
+if($type !== ''){
+    $where[] = 'l.action LIKE ?';
+    $params[] = $type.'%';
 }
 $whereSql = $where ? 'WHERE ' . implode(' AND ', $where) : '';
 
@@ -42,6 +48,13 @@ $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php endforeach; ?>
 </select></label>
 <label>Action: <input type="text" name="action" value="<?php echo htmlspecialchars($action); ?>"></label>
+<label>Type:
+<select name="type">
+<option value="">All</option>
+<?php foreach($types as $t): ?>
+    <option value="<?php echo htmlspecialchars($t); ?>"<?php if($type===$t) echo ' selected'; ?>><?php echo htmlspecialchars($t); ?></option>
+<?php endforeach; ?>
+</select></label>
 <button type="submit">Filter</button>
 </form>
 <table class="data-table">

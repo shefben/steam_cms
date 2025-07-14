@@ -19,10 +19,12 @@ if(isset($_POST['save'])){
     if($faqid1&&$faqid2){
         $db->prepare('UPDATE faq_content SET catid1=?,catid2=?,title=?,body=? WHERE faqid1=? AND faqid2=?')
             ->execute([$cat[0],$cat[1],$title,$body,$faqid1,$faqid2]);
+        cms_admin_log('Updated FAQ '.$faqid1.'-'.$faqid2);
     }else{
         $t=microtime(true);$sec=floor($t);$usec=(int)(($t-$sec)*1e6);$faqid1=$sec;$faqid2=$usec*100;
         $db->prepare('INSERT INTO faq_content(catid1,catid2,faqid1,faqid2,title,body) VALUES(?,?,?,?,?,?)')
             ->execute([$cat[0],$cat[1],$faqid1,$faqid2,$title,$body]);
+        cms_admin_log('Created FAQ '.$faqid1.'-'.$faqid2);
     }
     header('Location: faq.php');
     exit;

@@ -5,6 +5,7 @@ $db = cms_get_db();
 if(isset($_POST['reorder']) && isset($_POST['order'])){
     cms_require_permission('faqcat_edit');
     cms_set_setting('faq_cat_order', $_POST['order']);
+    cms_admin_log('Reordered FAQ categories');
     if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
         echo 'ok';
     }else{
@@ -17,6 +18,7 @@ if(isset($_POST['delete'])){
     cms_require_permission('faqcat_delete');
     $stmt=$db->prepare('DELETE FROM faq_categories WHERE id1=? AND id2=?');
     $stmt->execute([$_POST['id1'],$_POST['id2']]);
+    cms_admin_log('Deleted FAQ category '.$_POST['id1'].'-'.$_POST['id2']);
 }
 if(isset($_POST['save'])){
     $name=trim($_POST['name']);
@@ -28,15 +30,18 @@ if(isset($_POST['save'])){
         if($hidden===null){
             $stmt=$db->prepare('UPDATE faq_categories SET name=? WHERE id1=? AND id2=?');
             $stmt->execute([$name,$id1,$id2]);
+            cms_admin_log('Updated FAQ category '.$id1.'-'.$id2);
         }else{
             $stmt=$db->prepare('UPDATE faq_categories SET name=?,hidden=? WHERE id1=? AND id2=?');
             $stmt->execute([$name,$hidden,$id1,$id2]);
+            cms_admin_log('Updated FAQ category '.$id1.'-'.$id2);
         }
     }else{
         cms_require_permission('faqcat_add');
         $t=microtime(true);$sec=floor($t);$usec=(int)(($t-$sec)*1e6);$id1=$sec;$id2=$usec*100;
         $stmt=$db->prepare('INSERT INTO faq_categories(id1,id2,name,hidden) VALUES(?,?,?,0)');
         $stmt->execute([$id1,$id2,$name]);
+        cms_admin_log('Created FAQ category '.$id1.'-'.$id2);
     }
     if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){ echo 'ok'; exit; }
 }
