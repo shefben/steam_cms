@@ -8,10 +8,12 @@ if(isset($_POST['save'])){
     $target = trim($_POST['target']);
     if($slug!='' && $target!=''){
         $db->prepare('REPLACE INTO redirects(slug,target,created) VALUES(?,?,NOW())')->execute([$slug,$target]);
+        cms_admin_log('Saved redirect '.$slug);
     }
 }
 if(isset($_POST['delete'])){
     $db->prepare('DELETE FROM redirects WHERE id=?')->execute([(int)$_POST['delete']]);
+    cms_admin_log('Deleted redirect '.(int)$_POST['delete']);
 }
 $rows = $db->query('SELECT * FROM redirects ORDER BY created DESC')->fetchAll(PDO::FETCH_ASSOC);
 ?>

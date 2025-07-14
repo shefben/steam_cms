@@ -5,6 +5,7 @@ $db=cms_get_db();
 if(isset($_POST['reorder']) && isset($_POST['order'])){
     cms_require_permission('faq_edit');
     cms_set_setting('faq_order', $_POST['order']);
+    cms_admin_log('Reordered FAQs');
     if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
         echo 'ok';
     }else{
@@ -16,6 +17,7 @@ if(isset($_POST['delete'])){
     cms_require_permission('faq_delete');
     $stmt=$db->prepare('DELETE FROM faq_content WHERE faqid1=? AND faqid2=?');
     $stmt->execute([$_POST['faqid1'],$_POST['faqid2']]);
+    cms_admin_log('Deleted FAQ '.$_POST['faqid1'].'-'.$_POST['faqid2']);
 }
 $rows=$db->query('SELECT f.*,c.name as catname FROM faq_content f JOIN faq_categories c ON c.id1=f.catid1 AND c.id2=f.catid2 ORDER BY c.name,title')->fetchAll(PDO::FETCH_ASSOC);
 $order = cms_get_setting('faq_order','');
