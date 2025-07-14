@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Admin sidebar links now support drag-and-drop sorting with dynamic add/remove
 - Custom page template fallback now loads `default.twig` from the active theme
 - Add storefront dropdown navigation in admin sidebar
+- Fix install script ordering so storefront tabs load without foreign key errors
 - Fixed capsule modal positioning and added overlay click to close
 - Corrected capsule image paths in storefront admin
 - Pagination links spaced apart for clarity
