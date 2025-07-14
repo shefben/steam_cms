@@ -107,3 +107,4 @@
 - News list export to CSV or JSON with import preview
 - Upload zipped themes from the admin interface
 - Contextual help icons on admin forms loading content from database
+- Storefront SQL seed now inserts apps before referencing tabs
