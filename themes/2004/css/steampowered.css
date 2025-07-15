@@ -125,7 +125,7 @@ UL	{
 	padding:0px 0 0px 0;
 	margin: 8px 0px 8px 16px ; \\ top right bottom left
 	list-style:image;
-	list-style-image:url(img/square.gif);
+	list-style-image:url(../images/square.gif);
 	}
 EM	{
 	color:white;

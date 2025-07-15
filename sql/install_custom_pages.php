@@ -71,8 +71,6 @@ $insertArray[] = [
 ];
 
 $content2002v2 = <<<HTML
-<td align="left" colspan="4" content="" csheight="441" height="444" valign="top" width="769" xpos="15">
-<div align="center">
 <div align="left">
 <p><font color="#c4cabe" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>OVER</b></font><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>VIEW</b></font></p>
 <p><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">Steam is a broadband business platform for direct software delivery and content management. At its core, Steam is a distributed file system and shared set of technology components that can be implemented into any software application.<br>
@@ -98,8 +96,6 @@ technical inquiries, please email:</font><font face="Arial,Helvetica,Geneva,Swis
 <p style="margin-bottom: 0"><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">For
 business inquires, please email: </font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><a href="mailto:biz@steampowered.com"><b>biz@steampowered.com</b></a></font></p>
 </div>
-</div>
-</td>
 HTML;
 
 $insertArray[] = [
@@ -137,7 +133,7 @@ $content2003v1 = <<<HTML
 <p><font color="#969f8e" size="2">Steam consumers enjoy the benefit of starting their favorite applications within minutes of confirming their purchase. They can access their applications from any PC. They are no longer challenged to find the latest updates for these applications. And they no longer need to wonder if their device drivers are compatible with the latest software.<br>
 <br>
 </font></p>
-<p><font color="#969f8e" size="2">The Steam SDK also includes an integrated set of communications tools and Valve&#39s Graphic User Interface (V-GUI) that provide built-in support for a variety of services such as instant messaging, configuration, and server browsing.<br>
+<p><font color="#969f8e" size="2">The Steam SDK also includes an integrated set of communications tools and Valve�s Graphic User Interface (V-GUI) that provide built-in support for a variety of services such as instant messaging, configuration, and server browsing.<br>
 </font></p>
 </div>
 <p><font color="#bfba50" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4"><b>Coming Soon!</b></font></p>
@@ -151,7 +147,7 @@ $content2003v1 = <<<HTML
 <td align="left" colspan="2" height="225" valign="top" width="387" xpos="15">
 <table border="0" cellpadding="0" cellspacing="0" height="211" width="382">
 <tbody><tr height="211">
-<td background="themes/2003_v1/images/Box_01.gif" height="211" width="382">
+<td background="images/Box_01.gif" height="211" width="382">
 <div align="center">
 <table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="208" showgridx="" showgridy="" width="360">
 <tbody><tr height="10">
@@ -201,7 +197,7 @@ $content2003v1 = <<<HTML
 <td align="left" colspan="2" height="225" valign="top" width="397" xpos="402">
 <table border="0" cellpadding="0" cellspacing="0" height="211" width="382">
 <tbody><tr height="211">
-<td background="themes/2003_v1/images/Box_01.gif" height="211" width="382">
+<td background="images/Box_01.gif" height="211" width="382">
 <div align="center">
 <table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="196" showgridx="" showgridy="" width="360">
 <tbody><tr height="4">
