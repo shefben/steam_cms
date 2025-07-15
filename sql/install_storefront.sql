@@ -43,40 +43,6 @@ ALTER TABLE storefront_capsules_per_theme
 ALTER TABLE storefront_tab_games
     ADD CONSTRAINT fk_storefront_tab_games_tab FOREIGN KEY (tab_id) REFERENCES storefront_tabs(id) ON DELETE CASCADE,
     ADD CONSTRAINT fk_storefront_tab_games_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
-INSERT INTO storefront_tabs(theme,title,ord) VALUES
-('2007_v2','Top Sellers',1),
-('2007_v2','Top Rated',2);
-INSERT INTO storefront_tab_games(tab_id,appid,ord) VALUES
-(1,1200,1),
-(1,6980,2),
-(2,9340,1);
-INSERT INTO storefront_capsules_per_theme(theme,position,size,image_path,appid,price,hidden) VALUES
-('2006_v1','top1','small','2006_v1/1510.png',1510,9.95,0),
-('2006_v1','top2','small','2006_v1/3010.png',3010,19.95,0),
-('2006_v1','large','large','2006_v1/380.png',380,19.95,0),
-('2006_v1','under1','small','2006_v1/2400.png',2400,19.95,0),
-('2006_v1','under2','small','2006_v1/2810.png',2810,19.95,0),
-('2006_v1','bottom1','small','2006_v1/1300.png',1300,14.95,0),
-('2006_v1','bottom2','small','2006_v1/1500.png',1500,19.95,0),
-('2006_v2','top1','small','2006_v2/1510.png',1510,9.95,0),
-('2006_v2','top2','small','2006_v2/3000.png',3000,19.95,0),
-('2006_v2','large','large','2006_v2/900352.png',900352,0,0),
-('2006_v2','under1','small','2006_v2/300.png',300,19.95,0),
-('2006_v2','under2','small','2006_v2/2400.png',2400,19.95,0),
-('2006_v2','bottom1','small','2006_v2/380.png',380,19.95,0),
-('2006_v2','bottom2','small','2006_v2/1200.png',1200,24.95,0),
-('2007_v1','top1','small','2007_v1/4700.png',4700,49.95,0),
-('2007_v1','top2','small','2007_v1/380.png',380,19.95,0),
-('2007_v1','large','large','2007_v1/2100.png',2100,49.95,0),
-('2007_v1','under1','small','2007_v1/1510.png',1510,9.95,0),
-('2007_v1','under2','small','2007_v1/3900.png',3900,49.95,0),
-('2007_v1','bottom1','small','2007_v1/2400.png',2400,19.95,0),
-('2007_v1','bottom2','small','2007_v1/300.png',300,19.95,0),
-('2007_v2','top1','small','2007_v2/1200.png',1200,19.95,0),
-('2007_v2','top2','small','2007_v2/6980.png',6980,19.95,0),
-('2007_v2','large','large','2007_v2/9340.png',9340,39.95,0),
-('2007_v2','under1','small','2007_v2/7260.png',7260,39.95,0),
-('2007_v2','under2','small','2007_v2/8400.png',8400,3.95,0);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(2,'Single-player',1,1);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(1,'Multi-player',2,1);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(3,'New releases',3,1);
@@ -168,6 +134,60 @@ INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,descri
 INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images,show_metascore) VALUES(90018,"The Trenches","The Trenches Team","Available",0,"","","","0000000186_thumb.jpg","[\"0000000186_thumb.jpg\", \"0000000185_thumb.jpg\", \"0000000184_thumb.jpg\", \"0000000183_thumb.jpg\", \"0000000182_thumb.jpg\"]",0);
 INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images,show_metascore) VALUES(90020,"Vampire Slayer","Vampire Slayer","Available",0,"","","","0000000181_thumb.jpg","[\"0000000181_thumb.jpg\", \"0000000180_thumb.jpg\", \"0000000179_thumb.jpg\"]",0);
 INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images,show_metascore) VALUES(90012,"Zombie Panic","Zombie Panic Team","Available",0,"","","","0000000036_thumb.jpg","[\"0000000036_thumb.jpg\", \"0000000035_thumb.jpg\", \"0000000034_thumb.jpg\", \"0000000033_thumb.jpg\", \"0000000032_thumb.jpg\"]",0);
+-- Added missing apps for storefront references
+INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,description,sysreq,main_image,images,show_metascore) VALUES
+(380,'Half-Life 2: Episode One','Valve','Available',0,'','','','','[]',0),
+(1200,'Red Orchestra: Ostfront 41-45','Unknown','Available',0,'','','','','[]',0),
+(1300,'SiN Episodes: Emergence','Unknown','Available',0,'','','','','[]',0),
+(1502,'Unknown App 1502','Unknown','Available',0,'','','','','[]',0),
+(1510,'Uplink','Unknown','Available',0,'','','','','[]',0),
+(2100,'Dark Messiah of Might & Magic','Unknown','Available',0,'','','','','[]',0),
+(2400,'The Ship: Murder Party','Unknown','Available',0,'','','','','[]',0),
+(2510,'Shadowgrounds Demo','Unknown','Available',0,'','','','','[]',0),
+(2810,'X3: Reunion','Unknown','Available',0,'','','','','[]',0),
+(3000,'Unknown App 3000','Unknown','Available',0,'','','','','[]',0),
+(3010,'Xpand Rally','Unknown','Available',0,'','','','','[]',0),
+(3900,'Sid Meier''s Civilization IV','Unknown','Available',0,'','','','','[]',0),
+(4700,'Total War: MEDIEVAL II – Definitive Edition','Unknown','Available',0,'','','','','[]',0),
+(6980,'Thief: Deadly Shadows','Unknown','Available',0,'','','','','[]',0),
+(7260,'Loki','Unknown','Available',0,'','','','','[]',0),
+(8400,'Geometry Wars: Retro Evolved','Unknown','Available',0,'','','','','[]',0),
+(900352,'Unknown App 900352','Unknown','Available',0,'','','','','[]',0),
+(9340,'Company of Heroes: Opposing Fronts','Unknown','Available',0,'','','','','[]',0);
+INSERT INTO storefront_tabs(theme,title,ord) VALUES
+('2007_v2','Top Sellers',1),
+('2007_v2','Top Rated',2);
+INSERT INTO storefront_tab_games(tab_id,appid,ord) VALUES
+(1,1200,1),
+(1,6980,2),
+(2,9340,1);
+INSERT INTO storefront_capsules_per_theme(theme,position,size,image_path,appid,price,hidden) VALUES
+('2006_v1','top1','small','2006_v1/1510.png',1510,9.95,0),
+('2006_v1','top2','small','2006_v1/3010.png',3010,19.95,0),
+('2006_v1','large','large','2006_v1/380.png',380,19.95,0),
+('2006_v1','under1','small','2006_v1/2400.png',2400,19.95,0),
+('2006_v1','under2','small','2006_v1/2810.png',2810,19.95,0),
+('2006_v1','bottom1','small','2006_v1/1300.png',1300,14.95,0),
+('2006_v1','bottom2','small','2006_v1/1500.png',1500,19.95,0),
+('2006_v2','top1','small','2006_v2/1510.png',1510,9.95,0),
+('2006_v2','top2','small','2006_v2/3000.png',3000,19.95,0),
+('2006_v2','large','large','2006_v2/900352.png',900352,0,0),
+('2006_v2','under1','small','2006_v2/300.png',300,19.95,0),
+('2006_v2','under2','small','2006_v2/2400.png',2400,19.95,0),
+('2006_v2','bottom1','small','2006_v2/380.png',380,19.95,0),
+('2006_v2','bottom2','small','2006_v2/1200.png',1200,24.95,0),
+('2007_v1','top1','small','2007_v1/4700.png',4700,49.95,0),
+('2007_v1','top2','small','2007_v1/380.png',380,19.95,0),
+('2007_v1','large','large','2007_v1/2100.png',2100,49.95,0),
+('2007_v1','under1','small','2007_v1/1510.png',1510,9.95,0),
+('2007_v1','under2','small','2007_v1/3900.png',3900,49.95,0),
+('2007_v1','bottom1','small','2007_v1/2400.png',2400,19.95,0),
+('2007_v1','bottom2','small','2007_v1/300.png',300,19.95,0),
+('2007_v2','top1','small','2007_v2/1200.png',1200,19.95,0),
+('2007_v2','top2','small','2007_v2/6980.png',6980,19.95,0),
+('2007_v2','large','large','2007_v2/9340.png',9340,39.95,0),
+('2007_v2','under1','small','2007_v2/7260.png',7260,39.95,0),
+('2007_v2','under2','small','2007_v2/8400.png',8400,3.95,0);
 INSERT INTO subscriptions(subid,name,price) VALUES(7,"Counter-Strike",19.95);
 INSERT INTO subscriptions(subid,name,price) VALUES(25,"Day of Defeat: Source",19.95);
 INSERT INTO subscriptions(subid,name,price) VALUES(29,"Team Fortress Classic",9.95);
