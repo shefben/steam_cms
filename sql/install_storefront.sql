@@ -139,6 +139,7 @@ INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,descri
 (380,'Half-Life 2: Episode One','Valve','Available',0,'','','','','[]',0),
 (1200,'Red Orchestra: Ostfront 41-45','Unknown','Available',0,'','','','','[]',0),
 (1300,'SiN Episodes: Emergence','Unknown','Available',0,'','','','','[]',0),
+(1502,'Unknown App 1502','Unknown','Available',0,'','','','','[]',0),
 (1510,'Uplink','Unknown','Available',0,'','','','','[]',0),
 (2100,'Dark Messiah of Might & Magic','Unknown','Available',0,'','','','','[]',0),
 (2400,'The Ship: Murder Party','Unknown','Available',0,'','','','','[]',0),
