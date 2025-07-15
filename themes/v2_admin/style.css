@@ -696,3 +696,21 @@ a, a:visited { color: #f1c40f; }
     cursor: pointer;
     font-size: 14px;
 }
+
+.help-icon {
+    display:inline-block;
+    margin-left:4px;
+    width:14px;
+    height:14px;
+    line-height:14px;
+    text-align:center;
+    border:1px solid #666;
+    border-radius:50%;
+    color:#666;
+    font-weight:bold;
+    font-size:12px;
+    cursor:pointer;
+    background:#fff;
+}
+
+.help-modal {di

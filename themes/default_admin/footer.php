@@ -21,6 +21,16 @@ $(function(){
             $li.fadeOut(150, function(){ $(this).remove(); });
         });
     });
+    $('body').on('click','.help-icon',function(e){
+        e.preventDefault();
+        var txt=$(this).data('help');
+        if(!txt) return;
+        var $m=$('<div class="help-modal" aria-label="Help"><div class="dialog"></div></div>');
+        $m.find('.dialog').text(txt);
+        $('body').append($m);
+        $m.fadeIn(100);
+        $m.on('click',function(){ $m.fadeOut(150,function(){ $m.remove(); }); });
+    });
 });
 </script>
 </body>
