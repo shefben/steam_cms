@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+
+<head>
+	<title>Welcome to Steam</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta name="ROBOTS" content="ALL">
+	<meta name="DESCRIPTION" content="SteamPowered">
+	<meta name="KEYWORDS" content="Steam, account, account creation, signup">
+	<meta name="AUTHOR" content="Valve LLC">
+	<LINK rel="stylesheet" type="text/css" href="steampowered.css">
+	<script language="JavaScript" src="nav.js"></script>
+</head>
+
+<body>
+{{ header() }}
+<div class="content" id="container" style="background-position:top right; background-repeat:no-repeat;">
+
+<img id="steam" width="244" height="78" src="/img/steam_logo_alpha.gif"><br><br>
+{% if page_title is defined and page_title %}
+{{ split_title_entry(page_title) }}
+{% endif %}
+<br>
+<!-- begin content area -->
+    {{ content|raw }}
+<!-- end content area -->
+<br>
+</div>
+{{ footer() }}
+</body></html>
