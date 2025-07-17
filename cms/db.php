@@ -236,16 +236,28 @@ function cms_get_theme_header_data($theme, string $page = ''){
     return ['logo'=>$logo,'spacer'=>$spacer,'buttons'=>$buttons];
 }
 
-function cms_get_theme_footer($theme){
+function cms_get_theme_footer($theme)
+{
     $db = cms_get_db();
     try {
         $stmt = $db->prepare('SELECT html FROM theme_footers WHERE theme=?');
         $stmt->execute([$theme]);
         $html = $stmt->fetchColumn();
-        if($html===false) return '';
+
+        if ($html === false && $theme !== '2004') {
+            $stmt->execute(['2004']);
+            $html = $stmt->fetchColumn();
+        }
+
+        if ($html === false) {
+            return '';
+        }
+
         return $html;
-    } catch(PDOException $e){
-        if($e->getCode()==='42S02') return '';
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S02') {
+            return '';
+        }
         throw $e;
     }
 }
