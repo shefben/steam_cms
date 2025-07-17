@@ -449,7 +449,12 @@ function cms_render_template(string $path, array $vars = []): void
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
-        $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        $p = parse_url($path, PHP_URL_PATH);
+        $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
+        $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
+        if (!in_array($ext, $assets, true)) {
+            return $m[0];
+        }
         if ($ext === 'css') {
             $dir = 'css';
         } elseif ($ext === 'js') {
@@ -468,7 +473,12 @@ function cms_render_template(string $path, array $vars = []): void
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
-        $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        $p = parse_url($path, PHP_URL_PATH);
+        $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
+        $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
+        if (!in_array($ext, $assets, true)) {
+            return $m[0];
+        }
         if ($ext === 'css') {
             $dir = 'css';
         } elseif ($ext === 'js') {
@@ -522,7 +532,12 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
-        $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        $p = parse_url($path, PHP_URL_PATH);
+        $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
+        $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
+        if (!in_array($ext, $assets, true)) {
+            return $m[0];
+        }
         if ($ext === 'css') {
             $dir = 'css';
         } elseif ($ext === 'js') {
@@ -541,7 +556,12 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
-        $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        $p = parse_url($path, PHP_URL_PATH);
+        $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
+        $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
+        if (!in_array($ext, $assets, true)) {
+            return $m[0];
+        }
         if ($ext === 'css') {
             $dir = 'css';
         } elseif ($ext === 'js') {

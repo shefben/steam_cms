@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Admin sidebar links now support drag-and-drop sorting with dynamic add/remove
 - Custom page template fallback now loads `default.twig` from the active theme
 - Add storefront dropdown navigation in admin sidebar
+- Footer() tag now falls back to the default theme when a theme-specific footer is missing
 - Fix install script ordering so storefront tabs load without foreign key errors
 - Insert placeholder app 1502 so category seeding passes
 - Corrected admin user insert query to match placeholder count
