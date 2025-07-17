@@ -26,7 +26,7 @@ ASSETS = {
     'archived_steampowered/2003/v1/images/Valve_CircleR.gif': 'themes/2003_v1/images/Valve_CircleR.gif',
     'archived_steampowered/2003/v1/steam.css': 'themes/2003_v1/css/steam.css',
     'archived_steampowered/2005/v1/nav.js': 'themes/2005_v1/js/nav.js',
-    'archived_steampowered/2005/v1/steampowered02.css': 'themes/2005_v1/css/steampowered02.css',
+    'archived_steampowered/2005/v1/steampowered02.css': 'themes/2005_v1/steampowered02.css',
     'archived_steampowered/2005/v2/steampowered03.css': 'themes/2005_v2/css/steampowered03.css',
     'archived_steampowered/2005/storefront/img/dash.gif': 'themes/2005_v2/images/dash.gif',
     'archived_steampowered/2005/storefront/img/storefront/sp_bottom_left.gif': 'storefront/images/sp_bottom_left.gif',

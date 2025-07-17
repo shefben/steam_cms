@@ -18,6 +18,12 @@ All notable changes to this project will be documented in this file.
 - Insert placeholder app 1502 so category seeding passes
 - Corrected admin user insert query to match placeholder count
 - Fixed capsule modal positioning and added overlay click to close
+- Corrected CSS link rewriting so themes define custom locations
+- Resolved PHP 8 deprecation warnings from template engine asset path parsing
+- Fixed duplicate slashes in CSS links when rewriting theme assets
+- CSS rewrite no longer forces a "css" directory when the stylesheet resides at the theme root
+- Theme asset URLs no longer start with a slash when no base path is set
+- JavaScript image preloads via newImage() now point to the theme images directory
 - Corrected capsule image paths in storefront admin
 - Pagination links spaced apart for clarity
 - Added activity log admin page with user and action filters

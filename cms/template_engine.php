@@ -429,8 +429,8 @@ function cms_render_template(string $path, array $vars = []): void
     $vars += [
         'CMS_ROOT'  => __DIR__,
         'THEME_DIR' => $tpl_dir,
-        'THEME_URL' => ($base_url ? $base_url : '') . "/themes/$theme" . ($subdir ? "/$subdir" : ''),
-        'CSS_PATH'  => ($base_url ? $base_url : '') . "/themes/$theme/" . ltrim(cms_get_theme_css($theme), '/'),
+        'THEME_URL' => ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme" . ($subdir ? "/$subdir" : ''),
+        'CSS_PATH'  => ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme/" . ltrim(cms_get_theme_css($theme), '/'),
         'BASE'      => $base_url,
     ];
 
@@ -442,55 +442,76 @@ function cms_render_template(string $path, array $vars = []): void
     cms_set_current_template(basename($path));
     $html = $env->render(basename($path), $vars);
 
-    $css_base = basename(cms_get_theme_css($theme));
-    $css_path = $vars['CSS_PATH'];
-    $html = preg_replace('~(?:\.\./)?' . preg_quote($css_base, '~') . '~i', $css_path, $html);
-    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars) {
+    $css_file = cms_get_theme_css($theme);
+    $css_base = basename($css_file);
+    $css_dir  = trim(dirname($css_file), '/');
+    if ($css_dir === '.') {
+        $css_dir = '';
+    }
+    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
-        $p = parse_url($path, PHP_URL_PATH);
+        $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
         if (!in_array($ext, $assets, true)) {
             return $m[0];
         }
         if ($ext === 'css') {
-            $dir = 'css';
+            $dir  = $css_dir;
+            $path = basename($path);
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
             $dir = 'images';
         }
-        if (!preg_match('~^(css|js|images)/~', $path)) {
+        if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
         }
         return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
     }, $html);
 
-    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars) {
+    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
-        $p = parse_url($path, PHP_URL_PATH);
+        $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
         if (!in_array($ext, $assets, true)) {
             return $m[0];
         }
         if ($ext === 'css') {
-            $dir = 'css';
+            $dir  = $css_dir;
+            $path = basename($path);
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
             $dir = 'images';
         }
-        if (!preg_match('~^(css|js|images)/~', $path)) {
+        if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
         }
         return 'url('.$m[1].$vars['THEME_URL'].'/'.$path.$m[1].')';
+    }, $html);
+
+    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars) {
+        $path = $m[2];
+        if (preg_match('~^(?:https?:)?//|^/~', $path)) {
+            return $m[0];
+        }
+        $p   = parse_url($path, PHP_URL_PATH) ?? '';
+        $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
+        $images = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
+        if (!in_array($ext, $images, true)) {
+            return $m[0];
+        }
+        $path = ltrim($path, './');
+        $path = preg_replace('~^(?:img|images)/~', '', $path);
+        return 'newImage('.$m[1].$vars['THEME_URL'].'/images/'.$path.$m[1].')';
     }, $html);
 
 
@@ -513,8 +534,8 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
     $vars += [
         'CMS_ROOT'  => __DIR__,
         'THEME_DIR' => $tpl_dir,
-        'THEME_URL' => ($base_url ? $base_url : '') . "/themes/$theme" . ($subdir ? "/$subdir" : ''),
-        'CSS_PATH'  => ($base_url ? $base_url : '') . "/themes/$theme/" . ltrim(cms_get_theme_css($theme), '/'),
+        'THEME_URL' => ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme" . ($subdir ? "/$subdir" : ''),
+        'CSS_PATH'  => ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme/" . ltrim(cms_get_theme_css($theme), '/'),
         'BASE'      => $base_url,
     ];
 
@@ -526,55 +547,76 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
     cms_set_current_template(basename($path));
     $html = $env->render(basename($path), $vars);
 
-    $css_base = basename(cms_get_theme_css($theme));
-    $css_path = $vars['CSS_PATH'];
-    $html = preg_replace('~(?:\.\./)?' . preg_quote($css_base, '~') . '~i', $css_path, $html);
-    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars) {
+    $css_file = cms_get_theme_css($theme);
+    $css_base = basename($css_file);
+    $css_dir  = trim(dirname($css_file), '/');
+    if ($css_dir === '.') {
+        $css_dir = '';
+    }
+    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
-        $p = parse_url($path, PHP_URL_PATH);
+        $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
         if (!in_array($ext, $assets, true)) {
             return $m[0];
         }
         if ($ext === 'css') {
-            $dir = 'css';
+            $dir  = $css_dir;
+            $path = basename($path);
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
             $dir = 'images';
         }
-        if (!preg_match('~^(css|js|images)/~', $path)) {
+        if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
         }
         return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
     }, $html);
 
-    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars) {
+    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
-        $p = parse_url($path, PHP_URL_PATH);
+        $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
         if (!in_array($ext, $assets, true)) {
             return $m[0];
         }
         if ($ext === 'css') {
-            $dir = 'css';
+            $dir  = $css_dir;
+            $path = basename($path);
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
             $dir = 'images';
         }
-        if (!preg_match('~^(css|js|images)/~', $path)) {
+        if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
         }
         return 'url('.$m[1].$vars['THEME_URL'].'/'.$path.$m[1].')';
+    }, $html);
+
+    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars) {
+        $path = $m[2];
+        if (preg_match('~^(?:https?:)?//|^/~', $path)) {
+            return $m[0];
+        }
+        $p   = parse_url($path, PHP_URL_PATH) ?? '';
+        $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
+        $images = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
+        if (!in_array($ext, $images, true)) {
+            return $m[0];
+        }
+        $path = ltrim($path, './');
+        $path = preg_replace('~^(?:img|images)/~', '', $path);
+        return 'newImage('.$m[1].$vars['THEME_URL'].'/images/'.$path.$m[1].')';
     }, $html);
 
     echo $html;
