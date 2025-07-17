@@ -137,22 +137,22 @@ function cms_twig_env(string $tpl_dir): Environment
         $loader = new FilesystemLoader($tpl_dir);
         $env = new Environment($loader);
         $env->addFunction(new TwigFunction('header', function(bool $withButtons = true) {
-            $theme = cms_get_setting('theme', '2004');
+            $theme = cms_get_current_theme();
             return cms_render_header($theme, $withButtons);
         }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('footer', function() {
-            $theme = cms_get_setting('theme', '2004');
+            $theme = cms_get_current_theme();
             $html  = cms_get_theme_footer($theme);
             $html  = str_ireplace('{BASE}', '{{ BASE }}', $html);
             $env   = cms_twig_env('.');
             return $env->createTemplate($html)->render(['BASE' => cms_base_url()]);
         }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('nav_buttons', function(string $theme = '', string $style = '', ?string $spacer = null) {
-            $theme = $theme !== '' ? $theme : cms_get_setting('theme', '2004');
+            $theme = $theme !== '' ? $theme : cms_get_current_theme();
             return cms_header_buttons_html($theme, $style, $spacer);
         }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('news', function(string $type, ?int $count = null) {
-            $theme = cms_get_setting('theme', '2004');
+            $theme = cms_get_current_theme();
             $cfg   = cms_get_theme_config($theme);
             $count = $count ?? ($cfg['news_count'] ?? null);
             return cms_render_news($type, $count);
@@ -248,7 +248,7 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('capsule_block', function(string $key) {
-            $theme = cms_get_setting('theme', '2006_v1');
+            $theme = cms_get_current_theme();
             $useAll = cms_get_setting('capsules_same_all', '1') === '1';
             $db = cms_get_db();
             if ($useAll) {
@@ -267,7 +267,7 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('large_capsule_block', function(string $key = 'large') {
-            $theme = cms_get_setting('theme', '2006_v1');
+            $theme = cms_get_current_theme();
             $useAll = cms_get_setting('capsules_same_all', '1') === '1';
             $db = cms_get_db();
             if ($useAll) {
@@ -353,7 +353,7 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('tabs_block', function() {
-            $theme = cms_get_setting('theme', '2004');
+            $theme = cms_get_current_theme();
             if ($theme !== '2007_v2') {
                 return cms_get_setting('tabs_block', '');
             }
@@ -421,6 +421,7 @@ function cms_render_template(string $path, array $vars = []): void
     }
 
     $theme = cms_get_setting('theme', '2004');
+    cms_set_current_theme($theme);
     $tpl_dir = dirname($path);
     $subdir = $vars['theme_subdir'] ?? '';
     $base_url = cms_base_url();
@@ -504,6 +505,7 @@ function cms_render_template(string $path, array $vars = []): void
 
 function cms_render_template_theme(string $path, string $theme, array $vars = []): void
 {
+    cms_set_current_theme($theme);
     $tpl_dir = dirname($path);
     $subdir   = $vars['theme_subdir'] ?? '';
     $base_url = cms_base_url();
