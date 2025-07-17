@@ -445,8 +445,9 @@ function cms_render_template(string $path, array $vars = []): void
     $css_file = cms_get_theme_css($theme);
     $css_base = basename($css_file);
     $css_dir  = trim(dirname($css_file), '/');
-    $css_path = $vars['CSS_PATH'];
-    $html = preg_replace('~(?:\.\./)?' . preg_quote($css_base, '~') . '~i', $css_path, $html);
+    if ($css_dir === '.') {
+        $css_dir = '';
+    }
     $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
@@ -459,7 +460,8 @@ function cms_render_template(string $path, array $vars = []): void
             return $m[0];
         }
         if ($ext === 'css') {
-            $dir = $css_dir !== '' ? $css_dir : 'css';
+            $dir  = $css_dir !== '' ? $css_dir : 'css';
+            $path = basename($path);
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
@@ -483,7 +485,8 @@ function cms_render_template(string $path, array $vars = []): void
             return $m[0];
         }
         if ($ext === 'css') {
-            $dir = $css_dir !== '' ? $css_dir : 'css';
+            $dir  = $css_dir !== '' ? $css_dir : 'css';
+            $path = basename($path);
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
@@ -531,8 +534,9 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
     $css_file = cms_get_theme_css($theme);
     $css_base = basename($css_file);
     $css_dir  = trim(dirname($css_file), '/');
-    $css_path = $vars['CSS_PATH'];
-    $html = preg_replace('~(?:\.\./)?' . preg_quote($css_base, '~') . '~i', $css_path, $html);
+    if ($css_dir === '.') {
+        $css_dir = '';
+    }
     $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
@@ -545,7 +549,8 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
             return $m[0];
         }
         if ($ext === 'css') {
-            $dir = $css_dir !== '' ? $css_dir : 'css';
+            $dir  = $css_dir !== '' ? $css_dir : 'css';
+            $path = basename($path);
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
@@ -569,7 +574,8 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
             return $m[0];
         }
         if ($ext === 'css') {
-            $dir = $css_dir !== '' ? $css_dir : 'css';
+            $dir  = $css_dir !== '' ? $css_dir : 'css';
+            $path = basename($path);
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {

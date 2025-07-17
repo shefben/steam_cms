@@ -20,6 +20,7 @@
 - 2005v1 index template cleansed of hard-coded banner and corrects header include
 - Template engine updated for PHP 8 compatibility
 - Theme URL rewriting honors main CSS location without forcing subfolders
+- Asset rewriting cleans up malformed CSS links containing extra slashes
 - FAQ sidebar now reveals Questions and Categories links with slide animation
 - FAQ categories can be reordered and edited inline with AJAX
 - Public FAQ respects category order and visibility
