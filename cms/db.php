@@ -190,6 +190,14 @@ function cms_set_current_template(string $tpl): void {
     $GLOBALS['cms_current_template'] = basename($tpl, '.twig');
 }
 
+function cms_set_current_theme(string $theme): void {
+    $GLOBALS['cms_current_theme'] = $theme;
+}
+
+function cms_get_current_theme(): string {
+    return $GLOBALS['cms_current_theme'] ?? cms_get_setting('theme', '2004');
+}
+
 function cms_get_current_page(): string {
     return $GLOBALS['cms_current_template'] ?? ($_GET['area'] ?? basename($_SERVER['SCRIPT_NAME'], '.php'));
 }
