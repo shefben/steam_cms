@@ -453,6 +453,9 @@ function cms_render_template(string $path, array $vars = []): void
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
+        if (preg_match('~^/?themes/~i', $path)) {
+            return $m[1].'="'.$path.'"';
+        }
         $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
@@ -478,6 +481,9 @@ function cms_render_template(string $path, array $vars = []): void
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
+        if (preg_match('~^/?themes/~i', $path)) {
+            return 'url('.$m[1].$path.$m[1].')';
+        }
         $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
@@ -502,6 +508,9 @@ function cms_render_template(string $path, array $vars = []): void
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
+        }
+        if (preg_match('~^/?themes/~i', $path)) {
+            return 'newImage('.$m[1].$path.$m[1].')';
         }
         $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
@@ -558,6 +567,9 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
+        if (preg_match('~^/?themes/~i', $path)) {
+            return $m[1].'="'.$path.'"';
+        }
         $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
@@ -583,6 +595,9 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
         }
+        if (preg_match('~^/?themes/~i', $path)) {
+            return 'url('.$m[1].$path.$m[1].')';
+        }
         $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
@@ -607,6 +622,9 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
+        }
+        if (preg_match('~^/?themes/~i', $path)) {
+            return 'newImage('.$m[1].$path.$m[1].')';
         }
         $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
