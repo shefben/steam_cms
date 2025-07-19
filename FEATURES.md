@@ -4,6 +4,7 @@
 - Admin panel with styled themes and permissions
 - Storefront management pages grouped under sidebar dropdown
 - Dynamic news rendering via template tags
+- Full article news tag preserves HTML formatting
 - Configurable root path for subdirectory deployments
 - Year-based news filtering configurable per theme year
 - Individual storefront admin pages for featured items, products, categories and sidebar
@@ -78,6 +79,9 @@
 - Asset mover script copies archived theme directories and stylesheets
 - Custom page links honor configurable root path
 - Header navigation uses text labels, no image sprites
+- Global header bar markup unified across themes
+- Header bar styles inlined for consistent layout
+- Per-page header logo override using the `header_logo()` template tag
 - Footer HTML seeded during install
 - Footer tag falls back to default theme when theme lacks a footer entry
 - Header and footer render via {header} / {footer} tags
@@ -94,6 +98,11 @@
 
 - Themes must explicitly include their CSS and JS files in templates
 - Inline style URL paths automatically point to theme images
+- CSS links beginning with ./ resolve to the site's root path
+- CSS files served through the template engine rewrite url() references
+- Network status page displays archived statistics correctly
+- Status and content server pages use the default layout template
+- Content server page loads a theme-specific PHP block for layout
 - Archived 2006_v1 homepage content seeded for dynamic tags
 - Random and scheduled content tags pulled from database
 - `split_title` tag splits headings into styled halves

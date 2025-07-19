@@ -140,6 +140,10 @@ function cms_twig_env(string $tpl_dir): Environment
             $theme = cms_get_current_theme();
             return cms_render_header($theme, $withButtons);
         }, ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('header_logo', function(string $path) {
+            cms_set_header_logo_override($path);
+            return '';
+        }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('footer', function() {
             $theme = cms_get_current_theme();
             $html  = cms_get_theme_footer($theme);
@@ -448,7 +452,7 @@ function cms_render_template(string $path, array $vars = []): void
     if ($css_dir === '.') {
         $css_dir = '';
     }
-    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir) {
+    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir, $base_url, $theme) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -463,8 +467,15 @@ function cms_render_template(string $path, array $vars = []): void
             return $m[0];
         }
         if ($ext === 'css') {
+            if (str_starts_with($path, './')) {
+                $path = ltrim(substr($path, 2), '/');
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return $m[1].'="'.$base.$path.'"';
+            }
             $dir  = $css_dir;
             $path = basename($path);
+            $path = cms_rewrite_css_file($theme, ($dir ? $dir.'/' : '').$path, $vars['THEME_URL'], $base_url);
+            return $m[1].'="'.$path.'"';
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
@@ -476,7 +487,7 @@ function cms_render_template(string $path, array $vars = []): void
         return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
     }, $html);
 
-    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir) {
+    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -491,6 +502,11 @@ function cms_render_template(string $path, array $vars = []): void
             return $m[0];
         }
         if ($ext === 'css') {
+            if (str_starts_with($path, './')) {
+                $path = ltrim(substr($path, 2), '/');
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return 'url('.$m[1].$base.$path.$m[1].')';
+            }
             $dir  = $css_dir;
             $path = basename($path);
         } elseif ($ext === 'js') {
@@ -562,7 +578,7 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
     if ($css_dir === '.') {
         $css_dir = '';
     }
-    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir) {
+    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir, $base_url, $theme) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -577,8 +593,15 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
             return $m[0];
         }
         if ($ext === 'css') {
+            if (str_starts_with($path, './')) {
+                $path = ltrim(substr($path, 2), '/');
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return $m[1].'="'.$base.$path.'"';
+            }
             $dir  = $css_dir;
             $path = basename($path);
+            $path = cms_rewrite_css_file($theme, ($dir ? $dir.'/' : '').$path, $vars['THEME_URL'], $base_url);
+            return $m[1].'="'.$path.'"';
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
@@ -590,7 +613,7 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
     }, $html);
 
-    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir) {
+    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -605,6 +628,11 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
             return $m[0];
         }
         if ($ext === 'css') {
+            if (str_starts_with($path, './')) {
+                $path = ltrim(substr($path, 2), '/');
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return 'url('.$m[1].$base.$path.$m[1].')';
+            }
             $dir  = $css_dir;
             $path = basename($path);
         } elseif ($ext === 'js') {
@@ -638,4 +666,64 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
     }, $html);
 
     echo $html;
+}
+
+function cms_rewrite_css_urls(string $css, string $theme_url, string $css_dir, string $base_url): string
+{
+    return preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($theme_url, $css_dir, $base_url) {
+        $path = $m[2];
+        if (preg_match('~^(?:https?:)?//|^/~', $path)) {
+            return $m[0];
+        }
+        if (preg_match('~^/?themes/~i', $path)) {
+            return 'url('.$m[1].$path.$m[1].')';
+        }
+        $p   = parse_url($path, PHP_URL_PATH) ?? '';
+        $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
+        $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
+        if (!in_array($ext, $assets, true)) {
+            return $m[0];
+        }
+        if ($ext === 'css') {
+            if (str_starts_with($path, './')) {
+                $path = ltrim(substr($path, 2), '/');
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return 'url('.$m[1].$base.$path.$m[1].')';
+            }
+            $dir  = $css_dir;
+            $path = basename($path);
+        } elseif ($ext === 'js') {
+            $dir = 'js';
+        } else {
+            $dir = 'images';
+        }
+        if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
+            $path = $dir.'/'.$path;
+        }
+        return 'url('.$m[1].$theme_url.'/'.$path.$m[1].')';
+    }, $css);
+}
+
+function cms_rewrite_css_file(string $theme, string $css_path, string $theme_url, string $base_url): string
+{
+    $full = dirname(__DIR__)."/themes/$theme/".ltrim($css_path, '/');
+    if (!file_exists($full)) {
+        return $theme_url.'/'.ltrim($css_path, '/');
+    }
+    $hash = md5($full.filemtime($full));
+    $cache_dir = __DIR__.'/cache';
+    $cached = $cache_dir.'/'.$hash.'.css';
+    if (!file_exists($cached)) {
+        $css = file_get_contents($full);
+        $css_dir = trim(dirname($css_path), '/');
+        if ($css_dir === '.') {
+            $css_dir = '';
+        }
+        $css = cms_rewrite_css_urls($css, $theme_url, $css_dir, $base_url);
+        if (!is_dir($cache_dir)) {
+            mkdir($cache_dir);
+        }
+        file_put_contents($cached, $css);
+    }
+    return ($base_url ? rtrim($base_url, '/'). '/' : '').'cms/cache/'.basename($cached);
 }
