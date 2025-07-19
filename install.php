@@ -433,12 +433,13 @@ Please select an option from the top menu.
 </div>
 HTML;
             $header_buttons = [
-                ['url' => '/news.php','text' => 'news'],
-                ['url' => '/getsteamnow.php','text' => 'getSteamNow'],
-                ['url' => '/cybercafes.php','text' => 'Cyber Cafes'],
+                ['url' => 'index.php?area=news',          'text' => 'news'],
+                ['url' => 'index.php?area=getsteamnow',   'text' => 'getSteamNow'],
+                ['url' => 'index.php?area=cybercafes',    'text' => 'Cyber Cafes'],
                 ['url' => '/support.php','text' => 'Support'],
                 ['url' => '/forums.php','text' => 'Forums'],
-                ['url' => '/status/status.html','text' => 'Status']
+                //['url' => '/status/status.html','text' => 'Status']
+                ['url' => 'index.php?area=status','text' => 'Status']
             ];
             $default_nav = [
                 ['file' => 'index.php','label' => 'Dashboard','visible' => 1],
@@ -504,7 +505,8 @@ HTML;
                 ['url' => 'index.php?area=cybercafes',    'text' => 'Cyber Cafes'],
                 ['url' => 'support.php',       'text' => 'Support'],
                 ['url' => 'index.php?area=forums',        'text' => 'Forums'],
-                ['url' => 'status/status.php','text' => 'Status'],
+                //['url' => 'status/status.php','text' => 'Status'],
+                ['url' => 'index.php?area=status','text' => 'Status']
             ];
 
             /* theme-specific overrides                                    */
@@ -518,7 +520,7 @@ HTML;
 
                 /* 2002_v2 → Try Steam Now! | Steam Support Site | Valve Home */
                 '2002_v2' => [
-                    ['url' => 'getsteamnow.php','text' => 'Try Steam Now!'],
+                    ['url' => 'index.php?area=getsteamnow','text' => 'Try Steam Now!'],
                     ['url' => 'support.php',   'text' => 'Steam Support Site'],
                     ['url' => 'http://www.valvesoftware.com','text' => 'Valve Home'],
                 ],

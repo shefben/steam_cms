@@ -6,7 +6,6 @@ require_once __DIR__.'/cms/utilities/functions.php';
 require_once __DIR__.'/cms/db.php';
 $theme = cms_get_setting('theme','2004');
 if(!in_array($theme,['2003','2004','2005'])){
-    readfile(__DIR__.'/archived_steampowered/2006+2007_statistics/index.html');
     include __DIR__.'/cms/footer.php';
     return;
 }
@@ -41,17 +40,17 @@ $avgUsers   = $head['users'];
 $avgMinutes = $head['minutes'];
 
 // pretty timestamp
-$tsNow = new DateTime('now', new DateTimeZone(TIMEZONE));
+$tsNow = new DateTime('now', new DateTimeZone('CST'));
 $tsGmt = clone $tsNow; $tsGmt->setTimeZone(new DateTimeZone('GMT'));
 ?>
 <link rel="stylesheet" type="text/css" href="steampowered.css">
 <style type="text/css">
 	BODY	{color:#A0AA95; font-size:8pt;}
 	.capsule	{ background: #2C3329; width: 100%; margin:8px 0px 8px 0px;}
-	.captop div  { background: url(/img/tl.gif) no-repeat top left; }
-	.captop      { background: url(/img/tr.gif) no-repeat top right; }
-	.capbot div  { background: url(/img/bl.gif) no-repeat bottom left; }
-	.capbot      { background: url(/img/br.gif) no-repeat bottom right; }
+	.captop div  { background: url(./images/tl.gif) no-repeat top left; }
+	.captop      { background: url(./images/tr.gif) no-repeat top right; }
+	.capbot div  { background: url(./images/bl.gif) no-repeat bottom left; }
+	.capbot      { background: url(./images/br.gif) no-repeat bottom right; }
 	.captop div, .captop, .capbot div, .capbot {
 		width: 100%;
 		height: 7px;
@@ -95,7 +94,7 @@ $tsGmt = clone $tsNow; $tsGmt->setTimeZone(new DateTimeZone('GMT'));
                 <div class="capsule" name="players">
                         <div class="captop"><div></div></div><div class="capcontent">
                                 <b style="margin-left:42px;">STEAM PLAYERS & GAME SERVERS -- most recent 48 hours</b><br>
-                                <a href="game_stats.html"><img src="player_graph.php"></a><br><br>
+                                <a href="index.php?area=game_stats"><img src="./cms/utilities/player_graph.php"></a><br><br>
 
 
                                 </div>
@@ -106,7 +105,7 @@ $tsGmt = clone $tsNow; $tsGmt->setTimeZone(new DateTimeZone('GMT'));
   Average player minutes per month:
   <?= human_unit_format($avgMinutes); ?><br>
 
-  <a href="game_stats.html">View stats detail chart</a>
+  <a href="index.php?area=game_stats">View stats detail chart</a>
 </div>
 
 <div class="legend"><table>
@@ -126,7 +125,7 @@ $tsGmt = clone $tsNow; $tsGmt->setTimeZone(new DateTimeZone('GMT'));
                 <div class="capsule" name="content servers">
                         <div class="captop"><div></div></div><div class="capcontent">
                                <b style="margin-left:42px;">CONTENT SERVERS AGGREGATE BANDWIDTH USED -- most recent 48 hours</b><br>
-                                <a href="content_servers.php"><img src="cs_graph.php"></a><br><br>
+                                <a href="content_servers.php"><img src="./cms/utilities/cs_graph.php"></a><br><br>
 
  </div><div class="legendRight"><br><br><a href="content_servers.php">View content server detail chart</a></div>
 <div class="legend"><table>

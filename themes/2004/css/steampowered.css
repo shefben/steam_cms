@@ -4,7 +4,7 @@ BODY	{
 	background:#4C5844;
 	color:#D8DED3;
 	line-height:11px;
-	margin: 0px 0px 0px 0px ; \\ top right bottom left
+	margin: 0px 0px 0px 0px ;
 
 	}
 BODY.forum	{	
@@ -13,7 +13,7 @@ BODY.forum	{
 	background:#4C5844;
 	color:#D8DED3;
 	line-height:11px;
-	margin: 0px 8% 0px 8% ; \\ top right bottom left
+	margin: 0px 8% 0px 8% ;
 	scrollbar-face-color: #4C5844;
 	scrollbar-shadow-color: #4C5844;
 	scrollbar-highlight-color: #4C5844;
@@ -71,7 +71,7 @@ H1	{
 	}
 H2	{
 	color:#C4CABE;
-	font-family:trebuchet ms,arial narrow,helvetica narrow;verdana,tahoma,helvetica;
+	font-family:trebuchet ms,arial narrow,helvetica narrow,verdana,tahoma,helvetica;
 	font-size:14px;
 	font-weight:bold;
 	line-height:18px;
@@ -87,7 +87,7 @@ H2#page1{
 	}
 H3	{
 	color:#BFBA50;
-	font-family:trebuchet ms,arial narrow,helvetica narrow;verdana,tahoma,helvetica;
+	font-family:trebuchet ms,arial narrow,helvetica narrow,verdana,tahoma,helvetica;
 	font-size:14px;
 	font-weight:bold;
 	line-height:18px;
@@ -106,7 +106,7 @@ UL	{
 	color:#D8DED3;
 	line-height:20px;
 	padding:0px 0 0px 0;
-	margin: 8px 0px 8px 16px ; \\ top right bottom left
+	margin: 8px 0px 8px 16px ;
 	list-style:image;
 	list-style-image:url(img/square.gif);
 	}
@@ -143,7 +143,7 @@ SUP	{
 	padding-right:20%;
 	}
 .footer{
-	float:center;
+	float: center;
 	padding:8px 0px 8px 0px;
 	background:#4C5844;
 	margin-bottom:0px;
