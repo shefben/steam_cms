@@ -1,13 +1,12 @@
 <?php
 $page_title = 'Network Status';
 
-include __DIR__.'/cms/header.php';
 require_once __DIR__.'/cms/utilities/functions.php';
+require_once __DIR__.'/cms/template_engine.php';
 require_once __DIR__.'/cms/db.php';
-$theme = cms_get_setting('theme','2004');
-if(!in_array($theme,['2003','2004','2005'])){
+$theme = cms_get_setting('theme', '2004');
+if (!in_array($theme, ['2003', '2004', '2005'], true)) {
     readfile(__DIR__.'/archived_steampowered/2006+2007_statistics/index.html');
-    include __DIR__.'/cms/footer.php';
     return;
 }
 
@@ -43,6 +42,8 @@ $avgMinutes = $head['minutes'];
 // pretty timestamp
 $tsNow = new DateTime('now', new DateTimeZone(TIMEZONE));
 $tsGmt = clone $tsNow; $tsGmt->setTimeZone(new DateTimeZone('GMT'));
+
+ob_start();
 ?>
 <link rel="stylesheet" type="text/css" href="steampowered.css">
 <style type="text/css">
@@ -144,4 +145,11 @@ $tsGmt = clone $tsNow; $tsGmt->setTimeZone(new DateTimeZone('GMT'));
 <div class="capbot"><div></div></div>
                 </div>
         </div>
-<?php include __DIR__.'/cms/footer.php'; ?>
+<?php
+$content = ob_get_clean();
+$tpl = cms_theme_layout('default.twig', $theme);
+cms_render_template($tpl, [
+    'page_title' => $page_title,
+    'content'    => $content,
+]);
+?>

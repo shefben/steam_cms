@@ -13,6 +13,14 @@ All notable changes to this project will be documented in this file.
 - Admin sidebar links now support drag-and-drop sorting with dynamic add/remove
 - Custom page template fallback now loads `default.twig` from the active theme
 - Add storefront dropdown navigation in admin sidebar
+- Global header bar uses 2006 layout with dynamic navigation
+- Header bar styles now output inline with the 2006 layout
+- CSS links beginning with ./ now resolve to the root website path
+- CSS file url() references now point to the theme images directory
+- Full article news output retains HTML formatting
+- Fixed status page to render statistics HTML correctly
+- Status and content server pages now render via the default layout template
+- Content server page loads its block from the active theme
 - Footer() tag now falls back to the default theme when a theme-specific footer is missing
 - Fix install script ordering so storefront tabs load without foreign key errors
 - Insert placeholder app 1502 so category seeding passes
