@@ -197,6 +197,7 @@ function rng_bw_series(int $pts, int $start, int $step, int $cap): array {
     }
     return [$usage, $capArr];
 }
+
 /* ────────────────────────────────────────────────────────────
  * Monthly-average headline stats
  *   • unique users  (distinct SteamIDs per calendar month)
@@ -205,8 +206,8 @@ function rng_bw_series(int $pts, int $start, int $step, int $cap): array {
  * ──────────────────────────────────────────────────────────── */
 function headline_stats(int $maxConcurrent): array
 {
-    $useDB = (USE_DATABASE && ($_GET['source'] ?? '') !== 'rng')
-             || ($_GET['source'] ?? '') === 'db';
+    $useDB = false; /*(USE_DATABASE && ($_GET['source'] ?? '') !== 'rng')
+             || ($_GET['source'] ?? '') === 'db';*/
 
     if ($useDB) {
         $db = db_connect();   // <- your own connector
@@ -262,18 +263,16 @@ function human_unit_format(int|float $n): string {
 
 /* ---------- unified getters ---------- */
 function player_data(int $pts, int $start, int $step, int $cap): array {
-    if ((USE_DATABASE && ($_GET['source']??'')!=='rng') || ($_GET['source']??'')==='db') {
-        /* …DB query just like the previous answer… */
+    /*if ((USE_DATABASE && ($_GET['source']??'')!=='rng') || ($_GET['source']??'')==='db') {
         return rng_player_series($pts, $start, $step, $cap);   // or rng_bw_series(…)
-    }
+    }*/
     return rng_player_series($pts, $start, $step, $cap);
 }
 
 function bw_data(int $pts, int $start, int $step, int $cap): array {
-    if ((USE_DATABASE && ($_GET['source']??'')!=='rng') || ($_GET['source']??'')==='db') {
-        /* …DB query… */
+    /*if ((USE_DATABASE && ($_GET['source']??'')!=='rng') || ($_GET['source']??'')==='db') {
         return  rng_bw_series($pts, $start, $step, $cap);
-    }
+    }*/
     return rng_bw_series($pts, $start, $step, $cap);
 }
 ?>
