@@ -3,7 +3,7 @@ require_once __DIR__.'/db.php';
 
 function cms_news_url($id, $archive = false){
     $id = (int)$id;
-    return '{{ BASE }}/index.php?area=news' . ($archive ? '&archive=yes' : '') . '&id=' . $id;
+    return 'index.php?area=news' . ($archive ? '&archive=yes' : '') . '&id=' . $id;
 }
 
 function cms_get_news_settings(){
@@ -55,20 +55,9 @@ function cms_render_news($type,$count=null){
         $content = $row['content'];
         switch($type){
             case 'full_article':
-                $break = 230;
-                $plain = strip_tags($content);
-                if(strlen($plain) > $break){
-                    $pos = strrpos(substr($plain, 0, $break), ' ');
-                    if($pos === false) $pos = $break;
-                    $first = htmlspecialchars(substr($plain, 0, $pos), ENT_QUOTES, 'UTF-8');
-                    $rest  = htmlspecialchars(substr($plain, $pos + 1), ENT_QUOTES, 'UTF-8');
-                    $formatted = $first . '<br>' . $rest;
-                }else{
-                    $formatted = htmlspecialchars($plain, ENT_QUOTES, 'UTF-8');
-                }
                 $out .= "<p><h3><a href='$link' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";
                 $out .= "<span style='font-size: 9px;'>$date &middot; $author<table width='100%' cellpadding='0' cellspacing='0'><tr><td height='1' width='100%' bgcolor='#808080'></td></tr><tr><td height='10' width='100%'></td></tr></table></span>";
-                $out .= $formatted;
+                $out .= $content;
                 $out .= "<div><br>&nbsp;</div><br></p>";
                 break;
             case 'partial_article':
@@ -138,7 +127,7 @@ function cms_render_news($type,$count=null){
                     $words = preg_split('/\s+/', $text);
                     $summary = implode(' ', array_slice($words, 0, 30));
                 }
-                $out .= "<a class='rightLink_news' href='$link'><img border='0' height='7' src='{{ BASE }}/themes/2006_v1/images/ico_arrow_yellow.gif' width='7'>$title<p>$summary</p></a>";
+                $out .= "<a class='rightLink_news' href='$link'><img border='0' height='7' src='ico_arrow_yellow.gif' width='7'>$title<p>$summary</p></a>";
                 break;
             case 'index_brief':
                 $text = trim(preg_replace('/\s+/', ' ', strip_tags($content)));
@@ -154,10 +143,10 @@ function cms_render_news($type,$count=null){
         }
     }
     if($type==='index_brief'){
-        $out .= "<p align=\"right\"><sub><a href=\"{{ BASE }}/index.php?area=news\" style=\"text-decoration: none;\">read more &gt;</a></sub></p>";
+        $out .= "<p align=\"right\"><sub><a href=\"index.php?area=news\" style=\"text-decoration: none;\">read more &gt;</a></sub></p>";
     }
     if($type==='index_summary_date'){
-        $out .= "<p align=\"righ\t\"><sub><a class=\"BodyGreen\" href=\"{{ BASE }}/index.php?area=news\" style=\"color: Black; font-weight: bold;\">read more &gt;</a>&nbsp;</sub></p>";
+        $out .= "<p align=\"righ\t\"><sub><a class=\"BodyGreen\" href=\"index.php?area=news\" style=\"color: Black; font-weight: bold;\">read more &gt;</a>&nbsp;</sub></p>";
     }
     return $out;
 }

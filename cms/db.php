@@ -365,16 +365,20 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
     $base = cms_base_url();
     $logo = $data['logo'] ?: '/img/steam_logo_onblack.gif';
     $logo = str_ireplace('{BASE}', $base, $logo);
-    if($logo && $logo[0]=='/') $logo = $base.$logo;
-    $out = '<div class="header"><nobr>';
-    $out .= '<div><a href="'.$base.'/index.php"><img alt="Steam" src="'.htmlspecialchars($logo).'"></a></div>';
-    if($with_buttons){
-        $nav = cms_header_buttons_html($theme);
-        $out .= '<div class="navBar">'.$nav.'</div>';
+    if ($logo && $logo[0] == '/') {
+        $logo = $base . $logo;
     }
-    $out .= '</nobr></div>';
+    $out = '<link href="./includes/css/navbar.css" rel="stylesheet" type="text/css">';
+    $out  .= '<div style="min-width:850px;">';
+    $out .= '<div class="globalHeadBar_logo"><a href="'.$base.'/index.php"><img alt="Steam main" border="0" src="'.htmlspecialchars($logo).'"></a></div>';
+
+    $nav = $with_buttons ? cms_header_buttons_html($theme) : '';
+    $out .= '<div class="globalHeadBar">'.$nav.'</div>';
+
+    $out .= '</div><br clear="all">';
     return $out;
 }
+
 
 function cms_refresh_themes(){
     $db = cms_get_db();

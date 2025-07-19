@@ -16,16 +16,16 @@
 <body>
 {{ header() }}
 <div class="content" id="container" style="background-position:top right; background-repeat:no-repeat;">
-
-<img id="steam" width="244" height="78" src="/img/steam_logo_alpha.gif"><br><br>
 {% if page_title is defined and page_title %}
 {{ split_title_entry(page_title) }}
 {% endif %}
-<br>
 <!-- begin content area -->
-    {{ content|raw }}
+    {{ content }}
 <!-- end content area -->
 <br>
 </div>
+<div class="footer">
 {{ footer() }}
+</div>
+
 </body></html>
