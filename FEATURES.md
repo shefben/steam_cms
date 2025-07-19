@@ -99,6 +99,9 @@
 - Inline style URL paths automatically point to theme images
 - CSS links beginning with ./ resolve to the site's root path
 - CSS files served through the template engine rewrite url() references
+- Network status page displays archived statistics correctly
+- Status and content server pages use the default layout template
+- Content server page loads a theme-specific PHP block for layout
 - Archived 2006_v1 homepage content seeded for dynamic tags
 - Random and scheduled content tags pulled from database
 - `split_title` tag splits headings into styled halves
