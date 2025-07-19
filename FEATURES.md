@@ -81,6 +81,7 @@
 - Header navigation uses text labels, no image sprites
 - Global header bar markup unified across themes
 - Header bar styles inlined for consistent layout
+- Per-page header logo override using the `header_logo()` template tag
 - Footer HTML seeded during install
 - Footer tag falls back to default theme when theme lacks a footer entry
 - Header and footer render via {header} / {footer} tags
