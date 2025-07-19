@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__.'/cms/utilities/functions.php';
-require_once __DIR__.'/cms/db.php';
 $page_title = 'Steam Network Status';
+require_once __DIR__.'/cms/utilities/functions.php';
+require_once __DIR__.'/cms/template_engine.php';
+require_once __DIR__.'/cms/db.php';
 $db = db_connect();
 $main_ip = get_setting($db,'main_network_ip');
 $main_port = get_setting($db,'main_network_port');
@@ -18,11 +19,18 @@ $cs_theme = cms_get_setting('cs_theme','2004');
 if(!in_array($cs_theme,$themes)){
     $cs_theme = $themes[0] ?? '2004';
 }
-include __DIR__.'/cms/header.php';
 $theme_dir = __DIR__.'/themes/'.$cs_theme;
-if(!is_file($theme_dir.'/contentserver_block.php')){
+if (!is_file($theme_dir.'/contentserver_block.php')) {
     $theme_dir = __DIR__.'/themes/2004';
 }
 $theme_file = $theme_dir.'/contentserver_block.php';
+
+ob_start();
 include $theme_file;
-include __DIR__.'/cms/footer.php';
+$content = ob_get_clean();
+
+$tpl = cms_theme_layout('default.twig', $cs_theme);
+cms_render_template_theme($tpl, $cs_theme, [
+    'page_title' => $page_title,
+    'content'    => $content,
+]);
