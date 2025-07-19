@@ -368,18 +368,8 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
     if ($logo && $logo[0] == '/') {
         $logo = $base . $logo;
     }
-
-    $style  = '<style>';
-    $style .= '.globalHeadBar{background:#000000;margin:0;width:80%;padding-top:30px;padding-bottom:9px;float:left;}';
-    $style .= '.globalHeadBar_logo{background:#000000;margin:0;width:20%;padding-top:4px;padding-bottom:9px;float:left;}';
-    $style .= '.globalNavItem{display:inline;vertical-align:top;margin-bottom:0;}';
-    $style .= '.globalNavItem a{display:inline;margin-right:15px;margin-left:15px;padding-bottom:9px;background-color:#000000;text-decoration:none;}';
-    $style .= '.globalNavItem a:hover{background-color:#4C5844;text-decoration:none;}';
-    $style .= '.globalNavLink{font-family:Arial,Helvetica,sans-serif;font-size:0.8em;color:#FFFFFF;letter-spacing:1px;background-color:#000000;text-decoration:none;padding-top:3px;padding-bottom:3px;}';
-    $style .= '</style>';
-
-    $out  = $style;
-    $out .= '<div style="min-width:850px;">';
+    $out = '<link href="./includes/css/navbar.css" rel="stylesheet" type="text/css">';
+    $out  .= '<div style="min-width:850px;">';
     $out .= '<div class="globalHeadBar_logo"><a href="'.$base.'/index.php"><img alt="Steam main" border="0" src="'.htmlspecialchars($logo).'"></a></div>';
 
     $nav = $with_buttons ? cms_header_buttons_html($theme) : '';
@@ -388,6 +378,7 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
     $out .= '</div><br clear="all">';
     return $out;
 }
+
 
 function cms_refresh_themes(){
     $db = cms_get_db();

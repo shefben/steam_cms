@@ -4,14 +4,8 @@ BODY	{
 	background:#4C5844;
 	color:#D8DED3;
 	line-height:11px;
-	margin: 0px 0px 0px 0px ; \\ top right bottom left
-	scrollbar-face-color: #4C5844;
-	scrollbar-shadow-color: #4C5844;
-	scrollbar-highlight-color: #4C5844;
-	scrollbar-3dlight-color: #818D7C;
-	scrollbar-darkshadow-color: #1C261E;
-	scrollbar-track-color: #5A6A50;
-	scrollbar-arrow-color: #969F8E;
+	margin: 0px 0px 0px 0px ;
+
 	}
 BODY.forum	{	
 	font-family:verdana, arial, sans-serif;
@@ -19,7 +13,7 @@ BODY.forum	{
 	background:#4C5844;
 	color:#D8DED3;
 	line-height:11px;
-	margin: 0px 8% 0px 8% ; \\ top right bottom left
+	margin: 0px 8% 0px 8% ;
 	scrollbar-face-color: #4C5844;
 	scrollbar-shadow-color: #4C5844;
 	scrollbar-highlight-color: #4C5844;
@@ -77,7 +71,7 @@ H1	{
 	}
 H2	{
 	color:#C4CABE;
-	font-family:trebuchet ms,arial narrow,helvetica narrow;verdana,tahoma,helvetica;
+	font-family:trebuchet ms,arial narrow,helvetica narrow,verdana,tahoma,helvetica;
 	font-size:14px;
 	font-weight:bold;
 	line-height:18px;
@@ -85,17 +79,6 @@ H2	{
 	padding:0px;
 	/* letter-spacing:0.1em; */
 	}
-.css_news_header	{
-	color:#ffffff;
-	font-family:trebuchet ms,arial narrow,helvetica narrow;verdana,tahoma,helvetica;
-	font-size:18px;
-	font-weight:bold;
-	line-height:18px;
-	margin:0px 0px 0px 0px;
-	padding:0px;
-	/* letter-spacing:0.1em; */
-	}
-
 H2#afterBox{
 	margin-top:-24px;
 	}
@@ -104,7 +87,7 @@ H2#page1{
 	}
 H3	{
 	color:#BFBA50;
-	font-family:trebuchet ms,arial narrow,helvetica narrow;verdana,tahoma,helvetica;
+	font-family:trebuchet ms,arial narrow,helvetica narrow,verdana,tahoma,helvetica;
 	font-size:14px;
 	font-weight:bold;
 	line-height:18px;
@@ -123,9 +106,9 @@ UL	{
 	color:#D8DED3;
 	line-height:20px;
 	padding:0px 0 0px 0;
-	margin: 8px 0px 8px 16px ; \\ top right bottom left
+	margin: 8px 0px 8px 16px ;
 	list-style:image;
-	list-style-image:url(../images/square.gif);
+	list-style-image:url(img/square.gif);
 	}
 EM	{
 	color:white;
@@ -160,7 +143,7 @@ SUP	{
 	padding-right:20%;
 	}
 .footer{
-	float:center;
+	float: center;
 	padding:8px 0px 8px 0px;
 	background:#4C5844;
 	margin-bottom:0px;
@@ -225,6 +208,7 @@ DIV.box	{
 .maize{
 	color:#BFBA50;
 	}
+.maize2 { color: #bfba50; font-size: 8pt }
 .circleR{
 	font-family:verdana,arial,helvetica;
 	font-size:9px;
@@ -316,18 +300,7 @@ TEXTAREA.textfield{
 	color:#BFBA50;
 	}
 
-SELECT.dropdown{
-	width:268px;
-	margin:4px 0px 12px 0px;
-	background:#3E4637;
-	border-style:solid;
-	border-width:1px;
-	border-top-color:#1C261E;
-	border-right-color:#818D7C;
-	border-bottom-color:#818D7C;
-	border-left-color:#1C261E;
-	color:#BFBA50;
-	}
+SELECT.dropdown { color: #bfba50; background: #3e4637; margin: 4px 0 12px; width: 268px; border-style: solid; border-width: 1px; border-color: #1c261e #818d7c #818d7c #1c261e }
 
 INPUT.submitter{
 	height:24px;
@@ -399,9 +372,23 @@ IMG.plusMinus{
 	height:20px;
 	}
 .statusContent{
+	font-size:10px;
+	color:#A0AA95;
+	}
+.statusContentBackup{
 	font-size:8pt;
 	color:#A0AA95;
 	}
+
+.statusContent2  { color: #f5f5f5; font-size: 10pt }
+.offerPRICE  { color: #bfba50; font-size: 13pt; font-family: "Trebuchet MS", Geneva, Arial, Helvetica, SunSans-Regular, sans-serif; letter-spacing: 1pt }
+.offerBRONZE { color: #c93; font-size: 10pt }
+.offerSILVER { color: #ccc; font-size: 10pt }
+.offerGOLD { color: #ff0; font-size: 10pt }
+.statusContent3  { color: #f5f5f5; font-size: 6pt; letter-spacing: 1pt }
+.statusProductPageHed { color: #f5f5f5; font-weight: bolder; font-size: 14px }
+.statusGetTheGamesSubhed { color: black; font-weight: bold; font-size: 10pt }
+.statusGetTheGamesText { color: black; font-size: 10pt }
 .statusDown{
 	font-size:9pt;
 	color:#A0AA95;
@@ -467,3 +454,28 @@ HR.status	{
 	width:100%;
 	text-align:left;
 	}
+.DIV.INDEX02Body  { font-size: 6px }
+
+/* 1 · Normal / wide layout – newsbox floats on the right */
+#newsbox{
+    position:relative;     /* keep the positioning rule you already need */
+    top:302px;             /* keep your existing visual offset              */
+    float:right;           /* <-- NEW: makes surrounding text wrap          */
+    width:210px;           /* set an explicit width so the browser           */
+    margin:0 0 1rem 1rem;  /* leaves breathing-room between text & box       */
+}
+
+/* 2 · Main text column clears the float once it has to drop below          */
+#textcontainer{
+    overflow:hidden;       /* establishes a new block-formatting context     */
+    /* (If you prefer, you can swap this for clear:both;)                    */
+}
+
+/* 3 · Mobile / narrow layout – stack the newsbox above the text            */
+@media (max-width:600px){
+    #newsbox{
+        float:none;        /* cancel the float → full-width box on top       */
+        width:auto;        /* let it grow/shrink with the viewport           */
+        margin:0 0 1rem 0; /* reset side margin                              */
+    }
+}

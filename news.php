@@ -30,7 +30,7 @@ if(isset($_GET['news']) || isset($_GET['id'])){
     $content .= '</div>';
 }else{
 $content .= '<h2>LATEST <em>VALVE NEWS</em> &nbsp; <a href="/rss.xml" title="RSS format news feed"><img border="0" width="27" height="13" align="absmiddle" src="/img/RSS.gif"></a></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br><div class="narrower">';
-    $content .= '{news_full_article}';
+    $content .= '{{news("full_article", 10)}}';
     $content .= '<p align="center"><a href="news_archive.php" style="text-decoration: none;"><i>view the news archives</i></a> &middot; <a href="rss.xml" style="text-decoration: none;"><i>rss news feed</i></a></p>';
     $content .= '</div>';
 }
