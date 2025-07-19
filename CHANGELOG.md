@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - CSS links beginning with ./ now resolve to the root website path
 - CSS file url() references now point to the theme images directory
 - Full article news output retains HTML formatting
+- Header logo can be overridden per page using the `header_logo()` tag
 - Fixed status page to render statistics HTML correctly
 - Status and content server pages now render via the default layout template
 - Content server page loads its block from the active theme

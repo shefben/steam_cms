@@ -202,6 +202,18 @@ function cms_get_current_page(): string {
     return $GLOBALS['cms_current_template'] ?? ($_GET['area'] ?? basename($_SERVER['SCRIPT_NAME'], '.php'));
 }
 
+function cms_set_header_logo_override(?string $path): void {
+    if ($path === null) {
+        unset($GLOBALS['cms_header_logo_override']);
+    } else {
+        $GLOBALS['cms_header_logo_override'] = $path;
+    }
+}
+
+function cms_get_header_logo_override(): ?string {
+    return $GLOBALS['cms_header_logo_override'] ?? null;
+}
+
 function cms_get_theme_header_data($theme, string $page = ''){
     $db = cms_get_db();
     try {
@@ -361,9 +373,16 @@ function cms_header_buttons_html($theme, string $spacer_style = '', ?string $spa
 }
 
 function cms_render_header(string $theme, bool $with_buttons = true): string {
-    $data = cms_get_theme_header_data($theme);
-    $base = cms_base_url();
-    $logo = $data['logo'] ?: '/img/steam_logo_onblack.gif';
+    $data  = cms_get_theme_header_data($theme);
+    $base  = cms_base_url();
+    $logo  = $data['logo'] ?: '/img/steam_logo_onblack.gif';
+    $override = cms_get_header_logo_override();
+    if ($override !== null) {
+        $logo = $override;
+        if (!preg_match('~^(?:https?://|/)~', $logo)) {
+            $logo = "themes/$theme/" . ltrim($logo, '/');
+        }
+    }
     $logo = str_ireplace('{BASE}', $base, $logo);
     if ($logo && $logo[0] == '/') {
         $logo = $base . $logo;

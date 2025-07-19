@@ -140,6 +140,10 @@ function cms_twig_env(string $tpl_dir): Environment
             $theme = cms_get_current_theme();
             return cms_render_header($theme, $withButtons);
         }, ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('header_logo', function(string $path) {
+            cms_set_header_logo_override($path);
+            return '';
+        }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('footer', function() {
             $theme = cms_get_current_theme();
             $html  = cms_get_theme_footer($theme);
