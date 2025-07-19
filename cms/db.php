@@ -340,7 +340,7 @@ function cms_header_buttons_html($theme, string $spacer_style = '', ?string $spa
             $segment = '<a href="'.$url.'"><img src="'.$img.'" alt="'.$alt.'"></a>';
         }else{
             $title = htmlspecialchars($text);
-            $segment = '<a href="'.$url.'" title="'.$title.'">'.$title.'</a>';
+            $segment = '<div class="globalNavItem"><a href="'.$url.'" title="'.$title.'"><span class="globalNavLink">'.$title.'</span></a></div>';
         }
         if(!$first && $spacer !== ''){
             $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
@@ -370,7 +370,7 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
     }
     $out = '<link href="./includes/css/navbar.css" rel="stylesheet" type="text/css">';
     $out  .= '<div style="min-width:850px;">';
-    $out .= '<div class="globalHeadBar_logo"><a href="'.$base.'/index.php"><img alt="Steam main" border="0" src="'.htmlspecialchars($logo).'"></a></div>';
+    $out .= '<div class="globalHeadBar_logo"><a href="'.$base.'/index.php"><img border="0" src="'.htmlspecialchars($logo).'" alt="[Valve]" height="54" width="152"></a></div>';
 
     $nav = $with_buttons ? cms_header_buttons_html($theme) : '';
     $out .= '<div class="globalHeadBar">'.$nav.'</div>';
