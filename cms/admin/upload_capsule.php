@@ -33,7 +33,7 @@ if (!$pos || !$appid || !isset($_FILES['file'])) {
     exit('bad');
 }
 $target = $useAll ? 'all' : $theme;
-$basePath = dirname(__DIR__, 2) . '/images/capsules/' . $target;
+$basePath = dirname(__DIR__, 2) . '/storefront/images/capsules/' . $target;
 if (!is_dir($basePath)) {
     mkdir($basePath, 0777, true);
 }

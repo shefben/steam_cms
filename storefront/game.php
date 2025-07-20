@@ -16,7 +16,7 @@ $packages = $packs->fetchAll(PDO::FETCH_ASSOC);
 $is_demo = (bool)$db->query('SELECT 1 FROM app_categories WHERE appid='.$appid.' AND category_id=10')->fetchColumn();
 
 $theme = cms_get_setting('theme','2005_v2');
-$tpl_body = __DIR__.'/templates/'.($app['show_metascore']? '2005_game_metascore.twig' : '2005_game.twig');
+$tpl_body = dirname(__DIR__).'/themes/2005_v1/storefront/layout/'.($app['show_metascore']? '2005_game_metascore.twig' : '2005_game.twig');
 $links = cms_load_store_links(__FILE__);
 $params = [
     'app'=>$app,
@@ -29,7 +29,7 @@ $params = [
     'theme_subdir' => 'storefront',
 ];
 ob_start();
-cms_render_template($tpl_body, $params);
+cms_render_template_theme($tpl_body, '2005_v1', $params);
 $body = ob_get_clean();
 
 $tpl = cms_theme_layout('default.twig', $theme);

@@ -127,3 +127,8 @@
 - Storefront SQL seed now inserts apps before referencing tabs
 - Placeholder apps ensure categories reference valid IDs
 - Admin user created with proper parameterized insert during install
+
+- 2005 storefront views load from theme folder with automatic asset paths
+- Asset mover script installs 2005 storefront CSS and border graphics
+
+- Theme 2005 images copied from archive during asset move
