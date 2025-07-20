@@ -94,7 +94,7 @@ $apps = $db->query('SELECT appid,name,price,images FROM store_apps ORDER BY name
 $price_map = [];
 foreach ($apps as $a) { $price_map[$a['appid']] = $a['price']; }
 
-$img_base = dirname(__DIR__, 2) . '/images/capsules';
+$img_base = dirname(__DIR__, 2) . '/storefront/images/capsules';
 $list = [];
 if ($use_all) {
     foreach (glob($img_base.'/*', GLOB_ONLYDIR) as $dir) {
@@ -140,7 +140,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
       $price = $price_map[$app] ?? '';
     ?>
     <div class="capsule-box">
-      <img id="preview_<?php echo $p; ?>" src="../../images/capsules/<?php echo htmlspecialchars($img); ?>" alt="<?php echo $label; ?> preview" class="capsule-preview">
+      <img id="preview_<?php echo $p; ?>" src="../../storefront/images/capsules/<?php echo htmlspecialchars($img); ?>" alt="<?php echo $label; ?> preview" class="capsule-preview">
       <input type="hidden" name="current_image[<?php echo $p; ?>]" value="<?php echo htmlspecialchars($img); ?>">
       <button type="button" class="btn change-btn" data-pos="<?php echo $p; ?>">Change Capsule</button>
       <div>
@@ -184,7 +184,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
         $img=$caps[$p]['image']??'';
         $appid=$caps[$p]['appid']??0;
   ?>
-  <img src="../../images/capsules/<?php echo htmlspecialchars($img); ?>" data-pos="<?php echo $p?>" data-app="<?php echo $appid?>" style="position:absolute;<?php echo $style; ?>;border:0;cursor:pointer;" alt="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule" aria-label="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule preview">
+  <img src="../../storefront/images/capsules/<?php echo htmlspecialchars($img); ?>" data-pos="<?php echo $p?>" data-app="<?php echo $appid?>" style="position:absolute;<?php echo $style; ?>;border:0;cursor:pointer;" alt="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule" aria-label="<?php echo ucfirst(str_replace('_',' ', $p)); ?> capsule preview">
   <?php endforeach; ?>
 </div>
   <div id="capsuleModal" class="capsule-modal" aria-label="Change capsule">
@@ -313,9 +313,9 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
     var appid=$('#existingAppid').val();
     if(!file||!appid){ alert('Select image and app'); return; }
     $.post('storefront_main.php',{update:1,position:pos,image:file,appid:appid},function(){
-       $('#preview_'+pos).attr('src','../../images/capsules/'+file);
+       $('#preview_'+pos).attr('src','../../storefront/images/capsules/'+file);
        $('#sel_'+pos).val(appid);
-       $('img[data-pos='+pos+']').attr('src','../../images/capsules/'+file).data('app',appid);
+       $('img[data-pos='+pos+']').attr('src','../../storefront/images/capsules/'+file).data('app',appid);
        $('#capsuleModal').hide();
        $('#cropContainer').hide();
        $('#uploadAccept').prop('disabled',false);
@@ -365,9 +365,9 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
       fd.append('appid',appid);
       fd.append('file',blob,'capsule.png');
       $.ajax({url:'upload_capsule.php',type:'POST',data:fd,processData:false,contentType:false,success:function(rel){
-         $('#preview_'+pos).attr('src','../../images/capsules/'+rel);
+         $('#preview_'+pos).attr('src','../../storefront/images/capsules/'+rel);
          $('#sel_'+pos).val(appid);
-         $('img[data-pos='+pos+']').attr('src','../../images/capsules/'+rel).data('app',appid);
+         $('img[data-pos='+pos+']').attr('src','../../storefront/images/capsules/'+rel).data('app',appid);
          images[pos]=images[pos]||[];
          images[pos].push({file:rel,label:appid});
          $('#capsuleModal').hide();

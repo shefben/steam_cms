@@ -10,7 +10,7 @@ if ($ver === '2005') {
     $tpl = cms_theme_layout($layout, $theme);
     cms_render_template($tpl, ['page_title' => 'Steam Games', 'theme_subdir' => 'storefront']);
 } else {
-    $body_tpl = __DIR__.'/templates/' . $ver . '_body.twig';
+    $body_tpl = dirname(__DIR__).'/themes/2005_v1/storefront/layout/2005_body.twig';
     $links = cms_load_store_links(__FILE__);
     $db = cms_get_db();
     $capsules = [];
@@ -21,7 +21,7 @@ if ($ver === '2005') {
 
     ob_start();
     if (file_exists($body_tpl)) {
-        cms_render_template($body_tpl, ['links' => $links, 'capsules' => $capsules, 'theme_subdir' => 'storefront']);
+        cms_render_template_theme($body_tpl, '2005_v1', ['links' => $links, 'capsules' => $capsules, 'theme_subdir' => 'storefront']);
     }
     $body = ob_get_clean();
 

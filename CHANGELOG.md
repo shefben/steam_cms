@@ -143,3 +143,8 @@ All notable changes to this project will be documented in this file.
 - Navigation buttons support per-page overrides via new page field and auto-detect the current template
 - Spacer HTML can be configured per theme and overridden when calling {nav_buttons}
 - Added theme upload feature allowing ZIP installation from the admin panel
+
+- Storefront templates consolidated under 2005_v1 theme; admin capsule uploads now save to storefront/images/capsules
+- Storefront CSS and border images copied via move_assets.py instead of tracking binaries
+
+- 2005 theme GIF assets installed by move_assets.py and removed from the repo
