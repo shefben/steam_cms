@@ -56,7 +56,7 @@ if(isset($_POST['upload']) && isset($_FILES['theme_zip']) && is_uploaded_file($_
 if(isset($_POST['save'])){
     cms_set_setting('theme', trim($_POST['theme']));
     $theme = trim($_POST['theme']);
-    if(strpos($theme,'2003')===0){
+    if($theme === '2003_v1'){
         $show = isset($_POST['support2003_show']) ? '1' : '0';
         $html = $_POST['support2003_html'] ?? '';
         cms_set_setting('support2003_show',$show);
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded',function(){
     var opt=document.getElementById('support-options');
     function update(){
         if(!opt) return;
-        opt.style.display=select.value.startsWith('2003')?'block':'none';
+        opt.style.display=select.value==='2003_v1'?'block':'none';
     }
     select.addEventListener('change',update);
     update();
