@@ -417,8 +417,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ]);
             // default settings
             $footer = <<<'HTML'
-© 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
-
+© 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.
 HTML;
             $error_html = <<<HTML
 <!-- invalid_area -->
@@ -433,13 +432,14 @@ Please select an option from the top menu.
 </div>
 </div>
 HTML;
-                        $header_buttons = [
-                ['url' => '/news.php','text' => 'news'],
-                ['url' => '/getsteamnow.php','text' => 'getSteamNow'],
-                ['url' => '/cybercafes.php','text' => 'Cyber Cafes'],
+            $header_buttons = [
+                ['url' => 'index.php?area=news',          'text' => 'news'],
+                ['url' => 'index.php?area=getsteamnow',   'text' => 'getSteamNow'],
+                ['url' => 'index.php?area=cybercafes',    'text' => 'Cyber Cafes'],
                 ['url' => '/support.php','text' => 'Support'],
                 ['url' => '/forums.php','text' => 'Forums'],
-                ['url' => '/status/status.html','text' => 'Status']
+                //['url' => '/status/status.html','text' => 'Status']
+                ['url' => 'index.php?area=status','text' => 'Status']
             ];
             $default_nav = [
                 ['file' => 'index.php','label' => 'Dashboard','visible' => 1],
@@ -505,7 +505,8 @@ HTML;
                 ['url' => 'index.php?area=cybercafes',    'text' => 'Cyber Cafes'],
                 ['url' => 'support.php',       'text' => 'Support'],
                 ['url' => 'index.php?area=forums',        'text' => 'Forums'],
-                ['url' => 'status/status.php','text' => 'Status'],
+                //['url' => 'status/status.php','text' => 'Status'],
+                ['url' => 'index.php?area=status','text' => 'Status']
             ];
 
             /* theme-specific overrides                                    */
@@ -519,7 +520,7 @@ HTML;
 
                 /* 2002_v2 → Try Steam Now! | Steam Support Site | Valve Home */
                 '2002_v2' => [
-                    ['url' => 'getsteamnow.php','text' => 'Try Steam Now!'],
+                    ['url' => 'index.php?area=getsteamnow','text' => 'Try Steam Now!'],
                     ['url' => 'support.php',   'text' => 'Steam Support Site'],
                     ['url' => 'http://www.valvesoftware.com','text' => 'Valve Home'],
                 ],
@@ -579,7 +580,8 @@ HTML;
             }
 
             $tfStmt = $pdo->prepare('INSERT INTO theme_footers(theme,html) VALUES(?,?)');
-            $tfStmt->execute(['2003_v1',<<<'HTML'
+            
+$tfStmt->execute(['2003_v1',<<<'HTML'
 <tbody><tr height="19">
 <td colspan="4" height="19" width="799"></td>
 <td height="19" width="1"><spacer height="19" type="block" width="1"></spacer></td>
@@ -610,45 +612,28 @@ HTML;
 </tr>
 </tbody>
 HTML]);
-            $tfStmt->execute(['2003_v2',<<<'HTML'
-<a href="http://www.valvesoftware.com"><img align="left" src="{BASE}images/valve_greenlogo.gif"></a> ©2003 Valve, L.L.C. All rights reserved. Read our <a href="index.php?area=privacy">privacy policy</a>.<br>
+            
+$tfStmt->execute(['2003_v2',<<<'HTML'
+<a href="http://www.valvesoftware.com"><img align="left" src="images/valve_greenlogo.gif"></a> ©2003 Valve, L.L.C. All rights reserved. Read our <a href="index.php?area=privacy">privacy policy</a>.<br>
 Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve, L.L.C.
-</div>']);
-$tfStmt->execute(['2004','<div class="footer">
+HTML]);
+
+$tfStmt->execute(['2004',<<<'HTML'
 <a href="http://www.valvesoftware.com"><img src="images/valve_greenlogo.gif" align="left"></a> ©2004 Valve Corporation. All rights reserved. <a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.<br>
 Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve Corporation.
 HTML]);
-            $tfStmt->execute(['2005_v1',<<<'HTML'
-<span class="footerfix">© 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span>
+
+            
+$tfStmt->execute(['2005_v1',<<<'HTML'
+2005 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.
 HTML]);
 
-            $tfStmt->execute(['2004',<<<'HTML'
-© 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
+
+$tfStmt->execute(['2005_v2',<<<'HTML'
+© 2005 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy.</a> &nbsp;<a href="index.php?area=legal">Legal.</a> &nbsp;<a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a>
 HTML]);
 
-            $tfStmt->execute(['2005_v2',<<<'HTML'
-<tbody><tr height="11">
-<td height="11" width="800"></td>
-<td height="11" width="1"><spacer height="11" type="block" width="1"></spacer></td>
-</tr>
-<tr height="100">
-<td content="" csheight="100" height="100" valign="top" width="800" xpos="0">
-<div class="footer">
-                                © 2005 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy.</a> &nbsp;<a href="index.php?area=legal">Legal.</a> &nbsp;<a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a></div>
-<p></p>
-<div align="right">
-<p><img alt="" border="0" height="20" src="themes/2005_v2/images/creditcardonsteam.gif" width="279"></p>
-</div>
-</td>
-<td height="100" width="1"><spacer height="100" type="block" width="1"></spacer></td>
-</tr>
-<tr cntrlrow="" height="1">
-<td height="1" width="800"><spacer height="1" type="block" width="800"></spacer></td>
-<td height="1" width="1"></td>
-</tr>
-</tbody>
-HTML]);
-            $tfStmt->execute(['2006_v1',<<<'HTML'
+$tfStmt->execute(['2006_v1',<<<'HTML'
 <div class="footer">
 <table background="themes/2006_v1/images/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
 <tbody><tr>
@@ -663,7 +648,8 @@ HTML]);
 </tbody></table>
 </div>
 HTML]);
-            $tfStmt->execute(['2006_v2',<<<'HTML'
+
+$tfStmt->execute(['2006_v2',<<<'HTML'
 <div class="footer">
 <table background="themes/2006_v2/images/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
 <tbody><tr>
@@ -678,7 +664,8 @@ HTML]);
 </tbody></table>
 </div>
 HTML]);
-            $tfStmt->execute(['2007',<<<'HTML'
+
+$tfStmt->execute(['2007',<<<'HTML'
 <div class="footer">
 <table background="themes/2007/images/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
 <tbody><tr>
@@ -719,9 +706,8 @@ HTML]);
 </div>
 HTML]);
 
-            $features_html = <<<'HTML'
+$features_html = <<<'HTML'
 <!-- features -->
-
 <div class="content" id="container">
 <h1>FEATURES</H1>
 <h2>WHAT <em>CAN STEAM DO?</em></h2><img src="images/Graphic_box.jpg" height="6" width="24" alt=""><br>
@@ -758,9 +744,9 @@ xxxxxx xxxxx xxxxx x xxx xxxxxxx xxxxxx xxx xxxxxx x xxxxxx xxxxxxx. xxxxxx xxxx
 <a href="index.php?area=getsteamnow"><img src="images/but_getsteamnow.gif" height="24" width="124" alt="get steam now"></a><br>
 </div>
 HTML;
-            $pageStmt->execute(['features','Features',$features_html,'2003_v1,2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['features','Features',$features_html,'2003_v1,2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-            $e3_html = <<<'HTML'
+$e3_html = <<<'HTML'
 <!-- e3 movies -->
 <div class="content" id="container">
 <h1>Half-Life 2: E3 2003</H1>
@@ -799,9 +785,10 @@ Note that these movies are in Bink .exe format. If your computer has trouble pla
 </div>
 </div>
 HTML;
-            $pageStmt->execute(['e3_movies','Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-            $forums_html = <<<'HTML'
+$pageStmt->execute(['e3_movies','Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+$forums_html = <<<'HTML'
 <!-- forums -->
 <div class="content" id="container">
 <h1>FORUMS</h1>
