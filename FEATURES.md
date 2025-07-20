@@ -37,6 +37,7 @@
 - Cafe directory and FAQ pages paginated for manageability
 - Sidebar links grouped under expandable Cafe menu
 - Not-found routes return the admin-configured error page
+- Server-level 404 handler redirects missing files to error.php
 - Storefront SQL generator pulls pricing from package info
 - 2005 v2 theme index replicated from archive
 - Batch script copies 2005 v2 assets and CSS

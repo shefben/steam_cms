@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - Fixed status page to render statistics HTML correctly
 - Status and content server pages now render via the default layout template
 - Content server page loads its block from the active theme
+- Server now directs all 404 errors to the custom error.php page
 - Footer() tag now falls back to the default theme when a theme-specific footer is missing
 - Fix install script ordering so storefront tabs load without foreign key errors
 - Insert placeholder app 1502 so category seeding passes
