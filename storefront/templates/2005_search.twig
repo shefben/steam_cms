@@ -126,7 +126,7 @@
                             $rowid = 'row_'.$a['appid'];
                             $price_txt = $a['price']>0 ? '$'.number_format($a['price'],2) : 'Third-party';
                         ?>
-                        <tr class="h" onclick=" location.href='index.php?area=game&AppId=<?php echo $a['appid']; ?>&browse=1' " id="<?php echo $rowid; ?>" bgcolor="<?php echo $bg; ?>" onMouseOver="HiLiteRow('<?php echo $rowid; ?>', '#ECF39D');" onMouseOut="HiLiteRow('<?php echo $rowid; ?>', '<?php echo $bg; ?>');" >
+                        <tr class="h" onclick=" location.href='{{ BASE }}/index.php?area=game&AppId=<?php echo $a['appid']; ?>&browse=1' " id="<?php echo $rowid; ?>" bgcolor="<?php echo $bg; ?>" onMouseOver="HiLiteRow('<?php echo $rowid; ?>', '#ECF39D');" onMouseOut="HiLiteRow('<?php echo $rowid; ?>', '<?php echo $bg; ?>');" >
                             <td nowrap width="5" height="20"></td>
                             <td class="h" nowrap width="100%"><?php echo htmlspecialchars($a['name']); ?></td>
                             <td colspan="3" width="15"></td>

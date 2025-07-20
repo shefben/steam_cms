@@ -35,7 +35,7 @@
                         <tr><th>ID</th><th>Name</th><th>Categories</th><th>Developer</th><th>Price</th><th>Avail</th></tr>
                         {% for a in apps %}
                         <tr>
-                          <td><a href="index.php?area=game&AppId={{ a.appid }}">{{ a.appid }}</a></td>
+                          <td><a href="{{ BASE }}/index.php?area=game&AppId={{ a.appid }}">{{ a.appid }}</a></td>
                           <td>{{ a.name }}</td>
                           <td>{{ a.cats }}</td>
                           <td>{{ a.developer }}</td>
