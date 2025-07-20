@@ -424,7 +424,7 @@ HTML;
 
 <div class="content" id="container">
 <h1>INVALID AREA</H1>
-<h2>PERHAPS  <em>YOU MISTYPED?</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>PERHAPS  <em>YOU MISTYPED?</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
 <div class="narrower">
 <br>
 Please select an option from the top menu.

@@ -330,7 +330,46 @@ function cms_set_theme_setting(string $theme, string $name, $value){
     $stmt = $db->prepare('REPLACE INTO theme_settings(theme,name,value) VALUES(?,?,?)');
     $stmt->execute([$theme,$name,$value]);
 }
-
+function cms_nav_buttons_html($theme, string $spacer_style = '', ?string $spacer_override = null){
+    $page    = cms_get_current_page();
+    $data    = cms_get_theme_header_data($theme, $page);
+    $buttons = $data['buttons'];
+    $spacer  = $spacer_override !== null ? $spacer_override : ($data['spacer'] ?? '');
+    $out = '';
+    $first = true;
+    $base = cms_base_url();
+    foreach($buttons as $b){
+        if(!$b['visible']) continue;
+        $text = trim($b['text']);
+        $url  = str_ireplace('{BASE}', $base, $b['url']);
+        $url  = htmlspecialchars($url);
+        $segment = '';
+        if($b['img']){
+            $imgPath = str_ireplace('{BASE}', $base, $b['img']);
+            $img = htmlspecialchars($imgPath);
+            $alt = htmlspecialchars($text);
+            $segment = '<a href="'.$url.'"><img src="'.$img.'" alt="'.$alt.'"></a>';
+        }else{
+            $title = htmlspecialchars($text);
+            $segment = '<a href="'.$url.'" title="'.$title.'">'.$title.'</a>';
+        }
+        if(!$first && $spacer !== ''){
+            $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
+            $out .= '<span class="navSpacer"'.$style.'>'.$spacer.'</span>';
+        }
+        $out .= $segment;
+        $first = false;
+    }
+    if(cms_current_admin() || isset($_COOKIE['cms_admin_token'])){
+        if(!$first && $spacer !== ''){
+            $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
+            $out .= '<span class="navSpacer"'.$style.'>'.$spacer.'</span>';
+        }
+        $base = cms_base_url();
+        $out .= '<a href="'.$base.'/cms/admin/index.php" title="Admin">ADMIN</a>';
+    }
+    return $out;
+}
 function cms_header_buttons_html($theme, string $spacer_style = '', ?string $spacer_override = null){
     $page    = cms_get_current_page();
     $data    = cms_get_theme_header_data($theme, $page);

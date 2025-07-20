@@ -357,7 +357,7 @@ $insertArray[] = [
 ];
 
 $content2005v1 = <<<HTML
-<table background="img/index02/TopBanner.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="75" showgridx="" showgridy="" width="800">
+<table background="index02/TopBanner.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="75" showgridx="" showgridy="" width="800">
 <tbody><tr height="22">
 <td colspan="4" height="22" width="799"></td>
 <td height="22" width="1"><spacer height="22" type="block" width="1"></spacer></td>
@@ -373,7 +373,7 @@ $content2005v1 = <<<HTML
 </tr>
 <tr height="49">
 <td height="49" width="9"></td>
-<td align="left" height="49" valign="top" width="137" xpos="662"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="24" src="img\index02\but_getsteamnow02.gif" width="124"></a></td>
+<td align="left" height="49" valign="top" width="137" xpos="662"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="24" src="index02\but_getsteamnow02.gif" width="124"></a></td>
 <td height="49" width="1"><spacer height="49" type="block" width="1"></spacer></td>
 </tr>
 <tr cntrlrow="" height="1">
@@ -386,25 +386,25 @@ $content2005v1 = <<<HTML
 </tbody></table>
 <table bgcolor="#3e4637" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="657" showgridx="" showgridy="" width="801">
 <tbody><tr height="53">
-<td align="left" colspan="3" height="53" valign="top" width="173" xpos="0"><img alt="" border="0" height="41" src="img\index02\Banner_NAV\Banner_Nav_01.gif" width="173"></td>
-<!-- Begin Navigation Bar Area --> <td align="left" height="53" valign="top" width="28" xpos="173"><a href="index.php?area=news" onmouseout="changeImages( /*CMP*/'Banner_Nav_02',/*URL*/'img/index02/Banner_NAV/Banner_Nav_02.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_02',/*URL*/'img/index02/Banner_NAV/Banner_Nav_02-over.gif');return true"><img alt="news" border="0" height="41" name="Banner_Nav_02" src="img/index02/Banner_NAV/Banner_Nav_02.gif" width="28"></a></td>
-<td align="left" height="53" valign="top" width="30" xpos="201"><img alt="" border="0" height="41" src="img\index02\Banner_NAV\Banner_Nav_03.gif" width="30"></td>
-<td align="left" colspan="3" height="53" valign="top" width="81" xpos="231"><a href="index.php?area=getsteamnow" onmouseout="changeImages( /*CMP*/'Banner_Nav_04',/*URL*/'img/index02/Banner_NAV/Banner_Nav_04.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_04',/*URL*/'img/index02/Banner_NAV/Banner_Nav_04-over.gif');return true"><img alt="getSteamNow" border="0" height="41" name="Banner_Nav_04" src="img/index02/Banner_NAV/Banner_Nav_04.gif" width="81"></a></td>
-<td align="left" height="53" valign="top" width="32" xpos="312"><img alt="" border="0" height="41" src="img\index02\Banner_NAV\Banner_Nav_05.gif" width="32"></td>
-<td align="left" height="53" valign="top" width="66" xpos="344"><a href="index.php?area=cybercafes" onmouseout="changeImages( /*CMP*/'Banner_Nav_06',/*URL*/'img/index02/Banner_NAV/Banner_Nav_06.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_06',/*URL*/'img/index02/Banner_NAV/Banner_Nav_06-over.gif');return true"><img alt="Cyber Cafes" border="0" height="41" name="Banner_Nav_06" src="img/index02/Banner_NAV/Banner_Nav_06.gif" width="66"></a></td>
-<td align="left" height="53" valign="top" width="32" xpos="410"><img alt="" border="0" height="41" src="img\index02\Banner_NAV\Banner_Nav_07.gif" width="32"></td>
-<td align="left" colspan="2" height="53" valign="top" width="45" xpos="442"><a href="http://steampowered.custhelp.com/cgi-bin/steampowered.cfg/php/enduser/entry.php" onmouseout="changeImages( /*CMP*/'Banner_Nav_08',/*URL*/'img/index02/Banner_NAV/Banner_Nav_08.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_08',/*URL*/'./img/index02/Banner_NAV/Banner_Nav_08-over.gif');return true"><img alt="Support" border="0" height="41" name="Banner_Nav_08" src="img/index02/Banner_NAV/Banner_Nav_08.gif" width="45"></a></td>
-<td align="left" height="53" valign="top" width="27" xpos="487"><img alt="" border="0" height="41" src="img\index02\Banner_NAV\Banner_Nav_09.gif" width="27"></td>
-<td align="left" height="53" valign="top" width="40" xpos="514"><a href="index.php?area=forums" onmouseout="changeImages( /*CMP*/'Banner_Nav_10',/*URL*/'img/index02/Banner_NAV/Banner_Nav_10.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_10',/*URL*/'img/index02/Banner_NAV/Banner_Nav_10-over.gif');return true"><img alt="Forums" border="0" height="41" name="Banner_Nav_10" src="img\index02\Banner_NAV\Banner_Nav_10.gif" width="40"></a></td>
-<td align="left" height="53" valign="top" width="30" xpos="554"><img alt="" border="0" height="41" src="img\index02\Banner_NAV\Banner_Nav_11.gif" width="30"></td>
-<td align="left" height="53" valign="top" width="36" xpos="584"><a href="status/status.html" onmouseout="changeImages( /*CMP*/'Banner_Nav_12',/*URL*/'img/index02/Banner_NAV/Banner_Nav_12.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_12',/*URL*/'img/index02/Banner_NAV/Banner_Nav_12-over.gif');return true"><img alt="Status" border="0" height="41" name="Banner_Nav_12" src="img/index02/Banner_NAV/Banner_Nav_12.gif" width="36"></a></td> <!-- End Navigation Bar Area --> 
-<td align="left" colspan="2" height="53" valign="top" width="180" xpos="620"><img alt="" border="0" height="41" src="img\index02\Banner_NAV\Banner_Nav_13.gif" width="180"></td>
+<td align="left" colspan="3" height="53" valign="top" width="173" xpos="0"><img alt="" border="0" height="41" src="index02\Banner_NAV\Banner_Nav_01.gif" width="173"></td>
+<!-- Begin Navigation Bar Area --> <td align="left" height="53" valign="top" width="28" xpos="173"><a href="index.php?area=news" onmouseout="changeImages( /*CMP*/'Banner_Nav_02',/*URL*/'index02/Banner_NAV/Banner_Nav_02.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_02',/*URL*/'index02/Banner_NAV/Banner_Nav_02-over.gif');return true"><img alt="news" border="0" height="41" name="Banner_Nav_02" src="index02/Banner_NAV/Banner_Nav_02.gif" width="28"></a></td>
+<td align="left" height="53" valign="top" width="30" xpos="201"><img alt="" border="0" height="41" src="index02\Banner_NAV\Banner_Nav_03.gif" width="30"></td>
+<td align="left" colspan="3" height="53" valign="top" width="81" xpos="231"><a href="index.php?area=getsteamnow" onmouseout="changeImages( /*CMP*/'Banner_Nav_04',/*URL*/'index02/Banner_NAV/Banner_Nav_04.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_04',/*URL*/'index02/Banner_NAV/Banner_Nav_04-over.gif');return true"><img alt="getSteamNow" border="0" height="41" name="Banner_Nav_04" src="index02/Banner_NAV/Banner_Nav_04.gif" width="81"></a></td>
+<td align="left" height="53" valign="top" width="32" xpos="312"><img alt="" border="0" height="41" src="index02\Banner_NAV\Banner_Nav_05.gif" width="32"></td>
+<td align="left" height="53" valign="top" width="66" xpos="344"><a href="index.php?area=cybercafes" onmouseout="changeImages( /*CMP*/'Banner_Nav_06',/*URL*/'index02/Banner_NAV/Banner_Nav_06.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_06',/*URL*/'index02/Banner_NAV/Banner_Nav_06-over.gif');return true"><img alt="Cyber Cafes" border="0" height="41" name="Banner_Nav_06" src="index02/Banner_NAV/Banner_Nav_06.gif" width="66"></a></td>
+<td align="left" height="53" valign="top" width="32" xpos="410"><img alt="" border="0" height="41" src="index02\Banner_NAV\Banner_Nav_07.gif" width="32"></td>
+<td align="left" colspan="2" height="53" valign="top" width="45" xpos="442"><a href="http://steampowered.custhelp.com/cgi-bin/steampowered.cfg/php/enduser/entry.php" onmouseout="changeImages( /*CMP*/'Banner_Nav_08',/*URL*/'index02/Banner_NAV/Banner_Nav_08.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_08',/*URL*/'index02/Banner_NAV/Banner_Nav_08-over.gif');return true"><img alt="Support" border="0" height="41" name="Banner_Nav_08" src="index02/Banner_NAV/Banner_Nav_08.gif" width="45"></a></td>
+<td align="left" height="53" valign="top" width="27" xpos="487"><img alt="" border="0" height="41" src="index02\Banner_NAV\Banner_Nav_09.gif" width="27"></td>
+<td align="left" height="53" valign="top" width="40" xpos="514"><a href="index.php?area=forums" onmouseout="changeImages( /*CMP*/'Banner_Nav_10',/*URL*/'index02/Banner_NAV/Banner_Nav_10.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_10',/*URL*/'index02/Banner_NAV/Banner_Nav_10-over.gif');return true"><img alt="Forums" border="0" height="41" name="Banner_Nav_10" src="index02\Banner_NAV\Banner_Nav_10.gif" width="40"></a></td>
+<td align="left" height="53" valign="top" width="30" xpos="554"><img alt="" border="0" height="41" src="index02\Banner_NAV\Banner_Nav_11.gif" width="30"></td>
+<td align="left" height="53" valign="top" width="36" xpos="584"><a href="status/status.html" onmouseout="changeImages( /*CMP*/'Banner_Nav_12',/*URL*/'index02/Banner_NAV/Banner_Nav_12.gif');return true" onmouseover="changeImages( /*CMP*/'Banner_Nav_12',/*URL*/'index02/Banner_NAV/Banner_Nav_12-over.gif');return true"><img alt="Status" border="0" height="41" name="Banner_Nav_12" src="index02/Banner_NAV/Banner_Nav_12.gif" width="36"></a></td> <!-- End Navigation Bar Area --> 
+<td align="left" colspan="2" height="53" valign="top" width="180" xpos="620"><img alt="" border="0" height="41" src="index02\Banner_NAV\Banner_Nav_13.gif" width="180"></td>
 <td height="53" width="1"><spacer height="53" type="block" width="1"></spacer></td>
 </tr>
 <tr height="364">
 <td height="394" rowspan="2" width="11"><spacer height="394" type="block" width="11"></spacer></td>
 <td align="left" colspan="18" height="364" valign="top" width="789" xpos="11">
-<table background="img/index02/gamesbar.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="349" showgridx="" showgridy="" width="779">
+<table background="index02/gamesbar.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="349" showgridx="" showgridy="" width="779">
 <tbody><tr height="9">
 <td colspan="6" height="9" width="778"></td>
 <td height="9" width="1"><spacer height="9" type="block" width="1"></spacer></td>
@@ -412,7 +412,7 @@ $content2005v1 = <<<HTML
 <tr height="282">
 <td colspan="3" height="282" width="264"></td>
 <td align="left" height="339" rowspan="2" valign="top" width="171" xpos="264">
-<table background="img/index02/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
+<table background="index02/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
 <tbody><tr height="5">
 <td height="329" rowspan="7" width="6"></td>
 <td height="247" rowspan="5" width="1"></td>
@@ -428,7 +428,7 @@ $content2005v1 = <<<HTML
 <td height="37" width="1"><spacer height="37" type="block" width="1"></spacer></td>
 </tr>
 <tr height="11">
-<td align="left" colspan="3" height="11" valign="top" width="155" xpos="7"><img alt="" border="0" height="2" src="img\index02\rule01.gif" width="150"></td>
+<td align="left" colspan="3" height="11" valign="top" width="155" xpos="7"><img alt="" border="0" height="2" src="index02\rule01.gif" width="150"></td>
 <td height="11" width="1"><spacer height="11" type="block" width="1"></spacer></td>
 </tr>
 <tr height="25">
@@ -448,11 +448,11 @@ $content2005v1 = <<<HTML
 <td height="169" width="1"><spacer height="169" type="block" width="1"></spacer></td>
 </tr>
 <tr height="40">
-<td align="left" colspan="4" height="40" valign="top" width="156" xpos="6"><a href="steam://purchase/9"><img alt="" border="0" height="35" src="img\index02\but_withsteam.gif" width="150"></a></td>
+<td align="left" colspan="4" height="40" valign="top" width="156" xpos="6"><a href="steam://purchase/9"><img alt="" border="0" height="35" src="index02\but_withsteam.gif" width="150"></a></td>
 <td height="40" width="1"><spacer height="40" type="block" width="1"></spacer></td>
 </tr>
 <tr height="42">
-<td align="left" colspan="4" height="42" valign="top" width="156" xpos="6"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="35" src="img\index02\but_withoutsteam.gif" width="150"></a></td>
+<td align="left" colspan="4" height="42" valign="top" width="156" xpos="6"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="35" src="index02\but_withoutsteam.gif" width="150"></a></td>
 <td height="42" width="1"><spacer height="42" type="block" width="1"></spacer></td>
 </tr>
 <tr cntrlrow="" height="1">
@@ -466,7 +466,7 @@ $content2005v1 = <<<HTML
 </tbody></table>
 </td>
 <td align="left" height="339" rowspan="2" valign="top" width="170" xpos="435">
-<table background="img/index02/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
+<table background="index02/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
 <tbody><tr height="5">
 <td height="329" rowspan="7" width="6"></td>
 <td height="247" rowspan="5" width="1"></td>
@@ -481,7 +481,7 @@ $content2005v1 = <<<HTML
 <td height="37" width="1"><spacer height="37" type="block" width="1"></spacer></td>
 </tr>
 <tr height="11">
-<td align="left" colspan="4" height="11" valign="top" width="151" xpos="7"><img alt="" border="0" height="2" src="img\index02\rule01.gif" width="150"></td>
+<td align="left" colspan="4" height="11" valign="top" width="151" xpos="7"><img alt="" border="0" height="2" src="index02\rule01.gif" width="150"></td>
 <td height="11" width="1"><spacer height="11" type="block" width="1"></spacer></td>
 </tr>
 <tr height="25">
@@ -504,11 +504,11 @@ $content2005v1 = <<<HTML
 <td height="169" width="1"><spacer height="169" type="block" width="1"></spacer></td>
 </tr>
 <tr height="41">
-<td align="left" colspan="5" height="41" valign="top" width="152" xpos="6"><a href="steam://purchase/10"><img alt="" border="0" height="35" src="img\index02\but_withsteam.gif" width="150"></a></td>
+<td align="left" colspan="5" height="41" valign="top" width="152" xpos="6"><a href="steam://purchase/10"><img alt="" border="0" height="35" src="index02\but_withsteam.gif" width="150"></a></td>
 <td height="41" width="1"><spacer height="41" type="block" width="1"></spacer></td>
 </tr>
 <tr height="41">
-<td align="left" colspan="5" height="41" valign="top" width="152" xpos="6"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="35" src="img\index02\but_withoutsteam.gif" width="150"></a></td>
+<td align="left" colspan="5" height="41" valign="top" width="152" xpos="6"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="35" src="index02\but_withoutsteam.gif" width="150"></a></td>
 <td height="41" width="1"><spacer height="41" type="block" width="1"></spacer></td>
 </tr>
 <tr cntrlrow="" height="1">
@@ -524,7 +524,7 @@ $content2005v1 = <<<HTML
 </tbody></table>
 </td>
 <td align="left" height="339" rowspan="2" valign="top" width="173" xpos="605">
-<table background="img/index02/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
+<table background="index02/GameCel_Empty.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="330" showgridx="" showgridy="" width="163">
 <tbody><tr height="5">
 <td height="329" rowspan="7" width="6"></td>
 <td height="247" rowspan="5" width="4"></td>
@@ -539,7 +539,7 @@ $content2005v1 = <<<HTML
 <td height="37" width="1"><spacer height="37" type="block" width="1"></spacer></td>
 </tr>
 <tr height="11">
-<td align="left" colspan="3" height="11" valign="top" width="152" xpos="10"><img alt="" border="0" height="2" src="img\index02\rule01.gif" width="150"></td>
+<td align="left" colspan="3" height="11" valign="top" width="152" xpos="10"><img alt="" border="0" height="2" src="index02\rule01.gif" width="150"></td>
 <td height="11" width="1"><spacer height="11" type="block" width="1"></spacer></td>
 </tr>
 <tr height="25">
@@ -560,12 +560,12 @@ $content2005v1 = <<<HTML
 </td>
 </tr>
 <tr height="41">
-<td align="left" colspan="3" height="41" valign="top" width="151" xpos="6"><a href="steam://purchase/13"><img alt="" border="0" height="35" src="img\index02\but_withsteam.gif" width="150"></a></td>
+<td align="left" colspan="3" height="41" valign="top" width="151" xpos="6"><a href="steam://purchase/13"><img alt="" border="0" height="35" src="index02\but_withsteam.gif" width="150"></a></td>
 <td colspan="2" height="82" rowspan="2" width="6"></td>
 <td height="41" width="1"><spacer height="41" type="block" width="1"></spacer></td>
 </tr>
 <tr height="41">
-<td align="left" colspan="3" height="41" valign="top" width="151" xpos="6"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="35" src="img\index02\but_withoutsteam.gif" width="150"></a></td>
+<td align="left" colspan="3" height="41" valign="top" width="151" xpos="6"><a href="index.php?area=getsteamnow"><img alt="" border="0" height="35" src="index02\but_withoutsteam.gif" width="150"></a></td>
 <td height="41" width="1"><spacer height="41" type="block" width="1"></spacer></td>
 </tr>
 <tr cntrlrow="" height="1">
@@ -606,9 +606,9 @@ $content2005v1 = <<<HTML
 <td height="364" width="1"><spacer height="364" type="block" width="1"></spacer></td>
 </tr>
 <tr height="30">
-<td align="left" colspan="6" height="30" valign="top" width="271" xpos="11"><img alt="" border="0" height="25" src="img\index02\Hed_LatestNews.gif" width="263"></td>
+<td align="left" colspan="6" height="30" valign="top" width="271" xpos="11"><img alt="" border="0" height="25" src="index02\Hed_LatestNews.gif" width="263"></td>
 <td align="left" colspan="5" height="239" rowspan="2" valign="top" width="171" xpos="282">
-<table background="img/index02/CEL_TechSupport.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
+<table background="index02/CEL_TechSupport.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
 <tbody><tr height="30">
 <td colspan="3" height="30" width="163"></td>
 <td height="30" width="1"><spacer height="30" type="block" width="1"></spacer></td>
@@ -635,7 +635,7 @@ $content2005v1 = <<<HTML
 </tbody></table>
 </td>
 <td align="left" colspan="5" height="239" rowspan="2" valign="top" width="167" xpos="453">
-<table background="img/index02/CEL_CyberCafe.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
+<table background="index02/CEL_CyberCafe.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
 <tbody><tr height="30">
 <td colspan="3" height="30" width="163"></td>
 <td height="30" width="1"><spacer height="30" type="block" width="1"></spacer></td>
@@ -663,7 +663,7 @@ $content2005v1 = <<<HTML
 </td>
 <td height="239" rowspan="2" width="6"><spacer height="239" type="block" width="6"></spacer></td>
 <td align="left" height="239" rowspan="2" valign="top" width="174" xpos="626">
-<table background="img/index02/CEL_GetSteamNow.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
+<table background="index02/CEL_GetSteamNow.gif" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="228" showgridx="" showgridy="" width="164">
 <tbody><tr height="29">
 <td colspan="3" height="29" width="163"></td>
 <td height="29" width="1"><spacer height="29" type="block" width="1"></spacer></td>

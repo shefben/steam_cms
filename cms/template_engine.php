@@ -153,7 +153,7 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('nav_buttons', function(string $theme = '', string $style = '', ?string $spacer = null) {
             $theme = $theme !== '' ? $theme : cms_get_current_theme();
-            return cms_header_buttons_html($theme, $style, $spacer);
+            return cms_nav_buttons_html($theme, $style, $spacer);
         }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('news', function(string $type, ?int $count = null) {
             $theme = cms_get_current_theme();
