@@ -1,9 +1,13 @@
-<?php $page_title = 'Support'; include 'cms/header.php'; ?>
-<!-- support -->
-
-<div class="content" id="container">
 <?php
-$active_theme = cms_get_setting('theme', '2004');
+require_once __DIR__.'/cms/template_engine.php';
+require_once __DIR__.'/cms/db.php';
+
+$theme = cms_get_setting('theme', '2004');
+$page_title = 'support';
+
+ob_start();
+
+$active_theme = $theme;
 if ($active_theme === '2003_v1' && cms_get_setting('support2003_show', '1') === '1') {
     echo cms_get_setting('support2003_html', '<div class="notification"><b>:: REQUIRED UPDATE AVAILABLE</b></div>');
 }
@@ -86,4 +90,10 @@ If your issue is not addressed in any of the above pages, use these email addres
 
 </div>
 </div>
-<?php include 'cms/footer.php'; ?>
+<?php
+$content = ob_get_clean();
+$tpl = cms_theme_layout('default.twig', $theme);
+cms_render_template($tpl, [
+    'page_title' => $page_title,
+    'content'    => $content,
+]);
