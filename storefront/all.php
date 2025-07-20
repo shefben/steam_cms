@@ -10,7 +10,7 @@ $sql = 'SELECT a.*, GROUP_CONCAT(sc.name ORDER BY sc.ord SEPARATOR ", ") as cats
 $apps=$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 $theme = cms_get_setting('theme','2005_v2');
-$tpl_body = __DIR__.'/templates/2005_all.html';
+$tpl_body = dirname(__DIR__).'/themes/2005_v1/storefront/layouts/2005_all.twig';
 $links = cms_load_store_links(__FILE__);
 $params = ['apps'=>$apps,'links'=>$links, 'theme_subdir' => 'storefront'];
 ob_start();

@@ -10,7 +10,7 @@ if ($ver === '2005') {
     $tpl = cms_theme_layout($layout, $theme);
     cms_render_template($tpl, ['page_title' => 'Steam Games', 'theme_subdir' => 'storefront']);
 } else {
-    $body_tpl = __DIR__.'/templates/' . $ver . '_body.html';
+    $body_tpl = __DIR__.'/templates/' . $ver . '_body.twig';
     $links = cms_load_store_links(__FILE__);
     $db = cms_get_db();
     $capsules = [];

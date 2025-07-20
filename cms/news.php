@@ -55,20 +55,9 @@ function cms_render_news($type,$count=null){
         $content = $row['content'];
         switch($type){
             case 'full_article':
-                $break = 230;
-                $plain = strip_tags($content);
-                if(strlen($plain) > $break){
-                    $pos = strrpos(substr($plain, 0, $break), ' ');
-                    if($pos === false) $pos = $break;
-                    $first = htmlspecialchars(substr($plain, 0, $pos), ENT_QUOTES, 'UTF-8');
-                    $rest  = htmlspecialchars(substr($plain, $pos + 1), ENT_QUOTES, 'UTF-8');
-                    $formatted = $first . '<br>' . $rest;
-                }else{
-                    $formatted = htmlspecialchars($plain, ENT_QUOTES, 'UTF-8');
-                }
                 $out .= "<p><h3><a href='$link' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";
                 $out .= "<span style='font-size: 9px;'>$date &middot; $author<table width='100%' cellpadding='0' cellspacing='0'><tr><td height='1' width='100%' bgcolor='#808080'></td></tr><tr><td height='10' width='100%'></td></tr></table></span>";
-                $out .= $formatted;
+                $out .= $content;
                 $out .= "<div><br>&nbsp;</div><br></p>";
                 break;
             case 'partial_article':
