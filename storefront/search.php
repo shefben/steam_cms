@@ -92,7 +92,7 @@ function sort_link($label,$col,$params,$current,$order){
 }
 
 $theme = cms_get_setting('theme','2005_v2');
-$tpl_body = __DIR__.'/templates/2005_search.html';
+$tpl_body = __DIR__.'/templates/2005_search.twig';
 $links = cms_load_store_links(__FILE__);
 ob_start();
 cms_render_template($tpl_body, [

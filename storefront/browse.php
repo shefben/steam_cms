@@ -7,7 +7,7 @@ $developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->
 $links = cms_load_store_links(__FILE__);
 
 $theme = cms_get_setting('theme','2005_v2');
-$tpl_body = __DIR__.'/templates/2005_browse.html';
+$tpl_body = __DIR__.'/templates/2005_browse.twig';
 
 $params = ['categories'=>$categories,'developers'=>$developers,'links'=>$links, 'theme_subdir' => 'storefront'];
 ob_start();
