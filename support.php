@@ -2,7 +2,12 @@
 <!-- support -->
 
 <div class="content" id="container">
-<?php if(cms_get_setting('support2003_show','1')==='1') echo cms_get_setting('support2003_html','<div class="notification"><b>:: REQUIRED UPDATE AVAILABLE</b></div>'); ?>
+<?php
+$active_theme = cms_get_setting('theme', '2004');
+if ($active_theme === '2003_v1' && cms_get_setting('support2003_show', '1') === '1') {
+    echo cms_get_setting('support2003_html', '<div class="notification"><b>:: REQUIRED UPDATE AVAILABLE</b></div>');
+}
+?>
 <h1>SUPPORT</H1>
 <h2>QUESTIONS, <em>ANSWERS, BUG FIXES, ETC</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 
