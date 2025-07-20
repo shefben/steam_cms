@@ -16,7 +16,7 @@ $packages = $packs->fetchAll(PDO::FETCH_ASSOC);
 $is_demo = (bool)$db->query('SELECT 1 FROM app_categories WHERE appid='.$appid.' AND category_id=10')->fetchColumn();
 
 $theme = cms_get_setting('theme','2005_v2');
-$tpl_body = __DIR__.'/templates/'.($app['show_metascore']? '2005_game_metascore.html' : '2005_game.html');
+$tpl_body = __DIR__.'/templates/'.($app['show_metascore']? '2005_game_metascore.twig' : '2005_game.twig');
 $links = cms_load_store_links(__FILE__);
 $params = [
     'app'=>$app,

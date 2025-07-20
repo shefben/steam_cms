@@ -36,7 +36,7 @@ $stmt->execute([$subId]);
 $apps = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $theme = cms_get_setting('theme','2005_v2');
-$tpl_body = __DIR__.'/templates/2005_package.html';
+$tpl_body = __DIR__.'/templates/2005_package.twig';
 $links = cms_load_store_links(__FILE__);
 ob_start();
 cms_render_template($tpl_body, [
