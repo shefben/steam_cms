@@ -90,6 +90,7 @@ $icons = [
     'content_servers.php' => '🖥️',
     'contentserver_banners.php' => '🖼️',
     'custom_pages.php' => '📄',
+    'support_page.php' => '🛟',
     'custom_titles.php' => '🔤',
     'random_content.php' => '🎲',
     'scheduled_content.php' => '📅',
