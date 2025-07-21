@@ -7,6 +7,87 @@ ASSETS = {
         'themes/2006_v1/assets/images/apps/1300/capsule_sm.jpg',
     'archived_steampowered/2007/v1/img/ico/ico_arrow_blue.gif':
         'themes/2007_v1/assets/images/ico/ico_arrow_blue.gif',
+    # storefront assets for theme 2005_v1
+    'archived_steampowered/2005/v1/storefront.css':
+        'themes/2005_v1/storefront/css/storefront.css',
+    'archived_steampowered/2005/storefront/img/apps/metaCriticBase.jpg':
+        'themes/2005_v1/storefront/images/img/apps/metaCriticBase.jpg',
+    'archived_steampowered/2005/storefront/img/apps/metaCriticLogo.jpg':
+        'themes/2005_v1/storefront/images/img/apps/metaCriticLogo.jpg',
+    'archived_steampowered/2005/storefront/img/apps/metaCriticSpace.jpg':
+        'themes/2005_v1/storefront/images/img/apps/metaCriticSpace.jpg',
+    'archived_steampowered/2005/storefront/img/dash.gif':
+        'themes/2005_v1/storefront/images/img/dash.gif',
+    'archived_steampowered/2005/storefront/img/endcap_blue_l.gif':
+        'themes/2005_v1/storefront/images/img/endcap_blue_l.gif',
+    'archived_steampowered/2005/storefront/img/endcap_blue_r.gif':
+        'themes/2005_v1/storefront/images/img/endcap_blue_r.gif',
+    'archived_steampowered/2005/storefront/img/screenshots.jpg':
+        'themes/2005_v1/storefront/images/img/screenshots.jpg',
+    'archived_steampowered/2005/storefront/img/search_blue_left.gif':
+        'themes/2005_v1/storefront/images/img/search_blue_left.gif',
+    'archived_steampowered/2005/storefront/img/search_blue_left_top.gif':
+        'themes/2005_v1/storefront/images/img/search_blue_left_top.gif',
+    'archived_steampowered/2005/storefront/img/search_blue_right_top.gif':
+        'themes/2005_v1/storefront/images/img/search_blue_right_top.gif',
+    'archived_steampowered/2005/storefront/img/storefront/sp_bottom_left.gif':
+        'themes/2005_v1/storefront/images/img/storefront/sp_bottom_left.gif',
+    'archived_steampowered/2005/storefront/img/storefront/sp_bottom_right.gif':
+        'themes/2005_v1/storefront/images/img/storefront/sp_bottom_right.gif',
+    'archived_steampowered/2005/storefront/img/storefront/sp_top_left.gif':
+        'themes/2005_v1/storefront/images/img/storefront/sp_top_left.gif',
+    'archived_steampowered/2005/storefront/img/storefront/sp_top_right.gif':
+        'themes/2005_v1/storefront/images/img/storefront/sp_top_right.gif',
+    'archived_steampowered/2005/storefront/img/tab_left_gray.gif':
+        'themes/2005_v1/storefront/images/img/tab_left_gray.gif',
+    'archived_steampowered/2005/storefront/img/tab_left_red.gif':
+        'themes/2005_v1/storefront/images/img/tab_left_red.gif',
+    'archived_steampowered/2005/storefront/img/tab_middle_gray.gif':
+        'themes/2005_v1/storefront/images/img/tab_middle_gray.gif',
+    'archived_steampowered/2005/storefront/img/tab_middle_red.gif':
+        'themes/2005_v1/storefront/images/img/tab_middle_red.gif',
+    'archived_steampowered/2005/storefront/img/tab_right_gray.gif':
+        'themes/2005_v1/storefront/images/img/tab_right_gray.gif',
+    'archived_steampowered/2005/storefront/img/tab_right_red.gif':
+        'themes/2005_v1/storefront/images/img/tab_right_red.gif',
+    'archived_steampowered/2005/storefront/img/title_grey.jpg':
+        'themes/2005_v1/storefront/images/img/title_grey.jpg',
+
+    # general theme images for 2005_v1
+    'archived_steampowered/2005/v1/img/getSteamNow.gif':
+        'themes/2005_v1/images/getSteamNow.gif',
+    'archived_steampowered/2005/v1/img/forums.gif':
+        'themes/2005_v1/images/forums.gif',
+    'archived_steampowered/2005/v1/img/news.gif':
+        'themes/2005_v1/images/news.gif',
+    'archived_steampowered/2005/v1/img/steam_logo_onblack.gif':
+        'themes/2005_v1/images/steam_logo_onblack.gif',
+    'archived_steampowered/2005/v1/img/valve_greenlogo.gif':
+        'themes/2005_v1/images/valve_greenlogo.gif',
+    'archived_steampowered/2005/v1/img/productpage/but_ihavesteam.gif':
+        'themes/2005_v1/images/productpage/but_ihavesteam.gif',
+    'archived_steampowered/2005/v1/img/productpage/VerticalRule.gif':
+        'themes/2005_v1/images/productpage/VerticalRule.gif',
+    'archived_steampowered/2005/v1/img/productpage/hed_preloaditnow!.gif':
+        'themes/2005_v1/images/productpage/hed_preloaditnow!.gif',
+    'archived_steampowered/2005/v1/img/productpage/screenthumbs_hl2.gif':
+        'themes/2005_v1/images/productpage/screenthumbs_hl2.gif',
+    'archived_steampowered/2005/v1/img/productpage/but_withsteam.gif':
+        'themes/2005_v1/images/productpage/but_withsteam.gif',
+    'archived_steampowered/2005/v1/img/productpage/but_withoutsteam.gif':
+        'themes/2005_v1/images/productpage/but_withoutsteam.gif',
+    'archived_steampowered/2005/v1/img/productpage/ProductBanner_CSS02.gif':
+        'themes/2005_v1/images/productpage/ProductBanner_CSS02.gif',
+    'archived_steampowered/2005/v1/img/productpage/but_downloadsteam.gif':
+        'themes/2005_v1/images/productpage/but_downloadsteam.gif',
+    'archived_steampowered/2005/v1/img/square.gif':
+        'themes/2005_v1/images/square.gif',
+    'archived_steampowered/2005/v1/img/cafes.gif':
+        'themes/2005_v1/images/cafes.gif',
+    'archived_steampowered/2005/v1/img/support.gif':
+        'themes/2005_v1/images/support.gif',
+    'archived_steampowered/2005/v1/img/status.gif':
+        'themes/2005_v1/images/status.gif',
 }
 for src_rel, dest_rel in ASSETS.items():
     src = os.path.join(ROOT, src_rel)

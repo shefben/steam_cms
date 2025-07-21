@@ -36,10 +36,10 @@ $stmt->execute([$subId]);
 $apps = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $theme = cms_get_setting('theme','2005_v2');
-$tpl_body = __DIR__.'/templates/2005_package.twig';
+$tpl_body = dirname(__DIR__).'/themes/2005_v1/storefront/layout/2005_package.twig';
 $links = cms_load_store_links(__FILE__);
 ob_start();
-cms_render_template($tpl_body, [
+cms_render_template_theme($tpl_body, '2005_v1', [
     'package'=>$package,
     'apps'=>$apps,
     'base_params'=>$base_params,
