@@ -176,7 +176,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 address TEXT,
                 city_state TEXT,
                 zip TEXT,
-                ord INT DEFAULT 0
+                ord INT DEFAULT 0,
+                country CHAR(2) NOT NULL DEFAULT 'US',
+                state VARCHAR(100) NULL
             )");
             $pdo->exec("DROP TABLE IF EXISTS cafe_representatives");
             $pdo->exec("CREATE TABLE cafe_representatives(

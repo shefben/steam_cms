@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Cafe directory importer parses text files and deduplicates entries
+- Cafe directory seed SQL includes country and state data
 - Introduced role-based permission system with new roles admin page
 - Permissions on role and user forms presented as selectable checkboxes with all/none toggles
 - Admin dashboard graphs now use Chart.js with weekly/monthly toggles
