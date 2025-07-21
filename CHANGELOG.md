@@ -148,3 +148,5 @@ All notable changes to this project will be documented in this file.
 - Storefront CSS and border images copied via move_assets.py instead of tracking binaries
 
 - 2005 theme GIF assets installed by move_assets.py and removed from the repo
+
+- Added troubleshooter management and support request tracking

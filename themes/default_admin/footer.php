@@ -13,6 +13,10 @@ $(function(){
         e.preventDefault();
         $('#faq-sub').slideToggle(150);
     });
+    $('#ts-parent > a').on('click', function(e){
+        e.preventDefault();
+        $('#ts-sub').slideToggle(150);
+    });
     $('.notify-dismiss').on('click', function(e){
         e.preventDefault();
         var id = $(this).data('id');
