@@ -6,6 +6,22 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
 
+function cms_twig_cache_dir(): string
+{
+    return __DIR__.'/cache/twig';
+}
+
+function cms_clear_twig_cache(): void
+{
+    $dir = cms_twig_cache_dir();
+    if (!is_dir($dir)) {
+        return;
+    }
+    foreach (glob($dir.'/*') as $file) {
+        @unlink($file);
+    }
+}
+
 function cms_split_title(string $title): string
 {
     $words = preg_split('/\s+/', trim($title));
@@ -135,7 +151,11 @@ function cms_twig_env(string $tpl_dir): Environment
     static $env;
     if (!$env) {
         $loader = new FilesystemLoader($tpl_dir);
-        $env = new Environment($loader);
+        $cacheDir = cms_twig_cache_dir();
+        if (!is_dir($cacheDir)) {
+            mkdir($cacheDir, 0777, true);
+        }
+        $env = new Environment($loader, ['cache' => $cacheDir, 'auto_reload' => true]);
         $env->addFunction(new TwigFunction('header', function(bool $withButtons = true) {
             $theme = cms_get_current_theme();
             return cms_render_header($theme, $withButtons);
