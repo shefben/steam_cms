@@ -1089,6 +1089,52 @@ $insertArray[] = [
     date('Y-m-d H:i:s')        // updated
 ];
 
+$insertArray[] = [
+    'cybercafes',
+    'Cyber Cafés',
+    file_get_contents(__DIR__.'/../html/cybercafes.html'),
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+$insertArray[] = [
+    'HL2GOLD_contest',
+    'VALVE HQ TRIP GIVEAWAY',
+    file_get_contents(__DIR__.'/../html/hl2gold_contest.html'),
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+$insertArray[] = [
+    'get_cz',
+    'Counter-Strike: Condition Zero',
+    file_get_contents(__DIR__.'/../html/get_cz.html'),
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+$insertArray[] = [
+    'cafe_setup',
+    'Cyber Café Setup Instructions',
+    file_get_contents(__DIR__.'/../html/cafe_setup.html'),
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+$insertArray[] = [
+    'product_HL2bronsilvergold',
+    'Welcome to Steam',
+    file_get_contents(__DIR__.'/../html/product_HL2bronsilvergold.html'),
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+
 $stmtcp = $pdo->prepare(
     'INSERT INTO custom_pages
     (slug, title, content, theme, template, created, updated, status)

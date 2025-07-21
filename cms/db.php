@@ -63,6 +63,28 @@ function cms_get_custom_page($slug,$theme=null){
     return $row;
 }
 
+function cms_get_support_page(string $theme): ?array
+{
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT * FROM support_pages WHERE FIND_IN_SET(?, years)');
+        $stmt->execute([$theme]);
+        $page = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$page) return null;
+        $faqStmt = $db->prepare(
+            'SELECT f.faqid1,f.faqid2,f.title,spf.ord FROM support_page_faqs spf '
+            .'JOIN faq_content f ON f.faqid1=spf.faqid1 AND f.faqid2=spf.faqid2 '
+            .'WHERE spf.support_id=? ORDER BY spf.ord'
+        );
+        $faqStmt->execute([$page['id']]);
+        $page['faqs'] = $faqStmt->fetchAll(PDO::FETCH_ASSOC);
+        return $page;
+    } catch (PDOException $e) {
+        if ($e->getCode()==='42S02') return null;
+        throw $e;
+    }
+}
+
 function cms_record_visit($page){
     $db = cms_get_db();
     $date = date('Y-m-d');

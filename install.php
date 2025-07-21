@@ -129,6 +129,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 updated DATETIME,
                 status VARCHAR(20) DEFAULT 'draft'
             )");
+            $pdo->exec("DROP TABLE IF EXISTS support_pages");
+            $pdo->exec("CREATE TABLE support_pages(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                version VARCHAR(50) UNIQUE,
+                years TEXT,
+                content MEDIUMTEXT,
+                created DATETIME,
+                updated DATETIME
+            )");
+            $pdo->exec("DROP TABLE IF EXISTS support_page_faqs");
+            $pdo->exec("CREATE TABLE support_page_faqs(
+                support_id INT,
+                faqid1 BIGINT,
+                faqid2 BIGINT,
+                ord INT,
+                PRIMARY KEY(support_id, ord),
+                FOREIGN KEY(support_id) REFERENCES support_pages(id) ON DELETE CASCADE
+            )");
             $pdo->exec("DROP TABLE IF EXISTS cafe_directory");
             $pdo->exec("CREATE TABLE cafe_directory(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -384,6 +402,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
 
                     require_once 'sql/install_custom_pages.php';
+                    require_once 'sql/install_support_page.php';
 
                     $pdo->exec($stmt);
                 }
@@ -453,6 +472,7 @@ HTML;
                 ['file' => 'content_servers.php','label' => 'Servers','visible' => 1],
                 ['file' => 'contentserver_banners.php','label' => 'ContentServer Banner Management','visible' => 1],
                 ['file' => 'custom_pages.php','label' => 'Custom Pages','visible' => 1],
+                ['file' => 'support_page.php','label' => 'Support Page','visible' => 1],
                 ['file' => 'custom_titles.php','label' => 'Custom Titles','visible' => 1],
                 ['file' => 'random_content.php','label' => 'Random Content','visible' => 1],
                 ['file' => 'scheduled_content.php','label' => 'Scheduled Content','visible' => 1],
