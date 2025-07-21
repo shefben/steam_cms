@@ -60,6 +60,9 @@ $default_nav = [
     ['file'=>'scheduled_content.php','label'=>'Scheduled Content','visible'=>1],
     ['file'=>'theme.php','label'=>'Theme','visible'=>1],
     ['file'=>'settings.php','label'=>'Settings','visible'=>1],
+    ['file'=>'troubleshooter.php','label'=>'Troubleshooter','visible'=>1],
+    ['file'=>'troubleshooter_manage.php','label'=>'Manage Troubleshooter','visible'=>1],
+    ['file'=>'troubleshooter_requests.php','label'=>'Support Requests','visible'=>1],
     ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
     ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>cms_has_permission('manage_admins')?1:0],
@@ -96,6 +99,9 @@ $icons = [
     'scheduled_content.php' => '📅',
     'theme.php'        => '🎨',
     'settings.php'     => '⚙️',
+    'troubleshooter.php' => '🆘',
+    'troubleshooter_manage.php' => '📝',
+    'troubleshooter_requests.php' => '📬',
     'header_footer.php'=> '📑',
     'storefront.php'   => '🏬',
     'storefront_main.php' => '🖼️',
@@ -115,6 +121,8 @@ $sf_root = null;
 $sf_pages = [];
 $faq_root = null;
 $faq_pages = [];
+$ts_root = null;
+$ts_pages = [];
 $cafe_pages = [];
 foreach ($nav_items as $k => $item) {
     if (!($item['visible'] ?? 1)) continue;
@@ -129,6 +137,12 @@ foreach ($nav_items as $k => $item) {
         unset($nav_items[$k]);
     } elseif ($item['file'] === 'faq_categories.php') {
         $faq_pages[] = $item;
+        unset($nav_items[$k]);
+    } elseif ($item['file'] === 'troubleshooter.php') {
+        $ts_root = $item;
+        unset($nav_items[$k]);
+    } elseif (preg_match('/^troubleshooter_.*\.php/', $item['file'])) {
+        $ts_pages[] = $item;
         unset($nav_items[$k]);
     } elseif (preg_match('/^cafe_.*\.php/', $item['file'])) {
         $cafe_pages[] = $item;
@@ -186,6 +200,26 @@ if ($has_faq) {
     if ($faq_pages) {
         $nav_html .= '<ul class="sub-menu" id="faq-sub" style="display:none">';
         foreach ($faq_pages as $it) {
+            $file = $it['file'];
+            $label = cms_admin_translate($it['label']);
+            $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
+            $icon = $icons[$file] ?? '';
+            $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
+        }
+        $nav_html .= '</ul>';
+    }
+    $nav_html .= '</li>';
+}
+$has_ts = $ts_root || $ts_pages;
+if ($has_ts) {
+    $root_file = $ts_root['file'] ?? 'troubleshooter.php';
+    $root_label = cms_admin_translate($ts_root['label'] ?? 'Troubleshooter');
+    $active = strpos($_SERVER['PHP_SELF'], $root_file)!==false ? ' class="active"' : '';
+    $icon = $icons[$root_file] ?? '';
+    $nav_html .= '<li id="ts-parent"><a href="'.$root_file.'"'.$active.' aria-label="Troubleshooter menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
+    if ($ts_pages) {
+        $nav_html .= '<ul class="sub-menu" id="ts-sub" style="display:none">';
+        foreach ($ts_pages as $it) {
             $file = $it['file'];
             $label = cms_admin_translate($it['label']);
             $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';

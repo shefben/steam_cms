@@ -132,3 +132,5 @@
 - Asset mover script installs 2005 storefront CSS and border graphics
 
 - Theme 2005 images copied from archive during asset move
+
+- Troubleshooter pages editable via admin with request logs

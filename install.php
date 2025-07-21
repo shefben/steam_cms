@@ -147,6 +147,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 PRIMARY KEY(support_id, ord),
                 FOREIGN KEY(support_id) REFERENCES support_pages(id) ON DELETE CASCADE
             )");
+            $pdo->exec("DROP TABLE IF EXISTS troubleshooter_pages");
+            $pdo->exec("CREATE TABLE troubleshooter_pages(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                lang VARCHAR(8) NOT NULL,
+                slug VARCHAR(64) NOT NULL,
+                title TEXT,
+                content MEDIUMTEXT,
+                created DATETIME DEFAULT CURRENT_TIMESTAMP,
+                updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                UNIQUE KEY(lang,slug)
+            )");
+            $pdo->exec("DROP TABLE IF EXISTS support_requests");
+            $pdo->exec("CREATE TABLE support_requests(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                page VARCHAR(64) NOT NULL,
+                language VARCHAR(8) NOT NULL,
+                f1 TEXT,f2 TEXT,f3 TEXT,f4 TEXT,f5 TEXT,
+                f6 TEXT,f7 TEXT,f8 TEXT,f9 TEXT,f10 TEXT,
+                created DATETIME DEFAULT CURRENT_TIMESTAMP
+            )");
             $pdo->exec("DROP TABLE IF EXISTS cafe_directory");
             $pdo->exec("CREATE TABLE cafe_directory(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -403,6 +423,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     require_once 'sql/install_custom_pages.php';
                     require_once 'sql/install_support_page.php';
+                    require_once 'sql/install_troubleshooter.php';
 
                     $pdo->exec($stmt);
                 }
