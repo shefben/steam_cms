@@ -1,0 +1,245 @@
+
+
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>GERMANY</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Aschaffenburg</h3><br>
+				<li> <strong>Area51 Internetcafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +496021439626</span><br>
+				Duccastr.9<br>
+				Aschaffenburg<br>
+				63739<br>
+				<br>
+				
+				<li> <strong>Area51 Internetcafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +496021439626</span><br>
+				Duccastr.9<br>
+				Aschaffenburg<br>
+				63739<br>
+				<br>
+				<h3>Berlin</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.hellnet.com/" target="_blank">HellNet Franchise GmbH-Hellersdorf</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 30 293 898 10</span><br>
+				am Cecilienplatz - Ernst-Block-Strasse 39<br>
+				Berlin<br>
+				12619<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.hellnet.com/" target="_blank">HellNet Franchise GmbH-Hellersdorf</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 30 293 898 10</span><br>
+				am Cecilienplatz - Ernst-Block-Strasse 39<br>
+				Berlin<br>
+				12619<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.hellnet.com/" target="_blank">HellNet Franchise GmbH-Neukolln</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 30 293 898 10</span><br>
+				in den Neukolln Arcaden - Karl-Marx-Strasse 66-72<br>
+				Berlin<br>
+				12043<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.hellnet.com/" target="_blank">HellNet Franchise GmbH-Neukolln</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 30 293 898 10</span><br>
+				in den Neukolln Arcaden - Karl-Marx-Strasse 66-72<br>
+				Berlin<br>
+				12043<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.hellnet.com/" target="_blank">HellNet Mediacafe Berlin-Reinickendorf</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 30 293 898 10</span><br>
+				Oraniendamm 10-6<br>
+				Berlin<br>
+				13469<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.hellnet.com/" target="_blank">HellNet Mediacafe Berlin-Reinickendorf</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 30 293 898 10</span><br>
+				Oraniendamm 10-6<br>
+				Berlin<br>
+				13469<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://62.206.112.26/" target="_blank">Internetcafe and more</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (49) 3052280961</span><br>
+				Robert-Uhrig-Strare 15<br>
+				Berlin<br>
+				10315<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://62.206.112.26/" target="_blank">Internetcafe and more</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (49) 3052280961</span><br>
+				Robert-Uhrig-Strare 15<br>
+				Berlin<br>
+				10315<br>
+				<br>
+				<h3>Bruchsal</h3><br>
+				<li> <strong>Cal-Caf/ Cafe Cal</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (49) 7251 98249 0</span><br>
+				Bahnhofstr. 1a<br>
+				Bruchsal<br>
+				76646<br>
+				<br>
+				
+				<li> <strong>Cal-Caf/ Cafe Cal</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (49) 7251 98249 0</span><br>
+				Bahnhofstr. 1a<br>
+				Bruchsal<br>
+				76646<br>
+				<br>
+				<h3>Coburg</h3><br>
+				<li> <strong>Pinaz, NGZ-Server.de</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 499561871147</span><br>
+				Sonntagsaner 1<br>
+				Coburg<br>
+				96450<br>
+				<br>
+				
+				<li> <strong>Pinaz, NGZ-Server.de</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 499561871147</span><br>
+				Sonntagsaner 1<br>
+				Coburg<br>
+				96450<br>
+				<br>
+				<h3>Darmstadt</h3><br>
+				<li> <strong>SlashCom GmbH</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 6151 3696 93</span><br>
+				Ingelheimer Strasse 1<br>
+				Darmstadt<br>
+				64295<br>
+				<br>
+				
+				<li> <strong>SlashCom GmbH</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 6151 3696 93</span><br>
+				Ingelheimer Strasse 1<br>
+				Darmstadt<br>
+				64295<br>
+				<br>
+				<h3>Dortmund</h3><br>
+				<li> <strong>Uplink Café</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 173 25 78 134</span><br>
+				Varzinerstr. 60<br>
+				Dortmund<br>
+				44369<br>
+				<br>
+				
+				<li> <strong>Uplink Café</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 173 25 78 134</span><br>
+				Varzinerstr. 60<br>
+				Dortmund<br>
+				44369<br>
+				<br>
+				<h3>Dortmund </h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.login-lanstation.de /" target="_blank">Login Lanstation</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +491732720565 </span><br>
+				Geschwister Scholl Strasse 18 <br>
+				Dortmund <br>
+				44135<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.login-lanstation.de /" target="_blank">Login Lanstation</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +491732720565 </span><br>
+				Geschwister Scholl Strasse 18 <br>
+				Dortmund <br>
+				44135<br>
+				<br>
+				<h3>Eschweiler</h3><br>
+				<li> <strong>MIO AG</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 2403 21052</span><br>
+				Wollenweber Str. 10-14<br>
+				Eschweiler<br>
+				52249<br>
+				<br>
+				
+				<li> <strong>MIO AG</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 2403 21052</span><br>
+				Wollenweber Str. 10-14<br>
+				Eschweiler<br>
+				52249<br>
+				<br>
+				<h3>Hamburg</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.spielenetzwerk.com /" target="_blank">Spiele Netzwerk GmbH</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 40 22927136</span><br>
+				Hamburger Str. 1<br>
+				Hamburg<br>
+				22083<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.spielenetzwerk.com /" target="_blank">Spiele Netzwerk GmbH</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 40 22927136</span><br>
+				Hamburger Str. 1<br>
+				Hamburg<br>
+				22083<br>
+				<br>
+				<h3>Ingolstadt</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.i-c-e-internetcafe.de/" target="_blank">Internet Cafe Express</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 841 9316840</span><br>
+				Bahnhofstrasse 8<br>
+				Ingolstadt<br>
+				85051<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.i-c-e-internetcafe.de/" target="_blank">Internet Cafe Express</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 841 9316840</span><br>
+				Bahnhofstrasse 8<br>
+				Ingolstadt<br>
+				85051<br>
+				<br>
+				<h3>Iserlohn</h3><br>
+				<li> <strong>Login Lanstation</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 00492371784791</span><br>
+				Friedrich-Kirchhoff-Str.2<br>
+				Iserlohn<br>
+				58640<br>
+				<br>
+				
+				<li> <strong>Login Lanstation</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 00492371784791</span><br>
+				Friedrich-Kirchhoff-Str.2<br>
+				Iserlohn<br>
+				58640<br>
+				<br>
+				<h3>Neubrandenburg</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.hellnet.com/" target="_blank">HellNet Franchise GmbH-Neubrandenburg</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 30 293 898 10</span><br>
+				im Lindetal-Center<br>
+				Neubrandenburg<br>
+				17036<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.hellnet.com/" target="_blank">HellNet Franchise GmbH-Neubrandenburg</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 30 293 898 10</span><br>
+				im Lindetal-Center<br>
+				Neubrandenburg<br>
+				17036<br>
+				<br>
+				<h3>Potsdam</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.hellnet.com/" target="_blank">HellNet Franchise GmbH-Potsdam</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 30 293 898 10</span><br>
+				im Spartacus - Schlossstrasse 13<br>
+				Potsdam<br>
+				14467<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205002743/http://www.hellnet.com/" target="_blank">HellNet Franchise GmbH-Potsdam</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +49 30 293 898 10</span><br>
+				im Spartacus - Schlossstrasse 13<br>
+				Potsdam<br>
+				14467<br>
+				<br>
+				<h3>Ramstein-Miesenbach</h3><br>
+				<li> <strong>Gamefest</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (49) 6371617079</span><br>
+				Steinwendener strasse 3<br>
+				Ramstein-Miesenbach<br>
+				66877<br>
+				<br>
+				
+				<li> <strong>Gamefest</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (49) 6371617079</span><br>
+				Steinwendener strasse 3<br>
+				Ramstein-Miesenbach<br>
+				66877<br>
+				<br>
+				<h3>Remscheid</h3><br>
+				<li> <strong>Login Lanstation</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +491784986639</span><br>
+				Yildir / Kuhnert GbR - Haddenbacher Straße 40<br>
+				Remscheid<br>
+				42855<br>
+				<br>
+				
+				<li> <strong>Login Lanstation</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +491784986639</span><br>
+				Yildir / Kuhnert GbR - Haddenbacher Straße 40<br>
+				Remscheid<br>
+				42855<br>
+				<br>
+				<h3>Vechta</h3><br>
+				<li> <strong>Internet cafe.ag</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 004917621107321</span><br>
+				Münsterstrasse 31<br>
+				Vechta<br>
+				49377<br>
+				<br>
+				
+				<li> <strong>Internet cafe.ag</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 004917621107321</span><br>
+				Münsterstrasse 31<br>
+				Vechta<br>
+				49377<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041205002743/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

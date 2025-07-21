@@ -1,0 +1,79 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Washington</h3>
+		<ul>
+	<h3>Aberdeen</h3><br>
+		<li> <strong>Wired</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 360 537-9171</span><br>
+		415 W Heron<br>
+		Aberdeen, WA<br>
+		98520<br>
+		<br>
+		<h3>Bellevue</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211181005/http://www.lanwerx.com/" target="_blank">LanWerx, Inc</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (425) 372-2112</span><br>
+		707 112th Ave NE<br>
+		Bellevue, WA<br>
+		98004<br>
+		<br>
+		<h3>Graham</h3><br>
+		<li> <strong>BattleGround PC Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 253-262-2128</span><br>
+		9807 224th St East - Suite 108<br>
+		Graham, WA<br>
+		98338<br>
+		<br>
+		
+		<li> <strong>BattleGround PC Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 253-262-2128</span><br>
+		9807 224th St East - Suite 108<br>
+		Graham, WA<br>
+		98338<br>
+		<br>
+		<h3>Lakewood</h3><br>
+		<li> <strong>The Game Matrix</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 253-583-9708</span><br>
+		8610 So Tacoma Way<br>
+		Lakewood, WA<br>
+		98499<br>
+		<br>
+		
+		<li> <strong>The Game Matrix</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 253-583-9708</span><br>
+		8610 So Tacoma Way<br>
+		Lakewood, WA<br>
+		98499<br>
+		<br>
+		<h3>Poulsbo</h3><br>
+		<li> <strong>Net-Worlds</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (360) 779-4222</span><br>
+		18980 Jensen Way<br>
+		Poulsbo, WA<br>
+		98370<br>
+		<br>
+		
+		<li> <strong>Net-Worlds</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (360) 779-4222</span><br>
+		18980 Jensen Way<br>
+		Poulsbo, WA<br>
+		98370<br>
+		<br>
+		<h3>Puyallup</h3><br>
+		<li> <strong>ECS-Extreme Computer Services In</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 253-845-7577</span><br>
+		12623 Meridian Ave E. B-4<br>
+		Puyallup, WA<br>
+		98373<br>
+		<br>
+		<h3>Tacoma</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211181005/http://www.acsx.net/gaming" target="_blank">Affordable Computer Solutions</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 671-4117</span><br>
+		4830 Pacific Ave<br>
+		Tacoma, WA<br>
+		98408<br>
+		<br>
+		
+		<li> <strong>S3 Extreme Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (253) 537-8000</span><br>
+		409 Garfield St South<br>
+		Tacoma, WA<br>
+		98444<br>
+		<br>
+		
+		<li> <strong>S3 Extreme Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (253) 537-8000</span><br>
+		409 Garfield St South<br>
+		Tacoma, WA<br>
+		98444<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211181005/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

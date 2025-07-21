@@ -1,0 +1,169 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - New York</h3>
+		<ul>
+	<h3>Albany</h3><br>
+		<li> <strong>Interlan Cyber Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 518-463-3312</span><br>
+		791 Madison Avenue<br>
+		Albany, NY<br>
+		12208<br>
+		<br>
+		<h3>Amherst</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180326/http://www.cyberjocks.com/" target="_blank">CyberJocks</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 716-837-2600</span><br>
+		3311 Sheridan Dr<br>
+		Amherst, NY<br>
+		14226-1440<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180326/http://www.cyberjocks.com/" target="_blank">CyberJocks</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 716-837-2600</span><br>
+		3311 Sheridan Dr<br>
+		Amherst, NY<br>
+		14226-1440<br>
+		<br>
+		<h3>Astoria</h3><br>
+		<li> <strong>PK Net Corp.</strong> <br>
+		28-13 23rd Ave.<br>
+		Astoria, NY<br>
+		11105<br>
+		<br>
+		
+		<li> <strong>PK Net Corp.</strong> <br>
+		28-13 23rd Ave.<br>
+		Astoria, NY<br>
+		11105<br>
+		<br>
+		<h3>Brooklyn</h3><br>
+		<li> <strong>MPC Inc/ZeroOne Internet Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 718-972-8111</span><br>
+		5113 7th Avenue<br>
+		Brooklyn, NY<br>
+		11220<br>
+		<br>
+		
+		<li> <strong>Velocity Gaming </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 718-431-2444</span><br>
+		4716 4TH AVENUE<br>
+		Brooklyn, NY<br>
+		11220<br>
+		<br>
+		
+		<li> <strong>X-Treme Cyber Café</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 718-209-2291</span><br>
+		6315 Avenue N<br>
+		Brooklyn, NY<br>
+		11234<br>
+		<br>
+		<h3>Brookport</h3><br>
+		<li> <strong>Hacker's Hotspot Cyber Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (585) 637-0230</span><br>
+		53 N. Main Street<br>
+		Brookport, NY<br>
+		14420<br>
+		<br>
+		
+		<li> <strong>Hacker's Hotspot Cyber Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (585) 637-0230</span><br>
+		53 N. Main Street<br>
+		Brookport, NY<br>
+		14420<br>
+		<br>
+		<h3>Elmhurst</h3><br>
+		<li> <strong>Cyber Cafe Zone Inc</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 718.803.9311</span><br>
+		75-12 Broad Way<br>
+		Elmhurst, NY<br>
+		11373<br>
+		<br>
+		
+		<li> <strong>Zzangster</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (718) 271-8003</span><br>
+		9507 57th Ave<br>
+		Elmhurst, NY<br>
+		11373<br>
+		<br>
+		
+		<li> <strong>Zzangster</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (718) 271-8003</span><br>
+		9507 57th Ave<br>
+		Elmhurst, NY<br>
+		11373<br>
+		<br>
+		<h3>Islip</h3><br>
+		<li> <strong>FatPipe</strong> <br>
+		472 Main Street<br>
+		Islip, NY<br>
+		11751<br>
+		<br>
+		
+		<li> <strong>FatPipe</strong> <br>
+		472 Main Street<br>
+		Islip, NY<br>
+		11751<br>
+		<br>
+		<h3>Massapequa</h3><br>
+		<li> <strong>FatPipe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (516) 798-1511</span><br>
+		4915 Merrick Road<br>
+		Massapequa, NY<br>
+		11762<br>
+		<br>
+		
+		<li> <strong>FatPipe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (516) 798-1511</span><br>
+		4915 Merrick Road<br>
+		Massapequa, NY<br>
+		11762<br>
+		<br>
+		<h3>New York</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180326/http://www.gameplayerstation.com/" target="_blank">Game Players Station</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (212) 619-1019</span><br>
+		28 Elizabeth Street - 2nd Floor<br>
+		New York, NY<br>
+		10013<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180326/http://www.gameplayerstation.com/" target="_blank">Game Players Station</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (212) 619-1019</span><br>
+		28 Elizabeth Street - 2nd Floor<br>
+		New York, NY<br>
+		10013<br>
+		<br>
+		
+		<li> <strong>Unet, Inc</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (212) 625-8235</span><br>
+		9 Elizabeth Street<br>
+		New York, NY<br>
+		10013<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180326/http://www.web2zone.com/play" target="_blank">web2zone :: Cyber Center</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (212) 614-7300</span><br>
+		54 Cooper Square<br>
+		New York, NY<br>
+		10003<br>
+		<br>
+		<h3>Potsdam</h3><br>
+		<li> <strong>LanGameZone</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (315) 265-5491</span><br>
+		8 Market St<br>
+		Potsdam, NY<br>
+		13676<br>
+		<br>
+		<h3>Rochester</h3><br>
+		<li> <strong>Chris Gregory</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 585-271-4880</span><br>
+		130 Maywood Drive<br>
+		Rochester, NY<br>
+		14618<br>
+		<br>
+		<h3>Staten Island</h3><br>
+		<li> <strong>Video Game Arena</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 1-718-987-8880</span><br>
+		2343 Hylan Boulevard<br>
+		Staten Island, NY<br>
+		10306<br>
+		<br>
+		
+		<li> <strong>Video Game Arena</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 1-718-987-8880</span><br>
+		2343 Hylan Boulevard<br>
+		Staten Island, NY<br>
+		10306<br>
+		<br>
+		<h3>Washingtonville</h3><br>
+		<li> <strong>Online Internet Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (845) 496-4119</span><br>
+		7 East Main Street<br>
+		Washingtonville, NY<br>
+		10992<br>
+		<br>
+		
+		<li> <strong>Online Internet Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (845) 496-4119</span><br>
+		7 East Main Street<br>
+		Washingtonville, NY<br>
+		10992<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180326/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

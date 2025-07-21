@@ -1,0 +1,19 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Kansas</h3>
+		<ul>
+	<h3>Overland Park</h3><br>
+		<li> <strong>Gamer's Quest LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 913-383-8803</span><br>
+		9565 W. 87th St<br>
+		Overland Park, KS<br>
+		66212<br>
+		<br>
+		<h3>Wichita</h3><br>
+		<li> <strong>Gamer Zone</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 316-371-0914</span><br>
+		310 E Harry<br>
+		Wichita, KS<br>
+		67211<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180514/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

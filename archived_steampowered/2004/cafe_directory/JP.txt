@@ -1,0 +1,27 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>JAPAN</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Tokyo</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041206114340/http://www.ledzone.com/index_steam.html" target="_blank">NAMCO Ltd. (Official Cafe Representative - http://www.ledzone.com/index_steam.html)</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 81-3-3732-7236</span><br>
+				Tokyu-Plaza-Annex 2F - 7-3-3 Nishikamata Otaku<br>
+				Tokyo<br>
+				144-0051<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041206114340/http://www.ledzone.com/index_steam.html" target="_blank">NAMCO Ltd. (Official Cafe Representative - http://www.ledzone.com/index_steam.html)</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 81-3-3732-7236</span><br>
+				Tokyu-Plaza-Annex 2F - 7-3-3 Nishikamata Otaku<br>
+				Tokyo<br>
+				144-0051<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041206114340/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

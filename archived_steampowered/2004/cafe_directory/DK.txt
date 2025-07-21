@@ -1,0 +1,125 @@
+
+
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>DENMARK</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Aalborg</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.boomtown.net/" target="_blank">Boomtown Netcafe - Aalborg</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 98780962</span><br>
+				Nytorv 18<br>
+				Aalborg<br>
+				9000<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.boomtown.net/" target="_blank">Boomtown Netcafe - Aalborg</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 98780962</span><br>
+				Nytorv 18<br>
+				Aalborg<br>
+				9000<br>
+				<br>
+				<h3>Arhus C</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.boomtown.net/" target="_blank">Boomtown Netcafe - Aarhus</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 89413930</span><br>
+				Aboulevarden 21<br>
+				Arhus C<br>
+				8000<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.boomtown.net/" target="_blank">Boomtown Netcafe - Aarhus</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 89413930</span><br>
+				Aboulevarden 21<br>
+				Arhus C<br>
+				8000<br>
+				<br>
+				<h3>Frederiksberg</h3><br>
+				<li> <strong>Xzile Entertainment Group ApS</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 45 27121404</span><br>
+				Finsensvej 80 A<br>
+				Frederiksberg<br>
+				2000<br>
+				<br>
+				
+				<li> <strong>Xzile Entertainment Group ApS</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 45 27121404</span><br>
+				Finsensvej 80 A<br>
+				Frederiksberg<br>
+				2000<br>
+				<br>
+				<h3>Ishoj </h3><br>
+				<li> <strong>Ishoj Ungdomsskole </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +45 43543399</span><br>
+				Ishoj Sovej 204, Bygn. M<br>
+				Ishoj <br>
+				2635<br>
+				<br>
+				
+				<li> <strong>Ishoj Ungdomsskole </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +45 43543399</span><br>
+				Ishoj Sovej 204, Bygn. M<br>
+				Ishoj <br>
+				2635<br>
+				<br>
+				<h3>KÃ¸benhavn </h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.nethouse2000.dk/" target="_blank">nethouse2000.dk</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +45 3123 2631</span><br>
+				Amagerbrogade 44  <br>
+				KÃ¸benhavn <br>
+				2300 S<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.nethouse2000.dk/" target="_blank">nethouse2000.dk</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +45 3123 2631</span><br>
+				Amagerbrogade 44  <br>
+				KÃ¸benhavn <br>
+				2300 S<br>
+				<br>
+				<h3>Kobenhavn V</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.boomtown.net/" target="_blank">Boomtown Netcafe - Copenhagen</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 33321032</span><br>
+				Axel Torv 1<br>
+				Kobenhavn V<br>
+				1609<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.boomtown.net/" target="_blank">Boomtown Netcafe - Copenhagen</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 33321032</span><br>
+				Axel Torv 1<br>
+				Kobenhavn V<br>
+				1609<br>
+				<br>
+				<h3>Odense C</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.boomtown.net/" target="_blank">Boomtown Netcafe - Odense</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 63111505</span><br>
+				Pantheonsgade 4<br>
+				Odense C<br>
+				5000<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.boomtown.net/" target="_blank">Boomtown Netcafe - Odense</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 63111505</span><br>
+				Pantheonsgade 4<br>
+				Odense C<br>
+				5000<br>
+				<br>
+				<h3>Saeby</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.netshark.dk/" target="_blank">Netshark Danmark A/S</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 004521206633</span><br>
+				Gasvaerksvej 47<br>
+				Saeby<br>
+				9300<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207122207/http://www.netshark.dk/" target="_blank">Netshark Danmark A/S</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 004521206633</span><br>
+				Gasvaerksvej 47<br>
+				Saeby<br>
+				9300<br>
+				<br>
+				<h3>Skovlunde</h3><br>
+				<li> <strong>Deep Field</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +4544940043</span><br>
+				Bybjergvej 6g<br>
+				Skovlunde<br>
+				2740<br>
+				<br>
+				
+				<li> <strong>Deep Field</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +4544940043</span><br>
+				Bybjergvej 6g<br>
+				Skovlunde<br>
+				2740<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207122207/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

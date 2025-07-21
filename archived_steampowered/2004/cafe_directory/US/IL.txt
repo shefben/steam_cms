@@ -1,0 +1,133 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Illinois</h3>
+		<ul>
+	<h3>Algonquin</h3><br>
+		<li> <strong>Cyber Games</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 847-201-6070</span><br>
+		4065 W Algonquin<br>
+		Algonquin, IL<br>
+		60102<br>
+		<br>
+		<h3>Aurora </h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041208150556/http://digitalarenail.com /" target="_blank">Digital Arena</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 630 897 3205</span><br>
+		1158 Prairie Street  <br>
+		Aurora , IL<br>
+		60506<br>
+		<br>
+		<h3>Bourbonnais</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041208150556/http://www.computerworldinc.com/" target="_blank">Computer World, Inc</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 815-935-5736</span><br>
+		656 N. Convent Ave.<br>
+		Bourbonnais, IL<br>
+		60914<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041208150556/http://www.computerworldinc.com/" target="_blank">Computer World, Inc</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 815-935-5736</span><br>
+		656 N. Convent Ave.<br>
+		Bourbonnais, IL<br>
+		60914<br>
+		<br>
+		<h3>Chicago  </h3><br>
+		<li> <strong>PC Zone, Inc. </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 773-539-7233</span><br>
+		5400 N. Kedzie Ave <br>
+		Chicago  , IL<br>
+		60625 <br>
+		<br>
+		<h3>Countryside</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041208150556/http://www.datamedix.net/" target="_blank">Data Medics</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (708) 352-9336</span><br>
+		5402 S. La Grange Road<br>
+		Countryside, IL<br>
+		60625<br>
+		<br>
+		<h3>Dekalb</h3><br>
+		<li> <strong>Securelinx</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (815) 754-7788</span><br>
+		822 West Lincoln Highway<br>
+		Dekalb, IL<br>
+		60115<br>
+		<br>
+		
+		<li> <strong>Securelinx</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (815) 754-7788</span><br>
+		822 West Lincoln Highway<br>
+		Dekalb, IL<br>
+		60115<br>
+		<br>
+		<h3>Downers Grove</h3><br>
+		<li> <strong>Hive Incorporate/ Hive Cafe and Game Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (630) 960-3690</span><br>
+		1510 West 75th Street - Suite B<br>
+		Downers Grove, IL<br>
+		60516<br>
+		<br>
+		
+		<li> <strong>Hive Incorporate/ Hive Cafe and Game Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (630) 960-3690</span><br>
+		1510 West 75th Street - Suite B<br>
+		Downers Grove, IL<br>
+		60516<br>
+		<br>
+		<h3>Edwardsville</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041208150556/http://www.elitegamingonline.com /" target="_blank">Elite Gaming</a></strong> <br>
+		316 N. Main Street<br>
+		Edwardsville, IL<br>
+		62025<br>
+		<br>
+		<h3>Elgin</h3><br>
+		<li> <strong>Piranha's Internet Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (847) 622-0000</span><br>
+		903 S. Randall Road<br>
+		Elgin, IL<br>
+		60123<br>
+		<br>
+		
+		<li> <strong>Piranha's Internet Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (847) 622-0000</span><br>
+		903 S. Randall Road<br>
+		Elgin, IL<br>
+		60123<br>
+		<br>
+		<h3>Guernee</h3><br>
+		<li> <strong>Cyber Arena/Gurnee Mills</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 922-7452</span><br>
+		6170 W. Grand Avenue - Guernee Mills Mall, Space #187<br>
+		Guernee, IL<br>
+		60031<br>
+		<br>
+		<h3>Highland  </h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041208150556/http://olghighland.com /" target="_blank">Online Gamers</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (618)654-7757</span><br>
+		1336 Mercantile  <br>
+		Highland  , IL<br>
+		62249<br>
+		<br>
+		<h3>Lombard</h3><br>
+		<li> <strong>Cyberwiz Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (630) 424-8078</span><br>
+		1259 S. Main Street<br>
+		Lombard, IL<br>
+		60148<br>
+		<br>
+		
+		<li> <strong>Cyberwiz Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (630) 424-8078</span><br>
+		1259 S. Main Street<br>
+		Lombard, IL<br>
+		60148<br>
+		<br>
+		<h3>Oak Park</h3><br>
+		<li> <strong>Cyber Arena/Oak Park</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 708 5248589</span><br>
+		1010 Lake Street<br>
+		Oak Park, IL<br>
+		60301<br>
+		<br>
+		<h3>Schaumburg</h3><br>
+		<li> <strong>Xactek</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (847) 923-1643</span><br>
+		1483 W. Schaumburg Rd<br>
+		Schaumburg, IL<br>
+		60195<br>
+		<br>
+		
+		<li> <strong>Xactek</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (847) 923-1643</span><br>
+		1483 W. Schaumburg Rd<br>
+		Schaumburg, IL<br>
+		60195<br>
+		<br>
+		<h3>Skokie</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041208150556/http://www.krakkaboom.com/" target="_blank">KRAKKABOOM, LLC</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (847)763-1967</span><br>
+		125 Old Orchard Center Unit I<br>
+		Skokie, IL<br>
+		60077<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041208150556/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

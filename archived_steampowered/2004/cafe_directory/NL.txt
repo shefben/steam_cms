@@ -1,0 +1,87 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>NETHERLANDS</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Amsterda</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207163011/http://www.madprocessor.com/" target="_blank">The MAD Processor VOF  </a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 206121818</span><br>
+				Kinkerstraat 11-13<br>
+				Amsterda<br>
+				1053DB<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207163011/http://www.madprocessor.com/" target="_blank">The MAD Processor VOF  </a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 206121818</span><br>
+				Kinkerstraat 11-13<br>
+				Amsterda<br>
+				1053DB<br>
+				<br>
+				<h3>Amsterdam</h3><br>
+				<li> <strong>Connexion Plaza Den Haag BV</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 31297214414</span><br>
+				Bijlmerplein 858 - 1102ME<br>
+				Amsterdam<br>
+				2515BM<br>
+				<br>
+				
+				<li> <strong>Connexion Plaza Den Haag BV</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 31297214414</span><br>
+				Bijlmerplein 858 - 1102ME<br>
+				Amsterdam<br>
+				2515BM<br>
+				<br>
+				<h3>Den Haag</h3><br>
+				<li> <strong>Connexion Plaza Den Haag BV</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 31297214414</span><br>
+				Stationsweg 161<br>
+				Den Haag<br>
+				2515BM<br>
+				<br>
+				
+				<li> <strong>Connexion Plaza Den Haag BV</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 31297214414</span><br>
+				Stationsweg 161<br>
+				Den Haag<br>
+				2515BM<br>
+				<br>
+				<h3>Purmerend</h3><br>
+				<li> <strong>TGX</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +31-(0)299-476768</span><br>
+				Zuidersteeg 22<br>
+				Purmerend<br>
+				1441BD<br>
+				<br>
+				
+				<li> <strong>TGX</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +31-(0)299-476768</span><br>
+				Zuidersteeg 22<br>
+				Purmerend<br>
+				1441BD<br>
+				<br>
+				<h3>Rotterdam</h3><br>
+				<li> <strong>Connexion Plaza Rotterdam BV</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 31297214414</span><br>
+				Beijerlandselann 81<br>
+				Rotterdam<br>
+				3074EC<br>
+				<br>
+				
+				<li> <strong>Connexion Plaza Rotterdam BV</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 31297214414</span><br>
+				Beijerlandselann 81<br>
+				Rotterdam<br>
+				3074EC<br>
+				<br>
+				<h3>Tiburg</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207163011/http://www.cybergate.nl /" target="_blank">Future Amusement B.V./CyberGate </a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +31-13-5420604 </span><br>
+				Fabriekstraat 22<br>
+				Tiburg<br>
+				5038 EN<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207163011/http://www.cybergate.nl /" target="_blank">Future Amusement B.V./CyberGate </a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +31-13-5420604 </span><br>
+				Fabriekstraat 22<br>
+				Tiburg<br>
+				5038 EN<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207163011/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

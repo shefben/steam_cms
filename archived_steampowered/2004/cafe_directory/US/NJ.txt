@@ -1,0 +1,127 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - New Jersey</h3>
+		<ul>
+	<h3>Bloomfield</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175852/http://www.xitram.net/" target="_blank">Xitram Cyber Cafe LLC</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 973-472-2590</span><br>
+		594B Bloomfield Avenue<br>
+		Bloomfield, NJ<br>
+		07003<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211175852/http://www.xitram.net/" target="_blank">Xitram Cyber Cafe LLC</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 973-472-2590</span><br>
+		594B Bloomfield Avenue<br>
+		Bloomfield, NJ<br>
+		07003<br>
+		<br>
+		<h3>Cherry Hill</h3><br>
+		<li> <strong>Adrenaline Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 856.429.2673</span><br>
+		1461 Brace Road - (Super G Plaza)<br>
+		Cherry Hill, NJ<br>
+		08034<br>
+		<br>
+		
+		<li> <strong>Adrenaline Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 856.429.2673</span><br>
+		1461 Brace Road - (Super G Plaza)<br>
+		Cherry Hill, NJ<br>
+		08034<br>
+		<br>
+		<h3>Fort Lee</h3><br>
+		<li> <strong>Mpage Inc. </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 201-363-9996</span><br>
+		486 main st<br>
+		Fort Lee, NJ<br>
+		07024<br>
+		<br>
+		<h3>Harrison</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175852/http://www.maingear.com/" target="_blank">Maingear</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 888-MAINGEAR</span><br>
+		228 Harrison Ave<br>
+		Harrison, NJ<br>
+		07029<br>
+		<br>
+		<h3>Howell</h3><br>
+		<li> <strong>The Gamers Planet Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 732-367-3825</span><br>
+		4022 Route 9 South<br>
+		Howell, NJ<br>
+		07731<br>
+		<br>
+		
+		<li> <strong>The Gamers Planet Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 732-367-3825</span><br>
+		4022 Route 9 South<br>
+		Howell, NJ<br>
+		07731<br>
+		<br>
+		<h3>Kearny</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175852/http://latinnetcybercafe.com/" target="_blank">LatinNet Cyber Cafe</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 201-736-5210</span><br>
+		294 Kearny Ave.<br>
+		Kearny, NJ<br>
+		07032<br>
+		<br>
+		<h3>Lake Hopatcong</h3><br>
+		<li> <strong>Local Area Gameworks</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 973-663-3700</span><br>
+		778 Route 15 South<br>
+		Lake Hopatcong, NJ<br>
+		07849<br>
+		<br>
+		<h3>Liberty Corner</h3><br>
+		<li> <strong>Liberty Corner Computing</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 908-580-0087</span><br>
+		21 Church St - PO Box 157<br>
+		Liberty Corner, NJ<br>
+		07938<br>
+		<br>
+		<h3>North Bergen</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175852/http://www.computer-empire.com /" target="_blank">Computer Empire</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 201-861-7272</span><br>
+		75-31 Bergenline Avenue<br>
+		North Bergen, NJ<br>
+		07047<br>
+		<br>
+		<h3>Scotch Plains</h3><br>
+		<li> <strong>Samfred Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (908) 233-2396</span><br>
+		(908) 233-2396 - 73 Glenside Ave<br>
+		Scotch Plains, NJ<br>
+		07076<br>
+		<br>
+		<h3>Somers Point</h3><br>
+		<li> <strong>Clikz Computer Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 609-601-9007</span><br>
+		43 Mays Landing Road<br>
+		Somers Point, NJ<br>
+		08244<br>
+		<br>
+		
+		<li> <strong>Clikz Computer Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 609-601-9007</span><br>
+		43 Mays Landing Road<br>
+		Somers Point, NJ<br>
+		08244<br>
+		<br>
+		<h3>Summit</h3><br>
+		<li> <strong>Ultimate Cyber Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 917-291-6523</span><br>
+		497 Springfield Ave.<br>
+		Summit, NJ<br>
+		07901<br>
+		<br>
+		<h3>Wayne</h3><br>
+		<li> <strong>CyberconXion</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 709-0075</span><br>
+		25 Preakness Shopping Center<br>
+		Wayne, NJ<br>
+		07470<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211175852/http://cyberconxion.com/" target="_blank">CyberConXion</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (973) 709-0075</span><br>
+		25 Preakness Shopping Center<br>
+		Wayne, NJ<br>
+		07470<br>
+		<br>
+		<h3>West New York</h3><br>
+		<li> <strong>Unleashed Inc.</strong> <br>
+		6515 Park Avenue<br>
+		West New York, NJ<br>
+		07093<br>
+		<br>
+		
+		<li> <strong>Unleashed Inc.</strong> <br>
+		6515 Park Avenue<br>
+		West New York, NJ<br>
+		07093<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211175852/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

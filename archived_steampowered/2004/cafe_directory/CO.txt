@@ -1,0 +1,28 @@
+
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>COLOMBIA</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Bogoto, DC</h3><br>
+				<li> <strong>Technopia NET Ltda.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (571) 616-1000</span><br>
+				Calle 100 NO. 14-63 Piso 3<br>
+				Bogoto, DC<br>
+				00000<br>
+				<br>
+				
+				<li> <strong>Technopia NET Ltda.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (571) 616-1000</span><br>
+				Calle 100 NO. 14-63 Piso 3<br>
+				Bogoto, DC<br>
+				00000<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207121013/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

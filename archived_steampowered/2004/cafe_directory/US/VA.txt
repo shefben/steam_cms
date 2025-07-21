@@ -1,0 +1,85 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Virginia</h3>
+		<ul>
+	<h3>Centreville</h3><br>
+		<li> <strong>LANferno</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (866) 704-5722</span><br>
+		13814-B Braddock Road<br>
+		Centreville, VA<br>
+		20121<br>
+		<br>
+		
+		<li> <strong>LANferno</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (866) 704-5722</span><br>
+		13814-B Braddock Road<br>
+		Centreville, VA<br>
+		20121<br>
+		<br>
+		
+		<li> <strong>Recon Networks, Inc/LAN ferno</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (866) 704-5722</span><br>
+		13814-B Braddock Road<br>
+		Centreville, VA<br>
+		20121<br>
+		<br>
+		
+		<li> <strong>Recon Networks, Inc/LAN ferno</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (866) 704-5722</span><br>
+		13814-B Braddock Road<br>
+		Centreville, VA<br>
+		20121<br>
+		<br>
+		<h3>Chantilly</h3><br>
+		<li> <strong>Game Parlor - Chantilly</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (703) 803-3114</span><br>
+		13936 Metrotech Drive<br>
+		Chantilly, VA<br>
+		20151<br>
+		<br>
+		
+		<li> <strong>Game Parlor - Chantilly</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (703) 803-3114</span><br>
+		13936 Metrotech Drive<br>
+		Chantilly, VA<br>
+		20151<br>
+		<br>
+		<h3>Springfield</h3><br>
+		<li> <strong>Cyberzone Centers of America</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 703-971-7878</span><br>
+		6553 Springfield Mall<br>
+		Springfield, VA<br>
+		22153<br>
+		<br>
+		<h3>Sterling</h3><br>
+		<li> <strong>C3CyberClub</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 571-323-1991</span><br>
+		46950 Community Plaza - Suite 201A<br>
+		Sterling, VA<br>
+		20164<br>
+		<br>
+		
+		<li> <strong>C3CyberClub</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 571-323-1991</span><br>
+		46950 Community Plaza - Suite 201A<br>
+		Sterling, VA<br>
+		20164<br>
+		<br>
+		<h3>Virginia Beach</h3><br>
+		<li> <strong>Web City Cybercafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 757-544-0782  </span><br>
+		116 South Independence Blvd. - Suite 103<br>
+		Virginia Beach, VA<br>
+		23462<br>
+		<br>
+		
+		<li> <strong>Web City Cybercafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 757-544-0782  </span><br>
+		116 South Independence Blvd. - Suite 103<br>
+		Virginia Beach, VA<br>
+		23462<br>
+		<br>
+		<h3>Woodbridge</h3><br>
+		<li> <strong>Game Parlor - Woodbridge</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (703) 551-4200</span><br>
+		14400 Smoketown Road<br>
+		Woodbridge, VA<br>
+		22192<br>
+		<br>
+		
+		<li> <strong>Game Parlor - Woodbridge</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (703) 551-4200</span><br>
+		14400 Smoketown Road<br>
+		Woodbridge, VA<br>
+		22192<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211181206/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

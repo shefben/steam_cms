@@ -1,0 +1,25 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Alaska</h3>
+		<ul>
+	<h3>Anchorage</h3><br>
+		<li> <strong>Gamerz</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (907) 338-game</span><br>
+		6311 Debar Rd<br>
+		Anchorage, AK<br>
+		99504<br>
+		<br>
+		<h3>Faibanks </h3><br>
+		<li> <strong>Atomic Video Games</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 907-451-7336</span><br>
+		330 Eureka Ave   - Suite 7B <br>
+		Faibanks , AK<br>
+		99701<br>
+		<br>
+		<h3>Juneau </h3><br>
+		<li> <strong>Electronic Adventures</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 907-790-3658</span><br>
+		9105 Mendenhall Mall Rd 175  <br>
+		Juneau , AK<br>
+		99801<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211181050/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

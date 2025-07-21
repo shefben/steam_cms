@@ -1,0 +1,43 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Minnesota</h3>
+		<ul>
+	<h3>Minnetonka</h3><br>
+		<li> <strong>Game Tech</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 952 249 6229</span><br>
+		3311 County Rd 101<br>
+		Minnetonka, MN<br>
+		55391<br>
+		<br>
+		
+		<li> <strong>Game Tech</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 952 249 6229</span><br>
+		3311 County Rd 101<br>
+		Minnetonka, MN<br>
+		55391<br>
+		<br>
+		<h3>New Hope</h3><br>
+		<li> <strong>LAN Games</strong> <br>
+		4311 Winnetka Avenue North<br>
+		New Hope, MN<br>
+		55428<br>
+		<br>
+		
+		<li> <strong>LAN Games</strong> <br>
+		4311 Winnetka Avenue North<br>
+		New Hope, MN<br>
+		55428<br>
+		<br>
+		<h3>Oakdale</h3><br>
+		<li> <strong>Eagle CompuTech</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (651) 714-9560</span><br>
+		1061 Geneva Avenue<br>
+		Oakdale, MN<br>
+		55128<br>
+		<br>
+		
+		<li> <strong>Eagle CompuTech</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (651) 714-9560</span><br>
+		1061 Geneva Avenue<br>
+		Oakdale, MN<br>
+		55128<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211181035/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

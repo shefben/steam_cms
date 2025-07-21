@@ -1,0 +1,39 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>ARGENTINA</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Argentina</h3><br>
+				<li> <strong>Cyberstadio</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +54-221-482-0022</span><br>
+				7 N 549 - La Plata<br>
+				Argentina<br>
+				1900<br>
+				<br>
+				
+				<li> <strong>Cyberstadio</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +54-221-482-0022</span><br>
+				7 N 549 - La Plata<br>
+				Argentina<br>
+				1900<br>
+				<br>
+				<h3>Buenos Aires</h3><br>
+				<li> <strong>Juegos Alkon</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 5411-5182-9644</span><br>
+				Marcelo T. Alvear 1661<br>
+				Buenos Aires<br>
+				1060<br>
+				<br>
+				
+				<li> <strong>Juegos Alkon</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 5411-5182-9644</span><br>
+				Marcelo T. Alvear 1661<br>
+				Buenos Aires<br>
+				1060<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207111220/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

@@ -1,0 +1,109 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Arizona</h3>
+		<ul>
+	<h3>Anthem</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180741/http://www.xtremecomputercenter.com/" target="_blank">Xtreme Computer Center </a></strong> <br>
+		42302 N Vision Way #111<br>
+		Anthem, AZ<br>
+		85086<br>
+		<br>
+		<h3>Chandler</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180741/http://www.gametastic.us/" target="_blank">Gametastic</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 480-200-3456</span><br>
+		610 N Alma School Rd   - Ste 66<br>
+		Chandler, AZ<br>
+		85224<br>
+		<br>
+		
+		<li> <strong>The Front/ The Front #11</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (480) 703-9042</span><br>
+		3875 W Ray Rd #6<br>
+		Chandler, AZ<br>
+		85226<br>
+		<br>
+		
+		<li> <strong>The Front/ The Front #11</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (480) 703-9042</span><br>
+		3875 W Ray Rd #6<br>
+		Chandler, AZ<br>
+		85226<br>
+		<br>
+		
+		<li> <strong>Xtreme Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (602) 751-5835</span><br>
+		940 S. Lafayette Drive<br>
+		Chandler, AZ<br>
+		85225<br>
+		<br>
+		
+		<li> <strong>Xtreme Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (602) 751-5835</span><br>
+		940 S. Lafayette Drive<br>
+		Chandler, AZ<br>
+		85225<br>
+		<br>
+		<h3>Gilbert</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180741/http://www.wzgaming.com/" target="_blank">Warzone Gaming</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (480) 632-9942</span><br>
+		538 S. Gilbert Road - Suite 108<br>
+		Gilbert, AZ<br>
+		85296<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180741/http://www.wzgaming.com/" target="_blank">Warzone Gaming</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (480) 632-9942</span><br>
+		538 S. Gilbert Road - Suite 108<br>
+		Gilbert, AZ<br>
+		85296<br>
+		<br>
+		<h3>Glendale</h3><br>
+		<li> <strong>Net Gate</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 623 680 4479</span><br>
+		4920 W Thunderbird Rd # 119<br>
+		Glendale, AZ<br>
+		85306<br>
+		<br>
+		<h3>Peoria</h3><br>
+		<li> <strong>LAN Speed Games, LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 623-979-0560</span><br>
+		6750 W. Peoria Ave. - Suite #136<br>
+		Peoria, AZ<br>
+		85345<br>
+		<br>
+		<h3>Phoenix</h3><br>
+		<li> <strong>Beyond Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (623) 869-0676</span><br>
+		18635 N 35th - Ste 105<br>
+		Phoenix, AZ<br>
+		85027<br>
+		<br>
+		
+		<li> <strong>Beyond Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (623) 869-0676</span><br>
+		18635 N 35th - Ste 105<br>
+		Phoenix, AZ<br>
+		85027<br>
+		<br>
+		
+		<li> <strong>CyberHawk WWWeb</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (602) 867-4880</span><br>
+		4030 E. Bell Road, #105<br>
+		Phoenix, AZ<br>
+		85020<br>
+		<br>
+		
+		<li> <strong>CyberHawk WWWeb</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (602) 867-4880</span><br>
+		4030 E. Bell Road, #105<br>
+		Phoenix, AZ<br>
+		85020<br>
+		<br>
+		
+		<li> <strong>NetLans</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 602-494-5450</span><br>
+		3131 E Thunderbird RD #53<br>
+		Phoenix, AZ<br>
+		85032<br>
+		<br>
+		<h3>Tempe</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180741/http://www.wzgaming.com/" target="_blank">Warzone Gaming</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (480) 927-9663</span><br>
+		1805 E. Elliot Road - Suite 102<br>
+		Tempe, AZ<br>
+		85284<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180741/http://www.wzgaming.com/" target="_blank">Warzone Gaming</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (480) 927-9663</span><br>
+		1805 E. Elliot Road - Suite 102<br>
+		Tempe, AZ<br>
+		85284<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180741/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

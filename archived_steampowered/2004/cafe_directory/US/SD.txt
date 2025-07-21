@@ -1,0 +1,13 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - South Dakota</h3>
+		<ul>
+	<h3>Aberdeen</h3><br>
+		<li> <strong>I-LAN Digital Entertainment LLC  </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 605-725-4526</span><br>
+		205 S Main St<br>
+		Aberdeen, SD<br>
+		57401<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211181154/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

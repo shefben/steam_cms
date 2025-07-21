@@ -1,0 +1,51 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>PHILIPPINES</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Cubao, Quezon</h3><br>
+				<li> <strong>Web Devices Corp</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 4216760 / 4370457</span><br>
+				Unit 13 Block D, 3rd Floor - New Farmer's Plaza, Araneta Center<br>
+				Cubao, Quezon<br>
+				
+				<br>
+				
+				<li> <strong>Web Devices Corp</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 4216760 / 4370457</span><br>
+				Unit 13 Block D, 3rd Floor - New Farmer's Plaza, Araneta Center<br>
+				Cubao, Quezon<br>
+				
+				<br>
+				<h3>Muntinlupa City</h3><br>
+				<li> <strong>Arena X Internet Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 639274710610</span><br>
+				#1 Don Jesus Boulevard<br>
+				Muntinlupa City<br>
+				1200<br>
+				<br>
+				
+				<li> <strong>Arena X Internet Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 639274710610</span><br>
+				#1 Don Jesus Boulevard<br>
+				Muntinlupa City<br>
+				1200<br>
+				<br>
+				<h3>Quezon City</h3><br>
+				<li> <strong>RMI  </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +63-2-426-7445 </span><br>
+				#816 EDSA<br>
+				Quezon City<br>
+				1550<br>
+				<br>
+				
+				<li> <strong>RMI  </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +63-2-426-7445 </span><br>
+				#816 EDSA<br>
+				Quezon City<br>
+				1550<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207165818/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

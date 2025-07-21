@@ -1,0 +1,15 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>MALAYSIA</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<li> <a href="/web/20041207161725/http://www.steampowered.com/?area=cafe_directory&amp;country=MY&amp;state=?">Uncategorized</a><li> <a href="/web/20041207161725/http://www.steampowered.com/?area=cafe_directory&amp;country=MY&amp;state=Sarawak">Sarawak</a><li> <a href="/web/20041207161725/http://www.steampowered.com/?area=cafe_directory&amp;country=MY&amp;state=Temerloh">Temerloh</a>
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207161725/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

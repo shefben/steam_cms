@@ -1,0 +1,20 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+<h2>FIND THE PLACE<em> TO PLAY THE GAMES</em></h2><img src="/web/20040810153958im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+		<br>
+		<h3>CANADA - Ontario</h3>
+		<ul>
+	<h3>Markham</h3><br>
+		<li> <strong>Netplay</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 905-762-1595</span><br>
+		505 Highway 7 East Unit# 61<br>
+		Markham<br>, ON
+		L3T 7T1<br>
+		<br>
+		<h3>Toronto</h3><br>
+		<li> <strong>Studio 99</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> (416)226-6882</span><br>
+		5926A Yonge Street<br>
+		Toronto<br>, ON
+		M2M 3V9<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20040810153958/http://www.steampowered.com/?area=cafe_directory&amp;country=CA">return to states / provinces</a></div>

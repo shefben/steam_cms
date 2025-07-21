@@ -1,0 +1,63 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>SLOVAKIA</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3></h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207055130/http://www.igames.sk/" target="_blank">iGAMES cyber cafe</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +421 2 63451061</span><br>
+				Aupark, Einsteinova 18 - Bratislava<br>
+				
+				85101<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207055130/http://www.igames.sk/" target="_blank">iGAMES cyber cafe</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +421 2 63451061</span><br>
+				Aupark, Einsteinova 18 - Bratislava<br>
+				
+				85101<br>
+				<br>
+				<h3>Martin</h3><br>
+				<li> <strong>Jan Bilek - Deimos/Gameland</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 4.21904E+11</span><br>
+				Jesenskeho 5 <br>
+				Martin<br>
+				3601<br>
+				<br>
+				
+				<li> <strong>Jan Bilek - Deimos/Gameland</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 4.21904E+11</span><br>
+				Jesenskeho 5 <br>
+				Martin<br>
+				3601<br>
+				<br>
+				<h3>POPRAD</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207055130/http://www.internetpoprad.szm.sk/" target="_blank">MARIAN MICHALKO</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 4.21904E+11</span><br>
+				L.SVOBODU 2568/38  <br>
+				POPRAD<br>
+				5801<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207055130/http://www.internetpoprad.szm.sk/" target="_blank">MARIAN MICHALKO</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 4.21904E+11</span><br>
+				L.SVOBODU 2568/38  <br>
+				POPRAD<br>
+				5801<br>
+				<br>
+				<h3>Topolcany</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207055130/http://www.knihajakub.sk/" target="_blank">KNIHA JAKUB/BOOK</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +421 903 428 208</span><br>
+				Obchodna 3876/12  <br>
+				Topolcany<br>
+				955 01 <br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207055130/http://www.knihajakub.sk/" target="_blank">KNIHA JAKUB/BOOK</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +421 903 428 208</span><br>
+				Obchodna 3876/12  <br>
+				Topolcany<br>
+				955 01 <br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207055130/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

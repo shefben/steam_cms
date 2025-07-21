@@ -1,0 +1,27 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>MONGOLIA</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Ulaanbaatar</h3><br>
+				<li> <strong>Hurh/Cybergame</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 97699792130</span><br>
+				Baga Toiruu<br>
+				Ulaanbaatar<br>
+				976<br>
+				<br>
+				
+				<li> <strong>Hurh/Cybergame</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 97699792130</span><br>
+				Baga Toiruu<br>
+				Ulaanbaatar<br>
+				976<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207161134/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

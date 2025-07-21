@@ -1,0 +1,123 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>NEW ZEALAND</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Auckland</h3><br>
+				<li> <strong>Lan-IT Waiheke Ltd</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 64 9 372 9921</span><br>
+				4-118 Oceanview Road - Waiheke Island<br>
+				Auckland<br>
+				1240<br>
+				<br>
+				
+				<li> <strong>Lan-IT Waiheke Ltd</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 64 9 372 9921</span><br>
+				4-118 Oceanview Road - Waiheke Island<br>
+				Auckland<br>
+				1240<br>
+				<br>
+				
+				<li> <strong>PC Station Internet Cafe/Net Speed</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 006434413003</span><br>
+				15/12a Inverness Road - Browns Bay<br>
+				Auckland<br>
+				
+				<br>
+				
+				<li> <strong>PC Station Internet Cafe/Net Speed</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 006434413003</span><br>
+				15/12a Inverness Road - Browns Bay<br>
+				Auckland<br>
+				
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207164746/http://www.warp9ltd.net.nz/" target="_blank">Warp 9 Limited</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 825 0915</span><br>
+				Shop E307A, LynnMall Shopping Centre - New Lynn<br>
+				Auckland<br>
+				1007<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207164746/http://www.warp9ltd.net.nz/" target="_blank">Warp 9 Limited</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 825 0915</span><br>
+				Shop E307A, LynnMall Shopping Centre - New Lynn<br>
+				Auckland<br>
+				1007<br>
+				<br>
+				<h3>Christchurch</h3><br>
+				<li> <strong>Vadal.net</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (643) 377-2381</span><br>
+				57 Cathedral Sq.<br>
+				Christchurch<br>
+				8001<br>
+				<br>
+				
+				<li> <strong>Vadal.net</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (643) 377-2381</span><br>
+				57 Cathedral Sq.<br>
+				Christchurch<br>
+				8001<br>
+				<br>
+				<h3>Dunedin</h3><br>
+				<li> <strong>Dunedin Cue Club</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (03) 4773 064</span><br>
+				65 St. Andrew Street<br>
+				Dunedin<br>
+				9031<br>
+				<br>
+				
+				<li> <strong>Dunedin Cue Club</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (03) 4773 064</span><br>
+				65 St. Andrew Street<br>
+				Dunedin<br>
+				9031<br>
+				<br>
+				
+				<li> <strong>Internet Depot </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 0064 3 477 4056 </span><br>
+				18 George St<br>
+				Dunedin<br>
+				9001 <br>
+				<br>
+				
+				<li> <strong>Internet Depot </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 0064 3 477 4056 </span><br>
+				18 George St<br>
+				Dunedin<br>
+				9001 <br>
+				<br>
+				<h3>Queenstown</h3><br>
+				<li> <strong>PC Station Internet Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 006434413003</span><br>
+				Level 1, Stratton House - 16-24 Beach Street<br>
+				Queenstown<br>
+				
+				<br>
+				
+				<li> <strong>PC Station Internet Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 006434413003</span><br>
+				Level 1, Stratton House - 16-24 Beach Street<br>
+				Queenstown<br>
+				
+				<br>
+				<h3>Wanaka</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207164746/http://www.comzone.net.nz/" target="_blank">Bits Bytes</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 64-3-443-7078</span><br>
+				48 Helwick Street<br>
+				Wanaka<br>
+				9192<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207164746/http://www.comzone.net.nz/" target="_blank">Bits Bytes</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 64-3-443-7078</span><br>
+				48 Helwick Street<br>
+				Wanaka<br>
+				9192<br>
+				<br>
+				<h3>Wellington</h3><br>
+				<li> <strong>iPlay NZ Ltd</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (644) 494-0084</span><br>
+				49 Manners St<br>
+				Wellington<br>
+				6001<br>
+				<br>
+				
+				<li> <strong>iPlay NZ Ltd</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (644) 494-0084</span><br>
+				49 Manners St<br>
+				Wellington<br>
+				6001<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207164746/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

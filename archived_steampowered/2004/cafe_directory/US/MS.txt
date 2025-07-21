@@ -1,0 +1,25 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Mississippi</h3>
+		<ul>
+	<h3>Biloxi</h3><br>
+		<li> <strong>CompDot Inc</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 39531-228-432-8390</span><br>
+		1670 Pass Road - Suite A&B;<br>
+		Biloxi, MS<br>
+		39531<br>
+		<br>
+		<h3>Waveland</h3><br>
+		<li> <strong>CyberTek Computers</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (228) 467-2340</span><br>
+		210 Hwy. 90<br>
+		Waveland, MS<br>
+		39576<br>
+		<br>
+		
+		<li> <strong>CyberTek Computers</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (228) 467-2340</span><br>
+		210 Hwy. 90<br>
+		Waveland, MS<br>
+		39576<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180914/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

@@ -1,0 +1,19 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>CANADA - Yukon</h3>
+		<ul>
+	<h3>Whitehorse</h3><br>
+		<li> <strong>Gecko'z Game Centre</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 867-668-5177</span><br>
+		95 Lewes Blvd.<br>
+		Whitehorse, YT<br>
+		Y1A 3J4<br>
+		<br>
+		
+		<li> <strong>Gecko'z Game Centre</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 867-668-5177</span><br>
+		95 Lewes Blvd.<br>
+		Whitehorse, YT<br>
+		Y1A 3J4<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211201314/http://www.steampowered.com/?area=cafe_directory&amp;country=CA">return to states / provinces</a></div>

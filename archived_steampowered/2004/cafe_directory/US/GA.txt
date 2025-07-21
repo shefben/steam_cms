@@ -1,0 +1,31 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Georgia</h3>
+		<ul>
+	<h3>Fort Benning</h3><br>
+		<li> <strong>TLC Industries Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 847-534-5111</span><br>
+		Bldg. 2288 - Aleko St.<br>
+		Fort Benning, GA<br>
+		31905<br>
+		<br>
+		<h3>Glenwood</h3><br>
+		<li> <strong>Glenwood Telephone Company</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (912) 523-5111</span><br>
+		PO Box 235<br>
+		Glenwood, GA<br>
+		30428<br>
+		<br>
+		
+		<li> <strong>Glenwood Telephone Company</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (912) 523-5111</span><br>
+		PO Box 235<br>
+		Glenwood, GA<br>
+		30428<br>
+		<br>
+		<h3>Lawrenceville</h3><br>
+		<li> <strong>netWorks Online Entertainment</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (678) 847-5744</span><br>
+		5900 Sugarloaf Pkwy - Suite 443<br>
+		Lawrenceville, GA<br>
+		30043<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180554/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

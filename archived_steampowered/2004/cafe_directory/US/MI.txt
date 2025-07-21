@@ -1,0 +1,55 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Michigan</h3>
+		<ul>
+	<h3>Ann Arbor</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041208002459/http://www.digitalops.com/ " target="_blank">Digital Ops</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 734-994-1595</span><br>
+		525 E Liberty<br>
+		Ann Arbor, MI<br>
+		48104 <br>
+		<br>
+		<h3>Big Rapids</h3><br>
+		<li> <strong>Area 51 Internet Gaming Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (231) 796-2548</span><br>
+		605 N State St.<br>
+		Big Rapids, MI<br>
+		49307<br>
+		<br>
+		
+		<li> <strong>Area 51 Internet Gaming Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (231) 796-2548</span><br>
+		605 N State St.<br>
+		Big Rapids, MI<br>
+		49307<br>
+		<br>
+		<h3>Canton</h3><br>
+		<li> <strong>The Gaming Gate</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 734-981-6600</span><br>
+		1765 Canton Center Rd.<br>
+		Canton, MI<br>
+		48187<br>
+		<br>
+		<h3>Clinton Township</h3><br>
+		<li> <strong>ConneXion Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (586) 954-2773</span><br>
+		44319 Macomb Industrial Drive<br>
+		Clinton Township, MI<br>
+		48036<br>
+		<br>
+		
+		<li> <strong>ConneXion Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (586) 954-2773</span><br>
+		44319 Macomb Industrial Drive<br>
+		Clinton Township, MI<br>
+		48036<br>
+		<br>
+		<h3>Fenton</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041208002459/http://www.strikezonegaming.com  /" target="_blank">IAM4GAMES LLC</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 810-714-1806</span><br>
+		1122 N. Leroy St - Ste G<br>
+		Fenton, MI<br>
+		48430<br>
+		<br>
+		<h3>Utica</h3><br>
+		<li> <strong>Mouse Miles</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 586-323-2466</span><br>
+		45145 Cass Ave.<br>
+		Utica, MI<br>
+		48317<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041208002459/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

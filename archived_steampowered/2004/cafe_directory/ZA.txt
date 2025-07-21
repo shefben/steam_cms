@@ -1,0 +1,21 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>SOUTH AFRICA</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Pietermaritzburg</h3><br>
+				<li> <strong>The Hive Media Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 27333428988</span><br>
+				24 Phipson Road - Scottsville<br>
+				Pietermaritzburg<br>
+				3201<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207064037/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

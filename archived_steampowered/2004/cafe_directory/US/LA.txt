@@ -1,0 +1,31 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Louisiana</h3>
+		<ul>
+	<h3>Mandeville</h3><br>
+		<li> <strong>Gamer's Conclave</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 985-727-9479</span><br>
+		539 N. Causeway Blvd.<br>
+		Mandeville, LA<br>
+		70471<br>
+		<br>
+		
+		<li> <strong>Gamer's Conclave</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 985-727-9479</span><br>
+		539 N. Causeway Blvd.<br>
+		Mandeville, LA<br>
+		70471<br>
+		<br>
+		<h3>Metairie</h3><br>
+		<li> <strong>Dibbz PC Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 985-373-4007</span><br>
+		6850 Veterans Memorial Blvd<br>
+		Metairie, LA<br>
+		70003<br>
+		<br>
+		
+		<li> <strong>ICE Computer Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 504-324-6130</span><br>
+		5928 W. Metairie Ave. - Suite #10<br>
+		Metairie, LA<br>
+		70003<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211181151/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

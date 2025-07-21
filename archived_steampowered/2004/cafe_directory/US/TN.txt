@@ -1,0 +1,19 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Tennessee</h3>
+		<ul>
+	<h3>Cordova</h3><br>
+		<li> <strong>Lan-Matrix</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (901) 628-5973</span><br>
+		1890 Berrryhill  Rd #103<br>
+		Cordova, TN<br>
+		38016<br>
+		<br>
+		
+		<li> <strong>Lan-Matrix</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (901) 628-5973</span><br>
+		1890 Berrryhill  Rd #103<br>
+		Cordova, TN<br>
+		38016<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211175608/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

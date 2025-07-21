@@ -1,0 +1,28 @@
+
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>ESTONIA</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Tallinn</h3><br>
+				<li> <strong>Fermento Ltd.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (372) 516-7208</span><br>
+				Auna 4A-7<br>
+				Tallinn<br>
+				10317<br>
+				<br>
+				
+				<li> <strong>Fermento Ltd.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (372) 516-7208</span><br>
+				Auna 4A-7<br>
+				Tallinn<br>
+				10317<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207123338/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

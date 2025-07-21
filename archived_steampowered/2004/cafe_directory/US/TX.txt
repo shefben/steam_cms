@@ -1,0 +1,223 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Texas</h3>
+		<ul>
+	<h3>Allen</h3><br>
+		<li> <strong>LAN Xtreme, LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 214-403-9593</span><br>
+		1201 E. Main St. #270<br>
+		Allen, TX<br>
+		75013<br>
+		<br>
+		<h3>Alvin</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.ultimateonlinegaming.com/" target="_blank">Ultimate Online Gaming</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (409) 316-2000</span><br>
+		1836 Algoa Friendswood Road<br>
+		Alvin, TX<br>
+		77511<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.ultimateonlinegaming.com/" target="_blank">Ultimate Online Gaming</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (409) 316-2000</span><br>
+		1836 Algoa Friendswood Road<br>
+		Alvin, TX<br>
+		77511<br>
+		<br>
+		<h3>Austin</h3><br>
+		<li> <strong>LAN's Edge</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 512-689-1056</span><br>
+		2525 W. Anderson Ln - Ste 440<br>
+		Austin, TX<br>
+		78757<br>
+		<br>
+		
+		<li> <strong>UT Austin DFHS/Jester LanCave</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 512-232-2689</span><br>
+		201 E 21st ST<br>
+		Austin, TX<br>
+		78705<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.xtremenetworx.com/location.php" target="_blank">Xtreme NetworX</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (512) 320-9919</span><br>
+		301 West 13th Street<br>
+		Austin, TX<br>
+		78701<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.xtremenetworx.com/location.php" target="_blank">Xtreme NetworX</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (512) 320-9919</span><br>
+		301 West 13th Street<br>
+		Austin, TX<br>
+		78701<br>
+		<br>
+		<h3>Beaumont</h3><br>
+		<li> <strong>Extreme PCGamer.com LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (409) 861-2323</span><br>
+		6436 Phelan Blvd.<br>
+		Beaumont, TX<br>
+		77706<br>
+		<br>
+		
+		<li> <strong>Extreme PCGamer.com LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (409) 861-2323</span><br>
+		6436 Phelan Blvd.<br>
+		Beaumont, TX<br>
+		77706<br>
+		<br>
+		<h3>Corpus Christi</h3><br>
+		<li> <strong>CyberXtreme </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 361-633-9216</span><br>
+		POB 270126<br>
+		Corpus Christi, TX<br>
+		78427<br>
+		<br>
+		<h3>Dallas</h3><br>
+		<li> <strong>Tru Gamerz</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 469-964-7880</span><br>
+		19009 Preston Rd.<br>
+		Dallas, TX<br>
+		75252<br>
+		<br>
+		<h3>Dallas </h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.zjsportal.com/" target="_blank">ZJ's Portal</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 214-237-5922</span><br>
+		15615 Coit Rd. #120  <br>
+		Dallas , TX<br>
+		75248<br>
+		<br>
+		<h3>Denton</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://net-lightning.org /" target="_blank">Net Lightning</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 817-291-0425</span><br>
+		Golden Triangle Mall, Suite P-18   - 2201 South I-35E<br>
+		Denton, TX<br>
+		76205-8100<br>
+		<br>
+		<h3>El Paso</h3><br>
+		<li> <strong>Cafe dot NET</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 915-227-5929</span><br>
+		3233 N. Mesa - Ste 101<br>
+		El Paso, TX<br>
+		79902<br>
+		<br>
+		<h3>Flower Mound</h3><br>
+		<li> <strong>Xtreme Players Zone, LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 972-539-1559</span><br>
+		2021 Justin Rd - #197<br>
+		Flower Mound, TX<br>
+		75028<br>
+		<br>
+		
+		<li> <strong>Xtreme Players Zone, LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 972-539-1559</span><br>
+		2021 Justin Rd - #197<br>
+		Flower Mound, TX<br>
+		75028<br>
+		<br>
+		<h3>Friendswood</h3><br>
+		<li> <strong>D2 Game Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (281) 414-9242</span><br>
+		19074 Gulf Freeway<br>
+		Friendswood, TX<br>
+		77546<br>
+		<br>
+		
+		<li> <strong>D2 Game Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (281) 414-9242</span><br>
+		19074 Gulf Freeway<br>
+		Friendswood, TX<br>
+		77546<br>
+		<br>
+		<h3>Friendswood </h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.neogamersonline.com /" target="_blank">Neo Gamers Inc</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 281-482-3100</span><br>
+		3348 B FM 528  <br>
+		Friendswood , TX<br>
+		77546<br>
+		<br>
+		<h3>Grapevine</h3><br>
+		<li> <strong>Virtual Planet</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 972-849-2310</span><br>
+		330 West Northwest Highway - #400<br>
+		Grapevine, TX<br>
+		76051<br>
+		<br>
+		<h3>Houston</h3><br>
+		<li> <strong>Combatex.net</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 281-558-8553</span><br>
+		12288 Westheimer #250<br>
+		Houston, TX<br>
+		77077<br>
+		<br>
+		<h3>Houston (Oak Ridge)</h3><br>
+		<li> <strong>Combat Zone,  Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (281) 362-1881</span><br>
+		Woodridge PLZ #27514<br>
+		Houston (Oak Ridge), TX<br>
+		77385<br>
+		<br>
+		
+		<li> <strong>Combat Zone,  Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (281) 362-1881</span><br>
+		Woodridge PLZ #27514<br>
+		Houston (Oak Ridge), TX<br>
+		77385<br>
+		<br>
+		<h3>Katy</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.elementgaming.biz/" target="_blank">Element Gaming</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 281-646-1009</span><br>
+		1131 S Mason Rd.<br>
+		Katy, TX<br>
+		77450<br>
+		<br>
+		<h3>Kingwood</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.gameforcecenters.com/" target="_blank">GameForce</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (281) 361-3838</span><br>
+		4429 Town Center Place<br>
+		Kingwood, TX<br>
+		77339<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.gameforcecenters.com/" target="_blank">GameForce</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (281) 361-3838</span><br>
+		4429 Town Center Place<br>
+		Kingwood, TX<br>
+		77339<br>
+		<br>
+		<h3>Kingwood </h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.lan-wars.com /" target="_blank">Lan-Wars</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 281-795-4119</span><br>
+		1413-A NorthPark Dr.<br>
+		Kingwood , TX<br>
+		77339<br>
+		<br>
+		<h3>Laredo</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180805/http://www.ecoliseum.net/" target="_blank">E-coliseum LLC</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (956) 728-7777</span><br>
+		611 Shiloh - Suite 12<br>
+		Laredo, TX<br>
+		78045<br>
+		<br>
+		<h3>Magnolia</h3><br>
+		<li> <strong>NETXPRESSO</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (281) 259-5300</span><br>
+		37219 F.M. 1774<br>
+		Magnolia, TX<br>
+		77355<br>
+		<br>
+		<h3>Mckinney</h3><br>
+		<li> <strong>Knight Games</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (972) 548-1100</span><br>
+		400 N. Central Expressway - Suite 105<br>
+		Mckinney, TX<br>
+		75098<br>
+		<br>
+		
+		<li> <strong>Knight Games</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (972) 548-1100</span><br>
+		400 N. Central Expressway - Suite 105<br>
+		Mckinney, TX<br>
+		75098<br>
+		<br>
+		<h3>San Antonio</h3><br>
+		<li> <strong>Gladiator Games</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 210 545 5366</span><br>
+		16662 San Pedro Ave<br>
+		San Antonio, TX<br>
+		78232<br>
+		<br>
+		
+		<li> <strong>Xtreme Gaming Cybercafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 210-690-4263</span><br>
+		5440 Babcock #148<br>
+		San Antonio, TX<br>
+		78240<br>
+		<br>
+		<h3>Sugar Land</h3><br>
+		<li> <strong>Gladiators Gaming Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 281-313-5355</span><br>
+		4971 Sweetwater Blvd.<br>
+		Sugar Land, TX<br>
+		77479<br>
+		<br>
+		<h3>Tomball</h3><br>
+		<li> <strong>De Bunker</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (281) 516-1164</span><br>
+		28593 FM 2920<br>
+		Tomball, TX<br>
+		77375<br>
+		<br>
+		<h3>Tyler</h3><br>
+		<li> <strong>Arena 51, Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (903) 714-4895</span><br>
+		376 Jefferson Rd.<br>
+		Tyler, TX<br>
+		75703<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180805/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

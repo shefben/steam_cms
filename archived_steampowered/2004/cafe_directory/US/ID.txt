@@ -1,0 +1,19 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Idaho</h3>
+		<ul>
+	<h3>Boise</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180828/http://www.rampagegamingcom/" target="_blank">Rampage Gaming Group LLC/Boise</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (208) 855-2248</span><br>
+		2139 Broadway<br>
+		Boise, ID<br>
+		83706<br>
+		<br>
+		<h3>Meridian</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180828/http://www.rampagegamingcom/" target="_blank">Rampage Gaming Group LLC/Meridian</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (208) 855-2248</span><br>
+		39 E. Fairview<br>
+		Meridian, ID<br>
+		83642<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180828/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

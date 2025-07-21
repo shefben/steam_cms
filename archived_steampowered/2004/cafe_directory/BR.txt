@@ -1,0 +1,88 @@
+
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>BRAZIL</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Campinas</h3><br>
+				<li> <strong>Milmacacos Com. Loc Equip. Inf/Mousebox</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 551932323922</span><br>
+				R. General Osorio 1627<br>
+				Campinas<br>
+				13010-112<br>
+				<br>
+				
+				<li> <strong>Milmacacos Com. Loc Equip. Inf/Mousebox</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 551932323922</span><br>
+				R. General Osorio 1627<br>
+				Campinas<br>
+				13010-112<br>
+				<br>
+				<h3>Porto Alegre</h3><br>
+				<li> <strong>Sapo Games Entretenimentos</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 55 51-32415822</span><br>
+				176/02 Coronel Massot<br>
+				Porto Alegre<br>
+				91910530<br>
+				<br>
+				
+				<li> <strong>Sapo Games Entretenimentos</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 55 51-32415822</span><br>
+				176/02 Coronel Massot<br>
+				Porto Alegre<br>
+				91910530<br>
+				<br>
+				<h3>Santo Andre</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041205055447/http://www.shampzz.com.br/" target="_blank">Shampzz Ltda</a></strong> <br>
+				Av. Dom Pedro II, 3161<br>
+				Santo Andre<br>
+				09080-111<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205055447/http://www.shampzz.com.br/" target="_blank">Shampzz Ltda</a></strong> <br>
+				Av. Dom Pedro II, 3161<br>
+				Santo Andre<br>
+				09080-111<br>
+				<br>
+				<h3>Sao Jose dos Campos</h3><br>
+				<li> <strong>Thunder LAN</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 551239397850</span><br>
+				Rua Sumatra, 293<br>
+				Sao Jose dos Campos<br>
+				12235-410<br>
+				<br>
+				
+				<li> <strong>Thunder LAN</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 551239397850</span><br>
+				Rua Sumatra, 293<br>
+				Sao Jose dos Campos<br>
+				12235-410<br>
+				<br>
+				<h3>Sao Jose dos Campos SP</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041205055447/http://www.prin.com.br/" target="_blank">Lan Shots</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 55-12-3922-9815</span><br>
+				Shoping Colinas Av. Sao Joao, 2200 NS 30B - Sao Jose Dos Campos, SP 1224370<br>
+				Sao Jose dos Campos SP<br>
+				12242-840<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205055447/http://www.prin.com.br/" target="_blank">Lan Shots</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 55-12-3922-9815</span><br>
+				Shoping Colinas Av. Sao Joao, 2200 NS 30B - Sao Jose Dos Campos, SP 1224370<br>
+				Sao Jose dos Campos SP<br>
+				12242-840<br>
+				<br>
+				<h3>São Paulo</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041205055447/http://www.ovnilanhouse.com.br/" target="_blank">Ovni Net &amp; Game</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 5511 - 69730083</span><br>
+				Av Nova Cantareira 1243 - Agua Fria<br>
+				São Paulo<br>
+				02331002<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041205055447/http://www.ovnilanhouse.com.br/" target="_blank">Ovni Net &amp; Game</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 5511 - 69730083</span><br>
+				Av Nova Cantareira 1243 - Agua Fria<br>
+				São Paulo<br>
+				02331002<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041205055447/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

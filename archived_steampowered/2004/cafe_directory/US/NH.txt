@@ -1,0 +1,43 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - New Hampshire</h3>
+		<ul>
+	<h3>Derry</h3><br>
+		<li> <strong>Mr. B's LAN Party</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 603-560-6519</span><br>
+		35 Manchester Road - Suite #7<br>
+		Derry, NH<br>
+		03038<br>
+		<br>
+		<h3>Hampton</h3><br>
+		<li> <strong>Holo-Dek Gaming Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 603-926-7454 x 236</span><br>
+		8 Merrill Drive  Unit 4<br>
+		Hampton, NH<br>
+		03842<br>
+		<br>
+		<h3>Londonderry</h3><br>
+		<li> <strong>AREA 51 lan Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 603-437-3894</span><br>
+		44 Nashua Road Unit 17<br>
+		Londonderry, NH<br>
+		03053<br>
+		<br>
+		
+		<li> <strong>AREA 51 lan Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 603-437-3894</span><br>
+		44 Nashua Road Unit 17<br>
+		Londonderry, NH<br>
+		03053<br>
+		<br>
+		<h3>Newfields</h3><br>
+		<li> <strong>The Tower</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (603) 772-7788</span><br>
+		90 Old Lee Road<br>
+		Newfields, NH<br>
+		03856<br>
+		<br>
+		
+		<li> <strong>The Tower</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (603) 772-7788</span><br>
+		90 Old Lee Road<br>
+		Newfields, NH<br>
+		03856<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180819/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

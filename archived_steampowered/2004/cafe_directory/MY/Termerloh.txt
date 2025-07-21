@@ -1,0 +1,19 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>MALAYSIA - Temerloh</h3>
+		<ul>
+	<h3>Ahmad Shah</h3><br>
+		<li> <strong>Esb Computer</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (609) 296-4213</span><br>
+		Ks20 Tingkat 1, Plaza Temerloh,Jalan<br>
+		Ahmad Shah, Temerloh<br>
+		28000<br>
+		<br>
+		
+		<li> <strong>Esb Computer</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (609) 296-4213</span><br>
+		Ks20 Tingkat 1, Plaza Temerloh,Jalan<br>
+		Ahmad Shah, Temerloh<br>
+		28000<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211200239/http://www.steampowered.com/?area=cafe_directory&amp;country=MY">return to states / provinces</a></div>

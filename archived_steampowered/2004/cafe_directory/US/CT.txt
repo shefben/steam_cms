@@ -1,0 +1,61 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Connecticut</h3>
+		<ul>
+	<h3>Avon</h3><br>
+		<li> <strong>X PC LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 860-676-9721</span><br>
+		192 West Main Street<br>
+		Avon, CT<br>
+		06001<br>
+		<br>
+		<h3>Colchester</h3><br>
+		<li> <strong>CCS</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 860-537-3858</span><br>
+		92 Dara Dr<br>
+		Colchester, CT<br>
+		06415<br>
+		<br>
+		<h3>Gales Ferry</h3><br>
+		<li> <strong>Cave Communications</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 860.464.6304</span><br>
+		1600 Route 12<br>
+		Gales Ferry, CT<br>
+		06335<br>
+		<br>
+		<h3>Manchester</h3><br>
+		<li> <strong>The Battle Ground Game Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 860-644-6564</span><br>
+		194 Buckland Hills Dr<br>
+		Manchester, CT<br>
+		06040<br>
+		<br>
+		<h3>Monroe</h3><br>
+		<li> <strong>The G Lab LLC.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (203) 445-1122</span><br>
+		650 Main STreet<br>
+		Monroe, CT<br>
+		06468<br>
+		<br>
+		<h3>Newington</h3><br>
+		<li> <strong>The Combat Zone Network, LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (860) 436-9303</span><br>
+		3153 Berlin Turnpike<br>
+		Newington, CT<br>
+		06111<br>
+		<br>
+		
+		<li> <strong>The Combat Zone Network, LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (860) 436-9303</span><br>
+		3153 Berlin Turnpike<br>
+		Newington, CT<br>
+		06111<br>
+		<br>
+		<h3>Waterbury</h3><br>
+		<li> <strong>WEBWARRIORZ</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 203-465-0079</span><br>
+		Brass Mill Center - 495 Union Street<br>
+		Waterbury, CT<br>
+		06706<br>
+		<br>
+		
+		<li> <strong>WEBWARRIORZ</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 203-465-0079</span><br>
+		Brass Mill Center - 495 Union Street<br>
+		Waterbury, CT<br>
+		06706<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180725/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

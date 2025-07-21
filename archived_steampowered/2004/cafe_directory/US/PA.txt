@@ -1,0 +1,55 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Pennsylvania</h3>
+		<ul>
+	<h3>Allentown</h3><br>
+		<li> <strong>NERV Center Entertainment</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 610-841-4932</span><br>
+		3235 Hamilton Blvd.<br>
+		Allentown, PA<br>
+		18103<br>
+		<br>
+		<h3>Dallas</h3><br>
+		<li> <strong>Gizmos Computer Gaming Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (570) 675-1832</span><br>
+		332 Memorial Hwy<br>
+		Dallas, PA<br>
+		18612<br>
+		<br>
+		
+		<li> <strong>Gizmos Computer Gaming Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (570) 675-1832</span><br>
+		332 Memorial Hwy<br>
+		Dallas, PA<br>
+		18612<br>
+		<br>
+		<h3>Lansdale</h3><br>
+		<li> <strong>NeoQuest Games</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 215-855-7035</span><br>
+		531 South Broad Street<br>
+		Lansdale, PA<br>
+		19464<br>
+		<br>
+		<h3>Philadelphia</h3><br>
+		<li> <strong>webcybercafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (215) 275-1555</span><br>
+		2514 Kensington Ave.<br>
+		Philadelphia, PA<br>
+		19125<br>
+		<br>
+		<h3>Philadelphia </h3><br>
+		<li> <strong>Webcybercafe SP</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (215) 275-1555</span><br>
+		2514 Kensington Ave.<br>
+		Philadelphia , PA<br>
+		19125 <br>
+		<br>
+		<h3>Tatamy</h3><br>
+		<li> <strong>Cyber Station Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 610.438.4075</span><br>
+		756 Main Street<br>
+		Tatamy, PA<br>
+		18085<br>
+		<br>
+		<h3>West Chester</h3><br>
+		<li> <strong>Ground Zero Gaming, LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 610-696-2271</span><br>
+		543 East Gay Street<br>
+		West Chester, PA<br>
+		19380<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180315/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

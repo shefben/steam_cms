@@ -1,0 +1,183 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>SWEDEN</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3></h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207220109/http://www.e-star.se/" target="_blank">E-star Entertainment AB</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +46 (0) 660 19991</span><br>
+				Nygatan 8  - Örnsköldsvik<br>
+				
+				89133<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207220109/http://www.e-star.se/" target="_blank">E-star Entertainment AB</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +46 (0) 660 19991</span><br>
+				Nygatan 8  - Örnsköldsvik<br>
+				
+				89133<br>
+				<br>
+				<h3>Arvika, Varmland</h3><br>
+				<li> <strong>Perry Data AB/Perry.se</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 0046702297996</span><br>
+				Kopmangatan 4<br>
+				Arvika, Varmland<br>
+				67131<br>
+				<br>
+				
+				<li> <strong>Perry Data AB/Perry.se</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 0046702297996</span><br>
+				Kopmangatan 4<br>
+				Arvika, Varmland<br>
+				67131<br>
+				<br>
+				<h3>Katrineholm</h3><br>
+				<li> <strong>INTENCITY Katrineholm</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (461) 505-0690</span><br>
+				Drottninggatan<br>
+				Katrineholm<br>
+				64130<br>
+				<br>
+				
+				<li> <strong>INTENCITY Katrineholm</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (461) 505-0690</span><br>
+				Drottninggatan<br>
+				Katrineholm<br>
+				64130<br>
+				<br>
+				<h3>Linkoping</h3><br>
+				<li> <strong>GP i Linkoping AB</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (461) 310-0665</span><br>
+				Drottninggatan 36A<br>
+				Linkoping<br>
+				58227<br>
+				<br>
+				
+				<li> <strong>GP i Linkoping AB</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (461) 310-0665</span><br>
+				Drottninggatan 36A<br>
+				Linkoping<br>
+				58227<br>
+				<br>
+				<h3>Malmoe</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207220109/http://www.dotspot.se/" target="_blank">Dotspot</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 040307900</span><br>
+				Kalendegatan 13<br>
+				Malmoe<br>
+				21135<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207220109/http://www.dotspot.se/" target="_blank">Dotspot</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 040307900</span><br>
+				Kalendegatan 13<br>
+				Malmoe<br>
+				21135<br>
+				<br>
+				<h3>Marsta</h3><br>
+				<li> <strong>CyberPlace</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 46859124500</span><br>
+				Sodergatan 4<br>
+				Marsta<br>
+				19534<br>
+				<br>
+				
+				<li> <strong>CyberPlace</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 46859124500</span><br>
+				Sodergatan 4<br>
+				Marsta<br>
+				19534<br>
+				<br>
+				<h3>Nybro</h3><br>
+				<li> <strong>Nybro Film &amp; Video</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 3514548118881</span><br>
+				Storgatan 13<br>
+				Nybro<br>
+				38230<br>
+				<br>
+				
+				<li> <strong>Nybro Film &amp; Video</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 3514548118881</span><br>
+				Storgatan 13<br>
+				Nybro<br>
+				38230<br>
+				<br>
+				<h3>Stockholm</h3><br>
+				<li> <strong>Domehouse AB</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +46737062999</span><br>
+				Sveavägen 108 - 113 50 Stockholm<br>
+				Stockholm<br>
+				11350<br>
+				<br>
+				
+				<li> <strong>Domehouse AB</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +46737062999</span><br>
+				Sveavägen 108 - 113 50 Stockholm<br>
+				Stockholm<br>
+				11350<br>
+				<br>
+				<h3>Stockholm, Jarfalla</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207220109/http://www.cyberland.se/" target="_blank">Cyberland</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 08 58014380</span><br>
+				Tornervägen 23<br>
+				Stockholm, Jarfalla<br>
+				17739<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207220109/http://www.cyberland.se/" target="_blank">Cyberland</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 08 58014380</span><br>
+				Tornervägen 23<br>
+				Stockholm, Jarfalla<br>
+				17739<br>
+				<br>
+				<h3>Sundsvall</h3><br>
+				<li> <strong>Cyberworld Café</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 46734160811</span><br>
+				Skolhusallen 17B - 852 32<br>
+				Sundsvall<br>
+				
+				<br>
+				
+				<li> <strong>Cyberworld Café</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 46734160811</span><br>
+				Skolhusallen 17B - 852 32<br>
+				Sundsvall<br>
+				
+				<br>
+				<h3>Uplands Vasby</h3><br>
+				<li> <strong>VXO</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 46859034900</span><br>
+				Optimusvagen 14<br>
+				Uplands Vasby<br>
+				SE19434<br>
+				<br>
+				
+				<li> <strong>VXO</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 46859034900</span><br>
+				Optimusvagen 14<br>
+				Uplands Vasby<br>
+				SE19434<br>
+				<br>
+				<h3>Uppsala </h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207220109/http://www.kabom.se /" target="_blank">KABOM Sverige AB</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (461) 850-5150</span><br>
+				S:t Olofsgatan 35  <br>
+				Uppsala <br>
+				75330<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207220109/http://www.kabom.se /" target="_blank">KABOM Sverige AB</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (461) 850-5150</span><br>
+				S:t Olofsgatan 35  <br>
+				Uppsala <br>
+				75330<br>
+				<br>
+				<h3>Vaddo</h3><br>
+				<li> <strong>Lanterna Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (461) 765-0710</span><br>
+				Grisslehamnsvagen 18<br>
+				Vaddo<br>
+				76040<br>
+				<br>
+				
+				<li> <strong>Lanterna Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (461) 765-0710</span><br>
+				Grisslehamnsvagen 18<br>
+				Vaddo<br>
+				76040<br>
+				<br>
+				<h3>Ystad</h3><br>
+				<li> <strong>Future Zone</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (041) 1-1-0699</span><br>
+				Jennygatan 3<br>
+				Ystad<br>
+				27141<br>
+				<br>
+				
+				<li> <strong>Future Zone</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (041) 1-1-0699</span><br>
+				Jennygatan 3<br>
+				Ystad<br>
+				27141<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207220109/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

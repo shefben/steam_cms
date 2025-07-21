@@ -1,0 +1,27 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>KOREA, REPUBLIC OF</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Seoul</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207160117/http://www.valvepcbang.com/" target="_blank">Style Network, Inc. (995 Cafes - see www.valvepcbang.com/)</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 732-949-4345</span><br>
+				653-1 Any Bldg., 5th Floor - Sinsadong, Gangnam-gu<br>
+				Seoul<br>
+				135-897<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207160117/http://www.valvepcbang.com/" target="_blank">Style Network, Inc. (995 Cafes - see www.valvepcbang.com/)</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 732-949-4345</span><br>
+				653-1 Any Bldg., 5th Floor - Sinsadong, Gangnam-gu<br>
+				Seoul<br>
+				135-897<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207160117/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

@@ -1,0 +1,85 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Massachusetts</h3>
+		<ul>
+	<h3>Allston</h3><br>
+		<li> <strong>Between Hours</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 617-306-0906</span><br>
+		154 Harvard Ave.<br>
+		Allston, MA<br>
+		02134<br>
+		<br>
+		
+		<li> <strong>PC Café, Between Hours</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 617-306-0906</span><br>
+		154 Harvard Ave.<br>
+		Allston, MA<br>
+		02134<br>
+		<br>
+		<h3>Burlington</h3><br>
+		<li> <strong>The Internet ConneXtion</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 781-221-0373</span><br>
+		212 Cambridge St<br>
+		Burlington, MA<br>
+		01803<br>
+		<br>
+		<h3>Cambridge </h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175524/http://adrenzone.com /" target="_blank">Adrenaline Group, LLC</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 617 308 1457</span><br>
+		40 Brattle Street  <br>
+		Cambridge , MA<br>
+		2138<br>
+		<br>
+		<h3>Dracut</h3><br>
+		<li> <strong>pLANet Syrinx</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 978-459-2940</span><br>
+		1794 Bridge Street - Unit 13A<br>
+		Dracut, MA<br>
+		01826<br>
+		<br>
+		
+		<li> <strong>pLANet Syrinx</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 978-459-2940</span><br>
+		1794 Bridge Street - Unit 13A<br>
+		Dracut, MA<br>
+		01826<br>
+		<br>
+		<h3>Fitchburg  </h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175524/http://www.igamespot.com/" target="_blank">iGameSpot</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 978-827-6617 </span><br>
+		37 Main St.<br>
+		Fitchburg  , MA<br>
+		01420 <br>
+		<br>
+		<h3>Hadley</h3><br>
+		<li> <strong>X-Zone, Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (413) 586-6978</span><br>
+		367 Russell Street<br>
+		Hadley, MA<br>
+		1035<br>
+		<br>
+		
+		<li> <strong>X-Zone, Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (413) 586-6978</span><br>
+		367 Russell Street<br>
+		Hadley, MA<br>
+		1035<br>
+		<br>
+		<h3>Lynn</h3><br>
+		<li> <strong>AnyKey Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 781-599-6808</span><br>
+		126 Western Ave.<br>
+		Lynn, MA<br>
+		01904<br>
+		<br>
+		<h3>Stoneham</h3><br>
+		<li> <strong>Basic Instinct Internet Cafe, Inc.</strong> <br>
+		271 Main Street<br>
+		Stoneham, MA<br>
+		02180<br>
+		<br>
+		
+		<li> <strong>Basic Instinct Internet Cafe, Inc.</strong> <br>
+		271 Main Street<br>
+		Stoneham, MA<br>
+		02180<br>
+		<br>
+		<h3>Walpole</h3><br>
+		<li> <strong>Dream Machine Inc. / Battle LAN</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 508-660-2724</span><br>
+		Walpole Mall--90 Providence Highway<br>
+		Walpole, MA<br>
+		02032<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211175524/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

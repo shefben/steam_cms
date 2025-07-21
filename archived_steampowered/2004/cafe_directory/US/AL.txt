@@ -1,0 +1,19 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Alabama</h3>
+		<ul>
+	<h3>Auburn</h3><br>
+		<li> <strong>Ebaang Lan Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (334) 821-2979</span><br>
+		1655F South College Street<br>
+		Auburn, AL<br>
+		35832<br>
+		<br>
+		
+		<li> <strong>Ebaang Lan Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (334) 821-2979</span><br>
+		1655F South College Street<br>
+		Auburn, AL<br>
+		35832<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211175808/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

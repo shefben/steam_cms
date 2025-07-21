@@ -1,0 +1,19 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Utah</h3>
+		<ul>
+	<h3>Kearns</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175955/http://boldtco.com/" target="_blank">Boldt Computer Outlet</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 898-7187</span><br>
+		3898 W. 5535 S. #5<br>
+		Kearns, UT<br>
+		84118<br>
+		<br>
+		<h3>Sandy</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175955/http://www.gamerzzsandy.com/" target="_blank">Gamerzz Sandy</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (801) 571-9170</span><br>
+		9860 South 700 East, Suite 11<br>
+		Sandy, UT<br>
+		84070<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211175955/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

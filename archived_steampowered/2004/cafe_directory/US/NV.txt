@@ -1,0 +1,25 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Nevada</h3>
+		<ul>
+	<h3>Las Vegas</h3><br>
+		<li> <strong>CYBERPUNX</strong> <br>
+		4620 Meadows Lane - Suite B6<br>
+		Las Vegas, NV<br>
+		89107<br>
+		<br>
+		
+		<li> <strong>CYBERPUNX</strong> <br>
+		4620 Meadows Lane - Suite B6<br>
+		Las Vegas, NV<br>
+		89107<br>
+		<br>
+		
+		<li> <strong>Planetx1</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 702-255-0314</span><br>
+		9350 W Sahara - Suite #120<br>
+		Las Vegas, NV<br>
+		89117<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180522/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

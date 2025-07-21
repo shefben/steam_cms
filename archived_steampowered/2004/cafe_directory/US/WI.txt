@@ -1,0 +1,37 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Wisconsin</h3>
+		<ul>
+	<h3>Appleton</h3><br>
+		<li> <strong>ExtremePC LLC/ExtremeAPL</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (920) 738-9032</span><br>
+		1117D N. Badger Ave.<br>
+		Appleton, WI<br>
+		54915<br>
+		<br>
+		
+		<li> <strong>ExtremePC LLC/ExtremeAPL</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (920) 738-9032</span><br>
+		1117D N. Badger Ave.<br>
+		Appleton, WI<br>
+		54915<br>
+		<br>
+		
+		<li> <strong>ExtremePC LLC/ExtremeVFM</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (920) 738-9032</span><br>
+		1127 Valley Fair Mall<br>
+		Appleton, WI<br>
+		54915<br>
+		<br>
+		
+		<li> <strong>ExtremePC LLC/ExtremeVFM</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (920) 738-9032</span><br>
+		1127 Valley Fair Mall<br>
+		Appleton, WI<br>
+		54915<br>
+		<br>
+		<h3>Shorewood</h3><br>
+		<li> <strong>Milwaukee PC - Cyber Center</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 414-332-0874</span><br>
+		3900 North Sherburn Place<br>
+		Shorewood, WI<br>
+		53211<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180145/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

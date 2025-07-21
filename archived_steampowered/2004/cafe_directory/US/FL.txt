@@ -1,0 +1,205 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Florida</h3>
+		<ul>
+	<h3>Brandon</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180353/http://www.wiredwarfare.com/" target="_blank">Play Games Inc.</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 813-684-6883</span><br>
+		711 W. Lumsden Road<br>
+		Brandon, FL<br>
+		33511-6261<br>
+		<br>
+		<h3>Coral Springs</h3><br>
+		<li> <strong>Strange Connection</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (954) 825-0955</span><br>
+		774 Riverside Drive<br>
+		Coral Springs, FL<br>
+		33071<br>
+		<br>
+		
+		<li> <strong>Strange Connection</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (954) 825-0955</span><br>
+		774 Riverside Drive<br>
+		Coral Springs, FL<br>
+		33071<br>
+		<br>
+		<h3>Crystal River</h3><br>
+		<li> <strong>PC'S N Parts/PNP Arena</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (352) 564-8803</span><br>
+		1801 NW US Hwy 19 - Crystal River Mall, Suite 283<br>
+		Crystal River, FL<br>
+		34429<br>
+		<br>
+		
+		<li> <strong>PC'S N Parts/PNP Arena</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (352) 564-8803</span><br>
+		1801 NW US Hwy 19 - Crystal River Mall, Suite 283<br>
+		Crystal River, FL<br>
+		34429<br>
+		<br>
+		<h3>Davie</h3><br>
+		<li> <strong>Game Continuum</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 954-252-1551</span><br>
+		6880 Dykes Road<br>
+		Davie, FL<br>
+		33331<br>
+		<br>
+		
+		<li> <strong>Game Continuum</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 954-252-1551</span><br>
+		6880 Dykes Road<br>
+		Davie, FL<br>
+		33331<br>
+		<br>
+		<h3>Fort Myers</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180353/http://www.xarcade.net /" target="_blank">eXtreme Arcade</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 239-437-4263</span><br>
+		1930 Park Meadows Drive, Ste 6<br>
+		Fort Myers, FL<br>
+		33907<br>
+		<br>
+		<h3>Ft. Meyers</h3><br>
+		<li> <strong>The Frag Station</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (239) 415-6654</span><br>
+		12691 McGregor Blvd - Ste 104<br>
+		Ft. Meyers, FL<br>
+		33919<br>
+		<br>
+		
+		<li> <strong>The Frag Station</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (239) 415-6654</span><br>
+		12691 McGregor Blvd - Ste 104<br>
+		Ft. Meyers, FL<br>
+		33919<br>
+		<br>
+		<h3>Gainesville</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180353/http://www.gamersasylum.com/" target="_blank">Gamers Asylum</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (352) 371-1774</span><br>
+		1124 W. University Avenue<br>
+		Gainesville, FL<br>
+		32601<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180353/http://www.gamersasylum.com/" target="_blank">Gamers Asylum</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (352) 371-1774</span><br>
+		1124 W. University Avenue<br>
+		Gainesville, FL<br>
+		32601<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180353/http://wysiwyggaming.com/" target="_blank">WASIWYG Gaming Gainsville, LLC</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (352) 395-6190</span><br>
+		130 N.W. 13th Street<br>
+		Gainesville, FL<br>
+		32601<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211180353/http://wysiwyggaming.com/" target="_blank">WASIWYG Gaming Gainsville, LLC</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (352) 395-6190</span><br>
+		130 N.W. 13th Street<br>
+		Gainesville, FL<br>
+		32601<br>
+		<br>
+		<h3>Jacksonville</h3><br>
+		<li> <strong>My Lil Cyber Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 904-221-8092</span><br>
+		11160 Beach Blvd Ste 131<br>
+		Jacksonville, FL<br>
+		32246<br>
+		<br>
+		<h3>Key Biscayne</h3><br>
+		<li> <strong>Village of Key Biscayne</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 305-365-8912</span><br>
+		88 W. McIntyre St.<br>
+		Key Biscayne, FL<br>
+		33149<br>
+		<br>
+		<h3>Leesburg</h3><br>
+		<li> <strong>PC'S N PARTS/PNP Frag Arena</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (352) 564-8803</span><br>
+		10401 Hwy 441, Suite 314<br>
+		Leesburg, FL<br>
+		34788<br>
+		<br>
+		
+		<li> <strong>PC'S N PARTS/PNP Frag Arena</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (352) 564-8803</span><br>
+		10401 Hwy 441, Suite 314<br>
+		Leesburg, FL<br>
+		34788<br>
+		<br>
+		<h3>Miami</h3><br>
+		<li> <strong>Cyber Dome, Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (305) 308-5624</span><br>
+		4820 SW 152nd Place - Unit F<br>
+		Miami, FL<br>
+		33165<br>
+		<br>
+		
+		<li> <strong>Cyber Dome, Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (305) 308-5624</span><br>
+		4820 SW 152nd Place - Unit F<br>
+		Miami, FL<br>
+		33165<br>
+		<br>
+		
+		<li> <strong>E2 Café</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 305-598-3402</span><br>
+		12030 SW 88 St.<br>
+		Miami, FL<br>
+		33186<br>
+		<br>
+		
+		<li> <strong>E2 Café</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 305-598-3402</span><br>
+		12030 SW 88 St.<br>
+		Miami, FL<br>
+		33186<br>
+		<br>
+		
+		<li> <strong>Net Surf</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (305) 752-9000</span><br>
+		12833 N Kendall Dr<br>
+		Miami, FL<br>
+		33186<br>
+		<br>
+		
+		<li> <strong>Net Surf</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (305) 752-9000</span><br>
+		12833 N Kendall Dr<br>
+		Miami, FL<br>
+		33186<br>
+		<br>
+		
+		<li> <strong>Scorpico Multiplayer</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 305-669-4577</span><br>
+		5701 Sunset Srive - Suite 212<br>
+		Miami, FL<br>
+		33143<br>
+		<br>
+		<h3>Miami </h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180353/http://www.net-xtreme.net /" target="_blank">Net Xtreme</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 7862519760  </span><br>
+		2600 SW 137 Ave.<br>
+		Miami , FL<br>
+		33175<br>
+		<br>
+		<h3>Orlando</h3><br>
+		<li> <strong>MegaGamez Lancenters</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 407-657-8358</span><br>
+		469 south semoran blvd<br>
+		Orlando, FL<br>
+		32792<br>
+		<br>
+		<h3>Palm Harbor </h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180353/http://extremegamelan.com/" target="_blank">Extreme Game LAN, Inc. </a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 727 943-9220 </span><br>
+		37514 US Highway 19 N.<br>
+		Palm Harbor , FL<br>
+		34684-1019<br>
+		<br>
+		<h3>Pinellas Park</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180353/http://www.digitalbattlegrounds.com/" target="_blank">Digital Battlegrounds</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 727-547-0900</span><br>
+		6541 102nd Avenue North<br>
+		Pinellas Park, FL<br>
+		33782<br>
+		<br>
+		<h3>Port Richey</h3><br>
+		<li> <strong>PC'S N PARTS/PNP LAN Lounge</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (727) 816-3902</span><br>
+		9409 US Hwy 19, Suite 351<br>
+		Port Richey, FL<br>
+		34668<br>
+		<br>
+		
+		<li> <strong>PC'S N PARTS/PNP LAN Lounge</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (727) 816-3902</span><br>
+		9409 US Hwy 19, Suite 351<br>
+		Port Richey, FL<br>
+		34668<br>
+		<br>
+		<h3>West Palm Beach</h3><br>
+		<li> <strong>Techlords Inc</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 561.686.9881</span><br>
+		2054 Palm Beach Lakes Blvd<br>
+		West Palm Beach, FL<br>
+		33409<br>
+		<br>
+		<h3>Winter Haven</h3><br>
+		<li> <strong>Wired Warriors Inc</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 863-293-0428 </span><br>
+		P.O. Box 2369<br>
+		Winter Haven, FL<br>
+		33883<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180353/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

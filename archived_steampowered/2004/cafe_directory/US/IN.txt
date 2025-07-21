@@ -1,0 +1,43 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Indiana</h3>
+		<ul>
+	<h3>Greenwood</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175928/http://www.toxcity.net/" target="_blank">ToxCity</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 317-859-GAME</span><br>
+		640 South Madison<br>
+		Greenwood, IN<br>
+		46142<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211175928/http://www.toxcity.net/" target="_blank">ToxCity</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 317-859-GAME</span><br>
+		640 South Madison<br>
+		Greenwood, IN<br>
+		46142<br>
+		<br>
+		<h3>Indianapolis</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175928/http://www.netheads.com/" target="_blank">Net Heads</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (317) 257-6635</span><br>
+		1011 East Westfield Blvd.<br>
+		Indianapolis, IN<br>
+		46220<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211175928/http://www.netheads.com/" target="_blank">Net Heads</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (317) 257-6635</span><br>
+		1011 East Westfield Blvd.<br>
+		Indianapolis, IN<br>
+		46220<br>
+		<br>
+		<h3>Plainfield</h3><br>
+		<li> <strong>Mission Control</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 317-837-5100</span><br>
+		Mission Control - 126 West Main<br>
+		Plainfield, IN<br>
+		46168<br>
+		<br>
+		
+		<li> <strong>Mission Control</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 317-837-5100</span><br>
+		Mission Control - 126 West Main<br>
+		Plainfield, IN<br>
+		46168<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211175928/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

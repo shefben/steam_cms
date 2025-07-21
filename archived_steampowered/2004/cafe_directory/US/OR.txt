@@ -1,0 +1,31 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Oregon</h3>
+		<ul>
+	<h3>McMinnville</h3><br>
+		<li> <strong>Planet 8 Ball</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (503) 474-1464</span><br>
+		303 NE 3rd Street<br>
+		McMinnville, OR<br>
+		97128<br>
+		<br>
+		
+		<li> <strong>Planet 8 Ball</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (503) 474-1464</span><br>
+		303 NE 3rd Street<br>
+		McMinnville, OR<br>
+		97128<br>
+		<br>
+		<h3>Pendleton</h3><br>
+		<li> <strong>Dynamic Computer Consulting</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 541.966.9808</span><br>
+		129 S Main St<br>
+		Pendleton, OR<br>
+		97801<br>
+		<br>
+		<h3>Tigard</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211180611/http://www.theblockcafe.com /" target="_blank">The Block Internet Cafe </a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 503-936-5164</span><br>
+		12460 SW Main Street  <br>
+		Tigard, OR<br>
+		97223<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180611/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

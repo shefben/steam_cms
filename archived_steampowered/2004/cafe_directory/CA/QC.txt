@@ -1,0 +1,26 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+<h2>FIND THE PLACE<em> TO PLAY THE GAMES</em></h2><img src="/web/20040810162311im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+		<br>
+		<h3>CANADA - Quebec</h3>
+		<ul>
+	<h3>Montreal</h3><br>
+		<li> <strong>Chez Alain</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 737-2914</span><br>
+		4994 Queen Mary<br>
+		Montreal<br>, QC
+		h3w1x2<br>
+		<br>
+		<h3>Quebec</h3><br>
+		<li> <strong>Meg@Zone</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> (418) 821-0024</span><br>
+		2485 Boul. Saint-Anne<br>
+		Quebec<br>, QC
+		G1J1Y4<br>
+		<br>
+		<h3>Ste-Foy</h3><br>
+		<li> <strong>CyberZone</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> (418) 650-9434</span><br>
+		2480 Chemin Ste-Foy - Local 001<br>
+		Ste-Foy<br>, QC
+		G1V1T6<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20040810162311/http://www.steampowered.com/?area=cafe_directory&amp;country=CA">return to states / provinces</a></div>

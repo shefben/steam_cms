@@ -1,0 +1,37 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Kentucky</h3>
+		<ul>
+	<h3>Ledbetter</h3><br>
+		<li> <strong>Roddy Lyles  </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 270-898-0048</span><br>
+		Clarks Ferry Road<br>
+		Ledbetter, KY<br>
+		42058<br>
+		<br>
+		<h3>Lexington</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175627/http://dinkscafe.com/" target="_blank">DiNk's Cafe</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 859-278-0888</span><br>
+		2033 Harrodsburg Rd. - Suite 198<br>
+		Lexington, KY<br>
+		40504<br>
+		<br>
+		
+		<li> <strong>FunKyLAN</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (859) 276-1264</span><br>
+		2220 Nicholasville Road - Suite 212<br>
+		Lexington, KY<br>
+		40503<br>
+		<br>
+		
+		<li> <strong>FunKyLAN</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (859) 276-1264</span><br>
+		2220 Nicholasville Road - Suite 212<br>
+		Lexington, KY<br>
+		40503<br>
+		<br>
+		<h3>Louisville</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175627/http://www.gamectrl.com/" target="_blank">Game CCTRL, Inc</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 502 299-2639</span><br>
+		4121 Shelbyville RD. - Suite #15 / The ZONE<br>
+		Louisville, KY<br>
+		40207<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211175627/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

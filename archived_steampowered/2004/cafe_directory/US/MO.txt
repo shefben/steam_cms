@@ -1,0 +1,32 @@
+
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Missouri</h3>
+		<ul>
+	<h3>Rolla</h3><br>
+		<li> <strong>Pixl8ed</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (573) 364-3724</span><br>
+		205 West 11th Street<br>
+		Rolla, MO<br>
+		65401<br>
+		<br>
+		
+		<li> <strong>Pixl8ed</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (573) 364-3724</span><br>
+		205 West 11th Street<br>
+		Rolla, MO<br>
+		65401<br>
+		<br>
+		<h3>Springfield</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175804/http://www.fanatexe.com/" target="_blank">Fanat.exe</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 863-6125</span><br>
+		520 w university<br>
+		Springfield, MO<br>
+		65807<br>
+		<br>
+		
+		<li> <strong>Landmark Games</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 417-827-2510</span><br>
+		309 N Jefferson - Ste 260<br>
+		Springfield, MO<br>
+		65806<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211175804/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

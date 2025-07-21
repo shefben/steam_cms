@@ -1,0 +1,91 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - North Carolina</h3>
+		<ul>
+	<h3>Cary</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211181202/http://www.gamefrogcafe.com/" target="_blank">GameFrog café #1</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 919-286-2343</span><br>
+		Cary Town Center - 1105 Walnut Street<br>
+		Cary, NC<br>
+		27511<br>
+		<br>
+		<h3>Clemmons</h3><br>
+		<li> <strong>Player's Choice</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (336) 712-0062</span><br>
+		2539 Lewisiville Clemmons Road<br>
+		Clemmons, NC<br>
+		27012<br>
+		<br>
+		
+		<li> <strong>Player's Choice</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (336) 712-0062</span><br>
+		2539 Lewisiville Clemmons Road<br>
+		Clemmons, NC<br>
+		27012<br>
+		<br>
+		<h3>Durham</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211181202/http://www.gamefrogcafe.com/" target="_blank">Game Frog café #2</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 919-433-3300</span><br>
+		Hope Valley Pointe 4810 Hope Valley Rd., Ste 109<br>
+		Durham, NC<br>
+		27707<br>
+		<br>
+		<h3>Greensboro</h3><br>
+		<li> <strong>Digital Lifestyle Center LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 336-855-1337</span><br>
+		5609-A West Friendly Ave<br>
+		Greensboro, NC<br>
+		27410<br>
+		<br>
+		<h3>Knightdale</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211181202/http://www.gamingjunkiescafe.com/" target="_blank">Gaming Junkies Cafe</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 919-524-4097</span><br>
+		905C McKnight Drive - PO Box 1374<br>
+		Knightdale, NC<br>
+		27545<br>
+		<br>
+		<h3>Matthews</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211181202/http://atlantisgamers.com/" target="_blank">Atlantis Gaming Center</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (704) 844-6000</span><br>
+		11500-F East Independence Blvd.<br>
+		Matthews, NC<br>
+		28105<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211181202/http://atlantisgamers.com/" target="_blank">Atlantis Gaming Center</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (704) 844-6000</span><br>
+		11500-F East Independence Blvd.<br>
+		Matthews, NC<br>
+		28105<br>
+		<br>
+		<h3>Pineville</h3><br>
+		<li> <strong>Netplay</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 704-319-9094</span><br>
+		8700 Pineville-Matthews Rd. - Suite 360<br>
+		Pineville, NC<br>
+		28226<br>
+		<br>
+		
+		<li> <strong>Netplay</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 704-319-9094</span><br>
+		8700 Pineville-Matthews Rd. - Suite 360<br>
+		Pineville, NC<br>
+		28226<br>
+		<br>
+		<h3>Raleigh</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211181202/http://www.thetek.com/" target="_blank">The Tek, LLC</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (919) 834-8491</span><br>
+		3801 Hillsborough St.<br>
+		Raleigh, NC<br>
+		27607<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211181202/http://www.thetek.com/" target="_blank">The Tek, LLC</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (919) 834-8491</span><br>
+		3801 Hillsborough St.<br>
+		Raleigh, NC<br>
+		27607<br>
+		<br>
+		<h3>Winston-Salem</h3><br>
+		<li> <strong>GameLAN</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (336) 869-4538</span><br>
+		246 Jonestown Road<br>
+		Winston-Salem, NC<br>
+		27103<br>
+		<br>
+		
+		<li> <strong>GameLAN</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (336) 869-4538</span><br>
+		246 Jonestown Road<br>
+		Winston-Salem, NC<br>
+		27103<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211181202/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

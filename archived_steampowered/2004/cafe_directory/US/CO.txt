@@ -1,0 +1,127 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Colorado</h3>
+		<ul>
+	<h3>Arvada</h3><br>
+		<li> <strong>Maximum Gamer Arvada</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (303) 424-3710</span><br>
+		11651 West 64th Avenue, Unit A4<br>
+		Arvada, CO<br>
+		80004<br>
+		<br>
+		
+		<li> <strong>Maximum Gamer Arvada</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (303) 424-3710</span><br>
+		11651 West 64th Avenue, Unit A4<br>
+		Arvada, CO<br>
+		80004<br>
+		<br>
+		<h3>colo spgs</h3><br>
+		<li> <strong>Xtreme Online</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 719-884-0663</span><br>
+		3924 palmer park blvd<br>
+		colo spgs, CO<br>
+		80909<br>
+		<br>
+		
+		<li> <strong>Xtreme Online</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 719-884-0663</span><br>
+		3924 palmer park blvd<br>
+		colo spgs, CO<br>
+		80909<br>
+		<br>
+		<h3>Colorado Springs  </h3><br>
+		<li> <strong>Castleguard Cyber-Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 719 351-9324</span><br>
+		4466 Barnes Road<br>
+		Colorado Springs  , CO<br>
+		80917<br>
+		<br>
+		<h3>Denver</h3><br>
+		<li> <strong>GameScape</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 303-531-5050</span><br>
+		8000 E. Quincy Ave. #300<br>
+		Denver, CO<br>
+		80237<br>
+		<br>
+		
+		<li> <strong>GameScape</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 303-531-5050</span><br>
+		8000 E. Quincy Ave. #300<br>
+		Denver, CO<br>
+		80237<br>
+		<br>
+		<h3>Ft. Collins</h3><br>
+		<li> <strong>Game On, Inc.- At the Foothills Mall</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (970) 282-8811</span><br>
+		215 E. Foothills Parkway, #D1<br>
+		Ft. Collins, CO<br>
+		80525<br>
+		<br>
+		
+		<li> <strong>Game On, Inc.- At the Foothills Mall</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (970) 282-8811</span><br>
+		215 E. Foothills Parkway, #D1<br>
+		Ft. Collins, CO<br>
+		80525<br>
+		<br>
+		<h3>Highlands Ranch</h3><br>
+		<li> <strong>Cyberscape Enterprises, Inc.</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 303-925-1960</span><br>
+		P.O. Box 261085<br>
+		Highlands Ranch, CO<br>
+		80163-1085<br>
+		<br>
+		<h3>Littleton</h3><br>
+		<li> <strong>Treehouse WFB - Store 1</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (719) 248-3030</span><br>
+		5500 South Simms Street - Unit N<br>
+		Littleton, CO<br>
+		80127<br>
+		<br>
+		
+		<li> <strong>Treehouse WFB - Store 1</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (719) 248-3030</span><br>
+		5500 South Simms Street - Unit N<br>
+		Littleton, CO<br>
+		80127<br>
+		<br>
+		<h3>Thornton</h3><br>
+		<li> <strong>Maximum Gamer Thornton</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (303) 424-3710</span><br>
+		12720 Colorado Blvd<br>
+		Thornton, CO<br>
+		80241<br>
+		<br>
+		
+		<li> <strong>Maximum Gamer Thornton</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (303) 424-3710</span><br>
+		12720 Colorado Blvd<br>
+		Thornton, CO<br>
+		80241<br>
+		<br>
+		<h3>Thornton </h3><br>
+		<li> <strong>Gameswirl </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 303-531-7610</span><br>
+		3929A East 120th Ave  <br>
+		Thornton , CO<br>
+		80223 <br>
+		<br>
+		<h3>Westminnster</h3><br>
+		<li> <strong>Cyber Storm</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 303 487 1296</span><br>
+		9051 Harlan St.  #10<br>
+		Westminnster, CO<br>
+		80031<br>
+		<br>
+		<h3>Westminster</h3><br>
+		<li> <strong>Maximum Gamer Westminster</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (303) 424-3710</span><br>
+		10667 Westminster Blvd 800<br>
+		Westminster, CO<br>
+		80020<br>
+		<br>
+		
+		<li> <strong>Maximum Gamer Westminster</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (303) 424-3710</span><br>
+		10667 Westminster Blvd 800<br>
+		Westminster, CO<br>
+		80020<br>
+		<br>
+		<h3>Wheatridge</h3><br>
+		<li> <strong>Maximum Gamer Wheat Ridge</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (303) 424-3710</span><br>
+		3890 Kipling Street, Unit I<br>
+		Wheatridge, CO<br>
+		80033<br>
+		<br>
+		
+		<li> <strong>Maximum Gamer Wheat Ridge</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (303) 424-3710</span><br>
+		3890 Kipling Street, Unit I<br>
+		Wheatridge, CO<br>
+		80033<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211175912/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

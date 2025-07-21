@@ -1,0 +1,87 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>NORWAY</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Arendal</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207163713/http://www.planetx-pec.com /" target="_blank">Planet X-Pec</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (479) 180-7887</span><br>
+				Postboks 432<br>
+				Arendal<br>
+				4804<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207163713/http://www.planetx-pec.com /" target="_blank">Planet X-Pec</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (479) 180-7887</span><br>
+				Postboks 432<br>
+				Arendal<br>
+				4804<br>
+				<br>
+				<h3>Bergen</h3><br>
+				<li> <strong>Star Games AS </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (479) 017-3447</span><br>
+				hÃ¥konsgt 15<br>
+				Bergen<br>
+				5015<br>
+				<br>
+				
+				<li> <strong>Star Games AS </strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (479) 017-3447</span><br>
+				hÃ¥konsgt 15<br>
+				Bergen<br>
+				5015<br>
+				<br>
+				<h3>Flora</h3><br>
+				<li> <strong>Flora Videosenter</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +4793065438</span><br>
+				Strandgata 56<br>
+				Flora<br>
+				6900<br>
+				<br>
+				
+				<li> <strong>Flora Videosenter</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +4793065438</span><br>
+				Strandgata 56<br>
+				Flora<br>
+				6900<br>
+				<br>
+				<h3>Oslo</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207163713/http://www.cbrzn.com/" target="_blank">Cyberzone</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (479) 763-6858</span><br>
+				Kirkeg 34a<br>
+				Oslo<br>
+				0153<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207163713/http://www.cbrzn.com/" target="_blank">Cyberzone</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (479) 763-6858</span><br>
+				Kirkeg 34a<br>
+				Oslo<br>
+				0153<br>
+				<br>
+				
+				<li> <strong>Galleriet Internettcafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 22694222</span><br>
+				Dovregata 7<br>
+				Oslo<br>
+				0170<br>
+				<br>
+				
+				<li> <strong>Galleriet Internettcafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 22694222</span><br>
+				Dovregata 7<br>
+				Oslo<br>
+				0170<br>
+				<br>
+				<h3>Saipan</h3><br>
+				<li> <strong>i-NeT GaMe ZoNe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 670-288-1500</span><br>
+				P.O. Box 503362 CK<br>
+				Saipan<br>
+				96950<br>
+				<br>
+				
+				<li> <strong>i-NeT GaMe ZoNe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 670-288-1500</span><br>
+				P.O. Box 503362 CK<br>
+				Saipan<br>
+				96950<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207163713/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

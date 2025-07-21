@@ -1,0 +1,52 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+<h2>FIND THE PLACE<em> TO PLAY THE GAMES</em></h2><img src="/web/20040810111833im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+		<br>
+		<h3>FRANCE</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Cagnes sur Mer</h3><br>
+				<li> <strong>Numeric and Co./ViaFun</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 33493070144</span><br>
+				87 Avenue de Nice<br>
+				Cagnes sur Mer<br>
+				06800<br>
+				<br>
+				<h3>Marseille</h3><br>
+				<li> <strong>Frag &amp; Surf</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 033442104552</span><br>
+				233 Avenue Rhin-Danube<br>
+				Marseille<br>
+				13127<br>
+				<br>
+				<h3>Paris</h3><br>
+				<li> <strong>EPNI Ultimagate SA/Gate 104</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 33153631414</span><br>
+				9 Rue Huysmans<br>
+				Paris<br>
+				75006<br>
+				<br>
+				
+				<li> <strong>XS-ARENA</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 33673995261</span><br>
+				43, bld Sebstopol<br>
+				Paris<br>
+				75001<br>
+				<br>
+				<h3>Saint Mandrier sur mer</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20040810111833/http://net-arena.fr/" target="_blank">Net @rena 83</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> (049) 430-7658</span><br>
+				place des resistants<br>
+				Saint Mandrier sur mer<br>
+				83430<br>
+				<br>
+				<h3>Saint-Louis, Alsace</h3><br>
+				<li> <strong>Sid\'s World</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 33389677330</span><br>
+				32 Rue de Mulhouse<br>
+				Saint-Louis, Alsace<br>
+				68300<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20040810111833/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

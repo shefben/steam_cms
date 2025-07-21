@@ -1,0 +1,73 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Hawaii</h3>
+		<ul>
+	<h3>Honolulu</h3><br>
+		<li> <strong>ComputerWorks-Hawaii</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (808) 396-8400</span><br>
+		7192-D208 - Kalanianaole Hwy.<br>
+		Honolulu, HI<br>
+		92825<br>
+		<br>
+		
+		<li> <strong>ComputerWorks-Hawaii</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (808) 396-8400</span><br>
+		7192-D208 - Kalanianaole Hwy.<br>
+		Honolulu, HI<br>
+		92825<br>
+		<br>
+		
+		<li> <strong>Superconnected LLC</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (808) 528-1337</span><br>
+		1613 Nuuanu Ave #10-B<br>
+		Honolulu, HI<br>
+		96817<br>
+		<br>
+		<h3>Kailua</h3><br>
+		<li> <strong>Gamecorp.Net</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 808-262-5232</span><br>
+		45 Hoolai Street<br>
+		Kailua, HI<br>
+		96734<br>
+		<br>
+		
+		<li> <strong>Gamecorp.Net</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 808-262-5232</span><br>
+		45 Hoolai Street<br>
+		Kailua, HI<br>
+		96734<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211175908/http://gamecorp.net/" target="_blank">PC Pro of Kailua/Gamecorp.Net</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 808-262-5232</span><br>
+		45 Hoolai Street<br>
+		Kailua, HI<br>
+		96734<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20041211175908/http://gamecorp.net/" target="_blank">PC Pro of Kailua/Gamecorp.Net</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 808-262-5232</span><br>
+		45 Hoolai Street<br>
+		Kailua, HI<br>
+		96734<br>
+		<br>
+		<h3>Kaneohe</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20041211175908/http://www.java-electric.com /" target="_blank">Java Electric, Inc </a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 808-234-1344</span><br>
+		45-1151 Kamehameha Hwy<br>
+		Kaneohe, HI<br>
+		96744 <br>
+		<br>
+		<h3>Kapolei</h3><br>
+		<li> <strong>Kapolei PC Gaming</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (808) 674-9378</span><br>
+		563 Farrington Hwy. - #4<br>
+		Kapolei, HI<br>
+		96707<br>
+		<br>
+		<h3>Wailuku</h3><br>
+		<li> <strong>Battlezone</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 808-249-0442</span><br>
+		790 Eha St - (next to Sack N Save<br>
+		Wailuku, HI<br>
+		96793<br>
+		<br>
+		
+		<li> <strong>Battlezone</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 808-249-0442</span><br>
+		790 Eha St - (next to Sack N Save<br>
+		Wailuku, HI<br>
+		96793<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211175908/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

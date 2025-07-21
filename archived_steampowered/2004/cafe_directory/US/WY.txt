@@ -1,0 +1,31 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Wyoming</h3>
+		<ul>
+	<h3>Cheyenne</h3><br>
+		<li> <strong>Game On, Inc. - Cheyenne</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (307) 635-4263</span><br>
+		1400 Dell Range Boulevard, #31<br>
+		Cheyenne, WY<br>
+		82009<br>
+		<br>
+		
+		<li> <strong>Game On, Inc. - Cheyenne</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (307) 635-4263</span><br>
+		1400 Dell Range Boulevard, #31<br>
+		Cheyenne, WY<br>
+		82009<br>
+		<br>
+		<h3>Rawlins</h3><br>
+		<li> <strong>Gaming Pulse</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (307) 324-2562</span><br>
+		204 5th Street - PO Box 669<br>
+		Rawlins, WY<br>
+		82301<br>
+		<br>
+		
+		<li> <strong>Gaming Pulse</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (307) 324-2562</span><br>
+		204 5th Street - PO Box 669<br>
+		Rawlins, WY<br>
+		82301<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211181115/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

@@ -1,0 +1,52 @@
+
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>GREECE</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Agios Nikolaos, Crete</h3><br>
+				<li> <strong>Surf</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 00306973802838</span><br>
+				Mihail Sfakianaki 10<br>
+				Agios Nikolaos, Crete<br>
+				72100<br>
+				<br>
+				
+				<li> <strong>Surf</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 00306973802838</span><br>
+				Mihail Sfakianaki 10<br>
+				Agios Nikolaos, Crete<br>
+				72100<br>
+				<br>
+				<h3>Kalamata, Messinia</h3><br>
+				<li> <strong>Diktyo Internet Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 306932430172</span><br>
+				Nedontos 75<br>
+				Kalamata, Messinia<br>
+				24100<br>
+				<br>
+				
+				<li> <strong>Diktyo Internet Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 306932430172</span><br>
+				Nedontos 75<br>
+				Kalamata, Messinia<br>
+				24100<br>
+				<br>
+				<h3>Thessaloniki</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207141428/http://www.gnet.gr/" target="_blank">Gnet Gaming Networks </a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 3.06979E+11</span><br>
+				K.Melenikou 37  <br>
+				Thessaloniki<br>
+				54635<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207141428/http://www.gnet.gr/" target="_blank">Gnet Gaming Networks </a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 3.06979E+11</span><br>
+				K.Melenikou 37  <br>
+				Thessaloniki<br>
+				54635<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207141428/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

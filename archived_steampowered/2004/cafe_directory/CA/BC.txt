@@ -1,0 +1,44 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+<h2>FIND THE PLACE<em> TO PLAY THE GAMES</em></h2><img src="/web/20040810153614im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+		<br>
+		<h3>CANADA - British Columbia</h3>
+		<ul>
+	<h3>Gabriola</h3><br>
+		<li> <strong>Berni Sperling Ltd</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 250 247 0170</span><br>
+		#6-580 North Road<br>
+		Gabriola<br>, BC
+		V0R 1X3<br>
+		<br>
+		<h3>Gabriola Is.</h3><br>
+		<li> <strong><a href="https://web.archive.org/web/20040810153614/http://www.twomutts.ca/" target="_blank">TwoMutts</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 1-250-247-0170</span><br>
+		580 North Rd.<br>
+		Gabriola Is.<br>, BC
+		V0R 1X0<br>
+		<br>
+		<h3>Nanaimo</h3><br>
+		<li> <strong>Frame Rate Gaming/ The Kave</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 250.390.1338</span><br>
+		6314 Metral Dr<br>
+		Nanaimo<br>, BC
+		V9S 1R8<br>
+		<br>
+		<h3>Richmond</h3><br>
+		<li> <strong>Net Arena</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 604-2321368</span><br>
+		130 - 8080 Leslie Road<br>
+		Richmond<br>, BC
+		V6X 4A8<br>
+		<br>
+		<h3>Vancouver</h3><br>
+		<li> <strong>DBA Digital Alliance</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> (604) 669-8801</span><br>
+		1108 Homer Street<br>
+		Vancouver<br>, BC
+		BCV6B2X6<br>
+		<br>
+		
+		<li> <strong><a href="https://web.archive.org/web/20040810153614/http://www.freecomputer.ca/" target="_blank">marpole computer zone</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 604-263-1616</span><br>
+		8484 granville st<br>
+		vancouver<br>, BC
+		v6p4z7<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20040810153614/http://www.steampowered.com/?area=cafe_directory&amp;country=CA">return to states / provinces</a></div>

@@ -1,0 +1,72 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+<h2>FIND THE PLACE<em> TO PLAY THE GAMES</em></h2><img src="/web/20040810105822im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+		<br>
+		<h3>AUSTRALIA</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Adelaide</h3><br>
+				<li> <strong>The Zone Internet Network Gaming Lounge</strong> <br>
+				238 Rundle Street<br>
+				Adelaide<br>
+				5000<br>
+				<br>
+				<h3>Brisbane</h3><br>
+				<li> <strong>Cyber Room Pty Ltd</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 610730129331</span><br>
+				PO Box 13676 - George Street<br>
+				Brisbane<br>
+				4003<br>
+				<br>
+				<h3>Cannington</h3><br>
+				<li> <strong>Digital Network Arena/</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 610892585455</span><br>
+				Unit 7/1377 - Albany Hwy.<br>
+				Cannington<br>
+				6107<br>
+				<br>
+				<h3>Miranda</h3><br>
+				<li> <strong>Headshot</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> (029) 526-1319</span><br>
+				Shop 1/629 The Kingsway<br>
+				Miranda<br>
+				2228<br>
+				<br>
+				<h3>Mooloolaba</h3><br>
+				<li> <strong>3BlokesAGerbil&aComputerLounge;</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 61 7 5478 3534</span><br>
+				Shop 5 104 Brisbane Road<br>
+				Mooloolaba<br>
+				4557<br>
+				<br>
+				<h3>QLD</h3><br>
+				<li> <strong>UpTime EGNI Pty Ltd/UpTime Games - Westside</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 61738442989</span><br>
+				15 Station Road - Indooroopilly<br>
+				QLD<br>
+				4170<br>
+				<br>
+				<h3>Surry Hills</h3><br>
+				<li> <strong>Central Fast Net</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> (029) 280-1567</span><br>
+				30-34 Chalmers Street<br>
+				Surry Hills<br>
+				2010<br>
+				<br>
+				<h3>Sydney, NSW</h3><br>
+				<li> <strong>Leecom Technologies Pty Ltd/Web Lounge</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 61402900971</span><br>
+				Basement 1, 636 George Street<br>
+				Sydney, NSW<br>
+				2000<br>
+				<br>
+				<h3>Victoria</h3><br>
+				<li> <strong>Zing Computing</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> 61354430796</span><br>
+				374 Hargreaves Street.<br>
+				Victoria<br>
+				3550<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20040810105822/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>
+
+<!-- begin footer -->

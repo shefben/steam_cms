@@ -1,0 +1,19 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>UNITED STATES - Vermont</h3>
+		<ul>
+	<h3>S. Burlington</h3><br>
+		<li> <strong>Elite Online Access</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (802) 383-0628</span><br>
+		340 Dorset St. - Suite 2<br>
+		S. Burlington, VT<br>
+		5403<br>
+		<br>
+		
+		<li> <strong>Elite Online Access</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> (802) 383-0628</span><br>
+		340 Dorset St. - Suite 2<br>
+		S. Burlington, VT<br>
+		5403<br>
+		<br>
+		</ul><br>&raquo; <a href="/web/20041211180253/http://www.steampowered.com/?area=cafe_directory&amp;country=US">return to states / provinces</a></div>

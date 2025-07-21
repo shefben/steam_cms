@@ -1,0 +1,75 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+		<br>
+		<h3>HUNGARY</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Budapest</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207142048/http://lanklub.vit.hu/" target="_blank">Fragpoint Zuglo</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 383-2036</span><br>
+				Egressy ut 108/c<br>
+				Budapest<br>
+				1148<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207142048/http://lanklub.vit.hu/" target="_blank">Fragpoint Zuglo</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 383-2036</span><br>
+				Egressy ut 108/c<br>
+				Budapest<br>
+				1148<br>
+				<br>
+				<h3>Kaposvar</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207142048/http://www.pc-arena.axelero.net/" target="_blank">Kapos-Bonitas Bt.</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 36-30-911 0501  </span><br>
+				48-as Ifjusag utja 46-48 <br>
+				Kaposvar<br>
+				7400<br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207142048/http://www.pc-arena.axelero.net/" target="_blank">Kapos-Bonitas Bt.</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 36-30-911 0501  </span><br>
+				48-as Ifjusag utja 46-48 <br>
+				Kaposvar<br>
+				7400<br>
+				<br>
+				<h3>Szarvas</h3><br>
+				<li> <strong><a href="https://web.archive.org/web/20041207142048/http://www.dierjob.hu /" target="_blank">Dier Job Bt.</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +36302281890 </span><br>
+				Ságvári u 5.<br>
+				Szarvas<br>
+				5540 <br>
+				<br>
+				
+				<li> <strong><a href="https://web.archive.org/web/20041207142048/http://www.dierjob.hu /" target="_blank">Dier Job Bt.</a></strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +36302281890 </span><br>
+				Ságvári u 5.<br>
+				Szarvas<br>
+				5540 <br>
+				<br>
+				<h3>Ujfeherto</h3><br>
+				<li> <strong>Arato 2003 Kft</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +36 30 9777-874</span><br>
+				Beke ter 2  <br>
+				Ujfeherto<br>
+				4244<br>
+				<br>
+				
+				<li> <strong>Arato 2003 Kft</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> +36 30 9777-874</span><br>
+				Beke ter 2  <br>
+				Ujfeherto<br>
+				4244<br>
+				<br>
+				<h3>Veszprem</h3><br>
+				<li> <strong>Shift 2004 Kft/Shift Online</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 36702703931</span><br>
+				Toborzo Utca 8<br>
+				Veszprem<br>
+				8200<br>
+				<br>
+				
+				<li> <strong>Shift 2004 Kft/Shift Online</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><font face="wingdings">(</font> 36702703931</span><br>
+				Toborzo Utca 8<br>
+				Veszprem<br>
+				8200<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20041207142048/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

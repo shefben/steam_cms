@@ -1,0 +1,22 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+<h2>FIND THE PLACE<em> TO PLAY THE GAMES</em></h2><img src="/web/20040810110121im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+		<br>
+		<h3>BRUNEI DARUSSALAM</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<h3>Jerudong</h3><br>
+				<li> <strong>Smiley Internet Cafe</strong> <span style="font-size: 10px; color: #999999;" title="phone number"><span style="font-family: Wingdings;">(</span> (673) 877-7055</span><br>
+				No. 1, Simpang 219 - Jalan Jerudong<br>
+				Jerudong<br>
+				BG3122<br>
+				<br>
+				
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20040810110121/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>

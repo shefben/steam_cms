@@ -1,0 +1,16 @@
+<!-- cyber cafes -->
+<div class="content" id="container">
+<h1>CYBER CAF&Eacute; DIRECTORY</h1>
+<h2>FIND THE PLACE<em> TO PLAY THE GAMES</em></h2><img src="/web/20040810110726im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+		<br>
+		<h3>CANADA</h3>
+		<table width="75%">
+		<tr>
+			<td valign="top">
+			<ul>
+	<li> <a href="/web/20040810110726/http://www.steampowered.com/?area=cafe_directory&amp;country=CA&amp;state=?">Uncategorized</a><li> <a href="/web/20040810110726/http://www.steampowered.com/?area=cafe_directory&amp;country=CA&amp;state=AB">Alberta</a><li> <a href="/web/20040810110726/http://www.steampowered.com/?area=cafe_directory&amp;country=CA&amp;state=BC">British Columbia</a><li> <a href="/web/20040810110726/http://www.steampowered.com/?area=cafe_directory&amp;country=CA&amp;state=MB">Manitoba</a><li> <a href="/web/20040810110726/http://www.steampowered.com/?area=cafe_directory&amp;country=CA&amp;state=ON">Ontario</a><li> <a href="/web/20040810110726/http://www.steampowered.com/?area=cafe_directory&amp;country=CA&amp;state=QC">Quebec</a><li> <a href="/web/20040810110726/http://www.steampowered.com/?area=cafe_directory&amp;country=CA&amp;state=YT">Yukon</a>
+			</ul>
+			</td>
+		</tr>
+		</table>
+		</ul><br>&raquo; <a href="/web/20040810110726/http://www.steampowered.com/?area=cafe_directory">return to countries</a></div>
