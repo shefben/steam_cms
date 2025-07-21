@@ -121,7 +121,7 @@ $content2003v1 = <<<HTML
 </td>
 </tr>
 <tr>
-<td><img border="0" height="5" src="images/Graphic_box.jpg" width="33"></td>
+<td><img border="0" height="5" src="Graphic_box.jpg" width="33"></td>
 </tr>
 </tbody></table>
 <p><font color="#969f8e" size="2">Steam is a broadband business platform for direct software delivery and content management. At its core, Steam is a distributed file system and shared set of technology components that can be implemented into any software application.<br>
@@ -147,7 +147,7 @@ $content2003v1 = <<<HTML
 <td align="left" colspan="2" height="225" valign="top" width="387" xpos="15">
 <table border="0" cellpadding="0" cellspacing="0" height="211" width="382">
 <tbody><tr height="211">
-<td background="images/Box_01.gif" height="211" width="382">
+<td background="Box_01.gif" height="211" width="382">
 <div align="center">
 <table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="208" showgridx="" showgridy="" width="360">
 <tbody><tr height="10">
@@ -165,7 +165,7 @@ $content2003v1 = <<<HTML
 </td>
 </tr>
 <tr>
-<td><img border="0" height="5" src="images/Graphic_box.jpg" width="33"></td>
+<td><img border="0" height="5" src="Graphic_box.jpg" width="33"></td>
 </tr>
 </tbody></table>
 <a name="contactanchor2"></a>
@@ -197,7 +197,7 @@ $content2003v1 = <<<HTML
 <td align="left" colspan="2" height="225" valign="top" width="397" xpos="402">
 <table border="0" cellpadding="0" cellspacing="0" height="211" width="382">
 <tbody><tr height="211">
-<td background="images/Box_01.gif" height="211" width="382">
+<td background="Box_01.gif" height="211" width="382">
 <div align="center">
 <table border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="196" showgridx="" showgridy="" width="360">
 <tbody><tr height="4">
@@ -215,7 +215,7 @@ $content2003v1 = <<<HTML
 </td>
 </tr>
 <tr>
-<td><img border="0" height="5" src="images/Graphic_box.jpg" width="33"></td>
+<td><img border="0" height="5" src="Graphic_box.jpg" width="33"></td>
 </tr>
 </tbody></table>
 <br>
@@ -259,7 +259,7 @@ $insertArray[] = [
 
 $content2003v2 = <<<HTML
 <img height="78" id="steam" src="steam_logo_alpha.gif" width="244"><br><br>
-<h2 id="page1">BECOME <em>PART OF THE STEAM COMMUNITY</em></h2><img alt="" height="6" src="images/Graphic_box.jpg" width="24"><br>
+<h2 id="page1">BECOME <em>PART OF THE STEAM COMMUNITY</em></h2><img alt="" height="6" src="Graphic_box.jpg" width="24"><br>
 <ul>
 <li>Play the latest Valve games (like Counter-Strike 1.6 beta!)</li>
 <li>Get automatic updates (no more patching!)</li>
@@ -273,7 +273,7 @@ $content2003v2 = <<<HTML
 <div class="box">
 {{ news_index_brief(3) }}
 </div>
-<h2 id="afterBox">WHAT <em>IS STEAM?</em></h2><img alt="" height="6" src="images/Graphic_box.jpg" width="24"><br>
+<h2 id="afterBox">WHAT <em>IS STEAM?</em></h2><img alt="" height="6" src="Graphic_box.jpg" width="24"><br>
 Steam is Valve&#39s new way of getting games into your hands ASAP. Games like <i>Half-Life</i>, <i>Counter-Strike</i>, and <i>Counter-Strike Condition Zero</i> are all being made available through Steam.<br>
 <nobr>
 <a href="http://half-life.com" onmouseout="out(5)" onmouseover="over(5)"><img align="absmiddle" alt="Half-Life" height="36" name="logo_hl" src="logo_hl.gif" vspace="8" width="36"></a> &nbsp;
