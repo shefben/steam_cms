@@ -134,3 +134,5 @@
 - Theme 2005 images copied from archive during asset move
 
 - Troubleshooter pages editable via admin with request logs
+- Storefront pages resolve theme assets with correct base URL
+- Storefront links no longer drop the CMS subdirectory when calculating the base path

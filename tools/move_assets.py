@@ -31,13 +31,13 @@ ASSETS = {
     'archived_steampowered/2005/storefront/img/search_blue_right_top.gif':
         'themes/2005_v1/storefront/images/img/search_blue_right_top.gif',
     'archived_steampowered/2005/storefront/img/storefront/sp_bottom_left.gif':
-        'themes/2005_v1/storefront/images/img/storefront/sp_bottom_left.gif',
+        'themes/2005_v1/storefront/images/sp_bottom_left.gif',
     'archived_steampowered/2005/storefront/img/storefront/sp_bottom_right.gif':
-        'themes/2005_v1/storefront/images/img/storefront/sp_bottom_right.gif',
+        'themes/2005_v1/storefront/images/sp_bottom_right.gif',
     'archived_steampowered/2005/storefront/img/storefront/sp_top_left.gif':
-        'themes/2005_v1/storefront/images/img/storefront/sp_top_left.gif',
+        'themes/2005_v1/storefront/images/sp_top_left.gif',
     'archived_steampowered/2005/storefront/img/storefront/sp_top_right.gif':
-        'themes/2005_v1/storefront/images/img/storefront/sp_top_right.gif',
+        'themes/2005_v1/storefront/images/sp_top_right.gif',
     'archived_steampowered/2005/storefront/img/tab_left_gray.gif':
         'themes/2005_v1/storefront/images/img/tab_left_gray.gif',
     'archived_steampowered/2005/storefront/img/tab_left_red.gif':

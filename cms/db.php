@@ -200,10 +200,12 @@ function cms_base_url(){
         return $root === '/' ? '' : $root;
     }
     $dir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
-    if(substr($dir, -10) === '/cms/admin'){
+    if (str_ends_with($dir, '/cms/admin')) {
         $dir = substr($dir, 0, -10);
-    }elseif(substr($dir, -4) === '/cms'){
+    } elseif (str_ends_with($dir, '/cms')) {
         $dir = substr($dir, 0, -4);
+    } elseif (str_ends_with($dir, '/storefront')) {
+        $dir = substr($dir, 0, -11);
     }
     return $dir === '/' ? '' : $dir;
 }
