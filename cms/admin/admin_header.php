@@ -68,6 +68,7 @@ $default_nav = [
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>cms_has_permission('manage_admins')?1:0],
     ['file'=>'roles.php','label'=>'Roles','visible'=>cms_has_permission('manage_admins')?1:0],
     ['file'=>'activity_log.php','label'=>'Activity Log','visible'=>cms_has_permission('manage_admins')?1:0],
+    ['file'=>'error_log.php','label'=>'Error Log','visible'=>cms_has_permission('manage_admins')?1:0],
     ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
     ['file'=>'storefront.php','label'=>'Storefront','visible'=>1],
     ['file'=>'storefront_main.php','label'=>'Main Page','visible'=>1],
@@ -113,6 +114,7 @@ $icons = [
     'admin_users.php'  => '👥',
     'roles.php'        => '🔑',
     'activity_log.php' => '📜',
+    'error_log.php'    => '🐞',
     'error_page.php'   => '❌',
     '../logout.php'    => '🚪',
 ];

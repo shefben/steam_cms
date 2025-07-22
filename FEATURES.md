@@ -136,3 +136,5 @@
 - Theme 2005 images copied from archive during asset move
 
 - Troubleshooter pages editable via admin with request logs
+- Global PHP error handler logs warnings and errors to a database table
+- Admin panel page "Error Log" lists captured PHP errors
