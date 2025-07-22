@@ -142,3 +142,4 @@
 
 - Global PHP error handler logs warnings and errors to a database table
 - Admin panel page "Error Log" lists captured PHP errors
+- Troubleshooter installer converts ISO-8859 pages to UTF-8 for MySQL
