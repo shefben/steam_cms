@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Cafe directory importer parses text files and deduplicates entries
+- Cafe directory seed SQL includes country and state data
 - Introduced role-based permission system with new roles admin page
 - Permissions on role and user forms presented as selectable checkboxes with all/none toggles
 - Admin dashboard graphs now use Chart.js with weekly/monthly toggles
@@ -153,3 +155,6 @@ All notable changes to this project will be documented in this file.
 
 - Fixed base URL when rendering storefront pages so theme assets load correctly
 - Corrected base path detection so storefront links under subdirectories resolve properly
+
+- Added global PHP error handler with database logging and admin Error Log page
+

@@ -59,6 +59,8 @@
 - Capsule admin interface uses searchable dropdowns with image previews
 - Capsule modal centers on screen and closes when clicking outside
 - Drag-and-drop ordering for cafe reps, directory, and categories
+- Cafe directory importer parses text files, deduplicates entries, and populates country/state navigation
+- Cafe directory SQL seed preloads all countries and states
 - Pagination links styled with spacing
 - FAQ sidebar includes direct link to question list
 - Logo preview path adapts to current theme
@@ -134,5 +136,9 @@
 - Theme 2005 images copied from archive during asset move
 
 - Troubleshooter pages editable via admin with request logs
+
 - Storefront pages resolve theme assets with correct base URL
 - Storefront links no longer drop the CMS subdirectory when calculating the base path
+
+- Global PHP error handler logs warnings and errors to a database table
+- Admin panel page "Error Log" lists captured PHP errors

@@ -1,4 +1,7 @@
 <?php
+if (!defined('CMS_ROOT')) {
+    define('CMS_ROOT', dirname(__DIR__));
+}
 function cms_get_db(){
     static $db;
     if($db) return $db;
@@ -630,4 +633,65 @@ function cms_help_icon(string $page, string $field): string
     $esc = htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     return '<span class="help-icon" data-help="' . $esc . '" tabindex="0" role="button" aria-label="Help">?</span>';
 }
+
+function cms_log_php_error(string $level, string $message, string $file, int $line): void
+{
+    try {
+        $db = cms_get_db();
+        $stmt = $db->prepare(
+            'INSERT INTO error_logs(level, message, file, line, created) VALUES(?,?,?,?,NOW())'
+        );
+        $stmt->execute([$level, $message, $file, $line]);
+    } catch (Throwable $e) {
+        // ignore logging failures
+    }
+}
+
+function cms_error_handler(int $errno, string $errstr, string $errfile, int $errline): bool
+{
+    $root = realpath(CMS_ROOT);
+    if ($root && str_starts_with(realpath($errfile), $root)) {
+        $levels = [
+            E_ERROR             => 'error',
+            E_WARNING           => 'warning',
+            E_PARSE             => 'parse',
+            E_NOTICE            => 'notice',
+            E_CORE_ERROR        => 'core_error',
+            E_CORE_WARNING      => 'core_warning',
+            E_COMPILE_ERROR     => 'compile_error',
+            E_COMPILE_WARNING   => 'compile_warning',
+            E_USER_ERROR        => 'user_error',
+            E_USER_WARNING      => 'user_warning',
+            E_USER_NOTICE       => 'user_notice',
+            E_STRICT            => 'strict',
+            E_RECOVERABLE_ERROR => 'recoverable_error',
+            E_DEPRECATED        => 'deprecated',
+            E_USER_DEPRECATED   => 'user_deprecated',
+        ];
+        $level = $levels[$errno] ?? 'error';
+        cms_log_php_error($level, $errstr, $errfile, $errline);
+    }
+    return false;
+}
+
+function cms_exception_handler(Throwable $e): void
+{
+    $root = realpath(CMS_ROOT);
+    if ($root && str_starts_with(realpath($e->getFile()), $root)) {
+        cms_log_php_error('exception', $e->getMessage(), $e->getFile(), $e->getLine());
+    }
+    throw $e;
+}
+
+function cms_shutdown_handler(): void
+{
+    $err = error_get_last();
+    if ($err && in_array($err['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE], true)) {
+        cms_error_handler($err['type'], $err['message'], $err['file'], $err['line']);
+    }
+}
+
+set_error_handler('cms_error_handler');
+set_exception_handler('cms_exception_handler');
+register_shutdown_function('cms_shutdown_handler');
 ?>

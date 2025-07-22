@@ -176,7 +176,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 address TEXT,
                 city_state TEXT,
                 zip TEXT,
-                ord INT DEFAULT 0
+                ord INT DEFAULT 0,
+                country CHAR(2) NOT NULL DEFAULT 'US',
+                state VARCHAR(100) NULL
             )");
             $pdo->exec("DROP TABLE IF EXISTS cafe_representatives");
             $pdo->exec("CREATE TABLE cafe_representatives(
@@ -345,6 +347,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 content TEXT,
                 PRIMARY KEY(page,field)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+            $pdo->exec("DROP TABLE IF EXISTS error_logs");
+            $pdo->exec("CREATE TABLE error_logs(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                level VARCHAR(20),
+                message TEXT,
+                file TEXT,
+                line INT,
+                created DATETIME DEFAULT CURRENT_TIMESTAMP
+            )");
             function split_sql_statements($sql)
             {
                 $stmts = [];
