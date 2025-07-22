@@ -148,3 +148,9 @@ All notable changes to this project will be documented in this file.
 - Storefront CSS and border images copied via move_assets.py instead of tracking binaries
 
 - 2005 theme GIF assets installed by move_assets.py and removed from the repo
+- Runtime caching added for settings and theme data, reducing database queries
+- Gzip compression and asset path caching further boost rendering performance
+- News pages use publish_at indexes and runtime caching for faster queries
+- Storefront pages cache sidebar links and dropdown data
+- New indexes speed up storefront search queries
+- Cached HTML pages auto-expire when settings or content updates occur

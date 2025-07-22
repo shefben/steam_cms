@@ -6,6 +6,36 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
 
+function cms_init_output_buffer(): void
+{
+    static $started = false;
+    if ($started) {
+        return;
+    }
+    $started = true;
+    if (cms_get_setting('gzip', '0') === '1' && extension_loaded('zlib')) {
+        ob_start('ob_gzhandler');
+    } else {
+        ob_start();
+    }
+}
+
+function cms_twig_cache_dir(): string
+{
+    return __DIR__.'/cache/twig';
+}
+
+function cms_clear_twig_cache(): void
+{
+    $dir = cms_twig_cache_dir();
+    if (!is_dir($dir)) {
+        return;
+    }
+    foreach (glob($dir.'/*') as $file) {
+        @unlink($file);
+    }
+}
+
 function cms_split_title(string $title): string
 {
     $words = preg_split('/\s+/', trim($title));
@@ -135,7 +165,11 @@ function cms_twig_env(string $tpl_dir): Environment
     static $env;
     if (!$env) {
         $loader = new FilesystemLoader($tpl_dir);
-        $env = new Environment($loader);
+        $cacheDir = cms_twig_cache_dir();
+        if (!is_dir($cacheDir)) {
+            mkdir($cacheDir, 0777, true);
+        }
+        $env = new Environment($loader, ['cache' => $cacheDir, 'auto_reload' => true]);
         $env->addFunction(new TwigFunction('header', function(bool $withButtons = true) {
             $theme = cms_get_current_theme();
             return cms_render_header($theme, $withButtons);
@@ -311,9 +345,8 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('featured_capsules', function () {
-            $db = cms_get_db();
             $caps = [];
-            foreach ($db->query('SELECT position,appid,image FROM store_capsules') as $row) {
+            foreach (cms_get_store_capsules() as $row) {
                 $caps[$row['position']] = $row;
             }
             $base = cms_base_url();
@@ -417,9 +450,12 @@ function cms_render_string(string $html, array $vars, string $tpl_dir): string
 
 function cms_render_template(string $path, array $vars = []): void
 {
+    cms_init_output_buffer();
     $cache_enabled = cms_get_setting('enable_cache', '0') === '1';
     $cache_file = __DIR__.'/cache/'.md5($path).'.html';
-    if ($cache_enabled && file_exists($cache_file) && filemtime($cache_file) >= filemtime($path)) {
+    if ($cache_enabled && file_exists($cache_file)
+        && filemtime($cache_file) >= filemtime($path)
+        && filemtime($cache_file) >= cms_cache_version()) {
         readfile($cache_file);
         return;
     }
@@ -452,30 +488,39 @@ function cms_render_template(string $path, array $vars = []): void
     if ($css_dir === '.') {
         $css_dir = '';
     }
-    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir, $base_url, $theme) {
+    $attrCache = [];
+    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir, $base_url, $theme, &$attrCache) {
         $path = $m[2];
+        if (isset($attrCache[$path])) {
+            return $m[1].'="'.$attrCache[$path].'"';
+        }
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
+            $attrCache[$path] = $path;
             return $m[0];
         }
         if (preg_match('~^/?themes/~i', $path)) {
+            $attrCache[$path] = $path;
             return $m[1].'="'.$path.'"';
         }
         $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
         if (!in_array($ext, $assets, true)) {
+            $attrCache[$path] = $path;
             return $m[0];
         }
         if ($ext === 'css') {
             if (str_starts_with($path, './')) {
                 $path = ltrim(substr($path, 2), '/');
                 $base = $base_url ? rtrim($base_url, '/'). '/' : '';
-                return $m[1].'="'.$base.$path.'"';
+                $attrCache[$m[2]] = $base.$path;
+                return $m[1].'="'.$attrCache[$m[2]].'"';
             }
             $dir  = $css_dir;
-            $path = basename($path);
-            $path = cms_rewrite_css_file($theme, ($dir ? $dir.'/' : '').$path, $vars['THEME_URL'], $base_url);
-            return $m[1].'="'.$path.'"';
+            $file = basename($path);
+            $new  = cms_rewrite_css_file($theme, ($dir ? $dir.'/' : '').$file, $vars['THEME_URL'], $base_url);
+            $attrCache[$m[2]] = $new;
+            return $m[1].'="'.$new.'"';
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
@@ -484,28 +529,37 @@ function cms_render_template(string $path, array $vars = []): void
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
         }
-        return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
+        $attrCache[$m[2]] = $vars['THEME_URL'].'/'.$path;
+        return $m[1].'="'.$attrCache[$m[2]].'"';
     }, $html);
 
-    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url) {
+    $urlCache = [];
+    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url, &$urlCache) {
         $path = $m[2];
+        if (isset($urlCache[$path])) {
+            return 'url('.$m[1].$urlCache[$path].$m[1].')';
+        }
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
+            $urlCache[$path] = $path;
             return $m[0];
         }
         if (preg_match('~^/?themes/~i', $path)) {
+            $urlCache[$path] = $path;
             return 'url('.$m[1].$path.$m[1].')';
         }
         $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
         if (!in_array($ext, $assets, true)) {
+            $urlCache[$path] = $path;
             return $m[0];
         }
         if ($ext === 'css') {
             if (str_starts_with($path, './')) {
                 $path = ltrim(substr($path, 2), '/');
                 $base = $base_url ? rtrim($base_url, '/'). '/' : '';
-                return 'url('.$m[1].$base.$path.$m[1].')';
+                $urlCache[$m[2]] = $base.$path;
+                return 'url('.$m[1].$urlCache[$m[2]].$m[1].')';
             }
             $dir  = $css_dir;
             $path = basename($path);
@@ -517,26 +571,35 @@ function cms_render_template(string $path, array $vars = []): void
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
         }
-        return 'url('.$m[1].$vars['THEME_URL'].'/'.$path.$m[1].')';
+        $urlCache[$m[2]] = $vars['THEME_URL'].'/'.$path;
+        return 'url('.$m[1].$urlCache[$m[2]].$m[1].')';
     }, $html);
 
-    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars) {
+    $imgCache = [];
+    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars, &$imgCache) {
         $path = $m[2];
+        if (isset($imgCache[$path])) {
+            return 'newImage('.$m[1].$imgCache[$path].$m[1].')';
+        }
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
+            $imgCache[$path] = $path;
             return $m[0];
         }
         if (preg_match('~^/?themes/~i', $path)) {
+            $imgCache[$path] = $path;
             return 'newImage('.$m[1].$path.$m[1].')';
         }
         $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $images = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
         if (!in_array($ext, $images, true)) {
+            $imgCache[$path] = $path;
             return $m[0];
         }
         $path = ltrim($path, './');
         $path = preg_replace('~^(?:img|images)/~', '', $path);
-        return 'newImage('.$m[1].$vars['THEME_URL'].'/images/'.$path.$m[1].')';
+        $imgCache[$m[2]] = $vars['THEME_URL'].'/images/'.$path;
+        return 'newImage('.$m[1].$imgCache[$m[2]].$m[1].')';
     }, $html);
 
 
@@ -551,6 +614,7 @@ function cms_render_template(string $path, array $vars = []): void
 
 function cms_render_template_theme(string $path, string $theme, array $vars = []): void
 {
+    cms_init_output_buffer();
     cms_set_current_theme($theme);
     $tpl_dir = dirname($path);
     $subdir   = $vars['theme_subdir'] ?? '';
@@ -646,23 +710,31 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         return 'url('.$m[1].$vars['THEME_URL'].'/'.$path.$m[1].')';
     }, $html);
 
-    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars) {
+    $imgCache = [];
+    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars, &$imgCache) {
         $path = $m[2];
+        if (isset($imgCache[$path])) {
+            return 'newImage('.$m[1].$imgCache[$path].$m[1].')';
+        }
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
+            $imgCache[$path] = $path;
             return $m[0];
         }
         if (preg_match('~^/?themes/~i', $path)) {
+            $imgCache[$path] = $path;
             return 'newImage('.$m[1].$path.$m[1].')';
         }
         $p   = parse_url($path, PHP_URL_PATH) ?? '';
         $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
         $images = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
         if (!in_array($ext, $images, true)) {
+            $imgCache[$path] = $path;
             return $m[0];
         }
         $path = ltrim($path, './');
         $path = preg_replace('~^(?:img|images)/~', '', $path);
-        return 'newImage('.$m[1].$vars['THEME_URL'].'/images/'.$path.$m[1].')';
+        $imgCache[$m[2]] = $vars['THEME_URL'].'/images/'.$path;
+        return 'newImage('.$m[1].$imgCache[$m[2]].$m[1].')';
     }, $html);
 
     echo $html;

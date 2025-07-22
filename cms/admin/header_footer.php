@@ -26,6 +26,7 @@ if(isset($_POST['reorder']) && isset($_POST['order'])){
     foreach($reordered as $ord=>$b){
         $ins->execute([$theme,$page,$ord,$data['logo'],$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$spacer]);
     }
+    cms_touch_cache_version();
     if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
         echo 'ok';
     }
@@ -47,6 +48,7 @@ if(isset($_POST['upload_logo']) && isset($_FILES['new_logo']) && is_uploaded_fil
     move_uploaded_file($_FILES['new_logo']['tmp_name'], $path);
     $data['logo'] = '/img/' . $fname;
     $logo_files[] = $fname;
+    cms_touch_cache_version();
     echo '<p>Logo uploaded.</p>';
 }
 
@@ -102,6 +104,7 @@ if(isset($_POST['save'])){
     $logo_overrides = trim($_POST['logo_overrides']);
     $data = cms_get_theme_header_data($theme, $page);
     $spacer = $data['spacer'] ?? '';
+    cms_touch_cache_version();
     echo '<p>Settings saved.</p>';
 }
 if(isset($_POST['add'])){

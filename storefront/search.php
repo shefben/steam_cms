@@ -66,8 +66,8 @@ $stmt->execute($params);
 $apps = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Dropdown values
-$developers = $db->query('SELECT name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
-$categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
+$developers = cms_get_store_developers();
+$categories = cms_get_store_categories();
 $prices = [
     ''       => '-',
     '1'      => 'Third-party',

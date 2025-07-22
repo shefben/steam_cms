@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__.'/db.php';
 
+$GLOBALS['cms_news_cache'] = [];
+
+function cms_clear_news_cache(): void {
+    $GLOBALS['cms_news_cache'] = [];
+}
+
 function cms_news_url($id, $archive = false){
     $id = (int)$id;
     return 'index.php?area=news' . ($archive ? '&archive=yes' : '') . '&id=' . $id;
@@ -24,6 +30,10 @@ function cms_save_news_settings($data){
 function cms_render_news($type,$count=null){
     $settings = cms_get_news_settings();
     if($count===null) $count = $settings['articles_per_page'];
+    $cacheKey = implode('|', [$type, (int)$count, $settings['source'], cms_get_setting('news_year_only','1'), cms_get_setting('theme','2004')]);
+    if (isset($GLOBALS['cms_news_cache'][$cacheKey])) {
+        return $GLOBALS['cms_news_cache'][$cacheKey];
+    }
     $db = cms_get_db();
     // MySQL/MariaDB does not allow binding parameters for the LIMIT clause in
     // some versions. Cast $count to an integer and inject it directly to avoid
@@ -148,6 +158,7 @@ function cms_render_news($type,$count=null){
     if($type==='index_summary_date'){
         $out .= "<p align=\"righ\t\"><sub><a class=\"BodyGreen\" href=\"index.php?area=news\" style=\"color: Black; font-weight: bold;\">read more &gt;</a>&nbsp;</sub></p>";
     }
+    $GLOBALS['cms_news_cache'][$cacheKey] = $out;
     return $out;
 }
 ?>

@@ -1,5 +1,6 @@
 <?php
 require_once 'admin_header.php';
+require_once __DIR__.'/../template_engine.php';
 cms_require_permission('manage_settings');
 $gzip = cms_get_setting('gzip','0');
 $cache = cms_get_setting('enable_cache','0');
@@ -11,6 +12,9 @@ if(isset($_POST['save'])){
     cms_set_setting('enable_cache',$cache);
     if(isset($_POST['clear_cache'])){
         foreach(glob(__DIR__.'/../cache/*.html') as $f) unlink($f);
+        cms_clear_twig_cache();
+        cms_clear_runtime_caches();
+        cms_touch_cache_version();
     }
     echo '<p>Settings saved.</p>';
 }

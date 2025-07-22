@@ -40,6 +40,7 @@ if(isset($_POST['autosave'])){
         $stmt->execute([$title,$author,$pub,$pub,$content]);
         $id = $db->lastInsertId();
     }
+    cms_touch_cache_version();
     cms_admin_log('Autosaved news article '.$id);
     header('Content-Type: application/json');
     echo json_encode(['time'=>date('H:i:s'),'id'=>$id]);
@@ -61,6 +62,7 @@ if(isset($_POST['save'])){
         $id = $db->lastInsertId();
         cms_admin_log(($status==='scheduled'?'Scheduled':'Created').' news article '.$id);
     }
+    cms_touch_cache_version();
     header('Location: news.php');
     exit;
 }

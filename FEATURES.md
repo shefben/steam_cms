@@ -132,3 +132,8 @@
 - Asset mover script installs 2005 storefront CSS and border graphics
 
 - Theme 2005 images copied from archive during asset move
+- Runtime caches minimize database hits for settings and theme assets
+- Gzip compression and smarter asset rewriting improve page delivery speed
+- News listings cached per request and queries leverage publish_at indexes
+- Storefront lists cache categories and developers for faster browsing
+- Cached pages automatically regenerate when underlying data or templates change

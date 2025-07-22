@@ -9,7 +9,7 @@ $content .= '<h1>STEAM NEWS</h1>';
 if(isset($_GET['news']) || isset($_GET['id'])){
     $id = isset($_GET['news']) ? (int)$_GET['news'] : (int)$_GET['id'];
     $is_archive = (isset($_GET['archive']) && $_GET['archive'] === 'yes');
-    $stmt = $db->prepare('SELECT * FROM news WHERE id=? AND status="published"');
+    $stmt = $db->prepare('SELECT title,author,publish_date,content FROM news WHERE id=? AND publish_at<=NOW() AND status="published"');
     $stmt->execute([$id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $content .= '<h2>VALVE <em>NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br><div class="narrower">';

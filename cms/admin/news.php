@@ -10,6 +10,7 @@ if(isset($_POST['reorder']) && isset($_POST['order'])){
     $ids = array_map('intval', explode(',', $_POST['order']));
     cms_set_setting('news_order', json_encode($ids));
     cms_admin_log('Reordered news articles');
+    cms_touch_cache_version();
     if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
         echo 'ok';
     }else{
@@ -24,6 +25,7 @@ if(isset($_POST['delete'])){
     $delId = (int)$_POST['delete'];
     $stmt->execute([$delId]);
     cms_admin_log('Deleted news article '.$delId);
+    cms_touch_cache_version();
 }
 // move up/down by swapping publish dates
 if(isset($_GET['move']) && isset($_GET['id'])){
@@ -46,6 +48,7 @@ if(isset($_GET['move']) && isset($_GET['id'])){
                 $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$posts[$i]['publish_at'],$next['id']]);
                 $db->commit();
             }
+            cms_touch_cache_version();
             break;
         }
     }
