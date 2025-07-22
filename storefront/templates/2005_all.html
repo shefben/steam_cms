@@ -35,7 +35,7 @@
                         <tr><th>ID</th><th>Name</th><th>Categories</th><th>Developer</th><th>Price</th><th>Avail</th></tr>
                         <?php foreach($apps as $a): ?>
                         <tr>
-                          <td><a href="../index.php?area=game&AppId=<?php echo $a['appid'] ?>"><?php echo $a['appid'] ?></a></td>
+                          <td><a href="index.php?area=game&AppId=<?php echo $a['appid'] ?>"><?php echo $a['appid'] ?></a></td>
                           <td><?php echo htmlspecialchars($a['name']) ?></td>
                           <td><?php echo htmlspecialchars($a['cats']) ?></td>
                           <td><?php echo htmlspecialchars($a['developer']) ?></td>

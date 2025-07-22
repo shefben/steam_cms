@@ -37,7 +37,7 @@
 <div style="position: relative; width: 590px; height: 511px;">
   <!-- Top Game Image -->
   {% if capsules.top is defined and capsules.top %}
-  <a href="{{ BASE }}/index.php?area=game&AppId={{ capsules.top.appid }}">
+  <a href="{{ BASE }}/storefront/index.php?area=game&AppId={{ capsules.top.appid }}">
     <img src="{{ BASE }}/storefront/images/capsules/{{ capsules.top.image }}"
          style="position: absolute; left: 1px; top: 1px; width: 588px; height: 98px; border: 0;"
          alt="Top capsule" border="0"/>
@@ -51,7 +51,7 @@
   
   <!-- Middle Game Image -->
   {% if capsules.middle is defined and capsules.middle %}
-  <a href="{{ BASE }}/index.php?area=game&AppId={{ capsules.middle.appid }}">
+  <a href="{{ BASE }}/storefront/index.php?area=game&AppId={{ capsules.middle.appid }}">
     <img src="{{ BASE }}/storefront/images/capsules/{{ capsules.middle.image }}"
          style="position: absolute; left: 0; top: 112px; width: 589px; height: 228px; border: 0;"
          alt="Middle capsule" border="0"/>
@@ -65,7 +65,7 @@
   
   <!-- Bottom-Left Game Image -->
   {% if capsules.bottom_left is defined and capsules.bottom_left %}
-  <a href="{{ BASE }}/index.php?area=game&AppId={{ capsules.bottom_left.appid }}">
+  <a href="{{ BASE }}/storefront/index.php?area=game&AppId={{ capsules.bottom_left.appid }}">
     <img src="{{ BASE }}/storefront/images/capsules/{{ capsules.bottom_left.image }}"
          style="position: absolute; left: 0; top: 352px; width: 288px; height: 158px; border: 0;"
          alt="Bottom left capsule" border="0"/>
@@ -79,7 +79,7 @@
   
   <!-- Bottom-Right Game Image -->
   {% if capsules.bottom_right is defined and capsules.bottom_right %}
-  <a href="{{ BASE }}/index.php?area=game&AppId={{ capsules.bottom_right.appid }}">
+  <a href="{{ BASE }}/storefront/index.php?area=game&AppId={{ capsules.bottom_right.appid }}">
     <img src="{{ BASE }}/storefront/images/capsules/{{ capsules.bottom_right.image }}"
          style="position: absolute; left: 301px; top: 352px; width: 289px; height: 158px; border: 0;"
          alt="Bottom right capsule" border="0"/>
