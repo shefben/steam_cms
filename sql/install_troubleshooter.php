@@ -1,7 +1,7 @@
 <?php
 $base = __DIR__ . '/../troubleshooter/live';
 $langs = ['en','fr','de','it','es'];
-$stmt = $pdo->prepare('INSERT INTO troubleshooter_pages(lang,slug,title,content,created,updated) VALUES(?,?,?,?,NOW(),NOW())');
+$tsStmt = $pdo->prepare('INSERT INTO troubleshooter_pages(lang,slug,title,content,created,updated) VALUES(?,?,?,?,NOW(),NOW())');
 foreach ($langs as $lang) {
     $dir = "$base/$lang";
     if (!is_dir($dir)) continue;
@@ -15,7 +15,7 @@ foreach ($langs as $lang) {
         }
         preg_match('/<h1>([^<]*)<\/h1>/', $html, $m);
         $title = $m[1] ?? $slug;
-        $stmt->execute([$lang,$slug,$title,$html]);
+        $tsStmt->execute([$lang,$slug,$title,$html]);
     }
 }
 ?>
