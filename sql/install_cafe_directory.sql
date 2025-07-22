@@ -16,30 +16,18 @@ INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,sta
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Thunder LAN','551239397850','Rua Sumatra, 293','Sao Jose dos Campos','12235-410',3,'BR',NULL);
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('http://www.prin.com.br/','Lan Shots','55-12-3922-9815','Shoping Colinas Av. Sao Joao, 2200 NS 30B - Sao Jose Dos Campos, SP 1224370','Sao Jose dos Campos SP','12242-840',4,'BR',NULL);
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('http://www.ovnilanhouse.com.br/','Ovni Net & Game','5511 - 69730083','Av Nova Cantareira 1243 - Agua Fria','São Paulo','02331002',5,'BR',NULL);
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','EVO Internet Cafe','403) 608-7733','102-4015 17th Avenue SE','Calgary',', AB
-		T2AOS8',0,'CA','AB');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Berni Sperling Ltd','250 247 0170','#6-580 North Road','Gabriola',', BC
-		V0R 1X3',0,'CA','BC');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('http://www.twomutts.ca/','TwoMutts','1-250-247-0170','580 North Rd.','Gabriola Is.',', BC
-		V0R 1X0',1,'CA','BC');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Frame Rate Gaming/ The Kave','604-2321368','130 - 8080 Leslie Road','Richmond',', BC
-		V6X 4A8',2,'CA','BC');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','DBA Digital Alliance','604) 669-8801','1108 Homer Street','Vancouver',', BC
-		BCV6B2X6',3,'CA','BC');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('http://www.freecomputer.ca/','marpole computer zone','604-263-1616','8484 granville st','vancouver',', BC
-		v6p4z7',4,'CA','BC');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Fast Computer Services','204) 474-5010','6-709 Corydon Avenue','Winnipeg',', MB
-		R3N1L7',0,'CA','MB');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Netplay','905-762-1595','505 Highway 7 East Unit# 61','Markham',', ON
-		L3T 7T1',0,'CA','ON');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Studio 99','416)226-6882','5926A Yonge Street','Toronto',', ON
-		M2M 3V9',1,'CA','ON');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Chez Alain','737-2914','4994 Queen Mary','Montreal',', QC
-		h3w1x2',0,'CA','QC');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Meg@Zone','418) 821-0024','2485 Boul. Saint-Anne','Quebec',', QC
-		G1J1Y4',1,'CA','QC');
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','CyberZone','418) 650-9434','2480 Chemin Ste-Foy - Local 001','Ste-Foy',', QC
-		G1V1T6',2,'CA','QC');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','EVO Internet Cafe','403) 608-7733','102-4015 17th Avenue SE','Calgary, AB','T2AOS8',0,'CA','AB');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Berni Sperling Ltd','250 247 0170','#6-580 North Road','Gabriola, BC','V0R 1X3',0,'CA','BC');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('http://www.twomutts.ca/','TwoMutts','1-250-247-0170','580 North Rd.','Gabriola Is., BC','V0R 1X0',1,'CA','BC');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Frame Rate Gaming/ The Kave','604-2321368','130 - 8080 Leslie Road','Richmond, BC','V6X 4A8',2,'CA','BC');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','DBA Digital Alliance','604) 669-8801','1108 Homer Street','Vancouver, BC','BCV6B2X6',3,'CA','BC');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('http://www.freecomputer.ca/','marpole computer zone','604-263-1616','8484 granville st','vancouver, BC','v6p4z7',4,'CA','BC');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Fast Computer Services','204) 474-5010','6-709 Corydon Avenue','Winnipeg, MB','R3N1L7',0,'CA','MB');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Netplay','905-762-1595','505 Highway 7 East Unit# 61','Markham, ON','L3T 7T1',0,'CA','ON');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Studio 99','416)226-6882','5926A Yonge Street','Toronto, ON','M2M 3V9',1,'CA','ON');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Chez Alain','737-2914','4994 Queen Mary','Montreal, QC','h3w1x2',0,'CA','QC');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Meg@Zone','418) 821-0024','2485 Boul. Saint-Anne','Quebec, QC','G1J1Y4',1,'CA','QC');
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','CyberZone','418) 650-9434','2480 Chemin Ste-Foy - Local 001','Ste-Foy, QC','G1V1T6',2,'CA','QC');
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Gecko''z Game Centre','867-668-5177','95 Lewes Blvd.','Whitehorse, YT','Y1A 3J4',0,'CA','YT');
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Technopia NET Ltda.','571) 616-1000','Calle 100 NO. 14-63 Piso 3','Bogoto, DC','00000',0,'CO',NULL);
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Area51 Internetcafe','496021439626','Duccastr.9','Aschaffenburg','63739',0,'DE',NULL);
@@ -94,7 +82,7 @@ INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,sta
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','EPNI Ultimagate SA/Gate 104','33153631414','9 Rue Huysmans','Paris','75006',2,'FR',NULL);
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','XS-ARENA','33673995261','43, bld Sebstopol','Paris','75001',3,'FR',NULL);
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('http://net-arena.fr/','Net @rena 83','049) 430-7658','place des resistants','Saint Mandrier sur mer','83430',4,'FR',NULL);
-INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Sid\''s World','33389677330','32 Rue de Mulhouse','Saint-Louis, Alsace','68300',5,'FR',NULL);
+INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Sid''s World','33389677330','32 Rue de Mulhouse','Saint-Louis, Alsace','68300',5,'FR',NULL);
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Surf','00306973802838','Mihail Sfakianaki 10','Agios Nikolaos, Crete','72100',0,'GR',NULL);
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('','Diktyo Internet Cafe','306932430172','Nedontos 75','Kalamata, Messinia','24100',1,'GR',NULL);
 INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord,country,state) VALUES('http://lanklub.vit.hu/','Fragpoint Zuglo','383-2036','Egressy ut 108/c','Budapest','1148',0,'HU',NULL);
