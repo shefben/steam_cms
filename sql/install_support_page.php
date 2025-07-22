@@ -6,9 +6,9 @@ $supportPages = [
     ['2005_v1','2005_v1'],
     ['2005_v2','2005_v2'],
 ];
-$stmt = $pdo->prepare('INSERT INTO support_pages(version,years,content,created,updated) VALUES(?,?,?,?,?)');
+$pageStmt = $pdo->prepare('INSERT INTO support_pages(version,years,content,created,updated) VALUES(?,?,?,?,?)');
 foreach ($supportPages as $sp) {
-    $stmt->execute([$sp[0], $sp[1], $supportContent, date('Y-m-d H:i:s'), date('Y-m-d H:i:s')]);
+    $pageStmt->execute([$sp[0], $sp[1], $supportContent, date('Y-m-d H:i:s'), date('Y-m-d H:i:s')]);
     $id = $pdo->lastInsertId();
     $faqStmt = $pdo->prepare('INSERT INTO support_page_faqs(support_id,faqid1,faqid2,ord) VALUES(?,?,?,?)');
     $faqs = [
