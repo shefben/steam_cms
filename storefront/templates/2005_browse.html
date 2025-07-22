@@ -34,13 +34,13 @@
                         <span class="browse_section_header">Categories</span><br>
                         <ul>
                         <?php foreach($categories as $c): ?>
-                         <li><a href="../index.php?area=search&Browse=1&category=<?php echo $c['id'] ?>"><?php echo htmlspecialchars($c['name'])?></a></li>
+                         <li><a href="index.php?area=search&Browse=1&category=<?php echo $c['id'] ?>"><?php echo htmlspecialchars($c['name'])?></a></li>
                         <?php endforeach; ?>
                         </ul>
                         <span class="browse_section_header">Developers</span><br>
                         <ul>
                         <?php foreach($developers as $d): ?>
-                         <li><a href="../index.php?area=search&Browse=1&developer=<?php echo $d['id']?>"><?php echo htmlspecialchars($d['name'])?></a></li>
+                         <li><a href="index.php?area=search&Browse=1&developer=<?php echo $d['id']?>"><?php echo htmlspecialchars($d['name'])?></a></li>
                         <?php endforeach; ?>
                         </ul>
                     </span>
