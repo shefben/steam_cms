@@ -152,4 +152,9 @@ All notable changes to this project will be documented in this file.
 - 2005 theme GIF assets installed by move_assets.py and removed from the repo
 
 - Added troubleshooter management and support request tracking
+
+- Fixed base URL when rendering storefront pages so theme assets load correctly
+- Corrected base path detection so storefront links under subdirectories resolve properly
+
 - Added global PHP error handler with database logging and admin Error Log page
+
