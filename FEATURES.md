@@ -18,6 +18,7 @@
 - Logout link pinned to bottom of admin sidebar for consistent navigation
 - Full Steam Subscriber Agreement installed from archive text
 - Batch script relocates storefront capsule images from archived folders
+- Storefront URLs automatically prepend the CMS root path for subdirectory setups
 - 2005v1 index template cleansed of hard-coded banner and corrects header include
 - Template engine updated for PHP 8 compatibility
 - Theme URL rewriting honors main CSS location without forcing subfolders

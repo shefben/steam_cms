@@ -305,7 +305,7 @@ function cms_twig_env(string $tpl_dir): Environment
                 }
                 $label = htmlspecialchars($ln['label']);
                 $url   = $ln['url'];
-                if (str_starts_with($url, '/storefront/')) {
+                if (str_starts_with($url, '/')) {
                     $url = ($base ? rtrim($base, '/') : '') . $url;
                 }
                 $url = htmlspecialchars($url);
