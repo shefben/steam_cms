@@ -2,6 +2,10 @@
 require_once __DIR__.'/../cms/template_engine.php';
 require_once __DIR__.'/../cms/db.php';
 $db = cms_get_db();
+$lang = $_GET['l'] ?? 'english';
+$s    = $_GET['s'] ?? '';
+$i    = $_GET['i'] ?? '';
+$a    = $_GET['a'] ?? '';
 $categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
 $developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
 $links = cms_load_store_links(__FILE__);
@@ -9,7 +13,16 @@ $links = cms_load_store_links(__FILE__);
 $theme = cms_get_setting('theme','2005_v2');
 $tpl_body = dirname(__DIR__).'/themes/2005_v1/storefront/layout/2005_browse.twig';
 
-$params = ['categories'=>$categories,'developers'=>$developers,'links'=>$links, 'theme_subdir' => 'storefront'];
+$params = [
+    'categories'  => $categories,
+    'developers'  => $developers,
+    'links'       => $links,
+    'lang'        => $lang,
+    's'           => $s,
+    'i'           => $i,
+    'a'           => $a,
+    'theme_subdir' => 'storefront'
+];
 ob_start();
 cms_render_template_theme($tpl_body, '2005_v1', $params);
 $body = ob_get_clean();

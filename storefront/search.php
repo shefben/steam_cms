@@ -17,13 +17,22 @@ $sort_by    = $_GET['sort_by'] ?? 'Name';
 $sort_last  = $_GET['sort_last'] ?? $sort_by;
 $sort_order = strtoupper($_GET['sort_order'] ?? 'ASC') === 'DESC' ? 'DESC' : 'ASC';
 $browse     = $_GET['browse'] ?? '1';
+$lang       = $_GET['l'] ?? 'english';
+$s          = $_GET['s'] ?? '';
+$i          = $_GET['i'] ?? '';
+$a          = $_GET['a'] ?? '';
 
 // Build canonical URL for links
 function build_url(array $params){
-    $order = ['area','term','type','category','developer','price','order','sort_by','sort_last','sort_order','browse'];
+    $order = [
+        'area','term','type','category','developer','price','order',
+        'sort_by','sort_last','sort_order','browse','l','s','i','a'
+    ];
     $out = [];
-    foreach($order as $k){ $out[$k] = $params[$k] ?? ''; }
-    return 'index.php?'.http_build_query($out, '', '&');
+    foreach ($order as $k) {
+        $out[$k] = $params[$k] ?? '';
+    }
+    return 'index.php?' . http_build_query($out, '', '&');
 }
 
 $base_params = [
@@ -37,7 +46,11 @@ $base_params = [
     'sort_by'    => $sort_by,
     'sort_last'  => $sort_last,
     'sort_order' => $sort_order,
-    'browse'     => $browse
+    'browse'     => $browse,
+    'l'          => $lang,
+    's'          => $s,
+    'i'          => $i,
+    'a'          => $a
 ];
 
 // ------------------ Query Builder ------------------
@@ -105,9 +118,13 @@ cms_render_template_theme($tpl_body, '2005_v1', [
     'developer'=>$developer,
     'category'=>$category,
     'price'=>$price,
-    'sort_last'=>$sort_last,
-    'sort_order'=>$sort_order,
-    'links'=>$links,
+    'sort_last'   => $sort_last,
+    'sort_order'  => $sort_order,
+    'links'       => $links,
+    'lang'        => $lang,
+    's'           => $s,
+    'i'           => $i,
+    'a'           => $a,
     'theme_subdir' => 'storefront',
 ]);
 $body = ob_get_clean();

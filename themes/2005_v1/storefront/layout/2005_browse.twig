@@ -34,13 +34,13 @@
                         <span class="browse_section_header">Categories</span><br>
                         <ul>
                         {% for c in categories %}
-                         <li><a href="index.php?area=search&Browse=1&category={{ c.id }}">{{ c.name }}</a></li>
+                         <li><a href="index.php?area=search&l={{ lang }}&s={{ s }}&i={{ i }}&a={{ a }}&Browse=1&category={{ c.id }}">{{ c.name }}</a></li>
                         {% endfor %}
                         </ul>
                         <span class="browse_section_header">Developers</span><br>
                         <ul>
                         {% for d in developers %}
-                         <li><a href="index.php?area=search&Browse=1&developer={{ d.id }}">{{ d.name }}</a></li>
+                         <li><a href="index.php?area=search&l={{ lang }}&s={{ s }}&i={{ i }}&a={{ a }}&Browse=1&developer={{ d.id }}">{{ d.name }}</a></li>
                         {% endfor %}
                         </ul>
                     </span>

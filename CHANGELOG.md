@@ -159,3 +159,5 @@ All notable changes to this project will be documented in this file.
 - Added global PHP error handler with database logging and admin Error Log page
 
 - Installer converts troubleshooter content to UTF-8 to avoid MySQL errors
+
+- Storefront routes preserve legacy query parameters and index.php defaults to browse page
