@@ -264,7 +264,9 @@ function cms_twig_env(string $tpl_dir): Environment
             }
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if(!$row){ return ''; }
-            $img = 'images/capsules/'.$row['image_path'];
+            $base = cms_base_url();
+            $base = $base ? rtrim($base, '/'). '/' : '';
+            $img = $base.'storefront/images/capsules/'.$row['image_path'];
             $url = 'index.php?area=app&id='.(int)$row['appid'];
             $price = $row['price'];
             return '<a href="'.$url.'"><img src="'.$img.'" alt=""></a><span class="price">$'.htmlspecialchars($price).'</span>';
@@ -283,7 +285,9 @@ function cms_twig_env(string $tpl_dir): Environment
             }
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if(!$row){ return ''; }
-            $img = 'images/capsules/'.$row['image_path'];
+            $base = cms_base_url();
+            $base = $base ? rtrim($base, '/'). '/' : '';
+            $img = $base.'storefront/images/capsules/'.$row['image_path'];
             $url = 'index.php?area=app&id='.(int)$row['appid'];
             $price = $row['price'];
             return '<div class="large-capsule"><a href="'.$url.'"><img src="'.$img.'" alt=""></a><span class="price">$'.htmlspecialchars($price).'</span></div>';
@@ -322,31 +326,32 @@ function cms_twig_env(string $tpl_dir): Environment
                 $caps[$row['position']] = $row;
             }
             $base = cms_base_url();
+            $baseUrl = $base ? rtrim($base, '/'). '/' : '';
             $html = '<div style="position: relative; width: 590px; height: 511px;">';
             if (!empty($caps['top'])) {
                 $html .= '<a href="'.$base.'/index.php?area=game&AppId='.(int)$caps['top']['appid'].'">'
-                    .'<img src="images/capsules/'.$caps['top']['image'].'" '
+                    .'<img src="'.$baseUrl.'storefront/images/capsules/'.$caps['top']['image'].'" '
                     .'style="position: absolute; left: 1px; top: 1px; width: 588px; height: 98px; border: 0;" alt=""></a>';
             }
-            $html .= '<img src="images/capsules/2006_08-August/horizontal_top_middle.png" '
+            $html .= '<img src="'.$baseUrl.'storefront/images/capsules/2006_08-August/horizontal_top_middle.png" '
                 .'style="position: absolute; left: 0; top: 99px; width: 590px; height: 13px; border: 0;">';
             if (!empty($caps['middle'])) {
                 $html .= '<a href="'.$base.'/index.php?area=game&AppId='.(int)$caps['middle']['appid'].'">'
-                    .'<img src="images/capsules/'.$caps['middle']['image'].'" '
+                    .'<img src="'.$baseUrl.'storefront/images/capsules/'.$caps['middle']['image'].'" '
                     .'style="position: absolute; left: 0; top: 112px; width: 589px; height: 228px; border: 0;" alt=""></a>';
             }
-            $html .= '<img src="images/capsules/2006_08-August/horizontal_bar_lower.png" '
+            $html .= '<img src="'.$baseUrl.'storefront/images/capsules/2006_08-August/horizontal_bar_lower.png" '
                 .'style="position: absolute; left: 0; top: 340px; width: 590px; height: 12px; border: 0;">';
             if (!empty($caps['bottom_left'])) {
                 $html .= '<a href="'.$base.'/index.php?area=game&AppId='.(int)$caps['bottom_left']['appid'].'">'
-                    .'<img src="images/capsules/'.$caps['bottom_left']['image'].'" '
+                    .'<img src="'.$baseUrl.'storefront/images/capsules/'.$caps['bottom_left']['image'].'" '
                     .'style="position: absolute; left: 0; top: 352px; width: 288px; height: 158px; border: 0;" alt=""></a>';
             }
-            $html .= '<img src="images/capsules/2006_08-August/btm_middle_bar.png" '
+            $html .= '<img src="'.$baseUrl.'storefront/images/capsules/2006_08-August/btm_middle_bar.png" '
                 .'style="position: absolute; left: 288px; top: 352px; width: 13px; height: 158px; border: 0;">';
             if (!empty($caps['bottom_right'])) {
                 $html .= '<a href="'.$base.'/index.php?area=game&AppId='.(int)$caps['bottom_right']['appid'].'">'
-                    .'<img src="images/capsules/'.$caps['bottom_right']['image'].'" '
+                    .'<img src="'.$baseUrl.'storefront/images/capsules/'.$caps['bottom_right']['image'].'" '
                     .'style="position: absolute; left: 301px; top: 352px; width: 289px; height: 158px; border: 0;" alt=""></a>';
             }
             $html .= '</div>';
@@ -485,8 +490,18 @@ function cms_render_template(string $path, array $vars = []): void
             $dir = 'js';
         } else {
             $dir = 'images';
-            $path = ltrim($path, './');
-            $path = preg_replace('~^(?:img|images)/~', '', $path);
+            $clean = ltrim($path, './');
+            if (str_starts_with($clean, 'storefront/')) {
+                $clean = substr($clean, 11);
+            }
+            if (str_starts_with($clean, 'images/')) {
+                $clean = substr($clean, 7);
+            }
+            if (str_starts_with($clean, 'capsules/')) {
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return $m[1].'="'.$base.'storefront/images/'.$clean.'"';
+            }
+            $path = preg_replace('~^(?:img|images)/~', '', $clean);
             $path = preg_replace('~^storefront/~', '', $path);
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
@@ -521,6 +536,18 @@ function cms_render_template(string $path, array $vars = []): void
             $dir = 'js';
         } else {
             $dir = 'images';
+            $clean = ltrim($path, './');
+            if (str_starts_with($clean, 'storefront/')) {
+                $clean = substr($clean, 11);
+            }
+            if (str_starts_with($clean, 'images/')) {
+                $clean = substr($clean, 7);
+            }
+            if (str_starts_with($clean, 'capsules/')) {
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return 'url('.$m[1].$base.'storefront/images/'.$clean.$m[1].')';
+            }
+            $path = $clean;
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -542,8 +569,19 @@ function cms_render_template(string $path, array $vars = []): void
         if (!in_array($ext, $images, true)) {
             return $m[0];
         }
-        $path = ltrim($path, './');
-        $path = preg_replace('~^(?:img|images)/~', '', $path);
+        $clean = ltrim($path, './');
+        if (str_starts_with($clean, 'storefront/')) {
+            $clean = substr($clean, 11);
+        }
+        if (str_starts_with($clean, 'images/')) {
+            $clean = substr($clean, 7);
+        }
+        if (str_starts_with($clean, 'capsules/')) {
+            $base = cms_base_url();
+            $base = $base ? rtrim($base, '/'). '/' : '';
+            return 'newImage('.$m[1].$base.'storefront/images/'.$clean.$m[1].')';
+        }
+        $path = preg_replace('~^(?:img|images)/~', '', $clean);
         $path = preg_replace('~^storefront/~', '', $path);
         return 'newImage('.$m[1].$vars['THEME_URL'].'/images/'.$path.$m[1].')';
     }, $html);
@@ -615,6 +653,19 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
             $dir = 'js';
         } else {
             $dir = 'images';
+            $clean = ltrim($path, './');
+            if (str_starts_with($clean, 'storefront/')) {
+                $clean = substr($clean, 11);
+            }
+            if (str_starts_with($clean, 'images/')) {
+                $clean = substr($clean, 7);
+            }
+            if (str_starts_with($clean, 'capsules/')) {
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return $m[1].'="'.$base.'storefront/images/'.$clean.'"';
+            }
+            $path = preg_replace('~^(?:img|images)/~', '', $clean);
+            $path = preg_replace('~^storefront/~', '', $path);
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -648,6 +699,18 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
             $dir = 'js';
         } else {
             $dir = 'images';
+            $clean = ltrim($path, './');
+            if (str_starts_with($clean, 'storefront/')) {
+                $clean = substr($clean, 11);
+            }
+            if (str_starts_with($clean, 'images/')) {
+                $clean = substr($clean, 7);
+            }
+            if (str_starts_with($clean, 'capsules/')) {
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return 'url('.$m[1].$base.'storefront/images/'.$clean.$m[1].')';
+            }
+            $path = $clean;
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -669,8 +732,19 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         if (!in_array($ext, $images, true)) {
             return $m[0];
         }
-        $path = ltrim($path, './');
-        $path = preg_replace('~^(?:img|images)/~', '', $path);
+        $clean = ltrim($path, './');
+        if (str_starts_with($clean, 'storefront/')) {
+            $clean = substr($clean, 11);
+        }
+        if (str_starts_with($clean, 'images/')) {
+            $clean = substr($clean, 7);
+        }
+        if (str_starts_with($clean, 'capsules/')) {
+            $base = cms_base_url();
+            $base = $base ? rtrim($base, '/'). '/' : '';
+            return 'newImage('.$m[1].$base.'storefront/images/'.$clean.$m[1].')';
+        }
+        $path = preg_replace('~^(?:img|images)/~', '', $clean);
         $path = preg_replace('~^storefront/~', '', $path);
         return 'newImage('.$m[1].$vars['THEME_URL'].'/images/'.$path.$m[1].')';
     }, $html);
@@ -706,8 +780,18 @@ function cms_rewrite_css_urls(string $css, string $theme_url, string $css_dir, s
             $dir = 'js';
         } else {
             $dir = 'images';
-            $path = ltrim($path, './');
-            $path = preg_replace('~^(?:img|images)/~', '', $path);
+            $clean = ltrim($path, './');
+            if (str_starts_with($clean, 'storefront/')) {
+                $clean = substr($clean, 11);
+            }
+            if (str_starts_with($clean, 'images/')) {
+                $clean = substr($clean, 7);
+            }
+            if (str_starts_with($clean, 'capsules/')) {
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return 'url('.$m[1].$base.'storefront/images/'.$clean.$m[1].')';
+            }
+            $path = preg_replace('~^(?:img|images)/~', '', $clean);
             $path = preg_replace('~^storefront/~', '', $path);
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
