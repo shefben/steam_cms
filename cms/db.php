@@ -528,9 +528,17 @@ function cms_store_sidebar_links(){
 function cms_load_store_links($file){
     $path = '/storefront/' . basename($file);
     $links = cms_store_sidebar_links();
-    foreach($links as &$l){
-        if($l['type']==='link'){
+    $extra = [];
+    foreach (['l','s','i','a'] as $p) {
+        if (isset($_GET[$p]) && $_GET[$p] !== '') {
+            $extra[$p] = $_GET[$p];
+        }
+    }
+    $qs = $extra ? ('?' . http_build_query($extra, '', '&')) : '';
+    foreach ($links as &$l) {
+        if ($l['type'] === 'link') {
             $l['current'] = (parse_url($l['url'], PHP_URL_PATH) === $path);
+            $l['url'] .= $qs;
         }
     }
     return $links;
