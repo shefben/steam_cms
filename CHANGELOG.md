@@ -164,3 +164,7 @@ All notable changes to this project will be documented in this file.
 - Storefront routes preserve legacy query parameters and index.php defaults to browse page
 * Added store_pages table to manage storefront page titles and images.
 * Removed binary images from themes; asset mover now generates them on demand.
+* Fixed title image lookup by aligning store page keys with template tags.
+- Added preload and trailer fields to store_apps; screenshots managed individually
+- Products now include a checkbox to hide the trailer link on game pages
+- Game assets now load from storefront/images/apps/[appid] paths; package page iterates games dynamically

@@ -77,15 +77,19 @@
  
  <table cellpadding="0" cellspacing="0" width="100%"><tbody><tr>
  <td>
-  <a href="video/RDKF_trailer.avi" target="_blank"><span style="color: #ffffff; text-decoration: underline;"><strong>View the {{game.title}} gameplay trailer</strong></span></a> <font face="Wingdings 3" style="font-family: Wingdings 3; font-size: 12px; color: Red;">}}</font>
+  {% if game.trailer_url and game.show_trailer %}
+    <a href="{{ game.trailer_url }}" target="_blank"><span style="color: #ffffff; text-decoration: underline;"><strong>View the {{game.title}} gameplay trailer</strong></span></a>
+  {% endif %}
  </td>
- <td align="right">
-  <table cellpadding="0" cellspacing="0">
-  <tbody><tr>
-  <!-- begin preload button -->
+<td align="right">
+ <table cellpadding="0" cellspacing="0">
+ <tbody><tr>
+ <!-- begin preload button -->
+  {% if game.show_preload %}
   <td height="20" width="5" background="tab_left_red.gif" nowrap=""></td>
   <td bgcolor="#800000" nowrap="" align="center" background="tab_middle_red.gif"><a href="steam://preload/{{game.appid}}" class="purchase_button">Pre-Load {{game.title}} now!</a></td>
   <td height="20" width="5" background="tab_right_red.gif" nowrap=""></td>
+  {% endif %}
   <!-- end preload button -->
   </tr>
   </tbody></table>
@@ -103,7 +107,11 @@
 		<table width="100%" cellpadding="0" cellspacing="0">
 		<tbody><tr>
 			<td width="84" nowrap=""></td>
-			<td width="100%"><a href="index.php?area=game&amp;AppId=1002#" onclick="popup('image.php?id=209', 1034, 829, 0, 0);"><img src="0000000209_thumb.jpg" hspace="10" border="0" style="border: 1px Solid #5594a3;"></a><a href="index.php?area=game&amp;AppId=1002#" onclick="popup('image.php?id=208', 1034, 829, 0, 0);"><img src="0000000208_thumb.jpg" hspace="10" border="0" style="border: 1px Solid #5594a3;"></a><a href="index.php?area=game&amp;AppId=1002#" onclick="popup('image.php?id=207', 1034, 829, 0, 0);"><img src="0000000207_thumb.jpg" hspace="10" border="0" style="border: 1px Solid #5594a3;"></a><a href="index.php?area=game&amp;AppId=1002#" onclick="popup('image.php?id=206', 1034, 829, 0, 0);"><img src="0000000206_thumb.jpg" hspace="10" border="0" style="border: 1px Solid #5594a3;"></a><a href="index.php?area=game&amp;AppId=1002#" onclick="popup('image.php?id=205', 1034, 778, 0, 0);"><img src="0000000205_thumb.jpg" hspace="10" border="0" style="border: 1px Solid #5594a3;"></a></td>
+                        <td width="100%">
+                        {% for img in images|slice(0,5) %}
+                          <img src="{{ BASE }}/storefront/images/apps/{{ game.appid }}/screenshots/{{ img }}" hspace="10" border="0" style="border: 1px Solid #5594a3;">
+                        {% endfor %}
+                        </td>
 		</tr>
 		</tbody></table>
 	</td>

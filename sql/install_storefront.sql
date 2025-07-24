@@ -1,10 +1,37 @@
 CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,visible TINYINT DEFAULT 1);
 CREATE TABLE store_developers(id INT AUTO_INCREMENT PRIMARY KEY,name TEXT);
-CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availability TEXT,price DECIMAL(10,2),metacritic TEXT DEFAULT NULL,description TEXT,sysreq TEXT,main_image TEXT,images TEXT,show_metascore TINYINT DEFAULT 0);
+CREATE TABLE store_apps(
+    appid INT PRIMARY KEY,
+    name TEXT,
+    developer TEXT,
+    availability TEXT,
+    price DECIMAL(10,2),
+    metacritic TEXT DEFAULT NULL,
+    metacritic_url TEXT,
+    description TEXT,
+    sysreq_min TEXT,
+    sysreq_rec TEXT,
+    trailer_url TEXT,
+    hide_trailer TINYINT DEFAULT 0,
+    main_image TEXT,
+    images TEXT,
+    show_metascore TINYINT DEFAULT 0,
+    is_preload TINYINT DEFAULT 0,
+    preload_start DATE DEFAULT NULL,
+    preload_end DATE DEFAULT NULL
+);
 CREATE INDEX idx_storefront_products_appid ON store_apps(appid);
 CREATE TABLE subscriptions(subid INT PRIMARY KEY,name TEXT,price DECIMAL(10,2));
 CREATE TABLE subscription_apps(subid INT,appid INT,PRIMARY KEY(subid,appid));
 CREATE TABLE app_categories(appid INT,category_id INT,PRIMARY KEY(appid,category_id));
+CREATE TABLE store_screenshots(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    appid INT,
+    filename TEXT,
+    hidden TINYINT DEFAULT 0,
+    ord INT,
+    CONSTRAINT fk_store_screenshots_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE
+);
 CREATE TABLE store_sidebar_links(
     id INT AUTO_INCREMENT PRIMARY KEY,
     label TEXT,
