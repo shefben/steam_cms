@@ -7,6 +7,20 @@ $use_all = cms_get_setting('capsules_same_all', '1') === '1';
 $positions = ['top1','top2','large','under1','under2','bottom1','bottom2'];
 $is2006 = preg_match('/^200[67]/',$theme) === 1;
 $showTabs = $theme === '2007_v2';
+$page_slugs = ['all'=>'All Games','browse'=>'Browse Games','search'=>'Search'];
+$pages = [];
+foreach(array_keys($page_slugs) as $slug){
+    $pages[$slug] = cms_get_store_page($slug);
+}
+
+if(isset($_POST['save_pages'])){
+    foreach($page_slugs as $slug=>$label){
+        $title = trim($_POST[$slug.'_title'] ?? '');
+        $img   = trim($_POST[$slug.'_image'] ?? '');
+        cms_set_store_page($slug,$title,$img);
+        $pages[$slug] = ['title'=>$title,'title_image'=>$img];
+    }
+}
 
 if(isset($_POST['update'])){
     $pos=$_POST['position'];
@@ -126,6 +140,22 @@ $images = [];
 foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $images[$pos][] = ['file'=>$f,'label'=>$f]; } }
 ?>
 <h2>Main Page</h2>
+<form method="post" style="margin-bottom:15px;">
+  <fieldset>
+    <legend>Page Titles</legend>
+    <table class="table">
+      <tr><th>Page</th><th>Title</th><th>Image Path</th></tr>
+      <?php foreach($page_slugs as $slug=>$label): ?>
+      <tr>
+        <td><?php echo $label; ?></td>
+        <td><input type="text" name="<?php echo $slug; ?>_title" value="<?php echo htmlspecialchars($pages[$slug]['title']); ?>"></td>
+        <td><input type="text" name="<?php echo $slug; ?>_image" value="<?php echo htmlspecialchars($pages[$slug]['title_image']); ?>"></td>
+      </tr>
+      <?php endforeach; ?>
+    </table>
+    <button type="submit" name="save_pages" class="btn btn-primary">Save Titles</button>
+  </fieldset>
+</form>
 <form method="post" style="margin-bottom:15px;">
   <fieldset class="capsule-box-group">
     <legend>Capsule Links</legend>

@@ -52,6 +52,12 @@ ASSETS = {
         'themes/2005_v1/storefront/images/img/tab_right_red.gif',
     'archived_steampowered/2005/storefront/img/title_grey.jpg':
         'themes/2005_v1/storefront/images/img/title_grey.jpg',
+    'archived_steampowered/2005/storefront/img/title_blue.jpg':
+        'themes/2005_v1/storefront/images/img/title_blue.jpg',
+    'archived_steampowered/2005/storefront/img/title_red.jpg':
+        'themes/2005_v1/storefront/images/img/title_red.jpg',
+    'archived_steampowered/2005/storefront/img/title_package.jpg':
+        'themes/2005_v1/storefront/images/img/title_package.jpg',
 
     # general theme images for 2005_v1
     'archived_steampowered/2005/v1/img/getSteamNow.gif':
