@@ -1,0 +1,130 @@
+
+<html><head>
+<title>Steam Games</title>
+<script language="JavaScript" src="site\javascript.js"></script><style type="text/css" id="operaUserStyle"></style>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="ALL" name="ROBOTS">
+<meta content="SteamPowered" name="DESCRIPTION">
+<meta content="Steam, account, account creation, signup" name="KEYWORDS">
+<meta content="Valve LLC" name="AUTHOR">
+<link href="storefront.css" rel="stylesheet" type="text/css">
+<link href="webicon.png" rel="Shortcut Icon" type="image/png">
+
+</head>
+<body style="background: #4c5844; margin: 0px 0px 0px 0px; line-height: 12px; font-size: 8px; font-family: Verdana, Arial, Helvetica;">
+{{ header(withButtons=false) }}
+<table align="center" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="sp_top_left.gif"></td>
+<td bgcolor="#FFFFFF" rowspan="3" valign="top">
+<table align="center" border="0" cellpadding="0" cellspacing="0" style="height: 100%;" width="736">
+<tbody><tr>
+<td align="left" nowrap="" valign="top" width="10"></td>
+<td align="left" nowrap="" valign="top" width="118">
+<table cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td height="10"></td>
+</tr>
+<tr>
+<td nowrap="">
+{% for ln in links %}
+  {% if ln.type == 'spacer' %}
+    <div class="menu_spacer"></div>
+  {% elseif ln.hidden is empty %}
+    {% if ln.current is not empty %}
+      <span><font face="Wingdings 3"><span class="menu_pointer">&#132;</span></font> <a class="menu_item_current" href="{{ ln.url }}">{{ ln.label }}</a></span><br/>
+    {% else %}
+      <span><a class="menu_item" href="{{ ln.url }}">{{ ln.label }}</a></span><br/>
+    {% endif %}
+  {% endif %}
+{% endfor %}
+</td>
+</tr>
+</tbody></table>
+</td>
+<td width="8"><nobr></nobr></td>
+<td align="left" style="height: 100%" valign="top" width="100%">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td valign="top">
+<br>
+<div style="position: relative; width: 590px; height: 511px;">
+<!-- Begin Content Area -->
+  <!-- Top Game Image -->
+  {% if capsules.top is defined and capsules.top %}
+  <a href="{{ BASE }}/storefront/index.php?area=game&AppId={{ capsules.top.appid }}">
+    <img src="{{ BASE }}/storefront/images/capsules/{{ capsules.top.image }}"
+         style="position: absolute; left: 1px; top: 1px; width: 588px; height: 98px; border: 0;"
+         alt="Top capsule" border="0"/>
+  </a>
+  {% endif %}
+
+  <!-- Middle Game Image -->
+  {% if capsules.middle is defined and capsules.middle %}
+  <a href="{{ BASE }}/storefront/index.php?area=game&AppId={{ capsules.middle.appid }}">
+    <img src="{{ BASE }}/storefront/images/capsules/{{ capsules.middle.image }}"
+         style="position: absolute; left: 0; top: 112px; width: 589px; height: 228px; border: 0;"
+         alt="Middle capsule" border="0"/>
+  </a>
+  {% endif %}
+
+  <!-- Bottom-Left Game Image -->
+  {% if capsules.bottom_left is defined and capsules.bottom_left %}
+  <a href="{{ BASE }}/storefront/index.php?area=game&AppId={{ capsules.bottom_left.appid }}">
+    <img src="{{ BASE }}/storefront/images/capsules/{{ capsules.bottom_left.image }}"
+         style="position: absolute; left: 0; top: 352px; width: 288px; height: 158px; border: 0;"
+         alt="Bottom left capsule" border="0"/>
+  </a>
+  {% endif %}
+
+  <!-- Bottom-Right Game Image -->
+  {% if capsules.bottom_right is defined and capsules.bottom_right %}
+  <a href="{{ BASE }}/storefront/index.php?area=game&AppId={{ capsules.bottom_right.appid }}">
+    <img src="{{ BASE }}/storefront/images/capsules/{{ capsules.bottom_right.image }}"
+         style="position: absolute; left: 301px; top: 352px; width: 289px; height: 158px; border: 0;"
+         alt="Bottom right capsule" border="0"/>
+  </a>
+  {% endif %}
+<!-- End Content Area -->
+</div>
+<br>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="sp_top_right.gif"></td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF"></td>
+<td bgcolor="#FFFFFF"></td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="sp_bottom_left.gif"></td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="sp_bottom_right.gif"></td>
+</tr>
+</tbody></table></td></tr>
+<tr>
+	<td>
+
+		<!-- begin footer -->
+		<div style="float: center; padding: 8px 0px 8px 0px; background: #4c5844; margin-bottom: 0px; width: 100%; font-size: 7pt; line-height: 8pt; color: #75806f; position: relative;">
+			<table cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td><a href="/"><img src="valve_greenlogo.gif" border="0"></a></td>
+
+				<td>&nbsp;</td>
+				<td><span style="font-size: 7pt; line-height: 8pt; color: #75806f;">{{ footer() }}</span></td>
+				<td width="15%">&nbsp;</td>
+			</tr>
+			</tbody></table>
+
+		</div>
+		<!-- end footer -->
+
+	</td>
+</tr>
+ </body></html>
