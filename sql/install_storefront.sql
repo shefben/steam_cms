@@ -28,6 +28,11 @@ CREATE TABLE storefront_tab_games(
     appid INT,
     ord INT
 );
+CREATE TABLE store_pages(
+    slug VARCHAR(20) PRIMARY KEY,
+    title TEXT,
+    title_image TEXT
+);
 ALTER TABLE subscription_apps
     ADD CONSTRAINT fk_subscription_apps_sub FOREIGN KEY (subid) REFERENCES subscriptions(subid) ON DELETE CASCADE,
     ADD CONSTRAINT fk_subscription_apps_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
@@ -359,4 +364,8 @@ INSERT INTO store_sidebar_links(label,url,type,ord,visible) VALUES
  ('All Games','/storefront/allgames.php','link',4,1),
  ('Search','/storefront/search.php','link',5,1),
  ('','', 'spacer',6,1),
- ('Media','/storefront/media.php','link',7,1);
+('Media','/storefront/media.php','link',7,1);
+INSERT INTO store_pages(slug,title,title_image) VALUES
+ ('all','All Games','img/title_blue.jpg'),
+ ('browse','Browse Games','img/title_red.jpg'),
+ ('search','Search','img/title_grey.jpg');

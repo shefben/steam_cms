@@ -544,6 +544,30 @@ function cms_load_store_links($file){
     return $links;
 }
 
+function cms_get_store_page(string $slug): array
+{
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT title,title_image FROM store_pages WHERE slug=?');
+        $stmt->execute([$slug]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if(!$row) { return ['title'=>'','title_image'=>'']; }
+        return $row;
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S02') {
+            return ['title'=>'','title_image'=>''];
+        }
+        throw $e;
+    }
+}
+
+function cms_set_store_page(string $slug, string $title, string $image): void
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('REPLACE INTO store_pages(slug,title,title_image) VALUES(?,?,?)');
+    $stmt->execute([$slug,$title,$image]);
+}
+
 function cms_admin_language(?int $userId = null): string
 {
     if ($userId === null) {

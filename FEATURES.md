@@ -146,3 +146,5 @@
 - Troubleshooter installer converts ISO-8859 pages to UTF-8 for MySQL
 
 - Storefront links maintain legacy language and sorting parameters
+* Storefront pages now rendered using new Twig templates with configurable titles.
+- Theme binary images generated via move_assets.py to keep repo lean.
