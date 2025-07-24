@@ -124,13 +124,13 @@ foreach ($rows as $i => $row) {
     $tbodyHtml .= '<td>' . (int)$row['views'] . '</td>';
     $tbodyHtml .= '<td>';
     if (cms_has_permission('news_edit')) {
-        $tbodyHtml .= '<a href="news_edit.php?id=' . $row['id'] . '">Edit</a>';
+        $tbodyHtml .= '<a href="news_edit.php?id=' . $row['id'] . '" class="btn btn-primary btn-small">Edit</a>';
     }
     $tbodyHtml .= '</td><td>';
     if (cms_has_permission('news_delete')) {
         $tbodyHtml .= '<form method="post" style="display:inline">';
         $tbodyHtml .= '<input type="hidden" name="delete" value="' . $row['id'] . '">';
-        $tbodyHtml .= '<input type="submit" value="Delete">';
+        $tbodyHtml .= '<input type="submit" value="Delete" class="btn btn-danger btn-small">';
         $tbodyHtml .= '</form>';
     }
     $tbodyHtml .= '</td></tr>';
@@ -140,6 +140,9 @@ ob_start();
 ?>
 <div class="pagination">
 <?php if ($page>1): ?><a href="?page=<?php echo $page-1; ?>&title=<?php echo urlencode($titleFilter); ?>&author=<?php echo urlencode($authorFilter); ?>">&laquo; Prev</a><?php endif; ?>
+<?php for($i=1;$i<=$pages;$i++): ?>
+<a href="?page=<?php echo $i; ?>&title=<?php echo urlencode($titleFilter); ?>&author=<?php echo urlencode($authorFilter); ?>"<?php if($i==$page) echo ' class="current"'; ?>><?php echo $i; ?></a>
+<?php endfor; ?>
 <?php if ($page<$pages): ?><a href="?page=<?php echo $page+1; ?>&title=<?php echo urlencode($titleFilter); ?>&author=<?php echo urlencode($authorFilter); ?>">Next &raquo;</a><?php endif; ?>
 </div>
 <?php
@@ -170,7 +173,7 @@ if (isset($_GET['ajax'])) {
 <form id="orderForm" method="post">
 <input type="hidden" name="order" id="order-input">
 <table id="news-table" class="data-table">
-<thead><tr><th></th><th>Title</th><th>Author</th><th>Date</th><th>Status</th><th>Views</th><th colspan="2">Actions</th></tr></thead>
+<thead><tr><th></th><th class="sortable">Title</th><th class="sortable">Author</th><th class="sortable">Date</th><th class="sortable">Status</th><th class="sortable">Views</th><th colspan="2">Actions</th></tr></thead>
 <tbody id="news-body">
 <?php echo $tbodyHtml; ?>
 </tbody>
@@ -214,6 +217,18 @@ document.addEventListener('DOMContentLoaded',function(){
             });
         });
     }
+    $('#news-table th.sortable').on('click',function(){
+        var idx=$(this).index();
+        var asc=$(this).data('asc')||0;
+        var rows=$('#news-body tr').get();
+        rows.sort(function(a,b){
+            var ta=$(a).children('td').eq(idx-1).text().toLowerCase();
+            var tb=$(b).children('td').eq(idx-1).text().toLowerCase();
+            return asc?ta.localeCompare(tb):tb.localeCompare(ta);
+        });
+        $.each(rows,function(i,r){$('#news-body').append(r);});
+        $(this).data('asc',asc?0:1);
+    });
     $('#apply-filter').on('click',function(){
         var title=$('#filter-title').val();
         var author=$('#filter-author').val();

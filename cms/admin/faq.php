@@ -66,6 +66,9 @@ $rows = array_slice($rows, ($page-1)*$perPage, $perPage);
 </form>
 <div class="pagination">
 <?php if($page>1): ?><a href="?page=<?php echo $page-1; ?>">&laquo; Prev</a><?php endif; ?>
+<?php for($i=1;$i<=$pages;$i++): ?>
+<a href="?page=<?php echo $i; ?>"<?php if($i==$page) echo ' class="current"'; ?>><?php echo $i; ?></a>
+<?php endfor; ?>
 <?php if($page<$pages): ?><a href="?page=<?php echo $page+1; ?>">Next &raquo;</a><?php endif; ?>
 </div>
 <script>

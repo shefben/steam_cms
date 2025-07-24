@@ -6,11 +6,15 @@ $base = cms_base_url();
 $theme_list = array_filter(cms_get_themes(), fn($t)=>substr($t,-6) !== '_admin');
 $theme = $_GET['theme'] ?? ($_POST['theme'] ?? ($theme_list[0] ?? ''));
 $page = $_GET['page'] ?? ($_POST['page'] ?? '');
-$logo_files = array_map('basename', glob(__DIR__.'/../img/steam_logo_onblack*.gif'));
 $data = cms_get_theme_header_data($theme, $page);
+$image_dir = dirname(__DIR__,2)."/themes/$theme/images";
+$logo_files = glob($image_dir.'/*logo*.{gif,png,jpg,jpeg}', GLOB_BRACE);
+$logo_files = array_map(function($f) use($theme){ return '/themes/'.$theme.'/images/'.basename($f); }, $logo_files);
 $spacer = $data['spacer'] ?? '';
 $footer_html = cms_get_theme_footer($theme);
 $css_path = cms_get_theme_css($theme);
+
+ob_start();
 
 if(isset($_POST['reorder']) && isset($_POST['order'])){
     $indices = array_map('intval', explode(',', $_POST['order']));
@@ -38,15 +42,27 @@ $no_footer_pages = cms_get_setting('no_footer_pages','');
 $logo_overrides = cms_get_setting('page_logo_overrides','');
 
 if(isset($_POST['upload_logo']) && isset($_FILES['new_logo']) && is_uploaded_file($_FILES['new_logo']['tmp_name'])){
-    $num = 1;
-    do {
-        $fname = 'steam_logo_onblack_' . $num . '.gif';
-        $path = __DIR__ . '/../img/' . $fname;
-        $num++;
-    } while(file_exists($path));
-    move_uploaded_file($_FILES['new_logo']['tmp_name'], $path);
-    $data['logo'] = '/img/' . $fname;
-    $logo_files[] = $fname;
+    $fname = preg_replace('/[^a-zA-Z0-9._-]/','',$_FILES['new_logo']['name']);
+    if($fname==='') $fname = 'logo_'.time().'.gif';
+    $dest = $image_dir.'/'.$fname;
+    $n = 1;
+    while(file_exists($dest)){
+        $dest = $image_dir.'/'.pathinfo($fname,PATHINFO_FILENAME).'_'.$n.'.'.pathinfo($fname,PATHINFO_EXTENSION);
+        $n++;
+    }
+    if(!is_dir($image_dir)) mkdir($image_dir,0755,true);
+    move_uploaded_file($_FILES['new_logo']['tmp_name'],$dest);
+    $rel = '/themes/'.$theme.'/images/'.basename($dest);
+    $data['logo'] = $rel;
+    $logo_files[] = $rel;
+    $db = cms_get_db();
+    $count = $db->prepare('SELECT COUNT(*) FROM theme_headers WHERE theme=? AND page=?');
+    $count->execute([$theme,$page]);
+    if($count->fetchColumn()>0){
+        $db->prepare('UPDATE theme_headers SET logo=? WHERE theme=? AND page=?')->execute([$rel,$theme,$page]);
+    }else{
+        $db->prepare('INSERT INTO theme_headers(theme,page,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,?,1,"")')->execute([$theme,$page,0,$rel,'','','','','']);
+    }
     echo '<p>Logo uploaded.</p>';
 }
 
@@ -109,7 +125,7 @@ if(isset($_POST['add'])){
 }
 ?>
 <h2>Header &amp; Footer</h2>
-<label>Theme: <select id="theme-select" name="theme" onchange="location.href='header_footer.php?theme='+this.value+'&page='+encodeURIComponent(document.getElementById('page-input').value);">
+<label>Theme: <select id="theme-select" name="theme">
 <?php foreach($theme_list as $t): ?>
   <option value="<?php echo htmlspecialchars($t); ?>" <?php if($t==$theme) echo 'selected'; ?>><?php echo htmlspecialchars($t); ?></option>
 <?php endforeach; ?>
@@ -117,7 +133,8 @@ if(isset($_POST['add'])){
 <label style="margin-left:10px;">Page:
   <input type="text" id="page-input" name="page" value="<?php echo htmlspecialchars($page); ?>" placeholder="index" style="width:120px">
 </label>
-<form method="post" enctype="multipart/form-data">
+<div id="hf-form-wrapper">
+<form method="post" enctype="multipart/form-data" id="hf-form">
 <input type="hidden" name="theme" value="<?php echo htmlspecialchars($theme); ?>">
 <input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
 Stylesheet path: <input type="text" name="css_path" value="<?php echo htmlspecialchars($css_path); ?>" style="width:300px" title="Theme CSS file"><br>
@@ -127,12 +144,12 @@ $logo = str_ireplace('{BASE}', $base, $logo);
 if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
 <img src="<?php echo htmlspecialchars($logo); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>
 <select name="logo_choice" id="logo-choice">
-  <?php foreach($logo_files as $f): $p='/img/'.$f; ?>
-  <option value="<?php echo $p; ?>" data-img="<?php echo $base.$p; ?>" style="background:url('<?php echo $base.$p; ?>') no-repeat left center;padding-left:50px;min-height:20px;" <?php if($data['logo']==$p) echo 'selected'; ?>><?php echo $f; ?></option>
+  <?php foreach($logo_files as $p): ?>
+  <option value="<?php echo $p; ?>" data-img="<?php echo $base.$p; ?>" style="background:url('<?php echo $base.$p; ?>') no-repeat left center;padding-left:50px;min-height:20px;" <?php if($data['logo']===$p) echo 'selected'; ?>><?php echo basename($p); ?></option>
   <?php endforeach; ?>
 </select>
 <input type="file" name="new_logo" id="new-logo" style="display:inline">
-<button type="submit" name="upload_logo" value="1" class="btn btn-secondary">Upload</button>
+<button type="submit" name="upload_logo" id="upload-logo-btn" value="1" class="btn btn-secondary" disabled>Upload</button>
 <input type="hidden" name="logo" id="logo-url" value="<?php echo htmlspecialchars($data['logo']); ?>"><br><br>
 <table id="buttons-table" class="data-table">
 <thead><tr><th></th><th>URL</th><th>Text</th><th>Delete</th></tr></thead>
@@ -167,6 +184,7 @@ Logo overrides (one per line URL:year:logo path):<br>
 <textarea name="footer_html" style="width:100%;height:200px;" title="Custom HTML inserted in the footer"><?php echo htmlspecialchars($footer_html); ?></textarea><br>
 <input type="submit" name="save" value="Save" class="btn btn-success">
 </form>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
 var tbody = document.querySelector('#buttons-table tbody');
@@ -204,6 +222,21 @@ document.getElementById('logo-choice').addEventListener('change', function(){
     document.getElementById('logo-preview').src = opt.dataset.img;
 });
 
+var uploadBtn=document.getElementById('upload-logo-btn');
+var fileInput=document.getElementById('new-logo');
+fileInput.addEventListener('change',function(){
+    uploadBtn.disabled=!this.value;
+});
+uploadBtn.disabled=!fileInput.value;
+
+function loadForm(){
+    var theme=document.getElementById('theme-select').value;
+    var page=document.getElementById('page-input').value;
+    $('#hf-form-wrapper').load('header_footer.php?ajax_form=1&theme='+encodeURIComponent(theme)+'&page='+encodeURIComponent(page));
+}
+document.getElementById('theme-select').addEventListener('change',loadForm);
+document.getElementById('page-input').addEventListener('change',loadForm);
+
 
 
 
@@ -211,4 +244,12 @@ document.getElementById('logo-choice').addEventListener('change', function(){
 
 </script>
 <p><a href="index.php">Back</a></p>
-<?php include 'admin_footer.php'; ?>
+<?php
+$content = ob_get_clean();
+if(isset($_GET['ajax_form'])){
+    echo $content;
+    exit;
+}
+echo $content;
+include 'admin_footer.php';
+?>

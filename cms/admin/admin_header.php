@@ -126,8 +126,14 @@ $faq_pages = [];
 $ts_root = null;
 $ts_pages = [];
 $cafe_pages = [];
+$custom_groups = [];
 foreach ($nav_items as $k => $item) {
     if (!($item['visible'] ?? 1)) continue;
+    if (!empty($item['parent'])) {
+        $custom_groups[$item['parent']][] = $item;
+        unset($nav_items[$k]);
+        continue;
+    }
     if ($item['file'] === 'storefront.php') {
         $sf_root = $item;
         unset($nav_items[$k]);
@@ -165,6 +171,21 @@ foreach ($nav_items as $item) {
     $label = cms_admin_translate($item['label']);
     $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
     $icon = $icons[$file] ?? '';
+    if(isset($custom_groups[$file])){
+        $open = false;
+        foreach($custom_groups[$file] as $child){ if(strpos($_SERVER['PHP_SELF'],$child['file'])!==false){ $open=true; break; } }
+        $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a><ul class="sub-menu" style="'.($open?'display:block':'display:none').'">';
+        foreach($custom_groups[$file] as $child){
+            if(!($child['visible']??1)) continue;
+            $cfile=$child['file'];
+            $clabel=cms_admin_translate($child['label']);
+            $cac = strpos($_SERVER['PHP_SELF'],$cfile)!==false ? ' class="active"' : '';
+            $cicon=$icons[$cfile]??'';
+            $nav_html .= '<li><a href="'.$cfile.'"'.$cac.'>'.htmlspecialchars($cicon.' '.$clabel).'</a></li>';
+        }
+        $nav_html .= '</ul></li>';
+        continue;
+    }
     $item_html = '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
     if($file === '../logout.php'){
         $logout = $item_html;

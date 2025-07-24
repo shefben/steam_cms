@@ -75,7 +75,7 @@ $rows = $db->query('SELECT * FROM scheduled_content ORDER BY content_id')->fetch
 <?php endif; ?>
 <h2>Scheduled Content</h2>
 <form method="post">
-<table class="table">
+<table class="table" id="new-scheduled-table">
 <tr><th>ID</th><th>Theme</th><th>Description</th><th>Tag</th><th>Content</th><th>Type</th><th>N Days</th><th>Day</th><th>Start</th><th>End</th><th>Fixed Start</th><th>Fixed End</th><th>Active</th><th>Delete</th></tr>
 <tbody>
 <?php foreach ($rows as $i => $r): ?>
@@ -106,21 +106,21 @@ $rows = $db->query('SELECT * FROM scheduled_content ORDER BY content_id')->fetch
 <table class="table">
 <tr><th>Theme</th><th>Description</th><th>Tag</th><th>Content</th><th>Type</th><th>N Days</th><th>Day</th><th>Start</th><th>End</th><th>Fixed Start</th><th>Fixed End</th><th>Active</th></tr>
 <tr>
-  <td><input type="text" name="new_theme_name[]"></td>
-  <td><input type="text" name="new_description[]"></td>
-  <td><input type="text" name="new_tag_name[]"></td>
-  <td><textarea name="new_content[]" rows="2"></textarea></td>
-  <td><select name="new_schedule_type[]">
+  <td><input type="text" name="new_theme_name[]" style="width:120px"></td>
+  <td><input type="text" name="new_description[]" style="width:150px"></td>
+  <td><input type="text" name="new_tag_name[]" style="width:120px"></td>
+  <td><textarea name="new_content[]" rows="2" style="width:200px"></textarea></td>
+  <td><select name="new_schedule_type[]" style="width:130px">
       <option value="every_n_days">every_n_days</option>
       <option value="day_of_month">day_of_month</option>
       <option value="fixed_range">fixed_range</option>
   </select></td>
   <td><input type="number" name="new_every_n_days[]" style="width:60px"></td>
   <td><input type="number" name="new_day_of_month[]" style="width:60px"></td>
-  <td><input type="date" name="new_start_date[]"></td>
-  <td><input type="date" name="new_end_date[]"></td>
-  <td><input type="datetime-local" name="new_fixed_start_datetime[]"></td>
-  <td><input type="datetime-local" name="new_fixed_end_datetime[]"></td>
+  <td><input type="date" name="new_start_date[]" style="width:140px"></td>
+  <td><input type="date" name="new_end_date[]" style="width:140px"></td>
+  <td><input type="datetime-local" name="new_fixed_start_datetime[]" style="width:180px"></td>
+  <td><input type="datetime-local" name="new_fixed_end_datetime[]" style="width:180px"></td>
   <td><input type="checkbox" name="new_active[]" value="1" checked></td>
 </tr>
 </table>

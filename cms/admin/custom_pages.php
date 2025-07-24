@@ -76,8 +76,8 @@ if(isset($_GET['edit'])){
 <?php foreach($pages as $p): ?>
 <tr><td><?php echo htmlspecialchars($p['slug']); ?></td>
 <td><?php echo htmlspecialchars($p['title']); ?></td>
-<td><a href="?edit=<?php echo urlencode($p['slug']); ?>">Edit</a> |
-<a href="?delete=<?php echo urlencode($p['slug']); ?>" onclick="return confirm('Delete?');">Delete</a></td></tr>
+<td><a href="?edit=<?php echo urlencode($p['slug']); ?>" class="btn btn-primary btn-small">Edit</a>
+ <a href="?delete=<?php echo urlencode($p['slug']); ?>" class="btn btn-danger btn-small" onclick="return confirm('Delete?');">Delete</a></td></tr>
 <?php endforeach; ?>
 </table>
 <div id="editor" style="display:none;border:1px solid #333;padding:10px;background:#eee;">
