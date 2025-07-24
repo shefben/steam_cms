@@ -17,8 +17,8 @@ if(isset($_POST['save_pages'])){
     foreach($page_slugs as $slug=>$label){
         $title = trim($_POST[$slug.'_title'] ?? '');
         $img   = trim($_POST[$slug.'_image'] ?? '');
-        cms_set_store_page($slug,$title,$img);
-        $pages[$slug] = ['title'=>$title,'title_image'=>$img];
+        cms_set_store_page($slug, $title, $img);
+        $pages[$slug] = ['title' => $title, 'titleimage' => $img];
     }
 }
 
@@ -149,7 +149,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
       <tr>
         <td><?php echo $label; ?></td>
         <td><input type="text" name="<?php echo $slug; ?>_title" value="<?php echo htmlspecialchars($pages[$slug]['title']); ?>"></td>
-        <td><input type="text" name="<?php echo $slug; ?>_image" value="<?php echo htmlspecialchars($pages[$slug]['title_image']); ?>"></td>
+        <td><input type="text" name="<?php echo $slug; ?>_image" value="<?php echo htmlspecialchars($pages[$slug]['titleimage']); ?>"></td>
       </tr>
       <?php endforeach; ?>
     </table>

@@ -548,14 +548,14 @@ function cms_get_store_page(string $slug): array
 {
     $db = cms_get_db();
     try {
-        $stmt = $db->prepare('SELECT title,title_image FROM store_pages WHERE slug=?');
+        $stmt = $db->prepare('SELECT title, title_image AS titleimage FROM store_pages WHERE slug=?');
         $stmt->execute([$slug]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if(!$row) { return ['title'=>'','title_image'=>'']; }
+        if(!$row) { return ['title' => '', 'titleimage' => '']; }
         return $row;
     } catch (PDOException $e) {
         if ($e->getCode() === '42S02') {
-            return ['title'=>'','title_image'=>''];
+            return ['title' => '', 'titleimage' => ''];
         }
         throw $e;
     }
