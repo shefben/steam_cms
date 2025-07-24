@@ -69,7 +69,7 @@
 }
 -->
 </style>
-<table background="apps/{{game.productheader_path}}" cellpadding="0" cellspacing="0" height="220" width="600">
+<table background="{{ BASE }}/storefront/apps/{{ game.appid }}/headers/{{ game.productheader_path }}" cellpadding="0" cellspacing="0" height="220" width="600">
 <tbody><tr>
 <td class="copy" height="194" valign="top">{{ game.description }}</td>
 </tr>
@@ -90,7 +90,11 @@
 <table cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
 <td nowrap="" width="84"></td>
-<td width="100%"><a href="v2/index.php?area=game&amp;AppId=70&amp;" onclick="popup('image.php?id=150', 810, 610, 0, 0);"><img border="0" hspace="10" src="screenshots/0000000150_thumb.jpg" style="border: 1px Solid #5594a3;"></a><a href="v2/index.php?area=game&amp;AppId=70&amp;" onclick="popup('image.php?id=149', 810, 610, 0, 0);"><img border="0" hspace="10" src="screenshots/0000000149_thumb.jpg" style="border: 1px Solid #5594a3;"></a><a href="v2/index.php?area=game&amp;AppId=70&amp;" onclick="popup('image.php?id=147', 810, 610, 0, 0);"><img border="0" hspace="10" src="screenshots/0000000147_thumb.jpg" style="border: 1px Solid #5594a3;"></a><a href="v2/index.php?area=game&amp;AppId=70&amp;" onclick="popup('image.php?id=146', 810, 610, 0, 0);"><img border="0" hspace="10" src="screenshots/0000000146_thumb.jpg" style="border: 1px Solid #5594a3;"></a></td>
+<td width="100%">
+{% for img in images|slice(0,5) %}
+<img src="{{ BASE }}/storefront/images/apps/{{ game.appid }}/screenshots/{{ img }}" hspace="10" border="0" style="border: 1px Solid #5594a3;">
+{% endfor %}
+</td>
 </tr>
 </tbody></table>
 </td>

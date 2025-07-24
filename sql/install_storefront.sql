@@ -1,10 +1,37 @@
 CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,visible TINYINT DEFAULT 1);
 CREATE TABLE store_developers(id INT AUTO_INCREMENT PRIMARY KEY,name TEXT);
-CREATE TABLE store_apps(appid INT PRIMARY KEY,name TEXT,developer TEXT,availability TEXT,price DECIMAL(10,2),metacritic TEXT DEFAULT NULL,description TEXT,sysreq TEXT,main_image TEXT,images TEXT,show_metascore TINYINT DEFAULT 0);
+CREATE TABLE store_apps(
+    appid INT PRIMARY KEY,
+    name TEXT,
+    developer TEXT,
+    availability TEXT,
+    price DECIMAL(10,2),
+    metacritic TEXT DEFAULT NULL,
+    metacritic_url TEXT,
+    description TEXT,
+    sysreq_min TEXT,
+    sysreq_rec TEXT,
+    trailer_url TEXT,
+    hide_trailer TINYINT DEFAULT 0,
+    main_image TEXT,
+    images TEXT,
+    show_metascore TINYINT DEFAULT 0,
+    is_preload TINYINT DEFAULT 0,
+    preload_start DATE DEFAULT NULL,
+    preload_end DATE DEFAULT NULL
+);
 CREATE INDEX idx_storefront_products_appid ON store_apps(appid);
 CREATE TABLE subscriptions(subid INT PRIMARY KEY,name TEXT,price DECIMAL(10,2));
 CREATE TABLE subscription_apps(subid INT,appid INT,PRIMARY KEY(subid,appid));
 CREATE TABLE app_categories(appid INT,category_id INT,PRIMARY KEY(appid,category_id));
+CREATE TABLE store_screenshots(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    appid INT,
+    filename TEXT,
+    hidden TINYINT DEFAULT 0,
+    ord INT,
+    CONSTRAINT fk_store_screenshots_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE
+);
 CREATE TABLE store_sidebar_links(
     id INT AUTO_INCREMENT PRIMARY KEY,
     label TEXT,
@@ -27,6 +54,11 @@ CREATE TABLE storefront_tab_games(
     tab_id INT,
     appid INT,
     ord INT
+);
+CREATE TABLE store_pages(
+    slug VARCHAR(20) PRIMARY KEY,
+    title TEXT,
+    title_image TEXT
 );
 ALTER TABLE subscription_apps
     ADD CONSTRAINT fk_subscription_apps_sub FOREIGN KEY (subid) REFERENCES subscriptions(subid) ON DELETE CASCADE,
@@ -359,4 +391,8 @@ INSERT INTO store_sidebar_links(label,url,type,ord,visible) VALUES
  ('All Games','/storefront/allgames.php','link',4,1),
  ('Search','/storefront/search.php','link',5,1),
  ('','', 'spacer',6,1),
- ('Media','/storefront/media.php','link',7,1);
+('Media','/storefront/media.php','link',7,1);
+INSERT INTO store_pages(slug,title,title_image) VALUES
+ ('all','All Games','img/title_blue.jpg'),
+ ('browse','Browse Games','img/title_red.jpg'),
+ ('search','Search','img/title_grey.jpg');

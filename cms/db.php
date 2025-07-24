@@ -537,11 +537,83 @@ function cms_load_store_links($file){
     $qs = $extra ? ('?' . http_build_query($extra, '', '&')) : '';
     foreach ($links as &$l) {
         if ($l['type'] === 'link') {
-            $l['current'] = (parse_url($l['url'], PHP_URL_PATH) === $path);
+            $target = parse_url($l['url'], PHP_URL_PATH);
             $l['url'] .= $qs;
+            $l['current'] = ($target === $path);
+            if (!$l['current'] && ($target === '/storefront/allgames.php' || $target === '/storefront/all.php')) {
+                if (in_array($path, ['/storefront/game.php','/storefront/package.php','/storefront/all.php'], true)) {
+                    $l['current'] = true;
+                }
+            }
         }
     }
     return $links;
+}
+
+function cms_get_store_page(string $slug): array
+{
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT title, title_image AS titleimage FROM store_pages WHERE slug=?');
+        $stmt->execute([$slug]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if(!$row) { return ['title' => '', 'titleimage' => '']; }
+        return $row;
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S02') {
+            return ['title' => '', 'titleimage' => ''];
+        }
+        throw $e;
+    }
+}
+
+function cms_set_store_page(string $slug, string $title, string $image): void
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('REPLACE INTO store_pages(slug,title,title_image) VALUES(?,?,?)');
+    $stmt->execute([$slug,$title,$image]);
+}
+
+function cms_get_app_screenshots(int $appid): array
+{
+    $db = cms_get_db();
+    try {
+        $stmt = $db->prepare('SELECT id,filename,hidden,ord FROM store_screenshots WHERE appid=? ORDER BY ord,id');
+        $stmt->execute([$appid]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S02') {
+            return [];
+        }
+        throw $e;
+    }
+}
+
+function cms_set_app_screenshot(int $appid, string $file, bool $hidden, int $ord): void
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('INSERT INTO store_screenshots(appid,filename,hidden,ord) VALUES(?,?,?,?)');
+    $stmt->execute([$appid,$file,$hidden?1:0,$ord]);
+}
+
+function cms_app_screenshot_fs_dir(int $appid): string
+{
+    return CMS_ROOT . '/storefront/images/apps/' . $appid . '/screenshots/';
+}
+
+function cms_app_header_fs_dir(int $appid): string
+{
+    return CMS_ROOT . '/storefront/apps/' . $appid . '/headers/';
+}
+
+function cms_app_screenshot_url(int $appid, string $file): string
+{
+    return rtrim(cms_base_url(), '/') . '/storefront/images/apps/' . $appid . '/screenshots/' . $file;
+}
+
+function cms_app_header_url(int $appid, string $file): string
+{
+    return rtrim(cms_base_url(), '/') . '/storefront/apps/' . $appid . '/headers/' . $file;
 }
 
 function cms_admin_language(?int $userId = null): string

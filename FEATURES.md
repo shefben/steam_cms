@@ -146,3 +146,9 @@
 - Troubleshooter installer converts ISO-8859 pages to UTF-8 for MySQL
 
 - Storefront links maintain legacy language and sorting parameters
+- Storefront pages now rendered using new Twig templates with configurable titles.
+- Admin form lets you edit each storefront page's title image.
+- Theme binary images generated via move_assets.py to keep repo lean.
+- Product editor supports trailer URL, preload scheduling, and per-screenshot controls
+- Trailer links can be hidden on game pages via a product checkbox
+- Screenshots and headers stored per-app under storefront directories

@@ -178,9 +178,14 @@ if ($has_sf) {
     $root_label = cms_admin_translate($sf_root['label'] ?? 'Storefront');
     $active = strpos($_SERVER['PHP_SELF'], $root_file)!==false ? ' class="active"' : '';
     $icon = $icons[$root_file] ?? '';
+    $sf_open = false;
+    foreach ($sf_pages as $it) {
+        if (strpos($_SERVER['PHP_SELF'],$it['file'])!==false) { $sf_open = true; break; }
+    }
     $nav_html .= '<li id="sf-parent"><a href="'.$root_file.'"'.$active.' aria-label="StoreFront menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
     if ($sf_pages) {
-        $nav_html .= '<ul class="sub-menu" id="sf-sub" style="display:none">';
+        $style = $sf_open ? 'display:block' : 'display:none';
+        $nav_html .= '<ul class="sub-menu" id="sf-sub" style="'.$style.'">';
         foreach ($sf_pages as $it) {
             $file = $it['file'];
             $label = cms_admin_translate($it['label']);
@@ -198,9 +203,14 @@ if ($has_faq) {
     $root_label = cms_admin_translate($faq_root['label'] ?? 'FAQ');
     $active = strpos($_SERVER['PHP_SELF'], $root_file)!==false ? ' class="active"' : '';
     $icon = $icons[$root_file] ?? '';
+    $faq_open = false;
+    foreach ($faq_pages as $it) {
+        if (strpos($_SERVER['PHP_SELF'],$it['file'])!==false) { $faq_open = true; break; }
+    }
     $nav_html .= '<li id="faq-parent"><a href="'.$root_file.'"'.$active.' aria-label="FAQ menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
     if ($faq_pages) {
-        $nav_html .= '<ul class="sub-menu" id="faq-sub" style="display:none">';
+        $style = $faq_open ? 'display:block' : 'display:none';
+        $nav_html .= '<ul class="sub-menu" id="faq-sub" style="'.$style.'">';
         foreach ($faq_pages as $it) {
             $file = $it['file'];
             $label = cms_admin_translate($it['label']);
@@ -218,9 +228,14 @@ if ($has_ts) {
     $root_label = cms_admin_translate($ts_root['label'] ?? 'Troubleshooter');
     $active = strpos($_SERVER['PHP_SELF'], $root_file)!==false ? ' class="active"' : '';
     $icon = $icons[$root_file] ?? '';
+    $ts_open = false;
+    foreach ($ts_pages as $it) {
+        if (strpos($_SERVER['PHP_SELF'],$it['file'])!==false) { $ts_open = true; break; }
+    }
     $nav_html .= '<li id="ts-parent"><a href="'.$root_file.'"'.$active.' aria-label="Troubleshooter menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
     if ($ts_pages) {
-        $nav_html .= '<ul class="sub-menu" id="ts-sub" style="display:none">';
+        $style = $ts_open ? 'display:block' : 'display:none';
+        $nav_html .= '<ul class="sub-menu" id="ts-sub" style="'.$style.'">';
         foreach ($ts_pages as $it) {
             $file = $it['file'];
             $label = cms_admin_translate($it['label']);
@@ -239,8 +254,10 @@ if($has_cafe){
     foreach($cafe_pages as $it){
         if(strpos($_SERVER['PHP_SELF'],$it['file'])!==false){$active=' class="active"';break;}
     }
+    $cafe_open = $active ? true : false;
     $nav_html .= '<li id="cafe-parent"><a href="#"'.$active.' aria-label="Cafe menu">'.htmlspecialchars($icon.' '.cms_admin_translate('Cyber Cafe Management')).'</a>';
-    $nav_html .= '<ul class="sub-menu" id="cafe-sub" style="display:none">';
+    $style = $cafe_open ? 'display:block' : 'display:none';
+    $nav_html .= '<ul class="sub-menu" id="cafe-sub" style="'.$style.'">';
     foreach($cafe_pages as $it){
         $file=$it['file'];$label=cms_admin_translate($it['label']);
         $ac=strpos($_SERVER['PHP_SELF'],$file)!==false?' class="active"':'';
