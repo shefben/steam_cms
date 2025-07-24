@@ -105,19 +105,19 @@ function sort_link($label,$col,$params,$current,$order){
 }
 
 $theme = cms_get_setting('theme','2005_v2');
-$tpl_body = dirname(__DIR__).'/themes/2005_v1/storefront/layout/2005_search.twig';
 $links = cms_load_store_links(__FILE__);
-ob_start();
-cms_render_template_theme($tpl_body, '2005_v1', [
-    'base_params'=>$base_params,
-    'developers'=>$developers,
-    'categories'=>$categories,
-    'prices'=>$prices,
-    'apps'=>$apps,
-    'term'=>$term,
-    'developer'=>$developer,
-    'category'=>$category,
-    'price'=>$price,
+$page  = cms_get_store_page('search');
+$tpl = cms_theme_layout('default.twig', $theme);
+cms_render_template($tpl, [
+    'base_params' => $base_params,
+    'developers'  => $developers,
+    'categories'  => $categories,
+    'prices'      => $prices,
+    'apps'        => $apps,
+    'term'        => $term,
+    'developer'   => $developer,
+    'category'    => $category,
+    'price'       => $price,
     'sort_last'   => $sort_last,
     'sort_order'  => $sort_order,
     'links'       => $links,
@@ -125,9 +125,7 @@ cms_render_template_theme($tpl_body, '2005_v1', [
     's'           => $s,
     'i'           => $i,
     'a'           => $a,
-    'theme_subdir' => 'storefront',
+    'page'        => $page,
+    'page_title'  => $page['title'],
+    'theme_subdir'=> 'storefront'
 ]);
-$body = ob_get_clean();
-
-$tpl = cms_theme_layout('default.twig', $theme);
-cms_render_template($tpl, ['page_title'=>'Search','content'=>$body, 'theme_subdir' => 'storefront']);

@@ -162,3 +162,5 @@ All notable changes to this project will be documented in this file.
 - Installer converts troubleshooter content to UTF-8 to avoid MySQL errors
 
 - Storefront routes preserve legacy query parameters and index.php defaults to browse page
+* Added store_pages table to manage storefront page titles and images.
+* Removed binary images from themes; asset mover now generates them on demand.

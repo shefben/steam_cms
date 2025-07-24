@@ -16,21 +16,35 @@ $packages = $packs->fetchAll(PDO::FETCH_ASSOC);
 $is_demo = (bool)$db->query('SELECT 1 FROM app_categories WHERE appid='.$appid.' AND category_id=10')->fetchColumn();
 
 $theme = cms_get_setting('theme','2005_v2');
-$tpl_body = dirname(__DIR__).'/themes/2005_v1/storefront/layout/'.($app['show_metascore']? '2005_game_metascore.twig' : '2005_game.twig');
 $links = cms_load_store_links(__FILE__);
-$params = [
-    'app'=>$app,
-    'images'=>$images,
-    'packages'=>$packages,
-    'is_demo'=>$is_demo,
-    'appid'=>$appid,
-    'sysreq'=>$sysreq,
-    'links'=>$links,
-    'theme_subdir' => 'storefront',
+$tpl_name = $app['show_metascore'] ? 'gamepage_with_metascore.twig' : 'gamepage.twig';
+$tpl = cms_theme_layout($tpl_name, $theme);
+$min='';
+$rec='';
+if($sysreq){
+    if(preg_match('/Minimum:(.+?)(?:Recommended:|$)/is',$sysreq,$m)) $min=trim($m[1]);
+    if(preg_match('/Recommended:(.+)/is',$sysreq,$m)) $rec=trim($m[1]);
+}
+$game = [
+    'title' => $app['name'],
+    'price' => $app['price'],
+    'appid' => $appid,
+    'description' => $app['description'],
+    'metascore_score' => $app['metacritic'],
+    'minimumreqs' => $min,
+    'recommendedreqs' => $rec,
+    'productheader_path' => $app['main_image'],
+    'metascore_url' => '',
+    'package' => []
 ];
-ob_start();
-cms_render_template_theme($tpl_body, '2005_v1', $params);
-$body = ob_get_clean();
-
-$tpl = cms_theme_layout('default.twig', $theme);
-cms_render_template($tpl, ['page_title'=>$app['name'], 'content'=>$body, 'theme_subdir' => 'storefront']);
+foreach($packages as $p){
+    $game['package'][] = ['title'=>$p['name'],'subid'=>$p['subid'],'price'=>$p['price']];
+}
+cms_render_template($tpl,[
+    'game'=>$game,
+    'images'=>$images,
+    'is_demo'=>$is_demo,
+    'links'=>$links,
+    'theme_subdir'=>'storefront',
+    'page_title'=>$app['name']
+]);
