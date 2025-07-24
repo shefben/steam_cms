@@ -713,4 +713,11 @@ a, a:visited { color: #f1c40f; }
     background:#fff;
 }
 
+/* Scheduled content new row */
+#new-scheduled-table input,
+#new-scheduled-table textarea,
+#new-scheduled-table select {
+    max-width: 180px;
+}
+
 .help-modal {di

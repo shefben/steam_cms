@@ -48,9 +48,10 @@ if(!is_dir($theme_dir)){
     <meta charset="utf-8">
     <title>Admin Login</title>
     <link rel="stylesheet" href="<?php echo htmlspecialchars($theme_url); ?>/style.css">
+    <link rel="stylesheet" href="<?php echo htmlspecialchars($theme_url); ?>/login.css">
 </head>
 <body class="login-page">
-<main>
+<div class="login-container">
 <h2><?php echo htmlspecialchars(cms_admin_translate('Admin Login')); ?></h2>
 <?php if($err) echo '<p class="error">'.htmlspecialchars($err).'</p>'; ?>
 <form method="post" id="login-form" novalidate>
@@ -70,7 +71,7 @@ if(!is_dir($theme_dir)){
     </div>
     <p><a href="password_reset_request.php"><?php echo htmlspecialchars(cms_admin_translate('Forgot password?')); ?></a></p>
 </form>
-</main>
+</div>
 <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
 $(function(){

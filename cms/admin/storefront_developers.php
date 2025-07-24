@@ -34,7 +34,7 @@ $rows = $db->query('SELECT * FROM store_developers ORDER BY name')
         <td><?php echo htmlspecialchars($r['name']); ?></td>
         <td><?php echo htmlspecialchars($r['website'] ?? ''); ?></td>
         <td class="actions">
-            <a href="storefront_developer.php?id=<?php echo $r['id']; ?>">Edit</a>
+            <a href="storefront_developer.php?id=<?php echo $r['id']; ?>" class="btn btn-primary btn-small">Edit</a>
             <form method="post" style="display:inline" onsubmit="return confirm('Delete developer?');">
                 <button type="submit" name="delete" value="<?php echo $r['id']; ?>" class="btn btn-danger btn-small">Delete</button>
             </form>

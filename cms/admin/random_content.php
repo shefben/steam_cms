@@ -14,6 +14,12 @@ if (isset($_GET['ajax']) && isset($_GET['tag'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
     $tag = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['tag']);
+    if (!empty($_POST['new_tag'])) {
+        $new = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['new_tag']);
+        if ($new !== '') {
+            $tag = $new;
+        }
+    }
     if ($tag !== '') {
         if (!empty($_POST['content'])) {
             foreach ($_POST['content'] as $id => $html) {
@@ -38,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
 }
 
 $tags = $db->query('SELECT DISTINCT tag_name FROM random_content ORDER BY tag_name')->fetchAll(PDO::FETCH_COLUMN);
-$current = $_POST['tag'] ?? ($tags[0] ?? '');
+$current = $_POST['new_tag'] ?? ($_POST['tag'] ?? ($tags[0] ?? ''));
 $entries = [];
 if ($current) {
     $stmt = $db->prepare('SELECT uniqueid,content FROM random_content WHERE tag_name=? ORDER BY uniqueid');
@@ -52,6 +58,10 @@ if ($current) {
 <option value="<?php echo htmlspecialchars($t); ?>"<?php if ($t === $current) echo ' selected'; ?>><?php echo htmlspecialchars($t); ?></option>
 <?php endforeach; ?>
 </select>
+<div id="new-tag-container" style="display:none;margin-top:10px;">
+    <label for="new-tag">New Tag Name:</label>
+    <input type="text" id="new-tag" name="new_tag" style="width:200px">
+</div>
 <form method="post" id="content-form">
 <input type="hidden" name="tag" value="<?php echo htmlspecialchars($current); ?>">
 <div id="editor-container">
@@ -85,7 +95,10 @@ $('#tag-select').on('change',function(){
         $('input[name=tag]').val(t);
     },'json');
 });
-$('#add').on('click',function(){ addEditor(null,''); });
+$('#add').on('click',function(){
+    $('#new-tag-container').show();
+    addEditor(null,'');
+});
 $('#editor-container').on('click','.delete-btn',function(){
     var id=$(this).data('id');
     if(id!=='new'){
@@ -97,6 +110,9 @@ $('#editor-container').on('click','.delete-btn',function(){
 });
 $(function(){
     $('.editor').each(function(){ CKEDITOR.replace(this); });
+    <?php if(!empty($_POST['new_tag']) || !$tags): ?>
+    $('#new-tag-container').show();
+    <?php endif; ?>
 });
 </script>
 <?php include 'admin_footer.php'; ?>

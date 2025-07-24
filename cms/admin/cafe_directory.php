@@ -26,34 +26,67 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             null
         ]);
         $redir = 'cafe_directory.php';
-        if(!empty($_POST['country_filter'])) $redir .= '?country='.urlencode($_POST['country_filter']);
+        if (!empty($_POST['country_filter'])) {
+            $redir .= '?country='.urlencode($_POST['country_filter']);
+            if (!empty($_POST['state_filter'])) {
+                $redir .= '&state='.urlencode($_POST['state_filter']);
+            }
+        }
         header('Location: '.$redir); exit;
     }
     if(isset($_POST['update'])){
         $stmt=$db->prepare('UPDATE cafe_directory SET url=?,name=?,phone=?,address=?,city_state=?,zip=?,ord=? WHERE id=?');
         $stmt->execute([$_POST['url'],$_POST['name'],$_POST['phone'],$_POST['address'],$_POST['city_state'],$_POST['zip'],$_POST['ord'],$_POST['id']]);
         $redir = 'cafe_directory.php';
-        if(!empty($_POST['country_filter'])) $redir .= '?country='.urlencode($_POST['country_filter']);
+        if (!empty($_POST['country_filter'])) {
+            $redir .= '?country='.urlencode($_POST['country_filter']);
+            if (!empty($_POST['state_filter'])) {
+                $redir .= '&state='.urlencode($_POST['state_filter']);
+            }
+        }
         header('Location: '.$redir); exit;
     }
     if(isset($_POST['delete_single'])){
         $stmt=$db->prepare('DELETE FROM cafe_directory WHERE id=?');
         $stmt->execute([$_POST['delete_single']]);
         $redir = 'cafe_directory.php';
-        if(!empty($_POST['country_filter'])) $redir .= '?country='.urlencode($_POST['country_filter']);
+        if (!empty($_POST['country_filter'])) {
+            $redir .= '?country='.urlencode($_POST['country_filter']);
+            if (!empty($_POST['state_filter'])) {
+                $redir .= '&state='.urlencode($_POST['state_filter']);
+            }
+        }
         header('Location: '.$redir); exit;
     }
 }
+
 $countries = cms_cafe_country_names();
-$country = isset($_GET['country']) ? strtoupper(preg_replace('/[^A-Z]/','',
-    $_GET['country'])) : '';
+$country = isset($_GET['country']) ? strtoupper(preg_replace('/[^A-Z]/', '', $_GET['country'])) : '';
 if ($country && !isset($countries[$country])) {
     $country = '';
 }
+$state = isset($_GET['state']) ? preg_replace('/[^A-Za-z0-9 ]/', '', $_GET['state']) : '';
+if (!$country) {
+    $state = '';
+}
+$states = [];
+if (in_array($country, ['US', 'CA', 'MY'], true)) {
+    $states = cms_cafe_state_names($country);
+    if ($state && !isset($states[$state])) {
+        $state = '';
+    }
+} else {
+    $state = '';
+}
 
 if ($country) {
-    $stmt = $db->prepare('SELECT * FROM cafe_directory WHERE country=? ORDER BY ord,id');
-    $stmt->execute([$country]);
+    if ($state !== '') {
+        $stmt = $db->prepare('SELECT * FROM cafe_directory WHERE country=? AND state=? ORDER BY ord,id');
+        $stmt->execute([$country, $state]);
+    } else {
+        $stmt = $db->prepare('SELECT * FROM cafe_directory WHERE country=? ORDER BY ord,id');
+        $stmt->execute([$country]);
+    }
     $all = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
     $all = $db->query('SELECT * FROM cafe_directory ORDER BY ord,id')->fetchAll(PDO::FETCH_ASSOC);
@@ -71,10 +104,19 @@ $entries = array_slice($all, ($page - 1) * $per, $per);
     <label for="country-select">Country:</label>
     <select id="country-select" name="country">
         <option value="">All</option>
-        <?php foreach($countries as $code=>$name): ?>
-            <option value="<?php echo $code; ?>"<?php if($code===$country) echo ' selected'; ?>><?php echo htmlspecialchars($name); ?></option>
+        <?php foreach ($countries as $code => $name): ?>
+            <option value="<?php echo $code; ?>"<?php if ($code === $country) echo ' selected'; ?>><?php echo htmlspecialchars($name); ?></option>
         <?php endforeach; ?>
     </select>
+    <?php if ($states): ?>
+        <label for="state-select">State:</label>
+        <select id="state-select" name="state">
+            <option value="">All</option>
+            <?php foreach ($states as $scode => $sname): ?>
+                <option value="<?php echo htmlspecialchars($scode); ?>"<?php if ($scode === $state) echo ' selected'; ?>><?php echo htmlspecialchars($sname); ?></option>
+            <?php endforeach; ?>
+        </select>
+    <?php endif; ?>
     <noscript><button type="submit">Go</button></noscript>
 </form>
 <input type="hidden" id="dir-order" name="order">
@@ -92,7 +134,12 @@ $entries = array_slice($all, ($page - 1) * $per, $per);
 <td><input type="text" name="zip" value="<?php echo htmlspecialchars($e['zip']); ?>"></td>
 <td>
 <input type="hidden" name="id" value="<?php echo $e['id']; ?>">
-<?php if($country): ?><input type="hidden" name="country_filter" value="<?php echo $country; ?>"><?php endif; ?>
+<?php if($country): ?>
+<input type="hidden" name="country_filter" value="<?php echo $country; ?>">
+<?php endif; ?>
+<?php if($state !== ''): ?>
+<input type="hidden" name="state_filter" value="<?php echo htmlspecialchars($state); ?>">
+<?php endif; ?>
 <button name="update" value="1">Update</button>
 <button name="delete_single" value="<?php echo $e['id']; ?>" onclick="return confirm('Delete?')">Delete</button>
 </td>
@@ -100,7 +147,15 @@ $entries = array_slice($all, ($page - 1) * $per, $per);
 <?php endforeach; ?>
 </tbody>
 </table>
-<?php $q = $country ? 'country='.$country.'&' : ''; ?>
+<?php
+$q = '';
+if ($country) {
+    $q = 'country='.$country.'&';
+    if ($state !== '') {
+        $q .= 'state='.urlencode($state).'&';
+    }
+}
+?>
 <div class="pagination">
 <?php if($page>1): ?><a href="?<?php echo $q; ?>page=<?php echo $page-1; ?>">&laquo; Prev</a><?php endif; ?>
 <?php for($i=1;$i<=$pages;$i++): ?>
@@ -114,7 +169,12 @@ $entries = array_slice($all, ($page - 1) * $per, $per);
 </div>
 <h3>Add Entry</h3>
 <form method="post">
-<?php if($country): ?><input type="hidden" name="country_filter" value="<?php echo $country; ?>"><?php endif; ?>
+<?php if($country): ?>
+<input type="hidden" name="country_filter" value="<?php echo $country; ?>">
+<?php endif; ?>
+<?php if($state !== ''): ?>
+<input type="hidden" name="state_filter" value="<?php echo htmlspecialchars($state); ?>">
+<?php endif; ?>
 Order <input type="number" name="ord" value="0" style="width:50px">
 Name <input type="text" name="name">
 URL <input type="text" name="url">
@@ -134,10 +194,13 @@ $(function(){
         var data = new URLSearchParams();
         data.set('reorder','1');
         data.set('order', ids.join(','));
-        fetch('cafe_directory.php<?php echo $country ? '?country='.urlencode($country) : '';?>',{method:'POST',body:data});
+        fetch('cafe_directory.php<?php echo $country ? '?country='.urlencode($country).($state!==''?'&state='.urlencode($state):'') : '';?>',{method:'POST',body:data});
     }
     new Sortable(body,{handle:'.handle',onEnd:sendOrder});
-    $('#country-select').on('change',function(){
+    $('#country-select').on('change', function () {
+        if ($.inArray(this.value, ['US', 'CA', 'MY']) === -1) {
+            $('#state-select').val('');
+        }
         $('#country-filter').submit();
     });
 });

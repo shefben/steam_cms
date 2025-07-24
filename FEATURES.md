@@ -62,6 +62,7 @@
 - Drag-and-drop ordering for cafe reps, directory, and categories
 - Cafe directory importer parses text files, deduplicates entries, and populates country/state navigation
 - Cafe directory SQL seed preloads all countries and states
+- Admin cafe directory filters by country and state with dropdowns
 - Pagination links styled with spacing
 - FAQ sidebar includes direct link to question list
 - Logo preview path adapts to current theme
@@ -109,15 +110,18 @@
 - Content server page loads a theme-specific PHP block for layout
 - Archived 2006_v1 homepage content seeded for dynamic tags
 - Random and scheduled content tags pulled from database
+- Random Content admin supports creating new tag names
 - `split_title` tag splits headings into styled halves
 - `split_title_entry` tag renders titles stored in the `custom_titles` table
 - Admin page to manage custom title entries
 - Scheduled content admin checks schedule type fields
+- New entry row on Scheduled Content page uses compact layout
 - Capsule editor lists existing images by theme
 - Comprehensive tag guide available in TAGS.md
 - Capsule uploader provides client-side image cropping
 - News list filters by title and author via AJAX
 - Styled login page with jQuery validation and password reset request
+- Login screen matches installer look and centers form
 - Admin dashboard shows unread notifications with dismiss action
 - Admin sidebar links editable with drag-and-drop ordering and add/remove buttons
 - Role-based administrator permissions with editable roles
@@ -152,3 +156,6 @@
 - Product editor supports trailer URL, preload scheduling, and per-screenshot controls
 - Trailer links can be hidden on game pages via a product checkbox
 - Screenshots and headers stored per-app under storefront directories
+- Header/Footer admin loads form via AJAX and stores logos per theme
+- Settings page supports nested sidebar menus
+- FAQ and News admins show numbered pagination; news table sortable

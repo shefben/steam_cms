@@ -168,3 +168,12 @@ All notable changes to this project will be documented in this file.
 - Added preload and trailer fields to store_apps; screenshots managed individually
 - Products now include a checkbox to hide the trailer link on game pages
 - Game assets now load from storefront/images/apps/[appid] paths; package page iterates games dynamically
+- Admin cafe directory filters by country and state with dropdowns
+- Random Content page lets admins create new tag names
+- Scheduled Content page's new entry table is compact
+- Login screen styled like the installer
+- Header/Footer page updates via AJAX when changing theme and stores logos per theme
+- Settings page allows custom parent/child sidebar links
+- FAQ admin pagination includes page numbers
+- News admin lists pages with numbered pagination, sortable headers, and button actions
+- Developer and custom pages lists use styled buttons for edit/delete
