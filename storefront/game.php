@@ -31,6 +31,7 @@ $theme = cms_get_setting('theme','2005_v2');
 $links = cms_load_store_links(__FILE__);
 $tpl_name = $app['show_metascore'] ? 'gamepage_with_metascore.twig' : 'gamepage.twig';
 $tpl = cms_theme_layout($tpl_name, $theme);
+
 $game = [
     'title' => $app['name'],
     'price' => $app['price'],
