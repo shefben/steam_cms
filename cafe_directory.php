@@ -1,8 +1,11 @@
 <?php
-$page_title = 'Cyber Café Directory';
+require_once __DIR__.'/cms/template_engine.php';
 require_once __DIR__.'/cms/db.php';
-include __DIR__.'/cms/header.php';
-$db = cms_get_db();
+
+$theme      = cms_get_setting('theme', '2004');
+$page_title = 'Cyber Café Directory';
+$db         = cms_get_db();
+ob_start();
 
 function cafe_country_names(): array {
     static $map = null;
@@ -40,7 +43,12 @@ if ($country === null) {
         echo '<li><a href="index.php?area=cafe_directory&amp;country='.$code.'">'.htmlspecialchars($name).'</a></li>';
     }
     echo '</ul></div></div>';
-    include 'cms/footer.php';
+    $content = ob_get_clean();
+    $tpl = cms_theme_layout('default.twig', $theme);
+    cms_render_template($tpl, [
+        'page_title' => $page_title,
+        'content'    => $content,
+    ]);
     return;
 }
 
@@ -56,7 +64,12 @@ if ($state === null && is_dir($stateDir)) {
         echo '<li><a href="'.$u.'">'.htmlspecialchars($name).'</a></li>';
     }
     echo '</ul></div></div>';
-    include 'cms/footer.php';
+    $content = ob_get_clean();
+    $tpl = cms_theme_layout('default.twig', $theme);
+    cms_render_template($tpl, [
+        'page_title' => $page_title,
+        'content'    => $content,
+    ]);
     return;
 }
 
@@ -91,5 +104,10 @@ if ($state !== null) {
     echo '&raquo; <a href="index.php?area=cafe_directory">return to countries</a>';
 }
 echo '</div></div>';
-include 'cms/footer.php';
+$content = ob_get_clean();
+$tpl = cms_theme_layout('default.twig', $theme);
+cms_render_template($tpl, [
+    'page_title' => $page_title,
+    'content'    => $content,
+]);
 

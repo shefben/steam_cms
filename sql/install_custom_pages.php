@@ -1126,6 +1126,33 @@ $insertArray[] = [
     date('Y-m-d H:i:s')
 ];
 $insertArray[] = [
+    'cybercafe_program',
+    'Cyber Café Program',
+    file_get_contents(__DIR__.'/../html/cybercafe_program.html'),
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+$insertArray[] = [
+    'cybercafe_promotion',
+    'Valve Announces April Cyber Café Promotion',
+    file_get_contents(__DIR__.'/../html/cybercafe_promotion.html'),
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+$insertArray[] = [
+    'cybercafe_changeform',
+    'Cyber Café Program Change Form',
+    file_get_contents(__DIR__.'/../html/cybercafe_changeform.html'),
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+$insertArray[] = [
     'product_HL2bronsilvergold',
     'Welcome to Steam',
     file_get_contents(__DIR__.'/../html/product_HL2bronsilvergold.html'),

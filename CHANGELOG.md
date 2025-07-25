@@ -180,3 +180,5 @@ All notable changes to this project will be documented in this file.
 - Admin cafe directory updates table via AJAX and loads states dynamically
 - Storefront apps store minimum and recommended system requirements separately
 - Installer creates sysreq column for store apps
+- Cyber cafe pages render via the default Twig layout with header and footer
+- Cyber cafe program pages converted to custom pages
