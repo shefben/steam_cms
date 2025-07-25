@@ -179,3 +179,4 @@ All notable changes to this project will be documented in this file.
 - Developer and custom pages lists use styled buttons for edit/delete
 - Admin cafe directory updates table via AJAX and loads states dynamically
 - Storefront apps store minimum and recommended system requirements separately
+- Installer creates sysreq column for store apps
