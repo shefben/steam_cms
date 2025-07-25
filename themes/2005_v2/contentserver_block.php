@@ -13,6 +13,7 @@ TD{ font-size:8pt; padding:0 16px 0 0; }
 .legend{ margin:0 0 0 16px; padding:4px; margin:0 7px; }
 .legendRight{ float:right; text-align:right; margin:4px 7px; line-height:18px; }
 </style>
+<script src="/pop.js"></script>
 <div class="content">
 <h1>CONTENT SERVERS</h1>
 <span style="float:right;">This page last updated: <?php echo date('g:ia \P\S\T (O), F d Y', strtotime($last_update)); ?></span>
@@ -34,7 +35,14 @@ foreach($regions as $region=>$list){?>
     $load = $s['total_capacity']? (1 - $s['available_bandwidth']/$s['total_capacity'])*100 : 0;
     $avail = 100 - $load; ?>
 <tr>
-<td align="right"><?php echo htmlspecialchars($s['name']); ?></td>
+<td align="right">
+<?php if(!empty($s['website'])): ?>
+    <a href="<?php echo htmlspecialchars($s['website']); ?>"><?php echo htmlspecialchars($s['name']); ?></a>
+<?php else: ?>
+    <?php echo htmlspecialchars($s['name']); ?>
+<?php endif; ?>
+<?php if(!empty($s['filtered'])): ?> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('filtered_servers.php')">filtered</a>]</font><?php endif; ?>
+</td>
 <td>
 <table class="statusGraph" width="<?php echo max(1,(int)$load); ?>%" cellspacing="0">
 <tr><td class="CurrentLoad" width="<?php echo (int)$load; ?>%"></td><td class="AvailableBytesPerSecond" width="<?php echo (int)$avail; ?>%"></td></tr>

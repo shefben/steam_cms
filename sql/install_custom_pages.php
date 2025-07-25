@@ -1161,6 +1161,15 @@ $insertArray[] = [
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
 ];
+$insertArray[] = [
+    'filtered_info',
+    '"Filtered" Content Servers',
+    file_get_contents(__DIR__.'/../archived_steampowered/2004/filtered_info.html'),
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
 
 $stmtcp = $pdo->prepare(
     'INSERT INTO custom_pages

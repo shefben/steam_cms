@@ -26,7 +26,9 @@ $db->query("
     name VARCHAR(255),
     ip VARCHAR(100),
     port INT,
-    total_capacity INT
+    total_capacity INT,
+    filtered TINYINT(1) NOT NULL DEFAULT 0,
+    website VARCHAR(255) DEFAULT NULL
   )
 ");
 $db->query("

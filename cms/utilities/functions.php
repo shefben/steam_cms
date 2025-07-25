@@ -68,8 +68,16 @@ function get_servers($db){
     }
     $has_region = $res && $res->num_rows > 0;
     if($res) $res->free();
+    $res = $db->query("SHOW COLUMNS FROM content_servers LIKE 'website'");
+    $has_website = $res && $res->num_rows > 0;
+    if($res) $res->free();
+    $res = $db->query("SHOW COLUMNS FROM content_servers LIKE 'filtered'");
+    $has_filtered = $res && $res->num_rows > 0;
+    if($res) $res->free();
     $select = "cs.id, cs.name, cs.ip, cs.port, cs.total_capacity";
     if($has_region) $select .= ", cs.region";
+    if($has_website) $select .= ", cs.website";
+    if($has_filtered) $select .= ", cs.filtered";
     $sql = "SELECT $select, ss.available_bandwidth, ss.unique_connections, ss.last_checked, ss.status FROM content_servers cs LEFT JOIN server_stats ss ON cs.id=ss.server_id";
     try {
         $res = $db->query($sql);
@@ -80,6 +88,8 @@ function get_servers($db){
     $servers = [];
     while ($row = $res->fetch_assoc()){
         if(!isset($row['region'])) $row['region'] = 'Unknown';
+        if(!isset($row['website'])) $row['website'] = null;
+        if(!isset($row['filtered'])) $row['filtered'] = 0;
         $servers[] = $row;
     }
     return $servers;
@@ -124,7 +134,15 @@ function render_server_block($s, $max_capacity){
     <!-- ===== BEGIN CONTENT SERVER BLOCK ===== -->
     <span class="linky" onclick="showBranch('Server<?php echo $s['id']; ?>Details');swapPlus('plus<?php echo $s['id']; ?>')"><img class="plusMinus" id="plus<?php echo $s['id']; ?>" src="./img/plus.gif"></span>
     <div class="statusBlock" title="<?php if($s['status']=='UP'){ echo 'Available: '.$s['total_capacity'].'Mbps | Current Load: '.($s['total_capacity']?round((1-($s['available_bandwidth']/$s['total_capacity']))*100,1):0).'%'; } else { echo 'Server is down.  No information available.'; } ?>">
-    <h2 class="<?php echo $s['status']=='UP' ? 'status' : 'status-down'; ?>">CONTENT SERVER <?php echo $s['id']; ?> - <?php echo htmlspecialchars($s['name']); ?><?php if($s['status']!='UP') echo ' - DOWN'; ?></h2>
+    <h2 class="<?php echo $s['status']=='UP' ? 'status' : 'status-down'; ?>">CONTENT SERVER <?php echo $s['id']; ?> -
+        <?php if(!empty($s['website'])): ?>
+            <a href="<?php echo htmlspecialchars($s['website']); ?>"><?php echo htmlspecialchars($s['name']); ?></a>
+        <?php else: ?>
+            <?php echo htmlspecialchars($s['name']); ?>
+        <?php endif; ?>
+        <?php if(!empty($s['filtered'])): ?> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('filtered_servers.php')">filtered</a>]</font><?php endif; ?>
+        <?php if($s['status']!='UP') echo ' - DOWN'; ?>
+    </h2>
     <?php if($s['status']=='UP'): ?>
     <table class="statusGraph" cellspacing="0" width="<?php echo (int)(($s['total_capacity']/$max_capacity)*100); ?>%">
             <tr>

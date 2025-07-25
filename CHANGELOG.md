@@ -182,3 +182,5 @@ All notable changes to this project will be documented in this file.
 - Installer creates sysreq column for store apps
 - Cyber cafe pages render via the default Twig layout with header and footer
 - Cyber cafe program pages converted to custom pages
+- Content servers can be flagged as filtered and include website links
+- Filtered info popup loads from custom page

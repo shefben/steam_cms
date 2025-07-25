@@ -163,3 +163,5 @@
 - Storefront products include minimum and recommended system requirements
 - Cyber cafe pages use shared Twig layout with header and footer
 - Cyber cafe program pages stored as custom pages
+- Content server admin supports filtered flag and website links
+- Filtered info popup served from custom page
