@@ -9,6 +9,7 @@ CREATE TABLE store_apps(
     metacritic TEXT DEFAULT NULL,
     metacritic_url TEXT,
     description TEXT,
+    sysreq TEXT,
     sysreq_min TEXT,
     sysreq_rec TEXT,
     trailer_url TEXT,
