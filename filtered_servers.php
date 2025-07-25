@@ -1,4 +1,8 @@
-<?php $page_title = 'Filtered Servers'; ?>
+<?php
+$page_title = 'Filtered Servers';
+require_once __DIR__.'/cms/db.php';
+$page = cms_get_custom_page('filtered_info');
+?>
 
 <html>
 <head>
@@ -19,9 +23,13 @@
 <table width=\"100%\" height=\"100%\" cellspacing=\"0\" cellpadding=\"10\" class=\"content\">
 <tr>
 	<td width=\"100%\" align=\"left\" valign=\"top\" style=\"border: Solid 1px #56634D;\">
-	<h1>"Filtered" Content Servers</h1>
-	Some content servers on Steam's network are not public. These servers are called "filtered" because they only serve content to a select group of users (filtering out all others). <br><br>
-	On the content server status page, these servers are not counted in the Total Available Bandwidth or the Total Used Bandwidth numbers.<br>
+        <?php if($page): ?>
+            <?php echo $page['content']; ?>
+        <?php else: ?>
+        <h1>"Filtered" Content Servers</h1>
+        Some content servers on Steam's network are not public. These servers are called "filtered" because they only serve content to a select group of users (filtering out all others). <br><br>
+        On the content server status page, these servers are not counted in the Total Available Bandwidth or the Total Used Bandwidth numbers.<br>
+        <?php endif; ?>
 	</td>
 </tr>
 </table>
