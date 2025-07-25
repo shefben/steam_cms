@@ -1,4 +1,5 @@
 <?php
+
 $pdo = new PDO('sqlite::memory:');
 $pdo->exec('CREATE TABLE store_apps(appid INT PRIMARY KEY, metacritic_url TEXT)');
 $pdo->exec("INSERT INTO store_apps(appid,metacritic_url) VALUES(1,'http://example.com')");

@@ -1,4 +1,5 @@
 <?php
+
 // simple sqlite insert test for storefront tabs
 $pdo = new PDO('sqlite::memory:');
 $pdo->exec('CREATE TABLE storefront_tabs (id INTEGER PRIMARY KEY AUTOINCREMENT, theme TEXT, title TEXT, ord INT)');
