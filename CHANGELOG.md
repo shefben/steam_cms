@@ -178,3 +178,4 @@ All notable changes to this project will be documented in this file.
 - News admin lists pages with numbered pagination, sortable headers, and button actions
 - Developer and custom pages lists use styled buttons for edit/delete
 - Admin cafe directory updates table via AJAX and loads states dynamically
+- Storefront apps store minimum and recommended system requirements separately
