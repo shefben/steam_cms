@@ -1,1 +1,0 @@
-<?php // placeholder for phpcs
