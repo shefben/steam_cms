@@ -159,3 +159,4 @@
 - Header/Footer admin loads form via AJAX and stores logos per theme
 - Settings page supports nested sidebar menus
 - FAQ and News admins show numbered pagination; news table sortable
+- Cafe directory table reloads via AJAX; US/CA/MY show state dropdown
