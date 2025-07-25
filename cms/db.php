@@ -88,6 +88,30 @@ function cms_get_support_page(string $theme): ?array
     }
 }
 
+function cms_get_download_page(string $theme): ?array
+{
+    $db = cms_get_db();
+    $default = $theme === '2003_v2' ? '2003_v2_dlv2' : '2004_dlv3';
+    $ver = cms_get_setting('download_page_' . $theme, $default);
+    try {
+        $stmt = $db->prepare('SELECT content FROM download_pages WHERE version=?');
+        $stmt->execute([$ver]);
+        $content = $stmt->fetchColumn();
+        if ($content === false) return null;
+        $linkStmt = $db->prepare('SELECT category,label,url FROM download_links WHERE version=? ORDER BY ord,id');
+        $linkStmt->execute([$ver]);
+        $links = $linkStmt->fetchAll(PDO::FETCH_ASSOC);
+        return [
+            'version' => $ver,
+            'content' => $content,
+            'links'   => $links,
+        ];
+    } catch (PDOException $e) {
+        if ($e->getCode()==='42S02') return null;
+        throw $e;
+    }
+}
+
 function cms_record_visit($page){
     $db = cms_get_db();
     $date = date('Y-m-d');

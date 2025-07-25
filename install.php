@@ -435,6 +435,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     require_once 'sql/install_custom_pages.php';
                     require_once 'sql/install_support_page.php';
                     require_once 'sql/install_troubleshooter.php';
+                    require_once 'sql/install_download_pages.php';
 
                     $pdo->exec($stmt);
                 }
