@@ -161,3 +161,5 @@
 - FAQ and News admins show numbered pagination; news table sortable
 - Cafe directory table reloads via AJAX; US/CA/MY show state dropdown
 - Storefront products include minimum and recommended system requirements
+- Cyber cafe pages use shared Twig layout with header and footer
+- Cyber cafe program pages stored as custom pages
