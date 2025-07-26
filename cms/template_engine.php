@@ -109,23 +109,31 @@ function cms_theme_layout(?string $file, ?string $theme = null)
     $file  = $file ?: 'default.twig';
     $file  = preg_replace('/\.tpl$/', '.twig', $file);
 
-    $dirs = ['layouts', 'layout'];
-    foreach ($dirs as $dir) {
-        $path = dirname(__DIR__)."/themes/$theme/$dir/$file";
-        if (file_exists($path)) {
-            return $path;
+    $dirs     = ['layouts', 'layout'];
+    $subdirs  = ['', 'storefront'];
+
+    foreach ($subdirs as $sub) {
+        foreach ($dirs as $dir) {
+            $path = dirname(__DIR__)."/themes/$theme/".($sub ? "$sub/" : '')."$dir/$file";
+            if (file_exists($path)) {
+                return $path;
+            }
         }
     }
-    foreach ($dirs as $dir) {
-        $path = dirname(__DIR__)."/themes/$theme/$dir/default.twig";
-        if (file_exists($path)) {
-            return $path;
+    foreach ($subdirs as $sub) {
+        foreach ($dirs as $dir) {
+            $path = dirname(__DIR__)."/themes/$theme/".($sub ? "$sub/" : '')."$dir/default.twig";
+            if (file_exists($path)) {
+                return $path;
+            }
         }
     }
-    foreach ($dirs as $dir) {
-        $path = dirname(__DIR__)."/themes/2004/$dir/$file";
-        if (file_exists($path)) {
-            return $path;
+    foreach ($subdirs as $sub) {
+        foreach ($dirs as $dir) {
+            $path = dirname(__DIR__)."/themes/2004/".($sub ? "$sub/" : '')."$dir/$file";
+            if (file_exists($path)) {
+                return $path;
+            }
         }
     }
     return dirname(__DIR__)."/themes/2004/layout/default.twig";

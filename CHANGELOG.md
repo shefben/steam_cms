@@ -20,6 +20,8 @@ All notable changes to this project will be documented in this file.
 - CSS links beginning with ./ now resolve to the root website path
 - Storefront sidebar and media table links now respect the configured root path
 - CSS file url() references now point to the theme images directory
+- Storefront layout detection searches storefront folders first
+- Default storefront capsules now seed with 05_01_2005 images
 - Full article news output retains HTML formatting
 - Header logo can be overridden per page using the `header_logo()` tag
 - Fixed status page to render statistics HTML correctly
