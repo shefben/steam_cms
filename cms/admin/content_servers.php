@@ -5,14 +5,6 @@ $db = db_connect();
 $servers = get_servers($db);
 $main_ip = get_setting($db,'main_network_ip');
 $main_port = get_setting($db,'main_network_port');
-$themes = [];
-cms_refresh_themes();
-$themes = cms_get_themes();
-$cs_theme = get_setting($db,'cs_theme') ?: ($themes[0] ?? '2004');
-if(!in_array($cs_theme,$themes) && $themes){
-    $cs_theme = $themes[0];
-    set_setting($db,'cs_theme',$cs_theme);
-}
 if(!$main_ip && !$main_port && $servers){
     $main_ip = $servers[0]['ip'];
     $main_port = $servers[0]['port'];
@@ -43,11 +35,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $db->query('DELETE FROM content_servers WHERE id='.$id);
         $db->query('DELETE FROM server_stats WHERE server_id='.$id);
         cms_admin_log('Deleted content server '.$id);
-        header('Location: content_servers.php'); exit;
-    }
-    if(isset($_POST['set_settings'])){
-        set_setting($db,'cs_theme',$_POST['cs_theme']);
-        cms_admin_log('Updated content server settings');
         header('Location: content_servers.php'); exit;
     }
     if(isset($_POST['set_main_server'])){
@@ -103,15 +90,5 @@ $servers = get_servers($db);
 <input type="text" name="website" placeholder="Website">
 <label>Filtered <input type="checkbox" name="filtered" value="1"></label>
 <button name="add" value="1">Add</button>
-</form>
-<h3>Settings</h3>
-<form method="post">
-Theme <select name="cs_theme">
-<?php foreach($themes as $t): ?>
-    <option value="<?php echo htmlspecialchars($t); ?>" <?php echo $t==$cs_theme?'selected':''; ?>><?php echo htmlspecialchars($t); ?></option>
-<?php endforeach; ?>
-</select>
-<input type="hidden" name="set_settings" value="1">
-<input type="submit" value="Update">
 </form>
 <?php include 'admin_footer.php'; ?>

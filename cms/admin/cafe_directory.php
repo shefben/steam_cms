@@ -179,7 +179,12 @@ if (isset($_GET['ajax'])) {
 <?php echo $paginationHtml; ?>
 <h3>Add Entry</h3>
 <form method="post" id="add-form">
-<input type="hidden" name="country_filter" id="add-country" value="<?php echo $country; ?>">
+<label for="add-country">Country:</label>
+<select name="country_filter" id="add-country">
+    <?php foreach ($countries as $code => $name): ?>
+        <option value="<?php echo $code; ?>"<?php if ($code === $country) echo ' selected'; ?>><?php echo htmlspecialchars($name); ?></option>
+    <?php endforeach; ?>
+</select>
 <input type="hidden" name="state_filter" id="add-state" value="<?php echo htmlspecialchars($state); ?>">
 Order <input type="number" name="ord" value="0" style="width:50px">
 Name <input type="text" name="name">
