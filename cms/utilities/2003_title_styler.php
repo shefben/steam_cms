@@ -1,17 +1,15 @@
 <?php
 /**
- * renderInstructionBar()
+ * render0203PageTitle()
  * ----------------------
- * Returns HTML for the green “instruction bar” with inline styles.
+ * Returns HTML for the “Page Title” with inline styles.
  *
- *  • If the phrase has ONE word, the first half of its characters are white,
- *    *unless* it matches a special-split rule (e.g. TROUBLESHOOTING → TROUBLE/SHOOTING).
- *  • If it has TWO+ words, the first ⌊word-count ÷ 2⌋ words are white.
+ *  • Creates the title text that is displayed in the 2002_v2 and 2003_v1 themes
  *
  * @param string $text
  * @return string
  */
-function renderInstructionBar(string $text): string
+function render0203PageTitle(string $text): string
 {
     return '
 <style>
@@ -20,7 +18,7 @@ function renderInstructionBar(string $text): string
     src: url("DINEngschriftStd.otf") format("opentype");
 }
 </style>
-<div style="width:531px;height:38px;background:#626d5c;
+<div style="width:531px;height:38px;
             font:20px/36px \'DINEngschriftStd\';
             letter-spacing:1px;padding-left:7px;position:relative;
             color:#f0f0f0;white-space:nowrap;overflow:hidden;">
@@ -31,7 +29,6 @@ function renderInstructionBar(string $text): string
 </div>';
 }
 
-
-echo renderInstructionBar('Support Site');
+echo render0203PageTitle('GET ANSWERS TO YOUR QUESTIONS');
 
 ?>
