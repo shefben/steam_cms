@@ -95,6 +95,18 @@ ASSETS = {
     'archived_steampowered/2005/v1/img/status.gif':
         'themes/2005_v1/images/status.gif',
 }
+
+# storefront assets used by the unified 04-05 storefront
+for folder in ['images', 'gfx', 'img']:
+    src_base = os.path.join(ROOT, 'archived_steampowered', '2004', 'storefront', folder)
+    if not os.path.isdir(src_base):
+        continue
+    for root_dir, _, files in os.walk(src_base):
+        for fname in files:
+            src_path = os.path.join(root_dir, fname)
+            rel_src = os.path.relpath(src_path, ROOT)
+            sub_path = os.path.relpath(src_path, os.path.join(ROOT, 'archived_steampowered', '2004', 'storefront'))
+            ASSETS[rel_src] = f"04-05v1_storefront/{sub_path}"
 for src_rel, dest_rel in ASSETS.items():
     src = os.path.join(ROOT, src_rel)
     dest = os.path.join(ROOT, dest_rel)
@@ -104,3 +116,15 @@ for src_rel, dest_rel in ASSETS.items():
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     shutil.copy2(src, dest)
     print(f"Copied {src_rel} -> {dest_rel}")
+
+# replicate storefront assets into the 2004 and 2005_v1 theme folders so the
+# legacy storefront can serve them when those themes are active
+sf_src = os.path.join(ROOT, '04-05v1_storefront')
+for root_dir, _, files in os.walk(sf_src):
+    for fname in files:
+        rel_path = os.path.relpath(os.path.join(root_dir, fname), sf_src)
+        for theme in ['2004', '2005_v1']:
+            dest = os.path.join(ROOT, 'themes', theme, 'storefront', rel_path)
+            os.makedirs(os.path.dirname(dest), exist_ok=True)
+            shutil.copy2(os.path.join(root_dir, fname), dest)
+            print(f"Copied {rel_path} -> themes/{theme}/storefront/{rel_path}")
