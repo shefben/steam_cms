@@ -2,6 +2,20 @@
 if (!defined('CMS_ROOT')) {
     define('CMS_ROOT', dirname(__DIR__));
 }
+/**
+ * Cached configuration values to avoid repeated database queries.
+ * @var array<string, string|null>
+ */
+$cms_settings_cache = [];
+/**
+ * Cached theme data to avoid repeated database queries.
+ * @var array<string, mixed>
+ */
+$cms_theme_header_cache = [];
+$cms_theme_footer_cache = [];
+$cms_theme_css_cache = [];
+$cms_theme_config_cache = [];
+$cms_theme_setting_cache = [];
 function cms_get_db(){
     static $db;
     if($db) return $db;
@@ -15,12 +29,18 @@ function cms_get_db(){
 }
 
 function cms_get_setting($key, $default=null){
+    global $cms_settings_cache;
+    if (array_key_exists($key, $cms_settings_cache)) {
+        return $cms_settings_cache[$key];
+    }
+
     $db = cms_get_db();
     try{
         $stmt = $db->prepare('SELECT value FROM settings WHERE `key`=?');
         $stmt->execute([$key]);
         $val = $stmt->fetchColumn();
-        return $val!==false ? $val : $default;
+        $cms_settings_cache[$key] = $val!==false ? $val : $default;
+        return $cms_settings_cache[$key];
     }catch(PDOException $e){
         if($e->getCode()==='42S02') return $default; // table missing
         throw $e;
@@ -28,9 +48,11 @@ function cms_get_setting($key, $default=null){
 }
 
 function cms_set_setting($key,$value){
+    global $cms_settings_cache;
     $db = cms_get_db();
     $stmt = $db->prepare('REPLACE INTO settings(`key`,value) VALUES(?,?)');
     $stmt->execute([$key,$value]);
+    $cms_settings_cache[$key] = $value;
 }
 
 function cms_get_custom_page($slug,$theme=null){
@@ -266,6 +288,12 @@ function cms_get_header_logo_override(): ?string {
 }
 
 function cms_get_theme_header_data($theme, string $page = ''){
+    global $cms_theme_header_cache;
+    $cacheKey = $theme.'|'.$page;
+    if (isset($cms_theme_header_cache[$cacheKey])) {
+        return $cms_theme_header_cache[$cacheKey];
+    }
+
     $db = cms_get_db();
     try {
         $stmt = $db->prepare('SELECT logo,text,img,hover,depressed,url,visible,spacer FROM theme_headers WHERE theme=? AND page=? ORDER BY ord,id');
@@ -290,7 +318,10 @@ function cms_get_theme_header_data($theme, string $page = ''){
             // ignore if schema lacks page column
         }
     }
-    if(!$rows) return ['logo'=>'','spacer'=>'','buttons'=>[]];
+    if(!$rows) {
+        $cms_theme_header_cache[$cacheKey] = ['logo'=>'','spacer'=>'','buttons'=>[]];
+        return $cms_theme_header_cache[$cacheKey];
+    }
     $logo = $rows[0]['logo'];
     $spacer = $rows[0]['spacer'];
     $buttons = [];
@@ -304,11 +335,16 @@ function cms_get_theme_header_data($theme, string $page = ''){
             'visible'=>$r['visible']
         ];
     }
-    return ['logo'=>$logo,'spacer'=>$spacer,'buttons'=>$buttons];
+    $cms_theme_header_cache[$cacheKey] = ['logo'=>$logo,'spacer'=>$spacer,'buttons'=>$buttons];
+    return $cms_theme_header_cache[$cacheKey];
 }
 
 function cms_get_theme_footer($theme)
 {
+    global $cms_theme_footer_cache;
+    if (isset($cms_theme_footer_cache[$theme])) {
+        return $cms_theme_footer_cache[$theme];
+    }
     $db = cms_get_db();
     try {
         $stmt = $db->prepare('SELECT html FROM theme_footers WHERE theme=?');
@@ -321,12 +357,15 @@ function cms_get_theme_footer($theme)
         }
 
         if ($html === false) {
+            $cms_theme_footer_cache[$theme] = '';
             return '';
         }
 
+        $cms_theme_footer_cache[$theme] = $html;
         return $html;
     } catch (PDOException $e) {
         if ($e->getCode() === '42S02') {
+            $cms_theme_footer_cache[$theme] = '';
             return '';
         }
         throw $e;
@@ -334,42 +373,69 @@ function cms_get_theme_footer($theme)
 }
 
 function cms_get_theme_css($theme){
+    global $cms_theme_css_cache;
+    if (isset($cms_theme_css_cache[$theme])) {
+        return $cms_theme_css_cache[$theme];
+    }
     $db = cms_get_db();
     try {
         $stmt = $db->prepare('SELECT css_path FROM themes WHERE name=?');
         $stmt->execute([$theme]);
         $css = $stmt->fetchColumn();
-        if($css===false || $css==='') return 'steampowered02.css';
+        if($css===false || $css==='') {
+            $cms_theme_css_cache[$theme] = 'steampowered02.css';
+            return 'steampowered02.css';
+        }
+        $cms_theme_css_cache[$theme] = $css;
         return $css;
     } catch(PDOException $e){
-        if(in_array($e->getCode(), ['42S02','42S22'])) return 'steampowered02.css';
+        if(in_array($e->getCode(), ['42S02','42S22'])) {
+            $cms_theme_css_cache[$theme] = 'steampowered02.css';
+            return 'steampowered02.css';
+        }
         throw $e;
     }
 }
 
 function cms_get_theme_setting(string $theme, string $name, $default = null){
+    global $cms_theme_setting_cache;
+    $cacheKey = $theme.'|'.$name;
+    if (array_key_exists($cacheKey, $cms_theme_setting_cache)) {
+        return $cms_theme_setting_cache[$cacheKey];
+    }
+
     $db = cms_get_db();
     try {
         $stmt = $db->prepare('SELECT value FROM theme_settings WHERE theme=? AND name=?');
         $stmt->execute([$theme,$name]);
         $val = $stmt->fetchColumn();
-        return $val!==false ? $val : $default;
+        $cms_theme_setting_cache[$cacheKey] = $val!==false ? $val : $default;
+        return $cms_theme_setting_cache[$cacheKey];
     } catch(PDOException $e){
-        if($e->getCode()==='42S02') return $default;
+        if($e->getCode()==='42S02') {
+            $cms_theme_setting_cache[$cacheKey] = $default;
+            return $default;
+        }
         throw $e;
     }
 }
 
 function cms_get_theme_config(string $theme): array
 {
+    global $cms_theme_config_cache;
+    if (isset($cms_theme_config_cache[$theme])) {
+        return $cms_theme_config_cache[$theme];
+    }
     $db = cms_get_db();
     try {
         $stmt = $db->prepare('SELECT name, value FROM theme_settings WHERE theme=?');
         $stmt->execute([$theme]);
         $rows = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
-        return $rows ?: [];
+        $cms_theme_config_cache[$theme] = $rows ?: [];
+        return $cms_theme_config_cache[$theme];
     } catch (PDOException $e) {
         if ($e->getCode() === '42S02') {
+            $cms_theme_config_cache[$theme] = [];
             return [];
         }
         throw $e;
@@ -377,9 +443,14 @@ function cms_get_theme_config(string $theme): array
 }
 
 function cms_set_theme_setting(string $theme, string $name, $value){
+    global $cms_theme_setting_cache, $cms_theme_config_cache;
     $db = cms_get_db();
     $stmt = $db->prepare('REPLACE INTO theme_settings(theme,name,value) VALUES(?,?,?)');
     $stmt->execute([$theme,$name,$value]);
+    $cms_theme_setting_cache[$theme.'|'.$name] = $value;
+    if (isset($cms_theme_config_cache[$theme])) {
+        $cms_theme_config_cache[$theme][$name] = $value;
+    }
 }
 function cms_nav_buttons_html($theme, string $spacer_style = '', ?string $spacer_override = null){
     $page    = cms_get_current_page();

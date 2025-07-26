@@ -5,3 +5,5 @@
 * Create tests ensuring root-level theme stylesheets are rewritten without extra directories
 * Confirm asset URLs omit the leading slash when no base path is defined
 * Test rewriting of JavaScript newImage() paths to theme images
+* Profile slow database queries and add indexes where appropriate
+* Add migration to add `publish_at` index for the existing news table
