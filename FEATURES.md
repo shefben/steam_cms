@@ -137,6 +137,8 @@
 
 - 2005 storefront views load from theme folder with automatic asset paths
 - Asset mover script installs 2005 storefront CSS and border graphics
+- Template engine locates storefront layouts from theme storefront folders
+- Install script seeds default storefront capsules using 05_01_2005 images
 
 - Theme 2005 images copied from archive during asset move
 
