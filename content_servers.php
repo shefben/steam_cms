@@ -8,20 +8,23 @@ $main_ip = get_setting($db,'main_network_ip');
 $main_port = get_setting($db,'main_network_port');
 $steam_online = check_online($main_ip,$main_port);
 $servers = get_servers($db);
-foreach($servers as &$srv){ update_server_stats($db,$srv); }
-$last_update = get_last_update($db);
-$total_capacity = get_total_capacity($servers);
-$total_available = get_total_available($servers);
-$max_capacity = 0; foreach($servers as $s){ if($s['total_capacity']>$max_capacity) $max_capacity=$s['total_capacity']; }
-cms_refresh_themes();
-$themes = cms_get_themes();
-$cs_theme = cms_get_setting('cs_theme','2004');
-if(!in_array($cs_theme,$themes)){
-    $cs_theme = $themes[0] ?? '2004';
+foreach ($servers as &$srv) {
+    $srv['available_bandwidth'] = $srv['total_capacity'];
 }
-$theme_dir = __DIR__.'/themes/'.$cs_theme;
+$last_update    = date('Y-m-d H:i:s');
+$total_capacity = get_total_capacity($servers);
+$total_available = $total_capacity;
+$max_capacity = 0;
+foreach ($servers as $s) {
+    if ($s['total_capacity'] > $max_capacity) {
+        $max_capacity = $s['total_capacity'];
+    }
+}
+$theme  = cms_get_setting('theme', '2004');
+$theme_dir = __DIR__ . '/themes/' . $theme;
 if (!is_file($theme_dir.'/contentserver_block.php')) {
     $theme_dir = __DIR__.'/themes/2004';
+    $theme = '2004';
 }
 $theme_file = $theme_dir.'/contentserver_block.php';
 
@@ -29,8 +32,8 @@ ob_start();
 include $theme_file;
 $content = ob_get_clean();
 
-$tpl = cms_theme_layout('default.twig', $cs_theme);
-cms_render_template_theme($tpl, $cs_theme, [
+$tpl = cms_theme_layout('default.twig', $theme);
+cms_render_template_theme($tpl, $theme, [
     'page_title' => $page_title,
     'content'    => $content,
 ]);

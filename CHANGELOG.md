@@ -184,3 +184,8 @@ All notable changes to this project will be documented in this file.
 - Cyber cafe program pages converted to custom pages
 - Content servers can be flagged as filtered and include website links
 - Filtered info popup loads from custom page
+- Cafe directory add entry widget includes country dropdown
+- Content server admin page no longer offers theme selection
+- Status page groups servers by region with capacity bars scaled to max 1000
+- Status page uses current theme with 2004 fallback
+- Fixed stray output from legacy theme config files
