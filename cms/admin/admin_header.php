@@ -43,6 +43,7 @@ if ($notes) {
     $notifications_html .= '</ul></div>';
 }
 
+$legacy_visible = in_array(cms_get_setting('theme','2004'), ['2004','2005_v1']) ? 1 : 0;
 $default_nav = [
     ['file'=>'index.php','label'=>'Dashboard','visible'=>1],
     ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],
@@ -77,6 +78,10 @@ $default_nav = [
     ['file'=>'storefront_categories.php','label'=>'Categories','visible'=>1],
     ['file'=>'storefront_sidebar.php','label'=>'Sidebar','visible'=>1],
     ['file'=>'storefront_developers.php','label'=>'Developers','visible'=>1],
+    ['file'=>'legacy_storefront.php','label'=>'2004/2005 Storefront Management','visible'=>$legacy_visible],
+    ['file'=>'legacy_storefront_games.php','label'=>'Game management','visible'=>$legacy_visible,'parent'=>'legacy_storefront.php'],
+    ['file'=>'legacy_storefront_thirdparty.php','label'=>'Thirdparty Game management','visible'=>$legacy_visible,'parent'=>'legacy_storefront.php'],
+    ['file'=>'legacy_storefront_packages.php','label'=>'Package/Subscription Management','visible'=>$legacy_visible,'parent'=>'legacy_storefront.php'],
     ['file'=>'../logout.php','label'=>'Logout','visible'=>1]
 ];
 $json = cms_get_setting('nav_items',null);
@@ -112,6 +117,10 @@ $icons = [
     'storefront_categories.php' => '📂',
     'storefront_sidebar.php' => '🔗',
     'storefront_developers.php' => '👥',
+    'legacy_storefront.php' => '🎮',
+    'legacy_storefront_games.php' => '🎮',
+    'legacy_storefront_thirdparty.php' => '🎮',
+    'legacy_storefront_packages.php' => '🎮',
     'faq_categories.php'=> '📂',
     'admin_users.php'  => '👥',
     'roles.php'        => '🔑',
@@ -123,6 +132,8 @@ $icons = [
 
 $sf_root = null;
 $sf_pages = [];
+$legacy_sf_root = null;
+$legacy_sf_pages = [];
 $faq_root = null;
 $faq_pages = [];
 $ts_root = null;
@@ -141,6 +152,12 @@ foreach ($nav_items as $k => $item) {
         unset($nav_items[$k]);
     } elseif (preg_match('/^storefront.*\.php/', $item['file'])) {
         $sf_pages[] = $item;
+        unset($nav_items[$k]);
+    } elseif ($item['file'] === 'legacy_storefront.php') {
+        $legacy_sf_root = $item;
+        unset($nav_items[$k]);
+    } elseif (preg_match('/^legacy_storefront_.*\.php/', $item['file'])) {
+        $legacy_sf_pages[] = $item;
         unset($nav_items[$k]);
     } elseif ($item['file'] === 'faq.php') {
         $faq_root = $item;
@@ -265,6 +282,28 @@ if ($has_ts) {
             $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
             $icon = $icons[$file] ?? '';
             $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
+        }
+        $nav_html .= '</ul>';
+    }
+    $nav_html .= '</li>';
+}
+$has_leg = ($legacy_sf_root || $legacy_sf_pages) && $legacy_visible;
+if ($has_leg) {
+    $root_file = $legacy_sf_root['file'] ?? 'legacy_storefront.php';
+    $root_label = cms_admin_translate($legacy_sf_root['label'] ?? '2004/2005 Storefront Management');
+    $active = strpos($_SERVER['PHP_SELF'], $root_file)!==false ? ' class="active"' : '';
+    $icon = $icons[$root_file] ?? '🎮';
+    $open = false;
+    foreach ($legacy_sf_pages as $it) { if (strpos($_SERVER['PHP_SELF'],$it['file'])!==false){ $open=true; break; } }
+    $nav_html .= '<li id="legacy-sf-parent"><a href="'.$root_file.'"'.$active.' aria-label="Legacy Storefront menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
+    if ($legacy_sf_pages) {
+        $style = $open ? 'display:block' : 'display:none';
+        $nav_html .= '<ul class="sub-menu" id="legacy-sf-sub" style="'.$style.'">';
+        foreach ($legacy_sf_pages as $it) {
+            $file=$it['file'];$label=cms_admin_translate($it['label']);
+            $ac=strpos($_SERVER['PHP_SELF'],$file)!==false?' class="active"':'';
+            $icon=$icons[$file]??'';
+            $nav_html .= '<li><a href="'.$file.'"'.$ac.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
         }
         $nav_html .= '</ul>';
     }

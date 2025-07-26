@@ -7,3 +7,4 @@
 * Test rewriting of JavaScript newImage() paths to theme images
 * Profile slow database queries and add indexes where appropriate
 * Add migration to add `publish_at` index for the existing news table
+* Enhance package description field with a WYSIWYG editor

@@ -172,3 +172,10 @@
 - Content server stats use current theme with a 2004 fallback
 - Settings and theme data cached in-memory to reduce database load
 - News queries indexed and rendered blocks cached to disk for fast pages
+- Legacy 2004/2005 storefront routed via theme directory with DB-driven games
+- Legacy 2004/2005 storefront games editable via admin panel
+- Legacy thirdparty games parsed and editable via admin panel
+- Legacy packages imported and served from database
+- AJAX image upload and title images supported on legacy storefront admin pages
+- Legacy packages editable via admin panel with screenshot/badge options
+- Legacy storefront accessible under /storefront regardless of active 2004/2005_v1 theme

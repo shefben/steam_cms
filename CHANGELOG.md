@@ -191,3 +191,12 @@ All notable changes to this project will be documented in this file.
 - Status page groups servers by region with capacity bars scaled to max 1000
 - Status page uses current theme with 2004 fallback
 - Fixed stray output from legacy theme config files
+- Added 04-05 storefront importer and routing
+* Added legacy storefront management UI and importer updates
+* Added thirdparty game management for legacy storefront
+* Added legacy package importer and unified asset folder
+* Legacy storefront game and thirdparty admin pages support AJAX image uploads with automatic file naming
+
+* Added legacy package management page with AJAX uploads
+* Thirdparty screenshot uploads now use t2_<id>.ext naming
+* Legacy storefront URLs no longer expose the 04-05v1 directory; assets copy to /storefront

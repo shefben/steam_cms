@@ -15,11 +15,12 @@ if (isset($_GET['area'])) {
         exit;
 }
 require_once __DIR__.'/cms/db.php';
+$storeDir = in_array(cms_get_current_theme(), ["2004","2005_v1"]) ? __DIR__."/04-05v1_storefront/" : __DIR__."/storefront/";
 require_once __DIR__.'/cms/template_engine.php';
 
 if(in_array($area,['store','browse','search','game','package','all'])){
     $file=['store'=>'index','browse'=>'browse','search'=>'search','game'=>'game','package'=>'package','all'=>'all'][$area];
-    include __DIR__.'/storefront/'.$file.'.php';
+    include $storeDir.$file.'.php';
     exit;
 }
 
