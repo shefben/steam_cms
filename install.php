@@ -63,7 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 content TEXT,
                 is_official TINYINT(1) DEFAULT 1,
                 status VARCHAR(20) DEFAULT 'draft',
-                INDEX(publish_date)
+                INDEX(publish_date),
+                INDEX(publish_at)
             )");
             $pdo->exec("DROP TABLE IF EXISTS content_servers");
             $pdo->exec("CREATE TABLE content_servers(

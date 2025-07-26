@@ -168,3 +168,5 @@
 - Cafe directory add form lists all countries
 - Content server stats page groups servers by region with scaled capacity bars
 - Content server stats use current theme with a 2004 fallback
+- Settings and theme data cached in-memory to reduce database load
+- News queries indexed and rendered blocks cached to disk for fast pages

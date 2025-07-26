@@ -135,7 +135,11 @@ function cms_twig_env(string $tpl_dir): Environment
     static $env;
     if (!$env) {
         $loader = new FilesystemLoader($tpl_dir);
-        $env = new Environment($loader);
+        $cacheDir = __DIR__ . '/cache/twig';
+        if (!is_dir($cacheDir)) {
+            mkdir($cacheDir, 0777, true);
+        }
+        $env = new Environment($loader, ['cache' => $cacheDir]);
         $env->addFunction(new TwigFunction('header', function(bool $withButtons = true) {
             $theme = cms_get_current_theme();
             return cms_render_header($theme, $withButtons);

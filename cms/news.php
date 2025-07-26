@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__.'/db.php';
 
+/**
+ * Cache for rendered news blocks keyed by parameters.
+ * @var array<string, string>
+ */
+$cms_news_cache = [];
+
 function cms_news_url($id, $archive = false){
     $id = (int)$id;
     return 'index.php?area=news' . ($archive ? '&archive=yes' : '') . '&id=' . $id;
@@ -22,8 +28,25 @@ function cms_save_news_settings($data){
 }
 
 function cms_render_news($type,$count=null){
+    global $cms_news_cache;
     $settings = cms_get_news_settings();
     if($count===null) $count = $settings['articles_per_page'];
+
+    $theme = cms_get_setting('theme','2004');
+    $cache_key = md5($type.'|'.$count.'|'.$settings['source'].'|'.$theme);
+    $cache_dir = __DIR__.'/cache/news';
+    $cache_file = $cache_dir.'/'.$cache_key.'.html';
+    if (isset($cms_news_cache[$cache_key])) {
+        return $cms_news_cache[$cache_key];
+    }
+    if (file_exists($cache_file) && filemtime($cache_file) >= time() - 300) {
+        $html = file_get_contents($cache_file);
+        if ($html !== false) {
+            $cms_news_cache[$cache_key] = $html;
+            return $html;
+        }
+    }
+
     $db = cms_get_db();
     // MySQL/MariaDB does not allow binding parameters for the LIMIT clause in
     // some versions. Cast $count to an integer and inject it directly to avoid
@@ -148,6 +171,11 @@ function cms_render_news($type,$count=null){
     if($type==='index_summary_date'){
         $out .= "<p align=\"righ\t\"><sub><a class=\"BodyGreen\" href=\"index.php?area=news\" style=\"color: Black; font-weight: bold;\">read more &gt;</a>&nbsp;</sub></p>";
     }
+    if (!is_dir($cache_dir)) {
+        mkdir($cache_dir, 0777, true);
+    }
+    file_put_contents($cache_file, $out);
+    $cms_news_cache[$cache_key] = $out;
     return $out;
 }
 ?>
