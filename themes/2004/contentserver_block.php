@@ -33,7 +33,9 @@ foreach($regions as $region=>$list){?>
 <tr><td align="right" width="260"></td><td><b><?php echo htmlspecialchars($region); ?></b></td></tr>
 <?php foreach($list as $s){
     $load = $s['total_capacity']? (1 - $s['available_bandwidth']/$s['total_capacity'])*100 : 0;
-    $avail = 100 - $load; ?>
+    $avail = 100 - $load;
+    $capWidth = min(100, ($s['total_capacity']/1000)*100);
+    ?>
 <tr>
 <td align="right">
 <?php if(!empty($s['website'])): ?>
@@ -44,7 +46,7 @@ foreach($regions as $region=>$list){?>
 <?php if(!empty($s['filtered'])): ?> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('filtered_servers.php')">filtered</a>]</font><?php endif; ?>
 </td>
 <td>
-<table class="statusGraph" width="<?php echo max(1,(int)$load); ?>%" cellspacing="0">
+<table class="statusGraph" width="<?php echo (int)$capWidth; ?>%" cellspacing="0">
 <tr><td class="CurrentLoad" width="<?php echo (int)$load; ?>%"></td><td class="AvailableBytesPerSecond" width="<?php echo (int)$avail; ?>%"></td></tr>
 </table>
 </td>

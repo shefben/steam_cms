@@ -1,1 +1,4 @@
-<?php\nreturn ['news_count'=>8];\n
+<?php
+return [
+    'news_count' => 8
+];

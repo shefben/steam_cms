@@ -165,3 +165,6 @@
 - Cyber cafe program pages stored as custom pages
 - Content server admin supports filtered flag and website links
 - Filtered info popup served from custom page
+- Cafe directory add form lists all countries
+- Content server stats page groups servers by region with scaled capacity bars
+- Content server stats use current theme with a 2004 fallback
