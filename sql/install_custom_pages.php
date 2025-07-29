@@ -71,93 +71,41 @@ $insertArray[] = [
 ];
 
 $content2002v2 = <<<HTML
-<tr height="42">
-    <td width="339" height="42" colspan="2" valign="top" align="left" xpos="15">
-        <table border="0" cellpadding="0" cellspacing="2" width="64">
-            <tbody><tr>
-                <td>
-                    <p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="#c4cabe"><b>OVER</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="white"><b>VIEW</b></font></p>
-                </td>
-            </tr>
-            <tr>
-                <td><img src="./images/Graphic_box.jpg" width="33" height="5" border="0"></td>
-            </tr>
-        </tbody></table>
-    </td>
-    <td width="1" height="42"><spacer type="block" width="1" height="42"></spacer></td>
-</tr>
-<tr height="290">
-    <td width="741" height="290" colspan="3" align="left" xpos="15" content="" valign="top" csheight="277">
-        <div align="center">
-            <div align="left">
-                <p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2" color="white">Steam is a broadband business platform for direct software delivery and content management. At its core, Steam is a distributed file system and shared set of technology components that can be implemented into any software application.<br>
-                        <br>
-                    </font></p>
-                <p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2" color="white">With Steam, developers are given integrated tools for direct-content publishing, flexible billing, ensured-version control, anti-cheating, anti-piracy, and more.<br>
-                        <br>
-                    </font></p>
-                <p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2" color="white">Steam consumers enjoy the benefit of starting their favorite applications within minutes of confirming their purchase. They can access their applications from any PC. They are no longer challenged to find the latest updates for these applications. And they no longer need to wonder if their device drivers are compatible with the latest software.<br>
-                        <br>
-                    </font></p>
-                <p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2" color="white">The Steam SDK also includes an integrated set of communications tools and Valve’s Graphic User Interface (V-GUI) that provide built-in support for a variety of services such as instant messaging, configuration, and server browsing.</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2" color="black"><br>
-                    </font></p>
-            </div>
-            <p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white" size="4"><b><a href="index.php?area=getsteamnow">Try Steam Now!</a></b></font></p>
-        </div>
-    </td>
-    <td width="1" height="290"><spacer type="block" width="1" height="290"></spacer></td>
-</tr>
-<tr height="43">
-    <td width="339" height="43" colspan="2" valign="top" align="left" xpos="15">
-        <table border="0" cellpadding="0" cellspacing="2" width="64">
-            <tbody><tr>
-                <td>
-                    <p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="#c4cabe"><b>IN&nbsp;THE&nbsp;</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="white"><b>NEWS</b></font></p>
-                </td>
-            </tr>
-            <tr>
-                <td><img src="./images/Graphic_box.jpg" width="33" height="5" border="0"></td>
-            </tr>
-        </tbody></table>
-    </td>
-    <td width="402" height="43"><spacer type="block" width="402" height="43"></spacer></td>
-    <td width="1" height="43"><spacer type="block" width="1" height="43"></spacer></td>
-</tr>
-<tr height="60">
-    <td width="741" height="60" colspan="3" align="left" xpos="15" content="" valign="top" csheight="39"><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">Steam unveiled<b> </b></font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">a</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">t the <b>Game Developer's Conference</b>. View the <a href="/HTML/Press_Release.html">Steam Press Release.<br>
-            </a></font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">View GDC Steam Keynote Speech slides: <a href="./SteamKeynote_files/frame.htm" target="_blank">HTML</a> </font><font size="2"><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">|</font></b></font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white"> <a href="./SteamKeynote_files/SteamPowerpoint.ppt" target="_blank">Powerpoint Document</a><br>
-        </font></td>
-    <td width="1" height="60"><spacer type="block" width="1" height="60"></spacer></td>
-</tr>
-<tr height="42">
-    <td width="339" height="42" colspan="2" valign="top" align="left" xpos="15">
-        <table border="0" cellpadding="0" cellspacing="2" width="64">
-            <tbody><tr>
-                <td>
-                    <p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="#c4cabe"><b>MORE&nbsp;</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="white"><b>INFORMATION</b></font></p>
-                </td>
-            </tr>
-            <tr>
-                <td><img src="./images/Graphic_box.jpg" width="33" height="5" border="0"></td>
-            </tr>
-        </tbody></table>
-    </td>
-    <td width="402" height="42"><spacer type="block" width="402" height="42"></spacer></td>
-    <td width="1" height="42"><spacer type="block" width="1" height="42"></spacer></td>
-</tr>
-<tr height="102">
-    <td width="1" height="182" rowspan="3"><spacer type="block" width="1" height="182"></spacer></td>
-    <td width="747" height="102" colspan="3" align="left" xpos="16" content="" valign="top" csheight="83">
-        <div align="center">
-            <div align="left" style="width: 762; height: 178">
-                <p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">For technical inquiries, please email:</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"> <a href="mailto:tech@steampowered.com"><b>tech@steampowered.com</b></a></font></p>
-                <p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">For press inquiries, please mail:</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"> <a href="mailto:press@steampowered.com"><b>press@steampowered.com</b></a></font></p>
-                <p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">For business inquires, please email: </font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><a href="mailto:biz@steampowered.com"><b>biz@steampowered.com</b></a></font></p>
-            </div>
-        </div>
-    </td>
-    <td width="1" height="102"><spacer type="block" width="1" height="102"></spacer></td>
-</tr>
+<!-- OVERVIEW SECTION -->
+<div>
+    <div style="margin-left: 2px">
+        <p style="margin-bottom: 2px"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="#c4cabe"><b>OVER</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="white"><b>VIEW</b></font></p>
+        <img src="./Images/Graphic_box.jpg" width="33" border="0">
+    </div>
+    <div style="">
+        <p style="margin-bottom: 1px; margin-top: 13px"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2" color="white">Steam is a broadband business platform for direct software delivery and content management. At its core, Steam is a distributed file system and shared set of technology components that can be implemented into any software application.<br><br><br>With Steam, developers are given integrated tools for direct-content publishing, flexible billing, ensured-version control, anti-cheating, anti-piracy, and more.<br><br><br>Steam consumers enjoy the benefit of starting their favorite applications within minutes of confirming their purchase. They can access their applications from any PC. They are no longer challenged to find the latest updates for these applications. And they no longer need to wonder if their device drivers are compatible with the latest software.<br><br><br>The Steam SDK also includes an integrated set of communications tools and Valve's Graphic User Interface (V-GUI) that provide built-in support for a variety of services such as instant messaging, configuration, and server browsing.<br><br></font></p><div align="center"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2" color="white"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white" size="4"><b><a href="index.php?area=getsteamnow">Try Steam Now!</a></b></font></font></div><p></p>
+    </div>
+</div>
+
+<!-- IN THE NEWS SECTION -->
+<div style="">
+    <div style=" margin-left: 2px">
+        <p style="margin-bottom:1px; margin-top: 31px;"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="#c4cabe"><b>IN&nbsp;THE&nbsp;</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="white"><b>NEWS</b></font></p>
+        
+    <img src="./Images/Graphic_box.jpg" width="33" height="5" border="0"></div>
+    <div style="margin-top: 12px;">
+        <font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">Steam unveiled<b> </b>at the <b>Game Developer's Conference</b>. View the <a href="Press_Release.html">Steam Press Release.<br></a>View GDC Steam Keynote Speech slides: <a href="./SteamKeynote_files/frame.htm" target="_blank">HTML</a><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="black"> | </font></b><a href="./SteamKeynote_files/SteamPowerpoint.ppt" target="_blank">Powerpoint Document</a><br></font>
+        
+    </div>
+</div>
+
+<!-- MORE INFORMATION SECTION -->
+<div style="">
+    <div style=" margin-left: 2px">
+        <p style="margin-top: 31px; margin-bottom: 1px;"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="#c4cabe"><b>MORE&nbsp;</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="4" color="white"><b>INFORMATION</b></font></p>
+        <img src="./Images/Graphic_box.jpg" width="33" height="5" border="0">
+</div>
+    <div style="">
+        <p style="margin-top: 12px"><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">For technical inquiries, please email:</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"> <a href="mailto:tech@steampowered.com"><b>tech@steampowered.com</b></a></font></p>
+        <p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">For press inquiries, please mail:</font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"> <a href="mailto:press@steampowered.com"><b>press@steampowered.com</b></a></font></p>
+        <p><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" color="white">For business inquires, please email: </font><font size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><a href="mailto:biz@steampowered.com"><b>biz@steampowered.com</b></a></font></p>
+    </div>
+</div>
 HTML;
 
 $insertArray[] = [
