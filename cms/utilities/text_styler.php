@@ -70,7 +70,6 @@ function render2002Title(array $lines): string
             . "font-family:Verdana,Arial,sans-serif;"
             . "text-align:center;"
             . "position:relative;"
-            . "margin:4px auto;"
             . '">';
 
     // Vertical positioning
@@ -140,7 +139,7 @@ function render0203CatagoryBar(string $text): string
             white-space:nowrap;overflow:hidden;">
     <span style="">' . $strong . '</span>
     <span style="color:#a6aca1;">'   . $light  . '</span>
-    <div style="position:absolute;left:7px;bottom:4px;width:34px;height:4px;background:#000;"></div>
+    <div style="position:absolute;left:7px;bottom:4px;width:34px;height:5px;background:#000;"></div>
 </div>';
 }
 

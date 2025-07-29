@@ -1,0 +1,1 @@
+html/betasignup.html -> index.php?area=getsteamnow

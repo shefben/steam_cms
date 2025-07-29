@@ -615,7 +615,7 @@ HTML;
                 $buttons = $button_overrides[$theme] ?? $default_buttons;
 
                 $ord     = 0;
-                $spacer  = in_array($theme, ['2002_v2','2003_v1']) ? ' | ' : '';
+                $spacer  = in_array($theme, ['2002_v2','2003_v1']) ? ' <font size="2" color="white"><b><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">| </font></b></font> ' : '';
 
                 foreach ($buttons as $btn) {
                     $thStmt->execute([
@@ -634,7 +634,11 @@ HTML;
             }
 
             $tfStmt = $pdo->prepare('INSERT INTO theme_footers(theme,html) VALUES(?,?)');
-            
+
+$tfstmt->execute(['2002_v2', <<<'HTML'
+(c) 2002 Valve, L.L.C. All rights reserved. Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve, L.L.C.
+HTML])
+
 $tfStmt->execute(['2003_v1',<<<'HTML'
 <br>(c) 2003 Valve, L.L.C. All rights reserved. Steam, the Steam logo, Valve, and the Valve logo are trademarks<br>
                                 and/or registered trademarks of Valve, L.L.C.
@@ -824,15 +828,15 @@ $forums_html = <<<'HTML'
 <p align="center"><a href="support.php">Use the Steam Support system.</a></p>
 <p>Below are some forum usage guidelines. They are posted here as a general reminder in an effort to keep the forums friendly and usable for everyone.</p>
 <ul><em>
-<li style="list-style-image:url(images/square2.gif);"> The forums are for everyone, new and advanced user alike.<br>
+<li style="list-style-image:url(./images/square2.gif);"> The forums are for everyone, new and advanced user alike.<br>
 <br>
-<li style="list-style-image:url(images/square2.gif);"> Before you post a question, use the <a href="/forums/search.php" target="_blank">forum search feature</a> to determine whether your topic has already been covered.<br>
+<li style="list-style-image:url(./images/square2.gif);"> Before you post a question, use the <a href="/forums/search.php" target="_blank">forum search feature</a> to determine whether your topic has already been covered.<br>
 <br>
-<li style="list-style-image:url(images/square2.gif);"> Do not start flame wars. If you have a problem with someone, message that person and carry on a private discussion. Also, if someone has engaged in behavior that is a detriment to the message board -- spamming, flaming people, etc -- contact one of the forum moderators. Flaming the offensive user will only increase the problem.<br>
+<li style="list-style-image:url(./images/square2.gif);"> Do not start flame wars. If you have a problem with someone, message that person and carry on a private discussion. Also, if someone has engaged in behavior that is a detriment to the message board -- spamming, flaming people, etc -- contact one of the forum moderators. Flaming the offensive user will only increase the problem.<br>
 <br>
-<li style="list-style-image:url(images/square2.gif);"> Please post in the correct forum.<br>
+<li style="list-style-image:url(./images/square2.gif);"> Please post in the correct forum.<br>
 <br>
-<li style="list-style-image:url(images/square2.gif);"> Administrators/Moderators reserve the right to change, edit, or delete any content at any time if they feel it is inappropriate.<br>
+<li style="list-style-image:url(./images/square2.gif);"> Administrators/Moderators reserve the right to change, edit, or delete any content at any time if they feel it is inappropriate.<br>
 </em></ul>
 <p>The bottom line is: respect others and you will be treated with respect. Be rude and disrespectful, and you'll not find much help here.</p>
 <p align="center"><a href="forums/"> I agree to these terms.</a></p>
@@ -866,8 +870,8 @@ HTML;
 <br>
 <div class="narrower">
 <ul>
-<li style="list-style-image:url(images/square2.gif);"> <a href="#q1"><em>When will Counter-Strike: Source beta 1 be released?</em></a>
-<li style="list-style-image:url(images/square2.gif);"> <a href="#q2"><em>How can I get Counter-Strike: Source beta 1?</em></a>
+<li style="list-style-image:url(./images/square2.gif);"> <a href="#q1"><em>When will Counter-Strike: Source beta 1 be released?</em></a>
+<li style="list-style-image:url(./images/square2.gif);"> <a href="#q2"><em>How can I get Counter-Strike: Source beta 1?</em></a>
 <li> <a href="#q3"><em>I am a member of the Valve Cyber Caf&eacute; Program, or I own Condition Zero.  How will I know when Counter-Strike: Source beta 1 is available?</em></a>
 <li> <a href="#q8"><em>If I purchased the ATI/Half-Life 2 Video Card bundle, how do I participate in the Counter-Strike: Source Beta??</em></a>
 <li> <a href="#q4"><em>Can I get access to the beta if I am not part of the Valve Cyber Caf&eacute; Program, and do not own Condition Zero?</em></a>
