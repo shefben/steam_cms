@@ -1,3 +1,4 @@
 html/betasignup.html -> index.php?area=getsteamnow
 legal.html -> index.php?area=legal
 status.php -> index.php?area=sstatus
+cafesupport.domain.com -> /cafesupport/

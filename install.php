@@ -765,10 +765,10 @@ $cybercafe_html = <<<'HTML'
 Check the <a href="index.php?area=faq§ion=cybercafe">FAQ</a> for info on cyber cafés, the official program, Steam, etc.<br>
 <br>
 <strong><a href="index.php?area=support" style="text-decoration: none;">Support</a></strong><br>
-Members can contact us via <a href="https://web.archive.org/web/20050204034417/http://steampowered.custhelp.com/cgi-bin/steampowered.cfg/php/enduser/entry.php">support</a> any time for assistance with Steam or any Steam game.<br>
+Members can contact us via <a href="./cgi-bin/steampowered.cfg/php/enduser/entry.php">support</a> any time for assistance with Steam or any Steam game.<br>
 <br>
 <strong><a href="index.php?area=cybercafe_changeform" style="text-decoration: none;">Change Account Information</a></strong><br>
-Members can contact us via <a href="https://web.archive.org/web/20050204034417/mailto:cybercafes@valvesoftware.com">cybercafes@valvesoftware.com</a> to change contact information, café locations, number of seats, etc.<br>
+Members can contact us via <a href="mailto:cybercafes@valvesoftware.com">cybercafes@valvesoftware.com</a> to change contact information, café locations, number of seats, etc.<br>
 <!-- <p align="right"><sub><a href="incdex.php?area=news" style="text-decoration: none;">read more &gt;</a></sub></p> -->
 </div>
 <br>
@@ -902,7 +902,7 @@ eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=0,scrollbars=1,lo
 }
 </script><h3 style="text-transform:uppercase;">Valve Cyber Café Support</h3>
 
-Café members can contact us via our new <a href="https://web.archive.org/web/20051201224756/http://cafesupport.steampowered.com/">Café Support Site</a> for priority assistance with technical/software support questions or to update your café account information (café phone number/address, number of licenses, credit card billing number, etc.)  For the most successful visit to our support site, we suggest reading through our <a href="javascript:popUp('index.php?area=cybercafes&amp;tips=1', 600, 550)">Café Support Tips</a> first.<br>
+Café members can contact us via our new <a href="/cafesupport/">Café Support Site</a> for priority assistance with technical/software support questions or to update your café account information (café phone number/address, number of licenses, credit card billing number, etc.)  For the most successful visit to our support site, we suggest reading through our <a href="javascript:popUp('index.php?area=cybercafes&amp;tips=1', 600, 550)">Café Support Tips</a> first.<br>
 <br>
 <br>
 
@@ -924,18 +924,18 @@ Valve has launched a new <a href="index.php?area=tourney_limited">Tournament Web
 <!-- Fill out <a href="#">the sign-up form</a> and we'll get back to you right away. Once you're a member, your customers can begin playing right away.<br>-->
 <br>
 HTML;
-$pageStmt->execute(['cybercafes',null,'Cyber Cafés',$cybercafe_2005_html,'2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['cybercafes',null,'Cyber Cafés',$cybercafe_html,'2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $cafesetup_html = <<< 'HTML'
 <h1>CAFÉ SETUP INSTRUCTIONS</h1>
-<h2>HOW TO<em> GET UP AND RUNNING WITH STEAM</em></h2><img src="/web/20040603214916im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>HOW TO<em> GET UP AND RUNNING WITH STEAM</em></h2><img src="./image/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
 <div class="narrower">
 
-Here are instructions for setting up Steam in your café. Before you begin this process, you must be a member of the <a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=cybercafes">official Valve Cyber Café Program</a>. For additional information not covered here, please check the <a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=FAQ§ion=cybercafe">café section of our FAQ</a>.<br>
+Here are instructions for setting up Steam in your café. Before you begin this process, you must be a member of the <a href="index.php?area=cybercafes">official Valve Cyber Café Program</a>. For additional information not covered here, please check the <a href="index.php?area=FAQ§ion=cybercafe">café section of our FAQ</a>.<br>
 <br>
 <h3 style="text-transform:uppercase;">1. Download the Steam Installer (or use the supplied DVD-ROM)</h3>
-When you join the Cyber Café Program, we will send you a DVD-ROM containing the Steam installer. If you would rather not wait for that to arrive, you can download the Steam client installer from the <a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=getsteamnow">Get Steam Now</a> page on this site. If you choose to download this installer rather than using the DVD-ROM, be sure to save the installer to disk -- you'll need to use it on each licensed computer in your café.<br>
+When you join the Cyber Café Program, we will send you a DVD-ROM containing the Steam installer. If you would rather not wait for that to arrive, you can download the Steam client installer from the <a href="index.php?area=getsteamnow">Get Steam Now</a> page on this site. If you choose to download this installer rather than using the DVD-ROM, be sure to save the installer to disk -- you'll need to use it on each licensed computer in your café.<br>
 <br>
 
 <h3 style="text-transform:uppercase;">2. Run the Steam Installer</h3>
@@ -944,18 +944,18 @@ To make things simple, you will probably want to choose the same install locatio
 <h3 style="text-transform:uppercase;">3. Create an Account</h3>
 Follow these steps to create a Steam account:<br>
 <br>
-<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong>Email Address</strong><br>
+<img src="./image/square2.gif"> <strong>Email Address</strong><br>
 The first thing the Create Account wizard will ask you to do is enter a valid email address. Please note that for café Steam accounts, the address that you enter into this box does not actually need to be a valid email address. Instead, it should be an address like "computer1@the_name_of_your_cafe.com". Again, this does NOT need to be a valid email address -- it only needs to uniquely identify the specific machine in your café. The second machine on which you install Steam can use the address "computer2@the_name_of_your_cafe.com", and so on.<br>
 <br>
-<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong style="margin-bottom:4px;">Choose a Password and Secret Question &amp; Answer</strong><br>
+<img src="./image/square2.gif"> <strong style="margin-bottom:4px;">Choose a Password and Secret Question &amp; Answer</strong><br>
 The normal security concerns apply when choosing your Steam password. Note that it is possible to use the same password on all of the machines in your café (but obviously, somewhat less secure).<br>
 <br>
 As an added security feature for cyber cafés, Steam will require this password to be entered in order to log OUT. A customer in your café will therefore not be able to log out of Steam or log in as a different user. Also, Steam will run automatically when your computer starts up, and will log in to the Steam servers using the credentials you've supplied during account creation.<br>
 <br>
-<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong>Enter a Nickname</strong><br>
+<img src="./image/square2.gif"> <strong>Enter a Nickname</strong><br>
 When entering a "Nickname" for each of your café computers, you should again use the name of the computer ("computer1" or similar). It is not necessary to enter a First or Last name.<br>
 <br>
-<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong>Finished creating account</strong><br>
+<img src="./image/square2.gif"> <strong>Finished creating account</strong><br>
 That's it for account creation. All that's left is entering your Product Keys.<br>
 <br>
 <h3 style="text-transform:uppercase;">4. Enter Your Cyber Café Product Key</h3>
@@ -975,10 +975,10 @@ TCP 27030 to 27039 inclusive<br>
 <br>
 <h3 style="text-transform:uppercase;">7. Start Playing!</h3>
 Log in to Steam and sit your first customer down. Be sure to have them try the Server Browser (for finding Internet game servers). Also, they can send instant messages through "Friends" to any other Steam user. Automatic updates will be sent to each of your computers automatically, and new games will be added as they become available.<br>
-<br><a href="https://web.archive.org/web/20040603214916/mailto:cafesupport@valvesoftware.com">Let us know</a> if you have any difficulty.<br>
+<br><a href="mailto:cafesupport@valvesoftware.com">Let us know</a> if you have any difficulty.<br>
 <br>
 
-<a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=cybercafes">Return to main Cyber Café page</a>
+<a href="index.php?area=cybercafes">Return to main Cyber Café page</a>
 
 </div>
 HTML;
@@ -1023,6 +1023,112 @@ HTML;
 
 $pageStmt->execute(['features',null,'Features',$features_html,'2003_v1,2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
+$onlineconduct_html <<< 'HTML'
+<h1>STEAM ONLINE CONDUCT</H1>
+<br>
+<div class="narrower">
+
+As a <a href="steam_subscriber_agreement.php">Steam subscriber</a> you agree to abide by the following conduct rules.<br><br>
+You will not:<br>
+
+<ul>
+<li>Upload, or otherwise make available, files that contain images, photographs, software or other material protected by intellectual property laws, including, by way of example, and not as limitation, copyright or trademark laws (or by rights of privacy or publicity) unless you own or control the rights thereto or have received all necessary consents to do the same.</li>
+<li>Use any material or information, including images or photographs, via Steam in any manner that infringes any copyright, trademark, patent, trade secret, or other proprietary right of any party. </li>
+<li>Upload files that contain viruses, trojan horses, worms, or any other similar software or programs that may damage the operation of another's computer or property of another.</li>
+<li>Institute attacks upon a Steam server or otherwise disrupt Steam.</li>
+<li>Use Steam in connection with surveys, contests, pyramid schemes, chain letters, junk email, spamming or any duplicative or unsolicited messages (commercial or otherwise).</li>
+<li>Defame, abuse, harass, stalk, threaten or otherwise violate the legal rights (such as rights of privacy and publicity) of others.</li>
+<li>Restrict or inhibit any other user from using and enjoying Steam services, software or other content. <br>
+<li>Harvest or otherwise collect information about others, including e-mail addresses.</li>
+<li>Create a false identity for the purpose of misleading others.</li>
+<li>Violate any applicable laws or regulations.</li>
+</ul>
+
+</div>
+HTML;
+
+$pageStmt->execute(['online_conduct',null,'Steam Online Conduct',$onlineconduct_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+$mapcontestrules_html <<< 'HTML'
+<h1>HALF-LIFE 2: DEATHMATCH MAP CONTEST OFFICIAL RULES</h1>
+<br>
+<br>
+
+
+The Valve Half-Life 2 Map Contest (the "Contest") is sponsored by Valve Corporation ("Valve").    NO PURCHASE NECESSARY. VOID WHERE PROHIBITED.<br>
+<br>
+1.	Eligibility.  The Contest is open to individuals or groups of individuals (each an "Entrant"), each of whom must be (a) a subscriber to Half-Life 2 via Valve’s Steam service; and (b) at least 18 years old at the time of submitting their Contest Entry.  The Contest is open worldwide, except where prohibited by law.  Employees of Valve or its affiliates (the "Contest Sponsors"), and their immediate family or household members, are not eligible to participate.<br>
+<br>
+2.	Contest Dates.  Registration for the Contest begins at 12:00:01 a.m. Pacific Standard Time (PST) on December 1, 2004 and ends at 11:59:59 pm PST on January 15, 2005 (the "Contest Registration Period".)  All Contest registration forms and Contest Entries must be received by 11:59:59 pm PST on January 15, 2005.<br>
+<br>
+3.	How to Enter.  Visit <a href="https://web.archive.org/web/20051218104220/http://steampowered.com/?area=map_contest">http://steampowered.com/?area=map_contest</a> and follow the links to the Contest registration form.  Print out, complete and submit the Contest registration form before the end of the Contest Registration Period together with a Contest Entry meeting the requirements set forth in Section 4 of these Official Rules.  Submit your completed Contest registration form and Contest Entry to:<br>
+<br>
+Half-Life 2 Map Contest<br>
+Valve Corporation<br>
+P.O. Box 1688<br>
+Bellevue, WA 98009<br>
+ <br>
+4.	Contest Entry Requirements.  Each Contest Entry must consist of a map for a single level of Half-Life 2 Deathmatch created using Valve’s proprietary game engine, containing only textures from Half-Life 2, and submitted on a CD-ROM or DVD-ROM.  Each Contest Entry must be created solely by the Entrant(s) submitting the Contest Entry.  If the Entrant is a group, all individuals who contributed to the Contest Entry must be included, and each Entrant warrants that all contributing Entrants have agreed to the Contest Rules.  Each Entrant warrants that his or her Contest Entry does not include any trademarks, trade names, depictions of actual people, copyrighted materials, or other materials subject to the personal or proprietary rights of third parties, without the written permission of their respective owners sufficient to allow Contest Entrant to grant Valve the rights set forth in Section 8.  Each Contest Entry may not have been distributed prior to December 1, 2004.    Eligibility of Contest Entries will be determined in the discretion of the Contest Sponsors.<br>
+<br>
+5.	Judging of Entries.  After the end of the Contest Registration Period, all eligible Contest Entries will be judged by a panel of 3 members drawn from personnel of the Contest Sponsors (the "Contest Judges"), whose decisions are final and binding for all aspects of the Contest.  The Contest Judges will determine the potential winners of the first, second, and third place prizes based upon which Contest Entries, in the Contest Judges’ sole discretion, display superior playability, fun factor, and artistic merit. <br>
+<br>
+6.	Notification of Winners.  Each potential winner will be notified by the Contest Sponsor via email and overnight mail on or about January 30, 2005 and required to complete and return an affidavit of eligibility and release of liability no later than February 15, 2005 in the overnight envelope provided by the Contest Sponsor.  If the Contest Sponsor does not receive completed affidavits of eligibility, confirmation of Valve’s rights under Section 8 and/or releases of liability from any potential winner, or if a potential winner is determined in Contest Sponsor’s sole discretion to be ineligible to win, another winner will be selected by the Contest Judges.  The final winners will be notified via email and overnight mail on or about February 28, 2005 and a list will simultaneously be posted at www.steampowered.com.<br>
+<br>
+7.	Prizes.  The first place prize will be five thousand dollars (US$5,000.00) and the second and third place prizes will be three thousand dollars (US$3,000.00) each.   Each winner must contact the Contest Sponsor no later than March 15, 2005 to arrange delivery of their prize.  Each winner is responsible for all federal, state, local, provisional, or other taxes, and will be issued a U.S. 1099 tax form or other statement for the prize awarded.  Contest Sponsor reserves the right to withhold amounts from the prizes as may be required by taxing authorities.  If a group Entrant is selected as a winner, one prize will be awarded to the group by delivery to the group leader identified in the Entry, and the group members are responsible for distribution of the prize among the members. <br>
+<br>
+8.	Valve Rights to Contest Entries.  By accepting a prize, each winner grants Valve the royalty-free, fully-paid, worldwide, irrevocable, nonexclusive, perpetual right to exploit the intellectual property rights in the Contest Entry, including without limitation, at Valve’s option, distributing the Contest Entry to the public commercially or for free.  <br>
+<br>
+9.	General.  By submitting a Contest Entry, each Entrant warrants and represents that the Contest Entry was created solely by the Entrant(s) submitting it and that the Contest Entry is original.  By entering the Contest, each Entrant agrees to be bound by the terms of these Official Rules.  The Contest Sponsors are not responsible for incompletion, illegible, or misdirected e-mail or postal mail, or for phone, electrical, network, computer, hardware or software program malfunctions, failures or difficulties. The laws of the United States govern this Contest. All Federal, State and Local laws and regulations apply. Acceptance of prize constitutes permission for the Contest Sponsors to use winner's name and likeness for advertising and promotional purposes without additional compensation unless prohibited by law. By entering, Entrants release and hold harmless the Contest Sponsors and their respective subsidiaries, affiliates, directors, officers, prize suppliers, employees and agents, including advertising and promotion agencies, from any and all liability or any injuries, loss or damage of any kind arising from or in connection with this Contest or acceptance or use of prize. The Contest Sponsors reserve the right to cancel or modify the Contest if fraud or technical failure destroys the integrity of the Contest, as determined by the Contest Sponsors in their sole discretion. The Contest Sponsors reserve the right to disqualify any winner, as determined in their sole discretion. <br>
+<br><br>
+©2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, and Hammer are trademarks and/or registered trademarks of Valve Corporation.
+<br>
+HTML;
+
+$pageStmt->execute(['map_contest_rules',null,'Half-Life 2: Deathmatch Map Contest Official Rules',$mapcontestrules_html,"2004,2005_v1,2005_v2",'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+$hl2goldcontest_html <<< 'HTML'
+<h1>VALVE HQ TRIP GIVEAWAY</h1>
+<h2>WIN<em> A TRIP TO VALVE'S OFFICES</em></h2><img src="/web/20041011044601im_/http://steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+So you want to see Valve's headquarters? Well, how about if we fly you to Valve HQ to tour the facility and meet some of the team members responsible for Half-Life 2 and Valve's other games?<br>
+<br>
+Beginning now and ending December 31, 2004, Valve will automatically enter each eligible purchaser of the Half-Life 2 Gold package in the Valve HQ Trip Giveaway. On January 19th, 2005, Valve will randomly select one lucky winner for every 5,000 copies of the Half-Life 2 Gold package purchased by customers through Steam between October 7, 2004 and December 31, 2004 -- it could be you!<br>
+<br>
+The trip to Valve's headquarters includes:<br>
+<br>
+<ul>
+<li>Two nights' accommodation at a hotel of Valve's choice near Valve's Washington state headquarters.</li>
+<li>Coach class airfare to Seattle, Washington.</li>
+<li>A tour of Valve's facilities.</li>
+<li>Lunch with a select group of Valve employees.</li>
+<li>An autographed Half-Life 2 poster.</li>
+</ul>
+<br>
+NO PURCHASE NECESSARY<br>
+<br>
+How to enter:<br>
+<br>
+You can enter the Giveaway in one of two ways.<br>
+<br>
+1. Purchase the Half-Life 2 Gold Package via Steam by December 31, 2004.<br>
+2. Or if you are a United States resident you can enter by sending a postcard marked "Valve HQ Trip Giveaway" to the following address: PO Box 1688, Bellevue, WA 98009. Your postcard must be received by December 31, 2004 and include your full name, birth date, address, phone number and email. Incomplete or late entries will be rejected.<br>
+<hr>
+Conditions of Entry / Official Rules:<br>
+<br>
+1)      GIVEAWAY DESCRIPTION: Giveaway ends at 11:59 PM (PST) on December 31, 2004. The prize(s) will be awarded in a random drawing from eligible entries received. Only one entry per person accepted. Contestants must be over the age of 12.<br>
+<br>
+2)      HOW TO ENTER: You can enter the Giveaway in one of two ways.  You can purchase the Half-Life 2 Gold package via Steam by December 31, 2004. Or, if you are a United States resident, you can enter by sending a postcard marked "Valve HQ Giveaway" to the following address: PO Box 1688, Bellevue, WA 98009.  Your postcard must be received by 11:59 pm PST, December 31, 2004 and include your full name, birth date, address, phone number and email. Incomplete or late entries will be rejected.<br>
+<br>
+3)      WINNER SELECTION &amp; NOTIFICATION: A random drawing will be conducted by Valve on January 19, 2005. Valve's decision is final on all matters relating to the Giveaway. Odds of winning depend on the number of copies of the Half-Life 2 Gold package sold via Steam and the number of eligible entries received. The potential winner(s) will be notified by e-mail within one (1) week of prize drawing.<br>
+<br>
+4)      PRIZE: Valve will pay (i) two nights' accommodation at a hotel of Valve's choice near Valve's Washington state headquarters and (ii) coach class airfare to Seattle, Washington from either the major airport nearest to the winner's residence (if the winner resides in the United States) or the major international airport nearest to the winner's residence (if the winner does not reside in the United States).  Valve will give the prize winner(s) at least 8 weeks notice of the dates scheduled for the trip and prize winner(s) must provide Valve with any necessary information required for Valve to book air travel and hotel accommodations within 6 weeks of such date.  Any prize winner(s) under the age of 18 must travel with a parent or legal guardian.<br>
+<br>
+5)      GENERAL CONDITIONS: Giveaway entrants agree to be bound by the terms of these official rules.  The Giveaway is offered by Valve, which is not responsible for incompletion, illegible, or misdirected e-mail or postal mail, or for phone, electrical, network, computer, hardware or software program malfunctions, failures or difficulties. The laws of the United States govern this Giveaway. All Federal, State and Local laws and regulations apply. Acceptance of prize constitutes permission for Valve to use winner's name and likeness for advertising and promotional purposes without additional compensation unless prohibited by law. By entering, participants release and hold harmless Valve and its respective subsidiaries, affiliates, directors, officers, prize suppliers, employees and agents, including advertising and promotion agencies, from any and all liability or any injuries, loss or damage of any kind arising from or in connection with this Giveaway or acceptance or use of prize. Valve reserves the right to cancel or modify the Giveaway if fraud or technical failure destroys the integrity of the Giveaway, as determined by Valve in its sole discretion. Valve reserves the right to disqualify any winner, as determined by Valve in its sole discretion. No cash or other substitution for prizes except at the option of Valve, for a prize of equal or greater value. Taxes are the sole responsibility of the winners. Actual prizes may differ from images shown.<br>
+<br>
+<br>&nbsp;
+HTML;
+$pageStmt->execute(['HL2GOLD_contest',null,'VALVE HQ TRIP GIVEAWAY',$hl2goldcontest_html,"2004,2005_v1,2005_v2",'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
 $e3_html = <<<'HTML'
 <!-- e3 movies -->
 <h1>Half-Life 2: E3 2003</H1>
@@ -1063,6 +1169,42 @@ HTML;
 
 $pageStmt->execute(['e3_movies',null,'Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
+$contact_html <<< 'HTML'
+<h1>CONTACT</h1>
+<h2>TALK <em>TO US (&amp; THE STEAM COMMUNITY)</em></h2><img src="/web/20050323095856im_/http://steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+
+<div class="boxTop">Support Email Contacts</div><br clear="all">
+<div class="box">
+<strong>For technical inquiries:</strong><br>
+<a href="https://web.archive.org/web/20050323095856/mailto:support@steampowered.com">support@steampowered.com</a><br><br>
+
+<!-- <strong>For billing inquiries:</strong><br>
+<a href="support_billing.shtml">Billing Support</a> page<br><br> -->
+
+<strong>For feature suggestions:</strong><br>
+<a href="https://web.archive.org/web/20050323095856/mailto:ideas@steampowered.com">ideas@steampowered.com</a><br><br>
+</div>
+
+<div class="narrower">
+
+<h3>MESSAGE BOARDS &amp; FAQ</h3>
+If you're using Steam and running into trouble, you may find a solution in our list of <a href="/web/20050323095856/http://steampowered.com/index.php?area=faq">Frequently Asked Questions</a>. For issues not covered there, <a href="/web/20050323095856/http://steampowered.com/index.php?area=forums">the online forums</a> on this website are another resource worth investigating.<br><br>
+
+<h3>TECHNICAL SUPPORT ISSUES</h3>
+For technical issues not covered in the above places, feel free to contact the Steam team directly. Support email addresses are listed at the right.<br><br>
+
+<!-- <h3>BILLING QUESTIONS & PROBLEMS</h3>
+For any issues related to credit cards or billing, please visit the <a href="/index.php?area=support_billing">Steam Billing Support</a> page.<br><br> -->
+
+<h3>BUSINESS AND PARTNERSHIP INQUIRIES</h3>
+For inquiries regarding business relationships such as becoming a content server, offering Valve's games at cybercafes, or developing your own Steam-enabled software applications, please contact us directly at <a href="https://web.archive.org/web/20050323095856/mailto:biz@steampowered.com">biz@steampowered.com</a>.<br>
+
+</div>
+HTML;
+
+$pageStmt->execute(['contact',null,'Contact',$contact_html,'2003_v22004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+
 $forums_html = <<<'HTML'
 <h1>FORUMS</h1>
 <h2>FOR <em>SUPPORT AND DISCUSSION</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
@@ -1088,7 +1230,7 @@ $forums_html = <<<'HTML'
 HTML;
 $pageStmt->execute(['forums',null,'Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-            $ded_html = <<<'HTML'
+$ded_html = <<<'HTML'
 <!-- dedicated server -->
 <h1>Dedicated Server update files</h1>
 <h2>WINDOWS<em> AND LINUX VERSIONS</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
