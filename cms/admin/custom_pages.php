@@ -18,6 +18,7 @@ $template_files = array_map('basename', glob(__DIR__.'/../themes/'.$current_them
 if(isset($_POST['autosave'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_POST['slug']);
     $title=trim($_POST['title']);
+    $page_name=trim($_POST['page_name'] ?? '');
     $content=$_POST['content'];
     $template = in_array($_POST['template'] ?? '', $template_files, true) ? $_POST['template'] : null;
     $selThemes = isset($_POST['themes']) ? array_intersect($themes,$_POST['themes']) : [];
@@ -25,11 +26,11 @@ if(isset($_POST['autosave'])){
     $exists=$db->prepare('SELECT slug FROM custom_pages WHERE slug=?');
     $exists->execute([$slug]);
     if($exists->fetch()){
-        $stmt=$db->prepare('UPDATE custom_pages SET title=?,content=?,theme=?,template=?,updated=NOW(),status="draft" WHERE slug=?');
-        $stmt->execute([$title,$content,$themeStr,$template,$slug]);
+        $stmt=$db->prepare('UPDATE custom_pages SET page_name=?,title=?,content=?,theme=?,template=?,updated=NOW(),status="draft" WHERE slug=?');
+        $stmt->execute([$page_name,$title,$content,$themeStr,$template,$slug]);
     }else{
-        $stmt=$db->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,NOW(),"draft")');
-        $stmt->execute([$slug,$title,$content,$themeStr,$template,date('Y-m-d H:i:s')]);
+        $stmt=$db->prepare('INSERT INTO custom_pages(slug,page_name,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,?,NOW(),"draft")');
+        $stmt->execute([$slug,$page_name,$title,$content,$themeStr,$template,date('Y-m-d H:i:s')]);
     }
     cms_admin_log('Autosaved custom page '.$slug);
     header('Content-Type: application/json');
@@ -39,6 +40,7 @@ if(isset($_POST['autosave'])){
 if(isset($_POST['save_page'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_POST['slug']);
     $title=trim($_POST['title']);
+    $page_name=trim($_POST['page_name'] ?? '');
     $content=$_POST['content'];
     $template = in_array($_POST['template'] ?? '', $template_files, true) ? $_POST['template'] : null;
     $selThemes = isset($_POST['themes']) ? array_intersect($themes,$_POST['themes']) : [];
@@ -46,12 +48,12 @@ if(isset($_POST['save_page'])){
     $exists=$db->prepare('SELECT slug FROM custom_pages WHERE slug=?');
     $exists->execute([$slug]);
     if($exists->fetch()){
-        $stmt=$db->prepare('UPDATE custom_pages SET title=?,content=?,theme=?,template=?,updated=NOW(),status="published" WHERE slug=?');
-        $stmt->execute([$title,$content,$themeStr,$template,$slug]);
+        $stmt=$db->prepare('UPDATE custom_pages SET page_name=?,title=?,content=?,theme=?,template=?,updated=NOW(),status="published" WHERE slug=?');
+        $stmt->execute([$page_name,$title,$content,$themeStr,$template,$slug]);
         cms_admin_log('Updated custom page '.$slug);
     }else{
-        $stmt=$db->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,NOW(),"published")');
-        $stmt->execute([$slug,$title,$content,$themeStr,$template,date('Y-m-d H:i:s')]);
+        $stmt=$db->prepare('INSERT INTO custom_pages(slug,page_name,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,?,NOW(),"published")');
+        $stmt->execute([$slug,$page_name,$title,$content,$themeStr,$template,date('Y-m-d H:i:s')]);
         cms_admin_log('Created custom page '.$slug);
     }
 }
@@ -83,6 +85,7 @@ if(isset($_GET['edit'])){
 <div id="editor" style="display:none;border:1px solid #333;padding:10px;background:#eee;">
 <form method="post">
 <input type="text" name="slug" id="slug" placeholder="Page ID"><br>
+<label>Page Name: <input type="text" name="page_name" id="page_name" value="<?php echo isset($edit['page_name']) ? htmlspecialchars($edit['page_name']) : ''; ?>"></label><br>
 <label>Page Title: <input type="text" name="title" id="title"></label><br><br>
 <fieldset><legend>Visible For Themes</legend>
 <?php foreach($themes as $t): ?>
@@ -112,6 +115,7 @@ CKEDITOR.replace('content');
 function autoSave(){
     var data=$('form').serializeArray();
     data.push({name:'autosave',value:1});
+    data.push({name:'page_name',value:$('#page_name').val()});
     data.push({name:'content',value:CKEDITOR.instances.content.getData()});
     return $.post('custom_pages.php<?php echo isset($edit)?'?edit='.urlencode($edit['slug']):''; ?>',data,function(res){
         $('#lastSaved').text('Last saved '+res.time);
@@ -121,6 +125,7 @@ setInterval(autoSave,30000);
 <?php if($edit): ?>
 $('#restoreDraft').show().on('click',function(){
     $.get('custom_pages.php?edit=<?php echo urlencode($edit['slug']); ?>&ajax=1',function(d){
+        $('#page_name').val(d.page_name||'');
         $('#title').val(d.title);
         $('#template').val(d.template||'');
         CKEDITOR.instances.content.setData(d.content);
@@ -134,6 +139,7 @@ $('#previewBtn').show().on('click',function(){
 <?php endif; ?>
 $('#addBtn').on('click',function(){
     $('#slug').prop('readonly',false).val('');
+    $('#page_name').val('');
     $('#title').val('');
     CKEDITOR.instances.content.setData('');
     $('.themeChk').prop('checked',false);
@@ -143,6 +149,7 @@ $('#addBtn').on('click',function(){
 });
 <?php if($edit): ?>
 $('#slug').val('<?php echo addslashes($edit['slug']); ?>').prop('readonly',true);
+$('#page_name').val('<?php echo addslashes($edit['page_name'] ?? ''); ?>');
 $('#title').val('<?php echo addslashes($edit['title']); ?>');
 $('#template').val('<?php echo addslashes($edit['template'] ?? ''); ?>');
 CKEDITOR.instances.content.setData(`<?php echo addslashes($edit['content']); ?>`);

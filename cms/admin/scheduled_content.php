@@ -103,8 +103,12 @@ $rows = $db->query('SELECT * FROM scheduled_content ORDER BY content_id')->fetch
 </tbody>
 </table>
 <h3>Add New</h3>
-<table class="table">
-<tr><th>Theme</th><th>Description</th><th>Tag</th><th>Content</th><th>Type</th><th>N Days</th><th>Day</th><th>Start</th><th>End</th><th>Fixed Start</th><th>Fixed End</th><th>Active</th></tr>
+<table class="table" id="new-scheduled-table">
+<thead>
+<tr><th>Theme</th><th>Description</th><th>Tag</th><th>Content</th><th>Type</th></tr>
+<tr><th>N Days</th><th>Day</th><th>Start</th><th>End</th><th>Fixed Start</th><th>Fixed End</th><th>Active</th></tr>
+</thead>
+<tbody>
 <tr>
   <td><input type="text" name="new_theme_name[]" style="width:120px"></td>
   <td><input type="text" name="new_description[]" style="width:150px"></td>
@@ -115,6 +119,8 @@ $rows = $db->query('SELECT * FROM scheduled_content ORDER BY content_id')->fetch
       <option value="day_of_month">day_of_month</option>
       <option value="fixed_range">fixed_range</option>
   </select></td>
+</tr>
+<tr>
   <td><input type="number" name="new_every_n_days[]" style="width:60px"></td>
   <td><input type="number" name="new_day_of_month[]" style="width:60px"></td>
   <td><input type="date" name="new_start_date[]" style="width:140px"></td>
@@ -123,6 +129,7 @@ $rows = $db->query('SELECT * FROM scheduled_content ORDER BY content_id')->fetch
   <td><input type="datetime-local" name="new_fixed_end_datetime[]" style="width:180px"></td>
   <td><input type="checkbox" name="new_active[]" value="1" checked></td>
 </tr>
+</tbody>
 </table>
 <button type="submit" name="save" value="1">Save</button>
 </form>

@@ -200,3 +200,8 @@ All notable changes to this project will be documented in this file.
 * Added legacy package management page with AJAX uploads
 * Thirdparty screenshot uploads now use t2_<id>.ext naming
 * Legacy storefront URLs no longer expose the 04-05v1 directory; assets copy to /storefront
+* Added bold option for 2002_v2 and 2003_v1 navigation links
+* Added logo and sitetitle template tags; nav_buttons accepts color param; custom pages include page_name
+* Random content admin page lists tags with edit/delete actions and clarifies `random_` prefix
+* Scheduled content "Add New" table shows headers on two lines for better layout
+* Added theme_specific_content_start/End tags for conditional theme blocks
