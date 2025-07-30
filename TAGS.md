@@ -52,9 +52,9 @@ These tags pull their text from the `settings` table and simply echo it:
 
 ## Dynamic Content Tags
 
-Tags that start with `random_` or `scheduled_` are resolved at runtime. Random content tag names are stored without the `random_` prefix in the database:
+Tags that start with `random_` or `scheduled_` are resolved at runtime. Random content now groups entries by a `group` column and uses the group name as the tag:
 
-- **`random_<tagname>`** – Looks up all matching rows in `random_content` (`tag_name`, `content`) and returns one entry at random on each page load.
+- **`random_<group>`** – Looks up all rows in `random_content` where `group` matches and returns one entry at random on each page load.
 - **`scheduled_<tagname>`** – Reads entries from `scheduled_content` and checks the scheduling fields. Important columns include `schedule_type` (`every_n_days`, `day_of_month`, `fixed_range`), date fields, and `active` flag. Matching rows are concatenated and displayed.
 
 ## Development Notes
@@ -62,4 +62,25 @@ Tags that start with `random_` or `scheduled_` are resolved at runtime. Random c
 - All tags output raw HTML and are marked safe for Twig.
 - Theme files reside in `themes/<year_variant>/` with layouts under `layout/`.
 - New tags can be added in `cms/template_engine.php` by registering additional `TwigFunction` objects.
+
+## Admin & Database Mapping
+
+The following table lists each tag or tag group, where its content is managed in the administrator UI, and which database tables store the information.
+
+| Tag(s) | Admin Screen | Database Tables |
+|--------|--------------|-----------------|
+|`header`, `nav_buttons`, `logo`, `header_logo`|**Header/Footer** (`header_footer.php`)|`theme_headers`, `theme_settings`, `theme_footers`|
+|`footer`|**Header/Footer**|`theme_footers`|
+|`news*` tags|**News** (`news.php`)|`news`|
+|`join_steam_text`, `join_steam_block`|**Settings** (`settings.php`)|`settings`|
+|`new_on_steam_title`, `new_on_steam_list`, `latest_news_title`, `latest_news_list`, `find_title`, `find_list`, `browse_catalog_title`, `publisher_catalogs_title`, `publisher_catalogs_list`, `coming_soon_title`, `coming_soon_list`, `gear_block`, `free_block`|**Settings**|`settings`|
+|`categories_list`|**Storefront Categories** (`storefront_categories.php`)|`store_categories`|
+|`capsule_block`, `large_capsule_block`, `featured_capsules`|**Storefront Main** (`storefront_main.php`) and **Upload Capsule** (`upload_capsule.php`)|`storefront_capsules_all`, `storefront_capsules_per_theme`, `store_capsules`|
+|`store_sidebar`|**Storefront Sidebar** (`storefront_sidebar.php`)|`store_sidebar_links`|
+|`tabs_block`|**Storefront Main**|`storefront_tabs`, `storefront_tab_games`|
+|`split_title_entry`|**Custom Titles** (`custom_titles.php`)|`custom_titles`|
+|`sitetitle`|**Custom Pages** (`custom_pages.php`)|`custom_pages`|
+|`theme_specific_content_start`, `theme_specific_content_end`|N/A|N/A|
+|`random_<group>`|**Random Content** (`random_content.php`) and **Random Groups** (`random_groups.php`)|`random_content`, `random_groups`|
+|`scheduled_<tag>`|**Scheduled Content** (`scheduled_content.php`)|`scheduled_content`|
 
