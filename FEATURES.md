@@ -184,3 +184,5 @@
 - Random content list view with edit/delete actions and automatic {{random_}} prefix reminder
 - Scheduled content form splits schedule fields onto a new line for clarity
 - Theme-specific content blocks show fragments only for selected themes
+- Random content grouped by name with AJAX group creation
+- Template tag guide links each tag to its admin screen and DB table

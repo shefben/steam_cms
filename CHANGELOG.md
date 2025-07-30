@@ -205,3 +205,5 @@ All notable changes to this project will be documented in this file.
 * Random content admin page lists tags with edit/delete actions and clarifies `random_` prefix
 * Scheduled content "Add New" table shows headers on two lines for better layout
 * Added theme_specific_content_start/End tags for conditional theme blocks
+* Added random content groups with AJAX creation
+* Expanded TAGS.md with admin and database mapping

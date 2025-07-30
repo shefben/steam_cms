@@ -46,7 +46,7 @@ function cms_split_title_entry(string $name): string
 function cms_random_content(string $tag): string
 {
     $db = cms_get_db();
-    $stmt = $db->prepare('SELECT content FROM random_content WHERE tag_name=?');
+    $stmt = $db->prepare('SELECT content FROM random_content WHERE `group`=?');
     $stmt->execute([$tag]);
     $rows = $stmt->fetchAll(PDO::FETCH_COLUMN);
     if (!$rows) {

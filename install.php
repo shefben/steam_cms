@@ -212,10 +212,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 hits INT DEFAULT 0,
                 created DATETIME
             )");
+            $pdo->exec("DROP TABLE IF EXISTS random_groups");
+            $pdo->exec("CREATE TABLE random_groups(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) UNIQUE NOT NULL
+            )");
             $pdo->exec("DROP TABLE IF EXISTS random_content");
             $pdo->exec("CREATE TABLE random_content(
                 uniqueid INT AUTO_INCREMENT PRIMARY KEY,
                 tag_name VARCHAR(25) NOT NULL,
+                `group` VARCHAR(100) NOT NULL,
                 content TEXT NOT NULL
             )");
             $pdo->exec("DROP TABLE IF EXISTS scheduled_content");

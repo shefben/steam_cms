@@ -2,6 +2,30 @@
 require_once 'admin_header.php';
 cms_require_permission('manage_pages');
 $db = cms_get_db();
+$groupsList = $db->query('SELECT name FROM random_groups ORDER BY name')->fetchAll(PDO::FETCH_COLUMN);
+
+if (isset($_POST['ajax']) && $_POST['action'] === 'add') {
+    $name = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['name'] ?? '');
+    $group = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['group'] ?? '');
+    $content = $_POST['content'] ?? '';
+    $resp = [];
+    if ($name === '' || $group === '') {
+        $resp['error'] = 'All fields required';
+    } else {
+        $stmt = $db->prepare('SELECT COUNT(*) FROM random_groups WHERE name=?');
+        $stmt->execute([$group]);
+        if ($stmt->fetchColumn() == 0) {
+            $resp['error'] = 'Invalid group';
+        } else {
+            $ins = $db->prepare('INSERT INTO random_content(tag_name,`group`,content) VALUES(?,?,?)');
+            $ins->execute([$name, $group, $content]);
+            $resp['success'] = true;
+        }
+    }
+    header('Content-Type: application/json');
+    echo json_encode($resp);
+    exit;
+}
 
 if (isset($_GET['ajax']) && isset($_GET['tag'])) {
     $tag = preg_replace('/[^a-zA-Z0-9_-]/', '', $_GET['tag']);
@@ -51,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
     }
 }
 
-$tags = $db->query('SELECT DISTINCT tag_name FROM random_content ORDER BY tag_name')->fetchAll(PDO::FETCH_COLUMN);
+$rowsList = $db->query('SELECT DISTINCT tag_name, `group` FROM random_content ORDER BY `group`, tag_name')->fetchAll(PDO::FETCH_ASSOC);
+$tags = array_column($rowsList, 'tag_name');
 $current = $_GET['edit'] ?? ($_POST['tag'] ?? ($tags[0] ?? ''));
 $entries = [];
 if ($current !== '' && isset($_GET['edit'])) {
@@ -63,22 +88,31 @@ if ($current !== '' && isset($_GET['edit'])) {
 <h2>Random Content</h2>
 <?php if (!isset($_GET['edit'])): ?>
 <table class="data-table">
-<thead><tr><th>Tag Name</th><th>Action</th></tr></thead>
+<thead><tr><th>Group</th><th>Tag Name</th><th>Action</th></tr></thead>
 <tbody>
-<?php foreach ($tags as $t): ?>
+<?php foreach ($rowsList as $row): ?>
 <tr>
-  <td>{{random_<?php echo htmlspecialchars($t); ?>}}</td>
+  <td><?php echo htmlspecialchars($row['group']); ?></td>
+  <td>{{random_<?php echo htmlspecialchars($row['group']); ?>}}</td>
   <td class="actions">
-    <a class="btn btn-primary" href="random_content.php?edit=<?php echo urlencode($t); ?>">Edit</a>
+    <a class="btn btn-primary" href="random_content.php?edit=<?php echo urlencode($row['tag_name']); ?>">Edit</a>
     <form method="post" style="display:inline">
-      <button class="btn btn-danger" name="delete_tag" value="<?php echo htmlspecialchars($t); ?>" onclick="return confirm('Delete tag?')">Delete</button>
+      <button class="btn btn-danger" name="delete_tag" value="<?php echo htmlspecialchars($row['tag_name']); ?>" onclick="return confirm('Delete tag?')">Delete</button>
     </form>
   </td>
 </tr>
 <?php endforeach; ?>
 </tbody>
 </table>
-<p><a class="btn btn-secondary" href="random_content.php?edit=new">Add New Tag</a></p>
+<p><a class="btn btn-secondary" href="#" id="add-random-btn">Add New Random Content</a></p>
+<div id="add-form" style="display:none;margin-top:10px;">
+  <label>Name: <input type="text" id="new-name"></label>
+  <label>Group: <select id="new-group"><option value="">Select</option><?php foreach($groupsList as $g){echo '<option value="'.htmlspecialchars($g).'">'.htmlspecialchars($g).'</option>'; } ?></select></label>
+  <textarea id="new-content" rows="4" style="width:300px"></textarea>
+  <button id="save-new" class="btn btn-primary">Save</button>
+  <button id="cancel-new" class="btn btn-secondary">Cancel</button>
+  <span id="add-error" style="color:red;display:none;"></span>
+</div>
 <?php else: ?>
 <a href="random_content.php" class="btn btn-secondary">&laquo; Back to list</a>
 <div id="new-tag-container" style="margin-top:10px;">
@@ -100,6 +134,7 @@ if ($current !== '' && isset($_GET['edit'])) {
 </form>
 <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<?php if (isset($_GET['edit'])): ?>
 <script>
 function addEditor(id,content){
     var div=$('<div class="entry" data-id="'+(id||'new')+'">');
@@ -125,12 +160,23 @@ $('#editor-container').on('click','.delete-btn',function(){
 });
 $(function(){
     $('.editor').each(function(){ CKEDITOR.replace(this); });
-    <?php if(isset($_GET['edit'])): ?>
     $('#new-tag-container').show();
     $('#new-tag').on('input',function(){
         $('#tag-preview').text($(this).val());
     }).trigger('input');
-    <?php endif; ?>
+});
+</script>
+<?php else: ?>
+<script>
+CKEDITOR.replace('new-content');
+$('#add-random-btn').on('click',function(e){e.preventDefault();$('#add-form').slideToggle('fast');});
+$('#cancel-new').on('click',function(e){e.preventDefault();$('#add-form').slideUp('fast');});
+$('#save-new').on('click',function(){
+    var data={ajax:1,action:'add',name:$('#new-name').val().trim(),group:$('#new-group').val(),content:CKEDITOR.instances['new-content'].getData()};
+    $.post('random_content.php',data,function(res){
+        if(res.error){$('#add-error').text(res.error).show();}
+        else{location.reload();}
+    },'json');
 });
 </script>
 <?php endif; ?>
