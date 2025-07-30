@@ -121,15 +121,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             )");
             $pdo->exec("DROP TABLE IF EXISTS custom_pages");
             $pdo->exec("CREATE TABLE custom_pages(
-                slug VARCHAR(255) PRIMARY KEY,
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                slug VARCHAR(255) NOT NULL,
                 page_name VARCHAR(255) DEFAULT NULL,
                 title TEXT,
                 content MEDIUMTEXT,
-                theme TEXT DEFAULT NULL,
+                theme VARCHAR(255) DEFAULT NULL,
                 template VARCHAR(255) DEFAULT NULL,
                 created DATETIME,
                 updated DATETIME,
-                status VARCHAR(20) DEFAULT 'draft'
+                status VARCHAR(20) DEFAULT 'draft',
+                UNIQUE KEY slug_theme (slug, theme)
             )");
             $pdo->exec("DROP TABLE IF EXISTS support_pages");
             $pdo->exec("CREATE TABLE support_pages(

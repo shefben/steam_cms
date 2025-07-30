@@ -60,33 +60,58 @@ function cms_get_custom_page($slug,$theme=null){
     try {
         $stmt = $db->prepare('SELECT page_name,title,content,theme,template FROM custom_pages WHERE slug=? AND status="published"');
         $stmt->execute([$slug]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         if ($e->getCode() === '42S22') { // column missing
             $stmt = $db->prepare('SELECT title,content,theme FROM custom_pages WHERE slug=? AND status="published"');
             $stmt->execute([$slug]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (!$row) return null;
-            if ($theme !== null && $row['theme'] !== null && $row['theme'] !== '') {
-                $themes = array_map('trim', explode(',', $row['theme']));
-                if (!in_array($theme, $themes, true)) return null;
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if (!$rows) return null;
+            foreach ($rows as $row) {
+                if ($theme !== null && $row['theme'] !== null && $row['theme'] !== '') {
+                    $themes = array_map('trim', explode(',', $row['theme']));
+                    if (in_array($theme, $themes, true)) {
+                        unset($row['theme']);
+                        $row['template'] = null;
+                        $row['page_name'] = null;
+                        return $row;
+                    }
+                } elseif (!isset($default)) {
+                    $default = $row;
+                }
             }
-            unset($row['theme']);
-            $row['template'] = null;
-            $row['page_name'] = null;
-            return $row;
+            if (!empty($default)) {
+                unset($default['theme']);
+                $default['template'] = null;
+                $default['page_name'] = null;
+                return $default;
+            }
+            return null;
         }
         if ($e->getCode() === '42S02') return null; // table missing
         throw $e;
     }
-    if (!$row) return null;
-    if ($theme !== null && $row['theme'] !== null && $row['theme'] !== '') {
-        $themes = array_map('trim', explode(',', $row['theme']));
-        if (!in_array($theme, $themes, true)) return null;
+    if (!$rows) return null;
+    $match = null;
+    $default = null;
+    foreach ($rows as $row) {
+        if ($row['theme'] !== null && $row['theme'] !== '') {
+            $themes = array_map('trim', explode(',', $row['theme']));
+            if ($theme !== null && in_array($theme, $themes, true)) {
+                $match = $row;
+                break;
+            }
+        } elseif ($default === null) {
+            $default = $row;
+        }
     }
-    unset($row['theme']);
-    if (!isset($row['template']) || $row['template'] === '') $row['template'] = null;
-    return $row;
+    if ($match === null) {
+        if ($default === null) return null;
+        $match = $default;
+    }
+    unset($match['theme']);
+    if (!isset($match['template']) || $match['template'] === '') $match['template'] = null;
+    return $match;
 }
 
 function cms_get_support_page(string $theme): ?array
