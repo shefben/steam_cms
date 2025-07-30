@@ -740,9 +740,250 @@ $tfStmt->execute(['2007',<<<'HTML'
 </div>
 HTML]);
 
+$cafepromotion_html = <<<'HTML'
+<h1>APRIL CYBER CAFÉ PROMOTION</h1>
+<h2>VALVE&apos;S <em> OFFICIAL CYBER CAFÉ PROGRAM</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+During the month of April 2004, Valve is extending a special offer to Cyber Cafés. <b>During this time, a 12-month cyber café license for Valve’s games is being offered at a savings of 33%</b>. The license includes all of Valve’s available Steam content, including Counter-Strike: Condition Zero, Counter-Strike, Half-Life, Day of Defeat, Team Fortress Classic, and more. Licensed Cyber Café’s also receive product key protection, promotional materials, tournament licenses, and priority access to Valve support.<br>
+<br>
+This offer ends at 11:59 pm PST on April 30, 2004, is subject to change and is not available in every territory. For more information, please email <a href="mailto:cafe@valvesoftware.com">cafe@valvesoftware.com</a>.
+<br><br><br><br>&nbsp;
+HTML;
+$pageStmt->execute(['cybercafe_promotion',null,'Cybercafe Promotion',$cafepromotion_html,'2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+$cybercafe_html = <<<'HTML'
+<h1>CYBER CAFÉS</h1>
+<h2>BRING<em> STEAM GAMES TO YOUR CUSTOMERS</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<div class="box">
+<div class="boxTop2">For Cyber Café<br>Program Members</div>
+
+<strong><a href="index.php?area=cafe_setup" style="text-decoration: none;">Step-by-Step Instructions</a></strong><br>Read about <a href="index.php?area=cafe_setup">how to get your cafe up and running</a> with Steam.<br>
+<br>
+<strong><a href="index.php?area=faq§ion=cybercafe" style="text-decoration: none;">Frequently Asked Questions</a></strong><br>
+Check the <a href="index.php?area=faq§ion=cybercafe">FAQ</a> for info on cyber cafés, the official program, Steam, etc.<br>
+<br>
+<strong><a href="index.php?area=support" style="text-decoration: none;">Support</a></strong><br>
+Members can contact us via <a href="https://web.archive.org/web/20050204034417/http://steampowered.custhelp.com/cgi-bin/steampowered.cfg/php/enduser/entry.php">support</a> any time for assistance with Steam or any Steam game.<br>
+<br>
+<strong><a href="index.php?area=cybercafe_changeform" style="text-decoration: none;">Change Account Information</a></strong><br>
+Members can contact us via <a href="https://web.archive.org/web/20050204034417/mailto:cybercafes@valvesoftware.com">cybercafes@valvesoftware.com</a> to change contact information, café locations, number of seats, etc.<br>
+<!-- <p align="right"><sub><a href="incdex.php?area=news" style="text-decoration: none;">read more &gt;</a></sub></p> -->
+</div>
+<br>
+
+If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. There are currently over 800 gaming venues in our program, and more are signing up every day. Valve's cybercafé program is the only legal way to use Valve games in your cybercafé or gaming center.<br>
+<br>
+
+<!--
+<h3 style="text-transform:uppercase;">APRIL CYBER CAF&Eacute; PROMOTION</h3>
+During the month of April 2004, Valve is extending a <a href="index.php?area=cybercafe_promotion">special offer to Cyber Caf&eacute;s</a>. During this time, a 12-month cyber café license for Valve’s games is being offered at a savings of 33%. <a href="http://steampowered.com/?area=cybercafe_promotion">See this page for details</a>.<br><br>
+-->
+
+<h3 style="text-transform:uppercase;">The Official Valve Cyber Café Program</h3>
+
+<img src="./images/valve_maizelogo.gif" align="left">
+The Official Valve Cyber Café Program is here. One low monthly fee gets you the most popular action games on the Internet, regular content updates, low maintenance, and fully legal licenses for all of your computers. Here are the details:<br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=cybercafe_program">Features and Benefits</a><br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=cafe_pricing">Pricing and Licensing</a><br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=cafe_signup">Cyber Café Sign-Up Form</a><br>
+<br>
+<br>
+
+<h3 style="text-transform:uppercase;">Valve Cyber Café Representatives</h3>
+
+If you would like to participate in the Official Valve Cyber Café Program, contact the representative nearest you.<br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=cafe_representatives">Browse the Cyber Café Representatives</a><br>
+<br>
+<br>
+
+<h3 style="text-transform:uppercase;">Valve Cyber Café Directory</h3>
+
+Find an Official Valve Cyber Café and play our latest games.<br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=cafe_directory">Browse the Cyber Café Directory</a><br>
+<br>
+<br>
+
+<h3 style="text-transform:uppercase;">For Immediate Release</h3>
+<br>
+Monday, November 29 at 4:52 pm PST.<br>
+<br>
+VALVE WINS SUMMARY JUDGMENT MOTIONS IN COPYRIGHT INFRINGEMENT CASE<br>
+<br>
+Valve today announced the U.S. Federal District Court in Seattle, WA granted its motion for summary judgment on the matters of Cyber Café Rights and Contractual Limitation of Liability in its copyright infringement suit with Sierra/Vivendi Universal Games.<br>
+<br>
+Judge Thomas S. Zilly ruled that Sierra/Vivendi Universal Games, and its affiliates, are not authorized to distribute (directly or indirectly) Valve games through cyber cafés to end users for pay-to-play activities pursuant to the parties' current publishing agreement. Valve games such as Counter-Strike, Counter-Strike: Condition Zero and the recently released Half-Life 2 and Counter-Strike: Source are all popular in cyber cafés.<br>
+<br>
+In addition, Judge Zilly ruled in favor of the Valve motion regarding the contractual limitation of liability, allowing Valve to recover copyright damages for any infringement as allowed by law without regard to the publishing agreement's limitation of liability clause. <br>
+<br>
+"We're happy the court has affirmed the meaning of our publishing contract. This is good news for Valve and its cyber café partners around the world," said Gabe Newell, founder and CEO of Valve. "We continue to add value to our program and we look forward to working with cafés to get them signed up and offering Valve's latest games to their customers." <br>
+<br>
+The Valve Cyber Café Program is the only legal way to use Valve games in your cyber café or gaming center. There are currently thousands of cyber cafés participating in the program throughout the world. <br>
+
+
+<!-- Fill out <a href="#">the sign-up form</a> and we'll get back to you right away. Once you're a member, your customers can begin playing right away.<br>-->
+<br>
+HTML;
+$pageStmt->execute(['cybercafes',null,'Cyber Cafés',$cybercafe_html,'2003_v2,2004,2005_v1','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+$cybercafe_2005_html = <<<'HTML'
+<h1>CYBER CAFÉS</h1>
+<h2>BRING<em> STEAM GAMES TO YOUR CUSTOMERS</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<div class="box">
+<div class="boxTop2">Valve Cyber Café Representatives</div>
+
+If your café is located outside of the US and you would like to participate in the Official Valve Cyber Café Program, contact the representative nearest you.<br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=cafe_representatives">Browse the Cyber Café Representatives</a><br><br>
+
+<div class="boxTop2">Valve Tournament Calendar</div>
+
+The calendar below displays all of the Valve licensed tournaments occurring in the next 30 days.  (Tournament organizers may opt out of having their events displayed on this calendar.)<br><br>
+
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=tourney_calendar">view the full calendar</a><br><br>
+
+<table align="center" cellspacing="0" cellpadding="0"><tbody><tr><td><b>December 2005</b><br><span style="font-family: courier new;"><span style="border: 1px solid #282E22;" title="">&nbsp;&nbsp;</span>&nbsp;<span style="border: 1px solid #282E22;" title="">&nbsp;&nbsp;</span>&nbsp;<span style="border: 1px solid #282E22;" title="">&nbsp;&nbsp;</span>&nbsp;<span style="border: 1px solid #282E22;" title="">&nbsp;&nbsp;</span>&nbsp;<a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid red;" title="1 event is running today">&nbsp;1</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="2 events are running today">&nbsp;2</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="4 events are running today">&nbsp;3</span></a> <br><a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="3 events are running today">&nbsp;4</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">&nbsp;5</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">&nbsp;6</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">&nbsp;7</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">&nbsp;8</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">&nbsp;9</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">10</span></a> <br><a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">11</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">12</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">13</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="2 events are running today">14</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="4 events are running today">15</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="4 events are running today">16</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="5 events are running today">17</span></a> <br><a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="4 events are running today">18</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">19</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">20</span></a> <a href="https://web.archive.org/web/20051201224756/http://steampowered.com/?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="1 event is running today">21</span></a> <span style="border: 1px solid #282E22;;">22</span> <span style="border: 1px solid #282E22;;">23</span> <span style="border: 1px solid #282E22;;">24</span> <br><span style="border: 1px solid #282E22;;">25</span> <span style="border: 1px solid #282E22;;">26</span> <span style="border: 1px solid #282E22;;">27</span> <span style="border: 1px solid #282E22;;">28</span> <span style="border: 1px solid #282E22;;">29</span> <span style="border: 1px solid #282E22;;">30</span> <span style="border: 1px solid #282E22;;">31</span> <br></span><br><br></td></tr></tbody></table>
+
+</div>
+
+<br>
+
+If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. There are currently over 2500 gaming venues in our program, and more are signing up every day. Valve's cybercafé program is the only legal way to use Valve games in your cybercafé or gaming center.<br>
+<br>
+
+<!--
+<h3 style="text-transform:uppercase;">APRIL CYBER CAF&Eacute; PROMOTION</h3>
+During the month of April 2004, Valve is extending a <a href="index.php?area=cybercafe_promotion">special offer to Cyber Caf&eacute;s</a>. During this time, a 12-month cyber café license for Valve’s games is being offered at a savings of 33%. <a href="http://steampowered.com/?area=cybercafe_promotion">See this page for details</a>.<br><br>
+-->
+
+<h3 style="text-transform:uppercase;">The Official Valve Cyber Café Program</h3>
+
+<img src="./images/valve_maizelogo.gif" align="left">
+The Official Valve Cyber Café Program is here. One low monthly fee gets you the most popular action games on the Internet, regular content updates, low maintenance, and fully legal licenses for all of your computers. Here are the details:<br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=cybercafe_program">Features and Benefits</a><br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=cafe_pricing">Pricing and Licensing</a><br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=cafe_signup">Cyber Café Sign-Up Form</a><br>
+<br>
+<br>
+
+<h3 style="text-transform:uppercase;">New Product Releases:</h3>
+In the past few months we have added four new games to the Cyber Café Program: DOD: Source, Rag Doll Kung Fu, Blue Shift and most recently Half-Life 2: Lost Coast.  Don't miss out on having these great new games in your café.  <a href="index.php?area=cafe_signup">Sign up today</a>!<br>
+<br>
+Half-Life 2: Lost Coast, a single-player level custom-created to showcase High-Dynamic Range lighting (HDR) in the Source engine, is available now to all owners of HL2. As a technology showcase, Half-Life 2: Lost Coast's system requirements are very high. During installation, Steam will prompt you if your system does not meet the recommended configuration. We hope you and your customers enjoy it.<br>
+<br>
+<br>
+
+<h3 style="text-transform:uppercase;">New Time Based Billing System: Valve Time Tracker (VTT)  Beta</h3>
+
+Valve is continuing to improve cyber café software tools.  We are currently beta testing our new time based billing system: Valve Time Tracker (VTT).  VTT will allow cafés to choose between the current billing system (flat-rate per PC per month) or a new billing option that will allow you to pay only for the actual play time in your café.  Other major benefits of VTT include:<br>
+<br>
+1) Café owners will no longer have to worry about having their accounts stolen.  Your PCs will get login information directly from a Valve-controlled master server when the game is run.  No more hassles and down times waiting to have your passwords and secret questions reset.<br>
+<br>
+2) Direct integration with Steam to reduce maintenance during updates and improved compatibility with other cyber café tools.<br>
+<br>
+3) VTT will allow cafés to have any number of PCs playing Valve games concurrently - you are no longer limited to a certain number of PCs that can play Valve games.  This is great for tournaments or other peak times when you have more customers wanting to play the games for a short period of time.  You no longer have to worry about "adding" accounts - you can simply start playing on more PCs in your café.<br>
+<br>
+<br>
+
+<script>
+function popUp(URL, x, y) {
+day = new Date();
+id = day.getTime();
+eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width='+x+',height='+y);");
+}
+</script><h3 style="text-transform:uppercase;">Valve Cyber Café Support</h3>
+
+Café members can contact us via our new <a href="https://web.archive.org/web/20051201224756/http://cafesupport.steampowered.com/">Café Support Site</a> for priority assistance with technical/software support questions or to update your café account information (café phone number/address, number of licenses, credit card billing number, etc.)  For the most successful visit to our support site, we suggest reading through our <a href="javascript:popUp('index.php?area=cybercafes&amp;tips=1', 600, 550)">Café Support Tips</a> first.<br>
+<br>
+<br>
+
+<h3 style="text-transform:uppercase;">Valve Cyber Café Directory</h3>
+
+Find an Official Valve Cyber Café and play our latest games.<br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="index.php?area=cafe_directory">Browse the Cyber Café Directory</a><br>
+<br>
+<br>
+
+<h3 style="text-transform:uppercase;">Valve Tournament Webpage &amp; Calendar</h3>
+<br>
+Valve has launched a new <a href="index.php?area=tourney_limited">Tournament Webpage</a> for Tournaments. From this site, tournament organizers may submit a tournament registration request for their event to be posted on the <a href="index.php?area=tourney_calendar">Valve Tournament Calendar</a>. Organizers may also purchase Temporary Tournament Steam Accounts for their event. The price for these accounts is $2 USD per account, per day (25 account, 2 day minimum required). Members of our Cyber Cafe Program may receive a discount. <br>
+
+<br><br><br><br><br><br><br>
+
+
+<!-- Fill out <a href="#">the sign-up form</a> and we'll get back to you right away. Once you're a member, your customers can begin playing right away.<br>-->
+<br>
+HTML;
+$pageStmt->execute(['cybercafes',null,'Cyber Cafés',$cybercafe_2005_html,'2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+$cafesetup_html = <<< 'HTML'
+<h1>CAFÉ SETUP INSTRUCTIONS</h1>
+<h2>HOW TO<em> GET UP AND RUNNING WITH STEAM</em></h2><img src="/web/20040603214916im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+<div class="narrower">
+
+Here are instructions for setting up Steam in your café. Before you begin this process, you must be a member of the <a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=cybercafes">official Valve Cyber Café Program</a>. For additional information not covered here, please check the <a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=FAQ§ion=cybercafe">café section of our FAQ</a>.<br>
+<br>
+<h3 style="text-transform:uppercase;">1. Download the Steam Installer (or use the supplied DVD-ROM)</h3>
+When you join the Cyber Café Program, we will send you a DVD-ROM containing the Steam installer. If you would rather not wait for that to arrive, you can download the Steam client installer from the <a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=getsteamnow">Get Steam Now</a> page on this site. If you choose to download this installer rather than using the DVD-ROM, be sure to save the installer to disk -- you'll need to use it on each licensed computer in your café.<br>
+<br>
+
+<h3 style="text-transform:uppercase;">2. Run the Steam Installer</h3>
+To make things simple, you will probably want to choose the same install location on every machine in your café. We recommend that you have at least 1GB of free space on the drive before installing Steam.<br>
+<br>
+<h3 style="text-transform:uppercase;">3. Create an Account</h3>
+Follow these steps to create a Steam account:<br>
+<br>
+<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong>Email Address</strong><br>
+The first thing the Create Account wizard will ask you to do is enter a valid email address. Please note that for café Steam accounts, the address that you enter into this box does not actually need to be a valid email address. Instead, it should be an address like "computer1@the_name_of_your_cafe.com". Again, this does NOT need to be a valid email address -- it only needs to uniquely identify the specific machine in your café. The second machine on which you install Steam can use the address "computer2@the_name_of_your_cafe.com", and so on.<br>
+<br>
+<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong style="margin-bottom:4px;">Choose a Password and Secret Question &amp; Answer</strong><br>
+The normal security concerns apply when choosing your Steam password. Note that it is possible to use the same password on all of the machines in your café (but obviously, somewhat less secure).<br>
+<br>
+As an added security feature for cyber cafés, Steam will require this password to be entered in order to log OUT. A customer in your café will therefore not be able to log out of Steam or log in as a different user. Also, Steam will run automatically when your computer starts up, and will log in to the Steam servers using the credentials you've supplied during account creation.<br>
+<br>
+<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong>Enter a Nickname</strong><br>
+When entering a "Nickname" for each of your café computers, you should again use the name of the computer ("computer1" or similar). It is not necessary to enter a First or Last name.<br>
+<br>
+<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong>Finished creating account</strong><br>
+That's it for account creation. All that's left is entering your Product Keys.<br>
+<br>
+<h3 style="text-transform:uppercase;">4. Enter Your Cyber Café Product Key</h3>
+When Valve adds you to the Official Cyber Café Program, you will receive (via email and/or FedEx) a set of Product Keys. You will receive one for each computer you wish to license.<br>
+<br>
+After Steam is installed, open the "My Games" list. There, you'll see a list of all Steam Games. Double-Click on one that you intend to offer in your café. Steam will ask you for a product key at this point. Each computer will use one of the keys in your list. (Once you have used each Product Key in this way, it will be associated with the Steam account that you've created on that computer. Your Product Keys will, from this point on, not be usable by other people to create accounts or to play Steam games.)<br>
+<br>
+<h3 style="text-transform:uppercase;">5. Repeat Steps 2-4 for Each Computer</h3>
+Repeat these steps for every licensed computer on your network, using unique "email addresses" and Nicknames each time.<br>
+<br>
+<h3 style="text-transform:uppercase;">6. Configure Internet Ports</h3>
+Note that Steam requires certain ports to be open from your gaming machines to the Internet. If you haven't already done so, check that the following ports must are "open":<br>
+<br>
+UDP 1200<br>
+UDP 27000 to 27015 inclusive<br>
+TCP 27030 to 27039 inclusive<br>
+<br>
+<h3 style="text-transform:uppercase;">7. Start Playing!</h3>
+Log in to Steam and sit your first customer down. Be sure to have them try the Server Browser (for finding Internet game servers). Also, they can send instant messages through "Friends" to any other Steam user. Automatic updates will be sent to each of your computers automatically, and new games will be added as they become available.<br>
+<br><a href="https://web.archive.org/web/20040603214916/mailto:cafesupport@valvesoftware.com">Let us know</a> if you have any difficulty.<br>
+<br>
+
+<a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=cybercafes">Return to main Cyber Café page</a>
+
+</div>
+HTML;
+$pageStmt->execute(['cafe_setup', null, 'Cyber Café Setup Instructions',$cafesetup_html,'2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
 $features_html = <<<'HTML'
 <!-- features -->
-<div class="content" id="container">
 <h1>FEATURES</H1>
 <h2>WHAT <em>CAN STEAM DO?</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
 <div class="narrower">
@@ -776,13 +1017,12 @@ xxxxxx xxxxx xxxxx x xxx xxxxxxx xxxxxx xxx xxxxxx x xxxxxx xxxxxxx. xxxxxx xxxx
 -->
 </div><br clear="all">
 <a href="index.php?area=getsteamnow"><img src="but_getsteamnow.gif" height="24" width="124" alt="get steam now"></a><br>
-</div>
 HTML;
+
 $pageStmt->execute(['features',null,'Features',$features_html,'2003_v1,2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $e3_html = <<<'HTML'
 <!-- e3 movies -->
-<div class="content" id="container">
 <h1>Half-Life 2: E3 2003</H1>
 <h2>MOVIES<em> FROM THE ELECTRONIC ENTERTAINMENT EXPO</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
@@ -817,7 +1057,6 @@ These files are high-resolution, so they are pretty large. A <a href="http://bit
 <br><br>
 Note that these movies are in Bink .exe format. If your computer has trouble playing the movies, you may want to download the <a href="http://www.radgametools.com/bnkdown.htm">the RAD video tools</a> and try different playback settings.
 </div>
-</div>
 HTML;
 
 $pageStmt->execute(['e3_movies',null,'Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
@@ -845,7 +1084,7 @@ $forums_html = <<<'HTML'
 <p align="center"><a href="forums/"> I agree to these terms.</a></p>
 </div>
 HTML;
-            $pageStmt->execute(['forums',null,'Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['forums',null,'Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
             $ded_html = <<<'HTML'
 <!-- dedicated server -->
@@ -864,7 +1103,7 @@ NOTE: This release includes only those files which have changed since the last d
 <a href="files/HLserver/mar22/czero_dedicated_server_linux_032204.tgz.torrent">Linux Dedicated Server Update</a><br>
 </div>
 HTML;
-            $pageStmt->execute(['dedicated_server',null,'Dedicated Server update files',$ded_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['dedicated_server',null,'Dedicated Server update files',$ded_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
             $css_html = <<<'HTML'
 <!-- CS:S Beta 1 FAQ -->
@@ -903,10 +1142,9 @@ HTML;
 <p>No.</p>
 </div>
 HTML;
-            $pageStmt->execute(['css_b1',null,'Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['css_b1',null,'Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-            $pricing_html = <<<'HTML'
-<div class="content" id="container">
+$pricing_html = <<<'HTML'
 <h1>PRICING AND LICENSING</H1>
 <h2>VALVE'S<em> OFFICIAL CYBER CAF&Eacute; PROGRAM</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
@@ -933,12 +1171,72 @@ If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valv
 <a href="index.php?area=cybercafes">Return to main Cyber Caf&eacute; page</a>
 
 </div>
+HTML;
+$pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+$cafeprogram_html = <<<'HTML'
+<h1>FEATURES AND BENEFITS</h1>
+<h2>OF VALVE'S<em> OFFICIAL CYBER CAFÉ PROGRAM</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+<div class="narrower">
+
+<img src="./images/valve_maizelogo.gif" align="left">If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. When you <a href="index.php?area=cafe_signup">sign up</a> and become a memeber of our Cybercafé program, you'll enjoy the following benefits:<br>
+<br>
+<h3 style="text-transform:uppercase;">Current &amp; future products</h3>
+Cyber Café subscribers automatically receive access to newly released products in the Cyber Café program as long as they continue their regular monthly subscription.<br>
+<br>
+
+Products currently included in the Cyber Café Program are:<br>
+<ul>
+{{ theme_specific_content_start('2005_v1,2005_v2') }}
+	 <li>Half-Life 2</li>
+	 <li>Half-Life 2: Deathmatch</li>
+	 <li>Half-Life: Source</li>
+	 <li>Counter-Strike: Source</li>
+ {{ theme_specific_content_end() }}
+	 <li>Counter-Strike</li>
+	 <li>Counter-Strike: Condition Zero {{ theme_specific_content_start('2003_v2') }} (available upon release to retail) {{ theme_specific_content_end() }}</li>
+	 <li>Deathmatch Classic</li>
+	 <li>Day of Defeat</li>
+	 <li>Half-Life</li>
+	 <li>Opposing Force</li>
+	 <li>Half-Life Deathmatch</li>
+	 <li>Ricochet</li>
+	 <li>Team Fortress Classic</li>
+</ul>
+<br>
+
+<h3 style="text-transform:uppercase;">Automatic Updates Delivered Via Steam</h3>
+All of your game subscriptions will be kept up-to-date with the latest versions using Steam's distribution system. New content, bug fixes, and other items which have traditionally been distributed as "patches" will be handled automatically.<br>
+<br>
+<h3 style="text-transform:uppercase;">Fully licensed software and product keys</h3>
+When you sign up and become a member of our Cybercafé program, Valve will provide you with software and product keys for each computer you have licensed. <br>
+<!-- All commercial licensing of Valve's software is done directly with Valve Corporation -- games purchased at a retail store do not include a license for commercial cyber café use. -->
+<br>
+<h3 style="text-transform:uppercase;">Access to Valve Product Support</h3>
+Members will have priority access to Valve's product support services, for Steam issues and any game-related problems.<br>
+<br>
+<h3 style="text-transform:uppercase;">Product Key Protection</h3>
+Valve's Cyber Café program also protects members against banned accounts. We understand that it is sometimes difficult to prevent users from misusing your computers. To help combat this problem, cafés in the program can contact Valve to correct problems with "banned" accounts.<br>
+<br>
+<h3 style="text-transform:uppercase;">promotional materials</h3>
+We've got plenty of posters for your walls and windows, and other fun stuff that we'll send you when you sign up.<br>
+<br>
+<h3 style="text-transform:uppercase;">Free Tournament License</h3>
+Any time you'd like to host a gaming tournament or other local event, just drop us a line and let us know the details. We'll send you a tournament license right away, free of charge.<br>
+<br>
+<a href="index.php?area=cafe_signup">Sign up now!</a><br>
+<br>
+<a href="index.php?area=cybercafes">Return to main Cyber Café page</a>
+
 </div>
 HTML;
-            $pageStmt->execute(['cafe_pricing',null,'Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-            $dirStmt = $pdo->prepare('INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord) VALUES(?,?,?,?,?,?,?)');
-            $defaultCafes = [
+$pageStmt->execute(['cybercafe_program',null,'Cyber Café Program',$cafeprogram_html,'2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+
+$dirStmt = $pdo->prepare('INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord) VALUES(?,?,?,?,?,?,?)');
+$defaultCafes = [
                 ['http://www.gparadise.com','Gamers Paradise (IGUK)','(178) 424-7985','5 Station Road','Ashford','TW15 2UW'],
                 [null,'Fragz R Us Ltd','+441268271650','11 East Walk','Basildon, Essex','SS141HG'],
                 ['http://ozzis.co.uk','Ozzi\'s Online Gaming (IGUK)','(192) 447-1777','23 Commercial Street','Batley','WF17 5HJ'],
