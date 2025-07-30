@@ -921,6 +921,64 @@ Valve has launched a new <a href="index.php?area=tourney_limited">Tournament Web
 HTML;
 $pageStmt->execute(['cybercafes','Cyber Cafés',$cybercafe_2005_html,'2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
+$cafesetup_html = <<< 'HTML'
+<h1>CAFÉ SETUP INSTRUCTIONS</h1>
+<h2>HOW TO<em> GET UP AND RUNNING WITH STEAM</em></h2><img src="/web/20040603214916im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+<div class="narrower">
+
+Here are instructions for setting up Steam in your café. Before you begin this process, you must be a member of the <a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=cybercafes">official Valve Cyber Café Program</a>. For additional information not covered here, please check the <a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=FAQ§ion=cybercafe">café section of our FAQ</a>.<br>
+<br>
+<h3 style="text-transform:uppercase;">1. Download the Steam Installer (or use the supplied DVD-ROM)</h3>
+When you join the Cyber Café Program, we will send you a DVD-ROM containing the Steam installer. If you would rather not wait for that to arrive, you can download the Steam client installer from the <a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=getsteamnow">Get Steam Now</a> page on this site. If you choose to download this installer rather than using the DVD-ROM, be sure to save the installer to disk -- you'll need to use it on each licensed computer in your café.<br>
+<br>
+
+<h3 style="text-transform:uppercase;">2. Run the Steam Installer</h3>
+To make things simple, you will probably want to choose the same install location on every machine in your café. We recommend that you have at least 1GB of free space on the drive before installing Steam.<br>
+<br>
+<h3 style="text-transform:uppercase;">3. Create an Account</h3>
+Follow these steps to create a Steam account:<br>
+<br>
+<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong>Email Address</strong><br>
+The first thing the Create Account wizard will ask you to do is enter a valid email address. Please note that for café Steam accounts, the address that you enter into this box does not actually need to be a valid email address. Instead, it should be an address like "computer1@the_name_of_your_cafe.com". Again, this does NOT need to be a valid email address -- it only needs to uniquely identify the specific machine in your café. The second machine on which you install Steam can use the address "computer2@the_name_of_your_cafe.com", and so on.<br>
+<br>
+<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong style="margin-bottom:4px;">Choose a Password and Secret Question &amp; Answer</strong><br>
+The normal security concerns apply when choosing your Steam password. Note that it is possible to use the same password on all of the machines in your café (but obviously, somewhat less secure).<br>
+<br>
+As an added security feature for cyber cafés, Steam will require this password to be entered in order to log OUT. A customer in your café will therefore not be able to log out of Steam or log in as a different user. Also, Steam will run automatically when your computer starts up, and will log in to the Steam servers using the credentials you've supplied during account creation.<br>
+<br>
+<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong>Enter a Nickname</strong><br>
+When entering a "Nickname" for each of your café computers, you should again use the name of the computer ("computer1" or similar). It is not necessary to enter a First or Last name.<br>
+<br>
+<img src="/web/20040603214916im_/http://www.steampowered.com/img/square2.gif"> <strong>Finished creating account</strong><br>
+That's it for account creation. All that's left is entering your Product Keys.<br>
+<br>
+<h3 style="text-transform:uppercase;">4. Enter Your Cyber Café Product Key</h3>
+When Valve adds you to the Official Cyber Café Program, you will receive (via email and/or FedEx) a set of Product Keys. You will receive one for each computer you wish to license.<br>
+<br>
+After Steam is installed, open the "My Games" list. There, you'll see a list of all Steam Games. Double-Click on one that you intend to offer in your café. Steam will ask you for a product key at this point. Each computer will use one of the keys in your list. (Once you have used each Product Key in this way, it will be associated with the Steam account that you've created on that computer. Your Product Keys will, from this point on, not be usable by other people to create accounts or to play Steam games.)<br>
+<br>
+<h3 style="text-transform:uppercase;">5. Repeat Steps 2-4 for Each Computer</h3>
+Repeat these steps for every licensed computer on your network, using unique "email addresses" and Nicknames each time.<br>
+<br>
+<h3 style="text-transform:uppercase;">6. Configure Internet Ports</h3>
+Note that Steam requires certain ports to be open from your gaming machines to the Internet. If you haven't already done so, check that the following ports must are "open":<br>
+<br>
+UDP 1200<br>
+UDP 27000 to 27015 inclusive<br>
+TCP 27030 to 27039 inclusive<br>
+<br>
+<h3 style="text-transform:uppercase;">7. Start Playing!</h3>
+Log in to Steam and sit your first customer down. Be sure to have them try the Server Browser (for finding Internet game servers). Also, they can send instant messages through "Friends" to any other Steam user. Automatic updates will be sent to each of your computers automatically, and new games will be added as they become available.<br>
+<br><a href="https://web.archive.org/web/20040603214916/mailto:cafesupport@valvesoftware.com">Let us know</a> if you have any difficulty.<br>
+<br>
+
+<a href="https://web.archive.org/web/20040603214916/http://www.steampowered.com/?area=cybercafes">Return to main Cyber Café page</a>
+
+</div>
+HTML;
+$pageStmt->execute(['cafe_setup','Cyber Café Setup Instructions',$cafesetup_html,'2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
 $features_html = <<<'HTML'
 <!-- features -->
 <h1>FEATURES</H1>
@@ -1081,9 +1139,9 @@ HTML;
 <p>No.</p>
 </div>
 HTML;
-            $pageStmt->execute(['css_b1','Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['css_b1','Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-            $pricing_html = <<<'HTML'
+$pricing_html = <<<'HTML'
 <h1>PRICING AND LICENSING</H1>
 <h2>VALVE'S<em> OFFICIAL CYBER CAF&Eacute; PROGRAM</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
@@ -1111,10 +1169,70 @@ If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valv
 
 </div>
 HTML;
-            $pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-            $dirStmt = $pdo->prepare('INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord) VALUES(?,?,?,?,?,?,?)');
-            $defaultCafes = [
+$cafeprogram_html = <<<'HTML'
+<h1>FEATURES AND BENEFITS</h1>
+<h2>OF VALVE'S<em> OFFICIAL CYBER CAFÉ PROGRAM</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+<div class="narrower">
+
+<img src="./images/valve_maizelogo.gif" align="left">If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. When you <a href="index.php?area=cafe_signup">sign up</a> and become a memeber of our Cybercafé program, you'll enjoy the following benefits:<br>
+<br>
+<h3 style="text-transform:uppercase;">Current &amp; future products</h3>
+Cyber Café subscribers automatically receive access to newly released products in the Cyber Café program as long as they continue their regular monthly subscription.<br>
+<br>
+
+Products currently included in the Cyber Café Program are:<br>
+<ul>
+{{ theme_specific_content_start('2005_v1,2005_v2') }}
+	 <li>Half-Life 2</li>
+	 <li>Half-Life 2: Deathmatch</li>
+	 <li>Half-Life: Source</li>
+	 <li>Counter-Strike: Source</li>
+ {{ theme_specific_content_end() }}
+	 <li>Counter-Strike</li>
+	 <li>Counter-Strike: Condition Zero {{ theme_specific_content_start('2003_v2') }} (available upon release to retail) {{ theme_specific_content_end() }}</li>
+	 <li>Deathmatch Classic</li>
+	 <li>Day of Defeat</li>
+	 <li>Half-Life</li>
+	 <li>Opposing Force</li>
+	 <li>Half-Life Deathmatch</li>
+	 <li>Ricochet</li>
+	 <li>Team Fortress Classic</li>
+</ul>
+<br>
+
+<h3 style="text-transform:uppercase;">Automatic Updates Delivered Via Steam</h3>
+All of your game subscriptions will be kept up-to-date with the latest versions using Steam's distribution system. New content, bug fixes, and other items which have traditionally been distributed as "patches" will be handled automatically.<br>
+<br>
+<h3 style="text-transform:uppercase;">Fully licensed software and product keys</h3>
+When you sign up and become a member of our Cybercafé program, Valve will provide you with software and product keys for each computer you have licensed. <br>
+<!-- All commercial licensing of Valve's software is done directly with Valve Corporation -- games purchased at a retail store do not include a license for commercial cyber café use. -->
+<br>
+<h3 style="text-transform:uppercase;">Access to Valve Product Support</h3>
+Members will have priority access to Valve's product support services, for Steam issues and any game-related problems.<br>
+<br>
+<h3 style="text-transform:uppercase;">Product Key Protection</h3>
+Valve's Cyber Café program also protects members against banned accounts. We understand that it is sometimes difficult to prevent users from misusing your computers. To help combat this problem, cafés in the program can contact Valve to correct problems with "banned" accounts.<br>
+<br>
+<h3 style="text-transform:uppercase;">promotional materials</h3>
+We've got plenty of posters for your walls and windows, and other fun stuff that we'll send you when you sign up.<br>
+<br>
+<h3 style="text-transform:uppercase;">Free Tournament License</h3>
+Any time you'd like to host a gaming tournament or other local event, just drop us a line and let us know the details. We'll send you a tournament license right away, free of charge.<br>
+<br>
+<a href="index.php?area=cafe_signup">Sign up now!</a><br>
+<br>
+<a href="index.php?area=cybercafes">Return to main Cyber Café page</a>
+
+</div>
+HTML;
+$pageStmt->execute(['cybercafe_program','Cyber Café Program',$cafeprogram_html,'2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+
+$dirStmt = $pdo->prepare('INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord) VALUES(?,?,?,?,?,?,?)');
+$defaultCafes = [
                 ['http://www.gparadise.com','Gamers Paradise (IGUK)','(178) 424-7985','5 Station Road','Ashford','TW15 2UW'],
                 [null,'Fragz R Us Ltd','+441268271650','11 East Walk','Basildon, Essex','SS141HG'],
                 ['http://ozzis.co.uk','Ozzi\'s Online Gaming (IGUK)','(192) 447-1777','23 Commercial Street','Batley','WF17 5HJ'],
