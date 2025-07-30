@@ -256,6 +256,10 @@ function cms_twig_env(string $tpl_dir): Environment
             return '';
         }, ['is_safe' => ['html']]));
 
+        $env->addFunction(new TwigFunction('current_theme', function() {
+            return cms_get_current_theme();
+        }));
+
         $env->addFunction(new TwigFunction('theme_specific_content_start', function(string $themes) {
             $list = array_filter(array_map('trim', explode(',', $themes)));
             if (!isset($GLOBALS['_cms_theme_specific_stack'])) {
