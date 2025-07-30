@@ -1059,8 +1059,6 @@ $mapcontestrules_html <<< 'HTML'
 <h1>HALF-LIFE 2: DEATHMATCH MAP CONTEST OFFICIAL RULES</h1>
 <br>
 <br>
-
-
 The Valve Half-Life 2 Map Contest (the "Contest") is sponsored by Valve Corporation ("Valve").    NO PURCHASE NECESSARY. VOID WHERE PROHIBITED.<br>
 <br>
 1.	Eligibility.  The Contest is open to individuals or groups of individuals (each an "Entrant"), each of whom must be (a) a subscriber to Half-Life 2 via Valve’s Steam service; and (b) at least 18 years old at the time of submitting their Contest Entry.  The Contest is open worldwide, except where prohibited by law.  Employees of Valve or its affiliates (the "Contest Sponsors"), and their immediate family or household members, are not eligible to participate.<br>
@@ -1321,6 +1319,13 @@ If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valv
 <a href="index.php?area=cybercafes">Return to main Cyber Caf&eacute; page</a>
 
 </div>
+HTML;
+$pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+$productnewscss_html <<<'HTML'
+<span class="css_news_header">LATEST NEWS {{ theme_specific_content_start('2004') }}BETA NEWS{{ theme_specific_content_end() }}<br><br>
+{{ news }}
+</span>
 HTML;
 $pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 

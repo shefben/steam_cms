@@ -1,0 +1,64 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+function validatePhone(type, name)
+{
+
+phoneNumBill = nlapiGetFieldValue('phone');
+phoneNumTech = nlapiGetFieldValue('custentity20');
+phoneNumCafe = nlapiGetFieldValue('custentity45'); 
+ 
+if ((phoneNumBill != "") && (phoneNumBill.length < 10)){
+        alert('Billing contact phone number must be at least 10 digits');
+}
+
+else if ((phoneNumTech != "") && (phoneNumTech.length < 10)){
+        alert('Technical contact phone number must be at least 10 digits');
+
+}
+
+else if ((phoneNumCafe != "") && (phoneNumCafe.length < 10)){
+        alert('Cafe phone number must be at least 10 digits');
+}
+
+cyberState = nlapiGetFieldValue('custentity16');
+
+if((cyberState != "") && (cyberState.length > 2)){
+	alert('State must be 2 letter abbreviation');
+}
+}
+
+
+
+
+
+}
+/*
+     FILE ARCHIVED ON 04:37:09 Dec 24, 2013 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 00:26:03 Jul 30, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.94
+  exclusion.robots: 0.039
+  exclusion.robots.policy: 0.024
+  esindex: 0.015
+  cdx.remote: 71.094
+  LoadShardBlock: 171.905 (3)
+  PetaboxLoader3.datanode: 190.237 (4)
+  load_resource: 130.968
+  PetaboxLoader3.resolve: 66.159
+*/
