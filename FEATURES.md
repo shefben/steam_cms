@@ -185,4 +185,5 @@
 - Scheduled content form splits schedule fields onto a new line for clarity
 - Theme-specific content blocks show fragments only for selected themes
 - Random content grouped by name with AJAX group creation
+- News admin page lets you choose date format with immediate AJAX save
 - Template tag guide links each tag to its admin screen and DB table
