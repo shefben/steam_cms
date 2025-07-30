@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - Global header bar uses 2006 layout with dynamic navigation
 - Header bar styles now output inline with the 2006 layout
 - CSS links beginning with ./ now resolve to the root website path
+- News admin page offers configurable date format with AJAX persistence
 - Storefront sidebar and media table links now respect the configured root path
 - CSS file url() references now point to the theme images directory
 - Storefront layout detection searches storefront folders first

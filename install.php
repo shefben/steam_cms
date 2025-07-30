@@ -550,8 +550,9 @@ HTML;
                 'nav_items' => json_encode($default_nav),
                 'root_path' => '',
                 'gzip' => '0',
-                'enable_cache' => '0',
-                'news_year_only' => '1'
+                'enable_cache'   => '0',
+                'news_year_only' => '1',
+                'news_date_format' => 'long'
             ];
             $stmt = $pdo->prepare('INSERT INTO settings(`key`,value) VALUES(?,?)');
             foreach ($defaults as $k => $v) {

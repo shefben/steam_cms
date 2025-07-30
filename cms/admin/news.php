@@ -25,6 +25,19 @@ if(isset($_POST['delete'])){
     $stmt->execute([$delId]);
     cms_admin_log('Deleted news article '.$delId);
 }
+// change date format
+if(isset($_POST['set_date_format'])){
+    cms_require_permission('manage_news');
+    $val = $_POST['set_date_format'] === 'iso' ? 'iso' : 'long';
+    cms_set_setting('news_date_format', $val);
+    cms_admin_log('Changed news date format to ' . $val);
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        echo 'ok';
+    }else{
+        header('Location: news.php');
+    }
+    exit;
+}
 // move up/down by swapping publish dates
 if(isset($_GET['move']) && isset($_GET['id'])){
     cms_require_permission('news_edit');
@@ -156,6 +169,18 @@ if (isset($_GET['ajax'])) {
 ?>
 <h2>News Articles</h2>
 <?php if(cms_has_permission('news_create')): ?>
+<?php $fmt = cms_get_setting('news_date_format','long'); ?>
+<div id="news-date-format" style="margin-bottom:15px;">
+    <h3>Change Date/Time display</h3>
+    <label style="margin-right:10px;">
+        <input type="radio" name="date_format" value="long"<?php if($fmt==='long') echo ' checked'; ?>>
+        August 11, 2004, 2:15 pm
+    </label>
+    <label>
+        <input type="radio" name="date_format" value="iso"<?php if($fmt==='iso') echo ' checked'; ?>>
+        2004-08-20 15:33:00
+    </label>
+</div>
 <p><a href="news_edit.php">Add New Article</a></p>
 <?php endif; ?>
 <p>
@@ -247,6 +272,9 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('save-order').addEventListener('click',function(e){
         e.preventDefault();
         sendOrder();
+    });
+    $('input[name="date_format"]').on('change',function(){
+        $.post('news.php',{set_date_format:$(this).val()});
     });
 });
 </script>
