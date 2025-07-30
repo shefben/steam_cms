@@ -7,7 +7,8 @@ This document describes the built-in Twig tags available in the CMS templates. E
 - **`header(withButtons = true)`** – Renders the site header. Buttons come from the `theme_headers` table (`logo`, `text`, `img`, `hover`, `depressed`, `url`, `visible`, `spacer`). The `theme` is picked from the current setting.
 - **`header_logo(path)`** – Sets the header logo to an image within the active theme before calling `header()`. The path is relative to the theme directory.
 - **`footer()`** – Outputs the theme footer HTML stored in the `theme_footers` table (`html`).
-- **`nav_buttons(theme = '', style = '', spacer = null)`** – Generates a navigation bar using entries from `theme_headers`. The current template determines which page-specific buttons to load. The optional `theme` overrides the current theme, and `spacer` overrides the spacer stored in the database.
+- **`nav_buttons(theme = '', style = '', spacer = null, color = null)`** – Generates a navigation bar using entries from `theme_headers`. The current template determines which page-specific buttons to load. The optional `theme` overrides the current theme, `spacer` overrides the spacer stored in the database, and `color` sets the spacer text color.
+- **`logo()`** – Outputs the logo image defined in the `theme_headers` table for the current theme.
 
 ## News Tags
 
@@ -43,10 +44,15 @@ These tags pull their text from the `settings` table and simply echo it:
 
 - **`split_title(text)`** – Splits a string into two emphasized halves using the rules described in the prompt. Outputs the provided HTML snippet.
 - **`split_title_entry(name)`** – Fetches `title_content` from the `custom_titles` table for a given `title_name` and renders it with `split_title`.
+- **`sitetitle()`** – Displays the current page's `page_name` using the 2002/2003 title style.
+
+## Conditional Tags
+
+- **`theme_specific_content_start(themes)`** and **`theme_specific_content_end()`** – Wrap page fragments that should only display when the active theme matches one of the comma-separated `themes`.
 
 ## Dynamic Content Tags
 
-Tags that start with `random_` or `scheduled_` are resolved at runtime:
+Tags that start with `random_` or `scheduled_` are resolved at runtime. Random content tag names are stored without the `random_` prefix in the database:
 
 - **`random_<tagname>`** – Looks up all matching rows in `random_content` (`tag_name`, `content`) and returns one entry at random on each page load.
 - **`scheduled_<tagname>`** – Reads entries from `scheduled_content` and checks the scheduling fields. Important columns include `schedule_type` (`every_n_days`, `day_of_month`, `fixed_range`), date fields, and `active` flag. Matching rows are concatenated and displayed.

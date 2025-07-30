@@ -156,6 +156,17 @@ function cms_twig_env(string $tpl_dir): Environment
             cms_set_header_logo_override($path);
             return '';
         }, ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('logo', function() {
+            $theme = cms_get_current_theme();
+            $data  = cms_get_theme_header_data($theme);
+            $logo  = $data['logo'] ?: '/img/steam_logo_onblack.gif';
+            $base  = cms_base_url();
+            $logo  = str_ireplace('{BASE}', $base, $logo);
+            if ($logo && $logo[0] == '/') {
+                $logo = $base . $logo;
+            }
+            return '<img src="'.htmlspecialchars($logo).'" alt="logo">';
+        }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('footer', function() {
             $theme = cms_get_current_theme();
             $html  = cms_get_theme_footer($theme);
@@ -163,9 +174,9 @@ function cms_twig_env(string $tpl_dir): Environment
             $env   = cms_twig_env('.');
             return $env->createTemplate($html)->render(['BASE' => cms_base_url()]);
         }, ['is_safe' => ['html']]));
-        $env->addFunction(new TwigFunction('nav_buttons', function(string $theme = '', string $style = '', ?string $spacer = null) {
+        $env->addFunction(new TwigFunction('nav_buttons', function(string $theme = '', string $style = '', ?string $spacer = null, ?string $color = null) {
             $theme = $theme !== '' ? $theme : cms_get_current_theme();
-            return cms_nav_buttons_html($theme, $style, $spacer);
+            return cms_nav_buttons_html($theme, $style, $spacer, $color);
         }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('news', function(string $type, ?int $count = null) {
             $theme = cms_get_current_theme();
@@ -232,6 +243,37 @@ function cms_twig_env(string $tpl_dir): Environment
 
         $env->addFunction(new TwigFunction('split_title_entry', function(string $name) {
             return cms_split_title_entry($name);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sitetitle', function() {
+            $slug  = cms_get_current_page();
+            $theme = cms_get_current_theme();
+            $page  = cms_get_custom_page($slug, $theme);
+            if($page && !empty($page['page_name'])){
+                require_once __DIR__.'/utilities/text_styler.php';
+                return render0203PageTitle($page['page_name']);
+            }
+            return '';
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('theme_specific_content_start', function(string $themes) {
+            $list = array_filter(array_map('trim', explode(',', $themes)));
+            if (!isset($GLOBALS['_cms_theme_specific_stack'])) {
+                $GLOBALS['_cms_theme_specific_stack'] = [];
+            }
+            $GLOBALS['_cms_theme_specific_stack'][] = $list;
+            ob_start();
+            return '';
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('theme_specific_content_end', function() {
+            $content = ob_get_clean();
+            $list = $GLOBALS['_cms_theme_specific_stack'] ? array_pop($GLOBALS['_cms_theme_specific_stack']) : [];
+            $current = cms_get_current_theme();
+            if ($list && in_array($current, $list, true)) {
+                return $content;
+            }
+            return '';
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('categories_list', function() {

@@ -179,3 +179,8 @@
 - AJAX image upload and title images supported on legacy storefront admin pages
 - Legacy packages editable via admin panel with screenshot/badge options
 - Legacy storefront accessible under /storefront regardless of active 2004/2005_v1 theme
+- Header/footer admin allows bold navigation links for 2002_v2 and 2003_v1 themes
+- Logo and sitetitle tags display page-specific branding; nav_buttons spacer color customizable
+- Random content list view with edit/delete actions and automatic {{random_}} prefix reminder
+- Scheduled content form splits schedule fields onto a new line for clarity
+- Theme-specific content blocks show fragments only for selected themes

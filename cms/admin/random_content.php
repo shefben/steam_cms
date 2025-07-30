@@ -12,6 +12,14 @@ if (isset($_GET['ajax']) && isset($_GET['tag'])) {
     exit;
 }
 
+if (isset($_POST['delete_tag'])) {
+    $del = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['delete_tag']);
+    if ($del !== '') {
+        $db->prepare('DELETE FROM random_content WHERE tag_name=?')->execute([$del]);
+        cms_admin_log('Deleted random content tag '.$del);
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
     $tag = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['tag']);
     if (!empty($_POST['new_tag'])) {
@@ -44,23 +52,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
 }
 
 $tags = $db->query('SELECT DISTINCT tag_name FROM random_content ORDER BY tag_name')->fetchAll(PDO::FETCH_COLUMN);
-$current = $_POST['new_tag'] ?? ($_POST['tag'] ?? ($tags[0] ?? ''));
+$current = $_GET['edit'] ?? ($_POST['tag'] ?? ($tags[0] ?? ''));
 $entries = [];
-if ($current) {
+if ($current !== '' && isset($_GET['edit'])) {
     $stmt = $db->prepare('SELECT uniqueid,content FROM random_content WHERE tag_name=? ORDER BY uniqueid');
     $stmt->execute([$current]);
     $entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
 <h2>Random Content</h2>
-<select id="tag-select" name="tag">
+<?php if (!isset($_GET['edit'])): ?>
+<table class="data-table">
+<thead><tr><th>Tag Name</th><th>Action</th></tr></thead>
+<tbody>
 <?php foreach ($tags as $t): ?>
-<option value="<?php echo htmlspecialchars($t); ?>"<?php if ($t === $current) echo ' selected'; ?>><?php echo htmlspecialchars($t); ?></option>
+<tr>
+  <td>{{random_<?php echo htmlspecialchars($t); ?>}}</td>
+  <td class="actions">
+    <a class="btn btn-primary" href="random_content.php?edit=<?php echo urlencode($t); ?>">Edit</a>
+    <form method="post" style="display:inline">
+      <button class="btn btn-danger" name="delete_tag" value="<?php echo htmlspecialchars($t); ?>" onclick="return confirm('Delete tag?')">Delete</button>
+    </form>
+  </td>
+</tr>
 <?php endforeach; ?>
-</select>
-<div id="new-tag-container" style="display:none;margin-top:10px;">
-    <label for="new-tag">New Tag Name:</label>
-    <input type="text" id="new-tag" name="new_tag" style="width:200px">
+</tbody>
+</table>
+<p><a class="btn btn-secondary" href="random_content.php?edit=new">Add New Tag</a></p>
+<?php else: ?>
+<a href="random_content.php" class="btn btn-secondary">&laquo; Back to list</a>
+<div id="new-tag-container" style="margin-top:10px;">
+    <label for="new-tag">Tag Name (used as {{random_<span id="tag-preview"></span>}}):</label>
+    <input type="text" id="new-tag" name="new_tag" style="width:200px" value="<?php echo htmlspecialchars($current === 'new' ? '' : $current); ?>">
 </div>
 <form method="post" id="content-form">
 <input type="hidden" name="tag" value="<?php echo htmlspecialchars($current); ?>">
@@ -87,14 +110,6 @@ function addEditor(id,content){
     $('#editor-container').append(div);
     CKEDITOR.replace(ta[0]);
 }
-$('#tag-select').on('change',function(){
-    var t=this.value;
-    $.get('random_content.php',{ajax:1,tag:t},function(data){
-        $('#editor-container').empty();
-        data.forEach(function(row){ addEditor(row.uniqueid,row.content); });
-        $('input[name=tag]').val(t);
-    },'json');
-});
 $('#add').on('click',function(){
     $('#new-tag-container').show();
     addEditor(null,'');
@@ -110,9 +125,13 @@ $('#editor-container').on('click','.delete-btn',function(){
 });
 $(function(){
     $('.editor').each(function(){ CKEDITOR.replace(this); });
-    <?php if(!empty($_POST['new_tag']) || !$tags): ?>
+    <?php if(isset($_GET['edit'])): ?>
     $('#new-tag-container').show();
+    $('#new-tag').on('input',function(){
+        $('#tag-preview').text($(this).val());
+    }).trigger('input');
     <?php endif; ?>
 });
 </script>
+<?php endif; ?>
 <?php include 'admin_footer.php'; ?>

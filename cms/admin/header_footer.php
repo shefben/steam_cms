@@ -7,6 +7,7 @@ $theme_list = array_filter(cms_get_themes(), fn($t)=>substr($t,-6) !== '_admin')
 $theme = $_GET['theme'] ?? ($_POST['theme'] ?? ($theme_list[0] ?? ''));
 $page = $_GET['page'] ?? ($_POST['page'] ?? '');
 $data = cms_get_theme_header_data($theme, $page);
+$show_bold = in_array($theme, ['2002_v2','2003_v1']);
 $image_dir = dirname(__DIR__,2)."/themes/$theme/images";
 $logo_files = glob($image_dir.'/*logo*.{gif,png,jpg,jpeg}', GLOB_BRACE);
 $logo_files = array_map(function($f) use($theme){ return '/themes/'.$theme.'/images/'.basename($f); }, $logo_files);
@@ -26,9 +27,9 @@ if(isset($_POST['reorder']) && isset($_POST['order'])){
     $data['buttons'] = $reordered;
     $db = cms_get_db();
     $db->prepare('DELETE FROM theme_headers WHERE theme=? AND page=?')->execute([$theme, $page]);
-    $ins = $db->prepare('INSERT INTO theme_headers(theme,page,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,?,1,?)');
+    $ins = $db->prepare('INSERT INTO theme_headers(theme,page,ord,logo,text,img,hover,depressed,url,visible,bold,spacer) VALUES(?,?,?,?,?,?,?,?,?,1,?,?)');
     foreach($reordered as $ord=>$b){
-        $ins->execute([$theme,$page,$ord,$data['logo'],$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$spacer]);
+        $ins->execute([$theme,$page,$ord,$data['logo'],$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$b['bold']?1:0,$spacer]);
     }
     if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
         echo 'ok';
@@ -61,7 +62,7 @@ if(isset($_POST['upload_logo']) && isset($_FILES['new_logo']) && is_uploaded_fil
     if($count->fetchColumn()>0){
         $db->prepare('UPDATE theme_headers SET logo=? WHERE theme=? AND page=?')->execute([$rel,$theme,$page]);
     }else{
-        $db->prepare('INSERT INTO theme_headers(theme,page,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,?,1,"")')->execute([$theme,$page,0,$rel,'','','','','']);
+        $db->prepare('INSERT INTO theme_headers(theme,page,ord,logo,text,img,hover,depressed,url,visible,bold,spacer) VALUES(?,?,?,?,?,?,?,?,?,1,0,"")')->execute([$theme,$page,0,$rel,'','','','','']);
     }
     echo '<p>Logo uploaded.</p>';
 }
@@ -94,16 +95,17 @@ if(isset($_POST['save'])){
             'img'=>$img,
             'hover'=>$hover,
             'alt'=>trim($b['alt']),
-            'text'=>trim($b['text'])
+            'text'=>trim($b['text']),
+            'bold'=>isset($b['bold']) ? 1 : 0
         ];
     }
     $spacer = trim($_POST['spacer'] ?? $spacer);
     $data = ['logo'=>$logo,'buttons'=>$out, 'spacer'=>$spacer];
     $db = cms_get_db();
     $db->prepare('DELETE FROM theme_headers WHERE theme=? AND page=?')->execute([$theme,$page]);
-    $ins = $db->prepare('INSERT INTO theme_headers(theme,page,ord,logo,text,img,hover,depressed,url,visible,spacer) VALUES(?,?,?,?,?,?,?,?,?,1,?)');
+    $ins = $db->prepare('INSERT INTO theme_headers(theme,page,ord,logo,text,img,hover,depressed,url,visible,bold,spacer) VALUES(?,?,?,?,?,?,?,?,?,1,?,?)');
     foreach($out as $ord=>$b){
-        $ins->execute([$theme,$page,$ord,$logo,$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$spacer]);
+        $ins->execute([$theme,$page,$ord,$logo,$b['text'],$b['img'],$b['hover'],$b['alt'],$b['url'],$b['bold']?1:0,$spacer]);
     }
     $db->prepare('REPLACE INTO theme_footers(theme,html) VALUES(?,?)')->execute([$theme,$_POST['footer_html']]);
     $db->prepare('UPDATE themes SET css_path=? WHERE name=?')->execute([$css_path,$theme]);
@@ -121,7 +123,11 @@ if(isset($_POST['save'])){
     echo '<p>Settings saved.</p>';
 }
 if(isset($_POST['add'])){
-    $data['buttons'][] = ['url'=>'','img'=>'','hover'=>'','alt'=>'','text'=>''];
+    $new = ['url'=>'','img'=>'','hover'=>'','alt'=>'','text'=>''];
+    if($show_bold){
+        $new['bold'] = 0;
+    }
+    $data['buttons'][] = $new;
 }
 ?>
 <h2>Header &amp; Footer</h2>
@@ -152,13 +158,14 @@ if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
 <button type="submit" name="upload_logo" id="upload-logo-btn" value="1" class="btn btn-secondary" disabled>Upload</button>
 <input type="hidden" name="logo" id="logo-url" value="<?php echo htmlspecialchars($data['logo']); ?>"><br><br>
 <table id="buttons-table" class="data-table">
-<thead><tr><th></th><th>URL</th><th>Text</th><th>Delete</th></tr></thead>
+<thead><tr><th></th><th>URL</th><th>Text</th><?php if($show_bold): ?><th>Bold</th><?php endif; ?><th>Delete</th></tr></thead>
 <tbody>
 <?php foreach($data['buttons'] as $i=>$b): ?>
 <tr class="button-row" data-index="<?php echo $i; ?>">
 <td class="handle">☰</td>
 <td><input type="text" name="buttons[<?php echo $i; ?>][url]" value="<?php echo htmlspecialchars($b['url']); ?>" title="Link target when clicked" style="width:250px"></td>
 <td><input type="text" name="buttons[<?php echo $i; ?>][text]" value="<?php echo htmlspecialchars($b['text'] ?? ''); ?>" title="Text fallback" style="width:200px"></td>
+<?php if($show_bold): ?><td style="text-align:center"><input type="checkbox" name="buttons[<?php echo $i; ?>][bold]" value="1" <?php if(!empty($b['bold'])) echo 'checked'; ?>></td><?php endif; ?>
 <td><input type="checkbox" name="buttons[<?php echo $i; ?>][delete]"></td>
 <input type="hidden" name="buttons[<?php echo $i; ?>][img]" value="<?php echo htmlspecialchars($b['img'] ?? ''); ?>">
 <input type="hidden" name="buttons[<?php echo $i; ?>][hover]" value="<?php echo htmlspecialchars($b['hover'] ?? ''); ?>">
@@ -188,6 +195,7 @@ Logo overrides (one per line URL:year:logo path):<br>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
 var tbody = document.querySelector('#buttons-table tbody');
+var showBold = <?php echo $show_bold ? 'true' : 'false'; ?>;
 function sendOrder(){
     var ids=[];
     tbody.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.index);});
@@ -209,6 +217,7 @@ document.getElementById('add-button').addEventListener('click', function(){
     row.innerHTML = `<td class="handle">☰</td>`+
         `<td><input type="text" name="buttons[${idx}][url]" style="width:250px"></td>`+
         `<td><input type="text" name="buttons[${idx}][text]" style="width:200px"></td>`+
+        (showBold ? `<td style="text-align:center"><input type="checkbox" name="buttons[${idx}][bold]" value="1"></td>` : '')+
         `<td><input type="checkbox" name="buttons[${idx}][delete]"></td>`+
         `<input type="hidden" name="buttons[${idx}][img]">`+
         `<input type="hidden" name="buttons[${idx}][hover]">`+
