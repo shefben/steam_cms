@@ -122,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $pdo->exec("DROP TABLE IF EXISTS custom_pages");
             $pdo->exec("CREATE TABLE custom_pages(
                 slug VARCHAR(255) PRIMARY KEY,
+                page_name VARCHAR(255) DEFAULT NULL,
                 title TEXT,
                 content MEDIUMTEXT,
                 theme TEXT DEFAULT NULL,
@@ -259,6 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 depressed TEXT,
                 url TEXT,
                 visible TINYINT(1) DEFAULT 1,
+                bold TINYINT(1) DEFAULT 0,
                 spacer TEXT,
                 INDEX(theme),
                 INDEX(page)
@@ -547,7 +549,7 @@ HTML;
             foreach ($defaults as $k => $v) {
                 $stmt->execute([$k,$v]);
             }
-            $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,?,?)');
+            $pageStmt = $pdo->prepare('INSERT INTO custom_pages(slug,page_name,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,?,?,?)');
 
             /* -----------------------------------------------------------
              *  HEADER-BAR SEEDS
@@ -600,8 +602,8 @@ HTML;
              * --------------------------------------------------------- */
             $thStmt = $pdo->prepare(
                 'INSERT INTO theme_headers
-                 (theme,page,ord,logo,text,img,hover,depressed,url,visible,spacer)
-                 VALUES (?,?,?,?,?,?,?,?,?,1,?)'
+                 (theme,page,ord,logo,text,img,hover,depressed,url,visible,bold,spacer)
+                 VALUES (?,?,?,?,?,?,?,?,?,1,?,?)'
             );
 
             foreach ($logos as $theme => $logo) {
@@ -628,6 +630,7 @@ HTML;
                         null,           // hover
                         null,           // depressed
                         $btn['url'],
+                        0,
                         $spacer
                     ]);
                 }
@@ -746,7 +749,7 @@ During the month of April 2004, Valve is extending a special offer to Cyber Caf�
 This offer ends at 11:59 pm PST on April 30, 2004, is subject to change and is not available in every territory. For more information, please email <a href="mailto:cafe@valvesoftware.com">cafe@valvesoftware.com</a>.
 <br><br><br><br>&nbsp;
 HTML;
-$pageStmt->execute(['cybercafe_promotion','Cybercafe Promotion',$cafepromotion_html,'2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['cybercafe_promotion',null,'Cybercafe Promotion',$cafepromotion_html,'2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $cybercafe_html = <<<'HTML'
 <h1>CYBER CAFÉS</h1>
@@ -825,7 +828,7 @@ The Valve Cyber Café Program is the only legal way to use Valve games in your c
 <!-- Fill out <a href="#">the sign-up form</a> and we'll get back to you right away. Once you're a member, your customers can begin playing right away.<br>-->
 <br>
 HTML;
-$pageStmt->execute(['cybercafes','Cyber Cafés',$cybercafe_html,'2003_v2,2004,2005_v1','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['cybercafes',null,'Cyber Cafés',$cybercafe_html,'2003_v2,2004,2005_v1','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $cybercafe_2005_html = <<<'HTML'
 <h1>CYBER CAFÉS</h1>
@@ -919,7 +922,7 @@ Valve has launched a new <a href="index.php?area=tourney_limited">Tournament Web
 <!-- Fill out <a href="#">the sign-up form</a> and we'll get back to you right away. Once you're a member, your customers can begin playing right away.<br>-->
 <br>
 HTML;
-$pageStmt->execute(['cybercafes','Cyber Cafés',$cybercafe_2005_html,'2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['cybercafes',null,'Cyber Cafés',$cybercafe_2005_html,'2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $cafesetup_html = <<< 'HTML'
 <h1>CAFÉ SETUP INSTRUCTIONS</h1>
@@ -977,7 +980,7 @@ Log in to Steam and sit your first customer down. Be sure to have them try the S
 
 </div>
 HTML;
-$pageStmt->execute(['cafe_setup','Cyber Café Setup Instructions',$cafesetup_html,'2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['cafe_setup', null, 'Cyber Café Setup Instructions',$cafesetup_html,'2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $features_html = <<<'HTML'
 <!-- features -->
@@ -1016,7 +1019,7 @@ xxxxxx xxxxx xxxxx x xxx xxxxxxx xxxxxx xxx xxxxxx x xxxxxx xxxxxxx. xxxxxx xxxx
 <a href="index.php?area=getsteamnow"><img src="but_getsteamnow.gif" height="24" width="124" alt="get steam now"></a><br>
 HTML;
 
-$pageStmt->execute(['features','Features',$features_html,'2003_v1,2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['features',null,'Features',$features_html,'2003_v1,2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $e3_html = <<<'HTML'
 <!-- e3 movies -->
@@ -1056,7 +1059,7 @@ Note that these movies are in Bink .exe format. If your computer has trouble pla
 </div>
 HTML;
 
-$pageStmt->execute(['e3_movies','Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['e3_movies',null,'Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $forums_html = <<<'HTML'
 <h1>FORUMS</h1>
@@ -1081,7 +1084,7 @@ $forums_html = <<<'HTML'
 <p align="center"><a href="forums/"> I agree to these terms.</a></p>
 </div>
 HTML;
-            $pageStmt->execute(['forums','Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['forums',null,'Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
             $ded_html = <<<'HTML'
 <!-- dedicated server -->
@@ -1100,7 +1103,7 @@ NOTE: This release includes only those files which have changed since the last d
 <a href="files/HLserver/mar22/czero_dedicated_server_linux_032204.tgz.torrent">Linux Dedicated Server Update</a><br>
 </div>
 HTML;
-            $pageStmt->execute(['dedicated_server','Dedicated Server update files',$ded_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['dedicated_server',null,'Dedicated Server update files',$ded_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
             $css_html = <<<'HTML'
 <!-- CS:S Beta 1 FAQ -->
@@ -1139,7 +1142,7 @@ HTML;
 <p>No.</p>
 </div>
 HTML;
-$pageStmt->execute(['css_b1','Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['css_b1',null,'Counter-Strike: Source Beta 1 FAQ',$css_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $pricing_html = <<<'HTML'
 <h1>PRICING AND LICENSING</H1>
@@ -1228,7 +1231,8 @@ Any time you'd like to host a gaming tournament or other local event, just drop 
 
 </div>
 HTML;
-$pageStmt->execute(['cybercafe_program','Cyber Café Program',$cafeprogram_html,'2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
+$pageStmt->execute(['cybercafe_program',null,'Cyber Café Program',$cafeprogram_html,'2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 
 $dirStmt = $pdo->prepare('INSERT INTO cafe_directory(url,name,phone,address,city_state,zip,ord) VALUES(?,?,?,?,?,?,?)');

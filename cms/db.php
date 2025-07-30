@@ -58,7 +58,7 @@ function cms_set_setting($key,$value){
 function cms_get_custom_page($slug,$theme=null){
     $db = cms_get_db();
     try {
-        $stmt = $db->prepare('SELECT title,content,theme,template FROM custom_pages WHERE slug=? AND status="published"');
+        $stmt = $db->prepare('SELECT page_name,title,content,theme,template FROM custom_pages WHERE slug=? AND status="published"');
         $stmt->execute([$slug]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -73,6 +73,7 @@ function cms_get_custom_page($slug,$theme=null){
             }
             unset($row['theme']);
             $row['template'] = null;
+            $row['page_name'] = null;
             return $row;
         }
         if ($e->getCode() === '42S02') return null; // table missing
@@ -295,22 +296,42 @@ function cms_get_theme_header_data($theme, string $page = ''){
     }
 
     $db = cms_get_db();
+
+    static $hasBold;
+    if ($hasBold === null) {
+        try {
+            $db->query('SELECT bold FROM theme_headers LIMIT 1');
+            $hasBold = true;
+        } catch (PDOException $e) {
+            if ($e->getCode() === '42S22') {
+                $hasBold = false;
+            } elseif ($e->getCode() === '42S02') {
+                return ['logo' => '', 'spacer' => '', 'buttons' => []];
+            } else {
+                throw $e;
+            }
+        }
+    }
+
+    $cols = 'logo,text,img,hover,depressed,url,visible,spacer' . ($hasBold ? ',bold' : '');
+
     try {
-        $stmt = $db->prepare('SELECT logo,text,img,hover,depressed,url,visible,spacer FROM theme_headers WHERE theme=? AND page=? ORDER BY ord,id');
+        $stmt = $db->prepare("SELECT $cols FROM theme_headers WHERE theme=? AND page=? ORDER BY ord,id");
         $stmt->execute([$theme, $page]);
-    } catch(PDOException $e){
-        if($e->getCode()==='42S22') {
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S22') {
             // older schema without page column
-            $stmt = $db->prepare('SELECT logo,text,img,hover,depressed,url,visible,spacer FROM theme_headers WHERE theme=? ORDER BY ord,id');
+            $stmt = $db->prepare("SELECT $cols FROM theme_headers WHERE theme=? ORDER BY ord,id");
             $stmt->execute([$theme]);
-        } elseif($e->getCode()==='42S02') {
-            return ['logo'=>'','spacer'=>'','buttons'=>[]];
+        } elseif ($e->getCode() === '42S02') {
+            return ['logo' => '', 'spacer' => '', 'buttons' => []];
         } else {
             throw $e;
         }
     }
+
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if(!$rows && $page !== ''){
+    if (!$rows && $page !== '') {
         try {
             $stmt->execute([$theme, '']);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -318,24 +339,29 @@ function cms_get_theme_header_data($theme, string $page = ''){
             // ignore if schema lacks page column
         }
     }
-    if(!$rows) {
-        $cms_theme_header_cache[$cacheKey] = ['logo'=>'','spacer'=>'','buttons'=>[]];
+
+    if (!$rows) {
+        $cms_theme_header_cache[$cacheKey] = ['logo' => '', 'spacer' => '', 'buttons' => []];
         return $cms_theme_header_cache[$cacheKey];
     }
-    $logo = $rows[0]['logo'];
-    $spacer = $rows[0]['spacer'];
+
+    $logo    = $rows[0]['logo'];
+    $spacer  = $rows[0]['spacer'];
     $buttons = [];
-    foreach($rows as $r){
+
+    foreach ($rows as $r) {
         $buttons[] = [
-            'text'=>$r['text'],
-            'img'=>$r['img'],
-            'hover'=>$r['hover'],
-            'depressed'=>$r['depressed'],
-            'url'=>$r['url'],
-            'visible'=>$r['visible']
+            'text'     => $r['text'],
+            'img'      => $r['img'],
+            'hover'    => $r['hover'],
+            'depressed'=> $r['depressed'],
+            'url'      => $r['url'],
+            'visible'  => $r['visible'],
+            'bold'     => $hasBold ? (int)$r['bold'] : 0,
         ];
     }
-    $cms_theme_header_cache[$cacheKey] = ['logo'=>$logo,'spacer'=>$spacer,'buttons'=>$buttons];
+
+    $cms_theme_header_cache[$cacheKey] = ['logo' => $logo, 'spacer' => $spacer, 'buttons' => $buttons];
     return $cms_theme_header_cache[$cacheKey];
 }
 
@@ -452,7 +478,7 @@ function cms_set_theme_setting(string $theme, string $name, $value){
         $cms_theme_config_cache[$theme][$name] = $value;
     }
 }
-function cms_nav_buttons_html($theme, string $spacer_style = '', ?string $spacer_override = null){
+function cms_nav_buttons_html($theme, string $spacer_style = '', ?string $spacer_override = null, ?string $spacer_color = null){
     $page    = cms_get_current_page();
     $data    = cms_get_theme_header_data($theme, $page);
     $buttons = $data['buttons'];
@@ -472,11 +498,23 @@ function cms_nav_buttons_html($theme, string $spacer_style = '', ?string $spacer
             $alt = htmlspecialchars($text);
             $segment = '<a href="'.$url.'"><img src="'.$img.'" alt="'.$alt.'"></a>';
         }else{
-            $title = htmlspecialchars($text);
-            $segment = '<a href="'.$url.'" title="'.$title.'">'.$title.'</a>';
+            $titleAttr = htmlspecialchars($text);
+            $label = htmlspecialchars($text);
+            if(in_array($theme, ['2002_v2','2003_v1']) && !empty($b['bold'])){
+                $label = '<b>'.$label.'</b>';
+            }
+            $segment = '<a href="'.$url.'" title="'.$titleAttr.'">'.$label.'</a>';
         }
         if(!$first && $spacer !== ''){
-            $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
+            $styleParts = [];
+            if($spacer_style){
+                $styleParts[] = $spacer_style;
+            }
+            if($spacer_color && preg_match('/^#?[0-9a-fA-F]{3,6}$/', $spacer_color)){
+                $color = ltrim($spacer_color,'#');
+                $styleParts[] = 'color:#'.$color;
+            }
+            $style = $styleParts ? ' style="'.htmlspecialchars(implode(';', $styleParts)).'"' : '';
             $out .= '<span class="navSpacer"'.$style.'>'.$spacer.'</span>';
         }
         $out .= $segment;
@@ -484,7 +522,15 @@ function cms_nav_buttons_html($theme, string $spacer_style = '', ?string $spacer
     }
     if(cms_current_admin() || isset($_COOKIE['cms_admin_token'])){
         if(!$first && $spacer !== ''){
-            $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
+            $styleParts = [];
+            if($spacer_style){
+                $styleParts[] = $spacer_style;
+            }
+            if($spacer_color && preg_match('/^#?[0-9a-fA-F]{3,6}$/', $spacer_color)){
+                $color = ltrim($spacer_color,'#');
+                $styleParts[] = 'color:#'.$color;
+            }
+            $style = $styleParts ? ' style="'.htmlspecialchars(implode(';', $styleParts)).'"' : '';
             $out .= '<span class="navSpacer"'.$style.'>'.$spacer.'</span>';
         }
         $base = cms_base_url();
@@ -492,7 +538,7 @@ function cms_nav_buttons_html($theme, string $spacer_style = '', ?string $spacer
     }
     return $out;
 }
-function cms_header_buttons_html($theme, string $spacer_style = '', ?string $spacer_override = null){
+function cms_header_buttons_html($theme, string $spacer_style = '', ?string $spacer_override = null, ?string $spacer_color = null){
     $page    = cms_get_current_page();
     $data    = cms_get_theme_header_data($theme, $page);
     $buttons = $data['buttons'];
@@ -512,11 +558,23 @@ function cms_header_buttons_html($theme, string $spacer_style = '', ?string $spa
             $alt = htmlspecialchars($text);
             $segment = '<a href="'.$url.'"><img src="'.$img.'" alt="'.$alt.'"></a>';
         }else{
-            $title = htmlspecialchars($text);
-            $segment = '<div class="globalNavItem"><a href="'.$url.'" title="'.$title.'"><span class="globalNavLink">'.$title.'</span></a></div>';
+            $titleAttr = htmlspecialchars($text);
+            $label = htmlspecialchars($text);
+            if(in_array($theme, ['2002_v2','2003_v1']) && !empty($b['bold'])){
+                $label = '<b>'.$label.'</b>';
+            }
+            $segment = '<div class="globalNavItem"><a href="'.$url.'" title="'.$titleAttr.'"><span class="globalNavLink">'.$label.'</span></a></div>';
         }
         if(!$first && $spacer !== ''){
-            $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
+            $styleParts = [];
+            if($spacer_style){
+                $styleParts[] = $spacer_style;
+            }
+            if($spacer_color && preg_match('/^#?[0-9a-fA-F]{3,6}$/', $spacer_color)){
+                $color = ltrim($spacer_color,'#');
+                $styleParts[] = 'color:#'.$color;
+            }
+            $style = $styleParts ? ' style="'.htmlspecialchars(implode(';', $styleParts)).'"' : '';
             $out .= '<span class="navSpacer"'.$style.'>'.$spacer.'</span>';
         }
         $out .= $segment;
@@ -524,7 +582,15 @@ function cms_header_buttons_html($theme, string $spacer_style = '', ?string $spa
     }
     if(cms_current_admin() || isset($_COOKIE['cms_admin_token'])){
         if(!$first && $spacer !== ''){
-            $style = $spacer_style ? ' style="'.htmlspecialchars($spacer_style).'"' : '';
+            $styleParts = [];
+            if($spacer_style){
+                $styleParts[] = $spacer_style;
+            }
+            if($spacer_color && preg_match('/^#?[0-9a-fA-F]{3,6}$/', $spacer_color)){
+                $color = ltrim($spacer_color,'#');
+                $styleParts[] = 'color:#'.$color;
+            }
+            $style = $styleParts ? ' style="'.htmlspecialchars(implode(';', $styleParts)).'"' : '';
             $out .= '<span class="navSpacer"'.$style.'>'.$spacer.'</span>';
         }
         $base = cms_base_url();
