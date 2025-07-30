@@ -479,3 +479,8 @@ HR.status	{
         margin:0 0 1rem 0; /* reset side margin                              */
     }
 }
+
+.shot-list{margin-top:10px;}
+.shot-list .shot{display:inline-block;position:relative;margin-right:5px;}
+.shot-list .shot img{width:120px;height:auto;display:block;}
+.shot-list .remove{position:absolute;top:0;right:0;background:#900;color:#fff;border:none;cursor:pointer;}
