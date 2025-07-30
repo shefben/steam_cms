@@ -12,12 +12,20 @@ function cms_news_url($id, $archive = false){
     return 'index.php?area=news' . ($archive ? '&archive=yes' : '') . '&id=' . $id;
 }
 
-function cms_get_news_settings(){
-    $def=['articles_per_page'=>10,'partial_words'=>120,'source'=>'both'];
+function cms_get_news_settings()
+{
+    $def = [
+        'articles_per_page' => 10,
+        'partial_words'     => 120,
+        'source'            => 'both',
+        'date_format'       => 'long',
+    ];
+
     return [
-        'articles_per_page'=>(int)cms_get_setting('news_articles_per_page',$def['articles_per_page']),
-        'partial_words'=>(int)cms_get_setting('news_partial_words',$def['partial_words']),
-        'source'=>cms_get_setting('news_source',$def['source'])
+        'articles_per_page' => (int) cms_get_setting('news_articles_per_page', $def['articles_per_page']),
+        'partial_words'     => (int) cms_get_setting('news_partial_words', $def['partial_words']),
+        'source'            => cms_get_setting('news_source', $def['source']),
+        'date_format'       => cms_get_setting('news_date_format', $def['date_format']),
     ];
 }
 
@@ -25,6 +33,9 @@ function cms_save_news_settings($data){
     cms_set_setting('news_articles_per_page',$data['articles_per_page']);
     cms_set_setting('news_partial_words',$data['partial_words']);
     cms_set_setting('news_source',$data['source']);
+    if(isset($data['date_format'])){
+        cms_set_setting('news_date_format',$data['date_format']);
+    }
 }
 
 function cms_render_news($type,$count=null){
@@ -70,11 +81,17 @@ function cms_render_news($type,$count=null){
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $out = '';
-    foreach($rows as $row){
-        $title = htmlspecialchars($row['title']);
+    foreach ($rows as $row) {
+        $title  = htmlspecialchars($row['title']);
         $author = htmlspecialchars($row['author']);
-        $date = htmlspecialchars($row['publish_date']);
-        $link = cms_news_url($row['id']);
+        $format = cms_get_setting('news_date_format', 'long');
+        if ($format === 'iso') {
+            $date = date('Y-m-d H:i:s', strtotime($row['publish_date']));
+        } else {
+            $date = date('F j, Y, g:i a', strtotime($row['publish_date']));
+        }
+        $date  = htmlspecialchars($date);
+        $link   = cms_news_url($row['id']);
         $content = $row['content'];
         switch($type){
             case 'full_article':
