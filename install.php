@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 publish_at DATETIME,
                 views INT DEFAULT 0,
                 content TEXT,
+                products TEXT,
                 is_official TINYINT(1) DEFAULT 1,
                 status VARCHAR(20) DEFAULT 'draft',
                 INDEX(publish_date),

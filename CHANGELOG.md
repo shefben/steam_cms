@@ -208,3 +208,4 @@ All notable changes to this project will be documented in this file.
 * Added theme_specific_content_start/End tags for conditional theme blocks
 * Added random content groups with AJAX creation
 * Expanded TAGS.md with admin and database mapping
+- News table now stores related products parsed during installation
