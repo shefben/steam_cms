@@ -188,3 +188,4 @@
 - News admin page lets you choose date format with immediate AJAX save
 - Template tag guide links each tag to its admin screen and DB table
 - News table includes products column to link articles with related games
+- Product news page filters articles by product and theme year
