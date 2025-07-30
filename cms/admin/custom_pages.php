@@ -3,8 +3,9 @@ require_once 'admin_header.php';
 
 if(isset($_GET['ajax']) && isset($_GET['edit'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['edit']);
-    $stmt=cms_get_db()->prepare('SELECT * FROM custom_pages WHERE slug=?');
-    $stmt->execute([$slug]);
+    $thm = isset($_GET['theme']) ? preg_replace('/[^a-zA-Z0-9_,]/','',$_GET['theme']) : null;
+    $stmt=cms_get_db()->prepare('SELECT * FROM custom_pages WHERE slug=? AND theme <=> ?');
+    $stmt->execute([$slug,$thm]);
     $row=$stmt->fetch(PDO::FETCH_ASSOC);
     header('Content-Type: application/json');
     echo json_encode($row);
@@ -23,11 +24,11 @@ if(isset($_POST['autosave'])){
     $template = in_array($_POST['template'] ?? '', $template_files, true) ? $_POST['template'] : null;
     $selThemes = isset($_POST['themes']) ? array_intersect($themes,$_POST['themes']) : [];
     $themeStr = $selThemes ? implode(',', $selThemes) : null;
-    $exists=$db->prepare('SELECT slug FROM custom_pages WHERE slug=?');
-    $exists->execute([$slug]);
-    if($exists->fetch()){
-        $stmt=$db->prepare('UPDATE custom_pages SET page_name=?,title=?,content=?,theme=?,template=?,updated=NOW(),status="draft" WHERE slug=?');
-        $stmt->execute([$page_name,$title,$content,$themeStr,$template,$slug]);
+    $exists=$db->prepare('SELECT id FROM custom_pages WHERE slug=? AND theme <=> ?');
+    $exists->execute([$slug,$themeStr]);
+    if($row=$exists->fetch()){
+        $stmt=$db->prepare('UPDATE custom_pages SET page_name=?,title=?,content=?,theme=?,template=?,updated=NOW(),status="draft" WHERE id=?');
+        $stmt->execute([$page_name,$title,$content,$themeStr,$template,$row['id']]);
     }else{
         $stmt=$db->prepare('INSERT INTO custom_pages(slug,page_name,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,?,NOW(),"draft")');
         $stmt->execute([$slug,$page_name,$title,$content,$themeStr,$template,date('Y-m-d H:i:s')]);
@@ -45,11 +46,11 @@ if(isset($_POST['save_page'])){
     $template = in_array($_POST['template'] ?? '', $template_files, true) ? $_POST['template'] : null;
     $selThemes = isset($_POST['themes']) ? array_intersect($themes,$_POST['themes']) : [];
     $themeStr = $selThemes ? implode(',', $selThemes) : null;
-    $exists=$db->prepare('SELECT slug FROM custom_pages WHERE slug=?');
-    $exists->execute([$slug]);
-    if($exists->fetch()){
-        $stmt=$db->prepare('UPDATE custom_pages SET page_name=?,title=?,content=?,theme=?,template=?,updated=NOW(),status="published" WHERE slug=?');
-        $stmt->execute([$page_name,$title,$content,$themeStr,$template,$slug]);
+    $exists=$db->prepare('SELECT id FROM custom_pages WHERE slug=? AND theme <=> ?');
+    $exists->execute([$slug,$themeStr]);
+    if($row=$exists->fetch()){
+        $stmt=$db->prepare('UPDATE custom_pages SET page_name=?,title=?,content=?,theme=?,template=?,updated=NOW(),status="published" WHERE id=?');
+        $stmt->execute([$page_name,$title,$content,$themeStr,$template,$row['id']]);
         cms_admin_log('Updated custom page '.$slug);
     }else{
         $stmt=$db->prepare('INSERT INTO custom_pages(slug,page_name,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,?,NOW(),"published")');
@@ -59,27 +60,30 @@ if(isset($_POST['save_page'])){
 }
 if(isset($_GET['delete'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['delete']);
-    $db->prepare('DELETE FROM custom_pages WHERE slug=?')->execute([$slug]);
-    cms_admin_log('Deleted custom page '.$slug);
+    $thm = isset($_GET['theme']) ? preg_replace('/[^a-zA-Z0-9_,]/','',$_GET['theme']) : null;
+    $db->prepare('DELETE FROM custom_pages WHERE slug=? AND theme <=> ?')->execute([$slug,$thm]);
+    cms_admin_log('Deleted custom page '.$slug.' theme '.($thm ?? 'all'));
 }
-$pages=$db->query("SELECT slug,title FROM custom_pages WHERE slug NOT LIKE '%_index' ORDER BY slug")->fetchAll(PDO::FETCH_ASSOC);
+$pages=$db->query("SELECT slug,title,theme FROM custom_pages WHERE slug NOT LIKE '%_index' ORDER BY slug")->fetchAll(PDO::FETCH_ASSOC);
 $edit=null;
 if(isset($_GET['edit'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['edit']);
-    $stmt=$db->prepare('SELECT * FROM custom_pages WHERE slug=?');
-    $stmt->execute([$slug]);
+    $thm = isset($_GET['theme']) ? preg_replace('/[^a-zA-Z0-9_,]/','',$_GET['theme']) : null;
+    $stmt=$db->prepare('SELECT * FROM custom_pages WHERE slug=? AND theme <=> ?');
+    $stmt->execute([$slug,$thm]);
     $edit=$stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
 <h2>Custom Pages</h2>
 <button id="addBtn">Add Custom Page</button>
 <table>
-<tr><th>Slug</th><th>Title</th><th>Actions</th></tr>
+<tr><th>Slug</th><th>Themes</th><th>Title</th><th>Actions</th></tr>
 <?php foreach($pages as $p): ?>
 <tr><td><?php echo htmlspecialchars($p['slug']); ?></td>
+<td><?php echo htmlspecialchars($p['theme']); ?></td>
 <td><?php echo htmlspecialchars($p['title']); ?></td>
-<td><a href="?edit=<?php echo urlencode($p['slug']); ?>" class="btn btn-primary btn-small">Edit</a>
- <a href="?delete=<?php echo urlencode($p['slug']); ?>" class="btn btn-danger btn-small" onclick="return confirm('Delete?');">Delete</a></td></tr>
+<td><a href="?edit=<?php echo urlencode($p['slug']); ?>&amp;theme=<?php echo urlencode($p['theme']); ?>" class="btn btn-primary btn-small">Edit</a>
+ <a href="?delete=<?php echo urlencode($p['slug']); ?>&amp;theme=<?php echo urlencode($p['theme']); ?>" class="btn btn-danger btn-small" onclick="return confirm('Delete?');">Delete</a></td></tr>
 <?php endforeach; ?>
 </table>
 <div id="editor" style="display:none;border:1px solid #333;padding:10px;background:#eee;">
@@ -117,14 +121,14 @@ function autoSave(){
     data.push({name:'autosave',value:1});
     data.push({name:'page_name',value:$('#page_name').val()});
     data.push({name:'content',value:CKEDITOR.instances.content.getData()});
-    return $.post('custom_pages.php<?php echo isset($edit)?'?edit='.urlencode($edit['slug']):''; ?>',data,function(res){
+    return $.post('custom_pages.php<?php if(isset($edit)){ echo '?edit='.urlencode($edit['slug']).'&theme='.urlencode($edit['theme']??''); } ?>',data,function(res){
         $('#lastSaved').text('Last saved '+res.time);
     },'json');
 }
 setInterval(autoSave,30000);
 <?php if($edit): ?>
 $('#restoreDraft').show().on('click',function(){
-    $.get('custom_pages.php?edit=<?php echo urlencode($edit['slug']); ?>&ajax=1',function(d){
+    $.get('custom_pages.php?edit=<?php echo urlencode($edit['slug']); ?>&theme=<?php echo urlencode($edit['theme'] ?? ''); ?>&ajax=1',function(d){
         $('#page_name').val(d.page_name||'');
         $('#title').val(d.title);
         $('#template').val(d.template||'');

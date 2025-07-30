@@ -34,18 +34,34 @@ if ($type === 'page') {
         exit;
     }
     $db   = cms_get_db();
-    $stmt = $db->prepare('SELECT title,content,template FROM custom_pages WHERE slug=?');
+    $stmt = $db->prepare('SELECT title,content,template,theme FROM custom_pages WHERE slug=?');
     $stmt->execute([$slug]);
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$row) {
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (!$rows) {
         echo 'Page not found.';
         exit;
     }
-    $template = $row['template'] ?: 'default.twig';
+    $match = null;
+    $fallback = null;
+    foreach ($rows as $row) {
+        if ($row['theme'] !== null && $row['theme'] !== '') {
+            $themes = array_map('trim', explode(',', $row['theme']));
+            if (in_array($theme, $themes, true)) {
+                $match = $row;
+                break;
+            }
+        } elseif ($fallback === null) {
+            $fallback = $row;
+        }
+    }
+    if ($match === null) {
+        $match = $fallback;
+    }
+    $template = $match['template'] ?: 'default.twig';
     $tpl      = cms_theme_layout($template, $theme);
     cms_render_template_theme($tpl, $theme, [
-        'page_title' => $row['title'],
-        'content'    => $row['content'],
+        'page_title' => $match['title'],
+        'content'    => $match['content'],
     ]);
     exit;
 }
