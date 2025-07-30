@@ -510,6 +510,7 @@ HTML;
                 ['file' => 'main_content.php','label' => 'Main Content','visible' => 1],
                 ['file' => 'news.php','label' => 'News','visible' => 1],
                 ['file' => 'faq.php','label' => 'FAQ','visible' => 1],
+                ['file' => 'map_contest_submissions.php','label' => 'Map Contest Submissions','visible' => 1],
                 ['file' => 'cafe_signups.php','label' => 'Cafe Signup Requests','visible' => 1],
                 ['file' => 'cafe_directory.php','label' => 'Cafe Directory','visible' => 1],
                 ['file' => 'cafe_pricing.php','label' => 'Cafe Pricing','visible' => 1],

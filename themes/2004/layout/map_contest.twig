@@ -1,9 +1,10 @@
 {% extends 'layout/default.twig' %}
 {% block content %}
-<h1>INVALID AREA</h1>
-<h2>PERHAPS <em>YOU MISTYPED?</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
-<div class="narrower">
-<br>
-Please select an option from the top menu.
+<div id="contest-container">
+    {% include 'partials/map_contest_page1.twig' %}
+    {% include 'partials/map_contest_page2.twig' %}
+    {% include 'partials/map_contest_page3.twig' %}
 </div>
+<script src="{{ THEME_URL }}/js/jquery.min.js"></script>
+<script src="{{ THEME_URL }}/js/map_contest.js"></script>
 {% endblock %}
