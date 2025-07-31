@@ -211,3 +211,8 @@ All notable changes to this project will be documented in this file.
 - News table now stores related products parsed during installation
 - Implemented map contest submission pages and admin interface.
 - Added Counter-Strike: Source product news page with database-driven pagination
+- Added Page Selection Management admin page with radio options for legacy forms
+- Implemented Download System Management for files and settings
+- Added mirror host URLs with 10-entry limit and seeded default downloads
+- Added default installer mirrors and updated page selection images
+- Removed binary download thumbnails from version control

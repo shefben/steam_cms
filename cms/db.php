@@ -160,6 +160,96 @@ function cms_get_download_page(string $theme): ?array
     }
 }
 
+function cms_get_cafe_signup_page(string $theme): ?string
+{
+    $db = cms_get_db();
+    $default = '2004_signup_v1';
+    $ver = cms_get_setting('cafe_signup_page_' . $theme, $default);
+    try {
+        $stmt = $db->prepare('SELECT content FROM cafe_signup_pages WHERE version=?');
+        $stmt->execute([$ver]);
+        $content = $stmt->fetchColumn();
+        return $content !== false ? $content : null;
+    } catch (PDOException $e) {
+        if ($e->getCode()==='42S02') return null;
+        throw $e;
+    }
+}
+
+function cms_get_cheat_form_page(string $theme): ?string
+{
+    $db = cms_get_db();
+    $default = '2004_cheat_v1';
+    $ver = cms_get_setting('cheat_form_page_' . $theme, $default);
+    try {
+        $stmt = $db->prepare('SELECT content FROM cheat_form_pages WHERE version=?');
+        $stmt->execute([$ver]);
+        $content = $stmt->fetchColumn();
+        return $content !== false ? $content : null;
+    } catch (PDOException $e) {
+        if ($e->getCode()==='42S02') return null;
+        throw $e;
+    }
+}
+
+function cms_get_cd_account_page(string $theme): ?string
+{
+    $db = cms_get_db();
+    $default = '2004_cd_v1';
+    $ver = cms_get_setting('cd_account_page_' . $theme, $default);
+    try {
+        $stmt = $db->prepare('SELECT content FROM cd_account_pages WHERE version=?');
+        $stmt->execute([$ver]);
+        $content = $stmt->fetchColumn();
+        return $content !== false ? $content : null;
+    } catch (PDOException $e) {
+        if ($e->getCode()==='42S02') return null;
+        throw $e;
+    }
+}
+
+function cms_get_download_files(int $limit = 10, int $offset = 0): array
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('SELECT * FROM download_files ORDER BY id LIMIT ? OFFSET ?');
+    $stmt->bindValue(1, $limit, PDO::PARAM_INT);
+    $stmt->bindValue(2, $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $mStmt = $db->prepare('SELECT host,url FROM download_file_mirrors WHERE file_id=? ORDER BY ord,id');
+    foreach ($files as &$f) {
+        $mStmt->execute([$f['id']]);
+        $f['mirrors'] = $mStmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    return $files;
+}
+
+function cms_get_all_download_files(): array
+{
+    $db = cms_get_db();
+    $files = $db->query('SELECT * FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
+    $mStmt = $db->prepare('SELECT host,url FROM download_file_mirrors WHERE file_id=? ORDER BY ord,id');
+    foreach ($files as &$f) {
+        $mStmt->execute([$f['id']]);
+        $f['mirrors'] = $mStmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    return $files;
+}
+
+function cms_insert_support_request(string $page, array $fields, string $lang = 'en'): void
+{
+    $db = cms_get_db();
+    $vals = array_fill(0, 10, null);
+    foreach ($fields as $i => $val) {
+        if ($i < 10) {
+            $vals[$i] = $val;
+        }
+    }
+    $stmt = $db->prepare('INSERT INTO support_requests(page,language,f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,created) '
+        .'VALUES(?,?,?,?,?,?,?,?,?,?,?,NOW())');
+    $stmt->execute(array_merge([$page,$lang], $vals));
+}
+
 function cms_record_visit($page){
     $db = cms_get_db();
     $date = date('Y-m-d');
