@@ -211,3 +211,5 @@ All notable changes to this project will be documented in this file.
 - News table now stores related products parsed during installation
 - Implemented map contest submission pages and admin interface.
 - Added Counter-Strike: Source product news page with database-driven pagination
+- Added tournament management admin page and dynamic tournament calendar page.
+- Removed obsolete footer from tourney_limited page.
