@@ -1181,6 +1181,16 @@ $insertArray[] = [
     date('Y-m-d H:i:s')
 ];
 
+$insertArray[] = [
+    'tourney_limited',
+    'LIMITED GAME TOURNAMENT LICENSES',
+    file_get_contents(__DIR__.'/../html/tourney_limited.html'),
+    '2004,2005_v1',
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+
 $stmtcp = $pdo->prepare(
     'INSERT INTO custom_pages
     (slug, title, content, theme, template, created, updated, status)

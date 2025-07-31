@@ -134,7 +134,7 @@ if ($current !== '' && isset($_GET['edit'])) {
 </form>
 <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-<?php if (isset($_GET['edit'])): ?>
+<?php if (isset($_GET['edit'])) { ?>
 <script>
 function addEditor(id,content){
     var div=$('<div class="entry" data-id="'+(id||'new')+'">');
@@ -166,7 +166,7 @@ $(function(){
     }).trigger('input');
 });
 </script>
-<?php else: ?>
+<?php } else { ?>
 <script>
 CKEDITOR.replace('new-content');
 $('#add-random-btn').on('click',function(e){e.preventDefault();$('#add-form').slideToggle('fast');});
@@ -179,5 +179,5 @@ $('#save-new').on('click',function(){
     },'json');
 });
 </script>
-<?php endif; ?>
+<?php } ?>
 <?php include 'admin_footer.php'; ?>
