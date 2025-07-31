@@ -190,3 +190,5 @@
 - News table includes products column to link articles with related games
 - Added basic map contest submission form with multi-page AJAX flow and admin management.
 - Product news page filters articles by product and theme year
+- Tournament management allows admins to schedule events with calendars showing current and upcoming months.
+- "tourney_limited" custom page uses dynamic calendar and omits legacy footer.
