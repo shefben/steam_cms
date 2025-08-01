@@ -190,3 +190,14 @@
 - News table includes products column to link articles with related games
 - Added basic map contest submission form with multi-page AJAX flow and admin management.
 - Product news page filters articles by product and theme year
+- Page Version Management admin panel toggles legacy page versions
+- Download System Management with file and settings admin pages
+- Updated download mirrors to store host names and URLs; management UI supports up to 10 mirrors
+- Default Steam installer seeds with named mirror links
+- Removed thumbnail binaries to keep repository lightweight
+- Download pages dynamically render "Get Steam" button text via text_styler
+- Downloads can be restricted per theme and optionally use custom Steam buttons
+- Sidebar always includes a Page Version Management link
+- Download descriptions are edited with a simple WYSIWYG interface
+- Download lists filter dedicated server/update tool entries per page version
+- Install script populates all 2004 Steam download titles with full mirror lists

@@ -1,9 +1,71 @@
 <?php
 require_once __DIR__ . '/cms/db.php';
 $page_title = 'Cyber Café Sign-up';
+$theme = cms_get_setting('theme','2004');
 $db = cms_get_db();
 $errors = [];
 function field($n){return trim($_POST[$n] ?? '');}
+$page_html = cms_get_cafe_signup_page($theme);
+if($theme === '2004' && $page_html){
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+        if(isset($_POST['form_company_name'])){
+            $_POST['company'] = $_POST['form_company_name'] ?? '';
+            $_POST['firstname'] = $_POST['form_company_contact_first'] ?? ($_POST['form_company_contact'] ?? '');
+            $_POST['lastname'] = $_POST['form_company_contact_last'] ?? '';
+            $_POST['address1'] = $_POST['form_company_add1'] ?? '';
+            $_POST['address2'] = $_POST['form_company_add2'] ?? '';
+            $_POST['city'] = $_POST['form_company_city'] ?? '';
+            $_POST['state'] = $_POST['form_company_state'] ?? '';
+            $_POST['country'] = $_POST['form_company_country'] ?? '';
+            $_POST['zip'] = $_POST['form_company_zip'] ?? '';
+            $_POST['locations'] = $_POST['form_cafe_locations'] ?? '';
+            $_POST['seats'] = $_POST['form_cafe_stations'] ?? '';
+            $_POST['email'] = $_POST['form_admin_email'] ?? '';
+            $_POST['phone'] = $_POST['form_admin_phone'] ?? '';
+            $_POST['fax'] = $_POST['form_admin_fax'] ?? '';
+        }
+        $data = [
+            'company'=>field('company'),
+            'address1'=>field('address1'),
+            'address2'=>field('address2'),
+            'city'=>field('city'),
+            'state'=>field('state'),
+            'zip'=>field('zip'),
+            'country'=>field('country'),
+            'firstname'=>field('firstname'),
+            'lastname'=>field('lastname'),
+            'email'=>field('email'),
+            'phone'=>field('phone'),
+            'fax'=>field('fax'),
+            'locations'=>field('locations'),
+            'seats'=>field('seats'),
+            'prepaid_hours'=>field('prepaid_hours'),
+            'ship_name'=>field('ship_name'),
+            'ship_address1'=>field('ship_address1'),
+            'ship_address2'=>field('ship_address2'),
+            'ship_city'=>field('ship_city'),
+            'ship_state'=>field('ship_state'),
+            'ship_zip'=>field('ship_zip'),
+            'ship_country'=>field('ship_country'),
+            'directory'=>field('directory'),
+            'contact_email'=>field('contact_email'),
+            'ship_phone'=>field('ship_phone'),
+            'wire_transfer'=>field('wire_transfer')? 'yes':'no'
+        ];
+        $cols = implode(',',array_keys($data));
+        $place = rtrim(str_repeat('?,',count($data)),',');
+        $stmt=$db->prepare("INSERT INTO ccafe_registration(created,$cols) VALUES (NOW(),$place)");
+        $stmt->execute(array_values($data));
+        include 'cms/header.php';
+        echo '<p>Thank you for registering!</p>';
+        include 'cms/footer.php';
+        return;
+    }
+    include 'cms/header.php';
+    echo $page_html;
+    include 'cms/footer.php';
+    return;
+}
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $data = [
         'company'=>field('company'),

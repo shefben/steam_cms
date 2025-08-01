@@ -1,4 +1,30 @@
-<?php $page_title = 'Cheat Form'; include 'cms/header.php'; ?>
+<?php
+$page_title = 'Cheat Form';
+require_once __DIR__ . '/cms/db.php';
+$theme = cms_get_setting('theme','2004');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $fields = [
+        $_POST['steamEmail'] ?? null,
+        $_POST['validEmail'] ?? null,
+        $_POST['steamId'] ?? null,
+        $_POST['cdKey'] ?? null,
+        $_POST['operatingSystem'] ?? null,
+        $_POST['plea'] ?? null,
+    ];
+    cms_insert_support_request('cheat_form', $fields, 'en');
+    include 'cms/header.php';
+    echo '<p>Thank you for submitting your request.</p>';
+    include 'cms/footer.php';
+    return;
+}
+$page_html = cms_get_cheat_form_page($theme);
+if ($page_html) {
+    include 'cms/header.php';
+    echo $page_html;
+    include 'cms/footer.php';
+    return;
+}
+include 'cms/header.php'; ?>
 <!-- forums -->
 
 <script>

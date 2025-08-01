@@ -211,3 +211,15 @@ All notable changes to this project will be documented in this file.
 - News table now stores related products parsed during installation
 - Implemented map contest submission pages and admin interface.
 - Added Counter-Strike: Source product news page with database-driven pagination
+- Added Page Version Management admin page with radio options for legacy forms
+- Implemented Download System Management for files and settings
+- Added mirror host URLs with 10-entry limit and seeded default downloads
+- Added default installer mirrors and updated page selection images
+- Removed binary download thumbnails from version control
+- Dynamic button rendering for 2004 download pages using text_styler
+- Download manager supports theme visibility and optional Steam button text
+- Default download files now pre-select visibility based on theme and
+  getsteamnow version logic filters dedicated server and update tool entries
+- Admin sidebar always shows a Page Version Management link
+- Download management uses a simple WYSIWYG editor for descriptions and the Page Version Management screen lists all legacy download options
+- Seeded the complete 2004 Steam installer catalog with titles, sizes, and mirror hosts during installation
