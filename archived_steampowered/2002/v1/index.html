@@ -1,7 +1,7 @@
-<html>
-<head>
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>News</title>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+
 <script language="JavaScript">
 <!--
 function MM_preloadImages() { //v3.0
@@ -30,17 +30,8 @@ function MM_goToURL() { //v3.0
 function MM_swapImgRestore() { //v3.0
   var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
 }
-//-->
-</script>
-<style type="text/css">
-<!--
-a {color: #E4C55A; text-decoration: none}
-a:hover {color: #F9DF84; text-decoration:;
-font-weight: regular}
--->
-</style>
-<csscriptdict>
-<script><!--
+
+// Navigation functions
 CSInit = new Array;
 function CSScriptInit() {
 if(typeof(skipPage) != "undefined") { if(skipPage) return; }
@@ -50,36 +41,28 @@ for(var i=0;i<CSInit.length;i++)
 CSAction2(CSInit, idxArray);}
 CSAg = window.navigator.userAgent; CSBVers = parseInt(CSAg.charAt(CSAg.indexOf("/")+1),10);
 function IsIE() { return CSAg.indexOf("MSIE") > 0;}
-function CSIEStyl(s) { return document.all.tags("div")[s].style; }
-function CSNSStyl(s) { return CSFindElement(s,0); }
-function CSFindElement(n,ly) { if (CSBVers < 4) return document[n];
-	var curDoc = ly ? ly.document : document; var elem = curDoc[n];
-	if (!elem) { for (var i=0;i<curDoc.layers.length;i++) {
-		elem = CSFindElement(n,curDoc.layers[i]); if (elem) return elem; }}
-	return elem;
-}
 
 function CSClickReturn () {
 	var bAgent = window.navigator.userAgent; 
 	var bAppName = window.navigator.appName;
 	if ((bAppName.indexOf("Explorer") >= 0) && (bAgent.indexOf("Mozilla/3") >= 0) && (bAgent.indexOf("Mac") >= 0))
-		return true; // dont follow link
-	else return false; // dont follow link
+		return true;
+	else return false;
 }
 
 function CSButtonReturn () {
 	var bAgent = window.navigator.userAgent; 
 	var bAppName = window.navigator.appName;
 	if ((bAppName.indexOf("Explorer") >= 0) && (bAgent.indexOf("Mozilla/3") >= 0) && (bAgent.indexOf("Mac") >= 0))
-		return false; // follow link
-	else return true; // follow link
+		return false;
+	else return true;
 }
 
 CSIm = new Object();
 function CSIShow(n,i) {
 	if (document.images) {
 		if (CSIm[n]) {
-			var img = (!IsIE()) ? CSFindElement(n,0) : document[n];
+			var img = (!IsIE()) ? document.getElementById(n) : document[n];
 			if (img && typeof(CSIm[n][i].src) != "undefined") {img.src = CSIm[n][i].src;}
 			if(i != 0)
 				self.status = CSIm[n][3];
@@ -134,180 +117,237 @@ function CSAction2(fct, array) {
 }
 CSAct = new Object;
 
+CSInit[CSInit.length] = new Array(CSILoad,'button','images/Tabs-Home_out.png','images/Tabs-Home_over.png','images/Tabs-Home_in.png','');
+CSInit[CSInit.length] = new Array(CSILoad,'button2','images/Tabs-Games_Avail_out.png','images/Tabs-Games_Avail_over.png','images/Tabs-Games_Avail_in.png','');
+CSInit[CSInit.length] = new Array(CSILoad,'button3','images/Tabs-Support_out.png','images/Tabs-Support_over.png','images/Tabs-Support_in.png','');
+CSInit[CSInit.length] = new Array(CSILoad,'button4','images/Tabs-Message_Board_out.png','images/Tabs-Message_Board_over.png','images/Tabs-Message_Board_in.png','');
+CSInit[CSInit.length] = new Array(CSILoad,'button5','images/Tabs-FAQ_out.png','images/Tabs-FAQ_over.png','images/Tabs-FAQ_in.png','');
+//-->
+</script>
+<style type="text/css">
+<!--
+a {color: #E4C55A; text-decoration: none}
+a:hover {color: #F9DF84; text-decoration:;
+font-weight: regular}
 
-// --></script>
-</csscriptdict>
-<csactiondict>
-<script><!--
-CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button',/*URL*/'images/Tabs-Home_out.png',/*URL*/'images/Tabs-Home_over.png',/*URL*/'images/Tabs-Home_in.png','');
-CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button2',/*URL*/'images/Tabs-Games_Avail_out.png',/*URL*/'images/Tabs-Games_Avail_over.png',/*URL*/'images/Tabs-Games_Avail_in.png','');
-CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button3',/*URL*/'images/Tabs-Support_out.png',/*URL*/'images/Tabs-Support_over.png',/*URL*/'images/Tabs-Support_in.png','');
-CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button4',/*URL*/'images/Tabs-Message_Board_out.png',/*URL*/'images/Tabs-Message_Board_over.png',/*URL*/'images/Tabs-Message_Board_in.png','');
-CSInit[CSInit.length] = new Array(CSILoad,/*CMP*/'button5',/*URL*/'images/Tabs-FAQ_out.png',/*URL*/'images/Tabs-FAQ_over.png',/*URL*/'images/Tabs-FAQ_in.png','');
+body {
+    margin: 0;
+    padding: 0;
+    background-color: silver;
+    font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+}
+-->
+</style>
+<style type="text/css" id="operaUserStyle"></style></head>
+<body onload="CSScriptInit();MM_preloadImages('images/News.png','images/Games.png','images/Support.png','images/Message.png','images/About.png')" bgcolor="silver">
 
-// --></script>
-</csactiondict>
-</head>
-<body alink="#b8c2ae" bgcolor="silver" link="#b8c2ae" onload="CSScriptInit();MM_preloadImages('images/News.png','images/Games.png','images/Support.png','images/Message.png','images/About.png')" vlink="#b8c2ae">
-<table border="0" cellpadding="5" cellspacing="2" height="100%" width="100%">
-<tr align="CENTER" valign="CENTER">
-<td>
-<table bgcolor="silver" border="0" cellpadding="0" cellspacing="0" cool="" gridx="20" gridy="20" height="1367" showgridx="" showgridy="" width="681">
-<tr height="116">
-<td align="left" colspan="15" height="116" valign="top" width="680" xpos="0"><img border="0" height="116" src="images/Steam-Logo.png" width="677"/></td>
-<td height="116" width="1"><spacer height="116" type="block" width="1"/></td>
-</tr>
-<tr height="24">
-<td align="left" colspan="3" height="24" valign="top" width="28" xpos="0"><img border="0" height="24" src="images/Tabs-Home_Border.png" width="28"/></td>
-<td align="left" colspan="2" height="24" valign="top" width="62" xpos="28"><csobj cl="images/Tabs-Home_in.png" h="24" ht="images/Tabs-Home_over.png" t="Button" w="62"><a href="Home.htm" onclick="CSIShow(/*CMP*/'button',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button',0)" onmouseover="return CSIShow(/*CMP*/'button',1)" target="_top"><img border="0" height="24" name="button" src="images/Tabs-Home_out.png" width="62"/></a></csobj></td>
-<td align="left" colspan="2" height="24" valign="top" width="60" xpos="90"><img border="0" height="24" src="images/Tabs-News_in.png" width="60"/></td>
-<td align="left" height="24" valign="top" width="129" xpos="150"><csobj cl="images/Tabs-Games_Avail_in.png" h="24" ht="images/Tabs-Games_Avail_over.png" t="Button" w="129"><a href="Games_Available/Games.htm" onclick="CSIShow(/*CMP*/'button2',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button2',0)" onmouseover="return CSIShow(/*CMP*/'button2',1)" target="_top"><img border="0" height="24" name="button2" src="images/Tabs-Games_Avail_out.png" width="129"/></a></csobj></td>
-<td align="left" colspan="2" height="24" valign="top" width="76" xpos="279"><csobj cl="images/Tabs-Support_in.png" h="24" ht="images/Tabs-Support_over.png" t="Button" w="76"><a href="BetaSupport/support.htm" onclick="CSIShow(/*CMP*/'button3',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button3',0)" onmouseover="return CSIShow(/*CMP*/'button3',1)" target="_top"><img border="0" height="24" name="button3" src="images/Tabs-Support_out.png" width="76"/></a></csobj></td>
-<td align="left" height="24" valign="top" width="122" xpos="355"><csobj cl="images/Tabs-Message_Board_in.png" h="24" ht="images/Tabs-Message_Board_over.png" t="Button" w="122"><a href="http://www.chatbear.com/cgi-bin/board.pl?boardid=1041" onclick="CSIShow(/*CMP*/'button4',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button4',0)" onmouseover="return CSIShow(/*CMP*/'button4',1)" target="_top"><img border="0" height="24" name="button4" src="images/Tabs-Message_Board_out.png" width="122"/></a></csobj></td>
-<td align="left" height="24" valign="top" width="64" xpos="477"><csobj cl="images/Tabs-FAQ_in.png" h="24" ht="images/Tabs-FAQ_over.png" t="Button" w="64"><a href="Faq/FAQ.htm" onclick="CSIShow(/*CMP*/'button5',2);return CSButtonReturn()" onmouseout="return CSIShow(/*CMP*/'button5',0)" onmouseover="return CSIShow(/*CMP*/'button5',1)" target="_top"><img border="0" height="24" name="button5" src="images/Tabs-FAQ_out.png" width="64"/></a></csobj></td>
-<td align="left" colspan="3" height="24" valign="top" width="139" xpos="541"><img border="0" height="24" src="images/Tabs-FAQ_Border.png" width="136"/></td>
-<td height="24" width="1"><spacer height="24" type="block" width="1"/></td>
-</tr>
-<tr height="90">
-<td colspan="2" height="1097" rowspan="2" width="19" background="images/Page-Side_Left.png"><spacer height="1097" type="block" width="19"/></td>
-<td align="left" colspan="12" height="90" valign="top" width="632" xpos="19">
-<table bgcolor="#6a6f82" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="90" showgridx="" showgridy="" width="632">
-<tr height="24">
-<td height="89" rowspan="2" width="204"><spacer height="89" type="block" width="204"/></td>
-<td height="24" width="427"><spacer height="24" type="block" width="427"/></td>
-<td height="24" width="1"><spacer height="24" type="block" width="1"/></td>
-</tr>
-<tr height="65">
-<td align="left" height="65" valign="top" width="427" xpos="204"><img border="0" height="40" src="images/PageTitles-News.png" width="19"/></td>
-<td height="65" width="1"><spacer height="65" type="block" width="1"/></td>
-</tr>
-<tr cntrlrow="" height="1">
-<td height="1" width="204"><spacer height="1" type="block" width="204"/></td>
-<td height="1" width="427"><spacer height="1" type="block" width="427"/></td>
-<td height="1" width="1"><spacer height="1" type="block" width="1"/></td>
-</tr>
-</table>
-</td>
-<td height="1097" rowspan="2" width="29" background="images/Page-Side_right.png"><spacer height="1097" type="block" width="29"/></td>
-<td height="90" width="1"><spacer height="90" type="block" width="1"/></td>
-</tr>
-<tr height="1007">
-<td align="left" colspan="2" height="1007" valign="top" width="68" xpos="19">
-<table bgcolor="#6a6f82" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="1007" showgridx="" showgridy="" width="68">
+<center>
+<table border="0" cellpadding="0" cellspacing="0" width="681">
+    <!-- Header Logo -->
+    <tbody><tr>
+        <td colspan="3" width="681" height="116">
+            <img src="images/Steam-Logo.png" width="678" height="116" border="0">
+        </td>
+    </tr>
+    
+    <!-- Navigation Bar -->
+    <tr>
+        <td colspan="3" width="681" height="24">
+            <table border="0" cellpadding="0" cellspacing="0" width="681">
+                <tbody><tr>
+                    <td width="28" height="24">
+                        <img src="images/Tabs-Home_Border.png" width="28" height="24" border="0">
+                    </td>
+                    <td width="62" height="24">
+                        <a href="Home.htm" onclick="CSIShow('button',2);return CSButtonReturn()" onmouseout="return CSIShow('button',0)" onmouseover="return CSIShow('button',1)" target="_top">
+                            <img border="0" height="24" name="button" id="button" src="images/Tabs-Home_out.png" width="62">
+                        </a>
+                    </td>
+                    <td width="60" height="24">
+                        <img src="images/Tabs-News_in.png" width="60" height="24" border="0">
+                    </td>
+                    <td width="129" height="24">
+                        <a href="Games_Available/Games.htm" onclick="CSIShow('button2',2);return CSButtonReturn()" onmouseout="return CSIShow('button2',0)" onmouseover="return CSIShow('button2',1)" target="_top">
+                            <img border="0" height="24" name="button2" id="button2" src="images/Tabs-Games_Avail_out.png" width="129">
+                        </a>
+                    </td>
+                    <td width="76" height="24">
+                        <a href="BetaSupport/support.htm" onclick="CSIShow('button3',2);return CSButtonReturn()" onmouseout="return CSIShow('button3',0)" onmouseover="return CSIShow('button3',1)" target="_top">
+                            <img border="0" height="24" name="button3" id="button3" src="images/Tabs-Support_out.png" width="76">
+                        </a>
+                    </td>
+                    <td width="122" height="24">
+                        <a href="http://www.chatbear.com/cgi-bin/board.pl?boardid=1041" onclick="CSIShow('button4',2);return CSButtonReturn()" onmouseout="return CSIShow('button4',0)" onmouseover="return CSIShow('button4',1)" target="_top">
+                            <img border="0" height="24" name="button4" id="button4" src="images/Tabs-Message_Board_out.png" width="122">
+                        </a>
+                    </td>
+                    <td width="64" height="24">
+                        <a href="Faq/FAQ.htm" onclick="CSIShow('button5',2);return CSButtonReturn()" onmouseout="return CSIShow('button5',0)" onmouseover="return CSIShow('button5',1)" target="_top">
+                            <img border="0" height="24" name="button5" id="button5" src="images/Tabs-FAQ_out.png" width="64">
+                        </a>
+                    </td>
+<td height="24">
+                        <img src="images/Tabs-FAQ_Border.png" width="137" height="24" border="0">
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+    
+    <!-- Content Area -->
+    <tr>
+        <td width="19" height="1097" background="images/Page-Side_Left.png" valign="top">
+            <img src="images/Page-Side_Left.png" width="19" height="1" border="0">
+        </td>
+        <td width="635" height="1097" bgcolor="#6a6f82" valign="top">
+            <!-- Content Header -->
+            <table border="0" cellpadding="0" cellspacing="0" width="635">
+                <tbody><tr>
+                    <td width="635" height="90" bgcolor="#6a6f82" align="center" valign="middle">
+                        <br>
+<!-- start page title -->
+<!-- end page title -->
+                    </td>
+                </tr>
+            </tbody></table>
+            
+            <!-- Start Body -->
+            <table border="0" cellpadding="0" cellspacing="0" width="635">
+                <tbody><tr>
+                    <td width="68" height="1007" bgcolor="#6a6f82" valign="top">
+                        <img src="spacer.gif" width="68" height="1" border="0">
+                    </td>
+                    <td width="496" height="1007" bgcolor="#6a6f82" valign="top">
+                        <!-- start News Content -->
+                        <font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3">
+                            <b>*** SERVER ARE ONLINE!&nbsp;***</b><br><br>
+                            
+                            <b>*DoD beta 2.0 is available*</b><br><br>
+                            
+                            <b>Become A Beta Tester!</b><br>
+                            If you're interested in becoming a Beta Tester, fill out our <a href="http://beta.valvesoftware.com/" target="_new">Survey</a><br><br>
+                            
+                            <b>From the Dev Team:</b><br>
+                            <b>Planned Changes/Additions:</b><br>
+                        </font>
+                        <font face="Times New Roman,Georgia,Times" size="3" color="white">
+                            --------------------------<br>
+                            - Hostage AI upgrade<br>
+                            - New Counter-Strike hostage rescue map<br>
+                            - Vote/Kick<br>
+                            - General code optimization pass (client and server)<br>
+                            - Anti-Cheating system incorporated<br>
+                            - Allow server administrators to bind server to specific IP<br>
+                            - Allow server administrators to bind server to specific port<br>
+                            - Allow command line switches for server administrators<br>
+                            - Rework Para accuracy<br>
+                            - Make left and right handed models switchable on the fly<br>
+                            - Incorporate Tracker into Steam beta<br>
+                            - Remove "Use Shooting" from Counter-Strike<br>
+                            - Remove speed penalty when falling off an object.Will only apply when jumping.<br>
+                            - Allow muting of other player's text messages.<br><br>
+                        </font>
+                        
+                        <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3" color="white">
+                            <b>Planned Bug fixes:</b><br>
+                        </font>
+                        <font face="Times New Roman,Georgia,Times" size="3" color="white">
+                            --------------------------<br>
+                            - Default voice to use DirectSound by default<br>
+                            - Allow Steam to autoupdate itself<br>
+                            - Fix demo playback.<br>
+                            - Fix bug that allows a player automatically chosen as the VIP to keep their weapon.<br>
+                            - Fix exploit that allows Counter-Terrorists to look like Terrorists in certain maps.<br>
+                            - Fix missing entries in the spectator menu.<br><br>
+                        </font>
+                        
+                        <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3" color="white">
+                            <b>Recent Changes/Additions:</b><br>
+                        </font>
+                        <font face="Times New Roman,Georgia,Times" size="3" color="white">
+                            --------------------------<br>
+                            - HLTV UI upgrade<br>
+                            - Returned crosshairs for C4 and the knife<br>
+                            - Added de_chateau to mapcycle<br><br>
+                        </font>
+                        
+                        <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3" color="white">
+                            <b>Recent Bugfixes:</b><br>
+                        </font>
+                        <font face="Times New Roman,Georgia,Times" size="3" color="white">
+                            --------------------------<br>
+                            - Fixed jittery jump bug<br>
+                            - Fixed server list filtering bug in which the game filter attribute was lost<br>
+                            - Fixed string 595 error when clicking server list filter button<br>
+                            - Fixed problem with Terrorist and Counter-Terrorist menus not looking correct after changing teams
+                        </font>
+    <!-- end Content -->
+                    </td>
+                    <td width="71" height="1007" bgcolor="#6a6f82" valign="top">
+                        <img src="spacer.gif" width="71" height="1" border="0">
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+        <td width="72" height="1097" valign="top" style="background-image: url('images/Page-Side_right.png'); background-repeat: repeat-y;">
+            <img src="images/Page-Side_right.png" width="23" height="1" border="0">
+        </td>
+    </tr>
+    
+    <!-- Bottom Section -->
+    <tr>
+        <td colspan="3" width="681" height="103">
+            <table border="0" cellpadding="0" cellspacing="0" width="681">
+                <tbody><tr>
+                    <td width="678" height="43">
+                        <img src="images/Page-Bottom.png" width="678" height="43" border="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="677" height="29" align="center">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                
+                                <td width="81">
+                                    <img src="images/Bottom-VALVE1.png" width="81" height="29" border="0">
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="677" align="center">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                
+                                <td width="412">
+                                    <img src="images/Bottom-Links.png" width="412" border="0" usemap="#Bottom-Links">
+                                    <map name="Bottom-Links">
+                                        <area coords="353,4,406,15" href="mailto:steamsupport@valvesoftware.com" shape="rect" target="_top">
+                                        <area coords="316,4,341,15" href="Faq/FAQ.htm" shape="rect" target="_top">
+                                        <area coords="234,4,307,15" href="http://www.chatbear.com/cgi-bin/board.pl?boardid=1041&amp;view=flatold" shape="rect" target="_top">
+                                        <area coords="183,4,218,15" href="BetaSupport/support.htm" shape="rect" target="_top">
+                                        <area coords="85,4,168,15" href="Games_Available/Games.htm" shape="rect" target="_top">
+                                        <area coords="49,4,75,15" href="News.htm" shape="rect" target="_top">
+                                        <area coords="4,4,41,15" href="Home.htm" shape="rect" target="_top">
+                                    </map>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="677" height="28">
+                        <img src="images/Bottom-COPY1.png" width="678" height="28" border="0">
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+</center>
 
-<tr height="1006">
-<td height="1006" width="67"><spacer height="1006" type="block" width="67"/></td>
-<td height="1006" width="1"><spacer height="1006" type="block" width="1"/></td>
-</tr>
-<tr cntrlrow="" height="1">
-<td height="1" width="67"><spacer height="1" type="block" width="67"/></td>
-<td height="1" width="1"><spacer height="1" type="block" width="1"/></td>
-</tr>
-</table>
-</td>
-<td align="left" bgcolor="#6a6f82" colspan="9" content="" csgroup="01175B50" csheight="1007" height="1007" valign="top" width="496" xpos="87">
-<ul>
-<li type="square"><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>*** SERVER ARE ONLINE! ***</b><br/>
-</font><font size="3"><br/>
-</font>
-<li type="square"><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>*DoD beta 2.0 is available</b><b>*</b><b><br/>
-</b></font><font size="3"><br/>
-</font>
-<li type="square"><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>Become A Beta Tester!</b></font><font size="3"><br/>
-											
-											
-											If you're interested in becoming a Beta Tester, fill out our <a href="http://beta.valvesoftware.com" target="_new">Survey</a><br/>
-</font><font size="2"></font><font size="3"><br/>
-</font>
-<li type="square"><font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>From the Dev Team:<br/>
-</b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>Planned Changes/Additions:</b><b><br/>
-</b></font><font face="Times New Roman,Georgia,Times" size="3">--------------------------<br/>
-											- Hostage AI upgrade<br/>
-											- New Counter-Strike hostage rescue map<br/>
-											- Vote/Kick<br/>
-											- General code optimization pass (client and server)<br/>
-											- Anti-Cheating system incorporated<br/>
-											- Allow server administrators to bind server to specific IP<br/>
-											- Allow server administrators to bind server to specific port<br/>
-											- Allow command line switches for server administrators<br/>
-											- Rework Para accuracy<br/>
-											- Make left and right handed models switchable on the fly<br/>
-											- Incorporate Tracker into Steam beta<br/>
-											- Remove "Use Shooting" from Counter-Strike<br/>
-											- Remove speed penalty when falling off an object.Will only apply when jumping.<br/>
-											- Allow muting of other player's text messages.<br/>
-<br/>
-</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>Planned Bug fixes:</b><b><br/>
-</b></font><font face="Times New Roman,Georgia,Times" size="3">--------------------------<br/>
-											- Default voice to use DirectSound by default<br/>
-											- Allow Steam to autoupdate itself<br/>
-											- Fix demo playback.<br/>
-											- Fix bug that allows a player automatically chosen as the VIP to keep their weapon.<br/>
-											- Fix exploit that allows Counter-Terrorists to look like Terrorists in certain maps.<br/>
-											- Fix missing entries in the spectator menu.<br/>
-<br/>
-</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>Recent Changes/Additions:</b><b><br/>
-</b></font><font face="Times New Roman,Georgia,Times" size="3">--------------------------<br/>
-											- HLTV UI upgrade<br/>
-											- Returned crosshairs for C4 and the knife<br/>
-											- Added de_chateau to mapcycle<br/>
-<br/>
-</font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3"><b>Recent Bugfixes:</b><b><br/>
-</b></font><font face="Times New Roman,Georgia,Times" size="3">--------------------------<br/>
-											- Fixed jittery jump bug<br/>
-											- Fixed server list filtering bug in which the game filter attribute was lost<br/>
-											- Fixed string 595 error when clicking server list filter button<br/>
-											- Fixed problem with Terrorist and Counter-Terrorist menus not looking correct after changing teams<br/>
-</font>
-<p></p>
-</li></li></li></li></ul>
-</td>
-<td align="left" bgcolor="#6a6f82" content="" csgroup="01175B50" csheight="1007" height="1007" valign="top" width="68" xpos="583"></td>
-<td height="1007" width="1"><spacer height="1007" type="block" width="1"/></td>
-</tr>
-<tr height="46">
-<td height="46" width="2"><spacer height="46" type="block" width="2"/></td>
-<td align="left" colspan="14" height="46" valign="top" width="678" xpos="2"><img border="0" height="43" src="images/Page-Bottom.png" width="675"/></td>
-<td height="46" width="1"><spacer height="46" type="block" width="1"/></td>
-</tr>
-<tr height="29">
-<td colspan="9" height="29" width="302"><spacer height="29" type="block" width="302"/></td>
-<td align="left" colspan="2" height="29" valign="top" width="175" xpos="302"><img border="0" height="29" src="images/Bottom-VALVE1.png" width="81"/></td>
-<td colspan="4" height="29" width="203"><spacer height="29" type="block" width="203"/></td>
-<td height="29" width="1"><spacer height="29" type="block" width="1"/></td>
-</tr>
-<tr height="26">
-<td colspan="6" height="26" width="133"><spacer height="26" type="block" width="133"/></td>
-<td align="left" colspan="7" height="26" valign="top" width="450" xpos="133"><img border="0" height="19" src="images/Bottom-Links.png" usemap="#Bottom-Linksad2d481" width="412"/></td>
-<td colspan="2" height="26" width="97"><spacer height="26" type="block" width="97"/></td>
-<td height="26" width="1"><spacer height="26" type="block" width="1"/></td>
-</tr>
-<tr height="28">
-<td align="left" colspan="15" height="28" valign="top" width="680" xpos="0"><img border="0" height="28" src="images/Bottom-COPY1.png" width="678"/></td>
-<td height="28" width="1"><spacer height="28" type="block" width="1"/></td>
-</tr>
-<tr cntrlrow="" height="1">
-<td height="1" width="2"><spacer height="1" type="block" width="2"/></td>
-<td height="1" width="17"><spacer height="1" type="block" width="17"/></td>
-<td height="1" width="9"><spacer height="1" type="block" width="9"/></td>
-<td height="1" width="59"><spacer height="1" type="block" width="59"/></td>
-<td height="1" width="3"><spacer height="1" type="block" width="3"/></td>
-<td height="1" width="43"><spacer height="1" type="block" width="43"/></td>
-<td height="1" width="17"><spacer height="1" type="block" width="17"/></td>
-<td height="1" width="129"><spacer height="1" type="block" width="129"/></td>
-<td height="1" width="23"><spacer height="1" type="block" width="23"/></td>
-<td height="1" width="53"><spacer height="1" type="block" width="53"/></td>
-<td height="1" width="122"><spacer height="1" type="block" width="122"/></td>
-<td height="1" width="64"><spacer height="1" type="block" width="64"/></td>
-<td height="1" width="42"><spacer height="1" type="block" width="42"/></td>
-<td height="1" width="68"><spacer height="1" type="block" width="68"/></td>
-<td height="1" width="29"><spacer height="1" type="block" width="29"/></td>
-<td height="1" width="1"><spacer height="1" type="block" width="1"/></td>
-</tr>
-</table>
-<map name="Textimage-News4dbfb53"><area coords="19,2,182,19" href="#" shape="rect" target="_top"/></map><map name="bottom-logo496a198"></map></td>
-</tr>
-</table>
-<map name="Bottom-Linksad2d481"><area coords="353,4,406,15" href="mailto:steamsupport@valvesoftware.com" shape="rect" target="_top"/><area coords="316,4,341,15" href="../Faq/FAQ.htm" shape="rect" target="_top"/><area coords="234,4,307,15" href="http://www.chatbear.com/cgi-bin/board.pl?boardid=1041&amp;view=flatold" shape="rect" target="_top"/><area coords="183,4,218,15" href="../BetaSupport/support.htm" shape="rect" target="_top"/><area coords="85,4,168,15" href="../Games_Available/Games.htm" shape="rect" target="_top"/><area coords="49,4,75,15" href="News.htm" shape="rect" target="_top"/><area coords="4,4,41,15" href="../Home.htm" shape="rect" target="_top"/></map><map name="Voices_Ad2013efc6"></map>
-</body>
-</html> 
+
+</body></html>
