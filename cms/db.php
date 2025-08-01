@@ -146,6 +146,13 @@ function cms_get_download_page(string $theme): ?array
         $stmt->execute([$ver]);
         $content = $stmt->fetchColumn();
         if ($content === false) return null;
+        if (in_array($ver, ['2004_dlv2','2004_dlv3'])) {
+            require_once __DIR__.'/utilities/text_styler.php';
+            $size = $db->query("SELECT file_size FROM download_files WHERE title='Default' LIMIT 1")->fetchColumn();
+            if (!$size) { $size = '<1 MB'; }
+            $button = renderGetSteamNowButton("  CLICK HERE TO DOWNLOAD THE STEAM INSTALLER ( $size )");
+            $content = preg_replace('~<a[^>]*>\s*<img[^>]*getSteamNowButton\.gif[^>]*>\s*</a>~i', $button, $content);
+        }
         $linkStmt = $db->prepare('SELECT category,label,url FROM download_links WHERE version=? ORDER BY ord,id');
         $linkStmt->execute([$ver]);
         $links = $linkStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -158,6 +165,116 @@ function cms_get_download_page(string $theme): ?array
         if ($e->getCode()==='42S02') return null;
         throw $e;
     }
+}
+
+function cms_get_cafe_signup_page(string $theme): ?string
+{
+    $db = cms_get_db();
+    $default = '2004_signup_v1';
+    $ver = cms_get_setting('cafe_signup_page_' . $theme, $default);
+    try {
+        $stmt = $db->prepare('SELECT content FROM cafe_signup_pages WHERE version=?');
+        $stmt->execute([$ver]);
+        $content = $stmt->fetchColumn();
+        return $content !== false ? $content : null;
+    } catch (PDOException $e) {
+        if ($e->getCode()==='42S02') return null;
+        throw $e;
+    }
+}
+
+function cms_get_cheat_form_page(string $theme): ?string
+{
+    $db = cms_get_db();
+    $default = '2004_cheat_v1';
+    $ver = cms_get_setting('cheat_form_page_' . $theme, $default);
+    try {
+        $stmt = $db->prepare('SELECT content FROM cheat_form_pages WHERE version=?');
+        $stmt->execute([$ver]);
+        $content = $stmt->fetchColumn();
+        return $content !== false ? $content : null;
+    } catch (PDOException $e) {
+        if ($e->getCode()==='42S02') return null;
+        throw $e;
+    }
+}
+
+function cms_get_cd_account_page(string $theme): ?string
+{
+    $db = cms_get_db();
+    $default = '2004_cd_v1';
+    $ver = cms_get_setting('cd_account_page_' . $theme, $default);
+    try {
+        $stmt = $db->prepare('SELECT content FROM cd_account_pages WHERE version=?');
+        $stmt->execute([$ver]);
+        $content = $stmt->fetchColumn();
+        return $content !== false ? $content : null;
+    } catch (PDOException $e) {
+        if ($e->getCode()==='42S02') return null;
+        throw $e;
+    }
+}
+
+function cms_get_download_files(int $limit = 10, int $offset = 0): array
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('SELECT * FROM download_files ORDER BY id LIMIT ? OFFSET ?');
+    $stmt->bindValue(1, $limit, PDO::PARAM_INT);
+    $stmt->bindValue(2, $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $mStmt = $db->prepare('SELECT host,url FROM download_file_mirrors WHERE file_id=? ORDER BY ord,id');
+    foreach ($files as &$f) {
+        $mStmt->execute([$f['id']]);
+        $f['mirrors'] = $mStmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    return $files;
+}
+
+function cms_get_all_download_files(?string $theme = null, ?string $version = null): array
+{
+    $db = cms_get_db();
+    $files = $db->query('SELECT * FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
+    $mStmt = $db->prepare('SELECT host,url FROM download_file_mirrors WHERE file_id=? ORDER BY ord,id');
+    $out = [];
+    foreach ($files as $f) {
+        $themes = array_filter(array_map('trim', explode(',', $f['visibleontheme'])));
+        if ($theme !== null && $themes && !in_array($theme, $themes, true)) {
+            continue;
+        }
+        if ($version) {
+            if ($version === '2004_dlv1' && in_array($f['title'], ['Windows HLDS Update Tool','Linux HLDS Update Tool'])) {
+                continue;
+            }
+            if ($version === '2004_dlv3' && in_array($f['title'], ['Dedicated Server (Windows)','Dedicated Server (Linux)'])) {
+                continue;
+            }
+            if ($version === '2004_dlv2' && in_array($f['title'], ['Windows HLDS Update Tool','Linux HLDS Update Tool'])) {
+                continue;
+            }
+            if ($version === '2003_v2_dlv2' && $f['title'] !== 'Default') {
+                continue;
+            }
+        }
+        $mStmt->execute([$f['id']]);
+        $f['mirrors'] = $mStmt->fetchAll(PDO::FETCH_ASSOC);
+        $out[] = $f;
+    }
+    return $out;
+}
+
+function cms_insert_support_request(string $page, array $fields, string $lang = 'en'): void
+{
+    $db = cms_get_db();
+    $vals = array_fill(0, 10, null);
+    foreach ($fields as $i => $val) {
+        if ($i < 10) {
+            $vals[$i] = $val;
+        }
+    }
+    $stmt = $db->prepare('INSERT INTO support_requests(page,language,f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,created) '
+        .'VALUES(?,?,?,?,?,?,?,?,?,?,?,NOW())');
+    $stmt->execute(array_merge([$page,$lang], $vals));
 }
 
 function cms_record_visit($page){

@@ -43,7 +43,8 @@ if ($notes) {
     $notifications_html .= '</ul></div>';
 }
 
-$legacy_visible = in_array(cms_get_setting('theme','2004'), ['2004','2005_v1']) ? 1 : 0;
+$current_theme = cms_get_setting('theme','2004');
+$legacy_visible = in_array($current_theme, ['2004','2005_v1']) ? 1 : 0;
 $default_nav = [
     ['file'=>'index.php','label'=>'Dashboard','visible'=>1],
     ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],
@@ -63,7 +64,9 @@ $default_nav = [
     ['file'=>'scheduled_content.php','label'=>'Scheduled Content','visible'=>1],
     ['file'=>'theme.php','label'=>'Theme','visible'=>1],
     ['file'=>'settings.php','label'=>'Settings','visible'=>1],
-    ['file'=>'download_page.php','label'=>'Download/Get Steam Now Management','visible'=>1],
+    ['file'=>'download_files.php','label'=>'File Management','visible'=>1],
+    ['file'=>'download_settings.php','label'=>'Download Settings','visible'=>1],
+    ['file'=>'page_selection.php','label'=>'Page Version Management','visible'=>1],
     ['file'=>'troubleshooter.php','label'=>'Troubleshooter','visible'=>1],
     ['file'=>'troubleshooter_manage.php','label'=>'Manage Troubleshooter','visible'=>1],
     ['file'=>'troubleshooter_requests.php','label'=>'Support Requests','visible'=>1],
@@ -110,7 +113,9 @@ $icons = [
     'scheduled_content.php' => '📅',
     'theme.php'        => '🎨',
     'settings.php'     => '⚙️',
-    'download_page.php' => '⬇️',
+    'download_files.php' => '⬇️',
+    'download_settings.php' => '🛠️',
+    'page_selection.php' => '📄',
     'troubleshooter.php' => '🆘',
     'troubleshooter_manage.php' => '📝',
     'troubleshooter_requests.php' => '📬',
@@ -143,6 +148,7 @@ $faq_pages = [];
 $ts_root = null;
 $ts_pages = [];
 $cafe_pages = [];
+$download_pages = [];
 $custom_groups = [];
 foreach ($nav_items as $k => $item) {
     if (!($item['visible'] ?? 1)) continue;
@@ -177,6 +183,9 @@ foreach ($nav_items as $k => $item) {
         unset($nav_items[$k]);
     } elseif (preg_match('/^cafe_.*\.php/', $item['file'])) {
         $cafe_pages[] = $item;
+        unset($nav_items[$k]);
+    } elseif (preg_match('/^download_.*\.php/', $item['file'])) {
+        $download_pages[] = $item;
         unset($nav_items[$k]);
     }
 }
@@ -312,6 +321,25 @@ if ($has_leg) {
         $nav_html .= '</ul>';
     }
     $nav_html .= '</li>';
+}
+$has_download = !empty($download_pages);
+if($has_download){
+    $icon = '⬇️';
+    $active = '';
+    foreach($download_pages as $it){
+        if(strpos($_SERVER['PHP_SELF'],$it['file'])!==false){$active=' class="active"';break;}
+    }
+    $open = $active ? true : false;
+    $nav_html .= '<li id="download-parent"><a href="#"'.$active.' aria-label="Download menu">'.htmlspecialchars($icon.' '.cms_admin_translate('Download System Management')).'</a>';
+    $style = $open ? 'display:block' : 'display:none';
+    $nav_html .= '<ul class="sub-menu" id="download-sub" style="'.$style.'">';
+    foreach($download_pages as $it){
+        $file=$it['file'];$label=cms_admin_translate($it['label']);
+        $ac=strpos($_SERVER['PHP_SELF'],$file)!==false?' class="active"':'';
+        $icon=$icons[$file]??'';
+        $nav_html.='<li><a href="'.$file.'"'.$ac.'>'.htmlspecialchars($icon.' '.$label).'</a></li>';
+    }
+    $nav_html.='</ul></li>';
 }
 $has_cafe = !empty($cafe_pages);
 if($has_cafe){
