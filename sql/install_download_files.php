@@ -6,6 +6,27 @@ try{
         $pdo->exec("ALTER TABLE download_file_mirrors ADD COLUMN host VARCHAR(255)");
     }
 }
+try{
+    $pdo->query("SELECT visibleontheme FROM download_files LIMIT 1");
+}catch(PDOException $e){
+    if($e->getCode()==="42S22"){
+        $pdo->exec("ALTER TABLE download_files ADD COLUMN visibleontheme VARCHAR(255) DEFAULT ''");
+    }
+}
+try{
+    $pdo->query("SELECT usingbutton FROM download_files LIMIT 1");
+}catch(PDOException $e){
+    if($e->getCode()==="42S22"){
+        $pdo->exec("ALTER TABLE download_files ADD COLUMN usingbutton TINYINT(1) DEFAULT 0");
+    }
+}
+try{
+    $pdo->query("SELECT buttonText FROM download_files LIMIT 1");
+}catch(PDOException $e){
+    if($e->getCode()==="42S22"){
+        $pdo->exec("ALTER TABLE download_files ADD COLUMN buttonText VARCHAR(100) DEFAULT NULL");
+    }
+}
 
 function parse_2004_downloads(string $file): array {
     $html = file_get_contents($file);
@@ -51,10 +72,17 @@ foreach($parsed as $p){
 $downloads[] = ['title'=>'Windows HLDS Update Tool','size'=>'<3 MB','url'=>'./download/hlds_updatetool.exe','mirrors'=>[]];
 $downloads[] = ['title'=>'Linux HLDS Update Tool','size'=>'<3 MB','url'=>'./download/hldsupdatetool.bin','mirrors'=>[]];
 
-$stmt = $pdo->prepare('INSERT INTO download_files(title,file_size,main_url,created,updated) VALUES(?,?,?,NOW(),NOW())');
+$stmt = $pdo->prepare('INSERT INTO download_files(title,file_size,main_url,visibleontheme,usingbutton,buttonText,created,updated) VALUES(?,?,?,?,?,?,NOW(),NOW())');
 $mirStmt = $pdo->prepare('INSERT INTO download_file_mirrors(file_id,host,url,ord) VALUES(?,?,?,?)');
 foreach($downloads as $d){
-    $stmt->execute([$d['title'],$d['size'],$d['url']]);
+    $stmt->execute([
+        $d['title'],
+        $d['size'],
+        $d['url'],
+        '2004,2003_v2',
+        0,
+        '',
+    ]);
     $fileId = $pdo->lastInsertId();
     $ord = 1;
     foreach($d['mirrors'] as $m){

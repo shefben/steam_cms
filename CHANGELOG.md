@@ -217,3 +217,4 @@ All notable changes to this project will be documented in this file.
 - Added default installer mirrors and updated page selection images
 - Removed binary download thumbnails from version control
 - Dynamic button rendering for 2004 download pages using text_styler
+- Download manager supports theme visibility and optional Steam button text

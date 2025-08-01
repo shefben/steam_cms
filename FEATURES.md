@@ -196,3 +196,4 @@
 - Default Steam installer seeds with named mirror links
 - Removed thumbnail binaries to keep repository lightweight
 - Download pages dynamically render "Get Steam" button text via text_styler
+- Downloads can be restricted per theme and optionally use custom Steam buttons

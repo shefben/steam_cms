@@ -2,6 +2,7 @@
 require_once 'admin_header.php';
 cms_require_permission('manage_pages');
 $db = cms_get_db();
+$themes = cms_get_themes();
 
 if(isset($_GET['ajax']) && isset($_GET['id'])){
     $id = (int)$_GET['id'];
@@ -30,6 +31,9 @@ if(isset($_POST['ajax'])){
     $desc = $_POST['description'];
     $size = trim($_POST['file_size']);
     $url = trim($_POST['main_url']);
+    $visible = isset($_POST['visible']) ? implode(',', array_map('trim', (array)$_POST['visible'])) : '';
+    $usingButton = isset($_POST['usingbutton']) ? 1 : 0;
+    $buttonText = trim($_POST['buttonText'] ?? '');
     if(isset($_FILES['main_file']) && $_FILES['main_file']['tmp_name']){
         $fname = basename($_FILES['main_file']['name']);
         $dest = CMS_ROOT.'/downloads/'.$fname;
@@ -37,12 +41,12 @@ if(isset($_POST['ajax'])){
         $url = 'downloads/'.$fname;
     }
     if($id){
-        $stmt=$db->prepare('UPDATE download_files SET title=?,description=?,file_size=?,main_url=?,updated=NOW() WHERE id=?');
-        $stmt->execute([$title,$desc,$size,$url,$id]);
+        $stmt=$db->prepare('UPDATE download_files SET title=?,description=?,file_size=?,main_url=?,visibleontheme=?,usingbutton=?,buttonText=?,updated=NOW() WHERE id=?');
+        $stmt->execute([$title,$desc,$size,$url,$visible,$usingButton,$buttonText,$id]);
         $db->prepare('DELETE FROM download_file_mirrors WHERE file_id=?')->execute([$id]);
     }else{
-        $stmt=$db->prepare('INSERT INTO download_files(title,description,file_size,main_url,created,updated) VALUES(?,?,?,?,NOW(),NOW())');
-        $stmt->execute([$title,$desc,$size,$url]);
+        $stmt=$db->prepare('INSERT INTO download_files(title,description,file_size,main_url,visibleontheme,usingbutton,buttonText,created,updated) VALUES(?,?,?,?,?,?,?,NOW(),NOW())');
+        $stmt->execute([$title,$desc,$size,$url,$visible,$usingButton,$buttonText]);
         $id = $db->lastInsertId();
     }
     if(isset($_POST['mirror_urls']) && is_array($_POST['mirror_urls'])){
@@ -63,7 +67,7 @@ $limit=10;
 $page=max(1,(int)($_GET['page']??1));
 $offset=($page-1)*$limit;
 $total=$db->query('SELECT COUNT(*) FROM download_files')->fetchColumn();
-$stmt=$db->prepare('SELECT id,title,file_size FROM download_files ORDER BY id LIMIT ? OFFSET ?');
+$stmt=$db->prepare('SELECT id,title,file_size,visibleontheme FROM download_files ORDER BY id LIMIT ? OFFSET ?');
 $stmt->bindValue(1,$limit,PDO::PARAM_INT);
 $stmt->bindValue(2,$offset,PDO::PARAM_INT);
 $stmt->execute();
@@ -72,7 +76,7 @@ $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Download File Management</h2>
 <table class="data-table" id="filesTable">
-<tr><th>ID</th><th>Filename</th><th>File Size</th><th>Mirrors</th><th>Actions</th></tr>
+<tr><th>ID</th><th>Filename</th><th>File Size</th><th>Mirrors</th><th>Visible</th><th>Actions</th></tr>
 <?php foreach($rows as $r):
     $cnt=$db->prepare('SELECT COUNT(*) FROM download_file_mirrors WHERE file_id=?');
     $cnt->execute([$r['id']]);
@@ -83,6 +87,7 @@ $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
   <td><?php echo htmlspecialchars($r['title']); ?></td>
   <td><?php echo htmlspecialchars($r['file_size']); ?></td>
   <td><?php echo $mc; ?></td>
+  <td><?php echo htmlspecialchars($r['visibleontheme']); ?></td>
   <td><button class="edit btn btn-small" data-id="<?php echo $r['id']; ?>">Edit</button>
       <button class="delete btn btn-small" data-id="<?php echo $r['id']; ?>">Delete</button></td>
 </tr>
@@ -109,6 +114,12 @@ if($pages>1){
 <label>File size <input type="text" name="file_size" id="fileSize"></label><br>
 <label>Main download <input type="text" name="main_url" id="fileUrl"><input type="file" name="main_file"></label><br>
 <div id="mirrorFields"><!-- mirrors --><button type="button" id="addMirror">+</button></div>
+<div id="themeChecks">
+<?php foreach($themes as $t): ?>
+    <label style="margin-right:6px;"><input type="checkbox" name="visible[]" value="<?php echo htmlspecialchars($t); ?>"> <?php echo htmlspecialchars($t); ?></label>
+<?php endforeach; ?>
+</div>
+<label style="display:block;margin-top:8px;"><input type="checkbox" name="usingbutton" id="usingButton"> Generate Steam Download Button (2004 theme only!) <input type="text" name="buttonText" id="buttonText" style="width:60%;" disabled></label>
 <button type="submit" class="btn btn-primary">Save</button>
 <button type="button" id="cancelBtn" class="btn">Cancel</button>
 <input type="hidden" name="ajax" value="1">
@@ -127,19 +138,33 @@ $(function(){
    if(cnt>=9) $('#addMirror').hide();
  }
  $('#addMirror').on('click',function(){ addMirror(); });
- $('#addFile').on('click',function(){ $('#fileForm')[0].reset(); $('#mirrorFields .mirror-row').remove(); $('#addMirror').show(); $('#fileId').val(''); $('#fileModal').show(); });
+ $('#addFile').on('click',function(){
+   $('#fileForm')[0].reset();
+   $('#mirrorFields .mirror-row').remove();
+   $('#addMirror').show();
+   $('#fileId').val('');
+   $('#themeChecks input[type=checkbox]').prop('checked',false);
+   $('#usingButton').prop('checked',false);$('#buttonText').prop('disabled',true).val('');
+   $('#fileModal').show();
+ });
  $('#filesTable').on('click','.edit',function(){
    var id=$(this).data('id');
-   $.get('download_files.php',{ajax:1,id:id},function(d){
+  $.get('download_files.php',{ajax:1,id:id},function(d){
      $('#fileForm')[0].reset(); $('#mirrorFields .mirror-row').remove(); $('#addMirror').show();
      $('#fileId').val(d.id); $('#fileTitle').val(d.title); $('#fileDesc').val(d.description); $('#fileSize').val(d.file_size); $('#fileUrl').val(d.main_url);
+     $('#themeChecks input[type=checkbox]').prop('checked',false);
+     if(d.visibleontheme){
+        d.visibleontheme.split(',').forEach(function(t){ $('#themeChecks input[value="'+t.trim()+'"]').prop('checked',true); });
+     }
+     if(d.usingbutton==1){ $('#usingButton').prop('checked',true); $('#buttonText').prop('disabled',false).val(d.buttonText); } else { $('#usingButton').prop('checked',false); $('#buttonText').prop('disabled',true).val(''); }
      if(d.mirrors){d.mirrors.forEach(function(m){addMirror(m.host,m.url);}); if($('#mirrorFields .mirror-row').length>=10) $('#addMirror').hide(); }
      $('#fileModal').show();
-   },'json');
- });
+  },'json');
+});
  $('#filesTable').on('click','.delete',function(){ if(confirm('Delete?')){ $.post('download_files.php',{ajax:1,delete:$(this).data('id')},function(){location.reload();}); } });
- $('#cancelBtn').on('click',function(){ $('#fileModal').hide(); });
- $('#fileForm').on('submit',function(e){ e.preventDefault(); var fd=new FormData(this); $.ajax({url:'download_files.php',method:'POST',data:fd,processData:false,contentType:false,success:function(){location.reload();}}); });
+$('#cancelBtn').on('click',function(){ $('#fileModal').hide(); });
+$('#fileForm').on('submit',function(e){ e.preventDefault(); var fd=new FormData(this); $.ajax({url:'download_files.php',method:'POST',data:fd,processData:false,contentType:false,success:function(){location.reload();}}); });
+ $('#usingButton').on('change',function(){ $('#buttonText').prop('disabled',!this.checked); });
 });
 </script>
 <style>

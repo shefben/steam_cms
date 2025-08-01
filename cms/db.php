@@ -231,16 +231,22 @@ function cms_get_download_files(int $limit = 10, int $offset = 0): array
     return $files;
 }
 
-function cms_get_all_download_files(): array
+function cms_get_all_download_files(?string $theme = null): array
 {
     $db = cms_get_db();
     $files = $db->query('SELECT * FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
     $mStmt = $db->prepare('SELECT host,url FROM download_file_mirrors WHERE file_id=? ORDER BY ord,id');
-    foreach ($files as &$f) {
+    $out = [];
+    foreach ($files as $f) {
+        $themes = array_filter(array_map('trim', explode(',', $f['visibleontheme'])));
+        if ($theme !== null && $themes && !in_array($theme, $themes, true)) {
+            continue;
+        }
         $mStmt->execute([$f['id']]);
         $f['mirrors'] = $mStmt->fetchAll(PDO::FETCH_ASSOC);
+        $out[] = $f;
     }
-    return $files;
+    return $out;
 }
 
 function cms_insert_support_request(string $page, array $fields, string $lang = 'en'): void
