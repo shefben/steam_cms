@@ -448,6 +448,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     require_once 'sql/install_support_page.php';
                     require_once 'sql/install_troubleshooter.php';
                     require_once 'sql/install_download_pages.php';
+                    require_once 'sql/install_2004_pages.php';
+                    require_once 'sql/install_download_files.php';
 
                     $pdo->exec($stmt);
                 }
