@@ -146,6 +146,13 @@ function cms_get_download_page(string $theme): ?array
         $stmt->execute([$ver]);
         $content = $stmt->fetchColumn();
         if ($content === false) return null;
+        if (in_array($ver, ['2004_dlv2','2004_dlv3'])) {
+            require_once __DIR__.'/utilities/text_styler.php';
+            $size = $db->query("SELECT file_size FROM download_files WHERE title='Default' LIMIT 1")->fetchColumn();
+            if (!$size) { $size = '<1 MB'; }
+            $button = renderGetSteamNowButton("  CLICK HERE TO DOWNLOAD THE STEAM INSTALLER ( $size )");
+            $content = preg_replace('~<a[^>]*>\s*<img[^>]*getSteamNowButton\.gif[^>]*>\s*</a>~i', $button, $content);
+        }
         $linkStmt = $db->prepare('SELECT category,label,url FROM download_links WHERE version=? ORDER BY ord,id');
         $linkStmt->execute([$ver]);
         $links = $linkStmt->fetchAll(PDO::FETCH_ASSOC);

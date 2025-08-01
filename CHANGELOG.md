@@ -216,3 +216,4 @@ All notable changes to this project will be documented in this file.
 - Added mirror host URLs with 10-entry limit and seeded default downloads
 - Added default installer mirrors and updated page selection images
 - Removed binary download thumbnails from version control
+- Dynamic button rendering for 2004 download pages using text_styler

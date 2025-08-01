@@ -195,3 +195,4 @@
 - Updated download mirrors to store host names and URLs; management UI supports up to 10 mirrors
 - Default Steam installer seeds with named mirror links
 - Removed thumbnail binaries to keep repository lightweight
+- Download pages dynamically render "Get Steam" button text via text_styler
