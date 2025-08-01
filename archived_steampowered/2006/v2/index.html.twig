@@ -1,0 +1,203 @@
+{# index.html.twig #}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{{ page_title|default('Welcome to Steam') }}</title>
+
+    <link rel="stylesheet" href="styles_global.css">
+    <link rel="stylesheet" href="styles_capsules.css">
+    <link rel="stylesheet" href="styles_content.css">
+</head>
+<body>
+{# -----------------------------------------------------------
+   Header bar
+   ----------------------------------------------------------- #}
+<div style="min-width:850px;">
+    <div class="globalHeadBar_logo">
+        <a href="{{ homepage_url }}"><img src="{{ asset('img/logo_steam_header.jpg') }}" alt="Steam main"></a>
+    </div>
+
+    <div class="globalHeadBar">
+        {% for item in global_nav %}
+            <div class="globalNavItem">
+                <a href="{{ item.url }}" title="{{ item.title }}"><span class="globalNavLink">{{ item.label }}</span></a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<br clear="all">
+
+<center>
+{# -----------------------------------------------------------
+   Main content wrapper
+   ----------------------------------------------------------- #}
+<div class="contentBG_1">
+    <div class="headerBG_1">
+    {# -------------------------------------------------------
+       LEFT COLUMN
+       ------------------------------------------------------- #}
+        <div class="leftCol_1">
+            {# Join-Steam banner (static except copy) #}
+            <table class="capsuleArea_header" width="560" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="172"><img src="{{ asset('img/logo_steam_main.jpg') }}" width="172" height="63"></td>
+                    <td valign="top"><p>{{ join_steam_text }}</p></td>
+                </tr>
+            </table>
+
+            {# TOP-ROW SMALL CAPSULES #}
+            {% for cap in small_capsules_top %}
+                <div  class="capsule"
+                      style="background:#000"
+                      onmouseover="this.style.background='#666'"
+                      onmouseout="this.style.background='#000'"
+                      onclick="location.href='index.php?area=game&amp;AppId={{ cap.appId }}';">
+                    <div class="capsuleImage">
+                        <img src="{{ cap.image_sm }}" width="280" height="105" alt="{{ cap.name }}">
+                    </div>
+                    <div align="left"  class="capsuleText">{{ cap.name }}</div>
+                    <div align="right" class="capsuleCost">{{ cap.price }}&nbsp;</div>
+                </div>
+            {% endfor %}
+            <br clear="all">
+
+            {# LARGE FEATURE CAPSULE #}
+            {% if large_capsule is defined %}
+                <div  class="capsuleLarge"
+                      style="background:#000"
+                      onmouseover="this.style.background='#666'"
+                      onmouseout="this.style.background='#000'"
+                      onclick="location.href='index.php?area=game&amp;AppId={{ large_capsule.appId }}';">
+                    <div class="capsuleLargeImage">
+                        <img src="{{ large_capsule.image_lg }}" width="572" height="221" alt="{{ large_capsule.name }}">
+                    </div>
+                    <div class="capsuleLargeText">{{ large_capsule.name }}</div>
+                    <div class="capsuleLargeCost">{{ large_capsule.price }}&nbsp;</div>
+                </div>
+                <br clear="all">
+            {% endif %}
+
+            {# BOTTOM-ROW SMALL CAPSULES #}
+            {% for cap in small_capsules_bottom %}
+                <div  class="capsule"
+                      style="background:#000"
+                      onmouseover="this.style.background='#666'"
+                      onmouseout="this.style.background='#000'"
+                      onclick="location.href='index.php?area=game&amp;AppId={{ cap.appId }}';">
+                    <div class="capsuleImage">
+                        <img src="{{ cap.image_sm }}" width="280" height="105" alt="{{ cap.name }}">
+                    </div>
+                    <div align="left"  class="capsuleText">{{ cap.name }}</div>
+                    <div align="right" class="capsuleCost">{{ cap.price }}&nbsp;</div>
+                </div>
+            {% endfor %}
+            <br clear="left">
+
+            {# --- Gear widget --- #}
+            <div class="capsuleGear" align="center">
+                <div class="capsuleGearTitle">{{ gear.title }}</div>
+                <div class="capsuleGearText">
+                    {{ gear.text|raw }} {# contains anchor #}
+                </div>
+            </div>
+
+            {# --- Free-stuff widget --- #}
+            <div class="capsuleStuff" align="center">
+                <div class="capsuleStuffTitle">{{ free_stuff.title }}</div>
+                <div class="capsuleStuffText">
+                    {{ free_stuff.text|raw }}
+                </div>
+            </div>
+        </div>
+
+        {# -------------------------------------------------------
+           RIGHT COLUMN
+           ------------------------------------------------------- #}
+        <div class="rightCol_1">
+            <div class="btn_getSteam"
+                 title="Click for Details"
+                 onclick="location.href='index.php?area=getsteamnow'"
+                 onmouseover="this.style.background='url({{ asset('img/btn_getSteam_ovr.gif') }})'"
+                 onmouseout="this.style.background='url({{ asset('img/btn_getSteam.gif') }})'">
+                Get Steam Now&nbsp;!
+            </div>
+            <div class="btn_getSteam_sub">{{ get_steam_subtext }}</div>
+            <br>
+
+            {# ---------- NEW ON STEAM ---------- #}
+            <h1><img src="{{ asset('img/ico/ico_new_16.gif') }}" width="16" height="16" alt="NEW!"> New On Steam</h1>
+            {% for item in new_on_steam %}
+                <a class="rightLink" href="v/index.php?area=game&amp;AppId={{ item.appId }}&amp;">
+                    <img src="{{ asset('img/ico/ico_' ~ item.icon ~ '_13.gif') }}" border="0" align="absmiddle">
+                    {{ item.name }}
+                    <span class="rightLink_newDate_gr"> ({{ item.date|date('M d, Y') }})</span>
+                </a>
+            {% endfor %}
+
+            <div class="rightColHr"></div>
+
+            {# ---------- FIND ---------- #}
+            <h1><img src="{{ asset('img/ico/ico_srch_16.gif') }}" width="16" height="16" alt="Find"> Find</h1>
+            <div class="rightLink_find_area">
+                {% for f in find_links_left %}
+                    <a class="rightLink_find" href="{{ f.url }}"><img src="{{ asset('img/ico/ico_arrow_yellow.gif') }}" width="7" height="7"> {{ f.label }}</a>
+                {% endfor %}
+            </div>
+            <div class="rightLink_find_area">
+                {% for f in find_links_right %}
+                    <a class="rightLink_find" href="{{ f.url }}"><img src="{{ asset('img/ico/ico_arrow_yellow.gif') }}" width="7" height="7"> {{ f.label }}</a>
+                {% endfor %}
+            </div>
+            <br clear="all">
+
+            <div class="rightColHr"></div>
+
+            {# ---------- LATEST NEWS ---------- #}
+            <h1><img src="{{ asset('img/ico/ico_docs_16.gif') }}" width="16" height="16" alt="News"> Latest News</h1>
+            <div class="rightLink_news_area">
+                {% for n in latest_news %}
+                    <a class="rightLink_news" href="v/index.php?area=news&amp;id={{ n.id }}&amp;">
+                        <img src="{{ asset('img/ico/ico_arrow_yellow.gif') }}" width="7" height="7" border="0">
+                        {{ n.title }}
+                        <p>{{ n.summary }}</p>
+                    </a>
+                {% endfor %}
+            </div>
+            <a class="rightLink" href="v/index.php?area=news&amp;">
+                <img src="{{ asset('img/ico/ico_arrow_blue_wd.gif') }}" width="22" height="7" align="absmiddle" border="0"> Read more news
+            </a>
+            <div class="rightColHr" style="padding-bottom:0;margin-bottom:0;"></div>
+        </div>
+        {# -------- END RIGHT COLUMN -------- #}
+    </div>
+    <br clear="left">
+</div>
+{# -------- END MAIN CONTENT -------- #}
+
+{# -----------------------------------------------------------
+   FOOTER (mostly static)
+   ----------------------------------------------------------- #}
+<div class="footer">
+    <table width="910" border="0" cellspacing="0" cellpadding="0" background="{{ asset('img/img_footer_bg.jpg') }}">
+        <tr>
+            <td width="12" height="73" background="{{ asset('img/img_footer_l.jpg') }}">&nbsp;</td>
+            <td width="110" align="center">
+                <a href="http://www.valvesoftware.com"><img src="{{ asset('img/logo_valve_footer.jpg') }}" width="92" height="26" alt="Valve Software"></a>
+            </td>
+            <td>
+                <div class="legal">
+                    © {{ "now"|date("Y") }} Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br>
+                    <a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>.
+                    <a href="http://www.valvesoftware.com/legal.htm">Legal</a>.
+                    <a href="http://storefront.steampowered.com/v/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.
+                </div>
+            </td>
+            <td width="14" height="73" background="{{ asset('img/img_footer_r.jpg') }}">&nbsp;</td>
+        </tr>
+    </table>
+</div>
+<br>
+</center>
+</body>
+</html>

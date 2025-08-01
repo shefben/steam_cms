@@ -1,0 +1,168 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>News</title>
+
+<style>
+/* ------- base ------- */
+*{box-sizing:border-box;margin:0;padding:0;border:0;}
+body{background:silver;font-family:Arial,Helvetica,Geneva,Swiss,SunSans-Regular;color:#fff;}
+a{color:#E4C55A;text-decoration:none;} a:hover{color:#F9DF84;}
+img{display:block;user-select:none}
+
+/* ------- layout ------- */
+#wrapper{width:681px;margin:0 auto;background:#000;}
+nav{display:flex;align-items:flex-start}
+.left-side{width:12px;background:url('images/Page-Side_Left.png') repeat-y}
+.right-side{flex:0 0 50px; background-size: 25px; position: relative; left: 26px; background:url('images/Page-Side_right.png') repeat-y}
+
+/* ------- content ------- */
+.content{flex:1;background:#6a6f82;min-height:1007px;padding:20px 60px 20px}
+.news{margin-left:204px;max-width:427px}
+.news ul{padding-left:1.2em}
+.news li{margin-bottom:1em}
+
+/* ------- footer ------- */
+footer{text-align:center;background:#6a6f82;color:#b8c2ae;font-size:.8em}
+
+/* ------- nav button helpers ------- */
+nav a img{cursor:pointer}
+nav a.active img{cursor:default}          /* current page tab */
+</style>
+
+<script>
+/* Simple hover-swap for navigation buttons */
+document.addEventListener('DOMContentLoaded',()=> {
+  document.querySelectorAll('nav a:not(.active) img').forEach(img=>{
+    const out  = img.dataset.out,
+          over = img.dataset.over;
+    img.addEventListener('mouseover', ()=>{ img.src = over; });
+    img.addEventListener('mouseout',  ()=>{ img.src = out;  });
+  });
+});
+</script>
+<style type="text/css" id="operaUserStyle"></style></head>
+
+<body>
+<div id="wrapper">
+
+  <!-- header ------------------------------------------------------------ -->
+  <img src="images/Steam-Logo.png" alt="Steam Logo" width="681" height="116">
+
+  <!-- nav bar ----------------------------------------------------------- -->
+  <nav>
+    <img src="images/Tabs-Home_Border.png" alt="" width="28" height="24">
+
+    <a href="Home.htm">
+      <img src="images/Tabs-Home_out.png" data-out="images/Tabs-Home_out.png" data-over="images/Tabs-Home_over.png" alt="Home" width="62" height="24">
+    </a>
+
+    <img src="images/Tabs-News_in.png" alt="News" width="60" height="24" class="active">
+
+    <a href="Games_Available/Games.htm">
+      <img src="images/Tabs-Games_Avail_out.png" data-out="images/Tabs-Games_Avail_out.png" data-over="images/Tabs-Games_Avail_over.png" alt="Games Available" width="129" height="24">
+    </a>
+
+    <a href="BetaSupport/support.htm">
+      <img src="images/Tabs-Support_out.png" data-out="images/Tabs-Support_out.png" data-over="images/Tabs-Support_over.png" alt="Support" width="76" height="24">
+    </a>
+
+    <a href="http://www.chatbear.com/cgi-bin/board.pl?boardid=1041">
+      <img src="images/Tabs-Message_Board_out.png" data-out="images/Tabs-Message_Board_out.png" data-over="images/Tabs-Message_Board_over.png" alt="Message Board" width="122" height="24">
+    </a>
+
+    <a href="Faq/FAQ.htm">
+      <img src="images/Tabs-FAQ_out.png" data-out="images/Tabs-FAQ_out.png" data-over="images/Tabs-FAQ_over.png" alt="FAQ" width="64" height="24">
+    </a>
+
+    <img src="images/Tabs-FAQ_Border.png" alt="" style="flex:1;height:24px">
+  </nav>
+
+  <!-- main row with side strips ---------------------------------------- -->
+  <div style="display:flex">
+    <div class="left-side"></div>
+
+    <main class="content">
+      <img src="images/PageTitles-News.png" alt="News Title" width="19" height="40" style="margin-bottom:20px">
+
+      <!-- news list (position & width restored) -->
+      <div class="news">
+        <ul>
+          <li><b>*** SERVER ARE ONLINE! ***</b></li>
+
+          <li><b>*DoD beta 2.0 is available*</b></li>
+
+          <li><b>Become A Beta Tester!</b><br>
+              If you're interested in becoming a Beta Tester, fill out our
+              <a href="http://beta.valvesoftware.com" target="_blank">Survey</a>
+          </li>
+
+          <li><b>From the Dev Team:</b><br>
+              <b>Planned Changes/Additions:</b><br>
+              --------------------------<br>
+              - Hostage AI upgrade<br>
+              - New Counter-Strike hostage rescue map<br>
+              - Vote/Kick<br>
+              - General code optimization pass (client and server)<br>
+              - Anti-Cheating system incorporated<br>
+              - Allow server administrators to bind server to specific IP<br>
+              - Allow server administrators to bind server to specific port<br>
+              - Allow command line switches for server administrators<br>
+              - Rework Para accuracy<br>
+              - Make left and right handed models switchable on the fly<br>
+              - Incorporate Tracker into Steam beta<br>
+              - Remove "Use Shooting" from Counter-Strike<br>
+              - Remove speed penalty when falling off an object. Will only apply when jumping.<br>
+              - Allow muting of other player's text messages.
+          </li>
+
+          <li><b>Planned Bug fixes:</b><br>
+              --------------------------<br>
+              - Default voice to use DirectSound by default<br>
+              - Allow Steam to autoupdate itself<br>
+              - Fix demo playback.<br>
+              - Fix bug that allows a player automatically chosen as the VIP to keep their weapon.<br>
+              - Fix exploit that allows Counter-Terrorists to look like Terrorists in certain maps.<br>
+              - Fix missing entries in the spectator menu.
+          </li>
+
+          <li><b>Recent Changes/Additions:</b><br>
+              --------------------------<br>
+              - HLTV UI upgrade<br>
+              - Returned crosshairs for C4 and the knife<br>
+              - Added de_chateau to mapcycle
+          </li>
+
+          <li><b>Recent Bugfixes:</b><br>
+              --------------------------<br>
+              - Fixed jittery jump bug<br>
+              - Fixed server list filtering bug in which the game filter attribute was lost<br>
+              - Fixed string 595 error when clicking server list filter button<br>
+              - Fixed problem with Terrorist and Counter-Terrorist menus not looking correct after changing teams
+          </li>
+        </ul>
+      </div><!-- /.news -->
+    </main>
+
+    <div class="right-side"></div>
+  </div>
+
+  <!-- footer graphics --------------------------------------------------- -->
+  <img src="images/Page-Bottom.png" alt="" width="681" height="43">
+  <img src="images/Bottom-VALVE1.png" alt="Valve" width="81" height="29" style="margin:0 auto">
+  <img src="images/Bottom-Links.png" alt="Links" width="412" height="19" style="margin:0 auto" usemap="#BottomLinks">
+  <img src="images/Bottom-COPY1.png" alt="" width="678" height="28">
+
+  <!-- footer imagemap (original coords) -->
+  <map name="BottomLinks">
+    <area shape="rect" coords="4,4,41,15" href="../Home.htm" alt="Home">
+    <area shape="rect" coords="49,4,75,15" href="News.htm" alt="News">
+    <area shape="rect" coords="85,4,168,15" href="../Games_Available/Games.htm" alt="Games Available">
+    <area shape="rect" coords="183,4,218,15" href="../BetaSupport/support.htm" alt="Support">
+    <area shape="rect" coords="234,4,307,15" href="http://www.chatbear.com/cgi-bin/board.pl?boardid=1041&amp;view=flatold" alt="Message Board">
+    <area shape="rect" coords="316,4,341,15" href="../Faq/FAQ.htm" alt="FAQ">
+    <area shape="rect" coords="353,4,406,15" href="mailto:steamsupport@valvesoftware.com" alt="Email">
+  </map>
+
+</div><!-- /wrapper -->
+
+</body></html>
