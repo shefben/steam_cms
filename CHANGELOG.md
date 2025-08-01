@@ -223,3 +223,5 @@ All notable changes to this project will be documented in this file.
 - Admin sidebar always shows a Page Version Management link
 - Download management uses a simple WYSIWYG editor for descriptions and the Page Version Management screen lists all legacy download options
 - Seeded the complete 2004 Steam installer catalog with titles, sizes, and mirror hosts during installation
+- Added tournament management admin page and dynamic tournament calendar page.
+- Removed obsolete footer from tourney_limited page.

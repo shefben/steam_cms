@@ -453,6 +453,43 @@ function cms_twig_env(string $tpl_dir): Environment
             $html .= "<script>document.querySelectorAll('.tabs-block .tab-links a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var id=this.getAttribute('href');this.parentElement.parentElement.querySelectorAll('li').forEach(function(li){li.classList.remove('active');});this.parentElement.classList.add('active');var block=this.closest('.tabs-block');block.querySelectorAll('.tab-panel').forEach(function(p){p.style.display=p.id==id.substring(1)?'block':'none';});});});</script>";
             return $html;
         }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('tournament_calendar', function(int $months = 4) {
+            $db = cms_get_db();
+            $start = new DateTime('first day of this month');
+            $end = (clone $start)->modify('+' . $months . ' months');
+            $stmt = $db->prepare('SELECT event_date,title FROM tournaments WHERE event_date >= ? AND event_date < ?');
+            $stmt->execute([$start->format('Y-m-d'), $end->format('Y-m-d')]);
+            $events = [];
+            foreach ($stmt as $row) {
+                $events[$row['event_date']][] = $row['title'];
+            }
+            $html = '<table align="center" cellspacing="0" cellpadding="0"><tr><td>';
+            for ($m = 0; $m < $months; $m++) {
+                $month = (clone $start)->modify('+' . $m . ' months');
+                $days = (int)$month->format('t');
+                $html .= '<b>'.$month->format('F Y').'</b><br><span style="font-family: courier new;">';
+                $firstDow = (int)$month->format('w');
+                for ($i=0;$i<$firstDow;$i++) {
+                    $html .= '<span style="border: 1px solid #282E22;" title="">&nbsp;&nbsp;</span>&nbsp;';
+                }
+                for ($d=1;$d<=$days;$d++) {
+                    $date = $month->format('Y-m-') . str_pad((string)$d,2,'0',STR_PAD_LEFT);
+                    $dow = ($firstDow + $d -1) % 7;
+                    if (isset($events[$date])) {
+                        $count = count($events[$date]);
+                        $title = $count.' event'.($count>1?'s':'').' is running today';
+                        $html .= '<a href="index.php?area=tourney_calendar"><span style="background-color: #4B5640; border: 1px solid silver;" title="'.htmlspecialchars($title).'">'.($d<10?'&nbsp;'.$d:$d).'</span></a>';
+                    } else {
+                        $html .= '<span style="border: 1px solid #282E22;;">'.($d<10?'&nbsp;'.$d:$d).'</span>';
+                    }
+                    $html .= ($dow===6)?' <br>':' ';
+                }
+                $html .= '</span><br><br>';
+            }
+            $html .= '</td></tr></table>';
+            return $html;
+        }, ['is_safe' => ['html']]));
         $env->registerUndefinedFunctionCallback(function (string $name) {
             if (str_starts_with($name, 'random_')) {
                 $tag = substr($name, 7);

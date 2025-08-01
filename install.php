@@ -1327,12 +1327,109 @@ If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valv
 HTML;
 $pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-$productnewscss_html <<<'HTML'
-<span class="css_news_header">LATEST NEWS {{ theme_specific_content_start('2004') }}BETA NEWS{{ theme_specific_content_end() }}<br><br>
-{{ news }}
-</span>
+$cdaccountfaq_html <<<'HTML'
+<div class="content" id="container">
+<h1>CD KEYS AND STEAM ACCOUNTS</h1>
+<h2><em>FREQUENTLY</em> ASKED QUESTIONS</h2><img src="/web/20040414001040im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br>
+
+<div class="narrower">
+
+<h3>How do "accounts" and "CD keys" work in Steam?</h3>
+
+<ul>
+<p>When you sign up for Steam, you create a Steam account, which contains all of your Steam games.  You can use your Steam account on any computer, so that you can play your games no matter whether you're at home, at work, or on a friend's computer.  If you buy a new computer or need to re-format your old computer, you can keep using your old account-Steam will automatically download all of your information to the new computer.  Although you can use your account at any computer, it can only be used at one computer at a time.</p>
+
+<p>CD keys are special serial numbers printed on retail copies of Half-Life and other games in the Half-Life family.  Before Steam, this key was used as an anti-piracy measure, and became the user's unique ID code when playing the game online.  With Steam, the CD key can be used as a "Proof of Purchase" code that will grant your Steam account access to some of the available games through Steam.</p>
+
+<p>Each CD key may only be used with one Steam account. Once used, it is permanently bound to that account, and may not be used with another. Deleting the account will not free the CD key to be used again.  One Steam account, however, may have more than one CD key registered to it. For instance, if you have an account with a Counter-Strike CD key registered to it, and you purchase HL2 in the store, you may use the HL2 key on your Steam account to grant access to HL2.</p>
+</ul>
+
+<h3>When I try to enter my CD key, Steam says my key is already in use.</h3>
+
+<ul>
+<p><strong style="color: White;">Have you previously used this CD key with another account?</strong><br>
+A CD key can only be used with one account.  To play this game, you'll need to use the account you originally registered your CD key with.  See the accounts section below if you need help accessing your old account.</p>
+
+<p><strong style="color: White;">Has anyone else already used this CD key?</strong><br>
+A CD key can only be used with one account.  If anyone else has used this key, you won't be able to use it.  This can happen if you've shared your key with a friend, if you've been given this key by a friend, or if you bought the game used.</p>
+
+<p><strong style="color: White;">Did you just buy this game?</strong><br>
+If you just bought this game in the past few days and were unable to register the CD key, please contact us.  Send mail to <a href="https://web.archive.org/web/20040414001040/mailto:support@steampowered.com">support@steampowered.com</a> with the CD key and information about when and where you bought the game.</p>
+</ul>
+
+
+<h3>I created a Steam account a while ago, and now I can't access it.</h3>
+<ul>
+<p><strong style="color: White;">Do you know your account name?</strong><br>
+If you know your account name but have forgotten your password, you can reset your password using the "Reset Password" button on the login screen.</p>
+
+<p><strong style="color: White;">Have you forgotten your account name?</strong><br>
+Your account name is likely to be your email address, or perhaps an old email address that you used in the past.  Try logging in using any old email addresses you might have used.</p>
+
+<p><strong style="color: White;">Are you still unable to access your account?</strong><br>
+Unfortunately, if you can't remember your account name or are unable to reset your password, you will not be able to access your account.  You will need to create a new Steam account.</p>
+</ul>
+
+<h3>I've tried everything, and I still can't get my CD key to work.</h3>
+
+<ul>
+<p><strong style="color: White;">Do you still have your original retail package with the printed CD key?</strong><br>
+If you still have your original printed CD key, we can reset your key.  This will remove it from the account that is currently using it, and add it to your account.  To do this, you will need to have a working Steam account (create a new one, if you don't have access to your old account).  You will need to mail us the original printed CD key, along with your email address and the Steam account that you want the CD key assigned to.  Please note that we need the original CD key-we are unable to accept copies or photos.  Send your package to:</p>
+
+<ul>CD Key Reset<br>
+Valve Software<br>
+PO Box 1688<br>
+Bellevue WA 98009<br>
+USA</ul>
+
+<p><strong style="color: White;">Have you lost the original retail package?</strong><br>
+If you don't have the original retail package with the printed CD key and you're unable to get access to your Steam account, we will be unable to help you.</p>
+<br><br>
+</ul>
+
+
+<h2>OTHER QUESTIONS</h2><br>
+
+<h3>Is my Steam Account Name my email address?</h3>
+<ul>
+<p>Your Steam Account Name is what you enter into the "Account Name" field of the Login screen to log in to Steam. This may or may not be the same as your email address.</p>
+
+<p>Before March 3, 2004, Steam Account Names were email addresses. After that date, new accounts could be created that were not necessarily email addresses. Also, the option was added to change the email address associated with your Steam Account.</p>
+
+<p>Currently, you can not change the Account Name of your Steam Account. However, in the future this feature may be added.</p>
+
+<p>In the Steam Settings window, you have the option of changing the contact email address associated to your Steam Account. If you do this, a verification email will be sent to that address with a special code. You then enter that code into Steam to validate the new email address.</p>
+
+<p>Note that this does not change your Steam Account Name. Even if your Account Name is the same as your old email address. It may seem a little odd to type your old email address in the Login screen, but that is the way it works. </p>
+</ul>
+
+<h3>How do I delete my Steam account?</h3>
+<ul>
+<p>To delete your Steam Account, you must contact us. Deleting your account will not allow you to use any of the cd-keys registered to it on a new account. It will also not cause any previous purchases through Steam to be refunded.</p>
+</ul>
+
+<h3>What if the Valve Anti-Cheat system (VAC) bans me? How to I make my account work again?</h3>
+<ul>
+<p>Please visit <a href="index.php?area=cheat_form">this page</a>, read about VAC, and submit the form if necessary. </p>
+</ul>
+
+<h3>Where do I get a new CD key?</h3>
+<ul>
+<p>For now, you you'll need to buy a new copy of your game in a retail store or from an online retailer. </p>
+</ul>
+
+<h3>Do I get a CD key if I buy my games on Steam?</h3>
+<ul>
+<p>No.  When you buy games directly through Steam, your SteamID serves as your online identifier, and proof of your purchase is attached to your Steam account records. The CD key is therefore unnecessary.</p>
+</ul>
+<img src="https://web.archive.org/web/20040414001040im_/http://steampowered.com/img/Graphic_box.jpg" height="6" width="100%"><br><br>
+<h3>I've read through these issues, but I still need help</h3>
+If you have a problem related to CD Keys or your Steam account which is not covered above, then please tell us about it using <a href="https://web.archive.org/web/20040414001040/http://steampowered.com/index.php?area=cd_account_form">this form</a>.
+
+</div>
+</div>
 HTML;
-$pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['cd_account_faq','CD Keys and Steam Accounts',$cdaccountfaq_html,'2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $cafeprogram_html = <<<'HTML'
 <h1>FEATURES AND BENEFITS</h1>
