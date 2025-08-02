@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - Add storefront dropdown navigation in admin sidebar
 - Global header bar uses 2006 layout with dynamic navigation
 - Header bar styles now output inline with the 2006 layout
+- Fixed 2006 v1 and v2 theme layouts so storefront capsules render correctly
 - CSS links beginning with ./ now resolve to the root website path
 - Random content entries reference groups via foreign keys
 - Added 2002_page_title and support_email template tags
