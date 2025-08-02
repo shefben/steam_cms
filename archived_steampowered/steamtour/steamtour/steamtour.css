@@ -1,0 +1,75 @@
+p {
+	font-family: "Verdana";
+	font-size: 11px;
+	color: #bbbbbb;
+	line-height: 17px;
+}
+pre {
+	color: #bbbbbb;
+}
+.h1 {
+	font-family: "Trebuchet MS";
+	font-size: 28px;
+	color: #dddddd;
+}
+.h2 {
+	font-family: "Trebuchet MS";
+	font-size: 16px;
+	color: #dddddd;
+}
+h1 {
+	font-weight: normal;
+	font-family: "Trebuchet MS";
+	font-size: 28px;
+	color: #dddddd;
+}
+h2 {
+	font-family: "Trebuchet MS";
+	font-size: 16px;
+	color: #dddddd;
+}
+a:link {
+	text-decoration: underline;
+	color: d0b271;
+}
+a:visited {
+	color: d0b271;
+}
+a:hover {
+	color: ffffff;
+}
+a:active {
+	color: d0b271;
+}
+body {
+	background-color: #050704;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+#sysReq {
+	font-family: "Verdana";
+	font-size: 10px;
+	color: #565656;
+	line-height: 15px;
+	margin:0;
+	padding-top: -20px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+#sysReqBold {
+	font-weight:bold;
+}
+#click2Install {
+	font-family: "Verdana";
+	font-size: 11px;
+	color: #bbbbbb;
+	line-height: 17px;
+	text-align:center;
+	padding:0;
+	margin:0;
+	padding-top:2px;
+}
+	
+<script type="text/javascript" src="ieupdate.js">

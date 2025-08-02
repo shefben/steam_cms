@@ -1,6 +1,6 @@
 html/betasignup.html -> index.php?area=getsteamnow
 legal.html -> index.php?area=legal
-status.php -> index.php?area=sstatus
+status.php -> index.php?area=status
 cafesupport.domain.com -> /cafesupport/
 beta.valvesoftware.com -> index.php?area=becomebetatester
 Games_Available/Games.htm -> index.php?area=games
@@ -8,3 +8,4 @@ BetaSupport/support.htm -> index.php?area=support
 http://www.chatbear.com/cgi-bin/board.pl?boardid=1041&amp;view=flatold -> /forums/
 Faq/FAQ.htm -> index.php?area=beta1faq
 steamsupport@valvesoftware.com -> steamsupport@<domain>
+/marketing/ -> steam/marketing/

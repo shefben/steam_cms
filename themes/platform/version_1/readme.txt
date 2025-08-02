@@ -1,0 +1,1 @@
+This template is for the steam news updates.  version 1 should be used from 2003 to jan 1 2006

@@ -1,0 +1,70 @@
+<html><head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>{{ app_name_caps }} Update History</title>
+<link href="styles_updateHistory_{{skin}}.css" rel="stylesheet" type="text/css">
+<meta content="0" http-equiv="Expires">
+<meta content="no-cache" http-equiv="Pragma">
+<meta content="no-cache" http-equiv="Cache-Control">
+<style type="text/css">
+	<!--
+
+		.post_header {
+			cursor: pointer;
+			display: inline;
+		}
+		.post_pmbutton {
+			font-family: Courier New;
+			font-size: 12px;
+			float: left;
+		}
+		.post_date {
+			font-family: Verdana;
+			font-size: 12px;
+			float: left;
+		}
+		.post_content {
+			font-family: Verdana;
+			font-size: 12px;
+			padding: 1px;
+			padding-left: 25px;
+			max-width: 600px;
+		}
+
+	-->
+	</style>
+<script>
+	<!--
+
+		function togglePost( id )
+		{
+			var button = document.getElementById( 'button_'+id ).innerHTML;
+			if ( button == '[-]')
+			{
+				document.getElementById( 'button_'+id ).innerHTML = '[+]';
+				document.getElementById( 'content_'+id ).style.display = 'none';
+			}
+			else
+			{
+				document.getElementById( 'button_'+id ).innerHTML = '[-]';
+				document.getElementById( 'content_'+id ).style.display = '';
+			}
+		}
+
+	//-->
+	</script><style type="text/css" id="operaUserStyle"></style>
+</head>
+<body>
+<!-- skin {{skin}} -->
+<!-- id {{id}} -->
+<!-- client  -->
+<div class="header">
+<div class="headerImg">
+<div class="extImg"><a href="platform/update_history/index.php?skin={{skin}}&id={{ id }}"><img alt="launch in web browser" border="0" height="24" src="launch.gif" width="24"></a></div>
+<h1>Update News - {{ app_name_caps }}</h1>
+<h2>Latest update: {{ latest_update_date }}</h2>
+</div>
+</div>
+<div class="content">
+{{ platform_update_news() }}
+</div>
+</body></html>

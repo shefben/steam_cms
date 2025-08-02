@@ -1,0 +1,17 @@
+<html><head>
+<title>{{ app_name_caps }} Update History</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="script.js" type="text/JavaScript"></script><style type="text/css" id="operaUserStyle"></style>
+<meta content="0" http-equiv="Expires">
+<meta content="no-cache" http-equiv="Pragma">
+<meta content="no-cache" http-equiv="Cache-Control">
+</head>
+<body>
+<div class="headerimg"><a href="platform/update_history/index.php?skin={{skin}}&id={{ id }}" target="_new"><img align="absmiddle" alt="Open this page in a new window" border="0" height="18" src="ie_dark.gif" title="Open this page in a new window" width="17"></a></div>
+<b>UPDATE NEWS - {{ app_name_caps }}</b>
+<div class="header" style="padding-top: 5px; padding-bottom: 5px;">Latest update: {{ latest_update_date }}</div>
+<span class="note">
+<hr align="left" style="width: 100%;"></span>
+<div style="padding-bottom: 5px;"><strong style="color: #eeeeee;">Full Change History:</strong></div>
+{{ platform_update_news() }}
+</body></html>

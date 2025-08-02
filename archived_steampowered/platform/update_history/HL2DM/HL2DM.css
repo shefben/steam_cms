@@ -1,0 +1,55 @@
+BODY	{ 
+	color: white; 
+	font-size: 10pt; 
+	font-family: verdana;
+	arial, sans-serif; 
+	background: #3e4533; 
+	margin: 0px 
+	}
+DIV	{
+	padding:0px;
+	margin:0px;
+	}
+H1	{
+	font-family:trebuchet ms;
+	font-size:12pt;
+	font-weight:bold;
+	color:#BFBA50;
+	margin:0px;
+	letter-spacing:0.1em;
+	}
+hr {
+  /* make it 4px narrower than the parent and center it */
+  width: calc(100% - 24px);
+  margin: 8px auto;
+
+  /* your existing styling, tweaked to use border-top */
+  border: none;
+  border-top: 1px dotted #282E22;
+  height: 0;
+}
+
+.footer { color: #555; 
+	font-size: 7pt; 
+	line-height: 8pt; 
+	background-image: none; 
+	background-repeat: repeat; 
+	background-attachment: scroll; 
+	background-position: 0 0; 
+	position: relative; 
+	width: 100%; 
+	float: center     
+	}
+a	{
+	color:white;
+	}
+.steamMessage {
+  height: 550px;
+  width: 596px;
+  padding: 48px 0 0 20px;
+  background: url(img/background.gif) no-repeat center top;
+  /* make the image scale to exactly cover the div */
+  background-size: 100% 100%;
+  /* remove fixed‐to‐viewport behavior so it scrolls with the div */
+  background-attachment: scroll;
+}

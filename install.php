@@ -134,6 +134,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 status VARCHAR(20) DEFAULT 'draft',
                 UNIQUE KEY slug_theme (slug, theme)
             )");
+            $pdo->exec("DROP TABLE IF EXISTS platform_update_history");
+            $pdo->exec('CREATE TABLE platform_update_history (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                appid INT NOT NULL,
+                date DATE NOT NULL,
+                title TEXT,
+                content LONGTEXT NOT NULL,
+                INDEX idx_appid (`appid`),
+                INDEX idx_date (`date`)
+            )');
             $pdo->exec("DROP TABLE IF EXISTS support_pages");
             $pdo->exec("CREATE TABLE support_pages(
                 id INT AUTO_INCREMENT PRIMARY KEY,
