@@ -383,6 +383,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 line INT,
                 created DATETIME DEFAULT CURRENT_TIMESTAMP
             )");
+            $pdo->exec("DROP TABLE IF EXISTS survey_entries");
+            $pdo->exec("DROP TABLE IF EXISTS survey_categories");
+            $pdo->exec("DROP TABLE IF EXISTS survey_info");
+            $pdo->exec("CREATE TABLE survey_info(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                unique_samples INT,
+                start_date DATETIME,
+                last_updated DATETIME
+            )");
+            $pdo->exec("CREATE TABLE survey_categories(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                slug VARCHAR(100) UNIQUE,
+                title VARCHAR(255),
+                ord INT DEFAULT 0
+            )");
+            $pdo->exec("CREATE TABLE survey_entries(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                category_id INT NOT NULL,
+                label VARCHAR(255),
+                percentage DECIMAL(5,2),
+                count INT,
+                ord INT DEFAULT 0,
+                FOREIGN KEY (category_id) REFERENCES survey_categories(id) ON DELETE CASCADE
+            )");
             function split_sql_statements($sql)
             {
                 $stmts = [];
@@ -415,7 +439,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 return $stmts;
             }
 
+            function run_sql_file(PDO $pdo, string $file): void
+            {
+                $sql = file_get_contents($file);
+                foreach (split_sql_statements($sql) as $stmt) {
+                    $stmt = trim($stmt);
+                    if ($stmt === '') {
+                        continue;
+                    }
+                    $pdo->exec($stmt);
+                }
+            }
+
             foreach (glob(__DIR__.'/sql/*.sql') as $file) {
+                if (basename($file) === 'install_official_survey_stats.sql') {
+                    continue;
+                }
                 $sql = file_get_contents($file);
                 foreach (split_sql_statements($sql) as $stmt) {
                     $stmt = trim($stmt);
@@ -468,6 +507,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     $pdo->exec($stmt);
                 }
+            }
+            if (!empty($_POST['use_official_survey'])) {
+                run_sql_file($pdo, __DIR__.'/sql/install_official_survey_stats.sql');
             }
             // use first inserted content server as default network target
             try {
@@ -1807,6 +1849,9 @@ $defaultCafes = [
             <div class="form-group">
                 <label for="admin_email">Admin Email</label>
                 <input id="admin_email" type="email" class="form-control" name="admin_email" value="admin@steampowered.com">
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" name="use_official_survey" value="1"> Use official survey stats</label>
             </div>
             <button class="btn btn-primary" type="submit">Install</button>
         </form>
