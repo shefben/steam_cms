@@ -2,7 +2,7 @@ CREATE TABLE survey_info(
     id INT AUTO_INCREMENT PRIMARY KEY,
     unique_samples INT,
     start_date DATETIME,
-    last_updated DATETIME
+    last_updated VARCHAR(100)
 );
 CREATE TABLE survey_categories(
     id INT AUTO_INCREMENT PRIMARY KEY,

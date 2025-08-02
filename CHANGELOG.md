@@ -231,3 +231,4 @@ All notable changes to this project will be documented in this file.
 - Removed obsolete footer from tourney_limited page.
 - Added dynamic survey statistics with optional official data import and admin management.
 - Installer now seeds official 2006 survey stats from bundled SQL instead of parsing HTML.
+- Survey page mirrors archived 2006 design exactly while loading stats from the database.
