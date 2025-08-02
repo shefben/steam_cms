@@ -473,6 +473,29 @@ function cms_twig_env(string $tpl_dir): Environment
             return $html;
         }, ['is_safe' => ['html']]));
 
+        $env->addFunction(new TwigFunction('platform_update_news', function () {
+            $appid = $GLOBALS['platform_update_appid'] ?? 0;
+            if (!$appid) { return ''; }
+            $db = cms_get_db();
+            $stmt = $db->prepare('SELECT date,title,content FROM platform_update_history WHERE appid=? ORDER BY date DESC');
+            $stmt->execute([$appid]);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $out = '';
+            $i = 1;
+            foreach ($rows as $row) {
+                $date = date('F j, Y', strtotime($row['date']));
+                $title = htmlspecialchars($row['title'] ?? '');
+                $content = $row['content'] ?? '';
+                $out .= '<div class="post_header" onclick="togglePost('.$i.')">'
+                    .'<div id="button_'.$i.'" class="post_pmbutton">[-]</div>'
+                    .'<div class="post_date">'.$date.' - '.$title.'</div>'
+                    .'</div>'
+                    .'<div class="post_content" id="content_'.$i.'">'.$content.'</div>';
+                $i++;
+            }
+            return $out;
+        }, ['is_safe' => ['html']]));
+
         $env->addFunction(new TwigFunction('tournament_calendar', function(int $months = 4) {
             $db = cms_get_db();
             $start = new DateTime('first day of this month');
