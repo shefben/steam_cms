@@ -41,6 +41,10 @@ These tags pull their text from the `settings` table and simply echo it:
 - **`store_sidebar()`** – Generates sidebar navigation from `store_sidebar_links` (`label`, `url`, `type`, `ord`, `visible`).
 - **`tabs_block()`** – For theme `2007_v2` displays tabbed lists built from `storefront_tabs` and `storefront_tab_games` tables.
 
+## Platform Tags
+
+- **`platform_update_news()`** – Outputs update history entries for the current app. Each entry can be toggled open or closed and data comes from the `platform_update_history` table.
+
 ## Title Helpers
 
 - **`split_title(text)`** – Splits a string into two emphasized halves using the rules described in the prompt. Outputs the provided HTML snippet.
@@ -80,6 +84,7 @@ The following table lists each tag or tag group, where its content is managed in
 |`capsule_block`, `large_capsule_block`, `featured_capsules`|**Storefront Main** (`storefront_main.php`) and **Upload Capsule** (`upload_capsule.php`)|`storefront_capsules_all`, `storefront_capsules_per_theme`, `store_capsules`|
 |`store_sidebar`|**Storefront Sidebar** (`storefront_sidebar.php`)|`store_sidebar_links`|
 |`tabs_block`|**Storefront Main**|`storefront_tabs`, `storefront_tab_games`|
+|`platform_update_news`|N/A|`platform_update_history`|
 |`split_title_entry`|**Custom Titles** (`custom_titles.php`)|`custom_titles`|
 |`sitetitle`|**Custom Pages** (`custom_pages.php`)|`custom_pages`|
 |`theme_specific_content_start`, `theme_specific_content_end`|N/A|N/A|

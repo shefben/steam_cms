@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Update history page collapses entries with latest entry expanded by default
 - Cafe directory importer parses text files and deduplicates entries
 - Cafe directory seed SQL includes country and state data
 - Introduced role-based permission system with new roles admin page
