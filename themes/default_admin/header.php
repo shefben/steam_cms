@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <title>CMS Admin</title>
     <link rel="stylesheet" href="<?php echo htmlspecialchars($theme_url); ?>/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="<?php echo htmlspecialchars($theme_url); ?>/js/chart.min.js"></script>
 </head>
 <body>
 <header>
