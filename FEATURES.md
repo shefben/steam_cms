@@ -208,3 +208,6 @@
 - Install script populates all 2004 Steam download titles with full mirror lists
 - Tournament management allows admins to schedule events with calendars showing current and upcoming months.
 - "tourney_limited" custom page uses dynamic calendar and omits legacy footer.
+- Dynamic survey page renders database-driven stats with admin controls.
+- Installer can seed official 2006 survey statistics from bundled SQL.
+- Survey results page matches the archived 2006 layout pixel-for-pixel using database data.

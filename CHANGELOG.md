@@ -229,3 +229,6 @@ All notable changes to this project will be documented in this file.
 - Seeded the complete 2004 Steam installer catalog with titles, sizes, and mirror hosts during installation
 - Added tournament management admin page and dynamic tournament calendar page.
 - Removed obsolete footer from tourney_limited page.
+- Added dynamic survey statistics with optional official data import and admin management.
+- Installer now seeds official 2006 survey stats from bundled SQL instead of parsing HTML.
+- Survey page mirrors archived 2006 design exactly while loading stats from the database.
