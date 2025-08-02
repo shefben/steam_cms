@@ -38,6 +38,11 @@
 - Cafe directory and FAQ pages paginated for manageability
 - Sidebar links grouped under expandable Cafe menu
 - Not-found routes return the admin-configured error page
+- Random content links groups through foreign keys
+- 2002 page titles rendered with new 2002_page_title tag
+- Support email tag outputs address from settings
+- Admin settings screen captures support email address
+- 2002_v1 navigation auto-depresses active tab
 - Server-level 404 handler redirects missing files to error.php
 - Storefront SQL generator pulls pricing from package info
 - 2005 v2 theme index replicated from archive
