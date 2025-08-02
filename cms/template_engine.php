@@ -486,11 +486,18 @@ function cms_twig_env(string $tpl_dir): Environment
                 $date = date('F j, Y', strtotime($row['date']));
                 $title = htmlspecialchars($row['title'] ?? '');
                 $content = $row['content'] ?? '';
+                $open = $i === 1;
+                $button = $open ? '[-]' : '[+]';
+                $display = $open ? '' : 'none';
                 $out .= '<div class="post_header" onclick="togglePost('.$i.')">'
-                    .'<div id="button_'.$i.'" class="post_pmbutton">[-]</div>'
-                    .'<div class="post_date">'.$date.' - '.$title.'</div>'
+                    .'<div id="button_'.$i.'" class="post_pmbutton">'.$button.'</div>'
+                    .'<div class="post_date">'.$date.' - <strong class="post_title">'.$title.'</strong></div>'
+                    .'<br clear="all" />'
                     .'</div>'
-                    .'<div class="post_content" id="content_'.$i.'">'.$content.'</div>';
+                    .'<div class="post_content" id="content_'.$i.'" style="display: '.$display.';">'
+                    .$content
+                    .'<br clear="left" />'
+                    .'</div>';
                 $i++;
             }
             return $out;
