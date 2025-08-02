@@ -2,6 +2,7 @@
 require_once 'admin_header.php';
 cms_require_permission('manage_settings');
 $site_title = cms_get_setting('site_title','Steam');
+$support_email = cms_get_setting('supportemail','');
 $smtp_host = cms_get_setting('smtp_host','');
 $smtp_port = cms_get_setting('smtp_port','');
 $smtp_user = cms_get_setting('smtp_user','');
@@ -35,6 +36,7 @@ if(isset($_POST['reorder']) && isset($_POST['items'])){
 }
 if(isset($_POST['save'])){
     cms_set_setting('site_title',trim($_POST['site_title']));
+    cms_set_setting('supportemail',trim($_POST['supportemail']));
     cms_set_setting('smtp_host',trim($_POST['smtp_host']));
     cms_set_setting('smtp_port',trim($_POST['smtp_port']));
     cms_set_setting('smtp_user',trim($_POST['smtp_user']));
@@ -66,6 +68,7 @@ if(isset($_POST['save'])){
     cms_admin_log('Updated site settings');
     echo '<p>Settings saved.</p>';
     $site_title = trim($_POST['site_title']);
+    $support_email = trim($_POST['supportemail']);
     $smtp_host = trim($_POST['smtp_host']);
     $smtp_port = trim($_POST['smtp_port']);
     $smtp_user = trim($_POST['smtp_user']);
@@ -91,6 +94,7 @@ Only display news for specific year of theme:
     <option value="1" <?php echo $news_year_only==='1'?'selected':''; ?>>Yes</option>
     <option value="0" <?php echo $news_year_only==='0'?'selected':''; ?>>No</option>
 </select><br><br>
+Support Email Address: <input type="text" name="supportemail" value="<?php echo htmlspecialchars($support_email); ?>" title="Email address for user support"><br><br>
 SMTP Host: <input type="text" name="smtp_host" value="<?php echo htmlspecialchars($smtp_host); ?>" title="Mail server host"><br>
 SMTP Port: <input type="text" name="smtp_port" value="<?php echo htmlspecialchars($smtp_port); ?>" title="Mail server port"><br>
 SMTP User: <input type="text" name="smtp_user" value="<?php echo htmlspecialchars($smtp_user); ?>" title="Username for the mail server"><br>

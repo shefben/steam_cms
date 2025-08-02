@@ -46,7 +46,7 @@ function cms_split_title_entry(string $name): string
 function cms_random_content(string $tag): string
 {
     $db = cms_get_db();
-    $stmt = $db->prepare('SELECT content FROM random_content WHERE `group`=?');
+    $stmt = $db->prepare('SELECT c.content FROM random_content c JOIN random_groups g ON c.group_id = g.id WHERE g.name=?');
     $stmt->execute([$tag]);
     $rows = $stmt->fetchAll(PDO::FETCH_COLUMN);
     if (!$rows) {
@@ -237,6 +237,10 @@ function cms_twig_env(string $tpl_dir): Environment
             return cms_get_setting('find_list', '');
         }, ['is_safe' => ['html']]));
 
+        $env->addFunction(new TwigFunction('support_email', function() {
+            return cms_get_setting('supportemail', '');
+        }, ['is_safe' => ['html']]));
+
         $env->addFunction(new TwigFunction('split_title', function(string $title) {
             return cms_split_title($title);
         }, ['is_safe' => ['html']]));
@@ -256,8 +260,23 @@ function cms_twig_env(string $tpl_dir): Environment
             return '';
         }, ['is_safe' => ['html']]));
 
+        $env->addFunction(new TwigFunction('2002_page_title', function() {
+            $slug  = cms_get_current_page();
+            $theme = cms_get_current_theme();
+            $page  = cms_get_custom_page($slug, $theme);
+            if ($page && !empty($page['page_name'])) {
+                require_once __DIR__.'/utilities/text_styler.php';
+                return render2002Title([[18, $page['page_name']]]);
+            }
+            return '';
+        }, ['is_safe' => ['html']]));
+
         $env->addFunction(new TwigFunction('current_theme', function() {
             return cms_get_current_theme();
+        }));
+
+        $env->addFunction(new TwigFunction('current_page', function() {
+            return cms_get_current_page();
         }));
 
         $env->addFunction(new TwigFunction('theme_specific_content_start', function(string $themes) {

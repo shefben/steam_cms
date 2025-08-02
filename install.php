@@ -232,8 +232,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $pdo->exec("CREATE TABLE random_content(
                 uniqueid INT AUTO_INCREMENT PRIMARY KEY,
                 tag_name VARCHAR(25) NOT NULL,
-                `group` VARCHAR(100) NOT NULL,
-                content TEXT NOT NULL
+                group_id INT NOT NULL,
+                content TEXT NOT NULL,
+                FOREIGN KEY (group_id) REFERENCES random_groups(id) ON DELETE CASCADE
             )");
             $pdo->exec("DROP TABLE IF EXISTS scheduled_content");
             $pdo->exec("CREATE TABLE scheduled_content(

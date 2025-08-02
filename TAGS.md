@@ -27,6 +27,7 @@ These tags pull their text from the `settings` table and simply echo it:
 - `publisher_catalogs_title`, `publisher_catalogs_list`
 - `coming_soon_title`, `coming_soon_list`
 - `gear_block`, `free_block`
+- `support_email`
 
 ## Join Steam Block
 
@@ -44,6 +45,7 @@ These tags pull their text from the `settings` table and simply echo it:
 
 - **`split_title(text)`** – Splits a string into two emphasized halves using the rules described in the prompt. Outputs the provided HTML snippet.
 - **`split_title_entry(name)`** – Fetches `title_content` from the `custom_titles` table for a given `title_name` and renders it with `split_title`.
+- **`2002_page_title()`** – Displays the current page's `page_name` using the 2002 title banner style.
 - **`sitetitle()`** – Displays the current page's `page_name` using the 2002/2003 title style.
 
 ## Conditional Tags
@@ -52,9 +54,9 @@ These tags pull their text from the `settings` table and simply echo it:
 
 ## Dynamic Content Tags
 
-Tags that start with `random_` or `scheduled_` are resolved at runtime. Random content now groups entries by a `group` column and uses the group name as the tag:
+Tags that start with `random_` or `scheduled_` are resolved at runtime. Random content groups entries via the `random_groups` table and uses the group name as the tag:
 
-- **`random_<group>`** – Looks up all rows in `random_content` where `group` matches and returns one entry at random on each page load.
+- **`random_<group>`** – Looks up all rows in `random_content` whose linked group name matches and returns one entry at random on each page load.
 - **`scheduled_<tagname>`** – Reads entries from `scheduled_content` and checks the scheduling fields. Important columns include `schedule_type` (`every_n_days`, `day_of_month`, `fixed_range`), date fields, and `active` flag. Matching rows are concatenated and displayed.
 
 ## Development Notes
