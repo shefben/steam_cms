@@ -274,11 +274,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 INDEX(theme),
                 INDEX(page)
             )");
+
             $pdo->exec("DROP TABLE IF EXISTS theme_footers");
             $pdo->exec("CREATE TABLE theme_footers(
                 theme VARCHAR(50) PRIMARY KEY,
                 html MEDIUMTEXT
             )");
+
             $pdo->exec("DROP TABLE IF EXISTS admin_users");
             $pdo->exec("DROP TABLE IF EXISTS player_sessions");
             $pdo->exec("CREATE TABLE player_sessions (
@@ -288,14 +290,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 session_end   DATETIME        NOT NULL,
                 INDEX(user_id, session_start)
             )");
-                        $pdo->exec("DROP TABLE IF EXISTS player_history");
-                        $pdo->exec("CREATE TABLE player_history (
+
+            $pdo->exec("DROP TABLE IF EXISTS player_history");
+            $pdo->exec("CREATE TABLE player_history (
                 ts           TIMESTAMP PRIMARY KEY,
                 players      INT UNSIGNED NOT NULL,
                 game_servers INT UNSIGNED NOT NULL
             )");
-                        $pdo->exec("DROP TABLE IF EXISTS bw_history");
-                        $pdo->exec("CREATE TABLE bw_history (
+
+            $pdo->exec("DROP TABLE IF EXISTS bw_history");
+            $pdo->exec("CREATE TABLE bw_history (
                 ts     TIMESTAMP PRIMARY KEY,
                 mbps   INT UNSIGNED NOT NULL 
             )");
@@ -574,7 +578,6 @@ HTML;
                 ['url' => 'index.php?area=cybercafes',    'text' => 'Cyber Cafes'],
                 ['url' => 'support.php',       'text' => 'Support'],
                 ['url' => 'index.php?area=forums',        'text' => 'Forums'],
-                //['url' => 'status/status.php','text' => 'Status'],
                 ['url' => 'index.php?area=status','text' => 'Status']
             ];
 

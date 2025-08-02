@@ -1,0 +1,297 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script language="JavaScript">
+<!--
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function MM_goToURL() { //v3.0
+  var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
+  for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+// Navigation functions
+CSInit = new Array;
+function CSScriptInit() {
+if(typeof(skipPage) != "undefined") { if(skipPage) return; }
+idxArray = new Array;
+for(var i=0;i<CSInit.length;i++)
+	idxArray[i] = i;
+CSAction2(CSInit, idxArray);}
+CSAg = window.navigator.userAgent; CSBVers = parseInt(CSAg.charAt(CSAg.indexOf("/")+1),10);
+function IsIE() { return CSAg.indexOf("MSIE") > 0;}
+
+function CSClickReturn () {
+	var bAgent = window.navigator.userAgent; 
+	var bAppName = window.navigator.appName;
+	if ((bAppName.indexOf("Explorer") >= 0) && (bAgent.indexOf("Mozilla/3") >= 0) && (bAgent.indexOf("Mac") >= 0))
+		return true;
+	else return false;
+}
+
+function CSButtonReturn () {
+	var bAgent = window.navigator.userAgent; 
+	var bAppName = window.navigator.appName;
+	if ((bAppName.indexOf("Explorer") >= 0) && (bAgent.indexOf("Mozilla/3") >= 0) && (bAgent.indexOf("Mac") >= 0))
+		return false;
+	else return true;
+}
+
+CSIm = new Object();
+function CSIShow(n,i) {
+	if (document.images) {
+		if (CSIm[n]) {
+			var img = (!IsIE()) ? document.getElementById(n) : document[n];
+			if (img && typeof(CSIm[n][i].src) != "undefined") {img.src = CSIm[n][i].src;}
+			if(i != 0)
+				self.status = CSIm[n][3];
+			else
+				self.status = " ";
+			return true;
+		}
+	}
+	return false;
+}
+function CSILoad(action) {
+	im = action[1];
+	if (document.images) {
+		CSIm[im] = new Object();
+		for (var i=2;i<5;i++) {
+			if (action[i] != '') { CSIm[im][i-2] = new Image(); CSIm[im][i-2].src = action[i]; }
+			else CSIm[im][i-2] = 0;
+		}
+		CSIm[im][3] = action[5];
+	}
+}
+CSStopExecution = false;
+function CSAction(array) { 
+	return CSAction2(CSAct, array);
+}
+function CSAction2(fct, array) { 
+	var result;
+	for (var i=0;i<array.length;i++) {
+		if(CSStopExecution) return false; 
+		var actArray = fct[array[i]];
+		if(actArray == null) return false; 
+		var tempArray = new Array;
+		for(var j=1;j<actArray.length;j++) {
+			if((actArray[j] != null) && (typeof(actArray[j]) == "object") && (actArray[j].length == 2)) {
+				if(actArray[j][0] == "VAR") {
+					tempArray[j] = CSStateArray[actArray[j][1]];
+				}
+				else {
+					if(actArray[j][0] == "ACT") {
+						tempArray[j] = CSAction(new Array(new String(actArray[j][1])));
+					}
+				else
+					tempArray[j] = actArray[j];
+				}
+			}
+			else
+				tempArray[j] = actArray[j];
+		}			
+		result = actArray[0](tempArray);
+	}
+	return result;
+}
+CSAct = new Object;
+
+CSInit[CSInit.length] = new Array(CSILoad,'button','Tabs-Home_out.png','Tabs-Home_over.png','Tabs-Home_in.png','');
+CSInit[CSInit.length] = new Array(CSILoad,'button1','Tabs-News_out.png','Tabs-News_over.png','Tabs-News_in.png','');
+CSInit[CSInit.length] = new Array(CSILoad,'button2','Tabs-Games_Avail_out.png','Tabs-Games_Avail_over.png','Tabs-Games_Avail_in.png','');
+CSInit[CSInit.length] = new Array(CSILoad,'button3','Tabs-Support_out.png','Tabs-Support_over.png','Tabs-Support_in.png','');
+CSInit[CSInit.length] = new Array(CSILoad,'button4','Tabs-Message_Board_out.png','Tabs-Message_Board_over.png','Tabs-Message_Board_in.png','');
+CSInit[CSInit.length] = new Array(CSILoad,'button5','Tabs-FAQ_out.png','Tabs-FAQ_over.png','Tabs-FAQ_in.png','');
+//-->
+</script>
+<style type="text/css">
+<!--
+a {color: #E4C55A; text-decoration: none}
+a:hover {color: #F9DF84; text-decoration:;
+font-weight: regular}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: silver;
+    font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+}
+-->
+</style>
+<style type="text/css" id="operaUserStyle"></style></head>
+<body onload="CSScriptInit();MM_preloadImages('News.png','Games.png','Support.png','Message.png','About.png')" bgcolor="silver">
+
+<center>
+<table border="0" cellpadding="0" cellspacing="0" width="681">
+    <!-- Header Logo -->
+    <tbody><tr>
+        <td colspan="3" width="681" height="116">
+            <img src="Steam-Logo.png" width="678" height="116" border="0">
+        </td>
+    </tr>
+    
+    <!-- Navigation Bar -->
+    <tr>
+        <td colspan="3" width="681" height="24">
+            <table border="0" cellpadding="0" cellspacing="0" width="681">
+                <tbody><tr>
+                    <td width="28" height="24">
+                        <img src="Tabs-Home_Border.png" width="28" height="24" border="0">
+                    </td>
+                    <td width="62" height="24">
+                        <a href="./index.php" onclick="CSIShow('button',2);return CSButtonReturn()" onmouseout="return CSIShow('button',0)" onmouseover="return CSIShow('button',1)" target="_top">
+                            <img border="0" height="24" name="button" id="button" src="Tabs-Home_in.png" width="62">
+                        </a>
+                    </td>
+                    <td width="60" height="24">
+                        <a href="./index.php?area=games" onclick="CSIShow('button1',2);return CSButtonReturn()" onmouseout="return CSIShow('button1',0)" onmouseover="return CSIShow('button1',1)" target="_top">>
+                            <img border="0" height="24" name="button" id="button" src="Tabs-News_out.png" width="60">
+                        </a>
+                    </td>
+                    <td width="129" height="24">
+                        <a href="./index.php?area=games" onclick="CSIShow('button2',2);return CSButtonReturn()" onmouseout="return CSIShow('button2',0)" onmouseover="return CSIShow('button2',1)" target="_top">
+                            <img border="0" height="24" name="button2" id="button2" src="Tabs-Games_Avail_out.png" width="129">
+                        </a>
+                    </td>
+                    <td width="76" height="24">
+                        <a href="./index.php?area=support" onclick="CSIShow('button3',2);return CSButtonReturn()" onmouseout="return CSIShow('button3',0)" onmouseover="return CSIShow('button3',1)" target="_top">
+                            <img border="0" height="24" name="button3" id="button3" src="Tabs-Support_out.png" width="76">
+                        </a>
+                    </td>
+                    <td width="122" height="24">
+                        <a href="/forums/" onclick="CSIShow('button4',2);return CSButtonReturn()" onmouseout="return CSIShow('button4',0)" onmouseover="return CSIShow('button4',1)" target="_top">
+                            <img border="0" height="24" name="button4" id="button4" src="Tabs-Message_Board_out.png" width="122">
+                        </a>
+                    </td>
+                    <td width="64" height="24">
+                        <a href="./index.php?area=beta1faq" onclick="CSIShow('button5',2);return CSButtonReturn()" onmouseout="return CSIShow('button5',0)" onmouseover="return CSIShow('button5',1)" target="_top">
+                            <img border="0" height="24" name="button5" id="button5" src="Tabs-FAQ_out.png" width="64">
+                        </a>
+                    </td>
+<td height="24">
+                        <img src="Tabs-FAQ_Border.png" width="137" height="24" border="0">
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+    
+    <!-- Content Area -->
+    <tr>
+        <td width="19" height="1097" background="Page-Side_Left.png" valign="top">
+            <img src="Page-Side_Left.png" width="19" height="1" border="0">
+        </td>
+        <td width="635" height="1097" bgcolor="#6a6f82" valign="top">
+            <!-- Content Header -->
+            <table border="0" cellpadding="0" cellspacing="0" width="635">
+                <tbody><tr>
+                    <td width="635" height="90" bgcolor="#6a6f82" align="center" valign="middle">
+                        <br>
+<!-- start page title -->
+{{ 2002_page_title() }}
+<!-- end page title -->
+                    </td>
+                </tr>
+            </tbody></table>
+            
+            <!-- Start Body -->
+            <table border="0" cellpadding="0" cellspacing="0" width="635">
+                <tbody><tr>
+                    <td width="68" height="1007" bgcolor="#6a6f82" valign="top">
+                        <img src="spacer.gif" width="68" height="1" border="0">
+                    </td>
+                    <td width="496" height="1007" bgcolor="#6a6f82" valign="top">
+                        <!-- start News Content -->
+                        <font color="white" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="3">
+                            {{ content|raw }}
+                        </font>
+    <!-- end Content -->
+                    </td>
+                    <td width="71" height="1007" bgcolor="#6a6f82" valign="top">
+                        <img src="spacer.gif" width="71" height="1" border="0">
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+        <td width="72" height="1097" valign="top" style="background-image: url('Page-Side_right.png'); background-repeat: repeat-y;">
+            <img src="Page-Side_right.png" width="23" height="1" border="0">
+        </td>
+    </tr>
+    
+    <!-- Bottom Section -->
+    <tr>
+        <td colspan="3" width="681" height="103">
+            <table border="0" cellpadding="0" cellspacing="0" width="681">
+                <tbody><tr>
+                    <td width="678" height="43">
+                        <img src="Page-Bottom.png" width="678" height="43" border="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="677" height="29" align="center">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                
+                                <td width="81">
+                                    <img src="Bottom-VALVE1.png" width="81" height="29" border="0">
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="677" align="center">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                
+                                <td width="412">
+                                    <img src="Bottom-Links.png" width="412" border="0" usemap="#Bottom-Links">
+                                    <map name="Bottom-Links">
+                                        <area coords="353,4,406,15" href="mailto:steamsupport@valvesoftware.com" shape="rect" target="_top">
+                                        <area coords="316,4,341,15" href="./index.php?area=beta1faq" shape="rect" target="_top">
+                                        <area coords="234,4,307,15" href="/forums/" shape="rect" target="_top">
+                                        <area coords="183,4,218,15" href="./index.php?area=support" shape="rect" target="_top">
+                                        <area coords="85,4,168,15" href="./index.php?area=games" shape="rect" target="_top">
+                                        <area coords="49,4,75,15" href="./index.php?area=news" shape="rect" target="_top">
+                                        <area coords="4,4,41,15" href="./index.php" shape="rect" target="_top">
+                                    </map>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="677" height="28">
+                        <img src="Bottom-COPY1.png" width="678" height="28" border="0">
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+</center>
+
+
+</body></html>
