@@ -1,3 +1,19 @@
+DROP TABLE IF EXISTS store_categories;
+DROP TABLE IF EXISTS store_developers;
+DROP TABLE IF EXISTS store_apps;
+DROP TABLE IF EXISTS subscriptions;
+DROP TABLE IF EXISTS subscription_apps;
+DROP TABLE IF EXISTS app_categories;
+DROP TABLE IF EXISTS store_screenshots;
+DROP TABLE IF EXISTS store_sidebar_links;
+DROP TABLE IF EXISTS store_capsules;
+DROP TABLE IF EXISTS storefront_capsules_all;
+DROP TABLE IF EXISTS storefront_capsules_per_theme;
+DROP TABLE IF EXISTS storefront_capsule_items;
+DROP TABLE IF EXISTS storefront_tabs;
+DROP TABLE IF EXISTS storefront_tab_games;
+DROP TABLE IF EXISTS store_pages;
+
 CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,visible TINYINT DEFAULT 1);
 CREATE TABLE store_developers(id INT AUTO_INCREMENT PRIMARY KEY,name TEXT);
 CREATE TABLE store_apps(
