@@ -457,8 +457,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 run_sql_file($pdo, $file);
             }
 
-            foreach (glob(__DIR__.'/sql/*.sql') as $file) {
-                if (basename($file) === 'install_official_survey_stats.sql') {
+            $storefrontFile = __DIR__.'/sql/install_storefront.sql';
+            if (file_exists($storefrontFile)) {
+                run_sql_file($pdo, $storefrontFile);
+            }
+
+            $sqlFiles = glob(__DIR__.'/sql/*.sql');
+            sort($sqlFiles);
+            foreach ($sqlFiles as $file) {
+                $base = basename($file);
+                if ($base === 'install_storefront.sql' || $base === 'install_official_survey_stats.sql') {
                     continue;
                 }
                 $sql = file_get_contents($file);
