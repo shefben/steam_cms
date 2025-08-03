@@ -216,7 +216,7 @@ The following table lists each tag or tag group, where its content is managed in
 |`footer`|**Header/Footer**|`theme_footers`|
 |`news*` tags|**News** (`news.php`)|`news`|
 |`join_steam_text`, `join_steam_block`|**Settings** (`settings.php`)|`settings`|
-|`new_on_steam_title`, `new_on_steam_list`, `latest_news_title`, `latest_news_list`, `find_title`, `find_list`, `browse_catalog_title`, `publisher_catalogs_title`, `publisher_catalogs_list`, `coming_soon_title`, `coming_soon_list`, `gear_block`, `free_block`, `support_email`|**Settings**|`settings`|
+|`new_on_steam_title`, `new_on_steam_list`, `latest_news_title`, `latest_news_list`, `find_title`, `find_list`, `browse_catalog_title`, `browse_catalog_list`, `publisher_catalogs_title`, `publisher_catalogs_list`, `coming_soon_title`, `coming_soon_list`, `gear_block`, `free_block`|**Settings**|`settings`|
 |`categories_list`|**Storefront Categories** (`storefront_categories.php`)|`store_categories`|
 |`capsule_block`, `large_capsule_block`, `featured_capsules`|**Storefront Main** (`storefront_main.php`) and **Upload Capsule** (`upload_capsule.php`)|`storefront_capsules_all`, `storefront_capsules_per_theme`, `store_capsules`|
 |`store_sidebar`|**Storefront Sidebar** (`storefront_sidebar.php`)|`store_sidebar_links`|
