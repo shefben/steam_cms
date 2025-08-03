@@ -709,7 +709,7 @@ HTML;
 
 $tfstmt->execute(['2002_v2', <<<'HTML'
 (c) 2002 Valve, L.L.C. All rights reserved. Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve, L.L.C.
-HTML])
+HTML]);
 
 $tfStmt->execute(['2003_v1',<<<'HTML'
 <br>(c) 2003 Valve, L.L.C. All rights reserved. Steam, the Steam logo, Valve, and the Valve logo are trademarks<br>
@@ -840,7 +840,7 @@ Members can contact us via <a href="mailto:cybercafes@valvesoftware.com">cyberca
 </div>
 <br>
 
-If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. There are currently over 800 gaming venues in our program, and more are signing up every day. Valve's cybercafé program is the only legal way to use Valve games in your cybercafé or gaming center.<br>
+If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. There are currently over 800 gaming venues in our program, and more are signing up every day. Valve&aposs cybercafé program is the only legal way to use Valve games in your cybercafé or gaming center.<br>
 <br>
 
 <!--
@@ -889,7 +889,7 @@ Judge Thomas S. Zilly ruled that Sierra/Vivendi Universal Games, and its affilia
 <br>
 In addition, Judge Zilly ruled in favor of the Valve motion regarding the contractual limitation of liability, allowing Valve to recover copyright damages for any infringement as allowed by law without regard to the publishing agreement's limitation of liability clause. <br>
 <br>
-"We're happy the court has affirmed the meaning of our publishing contract. This is good news for Valve and its cyber café partners around the world," said Gabe Newell, founder and CEO of Valve. "We continue to add value to our program and we look forward to working with cafés to get them signed up and offering Valve's latest games to their customers." <br>
+"We're happy the court has affirmed the meaning of our publishing contract. This is good news for Valve and its cyber café partners around the world," said Gabe Newell, founder and CEO of Valve. "We continue to add value to our program and we look forward to working with cafés to get them signed up and offering Valve&aposs latest games to their customers." <br>
 <br>
 The Valve Cyber Café Program is the only legal way to use Valve games in your cyber café or gaming center. There are currently thousands of cyber cafés participating in the program throughout the world. <br>
 
@@ -921,7 +921,7 @@ The calendar below displays all of the Valve licensed tournaments occurring in t
 
 <br>
 
-If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. There are currently over 2500 gaming venues in our program, and more are signing up every day. Valve's cybercafé program is the only legal way to use Valve games in your cybercafé or gaming center.<br>
+If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. There are currently over 2500 gaming venues in our program, and more are signing up every day. Valve&aposs cybercafé program is the only legal way to use Valve games in your cybercafé or gaming center.<br>
 <br>
 
 <!--
@@ -993,7 +993,7 @@ Valve has launched a new <a href="index.php?area=tourney_limited">Tournament Web
 HTML;
 $pageStmt->execute(['cybercafes',null,'Cyber Cafés',$cybercafe_html,'2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-$cafesetup_html = <<< 'HTML'
+$cafesetup_html = <<<'HTML'
 <h1>CAFÉ SETUP INSTRUCTIONS</h1>
 <h2>HOW TO<em> GET UP AND RUNNING WITH STEAM</em></h2><img src="./image/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
@@ -1060,7 +1060,7 @@ Once you've installed Steam, all of the following features are available on your
 <br><br>
 <h3>EASY AND FAST ACCESS TO GAMES</h3>
 <img width="88" height="88" align="left" vspace="4" src="thumb_games.gif">
-After installing Steam, you'll have instant access to Valve's full library of games. And when you choose one to play, you don't have to wait for the whole thing to download -- you can start playing in a matter of minutes.<br clear="all">
+After installing Steam, you'll have instant access to Valve&aposs full library of games. And when you choose one to play, you don't have to wait for the whole thing to download -- you can start playing in a matter of minutes.<br clear="all">
 <br clear="all">
 <h3>AUTOMATIC UPDATES</h3>
 <img width="88" height="88" align="left" vspace="4" src="thumb_updates.gif">
@@ -1090,7 +1090,7 @@ HTML;
 
 $pageStmt->execute(['features',null,'Features',$features_html,'2003_v1,2003_v2,2004','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-$onlineconduct_html <<< 'HTML'
+$onlineconduct_html = <<<'HTML'
 <h1>STEAM ONLINE CONDUCT</H1>
 <br>
 <div class="narrower">
@@ -1101,7 +1101,7 @@ You will not:<br>
 <ul>
 <li>Upload, or otherwise make available, files that contain images, photographs, software or other material protected by intellectual property laws, including, by way of example, and not as limitation, copyright or trademark laws (or by rights of privacy or publicity) unless you own or control the rights thereto or have received all necessary consents to do the same.</li>
 <li>Use any material or information, including images or photographs, via Steam in any manner that infringes any copyright, trademark, patent, trade secret, or other proprietary right of any party. </li>
-<li>Upload files that contain viruses, trojan horses, worms, or any other similar software or programs that may damage the operation of another's computer or property of another.</li>
+<li>Upload files that contain viruses, trojan horses, worms, or any other similar software or programs that may damage the operation of another&aposs computer or property of another.</li>
 <li>Institute attacks upon a Steam server or otherwise disrupt Steam.</li>
 <li>Use Steam in connection with surveys, contests, pyramid schemes, chain letters, junk email, spamming or any duplicative or unsolicited messages (commercial or otherwise).</li>
 <li>Defame, abuse, harass, stalk, threaten or otherwise violate the legal rights (such as rights of privacy and publicity) of others.</li>
@@ -1116,7 +1116,7 @@ HTML;
 
 $pageStmt->execute(['online_conduct',null,'Steam Online Conduct',$onlineconduct_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-$mapcontestrules_html <<< 'HTML'
+$mapcontestrules_html = <<<'HTML'
 <h1>HALF-LIFE 2: DEATHMATCH MAP CONTEST OFFICIAL RULES</h1>
 <br>
 <br>
@@ -1151,20 +1151,20 @@ HTML;
 
 $pageStmt->execute(['map_contest_rules',null,'Half-Life 2: Deathmatch Map Contest Official Rules',$mapcontestrules_html,"2004,2005_v1,2005_v2",'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-$hl2goldcontest_html <<< 'HTML'
+$hl2goldcontest_html = <<<'HTML'
 <h1>VALVE HQ TRIP GIVEAWAY</h1>
-<h2>WIN<em> A TRIP TO VALVE'S OFFICES</em></h2><img src="/web/20041011044601im_/http://steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>WIN<em> A TRIP TO Valve&aposs OFFICES</em></h2><img src="/web/20041011044601im_/http://steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
-So you want to see Valve's headquarters? Well, how about if we fly you to Valve HQ to tour the facility and meet some of the team members responsible for Half-Life 2 and Valve's other games?<br>
+So you want to see Valve&aposs headquarters? Well, how about if we fly you to Valve HQ to tour the facility and meet some of the team members responsible for Half-Life 2 and Valve&aposs other games?<br>
 <br>
 Beginning now and ending December 31, 2004, Valve will automatically enter each eligible purchaser of the Half-Life 2 Gold package in the Valve HQ Trip Giveaway. On January 19th, 2005, Valve will randomly select one lucky winner for every 5,000 copies of the Half-Life 2 Gold package purchased by customers through Steam between October 7, 2004 and December 31, 2004 -- it could be you!<br>
 <br>
-The trip to Valve's headquarters includes:<br>
+The trip to Valve&aposs headquarters includes:<br>
 <br>
 <ul>
-<li>Two nights' accommodation at a hotel of Valve's choice near Valve's Washington state headquarters.</li>
+<li>Two nights&apos accommodation at a hotel of Valve&aposs choice near Valve&aposs Washington state headquarters.</li>
 <li>Coach class airfare to Seattle, Washington.</li>
-<li>A tour of Valve's facilities.</li>
+<li>A tour of Valve&aposs facilities.</li>
 <li>Lunch with a select group of Valve employees.</li>
 <li>An autographed Half-Life 2 poster.</li>
 </ul>
@@ -1184,11 +1184,11 @@ Conditions of Entry / Official Rules:<br>
 <br>
 2)      HOW TO ENTER: You can enter the Giveaway in one of two ways.  You can purchase the Half-Life 2 Gold package via Steam by December 31, 2004. Or, if you are a United States resident, you can enter by sending a postcard marked "Valve HQ Giveaway" to the following address: PO Box 1688, Bellevue, WA 98009.  Your postcard must be received by 11:59 pm PST, December 31, 2004 and include your full name, birth date, address, phone number and email. Incomplete or late entries will be rejected.<br>
 <br>
-3)      WINNER SELECTION &amp; NOTIFICATION: A random drawing will be conducted by Valve on January 19, 2005. Valve's decision is final on all matters relating to the Giveaway. Odds of winning depend on the number of copies of the Half-Life 2 Gold package sold via Steam and the number of eligible entries received. The potential winner(s) will be notified by e-mail within one (1) week of prize drawing.<br>
+3)      WINNER SELECTION &amp; NOTIFICATION: A random drawing will be conducted by Valve on January 19, 2005. Valve&aposs decision is final on all matters relating to the Giveaway. Odds of winning depend on the number of copies of the Half-Life 2 Gold package sold via Steam and the number of eligible entries received. The potential winner(s) will be notified by e-mail within one (1) week of prize drawing.<br>
 <br>
-4)      PRIZE: Valve will pay (i) two nights' accommodation at a hotel of Valve's choice near Valve's Washington state headquarters and (ii) coach class airfare to Seattle, Washington from either the major airport nearest to the winner's residence (if the winner resides in the United States) or the major international airport nearest to the winner's residence (if the winner does not reside in the United States).  Valve will give the prize winner(s) at least 8 weeks notice of the dates scheduled for the trip and prize winner(s) must provide Valve with any necessary information required for Valve to book air travel and hotel accommodations within 6 weeks of such date.  Any prize winner(s) under the age of 18 must travel with a parent or legal guardian.<br>
+4)      PRIZE: Valve will pay (i) two nights&apos accommodation at a hotel of Valve&aposs choice near Valve&aposs Washington state headquarters and (ii) coach class airfare to Seattle, Washington from either the major airport nearest to the winner's residence (if the winner resides in the United States) or the major international airport nearest to the winner's residence (if the winner does not reside in the United States).  Valve will give the prize winner(s) at least 8 weeks notice of the dates scheduled for the trip and prize winner(s) must provide Valve with any necessary information required for Valve to book air travel and hotel accommodations within 6 weeks of such date.  Any prize winner(s) under the age of 18 must travel with a parent or legal guardian.<br>
 <br>
-5)      GENERAL CONDITIONS: Giveaway entrants agree to be bound by the terms of these official rules.  The Giveaway is offered by Valve, which is not responsible for incompletion, illegible, or misdirected e-mail or postal mail, or for phone, electrical, network, computer, hardware or software program malfunctions, failures or difficulties. The laws of the United States govern this Giveaway. All Federal, State and Local laws and regulations apply. Acceptance of prize constitutes permission for Valve to use winner's name and likeness for advertising and promotional purposes without additional compensation unless prohibited by law. By entering, participants release and hold harmless Valve and its respective subsidiaries, affiliates, directors, officers, prize suppliers, employees and agents, including advertising and promotion agencies, from any and all liability or any injuries, loss or damage of any kind arising from or in connection with this Giveaway or acceptance or use of prize. Valve reserves the right to cancel or modify the Giveaway if fraud or technical failure destroys the integrity of the Giveaway, as determined by Valve in its sole discretion. Valve reserves the right to disqualify any winner, as determined by Valve in its sole discretion. No cash or other substitution for prizes except at the option of Valve, for a prize of equal or greater value. Taxes are the sole responsibility of the winners. Actual prizes may differ from images shown.<br>
+5)      GENERAL CONDITIONS: Giveaway entrants agree to be bound by the terms of these official rules.  The Giveaway is offered by Valve, which is not responsible for incompletion, illegible, or misdirected e-mail or postal mail, or for phone, electrical, network, computer, hardware or software program malfunctions, failures or difficulties. The laws of the United States govern this Giveaway. All Federal, State and Local laws and regulations apply. Acceptance of prize constitutes permission for Valve to use winner&aposs name and likeness for advertising and promotional purposes without additional compensation unless prohibited by law. By entering, participants release and hold harmless Valve and its respective subsidiaries, affiliates, directors, officers, prize suppliers, employees and agents, including advertising and promotion agencies, from any and all liability or any injuries, loss or damage of any kind arising from or in connection with this Giveaway or acceptance or use of prize. Valve reserves the right to cancel or modify the Giveaway if fraud or technical failure destroys the integrity of the Giveaway, as determined by Valve in its sole discretion. Valve reserves the right to disqualify any winner, as determined by Valve in its sole discretion. No cash or other substitution for prizes except at the option of Valve, for a prize of equal or greater value. Taxes are the sole responsibility of the winners. Actual prizes may differ from images shown.<br>
 <br>
 <br>&nbsp;
 HTML;
@@ -1234,7 +1234,7 @@ HTML;
 
 $pageStmt->execute(['e3_movies',null,'Half-Life 2 E3 Movies',$e3_html,'2003_v1,2003_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-$contact_html <<< 'HTML'
+$contact_html = <<<'HTML'
 <h1>CONTACT</h1>
 <h2>TALK <em>TO US (&amp; THE STEAM COMMUNITY)</em></h2><img src="/web/20050323095856im_/http://steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 
@@ -1262,7 +1262,7 @@ For technical issues not covered in the above places, feel free to contact the S
 For any issues related to credit cards or billing, please visit the <a href="/index.php?area=support_billing">Steam Billing Support</a> page.<br><br> -->
 
 <h3>BUSINESS AND PARTNERSHIP INQUIRIES</h3>
-For inquiries regarding business relationships such as becoming a content server, offering Valve's games at cybercafes, or developing your own Steam-enabled software applications, please contact us directly at <a href="https://web.archive.org/web/20050323095856/mailto:biz@steampowered.com">biz@steampowered.com</a>.<br>
+For inquiries regarding business relationships such as becoming a content server, offering Valve&aposs games at cybercafes, or developing your own Steam-enabled software applications, please contact us directly at <a href="https://web.archive.org/web/20050323095856/mailto:biz@steampowered.com">biz@steampowered.com</a>.<br>
 
 </div>
 HTML;
@@ -1295,6 +1295,40 @@ $forums_html = <<<'HTML'
 HTML;
 $pageStmt->execute(['forums',null,'Forums',$forums_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2,2006_v1,2006_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
+
+$steamidinstructions_html = <<<'HTML'
+<html>
+<head>
+<title>SteamID instructions</title>
+<style>
+	<!--
+	body { scrollbar-base-color: #4C5844; }
+	body, p, td, h1 { font-family: Verdana; font-size: 12px; }
+	h1 { font-size: 14px; font-weight: bold; }
+	body { background:#4C5844; color:#D8DED3; }
+	.content { background:#3E4637; }
+	a { color: White; }
+	-->
+	</style>
+</head>
+<body bottommargin='\"20\"' leftmargin='\"20\"' marginheight='\"20\"' marginwidth='\"20\"' rightmargin='\"20\"' topmargin='\"20\"'>
+<table cellpadding='\"10\"' cellspacing='\"0\"' class='\"content\"' height='\"100%\"' width='\"100%\"'>
+<tr>
+<td #56634d;\"="" 1px="" align='\"left\"' solid="" style='\"border:' valign='\"top\"' width='\"100%\"'>
+<h1>How to find your Steam User ID</h1>
+
+	Your Steam ID is your unique numeric identifier. It is the piece of identification that Steam uses to determine which games you own, whether you've ever cheated on a public game server, etc.<br/><br/>
+	If you don't know your Steam ID, here's how to find it:<br/><br/>
+	You must first connect to an internet game server. (If you've been banned by VAC for cheating, you'll have to find an "insecure" server for this purpose). After you're connected, open the console by pressing the tilde (~) key. In the console, type "status" (without quotes). Look for your own player name, and note the number that follows it. This is your official Steam ID.<br/>
+</td>
+</tr>
+</table>
+</body>
+</html>
+HTML;
+
+$pageStmt->execute(['steamid_instructions',null,'SteamID instructions',$steamidinstructions_html,'2003_v2,2004,2005_v1,2005_v2','none.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
 $ded_html = <<<'HTML'
 <!-- dedicated server -->
 <h1>Dedicated Server update files</h1>
@@ -1314,7 +1348,7 @@ NOTE: This release includes only those files which have changed since the last d
 HTML;
 $pageStmt->execute(['dedicated_server',null,'Dedicated Server update files',$ded_html,'2003_v1,2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-            $css_html = <<<'HTML'
+$css_html = <<<'HTML'
 <!-- CS:S Beta 1 FAQ -->
 <h1>COUNTER-STRIKE: SOURCE</h1>
 <h2>BETA 1 <em>QUESTIONS AND ANSWERS</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
@@ -1355,22 +1389,22 @@ $pageStmt->execute(['css_b1',null,'Counter-Strike: Source Beta 1 FAQ',$css_html,
 
 $pricing_html = <<<'HTML'
 <h1>PRICING AND LICENSING</H1>
-<h2>VALVE'S<em> OFFICIAL CYBER CAF&Eacute; PROGRAM</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>Valve&aposs<em> OFFICIAL CYBER CAF&Eacute; PROGRAM</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
 <div class="narrower">
 
-Valve's Official Cyber Caf&eacute; Program makes things simple for the caf&eacute; owner.<br>
+Valve&aposs Official Cyber Caf&eacute; Program makes things simple for the caf&eacute; owner.<br>
 <br>
 <h3 style="text-transform:uppercase;">One low monthly fee</h3>
-For a low monthly fee per licensed computer, your caf&eacute; gets access to all of Valve's games. See the <a href="index.php?area=cybercafe_program">full list of Features and Benefits</a> for the details of what's included. Payment is handled in three-month blocks, in advance, either by recurring automatic billing or by invoice. <!-- For full details about licensing, payment, and the details of the Caf&eacute; Program, please see the official <a href="cafe_signup.php">Valve Cyber Caf&eacute; Agreement</a>. --><br>
+For a low monthly fee per licensed computer, your caf&eacute; gets access to all of Valve&aposs games. See the <a href="index.php?area=cybercafe_program">full list of Features and Benefits</a> for the details of what's included. Payment is handled in three-month blocks, in advance, either by recurring automatic billing or by invoice. <!-- For full details about licensing, payment, and the details of the Caf&eacute; Program, please see the official <a href="cafe_signup.php">Valve Cyber Caf&eacute; Agreement</a>. --><br>
 <br>
 <!--
 <h3 style="text-transform:uppercase;">APRIL CYBER CAF&Eacute; PROMOTION</h3>
-During the month of April 2004, Valve is extending a <a href="index.php?area=cybercafe_promotion">special offer to Cyber Caf&eacute;s</a>. During this time, a 12-month cyber caf&eacute; license for Valve's games is being offered at a savings of 33%. <a href="/?area=cybercafe_promotion">See this page for details</a>.<br>
+During the month of April 2004, Valve is extending a <a href="index.php?area=cybercafe_promotion">special offer to Cyber Caf&eacute;s</a>. During this time, a 12-month cyber caf&eacute; license for Valve&aposs games is being offered at a savings of 33%. <a href="/?area=cybercafe_promotion">See this page for details</a>.<br>
 <Br>
 -->
 <h3 style="text-transform:uppercase;">Fully licensed software</h3>
-Software purchased at retail is not licensed for commercial use such as cyber caf&eacute; play. If you operate a gaming center, our program is the legal way to obtain a commercial license and offer Valve's games to your customers.<br>
+Software purchased at retail is not licensed for commercial use such as cyber caf&eacute; play. If you operate a gaming center, our program is the legal way to obtain a commercial license and offer Valve&aposs games to your customers.<br>
 <br>
 <h3 style="text-transform:uppercase;">As Always, Tournament Licenses Are Free</h3>
 If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valvesoftware.com">let us know</a> and we'll issue you a Tournament License, free of charge.<br>
@@ -1383,7 +1417,7 @@ If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valv
 HTML;
 $pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
-$cdaccountfaq_html <<<'HTML'
+$cdaccountfaq_html = <<<'HTML'
 <div class="content" id="container">
 <h1>CD KEYS AND STEAM ACCOUNTS</h1>
 <h2><em>FREQUENTLY</em> ASKED QUESTIONS</h2><img src="/web/20040414001040im_/http://www.steampowered.com/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br>
@@ -1487,9 +1521,60 @@ If you have a problem related to CD Keys or your Steam account which is not cove
 HTML;
 $pageStmt->execute(['cd_account_faq','CD Keys and Steam Accounts',$cdaccountfaq_html,'2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
+$autoupdate_html = <<<'HTML'
+<html style="--wm-toolbar-height: 67px;">
+<head>
+	<title>Auto-Update via Steam</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta name="ROBOTS" content="ALL">
+	<meta name="DESCRIPTION" content="Valve - Steam">
+	<meta name="KEYWORDS" content="Steam">
+	<meta name="AUTHOR" content="Valve">
+	<meta http-equiv="refresh" content="300">
+	<link rel="stylesheet" type="text/css" href="steampowered.css">
+<body>
+
+<!-- begin header -->
+<div class="header">
+<nobr><a href="index.php"><img src="steam_logo_onblack.gif" align="top" alt="[Valve]" height="54" width="152"></a>
+</nobr>
+</div>
+<!-- end header -->
+
+<center>
+<div style="
+	width:440px;
+	background:url(bg.jpg);
+	text-align:center;
+	padding:24px 48px 32px 48px;
+	color:black;
+	border:8px solid black;
+	line-height:150%;
+	">
+
+<img border="0" src="./images/dod_logo.gif"><br>
+<br><br>
+<b style="font-size:14px;">The version of Day of Defeat you currently<br>have installed is now out of date.</b><br>
+<br>
+In order to continue playing online using the Valve master servers, you'll need to upgrade to the latest version of the game.  A free upgrade for this game is provided via Steam.  To get the latest version of DoD, install Steam using the link below.  Steam will then keep DoD (and your other Valve games) up to date automatically.<br>
+<br><br>
+<a style="background:black;padding:6px;font-weight:bold;" href="index.php/?area=getsteamnow">Get Steam Now</a><br>
+<br><br>
+<a style="background:black;padding:6px;font-weight:bold;" href="index.php">More information about Steam</a><br>
+</div>
+</center>
+<br><br><br><br>
+<!-- begin footer -->
+<div class="footer">
+	<a href="https://web.archive.org/web/20040901032055/http://www.valvesoftware.com/"><img src="valve_greenlogo.gif" align="left"></a>{{footer()}}</div>
+<!-- end footer -->
+</body></html>
+HTML;
+$pageStmt->execute(['autoupdate','Auto-Update via Steam',$autoupdate_html,'2003_v2,2004,2005_v1,2005_v2','none.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+
 $cafeprogram_html = <<<'HTML'
 <h1>FEATURES AND BENEFITS</h1>
-<h2>OF VALVE'S<em> OFFICIAL CYBER CAFÉ PROGRAM</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<h2>OF Valve&aposs<em> OFFICIAL CYBER CAFÉ PROGRAM</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <br>
 <div class="narrower">
 
@@ -1524,13 +1609,13 @@ All of your game subscriptions will be kept up-to-date with the latest versions 
 <br>
 <h3 style="text-transform:uppercase;">Fully licensed software and product keys</h3>
 When you sign up and become a member of our Cybercafé program, Valve will provide you with software and product keys for each computer you have licensed. <br>
-<!-- All commercial licensing of Valve's software is done directly with Valve Corporation -- games purchased at a retail store do not include a license for commercial cyber café use. -->
+<!-- All commercial licensing of Valve&aposs software is done directly with Valve Corporation -- games purchased at a retail store do not include a license for commercial cyber café use. -->
 <br>
 <h3 style="text-transform:uppercase;">Access to Valve Product Support</h3>
-Members will have priority access to Valve's product support services, for Steam issues and any game-related problems.<br>
+Members will have priority access to Valve&aposs product support services, for Steam issues and any game-related problems.<br>
 <br>
 <h3 style="text-transform:uppercase;">Product Key Protection</h3>
-Valve's Cyber Café program also protects members against banned accounts. We understand that it is sometimes difficult to prevent users from misusing your computers. To help combat this problem, cafés in the program can contact Valve to correct problems with "banned" accounts.<br>
+Valve&aposs Cyber Café program also protects members against banned accounts. We understand that it is sometimes difficult to prevent users from misusing your computers. To help combat this problem, cafés in the program can contact Valve to correct problems with "banned" accounts.<br>
 <br>
 <h3 style="text-transform:uppercase;">promotional materials</h3>
 We've got plenty of posters for your walls and windows, and other fun stuff that we'll send you when you sign up.<br>

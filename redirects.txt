@@ -9,3 +9,5 @@ http://www.chatbear.com/cgi-bin/board.pl?boardid=1041&amp;view=flatold -> /forum
 Faq/FAQ.htm -> index.php?area=beta1faq
 steamsupport@valvesoftware.com -> steamsupport@<domain>
 /marketing/ -> steam/marketing/
+steamid_instructions.html -> index.php?area=steamid_instructions
+/autoupdate/ -> index.php?area=autoupdate
