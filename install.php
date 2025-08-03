@@ -451,6 +451,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
 
+            $migFiles = glob(__DIR__ . '/migrations/*.sql');
+            sort($migFiles);
+            foreach ($migFiles as $file) {
+                run_sql_file($pdo, $file);
+            }
+
             foreach (glob(__DIR__.'/sql/*.sql') as $file) {
                 if (basename($file) === 'install_official_survey_stats.sql') {
                     continue;
