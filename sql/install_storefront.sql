@@ -1,21 +1,3 @@
-
-ALTER TABLE subscription_apps
-    ADD CONSTRAINT fk_subscription_apps_sub FOREIGN KEY (subid) REFERENCES subscriptions(subid) ON DELETE CASCADE,
-    ADD CONSTRAINT fk_subscription_apps_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
-ALTER TABLE app_categories
-    ADD CONSTRAINT fk_app_categories_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE,
-    ADD CONSTRAINT fk_app_categories_cat FOREIGN KEY (category_id) REFERENCES store_categories(id) ON DELETE CASCADE;
-ALTER TABLE store_capsules
-    ADD CONSTRAINT fk_store_capsules_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
-ALTER TABLE storefront_capsules_all
-    ADD CONSTRAINT fk_storefront_capsules_all_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
-ALTER TABLE storefront_capsules_per_theme
-    ADD CONSTRAINT fk_storefront_capsules_per_theme_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
-ALTER TABLE storefront_capsule_items
-    ADD CONSTRAINT fk_storefront_capsule_items_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
-ALTER TABLE storefront_tab_games
-    ADD CONSTRAINT fk_storefront_tab_games_tab FOREIGN KEY (tab_id) REFERENCES storefront_tabs(id) ON DELETE CASCADE,
-    ADD CONSTRAINT fk_storefront_tab_games_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
 INSERT INTO store_categories(id,name,ord,visible) VALUES(2,'Single-player',1,1);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(1,'Multi-player',2,1);
 INSERT INTO store_categories(id,name,ord,visible) VALUES(3,'New releases',3,1);

@@ -612,23 +612,7 @@ CREATE TABLE store_pages(
     title TEXT,
     title_image TEXT
 );
-CREATE TABLE download_pages(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    version VARCHAR(50) UNIQUE,
-    years TEXT,
-    content MEDIUMTEXT,
-    created DATETIME,
-    updated DATETIME
-);
-CREATE TABLE download_links(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    version VARCHAR(50),
-    category VARCHAR(255),
-    label VARCHAR(255),
-    url TEXT,
-    ord INT DEFAULT 0,
-    FOREIGN KEY(version) REFERENCES download_pages(version) ON DELETE CASCADE
-);
+
 CREATE TABLE download_files(
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -654,7 +638,7 @@ CREATE TABLE IF NOT EXISTS tournaments (
     created DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX idx_news_publish_date ON news(publish_date);
-CREATE INDEX idx_storefront_products_appid ON store_apps(appid);
+
 ALTER TABLE admin_users
     ADD CONSTRAINT fk_admin_users_role FOREIGN KEY (role_id) REFERENCES admin_roles(id);
 
