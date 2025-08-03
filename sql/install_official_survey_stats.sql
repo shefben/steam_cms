@@ -1,4 +1,4 @@
-INSERT INTO survey_info(unique_samples,start_date,last_updated) VALUES (1092762,'2007-05-30 00:00:00','8:01pm PST (04:01 GMT), August 21 2007');
+INSERT INTO survey_info(unique_samples,start_date,last_updated) VALUES (1092762,'2007-05-30 00:00:00','2007-08-21 20:01:00');
 INSERT INTO survey_categories(slug,title,ord) VALUES ('netspeed','Network Speed',0);
 SET @cat_id := LAST_INSERT_ID();
 INSERT INTO survey_entries(category_id,label,percentage,count,ord) VALUES (@cat_id,'Unspecified',17.61,192446,0);
