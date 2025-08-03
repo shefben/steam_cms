@@ -742,6 +742,7 @@ function cms_header_buttons_html($theme, string $spacer_style = '', ?string $spa
 }
 
 function cms_render_header(string $theme, bool $with_buttons = true): string {
+    cms_record_visit($_SERVER['REQUEST_URI'] ?? '');
     $data  = cms_get_theme_header_data($theme);
     $base  = cms_base_url();
     $logo  = $data['logo'] ?: '/img/steam_logo_onblack.gif';

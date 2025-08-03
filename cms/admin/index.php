@@ -8,6 +8,12 @@ $popular = $db->query("SELECT page, SUM(views) v FROM page_views WHERE date>=DAT
 $popular_page = $popular ? $popular[0]['page'] : 'N/A';
 // visits per week (last 12 weeks)
 $weekly = [];
+$start = new DateTime('monday this week');
+$start->modify('-11 week');
+for($i=0;$i<12;$i++){
+    $weekly[$start->format('M j')] = 0;
+    $start->modify('+1 week');
+}
 $rows = $db->query("SELECT YEARWEEK(date,3) wk, MIN(date) start_date, SUM(views) v FROM page_views WHERE date>=DATE_SUB(CURDATE(),INTERVAL 12 WEEK) GROUP BY wk ORDER BY wk")->fetchAll(PDO::FETCH_ASSOC);
 foreach($rows as $r){
     $label = date('M j', strtotime($r['start_date']));
@@ -15,6 +21,12 @@ foreach($rows as $r){
 }
 // visits per month (last 12 months)
 $monthly = [];
+$start = new DateTime('first day of this month');
+$start->modify('-11 month');
+for($i=0;$i<12;$i++){
+    $monthly[$start->format('M Y')] = 0;
+    $start->modify('+1 month');
+}
 $rows = $db->query("SELECT DATE_FORMAT(date,'%Y-%m') ym, SUM(views) v FROM page_views WHERE date>=DATE_SUB(CURDATE(),INTERVAL 12 MONTH) GROUP BY ym ORDER BY ym")->fetchAll(PDO::FETCH_ASSOC);
 foreach($rows as $r){
     $label = date('M Y', strtotime($r['ym'].'-01'));
@@ -72,8 +84,8 @@ const pagesData = <?php echo json_encode(array_column($popular,'v')); ?>;
 const visitsCtx = document.getElementById('visitsChart').getContext('2d');
 let visitsChart = new Chart(visitsCtx, {
     type: 'line',
-    data: { labels: weeklyLabels, datasets: [{ label: 'Visits', data: weeklyData, borderColor: '#27ae60', tension: 0.1 }] },
-    options: { responsive: true, plugins: { legend: { display:false } } }
+    data: { labels: weeklyLabels, datasets: [{ label: 'Visits', data: weeklyData, borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,0.2)', tension: 0.1, pointRadius: 3, fill: false }] },
+    options: { responsive: true, plugins: { legend: { display:false } }, scales: { x: { display: true }, y: { beginAtZero: true, suggestedMax: 1, ticks: { precision: 0 } } } }
 });
 document.getElementById('showWeekly').addEventListener('click', function(){
     this.setAttribute('aria-pressed','true');

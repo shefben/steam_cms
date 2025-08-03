@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Introduced role-based permission system with new roles admin page
 - Permissions on role and user forms presented as selectable checkboxes with all/none toggles
 - Admin dashboard graphs now use Chart.js with weekly/monthly toggles
+- Admin dashboard graph records page views and renders weekly/monthly data
 - Admin news list supports filtering by title and author with AJAX pagination
 - Added preview endpoint with theme selection and admin-only access
 - Admin login styled with theme CSS, includes jQuery validation and reset link
