@@ -44,6 +44,15 @@ CREATE TABLE store_sidebar_links(
 CREATE TABLE store_capsules(position VARCHAR(20) PRIMARY KEY, image TEXT, appid INT);
 CREATE TABLE storefront_capsules_all(position VARCHAR(20) PRIMARY KEY, size VARCHAR(10), image_path TEXT, appid INT, price DECIMAL(10,2), hidden TINYINT DEFAULT 0);
 CREATE TABLE storefront_capsules_per_theme(theme VARCHAR(20), position VARCHAR(20), size VARCHAR(10), image_path TEXT, appid INT, price DECIMAL(10,2), hidden TINYINT DEFAULT 0, PRIMARY KEY(theme, position));
+CREATE TABLE storefront_capsule_items(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    theme VARCHAR(20),
+    type VARCHAR(10),
+    appid INT,
+    image_path TEXT,
+    price DECIMAL(10,2),
+    ord INT
+);
 CREATE TABLE storefront_tabs(
     id INT AUTO_INCREMENT PRIMARY KEY,
     theme VARCHAR(20),
@@ -73,6 +82,8 @@ ALTER TABLE storefront_capsules_all
     ADD CONSTRAINT fk_storefront_capsules_all_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
 ALTER TABLE storefront_capsules_per_theme
     ADD CONSTRAINT fk_storefront_capsules_per_theme_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+ALTER TABLE storefront_capsule_items
+    ADD CONSTRAINT fk_storefront_capsule_items_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
 ALTER TABLE storefront_tab_games
     ADD CONSTRAINT fk_storefront_tab_games_tab FOREIGN KEY (tab_id) REFERENCES storefront_tabs(id) ON DELETE CASCADE,
     ADD CONSTRAINT fk_storefront_tab_games_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;

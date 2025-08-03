@@ -24,22 +24,7 @@
 <div class="leftCol_home">
 <div class="leftCol_home_indent">
 {{ join_steam_block('2007')|raw }}
-<span style="color: Silver;">
-{{ capsule_block('top1')|raw }}
-{{ capsule_block('top2')|raw }}
-</span>
-<div id="capsule_large">
-{{ capsule_block('large')|raw }}
-</div>
-<div class="leftCol_home_indent">
-{{ capsule_block('under1')|raw }}
-{{ capsule_block('under2')|raw }}
-</div>
-{{ capsule_block('bottom1')|raw }}
-{{ capsule_block('bottom2')|raw }}
-<br clear="left">
-{{ gear_block()|raw }}
-{{ free_block()|raw }}
+{{ storefront_capsules()|raw }}
 </div>
 </div>
 <div class="rightCol_home">
@@ -69,7 +54,7 @@
 <div class="usr_edit_right_control" style="cursor: pointer;"><img border="0" height="14" id="browseCatalog_header" width="14"/></div>
 </div>
 <div id="browseCatalog_content">
-{{ find_list()|raw }}
+{{ browse_catalog_list()|raw }}
 </div>
 <script>check_section( 'browseCatalog', 'open' );</script>
 <div class="usr_edit_right_header" id="newOnSteam" onclick="toggle_section( 'new_on_steam' );" style="cursor: pointer;">
