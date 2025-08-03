@@ -754,15 +754,14 @@ ALTER TABLE storefront_tab_games
                         continue;  // skip $pdo->exec($stmt) — we’ve handled it.
                     }
 
-                    require_once 'sql/install_custom_pages.php';
-                    require_once 'sql/install_support_page.php';
-                    require_once 'sql/install_troubleshooter.php';
-                    require_once 'sql/install_download_pages.php';
-                    require_once 'sql/install_download_files.php';
-
                     $pdo->exec($stmt);
                 }
             }
+            require_once 'sql/install_custom_pages.php';
+            require_once 'sql/install_support_page.php';
+            require_once 'sql/install_troubleshooter.php';
+            require_once 'sql/install_download_pages.php';
+            require_once 'sql/install_download_files.php';
             if (!empty($_POST['use_official_survey'])) {
                 run_sql_file($pdo, __DIR__.'/sql/install_official_survey_stats.sql');
             }

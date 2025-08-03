@@ -66,9 +66,9 @@ foreach($parsed as $p){
 }
 $downloads[] = ['title'=>'Windows HLDS Update Tool','size'=>'<3 MB','url'=>'https://web.archive.org/download/hlds_updatetool.exe','mirrors'=>[]];
 $downloads[] = ['title'=>'Linux HLDS Update Tool','size'=>'<3 MB','url'=>'https://web.archive.org/download/hldsupdatetool.bin','mirrors'=>[]];
-$stmt = $pdo->prepare('INSERT INTO download_files(title,file_size,main_url,visibleontheme,usingbutton,buttonText,created,updated) VALUES(?,?,?,?,?,?,NOW(),NOW())');
-$mirStmt = $pdo->prepare('INSERT INTO download_file_mirrors(file_id,host,url,ord) VALUES(?,?,?,?)');
-foreach($downloads as $d){
+$fileStmt = $pdo->prepare('INSERT INTO download_files(title,file_size,main_url,visibleontheme,usingbutton,buttonText,created,updated) VALUES(?,?,?,?,?,?,NOW(),NOW())');
+$mirStmt   = $pdo->prepare('INSERT INTO download_file_mirrors(file_id,host,url,ord) VALUES(?,?,?,?)');
+foreach ($downloads as $d) {
     $title = $d['title'];
     if (in_array($title, ['Windows HLDS Update Tool','Linux HLDS Update Tool'])) {
         $visible = '2004';
@@ -86,7 +86,7 @@ foreach($downloads as $d){
     } else {
         $visible = '2004,2003_v2';
     }
-    $stmt->execute([
+    $fileStmt->execute([
         $title,
         $d['size'],
         $d['url'],
