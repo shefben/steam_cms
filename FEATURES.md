@@ -214,3 +214,4 @@
 - Dynamic survey page renders database-driven stats with admin controls.
 - Installer can seed official 2006 survey statistics from bundled SQL.
 - Survey results page matches the archived 2006 layout pixel-for-pixel using database data.
+- Legacy support forms render from archived HTML through Twig layouts, eliminating the installer script.

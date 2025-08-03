@@ -1,7 +1,11 @@
 <?php
 require_once __DIR__ . '/cms/db.php';
+require_once __DIR__ . '/cms/template_engine.php';
+
 $page_title = 'CD Key & Account Form';
-$theme = cms_get_setting('theme','2004');
+$theme      = cms_get_setting('theme', '2004');
+$tpl        = cms_theme_layout('default.twig', $theme);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fields = [
         $_POST['validEmail'] ?? null,
@@ -16,17 +20,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['readfaq'] ?? null,
     ];
     cms_insert_support_request('cd_account_form', $fields, 'en');
-    include 'cms/header.php';
-    echo '<p>Thank you for submitting your request.</p>';
-    include 'cms/footer.php';
+    cms_render_template($tpl, [
+        'page_title' => $page_title,
+        'content'    => '<p>Thank you for submitting your request.</p>',
+        'show_title' => false,
+    ]);
     return;
 }
+
 $page_html = cms_get_cd_account_page($theme);
-include 'cms/header.php';
-if ($page_html) {
-    echo $page_html;
-} else {
-    echo '<p>Page not available.</p>';
-}
-include 'cms/footer.php';
+$content   = $page_html ?: '<p>Page not available.</p>';
+
+cms_render_template($tpl, [
+    'page_title' => $page_title,
+    'content'    => $content,
+    'show_title' => false,
+]);
 
