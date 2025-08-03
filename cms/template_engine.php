@@ -138,6 +138,62 @@ function cms_theme_layout(?string $file, ?string $theme = null)
     }
     return dirname(__DIR__)."/themes/2004/layout/default.twig";
 }
+
+function cms_render_tabbed_games_column(array $games): string
+{
+    $html = '';
+    foreach ($games as $row) {
+        $appid = (int)$row['appid'];
+        $url   = 'index.php?area=game&amp;AppId=' . $appid . '&amp;';
+        $img   = 'gfx/apps/' . $appid . '/capsule_sm_120.jpg';
+        $name  = htmlspecialchars($row['name'] ?? '', ENT_QUOTES);
+        $price = number_format((float)($row['price'] ?? 0), 2);
+        $html .= '<div class="listArea_game" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'listArea_game\';" onmouseover="this.className=\'listArea_game_ovr\';">'
+            . '<div class="listArea_gameImage"><img alt="' . $name . '" border="0" height="45" src="' . $img . '" width="120"></div>'
+            . '<div class="listArea_gameTitle">' . $name . '</div><br>'
+            . '<div class="listArea_gamePrice">$' . $price . '</div>'
+            . '</div>';
+    }
+    return $html;
+}
+
+function cms_render_tabs(string $theme): string
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('SELECT id,title FROM storefront_tabs WHERE theme=? ORDER BY ord');
+    $stmt->execute([$theme]);
+    $tabs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (!$tabs) {
+        return '';
+    }
+    $html = '<div class="listArea"><br clear="all">';
+    foreach ($tabs as $i => $tab) {
+        $id    = $i + 1;
+        $focus = $i === 0;
+        $class = $focus ? 'listArea_tab_focus' : 'listArea_tab';
+        $l = $focus ? 'listArea_tab_focus_l.gif' : 'listArea_tab_l.gif';
+        $r = $focus ? 'listArea_tab_focus_r.gif' : 'listArea_tab_r.gif';
+        $html .= '<div class="' . $class . '" id="tab_' . $id . '">'
+            . '<img align="absmiddle" id="tab_' . $id . '_image_l" src="img/home/' . $l . '"><span class="listArea_tab_txt">' . htmlspecialchars($tab['title']) . '</span><img align="absmiddle" id="tab_' . $id . '_image_r" src="img/home/' . $r . '">'
+            . '</div>';
+    }
+    $html .= '<br clear="left"><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td height="6"><img height="6" src="img/_spacer.gif" width="6"></td><td align="right" height="6"><img height="6" src="img/home/listArea_tr.gif" width="6"></td></tr>';
+    foreach ($tabs as $i => $tab) {
+        $display = $i === 0 ? '' : ' style="display: none;"';
+        $html .= '<tr id="tab_' . ($i + 1) . '_content"' . $display . '><td valign="top">';
+        $g = $db->prepare('SELECT a.appid,a.name,a.price FROM storefront_tab_games g JOIN store_apps a ON g.appid=a.appid WHERE g.tab_id=? ORDER BY g.ord');
+        $g->execute([$tab['id']]);
+        $games = $g->fetchAll(PDO::FETCH_ASSOC);
+        $half = (int)ceil(count($games) / 2);
+        $html .= cms_render_tabbed_games_column(array_slice($games, 0, $half));
+        $html .= '</td><td valign="top">';
+        $html .= cms_render_tabbed_games_column(array_slice($games, $half));
+        $html .= '</td></tr>';
+    }
+    $html .= '<tr><td height="6"><img height="6" src="img/home/listArea_bl.gif" width="6"></td><td align="right" height="6"><img height="6" src="img/home/listArea_br.gif" width="6"></td></tr></tbody></table></div>';
+    $html .= "<script type=\"text/javascript\">document.querySelectorAll('.listArea_tab, .listArea_tab_focus').forEach(function(tab,idx){tab.addEventListener('click',function(){document.querySelectorAll('.listArea_tab_focus,.listArea_tab').forEach(function(t,i){var focus=i===idx;t.className=focus?'listArea_tab_focus':'listArea_tab';document.getElementById('tab_'+(i+1)+'_content').style.display=focus?'':'none';document.getElementById('tab_'+(i+1)+'_image_l').src='img/home/'+(focus?'listArea_tab_focus_l.gif':'listArea_tab_l.gif');document.getElementById('tab_'+(i+1)+'_image_r').src='img/home/'+(focus?'listArea_tab_focus_r.gif':'listArea_tab_r.gif');});});});</script>";
+    return $html;
+}
 function cms_twig_env(string $tpl_dir): Environment
 {
     static $env;
@@ -447,34 +503,149 @@ function cms_twig_env(string $tpl_dir): Environment
             return cms_get_setting('free_block', '');
         }, ['is_safe' => ['html']]));
 
+        $env->addFunction(new TwigFunction('storefront_capsules', function () {
+            $theme = cms_get_current_theme();
+            $useAll = cms_get_setting('capsules_same_all', '1') === '1';
+            $db = cms_get_db();
+            if ($useAll) {
+                $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsule_items c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme IS NULL ORDER BY ord');
+                $stmt->execute();
+            } else {
+                $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsule_items c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? ORDER BY ord');
+                $stmt->execute([$theme]);
+            }
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $base = cms_base_url();
+            $base = $base ? rtrim($base, '/') . '/' : '';
+            $html = '';
+            $open = false;
+            $count = 0;
+            $is2006 = in_array($theme, ['2006_v1', '2006_v2'], true);
+            $is2007 = in_array($theme, ['2007_v1', '2007_v2'], true);
+            foreach ($rows as $row) {
+                $priceVal = $row['price'] !== null ? (float)$row['price'] : (float)$row['app_price'];
+                $price = number_format($priceVal, 2);
+                $name = htmlspecialchars($row['app_name'] ?? '', ENT_QUOTES);
+                switch ($row['type']) {
+                    case 'small':
+                        if (!$open) {
+                            $html .= '<div class="capsuleGroup">';
+                            $open = true;
+                            $count = 0;
+                        }
+                        if ($is2006) {
+                            $imgPath = $row['image_path'];
+                            if (!str_starts_with($imgPath, 'gfx/')) {
+                                $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                            }
+                            $img = $imgPath;
+                            $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
+                            $html .= '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);">'
+                                . '<div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"></div>'
+                                . '<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>';
+                        } elseif ($is2007) {
+                            $imgPath = $row['image_path'];
+                            if (!str_starts_with($imgPath, 'gfx/')) {
+                                $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                            }
+                            $img = $imgPath;
+                            $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
+                            $html .= '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsule\'; window.status=\'\';" onmouseover="this.className=\'capsule_ovr\'; window.status=\'' . $url . '\';">'
+                                . '<div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="img/corners/smallcap_corners.png" width="280" height="105" border="0"></div></div>'
+                                . '<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '</div></div>';
+                        } else {
+                            $img = $base . 'storefront/images/capsules/' . $row['image_path'];
+                            $url = 'index.php?area=app&id=' . (int)$row['appid'];
+                            $html .= '<div class="capsule"><a href="' . $url . '"><img src="' . $img . '" alt="' . $name . '"></a><span class="price">$' . htmlspecialchars($price) . '</span></div>';
+                        }
+                        $count++;
+                        if ($count === 2) {
+                            $html .= '<br clear="all"></div>';
+                            $open = false;
+                        }
+                        break;
+                    case 'large':
+                        if ($open) {
+                            $html .= '<br clear="all"></div>';
+                            $open = false;
+                        }
+                        if ($is2006) {
+                            $imgPath = $row['image_path'];
+                            if (!str_starts_with($imgPath, 'gfx/')) {
+                                $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                            }
+                            $img = $imgPath;
+                            $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
+                            $html .= '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);">'
+                                . '<div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"></div>'
+                                . '<div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>'
+                                . '<br clear="all">';
+                        } elseif ($is2007) {
+                            $imgPath = $row['image_path'];
+                            if (!str_starts_with($imgPath, 'gfx/')) {
+                                $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                            }
+                            $img = $imgPath;
+                            $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
+                            $html .= '<div class="inline" id="capsule_large"><br clear="all"><div class="capsule_large_area"><div id="capsule_large_content">'
+                                . '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';">'
+                                . '<div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="img/corners/largecap_corners.png" width="572" height="221" border="0"></div></div>'
+                                . '<div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div>'
+                                . '</div></div></div>'
+                                . '<script type="text/javascript">var so=new SWFObject("swf/capsule_lg.swf","movie","578","255","8","#282828");so.addVariable("img1","' . (int)$row['appid'] . '");so.addVariable("txt1","' . addslashes($name) . '");so.addVariable("price1","&#36;' . htmlspecialchars($price) . '");so.addVariable("type1","apps");so.write("capsule_large_content");</script>';
+                        } else {
+                            $img = $base . 'storefront/images/capsules/' . $row['image_path'];
+                            $url = 'index.php?area=app&id=' . (int)$row['appid'];
+                            $html .= '<div class="capsuleLarge"><div class="large-capsule"><a href="' . $url . '"><img src="' . $img . '" alt="' . $name . '"></a><span class="price">$' . htmlspecialchars($price) . '</span></div><br clear="all"></div>';
+                        }
+                        break;
+                    case 'gear':
+                        if ($open) {
+                            $html .= '<br clear="all"></div>';
+                            $open = false;
+                        }
+                        if ($is2006) {
+                            $html .= '<div align="center" class="capsuleGear"><div class="capsuleGearTitle">Get The Gear!</div><div class="capsuleGearText">Check out the new Logitech® MOMO® Racing wheel! Visit the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> for official shirts, posters, hats and more!</div></div>';
+                        } elseif ($is2007) {
+                            $html .= '<div align="center" class="Gear"><div class="GearTitle">Get The Gear!</div><div class="GearText">Get your hands on the brand-new Half-Life® 2: Episode Two poster at the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> now!!! Also featuring official shirts, posters, hats and more!</div></div>';
+                        } else {
+                            $html .= cms_get_setting('gear_block', '');
+                        }
+                        break;
+                    case 'free':
+                        if ($open) {
+                            $html .= '<br clear="all"></div>';
+                            $open = false;
+                        }
+                        if ($is2006) {
+                            $html .= '<div align="center" class="capsuleStuff"><div class="capsuleStuffTitle">Free Stuff!</div><div class="capsuleStuffText">In addition to a catalog of great games, your free Steam account gives you access to <a href="http://storefront.steampowered.com/v/index.php?area=search&amp;browse=1&amp;category=&amp;price=1&amp;">games + demos</a>, <a href="http://storefront.steampowered.com/v/index.php?area=media&amp;">HD movies + trailers</a>, and more.</div></div>';
+                        } elseif ($is2007) {
+                            $html .= '<div align="center" class="Stuff"><div class="StuffTitle">Free Stuff!</div><div class="StuffText">In addition to a catalog of great games, your free Steam account gives you access to game <a href="v/index.php?area=free&amp;tab=demos&amp;">demos</a>, <a href="v/index.php?area=free&amp;tab=mods&amp;">mods</a>, <a href="v/index.php?area=free&amp;tab=videos&amp;">trailers</a> and more. Browse our <a href="v/index.php?area=free&amp;">Free Stuff</a> page for more details.</div></div>';
+                        } else {
+                            $html .= cms_get_setting('free_block', '');
+                        }
+                        break;
+                    case 'tabbed':
+                        if ($open) {
+                            $html .= '<br clear="all"></div>';
+                            $open = false;
+                        }
+                        $html .= cms_render_tabs($theme);
+                        break;
+                }
+            }
+            if ($open) {
+                $html .= '<br clear="all"></div>';
+            }
+            return $html;
+        }, ['is_safe' => ['html']]));
+
         $env->addFunction(new TwigFunction('tabs_block', function() {
             $theme = cms_get_current_theme();
-            if ($theme !== '2007_v2') {
-                return cms_get_setting('tabs_block', '');
+            if (str_starts_with($theme, '2007')) {
+                return cms_render_tabs($theme);
             }
-            $db = cms_get_db();
-            $stmt = $db->prepare('SELECT * FROM storefront_tabs WHERE theme=? ORDER BY ord,id');
-            $stmt->execute([$theme]);
-            $tabs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if (!$tabs) { return ''; }
-            $html = '<div class="tabs-block"><ul class="tab-links">';
-            $content = '';
-            foreach ($tabs as $i => $tab) {
-                $active = $i === 0 ? ' class="active"' : '';
-                $html .= '<li'.$active.'><a href="#tab_'.$tab['id'].'">'.htmlspecialchars($tab['title']).'</a></li>';
-                $g = $db->prepare('SELECT g.appid,a.name,a.price FROM storefront_tab_games g JOIN store_apps a ON g.appid=a.appid WHERE g.tab_id=? ORDER BY g.ord');
-                $g->execute([$tab['id']]);
-                $content .= '<div id="tab_'.$tab['id'].'" class="tab-panel" style="display:'.($i? 'none':'block').'"><ul>';
-                foreach ($g as $row) {
-                    $url = 'index.php?area=app&id='.(int)$row['appid'];
-                    $price = $row['price'];
-                    $content .= '<li><a href="'.$url.'">'.htmlspecialchars($row['name']).'</a> - $'.htmlspecialchars($price).'</li>';
-                }
-                $content .= '</ul></div>';
-            }
-            $html .= '</ul>'.$content.'</div>';
-            $html .= "<script>document.querySelectorAll('.tabs-block .tab-links a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var id=this.getAttribute('href');this.parentElement.parentElement.querySelectorAll('li').forEach(function(li){li.classList.remove('active');});this.parentElement.classList.add('active');var block=this.closest('.tabs-block');block.querySelectorAll('.tab-panel').forEach(function(p){p.style.display=p.id==id.substring(1)?'block':'none';});});});</script>";
-            return $html;
+            return cms_get_setting('tabs_block', '');
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('platform_update_news', function () {
