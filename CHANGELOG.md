@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Prefilled 04-05 storefront games, packages, and third-party tables via SQL seed
 - Added 2007_v1 and 2007_v2 themes with browse catalog list tag
 - Find sidebar title in 2007_v2 layout now pulled from settings; browse catalog title seeded for 2007 themes
 - Update history page collapses entries with latest entry expanded by default
