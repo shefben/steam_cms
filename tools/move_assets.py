@@ -5,8 +5,77 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 ASSETS = {
     'archived_steampowered/2006/v1/gfx/apps/1300/capsule_sm.jpg':
         'themes/2006_v1/assets/images/apps/1300/capsule_sm.jpg',
+    'archived_steampowered/2007/v1/styles_global.css':
+        'themes/2007_v1/css/styles_global.css',
+    'archived_steampowered/2007/v1/styles_home.css':
+        'themes/2007_v1/css/styles_home.css',
+    'archived_steampowered/2007/v1/minmax.js':
+        'themes/2007_v1/js/minmax.js',
+    'archived_steampowered/2007/v1/cookies.js':
+        'themes/2007_v1/js/cookies.js',
+    'archived_steampowered/2007/v1/collapse.js':
+        'themes/2007_v1/js/collapse.js',
+    'archived_steampowered/2007/v1/swfobject.js':
+        'themes/2007_v1/js/swfobject.js',
+    'archived_steampowered/2007/v1/corners.js':
+        'themes/2007_v1/js/corners.js',
+    'archived_steampowered/2007/v1/favicon.ico':
+        'themes/2007_v1/favicon.ico',
+    'archived_steampowered/2007/v1/img/logo_steam_header.jpg':
+        'themes/2007_v1/images/logo_steam_header.jpg',
+    'archived_steampowered/2007/v1/img/btn/btn_getSteam_ovr.gif':
+        'themes/2007_v1/images/btn/btn_getSteam_ovr.gif',
+    'archived_steampowered/2007/v1/img/btn_right_wd_over.jpg':
+        'themes/2007_v1/images/btn_right_wd_over.jpg',
+    'archived_steampowered/2007/v1/img/img_footer_bg.jpg':
+        'themes/2007_v1/images/img_footer_bg.jpg',
+    'archived_steampowered/2007/v1/img/img_footer_l.jpg':
+        'themes/2007_v1/images/img_footer_l.jpg',
+    'archived_steampowered/2007/v1/img/img_footer_r.jpg':
+        'themes/2007_v1/images/img_footer_r.jpg',
+    'archived_steampowered/2007/v1/img/logo_valve_footer.jpg':
+        'themes/2007_v1/images/logo_valve_footer.jpg',
     'archived_steampowered/2007/v1/img/ico/ico_arrow_blue.gif':
-        'themes/2007_v1/assets/images/ico/ico_arrow_blue.gif',
+        'themes/2007_v1/images/ico/ico_arrow_blue.gif',
+    'archived_steampowered/2007/v1/img/ico/ico_arrow_grey.gif':
+        'themes/2007_v1/images/ico/ico_arrow_grey.gif',
+
+    'archived_steampowered/2007/v2/styles_global.css':
+        'themes/2007_v2/css/styles_global.css',
+    'archived_steampowered/2007/v2/styles_home.css':
+        'themes/2007_v2/css/styles_home.css',
+    'archived_steampowered/2007/v2/minmax.js':
+        'themes/2007_v2/js/minmax.js',
+    'archived_steampowered/2007/v2/cookies.js':
+        'themes/2007_v2/js/cookies.js',
+    'archived_steampowered/2007/v2/collapse.js':
+        'themes/2007_v2/js/collapse.js',
+    'archived_steampowered/2007/v2/swfobject.js':
+        'themes/2007_v2/js/swfobject.js',
+    'archived_steampowered/2007/v2/corners.js':
+        'themes/2007_v2/js/corners.js',
+    'archived_steampowered/2007/v2/javascript.js':
+        'themes/2007_v2/js/javascript.js',
+    'archived_steampowered/2007/v2/favicon.ico':
+        'themes/2007_v2/favicon.ico',
+    'archived_steampowered/2007/v2/img/logo_steam_header.jpg':
+        'themes/2007_v2/images/logo_steam_header.jpg',
+    'archived_steampowered/2007/v2/img/btn/btn_getSteam_ovr.gif':
+        'themes/2007_v2/images/btn/btn_getSteam_ovr.gif',
+    'archived_steampowered/2007/v2/img/btn_right_wd_over.jpg':
+        'themes/2007_v2/images/btn_right_wd_over.jpg',
+    'archived_steampowered/2007/v2/img/img_footer_bg.jpg':
+        'themes/2007_v2/images/img_footer_bg.jpg',
+    'archived_steampowered/2007/v2/img/img_footer_l.jpg':
+        'themes/2007_v2/images/img_footer_l.jpg',
+    'archived_steampowered/2007/v2/img/img_footer_r.jpg':
+        'themes/2007_v2/images/img_footer_r.jpg',
+    'archived_steampowered/2007/v2/img/logo_valve_footer.jpg':
+        'themes/2007_v2/images/logo_valve_footer.jpg',
+    'archived_steampowered/2007/v2/img/ico/ico_arrow_blue.gif':
+        'themes/2007_v2/images/ico/ico_arrow_blue.gif',
+    'archived_steampowered/2007/v2/img/ico/ico_arrow_grey.gif':
+        'themes/2007_v2/images/ico/ico_arrow_grey.gif',
     # storefront assets for theme 2005_v1
     'archived_steampowered/2005/v1/storefront.css':
         'themes/2005_v1/storefront/css/storefront.css',

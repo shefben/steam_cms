@@ -225,6 +225,10 @@ function cms_twig_env(string $tpl_dir): Environment
             return cms_get_setting('browse_catalog_title', 'Browse The Catalog');
         }, ['is_safe' => ['html']]));
 
+        $env->addFunction(new TwigFunction('browse_catalog_list', function() {
+            return cms_get_setting('browse_catalog_list', '');
+        }, ['is_safe' => ['html']]));
+
         $env->addFunction(new TwigFunction('new_on_steam_list', function() {
             return cms_get_setting('new_on_steam_list', '');
         }, ['is_safe' => ['html']]));
