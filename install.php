@@ -664,6 +664,8 @@ HTML;
                 '2005_v2' => 'themes/2005_v2/images/steam_logo_onblack.gif',
                 '2006_v1' => 'logo_steam_header.jpg',
                 '2006_v2' => 'logo_steam_header.jpg',
+                '2007_v1' => 'logo_steam_header.jpg',
+                '2007_v2' => 'logo_steam_header.jpg',
             ];
 
             /* -----------------------------------------------------------

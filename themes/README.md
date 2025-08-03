@@ -40,6 +40,7 @@ The template engine exposes a set of Twig functions used to render dynamic conte
 | `find_list()` | – | HTML links for searching, browsing and videos. |
 | `categories_list()` | – | List of store categories linking to search results. Typically shown under the find list. |
 | `browse_catalog_title()` | – | Title for the browse catalog section. |
+| `browse_catalog_list()` | – | HTML list for the browse catalog section. |
 | `publisher_catalogs_title()` | – | Title string for the publisher catalog block. |
 | `publisher_catalogs_list()` | – | HTML list of publisher catalogs. |
 | `coming_soon_title()` | – | Title for the “Coming Soon” list. |

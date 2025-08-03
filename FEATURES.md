@@ -35,6 +35,7 @@
 - News management paginated with sortable ordering across pages
 - Custom page list excludes theme-specific index pages
 - Template engine enforces theme stylesheet even with relative links
+- 2007 themes added with browse catalog list tag for dynamic sidebar listings
 - Installer creates content server tables and default settings
 - Cafe directory and FAQ pages paginated for manageability
 - Sidebar links grouped under expandable Cafe menu
