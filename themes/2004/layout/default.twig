@@ -17,7 +17,8 @@
 <body>
 {{ header() }}
 <div class="content" id="container" style="background-position:top right; background-repeat:no-repeat;">
-{% if page_title is defined and page_title %}
+{% set show_title = show_title is not defined or show_title %}
+{% if page_title is defined and page_title and show_title %}
 {{ split_title_entry(page_title) }}
 {% endif %}
 <!-- begin content area -->

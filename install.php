@@ -451,28 +451,7 @@ CREATE TABLE `0405_storefront_packages` (
                 slug VARCHAR(100) UNIQUE,
                 title VARCHAR(255),
                 ord INT DEFAULT 0
-            ); 
-CREATE TABLE cafe_signup_pages(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    version VARCHAR(50) UNIQUE,
-    content MEDIUMTEXT,
-    created DATETIME,
-    updated DATETIME
-);
-CREATE TABLE cheat_form_pages(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    version VARCHAR(50) UNIQUE,
-    content MEDIUMTEXT,
-    created DATETIME,
-    updated DATETIME
-);
-CREATE TABLE cd_account_pages(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    version VARCHAR(50) UNIQUE,
-    content MEDIUMTEXT,
-    created DATETIME,
-    updated DATETIME
-);
+            );
 CREATE TABLE IF NOT EXISTS map_contest_entries (
     id INT AUTO_INCREMENT PRIMARY KEY,
     created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -779,7 +758,6 @@ ALTER TABLE storefront_tab_games
                     require_once 'sql/install_support_page.php';
                     require_once 'sql/install_troubleshooter.php';
                     require_once 'sql/install_download_pages.php';
-                    require_once 'sql/install_2004_pages.php';
                     require_once 'sql/install_download_files.php';
 
                     $pdo->exec($stmt);
