@@ -58,7 +58,7 @@
 </table>
 </form>
 </div>
-<div class="usr_edit_right_header"><div style="float:left;">Find More...</div></div>
+<div class="usr_edit_right_header"><div style="float:left;">{{ find_title() }}</div></div>
 {{ find_list()|raw }}
 <div id="spotlight_section">
 <div class="usr_edit_right_header"><div style="float:left;">Spotlight</div></div>
@@ -75,7 +75,7 @@
 <div class="usr_edit_right_control" style="cursor: pointer;"><img border="0" height="14" id="browseCatalog_header" width="14"/></div>
 </div>
 <div id="browseCatalog_content">
-{{ find_list()|raw }}
+{{ browse_catalog_list()|raw }}
 </div>
 <script>check_section( 'browseCatalog', 'open' );</script>
 <div class="usr_edit_right_header" id="newOnSteam" onclick="toggle_section( 'new_on_steam' );" style="cursor: pointer;">
