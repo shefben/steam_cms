@@ -66,7 +66,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 status VARCHAR(20) DEFAULT 'draft',
                 INDEX(publish_date),
                 INDEX(publish_at)
-            )");
+            );
+CREATE TABLE download_pages(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    version VARCHAR(50) UNIQUE,
+    years TEXT,
+    content MEDIUMTEXT,
+    created DATETIME,
+    updated DATETIME
+);
+CREATE TABLE download_links(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    version VARCHAR(50),
+    category VARCHAR(255),
+    label VARCHAR(255),
+    url TEXT,
+    ord INT DEFAULT 0,
+    FOREIGN KEY(version) REFERENCES download_pages(version) ON DELETE CASCADE
+);");
             $pdo->exec("DROP TABLE IF EXISTS content_servers");
             $pdo->exec("CREATE TABLE content_servers(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -74,7 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 ip VARCHAR(100),
                 port INT,
                 total_capacity INT,
-                region VARCHAR(100)
+                region VARCHAR(100),
+                filtered TINYINT(1) NOT NULL DEFAULT 0,
+                website VARCHAR(255) DEFAULT NULL
             )");
             $pdo->exec("DROP TABLE IF EXISTS server_stats");
             $pdo->exec("CREATE TABLE server_stats(
@@ -119,21 +138,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 contact_email TEXT,
                 ship_phone TEXT,
                 wire_transfer TEXT
-            )");
+            );
+CREATE TABLE `0405_storefront_games` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    appid INT UNIQUE,
+    title TEXT,
+    description TEXT,
+    image_thumb TEXT,
+    image_screenshot TEXT,
+    purchaseButtonStr VARCHAR(255),
+    isHidden TINYINT(1) NOT NULL DEFAULT 0
+);
+CREATE TABLE `0405_storefront_thirdpartGames` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title TEXT,
+    description TEXT,
+    image_thumb TEXT,
+    image_screenshot TEXT,
+    websiteUrl TEXT,
+    isHidden TINYINT(1) NOT NULL DEFAULT 0
+);
+CREATE TABLE `0405_storefront_packages` (
+    subid INT PRIMARY KEY,
+    title TEXT,
+    description TEXT,
+    image_thumb TEXT,
+    image_screenshot TEXT,
+    price TEXT,
+    steamOnlyBadge TINYINT(1) NOT NULL DEFAULT 0,
+    isHidden TINYINT(1) NOT NULL DEFAULT 0
+);");
             $pdo->exec("DROP TABLE IF EXISTS custom_pages");
-            $pdo->exec("CREATE TABLE custom_pages(
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                slug VARCHAR(255) NOT NULL,
-                page_name VARCHAR(255) DEFAULT NULL,
-                title TEXT,
-                content MEDIUMTEXT,
-                theme VARCHAR(255) DEFAULT NULL,
-                template VARCHAR(255) DEFAULT NULL,
-                created DATETIME,
-                updated DATETIME,
-                status VARCHAR(20) DEFAULT 'draft',
-                UNIQUE KEY slug_theme (slug, theme)
-            )");
+            $pdo->exec("CREATE TABLE custom_pages (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    slug VARCHAR(255) NOT NULL,
+    page_name VARCHAR(255) DEFAULT NULL,
+    title TEXT,
+    content MEDIUMTEXT,
+    theme VARCHAR(255) DEFAULT NULL,
+    template VARCHAR(255) DEFAULT NULL,
+    created DATETIME,
+    updated DATETIME,
+    status VARCHAR(20) DEFAULT 'draft',
+    UNIQUE KEY slug_theme (slug, theme)
+);");
+
             $pdo->exec("DROP TABLE IF EXISTS platform_update_history");
             $pdo->exec('CREATE TABLE platform_update_history (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -223,19 +272,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 hits INT DEFAULT 0,
                 created DATETIME
             )");
-            $pdo->exec("DROP TABLE IF EXISTS random_groups");
-            $pdo->exec("CREATE TABLE random_groups(
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(100) UNIQUE NOT NULL
-            )");
-            $pdo->exec("DROP TABLE IF EXISTS random_content");
-            $pdo->exec("CREATE TABLE random_content(
-                uniqueid INT AUTO_INCREMENT PRIMARY KEY,
-                tag_name VARCHAR(25) NOT NULL,
-                group_id INT NOT NULL,
-                content TEXT NOT NULL,
-                FOREIGN KEY (group_id) REFERENCES random_groups(id) ON DELETE CASCADE
-            )");
+            $pdo->exec("
+                DROP TABLE IF EXISTS random_content;
+                DROP TABLE IF EXISTS random_groups;
+            
+                CREATE TABLE random_groups (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(100) UNIQUE NOT NULL
+                );
+            
+                CREATE TABLE random_content (
+                    uniqueid INT AUTO_INCREMENT PRIMARY KEY,
+                    tag_name VARCHAR(25) NOT NULL,
+                    content TEXT NOT NULL,
+                    group_id INT NOT NULL,
+                    FOREIGN KEY (group_id) REFERENCES random_groups(id) ON DELETE CASCADE
+                );
+            ");
+
             $pdo->exec("DROP TABLE IF EXISTS scheduled_content");
             $pdo->exec("CREATE TABLE scheduled_content(
                 content_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -397,7 +451,68 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 slug VARCHAR(100) UNIQUE,
                 title VARCHAR(255),
                 ord INT DEFAULT 0
-            )");
+            ); 
+CREATE TABLE cafe_signup_pages(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    version VARCHAR(50) UNIQUE,
+    content MEDIUMTEXT,
+    created DATETIME,
+    updated DATETIME
+);
+CREATE TABLE cheat_form_pages(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    version VARCHAR(50) UNIQUE,
+    content MEDIUMTEXT,
+    created DATETIME,
+    updated DATETIME
+);
+CREATE TABLE cd_account_pages(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    version VARCHAR(50) UNIQUE,
+    content MEDIUMTEXT,
+    created DATETIME,
+    updated DATETIME
+);
+CREATE TABLE IF NOT EXISTS map_contest_entries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    full_name VARCHAR(255) NOT NULL,
+    address VARCHAR(255) DEFAULT NULL,
+    city VARCHAR(100) DEFAULT NULL,
+    state VARCHAR(100) DEFAULT NULL,
+    country VARCHAR(100) DEFAULT NULL,
+    zip VARCHAR(20) DEFAULT NULL,
+    dob VARCHAR(20) DEFAULT NULL,
+    phone VARCHAR(50) DEFAULT NULL,
+    email VARCHAR(255) NOT NULL,
+    group_name VARCHAR(255) DEFAULT NULL,
+    group_member1 VARCHAR(255) DEFAULT NULL,
+    group_member2 VARCHAR(255) DEFAULT NULL,
+    group_member3 VARCHAR(255) DEFAULT NULL,
+    group_member4 VARCHAR(255) DEFAULT NULL,
+    map_name VARCHAR(255) DEFAULT NULL,
+    map_file VARCHAR(255) DEFAULT NULL,
+    source_files VARCHAR(255) DEFAULT NULL,
+    map_description TEXT,
+    recommended_players VARCHAR(50) DEFAULT NULL,
+    game_mode VARCHAR(50) DEFAULT NULL,
+    development_time VARCHAR(50) DEFAULT NULL,
+    tools VARCHAR(255) DEFAULT NULL,
+    inspiration TEXT,
+    screenshot1 VARCHAR(255) DEFAULT NULL,
+    screenshot2 VARCHAR(255) DEFAULT NULL,
+    screenshot3 VARCHAR(255) DEFAULT NULL,
+    previous_experience TEXT,
+    additional_comments TEXT,
+    how_did_you_hear VARCHAR(255) DEFAULT NULL,
+    original_work TINYINT(1) DEFAULT 0,
+    agree_rules TINYINT(1) DEFAULT 0,
+    agree_license TINYINT(1) DEFAULT 0,
+    confirm_age TINYINT(1) DEFAULT 0,
+    UNIQUE KEY uniq_name_email (full_name,email)
+);
+
+");
             $pdo->exec("CREATE TABLE survey_entries(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 category_id INT NOT NULL,
@@ -406,7 +521,171 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 count INT,
                 ord INT DEFAULT 0,
                 FOREIGN KEY (category_id) REFERENCES survey_categories(id) ON DELETE CASCADE
-            )");
+            );
+DROP TABLE IF EXISTS store_categories;
+DROP TABLE IF EXISTS store_developers;
+DROP TABLE IF EXISTS store_apps;
+DROP TABLE IF EXISTS subscriptions;
+DROP TABLE IF EXISTS subscription_apps;
+DROP TABLE IF EXISTS app_categories;
+DROP TABLE IF EXISTS store_screenshots;
+DROP TABLE IF EXISTS store_sidebar_links;
+DROP TABLE IF EXISTS store_capsules;
+DROP TABLE IF EXISTS storefront_capsules_all;
+DROP TABLE IF EXISTS storefront_capsules_per_theme;
+DROP TABLE IF EXISTS storefront_capsule_items;
+DROP TABLE IF EXISTS storefront_tabs;
+DROP TABLE IF EXISTS storefront_tab_games;
+DROP TABLE IF EXISTS store_pages;
+
+CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,visible TINYINT DEFAULT 1);
+CREATE TABLE store_developers(id INT AUTO_INCREMENT PRIMARY KEY,name TEXT);
+CREATE TABLE store_apps(
+    appid INT PRIMARY KEY,
+    name TEXT,
+    developer TEXT,
+    availability TEXT,
+    price DECIMAL(10,2),
+    metacritic TEXT DEFAULT NULL,
+    metacritic_url TEXT,
+    description TEXT,
+    sysreq TEXT,
+    sysreq_min TEXT,
+    sysreq_rec TEXT,
+    trailer_url TEXT,
+    hide_trailer TINYINT DEFAULT 0,
+    main_image TEXT,
+    images TEXT,
+    show_metascore TINYINT DEFAULT 0,
+    is_preload TINYINT DEFAULT 0,
+    preload_start DATE DEFAULT NULL,
+    preload_end DATE DEFAULT NULL
+);
+CREATE INDEX idx_storefront_products_appid ON store_apps(appid);
+CREATE TABLE subscriptions(subid INT PRIMARY KEY,name TEXT,price DECIMAL(10,2));
+CREATE TABLE subscription_apps(subid INT,appid INT,PRIMARY KEY(subid,appid));
+CREATE TABLE app_categories(appid INT,category_id INT,PRIMARY KEY(appid,category_id));
+CREATE TABLE store_screenshots(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    appid INT,
+    filename TEXT,
+    hidden TINYINT DEFAULT 0,
+    ord INT,
+    CONSTRAINT fk_store_screenshots_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE
+);
+CREATE TABLE store_sidebar_links(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    label TEXT,
+    url TEXT,
+    type VARCHAR(10) DEFAULT 'link',
+    ord INT,
+    visible TINYINT DEFAULT 1
+);
+CREATE TABLE store_capsules(position VARCHAR(20) PRIMARY KEY, image TEXT, appid INT);
+CREATE TABLE storefront_capsules_all(position VARCHAR(20) PRIMARY KEY, size VARCHAR(10), image_path TEXT, appid INT, price DECIMAL(10,2), hidden TINYINT DEFAULT 0);
+CREATE TABLE storefront_capsules_per_theme(theme VARCHAR(20), position VARCHAR(20), size VARCHAR(10), image_path TEXT, appid INT, price DECIMAL(10,2), hidden TINYINT DEFAULT 0, PRIMARY KEY(theme, position));
+CREATE TABLE storefront_capsule_items(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    theme VARCHAR(20),
+    type VARCHAR(10),
+    appid INT,
+    image_path TEXT,
+    price DECIMAL(10,2),
+    ord INT
+);
+ALTER TABLE storefront_capsule_items
+    ADD CONSTRAINT fk_storefront_capsule_items_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+CREATE TABLE storefront_tabs(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    theme VARCHAR(20),
+    title TEXT,
+    ord INT
+);
+CREATE TABLE storefront_tab_games(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tab_id INT,
+    appid INT,
+    ord INT
+);
+CREATE TABLE store_pages(
+    slug VARCHAR(20) PRIMARY KEY,
+    title TEXT,
+    title_image TEXT
+);
+CREATE TABLE download_pages(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    version VARCHAR(50) UNIQUE,
+    years TEXT,
+    content MEDIUMTEXT,
+    created DATETIME,
+    updated DATETIME
+);
+CREATE TABLE download_links(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    version VARCHAR(50),
+    category VARCHAR(255),
+    label VARCHAR(255),
+    url TEXT,
+    ord INT DEFAULT 0,
+    FOREIGN KEY(version) REFERENCES download_pages(version) ON DELETE CASCADE
+);
+CREATE TABLE download_files(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description MEDIUMTEXT,
+    file_size VARCHAR(50),
+    main_url TEXT,
+    created DATETIME,
+    updated DATETIME
+);
+CREATE TABLE download_file_mirrors(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    file_id INT NOT NULL,
+    url TEXT,
+    ord INT DEFAULT 0,
+    FOREIGN KEY(file_id) REFERENCES download_files(id) ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS tournaments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    event_date DATE NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    game VARCHAR(255) DEFAULT NULL,
+    host VARCHAR(255) DEFAULT NULL,
+    created DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX idx_news_publish_date ON news(publish_date);
+CREATE INDEX idx_storefront_products_appid ON store_apps(appid);
+ALTER TABLE admin_users
+    ADD CONSTRAINT fk_admin_users_role FOREIGN KEY (role_id) REFERENCES admin_roles(id);
+
+ALTER TABLE admin_tokens
+    ADD CONSTRAINT fk_admin_tokens_user FOREIGN KEY (user_id) REFERENCES admin_users(id) ON DELETE CASCADE;
+
+ALTER TABLE admin_logs
+    ADD CONSTRAINT fk_admin_logs_user FOREIGN KEY (user) REFERENCES admin_users(id) ON DELETE SET NULL;
+
+ALTER TABLE subscription_apps
+    ADD CONSTRAINT fk_subscription_apps_sub FOREIGN KEY (subid) REFERENCES subscriptions(subid) ON DELETE CASCADE,
+    ADD CONSTRAINT fk_subscription_apps_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+
+ALTER TABLE app_categories
+    ADD CONSTRAINT fk_app_categories_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE,
+    ADD CONSTRAINT fk_app_categories_cat FOREIGN KEY (category_id) REFERENCES store_categories(id) ON DELETE CASCADE;
+
+ALTER TABLE store_capsules
+    ADD CONSTRAINT fk_store_capsules_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+
+ALTER TABLE storefront_capsules_all
+    ADD CONSTRAINT fk_storefront_capsules_all_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+
+ALTER TABLE storefront_capsules_per_theme
+    ADD CONSTRAINT fk_storefront_capsules_per_theme_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+
+ALTER TABLE storefront_tab_games
+    ADD CONSTRAINT fk_storefront_tab_games_tab FOREIGN KEY (tab_id) REFERENCES storefront_tabs(id) ON DELETE CASCADE,
+    ADD CONSTRAINT fk_storefront_tab_games_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+
+");
             function split_sql_statements($sql)
             {
                 $stmts = [];
@@ -1022,6 +1301,7 @@ When you join the Cyber Café Program, we will send you a DVD-ROM containing the
 <br>
 
 <h3 style="text-transform:uppercase;">2. Run the Steam Installer</h3>
+To make things simple, you will probably want to choose the same install location on every machine in your café. We recommend that you have at least 1GB of free space on the drive before installing Steam.<br>
 To make things simple, you will probably want to choose the same install location on every machine in your café. We recommend that you have at least 1GB of free space on the drive before installing Steam.<br>
 <br>
 <h3 style="text-transform:uppercase;">3. Create an Account</h3>

@@ -1,3 +1,0 @@
-ALTER TABLE cafe_directory
-    ADD COLUMN country CHAR(2) NOT NULL DEFAULT 'US',
-    ADD COLUMN state VARCHAR(100) NULL;

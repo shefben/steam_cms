@@ -1,3 +1,0 @@
-ALTER TABLE content_servers
-    ADD COLUMN filtered TINYINT(1) NOT NULL DEFAULT 0,
-    ADD COLUMN website VARCHAR(255) DEFAULT NULL;

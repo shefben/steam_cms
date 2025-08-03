@@ -1,1 +1,0 @@
-ALTER TABLE theme_headers ADD COLUMN bold TINYINT(1) DEFAULT 0;

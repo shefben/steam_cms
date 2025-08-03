@@ -1,1 +1,0 @@
-ALTER TABLE custom_pages ADD COLUMN page_name VARCHAR(255) DEFAULT NULL;
