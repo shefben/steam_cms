@@ -4,8 +4,13 @@ cms_require_permission('manage_store');
 $db=cms_get_db();
 $theme = cms_get_setting('theme', '2004');
 $use_all = cms_get_setting('capsules_same_all', '1') === '1';
-$positions = ['top1','top2','large','under1','under2','bottom1','bottom2'];
 $is2006 = preg_match('/^200[67]/',$theme) === 1;
+if ($is2006) {
+    require __DIR__ . '/storefront_main_dynamic.php';
+    include 'admin_footer.php';
+    return;
+}
+$positions = ['top1','top2','large','under1','under2','bottom1','bottom2'];
 $showTabs = $theme === '2007_v2';
 $page_slugs = ['all'=>'All Games','browse'=>'Browse Games','search'=>'Search'];
 $pages = [];

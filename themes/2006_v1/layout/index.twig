@@ -20,27 +20,7 @@
 <div class="headerBG_1">
 <div class="leftCol_1">
 {{ join_steam_block('2006')|raw }}
-<div class="capsuleGroup">
-    <div class="capsule">{{ capsule_block('top1')|raw }}</div>
-    <div class="capsule">{{ capsule_block('top2')|raw }}</div>
-    <br clear="all">
-</div>
-<div class="capsuleLarge">
-    {{ large_capsule_block('large')|raw }}
-    <br clear="all">
-</div>
-<div class="capsuleGroup">
-    <div class="capsule">{{ capsule_block('under1')|raw }}</div>
-    <div class="capsule">{{ capsule_block('under2')|raw }}</div>
-    <br clear="all">
-</div>
-<div class="capsuleGroup">
-    <div class="capsule">{{ capsule_block('bottom1')|raw }}</div>
-    <div class="capsule">{{ capsule_block('bottom2')|raw }}</div>
-</div>
-<br clear="left">
-{{ gear_block()|raw }}
-{{ free_block()|raw }}
+{{ storefront_capsules()|raw }}
 </div>
 <div class="rightCol_1">
 <div align="center" class="btn_getSteam" onclick="location.href='index.php?area=getsteamnow'" onmouseout="this.style.background='url(img/btn_getSteam.gif)'" onmouseover="this.style.background='url(img/btn_getSteam_ovr.gif)'" style="CURSOR:pointer;" title="Click for Details">
