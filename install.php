@@ -598,12 +598,16 @@ CREATE TABLE download_files(
     description MEDIUMTEXT,
     file_size VARCHAR(50),
     main_url TEXT,
+    visibleontheme VARCHAR(64) DEFAULT NULL,
+    usingbutton TINYINT(1) NOT NULL DEFAULT 0,
+    buttonText VARCHAR(64) NOT NULL DEFAULT '',
     created DATETIME,
     updated DATETIME
 );
 CREATE TABLE download_file_mirrors(
     id INT AUTO_INCREMENT PRIMARY KEY,
     file_id INT NOT NULL,
+    host VARCHAR(255) DEFAULT NULL,
     url TEXT,
     ord INT DEFAULT 0,
     FOREIGN KEY(file_id) REFERENCES download_files(id) ON DELETE CASCADE
@@ -1675,7 +1679,7 @@ If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valv
 HTML;
 $pageStmt->execute([
     'cafe_pricing',
-    'Cyber Café Pricing and Licensing',
+    null,
     'Cyber Café Pricing and Licensing',
     $pricing_html,
     null,
@@ -1787,7 +1791,7 @@ If you have a problem related to CD Keys or your Steam account which is not cove
 </div>
 </div>
 HTML;
-$pageStmt->execute(['cd_account_faq','CD Keys and Steam Accounts',$cdaccountfaq_html,'2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['cd_account_faq',null, 'CD Keys and Steam Accounts',$cdaccountfaq_html,'2003_v2,2004,2005_v1,2005_v2','default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $autoupdate_html = <<<'HTML'
 <html style="--wm-toolbar-height: 67px;">
@@ -1838,7 +1842,7 @@ In order to continue playing online using the Valve master servers, you'll need 
 <!-- end footer -->
 </body></html>
 HTML;
-$pageStmt->execute(['autoupdate','Auto-Update via Steam',$autoupdate_html,'2003_v2,2004,2005_v1,2005_v2','none.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute(['autoupdate',null, 'Auto-Update via Steam',$autoupdate_html,'2003_v2,2004,2005_v1,2005_v2','none.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
 
 $cafeprogram_html = <<<'HTML'
 <h1>FEATURES AND BENEFITS</h1>

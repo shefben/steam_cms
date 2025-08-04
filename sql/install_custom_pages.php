@@ -62,6 +62,7 @@ HTML;
 
 $insertArray[] = [
     '2002v1_index',            // slug
+    null,                      //page name
     'Steam Powered',           // title
     $content2002v1,              // content
     '2002_v1',                 // theme
@@ -110,6 +111,7 @@ HTML;
 
 $insertArray[] = [
     '2002v2_index',            // slug
+    null,
     'Steam Powered',           // title
     $content2002v2,              // content
     '2002_v2',                 // theme
@@ -259,6 +261,7 @@ HTML;
 
 $insertArray[] = [
     '2003v1_index',
+    null,
     'Steam Powered',
     $content2003v1,
     '2003_v1',
@@ -304,6 +307,7 @@ HTML;
 
 $insertArray[] = [
     '2003v2_index',
+    null,
     'Welcome to Steam',
     $content2003v2,
     '2003_v2',
@@ -358,6 +362,7 @@ HTML;
 
 $insertArray[] = [
     '2004_index',
+    null,
     'Welcome to Steam',
     $content2004,
     '2004',
@@ -752,6 +757,7 @@ HTML;
 
 $insertArray[] = [
     '2005v1_index',
+    null,
     'Welcome to Steam',
     $content2005v1,
     '2005_v1',
@@ -1014,6 +1020,8 @@ HTML;
 
 $insertArray[] = [
     '2005v2_index',
+    null,
+
     'Welcome to Steam',
     $content2005v2,
     '2005_v2',
@@ -1091,6 +1099,8 @@ HTML;
 
 $insertArray[] = [
     'subscriber_agreement',
+    null,
+
     'Steam Subscriber Agreement',
     $sa_html,
     null,
@@ -1101,6 +1111,8 @@ $insertArray[] = [
 
 $insertArray[] = [
     'cybercafes',
+    null,
+
     'Cyber Cafés',
     file_get_contents(__DIR__.'/../html/cybercafes.html'),
     null,
@@ -1110,6 +1122,8 @@ $insertArray[] = [
 ];
 $insertArray[] = [
     'HL2GOLD_contest',
+    null,
+
     'VALVE HQ TRIP GIVEAWAY',
     file_get_contents(__DIR__.'/../html/hl2gold_contest.html'),
     null,
@@ -1119,6 +1133,8 @@ $insertArray[] = [
 ];
 $insertArray[] = [
     'get_cz',
+    null,
+
     'Counter-Strike: Condition Zero',
     file_get_contents(__DIR__.'/../html/get_cz.html'),
     null,
@@ -1128,6 +1144,8 @@ $insertArray[] = [
 ];
 $insertArray[] = [
     'cafe_setup',
+    null,
+
     'Cyber Café Setup Instructions',
     file_get_contents(__DIR__.'/../html/cafe_setup.html'),
     null,
@@ -1137,6 +1155,8 @@ $insertArray[] = [
 ];
 $insertArray[] = [
     'cybercafe_program',
+    null,
+
     'Cyber Café Program',
     file_get_contents(__DIR__.'/../html/cybercafe_program.html'),
     null,
@@ -1146,6 +1166,8 @@ $insertArray[] = [
 ];
 $insertArray[] = [
     'cybercafe_promotion',
+    null,
+
     'Valve Announces April Cyber Café Promotion',
     file_get_contents(__DIR__.'/../html/cybercafe_promotion.html'),
     null,
@@ -1155,6 +1177,8 @@ $insertArray[] = [
 ];
 $insertArray[] = [
     'cybercafe_changeform',
+    null,
+
     'Cyber Café Program Change Form',
     file_get_contents(__DIR__.'/../html/cybercafe_changeform.html'),
     null,
@@ -1164,6 +1188,8 @@ $insertArray[] = [
 ];
 $insertArray[] = [
     'product_HL2bronsilvergold',
+    null,
+
     'Welcome to Steam',
     file_get_contents(__DIR__.'/../html/product_HL2bronsilvergold.html'),
     null,
@@ -1173,6 +1199,8 @@ $insertArray[] = [
 ];
 $insertArray[] = [
     'filtered_info',
+    null,
+
     '"Filtered" Content Servers',
     file_get_contents(__DIR__.'/../archived_steampowered/2004/filtered_info.html'),
     null,
@@ -1183,6 +1211,8 @@ $insertArray[] = [
 
 $insertArray[] = [
     'tourney_limited',
+    null,
+
     'LIMITED GAME TOURNAMENT LICENSES',
     file_get_contents(__DIR__.'/../html/tourney_limited.html'),
     '2004,2005_v1',
@@ -1193,8 +1223,8 @@ $insertArray[] = [
 
 $stmtcp = $pdo->prepare(
     'INSERT INTO custom_pages
-    (slug, title, content, theme, template, created, updated, status)
-     VALUES (?, ?, ?, ?, ?, ?, ?, "published")'
+    (slug, page_name, title, content, theme, template, created, updated, status)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, "published")'
 );
 
 foreach ($insertArray as $row) {
