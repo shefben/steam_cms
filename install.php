@@ -1673,7 +1673,17 @@ If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valv
 
 </div>
 HTML;
-$pageStmt->execute(['cafe_pricing','Cyber Café Pricing and Licensing',$pricing_html,null,'default.twig',date('Y-m-d H:i:s'),date('Y-m-d H:i:s'),'published']);
+$pageStmt->execute([
+    'cafe_pricing',
+    'Cyber Café Pricing and Licensing',
+    'Cyber Café Pricing and Licensing',
+    $pricing_html,
+    null,
+    'default.twig',
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s'),
+    'published'
+]);
 
 $cdaccountfaq_html = <<<'HTML'
 <div class="content" id="container">

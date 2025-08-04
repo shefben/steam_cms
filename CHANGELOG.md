@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Corrected cafe_pricing seed to match placeholder count and include page title.
 - Resolved installation fatal error caused by passing a PDOStatement to PDO::exec.
 - Removed installer for 2004 support pages; forms now load archived HTML through Twig templates.
 - Prefilled 04-05 storefront games, packages, and third-party tables via SQL seed
