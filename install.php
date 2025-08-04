@@ -963,7 +963,7 @@ HTML;
 
             $tfStmt = $pdo->prepare('INSERT INTO theme_footers(theme,html) VALUES(?,?)');
 
-$tfstmt->execute(['2002_v2', <<<'HTML'
+$tfStmt->execute(['2002_v2', <<<'HTML'
 (c) 2002 Valve, L.L.C. All rights reserved. Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve, L.L.C.
 HTML]);
 
