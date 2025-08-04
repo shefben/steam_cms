@@ -928,7 +928,7 @@ HTML;
             $thStmt = $pdo->prepare(
                 'INSERT INTO theme_headers
                  (theme,page,ord,logo,text,img,hover,depressed,url,visible,bold,spacer)
-                 VALUES (?,?,?,?,?,?,?,?,?,1,?,?)'
+                 VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
             );
 
             foreach ($logos as $theme => $logo) {
@@ -955,6 +955,7 @@ HTML;
                         null,           // hover
                         null,           // depressed
                         $btn['url'],
+                        1,
                         0,
                         $spacer
                     ]);
