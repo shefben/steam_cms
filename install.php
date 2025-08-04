@@ -796,19 +796,19 @@ ALTER TABLE storefront_tab_games
             $footer = <<<'HTML'
 © 2004 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.
 HTML;
-            $error_html = <<<HTML
-<!-- invalid_area -->
-
-<div class="content" id="container">
-<h1>INVALID AREA</H1>
-<h2>PERHAPS  <em>YOU MISTYPED?</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
-<div class="narrower">
-<br>
-Please select an option from the top menu.
-
-</div>
-</div>
-HTML;
+            $error_html = <<<'HTML'
+            <!-- invalid_area -->
+            
+            <div class="content" id="container">
+            <h1>INVALID AREA</H1>
+            <h2>PERHAPS  <em>YOU MISTYPED?</em></h2><img src="Graphic_box.jpg" height="6" width="24" alt=""><br>
+            <div class="narrower">
+            <br>
+            Please select an option from the top menu.
+            
+            </div>
+            </div>
+            HTML;
             $header_buttons = [
                 ['url' => 'index.php?area=news',          'text' => 'news'],
                 ['url' => 'index.php?area=getsteamnow',   'text' => 'getSteamNow'],
@@ -963,7 +963,7 @@ HTML;
 
             $tfStmt = $pdo->prepare('INSERT INTO theme_footers(theme,html) VALUES(?,?)');
 
-$tfstmt->execute(['2002_v2', <<<'HTML'
+$tfStmt->execute(['2002_v2', <<<'HTML'
 (c) 2002 Valve, L.L.C. All rights reserved. Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve, L.L.C.
 HTML]);
 
