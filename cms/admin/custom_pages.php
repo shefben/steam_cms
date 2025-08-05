@@ -79,9 +79,9 @@ if(isset($_GET['edit'])){
 <table>
 <tr><th>Slug</th><th>Themes</th><th>Title</th><th>Actions</th></tr>
 <?php foreach($pages as $p): ?>
-<tr><td><?php echo htmlspecialchars($p['slug']); ?></td>
-<td><?php echo htmlspecialchars($p['theme']); ?></td>
-<td><?php echo htmlspecialchars($p['title']); ?></td>
+<tr><td><?php echo htmlspecialchars($p['slug'] ?? ''); ?></td>
+<td><?php echo htmlspecialchars($p['theme'] ?? ''); ?></td>
+<td><?php echo htmlspecialchars($p['title'] ?? ''); ?></td>
 <td><a href="?edit=<?php echo urlencode($p['slug']); ?>&amp;theme=<?php echo urlencode($p['theme']); ?>" class="btn btn-primary btn-small">Edit</a>
  <a href="?delete=<?php echo urlencode($p['slug']); ?>&amp;theme=<?php echo urlencode($p['theme']); ?>" class="btn btn-danger btn-small" onclick="return confirm('Delete?');">Delete</a></td></tr>
 <?php endforeach; ?>

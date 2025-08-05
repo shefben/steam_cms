@@ -187,4 +187,5 @@ $('#save-new').on('click',function(){
 });
 </script>
 <?php } ?>
+<?php endif; ?>
 <?php include 'admin_footer.php'; ?>
