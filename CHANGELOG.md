@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - Consolidated Random Content and Random Groups scripts under jQuery ready handlers and added sidebar access to group management.
 - Grouped Random Content and Random Groups links under a "Random Content Management" dropdown with installation defaults.
 - Removed per-page jQuery and SortableJS script tags and wrapped drag-and-drop setups in DOM-ready handlers.
+- Fresh installations seed the admin sidebar with all recently added navigation links
 - Admin news list supports filtering by title and author with AJAX pagination
 - Added preview endpoint with theme selection and admin-only access
 - Admin login styled with theme CSS, includes jQuery validation and reset link
