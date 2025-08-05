@@ -7,8 +7,10 @@ $page = max(1, (int)($_GET['page'] ?? 1));
 $offset = ($page - 1) * $perPage;
 $total = (int)$db->query('SELECT COUNT(*) FROM error_logs')->fetchColumn();
 $pages = max(1, (int)ceil($total / $perPage));
-$stmt = $db->prepare('SELECT * FROM error_logs ORDER BY created DESC LIMIT ? OFFSET ?');
-$stmt->execute([$perPage, $offset]);
+$stmt = $db->prepare('SELECT * FROM error_logs ORDER BY created DESC LIMIT :limit OFFSET :offset');
+$stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
 $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Error Log</h2>
