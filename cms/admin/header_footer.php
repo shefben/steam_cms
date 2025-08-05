@@ -192,65 +192,60 @@ Logo overrides (one per line URL:year:logo path):<br>
 <input type="submit" name="save" value="Save" class="btn btn-success">
 </form>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
-var tbody = document.querySelector('#buttons-table tbody');
-var showBold = <?php echo $show_bold ? 'true' : 'false'; ?>;
-function sendOrder(){
-    var ids=[];
-    tbody.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.index);});
-    var data=new URLSearchParams();
-    data.set('reorder','1');
-    data.set('order',ids.join(','));
-    var theme=document.getElementById('theme-select').value;
-    var page=document.getElementById('page-input').value;
-    fetch('header_footer.php?theme='+encodeURIComponent(theme)+'&page='+encodeURIComponent(page),{method:'POST',body:data});
-}
-var sortable = new Sortable(tbody, {handle: '.handle', onEnd: sendOrder});
-
-document.getElementById('add-button').addEventListener('click', function(){
+document.addEventListener('DOMContentLoaded', function(){
     var tbody = document.querySelector('#buttons-table tbody');
-    var idx = tbody.querySelectorAll('tr').length;
-    var row = document.createElement('tr');
-    row.className = 'button-row';
-    row.dataset.index = idx;
-    row.innerHTML = `<td class="handle">☰</td>`+
-        `<td><input type="text" name="buttons[${idx}][url]" style="width:250px"></td>`+
-        `<td><input type="text" name="buttons[${idx}][text]" style="width:200px"></td>`+
-        (showBold ? `<td style="text-align:center"><input type="checkbox" name="buttons[${idx}][bold]" value="1"></td>` : '')+
-        `<td><input type="checkbox" name="buttons[${idx}][delete]"></td>`+
-        `<input type="hidden" name="buttons[${idx}][img]">`+
-        `<input type="hidden" name="buttons[${idx}][hover]">`+
-        `<input type="hidden" name="buttons[${idx}][alt]">`;
-    tbody.appendChild(row);
+    var showBold = <?php echo $show_bold ? 'true' : 'false'; ?>;
+    function sendOrder(){
+        var ids=[];
+        tbody.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.index);});
+        var data=new URLSearchParams();
+        data.set('reorder','1');
+        data.set('order',ids.join(','));
+        var theme=document.getElementById('theme-select').value;
+        var page=document.getElementById('page-input').value;
+        fetch('header_footer.php?theme='+encodeURIComponent(theme)+'&page='+encodeURIComponent(page),{method:'POST',body:data});
+    }
+    var sortable = new Sortable(tbody, {handle: '.handle', onEnd: sendOrder});
+
+    document.getElementById('add-button').addEventListener('click', function(){
+        var tbody = document.querySelector('#buttons-table tbody');
+        var idx = tbody.querySelectorAll('tr').length;
+        var row = document.createElement('tr');
+        row.className = 'button-row';
+        row.dataset.index = idx;
+        row.innerHTML = `<td class="handle">☰</td>`+
+            `<td><input type="text" name="buttons[${idx}][url]" style="width:250px"></td>`+
+            `<td><input type="text" name="buttons[${idx}][text]" style="width:200px"></td>`+
+            (showBold ? `<td style="text-align:center"><input type="checkbox" name="buttons[${idx}][bold]" value="1"></td>` : '')+
+            `<td><input type="checkbox" name="buttons[${idx}][delete]"></td>`+
+            `<input type="hidden" name="buttons[${idx}][img]">`+
+            `<input type="hidden" name="buttons[${idx}][hover]">`+
+            `<input type="hidden" name="buttons[${idx}][alt]">`;
+        tbody.appendChild(row);
+    });
+
+    document.getElementById('logo-choice').addEventListener('change', function(){
+        var opt = this.options[this.selectedIndex];
+        document.getElementById('logo-url').value = opt.value;
+        document.getElementById('logo-preview').src = opt.dataset.img;
+    });
+
+    var uploadBtn=document.getElementById('upload-logo-btn');
+    var fileInput=document.getElementById('new-logo');
+    fileInput.addEventListener('change',function(){
+        uploadBtn.disabled=!this.value;
+    });
+    uploadBtn.disabled=!fileInput.value;
+
+    function loadForm(){
+        var theme=document.getElementById('theme-select').value;
+        var page=document.getElementById('page-input').value;
+        $('#hf-form-wrapper').load('header_footer.php?ajax_form=1&theme='+encodeURIComponent(theme)+'&page='+encodeURIComponent(page));
+    }
+    document.getElementById('theme-select').addEventListener('change',loadForm);
+    document.getElementById('page-input').addEventListener('change',loadForm);
 });
-
-document.getElementById('logo-choice').addEventListener('change', function(){
-    var opt = this.options[this.selectedIndex];
-    document.getElementById('logo-url').value = opt.value;
-    document.getElementById('logo-preview').src = opt.dataset.img;
-});
-
-var uploadBtn=document.getElementById('upload-logo-btn');
-var fileInput=document.getElementById('new-logo');
-fileInput.addEventListener('change',function(){
-    uploadBtn.disabled=!this.value;
-});
-uploadBtn.disabled=!fileInput.value;
-
-function loadForm(){
-    var theme=document.getElementById('theme-select').value;
-    var page=document.getElementById('page-input').value;
-    $('#hf-form-wrapper').load('header_footer.php?ajax_form=1&theme='+encodeURIComponent(theme)+'&page='+encodeURIComponent(page));
-}
-document.getElementById('theme-select').addEventListener('change',loadForm);
-document.getElementById('page-input').addEventListener('change',loadForm);
-
-
-
-
-
-
 </script>
 <p><a href="index.php">Back</a></p>
 <?php

@@ -292,11 +292,10 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   #capsuleModal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:1000;}
   #capsuleModal .dialog{background:#fff;padding:20px;border:1px solid #333;max-width:600px;}
   </style>
-  <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
   <link rel="stylesheet" href="<?php echo htmlspecialchars($theme_url); ?>/cropper.min.css">
   <script src="<?php echo htmlspecialchars($theme_url); ?>/js/cropper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
   <script>
+  $(function(){
   var images = <?php echo json_encode($images);?>;
   var apps = <?php echo json_encode($apps);?>;
   var dims = <?php echo json_encode($dimsMap); ?>;
@@ -481,5 +480,6 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   Sortable.create(document.querySelector('#tabs-table tbody'),{handle:'.handle',animation:150});
   $('#tabs-table tbody tr').each(function(){initTabSort(this);});
 <?php endif; ?>
+  });
   </script>
 <?php include 'admin_footer.php';?>

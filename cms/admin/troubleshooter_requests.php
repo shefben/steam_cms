@@ -31,7 +31,6 @@ $rows=$reqs->fetchAll(PDO::FETCH_ASSOC);
 </table>
 <div class="pager" data-table="table-<?php echo htmlspecialchars($p); ?>"></div>
 <?php endforeach; ?>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
 $(function(){
   $('table.sortable').each(function(){

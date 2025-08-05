@@ -43,26 +43,27 @@ $groups = $db->query('SELECT * FROM random_groups ORDER BY name')->fetchAll(PDO:
     <button id="save-group" class="btn btn-primary">Save</button>
     <span id="group-error" style="color:red;display:none;"></span>
 </div>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
-$('#show-add-form').on('click', function(e){
-    e.preventDefault();
-    $('#group-error').hide();
-    $('#add-group-form').slideToggle('fast');
-});
-$('#save-group').on('click', function(){
-    var name = $('#group-name').val().trim();
-    if(!name) return;
-    $.post('random_groups.php', {ajax:1, action:'create', name:name}, function(res){
-        if(res.error){
-            $('#group-error').text(res.error).show();
-        }else{
-            $('#group-error').hide();
-            $('#group-body').append('<tr><td>'+res.id+'</td><td>'+res.name+'</td></tr>');
-            $('#group-name').val('');
-            $('#add-group-form').slideUp('fast');
-        }
-    }, 'json');
+$(function(){
+    $('#show-add-form').on('click', function(e){
+        e.preventDefault();
+        $('#group-error').hide();
+        $('#add-group-form').slideToggle('fast');
+    });
+    $('#save-group').on('click', function(){
+        var name = $('#group-name').val().trim();
+        if(!name) return;
+        $.post('random_groups.php', {ajax:1, action:'create', name:name}, function(res){
+            if(res.error){
+                $('#group-error').text(res.error).show();
+            }else{
+                $('#group-error').hide();
+                $('#group-body').append('<tr><td>'+res.id+'</td><td>'+res.name+'</td></tr>');
+                $('#group-name').val('');
+                $('#add-group-form').slideUp('fast');
+            }
+        }, 'json');
+    });
 });
 </script>
 <?php include 'admin_footer.php'; ?>

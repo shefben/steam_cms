@@ -69,7 +69,6 @@ Country <input type="text" name="country">
 Phone <input type="text" name="phone">
 <button name="add" value="1">Add</button>
 </form>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
     var body=document.getElementById('rep-body');

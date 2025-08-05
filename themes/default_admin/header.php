@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="<?php echo htmlspecialchars($theme_url); ?>/js/chart.min.js"></script>
 </head>
 <body>

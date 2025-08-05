@@ -101,7 +101,6 @@ $games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY appid')->fetch
 </div>
 <button type="submit" class="btn btn-primary">Save Game</button> <button type="reset" id="cancelBtn" class="btn">Cancel</button>
 </form>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
 function uploadFile(input,type){
   var fd=new FormData();

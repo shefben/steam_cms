@@ -18,6 +18,10 @@ All notable changes to this project will be documented in this file.
 - Permissions on role and user forms presented as selectable checkboxes with all/none toggles
 - Admin dashboard graphs now use Chart.js with weekly/monthly toggles
 - Admin dashboard graph records page views and renders weekly/monthly data
+- Enabled drag-and-drop ordering across admin pages by loading SortableJS in admin themes.
+- Consolidated Random Content and Random Groups scripts under jQuery ready handlers and added sidebar access to group management.
+- Grouped Random Content and Random Groups links under a "Random Content Management" dropdown with installation defaults.
+- Removed per-page jQuery and SortableJS script tags and wrapped drag-and-drop setups in DOM-ready handlers.
 - Admin news list supports filtering by title and author with AJAX pagination
 - Added preview endpoint with theme selection and admin-only access
 - Admin login styled with theme CSS, includes jQuery validation and reset link

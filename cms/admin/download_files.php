@@ -133,7 +133,6 @@ if($pages>1){
 <input type="hidden" name="ajax" value="1">
 </form>
 </div>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
 $(function(){
  function addMirror(host,url){

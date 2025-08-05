@@ -58,7 +58,6 @@ Title:<br>
 <input type="submit" name="save_page" value="Save">
 <span id="lastSaved" style="margin-left:10px;color:green;"></span>
 </form>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('content');

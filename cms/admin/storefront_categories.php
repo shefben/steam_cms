@@ -59,7 +59,6 @@ $categories = $db->query('SELECT * FROM store_categories ORDER BY ord,id')->fetc
     <input type="text" name="new_name" placeholder="New category">
     <input type="submit" name="add_category" value="Add" class="btn">
 </form>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
     var body=document.getElementById('cat-body');

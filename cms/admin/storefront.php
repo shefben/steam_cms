@@ -221,7 +221,6 @@ if($pages>1){
 <?php endforeach; ?>
 </table>
 </div>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
 $('.tabs a').on('click', function(e){
   e.preventDefault();
