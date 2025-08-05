@@ -1,5 +1,10 @@
 <?php
-require_once 'admin_header.php';
+session_start();
+require_once __DIR__.'/../db.php';
+if(!cms_current_admin()){
+    http_response_code(403);
+    exit;
+}
 $db = cms_get_db();
 if(isset($_GET['ajax'])){
     header('Content-Type: application/json');
@@ -45,6 +50,7 @@ if(isset($_GET['ajax'])){
     echo json_encode(['status'=>'error']);
     exit;
 }
+require_once 'admin_header.php';
 $appids = $db->query('SELECT DISTINCT appid FROM platform_update_history ORDER BY appid')->fetchAll(PDO::FETCH_COLUMN);
 ?>
 <h2>Update History Management</h2>

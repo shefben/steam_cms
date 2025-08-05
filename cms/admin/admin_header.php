@@ -220,7 +220,9 @@ foreach ($nav_items as $item) {
     if(isset($custom_groups[$file])){
         $open = false;
         foreach($custom_groups[$file] as $child){ if(strpos($_SERVER['PHP_SELF'],$child['file'])!==false){ $open=true; break; } }
-        $nav_html .= '<li><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a><ul class="sub-menu" style="'.($open?'display:block':'display:none').'">';
+        $parent_id = preg_replace('/\.php$/','',$file).'-parent';
+        $sub_id = preg_replace('/\.php$/','',$file).'-sub';
+        $nav_html .= '<li id="'.$parent_id.'"><a href="#"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a><ul class="sub-menu" id="'.$sub_id.'" style="'.($open?'display:block':'display:none').'">';
         foreach($custom_groups[$file] as $child){
             if(!($child['visible']??1)) continue;
             $cfile=$child['file'];
@@ -322,7 +324,7 @@ if ($has_leg) {
     $icon = $icons[$root_file] ?? '🎮';
     $open = false;
     foreach ($legacy_sf_pages as $it) { if (strpos($_SERVER['PHP_SELF'],$it['file'])!==false){ $open=true; break; } }
-    $nav_html .= '<li id="legacy-sf-parent"><a href="'.$root_file.'"'.$active.' aria-label="Legacy Storefront menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
+    $nav_html .= '<li id="legacy-sf-parent"><a href="#"'.$active.' aria-label="Legacy Storefront menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
     if ($legacy_sf_pages) {
         $style = $open ? 'display:block' : 'display:none';
         $nav_html .= '<ul class="sub-menu" id="legacy-sf-sub" style="'.$style.'">';

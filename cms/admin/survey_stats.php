@@ -1,6 +1,17 @@
 <?php
 require_once 'admin_header.php';
 $db = cms_get_db();
+function cms_survey_recalc($db, int $cat): void {
+    $stmt = $db->prepare('SELECT id,count FROM survey_entries WHERE category_id=?');
+    $stmt->execute([$cat]);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $total = array_sum(array_column($rows, 'count')) ?: 0;
+    foreach ($rows as $r) {
+        $pct = $total > 0 ? ($r['count'] / $total) * 100 : 0;
+        $u = $db->prepare('UPDATE survey_entries SET percentage=? WHERE id=?');
+        $u->execute([round($pct, 2), $r['id']]);
+    }
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_category'])) {
         $stmt = $db->prepare('INSERT INTO survey_categories(slug,title) VALUES(?,?)');
@@ -17,10 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     if (isset($_POST['add_entry']) && isset($_POST['category_id'])) {
-        $stmt = $db->prepare('INSERT INTO survey_entries(category_id,label,percentage,count) VALUES(?,?,?,?)');
-        $stmt->execute([(int)$_POST['category_id'], trim($_POST['label']), (float)$_POST['percentage'], (int)$_POST['count']]);
-        cms_admin_log('Added survey entry to category '.(int)$_POST['category_id']);
-        header('Location: survey_stats.php?cat='.(int)$_POST['category_id']);
+        $cat = (int)$_POST['category_id'];
+        $stmt = $db->prepare('INSERT INTO survey_entries(category_id,label,count) VALUES(?,?,?)');
+        $stmt->execute([$cat, trim($_POST['label']), (int)$_POST['count']]);
+        cms_survey_recalc($db, $cat);
+        cms_admin_log('Added survey entry to category '.$cat);
+        header('Location: survey_stats.php?cat='.$cat);
         exit;
     }
     if (isset($_POST['delete_entry']) && isset($_POST['entry_id'])) {
@@ -29,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cat = $stmt->fetchColumn();
         $stmt = $db->prepare('DELETE FROM survey_entries WHERE id=?');
         $stmt->execute([(int)$_POST['entry_id']]);
+        cms_survey_recalc($db, (int)$cat);
         cms_admin_log('Deleted survey entry '.(int)$_POST['entry_id']);
         header('Location: survey_stats.php?cat='.(int)$cat);
         exit;
@@ -88,7 +102,6 @@ if ($catId) {
         <form method="post">
             <input type="hidden" name="category_id" value="<?php echo $catId; ?>">
             <input type="text" name="label" placeholder="label" required>
-            <input type="number" step="0.01" name="percentage" placeholder="percentage" required>
             <input type="number" name="count" placeholder="count" required>
             <button class="btn" name="add_entry">Add</button>
         </form>

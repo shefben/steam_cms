@@ -19,6 +19,18 @@ $(function(){
         e.preventDefault();
         $('#ts-sub').slideToggle(150);
     });
+    $('#download-parent > a').on('click', function(e){
+        e.preventDefault();
+        $('#download-sub').slideToggle(150);
+    });
+    $('#legacy-sf-parent > a').on('click', function(e){
+        e.preventDefault();
+        $('#legacy-sf-sub').slideToggle(150);
+    });
+    $('#random_content-parent > a').on('click', function(e){
+        e.preventDefault();
+        $('#random_content-sub').slideToggle(150);
+    });
     $('.notify-dismiss').on('click', function(e){
         e.preventDefault();
         var id = $(this).data('id');
