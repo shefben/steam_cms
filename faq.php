@@ -2,14 +2,11 @@
 require_once __DIR__.'/cms/template_engine.php';
 require_once __DIR__.'/cms/db.php';
 
-$theme = cms_get_setting('theme','2004');
+$theme = cms_get_setting('theme', '2004');
 $page_title = 'faq';
 
 ob_start();
 ?>
-<h1>FREQUENTLY ASKED QUESTIONS</h1>
-<h2>QUESTIONS, <em>ANSWERS, TROUBLESHOOTING...</em></h2><img src="img/Graphic_box.jpg" height="6" width="24" alt=""><br>
-<br>
 <div class="narrower">
 <?php
 $db = cms_get_db();
@@ -36,7 +33,7 @@ foreach($cats as $c){
     if(isset($bycat[$key])){
         foreach($bycat[$key] as $f){
             $id = $c['id1'].','.$c['id2'].','.$f['faqid1'].','.$f['faqid2'];
-            $icon = ($f['views'] >= $threshold) ? '/img/yellowSquare.gif' : '/img/square2.gif';
+            $icon = ($f['views'] >= $threshold) ? 'img/yellowSquare.gif' : 'img/square2.gif';
             echo '<li style="list-style-image:url('.$icon.');"> <a href="index.php?area=faq&id='.$id.'">'.htmlspecialchars($f['title'])."</a></li>";
         }
     }
@@ -47,7 +44,7 @@ foreach($cats as $c){
 <?php
 $content = ob_get_clean();
 $tpl = cms_theme_layout('default.twig', $theme);
-cms_render_template($tpl, [
+cms_render_template_theme($tpl, $theme, [
     'page_title' => $page_title,
     'content'    => $content,
 ]);
