@@ -63,9 +63,15 @@ $page = max(1, (int)($_GET['page'] ?? 1));
 $pages = max(1, (int)ceil($total / $perPage));
 $offset = ($page - 1) * $perPage;
 
-$paramsWithLimit = array_merge($params, [$perPage, $offset]);
-$stmt = $db->prepare("SELECT * FROM admin_users $where ORDER BY username LIMIT ? OFFSET ?");
-$stmt->execute($paramsWithLimit);
+ $sql = "SELECT * FROM admin_users $where ORDER BY username LIMIT ? OFFSET ?";
+ $stmt = $db->prepare($sql);
+ $idx = 1;
+ foreach ($params as $p) {
+     $stmt->bindValue($idx++, $p);
+ }
+ $stmt->bindValue($idx++, (int)$perPage, PDO::PARAM_INT);
+ $stmt->bindValue($idx, (int)$offset, PDO::PARAM_INT);
+ $stmt->execute();
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $tbodyHtml = '';

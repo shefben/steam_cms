@@ -60,6 +60,9 @@ $default_nav = [
     ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
     ['file'=>'tournaments.php','label'=>'Tournament Management','visible'=>1],
     ['file'=>'custom_titles.php','label'=>'Custom Titles','visible'=>1],
+    ['file'=>'media.php','label'=>'Media','visible'=>1],
+    ['file'=>'redirects.php','label'=>'Redirects','visible'=>1],
+    ['file'=>'support_page.php','label'=>'Support Page','visible'=>1],
     ['file'=>'random_content.php','label'=>'Random Content','visible'=>1],
     ['file'=>'random_groups.php','label'=>'Random Groups','visible'=>1],
     ['file'=>'survey_stats.php','label'=>'Survey Stats','visible'=>1],
@@ -71,8 +74,8 @@ $default_nav = [
     ['file'=>'download_settings.php','label'=>'Download Settings','visible'=>1],
     ['file'=>'page_selection.php','label'=>'Page Version Management','visible'=>1],
     ['file'=>'troubleshooter.php','label'=>'Troubleshooter','visible'=>1],
-    ['file'=>'troubleshooter_manage.php','label'=>'Manage Troubleshooter','visible'=>1],
-    ['file'=>'troubleshooter_requests.php','label'=>'Support Requests','visible'=>1],
+    ['file'=>'troubleshooter_manage.php','label'=>'Troubleshooter Management','visible'=>1],
+    ['file'=>'troubleshooter_requests.php','label'=>'Requests Viewer','visible'=>1,'parent'=>'troubleshooter_manage.php'],
     ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
     ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1],
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>cms_has_permission('manage_admins')?1:0],
@@ -112,6 +115,7 @@ $icons = [
     'tournaments.php'  => '🏆',
     'support_page.php' => '🛟',
     'custom_titles.php' => '🔤',
+    'redirects.php' => '↪️',
     'random_content.php' => '🎲',
     'random_groups.php' => '📁',
     'survey_stats.php' => '📈',
@@ -169,6 +173,9 @@ foreach ($nav_items as $k => $item) {
     } elseif (preg_match('/^storefront.*\.php/', $item['file'])) {
         $sf_pages[] = $item;
         unset($nav_items[$k]);
+    } elseif ($item['file'] === 'media.php') {
+        $sf_pages[] = $item;
+        unset($nav_items[$k]);
     } elseif ($item['file'] === 'legacy_storefront.php') {
         $legacy_sf_root = $item;
         unset($nav_items[$k]);
@@ -184,7 +191,7 @@ foreach ($nav_items as $k => $item) {
     } elseif ($item['file'] === 'troubleshooter.php') {
         $ts_root = $item;
         unset($nav_items[$k]);
-    } elseif (preg_match('/^troubleshooter_.*\.php/', $item['file'])) {
+    } elseif (preg_match('/^troubleshooter_.*\.php/', $item['file']) && $item['file'] !== 'troubleshooter_manage.php') {
         $ts_pages[] = $item;
         unset($nav_items[$k]);
     } elseif (preg_match('/^cafe_.*\.php/', $item['file'])) {
