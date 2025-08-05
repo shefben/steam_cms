@@ -170,8 +170,8 @@ if($is2007){
   </fieldset>
 </form>
 <?php endif; ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
+$(function(){
 var apps = <?php echo json_encode($apps); ?>;
 function appOptions(){
   var opts='<option value="">-- App --</option>';
@@ -217,4 +217,5 @@ $('#tabsForm').on('click','.remove-tab',function(){
 Sortable.create(document.querySelector('#tabs-table tbody'),{handle:'.handle',animation:150});
 $('#tabs-table tbody tr').each(function(){initTabSort(this);});
 <?php endif; ?>
+});
 </script>

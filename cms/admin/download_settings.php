@@ -79,7 +79,6 @@ $links = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <button type="button" id="addLink">Add Link</button>
 <input type="submit" name="save_links" value="Save Links" class="btn btn-primary">
 </form>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
 $(function(){
     $('#addLink').on('click', function(){

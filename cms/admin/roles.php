@@ -67,7 +67,6 @@ $roles = $db->query('SELECT * FROM admin_roles ORDER BY name')->fetchAll(PDO::FE
 <button type="submit">Submit</button> <button type="button" id="cancel">Cancel</button>
 </form>
 </div>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <?php echo "<script>var cmsPerms=" . json_encode(cms_all_permissions()) . ";</script>"; ?>
 <script>
 $('#addBtn').on('click',function(){

@@ -168,7 +168,6 @@ if (isset($_GET['ajax'])) {
 <button type="submit">Submit</button> <button type="button" id="cancel">Cancel</button>
 </form>
 </div>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <?php echo "<script>var data=" . json_encode($rows) . ", currentPage=$page, cmsPerms=" . json_encode(cms_all_permissions()) . ";</script>"; ?>
 <script>
 function bindActions(){

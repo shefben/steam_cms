@@ -94,7 +94,6 @@ $games=$db->query('SELECT * FROM `0405_storefront_thirdpartGames` ORDER BY id')-
 <label>Thirdparty Website URL <input type="text" name="websiteUrl" id="websiteUrl"></label><br>
 <button type="submit" class="btn btn-primary">Save Game</button> <button type="reset" id="cancelBtn" class="btn">Cancel</button>
 </form>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
 function uploadFileTP(input,type){
   var fd=new FormData();

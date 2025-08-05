@@ -130,7 +130,6 @@ Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <in
 <!-- header and footer settings moved to header_footer.php -->
 <input type="submit" name="save" value="Save">
 </form>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
     var tbody=document.getElementById('nav-body');

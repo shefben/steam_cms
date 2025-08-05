@@ -57,7 +57,6 @@ if(isset($_GET['edit'])){
 <button type="button" id="cancelBtn">Cancel</button>
 </form>
 </div>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('content');

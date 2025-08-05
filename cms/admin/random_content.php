@@ -93,6 +93,7 @@ if ($current !== '' && isset($_GET['edit'])) {
 }
 ?>
 <h2>Random Content</h2>
+<p><a href="random_groups.php" class="btn btn-secondary">Manage Random Groups</a></p>
 <?php if (!isset($_GET['edit'])): ?>
 <table class="data-table">
 <thead><tr><th>Group</th><th>Tag Name</th><th>Action</th></tr></thead>
@@ -139,33 +140,32 @@ if ($current !== '' && isset($_GET['edit'])) {
 <button type="button" id="add">Add</button>
 <button type="submit" name="save" value="1">Save</button>
 </form>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <?php if (isset($_GET['edit'])) { ?>
 <script>
-function addEditor(id,content){
-    var div=$('<div class="entry" data-id="'+(id||'new')+'">');
-    var del=$('<button type="button" class="delete-btn" data-id="'+(id||'new')+'">Delete</button>');
-    var ta=$('<textarea class="editor" name="'+(id?"content["+id+"]":"new[]")+'"></textarea>');
-    if(content){ ta.text(content); }
-    div.append(del).append(ta);
-    $('#editor-container').append(div);
-    CKEDITOR.replace(ta[0]);
-}
-$('#add').on('click',function(){
-    $('#new-tag-container').show();
-    addEditor(null,'');
-});
-$('#editor-container').on('click','.delete-btn',function(){
-    var id=$(this).data('id');
-    if(id!=='new'){
-        $('<input>').attr({type:'hidden',name:'delete[]'}).val(id).appendTo('#content-form');
-    }
-    var inst=CKEDITOR.instances[$(this).next('textarea').attr('id')];
-    if(inst){ inst.destroy(true); }
-    $(this).parent().remove();
-});
 $(function(){
+    function addEditor(id,content){
+        var div=$('<div class="entry" data-id="'+(id||'new')+'">');
+        var del=$('<button type="button" class="delete-btn" data-id="'+(id||'new')+'">Delete</button>');
+        var ta=$('<textarea class="editor" name="'+(id?"content["+id+"]":"new[]")+'"></textarea>');
+        if(content){ ta.text(content); }
+        div.append(del).append(ta);
+        $('#editor-container').append(div);
+        CKEDITOR.replace(ta[0]);
+    }
+    $('#add').on('click',function(){
+        $('#new-tag-container').show();
+        addEditor(null,'');
+    });
+    $('#editor-container').on('click','.delete-btn',function(){
+        var id=$(this).data('id');
+        if(id!=='new'){
+            $('<input>').attr({type:'hidden',name:'delete[]'}).val(id).appendTo('#content-form');
+        }
+        var inst=CKEDITOR.instances[$(this).next('textarea').attr('id')];
+        if(inst){ inst.destroy(true); }
+        $(this).parent().remove();
+    });
     $('.editor').each(function(){ CKEDITOR.replace(this); });
     $('#new-tag-container').show();
     $('#new-tag').on('input',function(){
@@ -175,15 +175,17 @@ $(function(){
 </script>
 <?php } else { ?>
 <script>
-CKEDITOR.replace('new-content');
-$('#add-random-btn').on('click',function(e){e.preventDefault();$('#add-form').slideToggle('fast');});
-$('#cancel-new').on('click',function(e){e.preventDefault();$('#add-form').slideUp('fast');});
-$('#save-new').on('click',function(){
-    var data={ajax:1,action:'add',name:$('#new-name').val().trim(),group_id:$('#new-group').val(),content:CKEDITOR.instances['new-content'].getData()};
-    $.post('random_content.php',data,function(res){
-        if(res.error){$('#add-error').text(res.error).show();}
-        else{location.reload();}
-    },'json');
+$(function(){
+    CKEDITOR.replace('new-content');
+    $('#add-random-btn').on('click',function(e){e.preventDefault();$('#add-form').slideToggle('fast');});
+    $('#cancel-new').on('click',function(e){e.preventDefault();$('#add-form').slideUp('fast');});
+    $('#save-new').on('click',function(){
+        var data={ajax:1,action:'add',name:$('#new-name').val().trim(),group_id:$('#new-group').val(),content:CKEDITOR.instances['new-content'].getData()};
+        $.post('random_content.php',data,function(res){
+            if(res.error){$('#add-error').text(res.error).show();}
+            else{location.reload();}
+        },'json');
+    });
 });
 </script>
 <?php } ?>

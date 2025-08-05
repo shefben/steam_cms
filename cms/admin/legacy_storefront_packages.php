@@ -102,7 +102,6 @@ $packages = $db->query('SELECT * FROM `0405_storefront_packages` ORDER BY subid'
 <label>Price <input type="text" name="price" id="price"></label><br>
 <button type="submit" class="btn btn-primary">Save Package</button> <button type="reset" id="cancelBtn" class="btn">Cancel</button>
 </form>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script>
 function uploadFilePkg(input,type){
   var fd=new FormData();

@@ -195,7 +195,6 @@ City/State <input type="text" name="city_state">
 Zip <input type="text" name="zip">
 <button name="add" value="1">Add</button>
 </form>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
 $(function(){
     var body=document.getElementById('dir-body');

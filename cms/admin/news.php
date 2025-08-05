@@ -207,8 +207,6 @@ if (isset($_GET['ajax'])) {
 </form>
 <?php echo $paginationHtml; ?>
 <p><a href="index.php">Back</a></p>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
     var body=document.getElementById('news-body');

@@ -89,7 +89,6 @@ if($edit){
 <form method="post" style="margin-top:20px;">
 New Version: <input type="text" name="new_version"> <button name="create" value="1">Add</button>
 </form>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('content');

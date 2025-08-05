@@ -48,5 +48,4 @@ $tournaments = $db->query('SELECT * FROM tournaments ORDER BY event_date')->fetc
 <label>Host: <input type="text" name="host"></label><br>
 <button type="submit" name="add" class="btn btn-primary">Add</button>
 </form>
-<script src="<?php echo htmlspecialchars($theme_url); ?>/js/jquery.min.js"></script>
 <?php include 'admin_footer.php'; ?>
