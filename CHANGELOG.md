@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Removed download page version options from Page Version Management; now handled in Download Settings.
 - Capsule tags now load theme-specific entries before falling back to globally shared capsules.
 - Root .htaccess now redirects storefront paths to the 04-05 directory when the active theme is 2004 or 2005_v1.
 - Added fallback to legacy capsule tables so default storefront capsules render when no dynamic items are configured.
@@ -245,7 +246,7 @@ All notable changes to this project will be documented in this file.
 - Default download files now pre-select visibility based on theme and
   getsteamnow version logic filters dedicated server and update tool entries
 - Admin sidebar always shows a Page Version Management link
-- Download management uses a simple WYSIWYG editor for descriptions and the Page Version Management screen lists all legacy download options
+- Download management uses a simple WYSIWYG editor for descriptions
 - Seeded the complete 2004 Steam installer catalog with titles, sizes, and mirror hosts during installation
 - Added tournament management admin page and dynamic tournament calendar page.
 - Removed obsolete footer from tourney_limited page.
