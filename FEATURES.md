@@ -18,6 +18,7 @@
 
 - 2004 index snippets auto-wrap after two lines
 - Logout link pinned to bottom of admin sidebar for consistent navigation
+- Root .htaccess automatically updates storefront redirects based on the active theme
 - Full Steam Subscriber Agreement installed from archive text
 - Batch script relocates storefront capsule images from archived folders
 - Storefront URLs automatically prepend the CMS root path for subdirectory setups

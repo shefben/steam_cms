@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Root .htaccess now redirects storefront paths to the 04-05 directory when the active theme is 2004 or 2005_v1.
 - Added fallback to legacy capsule tables so default storefront capsules render when no dynamic items are configured.
 - Corrected cafe_pricing seed to match placeholder count and include page title.
 - FAQ page now loads popularity icons from the active theme directory.
