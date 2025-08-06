@@ -16,16 +16,22 @@ $(function(){
         $('#faq-sub').slideToggle(150);
     });
     $('#ts-parent > a').on('click', function(e){
-        e.preventDefault();
-        $('#ts-sub').slideToggle(150);
+        var $sub = $('#ts-sub');
+        if ($sub.length) {
+            e.preventDefault();
+            $sub.slideToggle(150);
+        }
     });
     $('#download-parent > a').on('click', function(e){
         e.preventDefault();
         $('#download-sub').slideToggle(150);
     });
     $('#legacy-sf-parent > a').on('click', function(e){
-        e.preventDefault();
-        $('#legacy-sf-sub').slideToggle(150);
+        var $sub = $('#legacy-sf-sub');
+        if ($sub.length) {
+            e.preventDefault();
+            $sub.slideToggle(150);
+        }
     });
     $('#random_content-parent > a').on('click', function(e){
         e.preventDefault();
