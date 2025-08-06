@@ -389,45 +389,87 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('capsule_block', function(string $key) {
-            $theme = cms_get_current_theme();
+            $theme  = cms_get_current_theme();
+            $db     = cms_get_db();
             $useAll = cms_get_setting('capsules_same_all', '1') === '1';
-            $db = cms_get_db();
-            if ($useAll) {
-                $stmt = $db->prepare('SELECT * FROM storefront_capsules_all WHERE position=?');
-                $stmt->execute([$key]);
-            } else {
-                $stmt = $db->prepare('SELECT * FROM storefront_capsules_per_theme WHERE theme=? AND position=?');
-                $stmt->execute([$theme, $key]);
-            }
+
+            $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? AND c.position=?');
+            $stmt->execute([$theme, $key]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if(!$row){ return ''; }
+
+            if (!$row && $useAll) {
+                $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_all c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.position=?');
+                $stmt->execute([$key]);
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            if (!$row) {
+                return '';
+            }
+
+            $priceVal = $row['price'] !== null ? (float)$row['price'] : (float)$row['app_price'];
+            $price = number_format($priceVal, 2);
+            $name = htmlspecialchars($row['app_name'] ?? '', ENT_QUOTES);
+            $imgPath = $row['image_path'];
+
+            if (in_array($theme, ['2006_v1', '2006_v2', '2007_v1', '2007_v2'], true)) {
+                if (!str_starts_with($imgPath, 'gfx/')) {
+                    $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                }
+                $img = $imgPath;
+                $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
+                if (in_array($theme, ['2007_v1', '2007_v2'], true)) {
+                    return '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsule\'; window.status=\'\';" onmouseover="this.className=\'capsule_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="img/corners/smallcap_corners.png" width="280" height="105" border="0"></div></div><div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '</div></div>';
+                }
+                return '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);"><div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"></div><div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>';
+            }
+
             $base = cms_base_url();
-            $base = $base ? rtrim($base, '/'). '/' : '';
-            $img = $base.'storefront/images/capsules/'.$row['image_path'];
-            $url = 'index.php?area=app&id='.(int)$row['appid'];
-            $price = $row['price'];
-            return '<a href="'.$url.'"><img src="'.$img.'" alt=""></a><span class="price">$'.htmlspecialchars($price).'</span>';
+            $base = $base ? rtrim($base, '/') . '/' : '';
+            $img  = $base . 'storefront/images/capsules/' . $imgPath;
+            $url  = 'index.php?area=app&id=' . (int)$row['appid'];
+            return '<div class="capsule"><a href="' . $url . '"><img src="' . $img . '" alt="' . $name . '"></a><span class="price">$' . htmlspecialchars($price) . '</span></div>';
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('large_capsule_block', function(string $key = 'large') {
-            $theme = cms_get_current_theme();
+            $theme  = cms_get_current_theme();
+            $db     = cms_get_db();
             $useAll = cms_get_setting('capsules_same_all', '1') === '1';
-            $db = cms_get_db();
-            if ($useAll) {
-                $stmt = $db->prepare('SELECT * FROM storefront_capsules_all WHERE position=?');
-                $stmt->execute([$key]);
-            } else {
-                $stmt = $db->prepare('SELECT * FROM storefront_capsules_per_theme WHERE theme=? AND position=?');
-                $stmt->execute([$theme, $key]);
-            }
+
+            $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? AND c.position=?');
+            $stmt->execute([$theme, $key]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if(!$row){ return ''; }
+
+            if (!$row && $useAll) {
+                $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_all c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.position=?');
+                $stmt->execute([$key]);
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            if (!$row) {
+                return '';
+            }
+
+            $priceVal = $row['price'] !== null ? (float)$row['price'] : (float)$row['app_price'];
+            $price = number_format($priceVal, 2);
+            $name = htmlspecialchars($row['app_name'] ?? '', ENT_QUOTES);
+            $imgPath = $row['image_path'];
+
+            if (in_array($theme, ['2006_v1', '2006_v2', '2007_v1', '2007_v2'], true)) {
+                if (!str_starts_with($imgPath, 'gfx/')) {
+                    $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                }
+                $img = $imgPath;
+                $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
+                if (in_array($theme, ['2007_v1', '2007_v2'], true)) {
+                    return '<div id="capsule_large_content"><div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="img/corners/largecap_corners.png" width="572" height="221" border="0"></div></div><div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div></div>';
+                }
+                return '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);"><div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"></div><div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>';
+            }
+
             $base = cms_base_url();
-            $base = $base ? rtrim($base, '/'). '/' : '';
-            $img = $base.'storefront/images/capsules/'.$row['image_path'];
-            $url = 'index.php?area=app&id='.(int)$row['appid'];
-            $price = $row['price'];
-            return '<div class="large-capsule"><a href="'.$url.'"><img src="'.$img.'" alt=""></a><span class="price">$'.htmlspecialchars($price).'</span></div>';
+            $base = $base ? rtrim($base, '/') . '/' : '';
+            $img  = $base . 'storefront/images/capsules/' . $imgPath;
+            $url  = 'index.php?area=app&id=' . (int)$row['appid'];
+            return '<div class="capsuleLarge"><div class="large-capsule"><a href="' . $url . '"><img src="' . $img . '" alt="' . $name . '"></a><span class="price">$' . htmlspecialchars($price) . '</span></div></div>';
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('store_sidebar', function () {
@@ -504,28 +546,35 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('storefront_capsules', function () {
-            $theme = cms_get_current_theme();
+            $theme  = cms_get_current_theme();
             $useAll = cms_get_setting('capsules_same_all', '1') === '1';
-            $db = cms_get_db();
-            if ($useAll) {
+            $db     = cms_get_db();
+
+            // Try theme-specific capsule items first
+            $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsule_items c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? ORDER BY ord');
+            $stmt->execute([$theme]);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // If none and sharing enabled, fall back to global capsule items
+            if (!$rows && $useAll) {
                 $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsule_items c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme IS NULL ORDER BY ord');
                 $stmt->execute();
-            } else {
-                $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsule_items c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? ORDER BY ord');
-                $stmt->execute([$theme]);
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
-            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
             if (!$rows) {
                 $posOrder = "'top1','top2','large','under1','under2','bottom1','bottom2','gear','free','tabbed'";
-                if ($useAll) {
-                    $sql = "SELECT c.position, c.size AS type, c.image_path, c.appid, c.price, a.name AS app_name, a.price AS app_price FROM storefront_capsules_all c LEFT JOIN store_apps a ON a.appid=c.appid ORDER BY FIELD(c.position,$posOrder)";
-                    $stmt = $db->query($sql);
-                } else {
-                    $sql = "SELECT c.position, c.size AS type, c.image_path, c.appid, c.price, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? ORDER BY FIELD(c.position,$posOrder)";
-                    $stmt = $db->prepare($sql);
-                    $stmt->execute([$theme]);
-                }
+                // Try theme-specific legacy capsule tables
+                $sql  = "SELECT c.position, c.size AS type, c.image_path, c.appid, c.price, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? ORDER BY FIELD(c.position,$posOrder)";
+                $stmt = $db->prepare($sql);
+                $stmt->execute([$theme]);
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Fall back to global legacy capsules when enabled
+                if (!$rows && $useAll) {
+                    $sql  = "SELECT c.position, c.size AS type, c.image_path, c.appid, c.price, a.name AS app_name, a.price AS app_price FROM storefront_capsules_all c LEFT JOIN store_apps a ON a.appid=c.appid ORDER BY FIELD(c.position,$posOrder)";
+                    $rows = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                }
             }
             $base = cms_base_url();
             $base = $base ? rtrim($base, '/') . '/' : '';
@@ -599,12 +648,11 @@ function cms_twig_env(string $tpl_dir): Environment
                             }
                             $img = $imgPath;
                             $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
-                            $html .= '<div class="inline" id="capsule_large"><br clear="all"><div class="capsule_large_area"><div id="capsule_large_content">'
+                            $html .= '<div id="capsule_large_content">'
                                 . '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';">'
                                 . '<div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="img/corners/largecap_corners.png" width="572" height="221" border="0"></div></div>'
                                 . '<div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div>'
-                                . '</div></div></div>'
-                                . '<script type="text/javascript">var so=new SWFObject("swf/capsule_lg.swf","movie","578","255","8","#282828");so.addVariable("img1","' . (int)$row['appid'] . '");so.addVariable("txt1","' . addslashes($name) . '");so.addVariable("price1","&#36;' . htmlspecialchars($price) . '");so.addVariable("type1","apps");so.write("capsule_large_content");</script>';
+                                . '</div>';
                         } else {
                             $img = $base . 'storefront/images/capsules/' . $row['image_path'];
                             $url = 'index.php?area=app&id=' . (int)$row['appid'];
