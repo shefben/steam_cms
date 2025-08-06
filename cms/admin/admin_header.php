@@ -163,43 +163,53 @@ $download_pages = [];
 $custom_groups = [];
 foreach ($nav_items as $k => $item) {
     if (!($item['visible'] ?? 1)) continue;
-    if (!empty($item['parent'])) {
-        $custom_groups[$item['parent']][] = $item;
-        unset($nav_items[$k]);
-        continue;
-    }
     if ($item['file'] === 'storefront.php') {
         $sf_root = $item;
         unset($nav_items[$k]);
-    } elseif (preg_match('/^storefront.*\.php/', $item['file'])) {
+        continue;
+    } elseif (preg_match('/^storefront.*\\.php/', $item['file'])) {
         $sf_pages[] = $item;
         unset($nav_items[$k]);
+        continue;
     } elseif ($item['file'] === 'media.php') {
         $sf_pages[] = $item;
         unset($nav_items[$k]);
+        continue;
     } elseif ($item['file'] === 'legacy_storefront.php') {
         $legacy_sf_root = $item;
         unset($nav_items[$k]);
-    } elseif (preg_match('/^legacy_storefront_.*\.php/', $item['file'])) {
+        continue;
+    } elseif (preg_match('/^legacy_storefront_.*\\.php/', $item['file'])) {
         $legacy_sf_pages[] = $item;
         unset($nav_items[$k]);
+        continue;
     } elseif ($item['file'] === 'faq.php') {
         $faq_root = $item;
         unset($nav_items[$k]);
+        continue;
     } elseif ($item['file'] === 'faq_categories.php') {
         $faq_pages[] = $item;
         unset($nav_items[$k]);
+        continue;
     } elseif ($item['file'] === 'troubleshooter.php') {
         $ts_root = $item;
         unset($nav_items[$k]);
-    } elseif (preg_match('/^troubleshooter_.*\.php/', $item['file']) && $item['file'] !== 'troubleshooter_manage.php') {
+        continue;
+    } elseif (preg_match('/^troubleshooter_.*\\.php/', $item['file'])) {
         $ts_pages[] = $item;
         unset($nav_items[$k]);
-    } elseif (preg_match('/^cafe_.*\.php/', $item['file'])) {
+        continue;
+    } elseif (preg_match('/^cafe_.*\\.php/', $item['file'])) {
         $cafe_pages[] = $item;
         unset($nav_items[$k]);
-    } elseif (preg_match('/^download_.*\.php/', $item['file'])) {
+        continue;
+    } elseif (preg_match('/^download_.*\\.php/', $item['file'])) {
         $download_pages[] = $item;
+        unset($nav_items[$k]);
+        continue;
+    }
+    if (!empty($item['parent'])) {
+        $custom_groups[$item['parent']][] = $item;
         unset($nav_items[$k]);
     }
 }
