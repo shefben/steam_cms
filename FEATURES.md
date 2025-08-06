@@ -42,7 +42,7 @@
 - Sidebar links grouped under expandable Cafe menu
 - Not-found routes return the admin-configured error page
 - Random content links groups through foreign keys
-- 2002 page titles rendered with new 2002_page_title tag
+- 2002 page titles rendered with new page_title_2002 tag
 - Support email tag outputs address from settings
 - Admin settings screen captures support email address
 - 2002_v1 navigation auto-depresses active tab
