@@ -324,7 +324,7 @@ if ($has_leg) {
     $icon = $icons[$root_file] ?? '🎮';
     $open = false;
     foreach ($legacy_sf_pages as $it) { if (strpos($_SERVER['PHP_SELF'],$it['file'])!==false){ $open=true; break; } }
-    $nav_html .= '<li id="legacy-sf-parent"><a href="#"'.$active.' aria-label="Legacy Storefront menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
+    $nav_html .= '<li id="legacy-sf-parent"><a href="'.$root_file.'"'.$active.' aria-label="Legacy Storefront menu">'.htmlspecialchars($icon.' '.$root_label).'</a>';
     if ($legacy_sf_pages) {
         $style = $open ? 'display:block' : 'display:none';
         $nav_html .= '<ul class="sub-menu" id="legacy-sf-sub" style="'.$style.'">';
