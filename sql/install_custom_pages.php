@@ -1021,10 +1021,32 @@ HTML;
 $insertArray[] = [
     '2005v2_index',
     null,
-
     'Welcome to Steam',
     $content2005v2,
     '2005_v2',
+    'index.twig',
+    date('Y-m-d H:i:s'),       // created
+    date('Y-m-d H:i:s')        // updated
+];
+
+
+$insertArray[] = [
+    '2006v1_index',
+    null,
+    'Welcome to Steam',
+    "",
+    '2006_v1',
+    'index.twig',
+    date('Y-m-d H:i:s'),       // created
+    date('Y-m-d H:i:s')        // updated
+];
+
+$insertArray[] = [
+    '2006v2_index',
+    null,
+    'Welcome to Steam',
+    "",
+    '2006_v2',
     'index.twig',
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
