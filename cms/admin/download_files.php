@@ -1,5 +1,7 @@
 <?php
+ob_start();
 require_once 'admin_header.php';
+$admin_header = ob_get_clean();
 cms_require_permission('manage_pages');
 $db = cms_get_db();
 $themes = cms_get_themes();
@@ -73,6 +75,7 @@ $stmt->bindValue(2,$offset,PDO::PARAM_INT);
 $stmt->execute();
 $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
+echo $admin_header;
 ?>
 <h2>Download File Management</h2>
 <table class="data-table" id="filesTable">

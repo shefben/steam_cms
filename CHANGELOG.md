@@ -35,7 +35,8 @@ All notable changes to this project will be documented in this file.
 - Fixed 2006 v1 and v2 theme layouts so storefront capsules render correctly
 - CSS links beginning with ./ now resolve to the root website path
 - Random content entries reference groups via foreign keys
-- Added 2002_page_title and support_email template tags
+- Renamed 2002_page_title tag to page_title_2002 to comply with Twig naming rules
+- Added page_title_2002 and support_email template tags
 - 2002_v1 navigation highlights active page based on current route
 - Admin settings include configurable support email address
 - News admin page offers configurable date format with AJAX persistence

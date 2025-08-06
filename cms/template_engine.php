@@ -320,7 +320,7 @@ function cms_twig_env(string $tpl_dir): Environment
             return '';
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('2002_page_title', function() {
+        $env->addFunction(new TwigFunction('page_title_2002', function() {
             $slug  = cms_get_current_page();
             $theme = cms_get_current_theme();
             $page  = cms_get_custom_page($slug, $theme);

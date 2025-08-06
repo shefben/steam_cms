@@ -156,9 +156,9 @@ Looks up a named title fragment in `custom_titles` and renders it with `split_ti
 - **name** (`string`): value of `title_name` to fetch.
 - **Example:** `{{ split_title_entry('home') }}`
 
-### `2002_page_title()`
+### `page_title_2002()`
 Displays the current page's `page_name` using the 2002 banner style.
-- **Example:** `{{ 2002_page_title() }}`
+- **Example:** `{{ page_title_2002() }}`
 
 ### `sitetitle()`
 Shows the current page name using the 2002/2003 style.
