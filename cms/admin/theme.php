@@ -62,6 +62,8 @@ if(isset($_POST['save'])){
         cms_set_setting('support2003_show',$show);
         cms_set_setting('support2003_html',$html);
     }
+    require_once __DIR__.'/../update_htaccess.php';
+    cms_update_htaccess_storefront_redirect();
     echo '<p>Theme updated.</p>';
 }
 ?>
