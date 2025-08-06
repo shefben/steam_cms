@@ -46,7 +46,7 @@ if(isset($_POST['save_game'])){
     if($purchase==='custom'){$purchase=trim($_POST['custom_purchase']);}
     $thumb=$_POST['current_thumb']??'';
     $screen=$_POST['current_screen']??'';
-    if(isset($_POST['remove_screenshot'])) $screen='';
+    if(!empty($_POST['remove_screenshot'])) $screen='';
     $stmt=$db->prepare('REPLACE INTO `0405_storefront_games`(appid,title,description,image_thumb,image_screenshot,purchaseButtonStr,isHidden) VALUES(?,?,?,?,?,?,0)');
     $stmt->execute([$appid,$title,$desc,$thumb,$screen,$purchase]);
 }
@@ -82,6 +82,7 @@ $games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY appid')->fetch
 <input type="hidden" name="save_game" value="1">
 <input type="hidden" name="current_thumb" id="current_thumb">
 <input type="hidden" name="current_screen" id="current_screen">
+<input type="hidden" name="remove_screenshot" id="remove_screenshot" value="0">
 <input type="hidden" name="title_image" id="title_image">
 <label>Application ID <input type="number" name="appid" id="appid"></label><br>
 <div>
@@ -92,7 +93,7 @@ $games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY appid')->fetch
 </div><br>
 <label>Main Image <span id="thumbPrev"></span> <input type="file" name="main_image" id="main_image"></label><br>
 <label>Screenshot <span id="screenPrev"></span> <input type="file" name="screenshot" id="screenshot">
-<button type="submit" name="remove_screenshot" value="1" id="removeShot" disabled>Remove Screenshot</button></label><br>
+<button type="button" id="removeShot" disabled>Remove Screenshot</button></label><br>
 <label>Description<br><textarea name="description" id="description" rows="5" cols="60"></textarea></label><br>
 <div>Purchase Button text:<br>
 <label><input type="radio" name="purchaseButtonStr" value="CLICK for PURCHASE OPTIONS" id="pb1"> CLICK for PURCHASE OPTIONS</label><br>
@@ -102,24 +103,122 @@ $games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY appid')->fetch
 <button type="submit" class="btn btn-primary">Save Game</button> <button type="reset" id="cancelBtn" class="btn">Cancel</button>
 </form>
 <script>
-function uploadFile(input,type){
-  var fd=new FormData();
-  fd.append('file',input.files[0]);
-  fd.append('appid',$('#appid').val());
-  fd.append('type',type);
-  $.ajax({url:'legacy_storefront_games.php?ajax=upload',method:'POST',data:fd,processData:false,contentType:false,success:function(p){
-    if(type==='thumb'){ $('#thumbPrev').html('<img src="'+p+'" width="32">'); $('#current_thumb').val(p); }
-    else if(type==='screen'){ $('#screenPrev').html('<img src="'+p+'" width="32">'); $('#current_screen').val(p); $('#removeShot').prop('disabled',false); }
-    else { $('#titleImgPrev').html('<img src="'+p+'" width="32">'); $('#title_image').val(p); $('#title_mode_image').prop('checked',true); }
-  }});
-}
-$('.toggle-hidden').on('change',function(){var id=$(this).data('id');$.post('legacy_storefront_games.php',{toggle_hidden:1,appid:id,hidden:this.checked?1:0});});
-$('.edit-btn').on('click',function(){var id=$(this).data('id');$.getJSON('legacy_storefront_games.php',{load:id},function(d){$('#appid').val(d.appid);if(d.title.match(/^\/storefront\/images\//)){ $('#title_mode_image').prop('checked',true); $('#title_image').val(d.title); $('#titleImgPrev').html('<img src="'+d.title+'" width="32">'); $('#title_text').val(''); }else{ $('#title_mode_text').prop('checked',true); $('#title_text').val(d.title); $('#title_image').val(''); $('#titleImgPrev').html('No Image selected'); }$('#current_thumb').val(d.image_thumb);$('#thumbPrev').html(d.image_thumb?'<img src="'+d.image_thumb+'" width="32">':'');$('#current_screen').val(d.image_screenshot);$('#screenPrev').html(d.image_screenshot?'<img src="'+d.image_screenshot+'" width="32">':'');$('#description').val(d.description);var pb=d.purchaseButtonStr;if(pb=="CLICK for PURCHASE OPTIONS"){$('#pb1').prop('checked',true);}else if(pb=="DOWNLOAD & INSTALL NOW"){$('#pb2').prop('checked',true);}else{$('#pb3').prop('checked',true);$('#custom_purchase').val(pb);}$('#removeShot').prop('disabled',!d.image_screenshot);});});
-$('#pb1,#pb2').on('change',function(){if(this.checked)$('#custom_purchase').val('');});
-$('#pb3').on('change',function(){if(this.checked)$('#custom_purchase').focus();});
-$('#main_image').on('change',function(){uploadFile(this,'thumb');});
-$('#screenshot').on('change',function(){uploadFile(this,'screen');});
-$('#uploadTitleBtn').on('click',function(){$('#titleFile').click();});
-$('#titleFile').on('change',function(){uploadFile(this,'title');});
+$(function () {
+    function uploadFile(input, type) {
+        var fd = new FormData();
+        fd.append('file', input.files[0]);
+        fd.append('appid', $('#appid').val());
+        fd.append('type', type);
+        $.ajax({
+            url: 'legacy_storefront_games.php?ajax=upload',
+            method: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function (p) {
+                if (type === 'thumb') {
+                    $('#thumbPrev').html('<img src="' + p + '" width="32">');
+                    $('#current_thumb').val(p);
+                } else if (type === 'screen') {
+                    $('#screenPrev').html('<img src="' + p + '" width="32">');
+                    $('#current_screen').val(p);
+                    $('#removeShot').prop('disabled', false);
+                } else {
+                    $('#titleImgPrev').html('<img src="' + p + '" width="32">');
+                    $('#title_image').val(p);
+                    $('#title_mode_image').prop('checked', true);
+                }
+            }
+        });
+    }
+
+    $(document).on('change', '.toggle-hidden', function () {
+        var id = $(this).data('id');
+        $.post('legacy_storefront_games.php', {
+            toggle_hidden: 1,
+            appid: id,
+            hidden: this.checked ? 1 : 0
+        });
+    });
+
+    $(document).on('click', '.edit-btn', function () {
+        var id = $(this).data('id');
+        $.getJSON('legacy_storefront_games.php', { load: id }, function (d) {
+            $('#appid').val(d.appid);
+            if (d.title.match(/^\/storefront\/images\//)) {
+                $('#title_mode_image').prop('checked', true);
+                $('#title_image').val(d.title);
+                $('#titleImgPrev').html('<img src="' + d.title + '" width="32">');
+                $('#title_text').val('');
+            } else {
+                $('#title_mode_text').prop('checked', true);
+                $('#title_text').val(d.title);
+                $('#title_image').val('');
+                $('#titleImgPrev').html('No Image selected');
+            }
+            $('#current_thumb').val(d.image_thumb);
+            $('#thumbPrev').html(d.image_thumb ? '<img src="' + d.image_thumb + '" width="32">' : '');
+            $('#current_screen').val(d.image_screenshot);
+            $('#screenPrev').html(d.image_screenshot ? '<img src="' + d.image_screenshot + '" width="32">' : '');
+            $('#description').val(d.description);
+            var pb = d.purchaseButtonStr;
+            if (pb == "CLICK for PURCHASE OPTIONS") {
+                $('#pb1').prop('checked', true);
+            } else if (pb == "DOWNLOAD & INSTALL NOW") {
+                $('#pb2').prop('checked', true);
+            } else {
+                $('#pb3').prop('checked', true);
+                $('#custom_purchase').val(pb);
+            }
+            $('#removeShot').prop('disabled', !d.image_screenshot);
+        });
+    });
+
+    $('#pb1,#pb2').on('change', function () {
+        if (this.checked) {
+            $('#custom_purchase').val('');
+        }
+    });
+
+    $('#pb3').on('change', function () {
+        if (this.checked) {
+            $('#custom_purchase').focus();
+        }
+    });
+
+    $('#main_image').on('change', function () {
+        uploadFile(this, 'thumb');
+    });
+
+    $('#screenshot').on('change', function () {
+        uploadFile(this, 'screen');
+    });
+
+    $('#uploadTitleBtn').on('click', function () {
+        $('#titleFile').click();
+    });
+
+    $('#titleFile').on('change', function () {
+        uploadFile(this, 'title');
+    });
+
+    $('#removeShot').on('click', function () {
+        $('#screenPrev').empty();
+        $('#current_screen').val('');
+        $('#remove_screenshot').val('1');
+        $(this).prop('disabled', true);
+    });
+
+    $('#gameForm').on('reset', function () {
+        setTimeout(function () {
+            $('#thumbPrev').empty();
+            $('#screenPrev').empty();
+            $('#titleImgPrev').text('No Image selected');
+            $('#current_thumb, #current_screen, #title_image').val('');
+            $('#removeShot').prop('disabled', true);
+            $('#remove_screenshot').val('0');
+        });
+    });
+});
 </script>
 <?php include 'admin_footer.php'; ?>
