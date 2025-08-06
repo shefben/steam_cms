@@ -1,0 +1,72 @@
+# Admin Page Issues
+
+General: Most pages lack CSRF tokens, input validation, and consistent widgets. Below are page-specific observations.
+
+- `activity_log.php`: Missing advanced widgets and validation.
+- `admin_footer.php`: Incomplete responsive design; ensure all scripts load correctly.
+- `admin_header.php`: Incomplete responsive design; ensure all scripts load correctly.
+- `admin_users.php`: No audit trail for changes; missing password strength checks.
+- `breadcrumbs.php`: Missing advanced widgets and validation.
+- `bulk_email.php`: Missing advanced widgets and validation.
+- `cafe_directory.php`: Lacks search and filtering; minimal validation.
+- `cafe_pricing.php`: Lacks search and filtering; minimal validation.
+- `cafe_representatives.php`: Lacks search and filtering; minimal validation.
+- `cafe_signup_edit.php`: Lacks search and filtering; minimal validation.
+- `cafe_signup_view.php`: Lacks search and filtering; minimal validation.
+- `cafe_signups.php`: Lacks search and filtering; minimal validation.
+- `content_servers.php`: Requires server health widgets and pagination.
+- `contentserver_banners.php`: Requires server health widgets and pagination.
+- `custom_pages.php`: Missing advanced widgets and validation.
+- `custom_titles.php`: Missing advanced widgets and validation.
+- `download_files.php`: File operations lack size checks; missing progress indicators.
+- `download_settings.php`: File operations lack size checks; missing progress indicators.
+- `error_log.php`: Missing advanced widgets and validation.
+- `error_page.php`: Missing advanced widgets and validation.
+- `faq.php`: Needs category management improvements and rich text editing.
+- `faq_categories.php`: Needs category management improvements and rich text editing.
+- `faq_edit.php`: Needs category management improvements and rich text editing.
+- `footer.php`: Incomplete responsive design; ensure all scripts load correctly.
+- `header.php`: Incomplete responsive design; ensure all scripts load correctly.
+- `header_footer.php`: Missing advanced widgets and validation.
+- `index.php`: Missing advanced widgets and validation.
+- `legacy_storefront.php`: Edit workflow previously broken; verify buttons and missing asset previews.
+- `legacy_storefront_games.php`: Cancel and remove screenshot actions now functional; still lacks CSRF protection and validation.
+- `legacy_storefront_packages.php`: Cancel and remove screenshot actions now functional; still lacks CSRF protection and validation.
+- `legacy_storefront_thirdparty.php`: Cancel and remove screenshot actions now functional; still lacks CSRF protection and validation.
+- `localization.php`: Missing advanced widgets and validation.
+- `main_content.php`: Missing advanced widgets and validation.
+- `map_contest_submissions.php`: Submission review lacks sorting and bulk actions.
+- `map_contest_view.php`: Submission review lacks sorting and bulk actions.
+- `media.php`: Missing advanced widgets and validation.
+- `news.php`: Missing live preview and scheduling tools; lacks CSRF tokens.
+- `news_edit.php`: Missing live preview and scheduling tools; lacks CSRF tokens.
+- `news_import.php`: Missing live preview and scheduling tools; lacks CSRF tokens.
+- `news_settings.php`: Missing live preview and scheduling tools; lacks CSRF tokens.
+- `notifications.php`: No mark-all-as-read option; needs filtering.
+- `page_selection.php`: Missing advanced widgets and validation.
+- `performance.php`: Graphs require async loading; missing date range filters.
+- `random_content.php`: Missing advanced widgets and validation.
+- `random_groups.php`: Missing advanced widgets and validation.
+- `redirects.php`: Needs bulk import/export and validation of URLs.
+- `roles.php`: No audit trail for changes; missing password strength checks.
+- `scheduled_content.php`: Missing advanced widgets and validation.
+- `settings.php`: No confirmation prompts; CSRF missing.
+- `storefront.php`: Tabs now respect URL hashes; page still requires pagination and better form validation.
+- `storefront_categories.php`: Requires pagination and better form validation.
+- `storefront_developer.php`: Requires pagination and better form validation.
+- `storefront_developers.php`: Requires pagination and better form validation.
+- `storefront_main.php`: Requires pagination and better form validation.
+- `storefront_main_dynamic.php`: Requires pagination and better form validation.
+- `storefront_product.php`: Requires pagination and better form validation.
+- `storefront_products.php`: Requires pagination and better form validation.
+- `storefront_sidebar.php`: Requires pagination and better form validation.
+- `support_2003.php`: Missing advanced widgets and validation.
+- `support_page.php`: Missing advanced widgets and validation.
+- `survey_stats.php`: Statistics lack export features.
+- `theme.php`: Theme selection does not preview before apply.
+- `tournaments.php`: Missing advanced widgets and validation.
+- `troubleshooter.php`: UI missing drag-and-drop ordering and issue tagging.
+- `troubleshooter_manage.php`: UI missing drag-and-drop ordering and issue tagging.
+- `troubleshooter_requests.php`: UI missing drag-and-drop ordering and issue tagging.
+- `update_history.php`: Missing advanced widgets and validation.
+- `upload_capsule.php`: Missing advanced widgets and validation.

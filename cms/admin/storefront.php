@@ -222,60 +222,80 @@ if($pages>1){
 </table>
 </div>
 <script>
-$('.tabs a').on('click', function(e){
-  e.preventDefault();
-  var id=$(this).attr('href');
-  $('.tabs a').removeClass('active');
-  $(this).addClass('active');
-  $('div[id]').hide();
-  $(id).show();
-});
-$('.tabs a:first').click();
-$('#dev-table').on('click','.dev-name',function(){
-  var td=$(this); var id=td.closest('tr').data('id');
-  var text=td.text();
-  var inp=$('<input>').val(text);
-  td.empty().append(inp);
-  inp.focus();
-  inp.on('blur',function(){
-    $.post('storefront.php',{dev_id:id,dev_name:inp.val()},function(){
+$(function () {
+  $('.tabs a').on('click', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('href');
+    $('.tabs a').removeClass('active');
+    $(this).addClass('active');
+    $('div[id]').hide();
+    $(id).show();
+    window.location.hash = id;
+  });
+
+  var hash = window.location.hash;
+  if (hash && $('.tabs a[href="' + hash + '"]').length) {
+    $('.tabs a[href="' + hash + '"]').trigger('click');
+  } else {
+    $('.tabs a:first').trigger('click');
+  }
+
+  $('#dev-table').on('click', '.dev-name', function () {
+    var td = $(this); var id = td.closest('tr').data('id');
+    var text = td.text();
+    var inp = $('<input>').val(text);
+    td.empty().append(inp);
+    inp.focus();
+    inp.on('blur', function () {
+      $.post('storefront.php', { dev_id: id, dev_name: inp.val() }, function () {
         td.text(inp.val());
+      });
     });
   });
-});
-$('.filter').on('input',function(){
-  var sel=$('#'+$(this).data('select')+' option');
-  var val=$(this).val().toLowerCase();
-  sel.each(function(){
-    var t=$(this).text().toLowerCase();
-    $(this).toggle(t.indexOf(val)>=0);
+
+  $('.filter').on('input', function () {
+    var sel = $('#' + $(this).data('select') + ' option');
+    var val = $(this).val().toLowerCase();
+    sel.each(function () {
+      var t = $(this).text().toLowerCase();
+      $(this).toggle(t.indexOf(val) >= 0);
+    });
   });
-});
-$('select[id^=f]').on('change mousemove',function(e){
-  var opt=$(this).find('option:selected');
-  var img=opt.data('img');
-  var target='#img_'+this.id;
-  if(img){
-    $(target).attr('src','../archived_steampowered/2005/storefront/screenshots/'+img).css({top:e.pageY+5,left:e.pageX+5}).show();
+
+  $('select[id^=f]').on('change mousemove', function (e) {
+    var opt = $(this).find('option:selected');
+    var img = opt.data('img');
+    var target = '#img_' + this.id;
+    if (img) {
+      $(target).attr('src', '../archived_steampowered/2005/storefront/screenshots/' + img)
+               .css({ top: e.pageY + 5, left: e.pageX + 5 }).show();
+    }
+  });
+
+  function updateOrders() {
+    $('#sidebar-list tr').each(function (i) {
+      $(this).find('input[name="ord[]"]').val(i + 1);
+    });
   }
-});
-function updateOrders(){
-  $('#sidebar-list tr').each(function(i){
-    $(this).find('input[name="ord[]"]').val(i+1);
+
+  Sortable.create(document.querySelector('#sidebar-list'), { handle: '.handle', animation: 150, onSort: updateOrders });
+  updateOrders();
+
+  $('#sidebar-list').on('click', '.remove', function () {
+    var row = $(this).closest('tr');
+    row.find('input[name="del[]"]').val('1');
+    row.hide();
   });
-}
-Sortable.create(document.querySelector('#sidebar-list'),{handle:'.handle',animation:150,onSort:updateOrders});
-updateOrders();
-$('#sidebar-list').on('click','.remove',function(){
-  var row=$(this).closest('tr');
-  row.find('input[name="del[]"]').val('1');
-  row.hide();
+
+  $('#sidebar-list').on('click', '.edit', function () {
+    var row = $(this).closest('tr');
+    row.find('.editable').prop('readonly', false);
+    $(this).prop('disabled', true);
+  });
+
+  $('select[id^=f]').on('mouseleave', function () {
+    $('#img_' + this.id).hide();
+  });
 });
-$('#sidebar-list').on('click','.edit',function(){
-  var row=$(this).closest('tr');
-  row.find('.editable').prop('readonly',false);
-  $(this).prop('disabled',true);
-});
-$('select[id^=f]').on('mouseleave',function(){ $('#img_'+this.id).hide(); });
 </script>
 <?php include 'admin_footer.php'; ?>

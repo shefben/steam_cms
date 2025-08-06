@@ -54,7 +54,7 @@ if (isset($_POST['save_package'])) {
     $badge = (int)($_POST['badge'] ?? 0);
     $thumb = $_POST['current_thumb'] ?? '';
     $screen = $_POST['current_screen'] ?? '';
-    if (isset($_POST['remove_screenshot'])) {
+    if (!empty($_POST['remove_screenshot'])) {
         $screen = '';
     }
     $stmt = $db->prepare('REPLACE INTO `0405_storefront_packages`(subid,title,description,image_thumb,image_screenshot,price,steamOnlyBadge,isHidden) VALUES(?,?,?,?,?,?,?,0)');
@@ -88,6 +88,7 @@ $packages = $db->query('SELECT * FROM `0405_storefront_packages` ORDER BY subid'
 <input type="hidden" name="save_package" value="1">
 <input type="hidden" name="current_thumb" id="current_thumb">
 <input type="hidden" name="current_screen" id="current_screen">
+<input type="hidden" name="remove_screenshot" id="remove_screenshot" value="0">
 <label>Package/Subscription ID <input type="number" name="subid" id="subid"></label><br>
 <label>Package Name <input type="text" name="title" id="title"></label><br>
 <label>Main Image <span id="thumbPrev"></span> <button type="button" id="uploadThumbBtn">Upload New Image</button><input type="file" id="thumbFile" style="display:none"></label><br>
@@ -103,24 +104,113 @@ $packages = $db->query('SELECT * FROM `0405_storefront_packages` ORDER BY subid'
 <button type="submit" class="btn btn-primary">Save Package</button> <button type="reset" id="cancelBtn" class="btn">Cancel</button>
 </form>
 <script>
-function uploadFilePkg(input,type){
-  var fd=new FormData();
-  fd.append('file',input.files[0]);
-  fd.append('subid',$('#subid').val());
-  fd.append('type',type);
-  $.ajax({url:'legacy_storefront_packages.php?ajax=upload',method:'POST',data:fd,processData:false,contentType:false,success:function(p){
-    if(type==='thumb'){ $('#thumbPrev').html('<img src="'+p+'" width="32">'); $('#current_thumb').val(p); }
-    else { $('#screenPrev').html('<img src="'+p+'" width="32">'); $('#current_screen').val(p); $('#removeShot').prop('disabled',false); }
-  }});
-}
-$('.toggle-hidden').on('change',function(){var id=$(this).data('id');$.post('legacy_storefront_packages.php',{toggle_hidden:1,sub:id,hidden:this.checked?1:0});});
-$('.edit-btn').on('click',function(){var id=$(this).data('id');$.getJSON('legacy_storefront_packages.php',{load:id},function(d){$('#subid').val(d.subid);$('#title').val(d.title);$('#price').val(d.price);$('#current_thumb').val(d.image_thumb);$('#thumbPrev').html(d.image_thumb?'<img src="'+d.image_thumb+'" width="32">':'');$('#current_screen').val(d.image_screenshot);$('#screenPrev').html(d.image_screenshot?'<img src="'+d.image_screenshot+'" width="32">':'No Image selected');$('#description').val(d.description);if(d.steamOnlyBadge==1){$('#optBadge').prop('checked',true);$('#badgeWrap').show();$('#screenWrap').hide();}else{$('#optScreen').prop('checked',true);$('#badgeWrap').hide();$('#screenWrap').show();$('#removeShot').prop('disabled',!d.image_screenshot);} });});
-$('#uploadThumbBtn').on('click',function(){$('#thumbFile').click();});
-$('#thumbFile').on('change',function(){uploadFilePkg(this,'thumb');});
-$('#uploadScreenBtn').on('click',function(){$('#screenFile').click();});
-$('#screenFile').on('change',function(){uploadFilePkg(this,'screen');});
-$('#optBadge').on('change',function(){if(this.checked){$('#badgeWrap').show();$('#screenWrap').hide();}});
-$('#optScreen').on('change',function(){if(this.checked){$('#badgeWrap').hide();$('#screenWrap').show();}});
+$(function () {
+    function uploadFilePkg(input, type) {
+        var fd = new FormData();
+        fd.append('file', input.files[0]);
+        fd.append('subid', $('#subid').val());
+        fd.append('type', type);
+        $.ajax({
+            url: 'legacy_storefront_packages.php?ajax=upload',
+            method: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function (p) {
+                if (type === 'thumb') {
+                    $('#thumbPrev').html('<img src="' + p + '" width="32">');
+                    $('#current_thumb').val(p);
+                } else {
+                    $('#screenPrev').html('<img src="' + p + '" width="32">');
+                    $('#current_screen').val(p);
+                    $('#removeShot').prop('disabled', false);
+                }
+            }
+        });
+    }
+
+    $(document).on('change', '.toggle-hidden', function () {
+        var id = $(this).data('id');
+        $.post('legacy_storefront_packages.php', {
+            toggle_hidden: 1,
+            sub: id,
+            hidden: this.checked ? 1 : 0
+        });
+    });
+
+    $(document).on('click', '.edit-btn', function () {
+        var id = $(this).data('id');
+        $.getJSON('legacy_storefront_packages.php', { load: id }, function (d) {
+            $('#subid').val(d.subid);
+            $('#title').val(d.title);
+            $('#price').val(d.price);
+            $('#current_thumb').val(d.image_thumb);
+            $('#thumbPrev').html(d.image_thumb ? '<img src="' + d.image_thumb + '" width="32">' : '');
+            $('#current_screen').val(d.image_screenshot);
+            $('#screenPrev').html(d.image_screenshot ? '<img src="' + d.image_screenshot + '" width="32">' : 'No Image selected');
+            $('#description').val(d.description);
+            if (d.steamOnlyBadge == 1) {
+                $('#optBadge').prop('checked', true);
+                $('#badgeWrap').show();
+                $('#screenWrap').hide();
+            } else {
+                $('#optScreen').prop('checked', true);
+                $('#badgeWrap').hide();
+                $('#screenWrap').show();
+                $('#removeShot').prop('disabled', !d.image_screenshot);
+            }
+        });
+    });
+
+    $('#uploadThumbBtn').on('click', function () {
+        $('#thumbFile').click();
+    });
+
+    $('#thumbFile').on('change', function () {
+        uploadFilePkg(this, 'thumb');
+    });
+
+    $('#uploadScreenBtn').on('click', function () {
+        $('#screenFile').click();
+    });
+
+    $('#screenFile').on('change', function () {
+        uploadFilePkg(this, 'screen');
+    });
+
+    $('#removeShot').on('click', function () {
+        $('#screenPrev').empty();
+        $('#current_screen').val('');
+        $('#remove_screenshot').val('1');
+        $(this).prop('disabled', true);
+    });
+
+    $('#optBadge').on('change', function () {
+        if (this.checked) {
+            $('#badgeWrap').show();
+            $('#screenWrap').hide();
+        }
+    });
+
+    $('#optScreen').on('change', function () {
+        if (this.checked) {
+            $('#badgeWrap').hide();
+            $('#screenWrap').show();
+        }
+    });
+
+    $('#pkgForm').on('reset', function () {
+        setTimeout(function () {
+            $('#thumbPrev').empty();
+            $('#screenPrev').text('No Image selected');
+            $('#current_thumb, #current_screen').val('');
+            $('#removeShot').prop('disabled', true);
+            $('#remove_screenshot').val('0');
+            $('#badgeWrap').hide();
+            $('#screenWrap').show();
+        });
+    });
+});
 </script>
 <?php include 'admin_footer.php'; ?>
 

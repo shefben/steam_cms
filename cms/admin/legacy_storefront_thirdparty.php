@@ -43,7 +43,7 @@ if(isset($_POST['save_game'])){
     $url=trim($_POST['websiteUrl']);
     $thumb=$_POST['current_thumb']??'';
     $screen=$_POST['current_screen']??'';
-    if(isset($_POST['remove_screenshot'])) $screen='';
+    if(!empty($_POST['remove_screenshot'])) $screen='';
     if($record){
         $stmt=$db->prepare('UPDATE `0405_storefront_thirdpartGames` SET title=?,description=?,image_thumb=?,image_screenshot=?,websiteUrl=? WHERE id=?');
         $stmt->execute([$title,$desc,$thumb,$screen,$url,$record]);
@@ -86,28 +86,89 @@ $games=$db->query('SELECT * FROM `0405_storefront_thirdpartGames` ORDER BY id')-
 <input type="hidden" name="record_id" id="record_id">
 <input type="hidden" name="current_thumb" id="current_thumb">
 <input type="hidden" name="current_screen" id="current_screen">
+<input type="hidden" name="remove_screenshot" id="remove_screenshot" value="0">
 <label>Game Name <input type="text" name="title" id="title"></label><br>
 <label>Main Image <span id="thumbPrev"></span> <input type="file" name="main_image" id="main_image"></label><br>
 <label>Screenshot <span id="screenPrev"></span> <input type="file" name="screenshot" id="screenshot">
-<button type="submit" name="remove_screenshot" value="1" id="removeShot" disabled>Remove Screenshot</button></label><br>
+<button type="button" id="removeShot" disabled>Remove Screenshot</button></label><br>
 <label>Description<br><textarea name="description" id="description" rows="5" cols="60"></textarea></label><br>
 <label>Thirdparty Website URL <input type="text" name="websiteUrl" id="websiteUrl"></label><br>
 <button type="submit" class="btn btn-primary">Save Game</button> <button type="reset" id="cancelBtn" class="btn">Cancel</button>
 </form>
 <script>
-function uploadFileTP(input,type){
-  var fd=new FormData();
-  fd.append('file',input.files[0]);
-  fd.append('id',$('#record_id').val()||0);
-  fd.append('type',type);
-  $.ajax({url:'legacy_storefront_thirdparty.php?ajax=upload',method:'POST',data:fd,processData:false,contentType:false,success:function(p){
-    if(type==='thumb'){ $('#thumbPrev').html('<img src="'+p+'" width="32">'); $('#current_thumb').val(p); }
-    else { $('#screenPrev').html('<img src="'+p+'" width="32">'); $('#current_screen').val(p); $('#removeShot').prop('disabled',false); }
-  }});
-}
-$('.toggle-hidden').on('change',function(){var id=$(this).data('id');$.post('legacy_storefront_thirdparty.php',{toggle_hidden:1,id:id,hidden:this.checked?1:0});});
-$('.edit-btn').on('click',function(){var id=$(this).data('id');$.getJSON('legacy_storefront_thirdparty.php',{load:id},function(d){$('#record_id').val(d.id);$('#title').val(d.title);$('#current_thumb').val(d.image_thumb);$('#thumbPrev').html(d.image_thumb?'<img src="'+d.image_thumb+'" width="32">':'');$('#current_screen').val(d.image_screenshot);$('#screenPrev').html(d.image_screenshot?'<img src="'+d.image_screenshot+'" width="32">':'');$('#description').val(d.description);$('#websiteUrl').val(d.websiteUrl);$('#removeShot').prop('disabled',!d.image_screenshot);});});
-$('#main_image').on('change',function(){uploadFileTP(this,'thumb');});
-$('#screenshot').on('change',function(){uploadFileTP(this,'screen');});
+$(function () {
+    function uploadFileTP(input, type) {
+        var fd = new FormData();
+        fd.append('file', input.files[0]);
+        fd.append('id', $('#record_id').val() || 0);
+        fd.append('type', type);
+        $.ajax({
+            url: 'legacy_storefront_thirdparty.php?ajax=upload',
+            method: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function (p) {
+                if (type === 'thumb') {
+                    $('#thumbPrev').html('<img src="' + p + '" width="32">');
+                    $('#current_thumb').val(p);
+                } else {
+                    $('#screenPrev').html('<img src="' + p + '" width="32">');
+                    $('#current_screen').val(p);
+                    $('#removeShot').prop('disabled', false);
+                }
+            }
+        });
+    }
+
+    $(document).on('change', '.toggle-hidden', function () {
+        var id = $(this).data('id');
+        $.post('legacy_storefront_thirdparty.php', {
+            toggle_hidden: 1,
+            id: id,
+            hidden: this.checked ? 1 : 0
+        });
+    });
+
+    $(document).on('click', '.edit-btn', function () {
+        var id = $(this).data('id');
+        $.getJSON('legacy_storefront_thirdparty.php', { load: id }, function (d) {
+            $('#record_id').val(d.id);
+            $('#title').val(d.title);
+            $('#current_thumb').val(d.image_thumb);
+            $('#thumbPrev').html(d.image_thumb ? '<img src="' + d.image_thumb + '" width="32">' : '');
+            $('#current_screen').val(d.image_screenshot);
+            $('#screenPrev').html(d.image_screenshot ? '<img src="' + d.image_screenshot + '" width="32">' : '');
+            $('#description').val(d.description);
+            $('#websiteUrl').val(d.websiteUrl);
+            $('#removeShot').prop('disabled', !d.image_screenshot);
+        });
+    });
+
+    $('#main_image').on('change', function () {
+        uploadFileTP(this, 'thumb');
+    });
+
+    $('#screenshot').on('change', function () {
+        uploadFileTP(this, 'screen');
+    });
+
+    $('#removeShot').on('click', function () {
+        $('#screenPrev').empty();
+        $('#current_screen').val('');
+        $('#remove_screenshot').val('1');
+        $(this).prop('disabled', true);
+    });
+
+    $('#tpForm').on('reset', function () {
+        setTimeout(function () {
+            $('#thumbPrev').empty();
+            $('#screenPrev').empty();
+            $('#current_thumb, #current_screen').val('');
+            $('#removeShot').prop('disabled', true);
+            $('#remove_screenshot').val('0');
+        });
+    });
+});
 </script>
 <?php include 'admin_footer.php'; ?>
