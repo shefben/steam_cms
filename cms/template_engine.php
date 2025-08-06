@@ -391,45 +391,85 @@ function cms_twig_env(string $tpl_dir): Environment
         $env->addFunction(new TwigFunction('capsule_block', function(string $key) {
             $theme  = cms_get_current_theme();
             $db     = cms_get_db();
-            $stmt   = $db->prepare('SELECT * FROM storefront_capsules_per_theme WHERE theme=? AND position=?');
+            $useAll = cms_get_setting('capsules_same_all', '1') === '1';
+
+            $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? AND c.position=?');
             $stmt->execute([$theme, $key]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (!$row && cms_get_setting('capsules_same_all', '1') === '1') {
-                $stmt = $db->prepare('SELECT * FROM storefront_capsules_all WHERE position=?');
+
+            if (!$row && $useAll) {
+                $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_all c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.position=?');
                 $stmt->execute([$key]);
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
             if (!$row) {
                 return '';
             }
+
+            $priceVal = $row['price'] !== null ? (float)$row['price'] : (float)$row['app_price'];
+            $price = number_format($priceVal, 2);
+            $name = htmlspecialchars($row['app_name'] ?? '', ENT_QUOTES);
+            $imgPath = $row['image_path'];
+
+            if (in_array($theme, ['2006_v1', '2006_v2', '2007_v1', '2007_v2'], true)) {
+                if (!str_starts_with($imgPath, 'gfx/')) {
+                    $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                }
+                $img = $imgPath;
+                $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
+                if (in_array($theme, ['2007_v1', '2007_v2'], true)) {
+                    return '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsule\'; window.status=\'\';" onmouseover="this.className=\'capsule_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="img/corners/smallcap_corners.png" width="280" height="105" border="0"></div></div><div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '</div></div>';
+                }
+                return '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);"><div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"></div><div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>';
+            }
+
             $base = cms_base_url();
-            $base = $base ? rtrim($base, '/'). '/' : '';
-            $img  = $base.'storefront/images/capsules/'.$row['image_path'];
-            $url  = 'index.php?area=app&id='.(int)$row['appid'];
-            $price = $row['price'];
-            return '<a href="'.$url.'"><img src="'.$img.'" alt=""></a><span class="price">$'.htmlspecialchars($price).'</span>';
+            $base = $base ? rtrim($base, '/') . '/' : '';
+            $img  = $base . 'storefront/images/capsules/' . $imgPath;
+            $url  = 'index.php?area=app&id=' . (int)$row['appid'];
+            return '<div class="capsule"><a href="' . $url . '"><img src="' . $img . '" alt="' . $name . '"></a><span class="price">$' . htmlspecialchars($price) . '</span></div>';
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('large_capsule_block', function(string $key = 'large') {
             $theme  = cms_get_current_theme();
             $db     = cms_get_db();
-            $stmt   = $db->prepare('SELECT * FROM storefront_capsules_per_theme WHERE theme=? AND position=?');
+            $useAll = cms_get_setting('capsules_same_all', '1') === '1';
+
+            $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? AND c.position=?');
             $stmt->execute([$theme, $key]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (!$row && cms_get_setting('capsules_same_all', '1') === '1') {
-                $stmt = $db->prepare('SELECT * FROM storefront_capsules_all WHERE position=?');
+
+            if (!$row && $useAll) {
+                $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_all c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.position=?');
                 $stmt->execute([$key]);
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
             if (!$row) {
                 return '';
             }
+
+            $priceVal = $row['price'] !== null ? (float)$row['price'] : (float)$row['app_price'];
+            $price = number_format($priceVal, 2);
+            $name = htmlspecialchars($row['app_name'] ?? '', ENT_QUOTES);
+            $imgPath = $row['image_path'];
+
+            if (in_array($theme, ['2006_v1', '2006_v2', '2007_v1', '2007_v2'], true)) {
+                if (!str_starts_with($imgPath, 'gfx/')) {
+                    $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                }
+                $img = $imgPath;
+                $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
+                if (in_array($theme, ['2007_v1', '2007_v2'], true)) {
+                    return '<div id="capsule_large_content"><div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="img/corners/largecap_corners.png" width="572" height="221" border="0"></div></div><div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div></div>';
+                }
+                return '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);"><div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"></div><div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>';
+            }
+
             $base = cms_base_url();
-            $base = $base ? rtrim($base, '/'). '/' : '';
-            $img  = $base.'storefront/images/capsules/'.$row['image_path'];
-            $url  = 'index.php?area=app&id='.(int)$row['appid'];
-            $price = $row['price'];
-            return '<div class="large-capsule"><a href="'.$url.'"><img src="'.$img.'" alt=""></a><span class="price">$'.htmlspecialchars($price).'</span></div>';
+            $base = $base ? rtrim($base, '/') . '/' : '';
+            $img  = $base . 'storefront/images/capsules/' . $imgPath;
+            $url  = 'index.php?area=app&id=' . (int)$row['appid'];
+            return '<div class="capsuleLarge"><div class="large-capsule"><a href="' . $url . '"><img src="' . $img . '" alt="' . $name . '"></a><span class="price">$' . htmlspecialchars($price) . '</span></div></div>';
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('store_sidebar', function () {
@@ -608,12 +648,11 @@ function cms_twig_env(string $tpl_dir): Environment
                             }
                             $img = $imgPath;
                             $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
-                            $html .= '<div class="inline" id="capsule_large"><br clear="all"><div class="capsule_large_area"><div id="capsule_large_content">'
+                            $html .= '<div id="capsule_large_content">'
                                 . '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';">'
                                 . '<div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="img/corners/largecap_corners.png" width="572" height="221" border="0"></div></div>'
                                 . '<div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div>'
-                                . '</div></div></div>'
-                                . '<script type="text/javascript">var so=new SWFObject("swf/capsule_lg.swf","movie","578","255","8","#282828");so.addVariable("img1","' . (int)$row['appid'] . '");so.addVariable("txt1","' . addslashes($name) . '");so.addVariable("price1","&#36;' . htmlspecialchars($price) . '");so.addVariable("type1","apps");so.write("capsule_large_content");</script>';
+                                . '</div>';
                         } else {
                             $img = $base . 'storefront/images/capsules/' . $row['image_path'];
                             $url = 'index.php?area=app&id=' . (int)$row['appid'];

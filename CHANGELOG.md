@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Render 2006–2007 storefront capsules using legacy HTML markup so capsule images display correctly.
 - Capsule tags now load theme-specific entries before falling back to globally shared capsules.
 - Root .htaccess now redirects storefront paths to the 04-05 directory when the active theme is 2004 or 2005_v1.
 - Added fallback to legacy capsule tables so default storefront capsules render when no dynamic items are configured.
