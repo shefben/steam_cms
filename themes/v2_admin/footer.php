@@ -33,10 +33,6 @@ $(function(){
             $sub.slideToggle(150);
         }
     });
-    $('#random_content-parent > a').on('click', function(e){
-        e.preventDefault();
-        $('#random_content-sub').slideToggle(150);
-    });
     $('.notify-dismiss').on('click', function(e){
         e.preventDefault();
         var id = $(this).data('id');
