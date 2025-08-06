@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Added fallback to legacy capsule tables so default storefront capsules render when no dynamic items are configured.
 - Corrected cafe_pricing seed to match placeholder count and include page title.
 - FAQ page now loads popularity icons from the active theme directory.
 - FAQ page renders through the default layout so the active theme styles apply.
