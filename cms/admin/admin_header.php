@@ -232,7 +232,7 @@ foreach ($nav_items as $item) {
         foreach($custom_groups[$file] as $child){ if(strpos($_SERVER['PHP_SELF'],$child['file'])!==false){ $open=true; break; } }
         $parent_id = preg_replace('/\.php$/','',$file).'-parent';
         $sub_id = preg_replace('/\.php$/','',$file).'-sub';
-        $nav_html .= '<li id="'.$parent_id.'"><a href="#"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a><ul class="sub-menu" id="'.$sub_id.'" style="'.($open?'display:block':'display:none').'">';
+        $nav_html .= '<li id="'.$parent_id.'"><a href="'.$file.'"'.$active.'>'.htmlspecialchars($icon.' '.$label).'</a><ul class="sub-menu" id="'.$sub_id.'" style="'.($open?'display:block':'display:none').'">';
         foreach($custom_groups[$file] as $child){
             if(!($child['visible']??1)) continue;
             $cfile=$child['file'];
