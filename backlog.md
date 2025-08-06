@@ -10,3 +10,4 @@
 * Enhance package description field with a WYSIWYG editor
 * Map contest submission system needs styling and validation improvements.
 * Add integration tests to verify AJAX interactions and drag-and-drop ordering on admin pages.
+* Seed download categories and templates from archived 2004 and 2003_v2 download pages.

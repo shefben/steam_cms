@@ -83,6 +83,11 @@ CREATE TABLE download_links(
     url TEXT,
     ord INT DEFAULT 0,
     FOREIGN KEY(version) REFERENCES download_pages(version) ON DELETE CASCADE
+);
+CREATE TABLE download_categories(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) UNIQUE,
+    file_size VARCHAR(50)
 );");
             $pdo->exec("DROP TABLE IF EXISTS content_servers");
             $pdo->exec("CREATE TABLE content_servers(

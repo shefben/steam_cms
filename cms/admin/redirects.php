@@ -1,5 +1,6 @@
 <?php
 require_once 'admin_header.php';
+require_once __DIR__.'/../update_htaccess.php';
 cms_require_permission('manage_pages');
 $db = cms_get_db();
 
@@ -9,11 +10,13 @@ if(isset($_POST['save'])){
     if($slug!='' && $target!=''){
         $db->prepare('REPLACE INTO redirects(slug,target,created) VALUES(?,?,NOW())')->execute([$slug,$target]);
         cms_admin_log('Saved redirect '.$slug);
+        cms_update_htaccess();
     }
 }
 if(isset($_POST['delete'])){
     $db->prepare('DELETE FROM redirects WHERE id=?')->execute([(int)$_POST['delete']]);
     cms_admin_log('Deleted redirect '.(int)$_POST['delete']);
+    cms_update_htaccess();
 }
 $rows = $db->query('SELECT * FROM redirects ORDER BY created DESC')->fetchAll(PDO::FETCH_ASSOC);
 ?>
