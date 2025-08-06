@@ -13,6 +13,18 @@ if ($page) {
 } else {
     echo '<p>Download page not available.</p>';
 }
+if ($page && !empty($page['categories'])) {
+    foreach ($page['categories'] as $cat) {
+        echo '<br><h2>'.htmlspecialchars($cat['name']).': ('.htmlspecialchars($cat['file_size']).')</h2>';
+        if (!empty($page['links'])) {
+            foreach ($page['links'] as $l) {
+                if ($l['category'] === $cat['name']) {
+                    echo '<a class="maize" href="'.htmlspecialchars($l['url']).'" style="font-size:11px;">'.htmlspecialchars($l['label']).'</a><br>';
+                }
+            }
+        }
+    }
+}
 if ($files) {
     function mirror_button($host,$url){
         $u = htmlspecialchars($url);

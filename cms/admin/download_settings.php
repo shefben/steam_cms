@@ -33,23 +33,29 @@ if (isset($_POST['save_type']) && isset($_POST['download_version'])) {
     }
 }
 
-if (isset($_POST['save_links'])) {
-    $db->prepare('DELETE FROM download_links WHERE version=?')->execute([$current]);
-    if (isset($_POST['links']) && is_array($_POST['links'])) {
-        $stmt = $db->prepare('INSERT INTO download_links(version,category,label,url,ord) VALUES(?,?,?,?,?)');
-        $ord = 1;
-        foreach ($_POST['links'] as $row) {
-            $url = trim($row['url'] ?? '');
-            if ($url === '') continue;
-            $stmt->execute([$current, trim($row['category'] ?? ''), trim($row['label'] ?? ''), $url, $ord++]);
+if (isset($_POST['save_cat'])) {
+    $id = (int)($_POST['id'] ?? 0);
+    $name = trim($_POST['name'] ?? '');
+    $size = trim($_POST['file_size'] ?? '');
+    if ($name !== '') {
+        if ($id > 0) {
+            $stmt = $db->prepare('UPDATE download_categories SET name=?,file_size=? WHERE id=?');
+            $stmt->execute([$name,$size,$id]);
+            echo '<p>Category updated.</p>';
+        } else {
+            $stmt = $db->prepare('INSERT INTO download_categories(name,file_size) VALUES(?,?)');
+            $stmt->execute([$name,$size]);
+            echo '<p>Category added.</p>';
         }
     }
-    echo '<p>Links updated.</p>';
+}
+if (isset($_POST['delete_cat'])) {
+    $id = (int)($_POST['id'] ?? 0);
+    $db->prepare('DELETE FROM download_categories WHERE id=?')->execute([$id]);
+    echo '<p>Category deleted.</p>';
 }
 
-$stmt = $db->prepare('SELECT * FROM download_links WHERE version=? ORDER BY ord,id');
-$stmt->execute([$current]);
-$links = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$cats = $db->query('SELECT * FROM download_categories ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Download/Get Steam Now Management</h2>
 <form method="post">
@@ -64,36 +70,29 @@ $links = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <button type="submit" name="save_type" class="btn btn-primary" style="margin-top:10px;">Save Download page type</button>
 </form>
 
-<form method="post" style="margin-top:20px;">
-<table id="linksTable" class="data-table">
-<tr><th>Category</th><th>Label</th><th>URL</th><th></th></tr>
-<?php foreach ($links as $i=>$row): ?>
+<h3 style="margin-top:20px;">Download Categories</h3>
+<table class="data-table" style="margin-top:10px;">
+<tr><th>ID</th><th>Name</th><th>File Size</th><th>Action</th></tr>
 <tr>
-<td><input type="text" name="links[<?php echo $i; ?>][category]" value="<?php echo htmlspecialchars($row['category']); ?>"></td>
-<td><input type="text" name="links[<?php echo $i; ?>][label]" value="<?php echo htmlspecialchars($row['label']); ?>"></td>
-<td><input type="text" name="links[<?php echo $i; ?>][url]" value="<?php echo htmlspecialchars($row['url']); ?>" style="width:100%;"></td>
-<td><button type="button" class="remove">Remove</button></td>
+    <form method="post">
+    <td>new</td>
+    <td><input type="text" name="name"></td>
+    <td><input type="text" name="file_size"></td>
+    <td><button type="submit" name="save_cat" class="btn btn-small">Add</button></td>
+    </form>
+</tr>
+<?php foreach ($cats as $c): ?>
+<tr>
+    <form method="post">
+    <td><?php echo $c['id']; ?><input type="hidden" name="id" value="<?php echo $c['id']; ?>"></td>
+    <td><input type="text" name="name" value="<?php echo htmlspecialchars($c['name']); ?>"></td>
+    <td><input type="text" name="file_size" value="<?php echo htmlspecialchars($c['file_size']); ?>"></td>
+    <td>
+        <button type="submit" name="save_cat" class="btn btn-small">Save</button>
+        <button type="submit" name="delete_cat" class="btn btn-small" onclick="return confirm('Delete?');">Delete</button>
+    </td>
+    </form>
 </tr>
 <?php endforeach; ?>
 </table>
-<button type="button" id="addLink">Add Link</button>
-<input type="submit" name="save_links" value="Save Links" class="btn btn-primary">
-</form>
-<script>
-$(function(){
-    $('#addLink').on('click', function(){
-        var idx = $('#linksTable tr').length - 1;
-        var row = `<tr>
-<td><input type="text" name="links[${idx}][category]"></td>
-<td><input type="text" name="links[${idx}][label]"></td>
-<td><input type="text" name="links[${idx}][url]" style="width:100%;"></td>
-<td><button type="button" class="remove">Remove</button></td>
-</tr>`;
-        $('#linksTable').append(row);
-    });
-    $('#linksTable').on('click','.remove',function(){
-        $(this).closest('tr').remove();
-    });
-});
-</script>
 <?php include 'admin_footer.php'; ?>

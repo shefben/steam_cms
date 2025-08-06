@@ -156,10 +156,22 @@ function cms_get_download_page(string $theme): ?array
         $linkStmt = $db->prepare('SELECT category,label,url FROM download_links WHERE version=? ORDER BY ord,id');
         $linkStmt->execute([$ver]);
         $links = $linkStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $categories = [];
+        try {
+            $catStmt = $db->query('SELECT id,name,file_size FROM download_categories ORDER BY id');
+            $categories = $catStmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            if ($e->getCode() !== '42S02') {
+                throw $e;
+            }
+        }
+
         return [
-            'version' => $ver,
-            'content' => $content,
-            'links'   => $links,
+            'version'    => $ver,
+            'content'    => $content,
+            'links'      => $links,
+            'categories' => $categories,
         ];
     } catch (PDOException $e) {
         if ($e->getCode()==='42S02') return null;
