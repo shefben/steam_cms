@@ -68,6 +68,14 @@
 - Automated script scans themes for archived assets and updates move_assets.py
 - Capsule admin interface uses searchable dropdowns with image previews
 - Capsule modal centers on screen and closes when clicking outside
+- 2006+ index management page offers drag-and-drop capsules with AJAX modal editor and image preview
+- GetTheGear and Freestuff/Custom capsules support custom titles and WYSIWYG content in the index manager and display using theme-specific sizes
+- Dedicated tabbed capsule creator allows up to five tabs and ten games per tab with AJAX image uploads and previews
+- 2006_v1, 2006_v2, 2007_v1, and 2007_v2 themes render index capsules from database-managed items
+- 2007 themes wrap each capsule row in `<div class="inline">` containers, keeping large capsules standalone
+- Circular **X** button deletes capsules in place and reorders remaining items to fill gaps
+- 2007 GetTheGear and Freestuff capsules render inside `<div class="leftCol_home_indent">` wrappers
+- Tabbed capsule output wrapped with `<div class="leftCol_home_indent">` for layout fidelity
 - Drag-and-drop ordering for cafe reps, directory, and categories
 - Cafe directory importer parses text files, deduplicates entries, and populates country/state navigation
 - Cafe directory SQL seed preloads all countries and states

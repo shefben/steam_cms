@@ -575,6 +575,8 @@ CREATE TABLE storefront_capsule_items(
     appid INT,
     image_path TEXT,
     price DECIMAL(10,2),
+    title TEXT,
+    content TEXT,
     ord INT
 );
 ALTER TABLE storefront_capsule_items
@@ -872,6 +874,7 @@ HTML;
                 ['file' => 'storefront_categories.php','label' => 'Categories','visible' => 1],
                 ['file' => 'storefront_sidebar.php','label' => 'Sidebar','visible' => 1],
                 ['file' => 'storefront_developers.php','label' => 'Developers','visible' => 1],
+                ['file' => 'index_management_2006.php','label' => '2006+ index management','visible' => 1],
                 ['file' => 'legacy_storefront.php','label' => '2004/2005 Storefront Management','visible' => 1],
                 ['file' => 'legacy_storefront_games.php','label' => 'Game management','visible' => 1,'parent' => 'legacy_storefront.php'],
                 ['file' => 'legacy_storefront_thirdparty.php','label' => 'Thirdparty Game management','visible' => 1,'parent' => 'legacy_storefront.php'],
