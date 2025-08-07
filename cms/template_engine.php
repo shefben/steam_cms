@@ -103,6 +103,41 @@ function cms_scheduled_content(string $tag): string
     return $out;
 }
 
+function cms_news_search_bar(): string
+{
+    return <<<HTML
+<div class="rightCol_2_top_soon" style="height: 40px;">
+    <form action="index.php" id="searchform" name="searchform">
+    <input type="hidden" name="area" value="news">
+    <input type="hidden" name="cc" value="--">
+    <table width="190" border="0" cellspacing="0" cellpadding="0">
+    <tbody><tr>
+        <td width="20" nowrap="">&nbsp;</td>
+        <td width="190"><input id="searchterm" name="term" value="" type="text" size="25" maxlength="64"></td>
+        <td>&nbsp;<a href="#" onclick="document.searchform.submit();" class="btn_search" style="">Search</a></td>
+    </tr>
+    </tbody></table><br clear="all">
+    </form>
+</div>
+HTML;
+}
+
+function cms_news_archive_months(int $year, int $months = 12): string
+{
+    $names = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+    $current = (int)date('n');
+    $html = '';
+    for ($i = 0; $i < $months; $i++) {
+        $m = $current - $i;
+        if ($m <= 0) {
+            $m += 12;
+        }
+        $label = $names[$m - 1];
+        $html .= '<a href="index.php?area=news_archive&amp;date=' . $m . '" class="rightLink"><img src="img/ico/ico_arrow_blue_wd.gif" width="22" height="7" border="0">&nbsp; ' . $label . ' </a>';
+    }
+    return $html;
+}
+
 function cms_theme_layout(?string $file, ?string $theme = null)
 {
     $theme = $theme ?: cms_get_setting('theme', '2004');
@@ -261,6 +296,56 @@ function cms_twig_env(string $tpl_dir): Environment
 
         $env->addFunction(new TwigFunction('news_index_2006', function(int $count = 5) {
             return cms_render_news('index_2006', $count);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('news_archive_months', function(int $year, int $months = 12) {
+            return cms_news_archive_months($year, $months);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('html_title', function() {
+            return cms_get_setting('html_title', 'Welcome to Steam');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('steam_news_title', function() {
+            return cms_get_setting('steam_news_title', 'STEAM NEWS');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('rss_feed_title', function() {
+            return cms_get_setting('rss_feed_title', 'RSS FEED');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('news_archive_title', function(int $year) {
+            $tpl = cms_get_setting('news_archive_title', 'NEWS ARCHIVE (%d)');
+            return sprintf($tpl, $year);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('full_archive_title', function() {
+            return cms_get_setting('full_archive_title', 'FULL ARCHIVE');
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('news_search_bar', function() {
+            return cms_news_search_bar();
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sidebar_right', function(int $year, string $page = 'news') {
+            if ($page === 'news') {
+                if ($year >= 2007) {
+                    return cms_news_search_bar();
+                }
+                $steamNews = cms_get_setting('steam_news_title', 'STEAM NEWS');
+                $rss = cms_get_setting('rss_feed_title', 'RSS FEED');
+                $archiveTitle = sprintf(cms_get_setting('news_archive_title', 'NEWS ARCHIVE (%d)'), $year);
+                $fullArchive = cms_get_setting('full_archive_title', 'FULL ARCHIVE');
+                $months = cms_news_archive_months($year);
+                return '<div class="rightCol_2_top_soon">' . $steamNews . '</div>'
+                    . '<a href="rss.xml" class="rightLink"><img src="img/ico/ico_rss.gif" width="28" height="13" border="0" align="absmiddle">&nbsp; ' . $rss . '</a>'
+                    . '<h1> ' . $archiveTitle . ' </h1>'
+                    . $months
+                    . '<div class="rightCol_2_Hr"></div>'
+                    . '<a href="index.php?area=news_archive" class="rightLink"><img src="img/ico/ico_arrow_blue_wd.gif" width="22" height="7" border="0">&nbsp; ' . $fullArchive . ' </a>'
+                    . '<div class="rightCol_2_Hr"></div>';
+            }
+            return '';
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('join_steam_text', function() {

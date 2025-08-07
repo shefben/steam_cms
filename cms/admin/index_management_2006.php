@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             if ($use_all) {
                 $ord = (int)$db->query('SELECT MAX(ord) FROM storefront_capsule_items WHERE theme IS NULL')->fetchColumn() + 1;
+
                 $stmt = $db->prepare('INSERT INTO storefront_capsule_items(theme,type,appid,image_path,price,title,content,ord) VALUES(?,?,?,?,?,?,?,?)');
                 $stmt->execute([null, $type, $appid, $img_path, $price, $title, $content, $ord]);
                 $id = (int)$db->lastInsertId();
