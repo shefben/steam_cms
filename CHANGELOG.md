@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Added interactive 2006+ index management page with drag-and-drop capsules and AJAX editing.
+- Index manager now supports GetTheGear and Freestuff/Custom capsule types with editable titles and rich text content.
+- GetTheGear and Freestuff capsules now match original theme dimensions (small in 2006, large in 2007).
+- Installer seeds 2006+ index management link in admin navigation.
+- 2006_v1, 2006_v2, 2007_v1, and 2007_v2 themes load index capsules from database entries.
+- 2007_v1 and 2007_v2 themes group capsule rows in `<div class="inline">` containers, except for large capsules.
+- 2007_v1 and 2007_v2 GetTheGear and Freestuff capsules now render inside `<div class="leftCol_home_indent">` wrappers.
+- Tabbed capsule markup wrapped in `<div class="leftCol_home_indent">` for consistent indentation.
+- Index manager capsules include a circular **X** control to delete items and reflow remaining capsules.
+- Added dedicated **Add Tabbed Capsule** workflow with multi-tab builder, game image uploads, and AJAX saving.
+- Tabbed capsule games now persist title, price, and image paths in relational tables and render from database records.
 - Removed download page version options from Page Version Management; now handled in Download Settings.
 - Render 2006–2007 storefront capsules using legacy HTML markup so capsule images display correctly.
 - Capsule tags now load theme-specific entries before falling back to globally shared capsules.
@@ -254,3 +265,5 @@ All notable changes to this project will be documented in this file.
 - Added dynamic survey statistics with optional official data import and admin management.
 - Installer now seeds official 2006 survey stats from bundled SQL instead of parsing HTML.
 - Survey page mirrors archived 2006 design exactly while loading stats from the database.
+- Storefront now renders tabbed capsules using saved HTML content and respects capsule ordering.
+- Reworked `storefront_capsules_per_theme` with integer ordering, theme checkboxes in the admin modal, and seeded Gear/Freestuff capsules with editable content.

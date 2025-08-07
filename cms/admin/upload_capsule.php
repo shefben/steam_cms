@@ -3,6 +3,18 @@ require_once 'admin_header.php';
 cms_require_permission('manage_store');
 $db=cms_get_db();
 $pos = $_POST['position'] ?? '';
+$posMap = [
+    'top1'=>1,
+    'top2'=>2,
+    'large'=>3,
+    'under1'=>4,
+    'under2'=>5,
+    'bottom1'=>6,
+    'bottom2'=>7,
+    'gear'=>8,
+    'free'=>9,
+    'tabbed'=>10
+];
 $appid = (int)($_POST['appid'] ?? 0);
 $theme = cms_get_setting('theme', '2006_v1');
 $useAll = cms_get_setting('capsules_same_all', '1') === '1';
@@ -25,6 +37,12 @@ if(!isset($styleMap[$pos])){
     http_response_code(400);
     exit('badpos');
 }
+
+if(!isset($posMap[$pos])){
+    http_response_code(400);
+    exit('badpos');
+}
+$ord = $posMap[$pos];
 preg_match('/width:(\d+)px;height:(\d+)px/',$styleMap[$pos],$m);
 $dw=(int)$m[1];
 $dh=(int)$m[2];
@@ -60,7 +78,7 @@ if ($useAll) {
     $stmt = $db->prepare('REPLACE INTO storefront_capsules_all(position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,0,0)');
     $stmt->execute([$pos, $size, $rel, $appid]);
 } else {
-    $stmt = $db->prepare('REPLACE INTO storefront_capsules_per_theme(theme,position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,?,0,0)');
-    $stmt->execute([$theme, $pos, $size, $rel, $appid]);
+    $stmt = $db->prepare('REPLACE INTO storefront_capsules_per_theme(theme,ord,size,image_path,appid,price,hidden,title,content) VALUES(?,?,?,?,?,?,0,NULL,NULL)');
+    $stmt->execute([$theme, $ord, $size, $rel, $appid, null]);
 }
 echo $rel;

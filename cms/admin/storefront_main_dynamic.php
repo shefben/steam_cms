@@ -27,13 +27,13 @@ if(isset($_POST['save_capsules'])){
         $db->prepare('DELETE FROM storefront_capsule_items WHERE theme=?')->execute([$theme]);
     }
     $ord = 1;
-    $stmt = $db->prepare('INSERT INTO storefront_capsule_items(theme,type,appid,image_path,price,ord) VALUES(?,?,?,?,?,?)');
+    $stmt = $db->prepare('INSERT INTO storefront_capsule_items(theme,type,appid,image_path,price,title,content,ord) VALUES(?,?,?,?,?,?,?,?)');
     foreach($caps as $cap){
         $type = $cap['type'] ?? 'small';
         $appid = isset($cap['appid']) && $cap['appid'] !== '' ? (int)$cap['appid'] : null;
         $img = trim($cap['image'] ?? '');
         $price = isset($cap['price']) && $cap['price'] !== '' ? floatval($cap['price']) : null;
-        $stmt->execute([$use_all?null:$theme, $type, $appid, $img, $price, $ord++]);
+        $stmt->execute([$use_all?null:$theme, $type, $appid, $img, $price, null, null, $ord++]);
     }
 }
 
