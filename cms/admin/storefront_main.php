@@ -11,6 +11,19 @@ if ($is2006) {
     return;
 }
 $positions = ['top1','top2','large','under1','under2','bottom1','bottom2'];
+$posMap = [
+    'top1'=>1,
+    'top2'=>2,
+    'large'=>3,
+    'under1'=>4,
+    'under2'=>5,
+    'bottom1'=>6,
+    'bottom2'=>7,
+    'gear'=>8,
+    'free'=>9,
+    'tabbed'=>10
+];
+$ordPosMap = array_flip($posMap);
 $showTabs = $theme === '2007_v2';
 $page_slugs = ['all'=>'All Games','browse'=>'Browse Games','search'=>'Search'];
 $pages = [];
@@ -32,12 +45,13 @@ if(isset($_POST['update'])){
     $img=trim($_POST['image']);
     $appid=(int)$_POST['appid'];
     $size=$pos==='large'?'large':'small';
+    $ord = $posMap[$pos] ?? 0;
     if($use_all){
         $stmt=$db->prepare('REPLACE INTO storefront_capsules_all(position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,0,0)');
         $stmt->execute([$pos,$size,$img,$appid]);
     }else{
-        $stmt=$db->prepare('REPLACE INTO storefront_capsules_per_theme(theme,position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,?,0,0)');
-        $stmt->execute([$theme,$pos,$size,$img,$appid]);
+        $stmt=$db->prepare('REPLACE INTO storefront_capsules_per_theme(theme,ord,size,image_path,appid,price,hidden,title,content) VALUES(?,?,?,?,?,?,0,NULL,NULL)');
+        $stmt->execute([$theme,$ord,$size,$img,$appid,null]);
     }
     exit('OK');
 }
@@ -50,12 +64,13 @@ if (isset($_POST['save_caps'])) {
         $price = isset($_POST['price'][$pos]) ? floatval($_POST['price'][$pos]) : null;
         $img = $_POST['current_image'][$pos] ?? '';
         $size = $pos === 'large' ? 'large' : 'small';
+        $ord = $posMap[$pos] ?? 0;
         if ($use_all) {
             $stmt = $db->prepare('REPLACE INTO storefront_capsules_all(position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,?,0)');
             $stmt->execute([$pos,$size,$img,$appid,$price]);
         } else {
-            $stmt = $db->prepare('REPLACE INTO storefront_capsules_per_theme(theme,position,size,image_path,appid,price,hidden) VALUES(?,?,?,?,?,?,0)');
-            $stmt->execute([$theme,$pos,$size,$img,$appid,$price]);
+            $stmt = $db->prepare('REPLACE INTO storefront_capsules_per_theme(theme,ord,size,image_path,appid,price,hidden,title,content) VALUES(?,?,?,?,?,?,0,NULL,NULL)');
+            $stmt->execute([$theme,$ord,$size,$img,$appid,$price]);
         }
         if ($appid && $price !== null) {
             $db->prepare('UPDATE store_apps SET price=? WHERE appid=?')->execute([$price,$appid]);
@@ -106,7 +121,10 @@ if ($use_all) {
 }
 $caps = [];
 foreach ($rows as $r) {
-    $caps[$r['position']] = $r + ['image' => $r['image_path']];
+    $p = $ordPosMap[$r['ord']] ?? null;
+    if ($p) {
+        $caps[$p] = $r + ['image' => $r['image_path']];
+    }
 }
 $caps += array_fill_keys($positions, ['appid'=>0,'image'=>'']);
 $apps = $db->query('SELECT appid,name,price,images FROM store_apps ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);

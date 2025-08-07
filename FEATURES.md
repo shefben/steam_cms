@@ -11,6 +11,7 @@
 - Configurable root path for subdirectory deployments
 - Year-based news filtering configurable per theme year
 - Individual storefront admin pages for featured items, products, categories and sidebar
+- Tabbed capsules manage up to five tabs and ten games per tab, with game data and images stored in relational tables
 - Pixel-perfect 2004 layout with full-height news box
 - Scheduled publishing for news items with daily cron script
 - Admin action logging with database-backed audit trail
@@ -225,3 +226,5 @@
 - Installer can seed official 2006 survey statistics from bundled SQL.
 - Survey results page matches the archived 2006 layout pixel-for-pixel using database data.
 - Legacy support forms render from archived HTML through Twig layouts, eliminating the installer script.
+- Storefront themes pull capsule type, content, and ordering from the database, including custom tabbed capsules.
+- Admin capsule builder supports per-theme selection, and the installer seeds Gear/Freestuff capsules with default content.

@@ -180,7 +180,17 @@ function cms_render_tabbed_games_column(array $games): string
     foreach ($games as $row) {
         $appid = (int)$row['appid'];
         $url   = 'index.php?area=game&amp;AppId=' . $appid . '&amp;';
-        $img   = 'gfx/apps/' . $appid . '/capsule_sm_120.jpg';
+        $imgPath = $row['image_path'] ?? '';
+        if ($imgPath) {
+            if (str_starts_with($imgPath, 'gfx/')) {
+                $img = $imgPath;
+            } else {
+                $base = cms_base_url();
+                $img = $base . 'storefront/images/capsules/' . ltrim($imgPath, '/');
+            }
+        } else {
+            $img = 'gfx/apps/' . $appid . '/capsule_sm_120.jpg';
+        }
         $name  = htmlspecialchars($row['name'] ?? '', ENT_QUOTES);
         $price = number_format((float)($row['price'] ?? 0), 2);
         $html .= '<div class="listArea_game" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'listArea_game\';" onmouseover="this.className=\'listArea_game_ovr\';">'
@@ -216,7 +226,7 @@ function cms_render_tabs(string $theme): string
     foreach ($tabs as $i => $tab) {
         $display = $i === 0 ? '' : ' style="display: none;"';
         $html .= '<tr id="tab_' . ($i + 1) . '_content"' . $display . '><td valign="top">';
-        $g = $db->prepare('SELECT a.appid,a.name,a.price FROM storefront_tab_games g JOIN store_apps a ON g.appid=a.appid WHERE g.tab_id=? ORDER BY g.ord');
+        $g = $db->prepare('SELECT g.appid,g.image_path,a.name,a.price FROM storefront_tab_games g JOIN store_apps a ON g.appid=a.appid WHERE g.tab_id=? ORDER BY g.ord');
         $g->execute([$tab['id']]);
         $games = $g->fetchAll(PDO::FETCH_ASSOC);
         $half = (int)ceil(count($games) / 2);
@@ -478,8 +488,10 @@ function cms_twig_env(string $tpl_dir): Environment
             $db     = cms_get_db();
             $useAll = cms_get_setting('capsules_same_all', '1') === '1';
 
-            $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? AND c.position=?');
-            $stmt->execute([$theme, $key]);
+            $ordMap = ['top1'=>1,'top2'=>2,'large'=>3,'under1'=>4,'under2'=>5,'bottom1'=>6,'bottom2'=>7,'gear'=>8,'free'=>9,'tabbed'=>10];
+            $ord = $ordMap[$key] ?? 0;
+            $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? AND c.ord=?');
+            $stmt->execute([$theme, $ord]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$row && $useAll) {
@@ -520,8 +532,10 @@ function cms_twig_env(string $tpl_dir): Environment
             $db     = cms_get_db();
             $useAll = cms_get_setting('capsules_same_all', '1') === '1';
 
-            $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? AND c.position=?');
-            $stmt->execute([$theme, $key]);
+            $ordMap = ['top1'=>1,'top2'=>2,'large'=>3,'under1'=>4,'under2'=>5,'bottom1'=>6,'bottom2'=>7,'gear'=>8,'free'=>9,'tabbed'=>10];
+            $ord = $ordMap[$key] ?? 0;
+            $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? AND c.ord=?');
+            $stmt->execute([$theme, $ord]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$row && $useAll) {
@@ -650,7 +664,7 @@ function cms_twig_env(string $tpl_dir): Environment
             if (!$rows) {
                 $posOrder = "'top1','top2','large','under1','under2','bottom1','bottom2','gear','free','tabbed'";
                 // Try theme-specific legacy capsule tables
-                $sql  = "SELECT c.position, c.size AS type, c.image_path, c.appid, c.price, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? ORDER BY FIELD(c.position,$posOrder)";
+                $sql  = "SELECT c.ord, c.size AS type, c.image_path, c.appid, c.price, c.title, c.content, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? ORDER BY c.ord";
                 $stmt = $db->prepare($sql);
                 $stmt->execute([$theme]);
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -807,7 +821,12 @@ function cms_twig_env(string $tpl_dir): Environment
                             $html .= $is2007 ? '</div>' : '<br clear="all"></div>';
                             $open = false;
                         }
-                        $html .= $is2007 ? '<div class="inline">' . cms_render_tabs($theme) . '</div>' : cms_render_tabs($theme);
+                        $tabContent = cms_render_tabs($theme);
+                        if ($is2007) {
+                            $html .= '<div class="inline">' . $tabContent . '</div>';
+                        } else {
+                            $html .= $tabContent;
+                        }
                         break;
                 }
             }

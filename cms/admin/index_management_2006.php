@@ -5,6 +5,7 @@ $db = cms_get_db();
 $theme = cms_get_setting('theme', '2006_v1');
 $gearLarge = str_starts_with($theme, '2007');
 $use_all = cms_get_setting('capsules_same_all', '1') === '1';
+$themesList = ['2006_v1','2006_v2','2007_v1','2007_v2'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
@@ -12,13 +13,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'save') {
         $id = isset($_POST['id']) && $_POST['id'] !== '' ? (int)$_POST['id'] : null;
         $type = $_POST['type'] ?? 'small';
+        if ($type === 'tabbed') {
+            echo json_encode(['status' => 'error']);
+            exit;
+        }
         $title = trim($_POST['title'] ?? '');
         $content = $_POST['content'] ?? '';
         $appid = isset($_POST['appid']) && $_POST['appid'] !== '' ? (int)$_POST['appid'] : null;
         $name = trim($_POST['name'] ?? '');
         $price = isset($_POST['price']) && $_POST['price'] !== '' ? (float)$_POST['price'] : null;
         $img_path = $_POST['current_image'] ?? '';
-        if (!in_array($type, ['gear', 'free', 'tabbed'], true)) {
+        if (!in_array($type, ['gear', 'free'], true)) {
             if (!empty($_FILES['image']['tmp_name'])) {
                 $target = $use_all ? 'all' : $theme;
                 $base = dirname(__DIR__, 2) . '/storefront/images/capsules/' . $target;
@@ -49,16 +54,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             if ($use_all) {
                 $ord = (int)$db->query('SELECT MAX(ord) FROM storefront_capsule_items WHERE theme IS NULL')->fetchColumn() + 1;
+
+                $stmt = $db->prepare('INSERT INTO storefront_capsule_items(theme,type,appid,image_path,price,title,content,ord) VALUES(?,?,?,?,?,?,?,?)');
+                $stmt->execute([null, $type, $appid, $img_path, $price, $title, $content, $ord]);
+                $id = (int)$db->lastInsertId();
+            } else {
+                $themesSel = $_POST['themes'] ?? [$theme];
+                $stmtIns = $db->prepare('INSERT INTO storefront_capsule_items(theme,type,appid,image_path,price,title,content,ord) VALUES(?,?,?,?,?,?,?,?)');
+                $firstId = null;
+                foreach ($themesSel as $th) {
+                    $st = $db->prepare('SELECT MAX(ord) FROM storefront_capsule_items WHERE theme=?');
+                    $st->execute([$th]);
+                    $ord = (int)$st->fetchColumn() + 1;
+                    $stmtIns->execute([$th, $type, $appid, $img_path, $price, $title, $content, $ord]);
+                    if ($firstId === null) {
+                        $firstId = (int)$db->lastInsertId();
+                    }
+                }
+                $id = $firstId ?? 0;
+            }
+        }
+        echo json_encode(['status' => 'ok', 'id' => $id, 'image' => $img_path, 'title' => $title, 'content' => $content, 'type' => $type]);
+        exit;
+    } elseif ($action === 'save_tabbed') {
+        $id = isset($_POST['id']) && $_POST['id'] !== '' ? (int)$_POST['id'] : null;
+        if (!$id) {
+            if ($use_all) {
+                $ord = (int)$db->query('SELECT MAX(ord) FROM storefront_capsule_items WHERE theme IS NULL')->fetchColumn() + 1;
             } else {
                 $stmt = $db->prepare('SELECT MAX(ord) FROM storefront_capsule_items WHERE theme=?');
                 $stmt->execute([$theme]);
                 $ord = (int)$stmt->fetchColumn() + 1;
             }
             $stmt = $db->prepare('INSERT INTO storefront_capsule_items(theme,type,appid,image_path,price,title,content,ord) VALUES(?,?,?,?,?,?,?,?)');
-            $stmt->execute([$use_all ? null : $theme, $type, $appid, $img_path, $price, $title, $content, $ord]);
+            $stmt->execute([$use_all ? null : $theme, 'tabbed', null, '', null, null, null, $ord]);
             $id = (int)$db->lastInsertId();
         }
-        echo json_encode(['status' => 'ok', 'id' => $id, 'image' => $img_path, 'title' => $title, 'content' => $content, 'type' => $type]);
+        $db->prepare('DELETE FROM storefront_tab_games WHERE tab_id IN (SELECT id FROM storefront_tabs WHERE theme=?)')->execute([$theme]);
+        $db->prepare('DELETE FROM storefront_tabs WHERE theme=?')->execute([$theme]);
+        $tabs = $_POST['tabs'] ?? [];
+        foreach ($tabs as $i => $tab) {
+            $title = trim($tab['title'] ?? '');
+            $stmt = $db->prepare('INSERT INTO storefront_tabs(theme,title,ord) VALUES(?,?,?)');
+            $stmt->execute([$theme, $title, $i + 1]);
+            $tabId = (int)$db->lastInsertId();
+            $games = $tab['games'] ?? [];
+            $o = 1;
+            foreach ($games as $game) {
+                $appid = isset($game['appid']) && $game['appid'] !== '' ? (int)$game['appid'] : null;
+                $img = $game['image'] ?? '';
+                $name = trim($game['name'] ?? '');
+                $price = isset($game['price']) && $game['price'] !== '' ? (float)$game['price'] : null;
+                if ($appid && $name !== '') {
+                    $db->prepare('INSERT INTO store_apps(appid,name,price) VALUES(?,?,?) ON DUPLICATE KEY UPDATE name=VALUES(name), price=VALUES(price)')->execute([$appid, $name, $price]);
+                }
+                $db->prepare('INSERT INTO storefront_tab_games(tab_id,appid,image_path,ord) VALUES(?,?,?,?)')->execute([$tabId, $appid, $img, $o++]);
+            }
+        }
+        echo json_encode(['status' => 'ok', 'id' => $id]);
+        exit;
+    } elseif ($action === 'get_tabbed') {
+        $out = [];
+        $stmt = $db->prepare('SELECT id,title FROM storefront_tabs WHERE theme=? ORDER BY ord');
+        $stmt->execute([$theme]);
+        $tabs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($tabs as $tab) {
+            $g = $db->prepare('SELECT g.appid,g.image_path,a.name,a.price FROM storefront_tab_games g JOIN store_apps a ON g.appid=a.appid WHERE g.tab_id=? ORDER BY g.ord');
+            $g->execute([$tab['id']]);
+            $out[] = ['title' => $tab['title'], 'games' => $g->fetchAll(PDO::FETCH_ASSOC)];
+        }
+        echo json_encode(['status' => 'ok', 'tabs' => $out]);
         exit;
     } elseif ($action === 'upload_game_image') {
         $target = $use_all ? 'all' : $theme;
@@ -158,6 +223,14 @@ if ($use_all) {
       <div id="cap-content" class="wysiwyg" contenteditable="true"></div>
       <textarea name="content" id="cap-content-hidden" style="display:none;"></textarea>
     </div>
+    <div class="form-row">
+      <label>Themes</label>
+      <div id="cap-themes">
+        <?php foreach($themesList as $th): ?>
+          <label><input type="checkbox" name="themes[]" value="<?php echo $th; ?>" <?php echo $th === $theme ? 'checked' : ''; ?>> <?php echo $th; ?></label>
+        <?php endforeach; ?>
+      </div>
+    </div>
     <div class="form-row" style="text-align:right;">
       <button type="submit" class="btn btn-primary">Save</button>
       <button type="button" id="cap-cancel" class="btn">Cancel</button>
@@ -194,6 +267,7 @@ if ($use_all) {
 </style>
 <script>
 $(function(){
+  var currentTheme = '<?php echo $theme; ?>';
   function updateOrder(){
     var order=[];
     $('#capsule-grid .capsule').each(function(){order.push($(this).data('id'));});
@@ -222,6 +296,8 @@ $(function(){
     $('#cap-current-image').val(data.image||'');
     $('#cap-title').val(data.title||'');
     $('#cap-content').html(data.content||'');
+    $('#cap-themes input').prop('checked',false);
+    $('#cap-themes input[value="'+currentTheme+'"]').prop('checked',true);
     toggleFields(data.type||'small');
     if(data.image){
       $('#cap-preview').attr('src','../storefront/images/capsules/'+data.image).show();
@@ -236,7 +312,7 @@ $(function(){
   $('#capsule-grid').on('click','.edit',function(){
     var c=$(this).closest('.capsule');
     if(c.data('type')==='tabbed'){
-      openTabbedModal({id:c.data('id'),content:c.data('content')});
+      openTabbedModal({id:c.data('id')});
     }else{
       openModal({id:c.data('id'),type:c.data('type'),name:c.find('.cap-name').text(),appid:c.data('appid'),price:c.data('price'),image:c.data('image'),title:c.data('title'),content:c.data('content')});
     }
@@ -303,49 +379,21 @@ $(function(){
     $('#tabs-config').append(blk);
     if(data&&data.games){data.games.forEach(function(g){addGame(blk,g);});}
   }
-  function buildTabbedHtml(){
-    var html='<div class="leftCol_home_indent"><div class="listArea">\n<br clear="all">\n';
-    var headers='';
-    var contents='<br clear="left">\n<table border="0" cellpadding="0" cellspacing="0" width="100%">\n<tbody>\n<tr>\n<td height="6"><img height="6" src="img/_spacer.gif" width="6"></td>\n<td align="right" height="6"><img height="6" src="img/home/listArea_tr.gif" width="6"></td>\n</tr>\n';
-    $('#tabs-config .tab-block').each(function(i){
-      var idx=i+1; var title=$(this).find('.tab-title').val();
-      headers+='<div class="'+(i===0?'listArea_tab_focus':'listArea_tab')+'" id="tab_'+idx+'">\n<img align="absmiddle" id="tab_'+idx+'_image_l" src="img/home/'+(i===0?'listArea_tab_focus_l.gif':'listArea_tab_l.gif')+'"><span class="listArea_tab_txt">'+title+'</span><img align="absmiddle" id="tab_'+idx+'_image_r" src="img/home/'+(i===0?'listArea_tab_focus_r.gif':'listArea_tab_r.gif')+'">\n</div>\n';
-      var left=''; var right='';
-      $(this).find('.game').each(function(j){
-        var target=$(this).find('.game-img-path').val();
-        var name=$(this).find('.game-name').val();
-        var appid=$(this).find('.game-appid').val();
-        var price=$(this).find('.game-price').val();
-        var ghtml='<div class="listArea_game" onclick="location.href=\'index.php?area=game&amp;AppId='+appid+'&amp;\';" onmouseout="this.className=\'listArea_game\';" onmouseover="this.className=\'listArea_game_ovr\';">\n<div class="listArea_gameImage"><img border="0" height="45" src="../storefront/images/capsules/'+target+'" width="120" alt="'+name+'"></div>\n<div class="listArea_gameTitle">'+name+'</div><br>\n<div class="listArea_gamePrice">'+price+'</div>\n</div>\n';
-        if(j%2===0) left+=ghtml; else right+=ghtml;
-      });
-      contents+='<tr id="tab_'+idx+'_content" style="'+(i===0?'':'display:none;')+'">\n<td valign="top">'+left+'</td>\n<td valign="top">'+right+'</td>\n</tr>\n';
-    });
-    contents+='<tr>\n<td height="6"><img height="6" src="img/home/listArea_bl.gif" width="6"></td>\n<td align="right" height="6"><img height="6" src="img/home/listArea_br.gif" width="6"></td>\n</tr>\n</tbody></table>\n</div></div>';
-    return html+headers+contents;
-  }
   function openTabbedModal(data){
     tabCount=0; $('#tabs-config').empty(); $('#tabbed-id').val(data.id||'');
-    if(data && data.content){
-      var dom=$(data.content);
-      var tabs=[]; dom.find('div[id^="tab_"].listArea_tab,div[id^="tab_"].listArea_tab_focus').each(function(){
-        var id=$(this).attr('id').split('_')[1];
-        var title=$(this).find('.listArea_tab_txt').text();
-        var games=[]; dom.find('#tab_'+id+'_content .listArea_game').each(function(){
-          var onclick=$(this).attr('onclick')||''; var m=onclick.match(/AppId=(\d+)/); var appid=m?m[1]:'';
-          games.push({
-            name:$(this).find('.listArea_gameTitle').text(),
-            price:$(this).find('.listArea_gamePrice').text(),
-            appid:appid,
-            image:$(this).find('img').attr('src').replace('../storefront/images/capsules/','')
-          });
-        });
-        tabs.push({title:title,games:games});
-      });
-      tabs.forEach(function(t,i){addTab(i+1,t);});
-    } else {
-      addTab(1);}
-    $('#tabbed-modal').dialog({modal:true,width:700});
+    if(data.id){
+      $.post('index_management_2006.php',{action:'get_tabbed'},function(r){
+        if(r.status==='ok' && r.tabs.length){
+          r.tabs.forEach(function(t,i){addTab(i+1,t);});
+        }else{
+          addTab(1);
+        }
+        $('#tabbed-modal').dialog({modal:true,width:700});
+      },'json');
+    }else{
+      addTab(1);
+      $('#tabbed-modal').dialog({modal:true,width:700});
+    }
   }
   $('#add-tab').on('click',function(){addTab(tabCount+1);});
   $('#tabs-config').on('click','.add-game',function(){addGame($(this).closest('.tab-block'));});
@@ -360,17 +408,22 @@ $(function(){
   $('#tabbed-cancel').on('click',function(){$('#tabbed-modal').dialog('close');});
   $('#tabbed-form').on('submit',function(e){
     e.preventDefault();
-    var html=buildTabbedHtml();
     var id=$('#tabbed-id').val();
-    $.post('index_management_2006.php',{action:'save',id:id,type:'tabbed',content:html},function(r){
+    var data={action:'save_tabbed',id:id};
+    $('#tabs-config .tab-block').each(function(i){
+      data['tabs['+i+'][title]']=$(this).find('.tab-title').val();
+      $(this).find('.game').each(function(j){
+        data['tabs['+i+'][games]['+j+'][appid]']=$(this).find('.game-appid').val();
+        data['tabs['+i+'][games]['+j+'][name]']=$(this).find('.game-name').val();
+        data['tabs['+i+'][games]['+j+'][price]']=$(this).find('.game-price').val();
+        data['tabs['+i+'][games]['+j+'][image]']=$(this).find('.game-img-path').val();
+      });
+    });
+    $.post('index_management_2006.php',data,function(r){
       if(r.status==='ok'){
-        if(id){
-          var c=$('#capsule-grid .capsule[data-id="'+id+'"]');
-          c.attr('data-content',html); c.data('content',html);
-        }else{
-          var el=$('<div class="capsule tabbed" data-id="'+r.id+'" data-type="tabbed" data-content=""></div>');
+        if(!id){
+          var el=$('<div class="capsule tabbed" data-id="'+r.id+'" data-type="tabbed"></div>');
           el.append('<span class="handle">&#9776;</span><button type="button" class="delete-circle">&times;</button><div class="cap-name">Tabbed Capsule</div><button type="button" class="edit btn btn-small">Edit</button>');
-          el.attr('data-content',html); el.data({type:'tabbed',content:html});
           $('#capsule-grid').append(el);
         }
         $('#tabbed-modal').dialog('close');

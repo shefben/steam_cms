@@ -567,7 +567,18 @@ CREATE TABLE store_sidebar_links(
 );
 CREATE TABLE store_capsules(position VARCHAR(20) PRIMARY KEY, image TEXT, appid INT);
 CREATE TABLE storefront_capsules_all(position VARCHAR(20) PRIMARY KEY, size VARCHAR(10), image_path TEXT, appid INT, price DECIMAL(10,2), hidden TINYINT DEFAULT 0);
-CREATE TABLE storefront_capsules_per_theme(theme VARCHAR(20), position VARCHAR(20), size VARCHAR(10), image_path TEXT, appid INT, price DECIMAL(10,2), hidden TINYINT DEFAULT 0, PRIMARY KEY(theme, position));
+CREATE TABLE storefront_capsules_per_theme(
+    theme VARCHAR(20),
+    ord INT,
+    size VARCHAR(10),
+    image_path TEXT,
+    appid INT,
+    price DECIMAL(10,2),
+    hidden TINYINT DEFAULT 0,
+    title TEXT,
+    content TEXT,
+    PRIMARY KEY(theme, ord)
+);
 CREATE TABLE storefront_capsule_items(
     id INT AUTO_INCREMENT PRIMARY KEY,
     theme VARCHAR(20),
@@ -591,6 +602,7 @@ CREATE TABLE storefront_tab_games(
     id INT AUTO_INCREMENT PRIMARY KEY,
     tab_id INT,
     appid INT,
+    image_path TEXT,
     ord INT
 );
 CREATE TABLE store_pages(
