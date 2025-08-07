@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 - Tabbed capsule markup wrapped in `<div class="leftCol_home_indent">` for consistent indentation.
 - Index manager capsules include a circular **X** control to delete items and reflow remaining capsules.
 - Added dedicated **Add Tabbed Capsule** workflow with multi-tab builder, game image uploads, and AJAX saving.
+- Replaced news sidebar text with template tags and added search bar tag for 2007 themes.
+- Right sidebar content generated through generic `sidebar_right` tag for 2006–2007 themes.
 - Removed download page version options from Page Version Management; now handled in Download Settings.
 - Render 2006–2007 storefront capsules using legacy HTML markup so capsule images display correctly.
 - Capsule tags now load theme-specific entries before falling back to globally shared capsules.
