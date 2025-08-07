@@ -74,6 +74,38 @@ Shortcut for `news('index_bodygreen', count)`.
 ### `news_index_2006(count = 5)`
 Shortcut for `news('index_2006', count)`.
 
+### `news_archive_months(year, months = 12)`
+Outputs links for the previous `months` months pointing to the archive for `year`.
+- **year** (`int`): theme year displayed in the header.
+- **months** (`int`, default `12`): number of months to include starting from the current month.
+- **Example:** `{{ news_archive_months(2006) }}`
+
+### `html_title()`
+Returns the HTML `<title>` text.
+
+### `steam_news_title()`
+Returns the “STEAM NEWS” heading.
+
+### `rss_feed_title()`
+Label for the RSS feed link.
+
+### `news_archive_title(year)`
+Displays the archive header for the given year.
+- **year** (`int`): year to show in the header.
+
+### `full_archive_title()`
+Label for the link to the full news archive.
+
+### `news_search_bar()`
+Outputs the news search form used by 2007 themes.
+
+### `sidebar_right(year, page = 'news')`
+Renders the right-hand sidebar for the given `page`. For `page = 'news'`, 2006 themes display the STEAM NEWS header, RSS link and archive months while 2007 themes show the search bar.
+
+- **year** (`int`): theme year.
+- **page** (`string`, default `'news'`): page context.
+- **Example:** `{{ sidebar_right(2006) }}`
+
 ## Simple Text Blocks
 
 Each of these tags outputs raw HTML stored in the `settings` table. They take no parameters.
