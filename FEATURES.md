@@ -5,6 +5,7 @@
 - Admin panel with styled themes and permissions
 - Storefront management pages grouped under sidebar dropdown
 - Dynamic news rendering via template tags
+- Right-hand news sidebar rendered through a generic template tag for 2006–2007 themes
 - Platform update history pages use collapsible entries with latest update expanded by default
 - Full article news tag preserves HTML formatting
 - Configurable root path for subdirectory deployments
