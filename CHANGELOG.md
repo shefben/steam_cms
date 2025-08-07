@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Added interactive 2006+ index management page with drag-and-drop capsules and AJAX editing.
+- Index manager now supports GetTheGear and Freestuff/Custom capsule types with editable titles and rich text content.
+- GetTheGear and Freestuff capsules now match original theme dimensions (small in 2006, large in 2007).
+- Installer seeds 2006+ index management link in admin navigation.
+- 2006_v1, 2006_v2, 2007_v1, and 2007_v2 themes load index capsules from database entries.
+- 2007_v1 and 2007_v2 themes group capsule rows in `<div class="inline">` containers, except for large capsules.
+- 2007_v1 and 2007_v2 GetTheGear and Freestuff capsules now render inside `<div class="leftCol_home_indent">` wrappers.
+- Tabbed capsule markup wrapped in `<div class="leftCol_home_indent">` for consistent indentation.
+- Index manager capsules include a circular **X** control to delete items and reflow remaining capsules.
+- Added dedicated **Add Tabbed Capsule** workflow with multi-tab builder, game image uploads, and AJAX saving.
 - Replaced news sidebar text with template tags and added search bar tag for 2007 themes.
 - Right sidebar content generated through generic `sidebar_right` tag for 2006–2007 themes.
 - Removed download page version options from Page Version Management; now handled in Download Settings.

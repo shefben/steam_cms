@@ -201,7 +201,7 @@ function cms_render_tabs(string $theme): string
     if (!$tabs) {
         return '';
     }
-    $html = '<div class="listArea"><br clear="all">';
+    $html = '<div class="leftCol_home_indent"><div class="listArea"><br clear="all">';
     foreach ($tabs as $i => $tab) {
         $id    = $i + 1;
         $focus = $i === 0;
@@ -225,7 +225,7 @@ function cms_render_tabs(string $theme): string
         $html .= cms_render_tabbed_games_column(array_slice($games, $half));
         $html .= '</td></tr>';
     }
-    $html .= '<tr><td height="6"><img height="6" src="img/home/listArea_bl.gif" width="6"></td><td align="right" height="6"><img height="6" src="img/home/listArea_br.gif" width="6"></td></tr></tbody></table></div>';
+    $html .= '<tr><td height="6"><img height="6" src="img/home/listArea_bl.gif" width="6"></td><td align="right" height="6"><img height="6" src="img/home/listArea_br.gif" width="6"></td></tr></tbody></table></div></div>';
     $html .= "<script type=\"text/javascript\">document.querySelectorAll('.listArea_tab, .listArea_tab_focus').forEach(function(tab,idx){tab.addEventListener('click',function(){document.querySelectorAll('.listArea_tab_focus,.listArea_tab').forEach(function(t,i){var focus=i===idx;t.className=focus?'listArea_tab_focus':'listArea_tab';document.getElementById('tab_'+(i+1)+'_content').style.display=focus?'':'none';document.getElementById('tab_'+(i+1)+'_image_l').src='img/home/'+(focus?'listArea_tab_focus_l.gif':'listArea_tab_l.gif');document.getElementById('tab_'+(i+1)+'_image_r').src='img/home/'+(focus?'listArea_tab_focus_r.gif':'listArea_tab_r.gif');});});});</script>";
     return $html;
 }
@@ -675,26 +675,28 @@ function cms_twig_env(string $tpl_dir): Environment
                 switch ($row['type']) {
                     case 'small':
                         if (!$open) {
-                            $html .= '<div class="capsuleGroup">';
+                            $html .= $is2007 ? '<div class="inline">' : '<div class="capsuleGroup">';
                             $open = true;
                             $count = 0;
                         }
                         if ($is2006) {
                             $imgPath = $row['image_path'];
-                            if (!str_starts_with($imgPath, 'gfx/')) {
-                                $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                            if (str_starts_with($imgPath, 'gfx/')) {
+                                $img = $imgPath;
+                            } else {
+                                $img = $base . 'storefront/images/capsules/' . ltrim($imgPath, '/');
                             }
-                            $img = $imgPath;
                             $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                             $html .= '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);">'
                                 . '<div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"></div>'
                                 . '<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>';
                         } elseif ($is2007) {
                             $imgPath = $row['image_path'];
-                            if (!str_starts_with($imgPath, 'gfx/')) {
-                                $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                            if (str_starts_with($imgPath, 'gfx/')) {
+                                $img = $imgPath;
+                            } else {
+                                $img = $base . 'storefront/images/capsules/' . ltrim($imgPath, '/');
                             }
-                            $img = $imgPath;
                             $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                             $html .= '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsule\'; window.status=\'\';" onmouseover="this.className=\'capsule_ovr\'; window.status=\'' . $url . '\';">'
                                 . '<div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="img/corners/smallcap_corners.png" width="280" height="105" border="0"></div></div>'
@@ -706,21 +708,22 @@ function cms_twig_env(string $tpl_dir): Environment
                         }
                         $count++;
                         if ($count === 2) {
-                            $html .= '<br clear="all"></div>';
+                            $html .= $is2007 ? '</div>' : '<br clear="all"></div>';
                             $open = false;
                         }
                         break;
                     case 'large':
                         if ($open) {
-                            $html .= '<br clear="all"></div>';
+                            $html .= $is2007 ? '</div>' : '<br clear="all"></div>';
                             $open = false;
                         }
                         if ($is2006) {
                             $imgPath = $row['image_path'];
-                            if (!str_starts_with($imgPath, 'gfx/')) {
-                                $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                            if (str_starts_with($imgPath, 'gfx/')) {
+                                $img = $imgPath;
+                            } else {
+                                $img = $base . 'storefront/images/capsules/' . ltrim($imgPath, '/');
                             }
-                            $img = $imgPath;
                             $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                             $html .= '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);">'
                                 . '<div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"></div>'
@@ -728,10 +731,11 @@ function cms_twig_env(string $tpl_dir): Environment
                                 . '<br clear="all">';
                         } elseif ($is2007) {
                             $imgPath = $row['image_path'];
-                            if (!str_starts_with($imgPath, 'gfx/')) {
-                                $imgPath = 'gfx/apps/' . ltrim($imgPath, '/');
+                            if (str_starts_with($imgPath, 'gfx/')) {
+                                $img = $imgPath;
+                            } else {
+                                $img = $base . 'storefront/images/capsules/' . ltrim($imgPath, '/');
                             }
-                            $img = $imgPath;
                             $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                             $html .= '<div id="capsule_large_content">'
                                 . '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';">'
@@ -745,42 +749,70 @@ function cms_twig_env(string $tpl_dir): Environment
                         }
                         break;
                     case 'gear':
-                        if ($open) {
-                            $html .= '<br clear="all"></div>';
-                            $open = false;
-                        }
-                        if ($is2006) {
-                            $html .= '<div align="center" class="capsuleGear"><div class="capsuleGearTitle">Get The Gear!</div><div class="capsuleGearText">Check out the new Logitech® MOMO® Racing wheel! Visit the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> for official shirts, posters, hats and more!</div></div>';
-                        } elseif ($is2007) {
-                            $html .= '<div align="center" class="Gear"><div class="GearTitle">Get The Gear!</div><div class="GearText">Get your hands on the brand-new Half-Life® 2: Episode Two poster at the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> now!!! Also featuring official shirts, posters, hats and more!</div></div>';
-                        } else {
-                            $html .= cms_get_setting('gear_block', '');
-                        }
-                        break;
                     case 'free':
-                        if ($open) {
-                            $html .= '<br clear="all"></div>';
-                            $open = false;
-                        }
-                        if ($is2006) {
-                            $html .= '<div align="center" class="capsuleStuff"><div class="capsuleStuffTitle">Free Stuff!</div><div class="capsuleStuffText">In addition to a catalog of great games, your free Steam account gives you access to <a href="http://storefront.steampowered.com/v/index.php?area=search&amp;browse=1&amp;category=&amp;price=1&amp;">games + demos</a>, <a href="http://storefront.steampowered.com/v/index.php?area=media&amp;">HD movies + trailers</a>, and more.</div></div>';
-                        } elseif ($is2007) {
-                            $html .= '<div align="center" class="Stuff"><div class="StuffTitle">Free Stuff!</div><div class="StuffText">In addition to a catalog of great games, your free Steam account gives you access to game <a href="v/index.php?area=free&amp;tab=demos&amp;">demos</a>, <a href="v/index.php?area=free&amp;tab=mods&amp;">mods</a>, <a href="v/index.php?area=free&amp;tab=videos&amp;">trailers</a> and more. Browse our <a href="v/index.php?area=free&amp;">Free Stuff</a> page for more details.</div></div>';
+                        if ($is2007) {
+                            if ($open) {
+                                $html .= '</div>';
+                                $open = false;
+                            }
+                            if ($row['type'] === 'gear') {
+                                $cTitle = htmlspecialchars($row['title'] ?? 'Get The Gear!', ENT_QUOTES);
+                                $defaultContent = 'Get your hands on the brand-new Half-Life® 2: Episode Two poster at the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> now!!! Also featuring official shirts, posters, hats and more!';
+                                $cContent = $row['content'] ?? $defaultContent;
+                                $html .= '<div class="leftCol_home_indent"><div align="center" class="Gear"><div class="GearTitle">' . $cTitle . '</div><div class="GearText">' . $cContent . '</div></div></div>';
+                            } else {
+                                $cTitle = htmlspecialchars($row['title'] ?? 'Free Stuff!', ENT_QUOTES);
+                                $defaultContent = 'In addition to a catalog of great games, your free Steam account gives you access to game <a href="v/index.php?area=free&amp;tab=demos&amp;">demos</a>, <a href="v/index.php?area=free&amp;tab=mods&amp;">mods</a>, <a href="v/index.php?area=free&amp;tab=videos&amp;">trailers</a> and more. Browse our <a href="v/index.php?area=free&amp;">Free Stuff</a> page for more details.';
+                                $cContent = $row['content'] ?? $defaultContent;
+                                $html .= '<div class="leftCol_home_indent"><div align="center" class="Stuff"><div class="StuffTitle">' . $cTitle . '</div><div class="StuffText">' . $cContent . '</div></div></div>';
+                            }
                         } else {
-                            $html .= cms_get_setting('free_block', '');
+                            if (!$open) {
+                                $html .= '<div class="capsuleGroup">';
+                                $open = true;
+                                $count = 0;
+                            }
+                            if ($row['type'] === 'gear') {
+                                $cTitle = htmlspecialchars($row['title'] ?? 'Get The Gear!', ENT_QUOTES);
+                                $defaultContent = $is2006
+                                    ? 'Check out the new Logitech® MOMO® Racing wheel! Visit the <a href="http://store.valvesoftware.com/" target="_blank">Valve Store</a> for official shirts, posters, hats and more!'
+                                    : '';
+                                $cContent = $row['content'] ?? $defaultContent;
+                                if ($is2006) {
+                                    $html .= '<div align="center" class="capsuleGear"><div class="capsuleGearTitle">' . $cTitle . '</div><div class="capsuleGearText">' . $cContent . '</div></div>';
+                                } else {
+                                    $html .= '<div class="gear-block"><h3>' . $cTitle . '</h3><div>' . $cContent . '</div></div>';
+                                }
+                            } else {
+                                $cTitle = htmlspecialchars($row['title'] ?? 'Free Stuff!', ENT_QUOTES);
+                                $defaultContent = $is2006
+                                    ? 'In addition to a catalog of great games, your free Steam account gives you access to <a href="http://storefront.steampowered.com/v/index.php?area=search&amp;browse=1&amp;category=&amp;price=1&amp;">games + demos</a>, <a href="http://storefront.steampowered.com/v/index.php?area=media&amp;">HD movies + trailers</a>, and more.'
+                                    : '';
+                                $cContent = $row['content'] ?? $defaultContent;
+                                if ($is2006) {
+                                    $html .= '<div align="center" class="capsuleStuff"><div class="capsuleStuffTitle">' . $cTitle . '</div><div class="capsuleStuffText">' . $cContent . '</div></div>';
+                                } else {
+                                    $html .= '<div class="free-block"><h3>' . $cTitle . '</h3><div>' . $cContent . '</div></div>';
+                                }
+                            }
+                            $count++;
+                            if ($count === 2) {
+                                $html .= '<br clear="all"></div>';
+                                $open = false;
+                            }
                         }
                         break;
                     case 'tabbed':
                         if ($open) {
-                            $html .= '<br clear="all"></div>';
+                            $html .= $is2007 ? '</div>' : '<br clear="all"></div>';
                             $open = false;
                         }
-                        $html .= cms_render_tabs($theme);
+                        $html .= $is2007 ? '<div class="inline">' . cms_render_tabs($theme) . '</div>' : cms_render_tabs($theme);
                         break;
                 }
             }
             if ($open) {
-                $html .= '<br clear="all"></div>';
+                $html .= $is2007 ? '</div>' : '<br clear="all"></div>';
             }
             return $html;
         }, ['is_safe' => ['html']]));
