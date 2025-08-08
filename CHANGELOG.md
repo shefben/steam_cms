@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - Right sidebar content generated through `custom_index_sidebar_configurations()` tag for 2006–2007 themes.
 - Index sidebar management modal supports editing theme-specific variants, drag-and-drop sorting, and CSRF protection.
 - Removed download page version options from Page Version Management; now handled in Download Settings.
+- Random content loader now picks a new entry on each render and respects absolute image paths.
 - Render 2006–2007 storefront capsules using legacy HTML markup so capsule images display correctly.
 - Capsule tags now load theme-specific entries before falling back to globally shared capsules.
 - Root .htaccess now redirects storefront paths to the 04-05 directory when the active theme is 2004 or 2005_v1.
