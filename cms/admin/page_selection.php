@@ -70,7 +70,7 @@ if(isset($_POST['save'])){
     <label>
       <input type="radio" name="cd_account" value="2004_cd_v2" <?php echo $current['cd_account']=='2004_cd_v2'?'checked':''; ?>><br>
       <span>Use Troubleshooter</span><br>
-      <img src="images/cdkeypage_thumbnails/version_1.png" alt="Use Troubleshooter">
+      <img src="images/cdkeypage_thumbnails/version_2.png" alt="Use Troubleshooter">
     </label>
   </div>
 </div>
