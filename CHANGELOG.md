@@ -15,7 +15,8 @@ All notable changes to this project will be documented in this file.
 - Added dedicated **Add Tabbed Capsule** workflow with multi-tab builder, game image uploads, and AJAX saving.
 - Tabbed capsule games now persist title, price, and image paths in relational tables and render from database records.
 - Replaced news sidebar text with template tags and added search bar tag for 2007 themes.
-- Right sidebar content generated through generic `sidebar_right` tag for 2006–2007 themes.
+- Right sidebar content generated through `custom_index_sidebar_configurations()` tag for 2006–2007 themes.
+- Index sidebar management modal supports editing theme-specific variants, drag-and-drop sorting, and CSRF protection.
 - Removed download page version options from Page Version Management; now handled in Download Settings.
 - Render 2006–2007 storefront capsules using legacy HTML markup so capsule images display correctly.
 - Capsule tags now load theme-specific entries before falling back to globally shared capsules.
@@ -270,3 +271,4 @@ All notable changes to this project will be documented in this file.
 - Storefront now renders tabbed capsules using saved HTML content and respects capsule ordering.
 - Reworked `storefront_capsules_per_theme` with integer ordering, theme checkboxes in the admin modal, and seeded Gear/Freestuff capsules with editable content.
 - Installer seeds example character image random group and templates use a random tag for 2003 v2 and 2004 themes.
+- Added generic sidebar renderer for 2006+ themes and introduced initial admin pages for index capsule and sidebar management.

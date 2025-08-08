@@ -229,3 +229,5 @@
 - Storefront themes pull capsule type, content, and ordering from the database, including custom tabbed capsules.
 - Admin capsule builder supports per-theme selection, and the installer seeds Gear/Freestuff capsules with default content.
 - Installer seeds a sample random content group for character images, enabling homepages to display one of several characters at random.
+- 2006+ themes use a unified index sidebar placeholder rendering sections from the database, and admin pages scaffold capsule and sidebar management.
+- Index Sidebar Management page allows theme-specific variants, drag-and-drop ordering, and CSRF-protected editing.

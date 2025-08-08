@@ -167,7 +167,7 @@ if ($use_all) {
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
-<h2>2006+ Index Management</h2>
+<h2>Index Capsule Management</h2>
 <div id="capsule-grid" class="capsule-grid">
 <?php foreach ($rows as $r): ?>
   <div class="capsule <?php echo htmlspecialchars($r['type']); ?>" data-id="<?php echo $r['id']; ?>" data-appid="<?php echo $r['appid']; ?>" data-price="<?php echo htmlspecialchars($r['price']); ?>" data-type="<?php echo htmlspecialchars($r['type']); ?>" data-image="<?php echo htmlspecialchars($r['image_path']); ?>" data-title="<?php echo htmlspecialchars($r['title'] ?? '', ENT_QUOTES); ?>" data-content="<?php echo htmlspecialchars($r['content'] ?? '', ENT_QUOTES); ?>">
@@ -271,7 +271,7 @@ $(function(){
   function updateOrder(){
     var order=[];
     $('#capsule-grid .capsule').each(function(){order.push($(this).data('id'));});
-    $.post('index_management_2006.php',{action:'reorder',order:order});
+    $.post('capsule_management_2006.php',{action:'reorder',order:order});
   }
   Sortable.create(document.getElementById('capsule-grid'),{
     handle:'.handle',
@@ -320,7 +320,7 @@ $(function(){
   $('#capsule-grid').on('click','.delete-circle',function(){
     if(!confirm('Delete this capsule?')) return;
     var c=$(this).closest('.capsule');
-    $.post('index_management_2006.php',{action:'delete',id:c.data('id')},function(){c.remove();updateOrder();},'json');
+    $.post('capsule_management_2006.php',{action:'delete',id:c.data('id')},function(){c.remove();updateOrder();},'json');
   });
   $('#cap-image').on('change',function(){
     var f=this.files[0];
@@ -336,7 +336,7 @@ $(function(){
     $('#cap-content-hidden').val($('#cap-content').html());
     var fd=new FormData(this);
     fd.append('action','save');
-    $.ajax({url:'index_management_2006.php',method:'POST',data:fd,processData:false,contentType:false,dataType:'json',success:function(r){
+    $.ajax({url:'capsule_management_2006.php',method:'POST',data:fd,processData:false,contentType:false,dataType:'json',success:function(r){
       if(r.status==='ok'){
         var id=$('#cap-id').val();
         var img=r.image;var name=$('#cap-name').val();var appid=$('#cap-appid').val();var price=$('#cap-price').val();var type=r.type;var title=$('#cap-title').val();var content=$('#cap-content').html();
@@ -382,7 +382,7 @@ $(function(){
   function openTabbedModal(data){
     tabCount=0; $('#tabs-config').empty(); $('#tabbed-id').val(data.id||'');
     if(data.id){
-      $.post('index_management_2006.php',{action:'get_tabbed'},function(r){
+      $.post('capsule_management_2006.php',{action:'get_tabbed'},function(r){
         if(r.status==='ok' && r.tabs.length){
           r.tabs.forEach(function(t,i){addTab(i+1,t);});
         }else{
@@ -401,7 +401,7 @@ $(function(){
   $('#tabs-config').on('change','.game-image',function(){
     var game=$(this).closest('.game');
     var fd=new FormData(); fd.append('action','upload_game_image'); fd.append('game_image',this.files[0]);
-    $.ajax({url:'index_management_2006.php',method:'POST',data:fd,processData:false,contentType:false,dataType:'json',success:function(r){
+    $.ajax({url:'capsule_management_2006.php',method:'POST',data:fd,processData:false,contentType:false,dataType:'json',success:function(r){
       if(r.status==='ok'){game.find('.game-img-path').val(r.path); game.find('img.preview').attr('src','../storefront/images/capsules/'+r.path).show();}
     }});
   });
@@ -419,7 +419,7 @@ $(function(){
         data['tabs['+i+'][games]['+j+'][image]']=$(this).find('.game-img-path').val();
       });
     });
-    $.post('index_management_2006.php',data,function(r){
+    $.post('capsule_management_2006.php',data,function(r){
       if(r.status==='ok'){
         if(!id){
           var el=$('<div class="capsule tabbed" data-id="'+r.id+'" data-type="tabbed"></div>');

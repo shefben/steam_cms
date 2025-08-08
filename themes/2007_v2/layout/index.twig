@@ -31,56 +31,7 @@
 </div>
 </div>
 <div class="rightCol_home">
-<div class="rightFindSearch">
-<form action="index.php" id="searchform" name="searchform">
-<input name="area" type="hidden" value="search"/>
-<input name="genre" type="hidden" value=""/>
-<input name="cc" type="hidden" value="US"/>
-<table border="0" cellpadding="0" cellspacing="0" width="300">
-<tr>
-<td width="20">&nbsp;</td>
-<td width="200"><input id="searchterm" maxlength="64" name="term" size="35" type="text"/></td>
-<td><a class="btn_search" href="v/index.php?cc=US" onclick="document.searchform.submit();">Search</a></td>
-</tr>
-</table>
-</form>
-</div>
-<div class="usr_edit_right_header"><div style="float:left;">{{ find_title() }}</div></div>
-{{ find_list()|raw }}
-<div id="spotlight_section">
-<div class="usr_edit_right_header"><div style="float:left;">Spotlight</div></div>
-{{ tabs_block()|raw }}
-</div>
-<div class="usr_edit_right_header"><div style="float:left;">{{ latest_news_title() }}</div></div>
-{{ latest_news_list()|raw }}
-<div id="publisher_catalog" style="display: inline;">
-<div class="usr_edit_right_header"><div style="float:left;">{{ publisher_catalogs_title() }}</div></div>
-{{ publisher_catalogs_list()|raw }}
-</div>
-<div class="usr_edit_right_header" id="browseCatalog" onclick="toggle_section( 'browseCatalog' );" style="cursor: pointer;">
-<div style="float:left;">{{ browse_catalog_title() }}</div>
-<div class="usr_edit_right_control" style="cursor: pointer;"><img border="0" height="14" id="browseCatalog_header" width="14"/></div>
-</div>
-<div id="browseCatalog_content">
-{{ browse_catalog_list()|raw }}
-</div>
-<script>check_section( 'browseCatalog', 'open' );</script>
-<div class="usr_edit_right_header" id="newOnSteam" onclick="toggle_section( 'new_on_steam' );" style="cursor: pointer;">
-<div style="float:left;">{{ new_on_steam_title() }}</div>
-<div class="usr_edit_right_control" style="cursor: pointer;"><img border="0" height="14" id="new_on_steam_header" width="14"/></div>
-</div>
-<div class="rightLink_newOnSteam" id="new_on_steam_content">
-{{ new_on_steam_list()|raw }}
-</div>
-<script>check_section( 'new_on_steam', 'closed' );</script>
-<div class="usr_edit_right_header" id="soon" onclick="toggle_section( 'soon_on_steam' );" style="cursor: pointer;">
-<div style="float:left;">{{ coming_soon_title() }}</div>
-<div class="usr_edit_right_control"><img border="0" height="14" id="soon_on_steam_header" width="14"/></div>
-</div>
-<div id="soon_on_steam_content">
-{{ coming_soon_list()|raw }}
-</div>
-<script>check_section('soon_on_steam','closed');</script>
+    {{ custom_index_sidebar_configurations()|raw }}
 </div>
 </div>
 <br clear="left"/>
