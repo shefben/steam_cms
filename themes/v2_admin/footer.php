@@ -26,6 +26,10 @@ $(function(){
         e.preventDefault();
         $('#download-sub').slideToggle(150);
     });
+    $('#index_management-parent > a').on('click', function(e){
+        e.preventDefault();
+        $('#index_management-sub').slideToggle(150);
+    });
     $('#legacy-sf-parent > a').on('click', function(e){
         var $sub = $('#legacy-sf-sub');
         if ($sub.length) {
