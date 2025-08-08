@@ -148,6 +148,13 @@ $(function () {
 
     $(document).on('click', '.edit-btn', function () {
         var id = $(this).data('id');
+        $('#pkgForm')[0].reset();
+        $('#thumbPrev').empty();
+        $('#screenPrev').text('No Image selected');
+        $('#removeShot').prop('disabled', true);
+        $('#badgeWrap').hide();
+        $('#screenWrap').show();
+        $('html,body').animate({scrollTop: $('#pkgForm').offset().top}, 'fast');
         $.getJSON('legacy_storefront_packages.php', { load: id }, function (d) {
             $('#subid').val(d.subid);
             $('#title').val(d.title);

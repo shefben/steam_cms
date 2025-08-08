@@ -143,6 +143,11 @@ $(function () {
 
     $(document).on('click', '.edit-btn', function () {
         var id = $(this).data('id');
+        $('#gameForm')[0].reset();
+        $('#thumbPrev, #screenPrev').empty();
+        $('#titleImgPrev').text('No Image selected');
+        $('#removeShot').prop('disabled', true);
+        $('html,body').animate({scrollTop: $('#gameForm').offset().top}, 'fast');
         $.getJSON('legacy_storefront_games.php', { load: id }, function (d) {
             $('#appid').val(d.appid);
             if (d.title.match(/^\/storefront\/images\//)) {

@@ -1,6 +1,9 @@
 <?php
+$ajax = isset($_GET['ajax_form']);
+if($ajax){ ob_start(); }
 require_once 'admin_header.php';
 cms_require_permission('manage_settings');
+if($ajax){ ob_clean(); }
 
 $base = cms_base_url();
 $theme_list = array_filter(cms_get_themes(), fn($t)=>substr($t,-6) !== '_admin');
@@ -11,6 +14,9 @@ $show_bold = in_array($theme, ['2002_v2','2003_v1']);
 $image_dir = dirname(__DIR__,2)."/themes/$theme/images";
 $logo_files = glob($image_dir.'/*logo*.{gif,png,jpg,jpeg}', GLOB_BRACE);
 $logo_files = array_map(function($f) use($theme){ return '/themes/'.$theme.'/images/'.basename($f); }, $logo_files);
+if (empty($data['logo']) && !empty($logo_files)) {
+    $data['logo'] = $logo_files[0];
+}
 $spacer = $data['spacer'] ?? '';
 $footer_html = cms_get_theme_footer($theme);
 $css_path = cms_get_theme_css($theme);
@@ -250,7 +256,8 @@ document.addEventListener('DOMContentLoaded', function(){
 <p><a href="index.php">Back</a></p>
 <?php
 $content = ob_get_clean();
-if(isset($_GET['ajax_form'])){
+if($ajax){
+    ob_end_clean();
     echo $content;
     exit;
 }

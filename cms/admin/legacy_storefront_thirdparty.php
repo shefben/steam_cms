@@ -132,6 +132,10 @@ $(function () {
 
     $(document).on('click', '.edit-btn', function () {
         var id = $(this).data('id');
+        $('#tpForm')[0].reset();
+        $('#thumbPrev, #screenPrev').empty();
+        $('#removeShot').prop('disabled', true);
+        $('html,body').animate({scrollTop: $('#tpForm').offset().top}, 'fast');
         $.getJSON('legacy_storefront_thirdparty.php', { load: id }, function (d) {
             $('#record_id').val(d.id);
             $('#title').val(d.title);
