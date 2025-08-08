@@ -33,9 +33,14 @@ $page = max(1, (int)($_GET['page'] ?? 1));
 $pages = max(1, (int)ceil($total/$perPage));
 $offset = ($page-1)*$perPage;
 
-$paramsWithLimit = array_merge($params, [$perPage, $offset]);
 $stmt = $db->prepare("SELECT l.*, u.username FROM admin_logs l LEFT JOIN admin_users u ON u.id=l.user $whereSql ORDER BY l.ts DESC LIMIT ? OFFSET ?");
-$stmt->execute($paramsWithLimit);
+$paramIndex = 1;
+foreach ($params as $param) {
+    $stmt->bindValue($paramIndex++, $param);
+}
+$stmt->bindValue($paramIndex++, $perPage, PDO::PARAM_INT);
+$stmt->bindValue($paramIndex, $offset, PDO::PARAM_INT);
+$stmt->execute();
 $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Activity Log</h2>
