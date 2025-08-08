@@ -2,15 +2,34 @@
 require_once 'admin_header.php';
 cms_require_any_permission(['manage_faq','faq_add','faq_edit','faq_delete']);
 $db=cms_get_db();
-if(isset($_POST['reorder']) && isset($_POST['order'])){
+require_once __DIR__.'/faq_order.php';
+
+$export = $_GET['export'] ?? '';
+if ($export === 'csv' || $export === 'json') {
     cms_require_permission('faq_edit');
-    cms_set_setting('faq_order', $_POST['order']);
-    cms_admin_log('Reordered FAQs');
-    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
-        echo 'ok';
-    }else{
-        header('Location: faq.php');
+    $data = $db->query('SELECT faqid1,faqid2,catid1,catid2,title,body,views FROM faq_content ORDER BY faqid1,faqid2')->fetchAll(PDO::FETCH_ASSOC);
+    $file = 'faq.' . ($export === 'csv' ? 'csv' : 'json');
+    if ($export === 'csv') {
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename=' . $file);
+        $out = fopen('php://output', 'w');
+        if ($data) {
+            fputcsv($out, array_keys($data[0]));
+            foreach ($data as $r) {
+                fputcsv($out, $r);
+            }
+        }
+        fclose($out);
+    } else {
+        header('Content-Type: application/json');
+        header('Content-Disposition: attachment; filename=' . $file);
+        echo json_encode($data);
     }
+    exit;
+}
+
+if(isset($_POST['reorder']) && isset($_POST['order'])){
+    cms_save_faq_order($_POST['order'], isset($_SERVER['HTTP_X_REQUESTED_WITH']));
     exit;
 }
 if(isset($_POST['delete'])){
@@ -36,6 +55,18 @@ $pages = max(1, (int)ceil($total/$perPage));
 $rows = array_slice($rows, ($page-1)*$perPage, $perPage);
 ?>
 <h2>FAQs</h2>
+<?php if(cms_has_permission('faq_edit') || cms_has_permission('faq_add')): ?>
+<p>
+    <?php if(cms_has_permission('faq_edit')): ?>
+    <a class="btn btn-secondary" href="faq.php?export=csv">Export CSV</a>
+    <a class="btn btn-secondary" href="faq.php?export=json">Export JSON</a>
+    <?php endif; ?>
+    <?php if(cms_has_permission('faq_add')): ?>
+    <a class="btn btn-secondary" href="faq_import.php">Import</a>
+    <?php endif; ?>
+</p>
+<?php endif; ?>
+
 <?php if(cms_has_permission('faq_add')): ?>
 <p><a href="faq_edit.php">Add FAQ</a></p>
 <?php endif; ?>

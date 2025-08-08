@@ -38,11 +38,17 @@ $versions = [
 ];
 $pageStmt = $pdo->prepare('INSERT INTO download_pages(version,years,content,created,updated) VALUES(?,?,?,?,?)');
 $linkStmt = $pdo->prepare('INSERT INTO download_links(version,category,label,url,ord) VALUES(?,?,?,?,?)');
+$catStmt = $pdo->prepare('INSERT INTO download_categories(name,file_size) VALUES(?,?)');
+$seenCats = [];
 foreach ($versions as $ver=>$info) {
     $html = file_get_contents($info['file']);
     $body = extract_content($html);
     $pageStmt->execute([$ver,$info['years'],$body,date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
     foreach (parse_links($body) as $l) {
         $linkStmt->execute([$ver,$l['category'],$l['label'],$l['url'],$l['ord']]);
+        if (!isset($seenCats[$l['category']])) {
+            $catStmt->execute([$l['category'], '']);
+            $seenCats[$l['category']] = true;
+        }
     }
 }

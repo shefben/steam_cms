@@ -5,6 +5,7 @@ $(function(){
     }
     $('#mc-form1').on('submit',function(e){
         e.preventDefault();
+        if(!this.checkValidity()){alert('Please fill out all required fields.');return;}
         $.post('map_contest.php?ajax=1&page=1', $(this).serialize(), function(){
             showPage(2);
         },'json');
@@ -40,6 +41,7 @@ $(function(){
 
     $('#mc-form2').on('submit',function(e){
         e.preventDefault();
+        if(!this.checkValidity()){alert('Please complete all fields.');return;}
         var fd = new FormData(this);
         uploadWithProgress(fd,'map_contest.php?ajax=1&page=2',$('#mapProg, #srcProg'),function(){
             showPage(3);

@@ -1,4 +1,7 @@
 {% extends 'layout/default.twig' %}
+{% block extra_head %}
+<link rel="stylesheet" href="{{ THEME_URL }}/css/map_contest.css">
+{% endblock %}
 {% block content %}
 <div id="contest-container">
     {% include 'partials/map_contest_page1.twig' %}
