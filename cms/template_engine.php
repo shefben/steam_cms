@@ -597,6 +597,11 @@ function cms_twig_env(string $tpl_dir): Environment
             return $out;
         }, ['is_safe' => ['html']]));
 
+        $env->addFunction(new TwigFunction('custom_index_sidebar_configurations', function () {
+            $theme = cms_get_setting('theme', '2004');
+            return cms_get_sidebar_sections_html($theme);
+        }, ['is_safe' => ['html']]));
+
         $env->addFunction(new TwigFunction('featured_capsules', function () {
             $db = cms_get_db();
             $caps = [];

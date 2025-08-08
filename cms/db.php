@@ -1051,6 +1051,55 @@ function cms_help_icon(string $page, string $field): string
     return '<span class="help-icon" data-help="' . $esc . '" tabindex="0" role="button" aria-label="Help">?</span>';
 }
 
+function cms_get_sidebar_sections_html(string $theme, bool $for_admin = false): string
+{
+    $db = cms_get_db();
+    try {
+        $stmt = $db->query('SELECT section_id,title,icon_path FROM sidebar_sections ORDER BY sort_order, section_id');
+        $sections = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S02') {
+            return '';
+        }
+        throw $e;
+    }
+
+    $out = '';
+    foreach ($sections as $section) {
+        $sid = (int)$section['section_id'];
+        $vstmt = $db->prepare('SELECT html_content FROM sidebar_section_variants WHERE section_id=? AND FIND_IN_SET(?, theme_list)');
+        $vstmt->execute([$sid, $theme]);
+        $html = $vstmt->fetchColumn();
+        if ($html === false) {
+            continue;
+        }
+        $icon = $section['icon_path'] ? '<img src="' . htmlspecialchars($section['icon_path'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '" alt="" align="absmiddle"> ' : '';
+        $title = htmlspecialchars($section['title'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        if ($for_admin) {
+            $out .= '<div class="sidebar-section" data-id="' . $sid . '"><h1>' . $icon . $title . '</h1>'
+                . '<div class="section-controls"><button class="edit-section" data-id="' . $sid
+                . '">Edit</button> <button class="delete-section" data-id="' . $sid . '">Delete</button></div>'
+                . $html . '<div class="rightColHr"></div></div>';
+        } else {
+            $out .= '<h1>' . $icon . $title . '</h1>' . $html . '<div class="rightColHr"></div>';
+        }
+    }
+    return $out;
+}
+
+function cms_get_csrf_token(): string
+{
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function cms_verify_csrf(string $token): bool
+{
+    return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
+}
+
 function cms_log_php_error(string $level, string $message, string $file, int $line): void
 {
     try {
