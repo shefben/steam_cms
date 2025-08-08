@@ -288,12 +288,31 @@ CREATE TABLE `0405_storefront_packages` (
             
                 CREATE TABLE random_content (
                     uniqueid INT AUTO_INCREMENT PRIMARY KEY,
-                    tag_name VARCHAR(25) NOT NULL,
+                    tag_name VARCHAR(64) NOT NULL,
                     content TEXT NOT NULL,
                     group_id INT NOT NULL,
                     FOREIGN KEY (group_id) REFERENCES random_groups(id) ON DELETE CASCADE
                 );
             ");
+
+            $pdo->exec('INSERT INTO random_groups (name) VALUES ("0304_character_image")');
+            $groupId = (int)$pdo->lastInsertId();
+            $stmt    = $pdo->prepare('INSERT INTO random_content(tag_name, content, group_id) VALUES (?,?,?)');
+            $stmt->execute([
+                '0304_character_image_gordon',
+                '<div class="content" id="container" style="background-image:url(images/gordon.gif); background-position:top right; background-repeat:no-repeat;">',
+                $groupId
+            ]);
+            $stmt->execute([
+                '0304_character_image_cz_guy',
+                '<div class="content" id="container" style="background-image:url(images/cz_guy.gif); background-position:top right; background-repeat:no-repeat;">',
+                $groupId
+            ]);
+            $stmt->execute([
+                '0304_character_image_shieldguy',
+                '<div class="content" id="container" style="background-image:url(images/shieldguy.gif); background-position:top right; background-repeat:no-repeat;">',
+                $groupId
+            ]);
 
             $pdo->exec("DROP TABLE IF EXISTS scheduled_content");
             $pdo->exec("CREATE TABLE scheduled_content(
