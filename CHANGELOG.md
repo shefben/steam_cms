@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Added CSV/JSON import and export for FAQs.
+- Added migration indexing `publish_at` on the news table.
+- Added triggers to notify admins of new cafe signups, import jobs, and platform update releases.
+- Added index on `faq_content` category columns for faster admin lookups.
+- Normalized theme asset paths by collapsing duplicate slashes.
+- Added tests for theme asset path rewriting and JavaScript `newImage()` handling.
+- Legacy storefront package editor supports rich text descriptions with a WYSIWYG control.
 - Added interactive 2006+ index management page with drag-and-drop capsules and AJAX editing.
 - Index manager now supports GetTheGear and Freestuff/Custom capsule types with editable titles and rich text content.
 - GetTheGear and Freestuff capsules now match original theme dimensions (small in 2006, large in 2007).
@@ -11,6 +18,9 @@ All notable changes to this project will be documented in this file.
 - 2007_v1 and 2007_v2 themes group capsule rows in `<div class="inline">` containers, except for large capsules.
 - 2007_v1 and 2007_v2 GetTheGear and Freestuff capsules now render inside `<div class="leftCol_home_indent">` wrappers.
 - Tabbed capsule markup wrapped in `<div class="leftCol_home_indent">` for consistent indentation.
+- Map contest submission form now includes custom styling and required field validation.
+- FAQ drag-and-drop ordering uses a reusable helper and is covered by integration tests.
+- Installer seeds download categories from archived 2004 and 2003_v2 pages.
 - Index manager capsules include a circular **X** control to delete items and reflow remaining capsules.
 - Added dedicated **Add Tabbed Capsule** workflow with multi-tab builder, game image uploads, and AJAX saving.
 - Tabbed capsule games now persist title, price, and image paths in relational tables and render from database records.

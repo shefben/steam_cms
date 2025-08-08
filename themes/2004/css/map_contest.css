@@ -1,0 +1,6 @@
+.mc-page form{max-width:500px;margin:0 auto;font-size:12px}
+.mc-page p{margin:8px 0}
+.mc-page input[type=text],.mc-page input[type=file],.mc-page textarea,.mc-page select{width:100%;box-sizing:border-box}
+.shot-list{display:flex;gap:10px;margin-top:5px}
+.shot img{max-width:120px;display:block}
+.shot button.remove{margin-top:4px}

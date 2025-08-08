@@ -99,7 +99,15 @@ $packages = $db->query('SELECT * FROM `0405_storefront_packages` ORDER BY subid'
  <label><input type="radio" name="badge" value="1" id="optBadge"> Steam Only Badge</label>
  <div id="badgeWrap" style="display:none;"><br><br><div class="discount" align="right" style="padding-top:12px;"><br>Offer<br>available<br>only on<br>STEAM!</div></div>
 </div><br>
-<label>Description<br><textarea name="description" id="description" rows="5" cols="60"></textarea></label><br>
+<label>Description</label>
+<div id="descToolbar">
+  <button type="button" data-cmd="bold"><b>B</b></button>
+  <button type="button" data-cmd="italic"><i>I</i></button>
+  <button type="button" data-cmd="underline"><u>U</u></button>
+</div>
+<div id="pkgDesc" class="wysiwyg" contenteditable="true"></div>
+<input type="hidden" name="description" id="pkgDescInput">
+<br>
 <label>Price <input type="text" name="price" id="price"></label><br>
 <button type="submit" class="btn btn-primary">Save Package</button> <button type="reset" id="cancelBtn" class="btn">Cancel</button>
 </form>
@@ -148,7 +156,8 @@ $(function () {
             $('#thumbPrev').html(d.image_thumb ? '<img src="' + d.image_thumb + '" width="32">' : '');
             $('#current_screen').val(d.image_screenshot);
             $('#screenPrev').html(d.image_screenshot ? '<img src="' + d.image_screenshot + '" width="32">' : 'No Image selected');
-            $('#description').val(d.description);
+            $('#pkgDesc').html(d.description);
+            $('#pkgDescInput').val(d.description);
             if (d.steamOnlyBadge == 1) {
                 $('#optBadge').prop('checked', true);
                 $('#badgeWrap').show();
@@ -208,9 +217,23 @@ $(function () {
             $('#remove_screenshot').val('0');
             $('#badgeWrap').hide();
             $('#screenWrap').show();
+            $('#pkgDesc').empty();
+            $('#pkgDescInput').val('');
         });
+    });
+
+    $('#pkgForm').on('submit', function () {
+        $('#pkgDescInput').val($('#pkgDesc').html());
+    });
+
+    $('#descToolbar button').on('click', function () {
+        document.execCommand($(this).data('cmd'), false, null);
     });
 });
 </script>
+<style>
+#descToolbar button{margin-right:4px;}
+.wysiwyg{border:1px solid #ccc;min-height:100px;padding:4px;}
+</style>
 <?php include 'admin_footer.php'; ?>
 

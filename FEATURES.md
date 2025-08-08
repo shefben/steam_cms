@@ -3,6 +3,7 @@
 - 04-05 storefront games, packages, and third-party listings seeded from archive
 - Customizable CMS themes for 2004 and 2005
 - Admin panel with styled themes and permissions
+- FAQ admin list supports CSV/JSON import and export with preview
 - Storefront management pages grouped under sidebar dropdown
 - Dynamic news rendering via template tags
 - Right-hand news sidebar rendered through a generic template tag for 2006–2007 themes
@@ -142,6 +143,7 @@
 - Styled login page with jQuery validation and password reset request
 - Login screen matches installer look and centers form
 - Admin dashboard shows unread notifications with dismiss action
+- Database triggers generate notifications for new cafe signups, import jobs, and platform updates
 - Admin sidebar links editable with drag-and-drop ordering and add/remove buttons
 - Role-based administrator permissions with editable roles
 - Permission checkboxes with all/none toggle on role and user forms
@@ -229,5 +231,7 @@
 - Storefront themes pull capsule type, content, and ordering from the database, including custom tabbed capsules.
 - Admin capsule builder supports per-theme selection, and the installer seeds Gear/Freestuff capsules with default content.
 - Installer seeds a sample random content group for character images, enabling homepages to display one of several characters at random.
+- Multi-step map contest submission form is styled and validates required fields with jQuery.
+- Installer seeds download categories parsed from 2004 and 2003_v2 download pages.
 - 2006+ themes use a unified index sidebar placeholder rendering sections from the database, and admin pages scaffold capsule and sidebar management.
 - Index Sidebar Management page allows theme-specific variants, drag-and-drop ordering, and CSRF-protected editing.
