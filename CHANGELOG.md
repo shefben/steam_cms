@@ -269,3 +269,4 @@ All notable changes to this project will be documented in this file.
 - Survey page mirrors archived 2006 design exactly while loading stats from the database.
 - Storefront now renders tabbed capsules using saved HTML content and respects capsule ordering.
 - Reworked `storefront_capsules_per_theme` with integer ordering, theme checkboxes in the admin modal, and seeded Gear/Freestuff capsules with editable content.
+- Installer seeds example character image random group and templates use a random tag for 2003 v2 and 2004 themes.
