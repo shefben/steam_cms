@@ -46,13 +46,39 @@ function cms_split_title_entry(string $name): string
 function cms_random_content(string $tag): string
 {
     $db = cms_get_db();
-    $stmt = $db->prepare('SELECT c.content FROM random_content c JOIN random_groups g ON c.group_id = g.id WHERE g.name=?');
+    $stmt = $db->prepare(
+        'SELECT c.content FROM random_content c '
+        . 'JOIN random_groups g ON c.group_id = g.id '
+        . 'WHERE g.name=?'
+    );
     $stmt->execute([$tag]);
     $rows = $stmt->fetchAll(PDO::FETCH_COLUMN);
     if (!$rows) {
         return '';
     }
-    return $rows[array_rand($rows)];
+
+    $index   = random_int(0, count($rows) - 1);
+    $content = $rows[$index];
+
+    $theme = cms_get_current_theme();
+
+    $rewrite = function (array $m) use ($theme): string {
+        return $m[1] . 'themes/' . $theme . '/images/' . $m[2];
+    };
+
+    $content = preg_replace_callback(
+        "#((?:src|href)=[\"'])(?![./])(images/[^\"']+)#i",
+        $rewrite,
+        $content
+    );
+
+    $content = preg_replace_callback(
+        "#(url\\([\"']?)(?![./])(images/[^)\"']+)#i",
+        $rewrite,
+        $content
+    );
+
+    return $content;
 }
 
 function cms_scheduled_content(string $tag): string
