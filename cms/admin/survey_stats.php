@@ -1,7 +1,9 @@
 <?php
+ob_start();
 require_once 'admin_header.php';
 $db = cms_get_db();
-function cms_survey_recalc($db, int $cat): void {
+function cms_survey_recalc($db, int $cat): void
+{
     $stmt = $db->prepare('SELECT id,count FROM survey_entries WHERE category_id=?');
     $stmt->execute([$cat]);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -16,14 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_category'])) {
         $stmt = $db->prepare('INSERT INTO survey_categories(slug,title) VALUES(?,?)');
         $stmt->execute([trim($_POST['slug']), trim($_POST['title'])]);
-        cms_admin_log('Added survey category '.trim($_POST['slug']));
+        cms_admin_log('Added survey category ' . trim($_POST['slug']));
+        ob_end_clean();
         header('Location: survey_stats.php');
         exit;
     }
     if (isset($_POST['delete_category']) && isset($_POST['category_id'])) {
         $stmt = $db->prepare('DELETE FROM survey_categories WHERE id=?');
         $stmt->execute([(int)$_POST['category_id']]);
-        cms_admin_log('Deleted survey category '.(int)$_POST['category_id']);
+        cms_admin_log('Deleted survey category ' . (int)$_POST['category_id']);
+        ob_end_clean();
         header('Location: survey_stats.php');
         exit;
     }
@@ -32,8 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $db->prepare('INSERT INTO survey_entries(category_id,label,count) VALUES(?,?,?)');
         $stmt->execute([$cat, trim($_POST['label']), (int)$_POST['count']]);
         cms_survey_recalc($db, $cat);
-        cms_admin_log('Added survey entry to category '.$cat);
-        header('Location: survey_stats.php?cat='.$cat);
+        cms_admin_log('Added survey entry to category ' . $cat);
+        ob_end_clean();
+        header('Location: survey_stats.php?cat=' . $cat);
         exit;
     }
     if (isset($_POST['delete_entry']) && isset($_POST['entry_id'])) {
@@ -43,8 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $db->prepare('DELETE FROM survey_entries WHERE id=?');
         $stmt->execute([(int)$_POST['entry_id']]);
         cms_survey_recalc($db, (int)$cat);
-        cms_admin_log('Deleted survey entry '.(int)$_POST['entry_id']);
-        header('Location: survey_stats.php?cat='.(int)$cat);
+        cms_admin_log('Deleted survey entry ' . (int)$_POST['entry_id']);
+        ob_end_clean();
+        header('Location: survey_stats.php?cat=' . (int)$cat);
         exit;
     }
 }
@@ -62,10 +68,12 @@ if ($catId) {
     <div class="categories">
         <h3>Categories</h3>
         <ul>
-            <?php foreach ($categories as $c): ?>
-                <li<?php if ($c['id'] == $catId) echo ' class="active"'; ?>>
+            <?php foreach ($categories as $c) : ?>
+                <?php $active = ($c['id'] == $catId) ? ' class="active"' : ''; ?>
+                <li<?php echo $active; ?>>
                     <a href="?cat=<?php echo (int)$c['id']; ?>"><?php echo htmlspecialchars($c['title']); ?></a>
-                    <form method="post" class="inline-form" style="display:inline" onsubmit="return confirm('Delete category?');">
+                    <form method="post" class="inline-form" style="display:inline"
+                        onsubmit="return confirm('Delete category?');">
                         <input type="hidden" name="category_id" value="<?php echo (int)$c['id']; ?>">
                         <button name="delete_category" class="btn btn-small">Delete</button>
                     </form>
@@ -83,7 +91,7 @@ if ($catId) {
         <h3>Entries</h3>
         <table class="data-table">
             <tr><th>Label</th><th>Percent</th><th>Count</th><th>Actions</th></tr>
-            <?php foreach ($entries as $e): ?>
+            <?php foreach ($entries as $e) : ?>
             <tr>
                 <td><?php echo htmlspecialchars($e['label']); ?></td>
                 <td><?php echo htmlspecialchars($e['percentage']); ?>%</td>
@@ -97,7 +105,7 @@ if ($catId) {
             </tr>
             <?php endforeach; ?>
         </table>
-        <?php if ($catId): ?>
+        <?php if ($catId) : ?>
         <h4>Add Entry</h4>
         <form method="post">
             <input type="hidden" name="category_id" value="<?php echo $catId; ?>">

@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Fixed header warning when deleting survey categories and darkened survey category links.
 - Added CSV/JSON import and export for FAQs.
 - Added migration indexing `publish_at` on the news table.
 - Added triggers to notify admins of new cafe signups, import jobs, and platform update releases.
