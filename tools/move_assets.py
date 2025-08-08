@@ -151,8 +151,6 @@ ASSETS = {
         'themes/2005_v1/images/productpage/but_withsteam.gif',
     'archived_steampowered/2005/v1/img/productpage/but_withoutsteam.gif':
         'themes/2005_v1/images/productpage/but_withoutsteam.gif',
-    'archived_steampowered/2005/v1/img/productpage/ProductBanner_CSS02.gif':
-        'themes/2005_v1/images/productpage/ProductBanner_CSS02.gif',
     'archived_steampowered/2005/v1/img/productpage/but_downloadsteam.gif':
         'themes/2005_v1/images/productpage/but_downloadsteam.gif',
     'archived_steampowered/2005/v1/img/square.gif':

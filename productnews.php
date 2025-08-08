@@ -4,6 +4,7 @@ require_once __DIR__ . '/cms/db.php';
 
 $theme = cms_get_setting('theme', '2004');
 $db    = cms_get_db();
+$base  = cms_base_url();
 
 // Determine year filter based on active theme
 $year = null;
@@ -31,7 +32,7 @@ if ($articleId > 0) {
         $title  = htmlspecialchars($row['title']);
         $date   = htmlspecialchars($row['publish_date']);
         $author = htmlspecialchars($row['author']);
-        $self   = 'productnews_CSS.php?id=' . $articleId;
+        $self   = 'productnews.php?id=' . $articleId;
         $newsHtml .= "<h3><a href='$self' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";
         $newsHtml .= "<span style='font-size: 9px;'>$date · <a href=\"mailto:contact@valvesoftware.com\" style='text-decoration: none;'>$author</a><table cellpadding='0' cellspacing='0' width='100%'><tr><td bgcolor='#808080' height='1' width='100%'></td></tr><tr><td height='10' width='100%'></td></tr></table></span>";
         $newsHtml .= $row['content'];
@@ -39,7 +40,7 @@ if ($articleId > 0) {
     } else {
         $newsHtml .= '<p>That news item could not be found.</p>';
     }
-    $newsHtml .= '<ul><li><a href="productnews_CSS.php" style="text-decoration: none;"><i>return to news page</i></a></li></ul>';
+    $newsHtml .= '<ul><li><a href="productnews.php" style="text-decoration: none;"><i>return to news page</i></a></li></ul>';
 } else {
     $perPage = (int)cms_get_setting('news_articles_per_page', 10);
     $page    = max(1, (int)($_GET['page'] ?? 1));
@@ -68,7 +69,7 @@ if ($articleId > 0) {
         $title  = htmlspecialchars($row['title']);
         $date   = htmlspecialchars($row['publish_date']);
         $author = htmlspecialchars($row['author']);
-        $link   = 'productnews_CSS.php?id=' . $id;
+        $link   = 'productnews.php?id=' . $id;
         $newsHtml .= "<h3><a href='$link' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";
         $newsHtml .= "<span style='font-size: 9px;'>$date · <a href=\"mailto:contact@valvesoftware.com\" style='text-decoration: none;'>$author</a><table cellpadding='0' cellspacing='0' width='100%'><tr><td bgcolor='#808080' height='1' width='100%'></td></tr><tr><td height='10' width='100%'></td></tr></table></span>";
         $newsHtml .= $row['content'];
@@ -86,79 +87,10 @@ if ($articleId > 0) {
 }
 
 $headerText = ($theme === '2004') ? 'BETA NEWS' : 'LATEST NEWS';
-$footerHtml = cms_get_theme_footer($theme);
-
-echo <<<HTML
-<html><head>
-<title>Counter-Strike™: Source™ Latest News</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="pragma" content="no-cache">
-<meta name="ROBOTS" content="ALL">
-<meta name="DESCRIPTION" content="SteamPowered">
-<meta name="KEYWORDS" content="Steam, account, account creation, signup">
-<meta name="AUTHOR" content="Valve LLC">
-<link rel="stylesheet" type="text/css" href="steampowered.css">
-<link rel="Shortcut Icon" type="image/png" href="webicon.png">
-<script language="JavaScript" src="nav.js"></script>
-<link rel="alternate" type="application/rss+xml" title="Valve RSS News Feed" href="rss.xml">
-</head>
-<body>
-<!-- begin header -->
-
-<!-- end header -->
-<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
-<tr>
-<td align="center" valign="top"><br>
-<table background="img/productpage/ProductBanner_CSS02.gif" border="0" cellpadding="0" cellspacing="0" height="172" width="800">
-<tr height="171">
-<td height="171" width="799"></td>
-<td height="171" width="1"><spacer height="171" type="block" width="1"></spacer></td>
-</tr>
-<tr height="1">
-<td height="1" width="799"><spacer height="1" type="block" width="799"></spacer></td>
-<td height="1" width="1"></td>
-</tr>
-</table>
-<table bgcolor="#3e4637" border="0" cellpadding="0" cellspacing="0" width="800">
-<tr height="24">
-<td colspan="3" height="24" width="799"><spacer height="24" type="block" width="799"></spacer></td>
-<td height="24" width="1"><spacer height="24" type="block" width="1"></spacer></td>
-</tr>
-<tr>
-<td width="26"><spacer height="1" type="block" width="26"></spacer></td>
-<td align="left" valign="top" width="736">
-<div align="left" style="line-height: 17px; width: 70%; text-align: left; margin-left: 54px;">
-<span class="css_news_header">{$headerText}<br><br></span>
-{$newsHtml}
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
-</td>
-<td width="37"><spacer type="block" width="37"></spacer></td>
-<td width="1"><spacer type="block" width="1"></spacer></td>
-</tr>
-<tr height="1">
-<td height="1" width="26"><spacer height="1" type="block" width="26"></spacer></td>
-<td height="1" width="736"><spacer height="1" type="block" width="736"></spacer></td>
-<td height="1" width="37"><spacer height="1" type="block" width="37"></spacer></td>
-<td height="1" width="1"><spacer height="1" type="block" width="1"></spacer></td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
-<div class="footer">
-</div>
-<!-- begin footer -->
-<div class="footer">
-<table cellpadding="0" cellspacing="0">
-<tr>
-<td><a href="http://www.valvesoftware.com"><img src="img/valve_greenlogo.gif"></a></td>
-<td>&nbsp;</td>
-<td><span class="footerfix">{$footerHtml}<a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
-<td width="15%">&nbsp;</td>
-</tr>
-</table>
-</div>
-<!-- end footer -->
-
-</body></html>
-HTML;
+$content = "<span class=\"css_news_header\">{$headerText}<br><br></span>{$newsHtml}";
+$tpl = cms_theme_layout('productpage.twig', $theme);
+$bannerPath = ($base ? rtrim($base, '/').'/' : '/').'Images/productpage/ProductBanner_CSS02.gif';
+cms_render_template($tpl, [
+    'content' => $content,
+    'banner'  => $bannerPath
+]);

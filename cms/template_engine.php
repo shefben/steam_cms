@@ -982,7 +982,7 @@ function cms_render_template(string $path, array $vars = []): void
     if ($css_dir === '.') {
         $css_dir = '';
     }
-    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir, $base_url, $theme) {
+    $html = preg_replace_callback('/(src|href|background)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir, $base_url, $theme) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1147,7 +1147,7 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
     if ($css_dir === '.') {
         $css_dir = '';
     }
-    $html = preg_replace_callback('/(src|href)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir, $base_url, $theme) {
+    $html = preg_replace_callback('/(src|href|background)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir, $base_url, $theme) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];

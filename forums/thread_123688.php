@@ -227,7 +227,7 @@ function popup(src,scroll,x,y,target)
 Also included in this portion of the beta is a Valve Source technology benchmark. The benchmark will be available to all beta participants via the main menu. Results will be displayed upon completion, and beta participants will then have the option to send the results to a Valve-hosted public web page tracking the results as done in prior Valve surveys. <br />
 <br />
 <br />
-For more information on the Counter-Strike: Source beta, please visit: <a href="/index.php?area=productnews_CSS" target="_blank">/index.p...productnews_CSS</a></font></p>
+For more information on the Counter-Strike: Source beta, please visit: <a href="/index.php?area=productnews" target="_blank">/index.p...productnews</a></font></p>
 	
 	<p></p>
 	<p></p>
@@ -380,7 +380,7 @@ For more information on the Counter-Strike: Source beta, please visit: <a href="
 	<a name="post966947"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>undeniable</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">«««</font></span></font><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«Â«Â«</font></span></font><br>
 	<font face="verdana,arial,helvetica" size="1" >Registered: Jul 2004<br>
 	Location: Virginia<br>
 	Posts: 1214</font></td>
@@ -389,7 +389,7 @@ For more information on the Counter-Strike: Source beta, please visit: <a href="
 	<a name="post966947"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>undeniable</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">«««</font></span></font><br><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«Â«Â«</font></span></font><br><br>
                 <p>
 	<font face="verdana,arial,helvetica" size="1" >Registered: Jul 2004</font></p></td>
 	
@@ -439,7 +439,7 @@ ah, I was wondering why the other one got deleted, <img src="images/smilies/tong
 	<a name="post966948"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>timmeh</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">«</font></span></font><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«</font></span></font><br>
 	<font face="verdana,arial,helvetica" size="1" >Registered: Oct 2003<br>
 	Location: <br>
 	Posts: 30</font></td>
@@ -448,7 +448,7 @@ ah, I was wondering why the other one got deleted, <img src="images/smilies/tong
 	<a name="post966948"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>timmeh</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">«</font></span></font><br><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«</font></span></font><br><br>
                 <p>
 	<font face="verdana,arial,helvetica" size="1" >Registered: Oct 2003</font></p></td>
 	
@@ -607,7 +607,7 @@ ah, I was wondering why the other one got deleted, <img src="images/smilies/tong
 	<a name="post966952"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>I Need $$$</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">««</font></span></font><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«Â«</font></span></font><br>
 	<font face="verdana,arial,helvetica" size="1" >Registered: Dec 2003<br>
 	Location: Tx<br>
 	Posts: 153</font></td>
@@ -616,7 +616,7 @@ ah, I was wondering why the other one got deleted, <img src="images/smilies/tong
 	<a name="post966952"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>I Need $$$</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">««</font></span></font><br><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«Â«</font></span></font><br><br>
                 <p>
 	<font face="verdana,arial,helvetica" size="1" >Registered: Dec 2003</font></p></td>
 	
@@ -663,7 +663,7 @@ ah, I was wondering why the other one got deleted, <img src="images/smilies/tong
 	<a name="post966962"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>amirreza</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">««</font></span></font><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«Â«</font></span></font><br>
 	<font face="verdana,arial,helvetica" size="1" >Registered: May 2004<br>
 	Location: T-Dot<br>
 	Posts: 337</font></td>
@@ -672,7 +672,7 @@ ah, I was wondering why the other one got deleted, <img src="images/smilies/tong
 	<a name="post966962"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>amirreza</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">««</font></span></font><br><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«Â«</font></span></font><br><br>
                 <p>
 	<font face="verdana,arial,helvetica" size="1" >Registered: May 2004</font></p></td>
 	
@@ -834,7 +834,7 @@ The whole team will be joining various servers to play, yes. We're looking forwa
 	<a name="post966973"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>loker269</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">««</font></span></font><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«Â«</font></span></font><br>
 	<font face="verdana,arial,helvetica" size="1" >Registered: Aug 2004<br>
 	Location: Constantine, MI<br>
 	Posts: 319</font></td>
@@ -843,7 +843,7 @@ The whole team will be joining various servers to play, yes. We're looking forwa
 	<a name="post966973"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>loker269</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">««</font></span></font><br><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«Â«</font></span></font><br><br>
                 <p>
 	<font face="verdana,arial,helvetica" size="1" >Registered: Aug 2004</font></p></td>
 	
@@ -948,7 +948,7 @@ hope to see you on there cliffe</font></p>
 	<a name="post966984"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>Clush</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="4" color="white">µ</font></span></font><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="4" color="white">Âµ</font></span></font><br>
 	<font face="verdana,arial,helvetica" size="1" >Registered: Jul 2003<br>
 	Location: UK<br>
 	Posts: 2440</font></td>
@@ -957,7 +957,7 @@ hope to see you on there cliffe</font></p>
 	<a name="post966984"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>Clush</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="4" color="white">µ</font></span></font><br><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="4" color="white">Âµ</font></span></font><br><br>
                 <p>
 	<font face="verdana,arial,helvetica" size="1" >Registered: Jul 2003</font></p></td>
 	
@@ -1004,7 +1004,7 @@ hope to see you on there cliffe</font></p>
 	<a name="post966986"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>amirreza</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">««</font></span></font><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«Â«</font></span></font><br>
 	<font face="verdana,arial,helvetica" size="1" >Registered: May 2004<br>
 	Location: T-Dot<br>
 	Posts: 337</font></td>
@@ -1013,7 +1013,7 @@ hope to see you on there cliffe</font></p>
 	<a name="post966986"></a>
 	
 	<font face="verdana, arial, helvetica" size="2" ><b>amirreza</b></font><br>
-	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">««</font></span></font><br><br>
+	<font face="verdana,arial,helvetica" size="1" ><span style="font-family: Wingdings; font-size: 15px;"><font face="wingdings" size="3">Â«Â«</font></span></font><br><br>
                 <p>
 	<font face="verdana,arial,helvetica" size="1" >Registered: May 2004</font></p></td>
 	
