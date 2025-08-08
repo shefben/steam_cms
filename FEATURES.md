@@ -233,3 +233,5 @@
 - Installer seeds a sample random content group for character images, enabling homepages to display one of several characters at random.
 - Multi-step map contest submission form is styled and validates required fields with jQuery.
 - Installer seeds download categories parsed from 2004 and 2003_v2 download pages.
+- 2006+ themes use a unified index sidebar placeholder rendering sections from the database, and admin pages scaffold capsule and sidebar management.
+- Index Sidebar Management page allows theme-specific variants, drag-and-drop ordering, and CSRF-protected editing.

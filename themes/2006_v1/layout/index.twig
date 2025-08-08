@@ -23,21 +23,7 @@
 {{ storefront_capsules()|raw }}
 </div>
 <div class="rightCol_1">
-<div align="center" class="btn_getSteam" onclick="location.href='index.php?area=getsteamnow'" onmouseout="this.style.background='url(btn_getSteam.gif)'" onmouseover="this.style.background='url(btn_getSteam_ovr.gif)'" style="CURSOR:pointer;" title="Click for Details">
-Get Steam Now !
-</div>
-<div class="btn_getSteam_sub">Everything you need to start playing now!</div>
-<br>
-<h1><img align="absmiddle" alt="NEW!" height="16" src="ico/ico_new_16.gif" width="16"> {{ new_on_steam_title() }}</h1>
-{{ new_on_steam_list()|raw }}
-<div class="rightColHr"></div>
-<h1><img align="absmiddle" alt="Find" height="16" src="ico/ico_srch_16.gif" width="16"> {{ find_title() }}</h1>
-{{ find_list()|raw }}
-{{ categories_list()|raw }}
-<div class="rightColHr"></div>
-<h1><img align="absmiddle" alt="News" height="16" src="ico/ico_docs_16.gif" width="16"> {{ latest_news_title() }}</h1>
-{{ news_index_2006()|raw }}
-<div class="rightColHr" style="padding-bottom: 0px; margin-bottom: 0px;"></div>
+    {{ custom_index_sidebar_configurations()|raw }}
 </div>
 </div>
 <br clear="left">
