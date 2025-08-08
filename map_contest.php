@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__.'/cms/db.php';
 session_start();
-$db = cms_get_db();
+$db   = cms_get_db();
 $theme = cms_get_setting('theme','2004');
+$base  = cms_base_url();
 
 if(isset($_GET['ajax'])){
     header('Content-Type: application/json');
@@ -138,5 +139,98 @@ if(isset($_GET['ajax'])){
     }
 }
 
-$tpl = cms_theme_layout('map_contest.twig', $theme);
-cms_render_template($tpl, ['page_title'=>'Map Contest']);
+$contestEnd = cms_get_setting('MapContest','0') === '1';
+$banner = ($base ? rtrim($base, '/').'/' : '/').'archived_steampowered/2005/v1/img/map_contest/ProductBanner_HL2DM.jpg';
+$content = '';
+if ($contestEnd) {
+    $content = <<<HTML
+<font color="#bfba50">Half-Life 2: Deathmatch Map Making Contest</font></span> 
+                        <p></p>
+                        <p class="statusContent2"><span class="statusContent2">Valve would like to thank everyone who participated in the Half-Life 2: Deathmatch Map Making Contest. The judging process has begun. Details regarding that process and more may be found on the contest <a href="https://web.archive.org/web/20050207091922/http://www.steampowered.com/?area=map_contest_rules">rules</a> page.</span></p>
+                        <p></p>
+                        <p></p>
+HTML;
+} else {
+    $base_url  = $base;
+    $theme_url = ($base_url ? rtrim($base_url,'/').'/' : '')."themes/$theme";
+    $content = <<<HTML
+<link rel="stylesheet" href="$theme_url/css/map_contest.css">
+<div id="contest-container">
+<div id="mc-page1" class="mc-page">
+<form id="mc-form1">
+<input type="hidden" name="area" value="map_contest">
+<p>Full legal name<br><input type="text" name="cFullName" size="42" required></p>
+<p>Address<br><input type="text" name="cAddress" size="42" required></p>
+<p>City<br><input type="text" name="cCity" size="42" required></p>
+<p>State/Province<br><input type="text" name="cState" size="16" required></p>
+<p>Country<br><input type="text" name="cCountry" size="16" required></p>
+<p>Zip or Postal Code<br><input type="text" name="cZip" size="16" required></p>
+<p>Date of Birth<br><input type="date" name="cDOB" size="16" required></p>
+<p>Phone<br><input type="text" name="cPhone" size="42" required></p>
+<p>Email<br><input type="email" name="cEmail" size="42" required></p>
+<p>Group Name<br><input type="text" name="cGroupName" size="42"></p>
+<p>Group Members<br><input type="text" name="cGroupMemberName1" size="42"><br>
+<input type="text" name="cGroupMemberName2" size="42"><br>
+<input type="text" name="cGroupMemberName3" size="42"><br>
+<input type="text" name="cGroupMemberName4" size="42"></p>
+<p><button type="submit">Next &raquo;</button></p>
+</form>
+</div>
+<div id="mc-page2" class="mc-page" style="display:none;">
+<form id="mc-form2" enctype="multipart/form-data">
+<p>Map Name<br><input type="text" name="mapName" size="42" required></p>
+<p>Map File (.bsp)<br><input type="file" name="mapFile" id="mapFile" accept=".bsp" required><progress id="mapProg" value="0" max="100" style="display:none;width:100%"></progress></p>
+<p>Source Files (.zip)<br><input type="file" name="sourceFiles" id="sourceFiles" accept=".zip,.rar"><progress id="srcProg" value="0" max="100" style="display:none;width:100%"></progress></p>
+<p>Map Description<br><textarea name="mapDescription" rows="4" cols="40"></textarea></p>
+<p>Recommended Players<br><select name="recommendedPlayers" required>
+<option value="">Select...</option>
+<option value="2-4">2-4</option>
+<option value="4-8">4-8</option>
+<option value="8-12">8-12</option>
+<option value="12-16">12-16</option>
+<option value="16+">16+</option>
+</select></p>
+<p>Game Mode<br><select name="gameMode" required>
+<option value="">Select...</option>
+<option value="deathmatch">Deathmatch</option>
+<option value="team">Team</option>
+<option value="combine_vs_resistance">Combine vs. Resistance</option>
+<option value="other">Other</option>
+</select></p>
+<p>Development Time<br><input type="text" name="developmentTime"></p>
+<p>Tools Used<br><input type="text" name="tools" size="42"></p>
+<p>Inspiration<br><textarea name="inspiration" rows="3" cols="40"></textarea></p>
+<p>Screenshots (maximum of 3)<br>
+<input type="file" id="ss-upload" accept="image/*" multiple>
+<div id="shotList" class="shot-list"></div>
+</p>
+<p><button type="button" class="mc-prev" data-prev="1">&laquo; Previous</button> <button type="submit">Next &raquo;</button></p>
+</form>
+</div>
+<div id="mc-page3" class="mc-page" style="display:none;">
+<form id="mc-form3">
+<p>Previous Mapping Experience<br><textarea name="previousExperience" rows="3" cols="40"></textarea></p>
+<p>Additional Comments<br><textarea name="additionalComments" rows="3" cols="40"></textarea></p>
+<p>How did you hear about this contest?<br><select name="howDidYouHear">
+<option value="">Select...</option>
+<option value="steam">Steam Client</option>
+<option value="valve_website">Valve Website</option>
+<option value="gaming_forum">Gaming Forum</option>
+<option value="friend">Friend</option>
+<option value="gaming_site">Gaming Site</option>
+<option value="other">Other</option>
+</select></p>
+<p><label><input type="checkbox" name="originalWork" required> This map is my original work</label></p>
+<p><label><input type="checkbox" name="agreeToRules" required> I agree to the contest rules</label></p>
+<p><label><input type="checkbox" name="agreeToLicense" required> I grant Valve rights to my submission</label></p>
+<p><label><input type="checkbox" name="confirmAge" required> I am at least 13 years old</label></p>
+<p><button type="button" class="mc-prev" data-prev="2">&laquo; Previous</button> <button type="submit">Submit Entry</button></p>
+</form>
+</div>
+</div>
+<script src="$theme_url/js/jquery.min.js"></script>
+<script src="$theme_url/js/map_contest.js"></script>
+HTML;
+}
+$tpl = cms_theme_layout('productpage.twig', $theme);
+cms_render_template($tpl, ['content' => $content, 'banner' => $banner]);

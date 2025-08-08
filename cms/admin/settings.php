@@ -10,6 +10,7 @@ $smtp_pass = cms_get_setting('smtp_pass','');
 $root_path = cms_get_setting('root_path','');
 $admin_theme = cms_get_setting('admin_theme','default');
 $news_year_only = cms_get_setting('news_year_only','1');
+$map_contest = cms_get_setting('MapContest','0');
 $json_nav = cms_get_setting('nav_items', null);
 $nav_items = $json_nav ? json_decode($json_nav, true) : ($default_nav ?? []);
 if(!$nav_items) $nav_items = $default_nav ?? [];
@@ -44,6 +45,7 @@ if(isset($_POST['save'])){
     cms_set_setting('root_path',trim($_POST['root_path']));
     cms_set_setting('admin_theme',$_POST['admin_theme']);
     cms_set_setting('news_year_only', $_POST['news_year_only']);
+    cms_set_setting('MapContest', isset($_POST['MapContest']) ? '1' : '0');
     if(isset($_POST['nav_items'])){
         $items = [];
         foreach($_POST['nav_items'] as $it){
@@ -76,6 +78,7 @@ if(isset($_POST['save'])){
     $root_path = trim($_POST['root_path']);
     $admin_theme = $_POST['admin_theme'];
     $news_year_only = $_POST['news_year_only'];
+    $map_contest = isset($_POST['MapContest']) ? '1' : '0';
     // header and footer settings moved to header_footer.php
     // keep nav_items array for redisplay
     $nav_items = $nav_items;
@@ -100,6 +103,7 @@ SMTP Port: <input type="text" name="smtp_port" value="<?php echo htmlspecialchar
 SMTP User: <input type="text" name="smtp_user" value="<?php echo htmlspecialchars($smtp_user); ?>" title="Username for the mail server"><br>
 SMTP Password: <input type="password" name="smtp_pass" value="<?php echo htmlspecialchars($smtp_pass); ?>" title="Password for the mail server"><br><br>
 Root Path: <input type="text" name="root_path" value="<?php echo htmlspecialchars($root_path); ?>" title="Prefix for all local links"><br><br>
+<label><input type="checkbox" name="MapContest" value="1" <?php echo $map_contest==='1'?'checked':''; ?>> End 2004/2005 Map Contest</label><br><br>
 Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <input type="file" name="favicon" accept="image/x-icon" title="Upload a custom site favicon"><br><br>
 <h3>Sidebar Navigation <?php echo cms_help_icon('settings','sidebar'); ?></h3>
 <?php $file_options = array_unique(array_merge(array_column($nav_items,'file'), array_column($default_nav,'file'))); ?>
