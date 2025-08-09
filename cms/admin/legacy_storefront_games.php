@@ -104,6 +104,7 @@ $games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY appid')->fetch
 </form>
 <script>
 $(function () {
+    var loadReq;
     function uploadFile(input, type) {
         var fd = new FormData();
         fd.append('file', input.files[0]);
@@ -148,34 +149,43 @@ $(function () {
         $('#titleImgPrev').text('No Image selected');
         $('#removeShot').prop('disabled', true);
         $('html,body').animate({scrollTop: $('#gameForm').offset().top}, 'fast');
-        $.getJSON('legacy_storefront_games.php', { load: id }, function (d) {
-            $('#appid').val(d.appid);
-            if (d.title.match(/^\/storefront\/images\//)) {
-                $('#title_mode_image').prop('checked', true);
-                $('#title_image').val(d.title);
-                $('#titleImgPrev').html('<img src="' + d.title + '" width="32">');
-                $('#title_text').val('');
-            } else {
-                $('#title_mode_text').prop('checked', true);
-                $('#title_text').val(d.title);
-                $('#title_image').val('');
-                $('#titleImgPrev').html('No Image selected');
+        if (loadReq) {
+            loadReq.abort();
+        }
+        loadReq = $.ajax({
+            url: 'legacy_storefront_games.php',
+            data: { load: id },
+            dataType: 'json',
+            cache: false,
+            success: function (d) {
+                $('#appid').val(d.appid);
+                if (d.title.match(/^\/storefront\/images\//)) {
+                    $('#title_mode_image').prop('checked', true);
+                    $('#title_image').val(d.title);
+                    $('#titleImgPrev').html('<img src="' + d.title + '" width="32">');
+                    $('#title_text').val('');
+                } else {
+                    $('#title_mode_text').prop('checked', true);
+                    $('#title_text').val(d.title);
+                    $('#title_image').val('');
+                    $('#titleImgPrev').html('No Image selected');
+                }
+                $('#current_thumb').val(d.image_thumb);
+                $('#thumbPrev').html(d.image_thumb ? '<img src="' + d.image_thumb + '" width="32">' : '');
+                $('#current_screen').val(d.image_screenshot);
+                $('#screenPrev').html(d.image_screenshot ? '<img src="' + d.image_screenshot + '" width="32">' : '');
+                $('#description').val(d.description);
+                var pb = d.purchaseButtonStr;
+                if (pb == "CLICK for PURCHASE OPTIONS") {
+                    $('#pb1').prop('checked', true);
+                } else if (pb == "DOWNLOAD & INSTALL NOW") {
+                    $('#pb2').prop('checked', true);
+                } else {
+                    $('#pb3').prop('checked', true);
+                    $('#custom_purchase').val(pb);
+                }
+                $('#removeShot').prop('disabled', !d.image_screenshot);
             }
-            $('#current_thumb').val(d.image_thumb);
-            $('#thumbPrev').html(d.image_thumb ? '<img src="' + d.image_thumb + '" width="32">' : '');
-            $('#current_screen').val(d.image_screenshot);
-            $('#screenPrev').html(d.image_screenshot ? '<img src="' + d.image_screenshot + '" width="32">' : '');
-            $('#description').val(d.description);
-            var pb = d.purchaseButtonStr;
-            if (pb == "CLICK for PURCHASE OPTIONS") {
-                $('#pb1').prop('checked', true);
-            } else if (pb == "DOWNLOAD & INSTALL NOW") {
-                $('#pb2').prop('checked', true);
-            } else {
-                $('#pb3').prop('checked', true);
-                $('#custom_purchase').val(pb);
-            }
-            $('#removeShot').prop('disabled', !d.image_screenshot);
         });
     });
 

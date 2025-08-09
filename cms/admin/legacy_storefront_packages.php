@@ -113,6 +113,7 @@ $packages = $db->query('SELECT * FROM `0405_storefront_packages` ORDER BY subid'
 </form>
 <script>
 $(function () {
+    var loadReq;
     function uploadFilePkg(input, type) {
         var fd = new FormData();
         fd.append('file', input.files[0]);
@@ -155,25 +156,34 @@ $(function () {
         $('#badgeWrap').hide();
         $('#screenWrap').show();
         $('html,body').animate({scrollTop: $('#pkgForm').offset().top}, 'fast');
-        $.getJSON('legacy_storefront_packages.php', { load: id }, function (d) {
-            $('#subid').val(d.subid);
-            $('#title').val(d.title);
-            $('#price').val(d.price);
-            $('#current_thumb').val(d.image_thumb);
-            $('#thumbPrev').html(d.image_thumb ? '<img src="' + d.image_thumb + '" width="32">' : '');
-            $('#current_screen').val(d.image_screenshot);
-            $('#screenPrev').html(d.image_screenshot ? '<img src="' + d.image_screenshot + '" width="32">' : 'No Image selected');
-            $('#pkgDesc').html(d.description);
-            $('#pkgDescInput').val(d.description);
-            if (d.steamOnlyBadge == 1) {
-                $('#optBadge').prop('checked', true);
-                $('#badgeWrap').show();
-                $('#screenWrap').hide();
-            } else {
-                $('#optScreen').prop('checked', true);
-                $('#badgeWrap').hide();
-                $('#screenWrap').show();
-                $('#removeShot').prop('disabled', !d.image_screenshot);
+        if (loadReq) {
+            loadReq.abort();
+        }
+        loadReq = $.ajax({
+            url: 'legacy_storefront_packages.php',
+            data: { load: id },
+            dataType: 'json',
+            cache: false,
+            success: function (d) {
+                $('#subid').val(d.subid);
+                $('#title').val(d.title);
+                $('#price').val(d.price);
+                $('#current_thumb').val(d.image_thumb);
+                $('#thumbPrev').html(d.image_thumb ? '<img src="' + d.image_thumb + '" width="32">' : '');
+                $('#current_screen').val(d.image_screenshot);
+                $('#screenPrev').html(d.image_screenshot ? '<img src="' + d.image_screenshot + '" width="32">' : 'No Image selected');
+                $('#pkgDesc').html(d.description);
+                $('#pkgDescInput').val(d.description);
+                if (d.steamOnlyBadge == 1) {
+                    $('#optBadge').prop('checked', true);
+                    $('#badgeWrap').show();
+                    $('#screenWrap').hide();
+                } else {
+                    $('#optScreen').prop('checked', true);
+                    $('#badgeWrap').hide();
+                    $('#screenWrap').show();
+                    $('#removeShot').prop('disabled', !d.image_screenshot);
+                }
             }
         });
     });

@@ -115,6 +115,7 @@ if(isset($_GET['edit'])){
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('content');
+var loadReq;
 function autoSave(){
     var data=$('form').serializeArray();
     data.push({name:'autosave',value:1});
@@ -134,7 +135,15 @@ function loadPage(slug,theme){
     $('#previewBtn,#restoreDraft').hide();
     CKEDITOR.instances.content.setData('');
     $('#slug').val(slug).prop('readonly',true);
-    $.getJSON('custom_pages.php',{ajax:1,edit:slug,theme:theme},function(d){
+    if (loadReq) {
+        loadReq.abort();
+    }
+    loadReq = $.ajax({
+        url: 'custom_pages.php',
+        data: {ajax:1,edit:slug,theme:theme},
+        dataType: 'json',
+        cache: false,
+        success: function(d){
         $('#page_name').val(d.page_name||'');
         $('#title').val(d.title||'');
         $('#template').val(d.template||'');
@@ -159,6 +168,7 @@ function loadPage(slug,theme){
             },'json');
         }).show();
         $('#editor').show();
+        }
     });
 }
 
