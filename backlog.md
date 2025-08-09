@@ -1,1 +1,1 @@
-* No outstanding tasks.
+*No outstanding tasks.*

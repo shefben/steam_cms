@@ -82,7 +82,7 @@ if(isset($_GET['edit'])){
 <tr><td><?php echo htmlspecialchars($p['slug'] ?? ''); ?></td>
 <td><?php echo htmlspecialchars($p['theme'] ?? ''); ?></td>
 <td><?php echo htmlspecialchars($p['title'] ?? ''); ?></td>
-<td><a href="?edit=<?php echo urlencode($p['slug']); ?>&amp;theme=<?php echo urlencode($p['theme']); ?>" class="btn btn-primary btn-small">Edit</a>
+<td><button type="button" class="edit-btn btn btn-primary btn-small" data-slug="<?php echo htmlspecialchars($p['slug']); ?>" data-theme="<?php echo htmlspecialchars($p['theme']); ?>">Edit</button>
  <a href="?delete=<?php echo urlencode($p['slug']); ?>&amp;theme=<?php echo urlencode($p['theme']); ?>" class="btn btn-danger btn-small" onclick="return confirm('Delete?');">Delete</a></td></tr>
 <?php endforeach; ?>
 </table>
@@ -115,31 +115,69 @@ if(isset($_GET['edit'])){
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('content');
+var loadReq;
 function autoSave(){
     var data=$('form').serializeArray();
     data.push({name:'autosave',value:1});
     data.push({name:'page_name',value:$('#page_name').val()});
     data.push({name:'content',value:CKEDITOR.instances.content.getData()});
-    return $.post('custom_pages.php<?php if(isset($edit)){ echo '?edit='.urlencode($edit['slug']).'&theme='.urlencode($edit['theme']??''); } ?>',data,function(res){
+    return $.post('custom_pages.php',data,function(res){
         $('#lastSaved').text('Last saved '+res.time);
     },'json');
 }
 setInterval(autoSave,30000);
-<?php if($edit): ?>
-$('#restoreDraft').show().on('click',function(){
-    $.get('custom_pages.php?edit=<?php echo urlencode($edit['slug']); ?>&theme=<?php echo urlencode($edit['theme'] ?? ''); ?>&ajax=1',function(d){
+
+function loadPage(slug,theme){
+    var form = $('#editor form')[0];
+    if(form){
+        form.reset();
+    }
+    $('#previewBtn,#restoreDraft').hide();
+    CKEDITOR.instances.content.setData('');
+    $('#slug').val(slug).prop('readonly',true);
+    if (loadReq) {
+        loadReq.abort();
+    }
+    loadReq = $.ajax({
+        url: 'custom_pages.php',
+        data: {ajax:1,edit:slug,theme:theme},
+        dataType: 'json',
+        cache: false,
+        success: function(d){
         $('#page_name').val(d.page_name||'');
-        $('#title').val(d.title);
+        $('#title').val(d.title||'');
         $('#template').val(d.template||'');
-        CKEDITOR.instances.content.setData(d.content);
-    },'json');
-});
-$('#previewBtn').show().on('click',function(){
-    autoSave().then(function(){
-        window.open('preview.php?type=page&slug=<?php echo urlencode($edit['slug']); ?>&theme=<?php echo $current_theme; ?>','_blank');
+        CKEDITOR.instances.content.setData(d.content||'');
+        $('.themeChk').prop('checked',false);
+        if(d.theme){
+            d.theme.split(',').forEach(function(t){
+                $('.themeChk[value="'+t+'"]').prop('checked',true);
+            });
+        }
+        $('#previewBtn').off('click').on('click',function(){
+            autoSave().then(function(){
+                window.open('preview.php?type=page&slug='+encodeURIComponent(slug)+'&theme=<?php echo $current_theme; ?>','_blank');
+            });
+        }).show();
+        $('#restoreDraft').off('click').on('click',function(){
+            $.get('custom_pages.php?ajax=1&edit='+encodeURIComponent(slug)+'&theme='+encodeURIComponent(theme||''),function(r){
+                $('#page_name').val(r.page_name||'');
+                $('#title').val(r.title||'');
+                $('#template').val(r.template||'');
+                CKEDITOR.instances.content.setData(r.content||'');
+            },'json');
+        }).show();
+        $('#editor').show();
+        }
     });
+}
+
+$(document).on('click','.edit-btn',function(){
+    var slug=$(this).data('slug');
+    var theme=$(this).data('theme')||'';
+    loadPage(slug,theme);
 });
-<?php endif; ?>
+
 $('#addBtn').on('click',function(){
     $('#slug').prop('readonly',false).val('');
     $('#page_name').val('');
@@ -147,24 +185,14 @@ $('#addBtn').on('click',function(){
     CKEDITOR.instances.content.setData('');
     $('.themeChk').prop('checked',false);
     $('#template').val('');
-    $('#previewBtn').hide();
+    $('#previewBtn,#restoreDraft').hide();
     $('#editor').show();
 });
+
 <?php if($edit): ?>
-$('#slug').val('<?php echo addslashes($edit['slug']); ?>').prop('readonly',true);
-$('#page_name').val('<?php echo addslashes($edit['page_name'] ?? ''); ?>');
-$('#title').val('<?php echo addslashes($edit['title']); ?>');
-$('#template').val('<?php echo addslashes($edit['template'] ?? ''); ?>');
-CKEDITOR.instances.content.setData(`<?php echo addslashes($edit['content']); ?>`);
-<?php if($edit && $edit['theme']):
-      $jsThemes = json_encode(explode(',', $edit['theme'])); ?>
-var selectedThemes = <?php echo $jsThemes; ?>;
-$('.themeChk').each(function(){
-    $(this).prop('checked', selectedThemes.indexOf($(this).val()) !== -1);
-});
+loadPage('<?php echo addslashes($edit['slug']); ?>','<?php echo addslashes($edit['theme'] ?? ''); ?>');
 <?php endif; ?>
-$('#editor').show();
-<?php endif; ?>
+
 $('#cancel').on('click',function(){ $('#editor').hide(); });
 </script>
 <?php include 'admin_footer.php'; ?>

@@ -228,6 +228,9 @@ All notable changes to this project will be documented in this file.
 - Scheduled Content page's new entry table is compact
 - Login screen styled like the installer
 - Header/Footer page updates via AJAX when changing theme and stores logos per theme
+- Combined survey pages with content server links under one menu, grouped support/FAQ/troubleshooter links, fixed legacy storefront and custom page edit flows, corrected CD key troubleshooter thumbnail, and ensured header/footer logo previews load from theme images.
+- Custom page editor resets forms when switching pages so subsequent edits work.
+- Aborted in-flight AJAX requests so legacy storefront and custom page edit buttons always load the intended record.
 - Settings page allows custom parent/child sidebar links
 - FAQ admin pagination includes page numbers
 - News admin lists pages with numbered pagination, sortable headers, and button actions
