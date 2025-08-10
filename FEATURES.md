@@ -3,6 +3,10 @@
 - 04-05 storefront games, packages, and third-party listings seeded from archive
 - Customizable CMS themes for 2004 and 2005
 - Admin panel with styled themes and permissions
+- Neon admin theme replicates neon_version2 layout with neon effects
+- Admin themes support Twig layouts with per-page identifiers and tag-level overrides
+- Default and v2 admin themes include Twig layouts mirroring their original HTML
+- Admin login pages render through theme-specific Twig templates
 - FAQ admin list supports CSV/JSON import and export with preview
 - Storefront management pages grouped under sidebar dropdown
 - Dynamic news rendering via template tags

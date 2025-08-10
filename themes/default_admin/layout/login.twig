@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="utf-8">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="{{ theme_url }}/style.css">
+    <link rel="stylesheet" href="{{ theme_url }}/login.css">
+</head>
+<body class="login-page">
+<div class="login-container">
+<h2>{{ login_title }}</h2>
+{% if err %}<p class="error">{{ err }}</p>{% endif %}
+<form method="post" id="login-form" novalidate>
+    <div>
+        <label for="username">{{ label_username }}</label>
+        <input type="text" name="username" id="username" autocomplete="username">
+    </div>
+    <div>
+        <label for="password">{{ label_password }}</label>
+        <input type="password" name="password" id="password" autocomplete="current-password">
+    </div>
+    <div>
+        <label for="stay"><input type="checkbox" name="stay" id="stay"> {{ label_stay }}</label>
+    </div>
+    <div>
+        <button type="submit">{{ label_login }}</button>
+    </div>
+    <p><a href="password_reset_request.php">{{ label_forgot }}</a></p>
+</form>
+</div>
+<script src="{{ theme_url }}/js/jquery.min.js"></script>
+<script>
+$(function(){
+    $('#login-form').on('submit', function(){
+        if($('#username').val().trim()===''){
+            alert('Please enter your username.');
+            $('#username').focus();
+            return false;
+        }
+        if($('#password').val()===''){
+            alert('Please enter your password.');
+            $('#password').focus();
+            return false;
+        }
+        return true;
+    });
+});
+</script>
+</body>
+</html>

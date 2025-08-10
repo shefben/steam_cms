@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Added neon-styled admin theme based on neon_version2 example.
+- Updated neon admin navigation markup to mirror original HTML structure.
+- Introduced Twig-driven admin layout system with per-page identifiers and tag-specific templates, including a neon default layout mirroring the example HTML.
+- Converted default and v2 admin themes to Twig layouts preserving their original structure.
+- Added Twig-based login templates for neon, default, and v2 admin themes.
 - Fixed header warning when deleting survey categories and darkened survey category links.
 - Added CSV/JSON import and export for FAQs.
 - Added migration indexing `publish_at` on the news table.

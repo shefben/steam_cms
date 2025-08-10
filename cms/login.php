@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__.'/db.php';
+require_once __DIR__.'/template_engine.php';
 
 $err = '';
 $dest = isset($_GET['return']) ? $_GET['return'] : 'admin/index.php';
@@ -40,6 +41,22 @@ $theme_url = ($base_url ? $base_url : '')."/themes/{$admin_theme}_admin";
 if(!is_dir($theme_dir)){
     $theme_dir = dirname(__DIR__).'/themes/default_admin';
     $theme_url = ($base_url ? $base_url : '').'/themes/default_admin';
+}
+
+$tpl = cms_admin_layout('login.twig', $admin_theme);
+if ($tpl) {
+    cms_render_template_theme($tpl, "{$admin_theme}_admin", [
+        'lang'          => $_SESSION['admin_lang'] ?? 'en',
+        'theme_url'     => $theme_url,
+        'err'           => $err,
+        'login_title'   => cms_admin_translate('Admin Login'),
+        'label_username'=> cms_admin_translate('Username'),
+        'label_password'=> cms_admin_translate('Password'),
+        'label_stay'    => cms_admin_translate('Stay logged in'),
+        'label_login'   => cms_admin_translate('Login'),
+        'label_forgot'  => cms_admin_translate('Forgot password?'),
+    ]);
+    exit;
 }
 ?>
 <!DOCTYPE html>
