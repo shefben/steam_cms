@@ -200,6 +200,72 @@ function cms_theme_layout(?string $file, ?string $theme = null)
     return dirname(__DIR__)."/themes/2004/layout/default.twig";
 }
 
+function cms_admin_layout(string $file, ?string $theme = null): ?string
+{
+    $theme = $theme ?: cms_get_setting('admin_theme', 'v2');
+    $file  = $file ?: 'default.twig';
+    $file  = preg_replace('/\.tpl$/', '.twig', $file);
+
+    $dirs = ['layouts', 'layout'];
+
+    foreach ($dirs as $dir) {
+        $path = dirname(__DIR__) . "/themes/{$theme}_admin/$dir/$file";
+        if (file_exists($path)) {
+            return $path;
+        }
+    }
+    foreach ($dirs as $dir) {
+        $path = dirname(__DIR__) . "/themes/{$theme}_admin/$dir/default.twig";
+        if (file_exists($path)) {
+            return $path;
+        }
+    }
+    foreach ($dirs as $dir) {
+        $path = dirname(__DIR__) . "/themes/default_admin/$dir/$file";
+        if (file_exists($path)) {
+            return $path;
+        }
+    }
+    foreach ($dirs as $dir) {
+        $path = dirname(__DIR__) . "/themes/default_admin/$dir/default.twig";
+        if (file_exists($path)) {
+            return $path;
+        }
+    }
+    return null;
+}
+
+function cms_admin_tag_path(string $tag, ?string $theme = null): ?string
+{
+    $theme = $theme ?: cms_get_setting('admin_theme', 'v2');
+    $dirs  = ['tag_layout', 'tag_layouts', 'tags'];
+    foreach ($dirs as $dir) {
+        $path = dirname(__DIR__) . "/themes/{$theme}_admin/$dir/$tag.twig";
+        if (file_exists($path)) {
+            return $path;
+        }
+    }
+    foreach ($dirs as $dir) {
+        $path = dirname(__DIR__) . "/themes/default_admin/$dir/$tag.twig";
+        if (file_exists($path)) {
+            return $path;
+        }
+    }
+    return null;
+}
+
+function cms_admin_tag(string $tag, array $vars = [], ?string $theme = null): string
+{
+    $path = cms_admin_tag_path($tag, $theme);
+    if (!$path) {
+        return '';
+    }
+    $tpl_dir = dirname($path);
+    $vars['BASE'] = cms_base_url();
+    $env = cms_twig_env($tpl_dir);
+    return $env->render(basename($path), $vars);
+}
+
 function cms_render_tabbed_games_column(array $games): string
 {
     $html = '';

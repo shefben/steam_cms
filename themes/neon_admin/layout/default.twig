@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon CMS Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ theme_url }}/style.css">
+</head>
+<body class="admin-{{ page_id }}">
+    <div class="container">
+        <div class="neon-wrapper">
+            <div class="content-wrapper">
+                {{ sidebar|raw }}
+                {{ content|raw }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
