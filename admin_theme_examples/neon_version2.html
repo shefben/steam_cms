@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon CMS Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #111111;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --sidebar-width: 280px;
+        }
+
+        @keyframes neonGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Neon Border Wrapper */
+        .neon-wrapper {
+            position: absolute;
+            inset: 20px;
+            background: linear-gradient(303deg, #ff00ff, #00ffff, #ffff00, #ff6c00, #007eff);
+            background-size: 400% 400%;
+            /* animation: neonGradient 8s ease infinite; */
+            border-radius: 20px;
+            padding: 2px;
+            box-shadow: 2px -1px 5px 4px rgba(255, 0, 255, 0.2), 0px 0px 8px 8px rgba(0, 255, 255, 0.1), inset 0 0 3px rgba(255, 255, 0, 0.05);
+                height: calc(100% - 36px); /* match top/bottom padding */
+                max-height: fit-content;   /* don’t stretch past content */
+
+        }
+
+        .content-wrapper {
+            background: var(--bg-primary);
+            border-radius: 18px;
+            width: 100%;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-secondary);
+            padding: 30px 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, #ff00ff, #00ffff, #ffff00);
+        }
+
+/* --- Sidebar logo header (from v1) --- */
+.logo {
+    padding: 14px 30px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+    position: relative;
+}
+/* pull the header up to the very top, flush edge-to-edge */
+/* bleed up and left only */
+.sidebar > .logo {
+    margin-top: -30px;      /* cancel top padding */
+    margin-left: -30px;     /* cancel left padding */
+    margin-right: 0;        /* DO NOT bleed to the right */
+    width: calc(100% + 48px); /* only compensates the left bleed */
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+}
+
+
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg,
+        #ff00ff 0%, #00ffff 25%, #ffff00 50%,
+        #ff0080 75%, #8000ff 100%);
+}
+.logo h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+}
+.logo p {
+    font-size: 12px;
+    color: #888;
+    margin-top: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Remove/shadow the v2-only logo animation bits to avoid conflicts */
+.logo i { display: none; }      /* hide the v2 icon since v1 logo has text */
+
+
+        .nav-section {
+            margin-bottom: 35px;
+        }
+
+        .nav-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .nav-item:hover::before {
+            transform: translateX(100%);
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+        }
+
+        .nav-item i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active i,
+        .nav-item:hover i {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+
+        .nav-item span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background: linear-gradient(45deg, #ff00ff, #ff0080);
+            color: white;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: hidden;
+            max-height: calc(100vh - 40px);
+        }
+
+.header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    padding: 25px 40px;
+    border-bottom: 2px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    backdrop-filter: blur(10px);
+
+    /* Make sure it fills the container */
+    width: 100%;
+    box-sizing: border-box; /* include padding in width */
+}
+/* pull the header up to the very top, flush edge-to-edge */
+.main-content > .header {
+    margin-top: -30px;              /* cancels the parent’s top padding */
+    margin-left: -30px;             /* optional: also kill left padding, if you want full bleed */
+    margin-right: -30px;
+    width: calc(100% + 60px);
+    box-sizing: border-box;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg,
+        #ff00ff 0%, #00ffff 25%, #ffff00 50%,
+        #ff0080 75%, #8000ff 100%);
+}
+
+/* v1 header sub-classes (safe to add) */
+.header-left h2 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    margin-bottom: 5px;
+}
+.header-subtitle {
+    color: #888;
+    font-size: 14px;
+    font-weight: 400;
+}
+.header-right { display: flex; align-items: center; gap: 25px; }
+
+.search-box { position: relative; }
+.search-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    border-radius: 25px;
+    padding: 12px 20px 12px 45px;
+    color: #fff;
+    font-size: 14px;
+    width: 280px;
+    transition: all 0.3s ease;
+}
+.search-input:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    background: rgba(0, 255, 255, 0.05);
+}
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px; height: 16px; fill: #666;
+}
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            border-color: rgba(255, 0, 255, 0.5);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(45deg, #ff00ff, #ff0080);
+            border-radius: 50%;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .user-avatar:hover {
+            border-color: rgba(255, 0, 255, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 35px;
+            padding-top: 20px;
+
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 0.6s ease backwards;
+            transition: all 0.3s ease;
+        }
+
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 20px;
+        }
+
+        .stat-icon.purple {
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(255, 0, 255, 0.1));
+            color: #ff00ff;
+        }
+
+        .stat-icon.cyan {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
+            color: #00ffff;
+        }
+
+        .stat-icon.yellow {
+            background: linear-gradient(135deg, rgba(255, 255, 0, 0.2), rgba(255, 255, 0, 0.1));
+            color: #ffff00;
+        }
+
+        .stat-icon.green {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
+            color: #00ff00;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            background: linear-gradient(45deg, #ffffff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .stat-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff88;
+        }
+
+        .stat-change.negative {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff4444;
+        }
+
+        /* Charts Section */
+        .charts-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+
+        }
+
+        .chart-card h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-placeholder {
+            height: 250px;
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.05), rgba(0, 255, 255, 0.05));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.03) 10px,
+                rgba(255, 255, 255, 0.03) 20px
+            );
+        }
+
+        /* Activity Feed */
+        .activity-feed {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            padding-left: 10px;
+            background: linear-gradient(90deg, rgba(255, 0, 255, 0.05), transparent);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1));
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.6);
+        }
+
+        .fab i {
+            font-size: 24px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="neon-wrapper">
+            <div class="content-wrapper">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="logo">
+                        <h1>NEON CMS</h1>
+                        <p>Professional Edition</p>
+                    </div>
+
+                    <nav style="
+                             padding-top: 25px;
+                         ">
+                        <div class="nav-section">
+                            <div class="nav-title">Main</div>
+                            <div class="nav-item active">
+                                <i class="fas fa-home"></i>
+                                <span>Dashboard</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Analytics</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>E-Commerce</span>
+                                <span class="nav-badge">New</span>
+                            </div>
+                        </div>
+
+                        <div class="nav-section">
+                            <div class="nav-title">Content</div>
+                            <div class="nav-item">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Pages</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-newspaper"></i>
+                                <span>Blog Posts</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-images"></i>
+                                <span>Media Library</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-comments"></i>
+                                <span>Comments</span>
+                                <span class="nav-badge">12</span>
+                            </div>
+                        </div>
+
+                        <div class="nav-section">
+                            <div class="nav-title">Users</div>
+                            <div class="nav-item">
+                                <i class="fas fa-users"></i>
+                                <span>All Users</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-user-shield"></i>
+                                <span>Roles</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-key"></i>
+                                <span>Permissions</span>
+                            </div>
+                        </div>
+
+                        <div class="nav-section">
+                            <div class="nav-title">Settings</div>
+                            <div class="nav-item">
+                                <i class="fas fa-cog"></i>
+                                <span>General</span>
+                            </div>
+                            <div class="nav-item">
+                                <i class="fas fa-plug"></i>
+                                <span>Integrations</span>
+                            </div>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="main-content">
+                    <!-- Header -->
+                    <header class="header">
+                      <div class="header-left">
+                        <h2>Dashboard Overview</h2>
+                        <p class="header-subtitle">Welcome back, Administrator</p>
+                      </div>
+                        <div class="header-right">
+                            <div class="search-box">
+                              <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+                              </svg>
+                              <input type="text" class="search-input" placeholder="Search content, users, settings...">
+                            </div>
+                        <div class="header-actions">
+                        <div class="notifications">
+                            <div class="icon-btn">
+                                <i class="fas fa-bell"></i>
+                                <div class="notification-dot"></div>
+                            </div>
+                            </div>
+                            <div class="user-profile">
+                            <div class="user-avatar">JD</div>
+                                  <div class="user-details">
+                                    <h4>John Doe</h4>
+                                    <p>Administrator</p>
+                                  </div>
+                                  </div>
+                        </div>
+                    </header>
+
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon purple">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <span class="stat-change">
+                                    <i class="fas fa-arrow-up"></i> 12%
+                                </span>
+                            </div>
+                            <div class="stat-value">8,432</div>
+                            <div class="stat-label">Total Users</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon cyan">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <span class="stat-change">
+                                    <i class="fas fa-arrow-up"></i> 28%
+                                </span>
+                            </div>
+                            <div class="stat-value">142.8k</div>
+                            <div class="stat-label">Page Views</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon yellow">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <span class="stat-change">
+                                    <i class="fas fa-arrow-up"></i> 8%
+                                </span>
+                            </div>
+                            <div class="stat-value">$24.5k</div>
+                            <div class="stat-label">Revenue</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon green">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <span class="stat-change negative">
+                                    <i class="fas fa-arrow-down"></i> 3%
+                                </span>
+                            </div>
+                            <div class="stat-value">3.24%</div>
+                            <div class="stat-label">Conversion Rate</div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="charts-section">
+                        <div class="chart-card">
+                            <h3>
+                                <i class="fas fa-chart-area" style="color: #00ffff;"></i>
+                                Traffic Overview
+                            </h3>
+                            <div class="chart-placeholder">
+                                <canvas id="trafficChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>
+                                <i class="fas fa-chart-pie" style="color: #ff00ff;"></i>
+                                Device Distribution
+                            </h3>
+                            <div class="chart-placeholder">
+                                <canvas id="deviceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Feed -->
+                    <div class="activity-feed">
+                        <h3 style="margin-bottom: 20px;">Recent Activity</h3>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-user-plus" style="color: #00ff88;"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">New user registered</div>
+                                <div class="activity-time">2 minutes ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-file-alt" style="color: #00ffff;"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">New blog post published</div>
+                                <div class="activity-time">15 minutes ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-comment" style="color: #ff00ff;"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">New comment on "Getting Started"</div>
+                                <div class="activity-time">1 hour ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-shopping-cart" style="color: #ffff00;"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">New order received</div>
+                                <div class="activity-time">3 hours ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="fab">
+        <i class="fas fa-plus"></i>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Traffic Chart
+        const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+        const gradient = trafficCtx.createLinearGradient(0, 0, 0, 250);
+        gradient.addColorStop(0, 'rgba(0, 255, 255, 0.3)');
+        gradient.addColorStop(1, 'rgba(0, 255, 255, 0)');
+
+        new Chart(trafficCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Visitors',
+                    data: [3200, 4500, 3800, 5100, 4700, 6200, 5800],
+                    borderColor: '#00ffff',
+                    backgroundColor: gradient,
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#00ffff',
+                    pointBorderColor: '#000',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)',
+                            borderColor: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#888'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)',
+                            borderColor: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#888'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Device Chart
+        const deviceCtx = document.getElementById('deviceChart').getContext('2d');
+        new Chart(deviceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Desktop', 'Mobile', 'Tablet'],
+                datasets: [{
+                    data: [58, 32, 10],
+                    backgroundColor: [
+                        'rgba(255, 0, 255, 0.8)',
+                        'rgba(0, 255, 255, 0.8)',
+                        'rgba(255, 255, 0, 0.8)'
+                    ],
+                    borderColor: '#000',
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#888',
+                            padding: 15,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Interactive animations
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Notification animation
+        document.querySelector('.icon-btn .fa-bell').parentElement.addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 10);
+        });
+
+        // FAB rotation
+        document.querySelector('.fab').addEventListener('click', function() {
+            this.style.transform = 'scale(1.2) rotate(180deg)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 300);
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('.search-bar input');
+        searchInput.addEventListener('focus', function() {
+            this.placeholder = 'Type to search...';
+        });
+        searchInput.addEventListener('blur', function() {
+            this.placeholder = 'Search anything...';
+        });
+
+        // Dynamic time updates for activity feed
+        function updateActivityTimes() {
+            const times = document.querySelectorAll('.activity-time');
+            const timeValues = ['just now', '2 minutes ago', '15 minutes ago', '1 hour ago', '3 hours ago'];
+            times.forEach((time, index) => {
+                if (timeValues[index]) {
+                    time.textContent = timeValues[index];
+                }
+            });
+        }
+
+        // Simulate real-time updates
+        setInterval(() => {
+            // Update a random stat
+            const statValues = document.querySelectorAll('.stat-value');
+            const randomStat = statValues[Math.floor(Math.random() * statValues.length)];
+            const currentValue = randomStat.textContent;
+            
+            // Add pulse effect
+            randomStat.style.animation = 'pulse 0.5s ease';
+            setTimeout(() => {
+                randomStat.style.animation = '';
+            }, 500);
+        }, 5000);
+
+        // Hover effects for stat cards
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.stat-icon i');
+                icon.style.transform = 'scale(1.2) rotate(10deg)';
+            });
+            card.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.stat-icon i');
+                icon.style.transform = '';
+            });
+        });
+
+        // Initialize tooltips and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add ripple effect to buttons
+            document.querySelectorAll('.icon-btn, .nav-item, .fab').forEach(elem => {
+                elem.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    ripple.style.position = 'absolute';
+                    ripple.style.width = '20px';
+                    ripple.style.height = '20px';
+                    ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.transform = 'scale(0)';
+                    ripple.style.animation = 'ripple 0.6s ease-out';
+                    ripple.style.pointerEvents = 'none';
+                    
+                    const rect = this.getBoundingClientRect();
+                    ripple.style.left = (e.clientX - rect.left - 10) + 'px';
+                    ripple.style.top = (e.clientY - rect.top - 10) + 'px';
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        });
+
+        // Add CSS animation for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
