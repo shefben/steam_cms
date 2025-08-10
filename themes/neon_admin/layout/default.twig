@@ -6,8 +6,13 @@
     <title>Neon CMS Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ theme_url }}/style.css">
+    <script src="{{ theme_url }}/js/jquery.min.js"></script>
 </head>
 <body class="admin-{{ page_id }}">
+    <header class="admin-header">
+        <h1>CMS Administration</h1>
+    </header>
+    {{ breadcrumbs_html|raw }}
     <div class="container">
         <div class="neon-wrapper">
             <div class="content-wrapper">
@@ -16,5 +21,34 @@
             </div>
         </div>
     </div>
+    <script>
+    $(function(){
+        $('.nav-menu li > a').on('click', function(e){
+            var $sub = $(this).next('.sub-menu');
+            if ($sub.length){
+                e.preventDefault();
+                $sub.slideToggle(150);
+            }
+        });
+        $('.notify-dismiss').on('click', function(e){
+            e.preventDefault();
+            var id = $(this).data('id');
+            var $li = $(this).closest('li');
+            $.post('notifications.php', {id:id}).done(function(){
+                $li.fadeOut(150, function(){ $(this).remove(); });
+            });
+        });
+        $('body').on('click','.help-icon',function(e){
+            e.preventDefault();
+            var txt=$(this).data('help');
+            if(!txt) return;
+            var $m=$('<div class="help-modal" aria-label="Help"><div class="dialog"></div></div>');
+            $m.find('.dialog').text(txt);
+            $('body').append($m);
+            $m.fadeIn(100);
+            $m.on('click',function(){ $m.fadeOut(150,function(){ $m.remove(); }); });
+        });
+    });
+    </script>
 </body>
 </html>
