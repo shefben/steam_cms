@@ -23,12 +23,13 @@
     </div>
     <script>
     $(function(){
-        $('.nav-menu li > a').on('click', function(e){
-            var $sub = $(this).next('.sub-menu');
-            if ($sub.length){
-                e.preventDefault();
-                $sub.slideToggle(150);
-            }
+        $('.nav-menu').on('click','.submenu-toggle', function(e){
+            e.preventDefault();
+            var $btn=$(this);
+            var $sub=$('#'+$btn.attr('aria-controls'));
+            $sub.slideToggle(150);
+            var expanded=$btn.attr('aria-expanded')==='true';
+            $btn.attr('aria-expanded', expanded?'false':'true');
         });
         $('.notify-dismiss').on('click', function(e){
             e.preventDefault();

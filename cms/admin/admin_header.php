@@ -230,7 +230,11 @@ foreach ($nav_items as $item) {
         foreach($custom_groups[$file] as $child){ if(strpos($_SERVER['PHP_SELF'],$child['file'])!==false){ $open=true; break; } }
         $parent_id = preg_replace('/\.php$/','',$file).'-parent';
         $sub_id = preg_replace('/\.php$/','',$file).'-sub';
-        $nav_html .= '<li id="'.$parent_id.'">'.$make_link($file,$label,$active).'<ul class="sub-menu" id="'.$sub_id.'" style="'.($open?'display:block':'display:none').'">';
+        $nav_html .= '<li id="'.$parent_id.'">'.$make_link($file,$label,$active);
+        if($admin_theme === 'neon'){
+            $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($open?'true':'false').'" aria-controls="'.$sub_id.'"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
+        }
+        $nav_html .= '<ul class="sub-menu" id="'.$sub_id.'" style="'.($open?'display:block':'display:none').'">';
         foreach($custom_groups[$file] as $child){
             if(!($child['visible']??1)) continue;
             $cfile=$child['file'];
@@ -259,6 +263,9 @@ if ($has_sf) {
     }
     $nav_html .= '<li id="sf-parent">'.$make_link($root_file,$root_label,$active,' aria-label="StoreFront menu"');
     if ($sf_pages) {
+        if($admin_theme === 'neon'){
+            $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($sf_open?'true':'false').'" aria-controls="sf-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
+        }
         $style = $sf_open ? 'display:block' : 'display:none';
         $nav_html .= '<ul class="sub-menu" id="sf-sub" style="'.$style.'">';
         foreach ($sf_pages as $it) {
@@ -280,6 +287,9 @@ if ($has_leg) {
     foreach ($legacy_sf_pages as $it) { if (strpos($_SERVER['PHP_SELF'],$it['file'])!==false){ $open=true; break; } }
     $nav_html .= '<li id="legacy-sf-parent">'.$make_link($root_file,$root_label,$active,' aria-label="Legacy Storefront menu"');
     if ($legacy_sf_pages) {
+        if($admin_theme === 'neon'){
+            $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($open?'true':'false').'" aria-controls="legacy-sf-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
+        }
         $style = $open ? 'display:block' : 'display:none';
         $nav_html .= '<ul class="sub-menu" id="legacy-sf-sub" style="'.$style.'">';
         foreach ($legacy_sf_pages as $it) {
@@ -304,6 +314,9 @@ if($has_download){
     }else{
         $nav_html .= '<li id="download-parent"><a href="#"'.$active.' aria-label="Download menu">'.htmlspecialchars($icon.' '.cms_admin_translate('Download System Management')).'</a>';
     }
+    if($admin_theme === 'neon'){
+        $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($open?'true':'false').'" aria-controls="download-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
+    }
     $style = $open ? 'display:block' : 'display:none';
     $nav_html .= '<ul class="sub-menu" id="download-sub" style="'.$style.'">';
     foreach($download_pages as $it){
@@ -325,6 +338,9 @@ if($has_cafe){
         $nav_html .= '<li id="cafe-parent"><a href="#"'.$active.' aria-label="Cafe menu"><span class="nav-icon">'.htmlspecialchars($icon).'</span><span class="nav-label">'.htmlspecialchars(cms_admin_translate('Cyber Cafe Management')).'</span></a>';
     }else{
         $nav_html .= '<li id="cafe-parent"><a href="#"'.$active.' aria-label="Cafe menu">'.htmlspecialchars($icon.' '.cms_admin_translate('Cyber Cafe Management')).'</a>';
+    }
+    if($admin_theme === 'neon'){
+        $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($cafe_open?'true':'false').'" aria-controls="cafe-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
     }
     $style = $cafe_open ? 'display:block' : 'display:none';
     $nav_html .= '<ul class="sub-menu" id="cafe-sub" style="'.$style.'">';
