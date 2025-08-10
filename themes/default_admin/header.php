@@ -13,8 +13,11 @@
 <body>
 <header>
     <h1><?php echo htmlspecialchars(cms_admin_translate('CMS Administration')); ?></h1>
-    <?php echo $nav_html; ?>
     <?php echo cms_admin_breadcrumb(); ?>
     <?php echo $notifications_html; ?>
 </header>
-<main>
+<div class="admin-layout">
+    <nav class="sidebar">
+        <?php echo $nav_html; ?>
+    </nav>
+    <main class="admin-content">

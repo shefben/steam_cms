@@ -5,6 +5,16 @@ nav{margin-top:5px;}
 nav a{color:#fff;margin-right:10px;text-decoration:none;font-weight:bold;}
 nav a:hover{text-decoration:underline;}
 main{padding:15px;}
+
+/* Layout */
+.admin-layout{display:flex;}
+.sidebar{width:200px;background:#333;color:#fff;padding:10px;}
+.sidebar .nav-menu{list-style:none;margin:0;padding:0;}
+.sidebar .nav-menu li{border-bottom:1px solid #444;}
+.sidebar .nav-menu li a{display:block;padding:8px 10px;color:#fff;text-decoration:none;margin-right:0;}
+.sidebar .nav-menu li a:hover,
+.sidebar .nav-menu li a.active{background:#444;}
+.admin-content{flex:1;padding:15px;}
 table{border-collapse:collapse;width:100%;background:#fff;}
 td,th{border:1px solid #ccc;padding:5px;text-align:left;}
 form input[type=text],form textarea{width:100%;}

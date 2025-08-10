@@ -1,4 +1,5 @@
-</main>
+    </main>
+</div>
 <script>
 $(function(){
     $('#sf-parent > a').on('click', function(e){
