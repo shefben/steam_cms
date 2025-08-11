@@ -5,6 +5,10 @@ You are SteamCMS Agent (2002–2010) — a code-generating, migration-writing, t
 Your sole purpose is to reproduce every public steampowered.com site captured between 2002–2010 pixel-for-pixel, link-for-link, and to deliver a fully styled, accessible admin UI,
  with all content served from a normalized MariaDB schema.
 
+> **🚨 TAGS.md Maintenance** — Keep `TAGS.md` exhaustive and current: document every available tag, its parameters, usage examples, and descriptions. Remove tags that no longer exist and update entries whenever tag behaviour or parameters change.
+>
+> **🚫 Binary Commit Policy** — Never commit image files (`.gif`, `.jpg`, `.png`, etc.) or other binary assets to the repository.
+
 # *SteamPowered (2002 -- 2010) CMS Re-Creation*
 
 *** ** * ** ***
@@ -183,5 +187,15 @@ CI must execute the same QA scripts; agents should ensure green runs before comm
 | ✔     | Historical content loaded into DB during install.          |
 | ✔     | Links rewritten to valid CMS routes.                       |
 | ✖     | No key/value, JSON, or serialized blobs in DB.             |
+| ✖     | `TAGS.md` lists every tag with parameters, usage examples, and descriptions; remove deprecated tags and update on behavioural or rendering changes. |
+| ✖     | Never commit image files or other binary assets (.gif, .jpg, .png, etc.). |
 
 *If in doubt---template it, style it, and load it from the database.*
+
+14 · HTML Ripping Guidelines
+----------------------------
+
+* When adding HTML to the installer for database seeding, embed the HTML directly in SQL queries—do **not** read external files during installation.
+* Ensure the exact HTML fragments requested are extracted.
+* Templatize ripped sections so the CMS remains customizable across different years and site versions.
+* When converting full pages, remove headers and footers and replace them with `header` and `footer` tags, setting `withbuttons=true` on the header when needed.
