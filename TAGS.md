@@ -113,23 +113,16 @@ Renders the right-hand sidebar for the given `page`. For `page = 'news'`, 2006 t
 
 ## Simple Text Blocks
 
-Each of these tags outputs raw HTML stored in the `settings` table. They take no parameters.
+Each of these tags outputs raw HTML stored in the `settings` table. Lists accept a `rows` parameter to control how many rows are rendered (column counts are fixed).
 
 - `join_steam_text()` – promotional blurb for the Join Steam box.
-- `new_on_steam_title()`, `new_on_steam_list()` – heading and list for new releases.
-- `latest_news_title()`, `latest_news_list()` – heading and list for the Latest News block.
-- `find_title()`, `find_list()` – heading and list for the Find section.
-- `browse_catalog_title()` – heading for the catalog link list.
-- `publisher_catalogs_title()`, `publisher_catalogs_list()` – heading and list of publisher catalogs.
-- `coming_soon_title()`, `coming_soon_list()` – heading and list for upcoming releases.
 - `gear_block()`, `free_block()` – sidebar promo blocks.
 - `support_email()` – support contact address.
 
-**Example:**
-```twig
-<h3>{{ latest_news_title() }}</h3>
-{{ latest_news_list() }}
-```
+### `sidebar_section(name, options = {})`
+Renders a sidebar block using the active theme's template located under `layouts/sidebar_sections/`.
+`name` selects the section (e.g., `search`, `get_steam_now`, `new_on_steam`, `latest_news`).
+`options` may provide values like `rows` or `limit` depending on the section.
 
 ## Join Steam Block
 
@@ -253,7 +246,7 @@ The following table lists each tag or tag group, where its content is managed in
 |`footer`|**Header/Footer**|`theme_footers`|
 |`news*` tags|**News** (`news.php`)|`news`|
 |`join_steam_text`, `join_steam_block`|**Settings** (`settings.php`)|`settings`|
-|`new_on_steam_title`, `new_on_steam_list`, `latest_news_title`, `latest_news_list`, `find_title`, `find_list`, `browse_catalog_title`, `browse_catalog_list`, `publisher_catalogs_title`, `publisher_catalogs_list`, `coming_soon_title`, `coming_soon_list`, `gear_block`, `free_block`|**Settings**|`settings`|
+|`new_on_steam_title`, `new_on_steam_list`, `latest_news_title`, `latest_news_list`, `find_title`, `find_list`, `browse_catalog_title`, `browse_catalog_list`, `publisher_catalogs_title`, `publisher_catalogs_list`, `coming_soon_title`, `coming_soon_list`, `gear_block`, `free_block`, `spotlight_content`|**Settings**|`settings`|
 |`categories_list`|**Storefront Categories** (`storefront_categories.php`)|`store_categories`|
 |`capsule_block`, `large_capsule_block`, `featured_capsules`|**Storefront Main** (`storefront_main.php`) and **Upload Capsule** (`upload_capsule.php`)|`storefront_capsules_all`, `storefront_capsules_per_theme`, `store_capsules`|
 |`store_sidebar`|**Storefront Sidebar** (`storefront_sidebar.php`)|`store_sidebar_links`|

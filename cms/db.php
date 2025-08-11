@@ -1074,7 +1074,7 @@ function cms_get_sidebar_sections_html(string $theme, bool $for_admin = false): 
 {
     $db = cms_get_db();
     try {
-        $stmt = $db->query('SELECT section_id,title,icon_path FROM sidebar_sections ORDER BY sort_order, section_id');
+        $stmt = $db->query('SELECT section_id,title,icon_path,is_collapsible,collapsible_id,has_icicles FROM sidebar_sections ORDER BY sort_order, section_id');
         $sections = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         if ($e->getCode() === '42S02') {
@@ -1093,14 +1093,36 @@ function cms_get_sidebar_sections_html(string $theme, bool $for_admin = false): 
             continue;
         }
         $icon = $section['icon_path'] ? '<img src="' . htmlspecialchars($section['icon_path'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '" alt="" align="absmiddle"> ' : '';
-        $title = htmlspecialchars($section['title'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        $title = trim($section['title']);
+        $titleEsc = htmlspecialchars($title, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        $html = cms_render_string($html, [], dirname(__DIR__) . '/themes/' . $theme);
+        if (!empty($section['has_icicles']) && in_array($theme, ['2007_v1','2007_v2'], true)) {
+            $style = 'background-image: url(./images/ice/ice_right.jpg); background-repeat: no-repeat;';
+            if (preg_match('/^<([a-z0-9]+)([^>]*)style="([^"]*)"/i', $html)) {
+                $html = preg_replace('/^<([a-z0-9]+)([^>]*)style="([^"]*)"/i', '<$1$2style="$3 ' . $style . '"', $html, 1);
+            } else {
+                $html = preg_replace('/^<([a-z0-9]+)([^>]*)>/i', '<$1$2 style="' . $style . '">', $html, 1);
+            }
+        }
+        $hasTitle = $titleEsc !== '';
         if ($for_admin) {
-            $out .= '<div class="sidebar-section" data-id="' . $sid . '"><h1>' . $icon . $title . '</h1>'
-                . '<div class="section-controls"><button class="edit-section" data-id="' . $sid
+            $out .= '<div class="sidebar-section" data-id="' . $sid . '">';
+            if ($hasTitle) {
+                $out .= '<h1>' . $icon . $titleEsc . '</h1>';
+            }
+            $out .= '<div class="section-controls"><button class="edit-section" data-id="' . $sid
                 . '">Edit</button> <button class="delete-section" data-id="' . $sid . '">Delete</button></div>'
-                . $html . '<div class="rightColHr"></div></div>';
+                . $html;
+            if ($hasTitle) {
+                $out .= '<div class="rightColHr"></div>';
+            }
+            $out .= '</div>';
         } else {
-            $out .= '<h1>' . $icon . $title . '</h1>' . $html . '<div class="rightColHr"></div>';
+            if ($hasTitle) {
+                $out .= '<h1>' . $icon . $titleEsc . '</h1>' . $html . '<div class="rightColHr"></div>';
+            } else {
+                $out .= $html;
+            }
         }
     }
     return $out;

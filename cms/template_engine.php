@@ -148,6 +148,86 @@ function cms_news_search_bar(): string
 HTML;
 }
 
+
+function cms_find_more_list(int $rows = 1): string
+{
+    $row = <<<ROW
+        <tr>
+            <td align="center"></td>
+            <td align="center" width="90"><a href="index.php?area=all"><img border="0" height="16" src="ico/ico_mouse_lg.gif" width="26"><br>Games</a></td>
+            <td align="center" width="90"><a href="index.php?area=free&tab=demos"><img border="0" height="16" src="ico/ico_demo.gif" width="26"><br>Demos</a></td>
+            <td align="center" width="90"><a href="index.php?area=free&tab=videos"><img border="0" height="16" src="ico/ico_film_lg.gif" width="26"><br>Trailers</a></td>
+            <td align="center"></td>
+        </tr>
+ROW;
+    $rowsHtml = str_repeat($row, max(1, $rows));
+    return '<div class="rightFindMore"><table align="center" border="0" cellpadding="0" cellspacing="0" height="57" width="310">'
+        . $rowsHtml . '</table></div>';
+}
+
+
+function cms_spotlight_content(): string
+{
+    return cms_get_setting('spotlight_content', '<p>Spotlight content</p>');
+}
+
+function cms_render_sidebar_section(Environment $env, string $section, array $params = []): string
+{
+    switch ($section) {
+        case 'search':
+            return $env->render('layouts/sidebar_sections/search.twig', $params);
+        case 'get_steam_now':
+            return $env->render('layouts/sidebar_sections/get_steam_now.twig', $params);
+        case 'new_on_steam':
+            $limit   = (int)($params['limit'] ?? 10);
+            $html    = cms_get_setting('new_on_steam_list', '');
+            $theme   = cms_get_setting('theme', '2004');
+            $render  = cms_render_string($html, [], dirname(__DIR__) . '/themes/' . $theme);
+            $lines   = array_filter(preg_split('/\r?\n/', trim($render)));
+            $items   = array_slice($lines, 0, $limit);
+            $items[] = '<a class="rightLink_moreNews" href="new.xml" target="_blank"><img border="0" height="11" src="ico/ico_arrow_green_wd.gif" width="22">&nbsp;&nbsp;<img align="absmiddle" border="0" src="ico/ico_rss2.gif"/>&nbsp;&nbsp;New on Steam RSS feed</a>';
+            return $env->render('layouts/sidebar_sections/new_on_steam.twig', ['items' => $items]);
+        case 'find':
+            $rows  = (int)($params['rows'] ?? 3);
+            $html  = cms_get_setting('find_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+            return $env->render('layouts/sidebar_sections/find.twig', ['html' => $render]);
+        case 'find_more':
+            $rows = (int)($params['rows'] ?? 1);
+            $html = cms_find_more_list($rows);
+            return $env->render('layouts/sidebar_sections/find_more.twig', ['html' => $html]);
+        case 'spotlight':
+            $content = cms_spotlight_content();
+            return $env->render('layouts/sidebar_sections/spotlight.twig', ['content' => $content]);
+        case 'latest_news':
+            $rows  = (int)($params['rows'] ?? 5);
+            $html  = cms_get_setting('latest_news_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+            return $env->render('layouts/sidebar_sections/latest_news.twig', ['html' => $render]);
+        case 'publisher_catalogs':
+            $rows  = (int)($params['rows'] ?? 3);
+            $html  = cms_get_setting('publisher_catalogs_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+            return $env->render('layouts/sidebar_sections/publisher_catalogs.twig', ['html' => $render]);
+        case 'browse_catalog':
+            $rows  = (int)($params['rows'] ?? 2);
+            $html  = cms_get_setting('browse_catalog_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+            return $env->render('layouts/sidebar_sections/browse_catalog.twig', ['html' => $render]);
+        case 'coming_soon':
+            $rows  = (int)($params['rows'] ?? 1);
+            $html  = cms_get_setting('coming_soon_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+            return $env->render('layouts/sidebar_sections/coming_soon.twig', ['html' => $render]);
+    }
+    return '';
+}
+
 function cms_news_archive_months(int $year, int $months = 12): string
 {
     $names = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
@@ -159,7 +239,7 @@ function cms_news_archive_months(int $year, int $months = 12): string
             $m += 12;
         }
         $label = $names[$m - 1];
-        $html .= '<a href="index.php?area=news_archive&amp;date=' . $m . '" class="rightLink"><img src="img/ico/ico_arrow_blue_wd.gif" width="22" height="7" border="0">&nbsp; ' . $label . ' </a>';
+        $html .= '<a href="index.php?area=news_archive&amp;date=' . $m . '" class="rightLink"><img src="ico/ico_arrow_blue_wd.gif" width="22" height="7" border="0">&nbsp; ' . $label . ' </a>';
     }
     return $html;
 }
@@ -311,10 +391,10 @@ function cms_render_tabs(string $theme): string
         $l = $focus ? 'listArea_tab_focus_l.gif' : 'listArea_tab_l.gif';
         $r = $focus ? 'listArea_tab_focus_r.gif' : 'listArea_tab_r.gif';
         $html .= '<div class="' . $class . '" id="tab_' . $id . '">'
-            . '<img align="absmiddle" id="tab_' . $id . '_image_l" src="img/home/' . $l . '"><span class="listArea_tab_txt">' . htmlspecialchars($tab['title']) . '</span><img align="absmiddle" id="tab_' . $id . '_image_r" src="img/home/' . $r . '">'
+            . '<img align="absmiddle" id="tab_' . $id . '_image_l" src="home/' . $l . '"><span class="listArea_tab_txt">' . htmlspecialchars($tab['title']) . '</span><img align="absmiddle" id="tab_' . $id . '_image_r" src="home/' . $r . '">'
             . '</div>';
     }
-    $html .= '<br clear="left"><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td height="6"><img height="6" src="img/_spacer.gif" width="6"></td><td align="right" height="6"><img height="6" src="img/home/listArea_tr.gif" width="6"></td></tr>';
+    $html .= '<br clear="left"><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td height="6"><img height="6" src="_spacer.gif" width="6"></td><td align="right" height="6"><img height="6" src="home/listArea_tr.gif" width="6"></td></tr>';
     foreach ($tabs as $i => $tab) {
         $display = $i === 0 ? '' : ' style="display: none;"';
         $html .= '<tr id="tab_' . ($i + 1) . '_content"' . $display . '><td valign="top">';
@@ -327,8 +407,8 @@ function cms_render_tabs(string $theme): string
         $html .= cms_render_tabbed_games_column(array_slice($games, $half));
         $html .= '</td></tr>';
     }
-    $html .= '<tr><td height="6"><img height="6" src="img/home/listArea_bl.gif" width="6"></td><td align="right" height="6"><img height="6" src="img/home/listArea_br.gif" width="6"></td></tr></tbody></table></div></div>';
-    $html .= "<script type=\"text/javascript\">document.querySelectorAll('.listArea_tab, .listArea_tab_focus').forEach(function(tab,idx){tab.addEventListener('click',function(){document.querySelectorAll('.listArea_tab_focus,.listArea_tab').forEach(function(t,i){var focus=i===idx;t.className=focus?'listArea_tab_focus':'listArea_tab';document.getElementById('tab_'+(i+1)+'_content').style.display=focus?'':'none';document.getElementById('tab_'+(i+1)+'_image_l').src='img/home/'+(focus?'listArea_tab_focus_l.gif':'listArea_tab_l.gif');document.getElementById('tab_'+(i+1)+'_image_r').src='img/home/'+(focus?'listArea_tab_focus_r.gif':'listArea_tab_r.gif');});});});</script>";
+    $html .= '<tr><td height="6"><img height="6" src="home/listArea_bl.gif" width="6"></td><td align="right" height="6"><img height="6" src="home/listArea_br.gif" width="6"></td></tr></tbody></table></div></div>';
+    $html .= "<script type=\"text/javascript\">document.querySelectorAll('.listArea_tab, .listArea_tab_focus').forEach(function(tab,idx){tab.addEventListener('click',function(){document.querySelectorAll('.listArea_tab_focus,.listArea_tab').forEach(function(t,i){var focus=i===idx;t.className=focus?'listArea_tab_focus':'listArea_tab';document.getElementById('tab_'+(i+1)+'_content').style.display=focus?'':'none';document.getElementById('tab_'+(i+1)+'_image_l').src='home/'+(focus?'listArea_tab_focus_l.gif':'listArea_tab_l.gif');document.getElementById('tab_'+(i+1)+'_image_r').src='home/'+(focus?'listArea_tab_focus_r.gif':'listArea_tab_r.gif');});});});</script>";
     return $html;
 }
 function cms_twig_env(string $tpl_dir): Environment
@@ -444,11 +524,11 @@ function cms_twig_env(string $tpl_dir): Environment
                 $fullArchive = cms_get_setting('full_archive_title', 'FULL ARCHIVE');
                 $months = cms_news_archive_months($year);
                 return '<div class="rightCol_2_top_soon">' . $steamNews . '</div>'
-                    . '<a href="rss.xml" class="rightLink"><img src="img/ico/ico_rss.gif" width="28" height="13" border="0" align="absmiddle">&nbsp; ' . $rss . '</a>'
+                    . '<a href="rss.xml" class="rightLink"><img src="ico/ico_rss.gif" width="28" height="13" border="0" align="absmiddle">&nbsp; ' . $rss . '</a>'
                     . '<h1> ' . $archiveTitle . ' </h1>'
                     . $months
                     . '<div class="rightCol_2_Hr"></div>'
-                    . '<a href="index.php?area=news_archive" class="rightLink"><img src="img/ico/ico_arrow_blue_wd.gif" width="22" height="7" border="0">&nbsp; ' . $fullArchive . ' </a>'
+                    . '<a href="index.php?area=news_archive" class="rightLink"><img src="ico/ico_arrow_blue_wd.gif" width="22" height="7" border="0">&nbsp; ' . $fullArchive . ' </a>'
                     . '<div class="rightCol_2_Hr"></div>';
             }
             return '';
@@ -463,7 +543,7 @@ function cms_twig_env(string $tpl_dir): Environment
             if ($style === '2007') {
                 return '<table class="capsuleArea_header" height="73" width="574"><tr><td height="73" valign="middle" width="250"><div class="btn_getSteam_slvr" onclick="location.href=\'index.php?area=getsteamnow\'">Get Steam Now !</div></td><td height="73" valign="top"><p>'.$text.'</p></td></tr></table>';
             }
-            return '<table class="capsuleArea_header" width="560"><tr><td width="172"><img src="img/logo_steam_main.jpg" width="172" height="63" alt=""></td><td valign="top"><p>'.$text.'</p></td></tr></table>';
+            return '<table class="capsuleArea_header" width="560"><tr><td width="172"><img src="logo_steam_main.jpg" width="172" height="63" alt=""></td><td valign="top"><p>'.$text.'</p></td></tr></table>';
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('new_on_steam_title', function() {
@@ -482,20 +562,36 @@ function cms_twig_env(string $tpl_dir): Environment
             return cms_get_setting('browse_catalog_title', 'Browse The Catalog');
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('browse_catalog_list', function() {
-            return cms_get_setting('browse_catalog_list', '');
+        $env->addFunction(new TwigFunction('browse_catalog_list', function(int $rows = 2) {
+            $html = cms_get_setting('browse_catalog_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('new_on_steam_list', function() {
-            return cms_get_setting('new_on_steam_list', '');
+        $env->addFunction(new TwigFunction('new_on_steam_list', function(int $limit = 10) {
+            $html   = cms_get_setting('new_on_steam_list', '');
+            $theme  = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['limit' => $limit], dirname(__DIR__) . '/themes/' . $theme);
+            $lines  = array_filter(preg_split('/\r?\n/', trim($render)));
+            $items  = array_slice($lines, 0, 10);
+            $items[] = '<a class="rightLink_moreNews" href="new.xml" target="_blank"><img border="0" height="11" src="ico/ico_arrow_green_wd.gif" width="22">  <img align="absmiddle" border="0" src="ico/ico_rss2.gif"/>  New on Steam RSS feed</a>';
+            return implode("\n", $items);
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('latest_news_list', function() {
-            return cms_get_setting('latest_news_list', '');
+        $env->addFunction(new TwigFunction('latest_news_list', function(int $rows = 5) {
+            $html = cms_get_setting('latest_news_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('find_list', function() {
-            return cms_get_setting('find_list', '');
+        $env->addFunction(new TwigFunction('find_list', function(int $rows = 3) {
+            $html = cms_get_setting('find_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sidebar_section', function(string $name, array $params = []) use ($env) {
+            return cms_render_sidebar_section($env, $name, $params);
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('support_email', function() {
@@ -577,16 +673,20 @@ function cms_twig_env(string $tpl_dir): Environment
             return cms_get_setting('publisher_catalogs_title', 'Publisher Catalogs');
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('publisher_catalogs_list', function() {
-            return cms_get_setting('publisher_catalogs_list', '');
+        $env->addFunction(new TwigFunction('publisher_catalogs_list', function(int $rows = 3) {
+            $html = cms_get_setting('publisher_catalogs_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('coming_soon_title', function() {
             return cms_get_setting('coming_soon_title', 'Coming Soon To Steam');
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('coming_soon_list', function() {
-            return cms_get_setting('coming_soon_list', '');
+        $env->addFunction(new TwigFunction('coming_soon_list', function(int $rows = 3) {
+            $html = cms_get_setting('coming_soon_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('capsule_block', function(string $key) {
@@ -621,7 +721,7 @@ function cms_twig_env(string $tpl_dir): Environment
                 $img = $imgPath;
                 $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                 if (in_array($theme, ['2007_v1', '2007_v2'], true)) {
-                    return '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsule\'; window.status=\'\';" onmouseover="this.className=\'capsule_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="img/corners/smallcap_corners.png" width="280" height="105" border="0"></div></div><div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '</div></div>';
+                    return '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsule\'; window.status=\'\';" onmouseover="this.className=\'capsule_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="corners/smallcap_corners.png" width="280" height="105" border="0"></div></div><div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '</div></div>';
                 }
                 return '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);"><div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"></div><div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>';
             }
@@ -665,7 +765,7 @@ function cms_twig_env(string $tpl_dir): Environment
                 $img = $imgPath;
                 $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                 if (in_array($theme, ['2007_v1', '2007_v2'], true)) {
-                    return '<div id="capsule_large_content"><div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="img/corners/largecap_corners.png" width="572" height="221" border="0"></div></div><div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div></div>';
+                    return '<div id="capsule_large_content"><div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="corners/largecap_corners.png" width="572" height="221" border="0"></div></div><div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div></div>';
                 }
                 return '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);"><div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"></div><div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>';
             }
@@ -813,7 +913,7 @@ function cms_twig_env(string $tpl_dir): Environment
                             }
                             $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                             $html .= '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsule\'; window.status=\'\';" onmouseover="this.className=\'capsule_ovr\'; window.status=\'' . $url . '\';">'
-                                . '<div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="img/corners/smallcap_corners.png" width="280" height="105" border="0"></div></div>'
+                                . '<div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="corners/smallcap_corners.png" width="280" height="105" border="0"></div></div>'
                                 . '<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '</div></div>';
                         } else {
                             $img = $base . 'storefront/images/capsules/' . $row['image_path'];
@@ -853,7 +953,7 @@ function cms_twig_env(string $tpl_dir): Environment
                             $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                             $html .= '<div id="capsule_large_content">'
                                 . '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';">'
-                                . '<div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="img/corners/largecap_corners.png" width="572" height="221" border="0"></div></div>'
+                                . '<div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="corners/largecap_corners.png" width="572" height="221" border="0"></div></div>'
                                 . '<div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div>'
                                 . '</div>';
                         } else {

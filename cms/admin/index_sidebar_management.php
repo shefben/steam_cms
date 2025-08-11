@@ -9,15 +9,15 @@ $csrf_token  = cms_get_csrf_token();
 $db          = cms_get_db();
 
 $builtins = [
-    'getsteamnow'      => ['title' => 'GET STEAM NOW',      'html' => '<p>Get Steam Now</p>'],
-    'spotlight'        => ['title' => 'SPOTLIGHT',          'html' => '<p>Spotlight content</p>'],
-    'findmore'         => ['title' => 'FIND MORE',          'html' => '<p>Find More</p>'],
-    'searchbar'        => ['title' => 'SEARCHBAR',          'html' => '<form><input type="text" placeholder="Search"></form>'],
-    'latestnews'       => ['title' => 'LATEST NEWS',        'html' => '<p>Latest News</p>'],
-    'publishercatalogs'=> ['title' => 'PUBLISHER CATALOGS', 'html' => '<p>Publisher Catalogs</p>'],
-    'browsecatalog'    => ['title' => 'BROWSE THE CATALOG', 'html' => '<p>Browse the Catalog</p>'],
-    'newonsteam'       => ['title' => 'NEW ON STEAM',       'html' => '<p>New on Steam</p>'],
-    'comingsoon'       => ['title' => 'COMING SOON TO STEAM','html' => '<p>Coming Soon</p>'],
+    'getsteamnow'      => ['title' => 'GET STEAM NOW',      'html' => '{{ sidebar_section("get_steam_now")|raw }}'],
+    'spotlight'        => ['title' => 'SPOTLIGHT',          'html' => '{{ sidebar_section("spotlight")|raw }}'],
+    'findmore'         => ['title' => 'FIND MORE',          'html' => '{{ sidebar_section("find_more")|raw }}'],
+    'searchbar'        => ['title' => 'SEARCHBAR',          'html' => '{{ sidebar_section("search")|raw }}'],
+    'latestnews'       => ['title' => 'LATEST NEWS',        'html' => '{{ sidebar_section("latest_news")|raw }}'],
+    'publishercatalogs'=> ['title' => 'PUBLISHER CATALOGS', 'html' => '{{ sidebar_section("publisher_catalogs")|raw }}'],
+    'browsecatalog'    => ['title' => 'BROWSE THE CATALOG', 'html' => '{{ sidebar_section("browse_catalog")|raw }}'],
+    'newonsteam'       => ['title' => 'NEW ON STEAM',       'html' => '{{ sidebar_section("new_on_steam")|raw }}'],
+    'comingsoon'       => ['title' => 'COMING SOON TO STEAM','html' => '{{ sidebar_section("coming_soon")|raw }}'],
 ];
 
 $existing_sections = [];
@@ -37,7 +37,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     }
     if (isset($_GET['id'])) {
         $id = (int)$_GET['id'];
-        $stmt = $db->prepare('SELECT section_id,title,icon_path,is_collapsible,collapsible_id FROM sidebar_sections WHERE section_id=?');
+        $stmt = $db->prepare('SELECT section_id,title,icon_path,is_collapsible,collapsible_id,has_icicles FROM sidebar_sections WHERE section_id=?');
         $stmt->execute([$id]);
         $section = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($section) {
@@ -72,11 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
             }
         } elseif (str_starts_with($source, 'section:')) {
             $id = (int)substr($source, 8);
-            $stmt = $db->prepare('SELECT title,icon_path,is_collapsible,collapsible_id FROM sidebar_sections WHERE section_id=?');
+            $stmt = $db->prepare('SELECT title,icon_path,is_collapsible,collapsible_id,has_icicles FROM sidebar_sections WHERE section_id=?');
             $stmt->execute([$id]);
             if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $db->prepare('INSERT INTO sidebar_sections(title,icon_path,is_collapsible,collapsible_id,sort_order) VALUES(?,?,?,?,(SELECT IFNULL(MAX(sort_order),0)+1 FROM sidebar_sections))')
-                    ->execute([$row['title'], $row['icon_path'], $row['is_collapsible'], $row['collapsible_id']]);
+                $db->prepare('INSERT INTO sidebar_sections(title,icon_path,is_collapsible,collapsible_id,has_icicles,sort_order) VALUES(?,?,?,?,?,(SELECT IFNULL(MAX(sort_order),0)+1 FROM sidebar_sections))')
+                    ->execute([$row['title'], $row['icon_path'], $row['is_collapsible'], $row['collapsible_id'], $row['has_icicles']]);
                 $newId = (int)$db->lastInsertId();
                 $v = $db->prepare('SELECT theme_list,html_content FROM sidebar_section_variants WHERE section_id=?');
                 $v->execute([$id]);
@@ -111,12 +111,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
         $icon = trim($_POST['icon'] ?? '');
         $is_collapsible = isset($_POST['collapsible']) ? 1 : 0;
         $collapsible_id = trim($_POST['collapsible_id'] ?? '');
+        $has_icicles = isset($_POST['icicles']) ? 1 : 0;
         if ($id) {
-            $stmt = $db->prepare('UPDATE sidebar_sections SET title=?,icon_path=?,is_collapsible=?,collapsible_id=?,updated_at=NOW() WHERE section_id=?');
-            $stmt->execute([$title, $icon, $is_collapsible, $collapsible_id, $id]);
+            $stmt = $db->prepare('UPDATE sidebar_sections SET title=?,icon_path=?,is_collapsible=?,collapsible_id=?,has_icicles=?,updated_at=NOW() WHERE section_id=?');
+            $stmt->execute([$title, $icon, $is_collapsible, $collapsible_id, $has_icicles, $id]);
         } else {
-            $stmt = $db->prepare('INSERT INTO sidebar_sections(title,icon_path,is_collapsible,collapsible_id,sort_order) VALUES(?,?,?,?,(SELECT IFNULL(MAX(sort_order),0)+1 FROM sidebar_sections))');
-            $stmt->execute([$title, $icon, $is_collapsible, $collapsible_id]);
+            $stmt = $db->prepare('INSERT INTO sidebar_sections(title,icon_path,is_collapsible,collapsible_id,has_icicles,sort_order) VALUES(?,?,?,?,?,(SELECT IFNULL(MAX(sort_order),0)+1 FROM sidebar_sections))');
+            $stmt->execute([$title, $icon, $is_collapsible, $collapsible_id, $has_icicles]);
             $id = (int)$db->lastInsertId();
         }
         $v_ids = $_POST['variant_id'] ?? [];
@@ -187,6 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
         <label>Header Icon <input type="text" id="section-icon" name="icon"></label>
         <label><input type="checkbox" id="section-collapsible" name="collapsible"> Collapsible</label>
         <div id="collapsible-id-field" style="display:none;"><label>Collapsible Content ID <input type="text" id="section-cid" name="collapsible_id"></label></div>
+        <label><input type="checkbox" id="section-icicles" name="icicles"> Icicles</label>
         <div id="variants-container"></div>
         <button type="button" id="add-variant" class="btn">+ Add New Version HTML</button>
     </form>
@@ -268,6 +270,7 @@ $(function(){
             $('#section-title').val(sec.title);
             $('#section-icon').val(sec.icon_path);
             if(sec.is_collapsible==1){ $('#section-collapsible').prop('checked',true); $('#collapsible-id-field').show(); $('#section-cid').val(sec.collapsible_id); }
+            if(sec.has_icicles==1){ $('#section-icicles').prop('checked',true); }
             if(sec.variants){ sec.variants.forEach(function(v){ addVariant(v.variant_id, v.theme_list ? v.theme_list.split(',') : [], v.html_content); }); }
             $('#section-form').show();
             $('#save-section').show();
@@ -286,6 +289,7 @@ $(function(){
         data.title = $('#section-title').val();
         data.icon = $('#section-icon').val();
         if($('#section-collapsible').is(':checked')){ data.collapsible = 1; data.collapsible_id = $('#section-cid').val(); }
+        if($('#section-icicles').is(':checked')){ data.icicles = 1; }
         data['variant_id'] = [];
         data['variant_themes'] = [];
         data['variant_html'] = [];
