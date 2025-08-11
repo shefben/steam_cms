@@ -219,9 +219,8 @@ nav {
 
 .nav-menu .submenu-toggle {
     position: absolute;
-    top: 50%;
+    top: 16px;
     right: 10px;
-    transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 0, 255, 0.3);
     border-radius: 4px;
@@ -232,6 +231,9 @@ nav {
     transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease, box-shadow 0.2s ease;
     font-size: 10px;
     pointer-events: all;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-menu .submenu-toggle:hover {
@@ -243,12 +245,14 @@ nav {
 }
 
 .nav-menu .submenu-toggle::before {
-    content: '\25BC';
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid currentColor;
     transition: transform 0.3s ease;
-    font-size: 12px;
-    font-weight: bold;
     display: block;
-    text-align: center;
 }
 
 .nav-menu .submenu-toggle[aria-expanded="true"]::before {
@@ -287,7 +291,6 @@ nav {
 /* Ensure submenu toggle stays in place when parent moves */
 .nav-menu li:hover .submenu-toggle {
     right: 15px;
-    transform: translateY(-50%);
 }
 
 /* Make dropdown arrow more visible */

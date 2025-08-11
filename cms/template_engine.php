@@ -759,18 +759,7 @@ function cms_twig_env(string $tpl_dir): Environment
             }
 
             if (!$rows) {
-                $posOrder = "'top1','top2','large','under1','under2','bottom1','bottom2','gear','free','tabbed'";
-                // Try theme-specific legacy capsule tables
-                $sql  = "SELECT c.ord, c.size AS type, c.image_path, c.appid, c.price, c.title, c.content, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? ORDER BY c.ord";
-                $stmt = $db->prepare($sql);
-                $stmt->execute([$theme]);
-                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                // Fall back to global legacy capsules when enabled
-                if (!$rows && $useAll) {
-                    $sql  = "SELECT c.position, c.size AS type, c.image_path, c.appid, c.price, a.name AS app_name, a.price AS app_price FROM storefront_capsules_all c LEFT JOIN store_apps a ON a.appid=c.appid ORDER BY FIELD(c.position,$posOrder)";
-                    $rows = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-                }
+                return '';
             }
             $base = cms_base_url();
             $base = $base ? rtrim($base, '/') . '/' : '';
