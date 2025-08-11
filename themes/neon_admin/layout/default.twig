@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="{{ theme_url }}/style.css">
     <script src="{{ theme_url }}/js/jquery.min.js"></script>
 </head>
-<body class="admin-{{ page_id }}">
     <header class="admin-header">
         <h1>CMS Administration</h1>
     </header>
     {{ breadcrumbs_html|raw }}
+<body class="admin-{{ page_id }}">
+
     <div class="container">
         <div class="neon-wrapper">
             <div class="content-wrapper">
@@ -31,12 +32,61 @@
             var expanded=$btn.attr('aria-expanded')==='true';
             $btn.attr('aria-expanded', expanded?'false':'true');
         });
+        
+        // Prevent parent dropdown links from navigating if they have submenus
+        $('.nav-menu li').each(function(){
+            var $li = $(this);
+            var $link = $li.children('a').first();
+            var $toggle = $li.find('.submenu-toggle');
+            var $submenu = $li.find('.sub-menu');
+            
+            if($toggle.length && $submenu.length) {
+                $link.on('click', function(e){
+                    e.preventDefault();
+                    // Trigger the submenu toggle instead
+                    $toggle.trigger('click');
+                    return false;
+                });
+            }
+        });
+        
+        // Notification system
+        $('#notification-btn').on('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            $('#notification-dropdown').toggleClass('show');
+        });
+        
+        $('#close-notifications').on('click', function(e){
+            e.preventDefault();
+            $('#notification-dropdown').removeClass('show');
+        });
+        
+        // Close notification dropdown when clicking outside
+        $(document).on('click', function(e){
+            if (!$(e.target).closest('.notifications').length) {
+                $('#notification-dropdown').removeClass('show');
+            }
+        });
+        
         $('.notify-dismiss').on('click', function(e){
             e.preventDefault();
             var id = $(this).data('id');
             var $li = $(this).closest('li');
+            var $dropdown = $('#notification-dropdown');
+            
             $.post('notifications.php', {id:id}).done(function(){
-                $li.fadeOut(150, function(){ $(this).remove(); });
+                $li.fadeOut(150, function(){ 
+                    $(this).remove(); 
+                    
+                    // Check if there are any notifications left
+                    var remainingNotifications = $('.notifications ul li').length;
+                    if (remainingNotifications === 0) {
+                        // Hide notification dot and show "no notifications" message
+                        $('.notification-dot').fadeOut(200);
+                        $('.notification-content').html('<div class="no-notifications"><i class="fas fa-check-circle"></i><p>No new notifications</p></div>');
+                    }
+                });
             });
         });
         $('body').on('click','.help-icon',function(e){

@@ -209,6 +209,9 @@ foreach ($nav_items as $k => $item) {
 
 $use_spans = ($admin_theme === 'neon');
 $nav_html = '<ul class="nav-menu">';
+if ($admin_theme === 'neon') {
+    $nav_html = '<div class="logo"><h1>Admin CMS</h1><p>Steampowered.com</p></div><ul class="nav-menu">';
+}
 $logout = null;
 $make_link = function(string $file, string $label, string $active = '', string $extra = '') use ($icons, $use_spans): string {
     $icon = $icons[$file] ?? '';

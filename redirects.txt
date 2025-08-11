@@ -11,3 +11,6 @@ steamsupport@valvesoftware.com -> steamsupport@<domain>
 /marketing/ -> steam/marketing/
 steamid_instructions.html -> index.php?area=steamid_instructions
 /autoupdate/ -> index.php?area=autoupdate
+/v/ -> /
+/v2/ -> /
+/v3/ -> /

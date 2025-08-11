@@ -1044,8 +1044,15 @@ Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registere
 HTML]);
 
 $tfStmt->execute(['2004',<<<'HTML'
-<a href="http://www.valvesoftware.com"><img src="valve_greenlogo.gif" align="left"></a> ©2004 Valve Corporation. All rights reserved. <a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.<br>
-Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve Corporation.
+<table cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td><a href="http://www.valvesoftware.com"><img src="img/valve_greenlogo.gif"></a></td>
+<td>&nbsp;</td>
+<td><span class="footerfix">©2004 Valve Corporation. All rights reserved. <a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.<br>
+                            Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve Corporation.</span></td>
+<td width="15%">&nbsp;</td>
+</tr>
+</tbody></table>
 HTML]);
 
             
