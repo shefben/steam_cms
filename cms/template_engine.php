@@ -340,7 +340,7 @@ function cms_twig_env(string $tpl_dir): Environment
         if (!is_dir($cacheDir)) {
             mkdir($cacheDir, 0777, true);
         }
-        $env = new Environment($loader, ['cache' => $cacheDir]);
+        $env = new Environment($loader, ['cache' => $cacheDir, 'auto_reload' => true]);
         $env->addFunction(new TwigFunction('header', function(bool $withButtons = true) {
             $theme = cms_get_current_theme();
             return cms_render_header($theme, $withButtons);
@@ -1037,16 +1037,45 @@ function cms_render_string(string $html, array $vars, string $tpl_dir): string
     return $env->createTemplate($html)->render($vars);
 }
 
+function cms_cache_last_modified(string $path, string $theme): int
+{
+    $times = [];
+    if (is_file($path)) {
+        $times[] = filemtime($path);
+    }
+
+    $tplDir = dirname($path);
+    foreach (glob($tplDir . '/*.twig') ?: [] as $file) {
+        $times[] = filemtime($file);
+    }
+
+    $cssFile = cms_get_theme_css($theme);
+    $cssPath = dirname(__DIR__) . "/themes/$theme/" . ltrim($cssFile, '/');
+    if (is_file($cssPath)) {
+        $times[] = filemtime($cssPath);
+    }
+
+    $root = dirname(__DIR__);
+    foreach (get_included_files() as $inc) {
+        if (str_starts_with($inc, $root . '/') && is_file($inc)) {
+            $times[] = filemtime($inc);
+        }
+    }
+
+    return $times ? max($times) : 0;
+}
+
 function cms_render_template(string $path, array $vars = []): void
 {
+    $theme = cms_get_setting('theme', '2004');
     $cache_enabled = cms_get_setting('enable_cache', '0') === '1';
-    $cache_file = __DIR__.'/cache/'.md5($path).'.html';
-    if ($cache_enabled && file_exists($cache_file) && filemtime($cache_file) >= filemtime($path)) {
+    $cache_file = __DIR__ . '/cache/' . md5($path) . '.html';
+    $lastModified = cms_cache_last_modified($path, $theme);
+    if ($cache_enabled && file_exists($cache_file) && filemtime($cache_file) >= $lastModified) {
         readfile($cache_file);
         return;
     }
 
-    $theme = cms_get_setting('theme', '2004');
     cms_set_current_theme($theme);
     $tpl_dir = dirname($path);
     $subdir = $vars['theme_subdir'] ?? '';
