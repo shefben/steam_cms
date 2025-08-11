@@ -82,8 +82,8 @@ $default_nav = [
     ['file'=>'download_settings.php','label'=>'Download Settings','visible'=>1],
     ['file'=>'page_selection.php','label'=>'Page Version Management','visible'=>1],
     ['file'=>'troubleshooter.php','label'=>'Troubleshooter','visible'=>1,'parent'=>'support_page.php'],
-    ['file'=>'troubleshooter_manage.php','label'=>'Troubleshooter Management','visible'=>1,'parent'=>'troubleshooter.php'],
-    ['file'=>'troubleshooter_requests.php','label'=>'Requests Viewer','visible'=>1,'parent'=>'troubleshooter.php'],
+    ['file'=>'troubleshooter_manage.php','label'=>'Troubleshooter Management','visible'=>1,'parent'=>'support_page.php'],
+    ['file'=>'troubleshooter_requests.php','label'=>'Requests Viewer','visible'=>1,'parent'=>'support_page.php'],
     ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
     ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1,'parent'=>'support_page.php'],
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>cms_has_permission('manage_admins')?1:0],
@@ -222,11 +222,10 @@ $make_link = function(string $file, string $label, string $active = '', string $
     $text = trim(($icon ? $icon.' ' : '').$label);
     return '<a href="'.$file.'"'.$active.$extra.'>'.htmlspecialchars($text).'</a>';
 };
-$build_nav_item = null;
-$build_nav_item = function(array $item) use (&$custom_groups, $make_link, $admin_theme, &$build_nav_item): string {
-    if(!($item['visible']??1)) return '';
+foreach ($nav_items as $item) {
+    if(!($item['visible']??1)) continue;
     $file = $item['file'];
-    if ($file === 'support_2003.php') return '';
+    if ($file === 'support_2003.php') continue;
     $label = cms_admin_translate($item['label']);
     $active = strpos($_SERVER['PHP_SELF'],$file)!==false ? ' class="active"' : '';
     if(isset($custom_groups[$file])){
@@ -234,27 +233,27 @@ $build_nav_item = function(array $item) use (&$custom_groups, $make_link, $admin
         foreach($custom_groups[$file] as $child){ if(strpos($_SERVER['PHP_SELF'],$child['file'])!==false){ $open=true; break; } }
         $parent_id = preg_replace('/\.php$/','',$file).'-parent';
         $sub_id = preg_replace('/\.php$/','',$file).'-sub';
-        if($file === 'troubleshooter.php'){ $parent_id = 'ts-parent'; $sub_id = 'ts-sub'; }
-        $html = '<li id="'.$parent_id.'">'.$make_link($file,$label,$active);
+        $nav_html .= '<li id="'.$parent_id.'">'.$make_link($file,$label,$active);
         if($admin_theme === 'neon'){
-            $html .= '<button class="submenu-toggle" aria-expanded="'.($open?'true':'false').'" aria-controls="'.$sub_id.'"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
+            $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($open?'true':'false').'" aria-controls="'.$sub_id.'"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
         }
-        $style = $open ? 'display:block' : 'display:none';
-        $html .= '<ul class="sub-menu" id="'.$sub_id.'" style="'.$style.'">';
+        $nav_html .= '<ul class="sub-menu" id="'.$sub_id.'" style="'.($open?'display:block':'display:none').'">';
         foreach($custom_groups[$file] as $child){
-            $html .= $build_nav_item($child);
+            if(!($child['visible']??1)) continue;
+            $cfile=$child['file'];
+            $clabel=cms_admin_translate($child['label']);
+            $cac = strpos($_SERVER['PHP_SELF'],$cfile)!==false ? ' class="active"' : '';
+            $nav_html .= '<li>'.$make_link($cfile,$clabel,$cac).'</li>';
         }
-        $html .= '</ul></li>';
-        return $html;
-    }
-    return '<li>'.$make_link($file,$label,$active).'</li>';
-};
-foreach ($nav_items as $item) {
-    if($item['file'] === '../logout.php'){
-        $logout = $build_nav_item($item);
+        $nav_html .= '</ul></li>';
         continue;
     }
-    $nav_html .= $build_nav_item($item);
+    $item_html = '<li>'.$make_link($file,$label,$active).'</li>';
+    if($file === '../logout.php'){
+        $logout = $item_html;
+        continue;
+    }
+    $nav_html .= $item_html;
 }
 $has_sf = $sf_root || $sf_pages;
 if ($has_sf) {
