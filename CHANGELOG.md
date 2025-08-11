@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-- Made 2007 v1 and v2 header bars responsive, keeping logo and navigation aligned.
+- Fixed 2007 v1 and v2 theme header bars so logo and navigation stay on one line.
 - Removed binary image assets from Green Steam admin themes
 - Added neon-styled admin theme based on neon_version2 example.
 - Updated neon admin navigation markup to mirror original HTML structure.
