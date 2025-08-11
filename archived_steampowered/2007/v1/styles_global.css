@@ -43,20 +43,20 @@ DIV {
 /* ============================================================== */
 .globalHeadBar
 {
-	background:#000000;
-	margin: 0px;
-	width: 80%;
-	padding-top: 30px;
-	padding-bottom: 9px;
-	float: left;
+        background:#000000;
+        margin: 0px;
+        width: 745px;
+        padding-top: 30px;
+        padding-bottom: 9px;
+        float: left;
 }
 .globalHeadBar_logo {
-	background:#000000;
-	margin: 0px;
-	width: 20%;
-	padding-top: 4px;
-	padding-bottom: 9px;
-	float: left;
+        background:#000000;
+        margin: 0px;
+        width: 165px;
+        padding-top: 4px;
+        padding-bottom: 9px;
+        float: left;
 	
 }
 .globalNavItem {
