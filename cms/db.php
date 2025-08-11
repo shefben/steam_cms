@@ -58,7 +58,7 @@ function cms_set_setting($key,$value){
 function cms_get_custom_page($slug,$theme=null){
     $db = cms_get_db();
     try {
-        $stmt = $db->prepare('SELECT page_name,title,content,theme,template FROM custom_pages WHERE slug=? AND status="published"');
+        $stmt = $db->prepare('SELECT page_name,title,content,theme,template,header_image FROM custom_pages WHERE slug=? AND status="published"');
         $stmt->execute([$slug]);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -74,6 +74,7 @@ function cms_get_custom_page($slug,$theme=null){
                         unset($row['theme']);
                         $row['template'] = null;
                         $row['page_name'] = null;
+                        cms_set_content_header_image(null);
                         return $row;
                     }
                 } elseif (!isset($default)) {
@@ -84,6 +85,7 @@ function cms_get_custom_page($slug,$theme=null){
                 unset($default['theme']);
                 $default['template'] = null;
                 $default['page_name'] = null;
+                cms_set_content_header_image(null);
                 return $default;
             }
             return null;
@@ -111,6 +113,7 @@ function cms_get_custom_page($slug,$theme=null){
     }
     unset($match['theme']);
     if (!isset($match['template']) || $match['template'] === '') $match['template'] = null;
+    cms_set_content_header_image($match['header_image'] ?? null);
     return $match;
 }
 
@@ -461,6 +464,22 @@ function cms_set_header_logo_override(?string $path): void {
 
 function cms_get_header_logo_override(): ?string {
     return $GLOBALS['cms_header_logo_override'] ?? null;
+}
+
+function cms_set_content_header_image(?string $path): void {
+    if ($path === null || $path === '') {
+        unset($GLOBALS['cms_content_header_image']);
+    } else {
+        $GLOBALS['cms_content_header_image'] = $path;
+    }
+}
+
+function cms_get_content_header_image(): ?string {
+    if (isset($GLOBALS['cms_content_header_image'])) {
+        return $GLOBALS['cms_content_header_image'];
+    }
+    $img = cms_get_setting('content_header_image', '');
+    return $img !== '' ? $img : null;
 }
 
 function cms_get_theme_header_data($theme, string $page = ''){

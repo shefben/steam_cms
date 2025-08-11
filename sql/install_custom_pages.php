@@ -1245,11 +1245,12 @@ $insertArray[] = [
 
 $stmtcp = $pdo->prepare(
     'INSERT INTO custom_pages
-    (slug, page_name, title, content, theme, template, created, updated, status)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, "published")'
+    (slug, page_name, title, content, theme, template, header_image, created, updated, status)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, "published")'
 );
 
 foreach ($insertArray as $row) {
+    array_splice($row, 6, 0, [null]);
     $stmtcp->execute($row);
 }
 ?>

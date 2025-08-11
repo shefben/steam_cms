@@ -13,9 +13,63 @@ if(isset($_GET['ajax']) && isset($_GET['edit'])){
 }
 cms_require_permission('manage_pages');
 $db=cms_get_db();
+$headerDir=dirname(__DIR__,2).'/images/headers/custom_pages';
+if(!is_dir($headerDir)){
+    mkdir($headerDir,0777,true);
+}
 $themes = cms_get_themes();
 $current_theme = cms_get_setting('theme','2004');
 $template_files = array_map('basename', glob(__DIR__.'/../themes/'.$current_theme.'/layout/*.twig'));
+
+if(isset($_GET['list_header_images'])){
+    $files=[];
+    foreach(scandir($headerDir) as $f){
+        if(preg_match('/\.(png|jpe?g|gif)$/i',$f)){
+            $files[]=$f;
+        }
+    }
+    header('Content-Type: application/json');
+    echo json_encode($files);
+    exit;
+}
+
+if(isset($_POST['upload_header_image']) && isset($_FILES['header_image'])){
+    $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_POST['slug'] ?? '');
+    $themeStr = isset($_POST['theme']) ? preg_replace('/[^a-zA-Z0-9_,]/','',$_POST['theme']) : null;
+    $name=preg_replace('/[^a-zA-Z0-9._-]/','',$_FILES['header_image']['name']);
+    $path=$headerDir.'/'.$name;
+    move_uploaded_file($_FILES['header_image']['tmp_name'],$path);
+    $rel='images/headers/custom_pages/'.$name;
+    $exists=$db->prepare('SELECT id FROM custom_pages WHERE slug=? AND theme <=> ?');
+    $exists->execute([$slug,$themeStr]);
+    if($row=$exists->fetch()){
+        $db->prepare('UPDATE custom_pages SET header_image=?,updated=NOW() WHERE id=?')->execute([$rel,$row['id']]);
+    }else{
+        $db->prepare('INSERT INTO custom_pages(slug,header_image,theme,created,updated,status) VALUES(?,?,?,?,NOW(),"draft")')->execute([$slug,$rel,$themeStr,date('Y-m-d H:i:s')]);
+    }
+    cms_set_content_header_image($rel);
+    header('Content-Type: application/json');
+    echo json_encode(['path'=>$rel]);
+    exit;
+}
+
+if(isset($_POST['select_header_image'])){
+    $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_POST['slug'] ?? '');
+    $themeStr = isset($_POST['theme']) ? preg_replace('/[^a-zA-Z0-9_,]/','',$_POST['theme']) : null;
+    $img=basename($_POST['image'] ?? '');
+    $rel='images/headers/custom_pages/'.$img;
+    $exists=$db->prepare('SELECT id FROM custom_pages WHERE slug=? AND theme <=> ?');
+    $exists->execute([$slug,$themeStr]);
+    if($row=$exists->fetch()){
+        $db->prepare('UPDATE custom_pages SET header_image=?,updated=NOW() WHERE id=?')->execute([$rel,$row['id']]);
+    }else{
+        $db->prepare('INSERT INTO custom_pages(slug,header_image,theme,created,updated,status) VALUES(?,?,?,?,NOW(),"draft")')->execute([$slug,$rel,$themeStr,date('Y-m-d H:i:s')]);
+    }
+    cms_set_content_header_image($rel);
+    header('Content-Type: application/json');
+    echo json_encode(['path'=>$rel]);
+    exit;
+}
 if(isset($_POST['autosave'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_POST['slug']);
     $title=trim($_POST['title']);
@@ -24,14 +78,15 @@ if(isset($_POST['autosave'])){
     $template = in_array($_POST['template'] ?? '', $template_files, true) ? $_POST['template'] : null;
     $selThemes = isset($_POST['themes']) ? array_intersect($themes,$_POST['themes']) : [];
     $themeStr = $selThemes ? implode(',', $selThemes) : null;
+    $header_image = trim($_POST['header_image'] ?? '');
     $exists=$db->prepare('SELECT id FROM custom_pages WHERE slug=? AND theme <=> ?');
     $exists->execute([$slug,$themeStr]);
     if($row=$exists->fetch()){
-        $stmt=$db->prepare('UPDATE custom_pages SET page_name=?,title=?,content=?,theme=?,template=?,updated=NOW(),status="draft" WHERE id=?');
-        $stmt->execute([$page_name,$title,$content,$themeStr,$template,$row['id']]);
+        $stmt=$db->prepare('UPDATE custom_pages SET page_name=?,title=?,content=?,theme=?,template=?,header_image=?,updated=NOW(),status="draft" WHERE id=?');
+        $stmt->execute([$page_name,$title,$content,$themeStr,$template,$header_image,$row['id']]);
     }else{
-        $stmt=$db->prepare('INSERT INTO custom_pages(slug,page_name,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,?,NOW(),"draft")');
-        $stmt->execute([$slug,$page_name,$title,$content,$themeStr,$template,date('Y-m-d H:i:s')]);
+        $stmt=$db->prepare('INSERT INTO custom_pages(slug,page_name,title,content,theme,template,header_image,created,updated,status) VALUES(?,?,?,?,?,?,?,?,NOW(),"draft")');
+        $stmt->execute([$slug,$page_name,$title,$content,$themeStr,$template,$header_image,date('Y-m-d H:i:s')]);
     }
     cms_admin_log('Autosaved custom page '.$slug);
     header('Content-Type: application/json');
@@ -46,15 +101,16 @@ if(isset($_POST['save_page'])){
     $template = in_array($_POST['template'] ?? '', $template_files, true) ? $_POST['template'] : null;
     $selThemes = isset($_POST['themes']) ? array_intersect($themes,$_POST['themes']) : [];
     $themeStr = $selThemes ? implode(',', $selThemes) : null;
+    $header_image = trim($_POST['header_image'] ?? '');
     $exists=$db->prepare('SELECT id FROM custom_pages WHERE slug=? AND theme <=> ?');
     $exists->execute([$slug,$themeStr]);
     if($row=$exists->fetch()){
-        $stmt=$db->prepare('UPDATE custom_pages SET page_name=?,title=?,content=?,theme=?,template=?,updated=NOW(),status="published" WHERE id=?');
-        $stmt->execute([$page_name,$title,$content,$themeStr,$template,$row['id']]);
+        $stmt=$db->prepare('UPDATE custom_pages SET page_name=?,title=?,content=?,theme=?,template=?,header_image=?,updated=NOW(),status="published" WHERE id=?');
+        $stmt->execute([$page_name,$title,$content,$themeStr,$template,$header_image,$row['id']]);
         cms_admin_log('Updated custom page '.$slug);
     }else{
-        $stmt=$db->prepare('INSERT INTO custom_pages(slug,page_name,title,content,theme,template,created,updated,status) VALUES(?,?,?,?,?,?,?,NOW(),"published")');
-        $stmt->execute([$slug,$page_name,$title,$content,$themeStr,$template,date('Y-m-d H:i:s')]);
+        $stmt=$db->prepare('INSERT INTO custom_pages(slug,page_name,title,content,theme,template,header_image,created,updated,status) VALUES(?,?,?,?,?,?,?,?,NOW(),"published")');
+        $stmt->execute([$slug,$page_name,$title,$content,$themeStr,$template,$header_image,date('Y-m-d H:i:s')]);
         cms_admin_log('Created custom page '.$slug);
     }
 }
@@ -75,6 +131,7 @@ if(isset($_GET['edit'])){
 }
 ?>
 <h2>Custom Pages</h2>
+<link rel="stylesheet" href="css/image-picker.css">
 <button id="addBtn">Add Custom Page</button>
 <table>
 <tr><th>Slug</th><th>Themes</th><th>Title</th><th>Actions</th></tr>
@@ -104,6 +161,12 @@ if(isset($_GET['edit'])){
         <?php endforeach; ?>
     </select>
 </label><br>
+<label>Set Content Header Image:</label><br>
+<div id="headerImagePreview"></div>
+<input type="hidden" name="header_image" id="header_image">
+<input type="file" id="headerImageFile" style="display:none;">
+<button type="button" id="uploadHeaderBtn">Upload Image</button>
+<button type="button" id="selectHeaderBtn">Select Pre-existing Image</button><br><br>
 <textarea name="content" id="content" style="width:100%;height:300px;"></textarea><br>
 <input type="submit" name="save_page" value="Save">
 <span id="lastSaved" style="margin-left:10px;color:green;"></span>
@@ -112,6 +175,10 @@ if(isset($_GET['edit'])){
 <button type="button" id="cancel">Cancel</button>
 </form>
 </div>
+<div id="headerImageDialog" title="Select Header Image" style="display:none;">
+    <select id="headerImageList"></select>
+</div>
+<script src="js/image-picker.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('content');
@@ -134,6 +201,7 @@ function loadPage(slug,theme){
     }
     $('#previewBtn,#restoreDraft').hide();
     CKEDITOR.instances.content.setData('');
+    setHeaderImage('');
     $('#slug').val(slug).prop('readonly',true);
     if (loadReq) {
         loadReq.abort();
@@ -147,6 +215,7 @@ function loadPage(slug,theme){
         $('#page_name').val(d.page_name||'');
         $('#title').val(d.title||'');
         $('#template').val(d.template||'');
+        setHeaderImage(d.header_image||'');
         CKEDITOR.instances.content.setData(d.content||'');
         $('.themeChk').prop('checked',false);
         if(d.theme){
@@ -185,6 +254,7 @@ $('#addBtn').on('click',function(){
     CKEDITOR.instances.content.setData('');
     $('.themeChk').prop('checked',false);
     $('#template').val('');
+    setHeaderImage('');
     $('#previewBtn,#restoreDraft').hide();
     $('#editor').show();
 });
@@ -194,5 +264,68 @@ loadPage('<?php echo addslashes($edit['slug']); ?>','<?php echo addslashes($edit
 <?php endif; ?>
 
 $('#cancel').on('click',function(){ $('#editor').hide(); });
+
+function setHeaderImage(path){
+    $('#header_image').val(path);
+    if(path){
+        $('#headerImagePreview').html('<img src="../'+path+'" style="max-width:200px;">');
+    }else{
+        $('#headerImagePreview').empty();
+    }
+}
+
+$('#uploadHeaderBtn').on('click',function(){
+    $('#headerImageFile').click();
+});
+
+$('#headerImageFile').on('change',function(){
+    var file=this.files[0];
+    if(!file)return;
+    var fd=new FormData();
+    fd.append('upload_header_image',1);
+    fd.append('header_image',file);
+    fd.append('slug',$('#slug').val());
+    fd.append('theme',$('.themeChk:checked').map(function(){return this.value;}).get().join(','));
+    fetch('custom_pages.php',{method:'POST',body:fd}).then(r=>r.json()).then(function(res){
+        setHeaderImage(res.path);
+    });
+});
+
+$('#selectHeaderBtn').on('click',function(){
+    fetch('custom_pages.php?list_header_images=1').then(r=>r.json()).then(function(list){
+        var select=$('#headerImageList');
+        if(select.data('picker')){
+            select.data('picker').destroy();
+        }
+        select.empty();
+        list.forEach(function(name){
+            $('<option>').val(name).attr('data-img-src','../images/headers/custom_pages/'+name).appendTo(select);
+        });
+        select.imagepicker({hide_select:true});
+        $('#headerImageDialog').dialog({
+            modal:true,
+            width:600,
+            buttons:{
+                'Select':function(){
+                    var selected=select.val();
+                    if(selected){
+                        var fd=new FormData();
+                        fd.append('select_header_image',1);
+                        fd.append('image',selected);
+                        fd.append('slug',$('#slug').val());
+                        fd.append('theme',$('.themeChk:checked').map(function(){return this.value;}).get().join(','));
+                        fetch('custom_pages.php',{method:'POST',body:fd}).then(r=>r.json()).then(function(res){
+                            setHeaderImage(res.path);
+                        });
+                    }
+                    $(this).dialog('close');
+                },
+                'Cancel':function(){
+                    $(this).dialog('close');
+                }
+            }
+        });
+    });
+});
 </script>
 <?php include 'admin_footer.php'; ?>

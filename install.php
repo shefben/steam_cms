@@ -182,6 +182,7 @@ CREATE TABLE `0405_storefront_packages` (
     content MEDIUMTEXT,
     theme VARCHAR(255) DEFAULT NULL,
     template VARCHAR(255) DEFAULT NULL,
+    header_image VARCHAR(255) DEFAULT NULL,
     created DATETIME,
     updated DATETIME,
     status VARCHAR(20) DEFAULT 'draft',

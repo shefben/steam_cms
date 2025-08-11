@@ -24,6 +24,11 @@ Sets a temporary header logo before outputting the header.
   {{ header() }}
   ```
 
+### `content_header_image()`
+Outputs the content header image for the current page. Custom pages use their assigned image; other pages fall back to the `content_header_image` setting.
+
+- **Example:** `{{ content_header_image() }}`
+
 ### `footer()`
 Outputs the HTML footer stored in the `theme_footers` table.
 
@@ -257,6 +262,7 @@ The following table lists each tag or tag group, where its content is managed in
 |`platform_update_news`|N/A|`platform_update_history`|
 |`split_title_entry`|**Custom Titles** (`custom_titles.php`)|`custom_titles`|
 |`sitetitle`|**Custom Pages** (`custom_pages.php`)|`custom_pages`|
+|`content_header_image`|**Settings** (`settings.php`), **Custom Pages** (`custom_pages.php`)|`settings`, `custom_pages`|
 |`theme_specific_content_start`, `theme_specific_content_end`|N/A|N/A|
 |`current_theme`, `current_page`|N/A|N/A|
 |`random_<group>`|**Random Content** (`random_content.php`) and **Random Groups** (`random_groups.php`)|`random_content`, `random_groups`|
