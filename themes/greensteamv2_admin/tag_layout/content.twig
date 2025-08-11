@@ -1,0 +1,14 @@
+<div id="admin-content">
+    {{ content|raw }}
+</div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var stats=document.querySelector('#admin-content .stat-header');
+  if(stats){stats.classList.add('window','no-resize');stats.setAttribute('name','System Stats');}
+  var cards=document.querySelectorAll('#admin-content .chart-card');
+  cards.forEach(function(el,idx){
+    el.classList.add('window','no-resize');
+    el.setAttribute('name',idx===0?'Graph 1':'Graph 2');
+  });
+});
+</script>

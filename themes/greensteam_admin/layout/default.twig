@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CMS Admin</title>
+    <link rel="stylesheet" type="text/css" href="{{ theme_url }}/styles/greensteam/greensteam.css">
+</head>
+<body>
+<div class="desktop">
+    <div class="header-bar">
+        <div class="header-title">CMS Administration</div>
+    </div>
+    <div class="breadcrumb-bar">
+        {{ breadcrumbs_html|raw }}
+    </div>
+    {{ sidebar|raw }}
+    {{ content|raw }}
+</div>
+<script>
+let isDragging=false,isResizing=false,currentElement=null,startX,startY;function minimizeWindow(e){const n=document.getElementById(e);n.classList.toggle("minimized")}function closeWindow(e){const n=document.getElementById(e);n.style.display="none"}function startResize(e,n){e.preventDefault(),e.stopPropagation(),isResizing=!0,currentElement=document.getElementById(n),currentElement.style.zIndex=getHighestZIndex()+1}function getHighestZIndex(){let e=10;return document.querySelectorAll('.draggable-window').forEach(n=>{const t=parseInt(n.style.zIndex||10);t>e&&(e=t)}),e}document.addEventListener('mousedown',function(e){if(e.target.classList.contains('window-header')){isDragging=!0,currentElement=e.target.parentElement;const n=currentElement.getBoundingClientRect();startX=e.clientX-n.left,startY=e.clientY-n.top,currentElement.style.zIndex=getHighestZIndex()+1,e.preventDefault()}});document.addEventListener('mousemove',function(e){if(isDragging&&currentElement){const n=e.clientX-startX,t=e.clientY-startY;currentElement.style.left=Math.max(0,n)+'px',currentElement.style.top=Math.max(70,t)+'px'}else if(isResizing&&currentElement){const n=Math.max(200,e.clientX-currentElement.offsetLeft),t=Math.max(150,e.clientY-currentElement.offsetTop);currentElement.style.width=n+'px',currentElement.style.height=t+'px'}});document.addEventListener('mouseup',function(){isDragging=!1,isResizing=!1,currentElement=null});document.addEventListener('mousedown',function(e){const n=e.target.closest('.draggable-window');n&&(n.style.zIndex=getHighestZIndex()+1)});
+</script>
+</body>
+</html>

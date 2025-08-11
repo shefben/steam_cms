@@ -1,0 +1,12 @@
+<div class="draggable-window sidebar-window" id="admin-sidebar">
+    <div class="window-header">Menu
+        <div class="window-controls">
+            <button class="window-control minimize-btn" onclick="minimizeWindow('admin-sidebar')" aria-label="Minimize"></button>
+            <button class="window-control close-btn" onclick="closeWindow('admin-sidebar')" aria-label="Close"></button>
+        </div>
+    </div>
+    <div class="window-content">
+        {{ nav|raw }}
+    </div>
+    <div class="resize-handle" onmousedown="startResize(event,'admin-sidebar')"></div>
+</div>

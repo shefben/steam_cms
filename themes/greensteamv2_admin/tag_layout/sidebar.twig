@@ -1,0 +1,4 @@
+{% set items = nav|replace({'<ul class="nav-menu">':'', '</ul>':'', 'sub-menu':'dropdown'}) %}
+<nav>
+{{ items|raw }}
+</nav>
