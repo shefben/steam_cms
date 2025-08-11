@@ -1,1 +1,2 @@
-*No outstanding tasks.*
+- refine download page Twig templates for 2003_v2 and 2004 to match archived HTML pixel-perfectly
+- implement admin UI for managing download_page_visibility mappings

@@ -200,6 +200,45 @@ function cms_theme_layout(?string $file, ?string $theme = null)
     return dirname(__DIR__)."/themes/2004/layout/default.twig";
 }
 
+function cms_theme_page_template(string $page, ?string $theme = null, ?string $version = null): string
+{
+    $theme   = $theme ?: cms_get_setting('theme', '2004');
+    $page    = preg_replace('/\.twig$/', '', $page);
+    $baseDir = dirname(__DIR__) . "/themes/$theme/templates";
+
+    if ($version !== null) {
+        $verPath = $baseDir . "/{$page}_v{$version}.twig";
+        if (file_exists($verPath)) {
+            return $verPath;
+        }
+    }
+
+    $pagePath = $baseDir . "/{$page}.twig";
+    if (file_exists($pagePath)) {
+        return $pagePath;
+    }
+
+    $defaultPath = $baseDir . '/default.twig';
+    if (file_exists($defaultPath)) {
+        return $defaultPath;
+    }
+
+    $baseDir = dirname(__DIR__) . '/themes/2004/templates';
+    if ($version !== null) {
+        $verPath = $baseDir . "/{$page}_v{$version}.twig";
+        if (file_exists($verPath)) {
+            return $verPath;
+        }
+    }
+
+    $pagePath = $baseDir . "/{$page}.twig";
+    if (file_exists($pagePath)) {
+        return $pagePath;
+    }
+
+    return $baseDir . '/default.twig';
+}
+
 function cms_admin_layout(string $file, ?string $theme = null): ?string
 {
     $theme = $theme ?: cms_get_setting('admin_theme', 'v2');
@@ -336,6 +375,7 @@ function cms_twig_env(string $tpl_dir): Environment
     static $env;
     if (!$env) {
         $loader = new FilesystemLoader($tpl_dir);
+        require_once __DIR__.'/utilities/text_styler.php';
         $cacheDir = __DIR__ . '/cache/twig';
         if (!is_dir($cacheDir)) {
             mkdir($cacheDir, 0777, true);
@@ -431,6 +471,10 @@ function cms_twig_env(string $tpl_dir): Environment
 
         $env->addFunction(new TwigFunction('news_search_bar', function() {
             return cms_news_search_bar();
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('getsteamnow_button', function(string $text) {
+            return renderGetSteamNowButton($text);
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('sidebar_right', function(int $year, string $page = 'news') {

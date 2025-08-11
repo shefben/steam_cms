@@ -1,0 +1,10 @@
+<h1>GET STEAM NOW</h1>
+{% if files %}
+    {% set main = files[0] %}
+    <p><a href="{{ main.main_url }}">{{ getsteamnow_button('  CLICK HERE TO DOWNLOAD THE STEAM INSTALLER ( < 1MB )')|raw }}</a></p>
+    <ul>
+    {% for file in files|slice(1) %}
+        <li><a class="maize" href="{{ file.main_url }}">{{ file.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}

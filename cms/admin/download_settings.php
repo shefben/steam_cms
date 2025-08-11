@@ -9,17 +9,18 @@ $versions = [];
 $defaultVer = '';
 if ($theme === '2003_v2') {
     $versions = [
-        '2003_v2_dlv1' => 'Version 1',
-        '2003_v2_dlv2' => 'Version 2'
+        '2003_v2_v1' => 'Version 1',
+        '2003_v2_v2' => 'Version 2',
+        '2003_v2_v3' => 'Version 3'
     ];
-    $defaultVer = '2003_v2_dlv2';
+    $defaultVer = '2003_v2_v2';
 } elseif ($theme === '2004') {
     $versions = [
-        '2004_dlv1' => 'Version 1',
-        '2004_dlv2' => 'Version 2',
-        '2004_dlv3' => 'Version 3'
+        '2004_v1' => 'Version 1',
+        '2004_v2' => 'Version 2',
+        '2004_v3' => 'Version 3'
     ];
-    $defaultVer = '2004_dlv3';
+    $defaultVer = '2004_v3';
 }
 $settingKey = 'download_page_' . $theme;
 $current = cms_get_setting($settingKey, $defaultVer);

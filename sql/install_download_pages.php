@@ -30,11 +30,12 @@ function parse_links(string $content): array {
     return $sections;
 }
 $versions = [
-    '2003_v2_dlv1' => ['file'=>__DIR__.'/../archived_steampowered/2003/v2/getsteamnow_dlv1.html','years'=>'2003_v2'],
-    '2003_v2_dlv2' => ['file'=>__DIR__.'/../archived_steampowered/2003/v2/getsteamnow_dlv2.html','years'=>'2003_v2'],
-    '2004_dlv1' => ['file'=>__DIR__.'/../archived_steampowered/2004/getsteamnow_dlv1.html','years'=>'2004'],
-    '2004_dlv2' => ['file'=>__DIR__.'/../archived_steampowered/2004/getsteamnow_dlv2.html','years'=>'2004'],
-    '2004_dlv3' => ['file'=>__DIR__.'/../archived_steampowered/2004/getsteamnow_dlv3.html','years'=>'2004'],
+    '2003_v2_v1' => ['file'=>__DIR__.'/../archived_steampowered/2003/v2/getsteamnow_v1.html','years'=>'2003_v2'],
+    '2003_v2_v2' => ['file'=>__DIR__.'/../archived_steampowered/2003/v2/getsteamnow_v2.html','years'=>'2003_v2'],
+    '2003_v2_v3' => ['file'=>__DIR__.'/../archived_steampowered/2003/v2/getsteamnow_v3.html','years'=>'2003_v2'],
+    '2004_v1' => ['file'=>__DIR__.'/../archived_steampowered/2004/getsteamnow_v1.html','years'=>'2004'],
+    '2004_v2' => ['file'=>__DIR__.'/../archived_steampowered/2004/getsteamnow_v2.html','years'=>'2004'],
+    '2004_v3' => ['file'=>__DIR__.'/../archived_steampowered/2004/getsteamnow_v3.html','years'=>'2004'],
 ];
 $pageStmt = $pdo->prepare('INSERT INTO download_pages(version,years,content,created,updated) VALUES(?,?,?,?,?)');
 $linkStmt = $pdo->prepare('INSERT INTO download_links(version,category,label,url,ord) VALUES(?,?,?,?,?)');
@@ -43,7 +44,7 @@ $seenCats = [];
 foreach ($versions as $ver=>$info) {
     $html = file_get_contents($info['file']);
     $body = extract_content($html);
-    $pageStmt->execute([$ver,$info['years'],$body,date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
+    $pageStmt->execute([$ver,$info['years'],'',date('Y-m-d H:i:s'),date('Y-m-d H:i:s')]);
     foreach (parse_links($body) as $l) {
         $linkStmt->execute([$ver,$l['category'],$l['label'],$l['url'],$l['ord']]);
         if (!isset($seenCats[$l['category']])) {

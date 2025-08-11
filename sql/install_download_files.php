@@ -27,6 +27,13 @@ try{
         $pdo->exec("ALTER TABLE download_files ADD COLUMN buttonText VARCHAR(100) DEFAULT NULL");
     }
 }
+try{
+    $pdo->query("SELECT 1 FROM download_page_visibility LIMIT 1");
+}catch(PDOException $e){
+    if($e->getCode()==="42S02"){
+        $pdo->exec("CREATE TABLE download_page_visibility(theme VARCHAR(32) NOT NULL, version INT NOT NULL, file_id INT NOT NULL, PRIMARY KEY(theme,version,file_id))");
+    }
+}
 
 function parse_2004_downloads(string $file): array {
     $html = file_get_contents($file);
@@ -56,7 +63,7 @@ function parse_2004_downloads(string $file): array {
 }
 
 $downloads = [];
-$parsed = parse_2004_downloads(__DIR__.'/../archived_steampowered/2004/getsteamnow_dlv1.html');
+$parsed = parse_2004_downloads(__DIR__.'/../archived_steampowered/2004/getsteamnow_v1.html');
 foreach($parsed as $p){
     $url = '';
     if($p['title'] === 'Minimal Steam Installer'){
@@ -98,6 +105,30 @@ foreach ($downloads as $d) {
     $ord = 1;
     foreach($d['mirrors'] as $m){
         $mirStmt->execute([$fileId,$m['host'],$m['url'],$ord++]);
+    }
+}
+
+$visStmt = $pdo->prepare('INSERT INTO download_page_visibility(theme,version,file_id) VALUES(?,?,?)');
+$fileIds = $pdo->query('SELECT id,title FROM download_files')->fetchAll(PDO::FETCH_KEY_PAIR);
+$map = [
+    '2003_v2' => [
+        1 => ["If you're upgrading from Counter-Strike 1.5"],
+        2 => ['Steam Installer'],
+        3 => ['Steam Installer',"If you're upgrading from Counter-Strike 1.5",'Dedicated Server (Windows)','Dedicated Server (Linux)','Windows HLDS Update Tool','Linux HLDS Update Tool'],
+    ],
+    '2004' => [
+        1 => ['Steam Installer','Dedicated Server (Windows)','Dedicated Server (Linux)'],
+        2 => ['Steam Installer','Dedicated Server (Windows)','Dedicated Server (Linux)'],
+        3 => ['Steam Installer','Dedicated Server (Windows)','Dedicated Server (Linux)'],
+    ],
+];
+foreach ($map as $theme=>$versions) {
+    foreach ($versions as $ver=>$titles) {
+        foreach ($titles as $title) {
+            if(isset($fileIds[$title])) {
+                $visStmt->execute([$theme,$ver,$fileIds[$title]]);
+            }
+        }
     }
 }
 

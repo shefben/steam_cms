@@ -142,20 +142,9 @@ function cms_get_support_page(string $theme): ?array
 function cms_get_download_page(string $theme): ?array
 {
     $db = cms_get_db();
-    $default = $theme === '2003_v2' ? '2003_v2_dlv2' : '2004_dlv3';
+    $default = $theme === '2003_v2' ? '2003_v2_v2' : '2004_v3';
     $ver = cms_get_setting('download_page_' . $theme, $default);
     try {
-        $stmt = $db->prepare('SELECT content FROM download_pages WHERE version=?');
-        $stmt->execute([$ver]);
-        $content = $stmt->fetchColumn();
-        if ($content === false) return null;
-        if (in_array($ver, ['2004_dlv2','2004_dlv3'])) {
-            require_once __DIR__.'/utilities/text_styler.php';
-            $size = $db->query("SELECT file_size FROM download_files WHERE title='Default' LIMIT 1")->fetchColumn();
-            if (!$size) { $size = '<1 MB'; }
-            $button = renderGetSteamNowButton("  CLICK HERE TO DOWNLOAD THE STEAM INSTALLER ( $size )");
-            $content = preg_replace('~<a[^>]*>\s*<img[^>]*getSteamNowButton\.gif[^>]*>\s*</a>~i', $button, $content);
-        }
         $linkStmt = $db->prepare('SELECT category,label,url FROM download_links WHERE version=? ORDER BY ord,id');
         $linkStmt->execute([$ver]);
         $links = $linkStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -172,7 +161,6 @@ function cms_get_download_page(string $theme): ?array
 
         return [
             'version'    => $ver,
-            'content'    => $content,
             'links'      => $links,
             'categories' => $categories,
         ];
@@ -267,10 +255,26 @@ function cms_get_download_files(int $limit = 10, int $offset = 0): array
     return $files;
 }
 
-function cms_get_all_download_files(?string $theme = null, ?string $version = null): array
+function cms_get_all_download_files(?string $theme = null, ?int $version = null): array
 {
     $db = cms_get_db();
-    $files = $db->query('SELECT * FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($theme !== null && $version !== null) {
+        try {
+            $stmt = $db->prepare('SELECT df.* FROM download_files df JOIN download_page_visibility dpv ON dpv.file_id=df.id WHERE dpv.theme=? AND dpv.version=? ORDER BY df.id');
+            $stmt->execute([$theme, $version]);
+            $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            if ($e->getCode() === '42S02') {
+                $files = $db->query('SELECT * FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                throw $e;
+            }
+        }
+    } else {
+        $files = $db->query('SELECT * FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     $mStmt = $db->prepare('SELECT host,url FROM download_file_mirrors WHERE file_id=? ORDER BY ord,id');
     $out = [];
     foreach ($files as $f) {
@@ -278,22 +282,11 @@ function cms_get_all_download_files(?string $theme = null, ?string $version = nu
         if ($theme !== null && $themes && !in_array($theme, $themes, true)) {
             continue;
         }
-        if ($version) {
-            if ($version === '2004_dlv1' && in_array($f['title'], ['Windows HLDS Update Tool','Linux HLDS Update Tool'])) {
-                continue;
-            }
-            if ($version === '2004_dlv3' && in_array($f['title'], ['Dedicated Server (Windows)','Dedicated Server (Linux)'])) {
-                continue;
-            }
-            if ($version === '2004_dlv2' && in_array($f['title'], ['Windows HLDS Update Tool','Linux HLDS Update Tool'])) {
-                continue;
-            }
-            if ($version === '2003_v2_dlv2' && $f['title'] !== 'Minimal Steam Installer') {
-                continue;
-            }
-        }
         $mStmt->execute([$f['id']]);
         $f['mirrors'] = $mStmt->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($f['main_url']) && !empty($f['mirrors'])) {
+            $f['main_url'] = $f['mirrors'][0]['url'];
+        }
         $out[] = $f;
     }
     return $out;
