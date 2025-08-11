@@ -41,38 +41,52 @@ $signup_count = (int)$db->query("SELECT COUNT(*) FROM ccafe_registration")->fetc
 $php_version = phpversion();
 $mysql_version = $db->query("SELECT VERSION()")->fetchColumn();
 ?>
-<h2>Admin Dashboard</h2>
-<div class="stats">
-    <table class="data-table">
-        <tr><th colspan="2">Site Stats</th></tr>
-        <tr><td>Total Visits</td><td><?php echo $total; ?></td></tr>
-        <tr><td>News Articles</td><td><?php echo $news_count; ?></td></tr>
-        <tr><td>FAQ Entries</td><td><?php echo $faq_count; ?></td></tr>
-        <tr><td>Admin Users</td><td><?php echo $user_count; ?></td></tr>
-        <tr><td>Café Signups</td><td><?php echo $signup_count; ?></td></tr>
-    </table>
-    <table class="data-table">
-        <tr><th colspan="2">Server Info</th></tr>
-        <tr><td>PHP Version</td><td><?php echo htmlspecialchars($php_version); ?></td></tr>
-        <tr><td>MySQL Version</td><td><?php echo htmlspecialchars($mysql_version); ?></td></tr>
-    </table>
-    <table class="data-table">
-        <tr><th colspan="2">Top Pages (30 days)</th></tr>
-        <?php foreach($popular as $p): ?>
-        <tr><td><?php echo htmlspecialchars($p['page']); ?></td><td><?php echo $p['v']; ?></td></tr>
-        <?php endforeach; ?>
-    </table>
+<div class="stat-header">
+    <h2>Admin Dashboard</h2>
+    <div class="stats">
+        <table class="data-table">
+            <tr><th colspan="2">Site Stats</th></tr>
+            <tr><td>Total Visits</td><td><?php echo $total; ?></td></tr>
+            <tr><td>News Articles</td><td><?php echo $news_count; ?></td></tr>
+            <tr><td>FAQ Entries</td><td><?php echo $faq_count; ?></td></tr>
+            <tr><td>Admin Users</td><td><?php echo $user_count; ?></td></tr>
+            <tr><td>Café Signups</td><td><?php echo $signup_count; ?></td></tr>
+        </table>
+        <table class="data-table">
+            <tr><th colspan="2">Server Info</th></tr>
+            <tr><td>PHP Version</td><td><?php echo htmlspecialchars($php_version); ?></td></tr>
+            <tr><td>MySQL Version</td><td><?php echo htmlspecialchars($mysql_version); ?></td></tr>
+        </table>
+        <table class="data-table">
+            <tr><th colspan="2">Top Pages (30 days)</th></tr>
+            <?php foreach($popular as $p): ?>
+            <tr><td><?php echo htmlspecialchars($p['page']); ?></td><td><?php echo $p['v']; ?></td></tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
 </div>
 
-<div class="chart-controls" aria-label="View range controls">
-    <button id="showWeekly" class="btn btn-small" aria-pressed="true">Weekly</button>
-    <button id="showMonthly" class="btn btn-small" aria-pressed="false">Monthly</button>
-</div>
-<div class="chart-container">
-    <canvas id="visitsChart" role="img" aria-label="Visits over time"></canvas>
-</div>
-<div class="chart-container">
-    <canvas id="pagesChart" role="img" aria-label="Top pages last month"></canvas>
+<div class="charts-section">
+    <div class="chart-card">
+        <div class="chart-header">
+            <h3>Site Visits</h3>
+            <div class="chart-controls" aria-label="View range controls">
+                <button id="showWeekly" class="btn btn-small" aria-pressed="true">Weekly</button>
+                <button id="showMonthly" class="btn btn-small" aria-pressed="false">Monthly</button>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="visitsChart" role="img" aria-label="Visits over time"></canvas>
+        </div>
+    </div>
+    <div class="chart-card">
+        <div class="chart-header">
+            <h3>Top Pages</h3>
+        </div>
+        <div class="chart-container">
+            <canvas id="pagesChart" role="img" aria-label="Top pages last month"></canvas>
+        </div>
+    </div>
 </div>
 <script>
 const weeklyLabels = <?php echo json_encode(array_keys($weekly)); ?>;
@@ -81,12 +95,85 @@ const monthlyLabels = <?php echo json_encode(array_keys($monthly)); ?>;
 const monthlyData = <?php echo json_encode(array_values($monthly)); ?>;
 const pagesLabels = <?php echo json_encode(array_column($popular,'page')); ?>;
 const pagesData = <?php echo json_encode(array_column($popular,'v')); ?>;
+// Chart.js configuration for neon theme
+Chart.defaults.color = '#e0e0e0';
+Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+Chart.defaults.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+
 const visitsCtx = document.getElementById('visitsChart').getContext('2d');
 let visitsChart = new Chart(visitsCtx, {
     type: 'line',
-    data: { labels: weeklyLabels, datasets: [{ label: 'Visits', data: weeklyData, borderColor: '#27ae60', backgroundColor: 'rgba(39,174,96,0.2)', tension: 0.1, pointRadius: 3, fill: false }] },
-    options: { responsive: true, plugins: { legend: { display:false } }, scales: { x: { display: true }, y: { beginAtZero: true, suggestedMax: 1, ticks: { precision: 0 } } } }
+    data: { 
+        labels: weeklyLabels, 
+        datasets: [{ 
+            label: 'Visits', 
+            data: weeklyData, 
+            borderColor: '#00ffff', 
+            backgroundColor: 'rgba(0, 255, 255, 0.1)', 
+            tension: 0.4, 
+            pointRadius: 5,
+            pointBackgroundColor: '#00ffff',
+            pointBorderColor: '#ff00ff',
+            pointBorderWidth: 2,
+            pointHoverRadius: 8,
+            pointHoverBackgroundColor: '#ff00ff',
+            pointHoverBorderColor: '#00ffff',
+            fill: true,
+            shadowColor: 'rgba(0, 255, 255, 0.5)',
+            shadowBlur: 10
+        }] 
+    },
+    options: { 
+        responsive: true, 
+        maintainAspectRatio: false,
+        plugins: { 
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: 'rgba(26, 26, 26, 0.9)',
+                titleColor: '#00ffff',
+                bodyColor: '#e0e0e0',
+                borderColor: '#ff00ff',
+                borderWidth: 2,
+                cornerRadius: 8,
+                displayColors: false
+            }
+        }, 
+        scales: { 
+            x: { 
+                display: true,
+                grid: {
+                    color: 'rgba(255, 0, 255, 0.1)',
+                    borderColor: 'rgba(255, 0, 255, 0.3)'
+                },
+                ticks: {
+                    color: '#e0e0e0'
+                }
+            }, 
+            y: { 
+                beginAtZero: true, 
+                suggestedMax: 1, 
+                grid: {
+                    color: 'rgba(0, 255, 255, 0.1)',
+                    borderColor: 'rgba(0, 255, 255, 0.3)'
+                },
+                ticks: { 
+                    precision: 0,
+                    color: '#e0e0e0'
+                }
+            } 
+        },
+        elements: {
+            point: {
+                hoverBorderWidth: 3
+            }
+        },
+        interaction: {
+            intersect: false,
+            mode: 'index'
+        }
+    }
 });
+
 document.getElementById('showWeekly').addEventListener('click', function(){
     this.setAttribute('aria-pressed','true');
     document.getElementById('showMonthly').setAttribute('aria-pressed','false');
@@ -94,6 +181,7 @@ document.getElementById('showWeekly').addEventListener('click', function(){
     visitsChart.data.datasets[0].data = weeklyData;
     visitsChart.update();
 });
+
 document.getElementById('showMonthly').addEventListener('click', function(){
     this.setAttribute('aria-pressed','true');
     document.getElementById('showWeekly').setAttribute('aria-pressed','false');
@@ -101,10 +189,64 @@ document.getElementById('showMonthly').addEventListener('click', function(){
     visitsChart.data.datasets[0].data = monthlyData;
     visitsChart.update();
 });
+
 new Chart(document.getElementById('pagesChart').getContext('2d'), {
     type: 'bar',
-    data: { labels: pagesLabels, datasets: [{ label: 'Views', data: pagesData, backgroundColor: '#2980b9' }] },
-    options: { responsive: true, plugins: { legend: { display:false } }, scales:{ y:{ beginAtZero:true } } }
+    data: { 
+        labels: pagesLabels, 
+        datasets: [{ 
+            label: 'Views', 
+            data: pagesData, 
+            backgroundColor: ['#ff00ff', '#00ffff', '#ffff00', '#ff0080', '#8000ff'],
+            borderColor: ['#ff00ff', '#00ffff', '#ffff00', '#ff0080', '#8000ff'],
+            borderWidth: 2,
+            hoverBackgroundColor: ['rgba(255, 0, 255, 0.8)', 'rgba(0, 255, 255, 0.8)', 'rgba(255, 255, 0, 0.8)', 'rgba(255, 0, 128, 0.8)', 'rgba(128, 0, 255, 0.8)'],
+            hoverBorderColor: '#fff',
+            hoverBorderWidth: 3
+        }] 
+    },
+    options: { 
+        responsive: true, 
+        maintainAspectRatio: false,
+        plugins: { 
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: 'rgba(26, 26, 26, 0.9)',
+                titleColor: '#ff00ff',
+                bodyColor: '#e0e0e0',
+                borderColor: '#00ffff',
+                borderWidth: 2,
+                cornerRadius: 8,
+                displayColors: false
+            }
+        }, 
+        scales: { 
+            x: {
+                grid: {
+                    color: 'rgba(255, 0, 255, 0.1)',
+                    borderColor: 'rgba(255, 0, 255, 0.3)'
+                },
+                ticks: {
+                    color: '#e0e0e0'
+                }
+            },
+            y: { 
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0, 255, 255, 0.1)',
+                    borderColor: 'rgba(0, 255, 255, 0.3)'
+                },
+                ticks: {
+                    color: '#e0e0e0'
+                }
+            } 
+        },
+        elements: {
+            bar: {
+                borderRadius: 4
+            }
+        }
+    }
 });
 </script>
 <?php include 'admin_footer.php'; ?>

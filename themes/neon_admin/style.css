@@ -202,8 +202,19 @@ nav {
     text-decoration: none;
     width: 100%;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     box-sizing: border-box;
+}
+
+/* Navigation link states */
+.nav-menu li > a:link {
+    color: var(--text-secondary);
+    text-shadow: none;
+}
+
+.nav-menu li > a:visited {
+    color: #888888;
+    text-shadow: 0 0 5px rgba(136, 136, 136, 0.3);
 }
 
 .nav-menu .submenu-toggle {
@@ -217,7 +228,7 @@ nav {
     color: #ff00ff;
     cursor: pointer;
     padding: 2px 6px;
-    z-index: 10;
+    z-index: 15;
     transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease, box-shadow 0.2s ease;
     font-size: 10px;
     pointer-events: all;
@@ -234,6 +245,10 @@ nav {
 .nav-menu .submenu-toggle::before {
     content: '\25BC';
     transition: transform 0.3s ease;
+    font-size: 12px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
 }
 
 .nav-menu .submenu-toggle[aria-expanded="true"]::before {
@@ -267,6 +282,23 @@ nav {
     border-left: 3px solid #ff00ff;
     transform: translateX(5px);
     transition: all 0.3s ease;
+}
+
+/* Ensure submenu toggle stays in place when parent moves */
+.nav-menu li:hover .submenu-toggle {
+    right: 15px;
+    transform: translateY(-50%);
+}
+
+/* Make dropdown arrow more visible */
+
+/* Improve arrow visibility on parent hover */
+.nav-menu li > a:hover ~ .submenu-toggle {
+    background: rgba(255, 0, 255, 0.2);
+    border-color: rgba(255, 0, 255, 0.6);
+    color: #ff00ff;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.8);
 }
 
 .nav-menu li > a.active {
@@ -313,6 +345,17 @@ nav {
     border-radius: 6px;
     margin: 2px 0;
     transition: all 0.2s ease;
+}
+
+/* Submenu link states */
+.sub-menu li a:link {
+    color: var(--text-secondary);
+    text-shadow: none;
+}
+
+.sub-menu li a:visited {
+    color: #aaaaaa;
+    text-shadow: 0 0 3px rgba(170, 170, 170, 0.3);
 }
 
 .sub-menu li a:hover {
@@ -711,6 +754,88 @@ nav {
 .help-icon{display:inline-block;margin-left:4px;width:14px;height:14px;line-height:14px;text-align:center;border:1px solid #666;border-radius:50%;color:#666;font-weight:bold;font-size:12px;cursor:pointer;background:#fff;}
 .help-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:1100;}
 .help-modal .dialog{background:#fff;padding:20px;border:1px solid #333;max-width:400px;}
+
+/* ============================
+   GLOBAL LINK STYLES
+   ============================ */
+
+/* Global link styling for all links */
+a:link {
+    color: #00ffff;
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    transition: all 0.2s ease;
+}
+
+a:visited {
+    color: #ff00ff;
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: #ffff00;
+    text-decoration: none;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+    transition: all 0.2s ease;
+}
+
+a:active {
+    color: #ff6600;
+    text-decoration: none;
+    text-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
+    transition: all 0.2s ease;
+}
+
+/* Specific link styles for breadcrumbs */
+.breadcrumb a:link {
+    color: #00ffff;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+}
+
+.breadcrumb a:visited {
+    color: #ff00ff;
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.4);
+}
+
+.breadcrumb a:hover {
+    color: #ffff00;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+}
+
+.breadcrumb a:active {
+    color: #ff6600;
+    text-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
+}
+
+/* Content area links */
+.main-content a:link {
+    color: #00ffff;
+    text-decoration: underline;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+}
+
+.main-content a:visited {
+    color: #ff00ff;
+    text-decoration: underline;
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.4);
+}
+
+.main-content a:hover {
+    color: #ffff00;
+    text-decoration: underline;
+    text-shadow: 0 0 12px rgba(255, 255, 0, 0.8);
+    background: rgba(255, 255, 0, 0.05);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.main-content a:active {
+    color: #ff6600;
+    text-decoration: underline;
+    text-shadow: 0 0 10px rgba(255, 102, 0, 0.6);
+}
 
 /* ============================
    NEON FORM CONTROLS & WIDGETS
@@ -1409,5 +1534,228 @@ input[type="range"] {
 progress {
     margin: 15px 0;
     clear: both;
+}
+
+/* ============================
+   DASHBOARD STYLES
+   ============================ */
+
+/* Stat header section */
+.stat-header {
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.stat-header h2 {
+    font-size: 36px;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    margin-bottom: 25px;
+    text-align: center;
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.stats .data-table {
+    background: rgba(26, 26, 26, 0.9);
+    border: 2px solid rgba(255, 0, 255, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 0, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.stats .data-table:hover {
+    border-color: rgba(0, 255, 255, 0.5);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.stats .data-table th {
+    background: linear-gradient(135deg, #ff00ff, #8000ff);
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.stats .data-table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 14px;
+}
+
+.stats .data-table td:first-child {
+    color: #e0e0e0;
+    font-weight: 500;
+}
+
+.stats .data-table td:last-child {
+    color: #00ffff;
+    font-weight: 600;
+    text-align: right;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+.stats .data-table tr:hover td {
+    background: rgba(255, 0, 255, 0.08);
+}
+
+/* Charts section */
+.charts-section {
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.chart-card {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(10, 10, 10, 0.95));
+    border: 2px solid rgba(255, 0, 255, 0.3);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(255, 0, 255, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.chart-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(255, 0, 255, 0.03) 0%, 
+        rgba(0, 255, 255, 0.03) 25%, 
+        rgba(255, 255, 0, 0.03) 50%, 
+        rgba(255, 0, 128, 0.03) 75%, 
+        rgba(128, 0, 255, 0.03) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.chart-card:hover {
+    border-color: rgba(0, 255, 255, 0.5);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 35px rgba(0, 255, 255, 0.2);
+    transform: translateY(-8px);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.chart-header h3 {
+    font-size: 24px;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.chart-controls .btn {
+    padding: 8px 16px;
+    font-size: 12px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 0, 255, 0.3);
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.chart-controls .btn:hover {
+    background: rgba(255, 0, 255, 0.15);
+    border-color: #ff00ff;
+    color: #ff00ff;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+    box-shadow: 0 0 12px rgba(255, 0, 255, 0.3);
+}
+
+.chart-controls .btn[aria-pressed="true"] {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.2));
+    border-color: #00ffff;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 1;
+}
+
+.chart-container canvas {
+    position: relative;
+    z-index: 2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .charts-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+    
+    .stat-header h2 {
+        font-size: 28px;
+    }
+    
+    .chart-header h3 {
+        font-size: 20px;
+    }
 }
 
