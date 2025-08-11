@@ -148,6 +148,55 @@ function cms_news_search_bar(): string
 HTML;
 }
 
+function cms_index_search_bar(): string
+{
+    return <<<HTML
+<div class="rightFindSearch">
+    <form action="index.php" id="searchform" name="searchform">
+        <input type="hidden" name="area" value="search">
+        <input type="hidden" name="genre" value="">
+        <input type="hidden" name="cc" value="US">
+        <table width="300" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="20">&nbsp;</td>
+                <td width="200"><input id="searchterm" name="term" type="text" size="35" maxlength="64"></td>
+                <td><a class="btn_search" href="index.php" onclick="document.searchform.submit();">Search</a></td>
+            </tr>
+        </table>
+    </form>
+</div>
+HTML;
+}
+
+function cms_find_more_list(int $rows = 1): string
+{
+    $row = <<<ROW
+        <tr>
+            <td align="center"></td>
+            <td align="center" width="90"><a href="index.php?area=all"><img border="0" height="16" src="img/ico/ico_mouse_lg.gif" width="26"><br>Games</a></td>
+            <td align="center" width="90"><a href="index.php?area=free&tab=demos"><img border="0" height="16" src="img/ico/ico_demo.gif" width="26"><br>Demos</a></td>
+            <td align="center" width="90"><a href="index.php?area=free&tab=videos"><img border="0" height="16" src="img/ico/ico_film_lg.gif" width="26"><br>Trailers</a></td>
+            <td align="center"></td>
+        </tr>
+ROW;
+    $rowsHtml = str_repeat($row, max(1, $rows));
+    return '<div class="rightFindMore"><table align="center" border="0" cellpadding="0" cellspacing="0" height="57" width="310">'
+        . $rowsHtml . '</table></div>';
+}
+
+function cms_get_steam_now_button(): string
+{
+    return <<<HTML
+<div align="center" class="btn_getSteam" onclick="location.href='index.php?area=getsteamnow'" onmouseout="this.style.background='url(img/btn_getSteam.gif)'" onmouseover="this.style.background='url(img/btn_getSteam_ovr.gif)'" style="CURSOR: pointer;" title="Click for Details">Get Steam Now !</div>
+<div class="btn_getSteam_sub">Everything you need to start playing now!</div><br>
+HTML;
+}
+
+function cms_spotlight_content(): string
+{
+    return cms_get_setting('spotlight_content', '<p>Spotlight content</p>');
+}
+
 function cms_news_archive_months(int $year, int $months = 12): string
 {
     $names = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
@@ -482,20 +531,48 @@ function cms_twig_env(string $tpl_dir): Environment
             return cms_get_setting('browse_catalog_title', 'Browse The Catalog');
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('browse_catalog_list', function() {
-            return cms_get_setting('browse_catalog_list', '');
+        $env->addFunction(new TwigFunction('browse_catalog_list', function(int $rows = 2) {
+            $html = cms_get_setting('browse_catalog_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('new_on_steam_list', function() {
-            return cms_get_setting('new_on_steam_list', '');
+        $env->addFunction(new TwigFunction('new_on_steam_list', function(int $limit = 10) {
+            $html   = cms_get_setting('new_on_steam_list', '');
+            $theme  = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['limit' => $limit], dirname(__DIR__) . '/themes/' . $theme);
+            $lines  = array_filter(preg_split('/\r?\n/', trim($render)));
+            $items  = array_slice($lines, 0, 10);
+            $items[] = '<a class="rightLink_moreNews" href="new.xml" target="_blank"><img border="0" height="11" src="img/ico/ico_arrow_green_wd.gif" width="22">  <img align="absmiddle" border="0" src="img/ico/ico_rss2.gif"/>  New on Steam RSS feed</a>';
+            return implode("\n", $items);
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('latest_news_list', function() {
-            return cms_get_setting('latest_news_list', '');
+        $env->addFunction(new TwigFunction('latest_news_list', function(int $rows = 5) {
+            $html = cms_get_setting('latest_news_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('find_list', function() {
-            return cms_get_setting('find_list', '');
+        $env->addFunction(new TwigFunction('find_list', function(int $rows = 3) {
+            $html = cms_get_setting('find_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('index_search_bar', function() {
+            return cms_index_search_bar();
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('find_more_list', function(int $rows = 1) {
+            return cms_find_more_list($rows);
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('get_steam_now_button', function() {
+            return cms_get_steam_now_button();
+        }, ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('spotlight_content', function() {
+            return cms_spotlight_content();
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('support_email', function() {
@@ -577,16 +654,20 @@ function cms_twig_env(string $tpl_dir): Environment
             return cms_get_setting('publisher_catalogs_title', 'Publisher Catalogs');
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('publisher_catalogs_list', function() {
-            return cms_get_setting('publisher_catalogs_list', '');
+        $env->addFunction(new TwigFunction('publisher_catalogs_list', function(int $rows = 3) {
+            $html = cms_get_setting('publisher_catalogs_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('coming_soon_title', function() {
             return cms_get_setting('coming_soon_title', 'Coming Soon To Steam');
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('coming_soon_list', function() {
-            return cms_get_setting('coming_soon_list', '');
+        $env->addFunction(new TwigFunction('coming_soon_list', function(int $rows = 3) {
+            $html = cms_get_setting('coming_soon_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('capsule_block', function(string $key) {
