@@ -10,6 +10,8 @@
 - FAQ admin list supports CSV/JSON import and export with preview
 - Storefront management pages grouped under sidebar dropdown
 - Dynamic news rendering via template tags
+- Green Steam admin themes provide windowed dashboards styled from archived examples
+- Green Steam admin themes exclude binary image assets to keep repository lean
 - Right-hand news sidebar rendered through a generic template tag for 2006–2007 themes
 - Platform update history pages use collapsible entries with latest update expanded by default
 - Full article news tag preserves HTML formatting

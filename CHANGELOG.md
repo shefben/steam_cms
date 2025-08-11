@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Removed binary image assets from Green Steam admin themes
 - Added neon-styled admin theme based on neon_version2 example.
 - Updated neon admin navigation markup to mirror original HTML structure.
 - Introduced Twig-driven admin layout system with per-page identifiers and tag-specific templates, including a neon default layout mirroring the example HTML.
@@ -18,6 +19,8 @@ All notable changes to this project will be documented in this file.
 - Legacy storefront package editor supports rich text descriptions with a WYSIWYG control.
 - Added interactive 2006+ index management page with drag-and-drop capsules and AJAX editing.
 - Index manager now supports GetTheGear and Freestuff/Custom capsule types with editable titles and rich text content.
+- Fixed Troubleshooter sidebar link to toggle sub-menu instead of navigating.
+- Introduced Green Steam admin themes with windowed layouts derived from example HTML.
 - GetTheGear and Freestuff capsules now match original theme dimensions (small in 2006, large in 2007).
 - Installer seeds 2006+ index management link in admin navigation.
 - 2006_v1, 2006_v2, 2007_v1, and 2007_v2 themes load index capsules from database entries.

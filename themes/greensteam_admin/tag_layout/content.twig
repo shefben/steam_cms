@@ -1,0 +1,12 @@
+<div class="draggable-window content-window" id="admin-content">
+    <div class="window-header">{{ page_title }}
+        <div class="window-controls">
+            <button class="window-control minimize-btn" onclick="minimizeWindow('admin-content')" aria-label="Minimize"></button>
+            <button class="window-control close-btn" onclick="closeWindow('admin-content')" aria-label="Close"></button>
+        </div>
+    </div>
+    <div class="window-content">
+        {{ content|raw }}
+    </div>
+    <div class="resize-handle" onmousedown="startResize(event,'admin-content')"></div>
+</div>
