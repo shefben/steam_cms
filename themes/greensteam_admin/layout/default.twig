@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>CMS Admin</title>
+    <title>Green Steam CMS - Separate Windows</title>
     <link rel="stylesheet" type="text/css" href="{{ theme_url }}/styles/greensteam/greensteam.css">
 </head>
 <body>
 <div class="desktop">
     <div class="header-bar">
-        <div class="header-title">CMS Administration</div>
+        <div class="header-title">Steam CMS Administration</div>
     </div>
     <div class="breadcrumb-bar">
-        {{ breadcrumbs_html|raw }}
+        <div class="breadcrumb">{{ breadcrumbs_html|raw }}</div>
     </div>
     {{ sidebar|raw }}
     {{ content|raw }}
