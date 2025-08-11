@@ -1214,7 +1214,6 @@ function cms_render_template(string $path, array $vars = []): void
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
-            $dir = 'images';
             $clean = ltrim($path, './');
             if (str_starts_with($clean, 'storefront/')) {
                 $clean = substr($clean, 11);
@@ -1229,6 +1228,8 @@ function cms_render_template(string $path, array $vars = []): void
             $path = preg_replace('~^(?:img|images)/~', '', $clean);
             $path = preg_replace('~^storefront/~', '', $path);
             $path = ltrim($path, '/');
+            $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+            return $m[1].'="'.$url.'"';
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -1236,7 +1237,7 @@ function cms_render_template(string $path, array $vars = []): void
         return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
     }, $html);
 
-    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url) {
+    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url, $theme) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1261,7 +1262,6 @@ function cms_render_template(string $path, array $vars = []): void
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
-            $dir = 'images';
             $clean = ltrim($path, './');
             if (str_starts_with($clean, 'storefront/')) {
                 $clean = substr($clean, 11);
@@ -1274,6 +1274,8 @@ function cms_render_template(string $path, array $vars = []): void
                 return 'url('.$m[1].$base.'storefront/images/'.$clean.$m[1].')';
             }
             $path = ltrim($clean, '/');
+            $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+            return 'url('.$m[1].$url.$m[1].')';
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -1281,7 +1283,7 @@ function cms_render_template(string $path, array $vars = []): void
         return 'url('.$m[1].$vars['THEME_URL'].'/'.$path.$m[1].')';
     }, $html);
 
-    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars) {
+    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars, $theme, $base_url) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1310,7 +1312,8 @@ function cms_render_template(string $path, array $vars = []): void
         $path = preg_replace('~^(?:img|images)/~', '', $clean);
         $path = preg_replace('~^storefront/~', '', $path);
         $path = ltrim($path, '/');
-        return 'newImage('.$m[1].$vars['THEME_URL'].'/images/'.$path.$m[1].')';
+        $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+        return 'newImage('.$m[1].$url.$m[1].')';
     }, $html);
 
 
@@ -1379,7 +1382,6 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
-            $dir = 'images';
             $clean = ltrim($path, './');
             if (str_starts_with($clean, 'storefront/')) {
                 $clean = substr($clean, 11);
@@ -1394,6 +1396,8 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
             $path = preg_replace('~^(?:img|images)/~', '', $clean);
             $path = preg_replace('~^storefront/~', '', $path);
             $path = ltrim($path, '/');
+            $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+            return $m[1].'="'.$url.'"';
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -1401,7 +1405,7 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
     }, $html);
 
-    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url) {
+    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url, $theme) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1426,7 +1430,6 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
-            $dir = 'images';
             $clean = ltrim($path, './');
             if (str_starts_with($clean, 'storefront/')) {
                 $clean = substr($clean, 11);
@@ -1439,6 +1442,8 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
                 return 'url('.$m[1].$base.'storefront/images/'.$clean.$m[1].')';
             }
             $path = ltrim($clean, '/');
+            $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+            return 'url('.$m[1].$url.$m[1].')';
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -1446,7 +1451,7 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         return 'url('.$m[1].$vars['THEME_URL'].'/'.$path.$m[1].')';
     }, $html);
 
-    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars) {
+    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars, $theme, $base_url) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1475,15 +1480,34 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         $path = preg_replace('~^(?:img|images)/~', '', $clean);
         $path = preg_replace('~^storefront/~', '', $path);
         $path = ltrim($path, '/');
-        return 'newImage('.$m[1].$vars['THEME_URL'].'/images/'.$path.$m[1].')';
+        $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+        return 'newImage('.$m[1].$url.$m[1].')';
     }, $html);
 
     echo $html;
 }
 
-function cms_rewrite_css_urls(string $css, string $theme_url, string $css_dir, string $base_url): string
+function cms_resolve_image(string $path, string $theme, string $theme_url, string $base_url): string
 {
-    return preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($theme_url, $css_dir, $base_url) {
+    $path = ltrim($path, '/');
+    $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
+    if (is_file($themeFile)) {
+        return $theme_url . '/images/' . $path;
+    }
+
+    $rootFile = dirname(__DIR__) . '/images/' . $path;
+    if (is_file($rootFile)) {
+        $base = $base_url ? rtrim($base_url, '/') . '/' : '';
+        return $base . 'images/' . $path;
+    }
+
+    $base = $base_url ? rtrim($base_url, '/') . '/' : '';
+    return $base . 'image_not_found.jpg';
+}
+
+function cms_rewrite_css_urls(string $css, string $theme, string $theme_url, string $css_dir, string $base_url): string
+{
+    return preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($theme, $theme_url, $css_dir, $base_url) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1508,7 +1532,6 @@ function cms_rewrite_css_urls(string $css, string $theme_url, string $css_dir, s
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
-            $dir = 'images';
             $clean = ltrim($path, './');
             if (str_starts_with($clean, 'storefront/')) {
                 $clean = substr($clean, 11);
@@ -1523,6 +1546,8 @@ function cms_rewrite_css_urls(string $css, string $theme_url, string $css_dir, s
             $path = preg_replace('~^(?:img|images)/~', '', $clean);
             $path = preg_replace('~^storefront/~', '', $path);
             $path = ltrim($path, '/');
+            $url  = cms_resolve_image($path, $theme, $theme_url, $base_url);
+            return 'url('.$m[1].$url.$m[1].')';
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -1546,7 +1571,7 @@ function cms_rewrite_css_file(string $theme, string $css_path, string $theme_url
         if ($css_dir === '.') {
             $css_dir = '';
         }
-        $css = cms_rewrite_css_urls($css, $theme_url, $css_dir, $base_url);
+        $css = cms_rewrite_css_urls($css, $theme, $theme_url, $css_dir, $base_url);
         if (!is_dir($cache_dir)) {
             mkdir($cache_dir);
         }
