@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Green Steam CMS - Separate Windows</title>
+    <link rel="stylesheet" type="text/css" href="./styles/greensteam/greensteam.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .desktop {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: #3e4637;
+        }
+        
+        .header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background-color: #4c5844;
+            border-bottom: solid 1px #292d23;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .header-title {
+            color: #c4b550;
+            font-weight: bold;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .breadcrumb-bar {
+            position: fixed;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background-color: #5a6a50;
+            border-bottom: solid 1px #292d23;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .breadcrumb {
+            color: #d8ded3;
+            font-size: 12px;
+        }
+        
+        .breadcrumb a {
+            color: #c4b550;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            color: #E3E41F;
+            text-decoration: underline;
+        }
+        
+        .draggable-window {
+            position: absolute;
+            background-color: #4c5844;
+            border-top: solid 1px #899281;
+            border-bottom: solid 1px #292d23;
+            border-left: solid 1px #899281;
+            border-right: solid 1px #292d23;
+            min-width: 200px;
+            min-height: 150px;
+            z-index: 10;
+        }
+        
+        .window-header {
+            height: 25px;
+            background-color: #4c5844;
+            background-image: url("./styles/greensteam/steamico.png"), url("./styles/greensteam/minimize.png"), url("./styles/greensteam/close.png");
+            background-repeat: no-repeat;
+            background-position: 5px center, calc(100% - 40px) center, calc(100% - 20px) center;
+            cursor: move;
+            display: flex;
+            align-items: center;
+            padding-left: 25px;
+            color: white;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            user-select: none;
+            border-bottom: solid 1px #292d23;
+        }
+        
+        .window-controls {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 25px;
+            display: flex;
+        }
+        
+        .window-control {
+            width: 20px;
+            height: 25px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+        }
+        
+        .minimize-btn {
+            background-image: url("./styles/greensteam/minimize.png");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .close-btn {
+            background-image: url("./styles/greensteam/close.png");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .window-content {
+            padding: 15px;
+            height: calc(100% - 40px);
+            overflow-y: auto;
+            color: #d8ded3;
+        }
+        
+        .resize-handle {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background-image: url("./styles/greensteam/resize.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: nw-resize;
+        }
+        
+        .sidebar-window {
+            top: 80px;
+            left: 20px;
+            width: 250px;
+            height: 400px;
+        }
+        
+        .content-window {
+            top: 80px;
+            left: 290px;
+            width: 500px;
+            height: 400px;
+        }
+        
+        .minimized {
+            height: 25px !important;
+            overflow: hidden;
+        }
+        
+        .minimized .window-content {
+            display: none;
+        }
+        
+        .minimized .resize-handle {
+            display: none;
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .nav-list li {
+            border-bottom: solid 1px #292d23;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        
+        .nav-list li:hover {
+            background-color: #5a6a50;
+        }
+        
+        .nav-list a {
+            color: #c4b550;
+            text-decoration: none;
+        }
+        
+        .nav-list a:hover {
+            color: #E3E41F;
+        }
+        
+        h1, h2 {
+            color: #c4b550;
+            margin: 0 0 15px 0;
+        }
+        
+        p {
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #d8ded3;
+        }
+        
+        input[type="text"], input[type="email"], textarea, select {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="desktop">
+        <div class="header-bar">
+            <div class="header-title">Steam CMS Administration</div>
+        </div>
+        
+        <div class="breadcrumb-bar">
+            <div class="breadcrumb">
+                <a href="#">Home</a> > <a href="#">Admin</a> > <span>Dashboard</span>
+            </div>
+        </div>
+        
+        <!-- Navigation Sidebar Window -->
+        <div class="draggable-window sidebar-window" id="sidebar">
+            <div class="window-header">
+                Navigation
+                <div class="window-controls">
+                    <button class="window-control minimize-btn" onclick="minimizeWindow('sidebar')"></button>
+                    <button class="window-control close-btn" onclick="closeWindow('sidebar')"></button>
+                </div>
+            </div>
+            <div class="window-content">
+                <ul class="nav-list">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Users</a></li>
+                    <li><a href="#">Games</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">System</a></li>
+                    <li><a href="#">Logs</a></li>
+                </ul>
+            </div>
+            <div class="resize-handle" onmousedown="startResize(event, 'sidebar')"></div>
+        </div>
+        
+        <!-- Main Content Window -->
+        <div class="draggable-window content-window" id="content">
+            <div class="window-header">
+                Dashboard
+                <div class="window-controls">
+                    <button class="window-control minimize-btn" onclick="minimizeWindow('content')"></button>
+                    <button class="window-control close-btn" onclick="closeWindow('content')"></button>
+                </div>
+            </div>
+            <div class="window-content">
+                <h1>Welcome to Steam CMS</h1>
+                <p>This is the main content area. You can manage your Steam content management system from here.</p>
+                
+                <h2>Recent Activity</h2>
+                <p>Here's what's been happening recently on your Steam platform:</p>
+                <ul>
+                    <li>3 new user registrations today</li>
+                    <li>12 games added to catalog</li>
+                    <li>News article published: "Steam Summer Sale"</li>
+                    <li>System maintenance scheduled for tomorrow</li>
+                </ul>
+                
+                <h2>Quick Actions</h2>
+                <div class="form-group">
+                    <button>Add New Game</button>
+                    <button>Create News Post</button>
+                    <button>View Reports</button>
+                </div>
+                
+                <h2>System Status</h2>
+                <p>All systems operational. Server load: 23%</p>
+                
+                <div class="form-group">
+                    <label>Quick Search:</label>
+                    <input type="text" placeholder="Search games, users, or content...">
+                </div>
+            </div>
+            <div class="resize-handle" onmousedown="startResize(event, 'content')"></div>
+        </div>
+    </div>
+
+    <script>
+        let isDragging = false;
+        let isResizing = false;
+        let currentElement = null;
+        let startX, startY, startWidth, startHeight, startLeft, startTop;
+
+        // Make windows draggable
+        document.addEventListener('mousedown', function(e) {
+            if (e.target.classList.contains('window-header')) {
+                isDragging = true;
+                currentElement = e.target.parentElement;
+                const rect = currentElement.getBoundingClientRect();
+                startX = e.clientX - rect.left;
+                startY = e.clientY - rect.top;
+                currentElement.style.zIndex = getHighestZIndex() + 1;
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging && currentElement) {
+                const x = e.clientX - startX;
+                const y = e.clientY - startY;
+                currentElement.style.left = Math.max(0, x) + 'px';
+                currentElement.style.top = Math.max(70, y) + 'px';
+            } else if (isResizing && currentElement) {
+                const width = Math.max(200, e.clientX - currentElement.offsetLeft);
+                const height = Math.max(150, e.clientY - currentElement.offsetTop);
+                currentElement.style.width = width + 'px';
+                currentElement.style.height = height + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+            isResizing = false;
+            currentElement = null;
+        });
+
+        // Window controls
+        function minimizeWindow(windowId) {
+            const window = document.getElementById(windowId);
+            window.classList.toggle('minimized');
+        }
+
+        function closeWindow(windowId) {
+            const window = document.getElementById(windowId);
+            window.style.display = 'none';
+        }
+
+        // Resize functionality
+        function startResize(e, windowId) {
+            e.preventDefault();
+            e.stopPropagation();
+            isResizing = true;
+            currentElement = document.getElementById(windowId);
+            currentElement.style.zIndex = getHighestZIndex() + 1;
+        }
+
+        // Utility function to get highest z-index
+        function getHighestZIndex() {
+            let highest = 10;
+            const windows = document.querySelectorAll('.draggable-window');
+            windows.forEach(window => {
+                const zIndex = parseInt(window.style.zIndex || 10);
+                if (zIndex > highest) highest = zIndex;
+            });
+            return highest;
+        }
+
+        // Bring window to front when clicked
+        document.addEventListener('mousedown', function(e) {
+            const window = e.target.closest('.draggable-window');
+            if (window) {
+                window.style.zIndex = getHighestZIndex() + 1;
+            }
+        });
+    </script>
+</body>
+</html>
