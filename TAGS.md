@@ -104,6 +104,19 @@ Label for the link to the full news archive.
 ### `news_search_bar()`
 Outputs the news search form used by 2007 themes.
 
+### `index_search_bar()`
+Search form displayed at the top of 2007 home page sidebars.
+
+### `get_steam_now_button()`
+Renders the "Get Steam Now" call-to-action used in 2006 sidebars.
+
+### `find_more_list(rows = 1)`
+List of Games, Demos, and Trailers links shown under the "Find More" header.
+The `rows` parameter controls how many table rows are rendered.
+
+### `spotlight_content()`
+Outputs Spotlight HTML, customizable via settings.
+
 ### `sidebar_right(year, page = 'news')`
 Renders the right-hand sidebar for the given `page`. For `page = 'news'`, 2006 themes display the STEAM NEWS header, RSS link and archive months while 2007 themes show the search bar.
 
@@ -113,15 +126,15 @@ Renders the right-hand sidebar for the given `page`. For `page = 'news'`, 2006 t
 
 ## Simple Text Blocks
 
-Each of these tags outputs raw HTML stored in the `settings` table. They take no parameters.
+Each of these tags outputs raw HTML stored in the `settings` table. Lists accept a `rows` parameter to control how many rows are rendered (column counts are fixed).
 
 - `join_steam_text()` – promotional blurb for the Join Steam box.
-- `new_on_steam_title()`, `new_on_steam_list()` – heading and list for new releases.
-- `latest_news_title()`, `latest_news_list()` – heading and list for the Latest News block.
-- `find_title()`, `find_list()` – heading and list for the Find section.
-- `browse_catalog_title()` – heading for the catalog link list.
-- `publisher_catalogs_title()`, `publisher_catalogs_list()` – heading and list of publisher catalogs.
-- `coming_soon_title()`, `coming_soon_list()` – heading and list for upcoming releases.
+- `new_on_steam_title()`, `new_on_steam_list(limit = 10)` – heading and list for new releases, capped at ten items with an RSS feed link.
+- `latest_news_title()`, `latest_news_list(rows = 5)` – heading and list for the Latest News block.
+- `find_title()`, `find_list(rows = 3)` – heading and list for the Find section.
+- `browse_catalog_title()`, `browse_catalog_list(rows = 2)` – heading and grid of catalog links.
+- `publisher_catalogs_title()`, `publisher_catalogs_list(rows = 3)` – heading and list of publisher catalogs.
+- `coming_soon_title()`, `coming_soon_list(rows = 3)` – heading and list for upcoming releases.
 - `gear_block()`, `free_block()` – sidebar promo blocks.
 - `support_email()` – support contact address.
 
@@ -253,7 +266,7 @@ The following table lists each tag or tag group, where its content is managed in
 |`footer`|**Header/Footer**|`theme_footers`|
 |`news*` tags|**News** (`news.php`)|`news`|
 |`join_steam_text`, `join_steam_block`|**Settings** (`settings.php`)|`settings`|
-|`new_on_steam_title`, `new_on_steam_list`, `latest_news_title`, `latest_news_list`, `find_title`, `find_list`, `browse_catalog_title`, `browse_catalog_list`, `publisher_catalogs_title`, `publisher_catalogs_list`, `coming_soon_title`, `coming_soon_list`, `gear_block`, `free_block`|**Settings**|`settings`|
+|`new_on_steam_title`, `new_on_steam_list`, `latest_news_title`, `latest_news_list`, `find_title`, `find_list`, `browse_catalog_title`, `browse_catalog_list`, `publisher_catalogs_title`, `publisher_catalogs_list`, `coming_soon_title`, `coming_soon_list`, `gear_block`, `free_block`, `spotlight_content`|**Settings**|`settings`|
 |`categories_list`|**Storefront Categories** (`storefront_categories.php`)|`store_categories`|
 |`capsule_block`, `large_capsule_block`, `featured_capsules`|**Storefront Main** (`storefront_main.php`) and **Upload Capsule** (`upload_capsule.php`)|`storefront_capsules_all`, `storefront_capsules_per_theme`, `store_capsules`|
 |`store_sidebar`|**Storefront Sidebar** (`storefront_sidebar.php`)|`store_sidebar_links`|
