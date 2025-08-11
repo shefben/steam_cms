@@ -236,6 +236,7 @@
 - Legacy support forms render from archived HTML through Twig layouts, eliminating the installer script.
 - Storefront themes pull capsule type, content, and ordering from the database, including custom tabbed capsules.
 - Admin capsule builder supports per-theme selection, and the installer seeds Gear/Freestuff capsules with default content.
+- Default 2006+ capsules load from a unified `storefront_capsule_items` table seeded during installation.
 - Installer seeds a sample random content group for character images, enabling homepages to display one of several characters at random.
 - Multi-step map contest submission form is styled and validates required fields with jQuery.
 - Installer seeds download categories parsed from 2004 and 2003_v2 download pages.
