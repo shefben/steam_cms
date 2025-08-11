@@ -1,0 +1,1 @@
+ALTER TABLE custom_pages ADD COLUMN header_image VARCHAR(255) DEFAULT NULL;

@@ -349,6 +349,20 @@ function cms_twig_env(string $tpl_dir): Environment
             cms_set_header_logo_override($path);
             return '';
         }, ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('content_header_image', function() {
+            $img = cms_get_content_header_image();
+            if (!$img) {
+                return '';
+            }
+            $base = cms_base_url();
+            if (strncasecmp($img, 'http', 4) !== 0) {
+                if ($img !== '' && $img[0] !== '/') {
+                    $img = '/' . $img;
+                }
+                $img = $base . $img;
+            }
+            return '<img src="' . htmlspecialchars($img) . '" alt="">';
+        }, ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('logo', function() {
             $theme = cms_get_current_theme();
             $data  = cms_get_theme_header_data($theme);
