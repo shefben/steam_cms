@@ -31,6 +31,7 @@ if (isset($admin_layout) && $admin_layout) {
         'admin_initials' => $admin_initials,
         'notifications_html' => $notifications_html ?? '',
         'breadcrumbs_html' => $breadcrumbs_html,
+        'page_id' => $page_id ?? '',
     ], $admin_theme);
     cms_render_template($admin_layout, [
         'sidebar' => $sidebar,
