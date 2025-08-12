@@ -1,0 +1,273 @@
+<html><head>
+<title>Steam Games</title>
+<script language="JavaScript" src="site/javascript.js"></script><style type="text/css" id="operaUserStyle"></style>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="ALL" name="ROBOTS">
+<meta content="SteamPowered" name="DESCRIPTION">
+<meta content="Steam, account, account creation, signup" name="KEYWORDS">
+<meta content="Valve LLC" name="AUTHOR">
+<link href="storefront.css" rel="stylesheet" type="text/css">
+<link href="webicon.png" rel="Shortcut Icon" type="image/png">
+<script language="JavaScript" src="nav.js"></script>
+<link href="rss.xml" rel="alternate" title="Valve RSS News Feed" type="application/rss+xml">
+</head>
+<body style="background: #4c5844; margin: 0px 0px 0px 0px; line-height: 12px; font-size: 8px; font-family: Verdana, Arial, Helvetica;">
+<table border="0" cellpadding="0" cellspacing="0" style="height: 100%;" width="100%">
+<tbody><tr>
+<td>
+<!-- begin header -->
+{{ header(withButtons=false) }}
+<!-- end header -->
+</td>
+</tr>
+<tr>
+<td height="100%">
+<table align="center" cellpadding="0" cellspacing="0" style="height: 100%;">
+<tbody><tr>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="storefront/sp_top_left.gif"></td>
+<td bgcolor="#FFFFFF" rowspan="3" valign="top">
+<table align="center" border="0" cellpadding="0" cellspacing="0" style="height: 100%;" width="736">
+<tbody><tr>
+<td align="left" nowrap="" valign="top" width="10"></td>
+<td align="left" nowrap="" valign="top" width="118">
+<table cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td height="10"></td>
+</tr>
+<tr>
+<td nowrap="">
+{% for ln in links %}
+  {% if ln.type == 'spacer' %}
+    <div class="menu_spacer"></div>
+  {% elseif ln.hidden is empty %}
+    {% if ln.current is not empty %}
+      <span><font face="Wingdings 3"><span class="menu_pointer">&#132;</span></font> <a class="menu_item_current" href="{{ ln.url }}">{{ ln.label }}</a></span><br/>
+    {% else %}
+      <span><a class="menu_item" href="{{ ln.url }}">{{ ln.label }}</a></span><br/>
+    {% endif %}
+  {% endif %}
+{% endfor %}
+</td>
+</tr>
+</tbody></table>
+</td>
+<td width="8"><nobr>&nbsp;&nbsp;</nobr></td>
+<td align="left" style="height: 100%" valign="top" width="100%">
+<table cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td><span class="normal_text"><style type="text/css">
+<!--
+.copy {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+	padding-right: 260px;
+	padding-left: 25px;
+	padding-bottom: 25px;
+	padding-top: 95px;
+}
+-->
+</style>
+<table background="{{ BASE }}/storefront/apps/{{ game.appid }}/headers/{{ game.productheader_path }}" cellpadding="0" cellspacing="0" height="220" width="600">
+<tbody><tr>
+<td class="copy" height="194" valign="top">{{ game.description }}</td>
+</tr>
+</tbody></table>
+<table background="apps/metaCriticSpace.jpg" cellpadding="0" cellspacing="0" height="40" width="600">
+<tbody><tr>
+<td width="150"><img height="34" src="apps/metaCriticLogo.jpg" width="145"></td>
+<td class="metaCriticNumber" valign="bottom" width="75">{{game.metascore_score}}<img align="top" class="metaCriticLink" height="26" src="apps/metaCriticBase.jpg" width="33"></td>
+<td class="metaCriticLink" valign="bottom"><a class="metaCriticLink" href="{{game.metascore_url}}" target="_new">read reviews </a></td>
+</tr>
+</tbody></table>
+<table cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td height="5"></td>
+</tr>
+<tr>
+<td background="screenshots.jpg" height="68" valign="middle" width="600">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td nowrap="" width="84"></td>
+<td width="100%">
+{% for img in images|slice(0,5) %}
+<img src="{{ BASE }}/storefront/images/apps/{{ game.appid }}/screenshots/{{ img }}" hspace="10" border="0" style="border: 1px Solid #5594a3;">
+{% endfor %}
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<div class="line_spacer"></div>
+<table cellpadding="0" cellspacing="0" width="600">
+<tbody><tr>
+<td colspan="6" width="100%">
+<table cellpadding="0" cellspacing="0" width="100%"> <tbody><tr> <td nowrap=""><img height="50" src="icon_info.gif" width="50"></td> <td nowrap="">&nbsp;</td> <td width="100%">To get this game or package, you need Steam. If you don't yet have it installed, click the button on the right to download Steam now.</td> <td nowrap="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> <td nowrap=""> <table cellpadding="0" cellspacing="0" width="110">
+<tbody><tr>
+<td background="tab_left_black.gif" height="20" nowrap="" width="5"></td>
+<td align="center" bgcolor="#000000" nowrap="" width="100%"><a class="get_steam_button" href="http://www.steampowered.com/?area=getsteamnow">Get Steam Now</a></td>
+<td background="tab_right_black.gif" height="20" nowrap="" width="5"></td>
+</tr>
+</tbody></table>
+</td> </tr> </tbody></table> </td>
+</tr>
+<tr>
+<td colspan="6" width="100%"><div class="line_spacer"></div></td>
+</tr>
+<tr>
+<td colspan="6" width="100%"><span class="purchase_header">Purchase:</span></td>
+</tr>
+<tr>
+<td valign="top" width="100%">
+<span class="package_title">{{game.title}}</span><br>
+<span class="package_description"></span><br>
+</td>
+<td nowrap="" valign="top"></td>
+<td nowrap="" valign="top">&nbsp;</td>
+<td align="right" nowrap="" valign="top"><span class="package_title">${{game.price}}</span></td>
+<td nowrap="" valign="top"><span class="normal_text">&nbsp;&nbsp;</span></td>
+<td nowrap="" valign="top">
+<table cellpadding="0" cellspacing="0" width="110">
+<tbody><tr>
+<td background="tab_left_red.gif" height="20" nowrap="" width="5"></td>
+<td align="center" background="tab_middle_red.gif" bgcolor="#800000" nowrap="" width="100%"><a class="purchase_button" href="steam://purchase/{{game.appid}}">Purchase</a></td>
+<td background="tab_right_red.gif" height="20" nowrap="" width="5"></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td align="right" colspan="4" width="100%"><span class="discount_text"></span></td>
+<td colspan="2" width="100%"><span class="normal_text"></span></td>
+</tr>
+<tr>
+<td colspan="6" width="100%"><div class="line_spacer"></div></td>
+</tr>
+<tr>
+<td colspan="6" width="100%"><span class="purchase_header">Purchase as part of:</span></td>
+</tr>
+<tr>
+<td valign="top" width="100%">
+<span class="package_title">{{game.package[i].title}}</span><br>
+<span class="package_description"></span><br>
+</td>
+<td nowrap="" valign="top">
+<table cellpadding="0" cellspacing="0" width="110">
+<tbody><tr>
+<td background="tab_left_gray.gif" height="20" nowrap="" width="5"></td>
+<td align="center" background="tab_middle_gray.gif" bgcolor="#dddddd" nowrap="" width="100%"><a class="details_button" href="v2/index.php?area=package&amp;SubId={{game.package[i].subid}}&amp;">Package Details</a></td>
+<td background="tab_right_gray.gif" height="20" nowrap="" width="5"></td>
+</tr>
+</tbody></table>
+</td>
+<td nowrap="" valign="top">&nbsp;</td>
+<td align="right" nowrap="" valign="top"><span class="package_title">${{game.package[i].price}}</span></td>
+<td nowrap="" valign="top"><span class="normal_text">&nbsp;&nbsp;</span></td>
+<td nowrap="" valign="top">
+<table cellpadding="0" cellspacing="0" width="110">
+<tbody><tr>
+<td background="tab_left_red.gif" height="20" nowrap="" width="5"></td>
+<td align="center" background="tab_middle_red.gif" bgcolor="#800000" nowrap="" width="100%"><a class="purchase_button" href="steam://purchase/{{game.package[i].subid}}">Purchase</a></td>
+<td background="tab_right_red.gif" height="20" nowrap="" width="5"></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td align="right" colspan="4" width="100%"><span class="discount_text"></span></td>
+<td colspan="2" width="100%"><span class="normal_text"></span></td>
+</tr>
+<tr>
+<td colspan="6" width="100%"><div class="line_spacer"></div></td>
+</tr>
+<tr>
+<td colspan="6" width="100%"><span class="purchase_header">Purchase as part of:</span></td>
+</tr>
+
+<tr>
+<td valign="top" width="100%">
+<span class="package_title">{{game.package[i]}}</span><br>
+<span class="package_description"></span><br>
+</td>
+<td nowrap="" valign="top">
+<table cellpadding="0" cellspacing="0" width="110">
+<tbody><tr>
+<td background="tab_left_gray.gif" height="20" nowrap="" width="5"></td>
+<td align="center" background="tab_middle_gray.gif" bgcolor="#dddddd" nowrap="" width="100%"><a class="details_button" href="v2/index.php?area=package&amp;SubId={{game.package[i].subid}}&amp;">Package Details</a></td>
+<td background="tab_right_gray.gif" height="20" nowrap="" width="5"></td>
+</tr>
+</tbody></table>
+</td>
+<td nowrap="" valign="top">&nbsp;</td>
+<td align="right" nowrap="" valign="top"><span class="package_title">${{game.package[i].price}}</span></td>
+<td nowrap="" valign="top"><span class="normal_text">&nbsp;&nbsp;</span></td>
+<td nowrap="" valign="top">
+<table cellpadding="0" cellspacing="0" width="110">
+<tbody><tr>
+<td background="tab_left_red.gif" height="20" nowrap="" width="5"></td>
+<td align="center" background="tab_middle_red.gif" bgcolor="#800000" nowrap="" width="100%"><a class="purchase_button" href="steam://purchase/{{game.package[i].subid}}">Purchase</a></td>
+<td background="tab_right_red.gif" height="20" nowrap="" width="5"></td>
+</tr>
+</tbody></table>
+</td>
+</tr><tr>
+<td align="right" colspan="4" width="100%"><span class="discount_text"></span></td>
+<td colspan="2" width="100%"><span class="normal_text"></span></td>
+</tr>
+<tr>
+<td colspan="6" width="100%"><div class="line_spacer"></div></td>
+</tr>
+<tr>
+<td colspan="6" width="100%">
+<table cellpadding="0" cellspacing="0" width="100%"> <tbody><tr> <td width="100%"> <span class="purchase_header">System Requirements</span><br> <span style="color:gray;">
+<br>
+<b>Minimum:</b><br>{{game.minimumreqs}}<br>
+<br>
+<b>Recommended:</b><br>{{game.recommendedreqs}}<br>
+</span> </td> <td nowrap="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> </tr> </tbody></table><br><br>&nbsp;	</td>
+</tr>
+</tbody></table>
+</span></td>
+</tr>
+</tbody></table><br>
+</td>
+</tr>
+</tbody></table>
+</td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="storefront/sp_top_right.gif"></td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF"></td>
+<td bgcolor="#FFFFFF"></td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="storefront/sp_bottom_left.gif"></td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="storefront/sp_bottom_right.gif"></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td>
+<!-- begin footer -->
+<div style="float: center; padding: 8px 0px 8px 0px; background: #4c5844; margin-bottom: 0px; width: 100%; font-size: 7pt; line-height: 8pt; color: #75806f; position: relative;">
+<table cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td><a href="http://www.valvesoftware.com"><img border="0" src="valve_greenlogo.gif"></a></td>
+<td>&nbsp;</td>
+<td><span style="font-size: 7pt; line-height: 8pt; color: #75806f;">{{footer()}}</span></td>
+<td width="15%">&nbsp;</td>
+</tr>
+</tbody></table>
+</div>
+<!-- end footer -->
+</td>
+</tr>
+</tbody></table>
+
+
+
+
+ </body></html>

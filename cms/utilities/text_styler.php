@@ -295,21 +295,21 @@ function renderGetSteamNowButton(string $inputText): string
  * ------------------------------------------------------------------------- */
 
 // 2002_v1 Title
-header('Content-Type: text/html; charset=UTF-8');
-echo render2002Title([
-    [11, 'Game Player License Agreement'],
-    [18, 'VALVE, L.L.C.'],
-    [18, 'STEAM GAME PLAYER AGREEMENT']
-]);
+//header('Content-Type: text/html; charset=UTF-8');
+//echo render2002Title([
+//    [11, 'Game Player License Agreement'],
+//    [18, 'VALVE, L.L.C.'],
+//    [18, 'STEAM GAME PLAYER AGREEMENT']
+//]);
 
 // 2002_v2/2003_v1 catagory bar
-echo render0203CatagoryBar('GET ANSWERS TO YOUR QUESTIONS');
+//echo render0203CatagoryBar('GET ANSWERS TO YOUR QUESTIONS');
 
 // 2002_v2/2003_v1 Webpage Title
-echo render0203PageTitle('Support');
+//echo render0203PageTitle('Support');
 
 // 2004/2005_v1 Download Steam button
-echo renderGetSteamNowButton("  CLICK HERE TO DOWNLOAD THE STEAM INSTALLER ( < 1MB )");
+//echo renderGetSteamNowButton("  CLICK HERE TO DOWNLOAD THE STEAM INSTALLER ( < 1MB )");
 ?>
 
 
