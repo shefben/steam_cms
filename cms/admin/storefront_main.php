@@ -247,9 +247,10 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
         <button type="button" id="btnUploadNew" class="btn btn-secondary">Upload New Image</button>
       </div>
       <div id="capExisting" style="display:none;">
-        <label>Image
-          <select id="existingFile"></select>
-        </label>
+        <div>
+          <img id="existingPreview" src="" alt="preview" style="display:none;max-width:100%;margin-bottom:10px;">
+          <button type="button" id="selectExistingImg" class="btn btn-secondary">Select Image</button>
+        </div>
         <label>App
           <select id="existingAppid"></select>
         </label>
@@ -310,14 +311,20 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   #capsuleModal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:1000;}
   #capsuleModal .dialog{background:#fff;padding:20px;border:1px solid #333;max-width:600px;}
   </style>
+  <link rel="stylesheet" href="css/image-picker.css">
   <link rel="stylesheet" href="<?php echo htmlspecialchars($theme_url); ?>/cropper.min.css">
   <script src="<?php echo htmlspecialchars($theme_url); ?>/js/cropper.min.js"></script>
+  <div id="existingImageDialog" title="Select Image" style="display:none;">
+    <select id="existingImageList"></select>
+  </div>
+  <script src="js/image-picker.min.js"></script>
   <script>
   $(function(){
   var images = <?php echo json_encode($images);?>;
   var apps = <?php echo json_encode($apps);?>;
   var dims = <?php echo json_encode($dimsMap); ?>;
   var cropper = null;
+  var selectedFile='';
 
   function populateAppLists() {
     var opts='';
@@ -339,19 +346,8 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   $('#btnSelectExisting').on('click',function(){
     var pos=$('#capsuleModal').data('pos');
     if(cropper){ cropper.destroy(); cropper=null; }
-    var grouped={};
-    $.each(images[pos]||[],function(i,img){
-       var p=img.file.split('/')[0];
-       if(!grouped[p]) grouped[p]=[];
-       grouped[p].push(img.file);
-    });
-    var opts='';
-    $.each(grouped,function(group,files){
-       opts+='<optgroup label="'+group+'">';
-       $.each(files,function(_,f){ opts+='<option value="'+f+'">'+f+'</option>'; });
-       opts+='</optgroup>';
-    });
-    $('#existingFile').html(opts);
+    $('#existingPreview').hide();
+    selectedFile='';
     $('#existingAppid').val('');
     $('#capChoose').hide();
     $('#capExisting').show();
@@ -359,9 +355,28 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
     $('#uploadAccept').prop('disabled',false);
   });
 
+  $('#selectExistingImg').on('click',function(){
+    var pos=$('#capsuleModal').data('pos');
+    var opts='';
+    $.each(images[pos]||[],function(i,img){
+        opts+='<option data-img-src="../../storefront/images/capsules/'+img.file+'" value="'+img.file+'">'+img.file+'</option>';
+    });
+    $('#existingImageList').html(opts).imagepicker();
+    $('#existingImageDialog').dialog({modal:true,width:600,buttons:{
+        'Select': function(){
+            selectedFile=$('#existingImageList').val();
+            if(selectedFile){
+                $('#existingPreview').attr('src','../../storefront/images/capsules/'+selectedFile).show();
+            }
+            $(this).dialog('close');
+        },
+        'Cancel': function(){ $(this).dialog('close'); }
+    }});
+  });
+
   $('#existingAccept').on('click',function(){
     var pos=$('#capsuleModal').data('pos');
-    var file=$('#existingFile').val();
+    var file=selectedFile;
     var appid=$('#existingAppid').val();
     if(!file||!appid){ alert('Select image and app'); return; }
     $.post('storefront_main.php',{update:1,position:pos,image:file,appid:appid},function(){

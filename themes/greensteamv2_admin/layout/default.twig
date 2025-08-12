@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>CMS Admin</title>
-    <link rel="stylesheet" type="text/css" href="{{ theme_url }}/styles/greensteam/greensteam.css">
+    <title>Green Steam Admin v2</title>
+    <link rel="stylesheet" type="text/css" href="{{ theme_url }}/steam_shared.css">
+    <link rel="stylesheet" type="text/css" href="{{ theme_url }}/greensteam/greensteam.css">
 </head>
 <body>
-<main>
+<div class="desktop">
+    <div class="header-bar">
+        <div class="header-title">Steam CMS Administration</div>
+    </div>
+    <div class="breadcrumb-bar">
+        <div class="breadcrumb">{{ breadcrumbs_html|raw }}</div>
+    </div>
     {{ sidebar|raw }}
     {{ content|raw }}
-</main>
+</div>
 </body>
 </html>

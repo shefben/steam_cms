@@ -73,7 +73,7 @@ if(isset($_POST['save'])){
     cms_save_theme_settings($theme, $_POST);
     require_once __DIR__.'/../update_htaccess.php';
     cms_update_htaccess();
-    echo '<p>Theme updated.</p>';
+    $saved = true;
 }
 ?>
 <h2>Theme Configuration</h2>
@@ -95,6 +95,9 @@ Theme: <select name="theme">
 </div>
 <input type="submit" name="save" value="Save">
 </form>
+<?php if(!empty($saved)): ?>
+<script>showNotify('OK');</script>
+<?php endif; ?>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
     var select=document.querySelector('select[name="theme"]');
@@ -107,5 +110,20 @@ document.addEventListener('DOMContentLoaded',function(){
     update();
 });
 </script>
+<script>
+function showNotify(msg){
+  var n=document.createElement('div');
+  n.className='cms-notify';
+  n.textContent=msg;
+  document.body.appendChild(n);
+  requestAnimationFrame(function(){n.classList.add('show');});
+  setTimeout(function(){n.classList.remove('show');},3000);
+  setTimeout(function(){n.remove();},3500);
+}
+</script>
+<style>
+.cms-notify{position:fixed;right:20px;bottom:-50px;background:#333;color:#fff;padding:10px 20px;border-radius:4px;transition:bottom .3s;}
+.cms-notify.show{bottom:20px;}
+</style>
 <p><a href="index.php">Back</a></p>
 <?php include 'admin_footer.php'; ?>
