@@ -45,8 +45,17 @@
                                   </div>
                         </div>
                     </div></header>
-<div class="stat-card" style="padding-top: 25px;">
-
+{% if page_id == 'index' %}
     {{ content|raw }}
-</div>
+{% else %}
+    {% set normalized = content|replace({'<hr />':'<hr>','<hr/>':'<hr>'}) %}
+    {% set sections = normalized|split('<hr>') %}
+    {% for section in sections %}
+        {% if section|trim %}
+        <div class="chart-card">
+            {{ section|raw }}
+        </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 </main>
