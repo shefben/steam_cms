@@ -1,82 +1,102 @@
 <?php
 require_once 'admin_header.php';
 cms_require_permission('manage_pages');
-$settingKeys = [
-    'cafe_signup' => 'cafe_signup_page_2004',
-    'cheat_form' => 'cheat_form_page_2004',
-    'cd_account' => 'cd_account_page_2004'
-];
-$current = [
-    'cafe_signup' => cms_get_setting($settingKeys['cafe_signup'], '2004_signup_v1'),
-    'cheat_form' => cms_get_setting($settingKeys['cheat_form'], '2004_cheat_v1'),
-    'cd_account' => cms_get_setting($settingKeys['cd_account'], '2004_cd_v1')
-];
-if(isset($_POST['save'])){
-    foreach($settingKeys as $k=>$key){
-        if(isset($_POST[$k])){
-            cms_set_setting($key, $_POST[$k]);
+
+// Core versioned pages
+cms_register_versioned_page('cafe_signup', 'Choose 2004 Cafe Sign-Up template version', 'cafe_signup_page_2004');
+cms_register_page_version(
+    'cafe_signup',
+    '2004_signup_v1',
+    'Version 1',
+    'images/2004_cafe_signup_thumbnails/version_1.PNG',
+    ['2004']
+);
+cms_register_page_version(
+    'cafe_signup',
+    '2004_signup_v2',
+    'Version 2',
+    'images/2004_cafe_signup_thumbnails/version_2.PNG',
+    ['2004']
+);
+
+cms_register_versioned_page('cheat_form', '2004 Cheat Form', 'cheat_form_page_2004');
+cms_register_page_version(
+    'cheat_form',
+    '2004_cheat_v1',
+    'Submission Form',
+    'images/2004_cheat_form/version_1.PNG',
+    ['2004']
+);
+cms_register_page_version(
+    'cheat_form',
+    '2004_cheat_v2',
+    'Use Troubleshooter',
+    'images/2004_cheat_form/version_2.PNG',
+    ['2004']
+);
+
+cms_register_versioned_page('cd_account', '2004 CDKey Page', 'cd_account_page_2004');
+cms_register_page_version(
+    'cd_account',
+    '2004_cd_v1',
+    'Submission Form',
+    'images/cdkeypage_thumbnails/version_1.png',
+    ['2004']
+);
+cms_register_page_version(
+    'cd_account',
+    '2004_cd_v2',
+    'Use Troubleshooter',
+    'images/cdkeypage_thumbnails/version_2.png',
+    ['2004']
+);
+
+$pages = cms_plugin_page_versions();
+$current = [];
+foreach ($pages as $key => $info) {
+    $default = $info['versions'][0]['value'] ?? '';
+    $current[$key] = cms_get_setting($info['setting'], $default);
+}
+
+if (isset($_POST['save'])) {
+    foreach ($pages as $key => $info) {
+        if (isset($_POST[$key])) {
+            cms_set_setting($info['setting'], $_POST[$key]);
         }
     }
     echo '<p>Selections saved.</p>';
-    $current = [
-        'cafe_signup' => cms_get_setting($settingKeys['cafe_signup'], '2004_signup_v1'),
-        'cheat_form' => cms_get_setting($settingKeys['cheat_form'], '2004_cheat_v1'),
-        'cd_account' => cms_get_setting($settingKeys['cd_account'], '2004_cd_v1')
-    ];
+    foreach ($pages as $key => $info) {
+        $default = $info['versions'][0]['value'] ?? '';
+        $current[$key] = cms_get_setting($info['setting'], $default);
+    }
 }
+
+$current_theme = cms_get_setting('theme', '2004');
 ?>
 <h2>Page Version Management</h2>
 <form method="post" id="pageForm">
-<div class="page-group">
-  <h3>Choose 2004 Cafe Sign-Up template version</h3>
-  <div class="page-options">
-    <label>
-      <input type="radio" name="cafe_signup" value="2004_signup_v1" <?php echo $current['cafe_signup']=='2004_signup_v1'?'checked':''; ?>><br>
-      <span>Version 1</span><br>
-      <img src="images/2004_cafe_signup_thumbnails/version_1.PNG" alt="Version 1">
-    </label>
-    <label>
-      <input type="radio" name="cafe_signup" value="2004_signup_v2" <?php echo $current['cafe_signup']=='2004_signup_v2'?'checked':''; ?>><br>
-      <span>Version 2</span><br>
-      <img src="images/2004_cafe_signup_thumbnails/version_2.PNG" alt="Version 2">
-    </label>
+<?php foreach ($pages as $key => $info): ?>
+  <div class="page-group">
+    <h3><?php echo htmlspecialchars($info['title']); ?></h3>
+    <div class="page-options">
+      <?php foreach ($info['versions'] as $ver):
+            if ($ver['themes'] && !in_array($current_theme, $ver['themes'], true)) {
+                continue;
+            }
+            $checked = $current[$key] === $ver['value'] ? 'checked' : '';
+      ?>
+      <label>
+        <input type="radio" name="<?php echo htmlspecialchars($key); ?>" value="<?php echo htmlspecialchars($ver['value']); ?>" <?php echo $checked; ?>><br>
+        <span><?php echo htmlspecialchars($ver['label']); ?></span><br>
+        <img src="<?php echo htmlspecialchars($ver['image']); ?>" alt="<?php echo htmlspecialchars($ver['label']); ?>">
+      </label>
+      <?php endforeach; ?>
+    </div>
   </div>
-</div>
-<hr>
-<div class="page-group">
-  <h3>2004 Cheat Form</h3>
-  <div class="page-options">
-    <label>
-      <input type="radio" name="cheat_form" value="2004_cheat_v1" <?php echo $current['cheat_form']=='2004_cheat_v1'?'checked':''; ?>><br>
-      <span>Submission Form</span><br>
-      <img src="images/2004_cheat_form/version_1.PNG" alt="Submission Form">
-    </label>
-    <label>
-      <input type="radio" name="cheat_form" value="2004_cheat_v2" <?php echo $current['cheat_form']=='2004_cheat_v2'?'checked':''; ?>><br>
-      <span>Use Troubleshooter</span><br>
-      <img src="images/2004_cheat_form/version_2.PNG" alt="Use Troubleshooter">
-    </label>
-  </div>
-</div>
-<hr>
-<div class="page-group">
-  <h3>2004 CDKey Page</h3>
-  <div class="page-options">
-    <label>
-      <input type="radio" name="cd_account" value="2004_cd_v1" <?php echo $current['cd_account']=='2004_cd_v1'?'checked':''; ?>><br>
-      <span>Submission Form</span><br>
-      <img src="images/cdkeypage_thumbnails/version_1.png" alt="Submission Form">
-    </label>
-    <label>
-      <input type="radio" name="cd_account" value="2004_cd_v2" <?php echo $current['cd_account']=='2004_cd_v2'?'checked':''; ?>><br>
-      <span>Use Troubleshooter</span><br>
-      <img src="images/cdkeypage_thumbnails/version_2.png" alt="Use Troubleshooter">
-    </label>
-  </div>
-</div>
-<hr>
-<button type="submit" name="save" class="btn btn-primary">Save</button>
-<a href="index.php" class="btn">Cancel</a>
+  <hr>
+<?php endforeach; ?>
+  <button type="submit" name="save" class="btn btn-primary">Save</button>
+  <a href="index.php" class="btn">Cancel</a>
 </form>
 <style>
 .page-options{display:flex;gap:20px;margin-top:5px;}
@@ -85,3 +105,4 @@ if(isset($_POST['save'])){
 .page-group{margin-bottom:10px;}
 </style>
 <?php include 'admin_footer.php'; ?>
+
