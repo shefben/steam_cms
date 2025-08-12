@@ -1762,3 +1762,9 @@ progress {
     }
 }
 
+/* Drag-and-drop handle cursor */
+.handle {
+    cursor: move;
+}
+
+
