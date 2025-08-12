@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Error logger now records all PHP errors and warnings by enforcing E_ALL reporting.
 - Removed duplicated news rows and stripped stray `\n` sequences during installation.
 - 2003 v1 update notification now displays only on the Get Steam Now page.
 - Installer seeds default sidebar sections for 2006 v1/v2 and 2007 v1/v2 themes.

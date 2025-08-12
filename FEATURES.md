@@ -176,7 +176,7 @@
 - Storefront pages resolve theme assets with correct base URL
 - Storefront links no longer drop the CMS subdirectory when calculating the base path
 
-- Global PHP error handler logs warnings and errors to a database table
+- Global PHP error handler logs all errors and warnings to a database table
 - Admin panel page "Error Log" lists captured PHP errors
 - Troubleshooter installer converts ISO-8859 pages to UTF-8 for MySQL
 
