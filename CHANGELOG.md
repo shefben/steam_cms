@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Removed duplicated news rows and stripped stray `\n` sequences during installation.
+- 2003 v1 update notification now displays only on the Get Steam Now page.
+- Installer seeds default sidebar sections for 2006 v1/v2 and 2007 v1/v2 themes.
 - Fixed installer to skip upgrade migrations and correctly parse SQL triggers.
 - Added theme.json support allowing themes to declare custom settings with admin widgets.
 - Fixed 2007 v1 and v2 theme header bars so logo and navigation stay on one line.

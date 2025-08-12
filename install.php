@@ -753,11 +753,16 @@ ALTER TABLE storefront_tab_games
                 run_sql_file($pdo, $storefrontFile);
             }
 
+            $sidebarFile = __DIR__.'/sql/install_sidebar_sections.sql';
+            if (file_exists($sidebarFile)) {
+                run_sql_file($pdo, $sidebarFile);
+            }
+
             $sqlFiles = glob(__DIR__.'/sql/*.sql');
             sort($sqlFiles);
             foreach ($sqlFiles as $file) {
                 $base = basename($file);
-                if ($base === 'install_storefront.sql' || $base === 'install_official_survey_stats.sql') {
+                if (in_array($base, ['install_storefront.sql', 'install_official_survey_stats.sql', 'install_sidebar_sections.sql'], true)) {
                     continue;
                 }
                 $sql = file_get_contents($file);
@@ -806,6 +811,11 @@ ALTER TABLE storefront_tab_games
                     $pdo->exec($stmt);
                 }
             }
+
+            // dedupe news and clean escaped newlines
+            $pdo->exec('DELETE n1 FROM news n1 JOIN news n2 ON n1.title = n2.title AND n1.publish_date = n2.publish_date AND n1.id > n2.id');
+            $pdo->exec("UPDATE news SET content = REPLACE(content, '\\n', '')");
+
             require_once 'sql/install_custom_pages.php';
             require_once 'sql/install_support_page.php';
             require_once 'sql/install_troubleshooter.php';

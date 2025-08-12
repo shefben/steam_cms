@@ -93,7 +93,7 @@ function cms_render_news($type,$count=null){
         }
         $date  = htmlspecialchars($date);
         $link   = cms_news_url($row['id']);
-        $content = $row['content'];
+        $content = str_replace('\\n', '', $row['content']);
         switch($type){
             case 'full_article':
                 $out .= "<p><h3><a href='$link' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";
