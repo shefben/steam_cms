@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Fixed content server stats to render all servers with collapsible blocks for 2003 v2 and grouped entries for 2004+ themes.
 - Error logger now records all PHP errors and warnings by enforcing E_ALL reporting.
 - Removed duplicated news rows and stripped stray `\n` sequences during installation.
 - 2003 v1 update notification now displays only on the Get Steam Now page.
