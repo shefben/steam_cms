@@ -1284,7 +1284,8 @@ function cms_shutdown_handler(): void
     }
 }
 
-set_error_handler('cms_error_handler');
+error_reporting(E_ALL);
+set_error_handler('cms_error_handler', E_ALL);
 set_exception_handler('cms_exception_handler');
 register_shutdown_function('cms_shutdown_handler');
 ?>
