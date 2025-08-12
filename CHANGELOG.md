@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Fixed custom pages and page version management screens to show content in the Neon admin theme.
 - Fixed content server stats to render all servers with collapsible blocks for 2003 v2 and grouped entries for 2004+ themes.
 - Error logger now records all PHP errors and warnings by enforcing E_ALL reporting.
 - Removed duplicated news rows and stripped stray `\n` sequences during installation.
