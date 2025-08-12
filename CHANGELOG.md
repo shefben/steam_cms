@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Added theme.json support allowing themes to declare custom settings with admin widgets.
 - Removed binary image assets from Green Steam admin themes
 - Added neon-styled admin theme based on neon_version2 example.
 - Updated neon admin navigation markup to mirror original HTML structure.
@@ -300,3 +301,8 @@ All notable changes to this project will be documented in this file.
 - Removed theme-specific product banners; templates now reference archived assets to avoid binary duplication
 - Seeded default 2006+ storefront capsules directly into `storefront_capsule_items` and retired legacy fallbacks
 - Stabilized Neon admin sidebar dropdown arrow positioning and styling
+- Introduced extensible theme settings with page-targeted widgets and
+  plugin API enabling custom admin pages, template tags, sidebar links, and
+  tag hooks
+- Added global plugin hooks for Twig environment and template rendering, and
+  theme settings can target custom tables with typed values
