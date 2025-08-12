@@ -33,6 +33,7 @@ foreach($regions as $region=>$list){?>
 <tr><td align="right" width="260"></td><td><b><?php echo htmlspecialchars($region); ?></b></td></tr>
 <?php foreach($list as $s){
     $load = $s['total_capacity']? (1 - $s['available_bandwidth']/$s['total_capacity'])*100 : 0;
+    $load = max(0, min(100, $load));
     $avail = 100 - $load;
     $capWidth = min(100, ($s['total_capacity']/1000)*100);
     ?>

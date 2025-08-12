@@ -128,7 +128,11 @@ function update_server_stats($db, &$server){
     }
 }
 
-function render_server_block($s, $max_capacity){
+function render_server_block($s){
+    $capWidth = min(100, ($s['total_capacity'] / 1000) * 100);
+    $loadPct = $s['total_capacity'] ? (1 - $s['available_bandwidth'] / $s['total_capacity']) * 100 : 0;
+    $loadPct = max(0, min(100, $loadPct));
+    $availPct = 100 - $loadPct;
     ob_start();
     ?>
     <!-- ===== BEGIN CONTENT SERVER BLOCK ===== -->
@@ -144,10 +148,10 @@ function render_server_block($s, $max_capacity){
         <?php if($s['status']!='UP') echo ' - DOWN'; ?>
     </h2>
     <?php if($s['status']=='UP'): ?>
-    <table class="statusGraph" cellspacing="0" width="<?php echo (int)(($s['total_capacity']/$max_capacity)*100); ?>%">
+    <table class="statusGraph" cellspacing="0" width="<?php echo (int)$capWidth; ?>%">
             <tr>
-                    <td class="CurrentLoad" width="<?php echo (int)((1-$s['available_bandwidth']/$s['total_capacity'])*100); ?>%" height="6"></td>
-                    <td class="AvailableBytesPerSecond" width="<?php echo (int)(($s['available_bandwidth']/$s['total_capacity'])*100); ?>%"></td>
+                    <td class="CurrentLoad" width="<?php echo (int)$loadPct; ?>%" height="6"></td>
+                    <td class="AvailableBytesPerSecond" width="<?php echo (int)$availPct; ?>%"></td>
             </tr>
     </table>
     <?php endif; ?>

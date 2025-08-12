@@ -14,12 +14,6 @@ foreach ($servers as &$srv) {
 $last_update    = date('Y-m-d H:i:s');
 $total_capacity = get_total_capacity($servers);
 $total_available = $total_capacity;
-$max_capacity = 0;
-foreach ($servers as $s) {
-    if ($s['total_capacity'] > $max_capacity) {
-        $max_capacity = $s['total_capacity'];
-    }
-}
 $theme  = cms_get_setting('theme', '2004');
 $theme_dir = __DIR__ . '/themes/' . $theme;
 if (!is_file($theme_dir.'/contentserver_block.php')) {
