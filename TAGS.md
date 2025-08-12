@@ -104,6 +104,19 @@ Label for the link to the full news archive.
 ### `news_search_bar()`
 Outputs the news search form used by 2007 themes.
 
+### `index_search_bar()`
+Search form displayed at the top of 2007 home page sidebars.
+
+### `get_steam_now_button()`
+Renders the "Get Steam Now" call-to-action used in 2006 sidebars.
+
+### `find_more_list(rows = 1)`
+List of Games, Demos, and Trailers links shown under the "Find More" header.
+The `rows` parameter controls how many table rows are rendered.
+
+### `spotlight_content()`
+Outputs Spotlight HTML, customizable via settings.
+
 ### `sidebar_right(year, page = 'news')`
 Renders the right-hand sidebar for the given `page`. For `page = 'news'`, 2006 themes display the STEAM NEWS header, RSS link and archive months while 2007 themes show the search bar.
 
