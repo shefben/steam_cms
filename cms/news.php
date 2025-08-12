@@ -50,7 +50,8 @@ function cms_render_news($type,$count=null){
     if (isset($cms_news_cache[$cache_key])) {
         return $cms_news_cache[$cache_key];
     }
-    if (file_exists($cache_file) && filemtime($cache_file) >= time() - 300) {
+    $cache_ttl = (int)cms_get_setting('news_cache_ttl', '1800');
+    if (file_exists($cache_file) && filemtime($cache_file) >= time() - $cache_ttl) {
         $html = file_get_contents($cache_file);
         if ($html !== false) {
             $cms_news_cache[$cache_key] = $html;

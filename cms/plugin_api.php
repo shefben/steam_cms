@@ -151,14 +151,34 @@ function cms_apply_hooks(string $event, $data)
  */
 function cms_load_plugins(): void
 {
-    static $loaded = false;
-    if ($loaded) {
+    static $pluginsLoaded = false;
+    if ($pluginsLoaded) {
         return;
     }
-    $loaded = true;
-    foreach (glob(__DIR__ . '/../plugins/*/plugin.php') as $file) {
+
+    $cache_file = __DIR__ . '/cache/plugins.php';
+    if (file_exists($cache_file) && filemtime($cache_file) >= time() - 3600) {
+        $plugins = include $cache_file;
+        foreach ($plugins as $plugin) {
+            if (file_exists($plugin)) {
+                include_once $plugin;
+            }
+        }
+        $pluginsLoaded = true;
+        return;
+    }
+
+    $foundPlugins = glob(__DIR__ . '/../plugins/*/plugin.php') ?: [];
+    foreach ($foundPlugins as $file) {
         include $file;
     }
+
+    if (!is_dir(dirname($cache_file))) {
+        mkdir(dirname($cache_file), 0777, true);
+    }
+    file_put_contents($cache_file, '<?php return ' . var_export($foundPlugins, true) . ';');
+
+    $pluginsLoaded = true;
 }
 
 /**

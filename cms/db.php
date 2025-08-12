@@ -16,43 +16,101 @@ $cms_theme_footer_cache = [];
 $cms_theme_css_cache = [];
 $cms_theme_config_cache = [];
 $cms_theme_setting_cache = [];
-function cms_get_db(){
+$cms_prepared_statements = [];
+
+function cms_get_db(): PDO
+{
     static $db;
-    if($db) return $db;
-    if(!file_exists(__DIR__.'/config.php')){
+    if ($db instanceof PDO) {
+        try {
+            if ($db->getAttribute(PDO::ATTR_CONNECTION_STATUS)) {
+                return $db;
+            }
+        } catch (PDOException $e) {
+            // fall through to reconnect
+        }
+    }
+    if (!file_exists(__DIR__ . '/config.php')) {
         die('CMS not installed. Please run install.php');
     }
-    $cfg = include __DIR__.'/config.php';
+    $cfg = include __DIR__ . '/config.php';
     $dsn = "mysql:host={$cfg['host']};port={$cfg['port']};dbname={$cfg['dbname']};charset=utf8mb4";
-    $db = new PDO($dsn, $cfg['user'], $cfg['pass'], [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
+    $options = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_PERSISTENT => true,
+        PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
+        PDO::ATTR_EMULATE_PREPARES => false,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))",
+    ];
+    $db = new PDO($dsn, $cfg['user'], $cfg['pass'], $options);
     return $db;
 }
 
-function cms_get_setting($key, $default=null){
+function cms_get_prepared_statement(string $sql): PDOStatement
+{
+    global $cms_prepared_statements;
+    if (!isset($cms_prepared_statements[$sql])) {
+        $db = cms_get_db();
+        $cms_prepared_statements[$sql] = $db->prepare($sql);
+    }
+    return $cms_prepared_statements[$sql];
+}
+
+function cms_load_settings(): void
+{
     global $cms_settings_cache;
-    if (array_key_exists($key, $cms_settings_cache)) {
-        return $cms_settings_cache[$key];
+    if ($cms_settings_cache !== []) {
+        return;
+    }
+
+    if (function_exists('apcu_entry')) {
+        $cms_settings_cache = apcu_entry('cms_settings_cache', function () {
+            $db = cms_get_db();
+            try {
+                return $db
+                    ->query('SELECT `key`, value FROM settings')
+                    ->fetchAll(PDO::FETCH_KEY_PAIR);
+            } catch (PDOException $e) {
+                if ($e->getCode() === '42S02') {
+                    return [];
+                }
+                throw $e;
+            }
+        }, 60);
+        return;
     }
 
     $db = cms_get_db();
-    try{
-        $stmt = $db->prepare('SELECT value FROM settings WHERE `key`=?');
-        $stmt->execute([$key]);
-        $val = $stmt->fetchColumn();
-        $cms_settings_cache[$key] = $val!==false ? $val : $default;
-        return $cms_settings_cache[$key];
-    }catch(PDOException $e){
-        if($e->getCode()==='42S02') return $default; // table missing
-        throw $e;
+    try {
+        $cms_settings_cache = $db
+            ->query('SELECT `key`, value FROM settings')
+            ->fetchAll(PDO::FETCH_KEY_PAIR);
+    } catch (PDOException $e) {
+        if ($e->getCode() === '42S02') {
+            $cms_settings_cache = [];
+        } else {
+            throw $e;
+        }
     }
 }
 
-function cms_set_setting($key,$value){
+function cms_get_setting($key, $default = null)
+{
+    global $cms_settings_cache;
+    cms_load_settings();
+    return array_key_exists($key, $cms_settings_cache) ? $cms_settings_cache[$key] : $default;
+}
+
+function cms_set_setting($key, $value): void
+{
     global $cms_settings_cache;
     $db = cms_get_db();
     $stmt = $db->prepare('REPLACE INTO settings(`key`,value) VALUES(?,?)');
-    $stmt->execute([$key,$value]);
+    $stmt->execute([$key, $value]);
     $cms_settings_cache[$key] = $value;
+    if (function_exists('apcu_delete')) {
+        apcu_delete('cms_settings_cache');
+    }
 }
 
 function cms_get_custom_page($slug,$theme=null){
@@ -1082,9 +1140,16 @@ function cms_help_icon(string $page, string $field): string
 
 function cms_get_sidebar_sections_html(string $theme, bool $for_admin = false): string
 {
+    static $sectionCache = [];
+    $cacheKey = $theme . '|' . ($for_admin ? '1' : '0');
+    if (isset($sectionCache[$cacheKey])) {
+        return $sectionCache[$cacheKey];
+    }
+
     $db = cms_get_db();
     try {
-        $stmt = $db->query('SELECT section_id,title,icon_path,is_collapsible,collapsible_id,has_icicles FROM sidebar_sections ORDER BY sort_order, section_id');
+        $stmt = cms_get_prepared_statement('SELECT section_id,title,icon_path,is_collapsible,collapsible_id,has_icicles FROM sidebar_sections ORDER BY sort_order, section_id');
+        $stmt->execute();
         $sections = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         if ($e->getCode() === '42S02') {
@@ -1093,13 +1158,23 @@ function cms_get_sidebar_sections_html(string $theme, bool $for_admin = false): 
         throw $e;
     }
 
+    $variants = [];
+    $sectionIds = array_column($sections, 'section_id');
+    if ($sectionIds) {
+        $placeholders = implode(',', array_fill(0, count($sectionIds), '?'));
+        $variantSql = "SELECT section_id, html_content FROM sidebar_section_variants WHERE section_id IN ($placeholders) AND FIND_IN_SET(?, theme_list)";
+        $vstmt = cms_get_prepared_statement($variantSql);
+        $vstmt->execute([...$sectionIds, $theme]);
+        foreach ($vstmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $variants[$row['section_id']] = $row['html_content'];
+        }
+    }
+
     $out = '';
     foreach ($sections as $section) {
         $sid = (int)$section['section_id'];
-        $vstmt = $db->prepare('SELECT html_content FROM sidebar_section_variants WHERE section_id=? AND FIND_IN_SET(?, theme_list)');
-        $vstmt->execute([$sid, $theme]);
-        $html = $vstmt->fetchColumn();
-        if ($html === false) {
+        $html = $variants[$sid] ?? null;
+        if ($html === null) {
             continue;
         }
         $icon = $section['icon_path'] ? '<img src="' . htmlspecialchars($section['icon_path'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '" alt="" align="absmiddle"> ' : '';
@@ -1135,6 +1210,7 @@ function cms_get_sidebar_sections_html(string $theme, bool $for_admin = false): 
             }
         }
     }
+    $sectionCache[$cacheKey] = $out;
     return $out;
 }
 

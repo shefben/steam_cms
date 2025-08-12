@@ -259,9 +259,14 @@ function cms_news_archive_months(int $year, int $months = 12): string
 
 function cms_theme_layout(?string $file, ?string $theme = null)
 {
+    static $pathCache = [];
     $theme = $theme ?: cms_get_setting('theme', '2004');
     $file  = $file ?: 'default.twig';
     $file  = preg_replace('/\.tpl$/', '.twig', $file);
+    $cacheKey = $theme . '|' . $file;
+    if (isset($pathCache[$cacheKey])) {
+        return $pathCache[$cacheKey];
+    }
 
     $dirs     = ['layouts', 'layout'];
     $subdirs  = ['', 'storefront'];
@@ -270,7 +275,7 @@ function cms_theme_layout(?string $file, ?string $theme = null)
         foreach ($dirs as $dir) {
             $path = dirname(__DIR__)."/themes/$theme/".($sub ? "$sub/" : '')."$dir/$file";
             if (file_exists($path)) {
-                return $path;
+                return $pathCache[$cacheKey] = $path;
             }
         }
     }
@@ -278,7 +283,7 @@ function cms_theme_layout(?string $file, ?string $theme = null)
         foreach ($dirs as $dir) {
             $path = dirname(__DIR__)."/themes/$theme/".($sub ? "$sub/" : '')."$dir/default.twig";
             if (file_exists($path)) {
-                return $path;
+                return $pathCache[$cacheKey] = $path;
             }
         }
     }
@@ -286,17 +291,24 @@ function cms_theme_layout(?string $file, ?string $theme = null)
         foreach ($dirs as $dir) {
             $path = dirname(__DIR__)."/themes/2004/".($sub ? "$sub/" : '')."$dir/$file";
             if (file_exists($path)) {
-                return $path;
+                return $pathCache[$cacheKey] = $path;
             }
         }
     }
-    return dirname(__DIR__)."/themes/2004/layout/default.twig";
+    $fallback = dirname(__DIR__)."/themes/2004/layout/default.twig";
+    $pathCache[$cacheKey] = $fallback;
+    return $fallback;
 }
 
 function cms_theme_page_template(string $page, ?string $theme = null, ?string $version = null): string
 {
+    static $pathCache = [];
     $theme = $theme ?: cms_get_setting('theme', '2004');
     $page  = preg_replace('/\.twig$/', '', $page);
+    $cacheKey = $theme . '|' . $page . '|' . ($version ?? '');
+    if (isset($pathCache[$cacheKey])) {
+        return $pathCache[$cacheKey];
+    }
 
     $dirs   = ['layouts', 'layout'];
     $themes = [$theme, '2004'];
@@ -307,13 +319,13 @@ function cms_theme_page_template(string $page, ?string $theme = null, ?string $v
             if ($version !== null) {
                 $verPath = $baseDir . "/{$page}_v{$version}.twig";
                 if (file_exists($verPath)) {
-                    return $verPath;
+                    return $pathCache[$cacheKey] = $verPath;
                 }
             }
 
             $pagePath = $baseDir . "/{$page}.twig";
             if (file_exists($pagePath)) {
-                return $pagePath;
+                return $pathCache[$cacheKey] = $pagePath;
             }
         }
     }
@@ -322,12 +334,14 @@ function cms_theme_page_template(string $page, ?string $theme = null, ?string $v
         foreach ($dirs as $dir) {
             $defaultPath = dirname(__DIR__) . "/themes/{$t}/{$dir}/default.twig";
             if (file_exists($defaultPath)) {
-                return $defaultPath;
+                return $pathCache[$cacheKey] = $defaultPath;
             }
         }
     }
 
-    return dirname(__DIR__) . '/themes/2004/layout/default.twig';
+    $fallback = dirname(__DIR__) . '/themes/2004/layout/default.twig';
+    $pathCache[$cacheKey] = $fallback;
+    return $fallback;
 }
 
 function cms_admin_layout(string $file, ?string $theme = null): ?string
@@ -464,15 +478,19 @@ function cms_render_tabs(string $theme): string
 function cms_twig_env(string $tpl_dir): Environment
 {
     static $env;
-    if (!$env) {
-        $loader = new FilesystemLoader($tpl_dir);
-        require_once __DIR__.'/utilities/text_styler.php';
-        $cacheDir = __DIR__ . '/cache/twig';
-        if (!is_dir($cacheDir)) {
-            mkdir($cacheDir, 0777, true);
+    if (!$env instanceof Environment) {
+        if (function_exists('apcu_fetch')) {
+            $env = apcu_fetch('cms_twig_env');
         }
-        cms_load_plugins();
-        $env = new Environment($loader, ['cache' => $cacheDir, 'auto_reload' => true]);
+        if (!$env instanceof Environment) {
+            $loader = new FilesystemLoader($tpl_dir);
+            require_once __DIR__ . '/utilities/text_styler.php';
+            $cacheDir = __DIR__ . '/cache/twig';
+            if (!is_dir($cacheDir)) {
+                mkdir($cacheDir, 0777, true);
+            }
+            cms_load_plugins();
+            $env = new Environment($loader, ['cache' => $cacheDir, 'auto_reload' => true]);
         $env->addFunction(new TwigFunction('header', cms_hookable(function(bool $withButtons = true) {
             $theme = cms_get_current_theme();
             return cms_render_header($theme, $withButtons);
@@ -1184,11 +1202,14 @@ function cms_twig_env(string $tpl_dir): Environment
             }
             return false;
         });
-    } else {
-        /** @var FilesystemLoader $loader */
-        $loader = $env->getLoader();
-        $loader->setPaths([$tpl_dir]);
+        if (function_exists('apcu_store')) {
+            apcu_store('cms_twig_env', $env);
+        }
     }
+}
+    /** @var FilesystemLoader $loader */
+    $loader = $env->getLoader();
+    $loader->setPaths([$tpl_dir]);
     // Allow plugins to interact with the Twig environment before use
     $env = cms_apply_hooks('twig_environment', $env);
     return $env;
@@ -1206,14 +1227,27 @@ function cms_render_string(string $html, array $vars, string $tpl_dir): string
 
 function cms_cache_last_modified(string $path, string $theme): int
 {
-    $times = [];
-    if (is_file($path)) {
-        $times[] = filemtime($path);
+    $key = 'cms_last_mod|' . $theme . '|' . $path;
+    if (function_exists('apcu_fetch')) {
+        $cached = apcu_fetch($key);
+        if ($cached !== false) {
+            return (int) $cached;
+        }
     }
 
-    $tplDir = dirname($path);
-    foreach (glob($tplDir . '/*.twig') ?: [] as $file) {
-        $times[] = filemtime($file);
+    static $manifest;
+    if ($manifest === null) {
+        $file = __DIR__ . '/cache/manifest.json';
+        $manifest = is_file($file) ? json_decode(file_get_contents($file), true) : [];
+    }
+
+    $times = [];
+    if (isset($manifest[$theme]) && is_array($manifest[$theme])) {
+        $times = array_map('intval', $manifest[$theme]);
+    }
+
+    if (is_file($path)) {
+        $times[] = filemtime($path);
     }
 
     $cssFile = cms_get_theme_css($theme);
@@ -1222,14 +1256,76 @@ function cms_cache_last_modified(string $path, string $theme): int
         $times[] = filemtime($cssPath);
     }
 
-    $root = dirname(__DIR__);
-    foreach (get_included_files() as $inc) {
-        if (str_starts_with($inc, $root . '/') && is_file($inc)) {
-            $times[] = filemtime($inc);
-        }
+    $last = $times ? max($times) : 0;
+    if (function_exists('apcu_store')) {
+        apcu_store($key, $last, 60);
+    }
+    return $last;
+}
+
+function cms_cache_asset_paths(string $html, array $vars, string $theme, string $base_url): string
+{
+    static $assetCache = [];
+    $css_file = cms_get_theme_css($theme);
+    $css_dir  = trim(dirname($css_file), '/');
+    if ($css_dir === '.') {
+        $css_dir = '';
     }
 
-    return $times ? max($times) : 0;
+    return preg_replace_callback('/(src|href|background)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir, $base_url, $theme, &$assetCache) {
+        $path = $m[2];
+        $cacheKey = $theme . '|' . $path;
+        if (isset($assetCache[$cacheKey])) {
+            return $assetCache[$cacheKey];
+        }
+        if (preg_match('~^(?:https?:)?//|^/~', $path)) {
+            return $assetCache[$cacheKey] = $m[0];
+        }
+        if (preg_match('~^/?themes/~i', $path)) {
+            return $assetCache[$cacheKey] = $m[1] . '="' . $path . '"';
+        }
+        $p   = parse_url($path, PHP_URL_PATH) ?? '';
+        $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
+        $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
+        if (!in_array($ext, $assets, true)) {
+            return $assetCache[$cacheKey] = $m[0];
+        }
+        $dir = '';
+        if ($ext === 'css') {
+            if (str_starts_with($path, './')) {
+                $path = ltrim(substr($path, 2), '/');
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return $assetCache[$cacheKey] = $m[1] . '="' . $base . $path . '"';
+            }
+            $dir  = $css_dir;
+            $path = basename($path);
+            $path = cms_rewrite_css_file($theme, ($dir ? $dir.'/' : '').$path, $vars['THEME_URL'], $base_url);
+            return $assetCache[$cacheKey] = $m[1] . '="' . $path . '"';
+        } elseif ($ext === 'js') {
+            $dir = 'js';
+        } else {
+            $clean = ltrim($path, './');
+            if (str_starts_with($clean, 'storefront/')) {
+                $clean = substr($clean, 11);
+            }
+            if (str_starts_with($clean, 'images/')) {
+                $clean = substr($clean, 7);
+            }
+            if (str_starts_with($clean, 'capsules/')) {
+                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
+                return $assetCache[$cacheKey] = $m[1] . '="' . $base . 'storefront/images/' . $clean . '"';
+            }
+            $path = preg_replace('~^(?:img|images)/~', '', $clean);
+            $path = preg_replace('~^storefront/~', '', $path);
+            $path = ltrim($path, '/');
+            $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+            return $assetCache[$cacheKey] = $m[1] . '="' . $url . '"';
+        }
+        if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
+            $path = $dir . '/' . $path;
+        }
+        return $assetCache[$cacheKey] = $m[1] . '="' . $vars['THEME_URL'] . '/' . $path . '"';
+    }, $html);
 }
 
 function cms_render_template(string $path, array $vars = []): void
@@ -1268,61 +1364,13 @@ function cms_render_template(string $path, array $vars = []): void
     $html = $env->render($hook['template'], $hook['vars']);
     $html = cms_apply_hooks('template_post_render', $html);
 
+    $html = cms_cache_asset_paths($html, $vars, $theme, $base_url);
+
     $css_file = cms_get_theme_css($theme);
-    $css_base = basename($css_file);
     $css_dir  = trim(dirname($css_file), '/');
     if ($css_dir === '.') {
         $css_dir = '';
     }
-    $html = preg_replace_callback('/(src|href|background)=["\']([^"\']+)["\']/', function ($m) use ($vars, $css_dir, $base_url, $theme) {
-        $path = $m[2];
-        if (preg_match('~^(?:https?:)?//|^/~', $path)) {
-            return $m[0];
-        }
-        if (preg_match('~^/?themes/~i', $path)) {
-            return $m[1].'="'.$path.'"';
-        }
-        $p   = parse_url($path, PHP_URL_PATH) ?? '';
-        $ext = strtolower(pathinfo($p, PATHINFO_EXTENSION));
-        $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
-        if (!in_array($ext, $assets, true)) {
-            return $m[0];
-        }
-        if ($ext === 'css') {
-            if (str_starts_with($path, './')) {
-                $path = ltrim(substr($path, 2), '/');
-                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
-                return $m[1].'="'.$base.$path.'"';
-            }
-            $dir  = $css_dir;
-            $path = basename($path);
-            $path = cms_rewrite_css_file($theme, ($dir ? $dir.'/' : '').$path, $vars['THEME_URL'], $base_url);
-            return $m[1].'="'.$path.'"';
-        } elseif ($ext === 'js') {
-            $dir = 'js';
-        } else {
-            $clean = ltrim($path, './');
-            if (str_starts_with($clean, 'storefront/')) {
-                $clean = substr($clean, 11);
-            }
-            if (str_starts_with($clean, 'images/')) {
-                $clean = substr($clean, 7);
-            }
-            if (str_starts_with($clean, 'capsules/')) {
-                $base = $base_url ? rtrim($base_url, '/'). '/' : '';
-                return $m[1].'="'.$base.'storefront/images/'.$clean.'"';
-            }
-            $path = preg_replace('~^(?:img|images)/~', '', $clean);
-            $path = preg_replace('~^storefront/~', '', $path);
-            $path = ltrim($path, '/');
-            $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
-            return $m[1].'="'.$url.'"';
-        }
-        if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
-            $path = $dir.'/'.$path;
-        }
-        return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
-    }, $html);
 
     $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url, $theme) {
         $path = $m[2];
