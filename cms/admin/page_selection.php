@@ -33,12 +33,12 @@ if(isset($_POST['save'])){
     <label>
       <input type="radio" name="cafe_signup" value="2004_signup_v1" <?php echo $current['cafe_signup']=='2004_signup_v1'?'checked':''; ?>><br>
       <span>Version 1</span><br>
-      <img src="images/2004_cafe_signup_thumbnails/version_1.png" alt="Version 1">
+      <img src="images/2004_cafe_signup_thumbnails/version_1.PNG" alt="Version 1">
     </label>
     <label>
       <input type="radio" name="cafe_signup" value="2004_signup_v2" <?php echo $current['cafe_signup']=='2004_signup_v2'?'checked':''; ?>><br>
       <span>Version 2</span><br>
-      <img src="images/2004_cafe_signup_thumbnails/version_2.png" alt="Version 2">
+      <img src="images/2004_cafe_signup_thumbnails/version_2.PNG" alt="Version 2">
     </label>
   </div>
 </div>
@@ -49,12 +49,12 @@ if(isset($_POST['save'])){
     <label>
       <input type="radio" name="cheat_form" value="2004_cheat_v1" <?php echo $current['cheat_form']=='2004_cheat_v1'?'checked':''; ?>><br>
       <span>Submission Form</span><br>
-      <img src="images/2004_cheat_form/version_1.png" alt="Submission Form">
+      <img src="images/2004_cheat_form/version_1.PNG" alt="Submission Form">
     </label>
     <label>
       <input type="radio" name="cheat_form" value="2004_cheat_v2" <?php echo $current['cheat_form']=='2004_cheat_v2'?'checked':''; ?>><br>
       <span>Use Troubleshooter</span><br>
-      <img src="images/2004_cheat_form/version_2.png" alt="Use Troubleshooter">
+      <img src="images/2004_cheat_form/version_2.PNG" alt="Use Troubleshooter">
     </label>
   </div>
 </div>
