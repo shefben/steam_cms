@@ -1,10 +1,23 @@
 <?php
 require_once __DIR__.'/news.php';
 require_once __DIR__.'/../includes/twig.php';
+require_once __DIR__.'/plugin_api.php';
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
+
+/**
+ * Wrap a Twig callback with plugin hook support.
+ */
+function cms_hookable(callable $fn, string $name): callable
+{
+    return function (...$args) use ($fn, $name) {
+        $args = cms_apply_tag_hooks($name, 'before', $args);
+        $out  = $fn(...$args);
+        return cms_apply_tag_hooks($name, 'after', $out);
+    };
+}
 
 function cms_split_title(string $title): string
 {
@@ -420,16 +433,17 @@ function cms_twig_env(string $tpl_dir): Environment
         if (!is_dir($cacheDir)) {
             mkdir($cacheDir, 0777, true);
         }
+        cms_load_plugins();
         $env = new Environment($loader, ['cache' => $cacheDir, 'auto_reload' => true]);
-        $env->addFunction(new TwigFunction('header', function(bool $withButtons = true) {
+        $env->addFunction(new TwigFunction('header', cms_hookable(function(bool $withButtons = true) {
             $theme = cms_get_current_theme();
             return cms_render_header($theme, $withButtons);
-        }, ['is_safe' => ['html']]));
-        $env->addFunction(new TwigFunction('header_logo', function(string $path) {
+        }, 'header'), ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('header_logo', cms_hookable(function(string $path) {
             cms_set_header_logo_override($path);
             return '';
-        }, ['is_safe' => ['html']]));
-        $env->addFunction(new TwigFunction('content_header_image', function() {
+        }, 'header_logo'), ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('content_header_image', cms_hookable(function() {
             $img = cms_get_content_header_image();
             if (!$img) {
                 return '';
@@ -442,8 +456,8 @@ function cms_twig_env(string $tpl_dir): Environment
                 $img = $base . $img;
             }
             return '<img src="' . htmlspecialchars($img) . '" alt="">';
-        }, ['is_safe' => ['html']]));
-        $env->addFunction(new TwigFunction('logo', function() {
+        }, 'content_header_image'), ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('logo', cms_hookable(function() {
             $theme = cms_get_current_theme();
             $data  = cms_get_theme_header_data($theme);
             $logo  = $data['logo'] ?: '/img/steam_logo_onblack.gif';
@@ -453,24 +467,27 @@ function cms_twig_env(string $tpl_dir): Environment
                 $logo = $base . $logo;
             }
             return '<img src="'.htmlspecialchars($logo).'" alt="logo">';
-        }, ['is_safe' => ['html']]));
-        $env->addFunction(new TwigFunction('footer', function() {
+        }, 'logo'), ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('footer', cms_hookable(function() {
             $theme = cms_get_current_theme();
             $html  = cms_get_theme_footer($theme);
             $html  = str_ireplace('{BASE}', '{{ BASE }}', $html);
             $env   = cms_twig_env('.');
             return $env->createTemplate($html)->render(['BASE' => cms_base_url()]);
-        }, ['is_safe' => ['html']]));
-        $env->addFunction(new TwigFunction('nav_buttons', function(string $theme = '', string $style = '', ?string $spacer = null, ?string $color = null) {
+        }, 'footer'), ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('nav_buttons', cms_hookable(function(string $theme = '', string $style = '', ?string $spacer = null, ?string $color = null) {
             $theme = $theme !== '' ? $theme : cms_get_current_theme();
             return cms_nav_buttons_html($theme, $style, $spacer, $color);
-        }, ['is_safe' => ['html']]));
-        $env->addFunction(new TwigFunction('news', function(string $type, ?int $count = null) {
+        }, 'nav_buttons'), ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('news', cms_hookable(function(string $type, ?int $count = null) {
             $theme = cms_get_current_theme();
             $cfg   = cms_get_theme_config($theme);
             $count = $count ?? ($cfg['news_count'] ?? null);
             return cms_render_news($type, $count);
-        }, ['is_safe' => ['html']]));
+        }, 'news'), ['is_safe' => ['html']]));
+
+        // allow plugins to register additional Twig tags
+        cms_register_plugin_template_tags($env);
 
         $env->addFunction(new TwigFunction('news_index_brief', function(int $count = 3) {
             return cms_render_news('index_brief', $count);
@@ -1130,14 +1147,19 @@ function cms_twig_env(string $tpl_dir): Environment
         $loader = $env->getLoader();
         $loader->setPaths([$tpl_dir]);
     }
+    // Allow plugins to interact with the Twig environment before use
+    $env = cms_apply_hooks('twig_environment', $env);
     return $env;
 }
 
 function cms_render_string(string $html, array $vars, string $tpl_dir): string
 {
-    $html = str_ireplace('{BASE}', '{{ BASE }}', $html);
+    $hook = ['type' => 'string', 'template' => $html, 'vars' => $vars, 'path' => null];
+    $hook = cms_apply_hooks('template_pre_render', $hook);
+    $html = str_ireplace('{BASE}', '{{ BASE }}', $hook['template']);
     $env  = cms_twig_env($tpl_dir);
-    return $env->createTemplate($html)->render($vars);
+    $out  = $env->createTemplate($html)->render($hook['vars']);
+    return cms_apply_hooks('template_post_render', $out);
 }
 
 function cms_cache_last_modified(string $path, string $theme): int
@@ -1196,9 +1218,13 @@ function cms_render_template(string $path, array $vars = []): void
         $vars['content'] = cms_render_string($vars['content'], $vars, $tpl_dir);
     }
 
+    $hook = ['type' => 'file', 'template' => basename($path), 'vars' => $vars, 'path' => $path];
+    $hook = cms_apply_hooks('template_pre_render', $hook);
+
     $env = cms_twig_env($tpl_dir);
-    cms_set_current_template(basename($path));
-    $html = $env->render(basename($path), $vars);
+    cms_set_current_template($hook['template']);
+    $html = $env->render($hook['template'], $hook['vars']);
+    $html = cms_apply_hooks('template_post_render', $html);
 
     $css_file = cms_get_theme_css($theme);
     $css_base = basename($css_file);
@@ -1364,9 +1390,13 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         $vars['content'] = cms_render_string($vars['content'], $vars, $tpl_dir);
     }
 
+    $hook = ['type' => 'file', 'template' => basename($path), 'vars' => $vars, 'path' => $path];
+    $hook = cms_apply_hooks('template_pre_render', $hook);
+
     $env = cms_twig_env($tpl_dir);
-    cms_set_current_template(basename($path));
-    $html = $env->render(basename($path), $vars);
+    cms_set_current_template($hook['template']);
+    $html = $env->render($hook['template'], $hook['vars']);
+    $html = cms_apply_hooks('template_post_render', $html);
 
     $css_file = cms_get_theme_css($theme);
     $css_base = basename($css_file);

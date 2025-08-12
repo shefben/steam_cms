@@ -1,0 +1,35 @@
+{
+  "settings": [
+    {
+      "name": "sidebar_color",
+      "label": "Sidebar Color",
+      "type": "text",
+      "default": "#333",
+      "page": ["settings", "theme"],
+      "target": "nav-table",
+      "position": "before",
+      "table": "settings",
+      "datatype": "string"
+    },
+    {
+      "name": "enable_feature_x",
+      "label": "Enable Experimental Feature X",
+      "type": "checkbox",
+      "default": "0",
+      "page": "theme",
+      "target": "support-options",
+      "position": "after",
+      "table": "settings",
+      "datatype": "int"
+    },
+    {
+      "name": "motd",
+      "label": "Message of the day",
+      "type": "textarea",
+      "default": "Today is a great day!",
+      "page": "settings",
+      "table": "theme_messages",
+      "datatype": "string"
+    }
+  ]
+}

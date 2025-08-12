@@ -2,6 +2,7 @@
 session_start();
 require_once __DIR__ . '/../db.php';
 require_once __DIR__ . '/../template_engine.php';
+require_once __DIR__ . '/../plugin_api.php'; // load plugin system
 require_once __DIR__ . '/breadcrumbs.php';
 if(!cms_current_admin()){
     if(isset($_COOKIE['cms_admin_token'])){
@@ -109,6 +110,10 @@ $default_nav = [
 $json = cms_get_setting('nav_items',null);
 $nav_items = $json ? json_decode($json,true) : $default_nav;
 if(!$nav_items) $nav_items = $default_nav;
+
+// Allow plugins to provide additional sidebar links
+cms_load_plugins();
+$nav_items = array_merge($nav_items, cms_plugin_sidebar_links());
 
 $icons = [
     'index.php'        => '📊',

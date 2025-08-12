@@ -3,6 +3,7 @@
 - 04-05 storefront games, packages, and third-party listings seeded from archive
 - Customizable CMS themes for 2004 and 2005
 - Admin panel with styled themes and permissions
+- Themes can declare custom settings via `theme.json` with automatic admin widgets
 - Neon admin theme replicates neon_version2 layout with neon effects
 - Admin themes support Twig layouts with per-page identifiers and tag-level overrides
 - Default and v2 admin themes include Twig layouts mirroring their original HTML
@@ -244,3 +245,11 @@
 - 2006+ themes use a unified index sidebar placeholder rendering sections from the database, and admin pages scaffold capsule and sidebar management.
 - Index Sidebar Management page allows theme-specific variants, drag-and-drop ordering, and CSRF-protected editing.
 - Shared product page layout with configurable banner and optional map contest closure toggle
+- Themes may declare settings and admin widgets via `theme.json`, including
+  page placement rules and automatic installation of defaults.
+- Plugin API supports custom admin pages, sidebar links, template tags and
+  before/after hooks on tag rendering.
+- Plugins can hook the Twig environment and template rendering through global
+  event hooks.
+- Theme settings may target custom database tables with optional datatype
+  casting.

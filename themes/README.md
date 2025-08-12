@@ -55,6 +55,45 @@ The template engine exposes a set of Twig functions used to render dynamic conte
 
 These tags allow layouts to remain clean and theme agnostic while pulling dynamic data from the CMS.
 
+## Theme configuration
+
+Each theme may include an optional `theme.json` file in its root directory. This file lets theme authors declare settings and corresponding admin widgets without writing PHP code. When a theme is uploaded or activated, the CMS reads the configuration, installs default values into the `settings` table, and renders the widgets on the **Theme Configuration** page.
+
+Example `theme.json`:
+
+```json
+{
+  "settings": [
+    {
+      "name": "sidebar_collapsible",
+      "label": "Enable collapsible sidebar",
+      "type": "checkbox",
+      "default": "0"
+    },
+    {
+      "name": "custom_message",
+      "label": "Custom welcome message",
+      "type": "text",
+      "default": "Welcome!"
+    }
+  ]
+}
+```
+
+Supported widget `type` values are `text`, `textarea`, and `checkbox`. Values are stored in the `settings` table under their `name` keys and can be retrieved with `cms_get_setting()` inside templates or PHP code. This system provides a simple yet extensible way to add theme-specific options.
+
+Additional optional keys:
+
+- `page` or `pages` – restricts the admin page(s) the widget appears on.
+- `target` and `position` – move the widget before or after an existing element
+  with the given HTML id.
+- `table` – database table where the setting should be stored. Defaults to
+  `settings` and assumes a `name`/`value` schema.
+- `datatype` – casts the saved value to `string`, `int`, or `float` before
+  storage.
+
+See `themes/examples/` for both a simple and a complex configuration example.
+
 ## How rendering works
 
 When a page is requested the CMS resolves the active theme and looks for a layout under that theme’s `layouts/` directory. If the file is missing it falls back to the default theme. Template files are processed by Twig and receive variables like `BASE`, `THEME_URL` and custom page content.

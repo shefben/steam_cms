@@ -1,0 +1,13 @@
+{
+  "settings": [
+    {
+      "name": "welcome_text",
+      "label": "Welcome Text",
+      "type": "text",
+      "default": "Hello from Simple Theme",
+      "page": "settings",
+      "table": "settings",
+      "datatype": "string"
+    }
+  ]
+}

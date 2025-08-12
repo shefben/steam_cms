@@ -1,6 +1,7 @@
 <?php
 $upload_msg = '';
 require_once 'admin_header.php';
+require_once __DIR__ . '/../theme_config.php';
 cms_require_permission('manage_settings');
 $theme = cms_get_setting('theme','2004');
 $show = cms_get_setting('support2003_show','1');
@@ -33,6 +34,7 @@ if(isset($_POST['upload']) && isset($_FILES['theme_zip']) && is_uploaded_file($_
                     $valid = is_dir($dest.'/templates') && glob($dest.'/templates/*.twig')
                         && is_dir($dest.'/assets');
                     if($valid){
+                        cms_install_theme_settings($name);
                         cms_refresh_themes();
                         $themes = cms_get_themes();
                         $upload_msg = '<p>Theme uploaded successfully.</p>';
@@ -62,6 +64,7 @@ if(isset($_POST['save'])){
         cms_set_setting('support2003_show',$show);
         cms_set_setting('support2003_html',$html);
     }
+    cms_save_theme_settings($theme, $_POST);
     require_once __DIR__.'/../update_htaccess.php';
     cms_update_htaccess();
     echo '<p>Theme updated.</p>';

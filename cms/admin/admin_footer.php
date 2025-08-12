@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../db.php';
 require_once __DIR__ . '/../template_engine.php';
+require_once __DIR__ . '/../theme_config.php';
 $admin_theme = cms_get_setting('admin_theme','v2');
 $base_url = cms_base_url();
 $theme_dir = dirname(__DIR__,2) . "/themes/{$admin_theme}_admin";
@@ -12,6 +13,10 @@ if (!is_dir($theme_dir)) {
 
 if (isset($admin_layout) && $admin_layout) {
     $page_content = ob_get_clean();
+    // allow theme-defined widgets for this page
+    ob_start();
+    cms_render_theme_admin_widgets($current_theme, $page_id ?? '');
+    $page_content .= ob_get_clean();
     $admin_initials = implode('', array_map(fn($w) => strtoupper($w[0]), preg_split('/\s+/', $admin_name)));
     $breadcrumbs_html = cms_admin_breadcrumb();
     $sidebar = cms_admin_tag('sidebar', [
