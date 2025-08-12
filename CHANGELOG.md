@@ -38,6 +38,7 @@ All notable changes to this project will be documented in this file.
 - Index manager now supports GetTheGear and Freestuff/Custom capsule types with editable titles and rich text content.
 - Fixed Troubleshooter sidebar link to toggle sub-menu instead of navigating.
 - Introduced Green Steam admin themes with windowed layouts derived from example HTML.
+- Restored radio buttons and thumbnails on the Page Version Management admin page when theme variants are active.
 - GetTheGear and Freestuff capsules now match original theme dimensions (small in 2006, large in 2007).
 - Installer seeds 2006+ index management link in admin navigation.
 - 2006_v1, 2006_v2, 2007_v1, and 2007_v2 themes load index capsules from database entries.
