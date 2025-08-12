@@ -1,0 +1,324 @@
+/* CSS Document */
+
+body {
+	background-color:#3f2c28;
+	padding:0;
+	margin:0;
+}
+
+#mainContainer {
+	background-image:url('images/main_bg.jpg');
+	background-repeat:repeat-x;
+	background-color:#bbaca5;
+	padding:0;
+	margin:0;
+}
+
+#pageContainer {
+	width:820px;
+	text-align:left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#000000;
+	padding:0;
+	margin:0;
+	line-height:18px;
+	position:relative;
+}
+
+#Map_btn {
+	position:absolute;
+	top:707px;
+	right:0px;
+}
+
+
+#Maps {
+	background-image:url('images/header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#MapsHead {
+	background-image:url('images/divide.jpg');
+	background-repeat:no-repeat;
+	padding:0;
+	margin:0;
+}
+
+#Maps_collapse {
+	background-image:url('images/default_bg.jpg');
+	background-repeat:repeat-y;
+}
+
+#MapsBody {
+	padding-top:470px;
+	width:532px;
+	padding-left:26px;
+}
+
+#MapsBG {
+	background-image:url('images/maps_bg.jpg');
+	background-repeat:repeat-y;
+
+}
+
+.Map_block_1 {
+	padding-top:22px;
+	padding-bottom:12px;
+	padding-left:26px;
+}
+
+.Map_block {
+	padding-top:4px;
+	padding-bottom:12px;
+	padding-left:26px;
+}
+
+.Map_block_3 {
+	padding-top:4px;
+	padding-bottom:12px;
+	padding-left:26px;
+}
+
+.Map_block_right {
+	float:left;
+	padding-right:14px;
+	padding-bottom:4px
+}
+
+.Map_desc {
+	float:left;
+	color:#e4e4e4;
+	width:514px;
+	padding-top:2px;
+	margin:0;
+	padding:0;
+}
+
+#Map_making {
+	background-image:url('images/make_bg.jpg');
+	background-repeat:repeat-y;
+	height:88px;
+	padding-left:26px;
+	padding-top:18px;
+}
+
+#Map_making_desc {
+	padding-top:8px;
+	width:770px;
+}
+
+a.textLink {
+	text-decoration:none;
+	color:#000000;
+	font-weight:bold;
+}
+
+a.textLink:hover {
+	color:#993333;
+}
+
+#weapons_header {
+	background-image:url('images/weapons_header.jpg');
+	background-repeat:no-repeat;
+}
+
+#weapons_intro {
+	padding-left:282px;
+	padding-top:120px;
+	color:#ebebeb;
+	width:512px;
+}
+
+#weapon_collapse {
+	background-image:url('images/weapon_collapse.jpg');
+	background-repeat:repeat-y;
+	width:820px;
+}
+
+#weapon_header_collapse {
+	background-image:url('images/weapon_header_collapse.jpg');
+	background-repeat:repeat-y;
+	width:820px;
+}
+
+#weapons_bg {
+	background-image:url('images/weapons_bg.jpg');
+	background-repeat:no-repeat;
+	text-align:center;
+	padding-top:10px;
+}	
+
+.weapon_desc {
+	padding-top:20px;
+	font-size:11px;
+	width:520px;
+	text-align:center;
+}
+
+#achievement_header {
+	margin:0px;
+	padding:0px;
+}
+
+#achievements {
+	background-image:url('images/achievement_bg.jpg');
+	background-repeat:repeat-y;
+}
+
+#achievementsLeft {
+	padding-left:26px;
+	width:386px;
+}
+
+#achievementsRight {
+	float:right;
+	width:400px;
+}
+
+.achievementBlock {
+	height:64px;
+	width:370px;
+	padding-bottom:10px;
+}
+
+.desc {
+	float:right;
+	width:300px;
+}
+
+.bold {
+	font-weight:bold;
+}
+
+#achievementDL {
+	height:36px;
+	background-image:url('images/achievement_dl_bg.jpg')	
+}
+
+#achievementDL a {
+	font-weight:bold;
+	color:#000000;
+}
+
+#achievementDL a:hover {
+	color:#993333;
+}
+
+.achievementsEnd {
+	margin:0;
+	padding:0px;
+}
+
+#DLLeft {
+	padding-top:2px;
+	width:236px;
+	text-align:right;
+}
+
+#DLRight {
+	padding-top:10px;
+	width:572px;
+	float:right;
+	text-align:left;
+}
+
+#prefooter {
+	background-image:url('images/default_bg.jpg');
+	background-repeat:repeat-y;
+	height:70px;
+	margin:0;
+	padding:0;
+	padding-top:10px;
+	text-align:center;
+}
+
+#footer {
+	background-image:url('images/footerBG.jpg');
+	height:60px;
+}
+
+#footerLogo {
+	padding-left:20px;
+	width:111px;
+}
+
+#copyright {
+	float:right;
+	color:#a3a3a3;
+	font-size:10px;
+	text-align:left;
+	width:660px;
+	padding-right:20px;
+	padding-top:8px;
+	line-height:normal;
+}
+.sec_break {
+	margin:0;
+	padding:0;
+}
+
+#sniper {
+	margin:0;
+	padding:0;
+}
+
+#weekend {
+	width:820px;
+	height:172px;
+	background-image:url('images/weekend/weekend_bg.jpg');
+	background-repeat:no-repeat;
+	margin:0;
+	padding:0;
+}
+
+#button {
+	padding-top:96px;
+	padding-left:16px;
+}
+
+#weekendInfo {
+	float:right;
+	width:514px;
+	text-align:left;
+	padding-right:12px;
+	padding-top:100px;
+	color:#fff5c7;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+}
+
+#weekendInfo_small {
+	float:right;
+	width:514px;
+	text-align:left;
+	padding-right:12px;
+	padding-top:100px;
+	color:#fff5c7;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+}
+
+.weekendInfoBold {
+	font-weight:bold;
+}
+
+#weekendInfo a {
+	color:#ffe566;
+}
+
+#weekendInfo a:hover {
+	color:#FFFFFF;
+}
+
+#weekendInfo_small a {
+	color:#ffe566;
+}
+
+#weekendInfo_small a:hover {
+	color:#FFFFFF;
+	

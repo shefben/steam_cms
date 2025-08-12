@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<title>Source Dedicated Server Update History</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript" src="script.js"></script>
+<META HTTP-EQUIV="Expires" CONTENT="0">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+</head>
+
+<body>
+
+<div class="headerimg"><a href="/platform/update_history/Source Dedicated Server.html" target="_new"><img align="absmiddle" border="0" width="17" height="18" src="http://www.steampowered.com/img/ie_dark.gif" title="Open this page in a new window" alt="Open this page in a new window"></a></div>
+
+<B>UPDATE NEWS - SOURCE DEDICATED SERVER</B>
+
+<div class="header" style="padding-top: 5px; padding-bottom: 5px;">Latest update: March 08, 2006</div>
+
+<span class="note">
+
+<hr align="left" style="width: 100%;"></span>
+<div style="padding-bottom: 5px;"><strong style="color: #eeeeee;">Full Change History:</strong></div>
+
+<span class="linky" onclick="showBranch('March 08, 2006')" id="March 08, 2006-link">[-] March 08, 2006</span> (current release)<br>
+<div id="March 08, 2006" style="display: block; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Reduced CPU spikes and overall load during server operation</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed serveral crash bugs on Linux systems running older GLIBC versions</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('May 12, 2005')" id="May 12, 2005-link">[+] May 12, 2005</span> <br>
+<div id="May 12, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> HTTP downloads from the game server system support downloading .bz2-compressed files</li>
+<li> Disable old style (non-challenged) server queries by default (use the sv_enableoldqueries cvar to change this behavior)</li>
+<li> Added cvar tv_delaymapchange to delay map changes caused by frag/time limit until whole game is broadcasted via SourceTV</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed memory leak in SourceTV relay servers by releasing receive tables correctly</li>
+<li> Bandwidth output in tv_status in kB/sec rather than bytes/sec</li>
+<li> Running a new map command (spawning a server) shuts down TV relay in same process</li>
+<li> Fixed SourceTV chase cam following ragdolls of dead secondary targets</li>
+<li> Fixed lag compensation invalidating bone cache for players moved back in time.</li>
+<li> Fixed lag compensation interpolation error between 2 ticks</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('May 05, 2005')" id="May 05, 2005-link">[+] May 05, 2005</span> <br>
+<div id="May 05, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Added hostname to tv_status output</li>
+<li> Changed the behavior of "tv_relay" command to automatically stop any running map</li>
+<li> Added command "tv_clients" to list connected spectators/proxy</li>
+<li> Added -tvmasteronly command line parameter to restrict tvmaxclients to 1 - for use when feeding a single proxy server (not broadcasting)</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed high CPU usage when running a non standard tick rate</li>
+<li> Fixed Linux build not correctly initializing, and then not running properly</li>
+<li> Fixed "tv_maxclients 0" working if SourceTV is used for recording demos only</li>
+<li> Fixed a couple other crashes</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('April 25, 2005')" id="April 25, 2005-link">[+] April 25, 2005</span> <br>
+<div id="April 25, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Moved default Steam port to 27009 (UDP) from 27030. Use -steamport <port> to override.</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('April 05, 2005')" id="April 05, 2005-link">[+] April 05, 2005</span> <br>
+<div id="April 05, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Added sv_visiblemaxplayers</li>
+</ul>Bug fixes<hr align="left"><ul><li> Fixed timing precision error causing slower framerates on servers running continuously for more than a few days</li>
+<li> Fixed a bug causing the first message from a plug-in message to be colored incorrectly</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('March 25, 2005')" id="March 25, 2005-link">[+] March 25, 2005</span> <br>
+<div id="March 25, 2005" style="display: none; padding-left: 32px">
+Bug fixes<hr align="left"><ul><li> Fixed exploit that would allow clients to spawn temporary entities on clients, causing a crash.</li>
+</ul>
+</div>
+
+<span class="linky" onclick="showBranch('January 10, 2005')" id="January 10, 2005-link">[+] January 10, 2005</span> <br>
+<div id="January 10, 2005" style="display: none; padding-left: 32px">
+Changes/Additions<hr align="left"><ul><li> Fixed rcon packet bug that was accepting negative packet lengths</li>
+<li> (Linux) Added "-pidfile" command line argument to output a pid file on startup</li>
+</ul>
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+
+#col_about {
+	width: 751px;
+	float: left;
+}
+#btn_getSteam {
+	font-size: 10px;
+	font-weight: bold;
+	color: #8BC53F;
+	border: 1px solid #8BC53F;
+	background-color: #2A2A2A;
+	text-decoration: none;
+	padding: 8px 7px 8px 20px;
+	background-image: url('http://cdn.store.steampowered.com/public/images/ico_arrow_green.gif');
+	background-repeat: no-repeat;
+	background-position: 2px center;
+	cursor:pointer;
+}
+#btn_getSteam strong {
+	font-size: 12px;
+}
+/* ================================================================================================== */
+/* ---- [ Header ] ---- */
+#header_about {
+	width: 751px;
+	height: 462px;
+	background-image: url('images/header_about.jpg');
+	background-repeat: no-repeat;
+}
+#header_about h1 {
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light, sans-serif;
+	font-size: 36px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-align: left;
+	margin: 0px 0px 0px 17px;
+}
+/* ================================================================================================== */
+/* ---- [ Center Column ] ---- */
+#col_about_main {
+	margin-left: 17px!important;
+	margin-left: 15px;
+	float: left;
+	width: 476px;
+}
+#col_about_main ul {
+	list-style: disc url('images/ico/ico_arrow_orange.gif');
+	padding-left: 17px;
+	margin-bottom: 15px;
+}
+#col_about_main li {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 18px;
+	color: #CFCBC2;	
+	margin-top: 10px
+}
+#col_about_main li strong {
+	color: #C26413;
+	line-height: 10px;
+}
+#col_about_main .btn_blue {
+	margin-left: 17px;
+}
+/* ================================================================================================== */
+/* ---- [ Right Column ] ---- */
+#col_about_right {
+	width: 223px;
+	margin-left: 17px!important;
+	margin-left: 15px;
+	text-align: left;
+	float: left;
+	padding-bottom: 10px;
+	padding-top: 20px;
+}
+#col_about_right h2 {
+	margin: 15px 0px 8px 0px;
+}
+#col_about_right ul {
+	list-style: disc url('images/ico/ico_arrow_grey.gif');
+	padding-left: 15px;
+	margin-bottom: 8px;
+}
+#col_about_right li {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #808081;
+	line-height: 13px;
+}
+#col_about_right p {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #808081;
+	line-height: 13px;
+	margin: 0px 0px 8px 0px;
+}

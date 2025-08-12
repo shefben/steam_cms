@@ -13,17 +13,26 @@ if ($active_theme === '2003_v1' && cms_get_setting('support2003_show', '1') === 
     echo cms_get_setting('support2003_html', '<div class="notification"><b>:: REQUIRED UPDATE AVAILABLE</b></div>');
 }
 ?>
-<h1>SUPPORT</H1>
-<h2>QUESTIONS, <em>ANSWERS, BUG FIXES, ETC</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 
-<div class="boxTop">5 Top Support Questions</div><br clear="all">
-<div class="box">
+<div class="" id="newsbox" style="
+    position: relative;
+    top: 423px;">
+<br><div class="boxTop">Top Support Questions</div><br clear="all">
+<div class="box" style="z-index: 12;">
 <?php if ($page && !empty($page['faqs'])): ?>
 <?php foreach ($page['faqs'] as $f): ?>
     <a href="faq_entry.php?id=<?php echo $f['faqid1'].','.$f['faqid2']; ?>"><strong><?php echo htmlspecialchars($f['title']); ?></strong></a><br><br>
 <?php endforeach; ?>
 <?php endif; ?>
+
+</div>
+</div>
+<div id="textcontainer">
+<h1>SUPPORT</H1>
+<h2>QUESTIONS, <em>ANSWERS, BUG FIXES, ETC</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
 <?php echo $page['content'] ?? '' ?>
+</div>
+</div>
 
 <?php
 $content = ob_get_clean();

@@ -1,0 +1,75 @@
+#col_package {
+	width: 717px;
+	margin-left: 17px;
+	margin-bottom: 15px;
+	float: left;
+}
+#col_package_header {
+	width: 717px;
+	height: 242px;
+	padding: 5px;
+	float: left;
+	background-image: url('images/col_package_headerBG.gif');
+	background-repeat: no-repeat;
+}
+/* ================================================================================================== */
+/* ---- [ Package sub totals ] ---- */
+#col_package_subTotals {
+	width: 477px;
+	text-align: right;
+	margin-bottom: 25px;
+}
+#col_package_subTotals strong {
+	font-size: 12px;
+	font-weight: bold;
+}
+#col_package_subTotals_left {
+	text-align:right;
+	float: right;
+}
+#col_package_subTotals_right {
+	width: 100px;
+	float: right;
+	margin-right: 5px;
+}
+.package_savings {
+	color: #8BC53F;
+}
+/* ================================================================================================== */
+/* ---- [  ] ---- */
+#col_package_content {
+	margin-top: 25px;
+	width: 476px;
+	float: left;
+}
+#col_package_contentsList
+{
+	width: 477px;
+	float: left;
+}
+#col_right_game
+{
+	margin-top: 12px;
+}
+/* ==================================================================================== */
+.messageRequiredApp {
+	background-color: #303030;
+	color: #c0c0c0;
+	border: 2px Solid Orange;
+	padding: 5px;
+	width: 446px !important;
+	width: 460px;
+	margin-top: 5px;
+	margin: 0px 0px 10px 0px !important;
+	margin: 0px 0px 0px 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+.messageRequiredApp a { color: White; }
+
+.messageRequiredApp a:hover { color: Silver; }
+/* ==================================================================================== */
+p#descriptorText {
+	font-size:10px;
+}

@@ -1,0 +1,610 @@
+/* CSS Document */
+p {
+	margin:0;
+	padding:0;
+}
+
+body {
+	background-color:#bbaca5;
+	/*background-color:#3f2c28; */
+	padding:0;
+	margin:0;
+}
+
+#mainContainer {
+	background-image:url('images/main_bg.jpg');
+	background-repeat:repeat-x;
+	background-color:#bbaca5;
+	padding:0;
+	margin:0;
+}
+
+#pageContainer {
+	width:820px;
+	text-align:left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#000000;
+	padding:0;
+	margin:0;
+	line-height:18px;
+	position:relative;
+}
+
+#home {
+	background-image:url('images/bg_home_day7.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	height:653px;
+	margin:0;
+	padding:0;
+}
+
+#home_fr {
+	background-image:url('images/french/bg_home_day6.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	height:653px;
+	margin:0;
+	padding:0;
+}
+
+#home_de {
+	background-image:url('images/german/bg_home_day7.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	height:653px;
+	margin:0;
+	padding:0;
+}
+
+#nav1 {
+	position:absolute;
+	top:397px;
+	left:57px;
+}
+
+#nav2 {
+	position:absolute;
+	top:428px;
+	left:57px;
+}
+
+#nav3 {
+	position:absolute;
+	top:461px;
+	left:57px;
+}
+
+#nav4 {
+	position:absolute;
+	top:493px;
+	left:57px;
+}
+
+#nav5 {
+	position:absolute;
+	top:525px;
+	left:57px;
+}
+
+#nav6 {
+	position:absolute;
+	top:557px;
+	left:57px;
+}
+
+#footer {
+	background-image:url('images/footerBG.jpg');
+	height:60px;
+}
+
+#footerLogo {
+	padding-left:20px;
+	width:111px;
+}
+
+#copyright {
+	float:right;
+	color:#a3a3a3;
+	font-size:10px;
+	text-align:left;
+	width:660px;
+	padding-right:20px;
+	padding-top:8px;
+	line-height:normal;
+}
+
+.footerShadowBottom {
+	height:60px;
+}
+
+/* Language Select */
+#languageSelect {
+	position:absolute;
+	top:624px;
+	left:57px;
+	color:#565656;
+}
+
+#languageSelect a {
+	color:#cccccc;
+	text-decoration:none;
+}
+
+#languageSelect a:hover {
+	color:#FFFFFF;
+}
+
+
+
+/* 01 CP_Steel */
+#steel_content {
+	background-image:url('images/01_expand_bg.gif');
+	background-repeat:repeat-y;
+	width:820px;
+	padding-top:14px;
+}
+
+#steel_thumbs {
+	float:left;
+	padding-left:22px;
+	padding-right:14px;
+	padding-bottom:10px
+	
+}
+
+#steel_desc {
+	float:left;
+	color:#c3c3c3;
+	width:470px;
+	padding-top:2px;
+	margin:0;
+	padding:0;
+}
+
+/* 02 KGB */
+#kgb_content {
+	width:820px;
+	background-image:url('images/02_kgb_bg.gif');
+	background-repeat:repeat-y;	
+}
+
+#kgb_desc {
+	padding-left:26px;
+	width:510px;
+	color:#c3c3c3;
+	padding-top:8px;
+	padding-bottom:180px;
+}
+
+#kgb_heavy {
+	background-image:url('images/02_achievementHead.jpg');
+	background-repeat:no-repeat;
+	background-position:bottom;
+}
+
+#kgb_heavy_fr {
+	background-image:url('images/french/02_achievementHead.jpg');
+	background-repeat:no-repeat;
+	background-position:bottom;
+}
+
+#kgb_heavy_de {
+	background-image:url('images/german/02_achievementHead.jpg');
+	background-repeat:no-repeat;
+	background-position:bottom;
+}
+
+#achievements {
+	background-image:url('images/02_achievement_bg.jpg');
+	background-repeat:repeat-y;
+	width:820px;
+	text-align:left;
+}
+
+#achievementsLeft {
+	padding-left:26px;
+	width:386px;
+}
+
+#achievementsRight {
+	float:right;
+	width:400px;
+}
+
+.achievementBlock {
+	height:64px;
+	width:370px;
+	padding-bottom:10px;
+}
+
+.desc {
+	float:right;
+	width:300px;
+	text-align:left;
+}
+
+.bold {
+	font-weight:bold;
+}
+
+#achievementDL {
+	height:36px;
+	background-image:url('images/achievement_dl_bg.jpg')	
+}
+
+#achievementDL a {
+	font-weight:bold;
+	color:#000000;
+}
+
+#achievementDL a:hover {
+	color:#993333;
+}
+
+.achievementsEnd {
+	margin:0;
+	padding:0px;
+}
+
+#DLLeft {
+	padding-top:2px;
+	width:236px;
+	text-align:right;
+}
+
+#DLRight {
+	padding-top:10px;
+	width:572px;
+	float:right;
+	text-align:left;
+}
+
+#DLLeft_fr {
+	padding-top:2px;
+	width:150px;
+	text-align:right;
+}
+
+#DLRight_fr {
+	padding-top:10px;
+	width:650px;
+	float:right;
+	text-align:left;
+}
+
+/* 03 Badwater */
+#badwaterBG {
+	background-image:url('images/03_BG.jpg');
+	background-repeat:repeat-y;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#badwaterImage {
+	background-image:url('images/03_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#badwaterImage_fr {
+	background-image:url('images/french/03_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#badwaterImage_de {
+	background-image:url('images/german/03_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#badwaterDesc {
+	padding-top:405px;
+	padding-left:32px;
+	width:500px;
+	color:#c3c3c3;
+	line-height:18px;
+}
+
+.Bold {
+	color:e6e4d6;
+	font-weight:bold;
+}
+
+#badwaterPics {
+		padding-left:32px;
+		padding-bottom:20px;
+}
+
+/* 04 Natascha */
+#nataschaBG {
+	background-image:url('images/04_BG.jpg');
+	background-repeat:repeat-y;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#nataschaImage {
+	background-image:url('images/04_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#nataschaImage_fr {
+	background-image:url('images/french/04_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#nataschaImage_de {
+	background-image:url('images/german/04_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#nataschaDesc {
+	padding-left:16px;
+	padding-top:84px;
+	width:368px;
+	color:#c9bca3;
+	line-height:18px;
+	float:left;
+}
+
+#nataschaGun {
+	padding-left:32px;
+	float:left;
+}
+
+#nataschaBlock {
+	padding-top:392px;
+}
+/* 05 Arena */
+#arenaBG {
+	background-image:url('images/05_topBG.jpg');
+	background-repeat:repeat-y;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#arenaImage {
+	background-image:url('images/05_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#arenaImage_fr {
+	background-image:url('images/french/05_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#arenaImage_de {
+	background-image:url('images/german/05_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#arena1 {
+	padding-top:304px;
+	padding-left:28px;
+	width:520px;
+	color:#c9bca3;
+	line-height:18px;
+
+}
+
+#mapSection {
+	background-image:url('images/05_bottomBG.jpg');
+	background-repeat:repeat-y;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#mapDesc {
+	padding-left:28px;
+	width:750px;
+	color:#c9bca3;
+	line-height:18px;
+}
+
+#mapLeft {
+		padding-left:28px;
+		width:366px;
+		color:#c9bca3;
+		line-height:18px;
+		float:left;
+}
+	
+#mapRight {
+		padding-left:28px;
+		width:366px;
+		color:#c9bca3;
+		line-height:18px;
+		float:left;
+}
+
+.title {
+	padding-bottom:10px
+}	
+
+/* 06 Sandvich */
+#sandvichBG {
+	background-image:url('images/06_BG.jpg');
+	background-repeat:repeat-y;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#sandvichImage {
+	background-image:url('images/06_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+#sandvichImage_fr {
+	background-image:url('images/french/06_header.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+}
+
+
+#sandvichBottom {
+	background-image:url('images/06_bottomBG.jpg');
+	background-repeat:no-repeat;
+	width:820px;
+	margin:0;
+	padding:0;
+	background-position:bottom;
+}
+
+#sandvichDesc {
+	padding-left:30px;
+	width:520px;
+	color:#d6ccc4;
+	line-height:18px;
+
+}
+
+#sandvich {
+	margin-top:17px;
+}
+
+#sandvichTitle {
+	padding-bottom: 20px;
+	padding-top:24px;
+}
+
+#sandvichBtn1{
+	float:left;
+	padding-left:10px;
+}
+
+#sandvichBtn2{
+	float:right;
+}
+
+#sandvichButtons {
+	width:600px;
+	text-align:center;
+	padding-top:20px;
+}
+
+
+/* WEEKEND */
+#weekendSection {
+	background-color:#3f2c28;
+}
+
+#weekend {
+	width:820px;
+	height:172px;
+	background-image:url('images/weekend/weekend_bg.jpg');
+	background-repeat:no-repeat;
+	margin:0;
+	padding:0;
+	text-align:left;
+}
+
+#weekend_fr {
+	width:820px;
+	height:172px;
+	background-image:url('images/french/weekend/weekend_bg.jpg');
+	background-repeat:no-repeat;
+	margin:0;
+	padding:0;
+	text-align:left;
+}
+
+#weekend_de {
+	width:820px;
+	height:172px;
+	background-image:url('images/german/weekend/weekend_bg.jpg');
+	background-repeat:no-repeat;
+	margin:0;
+	padding:0;
+	text-align:left;
+}
+
+#button {
+	padding-top:98px;
+	padding-left:26px;
+	width:270px;
+	float:left;
+}
+
+#weekendInfo {
+	float:left;
+	width:510px;
+	text-align:left;
+	padding-right:12px;
+	padding-top:102px;
+	color:#fff5c7;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+}
+
+#weekendInfo_small {
+	float:left;
+	width:510px;
+	text-align:left;
+	padding-right:12px;
+	padding-top:108px;
+	color:#fff5c7;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+	font-weight:bold;
+}
+
+.weekendInfoBold {
+	font-weight:bold;
+}
+
+#weekendInfo a {
+	color:#ffe566;
+}
+
+#weekendInfo a:hover {
+	color:#FFFFFF;
+}
+
+#weekendInfo_small a {
+	color:#ffe566;
+}
+
+#weekendInfo_small a:hover {
+	color:#FFFFFF;
+	
+
+
+
+	

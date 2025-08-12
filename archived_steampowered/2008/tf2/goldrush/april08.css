@@ -1,0 +1,482 @@
+﻿/* CSS Document */
+
+body {
+	background-image:url('images/mainBG.jpg');
+	background-repeat:repeat-x;
+	background-color:#bfafa8;
+	padding:0;
+	margin:0;
+}
+
+#pageContainer {
+	width:816px;
+	text-align:left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#000000;
+	padding:0;
+	margin:0;
+}
+
+#header {
+	margin:0px;
+	padding:0px;
+}
+
+#freeWeekend_english, #freeWeekend_german, #freeWeekend_french, #freeWeekend_spanish, #freeWeekend_swedish, #freeWeekend_norwegian, #freeWeekend_danish, #freeWeekend_dutch, #freeWeekend_finnish, #freeWeekend_polish, #freeWeekend_italian, #freeWeekend_portuguese, #freeWeekend_russian, #freeWeekend_japanese, #freeWeekend_korean, #freeWeekend_schinese, #freeWeekend_tchinese {
+	background-repeat:none;
+	width:816px;
+	height:162px;
+	margin:0px;
+}
+
+#freeWeekend_english {
+	background-image:url('images/english/freeWeekend.jpg');
+}
+
+#freeWeekend_german {
+	background-image:url('images/german/freeWeekend.jpg');
+}
+
+#freeWeekend_french {
+	background-image:url('images/french/freeWeekend.jpg');
+}
+
+#freeWeekend_spanish {
+	background-image:url('images/spanish/freeWeekend.jpg');
+}
+
+#freeWeekend_swedish {
+	background-image:url('images/swedish/freeWeekend.jpg');
+}
+
+#freeWeekend_norwegian {
+	background-image:url('images/norwegian/freeWeekend.jpg');
+}
+
+#freeWeekend_danish {
+	background-image:url('images/danish/freeWeekend.jpg');
+}
+
+#freeWeekend_dutch {
+	background-image:url('images/dutch/freeWeekend.jpg');
+}
+
+#freeWeekend_finnish {
+	background-image:url('images/finnish/freeWeekend.jpg');
+}
+
+#freeWeekend_polish {
+	background-image:url('images/polish/freeWeekend.jpg');
+}
+
+#freeWeekend_italian {
+	background-image:url('images/italian/freeWeekend.jpg');
+}
+
+#freeWeekend_portuguese {
+	background-image:url('images/portuguese/freeWeekend.jpg');
+}
+
+#freeWeekend_russian {
+	background-image:url('images/russian/freeWeekend.jpg');
+}
+
+#freeWeekend_japanese {
+	background-image:url('images/japanese/freeWeekend.jpg');
+}
+
+#freeWeekend_korean {
+	background-image:url('images/korean/freeWeekend.jpg');
+}
+
+#freeWeekend_schinese {
+	background-image:url('images/schinese/freeWeekend.jpg');
+}
+
+#freeWeekend_tchinese {
+	background-image:url('images/tchinese/freeWeekend.jpg');
+}
+
+#button {
+	padding-top:96px;
+	padding-left:16px;
+}
+
+#weekendInfo {
+	float:right;
+	width:516px;
+	text-align:left;
+	padding-right:12px;
+	padding-top:100px;
+	color:#fff5c7;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+}
+
+#weekendInfo_small {
+	float:right;
+	width:514px;
+	text-align:left;
+	padding-right:12px;
+	padding-top:100px;
+	color:#fff5c7;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+}
+
+#weekendInfo_smaller {
+	float:right;
+	width:514px;
+	text-align:left;
+	padding-right:12px;
+	padding-top:102px;
+	color:#fff5c7;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+	font-weight:bold;
+}
+
+.weekendInfoBold {
+	font-weight:bold;
+}
+
+#weekendInfo a, #weekendInfo_small a, #weekendInfo_smaller a {
+	color:#ffe566;
+}
+
+#weekendInfo a:hover, #weekendInfo_small a:hover, #weekendInfo_smaller a:hover {
+	color:#FFFFFF;
+}
+
+#newFeatures_english, #newFeatures_german, #newFeatures_french, #newFeatures_spanish, #newFeatures_swedish, #newFeatures_norwegian, #newFeatures_danish, #newFeatures_dutch, #newFeatures_finnish, #newFeatures_polish, #newFeatures_italian, #newFeatures_portuguese, #newFeatures_russian, #newFeatures_japanese, #newFeatures_korean, #newFeatures_schinese, #newFeatures_tchinese {
+	background-repeat:no-repeat;
+	width:816px;
+	margin:0px;
+	padding:0px;
+}
+
+#newFeatures_english {	
+	background-image:url('images/english/newFeatures2.jpg');
+}
+#newFeatures_german {
+	background-image:url('images/german/newFeatures2.jpg');
+}
+
+#newFeatures_french {
+	background-image:url('images/french/newFeatures2.jpg');
+}
+
+#newFeatures_spanish {
+	background-image:url('images/spanish/newFeatures2.jpg');
+}
+
+#newFeatures_swedish {
+	background-image:url('images/swedish/newFeatures2.jpg');
+}
+
+#newFeatures_norwegian {
+	background-image:url('images/norwegian/newFeatures2.jpg');
+}
+
+#newFeatures_danish {
+	background-image:url('images/danish/newFeatures2.jpg');
+}
+
+#newFeatures_dutch {
+	background-image:url('images/dutch/newFeatures2.jpg');
+}
+
+#newFeatures_finnish {
+	background-image:url('images/finnish/newFeatures2.jpg');
+}
+
+#newFeatures_polish {
+	background-image:url('images/polish/newFeatures2.jpg');
+}
+
+#newFeatures_italian {
+	background-image:url('images/italian/newFeatures2.jpg');
+}
+
+#newFeatures_portuguese {
+	background-image:url('images/portuguese/newFeatures2.jpg');
+}
+
+#newFeatures_russian {
+	background-image:url('images/russian/newFeatures2.jpg');
+}
+
+#newFeatures_japanese {
+	background-image:url('images/japanese/newFeatures2.jpg');
+}
+
+#newFeatures_korean {
+	background-image:url('images/korean/newFeatures2.jpg');
+}
+
+#newFeatures_schinese {
+	background-image:url('images/schinese/newFeatures2.jpg');
+}
+
+#newFeatures_tchinese {
+	background-image:url('images/tchinese/newFeatures2.jpg');
+}
+
+#GoldRush {
+	background-image:url('images/GoldRushBG.jpg');
+}
+
+#GoldRush_pic_1 {
+	padding-left:16px;
+	padding-top:168px;
+}
+
+#GoldRush_copy {
+	width:460px;
+	float:right;
+	padding-top:250px;
+	padding-left:12px;
+	padding-right:24px;
+}
+
+.captionA {
+	padding-top:2px;
+	padding-bottom:8px;
+	width:300px;
+	font-weight:bold;
+	font-size:12px;
+}
+
+.captionB {
+	padding-top:2px;
+	padding-bottom:12px;
+	width:460px;
+	font-weight:bold;
+	font-size:12px;
+}
+
+#systemHead {
+	margin:0px;
+	padding:0px;
+}
+	
+#system {
+	background-image:url('images/SystemBG.jpg');
+}
+
+#systemLeft {
+	width:470px;
+	padding-left:14px;
+}
+
+#systemRight {
+	width:320px;
+	float:right;
+	padding-right:2px;
+}
+
+#system_copy {
+	padding-right:10px;
+}
+
+#systemFooter_english, #systemFooter_german, #systemFooter_french, #systemFooter_spanish, #systemFooter_swedish, #systemFooter_norwegian, #systemFooter_danish, #systemFooter_dutch, #systemFooter_finnish, #systemFooter_polish, #systemFooter_italian, #systemFooter_portuguese, #systemFooter_russian, #systemFooter_japanese, #systemFooter_korean, #systemFooter_schinese, #systemFooter_tchinese  {
+	background-repeat:no-repeat;
+	background-position:bottom;
+	padding-bottom:206px;
+}
+
+#systemFooter_english {
+	background-image:url('images/english/medicHead.jpg');
+}
+
+#systemFooter_german {
+	background-image:url('images/german/medicHead.jpg');
+}
+
+#systemFooter_french {
+	background-image:url('images/french/medicHead.jpg');
+}
+
+#systemFooter_spanish {
+	background-image:url('images/spanish/medicHead.jpg');
+}
+
+#systemFooter_swedish {
+	background-image:url('images/swedish/medicHead.jpg');
+}
+
+#systemFooter_norwegian {
+	background-image:url('images/norwegian/medicHead.jpg');
+}
+
+#systemFooter_danish {
+	background-image:url('images/danish/medicHead.jpg');
+}
+
+#systemFooter_dutch {
+	background-image:url('images/dutch/medicHead.jpg');
+}
+
+#systemFooter_finnish {
+	background-image:url('images/finnish/medicHead.jpg');
+}
+
+#systemFooter_polish {
+	background-image:url('images/polish/medicHead.jpg');
+}
+
+#systemFooter_italian {
+	background-image:url('images/italian/medicHead.jpg');
+}
+
+#systemFooter_portuguese {
+	background-image:url('images/portuguese/medicHead.jpg');
+}
+
+#systemFooter_russian {
+	background-image:url('images/russian/medicHead.jpg');
+}
+
+#systemFooter_japanese {
+	background-image:url('images/japanese/medicHead.jpg');
+}
+
+#systemFooter_korean {
+	background-image:url('images/korean/medicHead.jpg');
+}
+
+#systemFooter_schinese {
+	background-image:url('images/schinese/medicHead.jpg');
+}
+
+#systemFooter_tchinese {
+	background-image:url('images/schinese/medicHead.jpg');
+}
+
+.achievementsEnd {
+	margin:0;
+	padding:0px;
+}
+
+#achievements {
+	background-image:url('images/MedicBG.jpg');
+}
+
+#achievementsLeft {
+	padding-left:20px;
+	width:386px;
+}
+
+#achievementsRight {
+	float:right;
+	width:400px;
+}
+
+.achievementBlock {
+	height:64px;
+	width:370px;
+	padding-bottom:10px;
+}
+
+#achievementDL {
+	height:36px;
+	background-image:url('images/MedicBG_dl_bottom.jpg');	
+}
+
+#achievementDL a {
+	font-weight:bold;
+	color:#000000;
+}
+
+#achievementDL a:hover {
+	color:#993333;
+}
+
+#DLLeft {
+	padding-top:2px;
+	width:236px;
+	text-align:right;
+}
+
+#DLRight {
+	padding-top:10px;
+	width:572px;
+	float:right;
+	text-align:left;
+}
+
+#DLLeft_french {
+	padding-top:2px;
+	width:190px;
+	text-align:right;
+}
+
+
+#DLRight_french {
+	padding-top:10px;
+	width:620px;
+	float:right;
+	text-align:left;
+}
+
+
+.desc {
+	float:right;
+	width:300px;
+}
+
+.bold {
+	font-weight:bold;
+}
+
+#preFooter {
+	background-image:url('images/GoldRushBG.jpg');
+	height:44px;
+}
+
+#GetTF2 {
+	padding-left:8px;
+	width:314px;
+}
+
+#WatchVideo {
+	float:right;
+	width:420px;
+}
+
+#WatchVideo_long {
+	float:right;
+	width:490px;
+}
+
+#footer {
+	background-image:url('images/footerBG.jpg');
+	height:60px;
+}
+
+#footerLogo {
+	padding-left:2px;
+	width:124px;
+}
+
+#copyright {
+	float:right;
+	color:#a3a3a3;
+	font-size:10px;
+	text-align:left;
+	width:660px;
+	padding-right:20px;
+	padding-top:8px;
+}
+	
+
+ 
+
+
+
+	
+
+
+

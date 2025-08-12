@@ -1,0 +1,286 @@
+
+#global_area_tabs {
+	margin-top: 40px;
+	margin-bottom: 10px;
+	padding-bottom: 0px;
+	text-align:left;
+}
+#global_area_tabs_search {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 0px;
+	text-align:left;
+}
+#global_area_tabs_tab {
+	float: left;
+	margin: 1px;
+}
+#global_area_tabs_title {
+	margin: 5px 0px 10px 5px;
+	padding-top: 15px;
+}
+#main_tab_list {
+	margin:0px;
+	padding:0px;
+	list-style:none;
+	float:left;
+}
+#main_tab_list li 
+{
+	line-height: 21px;
+}
+.main_tab_on, .main_tab_off {
+	float:left;
+	margin: 0px 5px 0px 0px;
+	padding: 0px;
+	list-style: none;
+	font-size: 10px;
+	font-weight: bold;
+	color: #9EA0A2;
+	background-image:url('images/listArea_tab_r.gif');
+	background-repeat:no-repeat;
+	background-position:top right;
+}
+.main_tab_on {
+	color:#FFFFFF;
+	background-image:url('images/listArea_tab_focus_r.gif');
+	background-repeat:no-repeat;
+	background-position:top right;
+}	
+.main_tab_on span, .main_tab_off a, .main_tab_off span, .main_tab_on a {
+	display:block;
+	padding:5px 0px 0px 9px;
+	margin-right:9px;
+	color: #BCBCBC;
+	background-image:url('images/listArea_tab_l.gif');
+	background-repeat:no-repeat;
+	background-position:top left;
+	cursor:pointer;
+}
+.main_tab_on span, .main_tab_on a {
+	color:#FFFFFF;
+	background-image:url('images/listArea_tab_focus_l.gif');
+	background-repeat:no-repeat;
+	background-position:top left;
+	cursor:default;
+}
+.tab_link,tab_link:hover {
+	text-transform:capitalize;
+}
+.tab_link:hover {
+	color:#FFFFFF;
+}
+#global_area_tabs h3, #global_area_tabs_search h3 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #6EBCFF;
+	margin: 0px;
+	text-transform: none;
+}
+#global_area_tabs_ctn {
+	background-color: #4A4945;
+	padding: 5px 0px 7px 0px;
+	margin: 0px;
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
+#global_area_tabs_ctn_pkg {
+	background-color: #2a2a2a;
+	padding: 5px 0px 7px 0px;
+	margin: 0px;
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
+.global_area_tabs_ctn_norm {
+	background-image: url('images/listArea_bottom.gif');
+}
+.global_area_tabs_ctn_norm_pkg {
+	background-image: url('images/listArea_bottom_pkg.gif');
+}
+.global_area_tabs_ctn_wide {
+	
+}
+.global_area_tabs_item_empty {
+	max-width: 100%;
+	height: 46px;
+	padding: 5px 0px 5px 0px;
+	margin: 0px 5px 0px 5px;
+}
+.global_area_tabs_item {
+	max-width: 100%;
+	height: 46px;
+	padding: 5px 0px 5px 0px;
+	margin: 0px 5px 0px 5px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #2F3030;
+	position: relative;
+}
+.global_area_tabs_item_overlay {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+.global_area_tabs_item_overlay img {
+	width: 100%;
+	height: 56px;
+	border: none;
+}
+.global_area_tabs_item_overlay a:focus {
+	outline: 0px none;
+}
+.global_area_tabs_item:hover {
+	background-color: #3B3B37;
+	cursor: pointer;
+}
+.tabHighlight {
+	background-color: #3B3B37;
+	cursor: pointer;
+}
+.global_area_tabs_item_img {
+	float: left;
+}
+.global_area_tabs_item_img img {
+	width: 120px;
+	height: 45px;
+	background-color: #000000;
+}
+.global_area_tabs_item_txt {
+	width: 245px;
+	height: 45px;
+	text-align: left;
+	float: left;
+	padding: 0px 0px 0px 10px;
+}
+.global_area_tabs_ctn_wide .global_area_tabs_item_txt {
+	width: 420px;
+	padding-top: 10px;
+}
+.global_area_tabs_ctn_wide_search .global_area_tabs_item_txt {
+	width: 360px;
+	padding-top: 10px;
+}
+.global_area_tabs_item_type {
+	width: 60px;
+	float: left;
+	padding-top: 10px;
+	text-align: center;
+}
+.global_area_tabs_item_price {
+	width: 52px;
+	text-align: right;
+	float: left;
+	padding-top: 10px;
+	margin-right: 0px;
+}
+.global_area_tabs_item_price strike 
+{
+	color: #626262;
+}
+.global_area_tabs_ctn_wide .global_area_tabs_item_price {
+	width: 62px;
+}
+.global_area_tabs_ctn_wide_search .global_area_tabs_item_price {
+	width: 62px;
+}
+.global_area_tabs_item_rating, .global_area_tabs_item_rating_na {
+	width: 32px;
+	text-align: center;
+	float: left;
+	padding-top: 10px;
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+}
+.global_area_tabs_ctn_wide_search .global_area_tabs_item_rating, .global_area_tabs_ctn_wide_search .global_area_tabs_item_rating_na, .global_area_tabs_ctn_wide .global_area_tabs_item_rating, .global_area_tabs_ctn_wide .global_area_tabs_item_rating_na {
+	width: 92px;
+}
+.global_area_tabs_item_rating {
+	color: #8BC53F;
+}
+.global_area_tabs_item_rating_na {
+	color: #808081;
+}
+/* ================================================================================================== */
+/* ---- [ column headers ] ---- */
+#tabs_contentsColumns, #tabs_contentsColumns_search {
+	width: 717px;
+	margin-bottom: 4px;
+}
+#tabs_contentsColumns_name {
+	width: 547px;
+	height: 16px;
+	background-color: #4A4945;
+	padding: 3px 0px 0px 7px;
+	float: left;
+	cursor: pointer;
+}
+#tabs_contentsColumns_search #tabs_contentsColumns_name {
+	width: 486px;
+}
+#tabs_contentsColumns_metascore {
+	width: 92px;
+	height: 16px;
+	background-color: #4A4945;
+	text-align: center;
+	padding: 3px 0px 0px 0px;
+	margin-left: 1px;
+	float: left;
+	cursor: pointer;
+}
+#tabs_contentsColumns_type {
+	width: 60px;
+	height: 16px;
+	background-color: #4A4945;
+	text-align: center;
+	padding: 3px 0px 0px 0px;
+	margin-left: 1px;
+	float: left;
+	cursor: pointer;
+}
+#tabs_contentsColumns_price {
+	width: 60px;
+	height: 16px;
+	background-color: #4A4945;
+	text-align: right;
+	padding: 3px 9px 0px 0px;
+	margin-left: 1px;
+	float: left;
+	cursor: pointer;
+}
+
+.tab_page {
+	overflow: hidden;
+	position: relative;
+}
+
+.tab_page_link_holder {
+	margin-left: 4px;
+	margin-right: 4px;
+	margin-top: 4px;
+	text-align: center;
+}
+
+.tab_page_count {
+	color: #85837c;
+}
+
+.tab_page_link img {
+	border: none;
+	vertical-align: bottom;
+}
+
+.tab_page_link a {
+	font-weight: normal;
+}
+
+.tab_page_link_prev {
+	float: left;
+}
+
+.tab_page_link_next {
+	float: right;
+}

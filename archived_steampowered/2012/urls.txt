@@ -1,0 +1,2 @@
+http://storefront.steampowered.com/v2/index.php?area=game&AppId=70&
+redirects to http://store.steampowered.com/app/70/

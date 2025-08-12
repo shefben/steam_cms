@@ -1,0 +1,1229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Welcome to Steam</title>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="storefront.css" rel="stylesheet" type="text/css">
+<!--
+	<link href="styles_home.css" rel="stylesheet" type="text/css" />
+	<link href="styles_capsules.css" rel="stylesheet" type="text/css" />
+	-->
+<link href="styles_global.css" rel="stylesheet" type="text/css">
+<link href="styles_content.css" rel="stylesheet" type="text/css"/>
+<link href="styles_lists.css" rel="stylesheet" type="text/css"/>
+<script language="JavaScript" src="minmax.js" type="text/javascript"></script>
+<script language="JavaScript" src="javascript.js" type="text/javascript"></script>
+</link></link></head>
+<body>
+<!-- header bar -->
+<div style="min-width:850px;">
+<div class="globalHeadBar_logo"><a href=""><img alt="Steam main" border="0" src="img/logo_steam_header.jpg"/></a></div>
+<div class="globalHeadBar">
+<div class="globalNavItem"><a href="v/index.php?cc=--" title="Home"><span class="globalNavLink">HOME</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=news&amp;cc=--" title="News"><span class="globalNavLink">NEWS</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=getsteamnow&amp;cc=--" title="Get Steam"><span class="globalNavLink">GET STEAM NOW</span></a></div>
+<div class="globalNavItem"><a href="https://cafe.steampowered.com/" title="Cyber Cafes"><span class="globalNavLink">CYBER CAFÉS</span></a></div>
+<div class="globalNavItem"><a href="http://support.steampowered.com/" title="Support"><span class="globalNavLink">SUPPORT</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=forums&amp;cc=--" title="Forums"><span class="globalNavLink">FORUMS</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=stats&amp;cc=--" title="Status"><span class="globalNavLink">STATS</span></a></div>
+</div>
+</div>
+<br clear="all"/>
+<!-- end header bar -->
+<center>
+<div class="contentBG_3">
+<div class="headerBG_3">
+<!-- Left Menu -->
+<div class="leftMenu_2" style="display: inline;">
+<div class="menu_item"><a href="v/index.php?cc=--">Home</a></div>
+<hr class="menu_spacer"/>
+<div class="menu_item"><a href="v/index.php?area=all&amp;cc=--">All Games</a></div>
+<div class="menu_item"><a href="v/index.php?area=browse&amp;cc=--">Browse Games</a></div>
+<div class="menu_item"><a href="v/index.php?area=search&amp;cc=--">Search</a></div>
+<hr class="menu_spacer"/>
+<div class="menu_item"><a href="v/index.php?area=free&amp;cc=--">Free Stuff</a></div>
+<div class="menu_item"><a href="v/index.php?area=media&amp;cc=--">Videos</a></div>
+</div>
+<!-- End Left Menu -->
+<!-- Left Collumn Content -->
+<div class="leftCol_3">
+<!-- example -->
+<div class="content" id="container">
+<table cellpadding="0" cellspacing="0" width="710">
+<tr>
+<td background="img/headers/header_710_hl03.jpg" height="110" width="710">
+<h1>LIMITED GAME TOURNAMENT</h1>
+<h2>LICENSE AGREEMENT <em> AND SIGNUP FORM</em></h2>
+</td>
+</tr>
+<tr><td height="5"></td></tr>
+</table>
+<div class="narrower">
+<script>
+function copyText() {
+	document.signup.tTourAddress.value = document.signup.tOrgAddress.value;
+	document.signup.tTourAddress2.value = document.signup.tOrgAddress2.value;
+	document.signup.tTourCity.value = document.signup.tOrgCity.value;
+	document.signup.tTourZipPostal.value = document.signup.tOrgZipPostal.value;
+	document.signup.tTourEmail.value = document.signup.tOrgEmail.value;
+	document.signup.tTourStateProv.value = document.signup.tOrgStateProv.value;
+	document.signup.tTourCountry.value = document.signup.tOrgCountry.value;
+}
+</script>
+<script language="javascript" type="text/javascript">
+function check_online_only() {
+
+	var tTourOnlineOnly = document.getElementById('tTourOnlineOnly').checked;
+	var table = document.getElementById('maintable');
+	var row, i = 0, rows = table.getElementsByTagName('tr');
+
+	while (row = rows.item(i++))
+		if (row.className == 'tTourAddress')
+			if (tTourOnlineOnly)
+				row.style.display = 'none';
+			else
+				row.style.display = 'block';
+}
+</script>
+<p>If you are hosting a LAN or online tournament that meets the requirements and restrictions described on the main <a href="v/?area=tourney_limited" target="_blank">Game Tournament License Page</a>, this is where you sign up to request a  license.  We first need a little information about your event.  We will also need to confirm your agreement to the terms of the <a href="v/?area=tourney_limited_license" target="_blank">Limited Game Tournament License Agreement</a>. Please complete the signup form below. We will review your information and send you a confirmation email if your tournament has been approved for a Limited Game Tournament License.  Please allow up to five (5) business days for us to review your information.</p>
+<style>
+.insidecontent {
+	background: #383838;
+}
+</style>
+<form action="/v/" method="post" name="signup">
+<input name="area" type="hidden" value="tourney_limited_signup"/>
+<table border="0" cellpadding="0" cellspacing="3" class="insidecontent" id="maintable" width="100%">
+<tr>
+<td></td>
+<td> </td>
+<td><p><strong>Organization Information</strong></p></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Organization Name</p></td>
+<td> </td>
+<td width="100%"><input name="tOrgName" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Type of Organization</p></td>
+<td> </td>
+<td>
+<select name="tOrgType" size="1" style="width: 200px;">
+<option value=""></option>
+<option %selected_torgtype_corporation%="" value="Corporation">Corporation</option>
+<option %selected_torgtype_non-profit%="" value="Non-Profit">Non-Profit</option>
+<option %selected_torgtype_partnership%="" value="Partnership">Partnership</option>
+<option %selected_torgtype_sole="" proprietorship%="" value="Sole Proprietorship">Sole Proprietorship</option>
+<option %selected_torgtype_other%="" value="Other">Other</option>
+</select>
+</td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Are you a CyberCafe?</p></td>
+<td> </td>
+<td>
+<select name="tIsCafe" size="1" style="width: 200px;">
+<option value=""></option>
+<option %selected_tiscafe_1%="" value="1">Yes</option>
+<option %selected_tiscafe_0%="" value="0">No</option>
+</select>
+</td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Organizer First Name</p></td>
+<td> </td>
+<td><input name="tOrgNameFirst" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Organizer Last Name</p></td>
+<td> </td>
+<td><input name="tOrgNameLast" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Address</p></td>
+<td> </td>
+<td><input name="tOrgAddress" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;">Address Line 2</p></td>
+<td> </td>
+<td><input name="tOrgAddress2" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> City</p></td>
+<td> </td>
+<td><input name="tOrgCity" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;">State/Province</p></td>
+<td> </td>
+<td>
+<select name="tOrgStateProv" size="1" style="width: 200px;">
+<option value=""></option>
+<option %selected_torgstateprov_al%="" value="AL">Alabama</option>
+<option %selected_torgstateprov_ak%="" value="AK">Alaska</option>
+<option %selected_torgstateprov_ab%="" value="AB">Alberta</option>
+<option %selected_torgstateprov_az%="" value="AZ">Arizona</option>
+<option %selected_torgstateprov_ar%="" value="AR">Arkansas</option>
+<option %selected_torgstateprov_bc%="" value="BC">British Columbia</option>
+<option %selected_torgstateprov_ca%="" value="CA">California</option>
+<option %selected_torgstateprov_co%="" value="CO">Colorado</option>
+<option %selected_torgstateprov_ct%="" value="CT">Connecticut</option>
+<option %selected_torgstateprov_de%="" value="DE">Delaware</option>
+<option %selected_torgstateprov_dc%="" value="DC">District of Columbia</option>
+<option %selected_torgstateprov_fl%="" value="FL">Florida</option>
+<option %selected_torgstateprov_ga%="" value="GA">Georgia</option>
+<option %selected_torgstateprov_hi%="" value="HI">Hawaii</option>
+<option %selected_torgstateprov_id%="" value="ID">Idaho</option>
+<option %selected_torgstateprov_il%="" value="IL">Illinois</option>
+<option %selected_torgstateprov_in%="" value="IN">Indiana</option>
+<option %selected_torgstateprov_ia%="" value="IA">Iowa</option>
+<option %selected_torgstateprov_ks%="" value="KS">Kansas</option>
+<option %selected_torgstateprov_ky%="" value="KY">Kentucky</option>
+<option %selected_torgstateprov_la%="" value="LA">Louisiana</option>
+<option %selected_torgstateprov_me%="" value="ME">Maine</option>
+<option %selected_torgstateprov_mb%="" value="MB">Manitoba</option>
+<option %selected_torgstateprov_md%="" value="MD">Maryland</option>
+<option %selected_torgstateprov_ma%="" value="MA">Massachusetts</option>
+<option %selected_torgstateprov_mi%="" value="MI">Michigan</option>
+<option %selected_torgstateprov_mn%="" value="MN">Minnesota</option>
+<option %selected_torgstateprov_ms%="" value="MS">Mississippi</option>
+<option %selected_torgstateprov_mo%="" value="MO">Missouri</option>
+<option %selected_torgstateprov_mt%="" value="MT">Montana</option>
+<option %selected_torgstateprov_ne%="" value="NE">Nebraska</option>
+<option %selected_torgstateprov_nv%="" value="NV">Nevada</option>
+<option %selected_torgstateprov_nb%="" value="NB">New Brunswick</option>
+<option %selected_torgstateprov_nh%="" value="NH">New Hampshire</option>
+<option %selected_torgstateprov_nj%="" value="NJ">New Jersey</option>
+<option %selected_torgstateprov_nm%="" value="NM">New Mexico</option>
+<option %selected_torgstateprov_ny%="" value="NY">New York</option>
+<option %selected_torgstateprov_nf%="" value="NF">Newfoundland</option>
+<option %selected_torgstateprov_nc%="" value="NC">North Carolina</option>
+<option %selected_torgstateprov_nd%="" value="ND">North Dakota</option>
+<option %selected_torgstateprov_nt%="" value="NT">Northwest Territories</option>
+<option %selected_torgstateprov_ns%="" value="NS">Nova Scotia</option>
+<option %selected_torgstateprov_nu%="" value="NU">Nunavut</option>
+<option %selected_torgstateprov_oh%="" value="OH">Ohio</option>
+<option %selected_torgstateprov_ok%="" value="OK">Oklahoma</option>
+<option %selected_torgstateprov_on%="" value="ON">Ontario</option>
+<option %selected_torgstateprov_or%="" value="OR">Oregon</option>
+<option %selected_torgstateprov_pa%="" value="PA">Pennsylvania</option>
+<option %selected_torgstateprov_pe%="" value="PE">Prince Edward Island</option>
+<option %selected_torgstateprov_pr%="" value="PR">Puerto Rico</option>
+<option %selected_torgstateprov_qc%="" value="QC">Quebec</option>
+<option %selected_torgstateprov_ri%="" value="RI">Rhode Island</option>
+<option %selected_torgstateprov_sk%="" value="SK">Saskatchewan</option>
+<option %selected_torgstateprov_sc%="" value="SC">South Carolina</option>
+<option %selected_torgstateprov_sd%="" value="SD">South Dakota</option>
+<option %selected_torgstateprov_tn%="" value="TN">Tennessee</option>
+<option %selected_torgstateprov_tx%="" value="TX">Texas</option>
+<option %selected_torgstateprov_ut%="" value="UT">Utah</option>
+<option %selected_torgstateprov_vt%="" value="VT">Vermont</option>
+<option %selected_torgstateprov_va%="" value="VA">Virginia</option>
+<option %selected_torgstateprov_wa%="" value="WA">Washington</option>
+<option %selected_torgstateprov_wv%="" value="WV">West Virginia</option>
+<option %selected_torgstateprov_wi%="" value="WI">Wisconsin</option>
+<option %selected_torgstateprov_wy%="" value="WY">Wyoming</option>
+<option %selected_torgstateprov_yt%="" value="YT">Yukon</option>
+</select>
+</td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Country</p></td>
+<td> </td>
+<td>
+<select name="tOrgCountry" size="1" style="width: 200px;">
+<option value=""></option>
+<option %selected_torgcountry_us%="" value="US">United States</option>
+<option %selected_torgcountry_af%="" value="AF">Afghanistan</option>
+<option %selected_torgcountry_al%="" value="AL">Albania</option>
+<option %selected_torgcountry_dz%="" value="DZ">Algeria</option>
+<option %selected_torgcountry_as%="" value="AS">American Samoa</option>
+<option %selected_torgcountry_ad%="" value="AD">Andorra</option>
+<option %selected_torgcountry_ao%="" value="AO">Angola</option>
+<option %selected_torgcountry_ai%="" value="AI">Anguilla</option>
+<option %selected_torgcountry_aq%="" value="AQ">Antarctica</option>
+<option %selected_torgcountry_ag%="" value="AG">Antigua and Barbuda</option>
+<option %selected_torgcountry_ar%="" value="AR">Argentina</option>
+<option %selected_torgcountry_am%="" value="AM">Armenia</option>
+<option %selected_torgcountry_aw%="" value="AW">Aruba</option>
+<option %selected_torgcountry_au%="" value="AU">Australia</option>
+<option %selected_torgcountry_at%="" value="AT">Austria</option>
+<option %selected_torgcountry_az%="" value="AZ">Azerbaijan</option>
+<option %selected_torgcountry_bs%="" value="BS">Bahamas</option>
+<option %selected_torgcountry_bh%="" value="BH">Bahrain</option>
+<option %selected_torgcountry_bd%="" value="BD">Bangladesh</option>
+<option %selected_torgcountry_bb%="" value="BB">Barbados</option>
+<option %selected_torgcountry_by%="" value="BY">Belarus</option>
+<option %selected_torgcountry_be%="" value="BE">Belgium</option>
+<option %selected_torgcountry_bz%="" value="BZ">Belize</option>
+<option %selected_torgcountry_bj%="" value="BJ">Benin</option>
+<option %selected_torgcountry_bm%="" value="BM">Bermuda</option>
+<option %selected_torgcountry_bt%="" value="BT">Bhutan</option>
+<option %selected_torgcountry_bo%="" value="BO">Bolivia</option>
+<option %selected_torgcountry_ba%="" value="BA">Bosnia and Herzegovina</option>
+<option %selected_torgcountry_bw%="" value="BW">Botswana</option>
+<option %selected_torgcountry_bv%="" value="BV">Bouvet Island</option>
+<option %selected_torgcountry_br%="" value="BR">Brazil</option>
+<option %selected_torgcountry_io%="" value="IO">British Indian Ocean Territory</option>
+<option %selected_torgcountry_bn%="" value="BN">Brunei Darussalam</option>
+<option %selected_torgcountry_bg%="" value="BG">Bulgaria</option>
+<option %selected_torgcountry_bf%="" value="BF">Burkina Faso</option>
+<option %selected_torgcountry_bi%="" value="BI">Burundi</option>
+<option %selected_torgcountry_kh%="" value="KH">Cambodia</option>
+<option %selected_torgcountry_cm%="" value="CM">Cameroon</option>
+<option %selected_torgcountry_ca%="" value="CA">Canada</option>
+<option %selected_torgcountry_cv%="" value="CV">Cap Verde</option>
+<option %selected_torgcountry_ky%="" value="KY">Cayman Islands</option>
+<option %selected_torgcountry_cf%="" value="CF">Central African Republic</option>
+<option %selected_torgcountry_td%="" value="TD">Chad</option>
+<option %selected_torgcountry_cl%="" value="CL">Chile</option>
+<option %selected_torgcountry_cn%="" value="CN">China</option>
+<option %selected_torgcountry_cx%="" value="CX">Christmas Island</option>
+<option %selected_torgcountry_cc%="" value="CC">Cocos (Keeling) Islands</option>
+<option %selected_torgcountry_co%="" value="CO">Colombia</option>
+<option %selected_torgcountry_km%="" value="KM">Comoros</option>
+<option %selected_torgcountry_cd%="" value="CD">Congo, Democratic People's Republic</option>
+<option %selected_torgcountry_cg%="" value="CG">Congo, Republic of</option>
+<option %selected_torgcountry_ck%="" value="CK">Cook Islands</option>
+<option %selected_torgcountry_cr%="" value="CR">Costa Rica</option>
+<option %selected_torgcountry_ci%="" value="CI">Cote d'Ivoire</option>
+<option %selected_torgcountry_hr%="" value="HR">Croatia/Hrvatska</option>
+<option %selected_torgcountry_cu%="" value="CU">Cuba</option>
+<option %selected_torgcountry_cy%="" value="CY">Cyprus</option>
+<option %selected_torgcountry_cz%="" value="CZ">Czech Republic</option>
+<option %selected_torgcountry_dk%="" value="DK">Denmark</option>
+<option %selected_torgcountry_dj%="" value="DJ">Djibouti</option>
+<option %selected_torgcountry_dm%="" value="DM">Dominica</option>
+<option %selected_torgcountry_do%="" value="DO">Dominican Republic</option>
+<option %selected_torgcountry_tp%="" value="TP">East Timor</option>
+<option %selected_torgcountry_ec%="" value="EC">Ecuador</option>
+<option %selected_torgcountry_eg%="" value="EG">Egypt</option>
+<option %selected_torgcountry_sv%="" value="SV">El Salvador</option>
+<option %selected_torgcountry_gq%="" value="GQ">Equatorial Guinea</option>
+<option %selected_torgcountry_er%="" value="ER">Eritrea</option>
+<option %selected_torgcountry_ee%="" value="EE">Estonia</option>
+<option %selected_torgcountry_et%="" value="ET">Ethiopia</option>
+<option %selected_torgcountry_fk%="" value="FK">Falkland Islands (Malvina)</option>
+<option %selected_torgcountry_fo%="" value="FO">Faroe Islands</option>
+<option %selected_torgcountry_fj%="" value="FJ">Fiji</option>
+<option %selected_torgcountry_fi%="" value="FI">Finland</option>
+<option %selected_torgcountry_fr%="" value="FR">France</option>
+<option %selected_torgcountry_gf%="" value="GF">French Guiana</option>
+<option %selected_torgcountry_pf%="" value="PF">French Polynesia</option>
+<option %selected_torgcountry_tf%="" value="TF">French Southern Territories</option>
+<option %selected_torgcountry_ga%="" value="GA">Gabon</option>
+<option %selected_torgcountry_gm%="" value="GM">Gambia</option>
+<option %selected_torgcountry_ge%="" value="GE">Georgia</option>
+<option %selected_torgcountry_de%="" value="DE">Germany</option>
+<option %selected_torgcountry_gh%="" value="GH">Ghana</option>
+<option %selected_torgcountry_gi%="" value="GI">Gibraltar</option>
+<option %selected_torgcountry_gr%="" value="GR">Greece</option>
+<option %selected_torgcountry_gl%="" value="GL">Greenland</option>
+<option %selected_torgcountry_gd%="" value="GD">Grenada</option>
+<option %selected_torgcountry_gp%="" value="GP">Guadeloupe</option>
+<option %selected_torgcountry_gu%="" value="GU">Guam</option>
+<option %selected_torgcountry_gt%="" value="GT">Guatemala</option>
+<option %selected_torgcountry_gg%="" value="GG">Guernsey</option>
+<option %selected_torgcountry_gn%="" value="GN">Guinea</option>
+<option %selected_torgcountry_gw%="" value="GW">Guinea-Bissau</option>
+<option %selected_torgcountry_gy%="" value="GY">Guyana</option>
+<option %selected_torgcountry_ht%="" value="HT">Haiti</option>
+<option %selected_torgcountry_hm%="" value="HM">Heard and McDonald Islands</option>
+<option %selected_torgcountry_va%="" value="VA">Holy See (City Vatican State)</option>
+<option %selected_torgcountry_hn%="" value="HN">Honduras</option>
+<option %selected_torgcountry_hk%="" value="HK">Hong Kong</option>
+<option %selected_torgcountry_hu%="" value="HU">Hungary</option>
+<option %selected_torgcountry_is%="" value="IS">Iceland</option>
+<option %selected_torgcountry_in%="" value="IN">India</option>
+<option %selected_torgcountry_id%="" value="ID">Indonesia</option>
+<option %selected_torgcountry_ir%="" value="IR">Iran (Islamic Republic of)</option>
+<option %selected_torgcountry_iq%="" value="IQ">Iraq</option>
+<option %selected_torgcountry_ie%="" value="IE">Ireland</option>
+<option %selected_torgcountry_im%="" value="IM">Isle of Man</option>
+<option %selected_torgcountry_il%="" value="IL">Israel</option>
+<option %selected_torgcountry_it%="" value="IT">Italy</option>
+<option %selected_torgcountry_jm%="" value="JM">Jamaica</option>
+<option %selected_torgcountry_jp%="" value="JP">Japan</option>
+<option %selected_torgcountry_je%="" value="JE">Jersey</option>
+<option %selected_torgcountry_jo%="" value="JO">Jordan</option>
+<option %selected_torgcountry_kz%="" value="KZ">Kazakhstan</option>
+<option %selected_torgcountry_ke%="" value="KE">Kenya</option>
+<option %selected_torgcountry_ki%="" value="KI">Kiribati</option>
+<option %selected_torgcountry_kp%="" value="KP">Korea, Democratic People's Republic</option>
+<option %selected_torgcountry_kr%="" value="KR">Korea, Republic of</option>
+<option %selected_torgcountry_kw%="" value="KW">Kuwait</option>
+<option %selected_torgcountry_kg%="" value="KG">Kyrgyzstan</option>
+<option %selected_torgcountry_la%="" value="LA">Lao People's Democratic Republic</option>
+<option %selected_torgcountry_lv%="" value="LV">Latvia</option>
+<option %selected_torgcountry_lb%="" value="LB">Lebanon</option>
+<option %selected_torgcountry_ls%="" value="LS">Lesotho</option>
+<option %selected_torgcountry_lr%="" value="LR">Liberia</option>
+<option %selected_torgcountry_ly%="" value="LY">Libyan Arab Jamahiriya</option>
+<option %selected_torgcountry_li%="" value="LI">Liechtenstein</option>
+<option %selected_torgcountry_lt%="" value="LT">Lithuania</option>
+<option %selected_torgcountry_lu%="" value="LU">Luxembourg</option>
+<option %selected_torgcountry_mo%="" value="MO">Macau</option>
+<option %selected_torgcountry_mk%="" value="MK">Macedonia</option>
+<option %selected_torgcountry_mg%="" value="MG">Madagascar</option>
+<option %selected_torgcountry_mw%="" value="MW">Malawi</option>
+<option %selected_torgcountry_my%="" value="MY">Malaysia</option>
+<option %selected_torgcountry_mv%="" value="MV">Maldives</option>
+<option %selected_torgcountry_ml%="" value="ML">Mali</option>
+<option %selected_torgcountry_mt%="" value="MT">Malta</option>
+<option %selected_torgcountry_mh%="" value="MH">Marshall Islands</option>
+<option %selected_torgcountry_mq%="" value="MQ">Martinique</option>
+<option %selected_torgcountry_mr%="" value="MR">Mauritania</option>
+<option %selected_torgcountry_mu%="" value="MU">Mauritius</option>
+<option %selected_torgcountry_yt%="" value="YT">Mayotte</option>
+<option %selected_torgcountry_mx%="" value="MX">Mexico</option>
+<option %selected_torgcountry_fm%="" value="FM">Micronesia, Federal State of</option>
+<option %selected_torgcountry_md%="" value="MD">Moldova, Republic of</option>
+<option %selected_torgcountry_mc%="" value="MC">Monaco</option>
+<option %selected_torgcountry_mn%="" value="MN">Mongolia</option>
+<option %selected_torgcountry_ms%="" value="MS">Montserrat</option>
+<option %selected_torgcountry_ma%="" value="MA">Morocco</option>
+<option %selected_torgcountry_mz%="" value="MZ">Mozambique</option>
+<option %selected_torgcountry_mm%="" value="MM">Myanmar</option>
+<option %selected_torgcountry_na%="" value="NA">Namibia</option>
+<option %selected_torgcountry_nr%="" value="NR">Nauru</option>
+<option %selected_torgcountry_np%="" value="NP">Nepal</option>
+<option %selected_torgcountry_nl%="" value="NL">Netherlands</option>
+<option %selected_torgcountry_an%="" value="AN">Netherlands Antilles</option>
+<option %selected_torgcountry_nc%="" value="NC">New Caledonia</option>
+<option %selected_torgcountry_nz%="" value="NZ">New Zealand</option>
+<option %selected_torgcountry_ni%="" value="NI">Nicaragua</option>
+<option %selected_torgcountry_ne%="" value="NE">Niger</option>
+<option %selected_torgcountry_ng%="" value="NG">Nigeria</option>
+<option %selected_torgcountry_nu%="" value="NU">Niue</option>
+<option %selected_torgcountry_nf%="" value="NF">Norfolk Island</option>
+<option %selected_torgcountry_mp%="" value="MP">Northern Mariana Islands</option>
+<option %selected_torgcountry_no%="" value="NO">Norway</option>
+<option %selected_torgcountry_om%="" value="OM">Oman</option>
+<option %selected_torgcountry_pk%="" value="PK">Pakistan</option>
+<option %selected_torgcountry_pw%="" value="PW">Palau</option>
+<option %selected_torgcountry_ps%="" value="PS">Palestinian Territories</option>
+<option %selected_torgcountry_pa%="" value="PA">Panama</option>
+<option %selected_torgcountry_pg%="" value="PG">Papua New Guinea</option>
+<option %selected_torgcountry_py%="" value="PY">Paraguay</option>
+<option %selected_torgcountry_pe%="" value="PE">Peru</option>
+<option %selected_torgcountry_ph%="" value="PH">Philippines</option>
+<option %selected_torgcountry_pn%="" value="PN">Pitcairn Island</option>
+<option %selected_torgcountry_pl%="" value="PL">Poland</option>
+<option %selected_torgcountry_pt%="" value="PT">Portugal</option>
+<option %selected_torgcountry_pr%="" value="PR">Puerto Rico</option>
+<option %selected_torgcountry_qa%="" value="QA">Qatar</option>
+<option %selected_torgcountry_re%="" value="RE">Reunion Island</option>
+<option %selected_torgcountry_ro%="" value="RO">Romania</option>
+<option %selected_torgcountry_ru%="" value="RU">Russian Federation</option>
+<option %selected_torgcountry_rw%="" value="RW">Rwanda</option>
+<option %selected_torgcountry_kn%="" value="KN">Saint Kitts and Nevis</option>
+<option %selected_torgcountry_lc%="" value="LC">Saint Lucia</option>
+<option %selected_torgcountry_vc%="" value="VC">Saint Vincent and the Grenadines</option>
+<option %selected_torgcountry_sm%="" value="SM">San Marino</option>
+<option %selected_torgcountry_st%="" value="ST">Sao Tome and Principe</option>
+<option %selected_torgcountry_sa%="" value="SA">Saudi Arabia</option>
+<option %selected_torgcountry_sn%="" value="SN">Senegal</option>
+<option %selected_torgcountry_cs%="" value="CS">Serbia and Montenegro</option>
+<option %selected_torgcountry_sc%="" value="SC">Seychelles</option>
+<option %selected_torgcountry_sl%="" value="SL">Sierra Leone</option>
+<option %selected_torgcountry_sg%="" value="SG">Singapore</option>
+<option %selected_torgcountry_sk%="" value="SK">Slovak Republic</option>
+<option %selected_torgcountry_si%="" value="SI">Slovenia</option>
+<option %selected_torgcountry_sb%="" value="SB">Solomon Islands</option>
+<option %selected_torgcountry_so%="" value="SO">Somalia</option>
+<option %selected_torgcountry_za%="" value="ZA">South Africa</option>
+<option %selected_torgcountry_gs%="" value="GS">South Georgia</option>
+<option %selected_torgcountry_es%="" value="ES">Spain</option>
+<option %selected_torgcountry_lk%="" value="LK">Sri Lanka</option>
+<option %selected_torgcountry_sh%="" value="SH">St. Helena</option>
+<option %selected_torgcountry_pm%="" value="PM">St. Pierre and Miquelon</option>
+<option %selected_torgcountry_sd%="" value="SD">Sudan</option>
+<option %selected_torgcountry_sr%="" value="SR">Suriname</option>
+<option %selected_torgcountry_sj%="" value="SJ">Svalbard and Jan Mayen Islands</option>
+<option %selected_torgcountry_sz%="" value="SZ">Swaziland</option>
+<option %selected_torgcountry_se%="" value="SE">Sweden</option>
+<option %selected_torgcountry_ch%="" value="CH">Switzerland</option>
+<option %selected_torgcountry_sy%="" value="SY">Syrian Arab Republic</option>
+<option %selected_torgcountry_tw%="" value="TW">Taiwan</option>
+<option %selected_torgcountry_tj%="" value="TJ">Tajikistan</option>
+<option %selected_torgcountry_tz%="" value="TZ">Tanzania</option>
+<option %selected_torgcountry_th%="" value="TH">Thailand</option>
+<option %selected_torgcountry_tg%="" value="TG">Togo</option>
+<option %selected_torgcountry_tk%="" value="TK">Tokelau</option>
+<option %selected_torgcountry_to%="" value="TO">Tonga</option>
+<option %selected_torgcountry_tt%="" value="TT">Trinidad and Tobago</option>
+<option %selected_torgcountry_tn%="" value="TN">Tunisia</option>
+<option %selected_torgcountry_tr%="" value="TR">Turkey</option>
+<option %selected_torgcountry_tm%="" value="TM">Turkmenistan</option>
+<option %selected_torgcountry_tc%="" value="TC">Turks and Ciacos Islands</option>
+<option %selected_torgcountry_tv%="" value="TV">Tuvalu</option>
+<option %selected_torgcountry_um%="" value="UM">US Minor Outlying Islands</option>
+<option %selected_torgcountry_ug%="" value="UG">Uganda</option>
+<option %selected_torgcountry_ua%="" value="UA">Ukraine</option>
+<option %selected_torgcountry_ae%="" value="AE">United Arab Emirates</option>
+<option %selected_torgcountry_uk%="" value="UK">United Kingdom</option>
+<option %selected_torgcountry_gb%="" value="GB">United Kingdom (GB)</option>
+<option %selected_torgcountry_uy%="" value="UY">Uruguay</option>
+<option %selected_torgcountry_uz%="" value="UZ">Uzbekistan</option>
+<option %selected_torgcountry_vu%="" value="VU">Vanuatu</option>
+<option %selected_torgcountry_ve%="" value="VE">Venezuela</option>
+<option %selected_torgcountry_vn%="" value="VN">Vietnam</option>
+<option %selected_torgcountry_vg%="" value="VG">Virgin Islands (British)</option>
+<option %selected_torgcountry_vi%="" value="VI">Virgin Islands (USA)</option>
+<option %selected_torgcountry_wf%="" value="WF">Wallis and Futuna Islands</option>
+<option %selected_torgcountry_eh%="" value="EH">Western Sahara</option>
+<option %selected_torgcountry_ws%="" value="WS">Western Samoa</option>
+<option %selected_torgcountry_ye%="" value="YE">Yemen</option>
+<option %selected_torgcountry_yu%="" value="YU">Yugoslavia</option>
+<option %selected_torgcountry_zm%="" value="ZM">Zambia</option>
+<option %selected_torgcountry_zw%="" value="ZW">Zimbabwe</option>
+</select>
+</td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> ZIP/Postal Code</p></td>
+<td> </td>
+<td><input name="tOrgZipPostal" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Phone Number</p></td>
+<td> </td>
+<td><input name="tOrgPhone" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;">Fax Number</p></td>
+<td> </td>
+<td><input name="tOrgFax" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Email Address</p></td>
+<td> </td>
+<td><input name="tOrgEmail" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""></td>
+<td> </td>
+<td></td>
+</tr>
+<tr>
+<td nowrap=""></td>
+<td> </td>
+<td><p style="margin: 0px;"><a name="tourneyinfo"></a><strong>Tournament Information</strong></p></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Name of Tournament</p></td>
+<td> </td>
+<td><input name="tTourName" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Est. Number of Participants</p></td>
+<td> </td>
+<td><input name="tTourParticipants" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Tournament Start Date</p></td>
+<td> </td>
+<td>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<select name="tTourStartMonth" size="1" style="width: 50px;">
+<option selected="" value="01">Jan</option>
+<option %selected_ttourstartmonth_02%="" value="02">Feb</option>
+<option %selected_ttourstartmonth_03%="" value="03">Mar</option>
+<option %selected_ttourstartmonth_04%="" value="04">Apr</option>
+<option %selected_ttourstartmonth_05%="" value="05">May</option>
+<option %selected_ttourstartmonth_06%="" value="06">Jun</option>
+<option %selected_ttourstartmonth_07%="" value="07">Jul</option>
+<option %selected_ttourstartmonth_08%="" value="08">Aug</option>
+<option %selected_ttourstartmonth_09%="" value="09">Sep</option>
+<option %selected_ttourstartmonth_10%="" value="10">Oct</option>
+<option %selected_ttourstartmonth_11%="" value="11">Nov</option>
+<option %selected_ttourstartmonth_12%="" value="12">Dec</option>
+</select>
+</td>
+<td> </td>
+<td>
+<select name="tTourStartDay" size="1" style="width: 50px;">
+<option %selected_ttourstartday_01%="" value="01">01</option>
+<option %selected_ttourstartday_02%="" value="02">02</option>
+<option %selected_ttourstartday_03%="" value="03">03</option>
+<option %selected_ttourstartday_04%="" value="04">04</option>
+<option %selected_ttourstartday_05%="" value="05">05</option>
+<option %selected_ttourstartday_06%="" value="06">06</option>
+<option selected="" value="07">07</option>
+<option %selected_ttourstartday_08%="" value="08">08</option>
+<option %selected_ttourstartday_09%="" value="09">09</option>
+<option %selected_ttourstartday_10%="" value="10">10</option>
+<option %selected_ttourstartday_11%="" value="11">11</option>
+<option %selected_ttourstartday_12%="" value="12">12</option>
+<option %selected_ttourstartday_13%="" value="13">13</option>
+<option %selected_ttourstartday_14%="" value="14">14</option>
+<option %selected_ttourstartday_15%="" value="15">15</option>
+<option %selected_ttourstartday_16%="" value="16">16</option>
+<option %selected_ttourstartday_17%="" value="17">17</option>
+<option %selected_ttourstartday_18%="" value="18">18</option>
+<option %selected_ttourstartday_19%="" value="19">19</option>
+<option %selected_ttourstartday_20%="" value="20">20</option>
+<option %selected_ttourstartday_21%="" value="21">21</option>
+<option %selected_ttourstartday_22%="" value="22">22</option>
+<option %selected_ttourstartday_23%="" value="23">23</option>
+<option %selected_ttourstartday_24%="" value="24">24</option>
+<option %selected_ttourstartday_25%="" value="25">25</option>
+<option %selected_ttourstartday_26%="" value="26">26</option>
+<option %selected_ttourstartday_27%="" value="27">27</option>
+<option %selected_ttourstartday_28%="" value="28">28</option>
+<option %selected_ttourstartday_29%="" value="29">29</option>
+<option %selected_ttourstartday_30%="" value="30">30</option>
+<option %selected_ttourstartday_31%="" value="31">31</option>
+</select>
+</td>
+<td> </td>
+<td>
+<select name="tTourStartYear" size="1" style="width: 75px;">
+<option %selected_ttourstartyear_2005%="" value="2005">2005</option>
+<option %selected_ttourstartyear_2006%="" value="2006">2006</option>
+<option selected="" value="2007">2007</option>
+<option selected="" value="2008">2008</option>
+<option selected="" value="2009">2009</option>
+<option selected="" value="2010">2010</option>
+</select>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Tournament End Date</p></td>
+<td> </td>
+<td>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<select name="tTourEndMonth" size="1" style="width: 50px;">
+<option selected="" value="01">Jan</option>
+<option %selected_ttourendmonth_02%="" value="02">Feb</option>
+<option %selected_ttourendmonth_03%="" value="03">Mar</option>
+<option %selected_ttourendmonth_04%="" value="04">Apr</option>
+<option %selected_ttourendmonth_05%="" value="05">May</option>
+<option %selected_ttourendmonth_06%="" value="06">Jun</option>
+<option %selected_ttourendmonth_07%="" value="07">Jul</option>
+<option %selected_ttourendmonth_08%="" value="08">Aug</option>
+<option %selected_ttourendmonth_09%="" value="09">Sep</option>
+<option %selected_ttourendmonth_10%="" value="10">Oct</option>
+<option %selected_ttourendmonth_11%="" value="11">Nov</option>
+<option %selected_ttourendmonth_12%="" value="12">Dec</option>
+</select>
+</td>
+<td> </td>
+<td>
+<select name="tTourEndDay" size="1" style="width: 50px;">
+<option %selected_ttourendday_01%="" value="01">01</option>
+<option %selected_ttourendday_02%="" value="02">02</option>
+<option %selected_ttourendday_03%="" value="03">03</option>
+<option %selected_ttourendday_04%="" value="04">04</option>
+<option %selected_ttourendday_05%="" value="05">05</option>
+<option %selected_ttourendday_06%="" value="06">06</option>
+<option selected="" value="07">07</option>
+<option %selected_ttourendday_08%="" value="08">08</option>
+<option %selected_ttourendday_09%="" value="09">09</option>
+<option %selected_ttourendday_10%="" value="10">10</option>
+<option %selected_ttourendday_11%="" value="11">11</option>
+<option %selected_ttourendday_12%="" value="12">12</option>
+<option %selected_ttourendday_13%="" value="13">13</option>
+<option %selected_ttourendday_14%="" value="14">14</option>
+<option %selected_ttourendday_15%="" value="15">15</option>
+<option %selected_ttourendday_16%="" value="16">16</option>
+<option %selected_ttourendday_17%="" value="17">17</option>
+<option %selected_ttourendday_18%="" value="18">18</option>
+<option %selected_ttourendday_19%="" value="19">19</option>
+<option %selected_ttourendday_20%="" value="20">20</option>
+<option %selected_ttourendday_21%="" value="21">21</option>
+<option %selected_ttourendday_22%="" value="22">22</option>
+<option %selected_ttourendday_23%="" value="23">23</option>
+<option %selected_ttourendday_24%="" value="24">24</option>
+<option %selected_ttourendday_25%="" value="25">25</option>
+<option %selected_ttourendday_26%="" value="26">26</option>
+<option %selected_ttourendday_27%="" value="27">27</option>
+<option %selected_ttourendday_28%="" value="28">28</option>
+<option %selected_ttourendday_29%="" value="29">29</option>
+<option %selected_ttourendday_30%="" value="30">30</option>
+<option %selected_ttourendday_31%="" value="31">31</option>
+</select>
+</td>
+<td> </td>
+<td>
+<select name="tTourEndYear" size="1" style="width: 75px;">
+<option %selected_ttourendyear_2005%="" value="2005">2005</option>
+<option %selected_ttourendyear_2006%="" value="2006">2006</option>
+<option selected="" value="2007">2007</option>
+<option %selected_ttourendyear_2008%="" value="2008">2007</option>
+<option %selected_ttourendyear_2009%="" value="2009">2007</option>
+<option %selected_ttourendyear_2010%="" value="2010">2007</option>
+</select>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td></td>
+<td> </td>
+<td></td>
+</tr>
+<tr>
+<td align="right" valign="bottom"><input id="tTourOnlineOnly" name="tTourOnlineOnly" onchange="check_online_only();" onclick="check_online_only();" type="checkbox" value="checked"/></td>
+<td> </td>
+<td valign="bottom"><p style="margin: 0px;">tournament is online-only</p></td>
+</tr>
+<tr class="tTourAddress">
+<td valign="top"><p nowrap="" style="margin: 0px;"> Physical Address of Tournament</p></td>
+<td> </td>
+<td valign="bottom">
+<style>
+	<!-- 
+	.fakelink {
+		cursor: pointer;
+		color: #ffffff;
+		text-decoration: underline;
+	}
+	-->
+	</style>
+<input name="tTourAddress" style="width: 200px;" type="text" value=""/><br/><p style="margin: 0px;"><sup>(<a class="fakelink" onclick="copyText();">click here to copy from above</a>)</sup></p></td>
+</tr>
+<tr class="tTourAddress">
+<td nowrap=""><p style="margin: 0px;">Address Line 2</p></td>
+<td> </td>
+<td><input name="tTourAddress2" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr class="tTourAddress">
+<td nowrap=""><p style="margin: 0px;"> City</p></td>
+<td> </td>
+<td><input name="tTourCity" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr class="tTourAddress">
+<td nowrap=""><p style="margin: 0px;">State/Province</p></td>
+<td> </td>
+<td>
+<select name="tTourStateProv" size="1" style="width: 200px;">
+<option value=""></option>
+<option %selected_ttourstateprov_al%="" value="AL">Alabama</option>
+<option %selected_ttourstateprov_ak%="" value="AK">Alaska</option>
+<option %selected_ttourstateprov_ab%="" value="AB">Alberta</option>
+<option %selected_ttourstateprov_az%="" value="AZ">Arizona</option>
+<option %selected_ttourstateprov_ar%="" value="AR">Arkansas</option>
+<option %selected_ttourstateprov_bc%="" value="BC">British Columbia</option>
+<option %selected_ttourstateprov_ca%="" value="CA">California</option>
+<option %selected_ttourstateprov_co%="" value="CO">Colorado</option>
+<option %selected_ttourstateprov_ct%="" value="CT">Connecticut</option>
+<option %selected_ttourstateprov_de%="" value="DE">Delaware</option>
+<option %selected_ttourstateprov_dc%="" value="DC">District of Columbia</option>
+<option %selected_ttourstateprov_fl%="" value="FL">Florida</option>
+<option %selected_ttourstateprov_ga%="" value="GA">Georgia</option>
+<option %selected_ttourstateprov_hi%="" value="HI">Hawaii</option>
+<option %selected_ttourstateprov_id%="" value="ID">Idaho</option>
+<option %selected_ttourstateprov_il%="" value="IL">Illinois</option>
+<option %selected_ttourstateprov_in%="" value="IN">Indiana</option>
+<option %selected_ttourstateprov_ia%="" value="IA">Iowa</option>
+<option %selected_ttourstateprov_ks%="" value="KS">Kansas</option>
+<option %selected_ttourstateprov_ky%="" value="KY">Kentucky</option>
+<option %selected_ttourstateprov_la%="" value="LA">Louisiana</option>
+<option %selected_ttourstateprov_me%="" value="ME">Maine</option>
+<option %selected_ttourstateprov_mb%="" value="MB">Manitoba</option>
+<option %selected_ttourstateprov_md%="" value="MD">Maryland</option>
+<option %selected_ttourstateprov_ma%="" value="MA">Massachusetts</option>
+<option %selected_ttourstateprov_mi%="" value="MI">Michigan</option>
+<option %selected_ttourstateprov_mn%="" value="MN">Minnesota</option>
+<option %selected_ttourstateprov_ms%="" value="MS">Mississippi</option>
+<option %selected_ttourstateprov_mo%="" value="MO">Missouri</option>
+<option %selected_ttourstateprov_mt%="" value="MT">Montana</option>
+<option %selected_ttourstateprov_ne%="" value="NE">Nebraska</option>
+<option %selected_ttourstateprov_nv%="" value="NV">Nevada</option>
+<option %selected_ttourstateprov_nb%="" value="NB">New Brunswick</option>
+<option %selected_ttourstateprov_nh%="" value="NH">New Hampshire</option>
+<option %selected_ttourstateprov_nj%="" value="NJ">New Jersey</option>
+<option %selected_ttourstateprov_nm%="" value="NM">New Mexico</option>
+<option %selected_ttourstateprov_ny%="" value="NY">New York</option>
+<option %selected_ttourstateprov_nf%="" value="NF">Newfoundland</option>
+<option %selected_ttourstateprov_nc%="" value="NC">North Carolina</option>
+<option %selected_ttourstateprov_nd%="" value="ND">North Dakota</option>
+<option %selected_ttourstateprov_nt%="" value="NT">Northwest Territories</option>
+<option %selected_ttourstateprov_ns%="" value="NS">Nova Scotia</option>
+<option %selected_ttourstateprov_nu%="" value="NU">Nunavut</option>
+<option %selected_ttourstateprov_oh%="" value="OH">Ohio</option>
+<option %selected_ttourstateprov_ok%="" value="OK">Oklahoma</option>
+<option %selected_ttourstateprov_on%="" value="ON">Ontario</option>
+<option %selected_ttourstateprov_or%="" value="OR">Oregon</option>
+<option %selected_ttourstateprov_pa%="" value="PA">Pennsylvania</option>
+<option %selected_ttourstateprov_pe%="" value="PE">Prince Edward Island</option>
+<option %selected_ttourstateprov_pr%="" value="PR">Puerto Rico</option>
+<option %selected_ttourstateprov_qc%="" value="QC">Quebec</option>
+<option %selected_ttourstateprov_ri%="" value="RI">Rhode Island</option>
+<option %selected_ttourstateprov_sk%="" value="SK">Saskatchewan</option>
+<option %selected_ttourstateprov_sc%="" value="SC">South Carolina</option>
+<option %selected_ttourstateprov_sd%="" value="SD">South Dakota</option>
+<option %selected_ttourstateprov_tn%="" value="TN">Tennessee</option>
+<option %selected_ttourstateprov_tx%="" value="TX">Texas</option>
+<option %selected_ttourstateprov_ut%="" value="UT">Utah</option>
+<option %selected_ttourstateprov_vt%="" value="VT">Vermont</option>
+<option %selected_ttourstateprov_va%="" value="VA">Virginia</option>
+<option %selected_ttourstateprov_wa%="" value="WA">Washington</option>
+<option %selected_ttourstateprov_wv%="" value="WV">West Virginia</option>
+<option %selected_ttourstateprov_wi%="" value="WI">Wisconsin</option>
+<option %selected_ttourstateprov_wy%="" value="WY">Wyoming</option>
+<option %selected_ttourstateprov_yt%="" value="YT">Yukon</option>
+</select>
+</td>
+</tr>
+<tr class="tTourAddress">
+<td nowrap=""><p style="margin: 0px;"> Country</p></td>
+<td> </td>
+<td>
+<select name="tTourCountry" size="1" style="width: 200px;">
+<option value=""></option>
+<option %selected_ttourcountry_us%="" value="US">United States</option>
+<option %selected_ttourcountry_af%="" value="AF">Afghanistan</option>
+<option %selected_ttourcountry_al%="" value="AL">Albania</option>
+<option %selected_ttourcountry_dz%="" value="DZ">Algeria</option>
+<option %selected_ttourcountry_as%="" value="AS">American Samoa</option>
+<option %selected_ttourcountry_ad%="" value="AD">Andorra</option>
+<option %selected_ttourcountry_ao%="" value="AO">Angola</option>
+<option %selected_ttourcountry_ai%="" value="AI">Anguilla</option>
+<option %selected_ttourcountry_aq%="" value="AQ">Antarctica</option>
+<option %selected_ttourcountry_ag%="" value="AG">Antigua and Barbuda</option>
+<option %selected_ttourcountry_ar%="" value="AR">Argentina</option>
+<option %selected_ttourcountry_am%="" value="AM">Armenia</option>
+<option %selected_ttourcountry_aw%="" value="AW">Aruba</option>
+<option %selected_ttourcountry_au%="" value="AU">Australia</option>
+<option %selected_ttourcountry_at%="" value="AT">Austria</option>
+<option %selected_ttourcountry_az%="" value="AZ">Azerbaijan</option>
+<option %selected_ttourcountry_bs%="" value="BS">Bahamas</option>
+<option %selected_ttourcountry_bh%="" value="BH">Bahrain</option>
+<option %selected_ttourcountry_bd%="" value="BD">Bangladesh</option>
+<option %selected_ttourcountry_bb%="" value="BB">Barbados</option>
+<option %selected_ttourcountry_by%="" value="BY">Belarus</option>
+<option %selected_ttourcountry_be%="" value="BE">Belgium</option>
+<option %selected_ttourcountry_bz%="" value="BZ">Belize</option>
+<option %selected_ttourcountry_bj%="" value="BJ">Benin</option>
+<option %selected_ttourcountry_bm%="" value="BM">Bermuda</option>
+<option %selected_ttourcountry_bt%="" value="BT">Bhutan</option>
+<option %selected_ttourcountry_bo%="" value="BO">Bolivia</option>
+<option %selected_ttourcountry_ba%="" value="BA">Bosnia and Herzegovina</option>
+<option %selected_ttourcountry_bw%="" value="BW">Botswana</option>
+<option %selected_ttourcountry_bv%="" value="BV">Bouvet Island</option>
+<option %selected_ttourcountry_br%="" value="BR">Brazil</option>
+<option %selected_ttourcountry_io%="" value="IO">British Indian Ocean Territory</option>
+<option %selected_ttourcountry_bn%="" value="BN">Brunei Darussalam</option>
+<option %selected_ttourcountry_bg%="" value="BG">Bulgaria</option>
+<option %selected_ttourcountry_bf%="" value="BF">Burkina Faso</option>
+<option %selected_ttourcountry_bi%="" value="BI">Burundi</option>
+<option %selected_ttourcountry_kh%="" value="KH">Cambodia</option>
+<option %selected_ttourcountry_cm%="" value="CM">Cameroon</option>
+<option %selected_ttourcountry_ca%="" value="CA">Canada</option>
+<option %selected_ttourcountry_cv%="" value="CV">Cap Verde</option>
+<option %selected_ttourcountry_ky%="" value="KY">Cayman Islands</option>
+<option %selected_ttourcountry_cf%="" value="CF">Central African Republic</option>
+<option %selected_ttourcountry_td%="" value="TD">Chad</option>
+<option %selected_ttourcountry_cl%="" value="CL">Chile</option>
+<option %selected_ttourcountry_cn%="" value="CN">China</option>
+<option %selected_ttourcountry_cx%="" value="CX">Christmas Island</option>
+<option %selected_ttourcountry_cc%="" value="CC">Cocos (Keeling) Islands</option>
+<option %selected_ttourcountry_co%="" value="CO">Colombia</option>
+<option %selected_ttourcountry_km%="" value="KM">Comoros</option>
+<option %selected_ttourcountry_cd%="" value="CD">Congo, Democratic People's Republic</option>
+<option %selected_ttourcountry_cg%="" value="CG">Congo, Republic of</option>
+<option %selected_ttourcountry_ck%="" value="CK">Cook Islands</option>
+<option %selected_ttourcountry_cr%="" value="CR">Costa Rica</option>
+<option %selected_ttourcountry_ci%="" value="CI">Cote d'Ivoire</option>
+<option %selected_ttourcountry_hr%="" value="HR">Croatia/Hrvatska</option>
+<option %selected_ttourcountry_cu%="" value="CU">Cuba</option>
+<option %selected_ttourcountry_cy%="" value="CY">Cyprus</option>
+<option %selected_ttourcountry_cz%="" value="CZ">Czech Republic</option>
+<option %selected_ttourcountry_dk%="" value="DK">Denmark</option>
+<option %selected_ttourcountry_dj%="" value="DJ">Djibouti</option>
+<option %selected_ttourcountry_dm%="" value="DM">Dominica</option>
+<option %selected_ttourcountry_do%="" value="DO">Dominican Republic</option>
+<option %selected_ttourcountry_tp%="" value="TP">East Timor</option>
+<option %selected_ttourcountry_ec%="" value="EC">Ecuador</option>
+<option %selected_ttourcountry_eg%="" value="EG">Egypt</option>
+<option %selected_ttourcountry_sv%="" value="SV">El Salvador</option>
+<option %selected_ttourcountry_gq%="" value="GQ">Equatorial Guinea</option>
+<option %selected_ttourcountry_er%="" value="ER">Eritrea</option>
+<option %selected_ttourcountry_ee%="" value="EE">Estonia</option>
+<option %selected_ttourcountry_et%="" value="ET">Ethiopia</option>
+<option %selected_ttourcountry_fk%="" value="FK">Falkland Islands (Malvina)</option>
+<option %selected_ttourcountry_fo%="" value="FO">Faroe Islands</option>
+<option %selected_ttourcountry_fj%="" value="FJ">Fiji</option>
+<option %selected_ttourcountry_fi%="" value="FI">Finland</option>
+<option %selected_ttourcountry_fr%="" value="FR">France</option>
+<option %selected_ttourcountry_gf%="" value="GF">French Guiana</option>
+<option %selected_ttourcountry_pf%="" value="PF">French Polynesia</option>
+<option %selected_ttourcountry_tf%="" value="TF">French Southern Territories</option>
+<option %selected_ttourcountry_ga%="" value="GA">Gabon</option>
+<option %selected_ttourcountry_gm%="" value="GM">Gambia</option>
+<option %selected_ttourcountry_ge%="" value="GE">Georgia</option>
+<option %selected_ttourcountry_de%="" value="DE">Germany</option>
+<option %selected_ttourcountry_gh%="" value="GH">Ghana</option>
+<option %selected_ttourcountry_gi%="" value="GI">Gibraltar</option>
+<option %selected_ttourcountry_gr%="" value="GR">Greece</option>
+<option %selected_ttourcountry_gl%="" value="GL">Greenland</option>
+<option %selected_ttourcountry_gd%="" value="GD">Grenada</option>
+<option %selected_ttourcountry_gp%="" value="GP">Guadeloupe</option>
+<option %selected_ttourcountry_gu%="" value="GU">Guam</option>
+<option %selected_ttourcountry_gt%="" value="GT">Guatemala</option>
+<option %selected_ttourcountry_gg%="" value="GG">Guernsey</option>
+<option %selected_ttourcountry_gn%="" value="GN">Guinea</option>
+<option %selected_ttourcountry_gw%="" value="GW">Guinea-Bissau</option>
+<option %selected_ttourcountry_gy%="" value="GY">Guyana</option>
+<option %selected_ttourcountry_ht%="" value="HT">Haiti</option>
+<option %selected_ttourcountry_hm%="" value="HM">Heard and McDonald Islands</option>
+<option %selected_ttourcountry_va%="" value="VA">Holy See (City Vatican State)</option>
+<option %selected_ttourcountry_hn%="" value="HN">Honduras</option>
+<option %selected_ttourcountry_hk%="" value="HK">Hong Kong</option>
+<option %selected_ttourcountry_hu%="" value="HU">Hungary</option>
+<option %selected_ttourcountry_is%="" value="IS">Iceland</option>
+<option %selected_ttourcountry_in%="" value="IN">India</option>
+<option %selected_ttourcountry_id%="" value="ID">Indonesia</option>
+<option %selected_ttourcountry_ir%="" value="IR">Iran (Islamic Republic of)</option>
+<option %selected_ttourcountry_iq%="" value="IQ">Iraq</option>
+<option %selected_ttourcountry_ie%="" value="IE">Ireland</option>
+<option %selected_ttourcountry_im%="" value="IM">Isle of Man</option>
+<option %selected_ttourcountry_il%="" value="IL">Israel</option>
+<option %selected_ttourcountry_it%="" value="IT">Italy</option>
+<option %selected_ttourcountry_jm%="" value="JM">Jamaica</option>
+<option %selected_ttourcountry_jp%="" value="JP">Japan</option>
+<option %selected_ttourcountry_je%="" value="JE">Jersey</option>
+<option %selected_ttourcountry_jo%="" value="JO">Jordan</option>
+<option %selected_ttourcountry_kz%="" value="KZ">Kazakhstan</option>
+<option %selected_ttourcountry_ke%="" value="KE">Kenya</option>
+<option %selected_ttourcountry_ki%="" value="KI">Kiribati</option>
+<option %selected_ttourcountry_kp%="" value="KP">Korea, Democratic People's Republic</option>
+<option %selected_ttourcountry_kr%="" value="KR">Korea, Republic of</option>
+<option %selected_ttourcountry_kw%="" value="KW">Kuwait</option>
+<option %selected_ttourcountry_kg%="" value="KG">Kyrgyzstan</option>
+<option %selected_ttourcountry_la%="" value="LA">Lao People's Democratic Republic</option>
+<option %selected_ttourcountry_lv%="" value="LV">Latvia</option>
+<option %selected_ttourcountry_lb%="" value="LB">Lebanon</option>
+<option %selected_ttourcountry_ls%="" value="LS">Lesotho</option>
+<option %selected_ttourcountry_lr%="" value="LR">Liberia</option>
+<option %selected_ttourcountry_ly%="" value="LY">Libyan Arab Jamahiriya</option>
+<option %selected_ttourcountry_li%="" value="LI">Liechtenstein</option>
+<option %selected_ttourcountry_lt%="" value="LT">Lithuania</option>
+<option %selected_ttourcountry_lu%="" value="LU">Luxembourg</option>
+<option %selected_ttourcountry_mo%="" value="MO">Macau</option>
+<option %selected_ttourcountry_mk%="" value="MK">Macedonia</option>
+<option %selected_ttourcountry_mg%="" value="MG">Madagascar</option>
+<option %selected_ttourcountry_mw%="" value="MW">Malawi</option>
+<option %selected_ttourcountry_my%="" value="MY">Malaysia</option>
+<option %selected_ttourcountry_mv%="" value="MV">Maldives</option>
+<option %selected_ttourcountry_ml%="" value="ML">Mali</option>
+<option %selected_ttourcountry_mt%="" value="MT">Malta</option>
+<option %selected_ttourcountry_mh%="" value="MH">Marshall Islands</option>
+<option %selected_ttourcountry_mq%="" value="MQ">Martinique</option>
+<option %selected_ttourcountry_mr%="" value="MR">Mauritania</option>
+<option %selected_ttourcountry_mu%="" value="MU">Mauritius</option>
+<option %selected_ttourcountry_yt%="" value="YT">Mayotte</option>
+<option %selected_ttourcountry_mx%="" value="MX">Mexico</option>
+<option %selected_ttourcountry_fm%="" value="FM">Micronesia, Federal State of</option>
+<option %selected_ttourcountry_md%="" value="MD">Moldova, Republic of</option>
+<option %selected_ttourcountry_mc%="" value="MC">Monaco</option>
+<option %selected_ttourcountry_mn%="" value="MN">Mongolia</option>
+<option %selected_ttourcountry_ms%="" value="MS">Montserrat</option>
+<option %selected_ttourcountry_ma%="" value="MA">Morocco</option>
+<option %selected_ttourcountry_mz%="" value="MZ">Mozambique</option>
+<option %selected_ttourcountry_mm%="" value="MM">Myanmar</option>
+<option %selected_ttourcountry_na%="" value="NA">Namibia</option>
+<option %selected_ttourcountry_nr%="" value="NR">Nauru</option>
+<option %selected_ttourcountry_np%="" value="NP">Nepal</option>
+<option %selected_ttourcountry_nl%="" value="NL">Netherlands</option>
+<option %selected_ttourcountry_an%="" value="AN">Netherlands Antilles</option>
+<option %selected_ttourcountry_nc%="" value="NC">New Caledonia</option>
+<option %selected_ttourcountry_nz%="" value="NZ">New Zealand</option>
+<option %selected_ttourcountry_ni%="" value="NI">Nicaragua</option>
+<option %selected_ttourcountry_ne%="" value="NE">Niger</option>
+<option %selected_ttourcountry_ng%="" value="NG">Nigeria</option>
+<option %selected_ttourcountry_nu%="" value="NU">Niue</option>
+<option %selected_ttourcountry_nf%="" value="NF">Norfolk Island</option>
+<option %selected_ttourcountry_mp%="" value="MP">Northern Mariana Islands</option>
+<option %selected_ttourcountry_no%="" value="NO">Norway</option>
+<option %selected_ttourcountry_om%="" value="OM">Oman</option>
+<option %selected_ttourcountry_pk%="" value="PK">Pakistan</option>
+<option %selected_ttourcountry_pw%="" value="PW">Palau</option>
+<option %selected_ttourcountry_ps%="" value="PS">Palestinian Territories</option>
+<option %selected_ttourcountry_pa%="" value="PA">Panama</option>
+<option %selected_ttourcountry_pg%="" value="PG">Papua New Guinea</option>
+<option %selected_ttourcountry_py%="" value="PY">Paraguay</option>
+<option %selected_ttourcountry_pe%="" value="PE">Peru</option>
+<option %selected_ttourcountry_ph%="" value="PH">Philippines</option>
+<option %selected_ttourcountry_pn%="" value="PN">Pitcairn Island</option>
+<option %selected_ttourcountry_pl%="" value="PL">Poland</option>
+<option %selected_ttourcountry_pt%="" value="PT">Portugal</option>
+<option %selected_ttourcountry_pr%="" value="PR">Puerto Rico</option>
+<option %selected_ttourcountry_qa%="" value="QA">Qatar</option>
+<option %selected_ttourcountry_re%="" value="RE">Reunion Island</option>
+<option %selected_ttourcountry_ro%="" value="RO">Romania</option>
+<option %selected_ttourcountry_ru%="" value="RU">Russian Federation</option>
+<option %selected_ttourcountry_rw%="" value="RW">Rwanda</option>
+<option %selected_ttourcountry_kn%="" value="KN">Saint Kitts and Nevis</option>
+<option %selected_ttourcountry_lc%="" value="LC">Saint Lucia</option>
+<option %selected_ttourcountry_vc%="" value="VC">Saint Vincent and the Grenadines</option>
+<option %selected_ttourcountry_sm%="" value="SM">San Marino</option>
+<option %selected_ttourcountry_st%="" value="ST">Sao Tome and Principe</option>
+<option %selected_ttourcountry_sa%="" value="SA">Saudi Arabia</option>
+<option %selected_ttourcountry_sn%="" value="SN">Senegal</option>
+<option %selected_ttourcountry_cs%="" value="CS">Serbia and Montenegro</option>
+<option %selected_ttourcountry_sc%="" value="SC">Seychelles</option>
+<option %selected_ttourcountry_sl%="" value="SL">Sierra Leone</option>
+<option %selected_ttourcountry_sg%="" value="SG">Singapore</option>
+<option %selected_ttourcountry_sk%="" value="SK">Slovak Republic</option>
+<option %selected_ttourcountry_si%="" value="SI">Slovenia</option>
+<option %selected_ttourcountry_sb%="" value="SB">Solomon Islands</option>
+<option %selected_ttourcountry_so%="" value="SO">Somalia</option>
+<option %selected_ttourcountry_za%="" value="ZA">South Africa</option>
+<option %selected_ttourcountry_gs%="" value="GS">South Georgia</option>
+<option %selected_ttourcountry_es%="" value="ES">Spain</option>
+<option %selected_ttourcountry_lk%="" value="LK">Sri Lanka</option>
+<option %selected_ttourcountry_sh%="" value="SH">St. Helena</option>
+<option %selected_ttourcountry_pm%="" value="PM">St. Pierre and Miquelon</option>
+<option %selected_ttourcountry_sd%="" value="SD">Sudan</option>
+<option %selected_ttourcountry_sr%="" value="SR">Suriname</option>
+<option %selected_ttourcountry_sj%="" value="SJ">Svalbard and Jan Mayen Islands</option>
+<option %selected_ttourcountry_sz%="" value="SZ">Swaziland</option>
+<option %selected_ttourcountry_se%="" value="SE">Sweden</option>
+<option %selected_ttourcountry_ch%="" value="CH">Switzerland</option>
+<option %selected_ttourcountry_sy%="" value="SY">Syrian Arab Republic</option>
+<option %selected_ttourcountry_tw%="" value="TW">Taiwan</option>
+<option %selected_ttourcountry_tj%="" value="TJ">Tajikistan</option>
+<option %selected_ttourcountry_tz%="" value="TZ">Tanzania</option>
+<option %selected_ttourcountry_th%="" value="TH">Thailand</option>
+<option %selected_ttourcountry_tg%="" value="TG">Togo</option>
+<option %selected_ttourcountry_tk%="" value="TK">Tokelau</option>
+<option %selected_ttourcountry_to%="" value="TO">Tonga</option>
+<option %selected_ttourcountry_tt%="" value="TT">Trinidad and Tobago</option>
+<option %selected_ttourcountry_tn%="" value="TN">Tunisia</option>
+<option %selected_ttourcountry_tr%="" value="TR">Turkey</option>
+<option %selected_ttourcountry_tm%="" value="TM">Turkmenistan</option>
+<option %selected_ttourcountry_tc%="" value="TC">Turks and Ciacos Islands</option>
+<option %selected_ttourcountry_tv%="" value="TV">Tuvalu</option>
+<option %selected_ttourcountry_um%="" value="UM">US Minor Outlying Islands</option>
+<option %selected_ttourcountry_ug%="" value="UG">Uganda</option>
+<option %selected_ttourcountry_ua%="" value="UA">Ukraine</option>
+<option %selected_ttourcountry_ae%="" value="AE">United Arab Emirates</option>
+<option %selected_ttourcountry_uk%="" value="UK">United Kingdom</option>
+<option %selected_ttourcountry_gb%="" value="GB">United Kingdom (GB)</option>
+<option %selected_ttourcountry_uy%="" value="UY">Uruguay</option>
+<option %selected_ttourcountry_uz%="" value="UZ">Uzbekistan</option>
+<option %selected_ttourcountry_vu%="" value="VU">Vanuatu</option>
+<option %selected_ttourcountry_ve%="" value="VE">Venezuela</option>
+<option %selected_ttourcountry_vn%="" value="VN">Vietnam</option>
+<option %selected_ttourcountry_vg%="" value="VG">Virgin Islands (British)</option>
+<option %selected_ttourcountry_vi%="" value="VI">Virgin Islands (USA)</option>
+<option %selected_ttourcountry_wf%="" value="WF">Wallis and Futuna Islands</option>
+<option %selected_ttourcountry_eh%="" value="EH">Western Sahara</option>
+<option %selected_ttourcountry_ws%="" value="WS">Western Samoa</option>
+<option %selected_ttourcountry_ye%="" value="YE">Yemen</option>
+<option %selected_ttourcountry_yu%="" value="YU">Yugoslavia</option>
+<option %selected_ttourcountry_zm%="" value="ZM">Zambia</option>
+<option %selected_ttourcountry_zw%="" value="ZW">Zimbabwe</option>
+</select>
+</td>
+</tr>
+<tr class="tTourAddress">
+<td nowrap=""><p style="margin: 0px;"> ZIP/Postal Code</p></td>
+<td> </td>
+<td><input name="tTourZipPostal" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Website URL</p></td>
+<td> </td>
+<td><input name="tTourWeb" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Email Address</p></td>
+<td> </td>
+<td><input name="tTourEmail" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td></td>
+<td> </td>
+<td><p style="margin: 0px;"><sup>* This email address will be used for further<br/>   contact regarding your tournament.</sup></p></td>
+</tr>
+<tr>
+<td></td>
+<td> </td>
+<td></td>
+</tr>
+<tr>
+<td nowrap="" valign="middle"><p style="margin: 0px;"> Is this a LAN-only event or an<br/>online tournament too?</p></td> <!-- tLanOrOnline  -->
+<td> </td>
+<td valign="middle">
+<select name="tLanOrOnline" size="1" style="width: 200px;">
+<option value=""></option>
+<option %selected_tlanoronline_lan%="" value="lan">LAN Event</option>
+<option %selected_tlanoronline_online%="" value="online">Online Event</option>
+<option %selected_tlanoronline_both%="" value="both">Both</option>
+</select>
+</td>
+</tr>
+<tr>
+<td nowrap="" valign="middle"><p style="margin: 0px;"> How are participants to register?</p></td> <!-- tRegType  -->
+<td> </td>
+<td valign="middle">
+<select multiple="" name="tRegType[]" size="3" style="width: 200px;">
+<option %selected_tregtype_email%="" value="email">Email-In Registration</option>
+<option %selected_tregtype_walk-in%="" value="walk-in">Walk-In Registration</option>
+<option %selected_tregtype_web%="" value="web">Web Registration</option>
+</select>
+</td>
+</tr>
+<tr>
+<td></td>
+<td> </td>
+<td><p style="margin: 0px;"><sup>* Hold CTRL to select multiple games</sup></p></td>
+</tr>
+<tr>
+<td nowrap="" valign="middle"><p style="margin: 0px;"> Would you like your tournament<br/>added to the calendar?</p></td> <!-- tInCalendar  -->
+<td> </td>
+<td valign="middle">
+<select name="tInCalendar" size="1" style="width: 200px;">
+<option %selected_tincalendar_1%="" value="1">Yes</option>
+<option %selected_tincalendar_0%="" value="0">No</option>
+</select>
+</td>
+</tr>
+<tr>
+<td nowrap=""><p style="margin: 0px;"> Valve games to be used in Tournament:</p></td> <!-- tValveGamesUsed  -->
+<td> </td>
+<td>
+<select multiple="" name="tValveGamesUsed[]" size="4" style="width: 200px;">
+<option %selected_tvalvegamesused_all%="" value="all">All Games</option>
+<option %selected_tvalvegamesused_cs%="" value="cs">Counter-Strike</option>
+<option %selected_tvalvegamesused_css%="" value="css">Counter-Strike: Source</option>
+<option %selected_tvalvegamesused_cscz%="" value="cscz">Counter-Strike: Condition Zero</option>
+<option %selected_tvalvegamesused_dod%="" value="dod">Day of Defeat</option>
+<option %selected_tvalvegamesused_dod%="" value="dods">Day of Defeat: Source</option>
+<option %selected_tvalvegamesused_dmc%="" value="dmc">Deathmatch Classic</option>
+<option %selected_tvalvegamesused_hl%="" value="hl">Half-Life</option>
+<option %selected_tvalvegamesused_hldm%="" value="hldm">Half-Life Deathmatch</option>
+<option %selected_tvalvegamesused_hl2%="" value="hl2">Half-Life 2</option>
+<option %selected_tvalvegamesused_hl2dm%="" value="hl2dm">Half-Life 2 Deathmatch</option>
+<option %selected_tvalvegamesused_hls%="" value="hls">Half-Life: Source</option>
+<option %selected_tvalvegamesused_rico%="" value="rico">Ricochet</option>
+<option %selected_tvalvegamesused_tfc%="" value="tfc">Team Fortress Classic</option>
+</select>
+</td>
+</tr>
+<tr>
+<td></td>
+<td> </td>
+<td><p style="margin: 0px;"><sup>* Hold CTRL to select multiple games</sup></p></td>
+</tr>
+<tr>
+<td colspan="3"><hr style="height:2px; color: #404040;"/></td>
+</tr>
+<tr>
+<td><p style="margin: 0px;"> Do you agree to the Valve Corporation Game Tournament License?</p></td> <!-- tAgreeToLicense  -->
+<td> </td>
+<td valign="top">
+<select name="tAgreeToLicense" size="1" style="width: 200px;">
+<option value=""></option>
+<option %selected_tagreetolicense_1%="" value="1">I Agree</option>
+<option %selected_tagreetolicense_2%="" value="2">I Do Not Agree</option>
+</select>
+</td>
+</tr>
+<tr>
+<td></td>
+<td> </td>
+<td><p style="margin: 0px;"><sup>* By choosing "I Agree" and clicking Submit,<br/>you are agreeing to the terms of the <a href="?area=tourney_limited_license" target="_blank">Limited<br/>Game Tournament License Agreement</a>.</sup></p></td>
+</tr>
+<tr>
+<td><p style="margin: 0px;"> Are you planning to purchase temporary tournament subscriptions?</p></td> <!-- tPurchaseTemp  -->
+<td> </td>
+<td valign="middle">
+<select name="tPurchaseTemp" size="1" style="width: 200px;">
+<option value=""></option>
+<option %selected_tpurchasetemp_1%="" value="1">Yes</option>
+<option %selected_tpurchasetemp_0%="" value="0">No</option>
+</select>
+</td>
+</tr>
+<tr>
+<td><p style="margin: 0px;">If yes, how many temporary tournament subscriptions?</p></td> <!-- tHowManyTemp  -->
+<td> </td>
+<td valign="middle"><input name="tHowManyTemp" style="width: 200px;" type="text" value=""/></td>
+</tr>
+<tr>
+<td colspan="3"><hr style="height:2px; color: #404040;"/></td>
+</tr>
+<tr>
+<td></td>
+<td> </td>
+<td><input class="submitter" name="action" style="width:200px; text-align: center;" type="submit" value="Submit"/></td>
+</tr>
+</table>
+</form>
+<br/>
+<h2 style="margin-top: 0px;">NEXT STEPS</h2>
+<p>Please allow five (5) business days for us to review your information.  Unless and until you receive a confirmation email from Valve, you are not licensed to hold a tournament with Valve products.</p>
+<p>All information you submit here is governed by Valve <a href="http://www.valvesoftware.com/privacy.htm" target="_blank">privacy policy</a>. If you have received a confirmation email that your tournament application has been approved, please note that the Limited Game Tournament License gives Valve permission to make the information you submit publicly available on our <a href="v/?area=tourney_calendar">Tournament Calendar</a>.</p>
+<p><a href="v/?area=tourney_limited">Return to main Tournament page</a></p>
+<script language="Javascript">
+<!--
+check_online_only();
+//-->
+</script>
+</div>
+</div><br/>
+</div>
+<!-- End Left Collumn Content -->
+</div>
+<br clear="left">
+</br></div>
+<!-- Footer Content -->
+<div class="footer">
+<form action="index.php">
+<input name="area" type="hidden" value="tourney_limited_signup"/>
+<input name="cc" type="hidden" value="--"/>
+<table background="img/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
+<tr>
+<td background="img/img_footer_l.jpg" height="73" width="12"> </td>
+<td align="center" width="110"><a href="http://www.valvesoftware.com"><img alt="link: Valve Software" border="0" height="26" src="img/logo_valve_footer.jpg" width="92"/></a></td>
+<td>
+<div class="legal">
+<select name="l" onchange="submit();">
+<option selected="" value="english">English</option>
+<option id="l_french" value="french">French</option>
+<option id="l_german" value="german">German</option>
+<option id="l_italian" value="italian">Italian</option>
+<option id="l_japanese" value="japanese">Japanese</option>
+<option id="l_korean" value="korean">Korean</option>
+<option id="l_polish" value="polish">Polish</option>
+<option id="l_portuguese" value="portuguese">Portuguese</option>
+<option id="l_russian" value="russian">Russian</option>
+<option id="l_schinese" value="schinese">Simplified Chinese</option>
+<option id="l_tchinese" value="tchinese">Traditional Chinese</option>
+<option id="l_spanish" value="spanish">Spanish</option>
+<option id="l_thai" value="thai">Thai</option>
+</select><br>
+
+				© 2006 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br>
+<a href="http://www.valvesoftware.com/privacy.htm"> Privacy Policy.</a> <a href="http://www.valvesoftware.com/legal.htm">Legal.</a> <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a>
+</br></br></div>
+</td>
+<td background="img/img_footer_r.jpg" height="73" width="14"> </td>
+</tr>
+</table>
+</form>
+</div>
+<!-- End Footer Content -->
+<br>
+</br></center>
+</body>
+
+<!-- canonicus server -->
+<!-- total exec time: 0.273365020752 -->
+<!-- db exec time: 0.00033164024353 -->

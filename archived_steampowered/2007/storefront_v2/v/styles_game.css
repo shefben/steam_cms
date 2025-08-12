@@ -1,0 +1,261 @@
+/* CSS Document */
+
+.purchaseArea_top {
+	height: 9px;
+	width: 462px;
+	background-image: url('img/game/purchaseArea_mid.gif');
+	background-repeat: repeat-y;
+}
+#img_purchaseArea_top {
+	height:9px;
+	width:462px;
+	background-image:url('img/game/purchaseArea_top.gif');
+	background-repeat:no-repeat;
+}
+.purchaseArea_main {
+	padding: 0px 5px 0px 10px;
+	width: 447px !important;
+	width: 462px;
+	margin: 0px;
+	background-image: url('img/game/purchaseArea_mid.gif');
+	background-repeat: repeat-y;
+	
+}
+.purchaseArea_buttons {
+	height: 25px;
+	width: 462px;
+	background-image: url('img/game/purchaseArea_buttom.gif');
+	background-repeat: no-repeat;
+	text-align: right;
+	margin-bottom: 10px;
+}
+.purchaseArea_pkg a, .purchaseArea_pkg a:hover, .purchaseArea_buy a, .purchaseArea_buy a:hover, .btn, .btn_ovr, .btn_pkg_ovr, .btn_pkg {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	text-decoration: none;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-weight: bold;
+	cursor:pointer;
+}
+.purchaseArea_pkg a, .btn_pkg {
+	color: #FFFFFF;
+}
+.purchaseArea_pkg a:hover, .btn_pkg_ovr {
+	color: #6F9FC8;
+}
+.purchaseArea_buy a, .btn {
+	color: #000000;
+}
+.purchaseArea_buy a:hover, .btn_ovr {
+	color: #FFFFFF;
+}
+/* =================================== */
+.purchaseArea_title {
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: #FFFFFF;	
+}
+.purchaseArea_inclusions {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: #808183;
+}
+.purchaseArea_content {
+	float: left;
+	width: 380px;
+	padding-bottom: 5px;
+}
+.purchaseArea_price {
+	font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;	
+	float: right;
+	text-align: right;
+	line-height: 12px;
+}
+.purchaseArea_price_norm {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #626366;
+	text-decoration: line-through;
+	font-weight: normal;
+}
+.purchaseArea_note {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	line-height: 13px;
+	color: #EDA312;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #999999;
+	padding: 0px 5px 5px 5px;
+	width: 452px !important;
+	width: 462px;
+}
+.purchaseArea_note strong {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	font-size: 10px;
+}
+.purchaseArea_note a {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #6F9FC8;
+	font-size: 9px;
+}
+.purchaseArea_note a:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	font-size: 9px;
+}
+/* ====================================== */
+.usr_edit_main_header {
+	margin: 1px 0px 0px 0px;
+	padding: 4px 10px 2px 10px;
+	height: 16px;
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	letter-spacing: 1px;
+	background-attachment: scroll;
+	background-color: #4f4f50;
+	clear:both;
+	overflow: visible;
+	line-height: 12px;
+}
+/* ================================================= */
+/* PACKAGE PURCHASE CLASSES */
+
+.pkg_purchaseArea_main {
+	padding: 0px 10px 0px 10px;
+	width: 690px !important;
+	width: 710px;
+	margin: 0px;
+	background-image: url('img/package/purchaseArea_mid.gif');
+	background-repeat: repeat-y;
+}
+.pkg_purchaseArea_buttons {
+	height: 25px;
+	width: 710px;
+	background-image: url('img/package/purchaseArea_buttom.gif');
+	background-repeat: no-repeat;
+	text-align: right;
+	margin-bottom: 10px;
+}
+
+
+.ico_arrow_blue {
+	width:7px;
+	height:7px;
+	border:none;
+	padding:0;
+	margin:0;
+	vertical-align:middle;
+	background-repeat:no-repeat;
+}
+
+.ss_seeMore_l {
+	background-image:url('img/ss_seeMore_l.gif');
+}
+.ss_seeMore_r {
+	background-image:url('img/ss_seeMore_r.gif');
+}
+
+.btn_purchase_bg {
+	background-image:url('img/game/btn_purchase_bg.gif');
+}
+.btn_info_bg {
+	background-image:url('img/game/btn_info_bg.gif');
+}
+.btn_demo_bg {
+	background-image:url('img/game/btn_demo_bg.gif');
+}
+.btn_media_bg {
+	background-image:url('img/game/btn_media_bg.gif');
+}
+.btn_purchase_left {
+	width:12px;
+	height:25px;
+	padding:0;
+	margin:0;
+	border:none;
+	background-image:url('img/game/btn_purchase_left.gif');
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+.btn_purchase_right {
+	width:21px;
+	height:25px;
+	padding:0;
+	margin:0;
+	border:none;
+	background-image:url('img/game/btn_purchase_right.gif');
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+.btn_info_left {
+	width:26px;
+	height:25px;
+	padding:0;
+	margin:0;
+	border:none;
+	background-image:url('img/game/btn_info_left.gif');
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+.btn_info_right {
+	width:17px;
+	height:25px;
+	padding:0;
+	margin:0;
+	border:none;
+	background-image:url('img/game/btn_info_right.gif');
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+.btn_demo_left {
+	width:12px;
+	height:25px;
+	padding:0;
+	margin:0;
+	border:none;
+	background-image:url('img/game/btn_demo_left.gif');
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+.btn_demo_right {
+	width:21px;
+	height:25px;
+	padding:0;
+	margin:0;
+	border:none;
+	background-image:url('img/game/btn_demo_right.gif');
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+.btn_media_left {
+	width:12px;
+	height:25px;
+	padding:0;
+	margin:0;
+	border:none;
+	background-image:url('img/game/btn_media_left.gif');
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+.btn_media_right {
+	width:21px;
+	height:25px;
+	padding:0;
+	margin:0;
+	border:none;
+	background-image:url('img/game/btn_media_right.gif');
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+
