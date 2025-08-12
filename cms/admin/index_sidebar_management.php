@@ -9,15 +9,15 @@ $csrf_token  = cms_get_csrf_token();
 $db          = cms_get_db();
 
 $builtins = [
-    'getsteamnow'      => ['title' => 'GET STEAM NOW',      'html' => '<p>Get Steam Now</p>'],
-    'spotlight'        => ['title' => 'SPOTLIGHT',          'html' => '<p>Spotlight content</p>'],
-    'findmore'         => ['title' => 'FIND MORE',          'html' => '<p>Find More</p>'],
-    'searchbar'        => ['title' => 'SEARCHBAR',          'html' => '<form><input type="text" placeholder="Search"></form>'],
-    'latestnews'       => ['title' => 'LATEST NEWS',        'html' => '<p>Latest News</p>'],
-    'publishercatalogs'=> ['title' => 'PUBLISHER CATALOGS', 'html' => '<p>Publisher Catalogs</p>'],
-    'browsecatalog'    => ['title' => 'BROWSE THE CATALOG', 'html' => '<p>Browse the Catalog</p>'],
-    'newonsteam'       => ['title' => 'NEW ON STEAM',       'html' => '{{ new_on_steam_list()|raw }}'],
-    'comingsoon'       => ['title' => 'COMING SOON TO STEAM','html' => '<p>Coming Soon</p>'],
+    'getsteamnow'      => ['title' => 'GET STEAM NOW',      'html' => '{{ sidebar_section("get_steam_now")|raw }}'],
+    'spotlight'        => ['title' => 'SPOTLIGHT',          'html' => '{{ sidebar_section("spotlight")|raw }}'],
+    'findmore'         => ['title' => 'FIND MORE',          'html' => '{{ sidebar_section("find_more")|raw }}'],
+    'searchbar'        => ['title' => 'SEARCHBAR',          'html' => '{{ sidebar_section("search")|raw }}'],
+    'latestnews'       => ['title' => 'LATEST NEWS',        'html' => '{{ sidebar_section("latest_news")|raw }}'],
+    'publishercatalogs'=> ['title' => 'PUBLISHER CATALOGS', 'html' => '{{ sidebar_section("publisher_catalogs")|raw }}'],
+    'browsecatalog'    => ['title' => 'BROWSE THE CATALOG', 'html' => '{{ sidebar_section("browse_catalog")|raw }}'],
+    'newonsteam'       => ['title' => 'NEW ON STEAM',       'html' => '{{ sidebar_section("new_on_steam")|raw }}'],
+    'comingsoon'       => ['title' => 'COMING SOON TO STEAM','html' => '{{ sidebar_section("coming_soon")|raw }}'],
 ];
 
 $existing_sections = [];
