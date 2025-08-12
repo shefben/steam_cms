@@ -161,34 +161,15 @@ function cms_news_search_bar(): string
 HTML;
 }
 
-function cms_index_search_bar(): string
-{
-    return <<<HTML
-<div class="rightFindSearch">
-    <form action="index.php" id="searchform" name="searchform">
-        <input type="hidden" name="area" value="search">
-        <input type="hidden" name="genre" value="">
-        <input type="hidden" name="cc" value="US">
-        <table width="300" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td width="20">&nbsp;</td>
-                <td width="200"><input id="searchterm" name="term" type="text" size="35" maxlength="64"></td>
-                <td><a class="btn_search" href="index.php" onclick="document.searchform.submit();">Search</a></td>
-            </tr>
-        </table>
-    </form>
-</div>
-HTML;
-}
 
 function cms_find_more_list(int $rows = 1): string
 {
     $row = <<<ROW
         <tr>
             <td align="center"></td>
-            <td align="center" width="90"><a href="index.php?area=all"><img border="0" height="16" src="img/ico/ico_mouse_lg.gif" width="26"><br>Games</a></td>
-            <td align="center" width="90"><a href="index.php?area=free&tab=demos"><img border="0" height="16" src="img/ico/ico_demo.gif" width="26"><br>Demos</a></td>
-            <td align="center" width="90"><a href="index.php?area=free&tab=videos"><img border="0" height="16" src="img/ico/ico_film_lg.gif" width="26"><br>Trailers</a></td>
+            <td align="center" width="90"><a href="index.php?area=all"><img border="0" height="16" src="ico/ico_mouse_lg.gif" width="26"><br>Games</a></td>
+            <td align="center" width="90"><a href="index.php?area=free&tab=demos"><img border="0" height="16" src="ico/ico_demo.gif" width="26"><br>Demos</a></td>
+            <td align="center" width="90"><a href="index.php?area=free&tab=videos"><img border="0" height="16" src="ico/ico_film_lg.gif" width="26"><br>Trailers</a></td>
             <td align="center"></td>
         </tr>
 ROW;
@@ -197,17 +178,67 @@ ROW;
         . $rowsHtml . '</table></div>';
 }
 
-function cms_get_steam_now_button(): string
-{
-    return <<<HTML
-<div align="center" class="btn_getSteam" onclick="location.href='index.php?area=getsteamnow'" onmouseout="this.style.background='url(img/btn_getSteam.gif)'" onmouseover="this.style.background='url(img/btn_getSteam_ovr.gif)'" style="CURSOR: pointer;" title="Click for Details">Get Steam Now !</div>
-<div class="btn_getSteam_sub">Everything you need to start playing now!</div><br>
-HTML;
-}
 
 function cms_spotlight_content(): string
 {
     return cms_get_setting('spotlight_content', '<p>Spotlight content</p>');
+}
+
+function cms_render_sidebar_section(Environment $env, string $section, array $params = []): string
+{
+    switch ($section) {
+        case 'search':
+            return $env->render('layouts/sidebar_sections/search.twig', $params);
+        case 'get_steam_now':
+            return $env->render('layouts/sidebar_sections/get_steam_now.twig', $params);
+        case 'new_on_steam':
+            $limit   = (int)($params['limit'] ?? 10);
+            $html    = cms_get_setting('new_on_steam_list', '');
+            $theme   = cms_get_setting('theme', '2004');
+            $render  = cms_render_string($html, [], dirname(__DIR__) . '/themes/' . $theme);
+            $lines   = array_filter(preg_split('/\r?\n/', trim($render)));
+            $items   = array_slice($lines, 0, $limit);
+            $items[] = '<a class="rightLink_moreNews" href="new.xml" target="_blank"><img border="0" height="11" src="ico/ico_arrow_green_wd.gif" width="22">&nbsp;&nbsp;<img align="absmiddle" border="0" src="ico/ico_rss2.gif"/>&nbsp;&nbsp;New on Steam RSS feed</a>';
+            return $env->render('layouts/sidebar_sections/new_on_steam.twig', ['items' => $items]);
+        case 'find':
+            $rows  = (int)($params['rows'] ?? 3);
+            $html  = cms_get_setting('find_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+            return $env->render('layouts/sidebar_sections/find.twig', ['html' => $render]);
+        case 'find_more':
+            $rows = (int)($params['rows'] ?? 1);
+            $html = cms_find_more_list($rows);
+            return $env->render('layouts/sidebar_sections/find_more.twig', ['html' => $html]);
+        case 'spotlight':
+            $content = cms_spotlight_content();
+            return $env->render('layouts/sidebar_sections/spotlight.twig', ['content' => $content]);
+        case 'latest_news':
+            $rows  = (int)($params['rows'] ?? 5);
+            $html  = cms_get_setting('latest_news_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+            return $env->render('layouts/sidebar_sections/latest_news.twig', ['html' => $render]);
+        case 'publisher_catalogs':
+            $rows  = (int)($params['rows'] ?? 3);
+            $html  = cms_get_setting('publisher_catalogs_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+            return $env->render('layouts/sidebar_sections/publisher_catalogs.twig', ['html' => $render]);
+        case 'browse_catalog':
+            $rows  = (int)($params['rows'] ?? 2);
+            $html  = cms_get_setting('browse_catalog_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+            return $env->render('layouts/sidebar_sections/browse_catalog.twig', ['html' => $render]);
+        case 'coming_soon':
+            $rows  = (int)($params['rows'] ?? 1);
+            $html  = cms_get_setting('coming_soon_list', '');
+            $theme = cms_get_setting('theme', '2004');
+            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
+            return $env->render('layouts/sidebar_sections/coming_soon.twig', ['html' => $render]);
+    }
+    return '';
 }
 
 function cms_news_archive_months(int $year, int $months = 12): string
@@ -221,7 +252,7 @@ function cms_news_archive_months(int $year, int $months = 12): string
             $m += 12;
         }
         $label = $names[$m - 1];
-        $html .= '<a href="index.php?area=news_archive&amp;date=' . $m . '" class="rightLink"><img src="img/ico/ico_arrow_blue_wd.gif" width="22" height="7" border="0">&nbsp; ' . $label . ' </a>';
+        $html .= '<a href="index.php?area=news_archive&amp;date=' . $m . '" class="rightLink"><img src="ico/ico_arrow_blue_wd.gif" width="22" height="7" border="0">&nbsp; ' . $label . ' </a>';
     }
     return $html;
 }
@@ -373,10 +404,10 @@ function cms_render_tabs(string $theme): string
         $l = $focus ? 'listArea_tab_focus_l.gif' : 'listArea_tab_l.gif';
         $r = $focus ? 'listArea_tab_focus_r.gif' : 'listArea_tab_r.gif';
         $html .= '<div class="' . $class . '" id="tab_' . $id . '">'
-            . '<img align="absmiddle" id="tab_' . $id . '_image_l" src="img/home/' . $l . '"><span class="listArea_tab_txt">' . htmlspecialchars($tab['title']) . '</span><img align="absmiddle" id="tab_' . $id . '_image_r" src="img/home/' . $r . '">'
+            . '<img align="absmiddle" id="tab_' . $id . '_image_l" src="home/' . $l . '"><span class="listArea_tab_txt">' . htmlspecialchars($tab['title']) . '</span><img align="absmiddle" id="tab_' . $id . '_image_r" src="home/' . $r . '">'
             . '</div>';
     }
-    $html .= '<br clear="left"><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td height="6"><img height="6" src="img/_spacer.gif" width="6"></td><td align="right" height="6"><img height="6" src="img/home/listArea_tr.gif" width="6"></td></tr>';
+    $html .= '<br clear="left"><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td height="6"><img height="6" src="_spacer.gif" width="6"></td><td align="right" height="6"><img height="6" src="home/listArea_tr.gif" width="6"></td></tr>';
     foreach ($tabs as $i => $tab) {
         $display = $i === 0 ? '' : ' style="display: none;"';
         $html .= '<tr id="tab_' . ($i + 1) . '_content"' . $display . '><td valign="top">';
@@ -389,8 +420,8 @@ function cms_render_tabs(string $theme): string
         $html .= cms_render_tabbed_games_column(array_slice($games, $half));
         $html .= '</td></tr>';
     }
-    $html .= '<tr><td height="6"><img height="6" src="img/home/listArea_bl.gif" width="6"></td><td align="right" height="6"><img height="6" src="img/home/listArea_br.gif" width="6"></td></tr></tbody></table></div></div>';
-    $html .= "<script type=\"text/javascript\">document.querySelectorAll('.listArea_tab, .listArea_tab_focus').forEach(function(tab,idx){tab.addEventListener('click',function(){document.querySelectorAll('.listArea_tab_focus,.listArea_tab').forEach(function(t,i){var focus=i===idx;t.className=focus?'listArea_tab_focus':'listArea_tab';document.getElementById('tab_'+(i+1)+'_content').style.display=focus?'':'none';document.getElementById('tab_'+(i+1)+'_image_l').src='img/home/'+(focus?'listArea_tab_focus_l.gif':'listArea_tab_l.gif');document.getElementById('tab_'+(i+1)+'_image_r').src='img/home/'+(focus?'listArea_tab_focus_r.gif':'listArea_tab_r.gif');});});});</script>";
+    $html .= '<tr><td height="6"><img height="6" src="home/listArea_bl.gif" width="6"></td><td align="right" height="6"><img height="6" src="home/listArea_br.gif" width="6"></td></tr></tbody></table></div></div>';
+    $html .= "<script type=\"text/javascript\">document.querySelectorAll('.listArea_tab, .listArea_tab_focus').forEach(function(tab,idx){tab.addEventListener('click',function(){document.querySelectorAll('.listArea_tab_focus,.listArea_tab').forEach(function(t,i){var focus=i===idx;t.className=focus?'listArea_tab_focus':'listArea_tab';document.getElementById('tab_'+(i+1)+'_content').style.display=focus?'':'none';document.getElementById('tab_'+(i+1)+'_image_l').src='home/'+(focus?'listArea_tab_focus_l.gif':'listArea_tab_l.gif');document.getElementById('tab_'+(i+1)+'_image_r').src='home/'+(focus?'listArea_tab_focus_r.gif':'listArea_tab_r.gif');});});});</script>";
     return $html;
 }
 function cms_twig_env(string $tpl_dir): Environment
@@ -510,11 +541,11 @@ function cms_twig_env(string $tpl_dir): Environment
                 $fullArchive = cms_get_setting('full_archive_title', 'FULL ARCHIVE');
                 $months = cms_news_archive_months($year);
                 return '<div class="rightCol_2_top_soon">' . $steamNews . '</div>'
-                    . '<a href="rss.xml" class="rightLink"><img src="img/ico/ico_rss.gif" width="28" height="13" border="0" align="absmiddle">&nbsp; ' . $rss . '</a>'
+                    . '<a href="rss.xml" class="rightLink"><img src="ico/ico_rss.gif" width="28" height="13" border="0" align="absmiddle">&nbsp; ' . $rss . '</a>'
                     . '<h1> ' . $archiveTitle . ' </h1>'
                     . $months
                     . '<div class="rightCol_2_Hr"></div>'
-                    . '<a href="index.php?area=news_archive" class="rightLink"><img src="img/ico/ico_arrow_blue_wd.gif" width="22" height="7" border="0">&nbsp; ' . $fullArchive . ' </a>'
+                    . '<a href="index.php?area=news_archive" class="rightLink"><img src="ico/ico_arrow_blue_wd.gif" width="22" height="7" border="0">&nbsp; ' . $fullArchive . ' </a>'
                     . '<div class="rightCol_2_Hr"></div>';
             }
             return '';
@@ -529,7 +560,7 @@ function cms_twig_env(string $tpl_dir): Environment
             if ($style === '2007') {
                 return '<table class="capsuleArea_header" height="73" width="574"><tr><td height="73" valign="middle" width="250"><div class="btn_getSteam_slvr" onclick="location.href=\'index.php?area=getsteamnow\'">Get Steam Now !</div></td><td height="73" valign="top"><p>'.$text.'</p></td></tr></table>';
             }
-            return '<table class="capsuleArea_header" width="560"><tr><td width="172"><img src="img/logo_steam_main.jpg" width="172" height="63" alt=""></td><td valign="top"><p>'.$text.'</p></td></tr></table>';
+            return '<table class="capsuleArea_header" width="560"><tr><td width="172"><img src="logo_steam_main.jpg" width="172" height="63" alt=""></td><td valign="top"><p>'.$text.'</p></td></tr></table>';
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('new_on_steam_title', function() {
@@ -560,7 +591,7 @@ function cms_twig_env(string $tpl_dir): Environment
             $render = cms_render_string($html, ['limit' => $limit], dirname(__DIR__) . '/themes/' . $theme);
             $lines  = array_filter(preg_split('/\r?\n/', trim($render)));
             $items  = array_slice($lines, 0, 10);
-            $items[] = '<a class="rightLink_moreNews" href="new.xml" target="_blank"><img border="0" height="11" src="img/ico/ico_arrow_green_wd.gif" width="22">  <img align="absmiddle" border="0" src="img/ico/ico_rss2.gif"/>  New on Steam RSS feed</a>';
+            $items[] = '<a class="rightLink_moreNews" href="new.xml" target="_blank"><img border="0" height="11" src="ico/ico_arrow_green_wd.gif" width="22">  <img align="absmiddle" border="0" src="ico/ico_rss2.gif"/>  New on Steam RSS feed</a>';
             return implode("\n", $items);
         }, ['is_safe' => ['html']]));
 
@@ -576,20 +607,8 @@ function cms_twig_env(string $tpl_dir): Environment
             return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('index_search_bar', function() {
-            return cms_index_search_bar();
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('find_more_list', function(int $rows = 1) {
-            return cms_find_more_list($rows);
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('get_steam_now_button', function() {
-            return cms_get_steam_now_button();
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('spotlight_content', function() {
-            return cms_spotlight_content();
+        $env->addFunction(new TwigFunction('sidebar_section', function(string $name, array $params = []) use ($env) {
+            return cms_render_sidebar_section($env, $name, $params);
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('support_email', function() {
@@ -719,7 +738,7 @@ function cms_twig_env(string $tpl_dir): Environment
                 $img = $imgPath;
                 $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                 if (in_array($theme, ['2007_v1', '2007_v2'], true)) {
-                    return '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsule\'; window.status=\'\';" onmouseover="this.className=\'capsule_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="img/corners/smallcap_corners.png" width="280" height="105" border="0"></div></div><div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '</div></div>';
+                    return '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsule\'; window.status=\'\';" onmouseover="this.className=\'capsule_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="corners/smallcap_corners.png" width="280" height="105" border="0"></div></div><div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '</div></div>';
                 }
                 return '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);"><div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"></div><div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>';
             }
@@ -763,7 +782,7 @@ function cms_twig_env(string $tpl_dir): Environment
                 $img = $imgPath;
                 $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                 if (in_array($theme, ['2007_v1', '2007_v2'], true)) {
-                    return '<div id="capsule_large_content"><div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="img/corners/largecap_corners.png" width="572" height="221" border="0"></div></div><div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div></div>';
+                    return '<div id="capsule_large_content"><div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';"><div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="corners/largecap_corners.png" width="572" height="221" border="0"></div></div><div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div></div>';
                 }
                 return '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.style.background=\'#000000\'; window.status=\'\';" onmouseover="this.style.background=\'#666666\'; window.status=\'' . $url . '\';" style="background: rgb(0, 0, 0);"><div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"></div><div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '&nbsp;</div></div>';
             }
@@ -911,7 +930,7 @@ function cms_twig_env(string $tpl_dir): Environment
                             }
                             $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                             $html .= '<div class="capsule" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsule\'; window.status=\'\';" onmouseover="this.className=\'capsule_ovr\'; window.status=\'' . $url . '\';">'
-                                . '<div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="img/corners/smallcap_corners.png" width="280" height="105" border="0"></div></div>'
+                                . '<div class="capsuleImage"><img alt="' . $name . '" border="0" height="105" src="' . $img . '" width="280"><div style="position: absolute; width: 280px; height: 105px; top: 0px; left: 0px;"><img src="corners/smallcap_corners.png" width="280" height="105" border="0"></div></div>'
                                 . '<div align="left" class="capsuleText"></div><div align="right" class="capsuleCost">$' . htmlspecialchars($price) . '</div></div>';
                         } else {
                             $img = $base . 'storefront/images/capsules/' . $row['image_path'];
@@ -951,7 +970,7 @@ function cms_twig_env(string $tpl_dir): Environment
                             $url = 'index.php?area=game&amp;AppId=' . (int)$row['appid'] . '&amp;';
                             $html .= '<div id="capsule_large_content">'
                                 . '<div class="capsuleLarge" onclick="location.href=\'' . $url . '\';" onmouseout="this.className=\'capsuleLarge\'; window.status=\'\';" onmouseover="this.className=\'capsuleLarge_ovr\'; window.status=\'' . $url . '\';">'
-                                . '<div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="img/corners/largecap_corners.png" width="572" height="221" border="0"></div></div>'
+                                . '<div class="capsuleLargeImage"><img alt="' . $name . '" border="0" galleryimg="no" height="221" src="' . $img . '" width="572"><div style="position: absolute; width: 572px; height: 221px; top: 0px; left: 0px;"><img src="corners/largecap_corners.png" width="572" height="221" border="0"></div></div>'
                                 . '<div class="capsuleLargeText"></div><div class="capsuleLargeCost">$' . htmlspecialchars($price) . '</div></div>'
                                 . '</div>';
                         } else {
@@ -1240,7 +1259,6 @@ function cms_render_template(string $path, array $vars = []): void
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
-            $dir = 'images';
             $clean = ltrim($path, './');
             if (str_starts_with($clean, 'storefront/')) {
                 $clean = substr($clean, 11);
@@ -1255,6 +1273,8 @@ function cms_render_template(string $path, array $vars = []): void
             $path = preg_replace('~^(?:img|images)/~', '', $clean);
             $path = preg_replace('~^storefront/~', '', $path);
             $path = ltrim($path, '/');
+            $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+            return $m[1].'="'.$url.'"';
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -1262,7 +1282,7 @@ function cms_render_template(string $path, array $vars = []): void
         return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
     }, $html);
 
-    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url) {
+    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url, $theme) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1287,7 +1307,6 @@ function cms_render_template(string $path, array $vars = []): void
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
-            $dir = 'images';
             $clean = ltrim($path, './');
             if (str_starts_with($clean, 'storefront/')) {
                 $clean = substr($clean, 11);
@@ -1300,6 +1319,8 @@ function cms_render_template(string $path, array $vars = []): void
                 return 'url('.$m[1].$base.'storefront/images/'.$clean.$m[1].')';
             }
             $path = ltrim($clean, '/');
+            $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+            return 'url('.$m[1].$url.$m[1].')';
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -1307,7 +1328,7 @@ function cms_render_template(string $path, array $vars = []): void
         return 'url('.$m[1].$vars['THEME_URL'].'/'.$path.$m[1].')';
     }, $html);
 
-    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars) {
+    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars, $theme, $base_url) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1336,7 +1357,8 @@ function cms_render_template(string $path, array $vars = []): void
         $path = preg_replace('~^(?:img|images)/~', '', $clean);
         $path = preg_replace('~^storefront/~', '', $path);
         $path = ltrim($path, '/');
-        return 'newImage('.$m[1].$vars['THEME_URL'].'/images/'.$path.$m[1].')';
+        $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+        return 'newImage('.$m[1].$url.$m[1].')';
     }, $html);
 
 
@@ -1409,7 +1431,6 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
-            $dir = 'images';
             $clean = ltrim($path, './');
             if (str_starts_with($clean, 'storefront/')) {
                 $clean = substr($clean, 11);
@@ -1424,6 +1445,8 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
             $path = preg_replace('~^(?:img|images)/~', '', $clean);
             $path = preg_replace('~^storefront/~', '', $path);
             $path = ltrim($path, '/');
+            $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+            return $m[1].'="'.$url.'"';
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -1431,7 +1454,7 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         return $m[1].'="'.$vars['THEME_URL'].'/'.$path.'"';
     }, $html);
 
-    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url) {
+    $html = preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($vars, $css_dir, $base_url, $theme) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1456,7 +1479,6 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
-            $dir = 'images';
             $clean = ltrim($path, './');
             if (str_starts_with($clean, 'storefront/')) {
                 $clean = substr($clean, 11);
@@ -1469,6 +1491,8 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
                 return 'url('.$m[1].$base.'storefront/images/'.$clean.$m[1].')';
             }
             $path = ltrim($clean, '/');
+            $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+            return 'url('.$m[1].$url.$m[1].')';
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -1476,7 +1500,7 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         return 'url('.$m[1].$vars['THEME_URL'].'/'.$path.$m[1].')';
     }, $html);
 
-    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars) {
+    $html = preg_replace_callback('/newImage\((["\'])([^"\']+)\1\)/i', function ($m) use ($vars, $theme, $base_url) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1505,15 +1529,34 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
         $path = preg_replace('~^(?:img|images)/~', '', $clean);
         $path = preg_replace('~^storefront/~', '', $path);
         $path = ltrim($path, '/');
-        return 'newImage('.$m[1].$vars['THEME_URL'].'/images/'.$path.$m[1].')';
+        $url  = cms_resolve_image($path, $theme, $vars['THEME_URL'], $base_url);
+        return 'newImage('.$m[1].$url.$m[1].')';
     }, $html);
 
     echo $html;
 }
 
-function cms_rewrite_css_urls(string $css, string $theme_url, string $css_dir, string $base_url): string
+function cms_resolve_image(string $path, string $theme, string $theme_url, string $base_url): string
 {
-    return preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($theme_url, $css_dir, $base_url) {
+    $path = ltrim($path, '/');
+    $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
+    if (is_file($themeFile)) {
+        return $theme_url . '/images/' . $path;
+    }
+
+    $rootFile = dirname(__DIR__) . '/images/' . $path;
+    if (is_file($rootFile)) {
+        $base = $base_url ? rtrim($base_url, '/') . '/' : '';
+        return $base . 'images/' . $path;
+    }
+
+    $base = $base_url ? rtrim($base_url, '/') . '/' : '';
+    return $base . 'image_not_found.jpg';
+}
+
+function cms_rewrite_css_urls(string $css, string $theme, string $theme_url, string $css_dir, string $base_url): string
+{
+    return preg_replace_callback('/url\((["\']?)([^"\)]*)\1\)/i', function ($m) use ($theme, $theme_url, $css_dir, $base_url) {
         $path = $m[2];
         if (preg_match('~^(?:https?:)?//|^/~', $path)) {
             return $m[0];
@@ -1538,7 +1581,6 @@ function cms_rewrite_css_urls(string $css, string $theme_url, string $css_dir, s
         } elseif ($ext === 'js') {
             $dir = 'js';
         } else {
-            $dir = 'images';
             $clean = ltrim($path, './');
             if (str_starts_with($clean, 'storefront/')) {
                 $clean = substr($clean, 11);
@@ -1553,6 +1595,8 @@ function cms_rewrite_css_urls(string $css, string $theme_url, string $css_dir, s
             $path = preg_replace('~^(?:img|images)/~', '', $clean);
             $path = preg_replace('~^storefront/~', '', $path);
             $path = ltrim($path, '/');
+            $url  = cms_resolve_image($path, $theme, $theme_url, $base_url);
+            return 'url('.$m[1].$url.$m[1].')';
         }
         if ($dir !== '' && !preg_match('~^(css|js|images)/~', $path)) {
             $path = $dir.'/'.$path;
@@ -1576,7 +1620,7 @@ function cms_rewrite_css_file(string $theme, string $css_path, string $theme_url
         if ($css_dir === '.') {
             $css_dir = '';
         }
-        $css = cms_rewrite_css_urls($css, $theme_url, $css_dir, $base_url);
+        $css = cms_rewrite_css_urls($css, $theme, $theme_url, $css_dir, $base_url);
         if (!is_dir($cache_dir)) {
             mkdir($cache_dir);
         }

@@ -5,6 +5,10 @@ file_put_contents($config, "<?php return ['host'=>'localhost','port'=>3306,'dbna
 $theme = 'test_asset_theme';
 $themeDir = __DIR__ . '/../themes/' . $theme;
 @mkdir($themeDir . '/templates', 0777, true);
+@mkdir($themeDir . '/images', 0777, true);
+file_put_contents($themeDir . '/images/bg.png', '1');
+file_put_contents($themeDir . '/images/btn.png', '1');
+file_put_contents($themeDir . '/images/bg2.png', '1');
 file_put_contents($themeDir . '/templates/test.twig', "<link rel='stylesheet' href='style.css'>\n<div style=\"background:url('images//bg.png')\"></div>\n<script>newImage('images/btn.png');</script>");
 file_put_contents($themeDir . '/style.css', "body{background:url('images//bg2.png');}");
 require __DIR__ . '/../cms/template_engine.php';

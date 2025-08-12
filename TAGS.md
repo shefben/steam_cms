@@ -129,20 +129,13 @@ Renders the right-hand sidebar for the given `page`. For `page = 'news'`, 2006 t
 Each of these tags outputs raw HTML stored in the `settings` table. Lists accept a `rows` parameter to control how many rows are rendered (column counts are fixed).
 
 - `join_steam_text()` – promotional blurb for the Join Steam box.
-- `new_on_steam_title()`, `new_on_steam_list(limit = 10)` – heading and list for new releases, capped at ten items with an RSS feed link.
-- `latest_news_title()`, `latest_news_list(rows = 5)` – heading and list for the Latest News block.
-- `find_title()`, `find_list(rows = 3)` – heading and list for the Find section.
-- `browse_catalog_title()`, `browse_catalog_list(rows = 2)` – heading and grid of catalog links.
-- `publisher_catalogs_title()`, `publisher_catalogs_list(rows = 3)` – heading and list of publisher catalogs.
-- `coming_soon_title()`, `coming_soon_list(rows = 3)` – heading and list for upcoming releases.
 - `gear_block()`, `free_block()` – sidebar promo blocks.
 - `support_email()` – support contact address.
 
-**Example:**
-```twig
-<h3>{{ latest_news_title() }}</h3>
-{{ latest_news_list() }}
-```
+### `sidebar_section(name, options = {})`
+Renders a sidebar block using the active theme's template located under `layouts/sidebar_sections/`.
+`name` selects the section (e.g., `search`, `get_steam_now`, `new_on_steam`, `latest_news`).
+`options` may provide values like `rows` or `limit` depending on the section.
 
 ## Join Steam Block
 
