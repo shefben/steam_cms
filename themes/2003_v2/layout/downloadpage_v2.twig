@@ -1,0 +1,15 @@
+<h1>GET STEAM NOW</h1>
+<h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2><img src="images/Graphic_box.jpg" width="24" height="6" alt=""><br>
+<div class="narrower"><br>
+{% if files %}
+    {% set file = files[0] %}
+    <h3>{{ file.title }}{% if file.file_size %}: ({{ file.file_size }}){% endif %}</h3><br>
+    <ul>
+    {% for m in file.mirrors %}
+        <li><a class="maize" href="{{ m.url }}">{{ loop.index }}: {{ m.host }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+<hr>
+{{ system_requirements|raw }}
+</div>

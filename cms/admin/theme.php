@@ -30,8 +30,14 @@ if(isset($_POST['upload']) && isset($_FILES['theme_zip']) && is_uploaded_file($_
                 if($zip->open($file['tmp_name']) === true){
                     $zip->extractTo($dest);
                     $zip->close();
-                    $valid = is_dir($dest.'/templates') && glob($dest.'/templates/*.twig')
-                        && is_dir($dest.'/assets');
+                    $valid = false;
+                    foreach (['layouts', 'layout'] as $dir) {
+                        if (is_dir($dest.'/' . $dir) && glob($dest.'/' . $dir . '/*.twig')) {
+                            $valid = true;
+                            break;
+                        }
+                    }
+                    $valid = $valid && is_dir($dest.'/assets');
                     if($valid){
                         cms_refresh_themes();
                         $themes = cms_get_themes();

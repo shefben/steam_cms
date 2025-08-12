@@ -1,0 +1,21 @@
+<h1>GET STEAM NOW</h1>
+<h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2><img src="images/Graphic_box.jpg" alt="" width="24" height="6"><br>
+<div class="narrower">
+<br>
+{% if files %}
+    {% set main = files[0] %}
+    <h2>{{ main.title }}:</h2>
+    <a class="maize" href="{{ main.main_url }}" style="font-size:11px;">Click here to download the Steam installer</a>{% if main.file_size %}. (Approx. {{ main.file_size }}){% endif %}<br>
+    <br><br>
+    {% for file in files|slice(1) %}
+        <h2>{{ file.title }}:</h2>
+        {% for m in file.mirrors %}
+            <a class="maize" href="{{ m.url }}" style="font-size:11px;">{{ loop.index }}: {{ m.host }}</a><br>
+        {% endfor %}
+        <br>
+    {% endfor %}
+{% endif %}
+<hr>
+{{ system_requirements|raw }}
+<hr>
+</div>
