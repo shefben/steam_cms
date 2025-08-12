@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Fixed installer to skip upgrade migrations and correctly parse SQL triggers.
 - Added theme.json support allowing themes to declare custom settings with admin widgets.
 - Fixed 2007 v1 and v2 theme header bars so logo and navigation stay on one line.
 - Removed binary image assets from Green Steam admin themes

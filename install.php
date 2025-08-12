@@ -697,6 +697,7 @@ ALTER TABLE storefront_tab_games
                 $stmts = [];
                 $buffer = '';
                 $inBlock = false;
+                $blockDepth = 0;
                 foreach (preg_split("/\r?\n/", $sql) as $line) {
                     $trim = trim($line);
                     if ($inBlock) {
@@ -712,8 +713,16 @@ ALTER TABLE storefront_tab_games
                         $inBlock = true;
                         continue;
                     }
+
+                    if (preg_match('/\bBEGIN\b/i', $trim)) {
+                        $blockDepth++;
+                    }
+                    if ($blockDepth > 0 && preg_match('/\bEND\b/i', $trim) && !preg_match('/\bEND\s+(IF|LOOP|CASE|REPEAT)\b/i', $trim)) {
+                        $blockDepth--;
+                    }
+
                     $buffer .= $line."\n";
-                    if (preg_match('/;\s*$/', $trim)) {
+                    if ($blockDepth === 0 && preg_match('/;\s*$/', $trim)) {
                         $stmts[] = trim($buffer);
                         $buffer = '';
                     }
@@ -736,11 +745,8 @@ ALTER TABLE storefront_tab_games
                 }
             }
 
-            $migFiles = glob(__DIR__ . '/migrations/*.sql');
-            sort($migFiles);
-            foreach ($migFiles as $file) {
-                run_sql_file($pdo, $file);
-            }
+            // Migration SQL files are for upgrades only and are not executed during
+            // a fresh installation.
 
             $storefrontFile = __DIR__.'/sql/install_storefront.sql';
             if (file_exists($storefrontFile)) {
