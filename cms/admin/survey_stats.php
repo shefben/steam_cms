@@ -82,7 +82,7 @@ if ($catId) {
         </ul>
         <h4>Add Category</h4>
         <form method="post">
-            <input type="text" name="slug" placeholder="slug" required>
+            <input type="text" name="slug" placeholder="ID" required>
             <input type="text" name="title" placeholder="title" required>
             <button class="btn" name="add_category">Add</button>
         </form>

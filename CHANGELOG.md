@@ -8,6 +8,12 @@ All notable changes to this project will be documented in this file.
 - Installer seeds default sidebar sections for 2006 v1/v2 and 2007 v1/v2 themes.
 - Fixed installer to skip upgrade migrations and correctly parse SQL triggers.
 - Added theme.json support allowing themes to declare custom settings with admin widgets.
+- Moved 2004/2005 map contest toggle to submissions page with AJAX updates and inline notifications.
+- Replaced theme update text with transient notifications on save.
+- Restored styling for GreenSteam and GreenSteam v2 admin themes.
+- Corrected Neon admin select arrows and sidebar toggle glyphs.
+- Updated survey stats form to label category IDs explicitly.
+- Integrated image picker for selecting existing storefront capsule images.
 - Fixed 2007 v1 and v2 theme header bars so logo and navigation stay on one line.
 - Removed binary image assets from Green Steam admin themes
 - Added neon-styled admin theme based on neon_version2 example.
