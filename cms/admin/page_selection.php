@@ -75,23 +75,35 @@ $current_theme = cms_get_setting('theme', '2004');
 ?>
 <h2>Page Version Management</h2>
 <form method="post" id="pageForm">
-<?php foreach ($pages as $key => $info): ?>
+<?php foreach ($pages as $key => $info):
+    $versions = [];
+    foreach ($info['versions'] as $ver) {
+        if ($ver['themes']) {
+            $match = false;
+            foreach ($ver['themes'] as $theme) {
+                if (
+                    $current_theme === $theme
+                    || str_starts_with($current_theme, $theme . '_')
+                    || str_starts_with($current_theme, $theme . '-')
+                ) {
+                    $match = true;
+                    break;
+                }
+            }
+            if (!$match) {
+                continue;
+            }
+        }
+        $versions[] = $ver;
+    }
+    if (!$versions) {
+        continue;
+    }
+?>
   <div class="page-group">
     <h3><?php echo htmlspecialchars($info['title']); ?></h3>
     <div class="page-options">
-      <?php foreach ($info['versions'] as $ver):
-            if ($ver['themes']) {
-                $match = false;
-                foreach ($ver['themes'] as $theme) {
-                    if ($current_theme === $theme || str_starts_with($current_theme, $theme . '_')) {
-                        $match = true;
-                        break;
-                    }
-                }
-                if (!$match) {
-                    continue;
-                }
-            }
+      <?php foreach ($versions as $ver):
             $checked = $current[$key] === $ver['value'] ? 'checked' : '';
       ?>
       <label>
