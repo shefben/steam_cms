@@ -47,6 +47,8 @@
                     </div></header>
 {% if page_id == 'index' %}
     {{ content|raw }}
+{% elseif '<form' in content or '<table' in content %}
+    {{ content|raw }}
 {% else %}
     {% set normalized = content|replace({'<hr />':'<hr>','<hr/>':'<hr>'}) %}
     {% set sections = normalized|split('<hr>') %}
