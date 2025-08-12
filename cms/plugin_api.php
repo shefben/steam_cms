@@ -21,6 +21,7 @@ $cms_plugins = [
     'template_tags' => [],   // Additional Twig template tags
     'tag_hooks'     => [],   // Hooks on template tags (name => ['before'=>[], 'after'=>[]])
     'hooks'         => [],   // Generic event hooks (event => [callbacks])
+    'versioned_pages' => [], // Versioned page registrations
 ];
 
 /**
@@ -144,6 +145,57 @@ function cms_apply_hooks(string $event, $data)
         }
     }
     return $data;
+}
+
+/**
+ * Register a page that offers selectable versions.
+ *
+ * @param string $key     Identifier for this page (used as form field name).
+ * @param string $title   Heading shown on the admin selection page.
+ * @param string $setting CMS setting key storing the chosen version.
+ */
+function cms_register_versioned_page(string $key, string $title, string $setting): void
+{
+    global $cms_plugins;
+    $cms_plugins['versioned_pages'][$key] ??= [
+        'title'    => $title,
+        'setting'  => $setting,
+        'versions' => [],
+    ];
+}
+
+/**
+ * Register a selectable version for a page.
+ *
+ * @param string   $pageKey Identifier used in cms_register_versioned_page().
+ * @param string   $value   Value stored in the setting when selected.
+ * @param string   $label   Human readable label shown to admins.
+ * @param string   $image   Relative path to thumbnail image.
+ * @param string[] $themes  List of themes this version applies to.
+ */
+function cms_register_page_version(string $pageKey, string $value, string $label, string $image, array $themes): void
+{
+    global $cms_plugins;
+    if (!isset($cms_plugins['versioned_pages'][$pageKey])) {
+        throw new InvalidArgumentException("Unknown versioned page: {$pageKey}");
+    }
+    $cms_plugins['versioned_pages'][$pageKey]['versions'][] = [
+        'value'  => $value,
+        'label'  => $label,
+        'image'  => $image,
+        'themes' => $themes,
+    ];
+}
+
+/**
+ * Retrieve all registered versioned pages.
+ *
+ * @return array<string,array<string,mixed>>
+ */
+function cms_plugin_page_versions(): array
+{
+    global $cms_plugins;
+    return $cms_plugins['versioned_pages'];
 }
 
 /**
