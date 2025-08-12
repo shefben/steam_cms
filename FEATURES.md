@@ -15,6 +15,7 @@
 - Green Steam admin themes exclude binary image assets to keep repository lean
 - Right-hand news sidebar rendered through a generic template tag for 2006–2007 themes
 - Installer seeds sidebar section defaults for 2006 v1/v2 and 2007 v1/v2 themes
+- Installer seeds default content server list from 2003 and 2004 archives
 - Platform update history pages use collapsible entries with latest update expanded by default
 - Full article news tag preserves HTML formatting
 - Configurable root path for subdirectory deployments

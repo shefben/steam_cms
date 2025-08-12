@@ -109,6 +109,7 @@ CREATE TABLE download_categories(
                 last_checked DATETIME,
                 status VARCHAR(10)
             )");
+            require __DIR__ . '/sql/install_content_servers.php';
             $pdo->exec("DROP TABLE IF EXISTS faq_categories");
             $pdo->exec("CREATE TABLE faq_categories(id1 BIGINT,id2 BIGINT,name TEXT,hidden TINYINT(1) DEFAULT 0,PRIMARY KEY(id1,id2))");
             $pdo->exec("DROP TABLE IF EXISTS faq_content");
