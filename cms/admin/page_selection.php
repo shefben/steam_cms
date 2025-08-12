@@ -80,8 +80,17 @@ $current_theme = cms_get_setting('theme', '2004');
     <h3><?php echo htmlspecialchars($info['title']); ?></h3>
     <div class="page-options">
       <?php foreach ($info['versions'] as $ver):
-            if ($ver['themes'] && !in_array($current_theme, $ver['themes'], true)) {
-                continue;
+            if ($ver['themes']) {
+                $match = false;
+                foreach ($ver['themes'] as $theme) {
+                    if ($current_theme === $theme || str_starts_with($current_theme, $theme . '_')) {
+                        $match = true;
+                        break;
+                    }
+                }
+                if (!$match) {
+                    continue;
+                }
             }
             $checked = $current[$key] === $ver['value'] ? 'checked' : '';
       ?>
