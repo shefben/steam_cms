@@ -1,4 +1,6 @@
 <?php
+// Buffer output so we can safely redirect after saving settings
+ob_start();
 require_once 'admin_header.php';
 cms_require_permission('manage_settings');
 $site_title = cms_get_setting('site_title','Steam');
@@ -31,7 +33,10 @@ if(isset($_POST['reorder']) && isset($_POST['items'])){
     }
     cms_set_setting('nav_items', json_encode($clean));
     $nav_items = $clean;
-    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){ echo 'ok'; }
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        ob_end_clean();
+        echo 'ok';
+    }
     exit;
 }
 if(isset($_POST['save'])){
@@ -55,32 +60,22 @@ if(isset($_POST['save'])){
             ];
         }
         cms_set_setting('nav_items', json_encode($items));
-        $nav_items = $items;
     }
     // header and footer settings moved to header_footer.php
     if(isset($_FILES['favicon']) && is_uploaded_file($_FILES['favicon']['tmp_name'])){
         $path = __DIR__.'/../content/favicon.ico';
         move_uploaded_file($_FILES['favicon']['tmp_name'],$path);
         cms_set_setting('favicon','/cms/content/favicon.ico');
-        $favicon = '/cms/content/favicon.ico';
     }
     // header navigation settings moved to header_footer.php
     cms_admin_log('Updated site settings');
-    echo '<p>Settings saved.</p>';
-    $site_title = trim($_POST['site_title']);
-    $support_email = trim($_POST['supportemail']);
-    $smtp_host = trim($_POST['smtp_host']);
-    $smtp_port = trim($_POST['smtp_port']);
-    $smtp_user = trim($_POST['smtp_user']);
-    $smtp_pass = trim($_POST['smtp_pass']);
-    $root_path = trim($_POST['root_path']);
-    $admin_theme = $_POST['admin_theme'];
-    $news_year_only = $_POST['news_year_only'];
-    // header and footer settings moved to header_footer.php
-    // keep nav_items array for redisplay
-    $nav_items = $nav_items;
+    // redirect to avoid mixed-theme output
+    ob_end_clean();
+    header('Location: settings.php?saved=1');
+    exit;
 }
 ?>
+<?php if(isset($_GET['saved'])) echo '<p>Settings saved.</p>'; ?>
 <h2>Site Settings <?php echo cms_help_icon('settings','site'); ?></h2>
 <form method="post" enctype="multipart/form-data">
 Site Title: <input type="text" name="site_title" value="<?php echo htmlspecialchars($site_title); ?>" title="Displayed in browser titles"><br><br>
@@ -187,3 +182,4 @@ document.addEventListener('DOMContentLoaded',function(){
 </script>
 <p><a href="index.php">Back</a></p>
 <?php include 'admin_footer.php'; ?>
+<?php ob_end_flush(); ?>

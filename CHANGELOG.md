@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Redirected settings page after saving so new admin theme loads without manual refresh.
 - Fixed custom pages and page version management screens to show content in the Neon admin theme.
 - Restored Page Version Management radio controls for hyphenated theme variants and skipped empty page groups.
 - Fixed content server stats to render all servers with collapsible blocks for 2003 v2 and grouped entries for 2004+ themes.
