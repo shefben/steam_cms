@@ -271,7 +271,8 @@ if ($use_all) {
   .capsule .delete-circle{position:absolute;top:5px;right:5px;width:20px;height:20px;border-radius:50%;border:1px solid #666;background:#fff;color:#666;line-height:18px;padding:0;cursor:pointer;}
   .capsule img{max-width:100%;height:auto;display:block;margin:0 auto 5px;}
   .capsule .btn{margin:2px;}
-  .wysiwyg{border:1px solid #ccc;min-height:120px;padding:5px;overflow:auto;}
+  #row-content{align-items:flex-start;}
+  .wysiwyg{border:1px solid #ccc;min-height:120px;padding:5px;overflow:auto;flex:1;}
   #tabbed-form .tab-block{border:1px solid #ccc;padding:5px;margin-bottom:10px;}
   #tabbed-form .tab-header{display:flex;align-items:center;gap:5px;margin-bottom:5px;}
   #tabbed-form .games{display:flex;flex-wrap:wrap;gap:10px;}
