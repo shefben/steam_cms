@@ -20,22 +20,33 @@ TD{ font-size:8pt; padding:0 16px 0 0; }
 Total Available Bandwidth: <?php echo number_format($total_available,2); ?>Mbps<br>
 Total Used Bandwidth: <?php echo number_format($total_capacity-$total_available,2); ?>Mbps
 <?php
-$regions=[];
-foreach($servers as $srv){
+$regions = [];
+$maxCapacity = 0.0;
+foreach ($servers as $srv) {
     $reg = $srv['region'] ?? 'Unknown';
-    $regions[$reg][]=$srv;
+    $regions[$reg][] = $srv;
+    if (($srv['total_capacity'] ?? 0) > $maxCapacity) {
+        $maxCapacity = $srv['total_capacity'];
+    }
 }
-foreach($regions as $region=>$list){?>
+ksort($regions, SORT_NATURAL | SORT_FLAG_CASE);
+foreach ($regions as &$list) {
+    usort($list, fn($a, $b) => strcasecmp($a['name'], $b['name']));
+}
+unset($list);
+foreach ($regions as $region => $list) {
+?>
 <div class="capsule" name="<?php echo htmlspecialchars($region); ?>">
 <div class="captop"><div></div></div>
 <div class="capcontent">
 <table width="100%">
 <tr><td align="right" width="260"></td><td><b><?php echo htmlspecialchars($region); ?></b></td></tr>
-<?php foreach($list as $s){
-    $load = $s['total_capacity']? (1 - $s['available_bandwidth']/$s['total_capacity'])*100 : 0;
+<?php foreach ($list as $s) {
+    $used = ($s['total_capacity'] ?? 0) - ($s['available_bandwidth'] ?? 0);
+    $load = ($s['total_capacity'] ?? 0) > 0 ? ($used / $s['total_capacity']) * 100 : 0;
     $load = max(0, min(100, $load));
     $avail = 100 - $load;
-    $capWidth = min(100, ($s['total_capacity']/1000)*100);
+    $capWidth = $maxCapacity > 0 ? ($s['total_capacity'] / $maxCapacity) * 100 : 0;
     ?>
 <tr>
 <td align="right">
@@ -47,8 +58,8 @@ foreach($regions as $region=>$list){?>
 <?php if(!empty($s['filtered'])): ?> <font color="#5B5B5B">[<a class="filter_link" href="javascript:popUp('filtered_servers.php')">filtered</a>]</font><?php endif; ?>
 </td>
 <td>
-<table class="statusGraph" width="<?php echo (int)$capWidth; ?>%" cellspacing="0">
-<tr><td class="CurrentLoad" width="<?php echo (int)$load; ?>%"></td><td class="AvailableBytesPerSecond" width="<?php echo (int)$avail; ?>%"></td></tr>
+<table class="statusGraph" width="<?php echo (int) $capWidth; ?>%" cellspacing="0">
+<tr><td class="CurrentLoad" width="<?php echo (int) $load; ?>%"></td><td class="AvailableBytesPerSecond" width="<?php echo (int) $avail; ?>%"></td></tr>
 </table>
 </td>
 </tr>
