@@ -142,6 +142,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['status' => 'error']);
         }
         exit;
+    } elseif ($action === 'list_capsule_images') {
+        $target = $use_all ? 'all' : $theme;
+        $base = dirname(__DIR__, 2) . '/storefront/images/capsules/' . $target;
+        $images = [];
+        if (is_dir($base)) {
+            foreach (glob($base . '/*.png') as $f) {
+                $images[] = $target . '/' . basename($f);
+            }
+        }
+        echo json_encode(['status' => 'ok', 'images' => $images]);
+        exit;
     } elseif ($action === 'delete') {
         $id = (int)($_POST['id'] ?? 0);
         $db->prepare('DELETE FROM storefront_capsule_items WHERE id=?')->execute([$id]);
@@ -248,6 +259,8 @@ if ($use_all) {
     </div>
   </form>
 </div>
+<link rel="stylesheet" href="css/image-picker.css">
+<script src="js/image-picker.min.js"></script>
 <style>
   .capsule-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
   .capsule{border:1px solid #ccc;padding:5px;position:relative;text-align:center;}
@@ -268,6 +281,10 @@ if ($use_all) {
 <script>
 $(function(){
   var currentTheme = '<?php echo $theme; ?>';
+  var existingImages = [];
+  $.post('capsule_management_2006.php',{action:'list_capsule_images'},function(r){
+    if(r.status==='ok'){ existingImages = r.images; }
+  },'json');
   function updateOrder(){
     var order=[];
     $('#capsule-grid .capsule').each(function(){order.push($(this).data('id'));});
@@ -366,11 +383,27 @@ $(function(){
   });
 
   var tabCount=0;
+  function buildImageOptions(selected){
+    var opts='<option value="">-- Select Image --</option>';
+    existingImages.forEach(function(img){
+      opts+='<option data-img-src="../storefront/images/capsules/'+img+'" value="'+img+'"'+(img===selected?' selected':'')+'>'+img+'</option>';
+    });
+    return opts;
+  }
   function addGame(block,data){
     var games=block.find('.game').length;
     if(games>=10) return;
-    var html='<div class="game"><input type="hidden" class="game-img-path" value="'+(data&&data.image?data.image:'')+'"><div><label>Image<input type="file" class="game-image" accept="image/png"></label><img class="preview"'+(data&&data.image?' src="../storefront/images/capsules/'+data.image+'" style="display:block;"':'')+'></div><div><label>Name<input type="text" class="game-name" value="'+(data&&data.name?data.name:'')+'"></label></div><div><label>Game ID<input type="text" class="game-appid" value="'+(data&&data.appid?data.appid:'')+'"></label></div><div><label>Price<input type="text" class="game-price" value="'+(data&&data.price?data.price:'')+'"></label></div><button type="button" class="btn btn-small remove-game">Remove</button></div>';
-    block.find('.games').append(html);
+    var imgPath=data&&data.image?data.image:'';
+    var html='<div class="game"><input type="hidden" class="game-img-path" value="'+imgPath+'">'
+      +'<div><label>Existing Image<select class="game-existing">'+buildImageOptions(imgPath)+'</select></label></div>'
+      +'<div><label>Upload<input type="file" class="game-image" accept="image/png"></label><img class="preview"'+(imgPath?' src="../storefront/images/capsules/'+imgPath+'" style="display:block;"':'')+'></div>'
+      +'<div><label>Name<input type="text" class="game-name" value="'+(data&&data.name?data.name:'')+'"></label></div>'
+      +'<div><label>Game ID<input type="text" class="game-appid" value="'+(data&&data.appid?data.appid:'')+'"></label></div>'
+      +'<div><label>Price<input type="text" class="game-price" value="'+(data&&data.price?data.price:'')+'"></label></div>'
+      +'<button type="button" class="btn btn-small remove-game">Remove</button></div>';
+    var el=$(html);
+    block.find('.games').append(el);
+    el.find('select.game-existing').imagepicker();
   }
   function addTab(index,data){
     if(tabCount>=5) return; tabCount++;
@@ -398,37 +431,55 @@ $(function(){
   $('#add-tab').on('click',function(){addTab(tabCount+1);});
   $('#tabs-config').on('click','.add-game',function(){addGame($(this).closest('.tab-block'));});
   $('#tabs-config').on('click','.remove-game',function(){$(this).closest('.game').remove();});
+  $('#tabs-config').on('change','.game-existing',function(){
+    var game=$(this).closest('.game');
+    var path=$(this).val();
+    game.find('.game-img-path').val(path);
+    if(path){
+      game.find('img.preview').attr('src','../storefront/images/capsules/'+path).show();
+    }else{
+      game.find('img.preview').hide();
+    }
+  });
   $('#tabs-config').on('change','.game-image',function(){
     var game=$(this).closest('.game');
     var fd=new FormData(); fd.append('action','upload_game_image'); fd.append('game_image',this.files[0]);
     $.ajax({url:'capsule_management_2006.php',method:'POST',data:fd,processData:false,contentType:false,dataType:'json',success:function(r){
-      if(r.status==='ok'){game.find('.game-img-path').val(r.path); game.find('img.preview').attr('src','../storefront/images/capsules/'+r.path).show();}
+      if(r.status==='ok'){
+        existingImages.push(r.path);
+        var sel=game.find('select.game-existing');
+        sel.append('<option data-img-src="../storefront/images/capsules/'+r.path+'" value="'+r.path+'">'+r.path+'</option>');
+        sel.val(r.path).imagepicker();
+        game.find('.game-img-path').val(r.path);
+        game.find('img.preview').attr('src','../storefront/images/capsules/'+r.path).show();
+      }
     }});
   });
   $('#tabbed-cancel').on('click',function(){$('#tabbed-modal').dialog('close');});
   $('#tabbed-form').on('submit',function(e){
     e.preventDefault();
-    var id=$('#tabbed-id').val();
-    var data={action:'save_tabbed',id:id};
+    var fd=new FormData();
+    fd.append('action','save_tabbed');
+    fd.append('id',$('#tabbed-id').val());
     $('#tabs-config .tab-block').each(function(i){
-      data['tabs['+i+'][title]']=$(this).find('.tab-title').val();
+      fd.append('tabs['+i+'][title]',$(this).find('.tab-title').val());
       $(this).find('.game').each(function(j){
-        data['tabs['+i+'][games]['+j+'][appid]']=$(this).find('.game-appid').val();
-        data['tabs['+i+'][games]['+j+'][name]']=$(this).find('.game-name').val();
-        data['tabs['+i+'][games]['+j+'][price]']=$(this).find('.game-price').val();
-        data['tabs['+i+'][games]['+j+'][image]']=$(this).find('.game-img-path').val();
+        fd.append('tabs['+i+'][games]['+j+'][appid]',$(this).find('.game-appid').val());
+        fd.append('tabs['+i+'][games]['+j+'][name]',$(this).find('.game-name').val());
+        fd.append('tabs['+i+'][games]['+j+'][price]',$(this).find('.game-price').val());
+        fd.append('tabs['+i+'][games]['+j+'][image]',$(this).find('.game-img-path').val());
       });
     });
-    $.post('capsule_management_2006.php',data,function(r){
+    $.ajax({url:'capsule_management_2006.php',method:'POST',data:fd,processData:false,contentType:false,dataType:'json',success:function(r){
       if(r.status==='ok'){
-        if(!id){
+        if(!$('#tabbed-id').val()){
           var el=$('<div class="capsule tabbed" data-id="'+r.id+'" data-type="tabbed"></div>');
           el.append('<span class="handle">&#9776;</span><button type="button" class="delete-circle">&times;</button><div class="cap-name">Tabbed Capsule</div><button type="button" class="edit btn btn-small">Edit</button>');
           $('#capsule-grid').append(el);
         }
         $('#tabbed-modal').dialog('close');
       }
-    },'json');
+    }});
   });
 });
 </script>

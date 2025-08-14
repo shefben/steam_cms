@@ -83,6 +83,7 @@
 - 2006+ index management page offers drag-and-drop capsules with AJAX modal editor and image preview
 - GetTheGear and Freestuff/Custom capsules support custom titles and WYSIWYG content in the index manager and display using theme-specific sizes
 - Dedicated tabbed capsule creator allows up to five tabs and ten games per tab with AJAX image uploads and previews
+- Tabbed capsule editor lets admins choose existing capsule images or upload new ones for each game
 - 2006_v1, 2006_v2, 2007_v1, and 2007_v2 themes render index capsules from database-managed items
 - 2007 themes wrap each capsule row in `<div class="inline">` containers, keeping large capsules standalone
 - Circular **X** button deletes capsules in place and reorders remaining items to fill gaps
