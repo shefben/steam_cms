@@ -38,6 +38,8 @@ All notable changes to this project will be documented in this file.
 - Legacy storefront package editor supports rich text descriptions with a WYSIWYG control.
 - Custom pages support content header images with AJAX upload/selection and `content_header_image` template tag.
 - Pre-existing header image selection now uses jQuery Image Picker for thumbnails and single-image selection.
+- Fixed Tabbed Capsule modal to persist tabs and game details on save.
+- Tabbed Capsule editor supports selecting existing capsule images or uploading new files for each game.
 - Added interactive 2006+ index management page with drag-and-drop capsules and AJAX editing.
 - Index manager now supports GetTheGear and Freestuff/Custom capsule types with editable titles and rich text content.
 - Fixed Troubleshooter sidebar link to toggle sub-menu instead of navigating.
