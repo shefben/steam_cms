@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'save') {
         $id = isset($_POST['id']) && $_POST['id'] !== '' ? (int)$_POST['id'] : null;
         $type = $_POST['type'] ?? 'small';
-        if ($type === 'tabbed') {
+        if ($type === 'tabbed' || $type === 'multi-large') {
             echo json_encode(['status' => 'error']);
             exit;
         }
@@ -125,6 +125,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         echo json_encode(['status' => 'ok', 'tabs' => $out]);
         exit;
+    } elseif ($action === 'save_multi_large') {
+        $id = isset($_POST['id']) && $_POST['id'] !== '' ? (int)$_POST['id'] : null;
+        if (!$id) {
+            if ($use_all) {
+                $ord = (int)$db->query('SELECT MAX(ord) FROM storefront_capsule_items WHERE theme IS NULL')->fetchColumn() + 1;
+            } else {
+                $stmt = $db->prepare('SELECT MAX(ord) FROM storefront_capsule_items WHERE theme=?');
+                $stmt->execute([$theme]);
+                $ord = (int)$stmt->fetchColumn() + 1;
+            }
+            $group = 'multi_' . time() . '_' . rand(1000, 9999);
+            $stmt = $db->prepare('INSERT INTO storefront_capsule_items(theme,type,appid,image_path,price,title,content,ord) VALUES(?,?,?,?,?,?,?,?)');
+            $stmt->execute([$use_all ? null : $theme, 'multi-large', null, $group, null, null, null, $ord]);
+            $id = (int)$db->lastInsertId();
+        } else {
+            $stmt = $db->prepare('SELECT image_path FROM storefront_capsule_items WHERE id=?');
+            $stmt->execute([$id]);
+            $group = $stmt->fetchColumn();
+        }
+        echo json_encode(['status' => 'ok', 'id' => $id, 'group' => $group]);
+        exit;
+    } elseif ($action === 'add_multi_app') {
+        $group = $_POST['group'] ?? '';
+        $appid = isset($_POST['appid']) && $_POST['appid'] !== '' ? (int)$_POST['appid'] : null;
+        $image_path = $_POST['image_path'] ?? '';
+        $price = isset($_POST['price']) && $_POST['price'] !== '' ? (float)$_POST['price'] : 0;
+        
+        if ($appid && $group) {
+            $stmt = $db->prepare('SELECT COUNT(*) FROM multicapsule WHERE `group`=?');
+            $stmt->execute([$group]);
+            $count = (int)$stmt->fetchColumn();
+            if ($count >= 7) {
+                echo json_encode(['status' => 'error', 'message' => 'Maximum 7 apps allowed']);
+                exit;
+            }
+            
+            $stmt = $db->prepare('SELECT MAX(`order`) FROM multicapsule WHERE `group`=?');
+            $stmt->execute([$group]);
+            $order = (int)$stmt->fetchColumn() + 1;
+            $stmt = $db->prepare('INSERT INTO multicapsule(`group`, `order`, appid, image_path, price) VALUES(?,?,?,?,?)');
+            $stmt->execute([$group, $order, $appid, $image_path, $price]);
+            
+            $stmt = $db->prepare('SELECT name FROM store_apps WHERE appid=?');
+            $stmt->execute([$appid]);
+            $name = $stmt->fetchColumn() ?: 'Unknown Game';
+            
+            echo json_encode(['status' => 'ok', 'id' => $db->lastInsertId(), 'appid' => $appid, 'name' => $name]);
+            exit;
+        }
+        echo json_encode(['status' => 'error']);
+        exit;
+    } elseif ($action === 'remove_multi_app') {
+        $id = (int)($_POST['id'] ?? 0);
+        $db->prepare('DELETE FROM multicapsule WHERE id=?')->execute([$id]);
+        echo json_encode(['status' => 'ok']);
+        exit;
+    } elseif ($action === 'get_multi_apps') {
+        $group = $_POST['group'] ?? '';
+        $stmt = $db->prepare('SELECT m.id, m.appid, m.image_path, m.price, a.name FROM multicapsule m LEFT JOIN store_apps a ON m.appid=a.appid WHERE m.`group`=? ORDER BY m.`order`');
+        $stmt->execute([$group]);
+        $apps = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode(['status' => 'ok', 'apps' => $apps]);
+        exit;
     } elseif ($action === 'upload_game_image') {
         $target = $use_all ? 'all' : $theme;
         $base = dirname(__DIR__, 2) . '/storefront/images/capsules/' . $target;
@@ -193,6 +256,7 @@ if ($use_all) {
         <option value="large">Large Capsule</option>
         <option value="small">Small Capsule</option>
         <option value="tabbed">Tabbed Capsule</option>
+        <option value="multi-large">Multi-App Large Capsule</option>
         <option value="gear">GetTheGear</option>
         <option value="free">Freestuff/Custom</option>
       </select>
@@ -231,9 +295,39 @@ if ($use_all) {
         <?php endforeach; ?>
       </div>
     </div>
+    <div class="form-row" id="row-multi-apps" style="display:none;">
+      <label>Apps in Multi-Capsule</label>
+      <div id="multi-apps-list"></div>
+      <button type="button" id="add-multi-app" class="btn btn-small">+ Add App</button>
+    </div>
     <div class="form-row" style="text-align:right;">
       <button type="submit" class="btn btn-primary">Save</button>
       <button type="button" id="cap-cancel" class="btn">Cancel</button>
+    </div>
+  </form>
+</div>
+<div id="multi-app-modal" title="Add App to Multi-Capsule" style="display:none;">
+  <form id="multi-app-form">
+    <input type="hidden" id="multi-group" name="group">
+    <div class="form-row">
+      <label for="multi-appid">Application</label>
+      <select name="appid" id="multi-appid">
+        <?php foreach($apps as $a): ?>
+        <option value="<?php echo $a['appid']; ?>"><?php echo $a['appid'].' - '.htmlspecialchars($a['name']); ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="multi-image-path">Image Path</label>
+      <input type="text" name="image_path" id="multi-image-path">
+    </div>
+    <div class="form-row">
+      <label for="multi-price">Price</label>
+      <input type="text" name="price" id="multi-price">
+    </div>
+    <div class="form-row" style="text-align:right;">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" id="multi-cancel" class="btn">Cancel</button>
     </div>
   </form>
 </div>
@@ -252,7 +346,7 @@ if ($use_all) {
   .capsule-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
   .capsule{border:1px solid #ccc;padding:5px;position:relative;text-align:center;}
   .capsule.small{flex:0 0 calc(50% - 10px);}
-  .capsule.large,.capsule.tabbed{flex:0 0 100%;}
+  .capsule.large,.capsule.tabbed,.capsule.multi-large{flex:0 0 100%;}
   .capsule.gear,.capsule.free{flex:0 0 <?php echo $gearLarge ? '100%' : 'calc(50% - 10px)'; ?>;}
   .capsule .handle{cursor:move;position:absolute;top:5px;left:5px;}
   .capsule .delete-circle{position:absolute;top:5px;right:5px;width:20px;height:20px;border-radius:50%;border:1px solid #666;background:#fff;color:#666;line-height:18px;padding:0;cursor:pointer;}
@@ -264,6 +358,8 @@ if ($use_all) {
   #tabbed-form .games{display:flex;flex-wrap:wrap;gap:10px;}
   #tabbed-form .game{border:1px solid #ccc;padding:5px;flex:0 0 calc(50% - 10px);}
   #tabbed-form .game img{max-width:100%;height:auto;margin-bottom:5px;display:none;}
+  .multi-app-item{padding:5px;border:1px solid #ddd;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;}
+  #add-multi-placeholder{color:#666;font-style:italic;padding:10px;text-align:center;}
 </style>
 <script>
 $(function(){
@@ -280,11 +376,14 @@ $(function(){
   });
   function toggleFields(t){
     if(t==='gear'||t==='free'){
-      $('#row-name,#row-appid,#row-price,#row-image').hide();
+      $('#row-name,#row-appid,#row-price,#row-image,#row-multi-apps').hide();
       $('#row-title,#row-content').show();
+    }else if(t==='multi-large'){
+      $('#row-name,#row-appid,#row-price,#row-image,#row-title,#row-content').hide();
+      $('#row-multi-apps').show();
     }else{
       $('#row-name,#row-appid,#row-price,#row-image').show();
-      $('#row-title,#row-content').hide();
+      $('#row-title,#row-content,#row-multi-apps').hide();
     }
   }
   function openModal(data){
@@ -299,7 +398,11 @@ $(function(){
     $('#cap-themes input').prop('checked',false);
     $('#cap-themes input[value="'+currentTheme+'"]').prop('checked',true);
     toggleFields(data.type||'small');
-    if(data.image){
+    if(data.type === 'multi-large') {
+      currentGroup = data.image || '';
+      loadMultiApps(currentGroup);
+    }
+    if(data.image && data.type !== 'multi-large'){
       $('#cap-preview').attr('src','../storefront/images/capsules/'+data.image).show();
     }else{
       $('#cap-preview').hide();
@@ -307,6 +410,72 @@ $(function(){
     $('#capsule-modal').dialog({modal:true,width:500});
   }
   $('#cap-type').on('change',function(){toggleFields(this.value);});
+  // Multi-app functionality
+  var currentGroup = '';
+  function loadMultiApps(group) {
+    if (!group) return;
+    $.post('capsule_management_2006.php', {action: 'get_multi_apps', group: group}, function(r) {
+      if (r.status === 'ok') {
+        var html = '';
+        r.apps.forEach(function(app, i) {
+          html += '<div class="multi-app-item" data-id="' + app.id + '">' + 
+                  app.appid + ' - ' + app.name + 
+                  ' <button type="button" class="btn btn-small remove-multi-app" data-id="' + app.id + '">−</button></div>';
+        });
+        if (r.apps.length < 7) {
+          html += '<div id="add-multi-placeholder">Click + Add App to add more games</div>';
+        }
+        $('#multi-apps-list').html(html);
+        $('#add-multi-app').toggle(r.apps.length < 7);
+      }
+    }, 'json');
+  }
+  
+  function openMultiModal(group) {
+    currentGroup = group;
+    $('#multi-group').val(group);
+    $('#multi-appid').val('');
+    $('#multi-image-path').val('');
+    $('#multi-price').val('');
+    $('#multi-app-modal').dialog({modal: true, width: 400});
+  }
+
+  $('#add-multi-app').on('click', function() {
+    openMultiModal(currentGroup);
+  });
+  
+  $('#multi-cancel').on('click', function() {
+    $('#multi-app-modal').dialog('close');
+  });
+  
+  $('#multi-app-form').on('submit', function(e) {
+    e.preventDefault();
+    var data = {
+      action: 'add_multi_app',
+      group: $('#multi-group').val(),
+      appid: $('#multi-appid').val(),
+      image_path: $('#multi-image-path').val(),
+      price: $('#multi-price').val()
+    };
+    $.post('capsule_management_2006.php', data, function(r) {
+      if (r.status === 'ok') {
+        loadMultiApps(currentGroup);
+        $('#multi-app-modal').dialog('close');
+      } else {
+        alert(r.message || 'Error adding app');
+      }
+    }, 'json');
+  });
+  
+  $('#multi-apps-list').on('click', '.remove-multi-app', function() {
+    var id = $(this).data('id');
+    $.post('capsule_management_2006.php', {action: 'remove_multi_app', id: id}, function(r) {
+      if (r.status === 'ok') {
+        loadMultiApps(currentGroup);
+      }
+    }, 'json');
+  });
+
   $('#add-capsule').on('click',function(){openModal({});});
   $('#add-tabbed').on('click',function(){openTabbedModal({});});
   $('#capsule-grid').on('click','.edit',function(){
@@ -333,6 +502,28 @@ $(function(){
   $('#cap-cancel').on('click',function(){$('#capsule-modal').dialog('close');});
   $('#capsule-form').on('submit',function(e){
     e.preventDefault();
+    var type = $('#cap-type').val();
+    if (type === 'multi-large') {
+      var data = {
+        action: 'save_multi_large',
+        id: $('#cap-id').val()
+      };
+      $.post('capsule_management_2006.php', data, function(r) {
+        if (r.status === 'ok') {
+          var id = $('#cap-id').val();
+          currentGroup = r.group;
+          if (!id) {
+            var html = '<div class="capsule multi-large" data-id="' + r.id + '" data-type="multi-large" data-image="' + r.group + '">';
+            html += '<span class="handle">&#9776;</span><button type="button" class="delete-circle">&times;</button>';
+            html += '<div class="cap-name">Multi-App Large Capsule</div><button type="button" class="edit btn btn-small">Edit</button></div>';
+            var el = $(html).data({id: r.id, type: 'multi-large', image: r.group});
+            $('#capsule-grid').append(el);
+          }
+          $('#capsule-modal').dialog('close');
+        }
+      }, 'json');
+      return;
+    }
     $('#cap-content-hidden').val($('#cap-content').html());
     var fd=new FormData(this);
     fd.append('action','save');

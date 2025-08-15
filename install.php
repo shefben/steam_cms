@@ -539,6 +539,7 @@ DROP TABLE IF EXISTS store_capsules;
 DROP TABLE IF EXISTS storefront_capsules_all;
 DROP TABLE IF EXISTS storefront_capsules_per_theme;
 DROP TABLE IF EXISTS storefront_capsule_items;
+DROP TABLE IF EXISTS multicapsule;
 DROP TABLE IF EXISTS storefront_tabs;
 DROP TABLE IF EXISTS storefront_tab_games;
 DROP TABLE IF EXISTS store_pages;
@@ -613,6 +614,17 @@ CREATE TABLE storefront_capsule_items(
 );
 ALTER TABLE storefront_capsule_items
     ADD CONSTRAINT fk_storefront_capsule_items_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+CREATE TABLE multicapsule(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    `group` VARCHAR(100) NOT NULL,
+    `order` INT NOT NULL DEFAULT 0,
+    appid INT,
+    image_path VARCHAR(255),
+    price DECIMAL(10,2),
+    INDEX idx_group (`group`),
+    INDEX idx_group_order (`group`, `order`),
+    FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE
+);
 CREATE TABLE storefront_tabs(
     id INT AUTO_INCREMENT PRIMARY KEY,
     theme VARCHAR(20),

@@ -18,7 +18,164 @@
     {{ content|raw }}
 </div>
 <script>
-let isDragging=false,isResizing=false,currentElement=null,startX,startY;function minimizeWindow(e){const n=document.getElementById(e);n.classList.toggle("minimized")}function closeWindow(e){const n=document.getElementById(e);n.style.display="none"}function startResize(e,n){e.preventDefault(),e.stopPropagation(),isResizing=!0,currentElement=document.getElementById(n),currentElement.style.zIndex=getHighestZIndex()+1}function getHighestZIndex(){let e=10;return document.querySelectorAll('.draggable-window').forEach(n=>{const t=parseInt(n.style.zIndex||10);t>e&&(e=t)}),e}document.addEventListener('mousedown',function(e){if(e.target.classList.contains('window-header')){isDragging=!0,currentElement=e.target.parentElement;const n=currentElement.getBoundingClientRect();startX=e.clientX-n.left,startY=e.clientY-n.top,currentElement.style.zIndex=getHighestZIndex()+1,e.preventDefault()}});document.addEventListener('mousemove',function(e){if(isDragging&&currentElement){const n=e.clientX-startX,t=e.clientY-startY;currentElement.style.left=Math.max(0,n)+'px',currentElement.style.top=Math.max(70,t)+'px'}else if(isResizing&&currentElement){const n=Math.max(200,e.clientX-currentElement.offsetLeft),t=Math.max(150,e.clientY-currentElement.offsetTop);currentElement.style.width=n+'px',currentElement.style.height=t+'px'}});document.addEventListener('mouseup',function(){isDragging=!1,isResizing=!1,currentElement=null});document.addEventListener('mousedown',function(e){const n=e.target.closest('.draggable-window');n&&(n.style.zIndex=getHighestZIndex()+1)});
+let isDragging=false,isResizing=false,currentElement=null,startX,startY;
+
+function minimizeWindow(e){
+    const n=document.getElementById(e);
+    n.classList.toggle("minimized");
+}
+
+function closeWindow(e){
+    const n=document.getElementById(e);
+    n.style.display="none";
+}
+
+function startResize(e,n){
+    e.preventDefault();
+    e.stopPropagation();
+    isResizing=true;
+    currentElement=document.getElementById(n);
+    currentElement.style.zIndex=getHighestZIndex()+1;
+}
+
+function getHighestZIndex(){
+    let e=10;
+    document.querySelectorAll('.draggable-window').forEach(n=>{
+        const t=parseInt(n.style.zIndex||10);
+        if(t>e) e=t;
+    });
+    return e;
+}
+
+function initializeWindows() {
+    // Auto-size sidebar based on nav items
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+        const navItems = sidebar.querySelectorAll('.nav-list li');
+        const itemHeight = 41; // Height per nav item (8px padding * 2 + text height + border)
+        const headerHeight = 25;
+        const padding = 30; // Some extra padding
+        const calculatedHeight = Math.max(150, (navItems.length * itemHeight) + headerHeight + padding);
+        sidebar.style.height = calculatedHeight + 'px';
+    }
+    
+    // Auto-size content window based on viewport
+    const content = document.getElementById('content');
+    if (content) {
+        const viewportHeight = window.innerHeight;
+        const topOffset = 80;
+        const bottomPadding = 40;
+        const maxHeight = viewportHeight - topOffset - bottomPadding;
+        content.style.height = Math.max(400, maxHeight) + 'px';
+        
+        // Adjust width based on viewport
+        const viewportWidth = window.innerWidth;
+        const leftOffset = 290; // Sidebar width + gap
+        const rightPadding = 40;
+        const maxWidth = viewportWidth - leftOffset - rightPadding;
+        content.style.width = Math.max(500, Math.min(800, maxWidth)) + 'px';
+    }
+    
+    // Auto-wrap forms in flex-controls
+    wrapFormsInFlexControls();
+}
+
+function wrapFormsInFlexControls() {
+    const contentWindow = document.getElementById('content');
+    if (!contentWindow) return;
+    
+    // Find all forms and fieldsets that should be wrapped
+    const forms = contentWindow.querySelectorAll('form:not(.flex-control form), fieldset:not(.flex-control fieldset)');
+    
+    forms.forEach(form => {
+        // Skip if already wrapped
+        if (form.closest('.flex-control')) return;
+        
+        // Create flex-control wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = 'flex-control';
+        
+        // Add a title if the form has one
+        const title = form.querySelector('h1, h2, h3, legend');
+        if (title && title.tagName === 'LEGEND') {
+            const h3 = document.createElement('h3');
+            h3.textContent = title.textContent;
+            wrapper.appendChild(h3);
+            title.remove();
+        } else if (title && !title.previousElementSibling) {
+            const h3 = document.createElement('h3');
+            h3.textContent = title.textContent;
+            wrapper.appendChild(h3);
+            title.remove();
+        }
+        
+        // Wrap the form
+        form.parentNode.insertBefore(wrapper, form);
+        wrapper.appendChild(form);
+        
+        // Convert form elements to form-row structure
+        const formElements = form.querySelectorAll('input, select, textarea, button[type="submit"]');
+        formElements.forEach(element => {
+            if (element.type === 'hidden') return;
+            
+            const parent = element.parentElement;
+            if (parent && !parent.classList.contains('form-row')) {
+                const row = document.createElement('div');
+                row.className = 'form-row';
+                
+                // Find associated label
+                const label = form.querySelector('label[for="' + element.id + '"]') || 
+                             element.previousElementSibling?.tagName === 'LABEL' ? element.previousElementSibling : null;
+                
+                parent.insertBefore(row, element);
+                if (label && label.tagName === 'LABEL') {
+                    row.appendChild(label);
+                }
+                row.appendChild(element);
+            }
+        });
+    });
+}
+
+document.addEventListener('mousedown',function(e){
+    if(e.target.classList.contains('window-header')){
+        isDragging=true;
+        currentElement=e.target.parentElement;
+        const n=currentElement.getBoundingClientRect();
+        startX=e.clientX-n.left;
+        startY=e.clientY-n.top;
+        currentElement.style.zIndex=getHighestZIndex()+1;
+        e.preventDefault();
+    }
+});
+
+document.addEventListener('mousemove',function(e){
+    if(isDragging&&currentElement){
+        const n=e.clientX-startX,t=e.clientY-startY;
+        currentElement.style.left=Math.max(0,n)+'px';
+        currentElement.style.top=Math.max(70,t)+'px';
+    }else if(isResizing&&currentElement){
+        const n=Math.max(200,e.clientX-currentElement.offsetLeft);
+        const t=Math.max(150,e.clientY-currentElement.offsetTop);
+        currentElement.style.width=n+'px';
+        currentElement.style.height=t+'px';
+    }
+});
+
+document.addEventListener('mouseup',function(){
+    isDragging=false;
+    isResizing=false;
+    currentElement=null;
+});
+
+document.addEventListener('mousedown',function(e){
+    const n=e.target.closest('.draggable-window');
+    if(n) n.style.zIndex=getHighestZIndex()+1;
+});
+
+// Initialize windows when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeWindows);
+window.addEventListener('resize', initializeWindows);
 </script>
 </body>
 </html>

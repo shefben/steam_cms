@@ -1061,6 +1061,13 @@ function cms_twig_env(string $tpl_dir): Environment
                             $html .= '<div class="capsuleLarge"><div class="large-capsule"><a href="' . $url . '"><img src="' . $img . '" alt="' . $name . '"></a><span class="price">$' . htmlspecialchars($price) . '</span></div><br clear="all"></div>';
                         }
                         break;
+                    case 'multi-large':
+                        $group = $row['image_path'];
+                        $base = cms_base_url();
+                        $capsuleUrl = $base ? rtrim($base, '/') . '/' : '';
+                        $capsuleUrl .= 'cms/multi_app_large_capsule.php?group=' . urlencode($group);
+                        $html .= '<iframe src="' . $capsuleUrl . '" width="589" height="267" frameborder="0" style="display: block;"></iframe>';
+                        break;
                     case 'gear':
                     case 'free':
                         if ($is2007) {

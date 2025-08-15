@@ -669,9 +669,9 @@ body {
 .window-header {
   height: 25px;
   background-color: #4c5844;
-  background-image: url("steamico.png"), url("minimize.png"), url("close.png");
+  background-image: url("steamico.png");
   background-repeat: no-repeat;
-  background-position: 5px center, calc(100% - 40px) center, calc(100% - 20px) center;
+  background-position: 5px center;
   cursor: move;
   display: flex;
   align-items: center;
@@ -722,14 +722,15 @@ body {
 
 .resize-handle {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 1px;
+  right: 19px;
   width: 20px;
   height: 20px;
   background-image: url("resize.png");
   background-repeat: no-repeat;
   background-position: center;
   cursor: nw-resize;
+  z-index: 20;
 }
 
 .sidebar-window {
@@ -796,6 +797,88 @@ p {
 
 .form-group {
   margin-bottom: 15px;
+}
+
+/* Flex Control for Forms */
+.flex-control {
+  border-top: solid 1px #899281;
+  border-bottom: solid 1px #292d23;
+  border-left: solid 1px #899281;
+  border-right: solid 1px #292d23;
+  padding: 15px;
+  background-color: #3e4637;
+  margin-bottom: 15px;
+}
+
+.flex-control h3 {
+  color: #c4b550;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.flex-control .form-row {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flex-control label {
+  min-width: 120px;
+  color: #d8ded3;
+  font-size: 12px;
+}
+
+.flex-control input,
+.flex-control select,
+.flex-control textarea {
+  flex: 1;
+}
+
+/* Chart/Graph Visibility Fixes */
+canvas,
+.chart-container,
+.graph-container,
+svg {
+  background-color: transparent !important;
+  color: #d8ded3 !important;
+}
+
+/* Ensure charts are visible */
+.chart-container canvas,
+.graph-container canvas,
+canvas[role="img"] {
+  filter: brightness(1.2) contrast(1.1);
+  background: rgba(78, 70, 55, 0.1) !important;
+}
+
+/* Chart text visibility */
+.chart-legend,
+.chart-labels,
+.axis-label {
+  color: #d8ded3 !important;
+  fill: #d8ded3 !important;
+}
+
+/* Dashboard specific styles */
+.dashboard-widget,
+.stats-widget {
+  background-color: #4c5844;
+  border-top: solid 1px #899281;
+  border-bottom: solid 1px #292d23;
+  border-left: solid 1px #899281;
+  border-right: solid 1px #292d23;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.dashboard-widget h3,
+.stats-widget h3 {
+  color: #c4b550;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 label {
