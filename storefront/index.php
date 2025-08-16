@@ -2,9 +2,18 @@
 require_once __DIR__.'/../cms/template_engine.php';
 require_once __DIR__.'/../cms/db.php';
 $theme = cms_get_setting('theme', '2005_v2');
-if (in_array($theme, ['2004', '2005_v1'], true)) {
-    $area = preg_replace('/[^a-zA-Z0-9_]/', '', $_GET['area'] ?? 'packs');
-    $file = __DIR__ . '/../04-05v1_storefront/' . ($area ?: 'packs') . '.php';
+if (in_array($theme, ['2003', '2004', '2005_v1'], true)) {
+    $area = preg_replace('/[^a-zA-Z0-9_]/', '', $_GET['area'] ?? '');
+    if ($area === '') {
+        header('Location: packs.php');
+        exit;
+    }
+    foreach (['l','s','i','a'] as $p) {
+        if (!isset($_GET[$p])) {
+            $_GET[$p] = '';
+        }
+    }
+    $file = __DIR__ . '/' . $area . '.php';
     if (is_file($file)) {
         include $file;
         return;
