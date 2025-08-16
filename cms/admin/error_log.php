@@ -21,7 +21,7 @@ $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
  <td><?php echo htmlspecialchars($log['created']); ?></td>
  <td><?php echo htmlspecialchars($log['level']); ?></td>
  <td><?php echo htmlspecialchars($log['message']); ?></td>
- <td><?php echo htmlspecialchars(basename($log['file'])); ?></td>
+ <td><?php echo htmlspecialchars($log['file']); ?></td>
  <td><?php echo (int)$log['line']; ?></td>
 </tr>
 <?php endforeach; ?>

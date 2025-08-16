@@ -1240,6 +1240,11 @@ function cms_log_php_error(string $level, string $message, string $file, int $li
     }
 }
 
+function cms_log_missing_file(string $path): void
+{
+    cms_log_php_error('missing_file', 'Missing file: ' . $path, $path, 0);
+}
+
 function cms_error_handler(int $errno, string $errstr, string $errfile, int $errline): bool
 {
     $root = realpath(CMS_ROOT);

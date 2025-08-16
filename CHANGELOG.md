@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+ - Logged missing 404 request paths, including static assets like images, CSS, and JS, to the error log for easier diagnostics.
 - Sidebar dropdowns now use a generic click handler so they toggle consistently across all admin pages.
 - Redirected settings page after saving so new admin theme loads without manual refresh.
 - Fixed custom pages and page version management screens to show content in the Neon admin theme.
