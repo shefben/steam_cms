@@ -1,0 +1,4 @@
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:1100;}
+.modal-overlay .modal{background:#fff;padding:20px;border:1px solid #333;max-width:600px;width:90%;max-height:90%;overflow:auto;}
+.modal-overlay label{display:block;margin-top:10px;}
+.modal-overlay .btn{margin-top:10px;}
