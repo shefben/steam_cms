@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - Replaced theme update text with transient notifications on save.
 - Restored styling for GreenSteam and GreenSteam v2 admin themes.
 - Corrected Neon admin select arrows and sidebar toggle glyphs.
+- Replaced troubleshooter management inline editor with AJAX modal and restored WYSIWYG.
 - Updated survey stats form to label category IDs explicitly.
 - Integrated image picker for selecting existing storefront capsule images.
 - Fixed 2007 v1 and v2 theme header bars so logo and navigation stay on one line.
