@@ -14,8 +14,6 @@ function cms_update_htaccess(): void
     $root = dirname(__DIR__);
     $file = $root . '/.htaccess';
 
-    $storefrontRedirect = in_array($theme, ['2004', '2005_v1'], true);
-
     $redirects = [];
     try {
         $db = cms_get_db();
@@ -27,11 +25,8 @@ function cms_update_htaccess(): void
     }
 
     $lines = ['ErrorDocument 404 /error.php'];
-    if ($storefrontRedirect || $redirects) {
+    if ($redirects) {
         $lines[] = 'RewriteEngine On';
-        if ($storefrontRedirect) {
-            $lines[] = 'RewriteRule ^storefront/(.*)$ 04-05v1_storefront/$1 [L,R=302]';
-        }
         foreach ($redirects as $r) {
             $slug = trim($r['slug'], '/');
             if ($slug === '') {
