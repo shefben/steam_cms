@@ -24,35 +24,8 @@
 </div>
 <script>
 $(function(){
-    $('#sf-parent > a').on('click', function(e){
-        e.preventDefault();
-        $('#sf-sub').slideToggle(150);
-    });
-    $('#cafe-parent > a').on('click', function(e){
-        e.preventDefault();
-        $('#cafe-sub').slideToggle(150);
-    });
-    $('#faq-parent > a').on('click', function(e){
-        e.preventDefault();
-        $('#faq-sub').slideToggle(150);
-    });
-    $('#ts-parent > a').on('click', function(e){
-        var $sub = $('#ts-sub');
-        if ($sub.length) {
-            e.preventDefault();
-            $sub.slideToggle(150);
-        }
-    });
-    $('#download-parent > a').on('click', function(e){
-        e.preventDefault();
-        $('#download-sub').slideToggle(150);
-    });
-    $('#index_management-parent > a').on('click', function(e){
-        e.preventDefault();
-        $('#index_management-sub').slideToggle(150);
-    });
-    $('#legacy-sf-parent > a').on('click', function(e){
-        var $sub = $('#legacy-sf-sub');
+    $('.nav-menu').on('click', 'li > a', function(e){
+        var $sub = $(this).siblings('.sub-menu');
         if ($sub.length) {
             e.preventDefault();
             $sub.slideToggle(150);
