@@ -43,12 +43,8 @@
 <body>
 
 <?php
-if (isset($_GET['i'])) {
-	$i = $_GET['i'];
-}
-if (isset($_GET['s'])) {
-	$s = $_GET['s'];
-}
+$i = $_GET['i'] ?? '';
+$s = $_GET['s'] ?? '';
 ?>
 
 <table bgcolor="black" width="100%" cellspacing="0">

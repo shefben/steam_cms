@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__.'/../cms/db.php';
+$s = $_GET['s'] ?? '';
+$i = $_GET['i'] ?? '';
 $games = cms_get_db()->query("SELECT * FROM `0405_storefront_games` WHERE isHidden=0 ORDER BY id")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <html>
@@ -8,6 +10,29 @@ $games = cms_get_db()->query("SELECT * FROM `0405_storefront_games` WHERE isHidd
     <link rel="stylesheet" type="text/css" href="storefront.css">
 </head>
 <body>
+<table bgcolor="black" width="100%" cellspacing="0">
+<tr><td>&nbsp;</td></tr>
+<tr>
+        <td width="100%" style="border-bottom: 2px Solid #889180;">&nbsp;&nbsp;<!-- spacer / back button --></td>
+        <td nowrap class="tab_enabled"
+                onMouseOver="this.style.color='#BDBE52'"
+                onMouseOut="this.style.color='white'"
+                onClick="window.open('packs.php?s=<?php echo $s ?>&i=<?php echo $i ?>&a=&l=english', '_top');"
+                style="cursor: hand;"
+                >GAME PACKAGES</td>
+        <td nowrap width="10" style="border-bottom: 2px Solid #889180;">&nbsp;</td>
+        <td nowrap class="tab_active">INDIVIDUAL GAMES</td>
+        <td nowrap width="10" style="border-bottom: 2px Solid #889180;">&nbsp;</td>
+        <td nowrap class="tab_enabled"
+                onMouseOver="this.style.color='#BDBE52'"
+                onMouseOut="this.style.color='white'"
+                onClick="window.open('3rdparty.php?s=<?php echo $s ?>&i=<?php echo $i ?>&a=&l=english', '_top');"
+                style="cursor: hand;"
+                >THIRD-PARTY GAMES</td>
+        <td nowrap width="20" style="border-bottom: 2px Solid #889180;">&nbsp;</td>
+</tr>
+</table>
+<br>
 <?php foreach($games as $game): ?>
 <div class="capsule">
     <div class="captop"><div> &nbsp; &nbsp;
