@@ -72,6 +72,7 @@ if (isset($_POST['save'])) {
 }
 
 $current_theme = cms_get_setting('theme', '2004');
+$img_base = cms_base_url() . '/cms/admin/';
 ?>
 <h2>Page Version Management</h2>
 <form method="post" id="pageForm">
@@ -109,7 +110,7 @@ $current_theme = cms_get_setting('theme', '2004');
       <label>
         <input type="radio" name="<?php echo htmlspecialchars($key); ?>" value="<?php echo htmlspecialchars($ver['value']); ?>" <?php echo $checked; ?>><br>
         <span><?php echo htmlspecialchars($ver['label']); ?></span><br>
-        <img src="<?php echo htmlspecialchars($ver['image']); ?>" alt="<?php echo htmlspecialchars($ver['label']); ?>">
+        <img src="<?php echo htmlspecialchars($img_base . $ver['image']); ?>" alt="<?php echo htmlspecialchars($ver['label']); ?>">
       </label>
       <?php endforeach; ?>
     </div>
