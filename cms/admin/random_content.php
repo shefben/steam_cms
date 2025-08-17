@@ -101,7 +101,7 @@ if ($current !== '' && isset($_GET['edit'])) {
 <?php foreach ($rowsList as $row): ?>
 <tr>
   <td><?php echo htmlspecialchars($row['group_name']); ?></td>
-  <td>{{random_<?php echo htmlspecialchars($row['group_name']); ?>}}</td>
+  <td>{% raw %}{{random_<?php echo htmlspecialchars($row['tag_name']); ?>}}{% endraw %}</td>
   <td class="actions">
     <a class="btn btn-primary" href="random_content.php?edit=<?php echo urlencode($row['tag_name']); ?>">Edit</a>
     <form method="post" style="display:inline">
@@ -124,7 +124,7 @@ if ($current !== '' && isset($_GET['edit'])) {
 <?php else: ?>
 <a href="random_content.php" class="btn btn-secondary">&laquo; Back to list</a>
 <div id="new-tag-container" style="margin-top:10px;">
-    <label for="new-tag">Tag Name (used as {{random_<span id="tag-preview"></span>}}):</label>
+    <label for="new-tag">Tag Name (used as {% raw %}{{random_<span id="tag-preview"></span>}}{% endraw %}):</label>
     <input type="text" id="new-tag" name="new_tag" style="width:200px" value="<?php echo htmlspecialchars($current === 'new' ? '' : $current); ?>">
 </div>
 <form method="post" id="content-form">
