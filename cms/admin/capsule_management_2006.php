@@ -233,6 +233,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+    $id = (int)$_GET['id'];
+    $stmt = $db->prepare('SELECT i.*, a.name FROM storefront_capsule_items i LEFT JOIN store_apps a ON i.appid=a.appid WHERE i.id=?');
+    $stmt->execute([$id]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    header('Content-Type: application/json');
+    if ($row) {
+        echo json_encode(['status' => 'ok', 'id' => (int)$row['id'], 'type' => $row['type'], 'appid' => $row['appid'], 'price' => $row['price'], 'image' => $row['image_path'], 'title' => $row['title'], 'content' => $row['content'], 'name' => $row['name']]);
+    } else {
+        echo json_encode(['status' => 'error']);
+    }
+    exit;
+}
+
 if ($use_all) {
     $rows = $db->query('SELECT i.*, a.name FROM storefront_capsule_items i LEFT JOIN store_apps a ON i.appid=a.appid WHERE i.theme IS NULL ORDER BY i.ord')->fetchAll(PDO::FETCH_ASSOC);
 } else {
@@ -353,11 +367,13 @@ if ($use_all) {
     </div>
   </form>
 </div>
+<link rel="stylesheet" href="../themes/<?php echo $theme; ?>/css/styles_capsules.css">
+<link rel="stylesheet" href="../themes/<?php echo $theme; ?>/css/styles_home.css">
 <link rel="stylesheet" href="css/image-picker.css">
 <script src="js/image-picker.min.js"></script>
 <style>
   .capsule-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
-  .capsule{border:1px solid #ccc;padding:5px;position:relative;text-align:center;}
+  .capsule{border:1px solid #ccc;padding:5px;position:relative;text-align:center;transform:scale(0.8);transform-origin:top left;width:280px;}
   .capsule.small{flex:0 0 calc(50% - 10px);}
   .capsule.large,.capsule.tabbed,.capsule.multi-large{flex:0 0 100%;}
   .capsule.gear,.capsule.free{flex:0 0 <?php echo $gearLarge ? '100%' : 'calc(50% - 10px)'; ?>;}
@@ -374,6 +390,7 @@ if ($use_all) {
   #tabbed-form .game img{max-width:100%;height:auto;margin-bottom:5px;display:none;}
   .multi-app-item{padding:5px;border:1px solid #ddd;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;}
   #add-multi-placeholder{color:#666;font-style:italic;padding:10px;text-align:center;}
+  body{color:#000;}
 </style>
 <script>
 $(function(){
@@ -498,10 +515,15 @@ $(function(){
   $('#add-tabbed').on('click',function(){openTabbedModal({});});
   $('#capsule-grid').on('click','.edit',function(){
     var c=$(this).closest('.capsule');
+    var id=c.data('id');
     if(c.data('type')==='tabbed'){
-      openTabbedModal({id:c.data('id')});
+      openTabbedModal({id:id});
     }else{
-      openModal({id:c.data('id'),type:c.data('type'),name:c.find('.cap-name').text(),appid:c.data('appid'),price:c.data('price'),image:c.data('image'),title:c.data('title'),content:c.data('content')});
+      $.getJSON('capsule_management_2006.php',{id:id},function(r){
+        if(r.status==='ok'){
+          openModal({id:r.id,type:r.type,name:r.name,appid:r.appid,price:r.price,image:r.image,title:r.title,content:r.content});
+        }
+      });
     }
   });
   $('#capsule-grid').on('click','.delete-circle',function(){
