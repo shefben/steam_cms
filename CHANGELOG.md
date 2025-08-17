@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Added inline editing with AJAX to custom redirects management.
 - Restored top navigation tabs on 2004/2005v1 storefront for packages, games, and third-party listings.
 - Logged missing 404 request paths, including static assets like images, CSS, and JS, to the error log for easier diagnostics.
 - Sidebar dropdowns now use a generic click handler so they toggle consistently across all admin pages.
