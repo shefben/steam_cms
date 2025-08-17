@@ -181,6 +181,7 @@
 
 - Global PHP error handler logs all errors and warnings to a database table
 - Admin panel page "Error Log" lists captured PHP errors
+- Error Log page allows deleting individual entries and clearing all logs
 - Troubleshooter installer converts ISO-8859 pages to UTF-8 for MySQL
 
 - Storefront links maintain legacy language and sorting parameters
