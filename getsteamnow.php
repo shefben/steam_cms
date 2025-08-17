@@ -4,14 +4,24 @@ require_once __DIR__.'/cms/template_engine.php';
 
 $page_title = 'Get Steam Now!';
 $theme = cms_get_setting('theme', '2004');
-$page  = cms_get_download_page($theme);
-$verNum = 1;
-if ($page && preg_match('/v(\d+)/', $page['version'], $m)) {
-    $verNum = (int)$m[1];
-}
-$files = cms_get_all_download_files($theme, $verNum);
 
-$template = cms_theme_page_template('downloadpage', $theme, (string)$verNum);
+if ($theme === '2005_v1' || $theme === '2005_v2') {
+    $verNum = 3;
+    $files = cms_get_all_download_files('2004', $verNum);
+    $page = cms_get_download_page('2004');
+    if (!$page) {
+        $page = ['version' => '2004_v3', 'links' => [], 'categories' => [], 'system_requirements' => ''];
+    }
+    $template = cms_theme_page_template('downloadpage', '2004', (string)$verNum);
+} else {
+    $page  = cms_get_download_page($theme);
+    $verNum = 1;
+    if ($page && preg_match('/v(\d+)/', $page['version'], $m)) {
+        $verNum = (int)$m[1];
+    }
+    $files = cms_get_all_download_files($theme, $verNum);
+    $template = cms_theme_page_template('downloadpage', $theme, (string)$verNum);
+}
 $tplDir   = dirname($template);
 
 $content = cms_render_string(

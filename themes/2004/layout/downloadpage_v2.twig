@@ -1,24 +1,28 @@
 <h1>GET STEAM NOW</h1>
 <h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2><img src="images/Graphic_box.jpg" alt="" width="24" height="6"><br><br>
 Installing Steam is the easiest way to get your favorite games, like Half-Life 2 and Counter-Strike: Source.<br><br>
-{% if files %}
-    {% set main = files[0] %}
-    <a href="{{ main.main_url }}">{{ getsteamnow_button('  CLICK HERE TO DOWNLOAD THE STEAM INSTALLER ( < 1MB )')|raw }}</a><br><br>
-    <div class="boxTop">Dedicated Server</div><br clear="all">
-    <div class="box">
-    If you run a game server on the Internet or a private LAN, get the necessary program files here. Choose from the following download locations:<br><br>
-    {% for file in files|slice(1) %}
-        <h2>{{ file.title }}:</h2>
-        {% for m in file.mirrors %}
-            <a class="maize" href="{{ m.url }}" style="font-size:11px;">{{ loop.index }}: {{ m.host }}</a><br>
-        {% endfor %}
-        <br>
-    {% endfor %}
-    </div>
+{% set mainCategory = categories|first %}
+{% set mainLinks = links|filter(l => l.category == mainCategory.name) %}
+{% if mainLinks|first %}
+    <a href="{{ mainLinks|first.url }}"><img src="images/getSteamNowButton.gif" alt="Get Steam Now" border="0"></a><br><br>
 {% endif %}
+<div class="boxTop">Dedicated Server</div><br clear="all">
+<div class="box">
+If you run a game server on the Internet or a private LAN, get the necessary program files here. Choose from the following download locations:<br><br>
+{% for category in categories|slice(1) %}
+    <h2>{{ category.name|upper }}:</h2>
+    {% set categoryLinks = links|filter(l => l.category == category.name) %}
+    {% for link in categoryLinks %}
+        <a class="maize" href="{{ link.url }}" style="font-size: 11px;">{{ link.label }}</a><br>
+    {% endfor %}
+    <br>
+{% endfor %}
+</div>
 <table cellpadding="8">
 <tr>
+<td><img src="images/openprogram.gif" align="left"></td>
 <td>After clicking the button above, select the option to 'Open' the install program. Then follow the instructions on your screen.</td>
+<td width="32px">&nbsp;</td>
 </tr>
 </table>
 <hr style="width:95%;">

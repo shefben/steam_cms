@@ -2,39 +2,19 @@
 <h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2>
 <img src="images/Graphic_box.jpg" width="24" height="6" alt=""><br>
 <div class="narrower">
-{% if files %}
-    {% set file = files[0] %}
-    <h3>{{ file.title }}{% if file.file_size %}: ({{ file.file_size }}){% endif %}</h3><br>
-    {% set half = (file.mirrors|length / 2)|round(0, 'ceil') %}
-    <table width="525" cellpadding="0" cellspacing="0">
-        <tr>
-            <td valign="top" width="50%">
-                {% for m in file.mirrors[:half] %}
-                <table cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td><img src="images/black_button_rightside.gif" width="10" height="24" alt=""></td>
-                        <td bgcolor="#000000" align="center" width="150"><a class="maize" href="{{ m.url }}">{{ loop.index }}: {{ m.host }}</a></td>
-                        <td><img src="images/black_button_rightside.gif" width="10" height="24" alt=""></td>
-                    </tr>
-                </table>
-                <br>
-                {% endfor %}
-            </td>
-            <td valign="top" width="50%">
-                {% for m in file.mirrors[half:] %}
-                <table cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td><img src="images/black_button_rightside.gif" width="10" height="24" alt=""></td>
-                        <td bgcolor="#000000" align="center" width="150"><a class="maize" href="{{ m.url }}">{{ half + loop.index }}: {{ m.host }}</a></td>
-                        <td><img src="images/black_button_rightside.gif" width="10" height="24" alt=""></td>
-                    </tr>
-                </table>
-                <br>
-                {% endfor %}
-            </td>
-        </tr>
-    </table>
-{% endif %}
+<br>The Steam client initial download is about 500kB. Please select one of the links below to get started. (If you already have Steam, you don't need to download this installer. Steam will update itself automatically.)<br>
+<br>
+<h2>DOWNLOAD LOCATIONS:</h2><br>
+<table><tr><td width="220">
+{% for link in links %}
+<table cellspacing="0"><tr>
+<td><img height="24" src="images/black_button_leftside.gif" width="10"></td>
+<td align="middle" bgcolor="#000000"><a class="maize" href="{{ link.url }}">{{ link.label }}</a></td>
+<td><img height="24" src="images/black_button_rightside.gif" width="10"></td>
+</tr></table>
+<br>
+{% endfor %}
+</td></tr></table>
 <hr>
 {{ system_requirements|raw }}
 </div>

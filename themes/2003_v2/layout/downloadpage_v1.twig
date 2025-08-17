@@ -2,31 +2,32 @@
 <h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2>
 <img src="images/Graphic_box.jpg" width="24" height="6" alt=""><br>
 <div class="narrower">
-<p>We've split the Steam installers into seperate versions based on the game cache they include.  Links marked with (BT) require a BitTorrent client.</p>
-{% for file in files %}
-    <br>
-    <h3>{{ file.title }}{% if file.file_size %}: ({{ file.file_size }}){% endif %}</h3><br>
-    <table width="525" cellpadding="0" cellspacing="0">
-        {% for row in file.mirrors|batch(3, '') %}
-        <tr>
-            {% for m in row %}
-            <td width="33%">
-                {% if m %}
-                <table cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td><img src="images/black_button_rightside.gif" width="10" height="24" alt=""></td>
-                        <td bgcolor="#000000" width="150" align="center"><a class="maize" href="{{ m.url }}">{{ loop.parent.loop.index0 * 3 + loop.index }}: {{ m.host }}</a></td>
-                        <td><img src="images/black_button_rightside.gif" width="10" height="24" alt=""></td>
-                    </tr>
-                </table>
-                {% endif %}
-            </td>
-            {% endfor %}
-        </tr>
-        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<br>We've split the Steam installers into seperate versions based on the game cache they include.  Links marked with (BT) require that you have <a href="http://www.filerush.com/forums/viewtopic.php?t=10" target="_blank">Bit Torrent</a> installed.<br>
+<br>
+{% for category in categories %}
+<h3>{{ category.name }}{% if category.file_size %}: ({{ category.file_size }}){% endif %}</h3><br>
+<table width="525" cellpadding="0" cellspacing="0">
+    {% set categoryLinks = links|filter(l => l.category == category.name) %}
+    {% for row in categoryLinks|batch(3, '') %}
+    <tr>
+        {% for link in row %}
+        <td width="33%">
+            {% if link %}
+            <table cellspacing="0" cellpadding="0">
+                <tr>
+                    <td nowrap><img src="images/black_button2_leftside.gif" width="10" height="20"></td>
+                    <td bgcolor="#000000" nowrap width="150"><a class="maize" href="{{ link.url }}" style="font-size: 11px;">{{ link.label }}</a></td>
+                    <td nowrap><img src="images/black_button2_rightside.gif" width="10" height="20"></td>
+                </tr>
+            </table>
+            {% endif %}
+        </td>
         {% endfor %}
-    </table>
-    <br>
+    </tr>
+    <tr><td><br></td><td><br></td><td><br></td></tr>
+    {% endfor %}
+</table>
+<br>
 {% endfor %}
 <hr>
 {{ system_requirements|raw }}

@@ -2,19 +2,19 @@
 <h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2><img src="images/Graphic_box.jpg" alt="" width="24" height="6"><br>
 <div class="narrower">
 <br>
-{% if files %}
-    {% set main = files[0] %}
-    <h2>{{ main.title }}:</h2>
-    <a class="maize" href="{{ main.main_url }}" style="font-size:11px;">Click here to download the Steam installer</a>{% if main.file_size %}. (Approx. {{ main.file_size }}){% endif %}<br>
-    <br><br>
-    {% for file in files|slice(1) %}
-        <h2>{{ file.title }}:</h2>
-        {% for m in file.mirrors %}
-            <a class="maize" href="{{ m.url }}" style="font-size:11px;">{{ loop.index }}: {{ m.host }}</a><br>
-        {% endfor %}
-        <br>
+<!-- <h3>DOWNLOAD LOCATIONS</h3><br> -->
+{% for category in categories %}
+<h2>{{ category.name }}:</h2>
+{% set categoryLinks = links|filter(l => l.category == category.name) %}
+{% if categoryLinks|first and categoryLinks|first.label == 'Click here to download the Steam installer' %}
+    <a class="maize" href="{{ categoryLinks|first.url }}" style="font-size: 11px;">Click here to download the Steam installer</a>{% if category.file_size %}. (Approx. {{ category.file_size }}){% endif %}<br>
+{% else %}
+    {% for link in categoryLinks %}
+    <a class="maize" href="{{ link.url }}" style="font-size: 11px;">{{ link.label }}</a><br>
     {% endfor %}
 {% endif %}
+<br>
+{% endfor %}
 <table cellpadding="8">
 <tr>
 <td>After you've started your Steam download from one of the locations listed above, select the option to 'Open' the install program. Then follow the instructions on your screen.</td>
