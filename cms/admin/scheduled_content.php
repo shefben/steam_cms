@@ -75,7 +75,7 @@ $rows = $db->query('SELECT * FROM scheduled_content ORDER BY content_id')->fetch
 <?php endif; ?>
 <h2>Scheduled Content</h2>
 <form method="post">
-<table class="table" id="new-scheduled-table">
+<table class="table" id="scheduled-table">
 <tr><th>ID</th><th>Theme</th><th>Description</th><th>Tag</th><th>Content</th><th>Type</th><th>N Days</th><th>Day</th><th>Start</th><th>End</th><th>Fixed Start</th><th>Fixed End</th><th>Active</th><th>Delete</th></tr>
 <tbody>
 <?php foreach ($rows as $i => $r): ?>
@@ -103,26 +103,46 @@ $rows = $db->query('SELECT * FROM scheduled_content ORDER BY content_id')->fetch
 </tbody>
 </table>
 <h3>Add New</h3>
-<div class="new-scheduled-item" id="new-scheduled-item">
-  <label>Theme: <input type="text" name="new_theme_name[]" style="width:120px"></label>
-  <label>Description: <input type="text" name="new_description[]" style="width:150px"></label>
-  <label>Tag: <input type="text" name="new_tag_name[]" style="width:120px"></label>
-  <label>Content:<br><textarea name="new_content[]" rows="2" style="width:200px"></textarea></label>
-  <label>Type:
+<table class="table" id="new-scheduled-table">
+<tr><th>Theme</th><th>Description</th><th>Tag</th><th>Content</th><th>Type</th><th>N Days</th><th>Day</th><th>Start</th><th>End</th><th>Fixed Start</th><th>Fixed End</th><th>Active</th><th>Remove</th></tr>
+<tbody>
+<tr class="new-scheduled-item">
+  <td><input type="text" name="new_theme_name[]" style="width:120px"></td>
+  <td><input type="text" name="new_description[]" style="width:150px"></td>
+  <td><input type="text" name="new_tag_name[]" style="width:120px"></td>
+  <td><textarea name="new_content[]" rows="2" style="width:200px"></textarea></td>
+  <td>
     <select name="new_schedule_type[]" style="width:130px">
         <option value="every_n_days">every_n_days</option>
         <option value="day_of_month">day_of_month</option>
         <option value="fixed_range">fixed_range</option>
     </select>
-  </label>
-  <label>Every N Days: <input type="number" name="new_every_n_days[]" style="width:60px"></label>
-  <label>Day of Month: <input type="number" name="new_day_of_month[]" style="width:60px"></label>
-  <label>Start Date: <input type="date" name="new_start_date[]" style="width:140px"></label>
-  <label>End Date: <input type="date" name="new_end_date[]" style="width:140px"></label>
-  <label>Fixed Start: <input type="datetime-local" name="new_fixed_start_datetime[]" style="width:180px"></label>
-  <label>Fixed End: <input type="datetime-local" name="new_fixed_end_datetime[]" style="width:180px"></label>
-  <label>Active: <input type="checkbox" name="new_active[]" value="1" checked></label>
-</div>
+  </td>
+  <td><input type="number" name="new_every_n_days[]" style="width:60px"></td>
+  <td><input type="number" name="new_day_of_month[]" style="width:60px"></td>
+  <td><input type="date" name="new_start_date[]" style="width:140px"></td>
+  <td><input type="date" name="new_end_date[]" style="width:140px"></td>
+  <td><input type="datetime-local" name="new_fixed_start_datetime[]" style="width:180px"></td>
+  <td><input type="datetime-local" name="new_fixed_end_datetime[]" style="width:180px"></td>
+  <td><input type="checkbox" name="new_active[]" value="1" checked></td>
+  <td><button type="button" class="remove-new-row">Remove</button></td>
+</tr>
+</tbody>
+</table>
+<button type="button" id="add-new-row">Add Row</button>
 <button type="submit" name="save" value="1">Save</button>
 </form>
+<script>
+$(function(){
+  $('#add-new-row').on('click', function(){
+    var $row = $('#new-scheduled-table .new-scheduled-item:first').clone();
+    $row.find('input, textarea').not(':checkbox').val('');
+    $row.find(':checkbox').prop('checked', true);
+    $('#new-scheduled-table tbody').append($row);
+  });
+  $('#new-scheduled-table').on('click', '.remove-new-row', function(){
+    $(this).closest('tr').remove();
+  });
+});
+</script>
 <?php include 'admin_footer.php'; ?>

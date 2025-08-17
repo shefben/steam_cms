@@ -714,6 +714,9 @@ a, a:visited { color: #f1c40f; }
 }
 
 /* Scheduled content new row */
+#scheduled-table input,
+#scheduled-table textarea,
+#scheduled-table select,
 #new-scheduled-table input,
 #new-scheduled-table textarea,
 #new-scheduled-table select {
