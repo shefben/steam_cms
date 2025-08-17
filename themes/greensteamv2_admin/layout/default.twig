@@ -17,5 +17,29 @@
     {{ sidebar|raw }}
     {{ content|raw }}
 </div>
+<script>
+document.addEventListener('click', function(e){
+    if(e.target.classList && e.target.classList.contains('submenu-toggle')){
+        e.preventDefault();
+        var sub=document.getElementById(e.target.getAttribute('aria-controls'));
+        if(sub){
+            var expanded=e.target.getAttribute('aria-expanded')==='true';
+            e.target.setAttribute('aria-expanded', expanded?'false':'true');
+            sub.style.display=expanded?'none':'block';
+        }
+    } else {
+        var link=e.target.closest('.nav-menu li > a');
+        if(link){
+            var li=link.parentElement;
+            var toggle=li.querySelector('.submenu-toggle');
+            var submenu=li.querySelector('.sub-menu');
+            if(toggle && submenu){
+                e.preventDefault();
+                toggle.dispatchEvent(new Event('click',{bubbles:true}));
+            }
+        }
+    }
+});
+</script>
 </body>
 </html>

@@ -4,6 +4,8 @@ require_once __DIR__ . '/cms/template_engine.php';
 
 $page_title = 'Cheat Form';
 $theme      = cms_get_setting('theme', '2004');
+// Use base theme when selecting versioned pages so variants share configuration.
+$base_theme = preg_split('/[-_]/', $theme)[0];
 $tpl        = cms_theme_layout('default.twig', $theme);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     return;
 }
 
-$page_html = cms_get_cheat_form_page($theme);
+$page_html = cms_get_cheat_form_page($base_theme);
 if ($page_html) {
     cms_render_template($tpl, [
         'page_title' => $page_title,

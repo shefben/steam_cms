@@ -24,13 +24,30 @@
 </div>
 <script>
 $(function(){
-    $('.nav-menu').on('click', 'li > a', function(e){
-        var $sub = $(this).siblings('.sub-menu');
-        if ($sub.length) {
-            e.preventDefault();
-            $sub.slideToggle(150);
+    $('.nav-menu').on('click','.submenu-toggle', function(e){
+        e.preventDefault();
+        var $btn=$(this);
+        var $sub=$('#'+$btn.attr('aria-controls'));
+        $sub.slideToggle(150);
+        var expanded=$btn.attr('aria-expanded')==='true';
+        $btn.attr('aria-expanded', expanded?'false':'true');
+    });
+
+    $('.nav-menu li').each(function(){
+        var $li = $(this);
+        var $link = $li.children('a').first();
+        var $toggle = $li.children('.submenu-toggle').first();
+        var $submenu = $li.children('.sub-menu').first();
+
+        if($toggle.length && $submenu.length) {
+            $link.on('click', function(e){
+                e.preventDefault();
+                $toggle.trigger('click');
+                return false;
+            });
         }
     });
+
     $('.notify-dismiss').on('click', function(e){
         e.preventDefault();
         var id = $(this).data('id');
