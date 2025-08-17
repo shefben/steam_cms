@@ -260,3 +260,4 @@
   event hooks.
 - Theme settings may target custom database tables with optional datatype
   casting.
+- Preload marketing messages stored in DB with AJAX admin editor

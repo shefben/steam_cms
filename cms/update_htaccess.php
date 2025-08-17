@@ -28,12 +28,18 @@ function cms_update_htaccess(): void
     if ($redirects) {
         $lines[] = 'RewriteEngine On';
         foreach ($redirects as $r) {
+            $hasTrailingSlash = substr($r['slug'], -1) === '/';
             $slug = trim($r['slug'], '/');
             if ($slug === '') {
                 continue;
             }
             $target = $r['target'];
-            $lines[] = 'RewriteRule ^' . preg_quote($slug, '#') . '$ ' . $target . ' [L,R=302]';
+            $pattern = '^' . preg_quote($slug, '#');
+            if ($hasTrailingSlash) {
+                $pattern .= '/?';
+            }
+            $pattern .= '$';
+            $lines[] = 'RewriteRule ' . $pattern . ' ' . $target . ' [L,R=302,QSA]';
         }
     }
 

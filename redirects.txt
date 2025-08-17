@@ -14,3 +14,6 @@ steamid_instructions.html -> index.php?area=steamid_instructions
 /v/ -> /
 /v2/ -> /
 /v3/ -> /
+/marketing/css_preload/ -> Marketing.php?t=css_preload
+/marketing/hl2_preload/ -> Marketing.php?t=hl2_preload
+/marketing/hl2_preload2/ -> Marketing.php?t=hl2_preload2

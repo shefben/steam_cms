@@ -87,6 +87,7 @@ $default_nav = [
     ['file'=>'random_content','label'=>'Random Content Management','visible'=>1],
     ['file'=>'random_content.php','label'=>'Random Content','visible'=>1,'parent'=>'random_content'],
     ['file'=>'random_groups.php','label'=>'Random Groups','visible'=>1,'parent'=>'random_content'],
+    ['file'=>'preload_marketing.php','label'=>'Preload Marketing Content','visible'=>1],
     ['file'=>'survey_stats','label'=>'Survey & Content Server Management','visible'=>1],
     ['file'=>'update_history.php','label'=>'Update History Management','visible'=>1],
     ['file'=>'theme.php','label'=>'Theme','visible'=>1],
