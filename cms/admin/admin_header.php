@@ -59,7 +59,6 @@ $default_nav = [
     ['file'=>'index.php','label'=>'Dashboard','visible'=>1],
     ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],
     ['file'=>'news.php','label'=>'News','visible'=>1],
-    ['file'=>'faq.php','label'=>'FAQ','visible'=>1,'parent'=>'support_page'],
     ['file'=>'map_contest_submissions.php','label'=>'Map Contest Submissions','visible'=>1],
     ['file'=>'cafe_signups.php','label'=>'Cafe Signup Requests','visible'=>1],
     ['file'=>'cafe_directory.php','label'=>'Cafe Directory','visible'=>1],
@@ -67,43 +66,49 @@ $default_nav = [
     ['file'=>'cafe_representatives.php','label'=>'Cafe Representatives','visible'=>1],
     ['file'=>'content_servers.php','label'=>'Servers','visible'=>1,'parent'=>'survey_stats'],
     ['file'=>'contentserver_banners.php','label'=>'ContentServer Banner Management','visible'=>1,'parent'=>'survey_stats'],
-    ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
     ['file'=>'tournaments.php','label'=>'Tournament Management','visible'=>1],
-    ['file'=>'custom_titles.php','label'=>'Custom Titles','visible'=>1],
     ['file'=>'media.php','label'=>'Media','visible'=>1],
     ['file'=>'redirects.php','label'=>'Redirects','visible'=>1],
-    ['file'=>'support_page','label'=>'Support & FAQ Management','visible'=>1],
+    ['file'=>'support_faq','label'=>'Support & FAQ','visible'=>1],
+    ['file'=>'faq_management','label'=>'FAQ Management','visible'=>1,'parent'=>'support_faq'],
+    ['file'=>'faq.php','label'=>'FAQ','visible'=>1,'parent'=>'faq_management'],
+    ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1,'parent'=>'faq_management'],
+    ['file'=>'support_page.php','label'=>'Support Page','visible'=>1,'parent'=>'support_faq'],
+    ['file'=>'troubleshooter','label'=>'Troubleshooter','visible'=>1,'parent'=>'support_faq'],
+    ['file'=>'troubleshooter.php','label'=>'Troubleshooter','visible'=>1,'parent'=>'troubleshooter'],
+    ['file'=>'troubleshooter_manage.php','label'=>'Troubleshooter Management','visible'=>1,'parent'=>'troubleshooter'],
+    ['file'=>'troubleshooter_requests.php','label'=>'Requests Viewer','visible'=>1,'parent'=>'troubleshooter'],
+    ['file'=>'content_management','label'=>'Content Management','visible'=>1],
+    ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1,'parent'=>'content_management'],
+    ['file'=>'error_page.php','label'=>'Error Page','visible'=>1,'parent'=>'content_management'],
+    ['file'=>'custom_titles.php','label'=>'Custom Titles','visible'=>1,'parent'=>'content_management'],
+    ['file'=>'page_selection.php','label'=>'Page Version Management','visible'=>1,'parent'=>'content_management'],
+    ['file'=>'scheduled_content.php','label'=>'Scheduled Content','visible'=>1,'parent'=>'content_management'],
     ['file'=>'random_content','label'=>'Random Content Management','visible'=>1],
     ['file'=>'random_content.php','label'=>'Random Content','visible'=>1,'parent'=>'random_content'],
     ['file'=>'random_groups.php','label'=>'Random Groups','visible'=>1,'parent'=>'random_content'],
     ['file'=>'survey_stats','label'=>'Survey & Content Server Management','visible'=>1],
-    ['file'=>'scheduled_content.php','label'=>'Scheduled Content','visible'=>1],
     ['file'=>'update_history.php','label'=>'Update History Management','visible'=>1],
     ['file'=>'theme.php','label'=>'Theme','visible'=>1],
     ['file'=>'settings.php','label'=>'Settings','visible'=>1],
     ['file'=>'download_files.php','label'=>'File Management','visible'=>1],
     ['file'=>'download_settings.php','label'=>'Download Settings','visible'=>1],
-    ['file'=>'page_selection.php','label'=>'Page Version Management','visible'=>1],
-    ['file'=>'troubleshooter.php','label'=>'Troubleshooter','visible'=>1,'parent'=>'support_page'],
-    ['file'=>'troubleshooter_manage.php','label'=>'Troubleshooter Management','visible'=>1,'parent'=>'support_page'],
-    ['file'=>'troubleshooter_requests.php','label'=>'Requests Viewer','visible'=>1,'parent'=>'support_page'],
     ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
-    ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1,'parent'=>'support_page'],
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>cms_has_permission('manage_admins')?1:0],
     ['file'=>'roles.php','label'=>'Roles','visible'=>cms_has_permission('manage_admins')?1:0],
     ['file'=>'activity_log.php','label'=>'Activity Log','visible'=>cms_has_permission('manage_admins')?1:0],
     ['file'=>'error_log.php','label'=>'Error Log','visible'=>cms_has_permission('manage_admins')?1:0],
-    ['file'=>'error_page.php','label'=>'Error Page','visible'=>1],
-    ['file'=>'storefront','label'=>'Storefront','visible'=>1],
-    ['file'=>'storefront_main.php','label'=>'Main Page','visible'=>1],
-    ['file'=>'storefront_products.php','label'=>'Products','visible'=>1],
-    ['file'=>'storefront_categories.php','label'=>'Categories','visible'=>1],
-    ['file'=>'storefront_sidebar.php','label'=>'Sidebar','visible'=>1],
-    ['file'=>'storefront_developers.php','label'=>'Developers','visible'=>1],
+    ['file'=>'storefront_management','label'=>'Storefront Management','visible'=>1],
+    ['file'=>'storefront','label'=>'Storefront','visible'=>1,'parent'=>'storefront_management'],
+    ['file'=>'storefront_main.php','label'=>'Main Page','visible'=>1,'parent'=>'storefront'],
+    ['file'=>'storefront_products.php','label'=>'Products','visible'=>1,'parent'=>'storefront'],
+    ['file'=>'storefront_categories.php','label'=>'Categories','visible'=>1,'parent'=>'storefront'],
+    ['file'=>'storefront_sidebar.php','label'=>'Sidebar','visible'=>1,'parent'=>'storefront'],
+    ['file'=>'storefront_developers.php','label'=>'Developers','visible'=>1,'parent'=>'storefront'],
     ['file'=>'index_management','label'=>'2006+ Index Management','visible'=>1],
     ['file'=>'capsule_management_2006.php','label'=>'Index Capsule Management','visible'=>1,'parent'=>'index_management'],
     ['file'=>'index_sidebar_management.php','label'=>'Index Sidebar Management','visible'=>1,'parent'=>'index_management'],
-    ['file'=>'legacy_storefront','label'=>'2004/2005 Storefront Management','visible'=>$legacy_visible],
+    ['file'=>'legacy_storefront','label'=>'2004/2005 Storefront Management','visible'=>$legacy_visible,'parent'=>'storefront_management'],
     ['file'=>'legacy_storefront_games.php','label'=>'Game management','visible'=>$legacy_visible,'parent'=>'legacy_storefront'],
     ['file'=>'legacy_storefront_thirdparty.php','label'=>'Thirdparty Game management','visible'=>$legacy_visible,'parent'=>'legacy_storefront'],
     ['file'=>'legacy_storefront_packages.php','label'=>'Package/Subscription Management','visible'=>$legacy_visible,'parent'=>'legacy_storefront'],
@@ -131,7 +136,10 @@ $icons = [
     'contentserver_banners.php' => '🖼️',
     'custom_pages.php' => '📄',
     'tournaments.php'  => '🏆',
-    'support_page' => '🛟',
+    'support_faq' => '🛟',
+    'faq_management' => '📚',
+    'support_page.php' => '🛟',
+    'troubleshooter' => '🆘',
     'custom_titles.php' => '🔤',
     'redirects.php' => '↪️',
     'random_content' => '🎲',
@@ -149,6 +157,7 @@ $icons = [
     'troubleshooter_manage.php' => '📝',
     'troubleshooter_requests.php' => '📬',
     'header_footer.php'=> '📑',
+    'storefront_management' => '🏪',
     'storefront'   => '🏬',
     'storefront_main.php' => '🖼️',
     'storefront_products.php' => '🛒',
@@ -163,6 +172,7 @@ $icons = [
     'legacy_storefront_thirdparty.php' => '🎮',
     'legacy_storefront_packages.php' => '🎮',
     'faq_categories.php'=> '📂',
+    'content_management' => '🗃️',
     'admin_users.php'  => '👥',
     'roles.php'        => '🔑',
     'activity_log.php' => '📜',
@@ -173,8 +183,10 @@ $icons = [
 
 $sf_root = null;
 $sf_pages = [];
+$sf_parent = null;
 $legacy_sf_root = null;
 $legacy_sf_pages = [];
+$legacy_sf_parent = null;
 $cafe_pages = [];
 $download_pages = [];
 $custom_groups = [];
@@ -182,18 +194,16 @@ foreach ($nav_items as $k => $item) {
     if (!($item['visible'] ?? 1)) continue;
     if ($item['file'] === 'storefront') {
         $sf_root = $item;
+        $sf_parent = $item['parent'] ?? null;
         unset($nav_items[$k]);
         continue;
     } elseif (preg_match('/^storefront.*\\.php/', $item['file'])) {
         $sf_pages[] = $item;
         unset($nav_items[$k]);
         continue;
-    } elseif ($item['file'] === 'media.php') {
-        $sf_pages[] = $item;
-        unset($nav_items[$k]);
-        continue;
     } elseif ($item['file'] === 'legacy_storefront') {
         $legacy_sf_root = $item;
+        $legacy_sf_parent = $item['parent'] ?? null;
         unset($nav_items[$k]);
         continue;
     } elseif (preg_match('/^legacy_storefront_.*\\.php/', $item['file'])) {
@@ -231,46 +241,7 @@ $make_link = function(string $file, string $label, string $active = '', string $
     $text = trim(($icon ? $icon.' ' : '').$label);
     return '<a href="'.$href.'"'.$active.$extra.'>'.htmlspecialchars($text).'</a>';
 };
-foreach ($nav_items as $item) {
-    if(!($item['visible']??1)) continue;
-    $file = $item['file'];
-    $has_children = isset($custom_groups[$file]);
-    $link = $item['url'] ?? $file;
-    if ($has_children) {
-        $link = '#';
-    }
-    if ($file === 'support_2003.php') continue;
-    $label = cms_admin_translate($item['label']);
-    $active = strpos($_SERVER['REQUEST_URI'],$link)!==false ? ' class="active"' : '';
-    if($has_children){
-        $open = false;
-        foreach($custom_groups[$file] as $child){ $chk = $child['url'] ?? $child['file']; if(strpos($_SERVER['REQUEST_URI'],$chk)!==false){ $open=true; break; } }
-        if($open) $active = ' class="active"';
-        $parent_id = preg_replace('/\.php$/','',$file).'-parent';
-        $sub_id = preg_replace('/\.php$/','',$file).'-sub';
-        $nav_html .= '<li id="'.$parent_id.'">'.$make_link($file,$label,$active,'',$link);
-        if($admin_theme === 'neon'){
-            $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($open?'true':'false').'" aria-controls="'.$sub_id.'"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
-        }
-        $nav_html .= '<ul class="sub-menu" id="'.$sub_id.'" style="'.($open?'display:block':'display:none').'">';
-        foreach($custom_groups[$file] as $child){
-            if(!($child['visible']??1)) continue;
-            $cfile=$child['file'];
-            $clink=$child['url'] ?? $cfile;
-            $clabel=cms_admin_translate($child['label']);
-            $cac = strpos($_SERVER['REQUEST_URI'],$clink)!==false ? ' class="active"' : '';
-            $nav_html .= '<li>'.$make_link($cfile,$clabel,$cac,'',$clink).'</li>';
-        }
-        $nav_html .= '</ul></li>';
-        continue;
-    }
-    $item_html = '<li>'.$make_link($file,$label,$active,'',$link).'</li>';
-    if($file === '../logout.php'){
-        $logout = $item_html;
-        continue;
-    }
-    $nav_html .= $item_html;
-}
+$extra_nav_html = '';
 $has_sf = $sf_root || $sf_pages;
 if ($has_sf) {
     $root_file = $sf_root['file'] ?? 'storefront';
@@ -281,23 +252,26 @@ if ($has_sf) {
         if (strpos($_SERVER['REQUEST_URI'],$chk)!==false) { $sf_open = true; break; }
     }
     $active = $sf_open ? ' class="active"' : '';
-    $nav_html .= '<li id="sf-parent">'.$make_link($root_file,$root_label,$active,' aria-label="StoreFront menu"','#');
+    $html = '<li id="sf-parent">'.$make_link($root_file,$root_label,$active,' aria-label="StoreFront menu"','#');
     if ($sf_pages) {
-        if($admin_theme === 'neon'){
-            $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($sf_open?'true':'false').'" aria-controls="sf-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
-        }
+        $html .= '<button class="submenu-toggle" aria-expanded="'.($sf_open?'true':'false').'" aria-controls="sf-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
         $style = $sf_open ? 'display:block' : 'display:none';
-        $nav_html .= '<ul class="sub-menu" id="sf-sub" style="'.$style.'">';
+        $html .= '<ul class="sub-menu" id="sf-sub" style="'.$style.'">';
         foreach ($sf_pages as $it) {
             $file = $it['file'];
             $link = $it['url'] ?? $file;
             $label = cms_admin_translate($it['label']);
             $active = strpos($_SERVER['REQUEST_URI'],$link)!==false ? ' class="active"' : '';
-            $nav_html .= '<li>'.$make_link($file,$label,$active,'',$link).'</li>';
+            $html .= '<li>'.$make_link($file,$label,$active,'',$link).'</li>';
         }
-        $nav_html .= '</ul>';
+        $html .= '</ul>';
     }
-    $nav_html .= '</li>';
+    $html .= '</li>';
+    if ($sf_parent) {
+        $custom_groups[$sf_parent][] = ['html' => $html, 'match' => $root_file];
+    } else {
+        $extra_nav_html .= $html;
+    }
 }
 $has_leg = ($legacy_sf_root || $legacy_sf_pages) && $legacy_visible;
 if ($has_leg) {
@@ -306,24 +280,84 @@ if ($has_leg) {
     $open = false;
     foreach ($legacy_sf_pages as $it) { $chk = $it['url'] ?? $it['file']; if (strpos($_SERVER['REQUEST_URI'],$chk)!==false){ $open=true; break; } }
     $active = $open ? ' class="active"' : '';
-    $nav_html .= '<li id="legacy-sf-parent">'.$make_link($root_file,$root_label,$active,' aria-label="Legacy Storefront menu"','#');
+    $html = '<li id="legacy-sf-parent">'.$make_link($root_file,$root_label,$active,' aria-label="Legacy Storefront menu"','#');
     if ($legacy_sf_pages) {
-        if($admin_theme === 'neon'){
-            $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($open?'true':'false').'" aria-controls="legacy-sf-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
-        }
+        $html .= '<button class="submenu-toggle" aria-expanded="'.($open?'true':'false').'" aria-controls="legacy-sf-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
         $style = $open ? 'display:block' : 'display:none';
-        $nav_html .= '<ul class="sub-menu" id="legacy-sf-sub" style="'.$style.'">';
+        $html .= '<ul class="sub-menu" id="legacy-sf-sub" style="'.$style.'">';
         foreach ($legacy_sf_pages as $it) {
             $file=$it['file'];
             $link=$it['url'] ?? $file;
             $label=cms_admin_translate($it['label']);
             $ac=strpos($_SERVER['REQUEST_URI'],$link)!==false?' class="active"':'';
-            $nav_html .= '<li>'.$make_link($file,$label,$ac,'',$link).'</li>';
+            $html .= '<li>'.$make_link($file,$label,$ac,'',$link).'</li>';
         }
-        $nav_html .= '</ul>';
+        $html .= '</ul>';
     }
-    $nav_html .= '</li>';
+    $html .= '</li>';
+    if ($legacy_sf_parent) {
+        $custom_groups[$legacy_sf_parent][] = ['html' => $html, 'match' => $root_file];
+    } else {
+        $extra_nav_html .= $html;
+    }
 }
+$has_active = function (string $file) use (&$has_active, $custom_groups): bool {
+    foreach ($custom_groups[$file] ?? [] as $child) {
+        $chk = $child['url'] ?? $child['file'] ?? ($child['match'] ?? null);
+        if ($chk && strpos($_SERVER['REQUEST_URI'], $chk) !== false) {
+            return true;
+        }
+        if (!empty($child['file']) && $has_active($child['file'])) {
+            return true;
+        }
+    }
+    return false;
+};
+
+$render_item = function (array $item) use (&$render_item, $custom_groups, $make_link, $use_spans, $has_active) {
+    if (isset($item['html'])) {
+        return $item['html'];
+    }
+    if (!($item['visible'] ?? 1)) {
+        return '';
+    }
+    $file = $item['file'];
+    if ($file === 'support_2003.php') {
+        return '';
+    }
+    $children = $custom_groups[$file] ?? [];
+    $has_children = !empty($children);
+    $link = $has_children ? '#' : ($item['url'] ?? $file);
+    $label = cms_admin_translate($item['label']);
+    $active = strpos($_SERVER['REQUEST_URI'], $link) !== false ? ' class="active"' : '';
+    $open = $has_children && ($active || $has_active($file));
+    if ($open && !$active) {
+        $active = ' class="active"';
+    }
+    if ($has_children) {
+        $parent_id = preg_replace('/\.php$/', '', $file) . '-parent';
+        $sub_id = preg_replace('/\.php$/', '', $file) . '-sub';
+        $html = '<li id="' . $parent_id . '">' . $make_link($file, $label, $active, '', $link);
+        $html .= '<button class="submenu-toggle" aria-expanded="' . ($open ? 'true' : 'false') . '" aria-controls="' . $sub_id . '"><span class="visually-hidden">' . cms_admin_translate('Toggle submenu') . '</span></button>';
+        $html .= '<ul class="sub-menu" id="' . $sub_id . '" style="' . ($open ? 'display:block' : 'display:none') . '">';
+        foreach ($children as $child) {
+            $html .= $render_item($child);
+        }
+        $html .= '</ul></li>';
+        return $html;
+    }
+    return '<li>' . $make_link($file, $label, $active, '', $link) . '</li>';
+};
+
+foreach ($nav_items as $item) {
+    $html = $render_item($item);
+    if ($item['file'] === '../logout.php') {
+        $logout = $html;
+        continue;
+    }
+    $nav_html .= $html;
+}
+$nav_html .= $extra_nav_html;
 $has_download = !empty($download_pages);
 if($has_download){
     $icon = '⬇️';
@@ -338,9 +372,7 @@ if($has_download){
     }else{
         $nav_html .= '<li id="download-parent"><a href="#"'.$active.' aria-label="Download menu">'.htmlspecialchars($icon.' '.cms_admin_translate('Download System Management')).'</a>';
     }
-    if($admin_theme === 'neon'){
-        $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($open?'true':'false').'" aria-controls="download-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
-    }
+    $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($open?'true':'false').'" aria-controls="download-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
     $style = $open ? 'display:block' : 'display:none';
     $nav_html .= '<ul class="sub-menu" id="download-sub" style="'.$style.'">';
     foreach($download_pages as $it){
@@ -366,9 +398,7 @@ if($has_cafe){
     }else{
         $nav_html .= '<li id="cafe-parent"><a href="#"'.$active.' aria-label="Cafe menu">'.htmlspecialchars($icon.' '.cms_admin_translate('Cyber Cafe Management')).'</a>';
     }
-    if($admin_theme === 'neon'){
-        $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($cafe_open?'true':'false').'" aria-controls="cafe-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
-    }
+    $nav_html .= '<button class="submenu-toggle" aria-expanded="'.($cafe_open?'true':'false').'" aria-controls="cafe-sub"><span class="visually-hidden">'.cms_admin_translate('Toggle submenu').'</span></button>';
     $style = $cafe_open ? 'display:block' : 'display:none';
     $nav_html .= '<ul class="sub-menu" id="cafe-sub" style="'.$style.'">';
     foreach($cafe_pages as $it){

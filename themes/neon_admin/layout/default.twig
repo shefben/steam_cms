@@ -42,9 +42,9 @@
         $('.nav-menu li').each(function(){
             var $li = $(this);
             var $link = $li.children('a').first();
-            var $toggle = $li.find('.submenu-toggle');
-            var $submenu = $li.find('.sub-menu');
-            
+            var $toggle = $li.children('.submenu-toggle').first();
+            var $submenu = $li.children('.sub-menu').first();
+
             if($toggle.length && $submenu.length) {
                 $link.on('click', function(e){
                     e.preventDefault();

@@ -29,6 +29,22 @@ a, a:visited { color: #f1c40f; }
     padding-left:15px;
 }
 
+.nav-menu .submenu-toggle {
+    background:none;
+    border:none;
+    color:inherit;
+    cursor:pointer;
+    float:right;
+}
+
+.nav-menu .submenu-toggle::before {
+    content:"\25B8";
+}
+
+.nav-menu .submenu-toggle[aria-expanded="true"]::before {
+    content:"\25BE";
+}
+
 .capsule-box-group{
     border:1px solid #777;
     padding:10px;

@@ -47,6 +47,10 @@ nav li ul.dropdown {
 nav li ul.dropdown li {
   display: block;
 }
+
+.nav-menu .submenu-toggle{
+  display:none;
+}
 /*** Form Controls: Buttons, Checkboxes, Radio Buttons, Text Fields, etc. ***/
 button,
 input[type=button],
