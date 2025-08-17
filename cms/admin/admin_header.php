@@ -57,24 +57,24 @@ $default_nav = [
     ['file'=>'index.php','label'=>'Dashboard','visible'=>1],
     ['file'=>'main_content.php','label'=>'Main Content','visible'=>1],
     ['file'=>'news.php','label'=>'News','visible'=>1],
-    ['file'=>'faq.php','label'=>'FAQ','visible'=>1,'parent'=>'support_page.php'],
+    ['file'=>'faq.php','label'=>'FAQ','visible'=>1,'parent'=>'support_page'],
     ['file'=>'map_contest_submissions.php','label'=>'Map Contest Submissions','visible'=>1],
     ['file'=>'cafe_signups.php','label'=>'Cafe Signup Requests','visible'=>1],
     ['file'=>'cafe_directory.php','label'=>'Cafe Directory','visible'=>1],
     ['file'=>'cafe_pricing.php','label'=>'Cafe Pricing','visible'=>1],
     ['file'=>'cafe_representatives.php','label'=>'Cafe Representatives','visible'=>1],
-    ['file'=>'content_servers.php','label'=>'Servers','visible'=>1,'parent'=>'survey_stats.php'],
-    ['file'=>'contentserver_banners.php','label'=>'ContentServer Banner Management','visible'=>1,'parent'=>'survey_stats.php'],
+    ['file'=>'content_servers.php','label'=>'Servers','visible'=>1,'parent'=>'survey_stats'],
+    ['file'=>'contentserver_banners.php','label'=>'ContentServer Banner Management','visible'=>1,'parent'=>'survey_stats'],
     ['file'=>'custom_pages.php','label'=>'Custom Pages','visible'=>1],
     ['file'=>'tournaments.php','label'=>'Tournament Management','visible'=>1],
     ['file'=>'custom_titles.php','label'=>'Custom Titles','visible'=>1],
     ['file'=>'media.php','label'=>'Media','visible'=>1],
     ['file'=>'redirects.php','label'=>'Redirects','visible'=>1],
-    ['file'=>'support_page.php','label'=>'Support & FAQ Management','visible'=>1],
-    ['file'=>'random_content.php','label'=>'Random Content Management','visible'=>1],
-    ['file'=>'random_content.php','label'=>'Random Content','visible'=>1,'parent'=>'random_content.php'],
-    ['file'=>'random_groups.php','label'=>'Random Groups','visible'=>1,'parent'=>'random_content.php'],
-    ['file'=>'survey_stats.php','label'=>'Survey & Content Server Management','visible'=>1],
+    ['file'=>'support_page','label'=>'Support & FAQ Management','visible'=>1],
+    ['file'=>'random_content','label'=>'Random Content Management','visible'=>1],
+    ['file'=>'random_content.php','label'=>'Random Content','visible'=>1,'parent'=>'random_content'],
+    ['file'=>'random_groups.php','label'=>'Random Groups','visible'=>1,'parent'=>'random_content'],
+    ['file'=>'survey_stats','label'=>'Survey & Content Server Management','visible'=>1],
     ['file'=>'scheduled_content.php','label'=>'Scheduled Content','visible'=>1],
     ['file'=>'update_history.php','label'=>'Update History Management','visible'=>1],
     ['file'=>'theme.php','label'=>'Theme','visible'=>1],
@@ -82,11 +82,11 @@ $default_nav = [
     ['file'=>'download_files.php','label'=>'File Management','visible'=>1],
     ['file'=>'download_settings.php','label'=>'Download Settings','visible'=>1],
     ['file'=>'page_selection.php','label'=>'Page Version Management','visible'=>1],
-    ['file'=>'troubleshooter.php','label'=>'Troubleshooter','visible'=>1,'parent'=>'support_page.php'],
-    ['file'=>'troubleshooter_manage.php','label'=>'Troubleshooter Management','visible'=>1,'parent'=>'support_page.php'],
-    ['file'=>'troubleshooter_requests.php','label'=>'Requests Viewer','visible'=>1,'parent'=>'support_page.php'],
+    ['file'=>'troubleshooter.php','label'=>'Troubleshooter','visible'=>1,'parent'=>'support_page'],
+    ['file'=>'troubleshooter_manage.php','label'=>'Troubleshooter Management','visible'=>1,'parent'=>'support_page'],
+    ['file'=>'troubleshooter_requests.php','label'=>'Requests Viewer','visible'=>1,'parent'=>'support_page'],
     ['file'=>'header_footer.php','label'=>'Header & Footer','visible'=>1],
-    ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1,'parent'=>'support_page.php'],
+    ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1,'parent'=>'support_page'],
     ['file'=>'admin_users.php','label'=>'Administrators','visible'=>cms_has_permission('manage_admins')?1:0],
     ['file'=>'roles.php','label'=>'Roles','visible'=>cms_has_permission('manage_admins')?1:0],
     ['file'=>'activity_log.php','label'=>'Activity Log','visible'=>cms_has_permission('manage_admins')?1:0],
@@ -129,12 +129,13 @@ $icons = [
     'contentserver_banners.php' => '🖼️',
     'custom_pages.php' => '📄',
     'tournaments.php'  => '🏆',
-    'support_page.php' => '🛟',
+    'support_page' => '🛟',
     'custom_titles.php' => '🔤',
     'redirects.php' => '↪️',
+    'random_content' => '🎲',
     'random_content.php' => '🎲',
     'random_groups.php' => '📁',
-    'survey_stats.php' => '📈',
+    'survey_stats' => '📈',
     'scheduled_content.php' => '📅',
     'update_history.php' => '📜',
     'theme.php'        => '🎨',
@@ -231,13 +232,18 @@ $make_link = function(string $file, string $label, string $active = '', string $
 foreach ($nav_items as $item) {
     if(!($item['visible']??1)) continue;
     $file = $item['file'];
+    $has_children = isset($custom_groups[$file]);
     $link = $item['url'] ?? $file;
+    if ($has_children && empty($item['url']) && strpos($file, '.php') === false) {
+        $link = '#';
+    }
     if ($file === 'support_2003.php') continue;
     $label = cms_admin_translate($item['label']);
     $active = strpos($_SERVER['REQUEST_URI'],$link)!==false ? ' class="active"' : '';
-    if(isset($custom_groups[$file])){
+    if($has_children){
         $open = false;
         foreach($custom_groups[$file] as $child){ $chk = $child['url'] ?? $child['file']; if(strpos($_SERVER['REQUEST_URI'],$chk)!==false){ $open=true; break; } }
+        if($open) $active = ' class="active"';
         $parent_id = preg_replace('/\.php$/','',$file).'-parent';
         $sub_id = preg_replace('/\.php$/','',$file).'-sub';
         $nav_html .= '<li id="'.$parent_id.'">'.$make_link($file,$label,$active,'',$link);

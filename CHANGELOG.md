@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 - Restored top navigation tabs on 2004/2005v1 storefront for packages, games, and third-party listings.
 - Logged missing 404 request paths, including static assets like images, CSS, and JS, to the error log for easier diagnostics.
 - Sidebar dropdowns now use a generic click handler so they toggle consistently across all admin pages.
+- Parent-only sidebar links no longer require URLs and won't navigate when toggled.
+- Installer seeds parent-only sidebar headers without PHP targets, preventing navigation.
 - Redirected settings page after saving so new admin theme loads without manual refresh.
 - Fixed custom pages and page version management screens to show content in the Neon admin theme.
 - Restored Page Version Management radio controls for hyphenated theme variants and skipped empty page groups.
