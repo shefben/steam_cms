@@ -1,0 +1,13 @@
+- create a redirect for all the folders and file within '<site root>/Marketing/'.  the redirects for '/Marketing/css_preload/messages.php?l=<language, if not present then default to english>' should redirect to `Marketing.php?t=css_preload&l=<language, default is english>`
+'/marketing/hl2_preload/messages.php?l=<language, if not present then default to english>' to `Marketing.php?t=hl2_preload&l=<language, default is english>` and '/marketing/hl2_preload2/messages.php?l=<language, if not present then default to english>' to `Marketing.php?t=hl2_preload2&l=<language, default is english>`.
+- create a marketing database table that has the following columns: msgtype (string, this is the t= variable in the url), content (holds the html content), language (string).
+- rip the full html from each message.php in the 3 marketing folders and place them in the marketing table with language as 'english' and the msgtype as the name of the folder (css_preload, hl2_preload, hl2_preload2).
+- rip any language html file content (such as Marketing/hl2_preload/french.html for french) and place it in the marketing table with their respective msgtype and language from the filename (skip english as it is the same as was taken from messages.php).
+- integrate the css as inline in each of the content for each language, remove any references to the css file.
+- create a new admin sidebar link with the label 'Preload Marketing Content'.
+- the preload marketing content page should contain a table displaying the msgtype, language and action columns. grab the information from the database to display it. put an edit and delete button for each entry in the action column.
+- create an 'Add New Preload Content' button under the table.
+- when the add new or edit button is pressed, create a modal using ajax that displays text boxes and labels for the message type, language and content.  the content textbox should be a wysiwyg box.  
+- the modal should auto fill in with the correct information if the user pressed edit on an entry.
+- the modal should have a save and cancel button at the bottom.  the entire page should use ajax for saving, editing and deleting to prevent reloading/refreshing the entire page.
+- rewrite all asset URL's within each of the marketing content pages so they are in './images/' rather than 'images/'.
