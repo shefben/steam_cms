@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 - Added inline editing with AJAX to custom redirects management.
+- Custom titles admin now supports AJAX add, delete, and save actions without page reloads.
 - Restored top navigation tabs on 2004/2005v1 storefront for packages, games, and third-party listings.
 - Logged missing 404 request paths, including static assets like images, CSS, and JS, to the error log for easier diagnostics.
 - Sidebar dropdowns now use a generic click handler so they toggle consistently across all admin pages.
@@ -19,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Fixed installer to skip upgrade migrations and correctly parse SQL triggers.
 - Added theme.json support allowing themes to declare custom settings with admin widgets.
 - Moved 2004/2005 map contest toggle to submissions page with AJAX updates and inline notifications.
+- Replaced random content creation link with modal-based button and fixed submission handling.
 - Replaced theme update text with transient notifications on save.
 - Restored styling for GreenSteam and GreenSteam v2 admin themes.
 - Corrected Neon admin select arrows and sidebar toggle glyphs.
