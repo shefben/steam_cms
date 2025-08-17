@@ -193,6 +193,7 @@
 - Screenshots and headers stored per-app under storefront directories
 - Header/Footer admin loads form via AJAX and stores logos per theme
 - Settings page supports nested sidebar menus
+- Parent-only sidebar entries can act as dropdown headers without linking to pages
 - FAQ and News admins show numbered pagination; news table sortable
 - Cafe directory table reloads via AJAX; US/CA/MY show state dropdown
 - Storefront products include minimum and recommended system requirements
