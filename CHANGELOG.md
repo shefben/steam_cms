@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Installer now writes the configured database port to `config.php`.
 - Added .htaccess redirect for Counter-Strike price change marketing page.
 - Grouped plugin sidebar links under a dedicated Plugins parent in the admin navigation.
 - Resolved Twig parser error on Random Content admin page by replacing deprecated `raw` blocks with `verbatim`.

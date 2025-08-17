@@ -23,7 +23,10 @@ function normalizeDate(string $raw): string
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($step == 1) {
         $host = trim($_POST['host']);
-        $port = trim($_POST['port']);
+        $port = isset($_POST['port']) ? trim($_POST['port']) : '';
+        if ($port === '') {
+            $port = '3306';
+        }
         $user = trim($_POST['dbuser']);
         $pass = trim($_POST['dbpass']);
         $dbname = trim($_POST['dbname']);
@@ -40,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif ($step == 2 && isset($_SESSION['cms_install'])) {
         $config = $_SESSION['cms_install'];
         $host = $config['host'];
-        $port = $config['port'];
+        $port = $config['port'] === '' ? '3306' : $config['port'];
         $user = $config['user'];
         $pass = $config['pass'];
         $dbname = $config['dbname'];
@@ -2192,8 +2195,15 @@ $defaultCafes = [
                 // Ignore errors for now as this is sample data
             }
 
-            $cfg = "<?php\nreturn [\n    'host'=>'$host',\n    'port'=>'$port',\n    'dbname'=>'$dbname',\n    'user'=>'$user',\n    'pass'=>'$pass'\n];\n?>";
-            file_put_contents(__DIR__.'/cms/config.php', $cfg);
+            $cfgArray = [
+                'host' => $host,
+                'port' => (int) $port,
+                'dbname' => $dbname,
+                'user' => $user,
+                'pass' => $pass,
+            ];
+            $cfg = "<?php\nreturn " . var_export($cfgArray, true) . ";\n?>";
+            file_put_contents(__DIR__ . '/cms/config.php', $cfg);
             unset($_SESSION['cms_install']);
             header('Location: install.php?step=3');
             exit;
