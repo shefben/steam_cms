@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Restored modal-based Add Capsule and Add Tabbed Capsule actions for 2006 index capsule management.
 - Installer now writes the configured database port to `config.php`.
 - Added .htaccess redirect for Counter-Strike price change marketing page.
 - Grouped plugin sidebar links under a dedicated Plugins parent in the admin navigation.

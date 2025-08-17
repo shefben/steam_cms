@@ -268,8 +268,8 @@ if ($use_all) {
   </div>
 <?php endforeach; ?>
 </div>
-<button id="add-capsule" class="btn btn-secondary">Add Capsule</button>
-<button id="add-tabbed" class="btn btn-secondary">Add Tabbed Capsule</button>
+<button type="button" id="add-capsule" class="btn btn-secondary">Add Capsule</button>
+<button type="button" id="add-tabbed" class="btn btn-secondary">Add Tabbed Capsule</button>
 
 <div id="capsule-modal" title="Capsule" style="display:none;">
   <form id="capsule-form">
@@ -511,8 +511,8 @@ $(function(){
     }, 'json');
   });
 
-  $('#add-capsule').on('click',function(){openModal({});});
-  $('#add-tabbed').on('click',function(){openTabbedModal({});});
+  $('#add-capsule').on('click',function(e){e.preventDefault();openModal({});});
+  $('#add-tabbed').on('click',function(e){e.preventDefault();openTabbedModal({});});
   $('#capsule-grid').on('click','.edit',function(){
     var c=$(this).closest('.capsule');
     var id=c.data('id');
