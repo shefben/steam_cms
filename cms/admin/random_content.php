@@ -112,14 +112,16 @@ if ($current !== '' && isset($_GET['edit'])) {
 <?php endforeach; ?>
 </tbody>
 </table>
-<p><a class="btn btn-secondary" href="#" id="add-random-btn">Add New Random Content</a></p>
-<div id="add-form" style="display:none;margin-top:10px;">
-  <label>Name: <input type="text" id="new-name"></label>
-  <label>Group: <select id="new-group"><option value="">Select</option><?php foreach($groupsList as $g){echo '<option value="'.(int)$g['id'].'">'.htmlspecialchars($g['name']).'</option>'; } ?></select></label>
-  <textarea id="new-content" rows="4" style="width:300px"></textarea>
-  <button id="save-new" class="btn btn-primary">Save</button>
-  <button id="cancel-new" class="btn btn-secondary">Cancel</button>
-  <span id="add-error" style="color:red;display:none;"></span>
+<p><button type="button" class="btn btn-secondary" id="add-random-btn">Add Random Content</button></p>
+<div id="addModal" style="display:none;" aria-modal="true" role="dialog">
+  <form id="add-form">
+    <label>Name: <input type="text" id="new-name" required></label>
+    <label>Group: <select id="new-group" required><option value="">Select</option><?php foreach($groupsList as $g){echo '<option value="'.(int)$g['id'].'">'.htmlspecialchars($g['name']).'</option>'; } ?></select></label>
+    <textarea id="new-content" rows="4" style="width:300px"></textarea>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" id="cancel-new" class="btn btn-secondary">Cancel</button>
+    <span id="add-error" style="color:red;display:none;"></span>
+  </form>
 </div>
 <?php else: ?>
 <a href="random_content.php" class="btn btn-secondary">&laquo; Back to list</a>
@@ -177,9 +179,15 @@ $(function(){
 <script>
 $(function(){
     CKEDITOR.replace('new-content');
-    $('#add-random-btn').on('click',function(e){e.preventDefault();$('#add-form').slideToggle('fast');});
-    $('#cancel-new').on('click',function(e){e.preventDefault();$('#add-form').slideUp('fast');});
-    $('#save-new').on('click',function(){
+    $('#add-random-btn').on('click',function(){
+        $('#add-form')[0].reset();
+        CKEDITOR.instances['new-content'].setData('');
+        $('#add-error').hide();
+        $('#addModal').show();
+    });
+    $('#cancel-new').on('click',function(){ $('#addModal').hide(); });
+    $('#add-form').on('submit',function(e){
+        e.preventDefault();
         var data={ajax:1,action:'add',name:$('#new-name').val().trim(),group_id:$('#new-group').val(),content:CKEDITOR.instances['new-content'].getData()};
         $.post('random_content.php',data,function(res){
             if(res.error){$('#add-error').text(res.error).show();}
@@ -188,6 +196,10 @@ $(function(){
     });
 });
 </script>
+<style>
+#addModal{background:#fff;border:1px solid #333;padding:10px;position:fixed;top:10%;left:50%;transform:translateX(-50%);z-index:1000;}
+#addModal label{display:block;margin-top:5px;}
+</style>
 <?php } ?>
 <?php endif; ?>
 <?php include 'admin_footer.php'; ?>
