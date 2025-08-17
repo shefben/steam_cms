@@ -1,0 +1,343 @@
+{
+  "root": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing",
+  "groups": [
+    {
+      "group_number": 1,
+      "reference_gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April21.2006\\img\\background.gif",
+      "members": [
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April21.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April21.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April28.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April28.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April7.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April7.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\December16.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\December16.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\December2.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\December2.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\December23.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\December23.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\December30.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\December30.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\December9.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\December9.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\January13.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\January13.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\January27.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\January27.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\January6.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\January6.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\March03.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\March03.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\March10.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\March10.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\March17.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\March17.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\March24.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\March24.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\March31.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\March31.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\May25.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\May25.2006\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\November11.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\November11.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\November18.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\November18.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\November23.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\November23.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\November4.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\November4.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\October21.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\October21.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\October28.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\October28.2005\\img\\background.gif",
+          "sha1": "ea0b549bf416d1874a85dccd3123b5f4e939e96e"
+        }
+      ]
+    },
+    {
+      "group_number": 2,
+      "reference_gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April22.2005\\img\\background.gif",
+      "members": [
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April22.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April22.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April29.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April29.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April8.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\April8.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\August12.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\August12.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\August19.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\August19.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\August26.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\August26.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\August5.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\August5.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Feb11.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Feb11.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Feb17.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Feb17.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Feb23.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Feb23.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Feb3.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Feb3.2006\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Feb4.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Feb4.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\February10.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\February10.2006\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\February17.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\February17.2006\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\February24.2006",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\February24.2006\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\HL2DM",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\HL2DM\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Jan15.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Jan15.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Jan19.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Jan19.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Jan26.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Jan26.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\July1.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\July1.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\July15.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\July15.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\July22.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\July22.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\July29.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\July29.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\June10.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\June10.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\June17.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\June17.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\June24.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\June24.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\June3.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\June3.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Mar10.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Mar10.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Mar18.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Mar18.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Mar2.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Mar2.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Mar25.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\Mar25.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\May12.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\May12.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\May20.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\May20.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\May27.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\May27.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\May6.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\May6.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\October14.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\October14.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\October6.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\October6.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\RDKF_Preload",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\RDKF_Preload\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\September16.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\September16.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\September2.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\September2.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\September23.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\September23.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        },
+        {
+          "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\September30.2005",
+          "gif": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\archived_steampowered\\steam\\marketing\\September30.2005\\img\\background.gif",
+          "sha1": "768db33aeebc2047f21dea016567242900e17bf9"
+        }
+      ]
+    }
+  ],
+  "uniques": []
+}
