@@ -7,7 +7,11 @@ if($ajax){ ob_clean(); }
 
 $base = cms_base_url();
 $theme_list = array_filter(cms_get_themes(), fn($t)=>substr($t,-6) !== '_admin');
-$theme = $_GET['theme'] ?? ($_POST['theme'] ?? ($theme_list[0] ?? ''));
+$default_theme = cms_get_setting('theme', $theme_list[0] ?? '');
+if (!in_array($default_theme, $theme_list, true)) {
+    $default_theme = $theme_list[0] ?? '';
+}
+$theme = $_GET['theme'] ?? ($_POST['theme'] ?? $default_theme);
 $page = $_GET['page'] ?? ($_POST['page'] ?? '');
 $data = cms_get_theme_header_data($theme, $page);
 $show_bold = in_array($theme, ['2002_v2','2003_v1']);

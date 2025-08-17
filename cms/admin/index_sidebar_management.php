@@ -145,8 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
     }
 }
 ?>
-<link rel="stylesheet" href="../themes/<?php echo $theme; ?>/css/styles_global.css">
-<link rel="stylesheet" href="../themes/<?php echo $theme; ?>/css/styles_content.css">
+<style>#sidebar-preview{color:#000;}#sidebar-preview .sidebar-section{border:1px solid #ccc;margin-bottom:10px;padding:5px;}#sidebar-preview h1{font-size:1.2em;margin:0 0 5px;}</style>
 <div id="sidebar-preview" class="rightCol_1">
 <?php echo cms_get_sidebar_sections_html($theme, true); ?>
 </div>
