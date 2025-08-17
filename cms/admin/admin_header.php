@@ -118,9 +118,20 @@ $json = cms_get_setting('nav_items',null);
 $nav_items = $json ? json_decode($json,true) : $default_nav;
 if(!$nav_items) $nav_items = $default_nav;
 
-// Allow plugins to provide additional sidebar links
+// Allow plugins to provide additional sidebar links grouped under a Plugins parent
 cms_load_plugins();
-$nav_items = array_merge($nav_items, cms_plugin_sidebar_links());
+$plugin_links = cms_plugin_sidebar_links();
+if (!empty($plugin_links)) {
+    $plugin_files = array_column($plugin_links, 'file');
+    foreach ($plugin_links as &$pl) {
+        if (empty($pl['parent']) || !in_array($pl['parent'], $plugin_files, true)) {
+            $pl['parent'] = 'plugins.php';
+        }
+    }
+    unset($pl);
+    $nav_items[] = ['file' => 'plugins.php', 'label' => 'Plugins', 'visible' => 1];
+    $nav_items = array_merge($nav_items, $plugin_links);
+}
 
 $icons = [
     'index.php'        => '📊',
@@ -150,6 +161,7 @@ $icons = [
     'update_history.php' => '📜',
     'theme.php'        => '🎨',
     'settings.php'     => '⚙️',
+    'plugins.php'      => '🔌',
     'download_files.php' => '⬇️',
     'download_settings.php' => '🛠️',
     'page_selection.php' => '📄',
