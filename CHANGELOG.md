@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Resolved Twig parser error on Random Content admin page by replacing deprecated `raw` blocks with `verbatim`.
 - Prevented duplicate `session_start` warnings on Update History page by checking session state in the admin header.
 - Corrected Page Version Management thumbnail URLs to resolve from the admin images directory.
 - Added inline editing with AJAX to custom redirects management.
