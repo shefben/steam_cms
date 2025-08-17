@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Added .htaccess redirect for Counter-Strike price change marketing page.
 - Grouped plugin sidebar links under a dedicated Plugins parent in the admin navigation.
 - Resolved Twig parser error on Random Content admin page by replacing deprecated `raw` blocks with `verbatim`.
 - Prevented duplicate `session_start` warnings on Update History page by checking session state in the admin header.

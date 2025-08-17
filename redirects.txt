@@ -17,3 +17,4 @@ steamid_instructions.html -> index.php?area=steamid_instructions
 /marketing/css_preload/ -> Marketing.php?t=css_preload
 /marketing/hl2_preload/ -> Marketing.php?t=hl2_preload
 /marketing/hl2_preload2/ -> Marketing.php?t=hl2_preload2
+/marketing/cz_pricechange/ -> Marketing.php?t=cz_pricechange
