@@ -263,6 +263,9 @@ if ($use_all) {
     <button type="button" class="delete-circle">&times;</button>
     <?php if ($r['image_path']): ?><img src="<?php echo htmlspecialchars('../storefront/images/capsules/' . $r['image_path']); ?>" alt="">
     <?php endif; ?>
+    <?php if (!empty($r['content'])): ?>
+      <div class="cap-content"><?php echo $r['content']; ?></div>
+    <?php endif; ?>
     <div class="cap-name"><?php echo htmlspecialchars($r['name'] ?: ($r['title'] ?? ''), ENT_QUOTES); ?></div>
     <button type="button" class="edit btn btn-small">Edit</button>
   </div>
@@ -367,19 +370,34 @@ if ($use_all) {
     </div>
   </form>
 </div>
-<link rel="stylesheet" href="../themes/<?php echo $theme; ?>/css/styles_capsules.css">
-<link rel="stylesheet" href="../themes/<?php echo $theme; ?>/css/styles_home.css">
+<?php
+$cssDir = dirname(__DIR__, 2) . '/themes/' . $theme . '/css';
+$cssFiles = [
+    'steampowered.css',
+    'styles_global.css',
+    'styles_capsules.css',
+    'styles_content.css',
+    'styles_home.css'
+];
+foreach ($cssFiles as $css) {
+    $abs = $cssDir . '/' . $css;
+    if (is_file($abs)) {
+        echo '<link rel="stylesheet" href="../themes/' . htmlspecialchars($theme) . '/css/' . htmlspecialchars($css) . '">';
+    }
+}
+?>
 <link rel="stylesheet" href="css/image-picker.css">
 <script src="js/image-picker.min.js"></script>
 <style>
   .capsule-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
-  .capsule{border:1px solid #ccc;padding:5px;position:relative;text-align:center;transform:scale(0.8);transform-origin:top left;width:280px;}
-  .capsule.small{flex:0 0 calc(50% - 10px);}
-  .capsule.large,.capsule.tabbed,.capsule.multi-large{flex:0 0 100%;}
-  .capsule.gear,.capsule.free{flex:0 0 <?php echo $gearLarge ? '100%' : 'calc(50% - 10px)'; ?>;}
+  .capsule{border:1px solid #ccc;padding:5px;position:relative;text-align:left;transform:scale(0.8);transform-origin:top left;overflow:hidden;}
+  .capsule.small{flex:0 0 calc(50% - 10px);width:231px;}
+  .capsule.large,.capsule.tabbed,.capsule.multi-large{flex:0 0 100%;width:467px;}
+  .capsule.gear,.capsule.free{flex:0 0 <?php echo $gearLarge ? '100%' : 'calc(50% - 10px)'; ?>;width:<?php echo $gearLarge ? 467 : 231; ?>px;}
   .capsule .handle{cursor:move;position:absolute;top:5px;left:5px;}
   .capsule .delete-circle{position:absolute;top:5px;right:5px;width:20px;height:20px;border-radius:50%;border:1px solid #666;background:#fff;color:#666;line-height:18px;padding:0;cursor:pointer;}
   .capsule img{max-width:100%;height:auto;display:block;margin:0 auto 5px;}
+  .cap-content{margin-bottom:5px;}
   .capsule .btn{margin:2px;}
   #row-content{align-items:flex-start;}
   .wysiwyg{border:1px solid #ccc;min-height:120px;padding:5px;overflow:auto;flex:1;}
@@ -399,6 +417,27 @@ $(function(){
   $.post('capsule_management_2006.php',{action:'list_capsule_images'},function(r){
     if(r.status==='ok'){ existingImages = r.images; }
   },'json');
+  function fixPaths(el){
+    el.find('[src],[href]').each(function(){
+      var $el=$(this);
+      var attr=$el.is('link')||$el.is('a')?'href':'src';
+      var val=$el.attr(attr);
+      if(val && !val.match(/^(?:https?:|\/|\.\.\/)/)){
+        $el.attr(attr,'../'+val);
+      }
+    });
+  }
+  function restorePaths(el){
+    el.find('[src],[href]').each(function(){
+      var $el=$(this);
+      var attr=$el.is('link')||$el.is('a')?'href':'src';
+      var val=$el.attr(attr);
+      if(val && val.indexOf('../')===0){
+        $el.attr(attr,val.substring(3));
+      }
+    });
+  }
+  $('#capsule-grid .cap-content').each(function(){fixPaths($(this));});
   function updateOrder(){
     var order=[];
     $('#capsule-grid .capsule').each(function(){order.push($(this).data('id'));});
@@ -430,6 +469,7 @@ $(function(){
     $('#cap-current-image').val(data.image||'');
     $('#cap-title').val(data.title||'');
     $('#cap-content').html(data.content||'');
+    fixPaths($('#cap-content'));
     $('#cap-themes input').prop('checked',false);
     $('#cap-themes input[value="'+currentTheme+'"]').prop('checked',true);
     toggleFields(data.type||'small');
@@ -513,7 +553,8 @@ $(function(){
 
   $('#add-capsule').on('click',function(e){e.preventDefault();openModal({});});
   $('#add-tabbed').on('click',function(e){e.preventDefault();openTabbedModal({});});
-  $('#capsule-grid').on('click','.edit',function(){
+  $('#capsule-grid').on('click','.edit',function(e){
+    e.preventDefault();
     var c=$(this).closest('.capsule');
     var id=c.data('id');
     if(c.data('type')==='tabbed'){
@@ -564,6 +605,7 @@ $(function(){
       }, 'json');
       return;
     }
+    restorePaths($('#cap-content'));
     $('#cap-content-hidden').val($('#cap-content').html());
     var fd=new FormData(this);
     fd.append('action','save');
@@ -581,11 +623,20 @@ $(function(){
           }
           c.removeClass('small large gear free').addClass(type);
           c.find('.cap-name').text(type==='gear'||type==='free'?title:name);
+          if(content){
+            if(c.find('.cap-content').length){c.find('.cap-content').html(content);}else{c.find('.cap-name').before('<div class="cap-content">'+content+'</div>');}
+            fixPaths(c.find('.cap-content'));
+          }else{
+            c.find('.cap-content').remove();
+          }
         }else{
-          var html='<div class="capsule '+type+'" data-id="'+r.id+'" data-appid="'+appid+'" data-price="'+price+'" data-type="'+type+'" data-image="'+img+'"><span class="handle">&#9776;</span><button type="button" class="delete-circle">&times;</button>';
-          if(img){html+='<img src="../storefront/images/capsules/'+img+'" alt="">';}
-          html+='<div class="cap-name">'+$('<div>').text(type==='gear'||type==='free'?title:name).html()+'</div><button type="button" class="edit btn btn-small">Edit</button></div>';
-          var el=$(html).data({appid:appid,price:price,type:type,image:img,title:title,content:content});
+          var el=$('<div class="capsule '+type+'" data-id="'+r.id+'" data-appid="'+appid+'" data-price="'+price+'" data-type="'+type+'" data-image="'+img+'"></div>');
+          el.append('<span class="handle">&#9776;</span><button type="button" class="delete-circle">&times;</button>');
+          if(img){el.append('<img src="../storefront/images/capsules/'+img+'" alt="">');}
+          if(content){el.append('<div class="cap-content">'+content+'</div>');}
+          el.append('<div class="cap-name">'+$('<div>').text(type==='gear'||type==='free'?title:name).html()+'</div><button type="button" class="edit btn btn-small">Edit</button>');
+          fixPaths(el.find('.cap-content'));
+          el.data({appid:appid,price:price,type:type,image:img,title:title,content:content});
           $('#capsule-grid').append(el);
         }
         $('#capsule-modal').dialog('close');
