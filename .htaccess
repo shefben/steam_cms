@@ -1,3 +1,5 @@
 ErrorDocument 404 /error.php
 RewriteEngine On
-RewriteRule ^test$ http://google.com [L,R=302]
+RewriteRule ^marketing/css_preload/?$ Marketing.php?t=css_preload [L,R=302,QSA]
+RewriteRule ^marketing/hl2_preload/?$ Marketing.php?t=hl2_preload [L,R=302,QSA]
+RewriteRule ^marketing/hl2_preload2/?$ Marketing.php?t=hl2_preload2 [L,R=302,QSA]
