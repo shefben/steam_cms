@@ -1,0 +1,104 @@
+/* 2008 Steam Theme - Global Styles */
+/* Based on the archived steampowered.com 2008 design */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #1e2328 url('../images/bg_body.gif') repeat-x top;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #c6d4df;
+}
+
+#all {
+    background: url('../images/bg_main.gif') no-repeat top center;
+    min-height: 100vh;
+}
+
+/* Global layout containers */
+#col_parent {
+    width: 940px;
+    margin: 0 auto;
+    background: transparent;
+}
+
+#col_left {
+    width: 174px;
+    float: left;
+    margin-right: 15px;
+}
+
+#col_center {
+    width: 570px;
+    float: left;
+    margin-right: 15px;
+}
+
+#col_right {
+    width: 174px;
+    float: left;
+}
+
+/* Basic text styles */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    color: #c6d4df;
+}
+
+h2 {
+    font-size: 12px;
+    font-weight: bold;
+    color: #8ba7cc;
+    margin-bottom: 8px;
+    padding: 3px 0;
+    border-bottom: 1px solid #2a3137;
+}
+
+h3 {
+    font-size: 11px;
+    font-weight: bold;
+    color: #c6d4df;
+    margin: 0;
+}
+
+a {
+    color: #8ba7cc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Button styles */
+.btn_blue {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #5c7e10;
+    color: #ffffff;
+    font-size: 11px;
+    text-decoration: none;
+    border: 1px solid #799f1a;
+    border-radius: 2px;
+}
+
+.btn_blue:hover {
+    background: #799f1a;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Clear fix utility */
+br.clear, br[clear="all"] {
+    clear: both;
+    line-height: 0;
+    height: 0;
+}
+
+/* Center utility */
+center {
+    text-align: center;
+}

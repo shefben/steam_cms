@@ -1,19 +1,23 @@
 <h1>GET STEAM NOW</h1>
 <h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2><img src="images/Graphic_box.jpg" alt="" width="24" height="6"><br><br>
 Installing Steam is the easiest way to get your favorite games, like Half-Life 2 and Counter-Strike: Source.<br><br>
+{% if categories|first %}
 {% set mainCategory = categories|first %}
 {% set mainLinks = links|filter(l => l.category == mainCategory.name) %}
 {% if mainLinks|first %}
     <a href="{{ mainLinks|first.url }}"><img src="images/getSteamNowButton.gif" alt="Get Steam Now" border="0"></a><br><br>
+{% endif %}
 {% endif %}
 <div class="boxTop">Dedicated Server</div><br clear="all">
 <div class="box">
 If you want to run a game server on the Internet or a private LAN, get the necessary program files here. Servers are available for both Windows and Linux operating systems:<br><br>
 {% for category in categories|slice(1) %}
     {% set categoryLinks = links|filter(l => l.category == category.name) %}
+    {% if categoryLinks|length > 0 %}
     {% for link in categoryLinks %}
         <a class="maize" href="{{ link.url }}" style="font-size:11px;">{{ link.label }}</a><br><br>
     {% endfor %}
+    {% endif %}
 {% endfor %}
 </div>
 <table cellpadding="8">

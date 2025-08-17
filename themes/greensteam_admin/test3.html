@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Green Steam – Admin Dashboard</title>
+    <!-- Reuse the same stylesheet path as your demo -->
+    <link rel="stylesheet" type="text/css" href="./styles/greensteam/greensteam.css">
+</head>
+
+<body>
+<main>
+
+    <!-- Top Navigation (same structure + dropdown pattern as the theme demo) -->
+    <nav>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#users">Users</a></li>
+        <li><a href="#content">Content</a></li>
+        <li><a href="#settings">Settings</a></li>
+        <li>
+            <a>Admin ▾</a>
+            <ul class="dropdown">
+                <li><a href="#quick-actions">Quick Actions</a></li>
+                <li><a href="#activity">Recent Activity</a></li>
+                <li><a href="#system">System Status</a></li>
+            </ul>
+        </li>
+    </nav>
+
+    <!-- Hero / Welcome -->
+    <div class="window" name="Admin Dashboard">
+        <h1 id="overview">Welcome</h1>
+        <p>This dashboard demonstrates how to compose admin pages using only the existing Green Steam UI classes. No extra styles or scripts required.</p>
+        <p>Each panel below is a <code>window</code> (optionally <code>headless</code>), and supporting blocks use <code>box</code>, <code>inset</code>, and layout helpers like <code>window-row</code>, <code>flex-row</code>, and <code>flex-column</code>.</p>
+    </div>
+
+    <!-- Two columns of key cards and a quick snapshot area -->
+    <div class="window-row">
+
+        <!-- Left Column -->
+        <div>
+            <!-- KPI Cards -->
+            <div class="window" name="Key Metrics">
+                <div class="box">
+                    <strong>Total Users:</strong> 12,487
+                </div>
+                <div class="box">
+                    <strong>Active Sessions:</strong> 327
+                </div>
+                <div class="box">
+                    <strong>Pending Approvals:</strong> 14
+                </div>
+                <div class="box rounded">
+                    <strong>Error Rate (24h):</strong> 0.23%
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="window" name="Quick Actions" id="quick-actions">
+                <div class="box">
+                    <p><a class="DownloadButton" href="#export-users" title="Export Users CSV"></a> Export Users CSV</p>
+                </div>
+                <div class="box">
+                    <p><a class="DownloadButton" href="#export-logs" title="Export Logs"></a> Export Logs</p>
+                </div>
+                <div class="box inset">
+                    <p>Tip: The <code>DownloadButton</code> is purely presentational—attach your download URL or action handler to it.</p>
+                </div>
+            </div>
+
+            <!-- System Status with native progress bars (theme styles them) -->
+            <div class="window" name="System Status" id="system">
+                <p>API Latency</p>
+                <progress value="120" max="200"></progress>
+
+                <br><br>
+                <p>Disk Usage</p>
+                <progress value="68" max="100"></progress>
+
+                <br><br>
+                <p>Job Queue</p>
+                <progress value="14" max="28"></progress>
+
+                <div class="box inset">
+                    <p>These are native <code>&lt;progress&gt;</code> elements like in the theme demo. Adjust <code>value</code>/<code>max</code> as needed.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div>
+            <!-- Recent Activity Feed -->
+            <div class="window headless" id="activity">
+                <div class="titlebar">Recent Activity</div>
+                <ul>
+                    <li>10:14 – Created user <code>mporter</code></li>
+                    <li>10:07 – Published page <code>/news/august-update</code></li>
+                    <li>09:59 – Rolled back deployment to <code>build #1427</code></li>
+                    <li>09:46 – Updated permissions for group <code>Moderators</code></li>
+                    <li>09:31 – Imported 243 records via CSV</li>
+                </ul>
+                <div class="box inset">
+                    <p>Use your backend to render this list; the theme handles spacing and typography.</p>
+                </div>
+            </div>
+
+            <!-- Alerts & Notices -->
+            <div class="window" name="Notices">
+                <div class="box rounded">
+                    <strong>Notice:</strong> Scheduled maintenance today 23:00–23:30 (read-only mode).
+                </div>
+                <div class="box">
+                    <strong>Warning:</strong> High memory usage detected on node <code>app-3</code>.
+                </div>
+                <div class="box inset">
+                    <p>For persistent notices, render a <code>box rounded</code> for emphasis and regular <code>box</code> for standard alerts.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Management Panels: Users, Content, Settings -->
+    <div class="window" name="Users" id="users">
+        <h1>User Management</h1>
+        <p>Below is a minimal table markup (unstyled by the theme on purpose). Wrap it with <code>box</code>/<code>inset</code> for visual grouping.</p>
+
+        <div class="box inset">
+            <table>
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Last Seen</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>jchen</td>
+                    <td>Admin</td>
+                    <td>Active</td>
+                    <td>08/11/2025 10:05:30</td>
+                </tr>
+                <tr>
+                    <td>kpatel</td>
+                    <td>Editor</td>
+                    <td>Active</td>
+                    <td>08/11/2025 09:57:12</td>
+                </tr>
+                <tr>
+                    <td>mporter</td>
+                    <td>Viewer</td>
+                    <td>Pending</td>
+                    <td>—</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="box rounded">
+            <p><strong>Bulk Actions:</strong> Approve, Disable, Reset Passwords</p>
+        </div>
+    </div>
+
+    <div class="window headless" id="content">
+        <div class="titlebar">Content</div>
+        <h2>Pages</h2>
+        <p>Use <code>box</code> to group filters and result lists.</p>
+
+        <div class="box">
+            <strong>Filters</strong><br>
+            <label><input type="checkbox" checked> Draft</label>
+            <label><input type="checkbox" checked> Published</label>
+            <label><input type="checkbox"> Archived</label>
+            <br><br>
+            <input type="search" placeholder="Search pages...">
+        </div>
+
+        <div class="box inset">
+            <ul>
+                <li><code>/home</code> – Published</li>
+                <li><code>/news/august-update</code> – Published</li>
+                <li><code>/maintenance</code> – Draft</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Settings form demonstrates the theme’s form controls + flex helpers -->
+    <div class="window" name="Settings" id="settings">
+        <h1>Configuration</h1>
+
+        <fieldset class="flex-row">
+            <legend>General</legend>
+
+            <style>.space-controls > * { margin-bottom: 12px; }</style>
+
+            <div class="flex-column space-controls">
+                <label>Site Title<br><input type="text" placeholder="Your Site Name"></label>
+                <label>Support Email<br><input type="email" placeholder="admin@example.com"></label>
+                <label>Timezone<br>
+                    <select>
+                        <option value="America/Chicago" selected>America/Chicago</option>
+                        <option value="America/New_York">America/New_York</option>
+                        <option value="UTC">UTC</option>
+                    </select>
+                </label>
+                <label>Default Role<br>
+                    <select>
+                        <option>Viewer</option>
+                        <option>Editor</option>
+                        <option>Admin</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="flex-column space-controls">
+                <label>Require 2FA <input type="checkbox" checked></label>
+                <label>Max Upload (MB)<br><input type="number" value="50"></label>
+                <label>Maintenance Window<br><input type="time" value="23:00"></label>
+                <label>Domain<br><input type="url" placeholder="https://example.com"></label>
+                <input type="submit" value="Save Settings">
+            </div>
+        </fieldset>
+
+        <div class="box inset">
+            <p>All controls above match the theme’s native input styling (see the original form demo for more controls like <code>range</code>, <code>week</code>, and <code>datalist</code>).</p>
+        </div>
+    </div>
+
+    <!-- Misc panel showing nested boxes and an inset pre/code block -->
+    <div class="window" name="Developer Notes">
+        <h2>Implementation Notes</h2>
+        <div class="box inset">
+            <p>Keep interactive behavior server-side or add minimal vanilla JS as needed; the layout and look come from the theme.</p>
+            <div class="box rounded">
+                <p>Use <code>window-row</code> to create two columns of windows. Nest <code>box</code> freely; combine with <code>rounded</code> for emphasis.</p>
+            </div>
+        </div>
+
+        <pre class="inset">
+Routing ideas (pseudocode):
+
+GET /admin               -> dashboard overview
+GET /admin/users         -> list users
+POST /admin/users/:id    -> update user
+GET /admin/content       -> list/edit pages
+POST /admin/settings     -> apply configuration
+        </pre>
+    </div>
+
+</main>
+</body>
+</html>

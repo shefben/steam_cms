@@ -24,11 +24,20 @@ if ($theme === '2005_v1' || $theme === '2005_v2') {
 }
 $tplDir   = dirname($template);
 
+$links = $page['links'] ?? [];
+$categories = $page['categories'] ?? [];
+
+$filteredCategories = array_filter($categories, function($category) use ($links) {
+    return !empty(array_filter($links, function($link) use ($category) {
+        return $link['category'] === $category['name'];
+    }));
+});
+
 $content = cms_render_string(
     file_get_contents($template),
     [
-        'links'      => $page['links'] ?? [],
-        'categories' => $page['categories'] ?? [],
+        'links'      => $links,
+        'categories' => array_values($filteredCategories),
         'files'      => $files,
         'system_requirements' => $page['system_requirements'] ?? '',
     ],

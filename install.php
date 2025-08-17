@@ -638,6 +638,28 @@ CREATE TABLE storefront_tab_games(
     image_path TEXT,
     ord INT
 );
+CREATE TABLE tabbed_capsules(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tab_name VARCHAR(255) NOT NULL,
+    tab_order INT NOT NULL DEFAULT 0,
+    active TINYINT(1) NOT NULL DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_order (tab_order)
+);
+CREATE TABLE tabbed_capsule_games(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tab_id INT NOT NULL,
+    appid INT NOT NULL,
+    game_order INT NOT NULL DEFAULT 0,
+    image_path VARCHAR(255),
+    custom_name VARCHAR(255),
+    custom_price DECIMAL(10,2),
+    release_date DATE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (tab_id) REFERENCES tabbed_capsules(id) ON DELETE CASCADE,
+    FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE,
+    INDEX idx_tab_order (tab_id, game_order)
+);
 CREATE TABLE store_pages(
     slug VARCHAR(20) PRIMARY KEY,
     title TEXT,
@@ -2097,6 +2119,65 @@ $defaultCafes = [
                     }
                 }
             }
+
+            // Add 2008 theme default tabbed capsule data
+            try {
+                // Insert default tabbed capsules
+                $tabStmt = $pdo->prepare('INSERT INTO tabbed_capsules (id, tab_name, tab_order, active) VALUES (?, ?, ?, ?)');
+                $tabStmt->execute([1, 'New releases', 1, 1]);
+                $tabStmt->execute([2, 'Top Sellers', 2, 1]);
+                $tabStmt->execute([3, 'Top Rated', 3, 1]);
+                $tabStmt->execute([4, 'Coming soon', 4, 1]);
+
+                // Add some sample apps for 2008 theme (historical games from that period)
+                $appStmt = $pdo->prepare('INSERT IGNORE INTO store_apps (appid, name, price, release_date, publisher, genre) VALUES (?, ?, ?, ?, ?, ?)');
+                $appStmt->execute([22300, 'Fallout 3', 49.99, '2008-10-28', 'Bethesda Softworks', 'RPG']);
+                $appStmt->execute([19980, 'Prince of Persia', 49.99, '2008-12-09', 'Ubisoft', 'Action']);
+                $appStmt->execute([10090, 'Call of Duty: World at War', 49.99, '2008-11-11', 'Activision', 'Action']);
+                $appStmt->execute([500, 'Left 4 Dead', 49.99, '2008-11-17', 'Valve', 'Action']);
+                $appStmt->execute([8140, 'Tomb Raider: Underworld', 39.99, '2008-11-18', 'Eidos Interactive', 'Action']);
+                $appStmt->execute([19900, 'Far Cry 2', 49.99, '2008-10-21', 'Ubisoft', 'Action']);
+                $appStmt->execute([12210, 'Grand Theft Auto IV', 49.99, '2008-12-02', 'Rockstar Games', 'Action']);
+                $appStmt->execute([3560, 'Bejeweled Twist', 19.99, '2008-10-17', 'PopCap Games', 'Casual']);
+                $appStmt->execute([21000, 'LEGO Batman', 29.99, '2008-09-23', 'Warner Bros', 'Action']);
+                $appStmt->execute([12900, 'AudioSurf', 9.99, '2008-02-15', 'Invisible Handlebar', 'Indie']);
+
+                // Add games to tabs
+                $gameStmt = $pdo->prepare('INSERT INTO tabbed_capsule_games (tab_id, appid, game_order) VALUES (?, ?, ?)');
+                
+                // New releases tab
+                $gameStmt->execute([1, 22300, 1]);
+                $gameStmt->execute([1, 19980, 2]);
+                $gameStmt->execute([1, 10090, 3]);
+                $gameStmt->execute([1, 8140, 4]);
+                
+                // Top Sellers tab
+                $gameStmt->execute([2, 500, 1]);
+                $gameStmt->execute([2, 12210, 2]);
+                $gameStmt->execute([2, 10090, 3]);
+                $gameStmt->execute([2, 22300, 4]);
+                
+                // Top Rated tab
+                $gameStmt->execute([3, 500, 1]);
+                $gameStmt->execute([3, 22300, 2]);
+                $gameStmt->execute([3, 12900, 3]);
+                $gameStmt->execute([3, 12210, 4]);
+                
+                // Coming soon tab
+                $gameStmt->execute([4, 19980, 1]);
+                $gameStmt->execute([4, 12210, 2]);
+                $gameStmt->execute([4, 21000, 3]);
+                $gameStmt->execute([4, 3560, 4]);
+
+                // Add 2008 theme configuration
+                $settingsStmt = $pdo->prepare('INSERT IGNORE INTO settings (`key`, value) VALUES (?, ?)');
+                $settingsStmt->execute(['2008_theme_installed', '1']);
+                $settingsStmt->execute(['theme', '2008']);
+                
+            } catch (PDOException $e) {
+                // Ignore errors for now as this is sample data
+            }
+
             $cfg = "<?php\nreturn [\n    'host'=>'$host',\n    'port'=>'$port',\n    'dbname'=>'$dbname',\n    'user'=>'$user',\n    'pass'=>'$pass'\n];\n?>";
             file_put_contents(__DIR__.'/cms/config.php', $cfg);
             unset($_SESSION['cms_install']);

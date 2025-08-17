@@ -5,9 +5,10 @@
 <br>We've split the Steam installers into seperate versions based on the game cache they include.  Links marked with (BT) require that you have <a href="http://www.filerush.com/forums/viewtopic.php?t=10" target="_blank">Bit Torrent</a> installed.<br>
 <br>
 {% for category in categories %}
+{% set categoryLinks = links|filter(l => l.category == category.name) %}
+{% if categoryLinks|length > 0 %}
 <h3>{{ category.name }}{% if category.file_size %}: ({{ category.file_size }}){% endif %}</h3><br>
 <table width="525" cellpadding="0" cellspacing="0">
-    {% set categoryLinks = links|filter(l => l.category == category.name) %}
     {% for row in categoryLinks|batch(3, '') %}
     <tr>
         {% for link in row %}
@@ -28,6 +29,7 @@
     {% endfor %}
 </table>
 <br>
+{% endif %}
 {% endfor %}
 <hr>
 {{ system_requirements|raw }}

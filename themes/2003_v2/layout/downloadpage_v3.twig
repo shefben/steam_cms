@@ -6,12 +6,14 @@
 <br>
 <h3>DOWNLOAD LOCATIONS:</h3><br>
 {% for category in categories %}
-<h2>{{ category.name }}{% if category.file_size %}: ({{ category.file_size }}){% endif %}</h2>
 {% set categoryLinks = links|filter(l => l.category == category.name) %}
+{% if categoryLinks|length > 0 %}
+<h2>{{ category.name }}{% if category.file_size %}: ({{ category.file_size }}){% endif %}</h2>
 {% for link in categoryLinks %}
 <a class="maize" href="{{ link.url }}" style="font-size: 11px;">{{ link.label }}</a><br>
 {% endfor %}
 <br>
+{% endif %}
 {% endfor %}
 <hr>
 {{ system_requirements|raw }}

@@ -1,0 +1,231 @@
+/* 2008 Steam Theme - Tabs Styles */
+/* Tabbed single column capsule system */
+
+#global_area_tabs {
+    background: #232832;
+    border: 1px solid #2a3137;
+    margin-bottom: 15px;
+}
+
+/* Tab navigation */
+#main_tab_list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #1e2328;
+    border-bottom: 1px solid #2a3137;
+    height: 30px;
+    overflow: hidden;
+}
+
+#main_tab_list li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    background: #1e2328;
+    border-right: 1px solid #2a3137;
+}
+
+#main_tab_list li:last-child {
+    border-right: none;
+}
+
+/* Tab links */
+.tab_link {
+    display: block;
+    padding: 8px 15px;
+    color: #8ba7cc;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 14px;
+    height: 14px;
+    background: #1e2328;
+    border: none;
+}
+
+/* Active tab */
+.main_tab_on {
+    background: #232832;
+}
+
+.main_tab_on .tab_link {
+    background: #232832;
+    color: #ffffff;
+}
+
+/* Inactive tab */
+.main_tab_off {
+    background: #1e2328;
+}
+
+.main_tab_off .tab_link:hover {
+    background: #2a3137;
+    color: #ffffff;
+}
+
+/* Tab content container */
+.global_area_tabs_ctn_norm {
+    padding: 10px;
+    background: #232832;
+    min-height: 400px;
+}
+
+/* Individual tab content areas */
+#tab_1_content, #tab_2_content, #tab_3_content, #tab_4_content, #tab_5_content {
+    display: none;
+}
+
+#tab_1_content {
+    display: block; /* First tab shown by default */
+}
+
+/* Game items in tabs */
+.global_area_tabs_item {
+    background: #1e2328;
+    border: 1px solid #2a3137;
+    margin-bottom: 8px;
+    padding: 8px;
+    cursor: pointer;
+    min-height: 45px;
+    overflow: hidden;
+}
+
+.global_area_tabs_item:hover {
+    background: #2a3137;
+    border-color: #5c7e10;
+}
+
+.global_area_tabs_item:last-child {
+    margin-bottom: 0;
+}
+
+/* Game item image */
+.global_area_tabs_item_img {
+    float: left;
+    margin-right: 10px;
+    width: 120px;
+    height: 45px;
+    background: #000000;
+    border: 1px solid #2a3137;
+    text-align: center;
+    overflow: hidden;
+}
+
+.global_area_tabs_item_img img {
+    width: 120px;
+    height: 45px;
+    border: none;
+}
+
+/* Game item text */
+.global_area_tabs_item_txt {
+    float: left;
+    width: 280px;
+    padding: 2px 0;
+}
+
+.global_area_tabs_item_txt h3 {
+    font-size: 12px;
+    font-weight: bold;
+    color: #c6d4df;
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+}
+
+.global_area_tabs_item_txt .release_date {
+    font-size: 10px;
+    color: #8ba7cc;
+    margin: 0;
+}
+
+/* Game item rating */
+.global_area_tabs_item_rating, .global_area_tabs_item_rating_na {
+    float: right;
+    width: 40px;
+    height: 20px;
+    margin: 5px 10px 0 0;
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.global_area_tabs_item_rating {
+    background: #5c7e10;
+    color: #ffffff;
+    border-radius: 3px;
+}
+
+.global_area_tabs_item_rating_na {
+    background: #666666;
+    color: #999999;
+    border-radius: 3px;
+}
+
+/* Game item price */
+.global_area_tabs_item_price {
+    float: right;
+    width: 60px;
+    text-align: right;
+    margin: 8px 10px 0 0;
+    font-size: 12px;
+    font-weight: bold;
+    color: #c6d4df;
+}
+
+.global_area_tabs_item_price strike {
+    color: #888888;
+    font-size: 10px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.global_area_tabs_item_price .sale_price {
+    color: #5c7e10;
+    font-size: 12px;
+}
+
+/* Clear fix for tab items */
+.global_area_tabs_item::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Loading state */
+.tabs_loading {
+    text-align: center;
+    padding: 40px;
+    color: #8ba7cc;
+    font-style: italic;
+}
+
+/* Empty state */
+.tabs_empty {
+    text-align: center;
+    padding: 40px;
+    color: #8ba7cc;
+}
+
+.tabs_empty h3 {
+    color: #8ba7cc;
+    margin-bottom: 10px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 940px) {
+    .global_area_tabs_item_txt {
+        width: 200px;
+    }
+    
+    .global_area_tabs_item_price {
+        width: 50px;
+        font-size: 10px;
+    }
+    
+    .global_area_tabs_item_rating, .global_area_tabs_item_rating_na {
+        width: 30px;
+        font-size: 9px;
+    }
+}

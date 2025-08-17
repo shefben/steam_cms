@@ -4,8 +4,9 @@
 <br>
 <!-- <h3>DOWNLOAD LOCATIONS</h3><br> -->
 {% for category in categories %}
-<h2>{{ category.name }}:</h2>
 {% set categoryLinks = links|filter(l => l.category == category.name) %}
+{% if categoryLinks|length > 0 %}
+<h2>{{ category.name }}:</h2>
 {% if categoryLinks|first and categoryLinks|first.label == 'Click here to download the Steam installer' %}
     <a class="maize" href="{{ categoryLinks|first.url }}" style="font-size: 11px;">Click here to download the Steam installer</a>{% if category.file_size %}. (Approx. {{ category.file_size }}){% endif %}<br>
 {% else %}
@@ -14,6 +15,7 @@
     {% endfor %}
 {% endif %}
 <br>
+{% endif %}
 {% endfor %}
 <table cellpadding="8">
 <tr>

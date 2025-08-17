@@ -1216,6 +1216,73 @@ function cms_twig_env(string $tpl_dir): Environment
             $html .= '</td></tr></table>';
             return $html;
         }, ['is_safe' => ['html']]));
+
+        // 2008 Theme Functions
+        $env->addFunction(new TwigFunction('header_2008', cms_hookable(function() {
+            $theme = cms_get_current_theme();
+            return cms_render_header_2008($theme);
+        }, 'header_2008'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('cart_status', cms_hookable(function() {
+            return '';
+        }, 'cart_status'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sidebar_2008_search', cms_hookable(function() {
+            return cms_render_2008_search_section();
+        }, 'sidebar_2008_search'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sidebar_2008_browse', cms_hookable(function() {
+            return cms_render_2008_browse_section();
+        }, 'sidebar_2008_browse'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sidebar_2008_install_steam', cms_hookable(function() {
+            return cms_render_2008_install_steam_section();
+        }, 'sidebar_2008_install_steam'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sidebar_2008_freeloads', cms_hookable(function() {
+            return cms_render_2008_freeloads_section();
+        }, 'sidebar_2008_freeloads'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sidebar_2008_news', cms_hookable(function() {
+            return cms_render_2008_news_section();
+        }, 'sidebar_2008_news'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sidebar_2008_catalogs', cms_hookable(function() {
+            return cms_render_2008_catalogs_section();
+        }, 'sidebar_2008_catalogs'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sidebar_2008_steam_info', cms_hookable(function() {
+            return cms_render_2008_steam_info_section();
+        }, 'sidebar_2008_steam_info'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('large_capsule_flash_2008', cms_hookable(function() {
+            return cms_render_2008_large_capsule();
+        }, 'large_capsule_flash_2008'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('small_capsules_2008', cms_hookable(function() {
+            return cms_render_2008_small_capsules();
+        }, 'small_capsules_2008'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('tabbed_single_column_capsule', cms_hookable(function() {
+            return cms_render_tabbed_single_column_capsule();
+        }, 'tabbed_single_column_capsule'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('extras_section_2008', cms_hookable(function() {
+            return cms_render_2008_extras_section();
+        }, 'extras_section_2008'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('sidebar_right_2008', cms_hookable(function() {
+            return cms_render_2008_sidebar_right();
+        }, 'sidebar_right_2008'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('footer_2008', cms_hookable(function() {
+            return cms_render_footer_2008();
+        }, 'footer_2008'), ['is_safe' => ['html']]));
+
+        $env->addFunction(new TwigFunction('tab_switching_script', cms_hookable(function() {
+            return cms_render_tab_switching_script();
+        }, 'tab_switching_script'), ['is_safe' => ['html']]));
+
         $env->registerUndefinedFunctionCallback(function (string $name) {
             if (str_starts_with($name, 'random_')) {
                 $tag = substr($name, 7);
@@ -1242,6 +1309,376 @@ function cms_twig_env(string $tpl_dir): Environment
     // Allow plugins to interact with the Twig environment before use
     $env = cms_apply_hooks('twig_environment', $env);
     return $env;
+}
+
+// 2008 Theme Implementation Functions
+function cms_render_header_2008(string $theme): string
+{
+    return '<div id="v4headerBar">
+<div id="steamLogo"><img border="0" height="54" src="themes/2008/images/steamLogo.jpg" width="105"/></div>
+<div id="steamText">
+<img border="0" height="35" src="themes/2008/images/steamText.jpg" width="72"/>
+</div>
+<div id="v4headerLinks">
+<p>
+<span id="v4headerMenuItems">
+<a class="v4headerLinkActive nav_button_2008" href="index.php">Home</a>   
+<a class="v4headerLink nav_button_2008_secondary" href="index.php?area=about">What is Steam</a>   
+<a class="v4headerLink nav_button_2008_secondary" href="https://steamcommunity.com/" target="_blank">Community</a>   
+<a class="v4headerLink nav_button_2008_secondary" href="index.php?area=news">News</a>   
+<a class="v4headerLink nav_button_2008_secondary" href="index.php?area=cybercafes">Cyber Cafés</a>   
+<a class="v4headerLink nav_button_2008_secondary" href="index.php?area=forums">Forums</a>   
+<a class="v4headerLink nav_button_2008_secondary" href="index.php?area=support">Support</a>   
+<a class="v4headerLink nav_button_2008_secondary" href="index.php?area=stats">Stats</a>
+</span>
+</p>
+</div>
+<div id="v4headerStatusItems">
+<p>
+<a class="nav_button_2008" href="index.php?area=login">Login</a>
+</p>
+</div>
+</div>';
+}
+
+function cms_render_2008_search_section(): string
+{
+    return '<div id="global_area_search">
+<form action="index.php" id="searchform" method="get" name="searchform">
+<input type="hidden" name="area" value="search">
+<input id="searchterm" name="term" onblur="SetDefaultSearchText();" onclick="ClearDefaultSearchText();" size="22" type="text" value="enter search term"/>
+<img align="top" alt="Steam Search" height="22" onclick="document.searchform.submit();" src="themes/2008/images/btn_search.gif" width="22"/>
+</form>
+</div>
+<script language="JavaScript">
+function ClearDefaultSearchText()
+{
+    var text = document.getElementById( \'searchterm\' ).value;
+    if ( text == \'enter search term\' )
+    {
+        document.getElementById( \'searchterm\' ).value = \'\';
+    }
+}
+function SetDefaultSearchText()
+{
+    var text = document.getElementById( \'searchterm\' ).value;
+    if ( text == \'\' )
+    {
+        document.getElementById( \'searchterm\' ).value = \'enter search term\';
+    }
+}
+</script>';
+}
+
+function cms_render_2008_browse_section(): string
+{
+    return '<div id="global_area_browse"><h2>Browse Games</h2></div>
+<ul id="global_area_browse_list">
+<li><a href="index.php?area=search&showall=1">All</a></li>
+<li><a href="index.php?area=genre&type=Action">Action</a></li>
+<li><a href="index.php?area=genre&type=Adventure">Adventure</a></li>
+<li><a href="index.php?area=genre&type=Strategy">Strategy</a></li>
+<li><a href="index.php?area=genre&type=RPG">RPG</a></li>
+<li><a href="index.php?area=genre&type=Casual">Casual</a></li>
+<li><a href="index.php?area=genre&type=Indie">Indie</a></li>
+<li><a href="index.php?area=genre&type=Racing">Racing</a></li>
+<li><a href="index.php?area=genre&type=Sports">Sports</a></li>
+<li><a href="index.php?area=genre&type=Simulation">Simulation</a></li>
+</ul>';
+}
+
+function cms_render_2008_install_steam_section(): string
+{
+    return '<div id="global_area_install_steam">
+<a href="index.php?area=getsteamnow"><img alt="Get Steam Now" border="0" height="36" src="themes/2008/images/btn_getSteam_english.gif" width="163"/></a>
+</div>';
+}
+
+function cms_render_2008_freeloads_section(): string
+{
+    return '<div id="global_area_freeloads"><h2>Free Stuff</h2></div>
+<ul id="global_area_freeloads_list">
+<li><a href="index.php?area=freestuff&type=demos">Game Demos</a></li>
+<li><a href="index.php?area=freestuff&type=videos">Videos/Trailers</a></li>
+<li><a href="index.php?area=freestuff&type=mods">Game Mods</a></li>
+</ul>';
+}
+
+function cms_render_2008_news_section(): string
+{
+    return '<div id="home_area_news"><h2>Steam News</h2></div>
+<ul id="global_area_news_list">
+<li><a href="index.php?area=news">All Steam News</a></li>
+<li><a href="index.php?area=news&filter=releases">Game Releases</a></li>
+</ul>';
+}
+
+function cms_render_2008_catalogs_section(): string
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare("SELECT DISTINCT publisher FROM store_apps WHERE publisher IS NOT NULL AND publisher != '' ORDER BY publisher LIMIT 20");
+    $stmt->execute();
+    $publishers = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
+    $html = '<div id="home_area_catalogs"><h2>Publisher Catalogs</h2></div>
+<ul id="global_area_catalogs_list">';
+    
+    foreach ($publishers as $publisher) {
+        $encoded = urlencode($publisher);
+        $html .= '<li><a href="index.php?area=publisher&name=' . $encoded . '">' . htmlspecialchars($publisher) . '</a></li>';
+    }
+    
+    $html .= '</ul>';
+    return $html;
+}
+
+function cms_render_2008_steam_info_section(): string
+{
+    return '<div id="home_area_steam">
+<img alt="Get Steam Now" src="themes/2008/images/col_left_logo_steam.jpg"/>
+<p>Join Steam for free and get games delivered straight to your desktop with automatic updates and a massive gaming community.</p>
+<br/>
+<a class="btn_blue" href="index.php?area=about">More about Steam</a>
+</div>';
+}
+
+function cms_render_2008_large_capsule(): string
+{
+    return '<div id="capsule_large_content">
+<p>Large capsule content will be displayed here with Flash or HTML5 content</p>
+</div>';
+}
+
+function cms_render_2008_small_capsules(): string
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare("SELECT * FROM store_apps ORDER BY release_date DESC LIMIT 2");
+    $stmt->execute();
+    $apps = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    $html = '';
+    foreach ($apps as $app) {
+        $price = number_format((float)$app['price'], 2);
+        $name = htmlspecialchars($app['name']);
+        $appid = (int)$app['appid'];
+        
+        $html .= '<div class="home_area_capsule_sm">
+<a href="index.php?area=app&id=' . $appid . '">
+<img alt="' . $name . '" border="0" src="themes/2008/images/capsules/capsule_231x87_default.jpg">
+<h5>$' . $price . '</h5>
+<h4> </h4>
+</img></a>
+</div>';
+    }
+    
+    return $html;
+}
+
+function cms_render_tabbed_single_column_capsule(): string
+{
+    $db = cms_get_db();
+    
+    // Get tabbed capsule data
+    $stmt = $db->prepare("SELECT * FROM tabbed_capsules ORDER BY tab_order");
+    $stmt->execute();
+    $tabs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    if (empty($tabs)) {
+        // Default tabs if none exist
+        $tabs = [
+            ['id' => 1, 'tab_name' => 'New releases', 'tab_order' => 1],
+            ['id' => 2, 'tab_name' => 'Top Sellers', 'tab_order' => 2],
+            ['id' => 3, 'tab_name' => 'Top Rated', 'tab_order' => 3],
+            ['id' => 4, 'tab_name' => 'Coming soon', 'tab_order' => 4]
+        ];
+    }
+    
+    $html = '<div>
+<ul id="main_tab_list">';
+    
+    foreach ($tabs as $i => $tab) {
+        $active = $i === 0 ? 'main_tab_on' : 'main_tab_off';
+        $tabId = $tab['id'] ?? ($i + 1);
+        $tabName = htmlspecialchars($tab['tab_name'] ?? 'Tab ' . ($i + 1));
+        
+        $html .= '<li class="' . $active . '" id="tab_' . $tabId . '_li"><a class="tab_link" href="javascript:SelectTab(' . $tabId . ');" id="tab_' . $tabId . '">' . $tabName . '</a></li>';
+    }
+    
+    $html .= '</ul>
+</div>
+<br clear="all"/>
+<div class="global_area_tabs_ctn_norm" id="global_area_tabs_ctn">
+<div></div>';
+    
+    // Add tab content
+    foreach ($tabs as $i => $tab) {
+        $tabId = $tab['id'] ?? ($i + 1);
+        $display = $i === 0 ? '' : 'style="display: none;"';
+        
+        $html .= '<div id="tab_' . $tabId . '_content" ' . $display . '>';
+        $html .= cms_render_tab_games($tabId);
+        $html .= '</div>';
+    }
+    
+    $html .= '</div>';
+    return $html;
+}
+
+function cms_render_tab_games(int $tabId): string
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare("SELECT tg.*, a.name, a.price, a.release_date FROM tabbed_capsule_games tg 
+                         LEFT JOIN store_apps a ON a.appid = tg.appid 
+                         WHERE tg.tab_id = ? ORDER BY tg.game_order LIMIT 10");
+    $stmt->execute([$tabId]);
+    $games = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    if (empty($games)) {
+        // Default sample games
+        $stmt = $db->prepare("SELECT * FROM store_apps ORDER BY RAND() LIMIT 10");
+        $stmt->execute();
+        $games = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    $html = '';
+    foreach ($games as $game) {
+        $name = htmlspecialchars($game['name']);
+        $price = number_format((float)$game['price'], 2);
+        $appid = (int)$game['appid'];
+        $releaseDate = $game['release_date'] ? date('M j, Y', strtotime($game['release_date'])) : '';
+        
+        $html .= '<div class="global_area_tabs_item" onclick="location.href=\'index.php?area=app&id=' . $appid . '\';">
+<div class="global_area_tabs_item_img"><img alt="Buy ' . $name . '" height="45" src="themes/2008/images/capsules/capsule_sm_120_default.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt"><h3>' . $name . '</h3>' . ($releaseDate ? 'Released: ' . $releaseDate : '') . '</div>
+<div class="global_area_tabs_item_rating"></div>
+<div class="global_area_tabs_item_price">$' . $price . '</div>
+<br clear="all"/>
+</div>';
+    }
+    
+    return $html;
+}
+
+function cms_render_2008_extras_section(): string
+{
+    return '<div class="home_area_extras_header"><h2>Gifting on Steam</h2></div>
+<div class="home_area_extras_bg">
+<a href="index.php?area=support&topic=gifts" target="_blank"><img align="left" alt="Gifting on Steam" border="0" height="65" src="themes/2008/images/home_area_extras_gifts.jpg" width="113"/></a>
+<a href="index.php?area=support&topic=gifts" target="_blank">Give the gift of game</a><br/>
+Gift purchasing is available on Steam. Simply indicate your purchase is a gift during checkout, write a little gift message for your friend, and we\'ll do the rest.
+</div>
+<div class="home_area_extras_header"><h2>Merchandise</h2></div>
+<div class="home_area_extras_bg">
+<a href="http://store.valvesoftware.com" target="_blank"><img align="left" alt="Merchandise" border="0" height="65" src="themes/2008/images/home_area_extras_merch.jpg" width="113"/></a>
+<a href="http://store.valvesoftware.com" target="_blank">Valve store </a><img align="bottom" border="0" src="themes/2008/images/ico/iconExternalLink.gif"/><br/>
+Open 24/7, The Valve Store is your source for swagalicious apparel, posters, books, and collectibles for all your favorite Valve games.
+</div>';
+}
+
+function cms_render_2008_sidebar_right(): string
+{
+    $db = cms_get_db();
+    
+    // Get recent news
+    $stmt = $db->prepare("SELECT id, title FROM news ORDER BY date_created DESC LIMIT 8");
+    $stmt->execute();
+    $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    $html = '<div id="home_area_steam_news">
+<h2>Steam News</h2>
+<ul id="home_area_news_list">';
+    
+    foreach ($news as $article) {
+        $title = htmlspecialchars($article['title']);
+        $id = (int)$article['id'];
+        $html .= '<li><a href="index.php?area=news&id=' . $id . '">' . $title . '</a></li>';
+    }
+    
+    $html .= '</ul>
+<br/>
+<a class="btn_blue" href="index.php?area=news">View all news</a>
+</div>
+<div id="home_area_videos">
+<div id="home_area_videos_banner"> </div>
+<h2>Videos/Trailers</h2>
+<ul id="home_area_videos_list">';
+    
+    // Add sample video links
+    $html .= '<li><a href="index.php?area=video&id=1">Sample Video 1</a></li>
+<li><a href="index.php?area=video&id=2">Sample Video 2</a></li>
+<li><a href="index.php?area=video&id=3">Sample Video 3</a></li>';
+    
+    $html .= '</ul>
+<br/>
+<a class="btn_blue" href="index.php?area=freestuff&type=videos">Browse all videos</a>
+</div>
+<div id="home_area_demos">
+<div id="home_area_demos_banner"> </div>
+<h2>Demos</h2>
+<ul id="home_area_demos_list">';
+    
+    // Add sample demo links
+    $html .= '<li><a href="index.php?area=demo&id=1">Sample Demo 1</a></li>
+<li><a href="index.php?area=demo&id=2">Sample Demo 2</a></li>
+<li><a href="index.php?area=demo&id=3">Sample Demo 3</a></li>';
+    
+    $html .= '</ul>
+<br/>
+<a class="btn_blue" href="index.php?area=freestuff&type=demos">Browse all demos</a>
+</div>';
+    
+    return $html;
+}
+
+function cms_render_footer_2008(): string
+{
+    return '<div id="footer">
+<div id="footer_logo"><a href="http://www.valvesoftware.com"><img alt="Valve Software" border="0" src="themes/2008/images/logo_valve_footer.jpg"/></a></div>
+<div id="footer_text">
+<form action="index.php">
+<select name="l" onchange="submit();" style="width: 200px;">
+<option value="english" selected>English</option>
+<option value="french">French</option>
+<option value="german">German</option>
+<option value="spanish">Spanish</option>
+<option value="italian">Italian</option>
+<option value="japanese">Japanese</option>
+<option value="korean">Korean</option>
+<option value="portuguese">Portuguese</option>
+<option value="russian">Russian</option>
+<option value="schinese">Simplified Chinese</option>
+<option value="tchinese">Traditional Chinese</option>
+</select><br>
+</form>
+<p>© 2008 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.
+<a href="index.php?area=privacy">Privacy Policy</a>. <a href="index.php?area=legal">Legal</a>. <a href="index.php?area=ssa">Steam Subscriber Agreement</a>.
+</p>
+<p>
+<br/>
+<a href="http://www.valvesoftware.com/about.html" target="_blank">About Valve</a> | <a href="http://www.valvesoftware.com/business/" target="_blank">Business Solutions</a> | <a href="http://www.valvesoftware.com/jobs.html" target="_blank">Jobs</a> | <a href="index.php?area=cybercafes" target="_blank">Cyber Cafés</a>
+</p>
+</div>
+</div>';
+}
+
+function cms_render_tab_switching_script(): string
+{
+    return 'function SelectTab( selected )
+{
+    // set tab
+    document.getElementById( \'tab_1_li\' ).className = \'main_tab_off\';
+    document.getElementById( \'tab_2_li\' ).className = \'main_tab_off\';
+    document.getElementById( \'tab_3_li\' ).className = \'main_tab_off\';
+    document.getElementById( \'tab_4_li\' ).className = \'main_tab_off\';
+    document.getElementById( \'tab_\'+selected+\'_li\' ).className = \'main_tab_on\';
+
+    // set content area
+    document.getElementById( \'tab_1_content\' ).style.display = \'none\';
+    document.getElementById( \'tab_2_content\' ).style.display = \'none\';
+    document.getElementById( \'tab_3_content\' ).style.display = \'none\';
+    document.getElementById( \'tab_4_content\' ).style.display = \'none\';
+    document.getElementById( \'tab_\'+selected+\'_content\' ).style.display = \'\';
+}';
 }
 
 function cms_render_string(string $html, array $vars, string $tpl_dir): string
