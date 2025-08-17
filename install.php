@@ -238,6 +238,20 @@ CREATE TABLE `0405_storefront_packages` (
                 f6 TEXT,f7 TEXT,f8 TEXT,f9 TEXT,f10 TEXT,
                 created DATETIME DEFAULT CURRENT_TIMESTAMP
             )");
+            $pdo->exec("DROP TABLE IF EXISTS bug_reports");
+            $pdo->exec("CREATE TABLE bug_reports(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                email_address VARCHAR(256) NOT NULL,
+                description TEXT,
+                reproducible VARCHAR(10),
+                repro_steps TEXT,
+                os VARCHAR(50),
+                connection_type VARCHAR(50),
+                file_system VARCHAR(50),
+                reporter_comments TEXT,
+                created DATETIME DEFAULT CURRENT_TIMESTAMP,
+                updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )");
             $pdo->exec("DROP TABLE IF EXISTS cafe_directory");
             $pdo->exec("CREATE TABLE cafe_directory(
                 id INT AUTO_INCREMENT PRIMARY KEY,

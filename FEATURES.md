@@ -18,6 +18,7 @@
 - Installer seeds sidebar section defaults for 2006 v1/v2 and 2007 v1/v2 themes
 - Installer seeds default content server list from 2003 and 2004 archives
 - Platform update history pages use collapsible entries with latest update expanded by default
+- Users can submit bug reports stored in MySQL with AJAX-enabled admin editing
 - Full article news tag preserves HTML formatting
 - Configurable root path for subdirectory deployments
 - Year-based news filtering configurable per theme year
