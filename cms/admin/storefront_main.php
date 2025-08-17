@@ -131,22 +131,6 @@ $apps = $db->query('SELECT appid,name,price,images FROM store_apps ORDER BY name
 $price_map = [];
 foreach ($apps as $a) { $price_map[$a['appid']] = $a['price']; }
 
-$img_base = dirname(__DIR__, 2) . '/storefront/images/capsules';
-$list = [];
-if ($use_all) {
-    foreach (glob($img_base.'/*', GLOB_ONLYDIR) as $dir) {
-        foreach (glob($dir.'/*.png') as $file) {
-            $list[] = basename(dirname($file)).'/'.basename($file);
-        }
-    }
-} else {
-    $dir = $img_base.'/'.$theme;
-    if (is_dir($dir)) {
-        foreach (glob($dir.'/*.png') as $file) {
-            $list[] = $theme.'/'.basename($file);
-        }
-    }
-}
 $tabs = [];
 if ($showTabs) {
     $stmt = $db->prepare('SELECT * FROM storefront_tabs WHERE theme=? ORDER BY ord,id');
@@ -159,8 +143,6 @@ if ($showTabs) {
     }
     unset($t);
 }
-$images = [];
-foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $images[$pos][] = ['file'=>$f,'label'=>$f]; } }
 ?>
 <h2>Main Page</h2>
 <form method="post" style="margin-bottom:15px;">
@@ -242,15 +224,13 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
 </div>
   <div id="capsuleModal" class="capsule-modal" aria-label="Change capsule">
     <div class="dialog">
+      <img id="modalPreview" src="" alt="selected image" style="display:none;max-width:100%;margin-bottom:10px;">
       <div id="capChoose">
         <button type="button" id="btnSelectExisting" class="btn btn-secondary">Choose Existing Image</button>
         <button type="button" id="btnUploadNew" class="btn btn-secondary">Upload New Image</button>
       </div>
       <div id="capExisting" style="display:none;">
-        <div>
-          <img id="existingPreview" src="" alt="preview" style="display:none;max-width:100%;margin-bottom:10px;">
-          <button type="button" id="selectExistingImg" class="btn btn-secondary">Select Image</button>
-        </div>
+        <button type="button" id="selectExistingImg" class="btn btn-secondary">Select Image</button>
         <label>App
           <select id="existingAppid"></select>
         </label>
@@ -320,7 +300,6 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   <script src="js/image-picker.min.js"></script>
   <script>
   $(function(){
-  var images = <?php echo json_encode($images);?>;
   var apps = <?php echo json_encode($apps);?>;
   var dims = <?php echo json_encode($dimsMap); ?>;
   var cropper = null;
@@ -336,6 +315,8 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   $('.change-btn').on('click',function(){
     var pos=$(this).data('pos');
     if(cropper){ cropper.destroy(); cropper=null; }
+    var src=$('#preview_'+pos).attr('src');
+    $('#modalPreview').attr('src',src).show();
     $('#capsuleModal').data('pos',pos).css('display','flex');
     $('#capChoose').show();
     $('#capExisting,#capUpload').hide();
@@ -344,9 +325,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   });
 
   $('#btnSelectExisting').on('click',function(){
-    var pos=$('#capsuleModal').data('pos');
     if(cropper){ cropper.destroy(); cropper=null; }
-    $('#existingPreview').hide();
     selectedFile='';
     $('#existingAppid').val('');
     $('#capChoose').hide();
@@ -356,22 +335,24 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   });
 
   $('#selectExistingImg').on('click',function(){
-    var pos=$('#capsuleModal').data('pos');
-    var opts='';
-    $.each(images[pos]||[],function(i,img){
-        opts+='<option data-img-src="../../storefront/images/capsules/'+img.file+'" value="'+img.file+'">'+img.file+'</option>';
+    $.getJSON('list_capsule_images.php',function(files){
+      var opts='';
+      $.each(files,function(i,file){
+        opts+='<option data-img-src="../../storefront/images/capsules/'+file+'" value="'+file+'">'+file+'</option>';
+      });
+      $('#existingImageList').html(opts).imagepicker();
+      $('#existingImageList').on('change',function(){
+        var f=$(this).val();
+        if(f){ $('#modalPreview').attr('src','../../storefront/images/capsules/'+f).show(); }
+      });
+      $('#existingImageDialog').dialog({modal:true,width:600,buttons:{
+          'Select': function(){
+              selectedFile=$('#existingImageList').val();
+              $(this).dialog('close');
+          },
+          'Cancel': function(){ $(this).dialog('close'); }
+      }});
     });
-    $('#existingImageList').html(opts).imagepicker();
-    $('#existingImageDialog').dialog({modal:true,width:600,buttons:{
-        'Select': function(){
-            selectedFile=$('#existingImageList').val();
-            if(selectedFile){
-                $('#existingPreview').attr('src','../../storefront/images/capsules/'+selectedFile).show();
-            }
-            $(this).dialog('close');
-        },
-        'Cancel': function(){ $(this).dialog('close'); }
-    }});
   });
 
   $('#existingAccept').on('click',function(){
@@ -411,6 +392,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
     var reader=new FileReader();
     reader.onload=function(e){
       $('#cropImage').attr('src',e.target.result);
+      $('#modalPreview').attr('src',e.target.result).show();
       $('#cropContainer').show();
       var dw=dims[pos].width, dh=dims[pos].height;
       if(cropper){ cropper.destroy(); }
@@ -435,8 +417,6 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
          $('#preview_'+pos).attr('src','../../storefront/images/capsules/'+rel);
          $('#sel_'+pos).val(appid);
          $('img[data-pos='+pos+']').attr('src','../../storefront/images/capsules/'+rel).data('app',appid);
-         images[pos]=images[pos]||[];
-         images[pos].push({file:rel,label:appid});
          $('#capsuleModal').hide();
          $('#cropContainer').hide();
          cropper.destroy();
@@ -447,6 +427,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
 
   $('.cancel').on('click',function(){
     $('#capsuleModal').hide();
+    $('#modalPreview').hide();
     if(cropper){ cropper.destroy(); cropper=null; }
     $('#cropContainer').hide();
     $('#uploadAccept').prop('disabled',false);
@@ -455,6 +436,7 @@ foreach ($positions as $pos) { $images[$pos] = []; foreach ($list as $f) { $imag
   $('#capsuleModal').on('click', function(e){
     if(e.target === this) {
       $(this).hide();
+      $('#modalPreview').hide();
       if(cropper){ cropper.destroy(); cropper=null; }
       $('#cropContainer').hide();
       $('#uploadAccept').prop('disabled',false);
