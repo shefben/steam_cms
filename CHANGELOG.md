@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - Parent-only sidebar links no longer require URLs and won't navigate when toggled.
 - Installer seeds parent-only sidebar headers without PHP targets, preventing navigation.
 - Removed URLs from all sidebar parent links, including storefront, index management, and legacy storefront headers.
+- Added bug report form with database storage and admin management interface.
 - Redirected settings page after saving so new admin theme loads without manual refresh.
 - Fixed custom pages and page version management screens to show content in the Neon admin theme.
 - Restored Page Version Management radio controls for hyphenated theme variants and skipped empty page groups.

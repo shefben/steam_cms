@@ -381,6 +381,63 @@ function cms_insert_support_request(string $page, array $fields, string $lang = 
     $stmt->execute(array_merge([$page,$lang], $vals));
 }
 
+function cms_insert_bug_report(array $data): int
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('INSERT INTO bug_reports(email_address, description, reproducible, repro_steps, os, connection_type, file_system, reporter_comments, created, updated) VALUES(?,?,?,?,?,?,?,?,NOW(),NOW())');
+    $stmt->execute([
+        $data['email_address'] ?? '',
+        $data['description'] ?? '',
+        $data['repro'] ?? '',
+        $data['repro_steps'] ?? '',
+        $data['os'] ?? '',
+        $data['connection_type'] ?? '',
+        $data['file_system'] ?? '',
+        $data['reporter_comments'] ?? '',
+    ]);
+    return (int) $db->lastInsertId();
+}
+
+function cms_get_bug_reports(): array
+{
+    $db = cms_get_db();
+    $stmt = $db->query('SELECT * FROM bug_reports ORDER BY created DESC');
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function cms_get_bug_report(int $id): ?array
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('SELECT * FROM bug_reports WHERE id=?');
+    $stmt->execute([$id]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row ?: null;
+}
+
+function cms_update_bug_report(int $id, array $data): void
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('UPDATE bug_reports SET email_address=?, description=?, reproducible=?, repro_steps=?, os=?, connection_type=?, file_system=?, reporter_comments=?, updated=NOW() WHERE id=?');
+    $stmt->execute([
+        $data['email_address'] ?? '',
+        $data['description'] ?? '',
+        $data['repro'] ?? '',
+        $data['repro_steps'] ?? '',
+        $data['os'] ?? '',
+        $data['connection_type'] ?? '',
+        $data['file_system'] ?? '',
+        $data['reporter_comments'] ?? '',
+        $id,
+    ]);
+}
+
+function cms_delete_bug_report(int $id): void
+{
+    $db = cms_get_db();
+    $stmt = $db->prepare('DELETE FROM bug_reports WHERE id=?');
+    $stmt->execute([$id]);
+}
+
 function cms_record_visit($page){
     $db = cms_get_db();
     $date = date('Y-m-d');
