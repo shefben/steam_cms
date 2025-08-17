@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Prevented duplicate `session_start` warnings on Update History page by checking session state in the admin header.
 - Added inline editing with AJAX to custom redirects management.
 - Custom titles admin now supports AJAX add, delete, and save actions without page reloads.
 - Restored top navigation tabs on 2004/2005v1 storefront for packages, games, and third-party listings.
