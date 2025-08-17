@@ -258,5 +258,6 @@
   before/after hooks on tag rendering.
 - Plugins can hook the Twig environment and template rendering through global
   event hooks.
+- Plugin sidebar links automatically group under a Plugins menu in the admin navigation.
 - Theme settings may target custom database tables with optional datatype
   casting.
