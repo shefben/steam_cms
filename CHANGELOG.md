@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Capsule previews in index management now load theme CSS for accurate rendering.
 - Restored modal-based Add Capsule and Add Tabbed Capsule actions for 2006 index capsule management.
 - Installer now writes the configured database port to `config.php`.
 - Added .htaccess redirect for Counter-Strike price change marketing page.

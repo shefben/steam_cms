@@ -370,8 +370,22 @@ if ($use_all) {
     </div>
   </form>
 </div>
-<link rel="stylesheet" href="../themes/<?php echo $theme; ?>/css/styles_capsules.css">
-<link rel="stylesheet" href="../themes/<?php echo $theme; ?>/css/styles_home.css">
+<?php
+$cssDir = dirname(__DIR__, 2) . '/themes/' . $theme . '/css';
+$cssFiles = [
+    'steampowered.css',
+    'styles_global.css',
+    'styles_capsules.css',
+    'styles_content.css',
+    'styles_home.css'
+];
+foreach ($cssFiles as $css) {
+    $abs = $cssDir . '/' . $css;
+    if (is_file($abs)) {
+        echo '<link rel="stylesheet" href="../themes/' . htmlspecialchars($theme) . '/css/' . htmlspecialchars($css) . '">';
+    }
+}
+?>
 <link rel="stylesheet" href="css/image-picker.css">
 <script src="js/image-picker.min.js"></script>
 <style>
