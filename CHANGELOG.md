@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - Restored Page Version Management radio controls for hyphenated theme variants and skipped empty page groups.
 - Fixed content server stats to render all servers with collapsible blocks for 2003 v2 and grouped entries for 2004+ themes.
 - Installer seeds default content servers from 2003 v2 and 2004 archives.
+- Error Log admin page supports deleting individual entries and clearing the entire log.
 - Error logger now records all PHP errors and warnings by enforcing E_ALL reporting.
 - Removed duplicated news rows and stripped stray `\n` sequences during installation.
 - 2003 v1 update notification now displays only on the Get Steam Now page.
