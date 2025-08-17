@@ -2058,3 +2058,156 @@ A:active   { color: #e08a01; font-size: 10pt; text-decoration: underline }
 
 
 ');
+INSERT INTO marketing (msgtype,language,content) VALUES ('cz_pricechange','english','<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+        <head>
+                <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+                <title>Steam</title>
+                <style>BODY  { color: white; font-size: 9pt; line-height: 14pt; font-family: verdana, tahoma, helvetica, arial; background-color: #666666; margin: 0px; padding: 0px }
+
+IMG {
+margin:0px;
+border:none;
+}
+
+IMG.screenshot {
+width:188px;
+height:110px;
+margin:12px 6px 12px 6px;
+border-width:4px;
+border-color:black;
+border-style:solid;
+}
+
+HR      {
+height:1px;
+color:#555555;
+}
+
+H1      {
+font-size:16pt;
+}
+
+H2 {
+padding-top:8px;
+font-size:13px;
+font-family:arial, tahoma, verdana;
+
+width:599px;
+line-height:20px;
+margin:2px 0px 4px 0px;
+\\background:#AAA71A;
+text-transform:uppercase;
+\\letter-spacing:0.1em;
+}
+
+UL {
+margin:0px 0px 0px 0px;
+list-style-type:square;
+margin-right:40px;
+}
+
+.header {
+padding:0px 0px 0px 12px;
+height:148px;
+background:black;
+background-image:url(./images/cz_logo_bg.gif);
+background-repeat:repeat-x;
+background-position:top left;
+}
+
+.shots {
+background:#555555;
+width:599px;
+text-align:center;
+}
+.content {
+margin:0px 24px 0px 32px;
+}
+.contentbold  { font-size: 26px; line-height: 20px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; margin: 0px }
+.contentbold2 { color: #ff0; font-size: 17px; line-height: 20px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; margin: 0px }
+.arrow  { font-size: 10pt; line-height: 14pt; background-color: transparent; float: left; margin: 0px; padding: 0px; \\width: 400px }
+
+.footnote {
+color:#999999;
+font-size:9px;
+line-height:11px;
+text-transform:uppercase;
+width:560px;
+}
+
+.violator {
+font-size:14pt;
+font-weight:bold;
+line-height:28px;
+text-decoration:none;
+}
+
+A:visited  { color: #ff0; font-size: 10pt; line-height: 14pt; text-decoration: underline }
+
+A:link  { color: #ff0; font-size: 10pt; line-height: 14pt; text-decoration: underline }
+
+A:hover  { color: #ffd700; font-size: 10pt; line-height: 14pt; text-decoration: underline }
+
+A:active  { color: #ff0; font-size: 10pt; line-height: 14pt; text-decoration: underline }</style>
+        </head>
+
+        <body bgcolor="#ffffff" topmargin="0" leftmargin="0" >
+                <table width="599" border="0" cellspacing="0" cellpadding="0" background="./images/MSGBackground_CZ.NewPrice.jpg" cool gridx="16" gridy="16" height="557" showgridx showgridy>
+                        <tr height="178">
+                                <td width="599" height="178" colspan="9"></td>
+                                <td width="1" height="178"><spacer type="block" width="1" height="178"></td>
+                        </tr>
+                        <tr height="220">
+                                <td width="34" height="220" colspan="2"></td>
+                                <td content csheight="33" width="549" height="220" colspan="5" valign="top" xpos="34">
+                                        <div align="center">
+                                                <b><span class="contentbold">NOW FOR&nbsp;ONLY&nbsp;$29.95.</span></b></div>
+                                </td>
+                                <td width="28" height="220" colspan="2"></td>
+                                <td width="1" height="220"><spacer type="block" width="1" height="220"></td>
+                        </tr>
+                        <tr height="2">
+                                <td width="113" height="109" colspan="3" rowspan="2"></td>
+                                <td content csheight="78" width="295" height="109" rowspan="2" valign="top" xpos="113"><span class="arrow"><img src="./images/Bullet_CZ.gif" alt="" width="8" height="8" border="0">&nbsp;&nbsp;Single-player action in Counter-Strike!<br>
+                                                <img src="./images/Bullet_CZ.gif" alt="" width="8" height="8" border="0">&nbsp;&nbsp;Extensive tour of duty campaign<br>
+                                                <img src="./images/Bullet_CZ.gif" alt="" width="8" height="8" border="0">&nbsp;&nbsp;Huge number of skirmish modes<br>
+                                                <img src="./images/Bullet_CZ.gif" alt="" width="8" height="8" border="0">&nbsp;&nbsp;Over 12 bonus single-player missions </span></td>
+                                <td width="246" height="2" colspan="5"></td>
+                                <td width="1" height="2"><spacer type="block" width="1" height="2"></td>
+                        </tr>
+                        <tr height="107">
+                                <td width="12" height="107"></td>
+                                <td content csheight="66" width="106" height="107" valign="top" xpos="467">
+                                        <div align="center">
+                                                <a href="steam://purchase/7"><b>CLICK HERE TO ORDER THE GAME NOW</b></a></div>
+                                </td>
+                                <td width="128" height="107" colspan="3"></td>
+                                <td width="1" height="107"><spacer type="block" width="1" height="107"></td>
+                        </tr>
+                        <tr height="42">
+                                <td width="17" height="42"></td>
+                                <td content csheight="30" width="577" height="42" colspan="7" valign="top" xpos="22"><span class="footnote"><span class="footnote2">&copy; VALVE CORPORATION. ALL RIGHTS RESERVED. VALVE, THE VALVE LOGO, HALF-LIFE, HALF-LIFE LOGO, LAMBDA LOGO, AND&nbsp;VALVE&nbsp;SOURCE ARE TRADEMARKS AND/OR REGISTERED TRADEMARKS OF VALVE CORPORATION. </span></span></td>
+                                <td width="3" height="42"></td>
+                                <td width="1" height="42"><spacer type="block" width="1" height="42"></td>
+                        </tr>
+                        <tr height="1" cntrlrow>
+                                <td width="22" height="1"><spacer type="block" width="22" height="1"></td>
+                                <td width="12" height="1"><spacer type="block" width="12" height="1"></td>
+                                <td width="79" height="1"><spacer type="block" width="79" height="1"></td>
+                                <td width="342" height="1"><spacer type="block" width="342" height="1"></td>
+                                <td width="12" height="1"><spacer type="block" width="12" height="1"></td>
+                                <td width="106" height="1"><spacer type="block" width="106" height="1"></td>
+                                <td width="100" height="1"><spacer type="block" width="100" height="1"></td>
+                                <td width="24" height="1"><spacer type="block" width="24" height="1"></td>
+                                <td width="4" height="1"><spacer type="block" width="4" height="1"></td>
+                                <td width="1" height="1"></td>
+                        </tr>
+                </table>
+        </body>
+
+</html>
+');
+
