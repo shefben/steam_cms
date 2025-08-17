@@ -74,6 +74,7 @@ $default_nav = [
     ['file'=>'faq.php','label'=>'FAQ','visible'=>1,'parent'=>'faq_management'],
     ['file'=>'faq_categories.php','label'=>'FAQ Categories','visible'=>1,'parent'=>'faq_management'],
     ['file'=>'support_page.php','label'=>'Support Page','visible'=>1,'parent'=>'support_faq'],
+    ['file'=>'bug_reports.php','label'=>'Bug Reports','visible'=>1,'parent'=>'support_faq'],
     ['file'=>'troubleshooter','label'=>'Troubleshooter','visible'=>1,'parent'=>'support_faq'],
     ['file'=>'troubleshooter.php','label'=>'Troubleshooter','visible'=>1,'parent'=>'troubleshooter'],
     ['file'=>'troubleshooter_manage.php','label'=>'Troubleshooter Management','visible'=>1,'parent'=>'troubleshooter'],
