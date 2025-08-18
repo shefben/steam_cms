@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once __DIR__ . '/../config.php';
 function db_connect() {
     static $db;
     if ($db instanceof PDO) {
@@ -9,17 +9,18 @@ function db_connect() {
             return $db;
         } catch (PDOException $e) {
             // Connection lost, need to reconnect
+            $db = null;
         }
     }
 
     $config_path = __DIR__ . '/../config.php';  // use __DIR__ or you deserve the pain
     if (!file_exists($config_path)) {
-        die('CMS not installed. Please run install.php');
+        throw new RuntimeException('CMS not installed. Please run install.php');
     }
 
     $cfg = include $config_path;
     if (!is_array($cfg)) {
-        die('Invalid config file. Expected an array.');
+        throw new RuntimeException('Invalid config file. Expected an array.');
     }
 
     try {
@@ -33,7 +34,7 @@ function db_connect() {
         $db = new PDO($dsn, $cfg['user'], $cfg['pass'], $options);
         return $db;
     } catch (PDOException $e) {
-        die('Connection failed: ' . $e->getMessage());
+        throw new RuntimeException('Connection failed: ' . $e->getMessage(), 0, $e);
     }
 }
 
@@ -62,7 +63,7 @@ function get_total_available($servers){
 }
 
 function check_online($ip, $port){
-    $fp = fsockopen($ip, $port, $errno, $errstr, 2);
+    $fp = @fsockopen($ip, $port, $errno, $errstr, 0.5);
     if ($fp) { 
         fclose($fp); 
         return true; 
@@ -115,7 +116,7 @@ function update_server_stats($db, &$server){
         $status = 'DOWN';
         $available = 0;
         $unique = 0;
-        $fp = fsockopen($server['ip'], $server['port'], $errno, $errstr, 2);
+        $fp = @fsockopen($server['ip'], $server['port'], $errno, $errstr, 0.5);
         if (!$fp) {
             error_log("Failed to connect to server {$server['ip']}:{$server['port']} - $errstr ($errno)");
         }

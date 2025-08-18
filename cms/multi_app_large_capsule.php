@@ -22,7 +22,8 @@ function fmt($v, $mode = 'currency') {
 $group = $_GET['group'] ?? '';
 if (empty($group)) {
     http_response_code(400);
-    exit('Missing group parameter');
+    echo 'Missing group parameter';
+    return;
 }
 
 // Get database connection
@@ -41,7 +42,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (empty($rows)) {
     http_response_code(404);
-    exit('No apps found for this group');
+    echo 'No apps found for this group';
+    return;
 }
 
 // Build items array

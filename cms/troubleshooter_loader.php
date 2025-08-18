@@ -9,7 +9,9 @@ $stmt = $db->prepare('SELECT content FROM troubleshooter_pages WHERE lang=? AND 
 $stmt->execute([$lang, $slug]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($row) {
-    echo $row['content'];
-    exit;
+    echo htmlspecialchars($row['content'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+} else {
+    http_response_code(404);
+    echo 'Troubleshooter content not found';
 }
 ?>

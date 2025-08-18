@@ -12,8 +12,14 @@ $inputText = isset($_GET['text']) ? trim($_GET['text']) : '';
 if ($inputText === '') {
     $inputText = '  CLICK HERE TO DOWNLOAD THE STEAM INSTALLER ( < 1MB )';
 }
+// Limit length to prevent excessive memory usage
+$inputText = function_exists('mb_substr') ? mb_substr($inputText, 0, 100, 'UTF-8') : substr($inputText, 0, 100);
 // Normalise to uppercase for consistency with the original button.
-$text = mb_strtoupper($inputText, 'UTF-8');
+if (function_exists('mb_strtoupper')) {
+    $text = mb_strtoupper($inputText, 'UTF-8');
+} else {
+    $text = strtoupper($inputText);
+}
 
 // Load the original template GIF.  We draw the text on top of this so that the button
 // retains its original colours, border, and rounded corners.  The GIF is shipped in the
@@ -23,7 +29,7 @@ if (!file_exists($templatePath)) {
     // Fail gracefully if the template is missing.
     header('Content-Type: text/plain');
     echo "Missing template image.";
-    exit;
+    return;
 }
 // GD cannot draw directly on palette based images cleanly, so convert to a truecolour image.
 $template = imagecreatefromgif($templatePath);
@@ -104,7 +110,7 @@ if ($fontPath === null) {
     // If no TTF font is available, we cannot render.  Inform the client accordingly.
     header('Content-Type: text/plain');
     echo "No suitable TrueType font found for rendering text.";
-    exit;
+    return;
 }
 
 // Determine an appropriate font size by trial.  The original button text occupies roughly
@@ -114,27 +120,21 @@ if ($fontPath === null) {
 $maxFontSize = 16;
 $paddingLeftRight = 12; // horizontal padding from the border before text begins
 $paddingTop       = 1;  // vertical offset; adjust to match original placement
-$fontSize = 8;                       // bold, fractional allowed
-$spacingPx = 0;        // <- new tracking amount
+$fontSize = $maxFontSize;
+$spacingPx = 1.5;
 
-// 2️⃣  Measure
-$bbox       = imagettfbbox($fontSize, 0, $fontPath, $text);
-//$textWidth  = $bbox[2] - $bbox[0];
-//$textHeight = $bbox[1] - $bbox[7];
-$textWidth = spaced_text_width($fontSize, 0, $fontPath, $text, $spacingPx);
-$textHeight = ($bbox = imagettfbbox($fontSize, 0, $fontPath, $text))[1] - $bbox[7];
-
-// 3️⃣  Shrink only if necessary
-$paddingLR = 10;
-    $fontSize -= 0.05;
-    $bbox       = imagettfbbox($fontSize, 0, $fontPath, $text);
-    $textWidth  = $bbox[2] - $bbox[0];
+do {
+    $textWidth = spaced_text_width($fontSize, 0, $fontPath, $text, $spacingPx);
+    $bbox = imagettfbbox($fontSize, 0, $fontPath, $text);
     $textHeight = $bbox[1] - $bbox[7];
+    if ($textWidth <= $width - 2 * $paddingLeftRight) {
+        break;
+    }
+    $fontSize -= 0.5;
+} while ($fontSize > 8);
 
-
-// 4️⃣  Centre
-$x = ($width  - $textWidth)  / 20;
-$y = ($height + $textHeight) / 2.1;
+$x = ($width  - $textWidth)  / 2;
+$y = ($height + $textHeight) / 2 - $paddingTop;
 
 /* ----------------------------------------------------------------
  *  Draw the text

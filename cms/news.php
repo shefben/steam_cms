@@ -104,11 +104,12 @@ function cms_render_news($type,$count=null){
         $date  = htmlspecialchars($date);
         $link   = cms_news_url($row['id']);
         $content = str_replace('\\n', '', $row['content']);
+        $safeContent = htmlspecialchars($content, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
         switch($type){
             case 'full_article':
                 $out .= "<p><h3><a href='$link' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";
                 $out .= "<span style='font-size: 9px;'>$date &middot; $author<table width='100%' cellpadding='0' cellspacing='0'><tr><td height='1' width='100%' bgcolor='#808080'></td></tr><tr><td height='10' width='100%'></td></tr></table></span>";
-                $out .= $content;
+                $out .= $safeContent;
                 $out .= "<div><br>&nbsp;</div><br></p>";
                 break;
             case 'partial_article':

@@ -323,9 +323,13 @@ function cms_load_plugins(): void
         return;
     }
 
-    $foundPlugins = glob(__DIR__ . '/../plugins/*/plugin.php') ?: [];
+    $pluginDir = realpath(__DIR__ . '/../plugins');
+    $foundPlugins = glob($pluginDir . '/*/plugin.php') ?: [];
     foreach ($foundPlugins as $file) {
-        include $file;
+        $real = realpath($file);
+        if ($real && str_starts_with($real, $pluginDir . DIRECTORY_SEPARATOR)) {
+            include $real;
+        }
     }
 
     if (!is_dir(dirname($cache_file))) {
