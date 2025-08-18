@@ -13,8 +13,7 @@ $root_path = cms_get_setting('root_path','');
 $admin_theme = cms_get_setting('admin_theme','default');
 $news_year_only = cms_get_setting('news_year_only','1');
 $json_nav = cms_get_setting('nav_items', null);
-$nav_items = $json_nav ? json_decode($json_nav, true) : ($default_nav ?? []);
-if(!$nav_items) $nav_items = $default_nav ?? [];
+$nav_items = $json_nav ? json_decode($json_nav, true) : [];
 $favicon = cms_get_setting('favicon','/favicon.ico');
 $themes = [];
 foreach(glob(dirname(__DIR__,2).'/themes/*_admin',GLOB_ONLYDIR) as $dir){
@@ -27,6 +26,7 @@ if(isset($_POST['reorder']) && isset($_POST['items'])){
         $clean[] = [
             'file' => trim($it['file'] ?? ''),
             'label' => trim($it['label'] ?? ''),
+            'icon' => trim($it['icon'] ?? ''),
             'visible' => !empty($it['visible']) ? 1 : 0,
             'parent' => trim($it['parent'] ?? '')
         ];
@@ -55,6 +55,7 @@ if(isset($_POST['save'])){
             $items[] = [
                 'file'=>trim($it['file']),
                 'label'=>trim($it['label']),
+                'icon'=>trim($it['icon'] ?? ''),
                 'visible'=>isset($it['visible'])?1:0,
                 'parent'=>trim($it['parent'] ?? '')
             ];
@@ -97,7 +98,7 @@ SMTP Password: <input type="password" name="smtp_pass" value="<?php echo htmlspe
 Root Path: <input type="text" name="root_path" value="<?php echo htmlspecialchars($root_path); ?>" title="Prefix for all local links"><br><br>
 Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <input type="file" name="favicon" accept="image/x-icon" title="Upload a custom site favicon"><br><br>
 <h3>Sidebar Navigation <?php echo cms_help_icon('settings','sidebar'); ?></h3>
-<?php $file_options = array_unique(array_merge(array_column($nav_items,'file'), array_column($default_nav,'file'))); ?>
+<?php $file_options = array_unique(array_column($nav_items,'file')); ?>
 <datalist id="nav-files">
 <?php foreach($file_options as $f): ?>
     <option value="<?php echo htmlspecialchars($f); ?>">
@@ -105,7 +106,7 @@ Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <in
 </datalist>
 <table id="nav-table" class="data-table" cellpadding="2">
 <thead>
-    <tr><th></th><th>#</th><th>File</th><th>Label</th><th>Parent</th><th>Visible</th><th>Remove</th></tr>
+    <tr><th></th><th>#</th><th>File</th><th>Label</th><th>Icon</th><th>Parent</th><th>Visible</th><th>Remove</th></tr>
 </thead>
 <tbody id="nav-body">
 <?php foreach($nav_items as $idx=>$it): ?>
@@ -114,6 +115,7 @@ Favicon: <img src="<?php echo htmlspecialchars($favicon); ?>" alt="favicon"> <in
     <td class="order"><?php echo $idx+1; ?></td>
     <td><input type="text" name="nav_items[<?php echo $idx; ?>][file]" value="<?php echo htmlspecialchars($it['file']); ?>" title="Relative admin page path"></td>
     <td><input type="text" name="nav_items[<?php echo $idx; ?>][label]" value="<?php echo htmlspecialchars($it['label']); ?>" title="Display text in the sidebar"></td>
+    <td><input type="text" name="nav_items[<?php echo $idx; ?>][icon]" value="<?php echo htmlspecialchars($it['icon'] ?? ''); ?>" style="width:50px" title="Emoji or text icon"></td>
     <td><input type="text" list="nav-files" name="nav_items[<?php echo $idx; ?>][parent]" value="<?php echo htmlspecialchars($it['parent'] ?? ''); ?>" style="width:150px" title="Parent menu file"></td>
     <td><input type="checkbox" name="nav_items[<?php echo $idx; ?>][visible]" <?php echo !empty($it['visible'])?'checked':''; ?> title="Show this link in the sidebar"></td>
     <td><button type="button" class="remove btn btn-small">Remove</button></td>
@@ -143,6 +145,7 @@ document.addEventListener('DOMContentLoaded',function(){
             items.push({
                 file:tr.querySelector('input[name$="[file]"]').value,
                 label:tr.querySelector('input[name$="[label]"]').value,
+                icon:tr.querySelector('input[name$="[icon]"]').value,
                 parent:tr.querySelector('input[name$="[parent]"]').value,
                 visible:tr.querySelector('input[name$="[visible]"]').checked?1:0
             });
@@ -163,6 +166,7 @@ document.addEventListener('DOMContentLoaded',function(){
                      '<td class="order">'+(idx+1)+'</td>'+
                     '<td><input type="text" name="nav_items['+idx+'][file]" style="width:150px"></td>'+
                     '<td><input type="text" name="nav_items['+idx+'][label]" style="width:150px"></td>'+
+                    '<td><input type="text" name="nav_items['+idx+'][icon]" style="width:50px"></td>'+
                     '<td><input type="text" list="nav-files" name="nav_items['+idx+'][parent]" style="width:150px"></td>'+
                     '<td><input type="checkbox" name="nav_items['+idx+'][visible]" checked></td>'+
                     '<td><button type="button" class="remove btn btn-small">Remove</button></td>';
