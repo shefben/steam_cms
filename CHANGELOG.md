@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Resolved Twig parser error on Random Content admin page by replacing deprecated `raw` blocks with `verbatim`.
 - Prevented duplicate `session_start` warnings on Update History page by checking session state in the admin header.
 - Corrected Page Version Management thumbnail URLs to resolve from the admin images directory.
+- Restored legacy `cms_check_permission()` helper to fix undefined function errors in the plugin API.
 - Added inline editing with AJAX to custom redirects management.
 - Custom titles admin now supports AJAX add, delete, and save actions without page reloads.
 - Consolidated support, FAQ, content, and storefront links under new sidebar parents for easier navigation.
