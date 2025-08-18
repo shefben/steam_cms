@@ -359,3 +359,4 @@ All notable changes to this project will be documented in this file.
   tag hooks
 - Added global plugin hooks for Twig environment and template rendering, and
   theme settings can target custom tables with typed values
+- Ensured plugin migrations and settings tables are created to prevent missing table errors in the plugin API.
