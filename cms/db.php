@@ -56,6 +56,43 @@ function cms_get_prepared_statement(string $sql): PDOStatement
     return $cms_prepared_statements[$sql];
 }
 
+function cms_ensure_plugin_migrations_table(): void
+{
+    static $created = false;
+    if ($created) {
+        return;
+    }
+    $db = cms_get_db();
+    $db->exec("CREATE TABLE IF NOT EXISTS plugin_migrations (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        plugin_name VARCHAR(100) NOT NULL,
+        version VARCHAR(50) NOT NULL,
+        executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE KEY plugin_version (plugin_name, version)
+    )");
+    $created = true;
+}
+
+function cms_ensure_plugin_settings_table(): void
+{
+    static $created = false;
+    if ($created) {
+        return;
+    }
+    $db = cms_get_db();
+    $db->exec("CREATE TABLE IF NOT EXISTS plugin_settings (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        plugin_name VARCHAR(100) NOT NULL,
+        setting_key VARCHAR(100) NOT NULL,
+        setting_value TEXT,
+        setting_type VARCHAR(20) DEFAULT 'string',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        UNIQUE KEY plugin_setting (plugin_name, setting_key)
+    )");
+    $created = true;
+}
+
 function cms_load_settings(): void
 {
     global $cms_settings_cache;

@@ -390,16 +390,36 @@ CREATE TABLE `0405_storefront_packages` (
             )");
 
             $pdo->exec("DROP TABLE IF EXISTS theme_footers");
-            $pdo->exec("CREATE TABLE theme_footers(
-                theme VARCHAR(50) PRIMARY KEY,
-                html MEDIUMTEXT
-            )");
+              $pdo->exec("CREATE TABLE theme_footers(
+                  theme VARCHAR(50) PRIMARY KEY,
+                  html MEDIUMTEXT
+              )");
 
-            $pdo->exec("DROP TABLE IF EXISTS admin_users");
-            $pdo->exec("DROP TABLE IF EXISTS player_sessions");
-            $pdo->exec("CREATE TABLE player_sessions (
-                id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                user_id       BIGINT UNSIGNED NOT NULL,
+              $pdo->exec("DROP TABLE IF EXISTS plugin_migrations");
+              $pdo->exec("CREATE TABLE plugin_migrations(
+                  id INT AUTO_INCREMENT PRIMARY KEY,
+                  plugin_name VARCHAR(100) NOT NULL,
+                  version VARCHAR(50) NOT NULL,
+                  executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                  UNIQUE KEY plugin_version (plugin_name, version)
+              )");
+              $pdo->exec("DROP TABLE IF EXISTS plugin_settings");
+              $pdo->exec("CREATE TABLE plugin_settings(
+                  id INT AUTO_INCREMENT PRIMARY KEY,
+                  plugin_name VARCHAR(100) NOT NULL,
+                  setting_key VARCHAR(100) NOT NULL,
+                  setting_value TEXT,
+                  setting_type VARCHAR(20) DEFAULT 'string',
+                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                  UNIQUE KEY plugin_setting (plugin_name, setting_key)
+              )");
+
+              $pdo->exec("DROP TABLE IF EXISTS admin_users");
+              $pdo->exec("DROP TABLE IF EXISTS player_sessions");
+              $pdo->exec("CREATE TABLE player_sessions (
+                  id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                  user_id       BIGINT UNSIGNED NOT NULL,
                 session_start DATETIME        NOT NULL,
                 session_end   DATETIME        NOT NULL,
                 INDEX(user_id, session_start)

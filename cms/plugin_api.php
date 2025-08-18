@@ -416,15 +416,7 @@ function cms_execute_plugin_migrations(?string $plugin_name = null): array
     global $cms_plugins;
     $db = cms_get_db();
     $results = [];
-    
-    // Create plugin migrations tracking table if it doesn't exist
-    $db->exec("CREATE TABLE IF NOT EXISTS plugin_migrations (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        plugin_name VARCHAR(100) NOT NULL,
-        version VARCHAR(50) NOT NULL,
-        executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        UNIQUE KEY plugin_version (plugin_name, version)
-    )");
+    cms_ensure_plugin_migrations_table();
     
     // Get already executed migrations
     $executed = [];
@@ -489,6 +481,7 @@ function cms_rollback_plugin_migrations(string $plugin_name, ?string $to_version
 {
     $db = cms_get_db();
     $results = [];
+    cms_ensure_plugin_migrations_table();
     
     // Mark migrations as rolled back
     if ($to_version) {
@@ -655,7 +648,8 @@ function cms_get_plugin_setting(string $plugin_name, string $setting_key, $defau
 {
     global $cms_plugins;
     $db = cms_get_db();
-    
+    cms_ensure_plugin_settings_table();
+
     $stmt = $db->prepare("SELECT setting_value, setting_type FROM plugin_settings WHERE plugin_name = ? AND setting_key = ?");
     $stmt->execute([$plugin_name, $setting_key]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -679,18 +673,7 @@ function cms_get_plugin_setting(string $plugin_name, string $setting_key, $defau
 function cms_set_plugin_setting(string $plugin_name, string $setting_key, $value, string $type = 'string'): bool
 {
     $db = cms_get_db();
-    
-    // Create plugin settings table if not exists
-    $db->exec("CREATE TABLE IF NOT EXISTS plugin_settings (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        plugin_name VARCHAR(100) NOT NULL,
-        setting_key VARCHAR(100) NOT NULL,
-        setting_value TEXT,
-        setting_type VARCHAR(20) DEFAULT 'string',
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        UNIQUE KEY plugin_setting (plugin_name, setting_key)
-    )");
+    cms_ensure_plugin_settings_table();
     
     // Validate and encode value
     $encoded_value = cms_encode_setting_value($value, $type);
@@ -750,6 +733,7 @@ function cms_encode_setting_value($value, string $type): string
 function cms_get_plugin_settings(string $plugin_name): array
 {
     $db = cms_get_db();
+    cms_ensure_plugin_settings_table();
     $stmt = $db->prepare("SELECT setting_key, setting_value, setting_type FROM plugin_settings WHERE plugin_name = ?");
     $stmt->execute([$plugin_name]);
     
