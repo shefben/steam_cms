@@ -104,19 +104,12 @@ Label for the link to the full news archive.
 
 ### `news_search_bar()`
 Outputs the news search form used by 2007 themes.
+- **Example:** `{{ news_search_bar() }}`
 
-### `index_search_bar()`
-Search form displayed at the top of 2007 home page sidebars.
-
-### `get_steam_now_button()`
-Renders the "Get Steam Now" call-to-action used in 2006 sidebars.
-
-### `find_more_list(rows = 1)`
-List of Games, Demos, and Trailers links shown under the "Find More" header.
-The `rows` parameter controls how many table rows are rendered.
-
-### `spotlight_content()`
-Outputs Spotlight HTML, customizable via settings.
+### `getsteamnow_button(text)`
+Renders a "Get Steam Now" button with custom text.
+- **text** (`string`): button label text.
+- **Example:** `{{ getsteamnow_button('Download Steam') }}`
 
 ### `sidebar_right(year, page = 'news')`
 Renders the right-hand sidebar for the given `page`. For `page = 'news'`, 2006 themes display the STEAM NEWS header, RSS link and archive months while 2007 themes show the search bar.
@@ -174,14 +167,106 @@ Outputs a static arrangement of capsules defined in `store_capsules`.
 Generates storefront sidebar navigation links.
 - **Example:** `{{ store_sidebar() }}`
 
+### `storefront_capsules()`
+Renders a collection of storefront game capsules with prices and images. Used for main storefront layouts.
+- **Example:** `{{ storefront_capsules() }}`
+
 ### `tabs_block()`
 For theme `2007_v2`, renders tabbed game lists built from `storefront_tabs` and `storefront_tab_games`.
 - **Example:** `{{ tabs_block() }}`
+
+### `custom_index_sidebar_configurations()`
+Returns JSON configuration for customizable sidebar elements on the index page.
+- **Example:** `{{ custom_index_sidebar_configurations() }}`
 
 ### `tournament_calendar(months = 4)`
 Displays a calendar of upcoming tournaments.
 - **months** (`int`, default `4`): number of months to show starting from current month.
 - **Example:** `{{ tournament_calendar(6) }}`
+
+## 2008 Theme Tags
+
+These tags are specifically designed for the 2008 Steam themes and provide enhanced functionality and layouts:
+
+### `header_2008()`
+Renders the 2008-specific header layout with updated styling and navigation.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ header_2008() }}`
+
+### `cart_status()`
+Displays the shopping cart status for the 2008 theme. Currently returns empty content but designed for future cart functionality.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ cart_status() }}`
+
+### `sidebar_2008_search()`
+Renders the enhanced search section for 2008 theme sidebars.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ sidebar_2008_search() }}`
+
+### `sidebar_2008_browse()`
+Displays the browse section with categories and navigation for 2008 themes.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ sidebar_2008_browse() }}`
+
+### `sidebar_2008_install_steam()`
+Shows the "Install Steam" promotional section with 2008 styling.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ sidebar_2008_install_steam() }}`
+
+### `sidebar_2008_freeloads()`
+Displays free content and downloads section for 2008 themes.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ sidebar_2008_freeloads() }}`
+
+### `sidebar_2008_news()`
+Renders the news section specifically formatted for 2008 theme sidebars.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ sidebar_2008_news() }}`
+
+### `sidebar_2008_catalogs()`
+Shows the game catalogs section for 2008 themes.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ sidebar_2008_catalogs() }}`
+
+### `sidebar_2008_steam_info()`
+Displays Steam information and help links for 2008 themes.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ sidebar_2008_steam_info() }}`
+
+### `large_capsule_flash_2008()`
+Renders a large featured game capsule with 2008 Flash-style animations and effects.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ large_capsule_flash_2008() }}`
+
+### `small_capsules_2008()`
+Displays a collection of small game capsules with 2008 theme styling.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ small_capsules_2008() }}`
+
+### `tabbed_single_column_capsule()`
+Shows tabbed content with single-column capsule layout for 2008 themes.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ tabbed_single_column_capsule() }}`
+
+### `extras_section_2008()`
+Renders additional content and extras section for 2008 themes.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ extras_section_2008() }}`
+
+### `sidebar_right_2008()`
+Displays the complete right sidebar layout for 2008 themes.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ sidebar_right_2008() }}`
+
+### `footer_2008()`
+Renders the footer with 2008-specific styling and content.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ footer_2008() }}`
+
+### `tab_switching_script()`
+Provides JavaScript functionality for tab switching in 2008 themes.
+- **Theme Specific:** 2008 themes only
+- **Example:** `{{ tab_switching_script() }}`
 
 ## Platform Tags
 
@@ -265,19 +350,22 @@ The following table lists each tag or tag group, where its content is managed in
 |`footer`|**Header/Footer**|`theme_footers`|
 |`news*` tags|**News** (`news.php`)|`news`|
 |`join_steam_text`, `join_steam_block`|**Settings** (`settings.php`)|`settings`|
-|`gear_block`, `free_block`, `spotlight_content`|**Settings**|`settings`|
+|`gear_block`, `free_block`|**Settings**|`settings`|
 |`sidebar_section`|**Sidebar Sections** (`index_sidebar_management.php`)|`sidebar_sections`, `sidebar_section_variants`, `sidebar_section_entries`|
 |`categories_list`|**Storefront Categories** (`storefront_categories.php`)|`store_categories`|
-|`capsule_block`, `large_capsule_block`, `featured_capsules`|**Storefront Main** (`storefront_main.php`) and **Upload Capsule** (`upload_capsule.php`)|`storefront_capsules_all`, `storefront_capsules_per_theme`, `store_capsules`|
+|`capsule_block`, `large_capsule_block`, `featured_capsules`, `storefront_capsules`|**Storefront Main** (`storefront_main.php`) and **Upload Capsule** (`upload_capsule.php`)|`storefront_capsules_all`, `storefront_capsules_per_theme`, `store_capsules`|
 |`store_sidebar`|**Storefront Sidebar** (`storefront_sidebar.php`)|`store_sidebar_links`|
 |`tabs_block`|**Storefront Main**|`storefront_tabs`, `storefront_tab_games`|
 |`tournament_calendar`|**Tournaments** (`tournaments.php`)|`tournaments`|
 |`platform_update_news`|N/A|`platform_update_history`|
 |`split_title_entry`|**Custom Titles** (`custom_titles.php`)|`custom_titles`|
-|`sitetitle`|**Custom Pages** (`custom_pages.php`)|`custom_pages`|
+|`sitetitle`, `page_title_2002`|**Custom Pages** (`custom_pages.php`)|`custom_pages`|
 |`content_header_image`|**Settings** (`settings.php`), **Custom Pages** (`custom_pages.php`)|`settings`, `custom_pages`|
 |`theme_specific_content_start`, `theme_specific_content_end`|N/A|N/A|
 |`current_theme`, `current_page`|N/A|N/A|
+|`custom_index_sidebar_configurations`|**Index Sidebar Management** (`index_sidebar_management.php`)|Various sidebar tables|
+|All `*_2008` tags|**Settings** and **Storefront** pages|Various storefront and content tables|
+|`getsteamnow_button`|**Settings**|`settings`|
 |`random_<group>`|**Random Content** (`random_content.php`) and **Random Groups** (`random_groups.php`)|`random_content`, `random_groups`|
 |`scheduled_<tag>`|**Scheduled Content** (`scheduled_content.php`)|`scheduled_content`|
 

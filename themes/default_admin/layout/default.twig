@@ -12,7 +12,20 @@
 </head>
 <body class="admin-{{ page_id }}">
 <header>
-    <h1>CMS Administration</h1>
+    <div class="header-content">
+        <h1>CMS Administration</h1>
+        <div class="header-controls">
+            <div class="notification-icon" title="Recent Notifications">
+                <span class="icon">🔔</span>
+                <div class="notification-dropdown">
+                    <div class="notification-header">Recent Activity</div>
+                    <div class="notification-list">
+                        <!-- Notifications will be populated via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {{ breadcrumbs_html|raw }}
     {{ notifications_html|raw }}
 </header>
@@ -56,6 +69,60 @@ $(function(){
             $li.fadeOut(150, function(){ $(this).remove(); });
         });
     });
+
+    // Notification icon functionality
+    $('.notification-icon').on('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var $dropdown = $(this).find('.notification-dropdown');
+        if($dropdown.is(':visible')) {
+            $dropdown.fadeOut(150);
+        } else {
+            loadNotifications();
+            $dropdown.fadeIn(150);
+        }
+    });
+
+    // Close notification dropdown when clicking outside
+    $(document).on('click', function(){
+        $('.notification-dropdown').fadeOut(150);
+    });
+
+    function loadNotifications() {
+        $.get('notifications.php?action=recent&limit=10')
+            .done(function(data) {
+                var $list = $('.notification-list');
+                $list.empty();
+                if(data && data.length > 0) {
+                    data.forEach(function(notification) {
+                        var $item = $('<div class="notification-item">');
+                        $item.html('<div class="notification-type">' + 
+                                  escapeHtml(notification.type) + '</div>' +
+                                  '<div class="notification-message">' + 
+                                  escapeHtml(notification.message) + '</div>' +
+                                  '<div class="notification-time">' + 
+                                  escapeHtml(notification.created) + '</div>');
+                        $list.append($item);
+                    });
+                } else {
+                    $list.html('<div class="no-notifications">No recent notifications</div>');
+                }
+            })
+            .fail(function() {
+                $('.notification-list').html('<div class="notification-error">Error loading notifications</div>');
+            });
+    }
+
+    function escapeHtml(text) {
+        var map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
     $('body').on('click','.help-icon',function(e){
         e.preventDefault();
         var txt=$(this).data('help');

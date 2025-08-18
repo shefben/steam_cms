@@ -9,7 +9,20 @@
 <body>
 <div class="desktop">
     <div class="header-bar">
-        <div class="header-title">Steam CMS Administration</div>
+        <div class="header-content">
+            <div class="header-title">Steam CMS Administration</div>
+            <div class="header-controls">
+                <div class="notification-icon" title="Recent Notifications">
+                    <span class="icon">🔔</span>
+                    <div class="notification-dropdown">
+                        <div class="notification-header">Recent Activity</div>
+                        <div class="notification-list">
+                            <!-- Notifications will be populated via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="breadcrumb-bar">
         <div class="breadcrumb">{{ breadcrumbs_html|raw }}</div>
@@ -176,8 +189,19 @@ document.addEventListener('mousedown',function(e){
 // Initialize windows when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeWindows);
 window.addEventListener('resize', initializeWindows);
+// Notification functionality
 document.addEventListener('click', function(e){
-    if(e.target.classList && e.target.classList.contains('submenu-toggle')){
+    if(e.target.closest('.notification-icon')){
+        e.preventDefault();
+        e.stopPropagation();
+        var dropdown = e.target.closest('.notification-icon').querySelector('.notification-dropdown');
+        if(dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+        } else {
+            loadNotifications();
+            dropdown.style.display = 'block';
+        }
+    } else if(e.target.classList && e.target.classList.contains('submenu-toggle')){
         e.preventDefault();
         var sub=document.getElementById(e.target.getAttribute('aria-controls'));
         if(sub){
@@ -186,6 +210,12 @@ document.addEventListener('click', function(e){
             sub.style.display=expanded?'none':'block';
         }
     } else {
+        // Close notification dropdown when clicking outside
+        var dropdown = document.querySelector('.notification-dropdown');
+        if(dropdown && !e.target.closest('.notification-icon')) {
+            dropdown.style.display = 'none';
+        }
+        
         var link=e.target.closest('.nav-menu li > a');
         if(link){
             var li=link.parentElement;
@@ -198,6 +228,44 @@ document.addEventListener('click', function(e){
         }
     }
 });
+
+function loadNotifications() {
+    fetch('notifications.php?action=recent&limit=10')
+        .then(response => response.json())
+        .then(data => {
+            var list = document.querySelector('.notification-list');
+            list.innerHTML = '';
+            if(data && data.length > 0) {
+                data.forEach(function(notification) {
+                    var item = document.createElement('div');
+                    item.className = 'notification-item';
+                    item.innerHTML = '<div class="notification-type">' + 
+                                    escapeHtml(notification.type) + '</div>' +
+                                    '<div class="notification-message">' + 
+                                    escapeHtml(notification.message) + '</div>' +
+                                    '<div class="notification-time">' + 
+                                    escapeHtml(notification.created) + '</div>';
+                    list.appendChild(item);
+                });
+            } else {
+                list.innerHTML = '<div class="no-notifications">No recent notifications</div>';
+            }
+        })
+        .catch(function() {
+            document.querySelector('.notification-list').innerHTML = '<div class="notification-error">Error loading notifications</div>';
+        });
+}
+
+function escapeHtml(text) {
+    var map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
 </script>
 </body>
 </html>
