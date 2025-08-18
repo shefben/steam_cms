@@ -3,6 +3,17 @@ require_once 'admin_header.php';
 cms_require_permission('manage_store');
 $db=cms_get_db();
 
+if(isset($_POST['reorder']) && isset($_POST['order'])){
+    $appids=array_map('intval',explode(',',$_POST['order']));
+    $db->beginTransaction();
+    $db->exec('UPDATE `0405_storefront_games` SET id=id+1000');
+    foreach($appids as $i=>$appid){
+        $db->prepare('UPDATE `0405_storefront_games` SET id=? WHERE appid=?')->execute([$i+1,$appid]);
+    }
+    $db->commit();
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){echo 'ok';exit;}
+}
+
 if(isset($_POST['toggle_hidden'])){
     $appid=(int)$_POST['appid'];
     $hidden=isset($_POST['hidden'])?1:0;
@@ -50,7 +61,7 @@ if(isset($_POST['save_game'])){
     $stmt=$db->prepare('REPLACE INTO `0405_storefront_games`(appid,title,description,image_thumb,image_screenshot,purchaseButtonStr,isHidden) VALUES(?,?,?,?,?,?,0)');
     $stmt->execute([$appid,$title,$desc,$thumb,$screen,$purchase]);
 }
-$games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY appid')->fetchAll(PDO::FETCH_ASSOC);
+$games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Legacy Storefront Game Management</h2>
 <table class="data-table" id="games-table">
@@ -58,7 +69,7 @@ $games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY appid')->fetch
 <tbody>
 <?php foreach($games as $g): ?>
 <tr data-id="<?php echo $g['appid']; ?>">
- <td><?php echo $g['appid']; ?></td>
+ <td class="handle"><?php echo $g['appid']; ?></td>
  <td>
 <?php if(preg_match('~^/storefront/images/~',$g['title'])): ?>
     <img src="<?php echo htmlspecialchars($g['title']); ?>" width="32">
@@ -105,6 +116,15 @@ $games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY appid')->fetch
 <script>
 $(function () {
     var loadReq;
+    var body=document.querySelector('#games-table tbody');
+    function sendOrder(){
+        var ids=[];
+        body.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.id);});
+        var data=new URLSearchParams();
+        data.set('reorder','1');
+        data.set('order',ids.join(','));
+        fetch('legacy_storefront_games.php',{method:'POST',body:data});
+    }
     function uploadFile(input, type) {
         var fd = new FormData();
         fd.append('file', input.files[0]);
@@ -234,6 +254,7 @@ $(function () {
             $('#remove_screenshot').val('0');
         });
     });
+    Sortable.create(body,{handle:'.handle',animation:150,onEnd:sendOrder});
 });
 </script>
 <?php include 'admin_footer.php'; ?>

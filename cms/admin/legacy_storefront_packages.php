@@ -3,6 +3,17 @@ require_once 'admin_header.php';
 cms_require_permission('manage_store');
 $db = cms_get_db();
 
+if(isset($_POST['reorder']) && isset($_POST['order'])){
+    $subs=array_map('intval',explode(',',$_POST['order']));
+    $db->beginTransaction();
+    $db->exec('UPDATE `0405_storefront_packages` SET subid=subid+1000');
+    foreach($subs as $i=>$sub){
+        $db->prepare('UPDATE `0405_storefront_packages` SET subid=? WHERE subid=?')->execute([$i+1,$sub+1000]);
+    }
+    $db->commit();
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){echo 'ok';exit;}
+}
+
 if (isset($_POST['toggle_hidden'])) {
     $sub = (int)$_POST['sub'];
     $hidden = isset($_POST['hidden']) ? 1 : 0;
@@ -69,7 +80,7 @@ $packages = $db->query('SELECT * FROM `0405_storefront_packages` ORDER BY subid'
 <tbody>
 <?php foreach ($packages as $p): ?>
 <tr data-id="<?php echo $p['subid']; ?>">
- <td><?php echo $p['subid']; ?></td>
+ <td class="handle"><?php echo $p['subid']; ?></td>
  <td><?php echo htmlspecialchars($p['title']); ?></td>
  <td><?php if ($p['image_thumb']): ?><img src="<?php echo htmlspecialchars($p['image_thumb']); ?>" width="32" height="32"><?php endif; ?></td>
  <td><?php echo htmlspecialchars($p['price']); ?></td>
@@ -114,6 +125,15 @@ $packages = $db->query('SELECT * FROM `0405_storefront_packages` ORDER BY subid'
 <script>
 $(function () {
     var loadReq;
+    var body=document.querySelector('#pkg-table tbody');
+    function sendOrder(){
+        var ids=[];
+        body.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.id);});
+        var data=new URLSearchParams();
+        data.set('reorder','1');
+        data.set('order',ids.join(','));
+        fetch('legacy_storefront_packages.php',{method:'POST',body:data});
+    }
     function uploadFilePkg(input, type) {
         var fd = new FormData();
         fd.append('file', input.files[0]);
@@ -246,6 +266,7 @@ $(function () {
     $('#descToolbar button').on('click', function () {
         document.execCommand($(this).data('cmd'), false, null);
     });
+    Sortable.create(body,{handle:'.handle',animation:150,onEnd:sendOrder});
 });
 </script>
 <style>
