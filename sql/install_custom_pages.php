@@ -289,7 +289,7 @@ $content2003v2 = <<<HTML
 <h2 id="afterBox">WHAT <em>IS STEAM?</em></h2><img alt="" height="6" src="./images/Graphic_box.jpg" width="24"><br>
 Steam is Valve&#39s new way of getting games into your hands ASAP. Games like <i>Half-Life</i>, <i>Counter-Strike</i>, and <i>Counter-Strike Condition Zero</i> are all being made available through Steam.<br>
 <nobr>
-<a href="http://half-life.com" onmouseout="out(5)" onmouseover="over(5)"><img align="absmiddle" alt="Half-Life" height="36" name="logo_hl" src="logo_hl.gif" vspace="8" width="36"></a> &nbsp;
+<a href="http://half-life.com" onmouseout="out(5)" onmouseover="over(5)"><img align="absmiddle" alt="Half-Life" height="36" name="logo_hl" src="logo_hl.gif" width="36" style="vertical-align: baseline;"></a> &nbsp;
 <a href="http://www.counter-strike.net" onmouseout="out(6)" onmouseover="over(6)"><img alt="Counter-Strike" height="36" name="logo_cs" src="logo_cs.gif" width="36"></a> &nbsp;
 <a href="http://www.cs-conditionzero.com/" onmouseout="out(7)" onmouseover="over(7)"><img alt="Counter-Strike: Condition Zero" height="36" name="logo_cz" src="logo_cz.gif" width="45"></a> &nbsp;
 <a href="http://www.teamfortressclassic.com" onmouseout="out(8)" onmouseover="over(8)"><img alt="Team Fortress Classic" height="36" name="logo_tfc" src="logo_tfc.gif" width="36"></a> &nbsp;</nobr>
