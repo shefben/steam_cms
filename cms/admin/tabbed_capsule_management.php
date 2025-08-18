@@ -2,8 +2,8 @@
 session_start();
 require_once __DIR__ . '/../db.php';
 
-if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: login.php');
+if (!cms_current_admin()) {
+    header('Location: ../login.php');
     exit;
 }
 
@@ -11,10 +11,13 @@ $db = cms_get_db();
 $action = $_GET['action'] ?? '';
 $message = '';
 $error = '';
+$csrfToken = cms_get_csrf_token();
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($action === 'create_tab') {
+    if (!cms_verify_csrf($_POST['csrf_token'] ?? '')) {
+        $error = 'Invalid CSRF token';
+    } elseif ($action === 'create_tab') {
         $tab_name = trim($_POST['tab_name']);
         $tab_order = (int)$_POST['tab_order'];
         $active = isset($_POST['active']) ? 1 : 0;
@@ -325,6 +328,7 @@ if ($selected_tab_id) {
             <span class="close" onclick="closeModal('createTabModal')">&times;</span>
             <h2>Create New Tab</h2>
             <form method="post" action="?action=create_tab">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken); ?>">
                 <div class="form-group">
                     <label for="tab_name">Tab Name:</label>
                     <input type="text" id="tab_name" name="tab_name" required>
@@ -349,6 +353,7 @@ if ($selected_tab_id) {
             <span class="close" onclick="closeModal('editTabModal')">&times;</span>
             <h2>Edit Tab</h2>
             <form method="post" action="?action=edit_tab">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken); ?>">
                 <input type="hidden" id="edit_tab_id" name="tab_id">
                 <div class="form-group">
                     <label for="edit_tab_name">Tab Name:</label>
@@ -374,6 +379,7 @@ if ($selected_tab_id) {
             <span class="close" onclick="closeModal('addGameModal')">&times;</span>
             <h2>Add Game to Tab</h2>
             <form method="post" action="?action=add_game">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken); ?>">
                 <input type="hidden" id="game_tab_id" name="tab_id">
                 <div class="form-group">
                     <label for="appid">Select Game:</label>
@@ -406,6 +412,7 @@ if ($selected_tab_id) {
     </div>
     
     <script>
+    const csrfToken = '<?= htmlspecialchars($csrfToken, ENT_QUOTES) ?>';
     function openCreateTabModal() {
         document.getElementById('createTabModal').style.display = 'block';
     }
@@ -432,13 +439,19 @@ if ($selected_tab_id) {
             var form = document.createElement('form');
             form.method = 'post';
             form.action = '?action=delete_tab';
-            
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'tab_id';
-            input.value = tabId;
-            
-            form.appendChild(input);
+
+            var idInput = document.createElement('input');
+            idInput.type = 'hidden';
+            idInput.name = 'tab_id';
+            idInput.value = tabId;
+            form.appendChild(idInput);
+
+            var tokenInput = document.createElement('input');
+            tokenInput.type = 'hidden';
+            tokenInput.name = 'csrf_token';
+            tokenInput.value = csrfToken;
+            form.appendChild(tokenInput);
+
             document.body.appendChild(form);
             form.submit();
         }
@@ -449,13 +462,19 @@ if ($selected_tab_id) {
             var form = document.createElement('form');
             form.method = 'post';
             form.action = '?action=remove_game';
-            
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'game_id';
-            input.value = gameId;
-            
-            form.appendChild(input);
+
+            var idInput = document.createElement('input');
+            idInput.type = 'hidden';
+            idInput.name = 'game_id';
+            idInput.value = gameId;
+            form.appendChild(idInput);
+
+            var tokenInput = document.createElement('input');
+            tokenInput.type = 'hidden';
+            tokenInput.name = 'csrf_token';
+            tokenInput.value = csrfToken;
+            form.appendChild(tokenInput);
+
             document.body.appendChild(form);
             form.submit();
         }

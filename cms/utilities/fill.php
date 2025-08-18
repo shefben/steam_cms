@@ -5,18 +5,18 @@
 
     $config_path = __DIR__ . '/../config.php';  // use __DIR__ or you deserve the pain
     if (!file_exists($config_path)) {
-        die('CMS not installed. Please run install.php');
+        throw new RuntimeException('CMS not installed. Please run install.php');
     }
 
     $cfg = include $config_path;
     if (!is_array($cfg)) {
-        die('Invalid config file. Expected an array.');
+        throw new RuntimeException('Invalid config file. Expected an array.');
     }
 
     $db = new mysqli($cfg['host'], $cfg['user'], $cfg['pass'], $cfg['dbname'], $cfg['port']);
 
     if ($db->connect_error) {
-        die('Connection failed: ' . $db->connect_error);
+        throw new RuntimeException('Connection failed: ' . $db->connect_error);
     }
 
 // 2) Create tables if missing
@@ -57,15 +57,17 @@ function get_servers($db){
 // 5) Fetch all servers
 $servers = get_servers($db);
 if (empty($servers)) {
-    die("No servers found. Congrats on breaking it.\n");
+    throw new RuntimeException("No servers found.\n");
 }
 
 // 6) Prepare server_stats insert
-$stmtSS = $db->prepare("
-  INSERT INTO server_stats
-    (server_id, available_bandwidth, unique_connections, last_checked, status)
-  VALUES (?, ?, ?, STR_TO_DATE(?, '%m/%d/%Y %H:%i:%s'), ?)
-") or die("Prepare failed (server_stats): " . $db->error);
+$stmtSS = $db->prepare(
+    "INSERT INTO server_stats (server_id, available_bandwidth, unique_connections, last_checked, status)
+      VALUES (?, ?, ?, STR_TO_DATE(?, '%m/%d/%Y %H:%i:%s'), ?)"
+);
+if (!$stmtSS) {
+    throw new RuntimeException('Prepare failed (server_stats): ' . $db->error);
+}
 
 $statuses = ['online','offline','degraded'];
 echo "Seeding one server_stats entry per server...\n";

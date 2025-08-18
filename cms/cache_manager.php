@@ -1,14 +1,13 @@
 <?php
+declare(strict_types=1);
 /**
  * SteamCMS Cache Manager
- * 
+ *
  * Centralized caching system with file timestamp validation and automatic invalidation.
  */
 
 if (!defined('CMS_CACHE_MANAGER_LOADED')) {
     define('CMS_CACHE_MANAGER_LOADED', true);
-
-declare(strict_types=1);
 
 class CacheManager
 {
@@ -32,7 +31,7 @@ class CacheManager
         if (!is_dir($ns_dir)) {
             mkdir($ns_dir, 0755, true);
         }
-        return $ns_dir . '/' . md5($key) . '.cache';
+        return $ns_dir . '/' . hash('sha256', $key) . '.cache';
     }
 
     /**

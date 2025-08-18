@@ -14,12 +14,12 @@
  * Requires PHP ≥ 7.4 with GD extension.
  */
 
-error_reporting(0);              // keep PNG output clean
-ini_set('display_errors', 0);
+error_reporting(E_ALL);
+ini_set('display_errors', '0');
 
 if (!extension_loaded('gd')) {
     header('Content-Type: text/plain', true, 500);
-    exit("GD extension not loaded\n");
+    throw new RuntimeException('GD extension not loaded');
 }
 
 /* -------------------------------------------------------------
@@ -44,9 +44,17 @@ $G = [
 
 /* Override from query-string ( ?graphWidth=800&graphStyle=bars&pieColors=... ) */
 foreach ($_GET as $k => $v) {
-    if (isset($G[$k])) {
-        $G[$k] = is_numeric($G[$k]) ? (float)$v
-               : (is_array($G[$k]) ? explode(',', $v) : $v);
+    if (!isset($G[$k])) {
+        continue;
+    }
+    if (is_int($G[$k])) {
+        $G[$k] = (int)$v;
+    } elseif (is_float($G[$k])) {
+        $G[$k] = (float)$v;
+    } elseif (is_array($G[$k])) {
+        $G[$k] = explode(',', $v);
+    } else {
+        $G[$k] = $v;
     }
 }
 
@@ -54,19 +62,26 @@ foreach ($_GET as $k => $v) {
  * 2. Load the XML data
  * ----------------------------------------------------------- */
 $dataURL = $_GET['data'] ?? 'data.xml';
-if (!preg_match('#^https?://#', $dataURL))
-    $dataURL = __DIR__ . '/' . $dataURL;
-
-if (!is_file($dataURL) && !filter_var($dataURL, FILTER_VALIDATE_URL)) {
+if (preg_match('#^https?://#i', $dataURL)) {
+    header('Content-Type: text/plain', true, 400);
+    echo "Remote URLs not allowed\n";
+    return;
+}
+$dataPath = realpath(__DIR__ . '/' . $dataURL);
+$baseDir = realpath(__DIR__);
+if (!$dataPath || strpos($dataPath, $baseDir) !== 0 || !is_file($dataPath)) {
     header('Content-Type: text/plain', true, 404);
-    exit("Data source not found: $dataURL\n");
+    echo "Data source not found\n";
+    return;
 }
 
 libxml_use_internal_errors(true);
-$xml = simplexml_load_string(file_get_contents($dataURL));
+$xmlContent = file_get_contents($dataPath);
+$xml = simplexml_load_string($xmlContent);
 if (!$xml) {
     header('Content-Type: text/plain', true, 500);
-    exit("Invalid XML\n");
+    echo "Invalid XML\n";
+    return;
 }
 
 /* ActionScript expected <row><x>Label</x><y>Value</y></row>… */
@@ -80,7 +95,8 @@ foreach ($xml->row as $row) {
 
 if (!$points) {
     header('Content-Type: text/plain', true, 500);
-    exit("No data rows\n");
+    echo "No data rows\n";
+    return;
 }
 
 /* -------------------------------------------------------------

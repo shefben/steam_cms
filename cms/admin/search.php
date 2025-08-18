@@ -108,7 +108,19 @@ if ($q !== '') {
         <?php endforeach; ?>
         </ul>
     <?php else: ?>
-        <pre><?= htmlspecialchars(print_r($items, true)) ?></pre>
+        <ul>
+        <?php foreach ($items as $row): ?>
+            <li>
+                <?php
+                    $pairs = [];
+                    foreach ($row as $k => $v) {
+                        $pairs[] = htmlspecialchars((string)$k) . ': ' . htmlspecialchars((string)$v);
+                    }
+                    echo implode(', ', $pairs);
+                ?>
+            </li>
+        <?php endforeach; ?>
+        </ul>
     <?php endif; ?>
 <?php endforeach; ?>
 <?php endif; ?>

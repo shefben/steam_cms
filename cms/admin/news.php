@@ -4,18 +4,25 @@ cms_require_any_permission(['manage_news','news_create','news_edit','news_delete
 $db = cms_get_db();
 $titleFilter = trim($_GET['title'] ?? '');
 $authorFilter = trim($_GET['author'] ?? '');
+$csrfToken = cms_get_csrf_token();
+$isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !cms_verify_csrf($_POST['csrf_token'] ?? '')) {
+    http_response_code(400);
+    echo 'Invalid CSRF token';
+    return;
+}
 // save new order
 if(isset($_POST['reorder']) && isset($_POST['order'])){
     cms_require_permission('news_edit');
     $ids = array_map('intval', explode(',', $_POST['order']));
     cms_set_setting('news_order', json_encode($ids));
     cms_admin_log('Reordered news articles');
-    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+    if($isAjax){
         echo 'ok';
     }else{
         header('Location: news.php');
     }
-    exit;
+    return;
 }
 // delete
 if(isset($_POST['delete'])){
@@ -24,10 +31,10 @@ if(isset($_POST['delete'])){
     $delId = (int)$_POST['delete'];
     $stmt->execute([$delId]);
     cms_admin_log('Deleted news article '.$delId);
-    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+    if($isAjax){
         header('Content-Type: application/json');
         echo json_encode(['status'=>'ok']);
-        exit;
+        return;
     }
 }
 // change date format
@@ -36,25 +43,29 @@ if(isset($_POST['set_date_format'])){
     $val = $_POST['set_date_format'] === 'iso' ? 'iso' : 'long';
     cms_set_setting('news_date_format', $val);
     cms_admin_log('Changed news date format to ' . $val);
-    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+    if($isAjax){
         echo 'ok';
     }else{
         header('Location: news.php');
     }
-    exit;
+    return;
 }
 // move up/down by swapping publish dates
 if(isset($_GET['move']) && isset($_GET['id'])){
     cms_require_permission('news_edit');
     $id = (int)$_GET['id'];
-    $direction = $_GET['move'];
+    $direction = $_GET['move'] === 'up' ? 'up' : ($_GET['move'] === 'down' ? 'down' : null);
+    if (!$direction) {
+        header('Location: news.php');
+        return;
+    }
     $posts = $db->query('SELECT id,publish_at FROM news ORDER BY publish_at DESC')->fetchAll(PDO::FETCH_ASSOC);
     $postCount = count($posts);
     
     // Bounds checking to prevent infinite loops
     if ($postCount === 0) {
         header('Location: news.php');
-        exit;
+        return;
     }
     
     for($i=0; $i < $postCount; $i++){
@@ -83,7 +94,7 @@ if(isset($_GET['move']) && isset($_GET['id'])){
         }
     }
     header('Location: news.php');
-    exit;
+    return;
 }
 $sql = 'SELECT id,title,author,publish_date,status,views FROM news WHERE 1';
 $params = [];
@@ -241,6 +252,7 @@ if (isset($_GET['ajax'])) {
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
+    var csrfToken = '<?= htmlspecialchars($csrfToken, ENT_QUOTES) ?>';
     var body=document.getElementById('news-body');
     var currentPage=<?php echo $page; ?>;
     var sortable;
@@ -256,6 +268,7 @@ document.addEventListener('DOMContentLoaded',function(){
         var data=new URLSearchParams();
         data.set('reorder','1');
         data.set('order',ids.join(','));
+        data.set('csrf_token', csrfToken);
         fetch('news.php',{method:'POST',body:data});
     }
     function initSortable(){
@@ -343,7 +356,7 @@ document.addEventListener('DOMContentLoaded',function(){
     $('#newsForm').on('submit',function(e){
         e.preventDefault();
         var id=$('#newsId').val();
-        var data={save:1,title:$('#newsTitle').val(),author:$('#newsAuthor').val(),publish_at:$('#newsPublish').val(),content:CKEDITOR.instances.newsContent.getData()};
+        var data={save:1,title:$('#newsTitle').val(),author:$('#newsAuthor').val(),publish_at:$('#newsPublish').val(),content:CKEDITOR.instances.newsContent.getData(),csrf_token:csrfToken};
         var url='news_edit.php'+(id?'?id='+id:'');
         $.post(url,data,function(){
             closeModal();
@@ -353,7 +366,7 @@ document.addEventListener('DOMContentLoaded',function(){
     $('#news-body').on('click','.delete-btn',function(){
         var id=$(this).data('id');
         if(confirm('Delete this article?')){
-            $.post('news.php',{delete:id},function(){
+            $.post('news.php',{delete:id,csrf_token:csrfToken},function(){
                 refreshList();
             });
         }
@@ -366,7 +379,7 @@ document.addEventListener('DOMContentLoaded',function(){
         sendOrder();
     });
     $('input[name="date_format"]').on('change',function(){
-        $.post('news.php',{set_date_format:$(this).val()});
+        $.post('news.php',{set_date_format:$(this).val(),csrf_token:csrfToken});
     });
 });
 </script>

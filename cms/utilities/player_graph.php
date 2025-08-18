@@ -7,7 +7,7 @@ error_reporting(0);
 ini_set('display_errors', 0);
 if (!extension_loaded('gd')) {
     header('Content-Type: text/plain', true, 500);
-    exit("GD extension not loaded\n");
+    throw new RuntimeException('GD extension not loaded');
 }
 
 // ── CONFIGURATION ───────────────────────────────────────────────
@@ -33,7 +33,7 @@ $plotH = $H - $TM - $BM;
 // font
 $fontFile ='../../includes/font/lucon.ttf';
 if (!file_exists($fontFile)) {
-    die("Missing font: $fontFile");
+    throw new RuntimeException("Missing font: $fontFile");
 }
 
 // ── SYNTHETIC DATA ────────────────────────────────────────────────
@@ -178,4 +178,3 @@ imagesetthickness($im, 1);
 header('Content-Type: image/png');
 imagepng($im);
 imagedestroy($im);
-exit;

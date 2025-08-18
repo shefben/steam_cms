@@ -6,7 +6,9 @@ $csrfToken = cms_get_csrf_token();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!cms_verify_csrf($_POST['csrf_token'] ?? '')) {
-        die('Invalid CSRF token');
+        http_response_code(400);
+        echo 'Invalid CSRF token';
+        return;
     }
     if (isset($_POST['delete_id'])) {
         $id = (int)$_POST['delete_id'];
@@ -16,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db->exec('DELETE FROM error_logs');
     }
     header('Location: error_log.php');
-    exit;
+    return;
 }
 
 $perPage = 30;
