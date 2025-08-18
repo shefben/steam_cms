@@ -19,7 +19,7 @@ onresize = resizeBox;
 //
 // preload all mouseover images. the order of this array sets the number of the image to call in the html.
 //
-var base= "/img/"
+var base= "./images/"
 var nrm = new Array();
 var mo = new Array();
 var toLoad = new Array('getSteamNow','forums','support','partners','contact','logo_hl','logo_cs','logo_cz','logo_tfc','logo_opfor','logo_dod','logo_r','logo_dmc', 'main', 'status', 'admin');
