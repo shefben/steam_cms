@@ -3,6 +3,17 @@ require_once 'admin_header.php';
 cms_require_permission('manage_store');
 $db=cms_get_db();
 
+if(isset($_POST['reorder']) && isset($_POST['order'])){
+    $ids=array_map('intval',explode(',',$_POST['order']));
+    $db->beginTransaction();
+    $db->exec('UPDATE `0405_storefront_thirdpartGames` SET id=id+1000');
+    foreach($ids as $i=>$id){
+        $db->prepare('UPDATE `0405_storefront_thirdpartGames` SET id=? WHERE id=?')->execute([$i+1,$id+1000]);
+    }
+    $db->commit();
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){echo 'ok';exit;}
+}
+
 if(isset($_POST['toggle_hidden'])){
     $id=(int)$_POST['id'];
     $hidden=isset($_POST['hidden'])?1:0;
@@ -60,7 +71,7 @@ $games=$db->query('SELECT * FROM `0405_storefront_thirdpartGames` ORDER BY id')-
 <tbody>
 <?php foreach($games as $g): ?>
 <tr data-id="<?php echo $g['id']; ?>">
- <td><?php echo $g['id']; ?></td>
+ <td class="handle"><?php echo $g['id']; ?></td>
  <td>
 <?php if(preg_match('~^/storefront/images/~',$g['title'])): ?>
     <img src="<?php echo htmlspecialchars($g['title']); ?>" width="32">
@@ -98,6 +109,15 @@ $games=$db->query('SELECT * FROM `0405_storefront_thirdpartGames` ORDER BY id')-
 <script>
 $(function () {
     var loadReq;
+    var body = document.querySelector('#tp-table tbody');
+    function sendOrder(){
+        var ids=[];
+        body.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.id);});
+        var data=new URLSearchParams();
+        data.set('reorder','1');
+        data.set('order',ids.join(','));
+        fetch('legacy_storefront_thirdparty.php',{method:'POST',body:data});
+    }
     function uploadFileTP(input, type) {
         var fd = new FormData();
         fd.append('file', input.files[0]);
@@ -183,6 +203,7 @@ $(function () {
             $('#remove_screenshot').val('0');
         });
     });
+    Sortable.create(body,{handle:'.handle',animation:150,onEnd:sendOrder});
 });
 </script>
 <?php include 'admin_footer.php'; ?>
