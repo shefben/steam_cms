@@ -23,18 +23,24 @@ function normalizeDate(string $raw): string
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($step == 1) {
         $host = trim($_POST['host']);
-        $port = isset($_POST['port']) ? trim($_POST['port']) : '';
-        if ($port === '') {
-            $port = '3306';
+        $dbPort = filter_input(INPUT_POST, 'port', FILTER_VALIDATE_INT);
+        if (!$dbPort) {
+            $dbPort = 3306;
         }
         $user = trim($_POST['dbuser']);
         $pass = trim($_POST['dbpass']);
         $dbname = trim($_POST['dbname']);
         try {
-            $dsn = "mysql:host=$host;port=$port;charset=utf8mb4";
+            $dsn = "mysql:host=$host;port=$dbPort;charset=utf8mb4";
             $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-            $_SESSION['cms_install'] = compact('host', 'port', 'user', 'pass', 'dbname');
+            $_SESSION['cms_install'] = [
+                'host' => $host,
+                'port' => $dbPort,
+                'user' => $user,
+                'pass' => $pass,
+                'dbname' => $dbname,
+            ];
             header('Location: install.php?step=2');
             exit;
         } catch (PDOException $e) {
@@ -43,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif ($step == 2 && isset($_SESSION['cms_install'])) {
         $config = $_SESSION['cms_install'];
         $host = $config['host'];
-        $port = $config['port'] === '' ? '3306' : $config['port'];
+        $dbPort = isset($config['port']) && (int) $config['port'] > 0 ? (int) $config['port'] : 3306;
         $user = $config['user'];
         $pass = $config['pass'];
         $dbname = $config['dbname'];
@@ -51,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $admin_pass = trim($_POST['admin_pass']);
         $admin_email = trim($_POST['admin_email']);
         try {
-            $dsn = "mysql:host=$host;port=$port;charset=utf8mb4";
+            $dsn = "mysql:host=$host;port=$dbPort;charset=utf8mb4";
             $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
@@ -2207,7 +2213,7 @@ $defaultCafes = [
 
             $cfgArray = [
                 'host' => $host,
-                'port' => (int) $port,
+                'port' => $dbPort,
                 'dbname' => $dbname,
                 'user' => $user,
                 'pass' => $pass,
@@ -2389,7 +2395,7 @@ $defaultCafes = [
             </div>
             <div class="form-group">
                 <label for="port">Database Port</label>
-                <input id="port" class="form-control" name="port" value="3306">
+                <input id="port" class="form-control" type="number" name="port" value="3306" min="1" max="65535">
             </div>
             <div class="form-group">
                 <label for="dbname">Database Name</label>
