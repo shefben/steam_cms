@@ -22,4 +22,6 @@ if($page){
     $content = '';
 }
 
-cms_render_template($tpl, ['page_title'=>$page_title, 'content'=>$content]);
+// Explicitly render using the resolved theme to avoid stale cached settings
+// that can lead to the wrong layout being used (e.g. missing main content).
+cms_render_template_theme($tpl, $theme, ['page_title'=>$page_title, 'content'=>$content]);

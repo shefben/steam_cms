@@ -135,8 +135,12 @@ Each of these tags outputs raw HTML stored in the `settings` table. Lists accept
 
 ### `sidebar_section(name, options = {})`
 Renders a sidebar block using the active theme's template located under `layouts/sidebar_sections/`.
+The block's links and content are loaded from `sidebar_sections`, `sidebar_section_variants`,
+and `sidebar_section_entries` for the current theme.
 `name` selects the section (e.g., `search`, `get_steam_now`, `new_on_steam`, `latest_news`).
 `options` may provide values like `rows` or `limit` depending on the section.
+For `new_on_steam`, the RSS feed link is auto-appended on 2006 themes; later themes include it in the seed data.
+`latest_news` adds a "Read more news" link for pre-2007 themes while newer themes store the link with their entries.
 
 ## Join Steam Block
 
@@ -238,6 +242,7 @@ Tags beginning with `random_` or `scheduled_` are created on the fly.
 ### `random_<group>`
 Selects one random entry from `random_content` where the group name matches `<group>`.
 - **Example:** `{{ random_sidebar }}`
+- Image paths beginning with `images/` are rewritten to load from the CMS root (`./images/`).
 
 ### `scheduled_<tagname>`
 Outputs all active rows from `scheduled_content` with `tag_name` of `<tagname>` and whose schedule matches the current date.
@@ -260,7 +265,8 @@ The following table lists each tag or tag group, where its content is managed in
 |`footer`|**Header/Footer**|`theme_footers`|
 |`news*` tags|**News** (`news.php`)|`news`|
 |`join_steam_text`, `join_steam_block`|**Settings** (`settings.php`)|`settings`|
-|`new_on_steam_title`, `new_on_steam_list`, `latest_news_title`, `latest_news_list`, `find_title`, `find_list`, `browse_catalog_title`, `browse_catalog_list`, `publisher_catalogs_title`, `publisher_catalogs_list`, `coming_soon_title`, `coming_soon_list`, `gear_block`, `free_block`, `spotlight_content`|**Settings**|`settings`|
+|`gear_block`, `free_block`, `spotlight_content`|**Settings**|`settings`|
+|`sidebar_section`|**Sidebar Sections** (`index_sidebar_management.php`)|`sidebar_sections`, `sidebar_section_variants`, `sidebar_section_entries`|
 |`categories_list`|**Storefront Categories** (`storefront_categories.php`)|`store_categories`|
 |`capsule_block`, `large_capsule_block`, `featured_capsules`|**Storefront Main** (`storefront_main.php`) and **Upload Capsule** (`upload_capsule.php`)|`storefront_capsules_all`, `storefront_capsules_per_theme`, `store_capsules`|
 |`store_sidebar`|**Storefront Sidebar** (`storefront_sidebar.php`)|`store_sidebar_links`|

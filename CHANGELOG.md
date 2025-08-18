@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Corrected download settings thumbnails for 2003_v2 and 2004 themes to load from the proper path.
 - Fixed 2005_v2 index to display latest news by falling back to `publish_date` when `publish_at` is missing.
 - Capsule previews in index management now load theme CSS for accurate rendering.
 - Restored modal-based Add Capsule and Add Tabbed Capsule actions for 2006 index capsule management.
@@ -34,6 +35,7 @@ All notable changes to this project will be documented in this file.
 - Removed duplicated news rows and stripped stray `\n` sequences during installation.
 - 2003 v1 update notification now displays only on the Get Steam Now page.
 - Installer seeds default sidebar sections for 2006 v1/v2 and 2007 v1/v2 themes.
+- Admin sidebar navigation and icons now load entirely from the database, removing hard-coded defaults from the header.
 - Fixed installer to skip upgrade migrations and correctly parse SQL triggers.
 - Added theme.json support allowing themes to declare custom settings with admin widgets.
 - Moved 2004/2005 map contest toggle to submissions page with AJAX updates and inline notifications.
@@ -344,6 +346,7 @@ All notable changes to this project will be documented in this file.
 - Storefront now renders tabbed capsules using saved HTML content and respects capsule ordering.
 - Reworked `storefront_capsules_per_theme` with integer ordering, theme checkboxes in the admin modal, and seeded Gear/Freestuff capsules with editable content.
 - Installer seeds example character image random group and templates use a random tag for 2003 v2 and 2004 themes.
+- Random content tag now resolves image paths from the CMS root instead of theme directories.
 - Added generic sidebar renderer for 2006+ themes and introduced initial admin pages for index capsule and sidebar management.
 - Removed theme-specific product banners; templates now reference archived assets to avoid binary duplication
 - Seeded default 2006+ storefront capsules directly into `storefront_capsule_items` and retired legacy fallbacks
