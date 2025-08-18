@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Corrected download settings thumbnails for 2003_v2 and 2004 themes to load from the proper path.
 - Fixed 2005_v2 index to display latest news by falling back to `publish_date` when `publish_at` is missing.
 - Capsule previews in index management now load theme CSS for accurate rendering.
 - Restored modal-based Add Capsule and Add Tabbed Capsule actions for 2006 index capsule management.

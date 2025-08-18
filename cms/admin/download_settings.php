@@ -103,10 +103,15 @@ $firstVer = key($verNums);
 <h2>Download/Get Steam Now Management</h2>
 <form method="post">
 <div style="display:flex;gap:20px;">
-<?php foreach ($versions as $ver=>$label): ?>
+<?php foreach ($versions as $ver => $label):
+    $thumb = $ver;
+    if ($theme === '2003_v2' || $theme === '2004') {
+        $thumb = preg_replace('/_v(\d+)$/', '_dlv$1', $ver);
+    }
+    ?>
     <label style="text-align:center;">
-        <input type="radio" name="download_version" value="<?php echo $ver; ?>" <?php echo $ver==$current?'checked':''; ?>><br>
-        <img src="images/downloadpage_thumbnails/<?php echo $ver; ?>.png" alt="<?php echo $label; ?>">
+        <input type="radio" name="download_version" value="<?php echo $ver; ?>" <?php echo $ver == $current ? 'checked' : ''; ?>><br>
+        <img src="images/downloadpage_thumbnails/<?php echo $thumb; ?>.png" alt="<?php echo $label; ?>">
     </label>
 <?php endforeach; ?>
 </div>
