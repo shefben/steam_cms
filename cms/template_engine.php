@@ -2,6 +2,7 @@
 require_once __DIR__.'/news.php';
 require_once __DIR__.'/../includes/twig.php';
 require_once __DIR__.'/plugin_api.php';
+require_once __DIR__.'/cache_manager.php';
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -1883,11 +1884,37 @@ function cms_render_template(string $path, array $vars = []): void
 {
     $theme = cms_get_setting('theme', '2004');
     $cache_enabled = cms_get_setting('enable_cache', '0') === '1';
-    $cache_file = __DIR__ . '/cache/' . md5($path) . '.html';
-    $lastModified = cms_cache_last_modified($path, $theme);
-    if ($cache_enabled && file_exists($cache_file) && filemtime($cache_file) >= $lastModified) {
-        readfile($cache_file);
-        return;
+    
+    if ($cache_enabled) {
+        // Use new cache manager with source file tracking
+        $cache_manager = cms_cache_manager();
+        $cache_key = md5($path . '|' . serialize($vars) . '|' . $theme);
+        
+        // Register source files
+        $source_files = [
+            $path,
+            __FILE__, // template_engine.php
+            __DIR__ . '/news.php',
+            __DIR__ . '/db.php'
+        ];
+        
+        // Add theme files if they exist
+        $theme_dir = dirname(dirname(__FILE__)) . "/themes/$theme";
+        if (is_dir($theme_dir)) {
+            $theme_files = glob($theme_dir . '/*.css');
+            if ($theme_files) {
+                $source_files = array_merge($source_files, $theme_files);
+            }
+        }
+        
+        $cache_manager->registerSourceFiles($cache_key, $source_files, 'templates');
+        
+        // Try to get from cache
+        $cached_html = $cache_manager->get($cache_key, 'templates', 3600); // 1 hour TTL
+        if ($cached_html !== null) {
+            echo $cached_html;
+            return;
+        }
     }
 
     cms_set_current_theme($theme);
@@ -1919,10 +1946,8 @@ function cms_render_template(string $path, array $vars = []): void
 
 
     if ($cache_enabled) {
-        if (!is_dir(__DIR__.'/cache')) {
-            mkdir(__DIR__.'/cache');
-        }
-        file_put_contents($cache_file, $html);
+        // Store in new cache system
+        $cache_manager->set($cache_key, $html, 'templates');
     }
     echo $html;
 }
@@ -2046,20 +2071,49 @@ function cms_rewrite_css_file(string $theme, string $css_path, string $theme_url
     if (!file_exists($full)) {
         return $cache[$key] = $theme_url.'/'.ltrim($css_path, '/');
     }
-    $hash = md5($full.filemtime($full));
+
+    // Use new cache manager for CSS
+    $cache_manager = cms_cache_manager();
+    $cache_key = md5($key);
+    
+    // Register source files
+    $cache_manager->registerSourceFiles($cache_key, [$full], 'css');
+    
+    // Try to get from cache
+    $cached_css = $cache_manager->get($cache_key, 'css');
+    if ($cached_css !== null) {
+        // Write to legacy cache location for web serving
+        $hash = md5($cached_css);
+        $cache_dir = __DIR__.'/cache';
+        $cached = $cache_dir.'/'.$hash.'.css';
+        if (!file_exists($cached)) {
+            if (!is_dir($cache_dir)) {
+                mkdir($cache_dir);
+            }
+            file_put_contents($cached, $cached_css);
+        }
+        return $cache[$key] = ($base_url ? rtrim($base_url, '/'). '/' : '').'cms/cache/'.basename($cached);
+    }
+    
+    // Generate CSS
+    $css = file_get_contents($full);
+    $css_dir = trim(dirname($css_path), '/');
+    if ($css_dir === '.') {
+        $css_dir = '';
+    }
+    $css = cms_rewrite_css_urls($css, $theme, $theme_url, $css_dir, $base_url);
+    
+    // Store in cache manager
+    $cache_manager->set($cache_key, $css, 'css');
+    
+    // Also write to legacy cache location for web serving
+    $hash = md5($css);
     $cache_dir = __DIR__.'/cache';
     $cached = $cache_dir.'/'.$hash.'.css';
-    if (!file_exists($cached)) {
-        $css = file_get_contents($full);
-        $css_dir = trim(dirname($css_path), '/');
-        if ($css_dir === '.') {
-            $css_dir = '';
-        }
-        $css = cms_rewrite_css_urls($css, $theme, $theme_url, $css_dir, $base_url);
-        if (!is_dir($cache_dir)) {
-            mkdir($cache_dir);
-        }
-        file_put_contents($cached, $css);
+    if (!is_dir($cache_dir)) {
+        mkdir($cache_dir);
     }
+    file_put_contents($cached, $css);
+    
     return $cache[$key] = ($base_url ? rtrim($base_url, '/'). '/' : '').'cms/cache/'.basename($cached);
 }

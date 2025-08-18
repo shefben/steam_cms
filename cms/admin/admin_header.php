@@ -5,6 +5,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 require_once __DIR__ . '/../db.php';
 require_once __DIR__ . '/../template_engine.php';
 require_once __DIR__ . '/../plugin_api.php'; // load plugin system
+require_once __DIR__ . '/../cache_manager.php'; // load cache system
 require_once __DIR__ . '/breadcrumbs.php';
 if(!cms_current_admin()){
     if(isset($_COOKIE['cms_admin_token'])){
@@ -40,10 +41,60 @@ $stmt = $db->prepare('SELECT username FROM admin_users WHERE id=?');
 $stmt->execute([$admin_id]);
 $admin_name = $stmt->fetchColumn() ?: 'admin';
 
+// Auto-clear cache on any POST request (saves/updates)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+    // Check if this is a form submission that modifies data
+    $save_indicators = ['save', 'submit', 'update', 'create', 'delete', 'import', 'upload'];
+    $is_save_operation = false;
+    
+    foreach ($save_indicators as $indicator) {
+        if (isset($_POST[$indicator]) || 
+            array_key_exists($indicator, $_POST) || 
+            strpos(strtolower(implode('', array_keys($_POST))), $indicator) !== false) {
+            $is_save_operation = true;
+            break;
+        }
+    }
+    
+    // Also check for common button names and form actions
+    foreach ($_POST as $key => $value) {
+        if (is_string($key) && (
+            stripos($key, 'save') !== false ||
+            stripos($key, 'submit') !== false ||
+            stripos($key, 'update') !== false ||
+            stripos($key, 'create') !== false ||
+            stripos($key, 'delete') !== false ||
+            stripos($key, 'import') !== false ||
+            stripos($key, 'upload') !== false
+        )) {
+            $is_save_operation = true;
+            break;
+        }
+    }
+    
+    if ($is_save_operation) {
+        $cleared = cms_clear_all_caches();
+        // Store cache clear notification for display
+        $_SESSION['cache_cleared'] = $cleared;
+    }
+}
+
 $notes = cms_get_unread_notifications($admin_id);
 $notifications_html = '';
+
+// Add cache clear notification if available
+if (isset($_SESSION['cache_cleared'])) {
+    $cleared = (int)$_SESSION['cache_cleared'];
+    if ($cleared > 0) {
+        $notifications_html .= '<div class="cache-notification" style="background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 8px; margin: 4px 0; border-radius: 4px;">';
+        $notifications_html .= "✓ Cache cleared automatically ({$cleared} files removed)";
+        $notifications_html .= '</div>';
+    }
+    unset($_SESSION['cache_cleared']);
+}
+
 if ($notes) {
-    $notifications_html = '<div class="notifications"><ul>';
+    $notifications_html .= '<div class="notifications"><ul>';
     foreach ($notes as $n) {
         $id = (int)$n['id'];
         $type = htmlspecialchars($n['type']);

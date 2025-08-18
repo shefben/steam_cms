@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/db.php';
+require_once __DIR__.'/cache_manager.php';
 
 /**
  * Cache for rendered news blocks keyed by parameters.
@@ -44,19 +45,27 @@ function cms_render_news($type,$count=null){
     if($count===null) $count = $settings['articles_per_page'];
 
     $theme = cms_get_setting('theme','2004');
-    $cache_key = md5($type.'|'.$count.'|'.$settings['source'].'|'.$theme);
-    $cache_dir = __DIR__.'/cache/news';
-    $cache_file = $cache_dir.'/'.$cache_key.'.html';
+    $cache_key = $type.'|'.$count.'|'.$settings['source'].'|'.$theme;
+    
+    // Check memory cache first
     if (isset($cms_news_cache[$cache_key])) {
         return $cms_news_cache[$cache_key];
     }
+    
+    // Register source files that could affect this cache
+    $cache_manager = cms_cache_manager();
+    $source_files = [
+        __FILE__, // news.php itself
+        __DIR__ . '/db.php', // database config
+    ];
+    $cache_manager->registerSourceFiles($cache_key, $source_files, 'news');
+    
+    // Try to get from cache
     $cache_ttl = (int)cms_get_setting('news_cache_ttl', '1800');
-    if (file_exists($cache_file) && filemtime($cache_file) >= time() - $cache_ttl) {
-        $html = file_get_contents($cache_file);
-        if ($html !== false) {
-            $cms_news_cache[$cache_key] = $html;
-            return $html;
-        }
+    $html = $cache_manager->get($cache_key, 'news', $cache_ttl);
+    if ($html !== null) {
+        $cms_news_cache[$cache_key] = $html;
+        return $html;
     }
 
     $db = cms_get_db();
@@ -190,10 +199,10 @@ function cms_render_news($type,$count=null){
     if($type==='index_summary_date'){
         $out .= "<p align=\"righ\t\"><sub><a class=\"BodyGreen\" href=\"index.php?area=news\" style=\"color: Black; font-weight: bold;\">read more &gt;</a>&nbsp;</sub></p>";
     }
-    if (!is_dir($cache_dir)) {
-        mkdir($cache_dir, 0777, true);
-    }
-    file_put_contents($cache_file, $out);
+    // Store in new cache system
+    $cache_manager->set($cache_key, $out, 'news');
+    
+    // Also store in memory cache
     $cms_news_cache[$cache_key] = $out;
     return $out;
 }
