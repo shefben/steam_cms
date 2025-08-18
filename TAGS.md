@@ -69,6 +69,7 @@ Fetches and renders news articles.
   - `index_brief` – very short summary used on the index page.
 - **count** (`int|null`, default `null`): maximum number of articles to display. `null` uses the theme default.
 - **Example:** `{{ news('full_article', 5) }}`
+- Articles missing a `publish_at` timestamp fall back to their `publish_date` for ordering and visibility.
 
 ### `news_index_brief(count = 3)`
 Shortcut for `news('index_brief', count)`.
