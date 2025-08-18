@@ -4,7 +4,22 @@ require_once __DIR__.'/db.php';
 require_once __DIR__.'/template_engine.php';
 
 $err = '';
-$dest = isset($_GET['return']) ? $_GET['return'] : 'admin/index.php';
+
+// Validate return URL to prevent open redirects
+function validate_return_url($url) {
+    if (empty($url)) {
+        return 'admin/index.php';
+    }
+    
+    // Only allow relative URLs starting with admin/
+    if (preg_match('#^admin/[a-zA-Z0-9_/.-]+\.php(\?[a-zA-Z0-9_&=%-]*)?$#', $url)) {
+        return $url;
+    }
+    
+    return 'admin/index.php';
+}
+
+$dest = validate_return_url($_GET['return'] ?? '');
 if($_SERVER['REQUEST_METHOD']==='POST'){
     $db=cms_get_db();
     $user=trim($_POST['username']);

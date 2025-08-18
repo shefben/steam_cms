@@ -1,9 +1,16 @@
 <?php
 require_once '../config.php';
-require_once __DIR__.'/functions.php';
 function db_connect() {
     static $db;
-    if ($db) return $db;
+    if ($db instanceof PDO) {
+        try {
+            // Check if connection is still alive
+            $db->getAttribute(PDO::ATTR_CONNECTION_STATUS);
+            return $db;
+        } catch (PDOException $e) {
+            // Connection lost, need to reconnect
+        }
+    }
 
     $config_path = __DIR__ . '/../config.php';  // use __DIR__ or you deserve the pain
     if (!file_exists($config_path)) {
@@ -15,30 +22,31 @@ function db_connect() {
         die('Invalid config file. Expected an array.');
     }
 
-    $db = new mysqli($cfg['host'], $cfg['user'], $cfg['pass'], $cfg['dbname'], $cfg['port']);
-
-    if ($db->connect_error) {
-        die('Connection failed: ' . $db->connect_error);
+    try {
+        $dsn = "mysql:host={$cfg['host']};port={$cfg['port']};dbname={$cfg['dbname']};charset=utf8mb4";
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_PERSISTENT => false,
+            PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ];
+        $db = new PDO($dsn, $cfg['user'], $cfg['pass'], $options);
+        return $db;
+    } catch (PDOException $e) {
+        die('Connection failed: ' . $e->getMessage());
     }
-
-    return $db;
 }
 
 function get_setting($db, $key) {
     $stmt = $db->prepare("SELECT value FROM settings WHERE `key`=?");
-    $stmt->bind_param('s', $key);
-    $stmt->execute();
-    $stmt->bind_result($val);
-    $stmt->fetch();
-    $stmt->close();
-    return $val;
+    $stmt->execute([$key]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row ? $row['value'] : null;
 }
 
 function set_setting($db, $key, $val) {
     $stmt = $db->prepare("REPLACE INTO settings(`key`, value) VALUES(?,?)");
-    $stmt->bind_param('ss', $key, $val);
-    $stmt->execute();
-    $stmt->close();
+    $stmt->execute([$key, $val]);
 }
 
 function get_total_capacity($servers){
@@ -54,26 +62,27 @@ function get_total_available($servers){
 }
 
 function check_online($ip, $port){
-    $fp = @fsockopen($ip, $port, $errno, $errstr, 2);
-    if ($fp) { fclose($fp); return true; }
+    $fp = fsockopen($ip, $port, $errno, $errstr, 2);
+    if ($fp) { 
+        fclose($fp); 
+        return true; 
+    }
+    error_log("Server check failed for $ip:$port - $errstr ($errno)");
     return false;
 }
 
 function get_servers($db){
     try {
         $res = $db->query("SHOW COLUMNS FROM content_servers LIKE 'region'");
-    } catch(mysqli_sql_exception $e){
+    } catch(PDOException $e){
         if($e->getCode()===1146) return [];
         throw $e;
     }
-    $has_region = $res && $res->num_rows > 0;
-    if($res) $res->free();
+    $has_region = $res && $res->rowCount() > 0;
     $res = $db->query("SHOW COLUMNS FROM content_servers LIKE 'website'");
-    $has_website = $res && $res->num_rows > 0;
-    if($res) $res->free();
+    $has_website = $res && $res->rowCount() > 0;
     $res = $db->query("SHOW COLUMNS FROM content_servers LIKE 'filtered'");
-    $has_filtered = $res && $res->num_rows > 0;
-    if($res) $res->free();
+    $has_filtered = $res && $res->rowCount() > 0;
     $select = "cs.id, cs.name, cs.ip, cs.port, cs.total_capacity";
     if($has_region) $select .= ", cs.region";
     if($has_website) $select .= ", cs.website";
@@ -81,12 +90,12 @@ function get_servers($db){
     $sql = "SELECT $select, ss.available_bandwidth, ss.unique_connections, ss.last_checked, ss.status FROM content_servers cs LEFT JOIN server_stats ss ON cs.id=ss.server_id";
     try {
         $res = $db->query($sql);
-    } catch(mysqli_sql_exception $e){
+    } catch(PDOException $e){
         if($e->getCode()===1146) return [];
         throw $e;
     }
     $servers = [];
-    while ($row = $res->fetch_assoc()){
+    while ($row = $res->fetch(PDO::FETCH_ASSOC)){
         if(!isset($row['region'])) $row['region'] = 'Unknown';
         if(!isset($row['website'])) $row['website'] = null;
         if(!isset($row['filtered'])) $row['filtered'] = 0;
@@ -97,7 +106,7 @@ function get_servers($db){
 
 function get_last_update($db){
     $res = $db->query("SELECT MAX(last_checked) AS last_update FROM server_stats");
-    $row = $res->fetch_assoc();
+    $row = $res->fetch(PDO::FETCH_ASSOC);
     return $row ? $row['last_update'] : null;
 }
 
@@ -106,7 +115,10 @@ function update_server_stats($db, &$server){
         $status = 'DOWN';
         $available = 0;
         $unique = 0;
-        $fp = @fsockopen($server['ip'], $server['port'], $errno, $errstr, 2);
+        $fp = fsockopen($server['ip'], $server['port'], $errno, $errstr, 2);
+        if (!$fp) {
+            error_log("Failed to connect to server {$server['ip']}:{$server['port']} - $errstr ($errno)");
+        }
         if ($fp) {
             fwrite($fp, "STATS\n");
             stream_set_timeout($fp, 2);
@@ -118,9 +130,7 @@ function update_server_stats($db, &$server){
             fclose($fp);
         }
         $stmt = $db->prepare("REPLACE INTO server_stats(server_id, available_bandwidth, unique_connections, last_checked, status) VALUES(?, ?, ?, NOW(), ?)");
-        $stmt->bind_param('iiis', $server['id'], $available, $unique, $status);
-        $stmt->execute();
-        $stmt->close();
+        $stmt->execute([$server['id'], $available, $unique, $status]);
         $server['available_bandwidth'] = $available;
         $server['unique_connections'] = $unique;
         $server['status'] = $status;
@@ -191,7 +201,7 @@ function rng_player_series(int $pts, int $start, int $step, int $cap): array {
     $usage = [];
     for ($i = 0; $i <= $pts; $i++) {
         $ts   = $start + $i * $step;
-        $prev = $usage[$i-1]['v'] ?? rand(10_000, 90_000);
+        $prev = ($i > 0 && isset($usage[$i-1]['v'])) ? $usage[$i-1]['v'] : rand(10_000, 90_000);
         $usage[] = ['t'=>$ts, 'v'=>max(0,min($cap, $prev + rand(-3_000,3_000)))];
     }
     // servers = cream line with a few bumps

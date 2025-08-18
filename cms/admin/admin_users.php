@@ -1,5 +1,5 @@
 <?php
-require_once 'admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 cms_require_permission('manage_admins');
 $db = cms_get_db();
 $roles = $db->query('SELECT id,name FROM admin_roles ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
@@ -37,7 +37,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'save') {
         }
     } else {
         $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $stmt = $db->prepare('INSERT INTO admin_users(username,email,first_name,last_name,language,permissions,role_id,created,password) VALUES(?,?,?,?,?,?,NOW(),?)');
+        $stmt = $db->prepare('INSERT INTO admin_users(username,email,first_name,last_name,language,permissions,role_id,password) VALUES(?,?,?,?,?,?,?,?)');
         $stmt->execute([trim($_POST['username']),$email,$first,$last,$lang,$perm,$role,$hash]);
         cms_admin_log('Created admin user ' . trim($_POST['username']));
     }
@@ -171,20 +171,32 @@ if (isset($_GET['ajax'])) {
 <?php echo "<script>var data=" . json_encode($rows) . ", currentPage=$page, cmsPerms=" . json_encode(cms_all_permissions()) . ";</script>"; ?>
 <script>
 function bindActions(){
+    // Create a lookup map for O(1) access instead of O(n) linear search
+    var dataMap = {};
+    for(var i=0; i<data.length; i++) {
+        dataMap[data[i].id] = data[i];
+    }
+    
     $('.editBtn').off('click').on('click',function(){
         var id=$(this).data('id');
-        for(var i=0;i<data.length;i++) if(data[i].id==id){
-            $('#eid').val(data[i].id);
-            $('#eusername').val(data[i].username);
-            $('#eemail').val(data[i].email);
-            $('#efirst').val(data[i].first_name);
-            $('#elast').val(data[i].last_name);
-            $('#elang').val(data[i].language||'en');
-            $('#erole').val(data[i].role_id?data[i].role_id:'');
-            var p=data[i].permissions==='all'?Object.keys(cmsPerms):data[i].permissions.split(',');
+        var user = dataMap[id];
+        if(user) {
+            $('#eid').val(user.id);
+            $('#eusername').val(user.username);
+            $('#eemail').val(user.email);
+            $('#efirst').val(user.first_name);
+            $('#elast').val(user.last_name);
+            $('#elang').val(user.language||'en');
+            $('#erole').val(user.role_id?user.role_id:'');
+            var p=user.permissions==='all'?Object.keys(cmsPerms):user.permissions.split(',');
             $('.permChk').prop('checked',false);
-            for(var j=0;j<p.length;j++){ var k=p[j].trim(); if(k) $('.permChk[value="'+k+'"]').prop('checked',true); }
-            break;
+            
+            // Use a Set for O(1) lookup instead of repeated DOM searches
+            var permSet = new Set(p.map(function(perm) { return perm.trim(); }));
+            $('.permChk').each(function() {
+                var val = $(this).val();
+                $(this).prop('checked', permSet.has(val));
+            });
         }
         togglePerm();
         $('#editor').show();

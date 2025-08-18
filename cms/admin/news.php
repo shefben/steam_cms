@@ -49,20 +49,35 @@ if(isset($_GET['move']) && isset($_GET['id'])){
     $id = (int)$_GET['id'];
     $direction = $_GET['move'];
     $posts = $db->query('SELECT id,publish_at FROM news ORDER BY publish_at DESC')->fetchAll(PDO::FETCH_ASSOC);
-    for($i=0;$i<count($posts);$i++){
+    $postCount = count($posts);
+    
+    // Bounds checking to prevent infinite loops
+    if ($postCount === 0) {
+        header('Location: news.php');
+        exit;
+    }
+    
+    for($i=0; $i < $postCount; $i++){
         if($posts[$i]['id']==$id){
-            if($direction=='up' && $i>0){
-                $prev = $posts[$i-1];
-                $db->beginTransaction();
-                $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$prev['publish_at'],$id]);
-                $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$posts[$i]['publish_at'],$prev['id']]);
-                $db->commit();
-            }elseif($direction=='down' && $i<count($posts)-1){
-                $next = $posts[$i+1];
-                $db->beginTransaction();
-                $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$next['publish_at'],$id]);
-                $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$posts[$i]['publish_at'],$next['id']]);
-                $db->commit();
+            try {
+                if($direction=='up' && $i>0){
+                    $prev = $posts[$i-1];
+                    $db->beginTransaction();
+                    $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$prev['publish_at'],$id]);
+                    $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$posts[$i]['publish_at'],$prev['id']]);
+                    $db->commit();
+                }elseif($direction=='down' && $i < ($postCount-1)){
+                    $next = $posts[$i+1];
+                    $db->beginTransaction();
+                    $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$next['publish_at'],$id]);
+                    $db->prepare('UPDATE news SET publish_at=? WHERE id=?')->execute([$posts[$i]['publish_at'],$next['id']]);
+                    $db->commit();
+                }
+            } catch (Exception $e) {
+                if ($db->inTransaction()) {
+                    $db->rollback();
+                }
+                error_log("News reordering failed: " . $e->getMessage());
             }
             break;
         }
@@ -118,11 +133,11 @@ if ($export === 'csv' || $export === 'json') {
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $order = cms_get_setting('news_order', null);
 $order = $order ? json_decode($order, true) : [];
-usort($rows, function($a,$b) use($order){
-    $ia = array_search($a['id'],$order);
-    $ib = array_search($b['id'],$order);
-    if($ia===false) $ia = PHP_INT_MAX;
-    if($ib===false) $ib = PHP_INT_MAX;
+// Create order lookup map for O(1) access instead of O(n) array_search
+$orderMap = array_flip($order);
+usort($rows, function($a,$b) use($orderMap){
+    $ia = $orderMap[$a['id']] ?? PHP_INT_MAX;
+    $ib = $orderMap[$b['id']] ?? PHP_INT_MAX;
     return $ia <=> $ib;
 });
 $page = max(1, (int)($_GET['page'] ?? 1));
@@ -247,6 +262,18 @@ document.addEventListener('DOMContentLoaded',function(){
         if(sortable){sortable.destroy();}
         sortable=new Sortable(body,{handle:'.handle',onStart:function(){showPage('all');},onEnd:function(){sendOrder();showPage(currentPage);}});
     }
+    
+    // Memory management for CKEditor instances
+    function destroyAllEditors() {
+        for(var instance in CKEDITOR.instances) {
+            CKEDITOR.instances[instance].destroy(true);
+        }
+    }
+    
+    // Clean up on page unload
+    window.addEventListener('beforeunload', function() {
+        destroyAllEditors();
+    });
     function bindPagination(){
         document.querySelectorAll('.pagination a').forEach(function(a){
             a.addEventListener('click',function(e){
@@ -292,7 +319,10 @@ document.addEventListener('DOMContentLoaded',function(){
     }
     function closeModal(){
         $('#newsModalOverlay').hide();
-        if(CKEDITOR.instances.newsContent){CKEDITOR.instances.newsContent.destroy(true);}
+        if(CKEDITOR.instances.newsContent){
+            CKEDITOR.instances.newsContent.destroy(true);
+            delete CKEDITOR.instances.newsContent;
+        }
     }
     $('#news-table th.sortable').on('click',function(){
         var idx=$(this).index();

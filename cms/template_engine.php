@@ -9,6 +9,35 @@ use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
 
 /**
+ * Global save hooks for cache invalidation
+ */
+$cms_save_hooks = [];
+
+/**
+ * Register a hook to be called when admin saves occur
+ */
+function cms_register_save_hook(callable $callback): void
+{
+    global $cms_save_hooks;
+    $cms_save_hooks[] = $callback;
+}
+
+/**
+ * Execute all registered save hooks
+ */
+function cms_execute_save_hooks(): void
+{
+    global $cms_save_hooks;
+    foreach ($cms_save_hooks as $hook) {
+        try {
+            $hook();
+        } catch (Exception $e) {
+            error_log("Save hook failed: " . $e->getMessage());
+        }
+    }
+}
+
+/**
  * Wrap a Twig callback with plugin hook support.
  */
 function cms_hookable(callable $fn, string $name): callable

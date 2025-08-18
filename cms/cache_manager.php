@@ -5,6 +5,9 @@
  * Centralized caching system with file timestamp validation and automatic invalidation.
  */
 
+if (!defined('CMS_CACHE_MANAGER_LOADED')) {
+    define('CMS_CACHE_MANAGER_LOADED', true);
+
 declare(strict_types=1);
 
 class CacheManager
@@ -100,6 +103,14 @@ class CacheManager
         }
 
         $cache_file = $this->getCacheFile($key, $namespace);
+        
+        // Check file size before reading to prevent memory exhaustion
+        $filesize = filesize($cache_file);
+        if ($filesize === false || $filesize > 10 * 1024 * 1024) { // 10MB limit
+            error_log("Cache file too large or unreadable: $cache_file ($filesize bytes)");
+            return null;
+        }
+        
         $content = file_get_contents($cache_file);
         
         return $content !== false ? $content : null;
@@ -131,15 +142,15 @@ class CacheManager
             }
         }
 
-        // Write cache and metadata atomically
+        // Write cache and metadata atomically with exclusive locking
         $temp_cache = $cache_file . '.tmp';
         $temp_meta = $meta_file . '.tmp';
         
-        if (file_put_contents($temp_cache, $content) === false) {
+        if (file_put_contents($temp_cache, $content, LOCK_EX) === false) {
             return false;
         }
         
-        if (file_put_contents($temp_meta, json_encode($meta, JSON_PRETTY_PRINT)) === false) {
+        if (file_put_contents($temp_meta, json_encode($meta, JSON_PRETTY_PRINT), LOCK_EX) === false) {
             unlink($temp_cache);
             return false;
         }
@@ -206,7 +217,9 @@ class CacheManager
         if ($namespace !== null) {
             $ns_dir = $this->cache_dir . '/' . $namespace;
             if (is_dir($ns_dir) && count(glob($ns_dir . '/*')) === 0) {
-                @rmdir($ns_dir); // Suppress warning if directory doesn't exist
+                if (!rmdir($ns_dir)) {
+                    error_log("Failed to remove empty namespace directory: $ns_dir");
+                }
             }
         }
         
@@ -294,7 +307,9 @@ function cms_clear_all_caches(): int
                         $cleared++;
                     }
                 }
-                @rmdir($subdir);
+                if (!rmdir($subdir)) {
+                    error_log("Failed to remove Twig cache directory: $subdir");
+                }
             }
         }
     }
@@ -316,3 +331,5 @@ function cms_init_cache_invalidation(): void
         cms_clear_all_caches();
     });
 }
+
+} // End of include guard
