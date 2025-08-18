@@ -344,6 +344,7 @@ All notable changes to this project will be documented in this file.
 - Storefront now renders tabbed capsules using saved HTML content and respects capsule ordering.
 - Reworked `storefront_capsules_per_theme` with integer ordering, theme checkboxes in the admin modal, and seeded Gear/Freestuff capsules with editable content.
 - Installer seeds example character image random group and templates use a random tag for 2003 v2 and 2004 themes.
+- Random content tag now resolves image paths from the CMS root instead of theme directories.
 - Added generic sidebar renderer for 2006+ themes and introduced initial admin pages for index capsule and sidebar management.
 - Removed theme-specific product banners; templates now reference archived assets to avoid binary duplication
 - Seeded default 2006+ storefront capsules directly into `storefront_capsule_items` and retired legacy fallbacks

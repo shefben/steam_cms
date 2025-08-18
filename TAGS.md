@@ -238,6 +238,7 @@ Tags beginning with `random_` or `scheduled_` are created on the fly.
 ### `random_<group>`
 Selects one random entry from `random_content` where the group name matches `<group>`.
 - **Example:** `{{ random_sidebar }}`
+- Image paths beginning with `images/` are rewritten to load from the CMS root (`./images/`).
 
 ### `scheduled_<tagname>`
 Outputs all active rows from `scheduled_content` with `tag_name` of `<tagname>` and whose schedule matches the current date.

@@ -73,20 +73,18 @@ function cms_random_content(string $tag): string
     $index   = random_int(0, count($rows) - 1);
     $content = $rows[$index];
 
-    $theme = cms_get_current_theme();
-
-    $rewrite = function (array $m) use ($theme): string {
-        return $m[1] . 'themes/' . $theme . '/images/' . $m[2];
+    $rewrite = function (array $m): string {
+        return $m[1] . './images/' . $m[2];
     };
 
     $content = preg_replace_callback(
-        "#((?:src|href)=[\"'])(?![./])(images/[^\"']+)#i",
+        "#((?:src|href)=[\"'])(?![./])images/([^\"']+)#i",
         $rewrite,
         $content
     );
 
     $content = preg_replace_callback(
-        "#(url\\([\"']?)(?![./])(images/[^)\"']+)#i",
+        "#(url\\([\"']?)(?![./])images/([^)\"']+)#i",
         $rewrite,
         $content
     );
