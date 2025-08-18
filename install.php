@@ -674,6 +674,12 @@ CREATE TABLE storefront_tabs(
     title TEXT,
     ord INT
 );
+CREATE TABLE marketing (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    msgtype VARCHAR(50) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 CREATE TABLE storefront_tab_games(
     id INT AUTO_INCREMENT PRIMARY KEY,
     tab_id INT,
