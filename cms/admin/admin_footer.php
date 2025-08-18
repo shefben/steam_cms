@@ -1,15 +1,18 @@
 <?php
+
 require_once __DIR__ . '/../db.php';
 require_once __DIR__ . '/../template_engine.php';
 require_once __DIR__ . '/../theme_config.php';
-$admin_theme = cms_get_setting('admin_theme','v2');
-$base_url = cms_base_url();
-$theme_dir = dirname(__DIR__,2) . "/themes/{$admin_theme}_admin";
-$theme_url = ($base_url ? $base_url : '') . "/themes/{$admin_theme}_admin";
+
+$admin_theme = cms_get_setting('admin_theme', 'v2');
+$base_url    = cms_base_url();
+$theme_dir   = dirname(__DIR__, 2) . "/themes/{$admin_theme}_admin";
+$theme_url   = ($base_url ? $base_url : '') . "/themes/{$admin_theme}_admin";
 if (!is_dir($theme_dir)) {
-    $theme_dir = dirname(__DIR__,2) . '/themes/default_admin';
+    $theme_dir = dirname(__DIR__, 2) . '/themes/default_admin';
     $theme_url = ($base_url ? $base_url : '') . '/themes/default_admin';
 }
+$current_theme = cms_get_current_theme();
 
 if (isset($admin_layout) && $admin_layout) {
     $page_content = ob_get_clean();
@@ -45,4 +48,3 @@ if (isset($admin_layout) && $admin_layout) {
 } else {
     include "$theme_dir/footer.php";
 }
-?>
