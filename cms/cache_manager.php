@@ -8,12 +8,13 @@ declare(strict_types=1);
 
 if (!defined('CMS_CACHE_MANAGER_LOADED')) {
     define('CMS_CACHE_MANAGER_LOADED', true);
+}
 
 class CacheManager
 {
     private string $cache_dir;
     private array $cache_sources = [];
-    
+
     public function __construct(string $cache_dir = null)
     {
         $this->cache_dir = $cache_dir ?? __DIR__ . '/cache';
@@ -330,5 +331,3 @@ function cms_init_cache_invalidation(): void
         cms_clear_all_caches();
     });
 }
-
-} // End of include guard

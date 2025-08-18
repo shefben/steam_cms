@@ -2,6 +2,13 @@
 require_once 'admin_header.php';
 cms_require_permission('manage_pages');
 $db = cms_get_db();
+try {
+    $stmt = $pdo->query("SELECT msgtype, message FROM marketing");
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+    // Optionally fallback or notify admin
+    die("Required table 'marketing' is missing.");
+}
 
 if (isset($_GET['ajax']) && $_GET['ajax'] === 'get') {
     $msgtype = preg_replace('/[^a-z0-9_]/i', '', $_GET['msgtype'] ?? '');

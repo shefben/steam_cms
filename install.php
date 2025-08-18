@@ -476,12 +476,12 @@ CREATE TABLE `0405_storefront_packages` (
             $pdo->exec("DROP TABLE IF EXISTS notifications");
             $pdo->exec("CREATE TABLE notifications(
                 id INT AUTO_INCREMENT PRIMARY KEY,
+                admin_id INT DEFAULT 0,
                 type VARCHAR(50) NOT NULL,
                 message TEXT NOT NULL,
-                target_user INT DEFAULT NULL,
-                target_role VARCHAR(50) DEFAULT NULL,
-                created DATETIME DEFAULT CURRENT_TIMESTAMP,
-                read_at DATETIME DEFAULT NULL
+                data JSON NULL,
+                is_read TINYINT(1) DEFAULT 0,
+                created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )");
             $pdo->exec("DROP TABLE IF EXISTS page_views");
             $pdo->exec("CREATE TABLE page_views(
@@ -673,6 +673,12 @@ CREATE TABLE storefront_tabs(
     theme VARCHAR(20),
     title TEXT,
     ord INT
+);
+CREATE TABLE marketing (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    msgtype VARCHAR(50) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE storefront_tab_games(
     id INT AUTO_INCREMENT PRIMARY KEY,

@@ -1,8 +1,8 @@
 CREATE TRIGGER trg_ccafe_registration_notify
 AFTER INSERT ON ccafe_registration
 FOR EACH ROW
-    INSERT INTO notifications(type, message, target_role)
-    VALUES('signup', CONCAT('New cafe signup: ', NEW.company), 'manage_signups');
+    INSERT INTO notifications(type, message, admin_id)
+    VALUES('signup', CONCAT('New cafe signup: ', NEW.company), 0);
 
 CREATE TABLE IF NOT EXISTS import_jobs (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -16,13 +16,13 @@ AFTER INSERT ON import_jobs
 FOR EACH ROW
 BEGIN
     IF NEW.status <> 'complete' THEN
-        INSERT INTO notifications(type, message, target_role)
-        VALUES('import', CONCAT('Import ', NEW.type, ' pending'), 'admin');
+        INSERT INTO notifications(type, message, admin_id)
+        VALUES('import', CONCAT('Import ', NEW.type, ' pending'), 0);
     END IF;
 END;
 
 CREATE TRIGGER trg_platform_update_notify
 AFTER INSERT ON platform_update_history
 FOR EACH ROW
-    INSERT INTO notifications(type, message, target_role)
-    VALUES('release', CONCAT('Platform update for app ', NEW.appid), 'all');
+    INSERT INTO notifications(type, message, admin_id)
+    VALUES('release', CONCAT('Platform update for app ', NEW.appid), 0);
