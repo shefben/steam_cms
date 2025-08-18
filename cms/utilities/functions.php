@@ -1,6 +1,5 @@
 <?php
 require_once '../config.php';
-require_once __DIR__.'/functions.php';
 function db_connect() {
     static $db;
     if ($db) return $db;
@@ -228,13 +227,11 @@ function rng_bw_series(int $pts, int $start, int $step, int $cap): array {
  * ──────────────────────────────────────────────────────────── */
 function headline_stats(int $maxConcurrent): array
 {
-    $useDB = false; /*(USE_DATABASE && ($_GET['source'] ?? '') !== 'rng')
-             || ($_GET['source'] ?? '') === 'db';*/
+    $useDB = false;
 
     if ($useDB) {
-        $db = db_connect();   // <- your own connector
+        $db = db_connect();
 
-        /* 12-month window, one row per calendar month, then AVG() */
         $sql = "
           SELECT
              AVG(m.users)   AS avg_users,
@@ -251,15 +248,12 @@ function headline_stats(int $maxConcurrent): array
           ) m";
         $row = $db->query($sql)->fetch_assoc();
 
-        // DB columns are NULL if you don’t have 12 full months yet ⇒ fall back.
         if ($row && $row['avg_users'] !== null && $row['avg_minutes'] !== null) {
             return ['users'   => (int) $row['avg_users'],
                     'minutes' => (int) $row['avg_minutes']];
         }
-        /* <— fall through to RNG if query empty */
     }
 
-    /* ───── Random, but plausible ───── */
     $avgUsers   = max($maxConcurrent + rand(50_000, 200_000), 1_000_000);
     $avgMinutes = rand(3_500_000_000, 5_000_000_000);   // 3.5-5.0 B
 
@@ -285,16 +279,10 @@ function human_unit_format(int|float $n): string {
 
 /* ---------- unified getters ---------- */
 function player_data(int $pts, int $start, int $step, int $cap): array {
-    /*if ((USE_DATABASE && ($_GET['source']??'')!=='rng') || ($_GET['source']??'')==='db') {
-        return rng_player_series($pts, $start, $step, $cap);   // or rng_bw_series(…)
-    }*/
     return rng_player_series($pts, $start, $step, $cap);
 }
 
 function bw_data(int $pts, int $start, int $step, int $cap): array {
-    /*if ((USE_DATABASE && ($_GET['source']??'')!=='rng') || ($_GET['source']??'')==='db') {
-        return  rng_bw_series($pts, $start, $step, $cap);
-    }*/
     return rng_bw_series($pts, $start, $step, $cap);
 }
 ?>

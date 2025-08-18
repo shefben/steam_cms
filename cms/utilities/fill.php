@@ -1,23 +1,20 @@
 <?php
 // --- Configuration – adjust if you can handle it ---
-  static $db;
-    if ($db) return $db;
+$config_path = __DIR__ . '/../config.php';  // use __DIR__ or you deserve the pain
+if (!file_exists($config_path)) {
+    die('CMS not installed. Please run install.php');
+}
 
-    $config_path = __DIR__ . '/../config.php';  // use __DIR__ or you deserve the pain
-    if (!file_exists($config_path)) {
-        die('CMS not installed. Please run install.php');
-    }
+$cfg = include $config_path;
+if (!is_array($cfg)) {
+    die('Invalid config file. Expected an array.');
+}
 
-    $cfg = include $config_path;
-    if (!is_array($cfg)) {
-        die('Invalid config file. Expected an array.');
-    }
+$db = new mysqli($cfg['host'], $cfg['user'], $cfg['pass'], $cfg['dbname'], $cfg['port']);
 
-    $db = new mysqli($cfg['host'], $cfg['user'], $cfg['pass'], $cfg['dbname'], $cfg['port']);
-
-    if ($db->connect_error) {
-        die('Connection failed: ' . $db->connect_error);
-    }
+if ($db->connect_error) {
+    die('Connection failed: ' . $db->connect_error);
+}
 
 // 2) Create tables if missing
 $db->query("

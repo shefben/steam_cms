@@ -26,34 +26,54 @@ if(isset($_POST['upload']) && isset($_FILES['theme_zip']) && is_uploaded_file($_
             if(is_dir($dest)){
                 $upload_msg = '<p class="error">Theme already exists.</p>';
             }else{
-                mkdir($dest, 0777, true);
+                mkdir($dest, 0755, true);
                 $zip = new ZipArchive();
-                if($zip->open($file['tmp_name']) === true){
-                    $zip->extractTo($dest);
-                    $zip->close();
-                    $valid = false;
-                    foreach (['layouts', 'layout'] as $dir) {
-                        if (is_dir($dest.'/' . $dir) && glob($dest.'/' . $dir . '/*.twig')) {
-                            $valid = true;
+                if ($zip->open($file['tmp_name']) === true) {
+                    $bad = false;
+                    for ($i = 0; $i < $zip->numFiles; $i++) {
+                        $fn = $zip->getNameIndex($i);
+                        if (str_contains($fn, '..') || str_starts_with($fn, '/')) {
+                            $bad = true;
                             break;
                         }
                     }
-                    $valid = $valid && is_dir($dest.'/assets');
-                    if($valid){
-                        cms_install_theme_settings($name);
-                        cms_refresh_themes();
-                        $themes = cms_get_themes();
-                        $upload_msg = '<p>Theme uploaded successfully.</p>';
-                    }else{
-                        $iter = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dest, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
-                        foreach($iter as $f){
-                            if($f->isDir()) rmdir($f->getPathname());
-                            else unlink($f->getPathname());
-                        }
+                    if ($bad) {
+                        $zip->close();
                         rmdir($dest);
-                        $upload_msg = '<p class="error">Archive missing templates or assets.</p>';
+                        $upload_msg = '<p class="error">Archive contains invalid paths.</p>';
+                    } else {
+                        $zip->extractTo($dest);
+                        $zip->close();
+                        $valid = false;
+                        foreach (['layouts', 'layout'] as $dir) {
+                            if (is_dir($dest . '/' . $dir) && glob($dest . '/' . $dir . '/*.twig')) {
+                                $valid = true;
+                                break;
+                            }
+                        }
+                        $valid = $valid && is_dir($dest . '/assets');
+                        if ($valid) {
+                            cms_install_theme_settings($name);
+                            cms_refresh_themes();
+                            $themes = cms_get_themes();
+                            $upload_msg = '<p>Theme uploaded successfully.</p>';
+                        } else {
+                            $iter = new RecursiveIteratorIterator(
+                                new RecursiveDirectoryIterator($dest, FilesystemIterator::SKIP_DOTS),
+                                RecursiveIteratorIterator::CHILD_FIRST
+                            );
+                            foreach ($iter as $f) {
+                                if ($f->isDir()) {
+                                    rmdir($f->getPathname());
+                                } else {
+                                    unlink($f->getPathname());
+                                }
+                            }
+                            rmdir($dest);
+                            $upload_msg = '<p class="error">Archive missing templates or assets.</p>';
+                        }
                     }
-                }else{
+                } else {
                     rmdir($dest);
                     $upload_msg = '<p class="error">Could not open archive.</p>';
                 }

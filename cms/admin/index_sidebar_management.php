@@ -8,6 +8,10 @@ $themes      = array_values(array_filter($themes_all, fn($t) => (int)substr($t, 
 $csrf_token  = cms_get_csrf_token();
 $db          = cms_get_db();
 
+function cms_sanitize_html(string $html): string {
+    return strip_tags($html, '<p><a><br><strong><em><ul><ol><li><span><div><img><h1><h2><h3><h4><h5><h6><b><i><u>');
+}
+
 $builtins = [
     'getsteamnow'      => ['title' => 'GET STEAM NOW',      'html' => '{{ sidebar_section("get_steam_now")|raw }}'],
     'spotlight'        => ['title' => 'SPOTLIGHT',          'html' => '{{ sidebar_section("spotlight")|raw }}'],
@@ -171,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
         for ($i = 0; $i < count($v_themes); $i++) {
             $vid = (int)($v_ids[$i] ?? 0);
             $theme_list = array_filter(array_map('trim', explode(',', $v_themes[$i] ?? '')), fn($t) => in_array($t, $allowed, true));
-            $html = $v_html[$i] ?? '';
+            $html = cms_sanitize_html($v_html[$i] ?? '');
             if ($vid) {
                 $stmt = $db->prepare('UPDATE sidebar_section_variants SET theme_list=?,html_content=?,updated_at=NOW() WHERE variant_id=? AND section_id=?');
                 $stmt->execute([implode(',', $theme_list), $html, $vid, $id]);

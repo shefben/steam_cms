@@ -6,31 +6,43 @@ require_once __DIR__.'/template_engine.php';
 $err = '';
 $dest = isset($_GET['return']) ? $_GET['return'] : 'admin/index.php';
 if($_SERVER['REQUEST_METHOD']==='POST'){
-    $db=cms_get_db();
-    $user=trim($_POST['username']);
-    $pass=$_POST['password'];
-    $stay=isset($_POST['stay']);
-    $stmt=$db->prepare('SELECT id,password,language FROM admin_users WHERE username=?');
-    $stmt->execute([$user]);
-    $row=$stmt->fetch(PDO::FETCH_ASSOC);
-    if($row && password_verify($pass,$row['password'])){
-        session_regenerate_id(true);
-        $_SESSION['admin_id']=$row['id'];
-        $_SESSION['admin_lang']=$row['language'] ?: 'en';
-        cms_admin_log('login success');
-        if($stay){
-            $token=cms_create_admin_token($row['id']);
-            setcookie('cms_admin_token',$token,[
-                'expires'=>time()+60*60*24*7,
-                'path'=>'/',
-                'httponly'=>true
-            ]);
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $attempts = $_SESSION['login_attempts'][$ip]['count'] ?? 0;
+    $last = $_SESSION['login_attempts'][$ip]['time'] ?? 0;
+    if(time() - $last > 300){
+        $attempts = 0;
+    }
+    if($attempts >= 5){
+        $err = 'Too many login attempts. Please wait.';
+    } else {
+        $db=cms_get_db();
+        $user=trim($_POST['username']);
+        $pass=$_POST['password'];
+        $stay=isset($_POST['stay']);
+        $stmt=$db->prepare('SELECT id,password,language FROM admin_users WHERE username=?');
+        $stmt->execute([$user]);
+        $row=$stmt->fetch(PDO::FETCH_ASSOC);
+        if($row && password_verify($pass,$row['password'])){
+            session_regenerate_id(true);
+            $_SESSION['admin_id']=$row['id'];
+            $_SESSION['admin_lang']=$row['language'] ?: 'en';
+            cms_admin_log('login success');
+            if($stay){
+                $token=cms_create_admin_token($row['id']);
+                setcookie('cms_admin_token',$token,[
+                    'expires'=>time()+60*60*24*7,
+                    'path'=>'/',
+                    'httponly'=>true
+                ]);
+            }
+            $_SESSION['login_attempts'][$ip] = ['count'=>0,'time'=>time()];
+            header('Location: '.$dest);
+            exit;
+        }else{
+            cms_admin_log('login failed', 0);
+            $_SESSION['login_attempts'][$ip] = ['count'=>$attempts+1,'time'=>time()];
+            $err='Invalid credentials';
         }
-        header('Location: '.$dest);
-        exit;
-    }else{
-        cms_admin_log('login failed', 0);
-        $err='Invalid credentials';
     }
 }
 

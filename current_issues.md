@@ -1,0 +1,48 @@
+# Current Issues in cms/
+
+- **cms/utilities/functions.php**: File self-requires itself, which is redundant and hints at misconfiguration or copy-paste oversight.
+- **cms/utilities/functions.php**: Contains large blocks of commented-out database logic (e.g., `USE_DATABASE`), leaving functionality incomplete and harder to maintain.
+- **cms/page.php**: Dynamically includes page files based on a query parameter without a whitelist, risking unintended file inclusion.
+- **cms/admin/admin_users.php**: Form used for deleting admin users lacks CSRF protection, leaving it vulnerable to cross-site request forgery.
+- **cms/utilities/2007_graph.php**: Accepts arbitrary query parameters and remote data URLs without thorough validation, allowing remote resource fetching and suppressing error reporting which hampers debugging.
+- **cms/utilities/cs_graph.php**: Disables error reporting, concealing runtime errors.
+- **cms/utilities/player_graph.php**: Suppresses errors with `error_reporting(0)`, making debugging difficult.
+- **cms/login.php**: Uses an unvalidated `return` parameter for redirects, enabling open-redirect attacks.
+- **cms/logout.php**: Sends a redirect header without calling `exit`, risking unintended output after the redirect.
+- **cms/cafe_utils.php**: Calls `file_get_contents` on external files without existence checks, which may trigger warnings.
+- **cms/theme_config.php**: `cms_theme_get_value` interpolates table names directly into SQL, allowing injection if the table name is untrusted.
+- **cms/troubleshooter_loader.php**: Echoes database content without HTML escaping, enabling XSS if stored data is untrusted.
+- **cms/admin/troubleshooter_manage.php**: AJAX save endpoint lacks CSRF protection, allowing cross-site request forgery.
+- **cms/admin/bug_reports.php**: Update and delete operations are performed without CSRF tokens.
+- **cms/admin/bug_reports.php**: Stores user-provided text without sanitization, risking stored XSS when displaying reports.
+- **cms/admin/error_log.php**: Reconstructs query strings from raw `$_GET` values, potentially reflecting unexpected parameters.
+- **cms/admin/cafe_signup_edit.php**: Form submission is missing CSRF protection.
+- **cms/admin/custom_pages.php**: Creates header image directories with `0777` permissions, leaving them world-writable.
+- **cms/admin/custom_pages.php**: Accepts uploaded header images without validating file type or size, enabling malicious uploads.
+- **cms/admin/custom_pages.php**: Processes numerous POST actions without CSRF tokens.
+- **cms/admin/custom_pages.php**: Saves page content and header paths directly to the database without sanitization, risking XSS.
+- **cms/utilities/functions.php**: Uses `@fsockopen` to suppress network errors, hiding failures when checking server status.
+- **cms/admin/index_sidebar_management.php**: Stores HTML fragments from POST data without sanitization, allowing script injection.
+- **cms/update_htaccess.php**: Overwrites the root `.htaccess` file without backup or permission checks, which can break site routing.
+- **cms/admin/download_files.php**: Uploads arbitrary files to a web-accessible directory without validating file type.
+- **cms/admin/download_files.php**: File management AJAX actions lack CSRF protection.
+- **cms/admin/news_edit.php**: Autosave and save actions do not verify CSRF tokens.
+- **cms/admin/news_edit.php**: Writes raw HTML from editors to the database, enabling stored XSS if later rendered unsanitized.
+- **cms/admin/cafe_signup_edit.php**: Dynamically builds SQL field lists from database columns, which can misbehave if unexpected columns exist.
+- **cms/login.php**: Lacks rate limiting, leaving it vulnerable to brute-force attacks.
+- **cms/news.php**: Renders news content from the database without escaping, enabling stored XSS in articles.
+- **cms/cache_manager.php**: `cms_clear_all_caches` purges every cache file on admin saves using `glob`, causing heavy I/O and potential race conditions.
+- **cms/admin/theme.php**: Upload and configuration forms omit CSRF tokens, exposing theme management to cross-site request forgery.
+- **cms/admin/theme.php**: Theme archives are extracted without path validation and target directories are created with `0777` permissions, permitting zip-slip attacks and world-writable files.
+- **cms/admin/upload_capsule.php**: Creates capsule directories with `0777` permissions and resizes images without bounding the source size, risking resource exhaustion.
+- **cms/admin/upload_capsule.php**: Capsule upload endpoint lacks CSRF protection.
+- **cms/admin/media.php**: Accepts arbitrary file uploads without checking type or size, allowing executable files in web-accessible locations.
+- **cms/admin/media.php**: Upload and delete actions are performed without CSRF tokens.
+- **cms/admin/faq_import.php**: Imports JSON/CSV files into memory with no size limits, enabling denial-of-service via large uploads.
+- **cms/admin/faq_import.php**: Preview and import forms have no CSRF protection.
+- **cms/admin/cafe_directory.php**: Add, update, and delete operations are missing CSRF safeguards.
+- **cms/utilities/fill.php**: Starts with a top-level `return` that prevents the seeding logic from executing, leaving the script non-functional.
+- **cms/utilities/2003_title_styler.php**: Emits demo HTML when included, producing unexpected output in production.
+- **cms/admin/storefront_product.php**: Main image and screenshot uploads lack validation, permitting arbitrary file types and sizes.
+
+_No explicit TODO or FIXME comments were found in `cms/` or its subdirectories. All PHP files passed a syntax check using `php -l`._

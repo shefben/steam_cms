@@ -180,33 +180,24 @@ class CacheManager
     {
         $cleared = 0;
         
-        if ($namespace === null) {
-            // Clear entire cache directory
-            $pattern = $this->cache_dir . '/*';
-        } else {
-            // Clear specific namespace
-            $pattern = $this->cache_dir . '/' . $namespace . '/*';
-        }
-        
-        foreach (glob($pattern) as $item) {
-            if (is_file($item)) {
-                if (unlink($item)) {
-                    $cleared++;
-                }
-            } elseif (is_dir($item) && $namespace === null) {
-                // Recursively clear subdirectories when clearing all
-                $this->clear(basename($item));
-                if (count(glob($item . '/*')) === 0) {
-                    rmdir($item);
+        $dir = $namespace === null ? $this->cache_dir : $this->cache_dir . '/' . $namespace;
+        if (is_dir($dir)) {
+            $iterator = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),
+                RecursiveIteratorIterator::CHILD_FIRST
+            );
+            foreach ($iterator as $item) {
+                $path = $item->getPathname();
+                if ($item->isFile()) {
+                    if (unlink($path)) {
+                        $cleared++;
+                    }
+                } elseif ($item->isDir() && $namespace === null) {
+                    @rmdir($path);
                 }
             }
-        }
-        
-        // Clean up empty namespace directories
-        if ($namespace !== null) {
-            $ns_dir = $this->cache_dir . '/' . $namespace;
-            if (is_dir($ns_dir) && count(glob($ns_dir . '/*')) === 0) {
-                @rmdir($ns_dir); // Suppress warning if directory doesn't exist
+            if ($namespace !== null) {
+                @rmdir($dir);
             }
         }
         
@@ -265,6 +256,11 @@ function cms_cache_manager(): CacheManager
  */
 function cms_clear_all_caches(): int
 {
+    $lockFile = __DIR__ . '/cache/.clear.lock';
+    $lock = fopen($lockFile, 'c');
+    if (!$lock || !flock($lock, LOCK_EX | LOCK_NB)) {
+        return 0;
+    }
     $manager = cms_cache_manager();
     $cleared = $manager->clear();
     
@@ -283,22 +279,27 @@ function cms_clear_all_caches(): int
             }
         }
     }
-    
+
     // Clear Twig cache directories
     $twig_cache_dir = __DIR__ . '/cache/twig';
     if (is_dir($twig_cache_dir)) {
-        foreach (glob($twig_cache_dir . '/*') as $subdir) {
-            if (is_dir($subdir)) {
-                foreach (glob($subdir . '/*') as $file) {
-                    if (is_file($file) && unlink($file)) {
-                        $cleared++;
-                    }
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($twig_cache_dir, FilesystemIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+        foreach ($iterator as $item) {
+            $path = $item->getPathname();
+            if ($item->isFile()) {
+                if (unlink($path)) {
+                    $cleared++;
                 }
-                @rmdir($subdir);
+            } else {
+                @rmdir($path);
             }
         }
     }
-    
+    flock($lock, LOCK_UN);
+    fclose($lock);
     return $cleared;
 }
 

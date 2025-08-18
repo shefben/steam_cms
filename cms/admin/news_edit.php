@@ -5,6 +5,9 @@ cms_require_permission($id ? 'news_edit' : 'news_create');
 $db = cms_get_db();
 $theme = cms_get_setting('theme','2004');
 $isAjax = strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'xmlhttprequest';
+function cms_sanitize_html(string $html): string {
+    return strip_tags($html, '<p><a><br><strong><em><ul><ol><li><b><i><u><h1><h2><h3><h4><h5><h6><span>');
+}
 if(isset($_GET['ajax']) && $id){
     $stmt = $db->prepare('SELECT * FROM news WHERE id=?');
     $stmt->execute([$id]);
@@ -31,7 +34,7 @@ if($id){
 if(isset($_POST['autosave'])){
     $title = $_POST['title'];
     $author = $_POST['author'];
-    $content = $_POST['content'];
+    $content = cms_sanitize_html($_POST['content']);
     $pub    = $_POST['publish_at'];
     if($id){
         $stmt = $db->prepare('UPDATE news SET title=?, author=?, content=?, publish_date=?, publish_at=?, status="draft" WHERE id=?');
@@ -49,7 +52,7 @@ if(isset($_POST['autosave'])){
 if(isset($_POST['save'])){
     $title  = $_POST['title'];
     $author = $_POST['author'];
-    $content = $_POST['content'];
+    $content = cms_sanitize_html($_POST['content']);
     $pub    = $_POST['publish_at'];
     $status = (strtotime($pub) > time()) ? 'scheduled' : 'published';
     if($id){

@@ -3,7 +3,7 @@
 // PHP ≥ 7.4 + GD extension
 require_once __DIR__.'/functions.php';
 
-error_reporting(0);
+error_reporting(E_ALL);
 ini_set('display_errors', 0);
 if (!extension_loaded('gd')) {
     header('Content-Type: text/plain', true, 500);

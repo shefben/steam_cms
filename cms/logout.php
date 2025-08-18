@@ -8,3 +8,4 @@ if(isset($_COOKIE['cms_admin_token'])){
     setcookie('cms_admin_token','',time()-3600,'/');
 }
 header('Location: login.php');
+exit;

@@ -8,6 +8,10 @@ require_once __DIR__.'/cache_manager.php';
  */
 $cms_news_cache = [];
 
+function cms_sanitize_html(string $html): string {
+    return strip_tags($html, '<p><a><br><strong><em><ul><ol><li><b><i><u><h1><h2><h3><h4><h5><h6><span>');
+}
+
 function cms_news_url($id, $archive = false){
     $id = (int)$id;
     return 'index.php?area=news' . ($archive ? '&archive=yes' : '') . '&id=' . $id;
@@ -103,7 +107,7 @@ function cms_render_news($type,$count=null){
         }
         $date  = htmlspecialchars($date);
         $link   = cms_news_url($row['id']);
-        $content = str_replace('\\n', '', $row['content']);
+        $content = cms_sanitize_html(str_replace('\\n', '', $row['content']));
         switch($type){
             case 'full_article':
                 $out .= "<p><h3><a href='$link' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";

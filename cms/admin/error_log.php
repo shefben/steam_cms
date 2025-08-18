@@ -52,22 +52,19 @@ $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </table>
 <div class="pagination">
 <?php
-$query = $_GET;
-if ($page > 1) { 
-    $query['page'] = $page - 1; 
-    echo '<a href="?' . http_build_query($query) . '" class="pagination-btn">&laquo; Previous</a>'; 
+$query = [];
+if ($page > 1) {
+    echo '<a href="?page=' . ($page - 1) . '" class="pagination-btn">&laquo; Previous</a>';
 }
 
 // Show page numbers with current page indicator
 for ($i = 1; $i <= $pages; $i++) {
-    $query['page'] = $i;
     $class = ($i == $page) ? 'pagination-current' : 'pagination-link';
-    echo '<a href="?' . http_build_query($query) . '" class="' . $class . '">' . $i . '</a>';
+    echo '<a href="?page=' . $i . '" class="' . $class . '">' . $i . '</a>';
 }
 
-if ($page < $pages) { 
-    $query['page'] = $page + 1; 
-    echo '<a href="?' . http_build_query($query) . '" class="pagination-btn">Next &raquo;</a>'; 
+if ($page < $pages) {
+    echo '<a href="?page=' . ($page + 1) . '" class="pagination-btn">Next &raquo;</a>';
 }
 ?>
 </div>

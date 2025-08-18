@@ -9,6 +9,9 @@ function norm_int($v){ return is_numeric($v) ? (int)$v : 0; }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['preview']) && !empty($_FILES['file']['tmp_name'])) {
+        if (($_FILES['file']['size'] ?? 0) > 1048576) { // 1MB limit
+            die('File too large');
+        }
         $tmp = $_FILES['file']['tmp_name'];
         $ext = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
         if ($ext === 'json') {

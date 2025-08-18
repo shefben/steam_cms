@@ -14,8 +14,8 @@
  * Requires PHP ≥ 7.4 with GD extension.
  */
 
-error_reporting(0);              // keep PNG output clean
-ini_set('display_errors', 0);
+error_reporting(E_ALL);
+ini_set('display_errors', 0); // keep PNG output clean
 
 if (!extension_loaded('gd')) {
     header('Content-Type: text/plain', true, 500);
@@ -53,13 +53,15 @@ foreach ($_GET as $k => $v) {
 /* -------------------------------------------------------------
  * 2. Load the XML data
  * ----------------------------------------------------------- */
-$dataURL = $_GET['data'] ?? 'data.xml';
-if (!preg_match('#^https?://#', $dataURL))
-    $dataURL = __DIR__ . '/' . $dataURL;
-
-if (!is_file($dataURL) && !filter_var($dataURL, FILTER_VALIDATE_URL)) {
+$dataParam = $_GET['data'] ?? 'data.xml';
+if (preg_match('#^https?://#', $dataParam)) {
+    header('Content-Type: text/plain', true, 400);
+    exit("Remote data URLs are not allowed\n");
+}
+$dataURL = realpath(__DIR__ . '/' . $dataParam);
+if ($dataURL === false || strncmp($dataURL, __DIR__, strlen(__DIR__)) !== 0 || !is_file($dataURL)) {
     header('Content-Type: text/plain', true, 404);
-    exit("Data source not found: $dataURL\n");
+    exit("Data source not found\n");
 }
 
 libxml_use_internal_errors(true);
