@@ -2,6 +2,14 @@
 require_once 'admin_header.php';
 cms_require_permission('manage_pages');
 $theme = cms_get_setting('theme','2004');
+$base_url = cms_base_url();
+$theme_url = ($base_url ? $base_url : '') . '/themes/' . $theme . '/';
+$legacyThemes = ['2002_v1','2002_v2','2003_v1','2003_v2','2004','2005_v1','2005_v2'];
+if (!in_array($theme, $legacyThemes, true)) {
+    echo '<p>This configuration page is only valid for themes which do not contain a storefront index. These themes include versions 2002 v1 through 2005_v2.</p>';
+    include 'admin_footer.php';
+    exit;
+}
 $slug_clean = str_replace('_','',$theme).'_index';
 $slug_legacy = $theme.'_index';
 $db = cms_get_db();
@@ -9,7 +17,7 @@ $msg = '';
 $slug = $slug_clean;
 if(isset($_POST['autosave'])){
     $title = trim($_POST['title']);
-    $content = $_POST['content'];
+    $content = str_replace(['/cms/admin/','/cms/'], ['/','/'], $_POST['content']);
     $stmt = $db->prepare('SELECT slug FROM custom_pages WHERE slug=? OR slug=? LIMIT 1');
     $stmt->execute([$slug_clean,$slug_legacy]);
     $existing = $stmt->fetchColumn();
@@ -27,7 +35,7 @@ if(isset($_POST['autosave'])){
 }
 if(isset($_POST['save_page'])){
     $title = trim($_POST['title']);
-    $content = $_POST['content'];
+    $content = str_replace(['/cms/admin/','/cms/'], ['/','/'], $_POST['content']);
     $stmt = $db->prepare('SELECT slug FROM custom_pages WHERE slug=? OR slug=? LIMIT 1');
     $stmt->execute([$slug_clean,$slug_legacy]);
     $existing = $stmt->fetchColumn();
@@ -47,7 +55,7 @@ if(!$page && $slug_legacy!==$slug_clean){
     $page = cms_get_custom_page($slug_legacy,$theme);
 }
 $title = $page['title'] ?? 'Home';
-$content = $page['content'] ?? '';
+$content = str_replace(['/cms/admin/','/cms/'], ['/','/'], $page['content'] ?? '');
 ?>
 <h2>Edit Home Page</h2>
 <?php if($msg): ?><p><?php echo htmlspecialchars($msg); ?></p><?php endif; ?>
@@ -60,7 +68,7 @@ Title:<br>
 </form>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
-CKEDITOR.replace('content');
+CKEDITOR.replace('content',{baseHref:'<?php echo htmlspecialchars($theme_url,ENT_QUOTES); ?>'});
 function autoSave(){
     var data={
         autosave:1,
