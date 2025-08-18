@@ -24,6 +24,11 @@ if(isset($_POST['delete'])){
     $delId = (int)$_POST['delete'];
     $stmt->execute([$delId]);
     cms_admin_log('Deleted news article '.$delId);
+    if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        header('Content-Type: application/json');
+        echo json_encode(['status'=>'ok']);
+        exit;
+    }
 }
 // change date format
 if(isset($_POST['set_date_format'])){
@@ -137,14 +142,11 @@ foreach ($rows as $i => $row) {
     $tbodyHtml .= '<td>' . (int)$row['views'] . '</td>';
     $tbodyHtml .= '<td>';
     if (cms_has_permission('news_edit')) {
-        $tbodyHtml .= '<a href="news_edit.php?id=' . $row['id'] . '" class="btn btn-primary btn-small">Edit</a>';
+        $tbodyHtml .= '<button type="button" class="btn btn-primary btn-small edit-btn" data-id="' . $row['id'] . '">Edit</button>';
     }
     $tbodyHtml .= '</td><td>';
     if (cms_has_permission('news_delete')) {
-        $tbodyHtml .= '<form method="post" style="display:inline">';
-        $tbodyHtml .= '<input type="hidden" name="delete" value="' . $row['id'] . '">';
-        $tbodyHtml .= '<input type="submit" value="Delete" class="btn btn-danger btn-small">';
-        $tbodyHtml .= '</form>';
+        $tbodyHtml .= '<button type="button" class="btn btn-danger btn-small delete-btn" data-id="' . $row['id'] . '">Delete</button>';
     }
     $tbodyHtml .= '</td></tr>';
 }
@@ -181,7 +183,7 @@ if (isset($_GET['ajax'])) {
         2004-08-20 15:33:00
     </label>
 </div>
-<p><a href="news_edit.php">Add New Article</a></p>
+<p><button type="button" id="add-news" class="btn btn-primary">Add New Article</button></p>
 <?php endif; ?>
 <p>
     <a class="btn btn-secondary" href="news.php?export=csv">Export CSV</a>
@@ -207,6 +209,21 @@ if (isset($_GET['ajax'])) {
 </form>
 <?php echo $paginationHtml; ?>
 <p><a href="index.php">Back</a></p>
+<div id="newsModalOverlay" class="modal-overlay" style="display:none;">
+  <div class="modal" role="dialog" aria-modal="true">
+    <form id="newsForm">
+      <input type="hidden" name="id" id="newsId">
+      <label>Title: <input type="text" name="title" id="newsTitle"></label>
+      <label>Author: <input type="text" name="author" id="newsAuthor"></label>
+      <label>Publish Date: <input type="datetime-local" name="publish_at" id="newsPublish"></label>
+      <label>Content:</label>
+      <textarea name="content" id="newsContent" style="width:100%;height:200px;"></textarea>
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" id="newsCancel" class="btn">Cancel</button>
+    </form>
+  </div>
+</div>
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
     var body=document.getElementById('news-body');
@@ -240,6 +257,43 @@ document.addEventListener('DOMContentLoaded',function(){
             });
         });
     }
+    function refreshList(){
+        var title=$('#filter-title').val();
+        var author=$('#filter-author').val();
+        $.get('news.php',{ajax:1,title:title,author:author},function(res){
+            $('#news-body').html(res.tbody);
+            $('.pagination').replaceWith(res.pagination);
+            body=document.getElementById('news-body');
+            bindPagination();
+            initSortable();
+            showPage(1);
+        },'json');
+    }
+    function openModal(id){
+        $('#newsForm')[0].reset();
+        $('#newsId').val('');
+        if(CKEDITOR.instances.newsContent){CKEDITOR.instances.newsContent.destroy(true);}
+        if(id){
+            $.get('news_edit.php',{id:id,ajax:1},function(d){
+                $('#newsId').val(d.id);
+                $('#newsTitle').val(d.title);
+                $('#newsAuthor').val(d.author);
+                $('#newsPublish').val(d.publish_at.replace(' ','T'));
+                $('#newsContent').val(d.content);
+                CKEDITOR.replace('newsContent');
+                $('#newsModalOverlay').show();
+            },'json');
+        }else{
+            $('#newsAuthor').val(<?php echo json_encode(getenv('USER') ?: 'Admin'); ?>);
+            $('#newsPublish').val(new Date().toISOString().slice(0,16));
+            CKEDITOR.replace('newsContent');
+            $('#newsModalOverlay').show();
+        }
+    }
+    function closeModal(){
+        $('#newsModalOverlay').hide();
+        if(CKEDITOR.instances.newsContent){CKEDITOR.instances.newsContent.destroy(true);}
+    }
     $('#news-table th.sortable').on('click',function(){
         var idx=$(this).index();
         var asc=$(this).data('asc')||0;
@@ -252,17 +306,27 @@ document.addEventListener('DOMContentLoaded',function(){
         $.each(rows,function(i,r){$('#news-body').append(r);});
         $(this).data('asc',asc?0:1);
     });
-    $('#apply-filter').on('click',function(){
-        var title=$('#filter-title').val();
-        var author=$('#filter-author').val();
-        $.get('news.php',{ajax:1,title:title,author:author},function(res){
-            $('#news-body').html(res.tbody);
-            $('.pagination').replaceWith(res.pagination);
-            body=document.getElementById('news-body');
-            bindPagination();
-            initSortable();
-            showPage(1);
+    $('#apply-filter').on('click',function(){ refreshList(); });
+    $('#add-news').on('click',function(){ openModal(); });
+    $('#news-body').on('click','.edit-btn',function(){ openModal($(this).data('id')); });
+    $('#newsCancel').on('click',function(){ closeModal(); });
+    $('#newsForm').on('submit',function(e){
+        e.preventDefault();
+        var id=$('#newsId').val();
+        var data={save:1,title:$('#newsTitle').val(),author:$('#newsAuthor').val(),publish_at:$('#newsPublish').val(),content:CKEDITOR.instances.newsContent.getData()};
+        var url='news_edit.php'+(id?'?id='+id:'');
+        $.post(url,data,function(){
+            closeModal();
+            refreshList();
         },'json');
+    });
+    $('#news-body').on('click','.delete-btn',function(){
+        var id=$(this).data('id');
+        if(confirm('Delete this article?')){
+            $.post('news.php',{delete:id},function(){
+                refreshList();
+            });
+        }
     });
     bindPagination();
     initSortable();

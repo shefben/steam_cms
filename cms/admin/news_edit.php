@@ -4,6 +4,7 @@ $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 cms_require_permission($id ? 'news_edit' : 'news_create');
 $db = cms_get_db();
 $theme = cms_get_setting('theme','2004');
+$isAjax = strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'xmlhttprequest';
 if(isset($_GET['ajax']) && $id){
     $stmt = $db->prepare('SELECT * FROM news WHERE id=?');
     $stmt->execute([$id]);
@@ -61,7 +62,12 @@ if(isset($_POST['save'])){
         $id = $db->lastInsertId();
         cms_admin_log(($status==='scheduled'?'Scheduled':'Created').' news article '.$id);
     }
-    header('Location: news.php');
+    if($isAjax){
+        header('Content-Type: application/json');
+        echo json_encode(['status'=>'ok','id'=>$id]);
+    }else{
+        header('Location: news.php');
+    }
     exit;
 }
 ?>
