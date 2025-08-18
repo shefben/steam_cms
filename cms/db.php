@@ -530,6 +530,20 @@ function cms_has_permission($perm){
     return false;
 }
 
+/**
+ * Backward-compatible wrapper for cms_has_permission().
+ *
+ * Some legacy components still call cms_check_permission(); keep this
+ * helper as a thin alias so those calls resolve correctly without
+ * duplicating permission logic.
+ *
+ * @param string $perm Permission identifier to verify
+ * @return bool        Whether the current admin has the permission
+ */
+function cms_check_permission($perm){
+    return cms_has_permission($perm);
+}
+
 function cms_require_permission($perm){
     if(!cms_has_permission($perm)){
         echo '<p>Access denied.</p>';
