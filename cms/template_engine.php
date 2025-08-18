@@ -196,6 +196,32 @@ function cms_get_sidebar_entries(string $sidebarName, string $theme): array
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
 
+/**
+ * Retrieve sidebar entry field data for plugin-defined sections.
+ *
+ * @param string $sidebarName Section slug.
+ * @param string $theme       Active theme.
+ * @return array<int,array<string,string>>
+ */
+function cms_get_sidebar_entry_data(string $sidebarName, string $theme): array
+{
+    $stmt = cms_get_prepared_statement(
+        'SELECT e.entry_id, f.field_key, f.field_value FROM sidebar_section_entries e '
+        . 'JOIN sidebar_section_variants v ON e.parent_variant_id = v.variant_id '
+        . 'JOIN sidebar_sections s ON v.section_id = s.section_id '
+        . 'LEFT JOIN sidebar_section_entry_fields f ON e.entry_id = f.entry_id '
+        . 'WHERE s.sidebar_name=? AND FIND_IN_SET(?, v.theme_list) '
+        . 'ORDER BY e.entry_order, f.field_key'
+    );
+    $stmt->execute([$sidebarName, $theme]);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $entries = [];
+    foreach ($rows as $row) {
+        $entries[$row['entry_id']][$row['field_key']] = $row['field_value'];
+    }
+    return array_values($entries);
+}
+
 function cms_render_sidebar_section(Environment $env, string $section, array $params = []): string
 {
     switch ($section) {
@@ -247,6 +273,13 @@ function cms_render_sidebar_section(Environment $env, string $section, array $pa
             $entries = cms_get_sidebar_entries('coming_soon', $theme);
             $html = implode('', $entries);
             return $env->render('layouts/sidebar_sections/coming_soon.twig', ['html' => $html]);
+    }
+    global $cms_plugins;
+    if (isset($cms_plugins['sidebar_renderers'][$section])) {
+        $theme = cms_get_current_theme();
+        $data = cms_get_sidebar_entry_data($section, $theme);
+        $renderer = $cms_plugins['sidebar_renderers'][$section];
+        return $renderer($env, $data);
     }
     return '';
 }

@@ -22,6 +22,8 @@ $cms_plugins = [
     'tag_hooks'     => [],   // Hooks on template tags (name => ['before'=>[], 'after'=>[]])
     'hooks'         => [],   // Generic event hooks (event => [callbacks])
     'versioned_pages' => [], // Versioned page registrations
+    'sidebar_renderers' => [], // Custom sidebar section renderers
+    'sidebar_entry_templates' => [], // Entry templates for plugin sections
 ];
 
 /**
@@ -196,6 +198,92 @@ function cms_plugin_page_versions(): array
 {
     global $cms_plugins;
     return $cms_plugins['versioned_pages'];
+}
+
+/**
+ * Register a custom sidebar section type using a JSON configuration.
+ *
+ * The JSON file must provide:
+ * {
+ *   "name": "unique_slug",
+ *   "title": "Section Title",
+ *   "entry_template": "<a href=\"{{url}}\">{{label}}</a>",
+ *   "fields": [
+ *     {"key":"url",   "label":"URL",   "type":"text"},
+ *     {"key":"label", "label":"Label", "type":"text"}
+ *   ]
+ * }
+ *
+ * @param string        $jsonPath Path to the JSON definition file.
+ * @param callable|null $renderer Optional callback to render the section.
+ */
+function cms_register_sidebar_section_type(string $jsonPath, ?callable $renderer = null): void
+{
+    global $cms_plugins;
+    $config = json_decode(file_get_contents($jsonPath), true);
+    if (!is_array($config) || empty($config['name'])) {
+        throw new InvalidArgumentException('Invalid sidebar section JSON');
+    }
+
+    $type  = $config['name'];
+    $title = $config['title'] ?? ucfirst($type);
+    $entryTemplate = $config['entry_template'] ?? '{{content}}';
+    $fields = $config['fields'] ?? [];
+    $themes = $config['themes'] ?? [];
+    if (is_string($themes)) {
+        $themes = array_map('trim', explode(',', $themes));
+    }
+    $themeList = implode(',', $themes);
+
+    $db = cms_get_db();
+    $db->prepare('INSERT IGNORE INTO sidebar_section_types(type_name,title,theme_list,entry_template) VALUES(?,?,?,?)')
+        ->execute([$type, $title, $themeList, $entryTemplate]);
+    $stmt = $db->prepare('INSERT IGNORE INTO sidebar_section_type_fields(type_name,field_key,field_label,field_type,field_order) VALUES(?,?,?,?,?)');
+    $order = 1;
+    foreach ($fields as $field) {
+        $stmt->execute([$type, $field['key'], $field['label'] ?? $field['key'], $field['type'] ?? 'text', $order++]);
+    }
+
+    if ($renderer) {
+        $cms_plugins['sidebar_renderers'][$type] = $renderer;
+    }
+    $cms_plugins['sidebar_entry_templates'][$type] = $entryTemplate;
+}
+
+/**
+ * Build HTML for a sidebar entry using the registered template.
+ *
+ * @param string               $type   Section type slug.
+ * @param array<string,string> $fields Field values.
+ */
+function cms_plugin_build_sidebar_entry(string $type, array $fields): string
+{
+    global $cms_plugins;
+    $tpl = $cms_plugins['sidebar_entry_templates'][$type] ?? '';
+    foreach ($fields as $k => $v) {
+        $tpl = str_replace('{{' . $k . '}}', htmlspecialchars($v, ENT_QUOTES), $tpl);
+    }
+    return $tpl;
+}
+
+/**
+ * Insert a sidebar entry for a given section variant.
+ *
+ * @param string               $type      Section type slug.
+ * @param array<string,string> $fields    Field values.
+ * @param int                  $variantId Target sidebar_section_variants.variant_id.
+ */
+function cms_add_sidebar_entry(string $type, array $fields, int $variantId): void
+{
+    $db = cms_get_db();
+    $html = cms_plugin_build_sidebar_entry($type, $fields);
+    $stmt = $db->prepare('INSERT INTO sidebar_section_entries(parent_variant_id,entry_order,entry_content) VALUES(?,?,?)');
+    $stmt->execute([$variantId, 0, $html]);
+    $entryId = (int)$db->lastInsertId();
+    $fStmt = $db->prepare('INSERT INTO sidebar_section_entry_fields(entry_id,field_key,field_value) VALUES(?,?,?)');
+    foreach ($fields as $k => $v) {
+        $fStmt->execute([$entryId, $k, $v]);
+    }
 }
 
 /**

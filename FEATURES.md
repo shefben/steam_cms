@@ -261,6 +261,8 @@
 - Plugins can hook the Twig environment and template rendering through global
   event hooks.
 - Plugin sidebar links automatically group under a Plugins menu in the admin navigation.
+- Plugins can register JSON-driven sidebar section types with custom entry forms.
+- Plugin-defined sidebar sections can limit visibility to specific themes using a `themes` array in their JSON config.
 - Theme settings may target custom database tables with optional datatype
   casting.
 - Preload marketing messages stored in DB with AJAX admin editor
