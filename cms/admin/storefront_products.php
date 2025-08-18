@@ -43,18 +43,21 @@ $total = (int)$db->query('SELECT COUNT(*) FROM store_apps')->fetchColumn();
      $tbodyHtml .= '<td>' . $r['appid'] . '</td>';
      $imgs = json_decode($r['images'] ?: '[]', true);
      $imgTag = '';
-     if ($imgs) {
-         $img = htmlspecialchars($imgs[0]);
-         $imgTag = '<img src="../archived_steampowered/2005/storefront/screenshots/' . $img . '" width="40">';
-     }
+    if ($imgs) {
+        $img = htmlspecialchars($imgs[0]);
+        $imgTag = '<img src="../storefront/images/apps/' . $r['appid'] . '/screenshots/' . $img . '" width="40">';
+    }
      $tbodyHtml .= '<td>' . $imgTag . '</td>';
      $tbodyHtml .= '<td>' . htmlspecialchars($r['name']) . '</td>';
      $tbodyHtml .= '<td>' . htmlspecialchars($r['developer']) . '</td>';
-     $tbodyHtml .= '<td>' . $r['price'] . '</td>';
-     $tbodyHtml .= '<td>' . htmlspecialchars($r['availability']) . '</td>';
-     $tbodyHtml .= '<td><a href="storefront_product.php?id=' . $r['appid'] . '">Edit</a></td>';
-     $tbodyHtml .= '</tr>';
- }
+    $tbodyHtml .= '<td>' . $r['price'] . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($r['availability']) . '</td>';
+    $tbodyHtml .= '<td>';
+    $tbodyHtml .= '<button class="btn btn-primary edit-btn" data-id="' . $r['appid'] . '">Edit</button> ';
+    $tbodyHtml .= '<button class="btn btn-danger delete-btn" data-id="' . $r['appid'] . '">Delete</button>';
+    $tbodyHtml .= '</td>';
+    $tbodyHtml .= '</tr>';
+}
 
  $pages = (int)ceil($total / $per);
  ob_start();
@@ -94,6 +97,7 @@ $total = (int)$db->query('SELECT COUNT(*) FROM store_apps')->fetchColumn();
 <p>
     <a class="btn btn-secondary" href="storefront_products.php?export=csv">Export CSV</a>
     <a class="btn btn-secondary" href="storefront_products.php?export=json">Export JSON</a>
+    <button id="addProduct" class="btn btn-success">Add Product</button>
 </p>
 <table class="table">
 <tr><th>ID</th><th>Image</th><th>Name</th><th>Developer</th><th>Price</th><th>Avail</th><th></th></tr>
@@ -102,6 +106,11 @@ $total = (int)$db->query('SELECT COUNT(*) FROM store_apps')->fetchColumn();
 </tbody>
 </table>
 <?php echo $paginationHtml; ?>
+<div id="product-modal" class="modal" style="display:none"></div>
+<style>
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);overflow:auto;z-index:1000;}
+.modal .modal-content{background:#fff;margin:5% auto;padding:20px;width:80%;}
+</style>
 <script>
 function loadProducts(p){
     $.get('storefront_products.php',{ajax:1,p:p},function(res){
@@ -123,6 +132,44 @@ function bindPagination(){
         var pag=$('.pagination'); var p=parseInt(pag.data('page'),10); var t=parseInt(pag.data('pages'),10); if(p<t){ loadProducts(p+1); }
     });
 }
-$(function(){ bindPagination(); });
+function bindRowActions(){
+    $('#products-body').on('click','.edit-btn',function(){
+        var id=$(this).data('id');
+        $('#product-modal').load('storefront_product.php?ajax=1&id='+id,function(){
+            $('#product-modal').show();
+            bindForm();
+        });
+    });
+    $('#products-body').on('click','.delete-btn',function(){
+        var id=$(this).data('id');
+        if(confirm('Delete this product?')){
+            $.post('storefront_product.php',{ajax:1,delete_app:id},function(){
+                loadProducts($('.pagination').data('page'));
+            },'json');
+        }
+    });
+}
+function bindForm(){
+    $('#product-form').off('submit').on('submit',function(e){
+        e.preventDefault();
+        var data=new FormData(this);
+        data.append('ajax',1);
+        $.ajax({url:'storefront_product.php',type:'POST',data:data,processData:false,contentType:false,dataType:'json',success:function(){
+            $('#product-modal').hide().empty();
+            loadProducts($('.pagination').data('page'));
+        }});
+    });
+    $('#product-modal').off('click','.cancel-btn').on('click','.cancel-btn',function(){ $('#product-modal').hide().empty(); });
+}
+$(function(){
+    bindPagination();
+    bindRowActions();
+    $('#addProduct').on('click',function(){
+        $('#product-modal').load('storefront_product.php?ajax=1',function(){
+            $('#product-modal').show();
+            bindForm();
+        });
+    });
+});
 </script>
 <?php include 'admin_footer.php'; ?>

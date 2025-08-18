@@ -190,6 +190,7 @@
 - Admin form lets you edit each storefront page's title image.
 - Theme binary images generated via move_assets.py to keep repo lean.
 - Product editor supports trailer URL, preload scheduling, and per-screenshot controls
+- Product editor allows selecting existing screenshots via an image-picker modal
 - Trailer links can be hidden on game pages via a product checkbox
 - Screenshots and headers stored per-app under storefront directories
 - Header/Footer admin loads form via AJAX and stores logos per theme

@@ -44,6 +44,7 @@ All notable changes to this project will be documented in this file.
 - Replaced troubleshooter management inline editor with AJAX modal and restored WYSIWYG.
 - Updated survey stats form to label category IDs explicitly.
 - Integrated image picker for selecting existing storefront capsule images.
+- Product editor can add existing screenshots through an AJAX-powered image picker.
 - Fixed 2007 v1 and v2 theme header bars so logo and navigation stay on one line.
 - Removed binary image assets from Green Steam admin themes
 - Added neon-styled admin theme based on neon_version2 example.

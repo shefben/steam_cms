@@ -1,17 +1,77 @@
 <?php
-require_once 'admin_header.php';
+$isAjax = isset($_GET['ajax']) || isset($_POST['ajax']);
+if(!$isAjax){
+    require_once 'admin_header.php';
+}
 cms_require_permission('manage_store');
 $db = cms_get_db();
 $appid = (int)($_GET['id'] ?? 0);
-$imgDir = cms_app_screenshot_fs_dir($appid);
-$publicImg = rtrim(cms_base_url(), '/') . '/storefront/images/apps/' . $appid . '/screenshots/';
-$headerDir = cms_app_header_fs_dir($appid);
-$publicHeader = rtrim(cms_base_url(), '/') . '/storefront/apps/' . $appid . '/headers/';
-$stmt = $db->prepare('SELECT * FROM store_apps WHERE appid=?');
-$stmt->execute([$appid]);
-$app = $stmt->fetch(PDO::FETCH_ASSOC);
-if(!$app){echo '<p>Unknown app.</p>';include 'admin_footer.php';exit;}
-$screens = cms_get_app_screenshots($appid);
+$isNew = $appid === 0;
+$imgDir = $isNew ? '' : cms_app_screenshot_fs_dir($appid);
+$publicImg = $isNew ? '' : rtrim(cms_base_url(), '/') . '/storefront/images/apps/' . $appid . '/screenshots/';
+$headerDir = $isNew ? '' : cms_app_header_fs_dir($appid);
+$publicHeader = $isNew ? '' : rtrim(cms_base_url(), '/') . '/storefront/apps/' . $appid . '/headers/';
+if(!$isNew){
+    $stmt = $db->prepare('SELECT * FROM store_apps WHERE appid=?');
+    $stmt->execute([$appid]);
+    $app = $stmt->fetch(PDO::FETCH_ASSOC);
+    if(!$app){
+        if($isAjax){ echo '<div class="modal-content"><p>Unknown app.</p></div>'; exit; }
+        echo '<p>Unknown app.</p>';
+        include 'admin_footer.php';
+        exit;
+    }
+    $screens = cms_get_app_screenshots($appid);
+} else {
+    $app = ['appid'=>'','name'=>'','price'=>'','developer'=>'','availability'=>'','description'=>'','metacritic'=>'','metacritic_url'=>'','trailer_url'=>'','hide_trailer'=>0,'sysreq_min'=>'','sysreq_rec'=>'','main_image'=>'','is_preload'=>0,'preload_start'=>'','preload_end'=>'','show_metascore'=>0];
+    $screens = [];
+}
+
+if(isset($_GET['list']) && !$isNew){
+    $dir = $_GET['list'] === 'headers' ? $headerDir : $imgDir;
+    $files = [];
+    if($dir && is_dir($dir)){
+        foreach(glob($dir.'*') as $f){ $files[] = basename($f); }
+    }
+    header('Content-Type: application/json');
+    echo json_encode($files);
+    exit;
+}
+
+if(isset($_POST['delete_app'])){
+    $id = (int)$_POST['delete_app'];
+    $db->prepare('DELETE FROM store_apps WHERE appid=?')->execute([$id]);
+    $db->prepare('DELETE FROM subscription_apps WHERE appid=?')->execute([$id]);
+    $db->prepare('DELETE FROM developer_apps WHERE appid=?')->execute([$id]);
+    $db->prepare('DELETE FROM app_categories WHERE appid=?')->execute([$id]);
+    $db->prepare('DELETE FROM store_capsules WHERE appid=?')->execute([$id]);
+    if($isAjax){ echo json_encode(['success'=>true]); exit; }
+}
+
+if(isset($_POST['add_screens']) && !$isNew){
+    $files = array_map('basename', (array)$_POST['add_screens']);
+    $max_ord = 0;
+    foreach ($screens as $s) {
+        if ($s['ord'] > $max_ord) {
+            $max_ord = $s['ord'];
+        }
+    }
+    $added = [];
+    foreach ($files as $f) {
+        if (!$f) {
+            continue;
+        }
+        $max_ord++;
+        cms_set_app_screenshot($appid, $f, false, $max_ord);
+        $id = (int)$db->lastInsertId();
+        $added[] = ['id' => $id, 'filename' => $f, 'url' => $publicImg . $f];
+    }
+    if ($isAjax) {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true, 'screens' => $added]);
+        exit;
+    }
+}
 if(!$screens && !empty($app['images'])){
     $list = json_decode($app['images'], true) ?: [];
     $o = 1;
@@ -23,6 +83,10 @@ if(!$screens && !empty($app['images'])){
 
 if(isset($_POST['save'])){
     $new_id = (int)$_POST['appid'];
+    $imgDir = cms_app_screenshot_fs_dir($new_id);
+    $publicImg = rtrim(cms_base_url(), '/') . '/storefront/images/apps/' . $new_id . '/screenshots/';
+    $headerDir = cms_app_header_fs_dir($new_id);
+    $publicHeader = rtrim(cms_base_url(), '/') . '/storefront/apps/' . $new_id . '/headers/';
     $name    = trim($_POST['name']);
     $price   = floatval($_POST['price']);
     $desc    = trim($_POST['description']);
@@ -33,16 +97,16 @@ if(isset($_POST['save'])){
     $avail   = $_POST['availability'];
     $meta    = trim($_POST['metacritic']);
     $meta_url = trim($_POST['metacritic_url'] ?? '');
-$min_req = trim($_POST['sysreq_min']);
-$rec_req = trim($_POST['sysreq_rec']);
-$show_ms = isset($_POST['show_metascore']) ? 1 : 0;
-$trailer = trim($_POST['trailer_url']);
-$hide_trailer = isset($_POST['hide_trailer']) ? 1 : 0;
-$is_preload = isset($_POST['is_preload']) ? 1 : 0;
-$pre_start = $_POST['preload_start'] ?: null;
-$pre_end   = $_POST['preload_end'] ?: null;
+    $min_req = trim($_POST['sysreq_min']);
+    $rec_req = trim($_POST['sysreq_rec']);
+    $show_ms = isset($_POST['show_metascore']) ? 1 : 0;
+    $trailer = trim($_POST['trailer_url']);
+    $hide_trailer = isset($_POST['hide_trailer']) ? 1 : 0;
+    $is_preload = isset($_POST['is_preload']) ? 1 : 0;
+    $pre_start = $_POST['preload_start'] ?: null;
+    $pre_end   = $_POST['preload_end'] ?: null;
 
-    $main_image = $app['main_image'];
+    $main_image = $_POST['main_image_existing'] ?? ($app['main_image'] ?? '');
     if(!empty($_FILES['main_image']['tmp_name'])){
         if(!is_dir($headerDir)){
             mkdir($headerDir, 0755, true);
@@ -90,7 +154,7 @@ $pre_end   = $_POST['preload_end'] ?: null;
     $images = array_column(cms_get_app_screenshots($appid), 'filename');
 
     $db->beginTransaction();
-    if($new_id && $new_id !== $appid){
+    if(!$isNew && $new_id && $new_id !== $appid){
         $db->prepare('UPDATE store_apps SET appid=? WHERE appid=?')->execute([$new_id,$appid]);
         $db->prepare('UPDATE subscription_apps SET appid=? WHERE appid=?')->execute([$new_id,$appid]);
         $db->prepare('UPDATE developer_apps SET appid=? WHERE appid=?')->execute([$new_id,$appid]);
@@ -98,8 +162,14 @@ $pre_end   = $_POST['preload_end'] ?: null;
         $db->prepare('UPDATE store_capsules SET appid=? WHERE appid=?')->execute([$new_id,$appid]);
         $appid = $new_id;
     }
-    $upd = $db->prepare('UPDATE store_apps SET name=?,price=?,description=?,developer=?,availability=?,show_metascore=?,metacritic=?,metacritic_url=?,sysreq_min=?,sysreq_rec=?,trailer_url=?,hide_trailer=?,is_preload=?,preload_start=?,preload_end=?,images=?,main_image=? WHERE appid=?');
-    $upd->execute([$name,$price,$desc,$dev_name,$avail,$show_ms,$meta,$meta_url,$min_req,$rec_req,$trailer,$hide_trailer,$is_preload,$pre_start,$pre_end,json_encode($images),$main_image,$appid]);
+    if($isNew){
+        $ins = $db->prepare('INSERT INTO store_apps(appid,name,price,description,developer,availability,show_metascore,metacritic,metacritic_url,sysreq_min,sysreq_rec,trailer_url,hide_trailer,is_preload,preload_start,preload_end,images,main_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+        $ins->execute([$new_id,$name,$price,$desc,$dev_name,$avail,$show_ms,$meta,$meta_url,$min_req,$rec_req,$trailer,$hide_trailer,$is_preload,$pre_start,$pre_end,json_encode($images),$main_image]);
+        $appid = $new_id;
+    } else {
+        $upd = $db->prepare('UPDATE store_apps SET name=?,price=?,description=?,developer=?,availability=?,show_metascore=?,metacritic=?,metacritic_url=?,sysreq_min=?,sysreq_rec=?,trailer_url=?,hide_trailer=?,is_preload=?,preload_start=?,preload_end=?,images=?,main_image=? WHERE appid=?');
+        $upd->execute([$name,$price,$desc,$dev_name,$avail,$show_ms,$meta,$meta_url,$min_req,$rec_req,$trailer,$hide_trailer,$is_preload,$pre_start,$pre_end,json_encode($images),$main_image,$appid]);
+    }
     $db->prepare('DELETE FROM subscription_apps WHERE appid=?')->execute([$appid]);
     foreach($_POST['packages'] ?? [] as $sub){
         $db->prepare('INSERT INTO subscription_apps(subid,appid) VALUES(?,?)')->execute([(int)$sub,$appid]);
@@ -109,25 +179,31 @@ $pre_end   = $_POST['preload_end'] ?: null;
         $db->prepare('INSERT INTO app_categories(appid,category_id) VALUES(?,?)')->execute([$appid,(int)$cat]);
     }
     $db->commit();
-    header('Location: storefront_products.php');
+    if($isAjax){
+        echo json_encode(['success'=>true]);
+    }else{
+        header('Location: storefront_products.php');
+    }
     exit;
 }
-$developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
-$dev_id = $db->prepare('SELECT id FROM store_developers WHERE name=?');
-$dev_id->execute([$app['developer']]);
-$cur_dev = $dev_id->fetchColumn();
-$images = array_column($screens, 'filename');
-$packages = $db->query('SELECT subid,name FROM subscriptions ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
-$cur_packs = $db->prepare('SELECT subid FROM subscription_apps WHERE appid=?');
-$cur_packs->execute([$appid]);
-$cur_packs = $cur_packs->fetchAll(PDO::FETCH_COLUMN);
-$categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
-$cur_cats = $db->prepare('SELECT category_id FROM app_categories WHERE appid=?');
-$cur_cats->execute([$appid]);
-$cur_cats = $cur_cats->fetchAll(PDO::FETCH_COLUMN);
+ $developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+ $dev_id = $db->prepare('SELECT id FROM store_developers WHERE name=?');
+ $dev_id->execute([$app['developer']]);
+ $cur_dev = $dev_id->fetchColumn();
+ $images = array_column($screens, 'filename');
+ $packages = $db->query('SELECT subid,name FROM subscriptions ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+ $cur_packs = $db->prepare('SELECT subid FROM subscription_apps WHERE appid=?');
+ $cur_packs->execute([$appid]);
+ $cur_packs = $cur_packs->fetchAll(PDO::FETCH_COLUMN);
+ $categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
+ $cur_cats = $db->prepare('SELECT category_id FROM app_categories WHERE appid=?');
+ $cur_cats->execute([$appid]);
+ $cur_cats = $cur_cats->fetchAll(PDO::FETCH_COLUMN);
+
+ob_start();
 ?>
-<h2>Edit Product</h2>
-<form method="post" enctype="multipart/form-data">
+<h2><?php echo $isNew ? 'Add Product' : 'Edit Product'; ?></h2>
+<form id="product-form" method="post" enctype="multipart/form-data">
 <label>App ID <input type="text" name="appid" value="<?php echo $app['appid']?>"></label><br>
 <label>Name <input type="text" name="name" value="<?php echo htmlspecialchars($app['name'])?>"></label><br>
 <label>Price <input type="text" name="price" value="<?php echo $app['price']?>"></label><br>
@@ -149,11 +225,19 @@ $cur_cats = $cur_cats->fetchAll(PDO::FETCH_COLUMN);
 <br><label>Upload Trailer <input type="file" name="trailer_file"></label>
 <br><label>Minimum Requirements<br><textarea name="sysreq_min" rows="3" cols="60"><?php echo htmlspecialchars($app['sysreq_min'])?></textarea></label>
 <br><label>Recommended Requirements<br><textarea name="sysreq_rec" rows="3" cols="60"><?php echo htmlspecialchars($app['sysreq_rec'])?></textarea></label>
-<br><label>Main Image <input type="file" name="main_image"></label>
-<?php if($app['main_image']): ?>
-<div><img src="<?php echo $publicHeader . $app['main_image']; ?>" width="100"></div>
-<?php endif; ?>
-<br><label>Upload Screenshots <input type="file" name="screenshots[]" multiple></label>
+<div>
+ <button type="button" id="mainImageBtn" class="btn btn-secondary">Select Main Image</button>
+ <input type="hidden" name="main_image_existing" id="main_image_existing" value="<?php echo htmlspecialchars($app['main_image']); ?>">
+ <?php if($app['main_image']): ?>
+  <div id="main-image-preview"><img src="<?php echo $publicHeader . $app['main_image']; ?>" width="100"></div>
+ <?php else: ?>
+  <div id="main-image-preview"></div>
+ <?php endif; ?>
+</div>
+<div>
+ <input type="file" id="screenshotsUpload" name="screenshots[]" multiple style="display:none">
+ <button type="button" id="screenshotsBtn" class="btn btn-secondary">Add Screenshot</button>
+</div>
 <div class="screenshot-list">
 <?php foreach($screens as $sc): ?>
  <div class="shot-item">
@@ -179,6 +263,102 @@ $cur_cats = $cur_cats->fetchAll(PDO::FETCH_COLUMN);
 <br><label><input type="checkbox" name="show_metascore" value="1" <?php if($app['show_metascore']) echo 'checked';?>> Show Metascore</label>
 <div>
 </div>
-<input type="submit" name="save" value="Save" class="btn btn-primary">
+<button type="submit" name="save" class="btn btn-primary">Save</button>
+<button type="button" class="btn btn-secondary cancel-btn">Cancel</button>
 </form>
-<?php include 'admin_footer.php'; ?>
+<div id="image-upload-modal" class="modal" style="display:none">
+  <div class="modal-content">
+    <button type="button" id="upload-new" class="btn btn-secondary">Upload Image</button>
+    <button type="button" id="choose-existing" class="btn btn-secondary">Choose Existing Image</button>
+    <input type="file" id="hidden-upload" name="main_image" style="display:none">
+  </div>
+</div>
+<div id="existing-images-modal" class="modal" style="display:none">
+  <div class="modal-content">
+    <select id="existing-image-select" class="image-picker show-html"></select>
+    <button type="button" id="existing-image-save" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary cancel-btn">Cancel</button>
+  </div>
+</div>
+<div id="screenshot-upload-modal" class="modal" style="display:none">
+  <div class="modal-content">
+    <button type="button" id="upload-screenshot-new" class="btn btn-secondary">Upload Image</button>
+    <button type="button" id="choose-screenshot-existing" class="btn btn-secondary">Choose Existing Image</button>
+  </div>
+</div>
+<div id="existing-screens-modal" class="modal" style="display:none">
+  <div class="modal-content">
+    <select id="existing-screens-select" multiple class="image-picker show-html"></select>
+    <button type="button" id="existing-screens-save" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary cancel-btn">Cancel</button>
+  </div>
+</div>
+<link rel="stylesheet" href="css/image-picker.css">
+<script src="js/image-picker.min.js"></script>
+<script>
+function initImagePicker(){
+  $('#mainImageBtn').on('click',function(){ $('#image-upload-modal').show(); });
+  $('#upload-new').on('click',function(){ $('#hidden-upload').click(); });
+  $('#hidden-upload').on('change',function(){
+    $('#image-upload-modal').hide();
+    if(this.files && this.files[0]){
+      var reader=new FileReader();
+      reader.onload=function(e){ $('#main-image-preview').html('<img src="'+e.target.result+'" width="100">'); };
+      reader.readAsDataURL(this.files[0]);
+    }
+  });
+  $('#choose-existing').on('click',function(){
+    $.get('storefront_product.php',{ajax:1,list:'headers',id:<?php echo $appid; ?>},function(files){
+      var sel=$('#existing-image-select').empty();
+      $.each(files,function(i,f){ sel.append('<option data-img-src="<?php echo $publicHeader; ?>'+f+'" value="'+f+'">'+f+'</option>'); });
+      sel.imagepicker();
+      $('#existing-images-modal').show();
+    },'json');
+  });
+  $('#existing-image-save').on('click',function(){
+    var val=$('#existing-image-select').val();
+    if(val){
+      $('#main_image_existing').val(val);
+      $('#main-image-preview').html('<img src="<?php echo $publicHeader; ?>'+val+'" width="100">');
+    }
+    $('#existing-images-modal').hide();
+    $('#image-upload-modal').hide();
+  });
+  $('#screenshotsBtn').on('click',function(){ $('#screenshot-upload-modal').show(); });
+  $('#upload-screenshot-new').on('click',function(){ $('#screenshotsUpload').click(); });
+  $('#screenshotsUpload').on('change',function(){ $('#screenshot-upload-modal').hide(); });
+  $('#choose-screenshot-existing').on('click',function(){
+    $.get('storefront_product.php',{ajax:1,list:'screenshots',id:<?php echo $appid; ?>},function(files){
+      var sel=$('#existing-screens-select').empty();
+      $.each(files,function(i,f){ sel.append('<option data-img-src="<?php echo $publicImg; ?>'+f+'" value="'+f+'">'+f+'</option>'); });
+      sel.imagepicker();
+      $('#existing-screens-modal').show();
+    },'json');
+  });
+  $('#existing-screens-save').on('click',function(){
+    var vals=$('#existing-screens-select').val() || [];
+    if(vals.length){
+      $.post('storefront_product.php',{ajax:1,id:<?php echo $appid; ?>,add_screens:vals},function(res){
+        if(res.success){
+          $.each(res.screens,function(i,s){
+            var item=$('<div class="shot-item"><img src="'+s.url+'" width="100" alt="screenshot"><div>'+s.filename+'</div><label>Hide <input type="checkbox" name="hide['+s.id+']" value="1"></label><label>Delete <input type="checkbox" name="delete['+s.id+']" value="1"></label></div>');
+            $('.screenshot-list').append(item);
+          });
+        }
+      },'json');
+    }
+    $('#existing-screens-modal').hide();
+    $('#screenshot-upload-modal').hide();
+  });
+  $(document).on('click','.modal .cancel-btn',function(e){ e.stopPropagation(); $(this).closest('.modal').hide(); });
+}
+$(function(){ initImagePicker(); });
+</script>
+<?php
+$form = ob_get_clean();
+if($isAjax){
+    echo '<div class="modal-content">'.$form.'</div>';
+    exit;
+}
+echo $form;
+include 'admin_footer.php';
