@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file.
 - Removed duplicated news rows and stripped stray `\n` sequences during installation.
 - 2003 v1 update notification now displays only on the Get Steam Now page.
 - Installer seeds default sidebar sections for 2006 v1/v2 and 2007 v1/v2 themes.
+- Admin sidebar navigation and icons now load entirely from the database, removing hard-coded defaults from the header.
 - Fixed installer to skip upgrade migrations and correctly parse SQL triggers.
 - Added theme.json support allowing themes to declare custom settings with admin widgets.
 - Moved 2004/2005 map contest toggle to submissions page with AJAX updates and inline notifications.
