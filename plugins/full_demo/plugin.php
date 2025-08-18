@@ -6,6 +6,8 @@
  * links, custom template tags, tag hooks, and template render hooks.
 */
 
+use Twig\Environment;
+
 // Parent admin page
 cms_register_admin_page('demo_root', 'Demo Plugin', function () {
     echo '<h2>Demo Dashboard</h2><p>Welcome to the demo plugin.</p>';
@@ -57,4 +59,12 @@ cms_add_hook('template_pre_render', function (array $data) {
 // Append marker after rendering any template
 cms_add_hook('template_post_render', function ($html) {
     return $html . "\n<!-- full_demo post render -->";
+});
+
+cms_register_sidebar_section_type(__DIR__ . '/sidebar.json', function(Environment $env, array $entries) {
+    $items = [];
+    foreach ($entries as $e) {
+        $items[] = cms_plugin_build_sidebar_entry('demo_links', $e);
+    }
+    return '<div class="demo-links">' . implode('', $items) . '</div>';
 });

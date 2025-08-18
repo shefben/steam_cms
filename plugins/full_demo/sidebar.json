@@ -1,0 +1,12 @@
+{
+  "name": "demo_links",
+  "title": "Demo Links",
+  "entry_template": "<div class=\"demo-entry\"><a href=\"{{url}}\">{{label}}</a><p>{{description}}</p>{{featured}}</div>",
+  "themes": ["2007_v1", "2007_v2"],
+  "fields": [
+    {"key": "url", "label": "URL", "type": "text"},
+    {"key": "label", "label": "Label", "type": "text"},
+    {"key": "description", "label": "Description", "type": "textarea"},
+    {"key": "featured", "label": "Featured", "type": "checkbox"}
+  ]
+}

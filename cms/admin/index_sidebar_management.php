@@ -20,6 +20,22 @@ $builtins = [
     'comingsoon'       => ['title' => 'COMING SOON TO STEAM','html' => '{{ sidebar_section("coming_soon")|raw }}'],
 ];
 
+$plugin_types = [];
+try {
+    $stmt = $db->query('SELECT type_name,title,theme_list FROM sidebar_section_types ORDER BY title');
+    $all_types = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($all_types as $pt) {
+        $themes_ok = empty($pt['theme_list']) || in_array($theme, array_map('trim', explode(',', $pt['theme_list'])));
+        if ($themes_ok) {
+            $plugin_types[] = $pt;
+        }
+    }
+} catch (PDOException $e) {
+    if ($e->getCode() !== '42S02') {
+        throw $e;
+    }
+}
+
 $existing_sections = [];
 try {
     $stmt = $db->query('SELECT section_id,title FROM sidebar_sections ORDER BY title');
@@ -44,6 +60,22 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
             $v = $db->prepare('SELECT variant_id,theme_list,html_content FROM sidebar_section_variants WHERE section_id=? ORDER BY variant_id');
             $v->execute([$id]);
             $section['variants'] = $v->fetchAll(PDO::FETCH_ASSOC);
+            $ts = $db->prepare('SELECT t.type_name FROM sidebar_sections s JOIN sidebar_section_types t ON s.sidebar_name=t.type_name WHERE s.section_id=?');
+            $ts->execute([$id]);
+            if ($type = $ts->fetchColumn()) {
+                $f = $db->prepare('SELECT field_key,field_label,field_type FROM sidebar_section_type_fields WHERE type_name=? ORDER BY field_order');
+                $f->execute([$type]);
+                $section['fields'] = $f->fetchAll(PDO::FETCH_ASSOC);
+                $ev = $db->prepare('SELECT e.entry_id FROM sidebar_section_entries e JOIN sidebar_section_variants v ON e.parent_variant_id=v.variant_id WHERE v.section_id=? ORDER BY e.entry_order');
+                $ev->execute([$id]);
+                $section['entries'] = [];
+                while ($eid = $ev->fetchColumn()) {
+                    $ef = $db->prepare('SELECT field_key,field_value FROM sidebar_section_entry_fields WHERE entry_id=?');
+                    $ef->execute([$eid]);
+                    $section['entries'][] = ['entry_id' => $eid, 'fields' => $ef->fetchAll(PDO::FETCH_KEY_PAIR)];
+                }
+                $section['sidebar_name'] = $type;
+            }
         }
         header('Content-Type: application/json');
         echo json_encode($section);
@@ -84,6 +116,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
                 while ($vr = $v->fetch(PDO::FETCH_ASSOC)) {
                     $ins->execute([$newId, $vr['theme_list'], $vr['html_content']]);
                 }
+            }
+        } elseif (str_starts_with($source, 'plugin:')) {
+            $type = substr($source, 7);
+            $stmt = $db->prepare('SELECT title,theme_list FROM sidebar_section_types WHERE type_name=?');
+            $stmt->execute([$type]);
+            if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $db->prepare('INSERT INTO sidebar_sections(title,sidebar_name,sort_order) VALUES(?,?,(SELECT IFNULL(MAX(sort_order),0)+1 FROM sidebar_sections))')
+                    ->execute([$row['title'], $type]);
+                $sid = (int)$db->lastInsertId();
+                $themeList = $row['theme_list'] ?: implode(',', $themes);
+                $db->prepare('INSERT INTO sidebar_section_variants(section_id,theme_list,html_content) VALUES(?,?,?)')
+                    ->execute([$sid, $themeList, '{{ sidebar_section("' . $type . '")|raw }}']);
             }
         }
         echo 'ok';
@@ -140,6 +184,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
         foreach ($del as $dv) {
             $db->prepare('DELETE FROM sidebar_section_variants WHERE variant_id=? AND section_id=?')->execute([(int)$dv, $id]);
         }
+
+        $typeStmt = $db->prepare('SELECT sidebar_name FROM sidebar_sections WHERE section_id=?');
+        $typeStmt->execute([$id]);
+        $sidebar_name = $typeStmt->fetchColumn();
+        $fstmt = $db->prepare('SELECT field_key FROM sidebar_section_type_fields WHERE type_name=? ORDER BY field_order');
+        $fstmt->execute([$sidebar_name]);
+        $field_keys = $fstmt->fetchAll(PDO::FETCH_COLUMN);
+        if ($field_keys) {
+            $vidStmt = $db->prepare('SELECT variant_id FROM sidebar_section_variants WHERE section_id=? LIMIT 1');
+            $vidStmt->execute([$id]);
+            $variantId = (int)$vidStmt->fetchColumn();
+            $db->prepare('DELETE FROM sidebar_section_entries WHERE parent_variant_id=?')->execute([$variantId]);
+            $entryCount = count($_POST['entry_' . $field_keys[0]] ?? []);
+            for ($i = 0; $i < $entryCount; $i++) {
+                $entryFields = [];
+                foreach ($field_keys as $fk) {
+                    $entryFields[$fk] = $_POST['entry_' . $fk][$i] ?? '';
+                }
+                cms_add_sidebar_entry($sidebar_name, $entryFields, $variantId);
+            }
+        }
         echo 'ok';
         exit;
     }
@@ -165,6 +230,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
 <?php foreach ($builtins as $key => $info): ?>
             <option value="builtin:<?php echo htmlspecialchars($key); ?>">Built-in: <?php echo htmlspecialchars($info['title']); ?></option>
 <?php endforeach; ?>
+<?php foreach ($plugin_types as $pt): ?>
+            <option value="plugin:<?php echo htmlspecialchars($pt['type_name']); ?>">Plugin: <?php echo htmlspecialchars($pt['title']); ?></option>
+<?php endforeach; ?>
 <?php foreach ($existing_sections as $sec): ?>
             <option value="section:<?php echo (int)$sec['section_id']; ?>"><?php echo htmlspecialchars($sec['title']); ?></option>
 <?php endforeach; ?>
@@ -189,6 +257,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
         <div id="collapsible-id-field" style="display:none;"><label>Collapsible Content ID <input type="text" id="section-cid" name="collapsible_id"></label></div>
         <label><input type="checkbox" id="section-icicles" name="icicles"> Icicles</label>
         <div id="variants-container"></div>
+        <div id="plugin-entries" style="display:none;">
+            <button type="button" class="btn" id="add-entry">+ Add Entry</button>
+            <div id="entries-container"></div>
+        </div>
         <button type="button" id="add-variant" class="btn">+ Add New Version HTML</button>
     </form>
 
@@ -199,6 +271,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
 var CSRF_TOKEN = <?php echo json_encode($csrf_token); ?>;
 var themes = <?php echo json_encode($themes); ?>;
 var deletedVariants = [];
+var pluginFields = [];
+function entryBlock(data){
+    var block = $('<div class="entry-block"></div>');
+    pluginFields.forEach(function(f){
+        var input = $('<input type="text" data-field="'+f.field_key+'" name="entry_'+f.field_key+'[]">');
+        if(data && data[f.field_key]){ input.val(data[f.field_key]); }
+        block.append($('<label>'+f.field_label+'</label>').append(input));
+    });
+    block.append('<button type="button" class="btn delete-entry">Remove</button>');
+    return block;
+}
 function variantBlock(id, themeList, html){
     var block = $('<div class="variant-block"></div>');
     block.append('<input type="hidden" class="variant-id" value="'+(id||'')+'">');
@@ -220,10 +303,13 @@ function addVariant(id, themeList, html){
 }
 function resetForm(){
     deletedVariants = [];
+    pluginFields = [];
     $('#section-form')[0].reset();
     $('#variants-container').empty();
+    $('#plugin-entries').hide();
     $('#section-id').val('');
     $('#collapsible-id-field').hide();
+    $('#entries-container').empty();
 }
 function refreshPreview(){
     $('#sidebar-preview').load('index_sidebar_management.php?ajax=1&fetch=html', setupPreview);
@@ -271,12 +357,20 @@ $(function(){
             if(sec.is_collapsible==1){ $('#section-collapsible').prop('checked',true); $('#collapsible-id-field').show(); $('#section-cid').val(sec.collapsible_id); }
             if(sec.has_icicles==1){ $('#section-icicles').prop('checked',true); }
             if(sec.variants){ sec.variants.forEach(function(v){ addVariant(v.variant_id, v.theme_list ? v.theme_list.split(',') : [], v.html_content); }); }
+            if(sec.fields){
+                pluginFields = sec.fields;
+                $('#plugin-entries').show();
+                $('#entries-container').empty();
+                if(sec.entries){ sec.entries.forEach(function(e){ $('#entries-container').append(entryBlock(e.fields)); }); }
+            }
             $('#section-form').show();
             $('#save-section').show();
         });
     });
     $('#section-collapsible').on('change', function(){ $('#collapsible-id-field').toggle(this.checked); });
     $('#add-variant').on('click', function(){ addVariant(0, [], ''); });
+    $('#add-entry').on('click', function(){ $('#entries-container').append(entryBlock()); });
+    $('#entries-container').on('click', '.delete-entry', function(){ $(this).closest('.entry-block').remove(); });
     $('#variants-container').on('click', '.delete-variant', function(){
         var vid = $(this).closest('.variant-block').find('.variant-id').val();
         if(vid){ deletedVariants.push(vid); }
@@ -300,6 +394,12 @@ $(function(){
             data['variant_html'].push($(this).find('.wysiwyg').html());
         });
         data['delete_variants'] = deletedVariants;
+        pluginFields.forEach(function(f){ data['entry_'+f.field_key] = []; });
+        $('#entries-container .entry-block').each(function(){
+            pluginFields.forEach(function(f){
+                data['entry_'+f.field_key].push($(this).find('input[data-field='+f.field_key+']').val());
+            });
+        });
         $.post('index_sidebar_management.php', data, function(){
             refreshPreview();
             $('#content-modal').hide();
@@ -323,8 +423,7 @@ $(function(){
 #content-modal label{display:block;margin-top:5px;}
 .variant-block{border:1px solid #ccc;padding:5px;margin-top:8px;}
 .variant-block .theme-checks label{margin-right:6px;}
-.section-controls{text-align:right;}
-.section-controls button{margin-left:4px;}
 .wysiwyg{border:1px solid #ccc;min-height:80px;padding:4px;margin-top:4px;}
+.entry-block{border:1px solid #ccc;padding:5px;margin-top:8px;}
 </style>
 <?php require_once 'admin_footer.php'; ?>

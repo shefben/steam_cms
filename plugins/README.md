@@ -16,6 +16,12 @@ Plugins extend the CMS without modifying core files. Each plugin lives in
   are processed or `after` a tag renders.
 - `cms_add_hook($event, $callback)` – Listen for global events like
   `twig_environment`, `template_pre_render`, or `template_post_render`.
+- `cms_register_sidebar_section_type($jsonPath, $renderer = null)` – Define a
+  custom sidebar section using a JSON field description and optional renderer.
+  The JSON may include a `"themes"` array of theme names to limit which themes
+  the section appears on.
+- `cms_add_sidebar_entry($type, $fields, $variantId)` – Insert an entry for a
+  plugin-defined sidebar section variant using the configured template.
 
 ## Examples
 
