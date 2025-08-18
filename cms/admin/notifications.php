@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     $admin_id = cms_current_admin();
     $db = cms_get_db();
     
-    $stmt = $db->prepare('SELECT id, type, message, created FROM notifications WHERE admin_id = ? OR admin_id = 0 ORDER BY created DESC LIMIT ?');
+    $stmt = $db->prepare('SELECT id, type, message, created FROM notifications WHERE is_read = 0 AND (admin_id = ? OR admin_id = 0) ORDER BY created DESC LIMIT ?');
     $stmt->execute([$admin_id, $limit]);
     $notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
     

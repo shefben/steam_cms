@@ -1189,28 +1189,21 @@ function cms_get_unread_notifications(int $userId): array
 {
     $db = cms_get_db();
     try {
-        $stmt = $db->prepare('SELECT id,type,message,target_role FROM notifications WHERE read_at IS NULL AND (target_user IS NULL OR target_user=?) ORDER BY created DESC');
+        $stmt = $db->prepare('SELECT id,type,message FROM notifications WHERE is_read = 0 AND (admin_id = ? OR admin_id = 0) ORDER BY created DESC');
         $stmt->execute([$userId]);
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         if ($e->getCode() === '42S02') {
             return [];
         }
         throw $e;
     }
-    $out = [];
-    foreach ($rows as $r) {
-        if (!$r['target_role'] || $r['target_role'] === 'all' || cms_has_permission($r['target_role'])) {
-            $out[] = $r;
-        }
-    }
-    return $out;
 }
 
 function cms_mark_notification_read(int $id): void
 {
     $db = cms_get_db();
-    $stmt = $db->prepare('UPDATE notifications SET read_at=NOW() WHERE id=?');
+    $stmt = $db->prepare('UPDATE notifications SET is_read=1 WHERE id=?');
     $stmt->execute([$id]);
 }
 
