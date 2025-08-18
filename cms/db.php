@@ -1205,8 +1205,14 @@ function cms_get_sidebar_sections_html(string $theme, bool $for_admin = false): 
 
     $db = cms_get_db();
     try {
-        $stmt = cms_get_prepared_statement('SELECT section_id,title,icon_path,is_collapsible,collapsible_id,has_icicles FROM sidebar_sections ORDER BY sort_order, section_id');
-        $stmt->execute();
+        $stmt = cms_get_prepared_statement(
+            'SELECT v.variant_id, s.section_id, s.title, v.icon_path, v.is_collapsible, v.collapsible_id, v.has_icicles, v.html_content
+             FROM sidebar_sections s
+             JOIN sidebar_section_variants v ON s.section_id = v.section_id
+             WHERE FIND_IN_SET(?, v.theme_list)
+             ORDER BY v.sort_order, s.section_id'
+        );
+        $stmt->execute([$theme]);
         $sections = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         if ($e->getCode() === '42S02') {
@@ -1215,24 +1221,21 @@ function cms_get_sidebar_sections_html(string $theme, bool $for_admin = false): 
         throw $e;
     }
 
-    $variants = [];
-    $sectionIds = array_column($sections, 'section_id');
-    if ($sectionIds) {
-        $placeholders = implode(',', array_fill(0, count($sectionIds), '?'));
-        $variantSql = "SELECT section_id, html_content FROM sidebar_section_variants WHERE section_id IN ($placeholders) AND FIND_IN_SET(?, theme_list)";
-        $vstmt = cms_get_prepared_statement($variantSql);
-        $vstmt->execute([...$sectionIds, $theme]);
-        foreach ($vstmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
-            $variants[$row['section_id']] = $row['html_content'];
-        }
-    }
-
     $out = '';
     foreach ($sections as $section) {
         $sid = (int)$section['section_id'];
-        $html = $variants[$sid] ?? null;
-        if ($html === null) {
-            continue;
+        $vid = (int)$section['variant_id'];
+        $html = $section['html_content'];
+        if (strpos($html, '{{entries}}') !== false) {
+            $estmt = cms_get_prepared_statement(
+                'SELECT entry_content FROM sidebar_section_entries WHERE parent_variant_id=? AND (theme_list IS NULL OR theme_list="" OR FIND_IN_SET(?, theme_list)) ORDER BY entry_order'
+            );
+            $estmt->execute([$vid, $theme]);
+            $entries = '';
+            foreach ($estmt->fetchAll(PDO::FETCH_ASSOC) as $erow) {
+                $entries .= $erow['entry_content'];
+            }
+            $html = str_replace('{{entries}}', $entries, $html);
         }
         $icon = $section['icon_path'] ? '<img src="' . htmlspecialchars($section['icon_path'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '" alt="" align="absmiddle"> ' : '';
         $title = trim($section['title']);
