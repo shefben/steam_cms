@@ -3,7 +3,8 @@ require_once 'admin_header.php';
 cms_require_permission('manage_pages');
 $db = cms_get_db();
 try {
-    $stmt = $pdo->query("SELECT msgtype, message FROM marketing");
+    // Verify the marketing table exists and is accessible
+    $db->query("SELECT msgtype, message FROM marketing");
 } catch (PDOException $e) {
     error_log($e->getMessage());
     // Optionally fallback or notify admin
@@ -38,7 +39,13 @@ if (isset($_POST['ajax'])) {
             $stmt = $db->prepare('INSERT INTO marketing (msgtype, language, content) VALUES (?,?,?)');
             $stmt->execute([$msgtype, $language, $content]);
         }
-        echo json_encode(['success' => true, 'msgtype' => $msgtype, 'language' => $language, 'orig_msgtype'=>$orig_msgtype, 'orig_language'=>$orig_language]);
+        echo json_encode([
+            'success' => true,
+            'msgtype' => $msgtype,
+            'language' => $language,
+            'orig_msgtype' => $orig_msgtype,
+            'orig_language' => $orig_language,
+        ]);
     } elseif ($action === 'delete') {
         $msgtype = preg_replace('/[^a-z0-9_]/i', '', $_POST['msgtype'] ?? '');
         $language = preg_replace('/[^a-z0-9_]/i', '', $_POST['language'] ?? '');
@@ -57,7 +64,7 @@ $rows = $db->query('SELECT msgtype, language FROM marketing ORDER BY msgtype, la
 <h2>Preload Marketing Content</h2>
 <table class="data-table" id="marketingTable">
 <tr><th>Message Type</th><th>Language</th><th>Action</th></tr>
-<?php foreach ($rows as $r): ?>
+<?php foreach ($rows as $r) : ?>
 <tr data-msgtype="<?php echo htmlspecialchars($r['msgtype']); ?>" data-language="<?php echo htmlspecialchars($r['language']); ?>">
 <td><?php echo htmlspecialchars($r['msgtype']); ?></td>
 <td><?php echo htmlspecialchars($r['language']); ?></td>
