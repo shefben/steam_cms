@@ -184,6 +184,20 @@ function cms_spotlight_content(): string
     return cms_get_setting('spotlight_content', '<p>Spotlight content</p>');
 }
 
+function cms_get_sidebar_entries(string $sidebarName, string $theme): array
+{
+    $stmt = cms_get_prepared_statement(
+        'SELECT e.entry_content FROM sidebar_section_entries e '
+        . 'JOIN sidebar_section_variants v ON e.parent_variant_id = v.variant_id '
+        . 'JOIN sidebar_sections s ON v.section_id = s.section_id '
+        . 'WHERE s.sidebar_name=? AND FIND_IN_SET(?, v.theme_list) '
+        . 'AND (e.theme_list IS NULL OR e.theme_list="" OR FIND_IN_SET(?, e.theme_list)) '
+        . 'ORDER BY e.entry_order'
+    );
+    $stmt->execute([$sidebarName, $theme, $theme]);
+    return $stmt->fetchAll(PDO::FETCH_COLUMN);
+}
+
 function cms_render_sidebar_section(Environment $env, string $section, array $params = []): string
 {
     switch ($section) {
@@ -192,20 +206,17 @@ function cms_render_sidebar_section(Environment $env, string $section, array $pa
         case 'get_steam_now':
             return $env->render('layouts/sidebar_sections/get_steam_now.twig', $params);
         case 'new_on_steam':
-            $limit   = (int)($params['limit'] ?? 10);
-            $html    = cms_get_setting('new_on_steam_list', '');
-            $theme   = cms_get_setting('theme', '2004');
-            $render  = cms_render_string($html, [], dirname(__DIR__) . '/themes/' . $theme);
-            $lines   = array_filter(preg_split('/\r?\n/', trim($render)));
-            $items   = array_slice($lines, 0, $limit);
-            $items[] = '<a class="rightLink_moreNews" href="new.xml" target="_blank"><img border="0" height="11" src="ico/ico_arrow_green_wd.gif" width="22">&nbsp;&nbsp;<img align="absmiddle" border="0" src="ico/ico_rss2.gif"/>&nbsp;&nbsp;New on Steam RSS feed</a>';
+            $theme = cms_get_current_theme();
+            $items = cms_get_sidebar_entries('new_on_steam', $theme);
+            if (in_array($theme, ['2006_v1', '2006_v2'])) {
+                $items[] = '<a class="rightLink_moreNews" href="new.xml" target="_blank"><img border="0" height="11" src="ico/ico_arrow_green_wd.gif" width="22">&nbsp;&nbsp;<img align="absmiddle" border="0" src="ico/ico_rss2.gif"/>&nbsp;&nbsp;New on Steam RSS feed</a>';
+            }
             return $env->render('layouts/sidebar_sections/new_on_steam.twig', ['items' => $items]);
         case 'find':
-            $rows  = (int)($params['rows'] ?? 3);
-            $html  = cms_get_setting('find_list', '');
-            $theme = cms_get_setting('theme', '2004');
-            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
-            return $env->render('layouts/sidebar_sections/find.twig', ['html' => $render]);
+            $theme = cms_get_current_theme();
+            $entries = cms_get_sidebar_entries('find', $theme);
+            $html = implode('', $entries);
+            return $env->render('layouts/sidebar_sections/find.twig', ['html' => $html]);
         case 'find_more':
             $rows = (int)($params['rows'] ?? 1);
             $html = cms_find_more_list($rows);
@@ -214,29 +225,30 @@ function cms_render_sidebar_section(Environment $env, string $section, array $pa
             $content = cms_spotlight_content();
             return $env->render('layouts/sidebar_sections/spotlight.twig', ['content' => $content]);
         case 'latest_news':
-            $rows  = (int)($params['rows'] ?? 5);
-            $html  = cms_get_setting('latest_news_list', '');
-            $theme = cms_get_setting('theme', '2004');
-            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
-            return $env->render('layouts/sidebar_sections/latest_news.twig', ['html' => $render]);
+            $theme = cms_get_current_theme();
+            $entries = cms_get_sidebar_entries('latest_news', $theme);
+            if (in_array($theme, ['2007_v1', '2007_v2'])) {
+                $html = '<div class="rightLink_news_area" style="height: auto;">' . implode('', $entries) . '</div>';
+            } else {
+                $html = '<div class="rightLink_news_area" style="height: auto;">' . implode('', $entries) . '</div>'
+                    . '<a class="rightLink" href="index.php?area=news"><img align="absmiddle" border="0" height="7" src="img/ico/ico_arrow_blue_wd.gif" width="22"> Read more news</a>';
+            }
+            return $env->render('layouts/sidebar_sections/latest_news.twig', ['html' => $html]);
         case 'publisher_catalogs':
-            $rows  = (int)($params['rows'] ?? 3);
-            $html  = cms_get_setting('publisher_catalogs_list', '');
-            $theme = cms_get_setting('theme', '2004');
-            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
-            return $env->render('layouts/sidebar_sections/publisher_catalogs.twig', ['html' => $render]);
+            $theme = cms_get_current_theme();
+            $entries = cms_get_sidebar_entries('publisher_catalogs', $theme);
+            $html = implode('', $entries);
+            return $env->render('layouts/sidebar_sections/publisher_catalogs.twig', ['html' => $html]);
         case 'browse_catalog':
-            $rows  = (int)($params['rows'] ?? 2);
-            $html  = cms_get_setting('browse_catalog_list', '');
-            $theme = cms_get_setting('theme', '2004');
-            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
-            return $env->render('layouts/sidebar_sections/browse_catalog.twig', ['html' => $render]);
+            $theme = cms_get_current_theme();
+            $entries = cms_get_sidebar_entries('browse_catalog', $theme);
+            $html = implode('', $entries);
+            return $env->render('layouts/sidebar_sections/browse_catalog.twig', ['html' => $html]);
         case 'coming_soon':
-            $rows  = (int)($params['rows'] ?? 1);
-            $html  = cms_get_setting('coming_soon_list', '');
-            $theme = cms_get_setting('theme', '2004');
-            $render = cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
-            return $env->render('layouts/sidebar_sections/coming_soon.twig', ['html' => $render]);
+            $theme = cms_get_current_theme();
+            $entries = cms_get_sidebar_entries('coming_soon', $theme);
+            $html = implode('', $entries);
+            return $env->render('layouts/sidebar_sections/coming_soon.twig', ['html' => $html]);
     }
     return '';
 }
@@ -641,50 +653,6 @@ function cms_twig_env(string $tpl_dir): Environment
             return '<table class="capsuleArea_header" width="560"><tr><td width="172"><img src="logo_steam_main.jpg" width="172" height="63" alt=""></td><td valign="top"><p>'.$text.'</p></td></tr></table>';
         }, ['is_safe' => ['html']]));
 
-        $env->addFunction(new TwigFunction('new_on_steam_title', function() {
-            return cms_get_setting('new_on_steam_title', 'New On Steam');
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('latest_news_title', function() {
-            return cms_get_setting('latest_news_title', 'Latest News');
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('find_title', function() {
-            return cms_get_setting('find_title', 'Find');
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('browse_catalog_title', function() {
-            return cms_get_setting('browse_catalog_title', 'Browse The Catalog');
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('browse_catalog_list', function(int $rows = 2) {
-            $html = cms_get_setting('browse_catalog_list', '');
-            $theme = cms_get_setting('theme', '2004');
-            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('new_on_steam_list', function(int $limit = 10) {
-            $html   = cms_get_setting('new_on_steam_list', '');
-            $theme  = cms_get_setting('theme', '2004');
-            $render = cms_render_string($html, ['limit' => $limit], dirname(__DIR__) . '/themes/' . $theme);
-            $lines  = array_filter(preg_split('/\r?\n/', trim($render)));
-            $items  = array_slice($lines, 0, 10);
-            $items[] = '<a class="rightLink_moreNews" href="new.xml" target="_blank"><img border="0" height="11" src="ico/ico_arrow_green_wd.gif" width="22">  <img align="absmiddle" border="0" src="ico/ico_rss2.gif"/>  New on Steam RSS feed</a>';
-            return implode("\n", $items);
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('latest_news_list', function(int $rows = 5) {
-            $html = cms_get_setting('latest_news_list', '');
-            $theme = cms_get_setting('theme', '2004');
-            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('find_list', function(int $rows = 3) {
-            $html = cms_get_setting('find_list', '');
-            $theme = cms_get_setting('theme', '2004');
-            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
-        }, ['is_safe' => ['html']]));
-
         $env->addFunction(new TwigFunction('sidebar_section', function(string $name, array $params = []) use ($env) {
             return cms_render_sidebar_section($env, $name, $params);
         }, ['is_safe' => ['html']]));
@@ -766,26 +734,6 @@ function cms_twig_env(string $tpl_dir): Environment
             }
             $html .= '</div>';
             return $out = $html;
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('publisher_catalogs_title', function() {
-            return cms_get_setting('publisher_catalogs_title', 'Publisher Catalogs');
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('publisher_catalogs_list', function(int $rows = 3) {
-            $html = cms_get_setting('publisher_catalogs_list', '');
-            $theme = cms_get_setting('theme', '2004');
-            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('coming_soon_title', function() {
-            return cms_get_setting('coming_soon_title', 'Coming Soon To Steam');
-        }, ['is_safe' => ['html']]));
-
-        $env->addFunction(new TwigFunction('coming_soon_list', function(int $rows = 3) {
-            $html = cms_get_setting('coming_soon_list', '');
-            $theme = cms_get_setting('theme', '2004');
-            return cms_render_string($html, ['rows' => $rows], dirname(__DIR__) . '/themes/' . $theme);
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('capsule_block', function(string $key) {

@@ -32,19 +32,7 @@ The template engine exposes a set of Twig functions used to render dynamic conte
 | `news_index_2006(count)` | – | Wrapper for `news('index_2006', count)` used by the 2006 themes. |
 | `join_steam_text()` | – | Returns the marketing text for the “Join Steam” section. |
 | `join_steam_block(style)` | `style` is `2006` or `2007` | Renders the full “Join Steam” promo block. Inserted near the top of the page. |
-| `new_on_steam_title()` | – | Title string for the “New On Steam” list. |
-| `new_on_steam_list()` | – | HTML list of the most recent releases. |
-| `latest_news_title()` | – | Title string for the “Latest News” list. |
-| `latest_news_list()` | – | HTML list for news headlines. |
-| `find_title()` | – | Title string for the “Find” links area. |
-| `find_list()` | – | HTML links for searching, browsing and videos. |
 | `categories_list()` | – | List of store categories linking to search results. Typically shown under the find list. |
-| `browse_catalog_title()` | – | Title for the browse catalog section. |
-| `browse_catalog_list()` | – | HTML list for the browse catalog section. |
-| `publisher_catalogs_title()` | – | Title string for the publisher catalog block. |
-| `publisher_catalogs_list()` | – | HTML list of publisher catalogs. |
-| `coming_soon_title()` | – | Title for the “Coming Soon” list. |
-| `coming_soon_list()` | – | HTML list of upcoming releases. |
 | `capsule_block(key)` | `key` can be positions like `top1`, `top2`, `under1`, `under2`, `bottom1`, `bottom2` | Outputs a small storefront capsule image and price for the given slot. |
 | `large_capsule_block(key)` | usually `large` | Renders the large promotional capsule. |
 | `store_sidebar()` | – | Generates the left menu for storefront pages. |
