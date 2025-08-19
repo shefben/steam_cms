@@ -57,6 +57,8 @@ if ($err === '' && $_SERVER['REQUEST_METHOD']==='POST'){
                 ]);
             }
             unset($_SESSION['login_attempts'], $_SESSION['login_lock_until']);
+            // Ensure session data is written before redirecting
+            session_write_close();
             header('Location: '.$dest);
             exit;
         }else{
@@ -89,6 +91,7 @@ if ($tpl) {
         'lang'          => $_SESSION['admin_lang'] ?? 'en',
         'theme_url'     => $theme_url,
         'err'           => $err,
+        'csrf_token'    => $csrfToken,
         'login_title'   => cms_admin_translate('Admin Login'),
         'label_username'=> cms_admin_translate('Username'),
         'label_password'=> cms_admin_translate('Password'),
