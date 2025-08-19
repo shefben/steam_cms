@@ -57,6 +57,8 @@ if ($err === '' && $_SERVER['REQUEST_METHOD']==='POST'){
                 ]);
             }
             unset($_SESSION['login_attempts'], $_SESSION['login_lock_until']);
+            // Ensure session data is written before redirecting
+            session_write_close();
             header('Location: '.$dest);
             exit;
         }else{
