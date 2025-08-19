@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- News admin add and edit actions open in an AJAX modal and update the table without page reload.
+- News admin pagination uses button controls and collapses page links to first and last five with ellipses.
 - Ensured admin login persists session data by closing the session before redirecting.
 - Included CSRF token in admin login templates to avoid invalid request errors.
 - Fixed fatal error on Preload Marketing admin page due to undefined `$pdo` variable.

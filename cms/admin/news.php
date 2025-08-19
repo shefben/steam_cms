@@ -180,11 +180,25 @@ foreach ($rows as $i => $row) {
 ob_start();
 ?>
 <div class="pagination">
-<?php if ($page>1): ?><a href="?page=<?php echo $page-1; ?>&title=<?php echo urlencode($titleFilter); ?>&author=<?php echo urlencode($authorFilter); ?>">&laquo; Prev</a><?php endif; ?>
-<?php for($i=1;$i<=$pages;$i++): ?>
-<a href="?page=<?php echo $i; ?>&title=<?php echo urlencode($titleFilter); ?>&author=<?php echo urlencode($authorFilter); ?>"<?php if($i==$page) echo ' class="current"'; ?>><?php echo $i; ?></a>
+<?php if ($page>1): ?>
+    <button type="button" class="page-nav" data-page="<?php echo $page-1; ?>">&laquo; Back</button>
+<?php endif; ?>
+<?php
+$firstEnd = min(5, $pages);
+for ($i = 1; $i <= $firstEnd; $i++): ?>
+    <a href="?page=<?php echo $i; ?>&title=<?php echo urlencode($titleFilter); ?>&author=<?php echo urlencode($authorFilter); ?>" data-page="<?php echo $i; ?>"<?php if($i==$page) echo ' class="current"'; ?>><?php echo $i; ?></a>
 <?php endfor; ?>
-<?php if ($page<$pages): ?><a href="?page=<?php echo $page+1; ?>&title=<?php echo urlencode($titleFilter); ?>&author=<?php echo urlencode($authorFilter); ?>">Next &raquo;</a><?php endif; ?>
+<?php
+$lastStart = max($pages - 4, $firstEnd + 1);
+if ($lastStart > $firstEnd + 1): ?>
+    <span class="ellipsis">...</span>
+<?php endif; ?>
+<?php for ($i = $lastStart; $i <= $pages; $i++): ?>
+    <a href="?page=<?php echo $i; ?>&title=<?php echo urlencode($titleFilter); ?>&author=<?php echo urlencode($authorFilter); ?>" data-page="<?php echo $i; ?>"<?php if($i==$page) echo ' class="current"'; ?>><?php echo $i; ?></a>
+<?php endfor; ?>
+<?php if ($page<$pages): ?>
+    <button type="button" class="page-nav" data-page="<?php echo $page+1; ?>">Next &raquo;</button>
+<?php endif; ?>
 </div>
 <?php
 $paginationHtml = ob_get_clean();
@@ -239,13 +253,17 @@ if (isset($_GET['ajax'])) {
   <div class="modal" role="dialog" aria-modal="true">
     <form id="newsForm">
       <input type="hidden" name="id" id="newsId">
-      <label>Title: <input type="text" name="title" id="newsTitle"></label>
-      <label>Author: <input type="text" name="author" id="newsAuthor"></label>
-      <label>Publish Date: <input type="datetime-local" name="publish_at" id="newsPublish"></label>
-      <label>Content:</label>
-      <textarea name="content" id="newsContent" style="width:100%;height:200px;"></textarea>
-      <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" id="newsCancel" class="btn">Cancel</button>
+      <div class="modal-body">
+        <label>Title: <input type="text" name="title" id="newsTitle"></label>
+        <label>Author: <input type="text" name="author" id="newsAuthor"></label>
+        <label>Publish Date: <input type="datetime-local" name="publish_at" id="newsPublish"></label>
+        <label>Content:</label>
+        <textarea name="content" id="newsContent" style="width:100%;height:200px;"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" id="newsCancel" class="btn">Cancel</button>
+      </div>
     </form>
   </div>
 </div>
@@ -288,10 +306,10 @@ document.addEventListener('DOMContentLoaded',function(){
         destroyAllEditors();
     });
     function bindPagination(){
-        document.querySelectorAll('.pagination a').forEach(function(a){
-            a.addEventListener('click',function(e){
+        document.querySelectorAll('.pagination [data-page]').forEach(function(el){
+            el.addEventListener('click',function(e){
                 e.preventDefault();
-                var p=parseInt(new URL(this.href).searchParams.get('page'));
+                var p=parseInt(this.getAttribute('data-page'));
                 showPage(p);
                 history.replaceState(null,'','?page='+p);
             });
@@ -306,7 +324,7 @@ document.addEventListener('DOMContentLoaded',function(){
             body=document.getElementById('news-body');
             bindPagination();
             initSortable();
-            showPage(1);
+            showPage(currentPage);
         },'json');
     }
     function openModal(id){
@@ -332,6 +350,7 @@ document.addEventListener('DOMContentLoaded',function(){
     }
     function closeModal(){
         $('#newsModalOverlay').hide();
+        $('#newsForm')[0].reset();
         if(CKEDITOR.instances.newsContent){
             CKEDITOR.instances.newsContent.destroy(true);
             delete CKEDITOR.instances.newsContent;

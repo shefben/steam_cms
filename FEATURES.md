@@ -152,6 +152,8 @@
 - Comprehensive tag guide available in TAGS.md
 - Capsule uploader provides client-side image cropping
 - News list filters by title and author via AJAX
+- News articles can be added or edited in an AJAX-powered modal that refreshes the table without reloading
+- News pagination shows only first and last five links with ellipses and Back/Next buttons
 - Styled login page with jQuery validation and password reset request
 - Login screen matches installer look and centers form
 - Admin dashboard shows unread notifications with dismiss action
