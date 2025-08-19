@@ -5,16 +5,24 @@
 <br>The Steam client initial download is about 500kB. Please select one of the links below to get started. (If you already have Steam, you don't need to download this installer. Steam will update itself automatically.)<br>
 <br>
 <h2>DOWNLOAD LOCATIONS:</h2><br>
-<table><tr><td width="220">
-{% for link in links %}
-<table cellspacing="0"><tr>
-<td><img height="24" src="images/black_button_leftside.gif" width="10"></td>
-<td align="middle" bgcolor="#000000"><a class="maize" href="{{ link.url }}">{{ link.label }}</a></td>
-<td><img height="24" src="images/black_button_rightside.gif" width="10"></td>
-</tr></table>
-<br>
+
+{# Render main content downloads using our new render system #}
+{% for file in main_content_files %}
+{{ cms_render_download_file(file, '2003_v2')|raw }}
 {% endfor %}
-</td></tr></table>
+
 <hr>
-{{ system_requirements|raw }}
+<h3>SYSTEM REQUIREMENTS</h3>
+<ul>
+<li>Windows 98, ME, 2000 or XP</li>
+<li>256 MB RAM</li>
+<li>1.0 Ghz processor</li>
+<li>1GB HD space (strongly recommended)</li>
+<li>Broadband Internet connection (128kb/s or higher strongly recommended)</li>
+</ul>
+(If you are not sure your computer meets these system requirements, please check with your computer manufacturer.)<br>
+<hr>
+After you've started your Steam download from one of the locations listed above, select the option to 'Open' the install program.<br><br>
 </div>
+<img height="133" src="images/openprogram.gif" width="499"><br><br>
+Then follow the instructions on your screen.

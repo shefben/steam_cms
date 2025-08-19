@@ -1,27 +1,30 @@
 <h1>GET STEAM NOW</h1>
-<h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2><img src="images/Graphic_box.jpg" alt="" width="24" height="6"><br><br>
-Installing Steam is the easiest way to get your favorite games, like Half-Life 2 and Counter-Strike: Source.<br><br>
-{% if categories|first %}
-{% set mainCategory = categories|first %}
-{% set mainLinks = links|filter(l => l.category == mainCategory.name) %}
-{% if mainLinks|first %}
-    <a href="{{ mainLinks|first.url }}"><img src="images/getSteamNowButton.gif" alt="Get Steam Now" border="0"></a><br><br>
-{% endif %}
-{% endif %}
+<h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2><img alt="" height="6" src="images/Graphic_box.jpg" width="24"><br>
+<br>
+
+Installing Steam is the easiest way to get your favorite games, like Half-Life 2 and Counter-Strike: Source.<br>
+<br>
+
+{# Render main content downloads using our new render system #}
+{% for file in main_content_files %}
+{{ cms_render_download_file(file, '2004')|raw }}
+{% endfor %}
+
+<br>
+
+{# Render floating box downloads if any #}
+{% if floating_box_files|length > 0 %}
 <div class="boxTop">Dedicated Server</div><br clear="all">
 <div class="box">
-If you run a game server on the Internet or a private LAN, get the necessary program files here. Choose from the following download locations:<br><br>
-{% for category in categories|slice(1) %}
-    {% set categoryLinks = links|filter(l => l.category == category.name) %}
-    {% if categoryLinks|length > 0 %}
-    <h2>{{ category.name|upper }}:</h2>
-    {% for link in categoryLinks %}
-        <a class="maize" href="{{ link.url }}" style="font-size: 11px;">{{ link.label }}</a><br>
-    {% endfor %}
-    <br>
-    {% endif %}
+If you run a game server on the Internet or a private LAN, get the necessary program files here. Choose from the following download locations:<br>
+<br>
+{% for file in floating_box_files %}
+{{ cms_render_download_file(file, '2004')|raw }}
 {% endfor %}
 </div>
+<br clear="all">
+{% endif %}
+
 <table cellpadding="8">
 <tr>
 <td><img src="images/openprogram.gif" align="left"></td>
@@ -30,4 +33,12 @@ If you run a game server on the Internet or a private LAN, get the necessary pro
 </tr>
 </table>
 <hr style="width:95%;">
-{{ system_requirements|raw }}
+<h3>SYSTEM REQUIREMENTS</h3>
+<ul>
+<li>Windows 98, ME, 2000 or XP</li>
+<li>64 MB RAM</li>
+<li>400 Mhz processor</li>
+<li>1GB HD space (recommended)</li>
+<li>Broadband Internet connection (recommended but not required)</li>
+</ul>
+(If you are not sure your computer meets these system requirements, please check with your computer manufacturer.)<br>

@@ -681,6 +681,10 @@ function cms_twig_env(string $tpl_dir): Environment
             return renderGetSteamNowButton($text);
         }, ['is_safe' => ['html']]));
 
+        $env->addFunction(new TwigFunction('cms_render_download_file', function(array $file, string $theme = '2004') {
+            return cms_render_download_file($file, $theme);
+        }, ['is_safe' => ['html']]));
+
         $env->addFunction(new TwigFunction('sidebar_right', function(int $year, string $page = 'news') {
             if ($page === 'news') {
                 if ($year >= 2007) {

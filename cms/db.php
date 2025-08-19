@@ -429,6 +429,30 @@ function cms_render_download_file(array $file, string $theme = '2004'): string
     }
     
     switch ($renderType) {
+        case 'black_buttons_table':
+            // Specific layout for 2003 v2 with black buttons in table layout
+            $html = "<table><tr><td width=\"220\">\n";
+            $count = 0;
+            foreach ($mirrors as $mirror) {
+                $host = htmlspecialchars($mirror['host'] ?? 'Mirror');
+                $url = htmlspecialchars($mirror['url']);
+                $orderNum = $count + 1;
+                
+                $html .= "<table cellspacing=\"0\"><tr>\n";
+                $html .= "<td><img height=\"24\" src=\"images/black_button_leftside.gif\" width=\"10\"></td>\n";
+                $html .= "<td align=\"middle\" bgcolor=\"#000000\"><a class=\"maize\" href=\"{$url}\">{$orderNum}: {$host}</a></td>\n";
+                $html .= "<td><img height=\"24\" src=\"images/black_button_rightside.gif\" width=\"10\"></td>\n";
+                $html .= "</tr></table>\n<br>\n";
+                
+                $count++;
+                // Switch to second column after 5 buttons
+                if ($count === 5) {
+                    $html .= "</td><td>\n";
+                }
+            }
+            $html .= "</td></tr></table>\n";
+            break;
+            
         case 'title_size_mirrors_buttons':
             $html = "<h3>{$title}";
             if ($size) $html .= " ({$size})";

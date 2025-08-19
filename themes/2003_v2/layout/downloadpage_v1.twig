@@ -2,35 +2,27 @@
 <h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2>
 <img src="images/Graphic_box.jpg" width="24" height="6" alt=""><br>
 <div class="narrower">
-<br>We've split the Steam installers into seperate versions based on the game cache they include.  Links marked with (BT) require that you have <a href="http://www.filerush.com/forums/viewtopic.php?t=10" target="_blank">Bit Torrent</a> installed.<br>
+<br>The Steam client initial download is about 500kB. Please select one of the links below to get started. (If you already have Steam, you don't need to download this installer. Steam will update itself automatically.)<br>
 <br>
-{% for category in categories %}
-{% set categoryLinks = links|filter(l => l.category == category.name) %}
-{% if categoryLinks|length > 0 %}
-<h3>{{ category.name }}{% if category.file_size %}: ({{ category.file_size }}){% endif %}</h3><br>
-<table width="525" cellpadding="0" cellspacing="0">
-    {% for row in categoryLinks|batch(3, '') %}
-    <tr>
-        {% for link in row %}
-        <td width="33%">
-            {% if link %}
-            <table cellspacing="0" cellpadding="0">
-                <tr>
-                    <td nowrap><img src="images/black_button2_leftside.gif" width="10" height="20"></td>
-                    <td bgcolor="#000000" nowrap width="150"><a class="maize" href="{{ link.url }}" style="font-size: 11px;">{{ link.label }}</a></td>
-                    <td nowrap><img src="images/black_button2_rightside.gif" width="10" height="20"></td>
-                </tr>
-            </table>
-            {% endif %}
-        </td>
-        {% endfor %}
-    </tr>
-    <tr><td><br></td><td><br></td><td><br></td></tr>
-    {% endfor %}
-</table>
-<br>
-{% endif %}
+<h2>DOWNLOAD LOCATIONS:</h2><br>
+
+{# Render main content downloads using our new render system #}
+{% for file in main_content_files %}
+{{ cms_render_download_file(file, '2003_v2')|raw }}
 {% endfor %}
+
 <hr>
-{{ system_requirements|raw }}
+<h3>SYSTEM REQUIREMENTS</h3>
+<ul>
+<li>Windows 98, ME, 2000 or XP</li>
+<li>256 MB RAM</li>
+<li>1.0 Ghz processor</li>
+<li>1GB HD space (strongly recommended)</li>
+<li>Broadband Internet connection (128kb/s or higher strongly recommended)</li>
+</ul>
+(If you are not sure your computer meets these system requirements, please check with your computer manufacturer.)<br>
+<hr>
+After you've started your Steam download from one of the locations listed above, select the option to 'Open' the install program.<br><br>
 </div>
+<img height="133" src="images/openprogram.gif" width="499"><br><br>
+Then follow the instructions on your screen.

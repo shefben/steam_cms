@@ -1,28 +1,35 @@
 <h1>GET STEAM NOW</h1>
-<h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2><img src="images/Graphic_box.jpg" alt="" width="24" height="6"><br>
+<h2>IN MINUTES, <em>YOU'LL BE PLAYING YOUR FAVORITE GAMES</em></h2><img alt="" height="6" src="images/Graphic_box.jpg" width="24"><br>
 <div class="narrower">
 <br>
 <!-- <h3>DOWNLOAD LOCATIONS</h3><br> -->
-{% for category in categories %}
-{% set categoryLinks = links|filter(l => l.category == category.name) %}
-{% if categoryLinks|length > 0 %}
-<h2>{{ category.name }}:</h2>
-{% if categoryLinks|first and categoryLinks|first.label == 'Click here to download the Steam installer' %}
-    <a class="maize" href="{{ categoryLinks|first.url }}" style="font-size: 11px;">Click here to download the Steam installer</a>{% if category.file_size %}. (Approx. {{ category.file_size }}){% endif %}<br>
-{% else %}
-    {% for link in categoryLinks %}
-    <a class="maize" href="{{ link.url }}" style="font-size: 11px;">{{ link.label }}</a><br>
-    {% endfor %}
-{% endif %}
-<br>
-{% endif %}
+
+{# Render main content downloads using our new render system #}
+{% for file in main_content_files %}
+{{ cms_render_download_file(file, '2004')|raw }}
 {% endfor %}
-<table cellpadding="8">
-<tr>
-<td>After you've started your Steam download from one of the locations listed above, select the option to 'Open' the install program. Then follow the instructions on your screen.</td>
-</tr>
-</table>
+
+<!--
+mirrors removed.
+ -->
+<br>
+<br>
+
+{# Render any additional main content files #}
+{% for file in main_content_files|slice(1) %}
+{{ cms_render_download_file(file, '2004')|raw }}
+{% endfor %}
+
 <hr>
-{{ system_requirements|raw }}
+<h3>SYSTEM REQUIREMENTS</h3>
+<ul>
+<li>Windows 98, ME, 2000 or XP</li>
+<li>64 MB RAM</li>
+<li>400 Mhz processor</li>
+<li>1GB HD space (recommended)</li>
+<li>Broadband Internet connection (recommended but not required)</li>
+</ul>
+(If you are not sure your computer meets these system requirements, please check with your computer manufacturer.)<br>
 <hr>
+After you've started your Steam download from one of the locations listed above, select the option to 'Open' the install program.<br><br>
 </div>
