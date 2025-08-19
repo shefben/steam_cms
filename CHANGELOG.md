@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Ensured admin login persists session data by closing the session before redirecting.
 - Fixed fatal error on Preload Marketing admin page due to undefined `$pdo` variable.
 - Updated marketing table to store localized content and adjusted admin preload page and installer accordingly.
 - Corrected download settings thumbnails for 2003_v2 and 2004 themes to load from the proper path.
