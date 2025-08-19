@@ -15,7 +15,7 @@ class CacheManager
     private string $cache_dir;
     private array $cache_sources = [];
 
-    public function __construct(string $cache_dir = null)
+    public function __construct(?string $cache_dir = null)
     {
         $this->cache_dir = $cache_dir ?? __DIR__ . '/cache';
         if (!is_dir($this->cache_dir)) {
@@ -187,7 +187,7 @@ class CacheManager
     /**
      * Clear all cache in a namespace or entire cache
      */
-    public function clear(string $namespace = null): int
+    public function clear(?string $namespace = null): int
     {
         $cleared = 0;
         
@@ -207,8 +207,11 @@ class CacheManager
             } elseif (is_dir($item) && $namespace === null) {
                 // Recursively clear subdirectories when clearing all
                 $this->clear(basename($item));
-                if (count(glob($item . '/*')) === 0) {
-                    rmdir($item);
+                if (is_dir($item)) {
+                    $children = glob($item . '/*') ?: [];
+                    if (count($children) === 0 && !rmdir($item)) {
+                        error_log("Failed to remove cache directory: $item");
+                    }
                 }
             }
         }
