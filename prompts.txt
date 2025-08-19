@@ -1,0 +1,715 @@
+1. Weighted Feeler-Based Obstacle Avoidance with Stuck Detection
+The PathFollower class implements a CS-style triple-feeler system and a StuckMonitor. This logic keeps the bot moving smoothly while recovering from obstacles:
+
+// m_flNextRepathTime throttles repath requests
+if (curTime >= nextRepathTime) {
+    nextRepathTime = curTime + 0.5f; // repath throttle
+    return false;
+}
+...
+FeelerAdjust(pos, traceFn, to);      // steer using feelers
+m_stuck.Update(pos, curTime, onLadder);
+if (m_stuck.GetDuration(curTime) > 2.0f)
+    return false;
+
+The feeler parameters and weights are documented in PathFollower’s header:
+
+static constexpr float FEELER_OFFSET = 20.0f;
+static constexpr float FEELER_LENGTH = 40.0f;
+static constexpr float CENTER_WEIGHT = 0.5f;
+static constexpr float SIDE_WEIGHT   = 0.25f;
+
+Benefit: Bots can nudge around walls without excessive path recomputation, and the stuck monitor invalidates the path if progress stalls for over two seconds.
+
+2. Objective Location System with CFFObjectiveTracker
+The advanced navigation design proposes tracking flags and capture zones using an objective tracker:
+
+## Phase 2 – Objective Location System
+- Track positions of flags, capture zones and resupply areas using `FFNavEntity` data.
+- Record dynamic objectives such as dropped flags every frame using the new `CFFObjectiveTracker` helper. Carried flags follow the carrier's position.
+- Provide queries for nearby objectives via `GetClosestObjective` and `GetClosestObjectiveOfType`.
+
+Example usage shows how bots could query the nearest enemy flag:
+
+const ObjectiveLocation *flag =
+    g_ObjectiveTracker.GetClosestObjectiveOfType(bot->GetAbsOrigin(),
+                                                 bot->GetTeamNumber(),
+                                                 NAV_FLAG);
+if ( flag )
+    bot->SetGoal(flag->pos);
+
+Benefit: With a centralized tracker, bots always know the up‑to‑date positions of flags and capture areas, enabling accurate goal selection and path planning.
+
+3. Dynamic Flag Tracking for Navigation
+The navigation analysis notes that flag positions are periodically refreshed:
+
+## Dynamic Flag Tracking
+- `ff_bot_temp.cpp` now includes `Bot_UpdateFlagPositions` which refreshes `g_FlagPosition` every second. Bots reference this table when orienting towards their own or the enemy flag.
+
+Benefit: Regularly updating flag locations ensures bots can react when flags are picked up, dropped, or returned, preventing outdated or incorrect paths.
+
+4. Utility-Based Decision Scoring and Team Coordination
+The CS bot port plan suggests replacing the existing state machine with modular layers and utility scoring:
+
+- Replace the existing FF state machine with CS-style modules such as *TacticalPosition*, *ObjectivePrioritiser*, *ThreatAssessment* and *TeamCoordinator*.
+- Assign scores to potential goals (capture flag, defend base, escort team mate) based on threat level, distance and current objectives. Choose the goal with the highest utility each tick.
+- Use an FF version of `CCSBotManager` to broadcast events like flag captures or defensive callouts so bots can coordinate pushes.
+
+Benefit: A utility-based approach helps bots dynamically choose between pursuing the flag, defending, or escorting teammates, while coordination logic keeps multiple bots focused on common objectives.
+
+
+
+
+
+
+
+
+
+
+
+
+
+- for the admin sidebar, if i am on a page that is from one of the dropdown links in the sidebar, make sure when the page loads that the dropdown for that is still 'dropped' and not closed.
+- fix the admin storefront product page by doing the following changes:
+1. split the `system requirements` text box into 2 text boxes, one for minimum requirements and the other for recommended.
+2. remove the screenshots text box and instead show each screenshot thumbnail, with its filename underneith and a `delete` button to remove it and a `hide` checkbox to hide it from the page
+do this for each screenshot.
+3. add 2 new text boxes with labels:
+a. metascore url which will be inserted into the database
+b. video trailer (this can be a external URL or a local path).
+b1. add a button that allows the admin to upload a trailer for the product
+4. add a 'Is preload' checkbox, when checked; the preload button on the product page which the users see should appear.  otherwise it should not be visible. 
+this means fixing the gamepage.twig template to allow the button to be hidden or visible depending on the database column 'ispreload' for the product entry.
+5. add a way to allow the preload button to be scheduled between two specific dates (month day year), if they are left blank, and the checkmark is checked, it will always show the preload button for the product.
+
+
+- on the admin storefront product page, add a checkbox to hide the trailer box in gamepage.twig so it can be hidden.
+- adjust gamepage.twig so the trailer URL can be hidden based on the information from the checkbox which is stored in the database.
+- adjust the gameplay.twig and gameplay_with_metascore.twig so it shows the available screenshot thumbnails.  it is possible there are no screenshots available, in this case, nothing is displayed for the screenshots. 
+ a maximum of 5 thumbnails can be displayed at a time. 
+
+
+- game screenshots will be stored, uploaded and loaded from/in <cms root>/storefrom/images/apps/<appid>/screenshots/.
+- game header images will be stored, uploaded and loaded from/in <cms root>/storefrom/apps/<appid>/headers/.
+- remove parsing the <cms root>/storefront/templates/*.html  files from the installer scripts.
+- go through packagepage.twig and ensure all tags have code to process the information correctly, grab the information from the database.
+- /archived_steampowered/2005/storefront/browse_games_catagories.html
+
+
+- add page numbers to the pagination in the admin cyber cafe directory page.
+- add a dropdown to select the country they want to display the directory results for so they can edit them in the admin page
+
+
+- for the 'random content' admin page, when the user selects the add button, show a textbox and label for creating the title to be used in the tag name for the randomized content.
+- in the scheduled content page, make sure the 'new' table is smaller and fits within the body of the admin panel page, it overhangs on the left side edge.
+- add the installer type style to the admin login page, so it is centered and looks like the installer page.
+- in the header and footer admin page, fill in the logo dropdown with what ever logo is set in the database for the selected template
+
+- in the header and footer admin page, when the user switches the template they want to change the header/footer settings for, do not reload the entire page, use ajax and update the content that way.
+- in the header and footer page, make sure that the preview and url is set to the theme's images folder.  it currently tries to read it from <cms root>/cms/admin/themes which is incorrect, it should be <cms root>/themes/<selected theme>/images/
+- if no file is selected for upload in the header and footer page, make the upload button unavailable until they select a new logo image.  make sure the logo gets uploaded to: <cms root>/themes/<selected theme>/images/ and is set in the database as well for the theme they are editing.
+- in the settings admin page, allow the admin to create custom dropdown sidebar menu's.  this means figuring out a way to designate a entry as a parent and others as children to that parent.
+- in the frequently asked questions admin page, add page numbers to the pagination between the next and back links.
+- in the news admin page, add page numbers between next and back so the user can select specific pages.
+-- also make the table sortable using the headers
+-- turn the edit link into a button
+- in the storefront developers admin page, turn the edit link into a button
+- in custom pages admin page, turn both the delete link into a red button and the edit link into a button
+
+
+- in cyber cafe directory admin page, add a dropdown to the 'add entry' widgets which lists all the countries.
+- remove the theme dropdown from the content server admin page.
+- fix the content_servers.php page so it displays everything correctly.  it should end up looking identical to the archived page from: `archived_steampowered/2004/2004_contentserver_stats.html`.
+-- fix the content servers php page so this isnt displayed at the top anymore: `8];\n 8];\n`
+-- make it so servers are broken into groups by their country, as shown in the archived page `archived_steampowered/2004/2004_contentserver_stats.html`.
+-- total avilable bandwidth should be all the capacity's added together of each server entry
+-- total used bandwidth should be 0 right now.
+-- the yellow line represents the used capacity of each server, the black line represent the available.  the max available capacity should be 1000 per server, which means the black bar goes all the way across (like it currently does).  if a server only has 500 then the black bar should be half the length of servers black lines that have 1000 available capacity
+
+
+
+
+- analyze all the php and html contents within `archived_steampowered/2004/storefront`, this is the 2004 and 2005_v1 storefront, it is seperate from the normal storefront.
+- the code needs to be moved to `<cms root>/04-05v1_storefront/`, but when the current cms theme is set to 2004 or 2005_v1, the url should show as and be accesible as `127.0.0.1/<cms root>/storefront`, otherwise if the theme is not either of those two, then /storefront should be the normal storefront.
+- this code must not be changed at all, and all assets should be moved to both the 2004 theme folder and 2005_v1 theme folder using a python script. do not move the actual image assets, only create a script that will do it.
+- this storefront should not use templates.
+- scrape all the different games, game image thumbnails, game name, appid and description from games.php and store it in the database table `0405_storefront_games`.
+-- change games.php so that it loads each game and its corresponding information from the database. 
+-- each game section should get a 'capsule' using this html (there are html comments in the area's where each part of the games information should be placed):
+`<div class="capsule" ;="">
+	<div class="captop"><div> &nbsp; &nbsp;
+<!-- start game title area -->
+    HALF-LIFE 2
+<!-- end game title area -->
+</div></div>
+	<div class="capcontent">
+
+	<table width="96%">
+	<tbody><tr>
+		<td valign="bottom" height="100%"><!-- start game image area -->
+<img src="images/gi1_220.gif">
+<!-- end game image area --></td>
+		<td nowrap="">&nbsp;</td>
+		<td style="padding-left:12px;" width="100%">
+<!-- start game description area -->
+    Half-Life 2 defines a new benchmark in gaming with startling realism and responsiveness. Powered by Source™ technology, Half-Life 2 features the most sophisticated in-game characters ever witnessed, advanced AI, stunning graphics and physical gameplay.
+<!-- end game description area -->
+</td>
+		<td height="100%">
+
+			<table height="100%" cellspacing="0" cellpadding="0">
+			<tbody><tr height="100%">
+				<td><div><!-- start screenshot area -->
+<img src="images/gi2_220.gif">
+<!-- end screenshot area --></div><div></div></td>
+			</tr>
+			<tr>
+				<td>
+
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+					<td height="10"><spacer></spacer></td>
+				</tr>
+<!-- start game purchase button area -->
+								<tr onmouseover="this.style.color='#BDBE52'" onmouseout="this.style.color='white'" onclick="window.open('steam://run/220', '_top');" style="cursor: pointer; color: white;">
+					<td nowrap="" class="purchase">CLICK for PURCHASE OPTIONS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td nowrap="" class="purchase1">&nbsp;</td>
+				</tr>
+<!-- end game purchase button area -->
+				</tbody></table>
+
+				</td>
+			</tr>
+			</tbody></table>
+
+		</td>
+	</tr>
+	</tbody></table>
+
+	</div><!-- end capcontent -->
+	<div class="capbot"><div></div></div>
+</div>`
+
+- add the boolean column `isHidden` to the `0405_storefront_games` table with default to false/0.
+- add the varchar2(255) column `purchaseButtonStr` to the `0405_storefront_games`.
+-- scrape the button text from each game in the storefronts game.php.
+- create a dropdown admin sidebar link called `2004/2005 Storefront Management`.  this should only be visible when the cms theme is set to `2004` OR `2005_v1` only.
+- - create the child storefront management link called `Game management` which will take the user to the 04/05v1 storefront game management page.
+--- the storefront game management page should be structured like this:
+a. there should be a css styled table with sortable headers with the header titles: `App ID` (unique, index), `Title`, `Image Preview`, `Hidden` and `Tasks`.
+aa. the table entries and information will be pulled from the database table `0405_storefront_games`.
+ab.  the `Tasks` cell for each column should contain 2 buttons: `Edit` and `Delete`.
+ac. the `Hidden` cell for each entry should contain a checkbox that will be used to update the isHidden cell of the specific entry using AJAX.
+ad. the `Image Preview` cell should show the main game image (not the screenshot) as a 32x32px image.
+b. below the table there should be a horizontal line break.
+c. after the line break create a form with the title `Add or Edit Games`.
+ca. the form should contain these widgets with labels: 
+i. `Application ID` (integers only)
+ii. `Game Name` (string)
+iii. `Main Image` (img preview)
+iv. `Upload New Image` button next to `Main Image`
+v. `Screenshot` (img preview)
+vi. `Upload New Screenshot` button next to `Screenshot`
+vii. `Remove Screenshot` button next to `Upload New Screenshot` button which will clear the screenshot cell for the entry if it had data in it. only enabled if screenshot cell has data or if adding a new game and a screenshot file was selected for upload.
+viii. Description (large blob) large text area
+ix. `Purchase Button text` radio button group with the following radio button options: `CLICK for PURCHASE OPTIONS`, `DOWNLOAD & INSTALL NOW` and the third radio button with the label `Custom` with a text box next to it where the user can enter custom button text.
+x. `Save Game` button to save the entry to the database.  if the appid is already in use, overwrite the entry with the new information.
+xi. `Cancel` button next to `Save Game` button which clears the form. 
+cb. when a user clicks the edit button on a game from the above table, it should use ajax to refresh the edit/add form below to grab the data from the database and fill in the form so the user can edit the game without fully refreshing the page.
+
+
+
+- scrape all the different thirdparty games, thirdparty  game image thumbnails, thirdparty  game name and thirdparty game description and website URLs from 3rdparty.php and store it in the database table `0405_storefront_thirdpartGames`.
+- add the boolean column `isHidden` to the `0405_storefront_thirdpartGames` table with default to false/0.
+- change 3rdparty.php so that it loads each thirdparty game and its corresponding information from the database. 
+-- each thirdparty game section should get a 'capsule' using this html (there are html comments in the area's where each part of the thirdparty games information should be placed):
+`<div class="capsule3">
+	<div class="captop3"><div>&nbsp; &nbsp;
+<!-- begin thirdparty game title area -->
+    NATURAL SELECTION V3.0 (BETA)
+<!-- end thirdparty game title area -->
+</div></div>
+	<div class="capcontent">
+
+	<table width="96%">
+	<tbody><tr>
+		<td valign="bottom" height="100%">
+<!-- begin thirdparty game thumbnail image area -->
+    <img src="images/t1_1.gif" width="188">
+<!-- end thirdparty game thumbnail image area-->
+</td>
+		<td nowrap="">&nbsp;</td>
+		<td width="100%">
+<!-- begin thirdparty game description area -->
+    <span class="maize">Natural Selection</span> blends first-person combat with real-time strategy. It features intense 'marines vs. aliens' teamplay, where one marine can become 'Commander'.<br>
+The <span class="maize">Commander</span> plays from a top-down strategic perspective and leads live players.<br>
+The <span class="maize">aliens</span> can evolve upgrades like Cloaking and Scent of Fear, and can change lifeforms to run on walls, fly and even devour marines whole.<br>
+NS has <span class="maize">atmospheric</span> indoor sci-fi environments full of steam and smoke, and features orchestral music from Jeremy Soule.
+<!-- end thirdparty game description area -->
+</td>
+		<td nowrap="">&nbsp;</td>
+		<td>
+
+			<table height="100%" cellspacing="0" cellpadding="0">
+			<tbody><tr height="100%">
+				<td><div>
+<!-- begin thirdparty game screenshot area -->
+    <img src="images/t2_1.gif" width="188">
+<!-- end thirdparty game screenshot area -->
+</div><div></div></td>
+			</tr>
+			<tr>
+				<td align="right">
+
+				<table cellspacing="0">
+				<tbody><tr>
+					<td height="10"><spacer></spacer></td>
+				</tr>
+<!-- begin thirdparty game website button area -->
+				<tr onmouseover="this.style.color='#BDBE52'" onmouseout="this.style.color='white'" onclick="window.open('http://www.natural-selection.org/', '_blank');" style="cursor: pointer; color: white;"><td nowrap="" class="purchase3">CLICK to VISIT WEBSITE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td nowrap="" class="purchase4">&nbsp;</td>
+				</tr>
+<!-- end thirdparty game website button area -->
+				</tbody></table>
+
+				</td>
+			</tr>
+			</tbody></table>
+
+		</td>
+	</tr>
+	</tbody></table>
+
+	</div><!-- end capcontent -->
+	<div class="capbot3"><div></div></div>
+</div>`
+
+- create the child storefront management link called `Thirdparty Game management`under the dropdown admin sidebar link called `2004/2005 Storefront Management; which will take the user to the 04/05v1 storefront thirdparty game management page.
+-- the storefront thirdparty game management page should be structured like this:
+a. there should be a css styled table with sortable headers with the header titles: `IndexID` (unique, index, auto generated), `Title`, `Image Preview`, 'Website URL' (clickable link), `Hidden` and `Tasks`.
+aa. the table entries and information will be pulled from the database table `0405_storefront_thirdpartGames`.
+ab.  the `Tasks` cell for each column should contain 2 buttons: `Edit` and `Delete`.
+ac. the `Hidden` cell for each entry should contain a checkbox that will be used to update the isHidden cell of the specific entry using AJAX.
+ad. the `Image Preview` cell should show the main thirdparty game image (not the screenshot) as a 32x32px image.
+b. below the table there should be a horizontal line break.
+c. after the line break create a form with the title `Add or Edit Thirdparty Games`.
+ca. the form should contain these widgets with labels: 
+i. `Game Name` (string)
+ii. `Main Image` (img preview)
+iii. `Upload New Image` button next to `Main Image`
+iv. `Screenshot` (img preview)
+v. `Upload New Screenshot` button next to `Screenshot`
+vi. `Remove Screenshot` button next to `Upload New Screenshot` button which will clear the screenshot cell for the entry if it had data in it. only enabled if screenshot cell has data or if adding a new game and a screenshot file was selected for upload.
+vii. Description (large blob) large text area
+viii. `Thirdparty Website URL` 
+ix. `Save Game` button to save the entry to the database.  if the appid is already in use, overwrite the entry with the new information.
+x. `Cancel` button next to `Save Game` button which clears the form. 
+cb. when a user clicks the edit button on a thirdparty game from the above table, it should use ajax to refresh the edit/add form below to grab the data from the database and fill in the form so the user can edit the thirdparty game without fully refreshing the page.
+
+
+- change the 04/05v1 asset mover and storefront image paths to load from the 04/05v1 storefront images folder instead of the 2004 and 2005_v1 theme images folders.
+- scrape all the different packages: packages image thumbnails, packages name and packages description, package prices, package screenshots (only valve premier pack has a screenshot), whether the package has the 'Offer available only on STEAM!` text + badge and package subscription ID from packs.php and store it in the database table `0405_storefront_packages`.
+- add the boolean column `isHidden` to the `0405_storefront_packages` table with default to false/0.
+- change packs.php so that it loads each package and its corresponding information from the database. 
+-- each package section should get a 'capsule' using this html (there are html comments in the area's where each part of the thirdparty games information should be placed):
+`<div class="capsule">
+	<div class="captop"><div> &nbsp; &nbsp;
+<!-- begin package title area -->
+    HALF-LIFE 2 GOLD
+<!-- end package title area -->
+</div></div>
+	<div class="capcontent">
+	<table width="96%">
+	<tbody><tr>
+		<td valign="bottom" height="100%" width="177">
+<!-- begin package main image area -->
+    <img src="images/p50.gif">
+<!-- end package main image area -->
+</td>
+		<td>
+<script language="JavaScript" src="/pop.js"></script>
+
+<!-- begin package description area -->
+<span class="maize">HALF-LIFE 2 GOLD INCLUDES:</span><br>
+ <ul>
+ <li>Half-Life 2</li>
+ <li>Counter-Strike: Source</li>
+ <li>Half-Life: Source</li>
+ <li>Day of Defeat: Source*</li>
+ <li><a style="text-decoration:underline;" href="javascript:popUp('/backcatalog/')">Valve's back catalog</a> available on Steam</li>
+ </ul>
+ <span class="maize">HALF-LIFE 2 MERCHANDISE:</span>
+ <ul>
+ <li>HL2 posters (3 total)</li>
+ <li>HL2 soundtrack</li>
+ <li>HL2 hat</li>
+ <li>HL2 sticker</li>
+ <li>City 17 postcard</li>
+ <li>Prima's HL2 Strategy Guide</li>
+ <li>Special collector's box</li>
+ </ul>
+ <hr>
+ <div style="font-weight:normal;color:#A4AD9D;">Allow 6-8 weeks for delivery of merchandise included in the Half-Life 2 gold package.<br>
+ * This is an unreleased product and will be made available to purchasers upon its release. The release date for this product is uncertain and purchasers should not rely on any estimated release date.<br>
+ <a style="text-decoration:underline;color:#A4AD9D;" target="_new" href="/Steam/Messages/minimum_req/index.php?l=english">HL2 system requirements</a></div>
+<!-- end package description area -->
+</td>
+		<td align="right">
+			<table height="100%" cellspacing="0" cellpadding="0">
+			<tbody><tr height="100%">
+				<td class="pricing2">
+<!-- begin package only steam badge OR screenshot area -->
+    <br><br><div class="discount" align="right" style="padding-top:12px;"><br>Offer<br>available<br>only on<br>STEAM!</div>
+<!-- end package only steam badge OR screenshot area -->
+</td>
+			</tr>
+			<tr>
+				<td class="pricing"><div>
+					<table cellspacing="0" width="190">
+					
+					<tbody><tr>
+						<td nowrap="" class="arithmetic">Package price</td>
+						<td nowrap="" align="right" class="arithmetic">
+<!-- begin package price area -->
+    $89.95
+<!-- end package price area -->
+</td>
+					</tr>
+																																								<tr>
+						<td nowrap="" class="arithmetic" colspan="2" style="border-top: 2px Solid #293021;">FINAL PRICE:<span class="total">
+<!-- begin package price area -->
+    $89.95
+<!-- end package price area -->
+</span> +TAX+S&amp;H</td>
+					</tr>
+<!-- begin package purchase button area -->
+					<tr onmouseover="this.style.color='#BDBE52'" onmouseout="this.style.color='white'" onclick="window.open('steam://purchase/13', '_top');" style="cursor: pointer; color: white;">
+						<td nowrap="" class="purchase5">PURCHASE THIS PACKAGE</td>
+						<td nowrap="" class="purchase6">&nbsp;</td>
+					</tr>
+<!-- end package purchase button area -->
+</tbody></table>
+					</div></td>
+			</tr>
+			</tbody></table>
+			
+		</td>
+	</tr>
+	</tbody></table>
+	</div><!-- end capcontent -->
+	<div class="capbot"><div></div></div>
+</div>`
+
+
+- change the upload image button for the main image and screenshot ih the thirdparty games and games admin management page so it uses AJAX for uploading and updates the preview image once upload is complete without fully refreshing the page.
+- uploaded images should be read from and uploaded to `<cms root>/04-05v1_storefront/images` directory.
+-- game main images should be renamed to this format: `gi1_<appid>.<ext>`.
+-- game screenshot images should be renamed to this format: `gi2_<appid>.<ext>`.
+-- thirdparty game main images should be renamed to this format: `t1_<uniqueid>.<ext>`.
+-- package main images should be renamed to this format: `p<package/subscriptionid>.<ext>`.
+- on the games management admin page, where the form to add or edit games is, change the title textbox and label to a radio button group with 2 options:
+a.  `Text Only` with a text box under the label `Text Only`.
+b. `Title Image` with an image preview if available, otherwise display `No Image selected`.
+ba. under the title image preview, put a button labeled `Upload` which will let the user upload an image to use using AJAX to upload and display the new image after uploading without refreshing the entire page.
+bb. if the `Text Only` radio button is selected, disable the upload button.
+bc. when uploading an title image, rename the file to this format: `gn_<appid>.<ext>`, into the `<cms_root>/04-05v1_storefront/images` directory
+c. if the option for a title image is used, save the image path to the database in the title cell.
+d. if the title cell of the database entry contains an image path, display an image in the table that lists all the games for the specific entries that use a title image.
+e. if the database entry contains an image path, display an image instead of text on the public facing `games.php` page for the entries that use images, otherwise just show the text as it currently it.
+
+- thirdparty game screenshot images should be renamed to this format: `t2_<uniqueid>.<ext>`, when uploaded.
+- create the child storefront management link called `Package/Subscription Management`under the dropdown admin sidebar link called `2004/2005 Storefront Management; which will take the user to the 04/05v1 storefront package management page.
+-- the storefront package management page should be structured like this:
+a. there should be a css styled table with sortable headers with the header titles: `Subscription ID` (unique, index), `Title`, `Image Preview`, 'Price', `Hidden` and `Tasks`.
+aa. the table entries and information will be pulled from the database table `0405_storefront_packages`.
+ab.  the `Tasks` cell for each column should contain 2 buttons: `Edit` and `Delete`.
+ac. the `Hidden` cell for each entry should contain a checkbox that will be used to update the isHidden cell of the specific entry using AJAX.
+ad. the `Image Preview` cell should show the main package image (not the screenshot) as a 32x32px image.
+b. below the table there should be a horizontal line break.
+c. after the line break create a form with the title `Add or Edit Steam Packages/Subscriptions`.
+c a. the form should contain these widgets with labels: 
+i. `Package/Subscription ID` (integer, unique)
+ii. `Package Name` (string)
+ii. `Main Image` (img preview)
+iii. `Upload New Image` button next to `Main Image`
+iv. a radio button group with the title `ScreenShot or Steam Only Badge` and 2 radio button options: `Screen Shot` and `Steam Only Badge`
+iv a. the screenshot radio button should show the main image if the user is editing a pre-existing package, otherwise it should just say no image selected until the user uploads an image (using ajax)
+iv a 1. `Upload New Screenshot` button next to `Screenshot`
+iv a 2. `Remove Screenshot` button next to `Upload New Screenshot` button which will clear the screenshot cell for the entry if it had data in it. only enabled if screenshot cell has data or if adding a new game and a screenshot file was selected for upload.
+iv b. disable the screenshot buttons and preview if the user selects the `Steam Only Bade` radio button`.
+iv b 1. the image under the badge radio button should display this:
+`<br><br><div class="discount" align="right" style="padding-top:12px;"><br>Offer<br>available<br>only on<br>STEAM!</div>`
+iv b 2. if the badge option is selected, the package entry (on the public facing packs.php) should display this badge instead of nothing or a screenshot:
+`<!-- begin package only steam badge OR screenshot area -->
+<br><br><div class="discount" align="right" style="padding-top:12px;"><br>Offer<br>available<br>only on<br>STEAM!</div>
+<!-- end package only steam badge OR screenshot area -->`
+v. Description (large blob) wysiwyg area.
+ix. `Save Package` button to save the entry to the database.  if the appid is already in use, overwrite the entry with the new information.
+x. `Cancel` button next to `Save Package` button which clears the form. 
+cb. when a user clicks the edit button on a package from the above table, it should use ajax to refresh the edit/add form below to grab the data from the database and fill in the form so the user can edit the package without fully refreshing the page.
+- package main images should be renamed to this format: `p<package/subscriptionid>.<ext>`.
+
+
+- in the legacy games, thirdparty games and packages management admin pages, change the table entries to use the javascript code so entries can be re-ordered by clicking and draging it around the table.  save the order of the entries to the entry in their corresponding database and then reflect the order on the public facing packs.php, 3rdparty.php and games.php pages.
+- on the random content admin page, ensure the dropdown shows all the random title entries from the database.  if a new entry is being made and save is clicked, update the dropdown entries using ajax.
+- rename the `Support Page` link in the admin side bar and  title of the support admin page to `Legacy Support Pages`
+- make the following changes to the `Custom Titles` admin page:
+1. add a checkbox to the `Delete` cell of each entry, when ti is checked and the user clicks save, the entry will be removed from the database.
+2. replace the `Themes` text box in each table entry with multiple checkboxes, one checkbox for each theme which will be saved to the database as a comma seperated list of theme names of the themes that are checked.
+3. rename the column header `Name` to `Title Tag Name`.
+4. add a new column with header with the label `Custom Title Text` after the `Title Tag Name` column.
+5. 
+-----------------------------
+
+
+make this prompt by adding details, making it coherent and precise, do not include any code, just the prompt:
+
+when the manage capsule button is clicked, an in-window modal window should become visible with a translucent surrounding background over the visible 
+parts of the webpage.  this should open using ajax to avoid fully refreshing.
+the new modal window will be used for graphically creating a tabbed content section, as shown in the image.
+
+the modal window should show a single tab on the left side with a short content area attached to the bottom of the tab with a button thats labeled '+ add game entry'.
+the tab should have an editable label  when the text of the tab is clicked, which causes the tab to grow and shrink based on the label length.
+after the label on the right side of it there should be a '+' button, when pressed, it will add a new tab next to the first one on the right side, 
+and move the button to after the new tab again it has an editable label.
+
+each tab should have a content area underneath it, in the content area, at the begining when there is no content, add a 'add entry' button.  when this button is clicked, open
+another modal window using ajax that contains widgets for the user to enter information and a save button and cancel button.  the widgets on this window should be for:
+application id, application title, release date, price and game logo. for the game logo allow the user to upload a new image to 'images\storefront\apps\<appid>\<appid>-<unique hash>.<ext>' 
+or add an javascript image selector that reads from the 'images\storefront\apps\<appid>\' directory and shows all the images the user can select.  
+when the user is done adding or editing the information, if they hit cancel the modal closes and nothing changes.  if the user hits save, it will use ajax to add the entry to the database
+then close the modal so the user can go back to the tabbed section editor modal, this modal will use ajax and show the new entry  the same way the included image shows it. (descibe it in the prompt as i cannot include the image in my prompt).
+the 'add entry' button should now be below the new entry.
+
+allow the user  to add as many entry rows as they would like per tab.  but it is a single column of entries.
+users can add up to 4 tabs maximum, the '+' button should disapear after the 4th tab.
+add a small 'x' to the top right corner of each tab, which when clciked will remove the tab and any content associated with that tab.
+
+the bottom of the tab editor modal should have a save button and a cancel button. the cancel button closes the modal and doesnt save any changes.
+the save button will save the tab information ensuring that all tabs have the same group id so the user can add multiple capsules with different tabs,
+ the individual row/entry information about the games that are added to the tab, make sure to have a groupid column so the correct entry shows up on the correct tab.
+
+the whole thing should use ajax to avoid a full webpage refresh.  use any librarys needed
+---------------------------------------
+
+
+analyze the clientside functions using the MCP tool; search for functions with these words in their names: `VIP`, `paypal`, `purchase`, `guest`, `gift`, `license`, `receipt` . then analyze the python server code related to purchasing, receipts, guestpasses, gift passes and more; within the steam3 folder. 
+create a comprehensive plan to implement any missing functions/packets/code and go through each method related to the things i mentioned earlier and double check for mistakes, make sure the methods return everything in a format the client needs.
+your plan should then include information about what still needs to be wired up, or connected via calls or reference so everything works in a cohesive manner.
+--------------------------------------------
+using 'archived_steampowered/2005/v2/index.html' replace the latest news content area with the correct latest news tag that displays the news in the same format that the archived html does.
+then
+----------------------
+i want to de-clutter the admin sidebar by moving parents to different parents so it is a nested dropdown.  also remove the 'toggle submenu' text. so follow these instructions: 
+- under FAQ management, move FAQ and FAQ Categories to a new nested parent within  'Support & FAQ Management' labeled 'FAQ Management' which drops down to the FAQ and FAQ categories links.
+- fix the troubleshooter link under 'Support & FAQ Management' so it is a dropdown again with 'troubleshooter management' and 'requests viewer' underneath 'troublershooter' which is under the parent 'Support & FAQ Management'.
+- add the support page link under the 'Support & FAQ Management' parent. 
+- create another new parent link labeled 'Content Management' which will contain these links and nested dropdown parents: Custom Pages, Error Page, Custom Titles, Page Version Management and Scheduled Content.
+- create another new parent link labeled 'Storefront Management' which will contain these links: 2004/2005 Storefront Management and  Storefront.
+- then make sure any links/parents that have been moved are no longer on the root of the sidebar and are displayed under their respective parents.
+remember, it must supported nested dropdowns.
+
+-------------------------
+- revert all changes made to ' sidebar_section_variants' and to the files `themes/2006_v1/sql/settings.sql` 
+ and `themes/2006_v2/sql/settings.sql`
+- in install_sidebar_sections.sql and any php code that uses the tables from install_sidebar_sections.sql make the following changes:
+- remove the columns sort_order, is collapsible, collapsible_id, icon_path and has_icicles from the 'sidebar_sections' table, but keep the values for each column removed as they will be moved to the sidebar_section_variants table for their respective entrys.
+- add a new column 'sidebar_name' which will be the name used as the parameter in the twig tag 'sidebar_section'.
+- add the columns variant_id (unique, index, auto generate), sort_order, is collapsible, collapsible_id, icon_path and has_icicles to 'sidebar_section_variants', insert the data that was removed from sidebar_sections into the correct variants entries.
+- create a new table called 'sidebar_section_entries' which will contain the individual entries that are placed within a specific section.
+-- the table must have these columns: entry_id (unique, index, auto generate), parent_variant_id, entry_order, entry_content (html)
+- then parse the links from each section in the 2006_v2 index.html and 2006_v1 index.html and add the entries to the 'sidebar_section_entries' table which  connects to the correct `sidebar_section_variants` id.
+---------------------------
+
+fix 'cms/admin/storefront_product.php'.
+- turn the edit link into a button
+- add a delete button for each entry, use ajax when the user clicks the button to prevent full page refreshing.
+- change the edit button to instead open a large modal with all the widgets (pre-filled with the selected entrys information) and the save and cancel button. it must use ajax for saving to prevent full page refreshing.
+- fix the image paths so they load from the '<cms root>/storefront/images/' directory and not '/cms/' or /cms/admini/'.
+- create a new button with the label 'Add Product' which will use the same modal as the edit modal, but it will be used to create a new entry.  use ajax for opening the modal and saving the information to prevent full page refreshes.
+- change the image upload buttons so they open a little modal with 2 buttons labeled 'Upload Image' and 'Choose Existing Image'.  the upload image button uses the normal file uploading stuff but the choose existing image button should open another modal which will display all the images that are currently in the same directory that image uploads are held in, it should show each as a preview image.  let the user click an image to select it and click save to set that as the image.  use a premade js library to deal with pre-existing image selection.
+-- use ajax to save the selected image and update the preview on the main modal to prevent page refreshes.
+--------------------
+1. go through and analyze the template engine and try to gather all the different tags that it renders/parses.     │
+│   then update the readme.md and TAGS.md with any missing tags or information.  all added information must be very    │
+│   descriptive with any valid parameters, what each parameter does, whether a tag is specific to a theme, a           │
+│   description of what the tag does/renders and anything else that may prove to be important to anyone looking to     │
+│   create a new template or custom page in the CMS. 2. paginate the table on 'cms/admin/error_log.php' so it has a    │
+│   next and previous button and page number links in between.  it should only show a maximum of 30 entries per page.  │
+│   3. add a notification icon to the top header bar of the admin_v2 and admin_default themes that shows a small       │
+│   floating   
+--------------------
+│ > analyze every php script within 'cms/' and subdirectories to find all coding issues, syntax issues, incomplete     │
+│   code, fixme or todo comments/placeholders or anything else that ma be an issues. then create                       │
+│   current_issues.md and list all problems with a small description of the issue.         
+-----------------------
+
+https://web.archive.org/web/*/media.steampowered.com*
+https://web.archive.org/web/*/media2.steampowered.com*
+https://web.archive.org/web/*/media3.steampowered.com*
+https://web.archive.org/web/*/media4.steampowered.com*
+
+https://web.archive.org/web/*/cdn.steampowered.com*
+https://web.archive.org/web/*/cdn-01.steampowered.com*
+https://web.archive.org/web/*/cdn2.steampowered.com*
+https://web.archive.org/web/*/cdn3.steampowered.com*
+https://web.archive.org/web/*/cdn4.steampowered.com*
+
+https://web.archive.org/web/*/cdn.store.steampowered.com*
+https://web.archive.org/web/*/cdn2.store.steampowered.com*
+https://web.archive.org/web/*/cdn3.store.steampowered.com*
+https://web.archive.org/web/*/cdn4.store.steampowered.com*
+
+https://web.archive.org/web/*/cloud.steampowered.com* 
+https://web.archive.org/web/*/cloud-2.steampowered.com*
+https://web.archive.org/web/*/cloud-3.steampowered.com*
+https://web.archive.org/web/*/cloud-4.steampowered.com*
+
+https://web.archive.org/web/*/store.staging.steampowered.com*
+https://web.archive.org/web/*/translation.steampowered.com*
+https://web.archive.org/web/*/help.steampowered.com*
+
+https://web.archive.org/web/*/store.akamai.steampowered.com*
+https://web.archive.org/web/*/steamstore-a.akamaihd.net*
+
+https://web.archive.org/web/20201112014013/http://cs.steampowered.com/serverlist/4/100/
+https://web.archive.org/web/20180416170558/https://kgs.steampowered.com/keyfile/2286389332316351290/
+
+SELECT UPDATE_TIME
+FROM information_schema.TABLES
+WHERE TABLE_SCHEMA = 'your_db' AND TABLE_NAME = 'your_table';
+
+------------------------------
+
+in the visibility section, give each download entry a dropdown for location, a dropdown for render type, a dropdown for mirror link type and keep the check boxes there 
+for hiding and displaying downloads.
+the selections for the location downdown depend on the page version and theme:
+*for 2003_v2 theme:
+- version 1 download page, hide the location drop down as there is only the main content area.
+- version 2 download page, 
+the selections for render type are: 'download image button', 'Single Link' and 'Title W/Mirrors'.
+
+ (uses the text_styler.php in cms/utils/)
+
+download page display options:
+- available render types:
+---title (with size) w/ mirrors as buttons
+---title (with size) w/ mirrors as links
+---title (no size) w/ mirrors as links
+--- mirrors as buttons w/o title  (only default (NON-FULL) steam install mirrors)
+---single button
+---single link
+--- title w/ single link with size next to link as text
+
+- available downloads:
+--- default steam installer
+--- full steam installer
+--- all full game steam installers
+--- windows hlds update tool
+--- linux hlds update tool
+--- dedicated server (windows)
+--- dedicated server (linux)
+
+2003_v2 theme:
+
+# download page version 1:
+- available locations: main content only
+- render type: 	title (with size) w/ mirrors as buttons
+- downloads:  	full steam installer, all full game steam installers
+
+# download page version 2:
+- available locations: main content only
+- render type:	mirrors as buttons w/o title (default steam install mirrors)
+- downloads:	default steam install mirrors
+
+# download page version 3:
+- available locations: main content only
+- render type:	title (with size) w/ mirrors as links
+- downloads:	default steam installer, full steam installer, all full game steam installers, dedicated server (windows), dedicated server (linux)
+
+
+2004 theme:
+
+# download page version 1:
+- available locations: main content only
+- render type: 	 title w/ single link with size next to link as text, title (with size) w/ mirrors as links
+- downloads:  	default steam installer [title w/ single link with size next to link as text], dedicated server (windows) [title with mirrors as links], dedicated server (linux) [title with mirrors as links]
+
+# download page version 2:
+- available locations: main content, floating box
+- render type:	single button, mirrors as buttons w/o title (default steam install mirrors)
+- downloads:	default steam install mirrors [single button]{main content}, dedicated server (windows) [title with mirrors as links]{floating box}, dedicated server (linux) [title with mirrors as links] {floating box}
+
+# download page version 3:
+- available locations: main content, floating box
+- render type:	single button, mirrors as buttons w/o title (default steam install mirrors)
+- downloads:	default steam install mirrors [single button]{main content}, windows hlds update tool [single link]{floating box}, linux hlds update tool [single link] {floating box}
+
+
+
+
+
+
+--------------------------------
+
+
+want the management panel and db tables to be as clean and intuitive and customizable as they can be without being complicated. i am thinking of a grid sort of system, depending on the theme and current download page version selected, it lets you select the location (if there is more than one) and then select the render type (depending on location) and whether the entry is visible for each download. give me atleast 3 ideas for the admin page so managing different versions of the same page within these constraints will be simple. this is the only constraint i am working with: 1. the page versions which contain the floating box location can only contain these download render types: 'single link' or 'title (no size) w/ mirrors as links'. these are all the options available:
+- available render types:
+---title (with size) w/ mirrors as buttons
+---title (with size) w/ mirrors as links
+---title (no size) w/ mirrors as links
+--- mirrors as buttons w/o title  (only default (NON-FULL) steam install mirrors)
+---single button
+---single link
+--- title w/ single link with size next to link as text
+
+- available downloads:
+--- default steam installer
+--- full steam installer
+--- all full game steam installers
+--- windows hlds update tool
+--- linux hlds update tool
+--- dedicated server (windows)
+--- dedicated server (linux)
+these are the different version download pages with the information they hold by default when the cms is installed:
+2003_v2 theme:
+
+# download page version 1:
+- available locations: main content only
+- render type: 	title (with size) w/ mirrors as buttons
+- downloads:  	full steam installer, all full game steam installers
+
+# download page version 2:
+- available locations: main content only
+- render type:	mirrors as buttons w/o title (default steam install mirrors)
+- downloads:	default steam install mirrors
+
+# download page version 3:
+- available locations: main content only
+- render type:	title (with size) w/ mirrors as links
+- downloads:	default steam installer, full steam installer, all full game steam installers, dedicated server (windows), dedicated server (linux)
+
+
+
+
+2004 theme:
+
+# download page version 1:
+- available locations: main content only
+- render type: 	 title w/ single link with size next to link as text, title (with size) w/ mirrors as links
+- downloads:  	default steam installer [title w/ single link with size next to link as text], dedicated server (windows) [title with mirrors as links], dedicated server (linux) [title with mirrors as links]
+
+# download page version 2:
+- available locations: main content, floating box
+- render type:	single button, mirrors as buttons w/o title (default steam install mirrors)
+- downloads:	default steam install mirrors [single button]{main content}, dedicated server (windows) [title with mirrors as links]{floating box}, dedicated server (linux) [title with mirrors as links] {floating box}
+
+# download page version 3:
+- available locations: main content, floating box
+- render type:	single button, mirrors as buttons w/o title (default steam install mirrors)
+- downloads:	default steam install mirrors [single button]{main content}, wind
+
+
+
+
+
+

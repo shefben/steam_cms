@@ -1,0 +1,267 @@
+ID: 6
+[
+xmin -40
+ymin -40
+xmax 360
+ymax 281
+readonly 1
+noselect 1
+font 5
+height 200
+color #ff808183
+align center
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]
+--- SEPARATOR ---
+ID: 15
+[
+xmin -40
+ymin -40
+xmax 6892
+ymax 380
+readonly 1
+noselect 1
+font 14
+height 240
+color #ffcfcbc2
+align left
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]test™
+--- SEPARATOR ---
+ID: 16
+[
+xmin -40
+ymin -40
+xmax 1150
+ymax 281
+readonly 1
+font 5
+height 200
+color #ffcfcbc2
+align right
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]$9.95
+--- SEPARATOR ---
+ID: 17
+[
+xmin -40
+ymin -40
+xmax 1632
+ymax 281
+readonly 1
+font 5
+height 200
+color #ff666666
+align right
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]$19.95
+--- SEPARATOR ---
+ID: 27
+[
+xmin -40
+ymin -40
+xmax 9159
+ymax 339
+readonly 1
+noselect 1
+html 1
+font 26
+height 220
+color #ffcccccc
+align center
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]<p align="center"></p>
+--- SEPARATOR ---
+ID: 6
+[
+xmin -40
+ymin -40
+xmax 360
+ymax 281
+readonly 1
+noselect 1
+font 5
+height 200
+color #ff808183
+align center
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]
+--- SEPARATOR ---
+ID: 15
+[
+xmin -40
+ymin -40
+xmax 6892
+ymax 380
+readonly 1
+noselect 1
+font 14
+height 240
+color #ffcfcbc2
+align left
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]test™
+--- SEPARATOR ---
+ID: 16
+[
+xmin -40
+ymin -40
+xmax 1150
+ymax 281
+readonly 1
+font 5
+height 200
+color #ffcfcbc2
+align right
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]$9.95
+--- SEPARATOR ---
+ID: 17
+[
+xmin -40
+ymin -40
+xmax 1632
+ymax 281
+readonly 1
+font 5
+height 200
+color #ff666666
+align right
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]$19.95
+--- SEPARATOR ---
+ID: 27
+[
+xmin -40
+ymin -40
+xmax 9159
+ymax 339
+readonly 1
+noselect 1
+html 1
+font 26
+height 220
+color #ffcccccc
+align center
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]<p align="center"></p>
+--- SEPARATOR ---
+ID: 6
+[
+xmin -40
+ymin -40
+xmax 360
+ymax 281
+readonly 1
+noselect 1
+font 5
+height 200
+color #ff808183
+align center
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]
+--- SEPARATOR ---
+ID: 15
+[
+xmin -40
+ymin -40
+xmax 6892
+ymax 380
+readonly 1
+noselect 1
+font 14
+height 240
+color #ffcfcbc2
+align left
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]test™
+--- SEPARATOR ---
+ID: 16
+[
+xmin -40
+ymin -40
+xmax 1150
+ymax 281
+readonly 1
+font 5
+height 200
+color #ffcfcbc2
+align right
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]$9.95
+--- SEPARATOR ---
+ID: 17
+[
+xmin -40
+ymin -40
+xmax 1632
+ymax 281
+readonly 1
+font 5
+height 200
+color #ff666666
+align right
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]$19.95
+--- SEPARATOR ---
+ID: 27
+[
+xmin -40
+ymin -40
+xmax 9159
+ymax 339
+readonly 1
+noselect 1
+html 1
+font 26
+height 220
+color #ffcccccc
+align center
+leftmargin 0
+rightmargin 0
+indent 0
+leading 40
+]<p align="center"></p>
+--- SEPARATOR ---

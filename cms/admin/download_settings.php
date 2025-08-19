@@ -34,18 +34,6 @@ if (isset($_POST['save_type']) && isset($_POST['download_version'])) {
     }
 }
 
-if (isset($_POST['save_vis'])) {
-    $db->prepare('DELETE FROM download_page_visibility WHERE theme=?')->execute([$theme]);
-    if (isset($_POST['vis']) && is_array($_POST['vis'])) {
-        $ins = $db->prepare('INSERT INTO download_page_visibility(theme,version,file_id) VALUES (?,?,?)');
-        foreach ($_POST['vis'] as $fileId => $vers) {
-            foreach ($vers as $ver => $on) {
-                $ins->execute([$theme, (int)$ver, (int)$fileId]);
-            }
-        }
-    }
-    echo '<p>Visibility updated.</p>';
-}
 
 if (isset($_POST['save_cat'])) {
     $id = (int)($_POST['id'] ?? 0);
@@ -82,13 +70,6 @@ foreach ($versions as $k => $label) {
         $verNums[(int)$m[1]] = $label;
     }
 }
-$allFiles = $db->query('SELECT id,title FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
-$visMap = [];
-$vStmt = $db->prepare('SELECT file_id,version FROM download_page_visibility WHERE theme=?');
-$vStmt->execute([$theme]);
-foreach ($vStmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
-    $visMap[$row['file_id']][$row['version']] = true;
-}
 
 $cats = $db->query('SELECT * FROM download_categories ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
 $sysReqs = [];
@@ -118,25 +99,6 @@ $firstVer = key($verNums);
 <button type="submit" name="save_type" class="btn btn-primary" style="margin-top:10px;">Save Download page type</button>
 </form>
 
-<h3 style="margin-top:20px;">File Visibility by Version</h3>
-<form method="post">
-<table class="data-table" style="margin-top:10px;">
-<tr><th>File</th>
-<?php foreach ($verNums as $num => $label): ?>
-    <th><?php echo $label; ?></th>
-<?php endforeach; ?>
-</tr>
-<?php foreach ($allFiles as $f): ?>
-<tr>
-    <td><?php echo htmlspecialchars($f['title']); ?></td>
-    <?php foreach ($verNums as $num => $label): ?>
-    <td style="text-align:center;"><input type="checkbox" name="vis[<?php echo $f['id']; ?>][<?php echo $num; ?>]" <?php echo isset($visMap[$f['id']][$num])?'checked':''; ?>></td>
-    <?php endforeach; ?>
-</tr>
-<?php endforeach; ?>
-</table>
-<button type="submit" name="save_vis" class="btn btn-primary" style="margin-top:10px;">Save Visibility</button>
-</form>
 
 <h3 style="margin-top:20px;">Download Categories</h3>
 <table class="data-table" style="margin-top:10px;">

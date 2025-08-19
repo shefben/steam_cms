@@ -1,0 +1,26 @@
+2009 game page:
+http://web.archive.org/20090402063540/www.steampowered.com/v/index.php?area=package&SubId=376
+redirects to http://web.archive.org/web/20090402063540/http://store.steampowered.com/sub/376/
+
+2008 coming soon game:
+http://web.archive.org/web/20080513203112/www.steampowered.com/v/index.php?area=app&AppId=10470&cc=US
+
+2008 storefront v2 game with and without pkg:
+http://web.archive.org/web/20080406104638/http://storefront.steampowered.com:80/v2/index.php?area=game&AppId=70&
+
+2007 supportwiki vac page:
+http://web.archive.org/web/20070206122216/http://supportwiki.steampowered.com/wiki/Valve_Anti-Cheat_System_%28VAC%29
+
+2007 supportwiki.steampowered.com main page:
+http://web.archive.org/web/20080703230834/http://supportwiki.steampowered.com:80/
+
+2007 coming soon game:
+http://web.archive.org/web/20080128210432/storefront.steampowered.com/v/index.php?area=game&AppId=9390
+
+2007 game no meta score:
+http://web.archive.org/web/20070822161048/storefront.steampowered.com/v/index.php?area=game&AppId=4600&
+
+http://web.archive.org/web/20071024120940/http://steampowered.com/v/index.php?area=game&AppId=380
+
+2006 search result
+https://web.archive.org/web/20061117212650/http://www.steamgames.com/v/index.php?area=search&browse=1&developer=Garry&

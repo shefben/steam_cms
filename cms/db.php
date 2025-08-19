@@ -367,33 +367,42 @@ function cms_get_download_files(int $limit = 10, int $offset = 0): array
     return $files;
 }
 
-function cms_get_all_download_files(?string $theme = null, ?int $version = null): array
+function cms_get_all_download_files(?string $theme = null, ?string $version = null): array
 {
     $db = cms_get_db();
 
     if ($theme !== null && $version !== null) {
         try {
-            $stmt = $db->prepare('SELECT df.* FROM download_files df JOIN download_page_visibility dpv ON dpv.file_id=df.id WHERE dpv.theme=? AND dpv.version=? ORDER BY df.id');
+            // Get files with their version-specific settings from new table structure
+            $stmt = $db->prepare('
+                SELECT df.*, 
+                       COALESCE(dfv.is_visible, 1) as is_visible,
+                       COALESCE(dfv.render_type, "title_size_mirrors_buttons") as render_type,
+                       COALESCE(dfv.location, "main_content") as location,
+                       COALESCE(dfv.sort_order, df.sort_order, 0) as sort_order
+                FROM download_files df
+                LEFT JOIN download_file_versions dfv ON df.id = dfv.file_id 
+                    AND dfv.theme = ? AND dfv.page_version = ?
+                WHERE COALESCE(dfv.is_visible, 1) = 1
+                ORDER BY COALESCE(dfv.sort_order, df.sort_order, 0), df.id
+            ');
             $stmt->execute([$theme, $version]);
             $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
+            // Fallback to old structure if new table doesn't exist yet
             if ($e->getCode() === '42S02') {
-                $files = $db->query('SELECT * FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
+                $files = $db->query('SELECT *, 1 as is_visible, "title_size_mirrors_buttons" as render_type, "main_content" as location, 0 as sort_order FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
             } else {
                 throw $e;
             }
         }
     } else {
-        $files = $db->query('SELECT * FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
+        $files = $db->query('SELECT *, 1 as is_visible, "title_size_mirrors_buttons" as render_type, "main_content" as location, 0 as sort_order FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
     }
 
     $mStmt = $db->prepare('SELECT host,url FROM download_file_mirrors WHERE file_id=? ORDER BY ord,id');
     $out = [];
     foreach ($files as $f) {
-        $themes = array_filter(array_map('trim', explode(',', $f['visibleontheme'])));
-        if ($theme !== null && $themes && !in_array($theme, $themes, true)) {
-            continue;
-        }
         $mStmt->execute([$f['id']]);
         $f['mirrors'] = $mStmt->fetchAll(PDO::FETCH_ASSOC);
         if (empty($f['main_url']) && !empty($f['mirrors'])) {
@@ -402,6 +411,142 @@ function cms_get_all_download_files(?string $theme = null, ?int $version = null)
         $out[] = $f;
     }
     return $out;
+}
+
+function cms_render_download_file(array $file, string $theme = '2004'): string
+{
+    require_once __DIR__ . '/utilities/text_styler.php';
+    
+    $renderType = $file['render_type'] ?? 'title_size_mirrors_buttons';
+    $title = htmlspecialchars($file['title']);
+    $size = htmlspecialchars($file['file_size'] ?? '');
+    $mainUrl = htmlspecialchars($file['main_url'] ?? '');
+    $mirrors = $file['mirrors'] ?? [];
+    
+    // Use single button for legacy usingbutton field
+    if (isset($file['usingbutton']) && $file['usingbutton'] && $renderType === 'title_size_mirrors_buttons') {
+        $renderType = 'single_button';
+    }
+    
+    switch ($renderType) {
+        case 'title_size_mirrors_buttons':
+            $html = "<h3>{$title}";
+            if ($size) $html .= " ({$size})";
+            $html .= "</h3>\n";
+            
+            if ($mainUrl) {
+                $html .= "<a href=\"{$mainUrl}\" class=\"download-button\">Download</a>\n";
+            }
+            foreach ($mirrors as $mirror) {
+                $host = htmlspecialchars($mirror['host'] ?? 'Mirror');
+                $url = htmlspecialchars($mirror['url']);
+                $html .= "<a href=\"{$url}\" class=\"download-button\">{$host}</a>\n";
+            }
+            break;
+            
+        case 'title_size_mirrors_links':
+            $html = "<h3>{$title}";
+            if ($size) $html .= " ({$size})";
+            $html .= "</h3>\n";
+            
+            if ($mainUrl) {
+                $html .= "<a href=\"{$mainUrl}\" class=\"download-link\">Download</a><br>\n";
+            }
+            foreach ($mirrors as $mirror) {
+                $host = htmlspecialchars($mirror['host'] ?? 'Mirror');
+                $url = htmlspecialchars($mirror['url']);
+                $html .= "<a href=\"{$url}\" class=\"download-link\">{$host}</a><br>\n";
+            }
+            break;
+            
+        case 'title_no_size_mirrors_links':
+            $html = "<h3>{$title}</h3>\n";
+            
+            if ($mainUrl) {
+                $html .= "<a href=\"{$mainUrl}\" class=\"download-link\">Download</a><br>\n";
+            }
+            foreach ($mirrors as $mirror) {
+                $host = htmlspecialchars($mirror['host'] ?? 'Mirror');
+                $url = htmlspecialchars($mirror['url']);
+                $html .= "<a href=\"{$url}\" class=\"download-link\">{$host}</a><br>\n";
+            }
+            break;
+            
+        case 'mirrors_buttons_no_title':
+            $html = '';
+            if ($mainUrl) {
+                $html .= "<a href=\"{$mainUrl}\" class=\"download-button\">Download</a>\n";
+            }
+            foreach ($mirrors as $mirror) {
+                $host = htmlspecialchars($mirror['host'] ?? 'Mirror');
+                $url = htmlspecialchars($mirror['url']);
+                $html .= "<a href=\"{$url}\" class=\"download-button\">{$host}</a>\n";
+            }
+            break;
+            
+        case 'single_button':
+            $url = $mainUrl ?: ($mirrors[0]['url'] ?? '');
+            if ($url) {
+                if (isset($file['usingbutton']) && $file['usingbutton']) {
+                    $buttonText = $file['buttonText'] ?? 'CLICK HERE TO DOWNLOAD THE STEAM INSTALLER ( < 1MB )';
+                    $html = renderGetSteamNowButton($buttonText);
+                } else {
+                    $html = "<a href=\"{$url}\" class=\"download-button-large\">Download {$title}</a>";
+                }
+            } else {
+                $html = '';
+            }
+            break;
+            
+        case 'single_link':
+            $url = $mainUrl ?: ($mirrors[0]['url'] ?? '');
+            if ($url) {
+                $html = "<a href=\"{$url}\" class=\"download-link\">{$title}</a>";
+            } else {
+                $html = '';
+            }
+            break;
+            
+        case 'title_single_link_with_size':
+            $url = $mainUrl ?: ($mirrors[0]['url'] ?? '');
+            if ($url) {
+                $html = "<a href=\"{$url}\" class=\"download-link\">{$title}</a>";
+                if ($size) $html .= " ({$size})";
+            } else {
+                $html = '';
+            }
+            break;
+            
+        case 'floating_box_single_link':
+            $url = $mainUrl ?: ($mirrors[0]['url'] ?? '');
+            if ($url) {
+                $html = "<div class=\"floating-box\"><a href=\"{$url}\" class=\"download-link\">{$title}</a></div>";
+            } else {
+                $html = '';
+            }
+            break;
+            
+        case 'floating_box_title_mirrors_links':
+            $html = "<div class=\"floating-box\">\n";
+            $html .= "<h4>{$title}</h4>\n";
+            
+            if ($mainUrl) {
+                $html .= "<a href=\"{$mainUrl}\" class=\"download-link\">Download</a><br>\n";
+            }
+            foreach ($mirrors as $mirror) {
+                $host = htmlspecialchars($mirror['host'] ?? 'Mirror');
+                $url = htmlspecialchars($mirror['url']);
+                $html .= "<a href=\"{$url}\" class=\"download-link\">{$host}</a><br>\n";
+            }
+            $html .= "</div>\n";
+            break;
+            
+        default:
+            $html = "<p>{$title}</p>";
+            break;
+    }
+    
+    return $html;
 }
 
 function cms_insert_support_request(string $page, array $fields, string $lang = 'en'): void
