@@ -11,6 +11,7 @@
 <h2>{{ login_title }}</h2>
 {% if err %}<p class="error">{{ err }}</p>{% endif %}
 <form method="post" id="login-form" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     <div>
         <label for="username">{{ label_username }}</label>
         <input type="text" name="username" id="username" autocomplete="username">
