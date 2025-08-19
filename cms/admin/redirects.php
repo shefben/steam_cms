@@ -83,6 +83,5 @@ Slug: <input type="text" name="slug" id="slug"> Target URL: <input type="text" n
 </tr>
 <?php endforeach; ?>
 </table>
-<p><a href="index.php">Back</a></p>
 <script src="js/redirects.js"></script>
 <?php include 'admin_footer.php'; ?>

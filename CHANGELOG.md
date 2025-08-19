@@ -18,6 +18,8 @@ All notable changes to this project will be documented in this file.
 - Installer seeds default redirect rules into the `redirects` table to preserve legacy paths.
 - Grouped plugin sidebar links under a dedicated Plugins parent in the admin navigation.
 - Resolved Twig parser error on Random Content admin page by replacing deprecated `raw` blocks with `verbatim`.
+- Removed back links from redirect and media admin pages.
+- Added admin notifications for new cheat, CD key, troubleshooter, map contest, and cyber cafe form submissions with indicator.
 - Prevented duplicate `session_start` warnings on Update History page by checking session state in the admin header.
 - Corrected Page Version Management thumbnail URLs to resolve from the admin images directory.
 - Restored legacy `cms_check_permission()` helper to fix undefined function errors in the plugin API.

@@ -44,5 +44,4 @@ $rows = $db->query('SELECT * FROM media ORDER BY uploaded DESC')->fetchAll(PDO::
 </tr>
 <?php endforeach; ?>
 </table>
-<p><a href="index.php">Back</a></p>
 <?php include 'admin_footer.php'; ?>
