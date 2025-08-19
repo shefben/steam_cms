@@ -302,6 +302,26 @@ CREATE TABLE `0405_storefront_packages` (
                 hits INT DEFAULT 0,
                 created DATETIME
             )");
+
+            // Seed default redirects so legacy paths resolve
+            $pdo->exec("INSERT INTO redirects (slug, target, created) VALUES
+                ('html/betasignup.html', 'index.php?area=getsteamnow', NOW()),
+                ('legal.html', 'index.php?area=legal', NOW()),
+                ('status.php', 'index.php?area=status', NOW()),
+                ('Games_Available/Games.htm', 'index.php?area=games', NOW()),
+                ('BetaSupport/support.htm', 'index.php?area=support', NOW()),
+                ('Faq/FAQ.htm', 'index.php?area=beta1faq', NOW()),
+                ('marketing/', 'steam/marketing/', NOW()),
+                ('steamid_instructions.html', 'index.php?area=steamid_instructions', NOW()),
+                ('autoupdate/', 'index.php?area=autoupdate', NOW()),
+                ('v/', '/', NOW()),
+                ('v2/', '/', NOW()),
+                ('v3/', '/', NOW()),
+                ('marketing/css_preload/', 'Marketing.php?t=css_preload', NOW()),
+                ('marketing/hl2_preload/', 'Marketing.php?t=hl2_preload', NOW()),
+                ('marketing/hl2_preload2/', 'Marketing.php?t=hl2_preload2', NOW()),
+                ('marketing/cz_pricechange/', 'Marketing.php?t=cz_pricechange', NOW())
+            ");
             $pdo->exec("
                 DROP TABLE IF EXISTS random_content;
                 DROP TABLE IF EXISTS random_groups;

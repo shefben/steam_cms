@@ -4,6 +4,7 @@
 - Customizable CMS themes for 2004 and 2005
 - Admin panel with styled themes and permissions
 - Custom redirects table supports inline editing with AJAX actions
+- Installer seeds default redirect entries to retain legacy paths
 - Themes can declare custom settings via `theme.json` with automatic admin widgets
 - Neon admin theme replicates neon_version2 layout with neon effects
 - Admin themes support Twig layouts with per-page identifiers and tag-level overrides
