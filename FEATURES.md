@@ -158,7 +158,7 @@
 - Styled login page with jQuery validation and password reset request
 - Login screen matches installer look and centers form
 - Admin dashboard shows unread notifications with dismiss action
-- Database triggers generate notifications for new cafe signups, import jobs, and platform updates
+- Database triggers generate notifications for new cafe signups, import jobs, platform updates, and support form submissions
 - Admin sidebar links editable with drag-and-drop ordering and add/remove buttons
 - Role-based administrator permissions with editable roles
 - Permission checkboxes with all/none toggle on role and user forms

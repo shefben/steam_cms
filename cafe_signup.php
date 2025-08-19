@@ -65,6 +65,7 @@ if ($theme === '2004' && $page_html) {
         $place = rtrim(str_repeat('?,', count($data)), ',');
         $stmt  = $db->prepare("INSERT INTO ccafe_registration(created,$cols) VALUES (NOW(),$place)");
         $stmt->execute(array_values($data));
+        cms_create_notification('Cafe Signup', 'New cyber cafe signup from '.$data['company']);
         cms_render_template($tpl, [
             'page_title' => $page_title,
             'content'    => '<p>Thank you for registering!</p>',
@@ -131,6 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $place = rtrim(str_repeat('?,', count($data)), ',');
         $stmt  = $db->prepare("INSERT INTO ccafe_registration(created,$cols) VALUES (NOW(),$place)");
         $stmt->execute(array_values($data));
+        cms_create_notification('Cafe Signup', 'New cyber cafe signup from '.$data['company']);
         $success = true;
     }
 }

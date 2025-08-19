@@ -131,6 +131,7 @@ if(isset($_GET['ajax'])){
             empty($data['agreeToLicense'])?0:1,
             empty($data['confirmAge'])?0:1
         ]);
+        cms_create_notification('Map Contest', 'New submission from '.($data['cFullName']??'unknown'));
         array_map('unlink', glob($tmpDir.'/*'));
         @rmdir($tmpDir);
         unset($_SESSION['mc']);

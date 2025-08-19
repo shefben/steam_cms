@@ -416,6 +416,15 @@ function cms_insert_support_request(string $page, array $fields, string $lang = 
     $stmt = $db->prepare('INSERT INTO support_requests(page,language,f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,created) '
         .'VALUES(?,?,?,?,?,?,?,?,?,?,?,NOW())');
     $stmt->execute(array_merge([$page,$lang], $vals));
+
+    $map = [
+        'troubleshooter'   => 'Troubleshooter request',
+        'cd_account_form'  => 'CD key form submission',
+        'cheat_form'       => 'Cheat form submission',
+    ];
+    if (isset($map[$page])) {
+        cms_create_notification('form', $map[$page]);
+    }
 }
 
 function cms_insert_bug_report(array $data): int
@@ -1205,6 +1214,22 @@ function cms_mark_notification_read(int $id): void
     $db = cms_get_db();
     $stmt = $db->prepare('UPDATE notifications SET is_read=1 WHERE id=?');
     $stmt->execute([$id]);
+}
+
+function cms_create_notification(string $type, string $message, int $adminId = 0): void
+{
+    $db = cms_get_db();
+    $db->exec('CREATE TABLE IF NOT EXISTS notifications (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        admin_id INT DEFAULT 0,
+        type VARCHAR(50) NOT NULL,
+        message TEXT NOT NULL,
+        data JSON NULL,
+        is_read TINYINT(1) DEFAULT 0,
+        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )');
+    $stmt = $db->prepare('INSERT INTO notifications(admin_id,type,message) VALUES(?,?,?)');
+    $stmt->execute([$adminId, $type, $message]);
 }
 
 function cms_admin_log(string $action, ?int $userId = null): void
