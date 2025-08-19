@@ -108,31 +108,37 @@ if($pages>1){
 }
 ?>
 <button id="addFile" class="btn btn-primary">Add Download</button>
+<div id="modalOverlay" style="display:none;"></div>
 
 <div id="fileModal" style="display:none;" aria-modal="true" role="dialog">
 <form id="fileForm">
 <input type="hidden" name="id" id="fileId">
-<label>File title <input type="text" name="title" id="fileTitle" required></label><br>
-<label>Description</label>
-<div id="descToolbar">
-  <button type="button" data-cmd="bold"><b>B</b></button>
-  <button type="button" data-cmd="italic"><i>I</i></button>
-  <button type="button" data-cmd="underline"><u>U</u></button>
+<label class="half">File title <input type="text" name="title" id="fileTitle" required></label>
+<label class="half">File size <input type="text" name="file_size" id="fileSize"></label>
+<div class="full-width">
+  <label>Description</label>
+  <div id="descToolbar">
+    <button type="button" data-cmd="bold"><b>B</b></button>
+    <button type="button" data-cmd="italic"><i>I</i></button>
+    <button type="button" data-cmd="underline"><u>U</u></button>
+  </div>
+  <div id="fileDesc" class="wysiwyg" contenteditable="true"></div>
+  <input type="hidden" name="description" id="fileDescInput">
 </div>
-<div id="fileDesc" class="wysiwyg" contenteditable="true"></div>
-<input type="hidden" name="description" id="fileDescInput">
-<br>
-<label>File size <input type="text" name="file_size" id="fileSize"></label><br>
-<label>Main download <input type="text" name="main_url" id="fileUrl"><input type="file" name="main_file"></label><br>
-<div id="mirrorFields"><!-- mirrors --><button type="button" id="addMirror">+</button></div>
-<div id="themeChecks">
+<div class="full-width">
+  <label>Main download <input type="text" name="main_url" id="fileUrl"><input type="file" name="main_file"></label>
+</div>
+<div id="mirrorFields" class="full-width"><!-- mirrors --><button type="button" id="addMirror">+</button></div>
+<div id="themeChecks" class="full-width">
 <?php foreach($themes as $t): ?>
-    <label style="margin-right:6px;"><input type="checkbox" name="visible[]" value="<?php echo htmlspecialchars($t); ?>"> <?php echo htmlspecialchars($t); ?></label>
+    <label class="theme-option"><input type="checkbox" name="visible[]" value="<?php echo htmlspecialchars($t); ?>"> <?php echo htmlspecialchars($t); ?></label>
 <?php endforeach; ?>
 </div>
-<label style="display:block;margin-top:8px;"><input type="checkbox" name="usingbutton" id="usingButton"> Generate Steam Download Button (2004 theme only!) <input type="text" name="buttonText" id="buttonText" style="width:60%;" disabled></label>
-<button type="submit" class="btn btn-primary">Save</button>
-<button type="button" id="cancelBtn" class="btn">Cancel</button>
+<label class="full-width" style="margin-top:8px;"><input type="checkbox" name="usingbutton" id="usingButton"> Generate Steam Download Button (2004 theme only!) <input type="text" name="buttonText" id="buttonText" style="width:60%;" disabled></label>
+<div class="full-width actions">
+  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="button" id="cancelBtn" class="btn">Cancel</button>
+</div>
 <input type="hidden" name="ajax" value="1">
 </form>
 </div>
@@ -148,6 +154,9 @@ $(function(){
    if(cnt>=9) $('#addMirror').hide();
  }
  $('#addMirror').on('click',function(){ addMirror(); });
+ function openModal(){ $('#modalOverlay').show(); $('#fileModal').show(); }
+ function closeModal(){ $('#modalOverlay').hide(); $('#fileModal').hide(); }
+ $('#modalOverlay').on('click',closeModal);
  $('#addFile').on('click',function(){
   $('#fileForm')[0].reset();
   $('#mirrorFields .mirror-row').remove();
@@ -156,7 +165,7 @@ $(function(){
   $('#themeChecks input[type=checkbox]').prop('checked',false);
   $('#usingButton').prop('checked',false);$('#buttonText').prop('disabled',true).val('');
   $('#fileDesc').empty();$('#fileDescInput').val('');
-  $('#fileModal').show();
+  openModal();
  });
  $('#filesTable').on('click','.edit',function(){
   var id=$(this).data('id');
@@ -169,22 +178,28 @@ $(function(){
     }
      if(d.usingbutton==1){ $('#usingButton').prop('checked',true); $('#buttonText').prop('disabled',false).val(d.buttonText); } else { $('#usingButton').prop('checked',false); $('#buttonText').prop('disabled',true).val(''); }
      if(d.mirrors){d.mirrors.forEach(function(m){addMirror(m.host,m.url);}); if($('#mirrorFields .mirror-row').length>=10) $('#addMirror').hide(); }
-     $('#fileModal').show();
+     openModal();
   },'json');
 });
- $('#filesTable').on('click','.delete',function(){ if(confirm('Delete?')){ $.post('download_files.php',{ajax:1,delete:$(this).data('id')},function(){location.reload();}); } });
-$('#cancelBtn').on('click',function(){ $('#fileModal').hide(); });
+$('#filesTable').on('click','.delete',function(){ if(confirm('Delete?')){ $.post('download_files.php',{ajax:1,delete:$(this).data('id')},function(){location.reload();}); } });
+$('#cancelBtn').on('click',closeModal);
 $('#fileForm').on('submit',function(e){ e.preventDefault(); $('#fileDescInput').val($('#fileDesc').html()); var fd=new FormData(this); $.ajax({url:'download_files.php',method:'POST',data:fd,processData:false,contentType:false,success:function(){location.reload();}}); });
 $('#usingButton').on('change',function(){ $('#buttonText').prop('disabled',!this.checked); });
 $('#descToolbar button').on('click',function(){ document.execCommand($(this).data('cmd'),false,null); });
 });
 </script>
 <style>
-#fileModal{background:#fff;border:1px solid #333;padding:10px;position:fixed;top:10%;left:50%;transform:translateX(-50%);z-index:1000;}
+#modalOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;}
+#fileModal{background:#fff;border:1px solid #333;padding:20px;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1000;width:80%;max-width:900px;max-height:90vh;overflow-y:auto;}
+#fileModal form{display:flex;flex-wrap:wrap;gap:10px;}
 #fileModal label{display:block;margin-top:5px;}
+#fileModal label.half{width:48%;}
+#fileModal .full-width{width:100%;}
+#fileModal .actions{margin-top:10px;}
 .mirror-row{margin-bottom:4px;}
 .mirror-row input[type=text]{margin-right:4px;}
 #descToolbar button{margin-right:4px;}
 .wysiwyg{border:1px solid #ccc;min-height:100px;padding:4px;}
+.theme-option{margin-right:6px;}
 </style>
 <?php include 'admin_footer.php'; ?>
