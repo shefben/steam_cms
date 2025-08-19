@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Avoided cache warnings by verifying directories exist before removing them.
 - News admin add and edit actions open in an AJAX modal and update the table without page reload.
 - News admin pagination uses button controls and collapses page links to first and last five with ellipses.
 - Ensured admin login persists session data by closing the session before redirecting.
