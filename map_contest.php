@@ -1,6 +1,6 @@
 <?php
+require_once __DIR__.'/cms/session.php';
 require_once __DIR__.'/cms/db.php';
-session_start();
 $db   = cms_get_db();
 $theme = cms_get_setting('theme','2004');
 $base  = cms_base_url();

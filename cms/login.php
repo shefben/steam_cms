@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__.'/session.php';
 require_once __DIR__.'/db.php';
 require_once __DIR__.'/template_engine.php';
 
@@ -48,12 +48,13 @@ if ($err === '' && $_SERVER['REQUEST_METHOD']==='POST'){
             cms_admin_log('login success');
             if($stay){
                 $token=cms_create_admin_token($row['id']);
-                setcookie('cms_admin_token',$token,[
-                    'expires'=>time()+60*60*24*7,
-                    'path'=>'/',
-                    'httponly'=>true,
-                    'secure'=>!empty($_SERVER['HTTPS']),
-                    'samesite'=>'Lax'
+                $cookiePath = cms_base_url() . '/';
+                setcookie('cms_admin_token', $token, [
+                    'expires' => time() + 60*60*24*7,
+                    'path' => $cookiePath,
+                    'httponly' => true,
+                    'secure' => !empty($_SERVER['HTTPS']),
+                    'samesite' => 'Lax'
                 ]);
             }
             unset($_SESSION['login_attempts'], $_SESSION['login_lock_until']);

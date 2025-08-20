@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/cms/session.php';
 require_once __DIR__ . '/cms/template_engine.php';
 require_once __DIR__ . '/cms/db.php';
 

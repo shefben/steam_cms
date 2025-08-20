@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__.'/../session.php';
 require_once __DIR__.'/../db.php';
 if(!cms_current_admin()){
     http_response_code(403);

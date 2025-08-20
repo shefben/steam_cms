@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - Added .htaccess redirect for Counter-Strike price change marketing page.
 - Installer seeds default redirect rules into the `redirects` table to preserve legacy paths.
 - Grouped plugin sidebar links under a dedicated Plugins parent in the admin navigation.
+- Isolated admin sessions per installation with unique cookie names and scoped paths to prevent cross-CMS logins.
 - Resolved Twig parser error on Random Content admin page by replacing deprecated `raw` blocks with `verbatim`.
 - Removed back links from redirect and media admin pages.
 - Added admin notifications for new cheat, CD key, troubleshooter, map contest, and cyber cafe form submissions with indicator.
