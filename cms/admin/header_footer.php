@@ -17,7 +17,7 @@ $data = cms_get_theme_header_data($theme, $page);
 $show_bold = in_array($theme, ['2002_v2','2003_v1']);
 $image_dir = dirname(__DIR__,2)."/themes/$theme/images";
 $logo_files = glob($image_dir.'/*logo*.{gif,png,jpg,jpeg}', GLOB_BRACE);
-$logo_files = array_map(function($f) use($theme){ return '/themes/'.$theme.'/images/'.basename($f); }, $logo_files);
+$logo_files = array_map(function($f) use($theme){ return '/'.basename($f); }, $logo_files);
 if (empty($data['logo']) && !empty($logo_files)) {
     $data['logo'] = $logo_files[0];
 }
@@ -163,7 +163,7 @@ $logo = $data['logo'];
 $logo = str_ireplace('{BASE}', $base, $logo);
 if($logo && !preg_match('#^https?://#i',$logo)){
     if($logo[0] !== '/'){
-        $logo = '/themes/'.$theme.'/images/'.ltrim($logo,'/');
+        $logo = '/'.ltrim($logo,'/');
     }
     $logo = $base.$logo;
 }
