@@ -80,6 +80,9 @@ if(isset($_POST['upload_logo']) && isset($_FILES['new_logo']) && is_uploaded_fil
 if(isset($_POST['save'])){
     $theme = $_POST['theme'];
     $logo = isset($_POST['logo_choice']) ? trim($_POST['logo_choice']) : trim($_POST['logo']);
+    if($logo!=='' && !preg_match('#^https?://#i',$logo) && (!isset($logo[0]) || $logo[0] !== '/')){
+        $logo = '/themes/'.$theme.'/images/'.ltrim($logo,'/');
+    }
     $css_path = trim($_POST['css_path']);
     $buttons = $_POST['buttons'] ?? [];
     $out = [];
@@ -155,9 +158,16 @@ if(isset($_POST['add'])){
 <input type="hidden" name="page" value="<?php echo htmlspecialchars($page); ?>">
 Stylesheet path: <input type="text" name="css_path" value="<?php echo htmlspecialchars($css_path); ?>" style="width:300px" title="Theme CSS file"><br>
 <p>Current logo:</p>
-<?php $logo = $data['logo'];
+<?php
+$logo = $data['logo'];
 $logo = str_ireplace('{BASE}', $base, $logo);
-if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
+if($logo && !preg_match('#^https?://#i',$logo)){
+    if($logo[0] !== '/'){
+        $logo = '/themes/'.$theme.'/images/'.ltrim($logo,'/');
+    }
+    $logo = $base.$logo;
+}
+?>
 <img src="<?php echo htmlspecialchars($logo); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>
 <select name="logo_choice" id="logo-choice">
   <?php foreach($logo_files as $p): ?>
