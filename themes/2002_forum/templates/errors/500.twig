@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Error - Steam Support Forums</title>
+    <style>
+        body {
+            font-family: Verdana, Arial, sans-serif;
+            font-size: 11px;
+            background-color: #2C5234;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 20px;
+        }
+        .error-container {
+            background-color: #3A6B42;
+            border: 1px solid #5A8B62;
+            padding: 20px;
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .error-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #FF6666;
+            margin-bottom: 15px;
+        }
+        .error-message {
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .back-link {
+            color: #99CCAA;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-title">Server Error</div>
+        <div class="error-message">
+            {% if message %}
+                {{ message }}
+            {% else %}
+                An internal server error occurred. Please try again later.
+            {% endif %}
+        </div>
+        <div>
+            <a href="/forum" class="back-link">← Return to Forum Index</a>
+        </div>
+    </div>
+</body>
+</html>
