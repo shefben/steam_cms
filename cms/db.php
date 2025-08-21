@@ -1163,7 +1163,18 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
     if ($logo && $logo[0] == '/') {
         $logo = $base . $logo;
     }
-    $out = '<link href="./includes/css/navbar.css" rel="stylesheet" type="text/css">';
+    // Check for theme-specific navbar.css override
+    $base_path = rtrim($base, '/');
+    $theme_navbar_css = "themes/$theme/css/navbar.css";
+    $includes_navbar_css = "./includes/css/navbar.css";
+    
+    if (is_file(dirname(__DIR__) . "/$theme_navbar_css")) {
+        // Use theme-specific navbar.css completely, replacing the default
+        $out = '<link href="' . ($base_path ? $base_path . '/' : '') . $theme_navbar_css . '" rel="stylesheet" type="text/css">';
+    } else {
+        // Use default navbar.css
+        $out = '<link href="' . $includes_navbar_css . '" rel="stylesheet" type="text/css">';
+    }
     $out  .= '<div style="min-width:850px;">';
     $out .= '<div class="globalHeadBar_logo"><a href="'.$base.'/index.php"><img border="0" src="'.htmlspecialchars($logo).'" alt="[Valve]" height="54" width="152"></a></div>';
 
@@ -1586,6 +1597,7 @@ function cms_shutdown_handler(): void
         cms_error_handler($err['type'], $err['message'], $err['file'], $err['line']);
     }
 }
+
 
 error_reporting(E_ALL);
 set_error_handler('cms_error_handler', E_ALL);

@@ -1934,11 +1934,33 @@ function cms_render_template(string $path, array $vars = []): void
     $subdir = $vars['theme_subdir'] ?? '';
     $base_url = cms_base_url();
 
+    // Handle storefront-specific CSS
+    $css_path = '';
+    if ($subdir === 'storefront') {
+        // Check for storefront-specific CSS first
+        $storefront_css = "themes/$theme/storefront/css/" . ltrim(cms_get_theme_css($theme), '/');
+        if (is_file(dirname(__DIR__) . '/' . $storefront_css)) {
+            $css_path = ($base_url ? rtrim($base_url, '/'). '/' : '') . $storefront_css;
+        } else {
+            // Fall back to theme storefront CSS (e.g., storefront.css)
+            $fallback_css = "themes/$theme/storefront/css/storefront.css";
+            if (is_file(dirname(__DIR__) . '/' . $fallback_css)) {
+                $css_path = ($base_url ? rtrim($base_url, '/'). '/' : '') . $fallback_css;
+            } else {
+                // Fall back to main theme CSS
+                $css_path = ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme/" . ltrim(cms_get_theme_css($theme), '/');
+            }
+        }
+    } else {
+        // Regular theme CSS
+        $css_path = ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme/" . ltrim(cms_get_theme_css($theme), '/');
+    }
+
     $vars += [
         'CMS_ROOT'  => __DIR__,
         'THEME_DIR' => $tpl_dir,
         'THEME_URL' => ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme" . ($subdir ? "/$subdir" : ''),
-        'CSS_PATH'  => ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme/" . ltrim(cms_get_theme_css($theme), '/'),
+        'CSS_PATH'  => $css_path,
         'BASE'      => $base_url,
     ];
 
@@ -1971,11 +1993,33 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
     $subdir   = $vars['theme_subdir'] ?? '';
     $base_url = cms_base_url();
 
+    // Handle storefront-specific CSS
+    $css_path = '';
+    if ($subdir === 'storefront') {
+        // Check for storefront-specific CSS first
+        $storefront_css = "themes/$theme/storefront/css/" . ltrim(cms_get_theme_css($theme), '/');
+        if (is_file(dirname(__DIR__) . '/' . $storefront_css)) {
+            $css_path = ($base_url ? rtrim($base_url, '/'). '/' : '') . $storefront_css;
+        } else {
+            // Fall back to theme storefront CSS (e.g., storefront.css)
+            $fallback_css = "themes/$theme/storefront/css/storefront.css";
+            if (is_file(dirname(__DIR__) . '/' . $fallback_css)) {
+                $css_path = ($base_url ? rtrim($base_url, '/'). '/' : '') . $fallback_css;
+            } else {
+                // Fall back to main theme CSS
+                $css_path = ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme/" . ltrim(cms_get_theme_css($theme), '/');
+            }
+        }
+    } else {
+        // Regular theme CSS
+        $css_path = ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme/" . ltrim(cms_get_theme_css($theme), '/');
+    }
+
     $vars += [
         'CMS_ROOT'  => __DIR__,
         'THEME_DIR' => $tpl_dir,
         'THEME_URL' => ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme" . ($subdir ? "/$subdir" : ''),
-        'CSS_PATH'  => ($base_url ? rtrim($base_url, '/'). '/' : '') . "themes/$theme/" . ltrim(cms_get_theme_css($theme), '/'),
+        'CSS_PATH'  => $css_path,
         'BASE'      => $base_url,
     ];
 
@@ -2005,9 +2049,27 @@ function cms_resolve_image(string $path, string $theme, string $theme_url, strin
         return $imageCache[$key];
     }
 
-    $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
-    if (is_file($themeFile)) {
-        return $imageCache[$key] = $theme_url . '/images/' . $path;
+    // Check if we're in storefront context
+    $isStorefront = strpos($theme_url, '/storefront') !== false;
+    
+    if ($isStorefront) {
+        // For storefront pages, check storefront images directory first
+        $storefrontFile = dirname(__DIR__) . "/themes/$theme/storefront/images/" . $path;
+        if (is_file($storefrontFile)) {
+            return $imageCache[$key] = $theme_url . '/images/' . $path;
+        }
+        
+        // Fall back to theme images directory
+        $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
+        if (is_file($themeFile)) {
+            return $imageCache[$key] = rtrim(str_replace('/storefront', '', $theme_url), '/') . '/images/' . $path;
+        }
+    } else {
+        // For regular pages, check theme images directory
+        $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
+        if (is_file($themeFile)) {
+            return $imageCache[$key] = $theme_url . '/images/' . $path;
+        }
     }
 
     $rootFile = dirname(__DIR__) . '/images/' . $path;

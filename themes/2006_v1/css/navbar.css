@@ -1,0 +1,19 @@
+.globalHeadBar_logo {
+    background: #000000;
+    margin: 0px;
+    /* width: 20%; */
+    /* padding-top: 4px; */
+    padding-bottom: 9px;
+    float: left;
+}
+.globalHeadBar {
+    background: #000000;
+    margin: 0px;
+    padding-left: 64px;
+    padding-top: 34px;
+    margin-bottom: 6px;
+    width: -webkit-fill-available;
+    /* height: 20px; */
+    /* overflow: hidden; */
+    float: inherit;
+}
