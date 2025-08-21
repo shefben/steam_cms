@@ -1,1 +1,18 @@
 ErrorDocument 404 /error.php
+RewriteEngine On
+RewriteRule ^html/betasignup\.html$ index.php?area=getsteamnow [L,R=302,QSA]
+RewriteRule ^legal\.html$ index.php?area=legal [L,R=302,QSA]
+RewriteRule ^status\.php$ index.php?area=status [L,R=302,QSA]
+RewriteRule ^Games_Available/Games\.htm$ index.php?area=games [L,R=302,QSA]
+RewriteRule ^BetaSupport/support\.htm$ index.php?area=support [L,R=302,QSA]
+RewriteRule ^Faq/FAQ\.htm$ index.php?area=beta1faq [L,R=302,QSA]
+RewriteRule ^marketing/?$ steam/marketing/ [L,R=302,QSA]
+RewriteRule ^steamid_instructions\.html$ index.php?area=steamid_instructions [L,R=302,QSA]
+RewriteRule ^autoupdate/?$ index.php?area=autoupdate [L,R=302,QSA]
+RewriteRule ^v/?$ / [L,R=302,QSA]
+RewriteRule ^v2/?$ / [L,R=302,QSA]
+RewriteRule ^v3/?$ / [L,R=302,QSA]
+RewriteRule ^marketing/css_preload/?$ Marketing.php?t=css_preload [L,R=302,QSA]
+RewriteRule ^marketing/hl2_preload/?$ Marketing.php?t=hl2_preload [L,R=302,QSA]
+RewriteRule ^marketing/hl2_preload2/?$ Marketing.php?t=hl2_preload2 [L,R=302,QSA]
+RewriteRule ^marketing/cz_pricechange/?$ Marketing.php?t=cz_pricechange [L,R=302,QSA]

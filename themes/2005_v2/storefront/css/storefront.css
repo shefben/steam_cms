@@ -1,216 +1,387 @@
-p {
-	font-family: Verdana;
-	font-size: 12px;
-	color: #eeeeee;
-}
+.browse_note_text { color: #909090; font-family: Tahoma; font-weight: bold; font-size: 10px; }
 
-BODY {
-	background-color:#293021;
-	color:#FFFFFF; 
+body {
 	margin:0px;
-	font-family: Verdana;
-	font-size: 12px;
-	padding-bottom:32px;
-	scrollbar-face-color: #4C5844;
-	scrollbar-shadow-color: #4C5844;
-	scrollbar-highlight-color: #4C5844;
-	scrollbar-3dlight-color: #818D7C;
-	scrollbar-darkshadow-color: #1C261E;
-	scrollbar-track-color: #5A6A50;
-	scrollbar-arrow-color: #969F8E;
-	text-align:center;
+	font-family:verdana,arial, helvetica;
+	font-size:8px;
+	line-height:12px;
 }
-IMG {
-	border:none;
-}
-H3 {
-	font-size:12px;
-	font-weight:bold;
-	font-family:verdana,arial;
-	margin:8px 0px 4px 0px;
-	padding:0px;
-	text-transform:uppercase;
-}
+
 TD {
-	padding:0px;
-	font-family:verdana,arial;
 	font-size:10px;
+}
+
+TD.store_capsule, TD.store_capsule:hover {
 	vertical-align:top;
+	cursor:pointer;
 	font-weight:bold;
 }
-TD.pricing {
-	vertical-align:bottom;
-	text-align:right;
-	padding-left:20px;
+
+a {
+	color: Black;
+	text-decoration: underline;
 }
-TD.pricing2 {
-	vertical-align:top;
-	text-align:right;
-	padding-left:20px;
+a:hover {
+	color: #808080;
 }
-HR {
-	height:2px;
-	color:#293021;
+
+.menu_spacer {
+	width: 100%; 
+	background-image: url('img/dash.gif'); 
+	background-repeat: repeat-x;
+	line-height:16px;
+	height:20px;
 }
-HR.gamerule {
-	color:#4A5942;
+
+.line_spacer {
+	width: 100%; 
+	background-image: url('img/dash.gif'); 
+	background-repeat: repeat-x;
+	height: 20px;
 }
-LI {
+
+.menu_item {
+	color: #3B3B3B;
+	font-family: Verdana;
+	font-size: 11px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height:16px;
+	height:20px;
 }
-UL {
-	line-height:14px;
-	margin-left:18px;
-	margin-top:0px;
-	margin-bottom:0px;
-	list-style-type:square;
-	list-style-image: url(gfx/bullet.gif);
+
+.menu_item_current, .menu_item_current:hover {
+	color: #34788A;
+	font-family: Verdana;
+	font-size: 11px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height:16px;
+	height:20px;
 }
-A {
+
+.menu_item:hover {
+	color: #000000;
+	line-height:16px;
+	height:20px;
+}
+
+.menu_pointer {
+	font-family: Wingdings 3; 
+	color: #822400; 
+	font-size: 11px;
+	line-height:16px;
+	height:20px;
+}
+
+.menu_note {
+	font-family: Tahoma;
+	font-size: 9px;
+	width: 120px;
+	line-height:16px;
+	height:20px;
+}
+
+.game_description {
+	height:200px; 
+	vertical-align:top; 
+	padding:16px 56px 16px 16px;
 	color:white;
-	text-decoration:none;
-}
-.tab_active {
-	vertical-align:middle;
-	width:140px;
-	height:29px;
-	background:url(gfx/tab_active.gif) no-repeat bottom left;
-	padding-left:8px;
-}
-.tab_active_sm {
-	vertical-align:middle;
-	width:70px;
-	height:29px;
-	background:url(gfx/tab_active_sm.gif) no-repeat bottom left;
-	padding-left:8px;
-}
-.tab_enabled {
-	vertical-align:middle;
-	width:140px;
-	height:29px;
-	background:url(gfx/tab_enabled.gif) no-repeat bottom left;
-	border-bottom: 2px Solid #889180;
-	padding-left:6px;
-	padding-top:4px;
-}
-.maize {
-	color:#BDBE52;
-	line-height:14px;
-}
-.arithmetic {
-	padding-top:4px;
-	padding-bottom:6px;
-	padding-right:16px;
-}
-.total {
-	color:#BDBE52;
-	font-size:16px;
-	font-family:trebuchet ms,verdana,arial;
-}
-.purchase {
-	background: url(gfx/button_purchase.gif) no-repeat top left;
-	height:28px;
-	vertical-align:middle;
-	padding-left:8px;
-}
-.purchase2 {
-	background: url(gfx/button_purchase.gif) no-repeat top right;
-}
-.purchase3 {
-	background: url(gfx/button_purchase2.gif) no-repeat top left;
-	height:28px;
-	vertical-align:middle;
-	padding-left:8px;
-}
-.purchase4 {
-	background: url(gfx/button_purchase2.gif) no-repeat top right;
-}
-.purchase5 {
-	background: url(gfx/button_purchase3.gif) no-repeat top left;
-	height:28px;
-	vertical-align:middle;
-	padding-left:8px;
-}
-.purchase6 {
-	background: url(gfx/button_purchase3.gif) no-repeat top right;
-}
-.purchased {
-	background: #000000;
-	padding-left:8px;
-	padding-right:8px;
-	padding-top:8px;
-	padding-bottom:8px;
-	text-align: center;
-	vertical-align:right;
-}
-.capsule {
-	background:#4A5942;
-	max-width:720px;
-	width:expression(document.body.clientWidth > 768? "720px": "95%" );
-	xmargin:12px 24px 8px 24px;
-	margin:12px 0px 8px 0px;
-}
-.capsule2 {
-	max-width:720px;
-	width:expression(document.body.clientWidth > 768? "720px": "95%" );
-	margin:12px 0px 8px 0px;
-}
-.capsule3 {
-	background:#4c4230;
-	max-width:720px;
-	width:expression(document.body.clientWidth > 768? "720px": "95%" );
-	xmargin:12px 24px 8px 24px;
-	margin:12px 0px 8px 0px;
-}
-.game {
-	xmax-width:720px;
-	width:expression(document.body.clientWidth > 768? "720px": "95%" );
-	margin:12px 24px 8px 24px;
-	margin:12px 0px 8px 0px;
-	text-align:left;
-}
-.discount {
-	text-align:center;
-	position:relative;
-	margin-top:-28px;
-	width:164px;
-	height:104px;
-	background: url(gfx/violator.gif);
 }
 
-.discount2 {
-	text-align: left;
-	position:relative;
-	margin-top: 0px;
-	height:104px;
+.discount_description, .discount_price {
+	color: #909090;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
 }
-.captop2 div  { font-size:16px; padding-top:4px; padding-bottom:4px; text-align:left;}
-.captop div  { background: url(gfx/tl.gif) no-repeat top left; font-size:16px; padding-top:4px; padding-bottom:4px; text-align:left;}
-.captop      { background: url(gfx/tr.gif) no-repeat top right; }
-.capbot div  { height: 7px;background: url(gfx/bl.gif) no-repeat bottom left; }
-.capbot      { height: 7px;background: url(gfx/br.gif) no-repeat bottom right; }
-.capcontent  { margin: 0 7px;}
 
-.captop3 div  { background: url(gfx/tl_3.gif) no-repeat top left; font-size:16px; padding-top:4px; padding-bottom:4px; text-align:left;}
-.captop3      { background: url(gfx/tr_3.gif) no-repeat top right; }
-.capbot3 div  { height: 7px;background: url(gfx/bl_3.gif) no-repeat bottom left; }
-.capbot3      { height: 7px;background: url(gfx/br_3.gif) no-repeat bottom right; }
+.purchase_header {
+	color: #909090;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+}
 
+.old_discount_text {
+	color: #909090;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+}
 
-.inner {
+.discount_text {
+	color: #000000;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.package_header {
+	color: #800000;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.purchase_button {
+	color: #ffffff;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	line-height: 20px;
 	width: 100%;
-	height: 100%;
-	padding: 10px;
-	background: #2b3026;
-	border-left: 1px Solid #282e22;
-	border-bottom: 1px Solid #889180;
-	border-right: 1px Solid #889180;
-	overflow: auto;
-	color: #eeeeee;
-	scrollbar-face-color: #4C5844;
-	scrollbar-shadow-color: #4C5844;
-	scrollbar-highlight-color: #4C5844;
-	scrollbar-3dlight-color: #818D7C;
-	scrollbar-darkshadow-color: #1C261E;
-	scrollbar-track-color: #5A6A50;
-	scrollbar-arrow-color: #969F8E;
 }
+
+.purchase_button:hover {
+	color: #ffdddd;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 20px;
+	width: 100%;
+}
+
+.get_steam_button {
+	color: #ffffff;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	line-height: 20px;
+	width: 100%;
+}
+
+.get_steam_button:hover {
+	color: #dddddd;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 20px;
+	width: 100%;
+}
+
+.details_button {
+	color: #800000;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	line-height: 20px;
+	width: 100%;
+}
+
+.details_button:hover {
+	color: #cc0000;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 20px;
+	width: 100%;
+}
+
+.page_title {
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 26px;
+}
+
+.individual_package_title {
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 22px;
+}
+
+.package_title {
+	color: #800000;
+	font-family: Arial;
+	font-size: 22px;
+}
+
+.package_description {
+	color: #800000;
+	font-family: Tahoma;
+	font-size: 11px;
+}
+
+.package_title_beta {
+	color: Blue;
+	font-family: Arial;
+	font-size: 22px;
+}
+
+.package_description_beta {
+	color: Blue;
+	font-family: Tahoma;
+	font-size: 11px;
+}
+
+.text_normal, .normal_text {
+	font-family: Verdana;
+	font-size: 11px;
+}
+
+.small_text, .text_small {
+	color: #000000;
+	font-family: Tahoma;
+	font-size: 10px;
+}
+
+.foot_text, .text_foot {
+	color: #909090;
+	font-family: Tahoma;
+	font-size: 10px;
+}
+
+.search_form_text{
+	font-weight: bold;
+	color: #ffffff;
+	font-family: Tahoma;
+	font-size: 10px;
+}
+
+.admin_login_textbox {
+	font-family: Verdana;
+	font-size: 11px;
+	width: 200px;
+}
+
+.header_link_user_admin, .header_link_user_admin:link, .header_link_user_admin:visited, .header_link_user_admin:hover {
+	font-family: Verdana;
+	font-size: 11px;
+	width: 100%;
+	color: White;
+	text-decoration: none;
+	line-height: 16px;
+}
+
+.header_link_user_admin:hover {
+	color: PaleGoldenrod;
+}
+
+.header_user_admin {
+	font-family: Verdana;
+	font-size: 11px;
+	width: 100%;
+	color: White;
+	text-decoration: none;
+}
+
+.line_link_user_admin, .line_link_user_admin:hover {
+	color: black;
+	width: 100%;
+	text-decoration: none;
+	line-height: 20px;
+}
+
+.line_link_game, .line_link_game:hover {
+	color: black;
+	width: 100%;
+	text-decoration: none;
+}
+
+.line_link_game_beta, .line_link_game_beta:hover {
+	color: Blue;
+	width: 100%;
+	text-decoration: none;
+}
+
+.ReleaseDateUnavailable {
+	color: #c0c0c0;
+}
+
+.ReleaseDateAvailable {
+	color: #c0c0c0;
+}
+
+.ReleaseDateComingSoon {
+}
+
+.ReleaseDateNewRelease {
+}
+
+.admin_note_color {
+	color: Red;
+}
+
+.beta_text {
+	color: #ff00ff;
+	font-weight: bold;
+}
+
+.free_app {
+	color: #800000;
+}
+
+.owned_app {
+	color: #008000;
+}
+
+.browse_section_header {
+	color: #800000;
+	font-family: Arial;
+	font-size: 22px;
+}
+
+a.browse_link {
+	font-family: Verdana;
+	font-size: 11px;
+	text-decoration: none;
+	color: #808080;
+	font-weight: bold;
+	line-height: 20px;
+}
+
+a.browse_link:hover {
+	font-family: Verdana;
+	font-size: 11px;
+	text-decoration: underline;
+	color: #000000;
+	font-weight: bold;
+}
+
+.price_text {
+	font-family: Verdana;
+	font-size: 11px;
+}
+
+.h {
+	font-size: 11px;
+	cursor:pointer;
+}
+
+.trailerLink {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+}
+A:link.trailerLink {
+	color: #FFFFFF; text-decoration:underline;
+}
+.copy {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	padding-right: 325px;
+	padding-left: 15px;
+	padding-bottom: 15px;
+}
+.metaCriticNumber {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	color: #e5c02d;
+}
+.metaCriticLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+	padding-bottom: 4px;
+}
+A.metaCriticLink:Link { color:#FFFFFF; }

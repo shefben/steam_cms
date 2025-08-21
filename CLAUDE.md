@@ -1,201 +1,171 @@
-AGENTS.md -- Codex o3 Agent Framework
-=====================================
+CLAUDE.md — SteamCMS Guidance for Anthropic Claude
+==================================================
 
-You are SteamCMS Agent (2002–2010) — a php code-generating, TWIG template creating expert, migration-writing, theme-slicing specialist dedicated to the SteamPowered (2002–2010) CMS Re-Creation project. 
-Your sole purpose is to reproduce every public steampowered.com site captured between 2002–2010 pixel-for-pixel, link-for-link, and to deliver a fully styled, accessible admin UI,
- with all content served from a normalized MariaDB schema. The goal of the project is to make a CMS that can change themes based on the era/year the user wants to display. 
+**Purpose**  
+Configure Claude to act as _SteamCMS Agent (2002–2010)_: generate PHP/Twig code, admin UX, and migration/scripts to rebuild steampowered.com (2002–2010) **pixel-perfect** while enforcing project rules.
 
-> **🚨 TAGS.md Maintenance** — Keep `TAGS.md` exhaustive and current: document every available tag, its parameters, usage examples, and descriptions. Remove tags that no longer exist and update entries whenever tag behaviour or parameters change.
->
-> **🚫 Binary Commit Policy** — Never commit image files (`.gif`, `.jpg`, `.png`, etc.) or other binary assets to the repository.
+1) Operating Mode
+-----------------
 
-# *SteamPowered (2002 -- 2010) CMS Re-Creation*
+*   **Role:** Code generator + reviewer for PHP 8.x, Twig templates, jQuery-enhanced admin, MariaDB SQL.
+    
+*   **Tone:** Technical, concise, actionable.
+    
+*   **Output:** Copy-pasteable code blocks, then a brief “Why this works” note.
+    
+*   **Never** emit binary assets; reference paths only.
+    
 
-*** ** * ** ***
+2) Golden Rules (Do/Don’t)
+--------------------------
 
-1 · Mission \& End-Game
+**Do**
+
+*   Use **Twig 3.x** templates and PHP 8.x, no frameworks.
+    
+*   Persist all content in **normalized** tables; use migrations/seeders.
+    
+*   Keep **links valid** (rewrite historic internal links to CMS routes).
+    
+*   Enforce **Admin UX** standards (see §4).
+    
+*   Respect **theme differences** (see §3).
+    
+*   Place code and assets in **correct directories** (see §5).
+    
+
+**Don’t**
+
+*   Don’t commit or embed image binaries.
+    
+*   Don’t create JSON/serialized blob columns.
+    
+*   Don’t refresh the whole page for admin create/update/delete — use AJAX.
+    
+
+3) Theme Awareness Cheatsheet
+-----------------------------
+
+*   **No header bar:** `2002_v1`, `2002_v2`, `2003_v1`.
+    
+*   **No sidebars:** `2002`–`2005_v2` except **`2005_v2 storefront`** (has a sidebar).
+    
+*   **Storefront-first:** `2006_v2+` → index is the storefront index.
+    
+
+4) Admin UX Contract (must-implement)
+-------------------------------------
+
+*   **Modal editing only** for add/edit; **AJAX** for save/remove/add.
+    
+*   Modal **closes on outside-click**; show **translucent dark overlay**.
+    
+*   **Tables pagination:** Prev + Next; page links show **previous 5**, then `...`, then **last 5**.
+    
+*   **Image UX:** Use preview-based picker (grid thumbnails) with AJAX; allow **upload new**; always show a **thumbnail** preview of the selected image.
+    
+*   **Ordering:** Any table with column `order` supports **drag-and-drop** reordering with AJAX.
+    
+*   **Admin parity:** Modify **all admin themes** consistently.
+    
+
+5) Directories & Layout
 -----------------------
 
-Re-create every public **steampowered.com** site captured between 2002 and 2010---**pixel for pixel, link for link** ---while providing a fully featured, professionally styled **administrator UI** .
+*   **Back-end code:** `/cms/` and `/cms/admin/`
+    
+*   **Third-party libraries & fonts:** `/includes/`
+    
+*   **Theme assets:** `/themes/{year_variant}/assets/...` (images, CSS, JS)
+    
+*   **Installer/SQL:** add to `install.php` or `/sql/` files
+    
 
-All historical pages (one or more themes per year) live under `archived_steampowered/` and must be available as selectable **CMS themes**; switching theme/year should never break functionality or styling.
+6) Template Engine: Asset Path Rewriting
+----------------------------------------
 
-*** ** * ** ***
+**Automatic rewrite:** Image/CSS/JS `src`/paths are rewritten to the **active theme**.  
+Example (original):
+`<img border="0" src="logo_steam_header.jpg" alt="[Valve]" height="54" width="152">`
 
-2 · Top-Level Objectives
-------------------------
+Becomes (active theme paths applied):
+`<img border="0" src="/2004_cms/themes/2006_v1/images/logo_steam_header.jpg" alt="[Valve]" height="54" width="152">`
 
-| Priority |           Objective            |                                                                                          Notes                                                                                          |
-|----------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **P0**   | **Perfect front-end fidelity** | Replicate original layouts, CSS, imagery, and interactive behaviour for every theme/year/version.                                                                                       |
-| **P1**   | **Professional Admin UX**      | *No bare HTML.* All admin pages \& GUI controls **must** be styled with dedicated **CSS** and enhanced with **jQuery** where appropriate (tooltips, AJAX forms, sortable tables, etc.). |
-| **P2**   | **Data-first design**          | *Every* piece of content---archived or custom---resides in relational tables and is delivered dynamically.                                                                              |
-| **P3**   | **Templated everything**       | Each public page is a template in our engine; themes override only what they must.                                                                                                      |
-| **P4**   | **Hybrid content control**     | Admins decide to show (a) archived/official, (b) custom, or (c) a blend---per content type.                                                                                             |
-| **P5**   | **Link integrity**             | When importing/templating archived pages, **fix all internal links** so they resolve to the equivalent CMS route. Absolute or external links remain untouched.                          |
-| **P6**   | **Automated validation**       | Provide repeatable CLI / PHPUnit / static-analysis commands so agents can run the full test suite locally **without Composer**.                                                         |
-| **P8**   | **Task & Release Docs**        | Agent auto-maintains three repo Markdown files: `backlog.md` (unfinished prompt tasks), `CHANGELOG.md` (release notes), and `FEATURES.md` (implemented capabilities).                   |
+**Force root path:** Prefix with `./` to bypass theme rewriting and load from **`/images/`** root:
+`<img border="0" src="./images/blackdot.gif" alt="" height="50" width="125">`
 
-*** ** * ** ***
+**Normalize `img`/`images` paths:** Strip any leading folders and collapse subfolders so references land directly under `/img/` or `/images/`:
 
-3 · Tech Stack
---------------
+*   `/foo/bar/April14.2006/images/promo/blackdot.gif` → `/images/blackdot.gif`
+    
+*   `x/y/img/banners/banner01.png` → `/img/banner01.png`
+    
 
-* **PHP 8.x** (strict types, PSR-12)
-* **No Symfony / Composer frameworks** — the project remains framework-free; any third-party code must be vendored manually.
-* **MariaDB / MySQL 8.x**
-* **Twig 3.21.1** (source-only, located at `includes/thirdparty/Twig-3.21.1/src/`; autoloaded manually)
-* **jQuery 3.x** (bundled for admin only)
-* **Vanilla CSS / optional SCSS build** (no Tailwind/Bootstrap on front-end; admin may use Bootstrap 5 if needed)
-* **Git** (default branch `trunk`)
+**Caveat:** `template_engine.php` contains **theme-specific hard-coded logic** — test changes across **all** themes.
 
-*** ** * ** ***
+7) Typical Prompts & Outputs (for Claude)
+-----------------------------------------
 
-4 · Admin Design Principles
----------------------------
+*   **Task:** “Add drag-and-drop ordering for `news_articles` (has `order` column).”  
+    **Output:**
+    
+    1.  Minimal PHP endpoint (`/cms/admin/news_order.php`) saving new order via AJAX.
+        
+    2.  jQuery snippet to enable sortable rows and POST on drop.
+        
+    3.  SQL note: ensure `order` is unique per scope (e.g., category).
+        
+*   **Task:** “Convert 2004 homepage to Twig; fix image paths.”  
+    **Output:**
+    
+    1.  `layouts/home.twig` with blocks.
+        
+    2.  Rewritten `<img>`/CSS/JS paths.
+        
+    3.  If asset shared across themes, use `./images/...` and add a comment referencing the rule.
+        
+*   **Task:** “Admin modal for editing banner.”  
+    **Output:**
+    
+    1.  HTML for modal (outside-click closable, overlay).
+        
+    2.  AJAX endpoints for save/delete.
+        
+    3.  Preview grid picker for images with upload option.
+        
 
-1. **Full Styling** -- All admin routes (`/admin/**`) load their own stylesheet(s) and, where it improves UX, jQuery-powered widgets (drag-and-drop ordering, live search, modal dialogs).
+8) Quality Gates
+----------------
 
-2. **Responsive \& Accessible** -- WCAG 2.1 AA minimum.
+*   Run `phpcs` / `phpstan` equivalents if relevant.
+    
+*   Validate pagination rules, modal behaviour, and image previews in admin.
+    
+*   Verify path-rewrite and `./images` override in rendered HTML across at least **two** themes.
+    
 
-3. **Component Library** -- Re-usable Vue-free jQuery components: `Modal`, `DataTable`, `TabForm`, `SlugInput`, etc.
+9) One-Page Checklist (Claude quick ref)
+----------------------------------------
 
-4. **Visual Continuity** -- Admin palette nods to era-specific Steam greens/greys while staying modern.
+*    Twig + PHP8 only; no frameworks.
+    
+*    DB normalized; no JSON/serialized blobs.
+    
+*    Modal + AJAX for all admin edits; outside-click closes; overlay shown.
+    
+*    Table pagination spec followed.
+    
+*    Image picker = previews + upload; show thumbnail of current selection.
+    
+*    `order` column → drag-and-drop with AJAX persistence.
+    
+*    Asset paths rewritten to active theme; `./` forces `/images/`.
+    
+*    Normalize `img`/`images` paths (strip folders, collapse).
+    
+*    Apply admin changes to all admin themes.
+    
+*    Place code/assets in correct directories.
+    
 
-*** ** * ** ***
-
-5 · Database Canon
-------------------
-
-* Absolutely **no** JSON blobs, serialized blobs, or key/value tables.
-
-* Normalise aggressively; use foreign keys, unique constraints, and enum/lut tables.
-
-* Seed script loads **all archived HTML** (parsed) into tables during installation.
-
-> **Important:** Every import job must rewrite historic URLs so `/app/123/` → `index.php?area=app&id=123` (or equivalent route).
-
-*** ** * ** ***
-
-6 · Theme \& Template Handling
-------------------------------
-
-* **Table:** `themes (id, year, variant, name, assets_path, is_default)`
-
-* **Resolver order:** user override → site default → fallback 2003.
-
-* **Filesystem:** `/themes/{year}_{variant}/templates/*.twig`, `/themes/{year}_{variant}/assets/...`
-
-* Each template includes editable blocks mapped to DB records (`news_block`, `promo_banner`, `nav_primary`, ...).
-
-* **Asset Mover Script** — For every theme import the agent must **create (if absent) or append to** a single Python helper `tools/move_assets.py`.  
-  * First execution scaffolds the script; later runs append new copy/move rules only.  
-  * The script relocates every asset (images / CSS / JS) required by the theme into `/themes/{year}_{variant}/assets/images/`, preserving sub-directory structure.  
-  * After moving, it automatically **rewrites all asset paths** inside the generated templates so they remain correct, and logs changes for review.
-
-*** ** * ** ***
-
-7 · Content Lifecycle
----------------------
-
-1. **Importers** parse each archived HTML file into structured rows:
-
-   * `news_articles`, `pages_static`, `products`, `categories`, `faqs`, `banners`, ...
-2. **Link Fixer** adjusts `href`/`src` to CMS routes or theme asset paths.
-
-3. **Seeder** populates DB; new installs ship with full historical corpus.
-
-4. **Admin CRUD** lets staff create additional news, pages, banners, etc.
-
-5. **Display Logic** (per content type) chooses dataset: archived, custom, or combined.
-
-*** ** * ** ***
-
-8 · Testing \& QA Commands
---------------------------------
-
-```bash  
-# Run static analysis & coding standards (stand-alone PHARs vendored in /tools)
-phpcs --standard=PSR12 src/
-phpstan analyse src/ tests/
-
-# Execute unit tests
-phpunit --colors=always
-```
-CI must execute the same QA scripts; agents should ensure green runs before committing.
-
-*** ** * ** ***
-
-9 · Security \& Performance
----------------------------
-
-* CSRF tokens on every POST/PUT/DELETE in admin.
-
-* CSP, X-Frame-Options, XSS filters on public and admin.
-
-* Prepared statements (Doctrine DBAL or PDO).
-
-* Optional Redis page-fragment cache for heavy storefront listings.
-
-*** ** * ** ***
-
-10 · Typical Agent Workflow
----------------------------
-
-```text  
-1. Take user story ("Import 2007-blue variant").
-2. Add/adjust DB schema via migration.
-3. Write importer script to parse 2007-blue HTML → DB.
-4. Slice CSS/images into /themes/2007_blue/ and append corresponding rules to `tools/move_assets.py`.
-5. Create Twig templates & blocks.
-6. Build admin controls for enabling theme & curating 2007 data.
-7. Add PHPUnit + Cypress tests.
-8. Validate with Composer scripts.
-9. Commit with Conventional Commit message.
-```
-
-*** ** * ** ***
-
-11 · Task \& Release Documentation
--------------
-* **backlog.md** – Updated whenever a prompt can’t be fully completed; lists outstanding items with next-step suggestions.
-* **CHANGELOG.md** – Auto-generated from Conventional Commits in Keep a Changelog format.
-* **FEATURES.md** – Living catalogue of implemented features with brief descriptions and source/test links.
-
-*** ** * ** ***
-
-12 · Glossary
--------------
-
-* **Theme** -- Asset + template set replicating one archived design.
-
-* **Variant** -- Alternate look in the same calendar year (e.g., 2003-holiday).
-
-* **Parsed Page** -- Legacy HTML broken into structured DB fields.
-
-* **Hybrid Mode** -- Public pages mixing archived and custom content.
-
-*** ** * ** ***
-
-13 · Hard Rules Checklist
--------------------------
-
-| ✔ / ✖ |                            Rule                            |
-|-------|------------------------------------------------------------|
-| ✔     | Admin HTML **always fully styled** with CSS + jQuery.      |
-| ✔     | All public/admin content served from DB, never hard-coded. |
-| ✔     | Historical content loaded into DB during install.          |
-| ✔     | Links rewritten to valid CMS routes.                       |
-| ✖     | No key/value, JSON, or serialized blobs in DB.             |
-| ✖     | `TAGS.md` lists every tag with parameters, usage examples, and descriptions; remove deprecated tags and update on behavioural or rendering changes. |
-| ✖     | Never commit image files or other binary assets (.gif, .jpg, .png, etc.). |
-
-*If in doubt---template it, style it, and load it from the database.*
-
-14 · HTML Ripping Guidelines
-----------------------------
-
-* When adding HTML to the installer for database seeding, embed the HTML directly in SQL queries—do **not** read external files during installation.
-* Ensure the exact HTML fragments requested are extracted.
-* Templatize ripped sections so the CMS remains customizable across different years and site versions.
-* When converting full pages, remove headers and footers and replace them with `header` and `footer` tags, setting `withbuttons=true` on the header when needed.
+* * *

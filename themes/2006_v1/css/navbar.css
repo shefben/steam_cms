@@ -1,11 +1,4 @@
-.globalHeadBar_logo {
-    background: #000000;
-    margin: 0px;
-    /* width: 20%; */
-    /* padding-top: 4px; */
-    padding-bottom: 9px;
-    float: left;
-}
+/* 2006_v1 Theme Complete Navbar CSS - Fully replaces global navbar.css */
 .globalHeadBar {
     background: #000000;
     margin: 0px;
@@ -13,7 +6,48 @@
     padding-top: 34px;
     margin-bottom: 6px;
     width: -webkit-fill-available;
-    /* height: 20px; */
-    /* overflow: hidden; */
+    height: auto;
+    overflow: visible;
     float: inherit;
+}
+
+.globalHeadBar_logo {
+    background: #000000;
+    margin: 0px;
+    padding-bottom: 9px;
+    float: left;
+}
+
+.globalHeadBar_logo img {
+    background: #000000;
+    float: left;
+    height: 54px;
+    width: 152px;
+}
+
+.globalNavItem {
+    display: inline;
+    vertical-align: top;
+    margin-bottom: 0px;
+}
+
+.globalNavItem a {
+    display: inline;
+    margin-right: 15px;
+    margin-left: 15px;
+    padding-bottom: 7.9px;
+    background-color: #000000;
+    color: inherit;
+    text-decoration: none;
+}
+
+.globalNavItem a:hover {
+    text-decoration: underline;
+}
+
+/* Additional 2006_v1 specific navbar styling */
+.globalHeadBar .nav-links {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 10px;
 }
