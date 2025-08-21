@@ -1,0 +1,49 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Message Display -->
+<!-- Message Headers -->
+<table border="0" cellspacing="0" width="100%" class="forum-header">
+<tr>
+    <td bgcolor="#424B3C" width="100%" class="forum-header-cell">
+        <p align="center"><font color="#EBEDEA" face="Arial" size="2"><b>{MESSAGE_TITLE}</b></font></p>
+    </td>
+</tr>
+</table>
+
+<!-- Message Content -->
+<div align="center">
+<table border="0" cellspacing="0" width="100%" class="forum-row">
+<tr>
+    <td bgcolor="#4C5844" width="100%" class="forum-cell">
+        <p align="center">
+            <font face="Arial" size="2">
+            {MESSAGE_TEXT}
+            </font>
+            
+            <!-- IF S_USER_NOTICE -->
+            <br /><br />
+            <font face="Arial" size="1">
+            <a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a>
+            </font>
+            <!-- ENDIF -->
+            
+            <!-- IF L_RETURN_TO -->
+            <br /><br />
+            <font face="Arial" size="1">
+            <a href="{U_RETURN_TO}">{L_RETURN_TO}</a>
+            </font>
+            <!-- ENDIF -->
+            
+            <!-- IF S_META -->
+            <br /><br />
+            <font face="Arial" size="1">
+            {L_REDIRECT}
+            </font>
+            <!-- ENDIF -->
+        </p>
+    </td>
+</tr>
+</table>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

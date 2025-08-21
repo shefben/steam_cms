@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="keywords" content="vbulletin,forum,bbs,discussion,steam,valve" />
+<meta name="description" content="Steam Users Forums is a discussion forum. To visit the forum, go to http://www.steampowered.com/forums/" />
+<title><!-- IF S_IN_MCP -->{L_MCP} - <!-- ELSEIF S_IN_UCP -->{L_UCP} - <!-- ENDIF -->{SITENAME}<!-- IF S_BOARD_DISABLED --> - {L_BOARD_DISABLED}<!-- ENDIF --></title>
+
+<link rel="stylesheet" href="{T_STYLESHEET_LINK}" type="text/css" />
+
+<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
+    <link rel="stylesheet" href="{T_THEME_PATH}/bidi.css" type="text/css" />
+<!-- ENDIF -->
+
+<script type="text/javascript">
+// <![CDATA[
+    var jump_page = '{L_JUMP_PAGE}:';
+    var on_page = '{ON_PAGE}';
+    var per_page = '{PER_PAGE}';
+    var base_url = '{A_BASE_URL}';
+    var style_cookie = 'phpBBstyle';
+    var style_cookie_settings = '{A_COOKIE_SETTINGS}';
+    var onload_functions = new Array();
+    var onunload_functions = new Array();
+
+    <!-- IF S_USER_NEW_PRIVMSG -->
+        var url = '{UA_POPUP_PM}';
+        window.open(url.replace(/&amp;/g, '&'), '_phpbbprivmsg', 'height=225,resizable=yes,scrollbars=yes,width=400');
+    <!-- ENDIF -->
+
+    function popup(url, width, height, name)
+    {
+        if (!name)
+        {
+            name = '_popup';
+        }
+
+        window.open(url.replace(/&amp;/g, '&'), name, 'height=' + height + ',resizable=yes,scrollbars=yes,width=' + width);
+        return false;
+    }
+
+    function jumpto()
+    {
+        var page = prompt(jump_page, on_page);
+        var per_page_regex = /^[0-9]+$/;
+        var base_url_regex = /^http[s]?:\/\//;
+
+        if (page !== null && page.match(per_page_regex))
+        {
+            page = parseInt(page, 10);
+            if (page > 0)
+            {
+                if (base_url.match(base_url_regex))
+                {
+                    document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + ((page - 1) * per_page);
+                }
+                else
+                {
+                    document.location.href = base_url + '&start=' + ((page - 1) * per_page);
+                }
+            }
+        }
+    }
+
+    function insert_text(text, spaces, popup)
+    {
+        var textarea;
+
+        if (!popup)
+        {
+            textarea = document.forms[form_name].elements[text_name];
+        }
+        else
+        {
+            textarea = opener.document.forms[form_name].elements[text_name];
+        }
+        
+        if (spaces)
+        {
+            text = ' ' + text + ' ';
+        }
+
+        if (!isNaN(textarea.selectionStart))
+        {
+            var sel_start = textarea.selectionStart;
+            var sel_end = textarea.selectionEnd;
+
+            mozWrap(textarea, text, '')
+            textarea.selectionStart = sel_start + text.length;
+            textarea.selectionEnd = sel_end + text.length;
+        }
+        else if (textarea.createTextRange && textarea.caretPos)
+        {
+            if (baseHeight != textarea.caretPos.boundingHeight)
+            {
+                textarea.focus();
+                storeCaret(textarea);
+            }
+            var caret_pos = textarea.caretPos;
+            caret_pos.text = caret_pos.text.charAt(caret_pos.text.length - 1) == ' ' ? caret_pos.text + text + ' ' : caret_pos.text + text;
+        }
+        else
+        {
+            textarea.value = textarea.value + text;
+        }
+        if (!popup)
+        {
+            textarea.focus();
+        }
+    }
+// ]]>
+</script>
+
+</head>
+<body bgcolor="#626d5c" text="#000000" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10" link="#000020" vlink="#000020" alink="#000020">
+
+<!-- Steam Header -->
+<center>
+<table border="0" width="90%" cellpadding="0" cellspacing="0">
+<tr>
+    <td valign="top" align="left">
+        <div align="center">
+            <img src="{T_THEME_PATH}/images/Steam_header2.jpg" border="0" align="middle" alt="Steam" />
+        </div>
+    </td>
+</tr>
+<tr height="10">
+    <td valign="top" align="left" height="10"></td>
+</tr>
+<tr>
+    <td valign="top" align="left">
+        <div align="center">
+            <!-- IF S_USER_LOGGED_IN -->
+                <a href="{U_PROFILE}"><img src="{T_THEME_PATH}/images/top_profile.gif" alt="{L_PROFILE}" border="0" /></a>
+            <!-- ELSE -->
+                <a href="{U_REGISTER}"><img src="{T_THEME_PATH}/images/top_register.gif" alt="{L_REGISTER}" border="0" /></a>
+            <!-- ENDIF -->
+            <a href="{U_MEMBERLIST}"><img src="{T_THEME_PATH}/images/top_members.gif" alt="{L_MEMBERLIST}" border="0" /></a>
+            <a href="{U_FAQ}"><img src="{T_THEME_PATH}/images/top_faq.gif" alt="{L_FAQ}" border="0" /></a>
+            <a href="{U_SEARCH}"><img src="{T_THEME_PATH}/images/top_search.gif" alt="{L_SEARCH}" border="0" /></a>
+            <a href="{U_INDEX}"><img src="{T_THEME_PATH}/images/top_home.gif" alt="{L_INDEX}" border="0" /></a>
+        </div>
+    </td>
+</tr>
+</table>
+
+<!-- Content Table -->
+<table bgcolor="#626d5c" width="800" cellpadding="10" cellspacing="0" border="0">
+<tr>
+    <td>
+        <!-- Navigation -->
+        <!-- IF not S_IS_BOT -->
+        <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+        <tr valign="top">
+            <td><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="{SITENAME}" />
+            <font face="verdana, arial, helvetica" size="2"><b>{SITENAME}</b></font></td>
+            <td align="right">
+                <!-- IF S_USER_LOGGED_IN -->
+                    <font face="verdana,arial,helvetica" size="1">
+                    <br /><b><a href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS}</a></b>
+                    </font>
+                <!-- ENDIF -->
+            </td>
+        </tr>
+        </table>
+        
+        <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+        <tr>
+            <td colspan="2">
+                <font face="verdana, arial, helvetica" size="2"><b>{L_WELCOME_GUEST}</b></font><br />
+                <font face="verdana,arial,helvetica" size="1">
+                <!-- IF S_USER_LOGGED_IN -->
+                    {LAST_VISIT_DATE}
+                <!-- ELSE -->
+                    {L_REGISTER_PROMPT}
+                <!-- ENDIF -->
+                </font>
+                <hr />
+            </td>
+        </tr>
+        <tr valign="bottom">
+            <td>
+                <font face="verdana,arial,helvetica" size="1">
+                {TOTAL_POSTS} • {TOTAL_TOPICS} • {TOTAL_USERS}<br />
+                <!-- IF NEWEST_USER -->{L_NEWEST_USER}: <a href="{NEWEST_USER_FULL_URL}">{NEWEST_USER_COLOUR}</a><!-- ENDIF -->
+                </font>
+            </td>
+            <td align="right">
+                <font face="verdana,arial,helvetica" size="1">
+                {CURRENT_TIME}<br />
+                <!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ENDIF -->
+                </font>
+            </td>
+        </tr>
+        </table>
+        <!-- ENDIF -->
+
+        <br />

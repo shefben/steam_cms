@@ -1,0 +1,104 @@
+        <br />
+
+        <!-- Timezone/Login -->
+        <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+        <tr valign="top">
+            <td><font face="verdana,arial,helvetica" size="1">{L_TIMEZONE}: {S_TIMEZONE}. {CURRENT_TIME}</font></td>
+            <td align="right">
+                <font face="verdana,arial,helvetica" size="1">
+                <a href="{U_MARK_FORUMS}">{L_MARK_FORUMS_READ}</a> | 
+                <a href="{U_TEAM}">{L_THE_TEAM}</a>
+                </font>
+
+                <!-- IF not S_USER_LOGGED_IN -->
+                <form action="{S_LOGIN_ACTION}" method="post">
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td nowrap="nowrap"><font face="verdana,arial,helvetica" size="1"><b>{L_LOGIN_LOGOUT}</b><br />{L_USERNAME}: </font></td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap">
+                    <input type="hidden" name="redirect" value="{S_REDIRECT}" />
+                    <input type="text" class="bginput" name="username" size="7" maxlength="40" value="{USERNAME}" />
+                    <input type="password" class="bginput" name="password" size="7" maxlength="32" />
+                    <input type="submit" class="bginput" value="{L_LOGIN}" />
+                    </td>
+                </tr>
+                </table>
+                </form>
+                <!-- ENDIF -->
+            </td>
+        </tr>
+        </table>
+
+        <br />
+
+        <!-- Icons Legend -->
+        <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+        <tr>
+            <td align="center">
+                <img src="{T_THEME_PATH}/images/on.gif" border="0" alt="{L_NEW_POSTS}" align="absmiddle" />
+                <b><font face="verdana,arial,helvetica" size="1">{L_NEW_POSTS}</font></b>
+                &nbsp;&nbsp;
+                <img src="{T_THEME_PATH}/images/off.gif" border="0" alt="{L_NO_NEW_POSTS}" align="absmiddle" />
+                <b><font face="verdana,arial,helvetica" size="1">{L_NO_NEW_POSTS}</font></b>
+                &nbsp;&nbsp;
+                <img src="{T_THEME_PATH}/images/offlock.gif" border="0" alt="{L_FORUM_LOCKED}" align="absmiddle" />
+                <b><font face="verdana,arial,helvetica" size="1">{L_FORUM_LOCKED}</font></b>
+            </td>
+        </tr>
+        </table>
+
+    </td>
+</tr>
+</table>
+<!-- /content area table -->
+</center>
+
+<!-- Footer -->
+<table width="803" height="77" border="0" cellspacing="0" cellpadding="0" align="center">
+<tr height="2">
+    <td width="802" height="2" colspan="4"></td>
+    <td width="1" height="2"></td>
+</tr>
+<tr height="34">
+    <td width="356" height="34" colspan="2"></td>
+    <td width="420" height="34" valign="top" align="left">
+        <img src="{T_THEME_PATH}/images/LOGO_Valve.01.gif" width="82" height="23" border="0" alt="Valve" />
+    </td>
+    <td width="26" height="74" rowspan="2"></td>
+    <td width="1" height="34"></td>
+</tr>
+<tr height="40">
+    <td width="24" height="40"></td>
+    <td width="752" height="40" colspan="2" align="left" valign="top">
+        <div align="center">
+            <p>
+            <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">
+            <a href="{U_INDEX}">{L_INDEX}</a> | 
+            <a href="#">Support</a> | 
+            <a href="{U_INDEX}">Forums</a> | 
+            <a href="#">Bugs</a> | 
+            <a href="#">Troubleshooting</a> | 
+            <a href="#">Contact</a>
+            <br />
+            </font>
+            <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="1">
+            (c) 2003 Valve, L.L.C. All rights reserved. Steam, the Steam logo, Valve, and the Valve logo are trademarks and/or registered trademarks of Valve, L.L.C.
+            </font>
+            </p>
+        </div>
+    </td>
+    <td width="1" height="40"></td>
+</tr>
+</table>
+
+<!-- IF DEBUG_OUTPUT --><br /><br /><div align="center"><span class="gensmall">{DEBUG_OUTPUT}</span></div><!-- ENDIF -->
+
+<div id="page-footer">
+    Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited<br />
+    Steam theme &copy; 2003 Valve Corporation
+</div>
+
+</body>
+</html>

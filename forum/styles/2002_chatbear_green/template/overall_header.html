@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="content-type" />
+<title><!-- IF S_IN_MCP -->{L_MCP} - <!-- ELSEIF S_IN_UCP -->{L_UCP} - <!-- ENDIF -->Steam - Support Site<!-- IF S_BOARD_DISABLED --> - {L_BOARD_DISABLED}<!-- ENDIF --></title>
+
+<link rel="stylesheet" href="{T_STYLESHEET_LINK}" type="text/css" />
+
+<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
+    <link rel="stylesheet" href="{T_THEME_PATH}/bidi.css" type="text/css" />
+<!-- ENDIF -->
+
+<script type="text/javascript">
+// <![CDATA[
+    var jump_page = '{L_JUMP_PAGE}:';
+    var on_page = '{ON_PAGE}';
+    var per_page = '{PER_PAGE}';
+    var base_url = '{A_BASE_URL}';
+    var style_cookie = 'phpBBstyle';
+    var style_cookie_settings = '{A_COOKIE_SETTINGS}';
+
+    <!-- IF S_USER_NEW_PRIVMSG -->
+        var url = '{UA_POPUP_PM}';
+        window.open(url.replace(/&amp;/g, '&'), '_phpbbprivmsg', 'height=225,resizable=yes,scrollbars=yes,width=400');
+    <!-- ENDIF -->
+
+    function popup(url, width, height, name) {
+        if (!name) {
+            name = '_popup';
+        }
+        window.open(url.replace(/&amp;/g, '&'), name, 'height=' + height + ',resizable=yes,scrollbars=yes,width=' + width);
+        return false;
+    }
+// ]]>
+</script>
+
+</head>
+<body alink="#938f3c" bgcolor="#626d5c" link="#bfba50" text="#c4cabe" vlink="#938f3c">
+
+<!-- Planet Groovy Advertisement -->
+<p align="center" class="groovy-ad">
+    <a href="#"><img alt="Planet Groovy - 24 Hour Updates, Gaming, Entertainment, News and more!" border="0" height="60" src="{T_THEME_PATH}/images/fridaypgad.gif" width="468" class="groovy-banner" /></a>
+</p>
+
+<!-- Steam Header -->
+<div align="left">
+<table align="center" bgcolor="#000000" border="0" cellpadding="0" cellspacing="0" class="steam-header">
+<tr class="spacer-h16">
+    <td colspan="5" height="16" width="799"></td>
+    <td height="16" width="1"></td>
+</tr>
+<tr class="spacer-h38">
+    <td colspan="2" height="38" width="17"></td>
+    <td align="left" colspan="3" height="38" valign="top" width="782">
+        <img border="0" height="29" src="{T_THEME_PATH}/images/Type_SupportSite2.jpg" width="770" class="support-site-logo" />
+    </td>
+    <td height="38" width="1"></td>
+</tr>
+<tr class="spacer-h18">
+    <td colspan="3" height="18" width="241"></td>
+    <td align="left" height="80" rowspan="2" valign="top" width="545" class="header-nav">
+        <div align="right">
+            <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2" class="header-nav-main">
+                <b><a href="{U_INDEX}">Home</a></b> |
+                <b><a href="#">Support</a></b> |
+                <b><a href="{U_INDEX}">Forums</a></b> |
+                <b><a href="#">Bugs</a></b> |
+                <b><a href="#">Troubleshooting</a></b> |
+                <b><a href="#">Contact</a></b>
+            </font><br />
+            <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="1" class="header-nav-sub">
+                <!-- IF S_USER_LOGGED_IN -->
+                    <a href="{U_PROFILE}">Account Options</a> |
+                <!-- ELSE -->
+                    <a href="{U_REGISTER}">Create Account</a> |
+                <!-- ENDIF -->
+                <a href="#">Account Options</a> |
+                <a href="#">Lost Password</a> |
+                <a href="{U_PRIVATEMSGS}">Private Messages 
+                <!-- IF S_USER_NEW_PRIVMSG -->({PRIVATE_MESSAGE_COUNT})<!-- ELSE -->(?)<!-- ENDIF --></a>
+            </font>
+        </div>
+    </td>
+    <td height="80" rowspan="2" width="13"></td>
+    <td height="18" width="1"></td>
+</tr>
+<tr class="spacer-h62">
+    <td height="62" width="15"></td>
+    <td align="left" colspan="2" height="62" valign="top" width="226">
+        <img border="0" height="51" src="{T_THEME_PATH}/images/Logo_Steam2.jpg" width="188" class="steam-logo" />
+    </td>
+    <td height="62" width="1"></td>
+</tr>
+</table>
+</div>
+
+<br />
+
+<!-- Content Wrapper -->
+<table align="center" bgcolor="#626D5C" border="0" cellpadding="5" cellspacing="0" width="798" class="content-wrapper">
+<tr valign="top">
+    <td align="left" bgcolor="#4c5844" width="100%" class="content-inner">
+        <div align="center" class="board-listing">

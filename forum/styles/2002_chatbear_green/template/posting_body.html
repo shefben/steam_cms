@@ -1,0 +1,193 @@
+<!-- INCLUDE overall_header.html -->
+
+<div class="content" role="main">
+	<div align="center">
+		<table bgcolor="#626D5C" border="0" cellpadding="5" cellspacing="0" width="798">
+			<tr valign="top">
+				<td align="left" bgcolor="#4c5844" width="100%">
+					<div align="center">
+						<table border="0" cellspacing="0" width="100%">
+							<tr>
+								<td width="100%">
+									<b><font color="#FFFFFF" face="Arial" size="5">{L_POST_A} {PAGE_TITLE}</font></b><br/>
+									<font face="Arial" size="2" color="#c4cabe">Enter the details of the message you'd like to post in the boxes below and click the button at the bottom of the form.</font>
+									<p><font face="Arial" size="2"></font></p>
+									
+									<form action="{S_POST_ACTION}" method="post" enctype="multipart/form-data" id="postform">
+										{S_FORM_TOKEN}
+										{S_HIDDEN_FIELDS}
+										
+										<table border="0" cellspacing="0" width="100%">
+											<tr>
+												<td width="20%"><font face="Arial" size="2" color="#c4cabe">Subject</font></td>
+												<td width="80%"><input maxlength="100" name="subject" size="30" type="text" value="{SUBJECT}" /></td>
+											</tr>
+											<tr>
+												<td width="20%"><font face="Arial" size="2" color="#c4cabe">Message</font></td>
+												<td width="80%">
+													<!-- IF S_BBCODE_ALLOWED -->
+													<div id="format-buttons">
+														<input type="button" class="button2" onclick="bbstyle(0)" title="Bold" value="B" />
+														<input type="button" class="button2" onclick="bbstyle(2)" title="Italic" value="i" />
+														<input type="button" class="button2" onclick="bbstyle(4)" title="Underline" value="u" />
+														<input type="button" class="button2" onclick="bbstyle(6)" title="Quote" value="Quote" />
+														<input type="button" class="button2" onclick="bbstyle(8)" title="Code" value="Code" />
+													</div>
+													<!-- ENDIF -->
+													<textarea cols="60" name="message" rows="15" wrap="virtual">{MESSAGE}</textarea>
+												</td>
+											</tr>
+											
+											<!-- IF S_SHOW_ATTACH_BOX -->
+											<tr>
+												<td width="20%"><font face="Arial" size="2" color="#c4cabe">Attach file</font></td>
+												<td width="80%">
+													<input type="file" name="fileupload" />
+													<font face="Arial" size="1" color="#c4cabe">Max filesize: {ATTACH_MAX_SIZE}</font>
+												</td>
+											</tr>
+											<!-- ENDIF -->
+											
+											<tr>
+												<td width="20%"><font face="Arial" size="2" color="#c4cabe">Options</font></td>
+												<td width="80%">
+													<font face="Arial" size="2" color="#c4cabe">
+														<!-- IF S_BBCODE_ALLOWED -->
+														<input name="disable_bbcode" type="checkbox" <!-- IF S_BBCODE_CHECKED -->checked<!-- ENDIF --> /> Disable BBCode<br/>
+														<!-- ENDIF -->
+														<!-- IF S_SMILIES_ALLOWED -->
+														<input name="disable_smilies" type="checkbox" <!-- IF S_SMILIES_CHECKED -->checked<!-- ENDIF --> /> Disable Smilies<br/>
+														<!-- ENDIF -->
+														<input name="disable_magic_url" type="checkbox" <!-- IF S_MAGIC_URL_CHECKED -->checked<!-- ENDIF --> /> Disable automatic URL linking<br/>
+														<input name="attach_sig" type="checkbox" <!-- IF S_SIGNATURE_CHECKED -->checked<!-- ENDIF --> /> Attach signature (signatures can be changed in profile)
+													</font>
+												</td>
+											</tr>
+											
+											<!-- IF S_TOPIC_REVIEW -->
+											<tr>
+												<td width="20%"><font face="Arial" size="2" color="#c4cabe">Notify</font></td>
+												<td width="80%">
+													<font face="Arial" size="2" color="#c4cabe">
+														<input name="notify" type="checkbox" <!-- IF S_NOTIFY_CHECKED -->checked<!-- ENDIF --> /> Notify me when a reply is posted
+													</font>
+												</td>
+											</tr>
+											<!-- ENDIF -->
+											
+											<tr>
+												<td colspan="2" width="100%"><font color="#4C5844" face="Arial" size="2">.</font></td>
+											</tr>
+											
+											<!-- IF not S_USER_LOGGED_IN -->
+											<tr>
+												<td width="20%"></td>
+												<td width="80%">
+													<font face="Arial" size="2" color="#c4cabe">Username </font><input name="username" size="25" type="text" value="{USERNAME}" />
+													<font face="Arial" size="2" color="#c4cabe"> Password </font><input maxlength="32" name="password" size="10" type="password" value="" />
+													<input name="autologin" type="checkbox" value="on"/><font face="Arial" size="2" color="#c4cabe"> Remember Me</font>
+												</td>
+											</tr>
+											<tr>
+												<td width="20%"></td>
+												<td width="80%">
+													<font face="Arial" size="2" color="#c4cabe">
+														If you don't already have an account, you can <a href="{U_REGISTER}" style="color: #bfba50">register for one here</a>.<br/>
+														If you have a signature setup, it will be automatically appended to your message.
+													</font>
+												</td>
+											</tr>
+											<!-- ENDIF -->
+										</table>
+										
+										<p align="center">
+											<input name="post" type="submit" value="{L_SUBMIT}" />
+											<!-- IF S_SAVE_ALLOWED -->
+											<input name="save" type="submit" value="{L_SAVE_DRAFT}" />
+											<!-- ENDIF -->
+											<!-- IF S_LOAD_DRAFT -->
+											<input name="load" type="submit" value="{L_LOAD_DRAFT}" />
+											<!-- ENDIF -->
+											<input name="preview" type="submit" value="{L_PREVIEW}" />
+										</p>
+									</form>
+								</td>
+							</tr>
+						</table>
+					</div>
+					
+					<!-- BBCode help -->
+					<p align="left"><b><font face="Arial" size="2" color="#c4cabe">Special Codes</font></b>
+					<ul type="square">
+						<li><font face="Arial" size="2" color="#c4cabe">b[<b>bold text</b>]b</font></li>
+						<li><font face="Arial" size="2" color="#c4cabe">i[<i>italic text</i>]i</font></li>
+						<li><font face="Arial" size="2" color="#c4cabe">u[<u>underline text</u>]u</font></li>
+						<li><font face="Arial" size="2" color="#c4cabe">-[<strike>strikethrough text</strike>]-</font></li>
+						<li><font face="Arial" size="2" color="#c4cabe">q[quote text (indented)]q</font></li>
+						<li><font face="Arial" size="2" color="#c4cabe">+[bullet point]+</font></li>
+						<li><font face="Arial" size="2" color="#c4cabe">c[code text]c</font></li>
+						<li><font face="Arial" size="2" color="#c4cabe">1{<font color="#d6e4e2">coloured text 1</font>}1</font></li>
+						<li><font face="Arial" size="2" color="#c4cabe">2{<font color="#eecfcc">coloured text 2</font>}2</font></li>
+						<li><font face="Arial" size="2" color="#c4cabe">3{<font color="#cceed2">coloured text 3</font>}3</font></li>
+						<li><font face="Arial" size="2" color="#c4cabe">4{<font color="#cfd5f5">coloured text 4</font>}4</font></li>
+					</ul></p>
+					
+					<!-- IF TOPIC_REVIEW -->
+					<div align="center">
+						<table border="0" cellspacing="0" width="100%">
+							<tr>
+								<td bgcolor="#424B3C" width="100%">
+									<p align="left"><font color="#c4cabe" face="Arial" size="2"><b>Topic Review</b></font></p>
+									<!-- BEGIN topic_review_row -->
+									<table border="0" cellspacing="0" width="100%">
+										<tr>
+											<td bgcolor="#4C5844" width="20%"><font face="Arial" size="1" color="#c4cabe">{topic_review_row.POST_AUTHOR}</font></td>
+											<td bgcolor="#4C5844" width="80%"><font face="Arial" size="1" color="#c4cabe">{topic_review_row.POST_SUBJECT} - {topic_review_row.POST_DATE}</font></td>
+										</tr>
+										<tr>
+											<td colspan="2" bgcolor="#4C5844"><font face="Arial" size="1" color="#c4cabe">{topic_review_row.MESSAGE}</font></td>
+										</tr>
+									</table>
+									<!-- END topic_review_row -->
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!-- ENDIF -->
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+// BBCode functions
+function bbstyle(bbnumber) {
+	var txtarea = document.forms['postform'].elements['message'];
+	
+	doInsert('[b]', '[/b]', false);
+	function doInsert(prefix, suffix) {
+		txtarea.focus();
+		
+		if (typeof(txtarea.selectionStart) != 'undefined') {
+			var start = txtarea.selectionStart;
+			var end = txtarea.selectionEnd;
+			var sel = txtarea.value.substring(start, end);
+			txtarea.value = txtarea.value.substring(0, start) + prefix + sel + suffix + txtarea.value.substring(end);
+			txtarea.selectionStart = start + prefix.length;
+			txtarea.selectionEnd = start + prefix.length + sel.length;
+		} else if (typeof(document.selection) != 'undefined') {
+			var range = document.selection.createRange();
+			var sel = range.text;
+			range.text = prefix + sel + suffix;
+			range.moveStart('character', prefix.length);
+			range.moveEnd('character', sel.length);
+			range.select();
+		} else {
+			txtarea.value += prefix + suffix;
+		}
+	}
+}
+</script>
+
+<!-- INCLUDE overall_footer.html -->

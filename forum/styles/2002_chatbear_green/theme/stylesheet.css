@@ -1,0 +1,373 @@
+/* Steam 2002 Chatbear Green Forum Style - Based on archived steampowered.com 2002 v2 forum design */
+
+/* Basic body and color scheme */
+body {
+    background-color: #626d5c;
+    color: #c4cabe;
+    font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+/* Link styling */
+a {
+    color: #bfba50;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #938f3c;
+    text-decoration: none;
+}
+
+a:active {
+    color: #938f3c;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #bfba50;
+    text-decoration: underline;
+}
+
+/* Tables and main layout */
+table {
+    border-collapse: collapse;
+}
+
+.table1 {
+    background-color: #626d5c;
+    border: 0;
+}
+
+/* Header styling with Steam branding */
+.steam-header {
+    background-color: #000000;
+    width: 800px;
+    height: 135px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.support-site-logo {
+    width: 770px;
+    height: 29px;
+    margin-top: 16px;
+}
+
+.steam-logo {
+    width: 188px;
+    height: 51px;
+    margin-top: 18px;
+    margin-left: 15px;
+    float: left;
+}
+
+.header-nav {
+    float: right;
+    margin-top: 18px;
+    margin-right: 13px;
+    text-align: right;
+}
+
+.header-nav-main {
+    font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+    font-size: 12px;
+    font-weight: bold;
+    color: #c4cabe;
+}
+
+.header-nav-sub {
+    font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+    font-size: 10px;
+    color: #c4cabe;
+    margin-top: 5px;
+}
+
+/* Content area */
+.content-wrapper {
+    background-color: #626D5C;
+    width: 798px;
+    margin: 0 auto;
+    padding: 5px 0;
+}
+
+.content-inner {
+    background-color: #4c5844;
+    width: 100%;
+    padding: 5px;
+}
+
+/* Forum list headers */
+.forum-header {
+    background-color: #424B3C;
+    width: 100%;
+}
+
+.forum-header-cell {
+    background-color: #424B3C;
+    color: #EBEDEA;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px;
+}
+
+.forum-header-name { 
+    width: 50%; 
+    text-align: left; 
+}
+
+.forum-header-topics { 
+    width: 15%; 
+    text-align: center; 
+}
+
+.forum-header-posts { 
+    width: 15%; 
+    text-align: center; 
+}
+
+.forum-header-updated { 
+    width: 20%; 
+    text-align: left; 
+}
+
+/* Forum rows */
+.forum-row {
+    width: 100%;
+    margin: 0;
+}
+
+.forum-row-1 {
+    background-color: #424B3C;
+}
+
+.forum-row-2 {
+    background-color: #4C5844;
+}
+
+.forum-cell {
+    padding: 6px;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.forum-name {
+    width: 50%;
+    text-align: left;
+}
+
+.forum-name a {
+    color: #bfba50;
+    font-weight: bold;
+}
+
+.forum-name a:hover {
+    color: #bfba50;
+    text-decoration: underline;
+}
+
+.forum-desc {
+    font-size: 11px;
+    color: #c4cabe;
+    font-weight: normal;
+}
+
+.forum-topics {
+    width: 15%;
+    text-align: center;
+    color: #c4cabe;
+}
+
+.forum-posts {
+    width: 15%;
+    text-align: center;
+    color: #c4cabe;
+}
+
+.forum-updated {
+    width: 20%;
+    text-align: left;
+    color: #c4cabe;
+    font-size: 12px;
+}
+
+.forum-lastvisit {
+    font-size: 10px;
+    color: #969F8E;
+}
+
+/* Footer styling */
+.page-footer {
+    width: 803px;
+    height: 77px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.valve-logo-footer {
+    width: 82px;
+    height: 23px;
+    margin-top: 34px;
+}
+
+.footer-content {
+    text-align: center;
+    padding: 10px;
+}
+
+.footer-links {
+    font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+    font-size: 12px;
+    font-weight: bold;
+    color: #c4cabe;
+}
+
+.footer-copyright {
+    font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+    font-size: 10px;
+    color: #c4cabe;
+    margin-top: 5px;
+}
+
+.chatbear-footer {
+    font-size: 12px;
+    color: #bfba50;
+    margin-top: 5px;
+}
+
+/* Form inputs */
+input, textarea, select {
+    background-color: #CFCFCF;
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    border: 1px solid #969F8E;
+}
+
+input.button {
+    background-color: #CFCFCF;
+    color: #000000;
+    border: 1px outset #969F8E;
+    padding: 2px 6px;
+    font-family: Arial;
+}
+
+/* Board listing specific */
+.board-listing {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Thread view elements */
+.thread-header {
+    background-color: #424B3C;
+    color: #EBEDEA;
+}
+
+.thread-subject { width: 50%; }
+.thread-posts { width: 15%; }
+.thread-updated { width: 20%; }
+.thread-author { width: 15%; }
+
+/* Post content */
+.post-content {
+    background-color: #4C5844;
+    color: #c4cabe;
+    padding: 8px;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+/* Support site specific elements */
+.support-nav {
+    background-color: #000000;
+    color: #c4cabe;
+    padding: 5px;
+    text-align: right;
+}
+
+.support-nav a {
+    color: #bfba50;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.support-nav-sub {
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+.support-nav-sub a {
+    color: #bfba50;
+    font-size: 10px;
+    font-weight: normal;
+}
+
+/* Planet Groovy advertisement */
+.groovy-ad {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.groovy-banner {
+    width: 468px;
+    height: 60px;
+    border: 0;
+}
+
+/* Pagination */
+.pagination {
+    text-align: center;
+    color: #bfba50;
+    font-size: 11px;
+    margin: 10px 0;
+}
+
+.pagination a {
+    color: #bfba50;
+    text-decoration: none;
+    padding: 2px 4px;
+}
+
+.pagination a:hover {
+    color: #bfba50;
+    background-color: #4C5844;
+    text-decoration: underline;
+}
+
+/* Content layout spacers */
+.spacer-h16 { height: 16px; }
+.spacer-h38 { height: 38px; }
+.spacer-h18 { height: 18px; }
+.spacer-h62 { height: 62px; }
+
+/* Navigation breadcrumbs */
+.breadcrumbs {
+    background-color: #4c5844;
+    color: #c4cabe;
+    padding: 5px;
+    font-size: 11px;
+}
+
+.breadcrumbs a {
+    color: #bfba50;
+}
+
+/* Message styling */
+.private-messages {
+    color: #bfba50;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+/* Online users */
+.online-users {
+    background-color: #4C5844;
+    color: #c4cabe;
+    padding: 8px;
+    font-size: 11px;
+}

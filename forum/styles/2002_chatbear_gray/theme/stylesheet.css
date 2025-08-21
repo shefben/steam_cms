@@ -1,0 +1,302 @@
+/* Steam 2002 Chatbear Gray Forum Style - Based on archived steampowered.com 2002 v1 forum design */
+
+/* Basic body and color scheme */
+body {
+    background-color: silver;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    margin: 5px;
+    text-align: center;
+    link: #27346f;
+    vlink: #27346f;
+    alink: #27346f;
+}
+
+/* Link styling */
+a {
+    color: #B8C2AE;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FAAE4C;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+/* Tables and main layout */
+table {
+    border-collapse: collapse;
+}
+
+.table1 {
+    background-color: silver;
+    border: 0;
+}
+
+/* Header styling with Steam logo and tabs */
+.steam-header {
+    background-color: #C0C0C0;
+    width: 679px;
+    margin: 0 auto;
+}
+
+.steam-logo {
+    width: 677px;
+    height: 116px;
+}
+
+.steam-tabs {
+    height: 24px;
+}
+
+/* Tab styling */
+.tab-home { width: 62px; }
+.tab-news { width: 60px; }
+.tab-games { width: 129px; }
+.tab-support { width: 76px; }
+.tab-message { width: 122px; background: url('images/Tabs-Message_Board_in.gif'); }
+.tab-faq { width: 64px; }
+
+/* Content area */
+.content-wrapper {
+    background-color: #6a6f82;
+    width: 631px;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+/* Top navigation bar */
+.top-nav {
+    background-color: #3C4770;
+    padding: 3px;
+    width: 100%;
+}
+
+.top-nav-left {
+    background-color: #3C4770;
+    width: 50%;
+    text-align: left;
+}
+
+.top-nav-right {
+    background-color: #3C4770;
+    width: 50%;
+    text-align: right;
+}
+
+.nav-link {
+    color: #B8C2AE;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+/* Forum list headers */
+.forum-header {
+    background-color: #001052;
+    width: 100%;
+}
+
+.forum-header-cell {
+    background-color: #001052;
+    color: #E2E3E6;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px;
+}
+
+.forum-header-name { width: 50%; text-align: left; }
+.forum-header-topics { width: 15%; text-align: center; }
+.forum-header-posts { width: 15%; text-align: center; }
+.forum-header-updated { width: 20%; text-align: left; }
+
+/* Forum rows */
+.forum-row {
+    width: 100%;
+    margin: 0;
+}
+
+.forum-row-1 {
+    background-color: #606275;
+}
+
+.forum-row-2 {
+    background-color: #6b6d84;
+}
+
+.forum-cell {
+    padding: 6px;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.forum-name {
+    width: 50%;
+    text-align: left;
+}
+
+.forum-name a {
+    color: #B8C2AE;
+    font-weight: bold;
+}
+
+.forum-name a:hover {
+    color: #FAAE4C;
+}
+
+.forum-desc {
+    font-size: 11px;
+    color: white;
+}
+
+.forum-topics {
+    width: 15%;
+    text-align: center;
+    color: white;
+}
+
+.forum-posts {
+    width: 15%;
+    text-align: center;
+    color: white;
+}
+
+.forum-updated {
+    width: 20%;
+    text-align: left;
+    color: white;
+    font-size: 11px;
+}
+
+.forum-lastvisit {
+    font-size: 10px;
+    color: #C0C0C0;
+}
+
+/* Footer styling */
+.page-bottom {
+    width: 675px;
+    height: 43px;
+    margin: 0 auto;
+}
+
+.valve-footer {
+    background-color: #C0C0C0;
+    width: 679px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.valve-logo {
+    height: 29px;
+    width: 81px;
+}
+
+.footer-links {
+    height: 19px;
+    width: 412px;
+}
+
+.footer-copyright {
+    height: 28px;
+    width: 678px;
+}
+
+/* Chatbear elements */
+.chatbear-ad {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.chatbear-banner {
+    width: 468px;
+    height: 60px;
+}
+
+.donation-link {
+    font-size: 12px;
+    font-weight: bold;
+    color: #B8C2AE;
+}
+
+.terms-link {
+    font-size: 12px;
+    color: #B8C2AE;
+}
+
+/* Message styling */
+.private-messages {
+    color: #B8C2AE;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+/* New post indicators */
+.new-post-indicator {
+    color: red;
+    font-weight: bold;
+}
+
+/* Form inputs */
+input, textarea, select {
+    background-color: white;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    border: 1px solid #666;
+}
+
+input.button {
+    background-color: #E0E0E0;
+    color: black;
+    border: 1px outset #999;
+    padding: 2px 6px;
+    font-family: Arial;
+}
+
+/* Board listing specific */
+.board-listing {
+    width: 600px;
+    margin: 0 auto;
+}
+
+/* Thread view elements */
+.thread-header {
+    background-color: #001052;
+    color: #E2E3E6;
+}
+
+.thread-subject { width: 50%; }
+.thread-posts { width: 15%; }
+.thread-updated { width: 20%; }
+.thread-author { width: 15%; }
+
+/* Post content */
+.post-content {
+    background-color: #606275;
+    color: white;
+    padding: 8px;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+/* Pagination */
+.pagination {
+    text-align: center;
+    color: #B8C2AE;
+    font-size: 11px;
+    margin: 10px 0;
+}
+
+.pagination a {
+    color: #B8C2AE;
+    text-decoration: none;
+    padding: 2px 4px;
+}
+
+.pagination a:hover {
+    color: #FAAE4C;
+    background-color: #606275;
+}

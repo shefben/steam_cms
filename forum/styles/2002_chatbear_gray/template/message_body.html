@@ -1,0 +1,53 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Message Display -->
+<div align="center" class="board-listing">
+    
+    <!-- Message Header -->
+    <table border="0" cellspacing="0" width="600" class="forum-header">
+    <tr>
+        <td bgcolor="#001052" width="100%" class="forum-header-cell">
+            <p align="center"><font color="#E2E3E6" face="Arial" size="2"><b>{MESSAGE_TITLE}</b></font></p>
+        </td>
+    </tr>
+    </table>
+
+    <!-- Message Content -->
+    <div align="center">
+    <table border="0" cellspacing="0" width="600" class="forum-row">
+    <tr>
+        <td bgcolor="#606275" width="100%" class="forum-cell">
+            <p align="center">
+                <font face="Arial" size="2">
+                {MESSAGE_TEXT}
+                </font>
+                
+                <!-- IF S_USER_NOTICE -->
+                <br /><br />
+                <font face="Arial" size="1">
+                <a href="{U_LOGIN_LOGOUT}" class="nav-link">{L_LOGIN_LOGOUT}</a>
+                </font>
+                <!-- ENDIF -->
+                
+                <!-- IF L_RETURN_TO -->
+                <br /><br />
+                <font face="Arial" size="1">
+                <a href="{U_RETURN_TO}" class="nav-link">{L_RETURN_TO}</a>
+                </font>
+                <!-- ENDIF -->
+                
+                <!-- IF S_META -->
+                <br /><br />
+                <font face="Arial" size="1">
+                {L_REDIRECT}
+                </font>
+                <!-- ENDIF -->
+            </p>
+        </td>
+    </tr>
+    </table>
+    </div>
+
+</div>
+
+<!-- INCLUDE overall_footer.html -->

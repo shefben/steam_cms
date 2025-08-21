@@ -1,0 +1,247 @@
+/* Steam 2003 Forum Style - Based on archived steampowered.com 2003 forum design */
+
+/* Basic body and color scheme */
+body {
+    background-color: #626d5c;
+    color: #c4cabe;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    margin: 10px;
+    scrollbar-base-color: #4C5844;
+    scrollbar-arrow-color: #969F8E;
+}
+
+/* Tables and main layout */
+table {
+    border-collapse: collapse;
+}
+
+.table1 {
+    background-color: #626d5c;
+    border: 0;
+}
+
+/* Header styling */
+.headerbar {
+    background-color: #626d5c;
+    color: #c4cabe;
+}
+
+/* Navigation and links */
+a:link, a:visited, a:active {
+    color: #C4CABE;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+/* Category links (green) */
+.cat a:link, .cat a:visited, .cat a:active {
+    color: #B4BA50;
+    text-decoration: none;
+}
+
+.cat a:hover {
+    color: #B4BA50;
+    text-decoration: underline;
+}
+
+/* Category headers */
+.cat {
+    background-color: #3E4637;
+    color: #B4BA50;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+/* Forum row styling */
+.row1 {
+    background-color: #626d5c;
+    padding: 4px;
+}
+
+.row2 {
+    background-color: #545F4E;
+    padding: 4px;
+}
+
+/* Forum headers */
+.forum-header {
+    background-color: #3E4637;
+    color: #D8DED3;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+/* Forum statistics and info */
+.forum-stats {
+    font-size: 11px;
+    color: #c4cabe;
+    text-align: center;
+}
+
+/* Last post info */
+.lastpost {
+    font-size: 11px;
+    color: #c4cabe;
+}
+
+.lastpost-time {
+    color: #969F8E;
+}
+
+/* Navigation bar */
+.navbar {
+    background-color: #626d5c;
+    color: #c4cabe;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Form inputs */
+input, textarea, select {
+    background-color: #CFCFCF;
+    color: #000000;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    border: 1px solid #969F8E;
+}
+
+input.button {
+    background-color: #CFCFCF;
+    color: #000000;
+    border: 1px outset #969F8E;
+    padding: 2px 6px;
+}
+
+/* Content wrapper */
+.wrap {
+    background-color: #626d5c;
+    width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Forum icons */
+.forum-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+/* Post styling */
+.post {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    margin: 4px 0;
+    padding: 6px;
+}
+
+.post-header {
+    background-color: #3E4637;
+    color: #D8DED3;
+    padding: 4px;
+    font-weight: bold;
+}
+
+/* Topic list styling */
+.topiclist {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.topiclist th {
+    background-color: #3E4637;
+    color: #D8DED3;
+    padding: 6px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.topiclist td {
+    padding: 6px;
+    border-bottom: 1px solid #3E4637;
+    font-size: 11px;
+}
+
+/* Who's online styling */
+.online-info {
+    background-color: #545F4E;
+    color: #c4cabe;
+    padding: 6px;
+    font-size: 11px;
+}
+
+/* Footer styling */
+.copyright {
+    text-align: center;
+    font-size: 10px;
+    color: #969F8E;
+    padding: 10px;
+}
+
+/* Login form */
+.login-box {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    padding: 6px;
+    font-size: 11px;
+}
+
+/* Welcome message */
+.welcome {
+    background-color: #626d5c;
+    color: #c4cabe;
+    padding: 8px;
+    font-size: 12px;
+}
+
+/* Steam header styling */
+.steam-header {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.steam-logo {
+    margin: 10px 0;
+}
+
+.steam-nav {
+    text-align: center;
+    padding: 5px 0;
+}
+
+/* Forum list container */
+.forumlist {
+    background-color: #3E4637;
+    border: 1px solid #3E4637;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background-color: #626d5c;
+    color: #c4cabe;
+    padding: 6px;
+    font-size: 11px;
+}
+
+/* Page footer */
+.page-footer {
+    text-align: center;
+    background-color: #626d5c;
+    color: #969F8E;
+    padding: 10px;
+    font-size: 10px;
+}
+
+/* Timezone info */
+.timezone {
+    color: #969F8E;
+    font-size: 11px;
+}

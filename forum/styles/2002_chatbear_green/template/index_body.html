@@ -1,0 +1,62 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Forum Headers -->
+<table border="0" cellspacing="0" width="100%" class="forum-header">
+<tr>
+    <td bgcolor="#424B3C" width="50%" class="forum-header-cell forum-header-name">
+        <p align="left"><font color="#EBEDEA" face="Arial" size="2"><b>Name</b></font></p>
+    </td>
+    <td align="center" bgcolor="#424B3C" width="15%" class="forum-header-cell forum-header-topics">
+        <p align="center"><font color="#EBEDEA" face="Arial" size="2"><b>Topics</b></font></p>
+    </td>
+    <td align="center" bgcolor="#424B3C" width="15%" class="forum-header-cell forum-header-posts">
+        <p align="center"><font color="#EBEDEA" face="Arial" size="2"><b>Posts</b></font></p>
+    </td>
+    <td align="center" bgcolor="#424B3C" width="20%" class="forum-header-cell forum-header-updated">
+        <p align="left"><font color="#EBEDEA" face="Arial" size="2"><b>Updated</b></font></p>
+    </td>
+</tr>
+</table>
+
+<!-- Forum Listings -->
+<!-- BEGIN forumrow -->
+<!-- IF not forumrow.S_IS_CAT -->
+<div align="center">
+<table border="0" cellspacing="0" width="100%" class="forum-row">
+<tr>
+    <td bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="50%" class="forum-cell forum-name">
+        <p align="left">
+            <font face="Arial" size="2">
+                <b><a href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a><br /></b>
+                <!-- IF forumrow.FORUM_DESC -->
+                <span class="forum-desc">{forumrow.FORUM_DESC}</span>
+                <!-- ENDIF -->
+            </font>
+        </p>
+    </td>
+    <td align="center" bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="15%" class="forum-cell forum-topics">
+        <p align="center"><font face="Arial" size="2">{forumrow.TOPICS}</font></p>
+    </td>
+    <td align="center" bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="15%" class="forum-cell forum-posts">
+        <p align="center"><font face="Arial" size="2">{forumrow.POSTS}</font></p>
+    </td>
+    <td align="center" bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="20%" class="forum-cell forum-updated">
+        <p align="left">
+            <font face="Arial" size="2" class="forum-updated">
+            <!-- IF forumrow.LAST_POST_TIME -->
+                {forumrow.LAST_POST_TIME}<br />
+                <font size="1" class="forum-lastvisit">Last Visit: <!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ELSE -->Never<!-- ENDIF --></font>
+            <!-- ELSE -->
+                No Posts<br />
+                <font size="1" class="forum-lastvisit">Last Visit: Never</font>
+            <!-- ENDIF -->
+            </font>
+        </p>
+    </td>
+</tr>
+</table>
+</div>
+<!-- ENDIF -->
+<!-- END forumrow -->
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,34 @@
+<!-- INCLUDE overall_header.html -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<tr>
+    <td>
+        <table cellpadding="4" cellspacing="1" border="0" width="100%">
+        <tr>
+            <td bgcolor="#3E4637">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_UCP}</b></font>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#545F4E">
+                <font face="verdana,arial,helvetica" size="2">
+                {L_WELCOME} {USERNAME}!<br /><br />
+                
+                <!-- IF S_USER_NEW_PRIVMSG -->
+                <b>{L_PRIVMSGS_NEW}: <a href="{U_PRIVATEMSGS}">{PRIVATE_MESSAGE_COUNT}</a></b><br />
+                <!-- ENDIF -->
+                
+                <a href="{U_PROFILE}">{L_PROFILE}</a><br />
+                <a href="{U_PRIVATEMSGS}">{L_PRIVATE_MESSAGES}</a><br />
+                <a href="{U_DRAFTS}">{L_DRAFTS}</a><br />
+                <a href="{U_SUBSCRIPTIONS}">{L_SUBSCRIPTIONS}</a><br />
+                <a href="{U_BOOKMARKS}">{L_BOOKMARKS}</a><br />
+                </font>
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->
