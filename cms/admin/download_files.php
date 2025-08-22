@@ -30,7 +30,7 @@ $selectedVersion = $_GET['version'] ?? $defaultVersion;
 
 // Render type options based on theme and version
 function getRenderOptions($theme, $version) {
-    $baseOptions = [
+    $main = [
         'title_size_mirrors_buttons' => 'Title (with size) w/ mirrors as buttons',
         'title_size_mirrors_links' => 'Title (with size) w/ mirrors as links',
         'title_no_size_mirrors_links' => 'Title (no size) w/ mirrors as links',
@@ -39,14 +39,20 @@ function getRenderOptions($theme, $version) {
         'single_link' => 'Single link',
         'title_single_link_with_size' => 'Title w/ single link with size next to link as text'
     ];
-    
-    // Add floating box options for 2004 v2 and v3
+
+    $floating = [];
+
     if ($theme === '2004' && ($version === 'v2' || $version === 'v3')) {
-        $baseOptions['floating_box_single_link'] = 'Floating box single link';
-        $baseOptions['floating_box_title_mirrors_links'] = 'Floating box title (no size) w/ mirrors as links';
+        $floating = [
+            'single_link' => 'Single link',
+            'title_no_size_mirrors_links' => 'Title (no size) w/ mirrors as links'
+        ];
     }
-    
-    return $baseOptions;
+
+    return [
+        'main_content' => $main,
+        'floating_box' => $floating
+    ];
 }
 
 // AJAX handlers
@@ -57,12 +63,13 @@ if (isset($_GET['ajax'])) {
         $version = $_GET['version'] ?? $defaultVersion;
         
         // Get files with their version-specific settings
-        $sql = "SELECT df.id, df.title, df.file_size, 
+        $sql = "SELECT df.id, df.title, df.file_size,
                        COALESCE(dfv.is_visible, 1) as is_visible,
                        COALESCE(dfv.render_type, 'title_size_mirrors_buttons') as render_type,
+                       COALESCE(dfv.location, 'main_content') as location,
                        COALESCE(dfv.sort_order, df.sort_order, 0) as sort_order
                 FROM download_files df
-                LEFT JOIN download_file_versions dfv ON df.id = dfv.file_id 
+                LEFT JOIN download_file_versions dfv ON df.id = dfv.file_id
                     AND dfv.theme = ? AND dfv.page_version = ?
                 ORDER BY COALESCE(dfv.sort_order, df.sort_order, 0), df.id";
         
@@ -106,19 +113,21 @@ if (isset($_POST['ajax'])) {
         $version = $_POST['version'];
         $isVisible = isset($_POST['is_visible']) ? 1 : 0;
         $renderType = $_POST['render_type'];
+        $location = $_POST['location'] ?? 'main_content';
         $sortOrder = (int)$_POST['sort_order'];
-        
+
         // Update or insert version settings
         $stmt = $db->prepare('
-            INSERT INTO download_file_versions (file_id, theme, page_version, is_visible, render_type, sort_order)
-            VALUES (?, ?, ?, ?, ?, ?)
-            ON DUPLICATE KEY UPDATE 
+            INSERT INTO download_file_versions (file_id, theme, page_version, is_visible, render_type, location, sort_order)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE
                 is_visible = VALUES(is_visible),
                 render_type = VALUES(render_type),
+                location = VALUES(location),
                 sort_order = VALUES(sort_order),
                 updated_at = CURRENT_TIMESTAMP
         ');
-        $stmt->execute([$fileId, $theme, $version, $isVisible, $renderType, $sortOrder]);
+        $stmt->execute([$fileId, $theme, $version, $isVisible, $renderType, $location, $sortOrder]);
         
         echo 'ok';
         exit;
@@ -222,6 +231,7 @@ echo $admin_header;
             <th>File Size</th>
             <th>Mirrors</th>
             <th>Visible</th>
+            <th>Location</th>
             <th>Rendering</th>
             <th>Actions</th>
         </tr>
@@ -291,7 +301,8 @@ $(function() {
         
         files.forEach(function(file) {
             const visibleChecked = file.is_visible == 1 ? 'checked' : '';
-            const renderSelect = createRenderSelect(file.render_type, file.id);
+            const locationSelect = createLocationSelect(file.location, file.id);
+            const renderSelect = createRenderSelect(file.render_type, file.id, file.location);
             
             const row = `
                 <tr data-id="${file.id}">
@@ -301,6 +312,7 @@ $(function() {
                     <td>${escapeHtml(file.file_size || '')}</td>
                     <td>${file.mirror_count}</td>
                     <td><input type="checkbox" class="visible-checkbox" data-id="${file.id}" ${visibleChecked}></td>
+                    <td>${locationSelect}</td>
                     <td>${renderSelect}</td>
                     <td>
                         <button class="edit btn btn-small" data-id="${file.id}">Edit</button>
@@ -314,18 +326,37 @@ $(function() {
         // Attach event handlers
         $('.visible-checkbox').on('change', updateFileSettings);
         $('.render-select').on('change', updateFileSettings);
+        $('.location-select').on('change', function() {
+            const row = $(this).closest('tr');
+            const fileId = $(this).data('id');
+            const loc = $(this).val();
+            // Rebuild render options based on new location
+            row.find('.render-select').replaceWith(createRenderSelect(row.find('.render-select').val(), fileId, loc));
+            row.find('.render-select').on('change', updateFileSettings);
+            updateFileSettings.call(this);
+        });
         $('#filesTable').off('click', '.edit').on('click', '.edit', editFile);
         $('#filesTable').off('click', '.delete').on('click', '.delete', deleteFile);
     }
     
     // Create render type select
-    function createRenderSelect(selectedValue, fileId) {
+    function createRenderSelect(selectedValue, fileId, location) {
         let options = '';
-        for (const [value, label] of Object.entries(renderOptions)) {
+        const loc = location || 'main_content';
+        const optSource = renderOptions[loc] || {};
+        for (const [value, label] of Object.entries(optSource)) {
             const selected = value === selectedValue ? 'selected' : '';
             options += `<option value="${value}" ${selected}>${escapeHtml(label)}</option>`;
         }
         return `<select class="render-select" data-id="${fileId || ''}">${options}</select>`;
+    }
+
+    function createLocationSelect(selectedValue, fileId) {
+        let options = '<option value="main_content"' + (selectedValue === 'main_content' ? ' selected' : '') + '>Main Content</option>';
+        if (renderOptions.floating_box && Object.keys(renderOptions.floating_box).length > 0) {
+            options += '<option value="floating_box"' + (selectedValue === 'floating_box' ? ' selected' : '') + '>Floating Box</option>';
+        }
+        return `<select class="location-select" data-id="${fileId || ''}">${options}</select>`;
     }
     
     // Update file settings
@@ -334,8 +365,9 @@ $(function() {
         const row = $(this).closest('tr');
         const isVisible = row.find('.visible-checkbox').is(':checked');
         const renderType = row.find('.render-select').val();
+        const location = row.find('.location-select').val();
         const sortOrder = row.index() + 1;
-        
+
         $.post('download_files.php', {
             ajax: 1,
             update_file_settings: 1,
@@ -343,6 +375,7 @@ $(function() {
             version: currentVersion,
             is_visible: isVisible ? 1 : 0,
             render_type: renderType,
+            location: location,
             sort_order: sortOrder
         });
     }

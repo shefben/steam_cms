@@ -60,11 +60,15 @@ if (isset($_GET['news']) || isset($_GET['id'])) {
     $content .= '</div>';
 } else {
     $content .= '<h2>LATEST <em>VALVE NEWS</em> &nbsp; <a href="/rss.xml" title="RSS format news feed"><img border="0" width="27" height="13" align="absmiddle" src="/img/RSS.gif"></a></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br><div class="narrower">';
-    $content .= '{{news("full_article", 10)}}';
+    // Render the latest news articles directly rather than passing a Twig tag
+    // string. This avoids the output being escaped and ensures HTML within
+    // articles is rendered.
+    $content .= cms_render_news('full_article', 10);
     $content .= '<p align="center"><a href="news_archive.php" style="text-decoration: none;"><i>view the news archives</i></a> &middot; <a href="rss.xml" style="text-decoration: none;"><i>rss news feed</i></a></p>';
     $content .= '</div>';
 }
-$tpl = cms_theme_layout('default.twig', $theme);
+$layoutFile = ($theme === '2005_v2') ? 'news.twig' : 'default.twig';
+$tpl = cms_theme_layout($layoutFile, $theme);
 cms_render_template($tpl, [
     'content'    => $content,
     'page_title' => $page_title,

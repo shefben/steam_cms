@@ -18,6 +18,8 @@
 - Right-hand news sidebar rendered through a generic template tag for 2006–2007 themes
 - Installer seeds sidebar section defaults for 2006 v1/v2 and 2007 v1/v2 themes
 - Installer seeds default content server list from 2003 and 2004 archives
+- News pages render stored HTML content properly and are no longer restricted to theme year
+- Theme-specific navbar.css files can override global navigation styling
 - Platform update history pages use collapsible entries with latest update expanded by default
 - Users can submit bug reports stored in MySQL with AJAX-enabled admin editing
 - Full article news tag preserves HTML formatting
@@ -252,6 +254,8 @@
 - Admin capsule builder supports per-theme selection, and the installer seeds Gear/Freestuff capsules with default content.
 - Default 2006+ capsules load from a unified `storefront_capsule_items` table seeded during installation.
 - Installer seeds a sample random content group for character images, enabling homepages to display one of several characters at random.
+- Storefront capsule renderer falls back to shared capsule tables when theme-specific items are absent, ensuring 2006+ layouts always show featured games.
+- 2005_v2 storefront leverages legacy capsule fallback so featured games appear even without dedicated data.
 - Multi-step map contest submission form is styled and validates required fields with jQuery.
 - Installer seeds download categories parsed from 2004 and 2003_v2 download pages.
 - 2006+ themes use a unified index sidebar placeholder rendering sections from the database, and admin pages scaffold capsule and sidebar management.
@@ -269,3 +273,9 @@
 - Theme settings may target custom database tables with optional datatype
   casting.
 - Preload marketing messages stored in DB with AJAX admin editor
+- Download manager supports per-page version visibility, location (main content or floating box), rendering modes, and drag-and-drop ordering.
+- Single-button downloads use `renderGetSteamNowButton`, and 2005_v2 news pages render with a theme-specific Twig layout and assets.
+- 2005_v2 theme includes full Twig slicing for generic pages, news, and storefront with asset helpers.
+- `featured_capsules` function now leverages multi-source capsule lookup so 2006+ storefronts show featured games.
+- News system renders stored HTML in summaries and falls back across years when no theme-specific articles exist.
+- Theme-specific navbar stylesheets fully replace the global `navbar.css` via single-link injection, preventing conflicts.

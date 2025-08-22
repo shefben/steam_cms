@@ -511,12 +511,8 @@ function cms_render_download_file(array $file, string $theme = '2004'): string
         case 'single_button':
             $url = $mainUrl ?: ($mirrors[0]['url'] ?? '');
             if ($url) {
-                if (isset($file['usingbutton']) && $file['usingbutton']) {
-                    $buttonText = $file['buttonText'] ?? 'CLICK HERE TO DOWNLOAD THE STEAM INSTALLER ( < 1MB )';
-                    $html = renderGetSteamNowButton($buttonText);
-                } else {
-                    $html = "<a href=\"{$url}\" class=\"download-button-large\">Download {$title}</a>";
-                }
+                $buttonText = $file['buttonText'] ?? $title;
+                $html = '<a href="' . $url . '">' . renderGetSteamNowButton($buttonText) . '</a>';
             } else {
                 $html = '';
             }
@@ -571,6 +567,56 @@ function cms_render_download_file(array $file, string $theme = '2004'): string
     }
     
     return $html;
+}
+
+function cms_get_featured_capsules(?string $theme = null): array
+{
+    $db    = cms_get_db();
+    $theme = $theme ?? cms_get_setting('theme', '2005_v2');
+    $useAll = cms_get_setting('capsules_same_all', '1') === '1';
+
+    $capsules = [];
+
+    // Prefer legacy four-position layout from store_capsules when available
+    try {
+        $res = $db->query('SELECT position, appid, image FROM store_capsules');
+        foreach ($res as $row) {
+            $capsules[$row['position']] = [
+                'appid' => (int)$row['appid'],
+                'image' => $row['image'],
+            ];
+        }
+    } catch (PDOException $e) {
+        $capsules = [];
+    }
+
+    if ($capsules) {
+        return $capsules;
+    }
+
+    // Fall back to dynamic capsule items table introduced for 2006+
+    $stmt = $db->prepare('SELECT appid, image_path FROM storefront_capsule_items WHERE theme = ? ORDER BY ord LIMIT 4');
+    $stmt->execute([$theme]);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!$rows && $useAll) {
+        $stmt = $db->query('SELECT appid, image_path FROM storefront_capsule_items WHERE theme IS NULL ORDER BY ord LIMIT 4');
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    if ($rows) {
+        $positions = ['top', 'middle', 'bottom_left', 'bottom_right'];
+        foreach ($rows as $i => $r) {
+            if (isset($positions[$i])) {
+                $capsules[$positions[$i]] = [
+                    'appid' => (int)$r['appid'],
+                    'image' => $r['image_path'],
+                ];
+            }
+        }
+    }
+
+    return $capsules;
 }
 
 function cms_insert_support_request(string $page, array $fields, string $lang = 'en'): void
@@ -1164,18 +1210,21 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
         $logo = $base . $logo;
     }
     // Check for theme-specific navbar.css override
-    $base_path = rtrim($base, '/');
-    $theme_navbar_css = "themes/$theme/css/navbar.css";
+    $base_path         = rtrim($base, '/');
+    $theme_navbar_css  = "themes/$theme/css/navbar.css";
     $includes_navbar_css = "./includes/css/navbar.css";
-    
+
+    // Determine which navbar stylesheet to load. If the active theme provides
+    // its own navbar.css it should completely replace the global one so that
+    // duplicate rules do not conflict. Assign an ID so templates can reference
+    // or replace the link if needed.
     if (is_file(dirname(__DIR__) . "/$theme_navbar_css")) {
-        // Use theme-specific navbar.css completely, replacing the default
-        $out = '<link href="' . ($base_path ? $base_path . '/' : '') . $theme_navbar_css . '" rel="stylesheet" type="text/css">';
+        $navbar_css = ($base_path ? $base_path . '/' : '') . $theme_navbar_css;
     } else {
-        // Use default navbar.css
-        $out = '<link href="' . $includes_navbar_css . '" rel="stylesheet" type="text/css">';
+        $navbar_css = $includes_navbar_css;
     }
-    $out  .= '<div style="min-width:850px;">';
+    $out  = '<link href="' . $navbar_css . '" rel="stylesheet" type="text/css" id="navbar-css">';
+    $out .= '<div style="min-width:850px;">';
     $out .= '<div class="globalHeadBar_logo"><a href="'.$base.'/index.php"><img border="0" src="'.htmlspecialchars($logo).'" alt="[Valve]" height="54" width="152"></a></div>';
 
     $nav = $with_buttons ? cms_header_buttons_html($theme) : '';

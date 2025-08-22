@@ -161,7 +161,25 @@ ASSETS = {
         'themes/2005_v1/images/support.gif',
     'archived_steampowered/2005/v1/img/status.gif':
         'themes/2005_v1/images/status.gif',
+    # theme assets for 2005_v2
+    'archived_steampowered/2005/v2/steampowered.css':
+        'themes/2005_v2/css/steampowered.css',
+    'archived_steampowered/2005/v2/steampowered03.css':
+        'themes/2005_v2/css/steampowered03.css',
+    'archived_steampowered/2005/v2/nav.js':
+        'themes/2005_v2/js/nav.js',
+    'archived_steampowered/2005/v2/webicon.png':
+        'themes/2005_v2/webicon.png',
 }
+
+# copy all image assets for theme 2005_v2
+src_base = os.path.join(ROOT, 'archived_steampowered', '2005', 'v2', 'img')
+for root_dir, _, files in os.walk(src_base):
+    for fname in files:
+        src_path = os.path.join(root_dir, fname)
+        rel_src = os.path.relpath(src_path, ROOT)
+        sub_path = os.path.relpath(src_path, src_base)
+        ASSETS[rel_src] = f'themes/2005_v2/images/{sub_path}'
 
 # storefront assets used by the unified 04-05 storefront
 for folder in ['images', 'gfx', 'img']:
@@ -190,7 +208,7 @@ sf_src = os.path.join(ROOT, 'storefront')
 for root_dir, _, files in os.walk(sf_src):
     for fname in files:
         rel_path = os.path.relpath(os.path.join(root_dir, fname), sf_src)
-        for theme in ['2004', '2005_v1']:
+        for theme in ['2004', '2005_v1', '2005_v2']:
             dest = os.path.join(ROOT, 'themes', theme, 'storefront', rel_path)
             os.makedirs(os.path.dirname(dest), exist_ok=True)
             shutil.copy2(os.path.join(root_dir, fname), dest)
