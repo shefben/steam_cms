@@ -921,14 +921,13 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('featured_capsules', function () {
-            $db = cms_get_db();
-            $caps = [];
-            foreach ($db->query('SELECT position,appid,image FROM store_capsules') as $row) {
-                $caps[$row['position']] = $row;
+            $caps = cms_get_featured_capsules();
+            if (!$caps) {
+                return '';
             }
-            $base = cms_base_url();
+            $base    = cms_base_url();
             $baseUrl = $base ? rtrim($base, '/'). '/' : '';
-            $html = '<div style="position: relative; width: 590px; height: 511px;">';
+            $html    = '<div style="position: relative; width: 590px; height: 511px;">';
             if (!empty($caps['top'])) {
                 $html .= '<a href="'.$base.'/index.php?area=game&AppId='.(int)$caps['top']['appid'].'">'
                     .'<img src="'.$baseUrl.'storefront/images/capsules/'.$caps['top']['image'].'" '
@@ -982,6 +981,22 @@ function cms_twig_env(string $tpl_dir): Environment
                 $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsule_items c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme IS NULL ORDER BY ord');
                 $stmt->execute();
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+
+            // Fall back to legacy capsule tables when no items found
+            if (!$rows) {
+                if ($useAll) {
+                    $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_all c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.hidden=0 ORDER BY ord');
+                    $stmt->execute();
+                } else {
+                    $stmt = $db->prepare('SELECT c.*, a.name AS app_name, a.price AS app_price FROM storefront_capsules_per_theme c LEFT JOIN store_apps a ON a.appid=c.appid WHERE c.theme=? AND c.hidden=0 ORDER BY ord');
+                    $stmt->execute([$theme]);
+                }
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as &$r) {
+                    $r['type'] = ($r['size'] === 'large') ? 'large' : 'small';
+                }
+                unset($r);
             }
 
             if (!$rows) {

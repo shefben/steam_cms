@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - Installer now writes the configured database port to `config.php`.
 - Added .htaccess redirect for Counter-Strike price change marketing page.
 - Installer seeds default redirect rules into the `redirects` table to preserve legacy paths.
+- Fallback to legacy capsule tables so 2006+ storefronts display featured capsules when theme-specific items are missing.
 - Grouped plugin sidebar links under a dedicated Plugins parent in the admin navigation.
 - Resolved Twig parser error on Random Content admin page by replacing deprecated `raw` blocks with `verbatim`.
 - Removed back links from redirect and media admin pages.
@@ -38,6 +39,8 @@ All notable changes to this project will be documented in this file.
 - Parent-only sidebar links no longer require URLs and won't navigate when toggled.
 - Installer seeds parent-only sidebar headers without PHP targets, preventing navigation.
 - Removed URLs from all sidebar parent links, including storefront, index management, and legacy storefront headers.
+- Allowed news articles to render stored HTML and display across all theme years.
+- Theme navbar.css files now fully replace the default navigation styles without duplicate rules.
 - Added bug report form with database storage and admin management interface.
 - Redirected settings page after saving so new admin theme loads without manual refresh.
 - Fixed custom pages and page version management screens to show content in the Neon admin theme.
@@ -371,3 +374,10 @@ All notable changes to this project will be documented in this file.
 - Added global plugin hooks for Twig environment and template rendering, and
   theme settings can target custom tables with typed values
 - Ensured plugin migrations and settings tables are created to prevent missing table errors in the plugin API.
+- Restored 2005_v2 storefront capsules with multi-source fallback logic.
+- Download manager now supports per-version visibility, rendering style, and location (including floating box options).
+- Single-button downloads render via `renderGetSteamNowButton` and 2005_v2 news pages use a dedicated Twig layout with theme assets.
+- Sliced full 2005_v2 theme templates, wiring asset helpers and moving copy rules into `tools/move_assets.py`.
+- Updated `featured_capsules` to leverage `cms_get_featured_capsules`, ensuring 2006+ storefronts populate their capsule slots.
+- News articles on the main page render stored HTML and fall back across years when a theme lacks posts.
+- Theme-specific `navbar.css` files fully replace the global stylesheet, preventing duplicate rules.

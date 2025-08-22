@@ -34,18 +34,14 @@ if (in_array($area, ['browse', 'search', 'game', 'package', 'all'], true)) {
     exit;
 }
 
-$theme = cms_get_setting('theme', '2005_v2');
-$tpl = cms_theme_layout('index.twig', $theme);
-$links = cms_load_store_links(__FILE__);
-$db = cms_get_db();
-$capsules = [];
-$res = $db->query('SELECT position,appid,image FROM store_capsules');
-foreach ($res as $row) {
-    $capsules[$row['position']] = $row;
-}
+$theme    = cms_get_setting('theme', '2005_v2');
+$tpl      = cms_theme_layout('index.twig', $theme);
+$links    = cms_load_store_links(__FILE__);
+$capsules = cms_get_featured_capsules($theme);
+
 cms_render_template($tpl, [
-    'links'    => $links,
-    'capsules' => $capsules,
+    'links'        => $links,
+    'capsules'     => $capsules,
     'theme_subdir' => 'storefront'
 ]);
 ?>
