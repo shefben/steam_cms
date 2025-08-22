@@ -1,133 +1,207 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- Breadcrumbs -->
-<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
-<tr>
-    <td>
-        <font face="verdana,arial,helvetica" size="1">
-        <a href="{U_INDEX}">{L_INDEX}</a>
-        <!-- BEGIN navlinks -->
-        &nbsp;&#187;&nbsp;<a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a>
-        <!-- END navlinks -->
-        </font>
-    </td>
-    <td align="right">
-        <!-- IF S_DISPLAY_REPLY_INFO and not S_IS_BOT -->
-        <a href="{U_POST_REPLY_TOPIC}"><img src="{T_THEME_PATH}/images/reply.gif" border="0" alt="{L_POST_REPLY}" /></a>
-        <!-- ENDIF -->
-    </td>
-</tr>
-</table>
+<div class="content" role="main">
+	<div align="center">
+		<table bgcolor="#626D5C" border="0" cellpadding="5" cellspacing="0" width="798">
+			<tr valign="top">
+				<td align="left" bgcolor="#4c5844" width="100%">
+					<div align="center">
+						<table border="0" cellspacing="0" width="100%">
+							<tr>
+								<td align="left" width="50%">
+									<font color="#FFFFFF" face="Arial" size="4"><b>{TOPIC_TITLE}</b></font><br/>
+									<font face="Arial" size="1">Last Visit: {S_USER_LAST_VISIT} -- Currently: {CURRENT_TIME}</font>
+								</td>
+								<td width="50%">
+									<p align="right">
+										<!-- IF S_CAN_POST_NEW -->
+										<a href="{U_POST_NEW_TOPIC}"><img border="0" height="19" src="{T_THEME_PATH}/images/buttons/grey/postnewtopic.gif" width="88"/></a>
+										<!-- ENDIF -->
+										<a href="{U_VIEW_FORUM}"><img border="0" height="19" src="{T_THEME_PATH}/images/buttons/grey/boardlistings.gif" width="82"/></a>
+										<a href="{U_SEARCH}"><img border="0" height="19" src="{T_THEME_PATH}/images/buttons/grey/search.gif" width="48"/></a>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" width="100%">
+									<font color="#4C5844" face="Arial" size="1">.</font>
+								</td>
+							</tr>
+						</table>
+					</div>
 
-<!-- Topic Title -->
-<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
-<tr>
-    <td>
-        <font face="verdana, arial, helvetica" size="2"><b>{TOPIC_TITLE}</b></font>
-    </td>
-</tr>
-</table>
+					<!-- Navigation and pagination -->
+					<div align="center">
+						<table border="0" cellspacing="0" width="100%">
+							<tr>
+								<td width="50%">
+									<font face="Arial" size="2">
+										View: 
+										<select name="viewmode">
+											<option value="threaded" <!-- IF S_VIEWMODE_THREADED -->selected<!-- ENDIF -->>Threaded</option>
+											<option value="flat" <!-- IF S_VIEWMODE_FLAT -->selected<!-- ENDIF -->>Flat</option>
+										</select>
+									</font>
+								</td>
+								<td width="50%">
+									<p align="right">
+										<font face="Arial" size="2">
+											<!-- IF PREVIOUS_PAGE --><a href="{PREVIOUS_PAGE}"><img alt="Previous Thread" border="0" height="19" src="{T_THEME_PATH}/images/buttons/grey/previousthread.gif" width="23"/></a><!-- ENDIF -->
+											<a href="{U_VIEW_FORUM}"><img border="0" height="19" src="{T_THEME_PATH}/images/buttons/grey/topiclistings.gif" width="82"/></a>
+											<!-- IF NEXT_PAGE --><a href="{NEXT_PAGE}"><img alt="Next Thread" border="0" height="19" src="{T_THEME_PATH}/images/buttons/grey/nextthread.gif" width="23"/></a><!-- ENDIF -->
+										</font>
+									</p>
+								</td>
+							</tr>
+						</table>
+					</div>
 
-<br />
+					<!-- Posts -->
+					<!-- BEGIN postrow -->
+					<div align="center">
+						<table border="0" cellspacing="0" width="100%">
+							<tr>
+								<td align="center" bgcolor="<!-- IF postrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="5%">
+									<font face="Arial" size="2" color="#c4cabe">{postrow.POST_NUMBER}.</font>
+								</td>
+								<td bgcolor="<!-- IF postrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="55%">
+									<b><font color="#c4cabe" face="Arial" size="2">{postrow.POST_SUBJECT}</font></b>
+								</td>
+								<td bgcolor="<!-- IF postrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="20%">
+									<font face="Arial" size="2" color="#c4cabe">{postrow.POST_DATE} <font color="#969F8E">{postrow.POST_TIME}</font></font>
+								</td>
+								<td align="right" bgcolor="<!-- IF postrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="20%">
+									<font face="Arial" size="2">
+										<a href="{postrow.U_POST_AUTHOR}" title="Posts: {postrow.POSTS} ; Rank: {postrow.RANK_TITLE}" style="color: #bfba50">{postrow.POST_AUTHOR}</a>
+									</font>
+								</td>
+							</tr>
+						</table>
+						
+						<!-- Post content -->
+						<table border="0" cellspacing="0" width="100%">
+							<tr>
+								<td align="center" bgcolor="<!-- IF postrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" valign="top" width="5%">
+									<p><font color="#FFFFFF" face="Arial" size="2"></font></p>
+								</td>
+								<td bgcolor="<!-- IF postrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" colspan="3" valign="top" width="95%">
+									<font face="Arial" size="2" color="#c4cabe">{postrow.MESSAGE}</font>
+									<!-- IF postrow.SIGNATURE --><br/><br/><font face="Arial" size="1" color="#c4cabe">{postrow.SIGNATURE}</font><!-- ENDIF -->
+									
+									<br/><br/>
+									<table width="100%" border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td><font face="Arial" size="1" color="#c4cabe">
+										Registered: <!-- IF postrow.POSTER_JOINED -->{postrow.POSTER_JOINED}<!-- ENDIF --><br/>
+										Location: <!-- IF postrow.POSTER_FROM -->{postrow.POSTER_FROM}<!-- ENDIF --><br/>
+										Posts: <!-- IF postrow.POSTER_POSTS -->{postrow.POSTER_POSTS}<!-- ENDIF -->
+										</font></td>
+									</tr>
+									</table>
+									
+									<br/>
+									<table width="100%" border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td><font face="Arial" size="1" color="#c4cabe">
+										<!-- IF postrow.U_POST_AUTHOR --><a href="{postrow.U_POST_AUTHOR}" style="color: #bfba50">Profile</a><!-- ENDIF -->
+										<!-- IF postrow.U_PM --> | <a href="{postrow.U_PM}" style="color: #bfba50">PM</a><!-- ENDIF -->
+										<!-- IF postrow.U_SEARCH --> | <a href="{postrow.U_SEARCH}" style="color: #bfba50">Search</a><!-- ENDIF -->
+										<!-- IF postrow.U_BUDDY_ADD --> | <a href="{postrow.U_BUDDY_ADD}" style="color: #bfba50">Buddy</a><!-- ENDIF -->
+										</font></td>
+									</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
 
-<!-- Posts -->
-<!-- BEGIN postrow -->
-<table cellpadding="0" cellspacing="0" border="0" bgcolor="#001052" width="100%" align="center">
-<tr>
-    <td>
-        <table cellpadding="4" cellspacing="1" border="0" width="100%">
-        <tr>
-            <td bgcolor="#001052" width="150" valign="top">
-                <font face="Arial" size="1" color="#E2E3E6"><b>{postrow.POST_AUTHOR_FULL}</b></font>
-            </td>
-            <td bgcolor="#001052" align="right">
-                <font face="Arial" size="1" color="#E2E3E6">
-                <!-- IF postrow.POST_DATE -->{postrow.POST_DATE}<!-- ENDIF -->
-                </font>
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor="#606275" width="150" valign="top">
-                <!-- IF postrow.POSTER_AVATAR -->
-                {postrow.POSTER_AVATAR}<br />
-                <!-- ENDIF -->
-                <font face="Arial" size="1" color="white">
-                <!-- IF postrow.POSTER_JOINED -->{L_JOINED}: {postrow.POSTER_JOINED}<br /><!-- ENDIF -->
-                <!-- IF postrow.POSTER_POSTS -->{L_POSTS}: {postrow.POSTER_POSTS}<br /><!-- ENDIF -->
-                <!-- IF postrow.POSTER_FROM -->{L_LOCATION}: {postrow.POSTER_FROM}<br /><!-- ENDIF -->
-                </font>
-            </td>
-            <td bgcolor="#6b6d84" valign="top">
-                <font face="Arial" size="2" color="white">
-                {postrow.MESSAGE}
-                </font>
-                
-                <!-- IF postrow.SIGNATURE -->
-                <br /><br />
-                <hr size="1" color="#B8C2AE" />
-                <font face="Arial" size="1" color="white">{postrow.SIGNATURE}</font>
-                <!-- ENDIF -->
-                
-                <!-- IF postrow.EDITED_MESSAGE -->
-                <br /><br />
-                <font face="Arial" size="1" color="#B8C2AE">
-                {postrow.EDITED_MESSAGE}
-                </font>
-                <!-- ENDIF -->
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor="#606275" width="150">
-                <!-- IF postrow.POSTER_ONLINE -->
-                <img src="{T_THEME_PATH}/images/icon_online.gif" border="0" alt="{L_ONLINE}" />
-                <font face="Arial" size="1" color="white">{L_ONLINE}</font>
-                <!-- ELSE -->
-                <img src="{T_THEME_PATH}/images/icon_offline.gif" border="0" alt="{L_OFFLINE}" />
-                <font face="Arial" size="1" color="white">{L_OFFLINE}</font>
-                <!-- ENDIF -->
-            </td>
-            <td bgcolor="#6b6d84" align="right">
-                <font face="Arial" size="1">
-                <!-- IF postrow.U_QUOTE -->
-                <a href="{postrow.U_QUOTE}"><img src="{T_THEME_PATH}/images/quote.gif" border="0" alt="{L_REPLY_WITH_QUOTE}" /></a>
-                <!-- ENDIF -->
-                <!-- IF postrow.U_EDIT -->
-                <a href="{postrow.U_EDIT}"><img src="{T_THEME_PATH}/images/edit.gif" border="0" alt="{L_EDIT_POST}" /></a>
-                <!-- ENDIF -->
-                </font>
-            </td>
-        </tr>
-        </table>
-    </td>
-</tr>
-</table>
-<br />
-<!-- END postrow -->
+						<!-- Post actions -->
+						<div align="center">
+							<table border="0" cellspacing="0" width="100%">
+								<tr>
+									<td width="50%">
+										<font face="Arial" size="2">
+											<!-- IF not postrow.S_LAST_POST --><a href="#post{postrow.POST_ID_NEXT}"><img alt="Next Post" border="0" height="19" src="{T_THEME_PATH}/images/buttons/cream/nextpost.gif" width="49"/></a><!-- ENDIF -->
+										</font>
+									</td>
+									<td align="right" width="50%">
+										<font face="Arial" size="2">
+											<!-- IF postrow.S_CAN_REPLY --><a href="{postrow.U_POST_REPLY}"><img border="0" height="19" src="{T_THEME_PATH}/images/buttons/cream/postreply.gif" width="66"/></a><!-- ENDIF -->
+											<!-- IF postrow.S_CAN_EDIT --><a href="{postrow.U_EDIT}"><img border="0" height="19" src="{T_THEME_PATH}/images/buttons/cream/edit.gif" width="40"/></a><!-- ENDIF -->
+											<!-- IF postrow.S_CAN_DELETE --><a href="{postrow.U_DELETE}"><img border="0" height="19" src="{T_THEME_PATH}/images/buttons/cream/delete.gif" width="49"/></a><!-- ENDIF -->
+										</font>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" width="100%"><font color="#FFFFFF" face="Arial" size="2">.</font></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- END postrow -->
 
-<!-- Quick Reply -->
-<!-- IF S_QUICK_REPLY -->
-<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
-<tr>
-    <td>
-        <table cellpadding="4" cellspacing="1" border="0" width="100%">
-        <tr>
-            <td bgcolor="#3E4637" colspan="2">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_QUICK_REPLY}</b></font>
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor="#545F4E" colspan="2">
-                <form method="post" action="{S_QUICK_REPLY_ACTION}">
-                <textarea name="message" rows="8" cols="80" class="bginput"></textarea><br />
-                <input type="submit" value="{L_SUBMIT}" class="bginput" />
-                {S_FORM_TOKEN}
-                </form>
-            </td>
-        </tr>
-        </table>
-    </td>
-</tr>
-</table>
-<!-- ENDIF -->
+					<!-- Pagination -->
+					<!-- IF S_DISPLAY_PAGINATION -->
+					<div align="center">
+						<font face="Arial" size="2" color="#c4cabe">
+							<b>{TOTAL_POSTS} Post(s). {PAGE_NUMBER}</b><br/>
+							<!-- IF PAGINATION -->
+							{PAGINATION}
+							<!-- ENDIF -->
+						</font>
+					</div>
+					<!-- ENDIF -->
+
+					<!-- Quick reply form -->
+					<!-- IF S_QUICK_REPLY -->
+					<div align="center">
+						<table border="0" cellspacing="0" width="100%">
+							<tr>
+								<td bgcolor="#424B3C" width="100%">
+									<p align="left"><font color="#c4cabe" face="Arial" size="2"><b>Quick Reply</b></font></p>
+									<form action="{S_POST_ACTION}" method="post">
+										{S_FORM_TOKEN}
+										<textarea name="message" cols="60" rows="8" wrap="virtual"></textarea><br/>
+										<input type="submit" name="post" value="Post Reply" />
+									</form>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!-- ENDIF -->
+
+					<!-- Moderator controls -->
+					<div align="center">
+						<table border="0" cellspacing="0" width="100%">
+							<tr>
+								<td width="50%"><font color="#4C5844" face="Arial" size="1">.</font></td>
+								<td width="50%"><font color="#4C5844" face="Arial" size="1">.</font></td>
+							</tr>
+							<tr>
+								<td align="right" width="50%">
+									<p align="left"><font face="Arial" size="1"></font></p>
+								</td>
+								<td align="right" width="50%">
+									<font face="Arial">
+										<font size="1" color="#c4cabe"><b>Moderators on this board:<br/></b></font>
+										<font face="Arial" size="1">
+											<!-- BEGIN moderators -->
+											<!-- IF not moderators.S_FIRST_ROW -->, <!-- ENDIF --><a href="{moderators.U_USERNAME}" style="color: #bfba50">{moderators.USERNAME}</a>
+											<!-- END moderators -->
+										</font>
+									</font>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" width="100%">
+									<br/><font face="Arial" size="1" color="#c4cabe"><font color="red">*</font> Updated or new since last visit.</font>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
 
 <!-- INCLUDE overall_footer.html -->

@@ -159,6 +159,8 @@
 
 		<!-- IF postrow.POSTER_POSTS != '' --><dd class="profile-posts"><strong>{L_POSTS}{L_COLON}</strong> <!-- IF postrow.U_SEARCH !== '' --><a href="{postrow.U_SEARCH}"><!-- ENDIF -->{postrow.POSTER_POSTS}<!-- IF postrow.U_SEARCH !== '' --></a><!-- ENDIF --></dd><!-- ENDIF -->
 		<!-- IF postrow.POSTER_JOINED --><dd class="profile-joined"><strong>{L_JOINED}{L_COLON}</strong> {postrow.POSTER_JOINED}</dd><!-- ENDIF -->
+		<!-- IF postrow.POSTER_FROM --><dd class="profile-location"><strong>{L_LOCATION}{L_COLON}</strong> {postrow.POSTER_FROM}</dd><!-- ENDIF -->
+		<!-- IF postrow.POST_DATE --><dd class="profile-post-date"><strong>Posted{L_COLON}</strong> {postrow.POST_DATE} {postrow.POST_TIME}</dd><!-- ENDIF -->
 		<!-- IF postrow.POSTER_WARNINGS --><dd class="profile-warnings"><strong>{L_WARNINGS}{L_COLON}</strong> {postrow.POSTER_WARNINGS}</dd><!-- ENDIF -->
 
 		<!-- IF postrow.S_PROFILE_FIELD1 -->
@@ -339,6 +341,16 @@
 			{% EVENT viewtopic_body_postrow_content_before %}
 
 			<div class="content">{postrow.MESSAGE}</div>
+
+			<!-- Additional post actions -->
+			<div class="post-actions">
+				<p>
+				<!-- IF postrow.U_POST_AUTHOR --><a href="{postrow.U_POST_AUTHOR}">Profile</a><!-- ENDIF -->
+				<!-- IF postrow.U_PM --> | <a href="{postrow.U_PM}">PM</a><!-- ENDIF -->
+				<!-- IF postrow.U_SEARCH --> | <a href="{postrow.U_SEARCH}">Search</a><!-- ENDIF -->
+				<!-- IF postrow.U_BUDDY_ADD --> | <a href="{postrow.U_BUDDY_ADD}">Buddy</a><!-- ENDIF -->
+				</p>
+			</div>
 
 			<!-- EVENT viewtopic_body_postrow_content_after -->
 

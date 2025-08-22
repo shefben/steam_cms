@@ -44,60 +44,94 @@
 
 <!-- Steam Header -->
 <div align="left">
-<table align="center" bgcolor="#000000" border="0" cellpadding="0" cellspacing="0" class="steam-header">
-<tr class="spacer-h16">
-    <td colspan="5" height="16" width="799"></td>
-    <td height="16" width="1"></td>
+<table align="center" bgcolor="#000000" border="0" cellpadding="0" cellspacing="0" cool="" gridx="16" gridy="16" height="135" showgridx="" showgridy="" width="800">
+<tr height="16">
+    <td colspan="5" height="16" width="799"><spacer height="16" type="block" width="799"/></td>
+    <td height="16" width="1"><spacer height="16" type="block" width="1"/></td>
 </tr>
-<tr class="spacer-h38">
-    <td colspan="2" height="38" width="17"></td>
-    <td align="left" colspan="3" height="38" valign="top" width="782">
-        <img border="0" height="29" src="{T_THEME_PATH}/images/Type_SupportSite2.jpg" width="770" class="support-site-logo" />
+<tr height="38">
+    <td colspan="2" height="38" width="17"><spacer height="38" type="block" width="17"/></td>
+    <td align="left" colspan="3" height="38" valign="top" width="782" xpos="17">
+        <img border="0" height="29" src="{T_THEME_PATH}/images/Type_SupportSite2.jpg" width="770"/>
     </td>
-    <td height="38" width="1"></td>
+    <td height="38" width="1"><spacer height="38" type="block" width="1"/></td>
 </tr>
-<tr class="spacer-h18">
-    <td colspan="3" height="18" width="241"></td>
-    <td align="left" height="80" rowspan="2" valign="top" width="545" class="header-nav">
+<tr height="18">
+    <td colspan="3" height="18" width="241"><spacer height="18" type="block" width="241"/></td>
+    <td align="left" content="" csheight="71" height="80" rowspan="2" valign="top" width="545" xpos="241">
         <div align="right">
-            <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2" class="header-nav-main">
-                <b><a href="{U_INDEX}">Home</a></b> |
-                <b><a href="#">Support</a></b> |
-                <b><a href="{U_INDEX}">Forums</a></b> |
-                <b><a href="#">Bugs</a></b> |
-                <b><a href="#">Troubleshooting</a></b> |
+            <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">
+                <b><a href="{U_INDEX}">Home</a></b> |<b> </b>
+                <b><a href="#">Support</a></b> |<b> </b>
+                <b><a href="{U_INDEX}">Forums</a></b><b> | </b>
+                <b><a href="#">Bugs</a></b><b> | </b>
+                <b><a href="#">Troubleshooting</a></b><b> | </b>
                 <b><a href="#">Contact</a></b>
-            </font><br />
-            <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="1" class="header-nav-sub">
-                <!-- IF S_USER_LOGGED_IN -->
-                    <a href="{U_PROFILE}">Account Options</a> |
-                <!-- ELSE -->
-                    <a href="{U_REGISTER}">Create Account</a> |
+            </font><br/>
+            <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="1">
+                <!-- IF not S_USER_LOGGED_IN -->
+                    <a href="{U_REGISTER}">Create Account</a> | 
                 <!-- ENDIF -->
-                <a href="#">Account Options</a> |
-                <a href="#">Lost Password</a> |
-                <a href="{U_PRIVATEMSGS}">Private Messages 
-                <!-- IF S_USER_NEW_PRIVMSG -->({PRIVATE_MESSAGE_COUNT})<!-- ELSE -->(?)<!-- ENDIF --></a>
+                <a href="#">Account Options</a> | 
+                <a href="#">Lost Password</a> | 
+                <a href="{U_PRIVATEMSGS}">Private Messages <!-- IF S_USER_NEW_PRIVMSG -->({PRIVATE_MESSAGE_COUNT})<!-- ELSE -->(?)<!-- ENDIF --></a>
             </font>
         </div>
     </td>
-    <td height="80" rowspan="2" width="13"></td>
-    <td height="18" width="1"></td>
+    <td height="80" rowspan="2" width="13"><spacer height="80" type="block" width="13"/></td>
+    <td height="18" width="1"><spacer height="18" type="block" width="1"/></td>
 </tr>
-<tr class="spacer-h62">
-    <td height="62" width="15"></td>
-    <td align="left" colspan="2" height="62" valign="top" width="226">
-        <img border="0" height="51" src="{T_THEME_PATH}/images/Logo_Steam2.jpg" width="188" class="steam-logo" />
+<tr height="62">
+    <td height="62" width="15"><spacer height="62" type="block" width="15"/></td>
+    <td align="left" colspan="2" height="62" valign="top" width="226" xpos="15">
+        <img border="0" height="51" src="{T_THEME_PATH}/images/Logo_Steam2.jpg" width="188"/>
     </td>
-    <td height="62" width="1"></td>
+    <td height="62" width="1"><spacer height="62" type="block" width="1"/></td>
+</tr>
+<tr cntrlrow="" height="1">
+    <td height="1" width="15"><spacer height="1" type="block" width="15"/></td>
+    <td height="1" width="2"><spacer height="1" type="block" width="2"/></td>
+    <td height="1" width="224"><spacer height="1" type="block" width="224"/></td>
+    <td height="1" width="545"><spacer height="1" type="block" width="545"/></td>
+    <td height="1" width="13"><spacer height="1" type="block" width="13"/></td>
+    <td height="1" width="1"><spacer height="1" type="block" width="1"/></td>
 </tr>
 </table>
+<br/>
 </div>
 
 <br />
 
 <!-- Content Wrapper -->
-<table align="center" bgcolor="#626D5C" border="0" cellpadding="5" cellspacing="0" width="798" class="content-wrapper">
-<tr valign="top">
-    <td align="left" bgcolor="#4c5844" width="100%" class="content-inner">
-        <div align="center" class="board-listing">
+<table border="0" cellpadding="0" cellspacing="0" width="651">
+<tr>
+<td width="5"><font color="#B8C2AE"> </font></td>
+<td bgcolor="#6a6f82" width="631">
+<table border="0" cellpadding="5" cellspacing="0" width="100%">
+<tr>
+<td width="100%">
+<div align="center">
+<center>
+<table border="0" cellpadding="3" cellspacing="0" width="100%">
+<tr>
+<td bgcolor="#3C4770" width="50%"><font face="Arial" size="2">
+<!-- IF not S_USER_LOGGED_IN -->
+<a href="{U_REGISTER}">Signup</a> :
+<a href="#">Forgotten Password</a> 
+: <a href="#">Options</a>
+<!-- ELSE -->
+<a href="{U_PROFILE}">Profile</a> :
+<a href="#">Options</a>
+<!-- ENDIF -->
+</font></td>
+<td bgcolor="#3C4770" width="50%">
+<p align="right"><font face="Arial" size="2">You have <!-- IF S_USER_NEW_PRIVMSG -->{PRIVATE_MESSAGE_COUNT}<!-- ELSE -->?<!-- ENDIF -->
+<a href="{U_PRIVATEMSGS}">Private Messages</a></font></p></td>
+</tr>
+<tr>
+<td colspan="2" width="100%"><font color="#636D5A" face="Arial" size="2">.</font></td>
+</tr>
+</table>
+</center>
+</div>
+<p align="left"><div align="center">

@@ -8,7 +8,24 @@ $i    = $_GET['i'] ?? '';
 $a    = $_GET['a'] ?? '';
 $categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
 $developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+$apps = $db->query('SELECT * FROM store_apps ORDER BY name LIMIT 20')->fetchAll(PDO::FETCH_ASSOC);
 $links = cms_load_store_links(__FILE__);
+
+// Generate browse content
+$content = '<h2>Browse Games</h2>';
+$content .= '<div class="game-grid">';
+foreach ($apps as $app) {
+    $content .= '<div class="game-item">';
+    $content .= '<h3><a href="?area=game&AppId=' . $app['appid'] . '">' . htmlspecialchars($app['name']) . '</a></h3>';
+    if (!empty($app['description'])) {
+        $content .= '<p>' . htmlspecialchars(substr($app['description'], 0, 100)) . '...</p>';
+    }
+    if ($app['price'] > 0) {
+        $content .= '<p>Price: $' . number_format($app['price'], 2) . '</p>';
+    }
+    $content .= '</div>';
+}
+$content .= '</div>';
 
 $theme = cms_get_setting('theme','2005_v2');
 $page  = cms_get_store_page('browse');
@@ -16,13 +33,15 @@ $tpl = cms_theme_layout('default.twig', $theme);
 cms_render_template($tpl, [
     'categories' => $categories,
     'developers' => $developers,
+    'apps'       => $apps,
     'links'      => $links,
     'lang'       => $lang,
     's'          => $s,
     'i'          => $i,
     'a'          => $a,
     'page'       => $page,
-    'page_title' => $page['title'],
+    'page_title' => $page['title'] ?: 'Browse Games',
+    'content'    => $content,
     'theme_subdir' => 'storefront'
 ]);
 ?>

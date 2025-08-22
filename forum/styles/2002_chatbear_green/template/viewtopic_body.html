@@ -68,7 +68,7 @@
 									<b><font color="#c4cabe" face="Arial" size="2">{postrow.POST_SUBJECT}</font></b>
 								</td>
 								<td bgcolor="<!-- IF postrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="20%">
-									<font face="Arial" size="2" color="#c4cabe">{postrow.POST_DATE}</font>
+									<font face="Arial" size="2" color="#c4cabe">{postrow.POST_DATE} <font color="#969F8E">{postrow.POST_TIME}</font></font>
 								</td>
 								<td align="right" bgcolor="<!-- IF postrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="20%">
 									<font face="Arial" size="2">
@@ -87,6 +87,29 @@
 								<td bgcolor="<!-- IF postrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" colspan="3" valign="top" width="95%">
 									<font face="Arial" size="2" color="#c4cabe">{postrow.MESSAGE}</font>
 									<!-- IF postrow.SIGNATURE --><br/><br/><font face="Arial" size="1" color="#c4cabe">{postrow.SIGNATURE}</font><!-- ENDIF -->
+									
+									<br/><br/>
+									<table width="100%" border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td><font face="Arial" size="1" color="#c4cabe">
+										Registered: <!-- IF postrow.POSTER_JOINED -->{postrow.POSTER_JOINED}<!-- ENDIF --><br/>
+										Location: <!-- IF postrow.POSTER_FROM -->{postrow.POSTER_FROM}<!-- ENDIF --><br/>
+										Posts: <!-- IF postrow.POSTER_POSTS -->{postrow.POSTER_POSTS}<!-- ENDIF -->
+										</font></td>
+									</tr>
+									</table>
+									
+									<br/>
+									<table width="100%" border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td><font face="Arial" size="1" color="#c4cabe">
+										<!-- IF postrow.U_POST_AUTHOR --><a href="{postrow.U_POST_AUTHOR}" style="color: #bfba50">Profile</a><!-- ENDIF -->
+										<!-- IF postrow.U_PM --> | <a href="{postrow.U_PM}" style="color: #bfba50">PM</a><!-- ENDIF -->
+										<!-- IF postrow.U_SEARCH --> | <a href="{postrow.U_SEARCH}" style="color: #bfba50">Search</a><!-- ENDIF -->
+										<!-- IF postrow.U_BUDDY_ADD --> | <a href="{postrow.U_BUDDY_ADD}" style="color: #bfba50">Buddy</a><!-- ENDIF -->
+										</font></td>
+									</tr>
+									</table>
 								</td>
 							</tr>
 						</table>

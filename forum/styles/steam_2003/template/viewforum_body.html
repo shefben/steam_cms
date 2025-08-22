@@ -33,81 +33,81 @@
 <br />
 
 <!-- Topic List -->
-<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000" bgcolor="#505050" width="100%" align="center">
 <tr>
     <td>
         <table cellpadding="4" cellspacing="1" border="0" width="100%">
         <tr align="center">
-            <td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1">&nbsp;</font></td>
-            <td bgcolor="#3E4637" width="50%" align="left">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_TOPICS}</b></font>
+            <td bgcolor="#505050"><font face="verdana,arial,helvetica" size="1">&nbsp;</font></td>
+            <td bgcolor="#505050" width="50%" align="left">
+                <font face="verdana,arial,helvetica" size="1" color="#FFFFFF"><b>{L_TOPICS}</b></font>
             </td>
-            <td bgcolor="#3E4637">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_AUTHOR}</b></font>
+            <td bgcolor="#505050">
+                <font face="verdana,arial,helvetica" size="1" color="#FFFFFF"><b>{L_AUTHOR}</b></font>
             </td>
-            <td bgcolor="#3E4637">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_REPLIES}</b></font>
+            <td bgcolor="#505050">
+                <font face="verdana,arial,helvetica" size="1" color="#FFFFFF"><b>{L_REPLIES}</b></font>
             </td>
-            <td bgcolor="#3E4637">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_VIEWS}</b></font>
+            <td bgcolor="#505050">
+                <font face="verdana,arial,helvetica" size="1" color="#FFFFFF"><b>{L_VIEWS}</b></font>
             </td>
-            <td bgcolor="#3E4637" nowrap="nowrap">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_LAST_POST}</b></font>
+            <td bgcolor="#505050" nowrap="nowrap">
+                <font face="verdana,arial,helvetica" size="1" color="#FFFFFF"><b>{L_LAST_POST}</b></font>
             </td>
         </tr>
 
         <!-- BEGIN topicrow -->
         <tr align="center">
-            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is odd -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->" valign="top">
+            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is odd -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->" valign="top" style="border: 1px solid #000000;">
                 <!-- IF topicrow.TOPIC_FOLDER_IMG -->
                 <img src="{topicrow.TOPIC_FOLDER_IMG}" border="0" alt="{topicrow.TOPIC_FOLDER_IMG_ALT}" />
                 <!-- ELSE -->
-                <img src="{T_THEME_PATH}/images/<!-- IF topicrow.S_TOPIC_LOCKED -->lockfolder<!-- ELSEIF topicrow.S_UNREAD_TOPIC -->newfolder<!-- ELSE -->folder<!-- ENDIF -->.gif" border="0" alt="" />
+                <img src="{T_THEME_PATH}/images/<!-- IF topicrow.S_TOPIC_LOCKED -->lockfolder<!-- ELSEIF topicrow.S_UNREAD_TOPIC -->newfolder<!-- ELSE -->folder<!-- ENDIF -->.gif" border="0" alt="Topic Status" />
                 <!-- ENDIF -->
             </td>
-            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is even -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->" align="left">
-                <!-- IF topicrow.S_UNREAD_TOPIC and not S_IS_BOT --><a href="{topicrow.U_NEWEST_POST}"><img src="{T_THEME_PATH}/images/icon_newest_reply.gif" border="0" alt="{L_VIEW_NEWEST_POST}" /></a>&nbsp;<!-- ENDIF -->
+            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is even -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->" align="left" style="border: 1px solid #000000;">
+                <!-- IF topicrow.S_UNREAD_TOPIC and not S_IS_BOT --><a href="{topicrow.U_NEWEST_POST}"><img src="{T_THEME_PATH}/images/icon_newest_reply.gif" border="0" alt="View newest post" /></a>&nbsp;<!-- ENDIF -->
                 <a href="{topicrow.U_VIEW_TOPIC}">
-                    <font face="verdana, arial, helvetica" size="2">{topicrow.TOPIC_TITLE}</font>
+                    <font face="verdana, arial, helvetica" size="2" color="#000000">{topicrow.TOPIC_TITLE}</font>
                 </a>
                 <!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED -->
                 <br /><font face="verdana,arial,helvetica" size="1" color="#FF6600">{L_TOPIC_UNAPPROVED}</font>
                 <!-- ENDIF -->
                 <!-- IF topicrow.GOTO_PAGE -->
-                <br /><font face="verdana,arial,helvetica" size="1">{L_GOTO_PAGE}: {topicrow.GOTO_PAGE}</font>
+                <br /><font face="verdana,arial,helvetica" size="1" color="#000000">{L_GOTO_PAGE}: {topicrow.GOTO_PAGE}</font>
                 <!-- ENDIF -->
             </td>
-            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is odd -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
-                <font face="verdana, arial, helvetica" size="2">{topicrow.TOPIC_AUTHOR_FULL}</font>
+            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is odd -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->" style="border: 1px solid #000000;">
+                <font face="verdana, arial, helvetica" size="2" color="#000000">{topicrow.TOPIC_AUTHOR_FULL}</font>
             </td>
-            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is even -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
-                <font face="verdana, arial, helvetica" size="2">{topicrow.REPLIES}</font>
+            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is even -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->" style="border: 1px solid #000000;">
+                <font face="verdana, arial, helvetica" size="2" color="#000000">{topicrow.REPLIES}</font>
             </td>
-            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is odd -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
-                <font face="verdana, arial, helvetica" size="2">{topicrow.VIEWS}</font>
+            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is odd -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->" style="border: 1px solid #000000;">
+                <font face="verdana, arial, helvetica" size="2" color="#000000">{topicrow.VIEWS}</font>
             </td>
-            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is even -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
-                <font face="verdana,arial,helvetica" size="1">
+            <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is even -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->" style="border: 1px solid #000000;">
+                <font face="verdana,arial,helvetica" size="1" color="#000000">
                 <!-- IF topicrow.LAST_POST_TIME -->
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
                     <tr align="right">
                         <td nowrap="nowrap">
-                            <font face="verdana,arial,helvetica" size="1">
+                            <font face="verdana,arial,helvetica" size="1" color="#000000">
                             {topicrow.LAST_POST_TIME}
                             <!-- IF topicrow.LAST_POST_AUTHOR -->
-                            <br />by <a href="{topicrow.U_LAST_POST_AUTHOR}">{topicrow.LAST_POST_AUTHOR}</a>
+                            <br />by <a href="{topicrow.U_LAST_POST_AUTHOR}" style="color: #27346f">{topicrow.LAST_POST_AUTHOR}</a>
                             <!-- ENDIF -->
                             </font>
                         </td>
                         <td nowrap="nowrap">
-                            &nbsp;<a href="{topicrow.U_LAST_POST}">
+                            &nbsp;<a href="{topicrow.U_LAST_POST}" style="color: #27346f">
                                 <img src="{T_THEME_PATH}/images/lastpost.gif" border="0" alt="{L_VIEW_LATEST_POST}" />
                             </a>
                         </td>
                     </tr>
                     </table>
                 <!-- ELSE -->
-                    {L_NO_POSTS}
+                    <font color="#000000">{L_NO_POSTS}</font>
                 <!-- ENDIF -->
                 </font>
             </td>
@@ -116,8 +116,8 @@
 
         <!-- IF not .topicrow -->
         <tr>
-            <td bgcolor="#545F4E" colspan="6" align="center">
-                <font face="verdana,arial,helvetica" size="2">{L_NO_TOPICS}</font>
+            <td bgcolor="#DFDFDF" colspan="6" align="center" style="border: 1px solid #000000;">
+                <font face="verdana,arial,helvetica" size="2" color="#000000">{L_NO_TOPICS}</font>
             </td>
         </tr>
         <!-- ENDIF -->
