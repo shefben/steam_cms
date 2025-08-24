@@ -1,0 +1,387 @@
+.browse_note_text { color: #909090; font-family: Tahoma; font-weight: bold; font-size: 10px; }
+
+body {
+	margin:0px;
+	font-family:verdana,arial, helvetica;
+	font-size:8px;
+	line-height:12px;
+}
+
+TD {
+	font-size:10px;
+}
+
+TD.store_capsule, TD.store_capsule:hover {
+	vertical-align:top;
+	cursor:pointer;
+	font-weight:bold;
+}
+
+a {
+	color: Black;
+	text-decoration: underline;
+}
+a:hover {
+	color: #808080;
+}
+
+.menu_spacer {
+	width: 100%; 
+	background-image: url('img/dash.gif'); 
+	background-repeat: repeat-x;
+	line-height:16px;
+	height:20px;
+}
+
+.line_spacer {
+	width: 100%; 
+	background-image: url('img/dash.gif'); 
+	background-repeat: repeat-x;
+	height: 20px;
+}
+
+.menu_item {
+	color: #3B3B3B;
+	font-family: Verdana;
+	font-size: 11px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height:16px;
+	height:20px;
+}
+
+.menu_item_current, .menu_item_current:hover {
+	color: #34788A;
+	font-family: Verdana;
+	font-size: 11px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height:16px;
+	height:20px;
+}
+
+.menu_item:hover {
+	color: #000000;
+	line-height:16px;
+	height:20px;
+}
+
+.menu_pointer {
+	font-family: Wingdings 3; 
+	color: #822400; 
+	font-size: 11px;
+	line-height:16px;
+	height:20px;
+}
+
+.menu_note {
+	font-family: Tahoma;
+	font-size: 9px;
+	width: 120px;
+	line-height:16px;
+	height:20px;
+}
+
+.game_description {
+	height:200px; 
+	vertical-align:top; 
+	padding:16px 56px 16px 16px;
+	color:white;
+}
+
+.discount_description, .discount_price {
+	color: #909090;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.purchase_header {
+	color: #909090;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.old_discount_text {
+	color: #909090;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.discount_text {
+	color: #000000;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.package_header {
+	color: #800000;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.purchase_button {
+	color: #ffffff;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	line-height: 20px;
+	width: 100%;
+}
+
+.purchase_button:hover {
+	color: #ffdddd;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 20px;
+	width: 100%;
+}
+
+.get_steam_button {
+	color: #ffffff;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	line-height: 20px;
+	width: 100%;
+}
+
+.get_steam_button:hover {
+	color: #dddddd;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 20px;
+	width: 100%;
+}
+
+.details_button {
+	color: #800000;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	line-height: 20px;
+	width: 100%;
+}
+
+.details_button:hover {
+	color: #cc0000;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 20px;
+	width: 100%;
+}
+
+.page_title {
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 26px;
+}
+
+.individual_package_title {
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 22px;
+}
+
+.package_title {
+	color: #800000;
+	font-family: Arial;
+	font-size: 22px;
+}
+
+.package_description {
+	color: #800000;
+	font-family: Tahoma;
+	font-size: 11px;
+}
+
+.package_title_beta {
+	color: Blue;
+	font-family: Arial;
+	font-size: 22px;
+}
+
+.package_description_beta {
+	color: Blue;
+	font-family: Tahoma;
+	font-size: 11px;
+}
+
+.text_normal, .normal_text {
+	font-family: Verdana;
+	font-size: 11px;
+}
+
+.small_text, .text_small {
+	color: #000000;
+	font-family: Tahoma;
+	font-size: 10px;
+}
+
+.foot_text, .text_foot {
+	color: #909090;
+	font-family: Tahoma;
+	font-size: 10px;
+}
+
+.search_form_text{
+	font-weight: bold;
+	color: #ffffff;
+	font-family: Tahoma;
+	font-size: 10px;
+}
+
+.admin_login_textbox {
+	font-family: Verdana;
+	font-size: 11px;
+	width: 200px;
+}
+
+.header_link_user_admin, .header_link_user_admin:link, .header_link_user_admin:visited, .header_link_user_admin:hover {
+	font-family: Verdana;
+	font-size: 11px;
+	width: 100%;
+	color: White;
+	text-decoration: none;
+	line-height: 16px;
+}
+
+.header_link_user_admin:hover {
+	color: PaleGoldenrod;
+}
+
+.header_user_admin {
+	font-family: Verdana;
+	font-size: 11px;
+	width: 100%;
+	color: White;
+	text-decoration: none;
+}
+
+.line_link_user_admin, .line_link_user_admin:hover {
+	color: black;
+	width: 100%;
+	text-decoration: none;
+	line-height: 20px;
+}
+
+.line_link_game, .line_link_game:hover {
+	color: black;
+	width: 100%;
+	text-decoration: none;
+}
+
+.line_link_game_beta, .line_link_game_beta:hover {
+	color: Blue;
+	width: 100%;
+	text-decoration: none;
+}
+
+.ReleaseDateUnavailable {
+	color: #c0c0c0;
+}
+
+.ReleaseDateAvailable {
+	color: #c0c0c0;
+}
+
+.ReleaseDateComingSoon {
+}
+
+.ReleaseDateNewRelease {
+}
+
+.admin_note_color {
+	color: Red;
+}
+
+.beta_text {
+	color: #ff00ff;
+	font-weight: bold;
+}
+
+.free_app {
+	color: #800000;
+}
+
+.owned_app {
+	color: #008000;
+}
+
+.browse_section_header {
+	color: #800000;
+	font-family: Arial;
+	font-size: 22px;
+}
+
+a.browse_link {
+	font-family: Verdana;
+	font-size: 11px;
+	text-decoration: none;
+	color: #808080;
+	font-weight: bold;
+	line-height: 20px;
+}
+
+a.browse_link:hover {
+	font-family: Verdana;
+	font-size: 11px;
+	text-decoration: underline;
+	color: #000000;
+	font-weight: bold;
+}
+
+.price_text {
+	font-family: Verdana;
+	font-size: 11px;
+}
+
+.h {
+	font-size: 11px;
+	cursor:pointer;
+}
+
+.trailerLink {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+}
+A:link.trailerLink {
+	color: #FFFFFF; text-decoration:underline;
+}
+.copy {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	padding-right: 325px;
+	padding-left: 15px;
+	padding-bottom: 15px;
+}
+.metaCriticNumber {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	color: #e5c02d;
+}
+.metaCriticLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+	padding-bottom: 4px;
+}
+A.metaCriticLink:Link { color:#FFFFFF; }

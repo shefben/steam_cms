@@ -847,6 +847,40 @@ function cms_require_any_permission($perms){
     exit;
 }
 
+function cms_root_path(): string
+{
+    static $cached_root_path = null;
+    if ($cached_root_path !== null) {
+        return $cached_root_path;
+    }
+
+    // 1. Prefer config setting
+    $root = rtrim(cms_get_setting('root_path', ''), '/');
+    if ($root !== '') {
+        return $cached_root_path = ($root === '/' ? '' : $root);
+    }
+
+    // 2. Auto-detect from script name
+    $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
+    $patterns = [
+        '/storefront/'  => '/storefront',
+        '/cms/admin/'   => '/cms/admin',
+        '/cms/'         => '/cms',
+    ];
+
+    foreach ($patterns as $needle => $strip) {
+        if (strpos($script_name, $needle) !== false) {
+            $root_path = str_replace($strip, '', dirname($script_name));
+            return $cached_root_path = ($root_path === '/' ? '' : $root_path);
+        }
+    }
+
+    // 3. Default: parent directory
+    $root_path = rtrim(dirname($script_name), '/');
+    return $cached_root_path = ($root_path === '/' ? '' : $root_path);
+}
+
+
 function cms_base_url(){
     $root = rtrim(cms_get_setting('root_path',''), '/');
     if($root !== ''){
@@ -1222,7 +1256,7 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
     cms_record_visit($_SERVER['REQUEST_URI'] ?? '');
     $data  = cms_get_theme_header_data($theme);
     $base  = cms_base_url();
-    $logo  = 'images/steam_logo_onblack.gif';
+    $logo  = $data['logo'] ?: '/images/steam_logo_onblack.gif';
     $override = cms_get_header_logo_override();
     if ($override !== null) {
         $logo = $override;
@@ -1230,7 +1264,7 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
             $logo = "themes/$theme/" . ltrim($logo, '/');
         }
     }
-    $logo = str_ireplace('{BASE}', $base, $logo);
+    //$logo = str_ireplace('{BASE}', $base, $logo);
     if ($logo && $logo[0] == '/') {
         $logo = $base . $logo;
     }

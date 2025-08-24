@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = trim($_POST['dbuser']);
         $pass = trim($_POST['dbpass']);
         $dbname = trim($_POST['dbname']);
+        $root_path = trim($_POST['root_path'] ?? '');
         try {
             $dsn = "mysql:host=$host;port=$dbPort;charset=utf8mb4";
             $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
@@ -40,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'user' => $user,
                 'pass' => $pass,
                 'dbname' => $dbname,
+                'root_path' => $root_path,
             ];
             header('Location: install.php?step=2');
             exit;
@@ -53,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $config['user'];
         $pass = $config['pass'];
         $dbname = $config['dbname'];
+        $root_path = $config['root_path'] ?? '';
         $admin_user = trim($_POST['admin_user']);
         $admin_pass = trim($_POST['admin_pass']);
         $admin_email = trim($_POST['admin_email']);
@@ -1059,7 +1062,7 @@ HTML;
                 'favicon' => '/favicon.ico',
                 'error_html' => $error_html,
                 'nav_items' => json_encode($default_nav),
-                'root_path' => '',
+                'root_path' => $root_path,
                 'gzip' => '0',
                 'enable_cache'   => '0',
                 'news_year_only' => '1',
@@ -2454,6 +2457,15 @@ $defaultCafes = [
             <div class="form-group">
                 <label for="dbpass">Database Password</label>
                 <input id="dbpass" type="password" class="form-control" name="dbpass">
+            </div>
+            <div class="form-group">
+                <label for="root_path">CMS Root Path</label>
+                <input id="root_path" class="form-control" name="root_path" value="<?php 
+                    $script_name = $_SERVER['SCRIPT_NAME'] ?? '/install.php';
+                    $root_path = dirname($script_name);
+                    echo htmlspecialchars($root_path === '/' ? '' : $root_path);
+                ?>" placeholder="e.g. /somefolder or leave empty for root">
+                <small class="form-text text-muted">The directory path where the CMS is installed (without domain name). Leave empty if installed in domain root.</small>
             </div>
             <button class="btn btn-primary" type="submit">Continue</button>
         </form>

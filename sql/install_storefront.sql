@@ -317,14 +317,14 @@ INSERT INTO settings(`key`,value) VALUES('store_featured',"{\"top\": 2400, \"mid
 INSERT INTO settings(`key`,value) VALUES('capsules_same_all','0');
 INSERT INTO store_capsules(position,image,appid) VALUES('top','top/05_01_2005.png',2400),('middle','middle/05_01_2005.png',380),('bottom_left','bottom_left/05_01_2005.png',1200),('bottom_right','bottom_right/05_01_2005.png',1300);
 INSERT INTO store_sidebar_links(label,url,type,ord,visible) VALUES
- ('Home','/storefront/index.php','link',1,1),
+ ('Home','storefront/index.php','link',1,1),
  ('','', 'spacer',2,1),
- ('Browser Games','/storefront/browse.php','link',3,1),
- ('All Games','/storefront/all.php','link',4,1),
- ('Search','/storefront/search.php','link',5,1),
+ ('Browser Games','storefront/browse.php','link',3,1),
+ ('All Games','storefront/all.php','link',4,1),
+ ('Search','storefront/search.php','link',5,1),
  ('','', 'spacer',6,1),
-('Media','/storefront/media.php','link',7,1);
+('Media','storefront/media.php','link',7,1);
 INSERT INTO store_pages(slug,title,title_image) VALUES
- ('all','All Games','img/title_blue.jpg'),
- ('browse','Browse Games','img/title_red.jpg'),
- ('search','Search','img/title_grey.jpg');
+ ('all','All Games','title_blue.jpg'),
+ ('browse','Browse Games','title_red.jpg'),
+ ('search','Search','title_grey.jpg');

@@ -595,16 +595,7 @@ function cms_twig_env(string $tpl_dir): Environment
             if (!$img) {
                 return '';
             }
-            $root_path = rtrim(cms_get_setting('root_path', ''), '/');
-            if ($root_path === '') {
-                $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
-                if (strpos($script_name, '/storefront/') !== false) {
-                    $root_path = str_replace('/storefront', '', dirname($script_name));
-                } else {
-                    $root_path = rtrim(dirname($script_name), '/');
-                }
-                $root_path = $root_path === '/' ? '' : $root_path;
-            }
+            $root_path = cms_root_path();
             if (strncasecmp($img, 'http', 4) !== 0) {
                 if ($img !== '' && $img[0] !== '/') {
                     $img = '/' . $img;
@@ -617,16 +608,7 @@ function cms_twig_env(string $tpl_dir): Environment
             $theme = cms_get_current_theme();
             $data  = cms_get_theme_header_data($theme);
             $logo  = $data['logo'] ?: '/images/steam_logo_onblack.gif';
-            $root_path = rtrim(cms_get_setting('root_path', ''), '/');
-            if ($root_path === '') {
-                $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
-                if (strpos($script_name, '/storefront/') !== false) {
-                    $root_path = str_replace('/storefront', '', dirname($script_name));
-                } else {
-                    $root_path = rtrim(dirname($script_name), '/');
-                }
-                $root_path = $root_path === '/' ? '' : $root_path;
-            }
+            $root_path = cms_root_path();
             $logo  = str_ireplace('{BASE}', $root_path, $logo);
             if ($logo && $logo[0] == '/') {
                 $logo = $root_path . $logo;
@@ -638,16 +620,7 @@ function cms_twig_env(string $tpl_dir): Environment
             $html  = cms_get_theme_footer($theme);
             $html  = str_ireplace('{BASE}', '{{ BASE }}', $html);
             $env   = cms_twig_env('.');
-            $root_path = rtrim(cms_get_setting('root_path', ''), '/');
-            if ($root_path === '') {
-                $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
-                if (strpos($script_name, '/storefront/') !== false) {
-                    $root_path = str_replace('/storefront', '', dirname($script_name));
-                } else {
-                    $root_path = rtrim(dirname($script_name), '/');
-                }
-                $root_path = $root_path === '/' ? '' : $root_path;
-            }
+            $root_path = cms_root_path();
             return $env->createTemplate($html)->render(['BASE' => $root_path]);
         }, 'footer'), ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('nav_buttons', cms_hookable(function(string $theme = '', string $style = '', ?string $spacer = null, ?string $color = null) {
