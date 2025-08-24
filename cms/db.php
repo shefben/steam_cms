@@ -1256,6 +1256,7 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
     cms_record_visit($_SERVER['REQUEST_URI'] ?? '');
     $data  = cms_get_theme_header_data($theme);
     $base  = cms_base_url();
+    $root_path = cms_root_path();
     $logo  = $data['logo'] ?: '/images/steam_logo_onblack.gif';
     $override = cms_get_header_logo_override();
     if ($override !== null) {
@@ -1264,10 +1265,16 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
             $logo = "themes/$theme/" . ltrim($logo, '/');
         }
     }
-    //$logo = str_ireplace('{BASE}', $base, $logo);
+    
+    // Make logo path absolute from CMS root
     if ($logo && $logo[0] == '/') {
-        $logo = $base . $logo;
+        // Already absolute path, prepend root
+        $logo = $root_path . $logo;
+    } elseif ($logo && !preg_match('~^https?://~', $logo)) {
+        // Relative path (like themes/xxx), make absolute from CMS root
+        $logo = $root_path . '/' . ltrim($logo, '/');
     }
+    //
     // Check for theme-specific navbar.css override
     $base_path         = rtrim($base, '/');
     $theme_navbar_css  = "themes/$theme/css/navbar.css";

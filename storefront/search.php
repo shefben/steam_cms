@@ -16,7 +16,7 @@ $order      = $_GET['order'] ?? '';
 $sort_by    = $_GET['sort_by'] ?? 'Name';
 $sort_last  = $_GET['sort_last'] ?? $sort_by;
 $sort_order = strtoupper($_GET['sort_order'] ?? 'ASC') === 'DESC' ? 'DESC' : 'ASC';
-$browse     = $_GET['browse'] ?? '1';
+$browse     = $_GET['browse'] ?? '0';
 $lang       = $_GET['l'] ?? 'english';
 $s          = $_GET['s'] ?? '';
 $i          = $_GET['i'] ?? '';
@@ -78,6 +78,20 @@ $stmt = $db->prepare($sql);
 $stmt->execute($params);
 $apps = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Get category name for browse mode
+$category_name = '';
+if ($browse == '1' && $category !== '') {
+    $cat_stmt = $db->prepare('SELECT name FROM store_categories WHERE id = ?');
+    $cat_stmt->execute([(int)$category]);
+    $category_result = $cat_stmt->fetch(PDO::FETCH_ASSOC);
+    if ($category_result) {
+        $category_name = $category_result['name'];
+
+    }
+}
+// Debug: uncomment next line to see values
+error_log("DEBUG: browse='$browse', category='$category', category_name='$category_name'");
+
 // Dropdown values
 $developers = $db->query('SELECT name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
 $categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
@@ -91,6 +105,8 @@ $prices = [
     '5001'   => '$50 or less',
     '999991' => 'All'
 ];
+
+$browsePrice = $_GET['price'] ?? '';
 
 function sort_link($label,$col,$params,$current,$order){
     $params['sort_by'] = $col;
@@ -107,6 +123,11 @@ function sort_link($label,$col,$params,$current,$order){
 $theme = cms_get_setting('theme','2005_v2');
 $links = cms_store_sidebar_links();
 $page  = cms_get_store_page('search');
+
+// Override page title for browse mode
+if ($browse == '1') {
+    $page['title'] = 'Browse Games';
+}
 
 // Create sort link function for Twig
 function sort_link_func($label,$col,$base_params,$current,$order){
@@ -134,25 +155,28 @@ foreach (['name', 'developer', 'metacritic', 'price'] as $col) {
 }
 
 cms_render_template($tpl, [
-    'base_params' => $base_params,
-    'developers'  => $developers,
-    'categories'  => $categories,
-    'prices'      => $prices,
-    'apps'        => $apps,
-    'term'        => $term,
-    'developer'   => $developer,
-    'category'    => $category,
-    'price'       => $price,
-    'sort_by'     => $sort_by,
-    'sort_last'   => $sort_last,
-    'sort_order'  => $sort_order,
-    'sort_links'  => $sort_links,
-    'links'       => $links,
-    'lang'        => $lang,
-    's'           => $s,
-    'i'           => $i,
-    'a'           => $a,
-    'page'        => $page,
-    'page_title'  => $page['title'],
-    'theme_subdir'=> 'storefront'
+    'base_params'   => $base_params,
+    'developers'    => $developers,
+    'categories'    => $categories,
+    'prices'        => $prices,
+    'browse_price'  => $prices[$browsePrice],
+    'apps'          => $apps,
+    'term'          => $term,
+    'developer'     => $developer,
+    'category'      => $category,
+    'price'         => $price,
+    'sort_by'       => $sort_by,
+    'sort_last'     => $sort_last,
+    'sort_order'    => $sort_order,
+    'sort_links'    => $sort_links,
+    'links'         => $links,
+    'lang'          => $lang,
+    's'             => $s,
+    'i'             => $i,
+    'a'             => $a,
+    'page'          => $page,
+    'page_title'    => $page['title'],
+    'theme_subdir'  => 'storefront',
+    'browse'        => $browse,
+    'category_name' => $category_name
 ]);

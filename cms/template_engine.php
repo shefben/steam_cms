@@ -610,9 +610,16 @@ function cms_twig_env(string $tpl_dir): Environment
             $logo  = $data['logo'] ?: '/images/steam_logo_onblack.gif';
             $root_path = cms_root_path();
             $logo  = str_ireplace('{BASE}', $root_path, $logo);
+            
+            // Make all paths absolute from CMS root
             if ($logo && $logo[0] == '/') {
+                // Already absolute path, prepend root
                 $logo = $root_path . $logo;
+            } elseif ($logo && !preg_match('~^https?://~', $logo)) {
+                // Relative path (like themes/xxx), make absolute from CMS root
+                $logo = $root_path . '/' . ltrim($logo, '/');
             }
+            
             return '<img src="'.htmlspecialchars($logo).'" alt="logo">';
         }, 'logo'), ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('footer', cms_hookable(function() {
@@ -915,11 +922,13 @@ function cms_twig_env(string $tpl_dir): Environment
                 // Determine if this is the current page
                 $url = $ln['url'];
                 $target = parse_url($url, PHP_URL_PATH);
-                $current = ($target === $path);
+                $current_file = basename($file);
+                $target_file = basename($target);
+                $current = ($target_file === $current_file);
                 
                 // Special case for all.php - also highlight for game.php and package.php
-                if (!$current && ($target === '/storefront/all.php')) {
-                    if (in_array($path, ['/storefront/game.php','/storefront/package.php','/storefront/all.php'], true)) {
+                if (!$current && ($target_file === 'all.php')) {
+                    if (in_array($current_file, ['game.php','package.php','all.php'], true)) {
                         $current = true;
                     }
                 }
@@ -934,7 +943,8 @@ function cms_twig_env(string $tpl_dir): Environment
                 $url = htmlspecialchars($url);
                 
                 if ($current) {
-                    $out .= '<span class="menu_pointer">»</span>' .'<a class="menu_item_current" style="color: #34788A;" href="'.$url.'">'.$label.'</a></span><br/>';
+                    $out .= '<span><span class="menu_pointer">»</span> '
+                        .'<a class="menu_item_current" style="color: #34788A;" href="'.$url.'">'.$label.'</a></span><br/>';
                 } else {
                     $out .= '<span><a class="menu_item" href="'.$url.'">'.$label.'</a></span><br/>';
                 }

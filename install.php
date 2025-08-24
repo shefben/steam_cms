@@ -1196,7 +1196,14 @@ HTML]);
 
 
 $tfStmt->execute(['2005_v2',<<<'HTML'
-© 2005 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy.</a> &nbsp;<a href="index.php?area=legal">Legal.</a> &nbsp;<a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a>
+<table cellpadding="0" cellspacing="0">
+<tr>
+		<td><a href="http://www.valvesoftware.com/"><img src="valve_greenlogo.gif"></a></td>
+		<td>&nbsp;</td>
+		<td><span class="footerfix">© 2005 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. <a href="index.php?area=privacy">Privacy Policy.</a> &nbsp;<a href="index.php?area=legal">Legal.</a> &nbsp;<a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a></span></td>
+		<td width="15%">&nbsp;</td>
+	</tr>
+</table>
 HTML]);
 
 $tfStmt->execute(['2006_v1',<<<'HTML'

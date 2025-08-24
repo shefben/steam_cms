@@ -11,6 +11,9 @@
 <link href="webicon.png" rel="Shortcut Icon" type="image/png">
 <script language="JavaScript" src="nav.js"></script>
 <link href="rss.xml" rel="alternate" title="Valve RSS News Feed" type="application/rss+xml">
+      <style>
+          .footer .footerfix { color: #75806f !important; }
+      </style>
 </head>
 <body style="background: #4c5844; margin: 0px 0px 0px 0px; line-height: 12px; font-size: 8px; font-family: Verdana, Arial, Helvetica;">
 <table border="0" cellpadding="0" cellspacing="0" style="height: 100%;" width="100%">
@@ -92,7 +95,7 @@
 <td nowrap="" width="84"></td>
 <td width="100%">
 {% for img in images|slice(0,5) %}
-<img src="{{ BASE }}/storefront/images/apps/{{ game.appid }}/screenshots/{{ img }}" hspace="10" border="0" style="border: 1px Solid #5594a3;">
+<a href="#" onClick="popup('images.php?appid={{ game.appid }}&id={{ img }}', 1034, 588, 0, 0);"><img src="screenshots/{{ img }}_thumb.jpg" hspace="10" border="0" style="border: 1px Solid #5594a3;"></a>
 {% endfor %}
 </td>
 </tr>
@@ -250,24 +253,11 @@
 </td>
 </tr>
 <tr>
-<td>
-<!-- begin footer -->
-<div style="float: center; padding: 8px 0px 8px 0px; background: #4c5844; margin-bottom: 0px; width: 100%; font-size: 7pt; line-height: 8pt; color: #75806f; position: relative;">
-<table cellpadding="0" cellspacing="0">
-<tbody><tr>
-<td><a href="http://www.valvesoftware.com"><img border="0" src="valve_greenlogo.gif"></a></td>
-<td>&nbsp;</td>
-<td><span style="font-size: 7pt; line-height: 8pt; color: #75806f;">{{footer()}}</span></td>
-<td width="15%">&nbsp;</td>
-</tr>
+            <td class="footer">
+                <!-- begin footer -->
+                {{ footer() }}
+                <!-- end footer -->
+            </td>
+         </tr>
 </tbody></table>
-</div>
-<!-- end footer -->
-</td>
-</tr>
-</tbody></table>
-
-
-
-
- </body></html>
+</body></html>
