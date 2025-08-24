@@ -577,21 +577,22 @@ function cms_get_featured_capsules(?string $theme = null): array
 
     $capsules = [];
 
-    // Prefer legacy four-position layout from store_capsules when available
-    try {
-        $res = $db->query('SELECT position, appid, image FROM store_capsules');
-        foreach ($res as $row) {
-            $capsules[$row['position']] = [
-                'appid' => (int)$row['appid'],
-                'image' => $row['image'],
-            ];
+    // Use legacy four-position layout for 2005_v2 and 2006_v1 themes
+    if (in_array($theme, ['2005_v2', '2006_v1'], true)) {
+        try {
+            $res = $db->query('SELECT position, appid, image FROM store_capsules');
+            foreach ($res as $row) {
+                $capsules[$row['position']] = [
+                    'appid' => (int)$row['appid'],
+                    'image' => $row['image'],
+                ];
+            }
+        } catch (PDOException $e) {
+            $capsules = [];
         }
-    } catch (PDOException $e) {
-        $capsules = [];
-    }
-
-    if ($capsules) {
-        return $capsules;
+        if ($capsules) {
+            return $capsules;
+        }
     }
 
     // Fall back to dynamic capsule items table introduced for 2006+
@@ -612,6 +613,30 @@ function cms_get_featured_capsules(?string $theme = null): array
                     'appid' => (int)$r['appid'],
                     'image' => $r['image_path'],
                 ];
+            }
+        }
+    }
+
+    // Fall back to file system capsules if no database entries found
+    if (empty($capsules)) {
+        $positions = ['top', 'middle', 'bottom_left', 'bottom_right'];
+        
+        foreach ($positions as $position) {
+            $capsule_dir = dirname(__DIR__) . "/storefront/images/capsules/$position/";
+            if (is_dir($capsule_dir)) {
+                $files = glob($capsule_dir . "*.png");
+                if (!empty($files)) {
+                    // Get the most recent file by modification time
+                    usort($files, function($a, $b) {
+                        return filemtime($b) - filemtime($a);
+                    });
+                    
+                    $latest_file = basename($files[0]);
+                    $capsules[$position] = [
+                        'appid' => 10, // Default to Half-Life for demo
+                        'image' => "$position/$latest_file",
+                    ];
+                }
             }
         }
     }
@@ -1197,7 +1222,7 @@ function cms_render_header(string $theme, bool $with_buttons = true): string {
     cms_record_visit($_SERVER['REQUEST_URI'] ?? '');
     $data  = cms_get_theme_header_data($theme);
     $base  = cms_base_url();
-    $logo  = $data['logo'] ?: '/img/steam_logo_onblack.gif';
+    $logo  = 'images/steam_logo_onblack.gif';
     $override = cms_get_header_logo_override();
     if ($override !== null) {
         $logo = $override;
@@ -1284,41 +1309,6 @@ function cms_get_themes(){
     return $res ? $res->fetchAll(PDO::FETCH_COLUMN) : [];
 }
 
-function cms_store_sidebar_links(){
-    $db = cms_get_db();
-    try {
-        $res = $db->query('SELECT id,label,url,type,ord,visible FROM store_sidebar_links WHERE visible=1 ORDER BY ord,id');
-        return $res->fetchAll(PDO::FETCH_ASSOC);
-    } catch(PDOException $e){
-        if($e->getCode()==='42S02') return [];
-        throw $e;
-    }
-}
-
-function cms_load_store_links($file){
-    $path = '/storefront/' . basename($file);
-    $links = cms_store_sidebar_links();
-    $extra = [];
-    foreach (['l','s','i','a'] as $p) {
-        if (isset($_GET[$p]) && $_GET[$p] !== '') {
-            $extra[$p] = $_GET[$p];
-        }
-    }
-    $qs = $extra ? ('?' . http_build_query($extra, '', '&')) : '';
-    foreach ($links as &$l) {
-        if ($l['type'] === 'link') {
-            $target = parse_url($l['url'], PHP_URL_PATH);
-            $l['url'] .= $qs;
-            $l['current'] = ($target === $path);
-            if (!$l['current'] && ($target === '/storefront/allgames.php' || $target === '/storefront/all.php')) {
-                if (in_array($path, ['/storefront/game.php','/storefront/package.php','/storefront/all.php'], true)) {
-                    $l['current'] = true;
-                }
-            }
-        }
-    }
-    return $links;
-}
 
 function cms_get_store_page(string $slug): array
 {

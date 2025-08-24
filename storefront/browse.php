@@ -9,7 +9,7 @@ $a    = $_GET['a'] ?? '';
 $categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
 $developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
 $apps = $db->query('SELECT * FROM store_apps ORDER BY name LIMIT 20')->fetchAll(PDO::FETCH_ASSOC);
-$links = cms_load_store_links(__FILE__);
+$links = cms_store_sidebar_links();
 
 // Generate browse content
 $content = '<h2>Browse Games</h2>';
@@ -29,7 +29,7 @@ $content .= '</div>';
 
 $theme = cms_get_setting('theme','2005_v2');
 $page  = cms_get_store_page('browse');
-$tpl = cms_theme_layout('default.twig', $theme);
+$tpl = cms_theme_layout('browse.twig', $theme);
 cms_render_template($tpl, [
     'categories' => $categories,
     'developers' => $developers,

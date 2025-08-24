@@ -3,11 +3,11 @@ require_once __DIR__.'/../cms/template_engine.php';
 require_once __DIR__.'/../cms/db.php';
 
 $db = cms_get_db();
-$appid = (int)($_GET['AppId'] ?? 0);
+$appid = (int)($_GET['appid'] ?? 0);
 $stmt = $db->prepare('SELECT * FROM store_apps WHERE appid=?');
 $stmt->execute([$appid]);
 $app = $stmt->fetch(PDO::FETCH_ASSOC);
-if(!$app){ echo '<p>App not found.</p>'; exit; }
+if(!$app){ echo '<p>App not found. AppId: '.$appid.'</p>'; exit; }
 $images = [];
 try {
     $images = cms_get_app_screenshots($appid);
@@ -28,8 +28,17 @@ $packages = $packs->fetchAll(PDO::FETCH_ASSOC);
 $is_demo = (bool)$db->query('SELECT 1 FROM app_categories WHERE appid='.$appid.' AND category_id=10')->fetchColumn();
 
 $theme = cms_get_setting('theme','2005_v2');
-$links = cms_load_store_links(__FILE__);
-$tpl_name = $app['show_metascore'] ? 'gamepage_with_metascore.twig' : 'gamepage.twig';
+$links = cms_store_sidebar_links();
+$now = date('Y-m-d');
+
+// Determine template variant based on database fields
+$tpl_name = 'gamepage.twig'; // Default normal variant
+if (!empty($app['is_preload']) && $now >= ($app['preload_start'] ?: $now) && $now <= ($app['preload_end'] ?: $now)) {
+    $tpl_name = 'gamepage_preload.twig'; // Preload variant
+} elseif (!empty($app['show_metascore']) || !empty($app['metacritic'])) {
+    $tpl_name = 'gamepage_with_metascore.twig'; // Metascore variant
+}
+
 $tpl = cms_theme_layout($tpl_name, $theme);
 
 $game = [
@@ -48,7 +57,6 @@ $game = [
     'package' => []
 ];
 if(!empty($app['is_preload'])){
-    $now = date('Y-m-d');
     $start = $app['preload_start'] ?: $now;
     $end   = $app['preload_end'] ?: $now;
     if($now >= $start && $now <= $end){

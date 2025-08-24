@@ -320,7 +320,7 @@ INSERT INTO store_sidebar_links(label,url,type,ord,visible) VALUES
  ('Home','/storefront/index.php','link',1,1),
  ('','', 'spacer',2,1),
  ('Browser Games','/storefront/browse.php','link',3,1),
- ('All Games','/storefront/allgames.php','link',4,1),
+ ('All Games','/storefront/all.php','link',4,1),
  ('Search','/storefront/search.php','link',5,1),
  ('','', 'spacer',6,1),
 ('Media','/storefront/media.php','link',7,1);

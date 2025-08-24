@@ -36,12 +36,14 @@ $stmt->execute([$subId]);
 $apps = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $theme = cms_get_setting('theme','2005_v2');
-$links = cms_load_store_links(__FILE__);
-$tpl = cms_theme_layout('packagepage.twig', $theme);
+$links = cms_store_sidebar_links();
+$tpl = cms_theme_layout('package.twig', $theme);
 cms_render_template($tpl, [
     'package'    => $package,
+    'games'      => $apps,
     'apps'       => $apps,
     'base_params'=> $base_params,
+    'sort_by'    => $sort_by,
     'sort_last'  => $sort_last,
     'sort_order' => $sort_order,
     'subId'      => $subId,

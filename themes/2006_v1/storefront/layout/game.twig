@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Steam Games</title>
+<script language="JavaScript" src="site\javascript.js"></script>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="no-cache" http-equiv="pragma"/>
+<meta content="ALL" name="ROBOTS"/>
+<meta content="SteamPowered" name="DESCRIPTION"/>
+<meta content="Steam, account, account creation, signup" name="KEYWORDS"/>
+<meta content="Valve LLC" name="AUTHOR"/>
+<link href="storefront/css/storefront.css" rel="stylesheet" type="text/css"/>
+<link href="storefront/images/webicon.png" rel="Shortcut Icon" type="image/png"/>
+<link href="rss.xml" rel="alternate" title="Valve RSS News Feed" type="application/rss+xml">
+</head>
+<body style="background: #4c5844; margin: 0px 0px 0px 0px; line-height: 12px; font-size: 8px; font-family: Verdana, Arial, Helvetica;">
+<!-- begin header -->
+<div style="padding: 0px; background: #000000; margin-bottom: 16px; width: 100%;">
+<nobr><a href="http://www.steampowered.com/index.php"><img align="top" alt="[Steam]" border="0" height="54" src="storefront/images/steam_logo_onblack.gif" width="152"/></a>
+<span style="margin-left: 64px; position: absolute; top: 32px; font-weight: bold;">
+<a href="http://storefront.steampowered.com/v2/"><img alt="games" border="0" height="22" name="games" onmouseout="this.src='storefront/images/games.gif';" onmouseover="this.src='storefront/images/MOgames.gif';" src="storefront/images/games.gif" title="games" valign="bottom" width="66"/></a>
+<a href="http://www.steampowered.com/index.php?area=news"><img alt="news" border="0" height="22" name="news" onmouseout="this.src='storefront/images/news.gif';" onmouseover="this.src='storefront/images/MOnews.gif';" src="storefront/images/news.gif" valign="bottom" width="54"/></a>
+<a href="http://www.steampowered.com/index.php?area=getsteamnow"><img alt="getSteamNow" border="0" height="22" onmouseout="this.src='storefront/images/getSteamNow.gif'" onmouseover="this.src='storefront/images/MOgetSteamNow.gif'" src="storefront/images/getSteamNow.gif" valign="bottom" width="108"/></a>
+<a href="http://www.steampowered.com/index.php?area=cybercafes"><img alt="Cyber Cafes" border="0" height="22" onmouseout="this.src='storefront/images/cafes.gif'" onmouseover="this.src='storefront/images/MOcafes.gif'" src="storefront/images/cafes.gif" valign="bottom" width="95"/></a>
+<a href="http://support.steampowered.com/"><img alt="Support" border="0" height="22" onmouseout="this.src='storefront/images/support.gif'" onmouseover="this.src='storefront/images/MOsupport.gif'" src="storefront/images/support.gif" valign="bottom" width="68"/></a>
+<a href="http://www.steampowered.com/index.php?area=forums"><img alt="Forums" border="0" height="22" onmouseout="this.src='storefront/images/forums.gif'" onmouseover="this.src='storefront/images/MOforums.gif'" src="storefront/images/forums.gif" valign="bottom" width="68"/></a>
+<a href="http://www.steampowered.com/status/status.html"><img alt="Status" border="0" height="22" onmouseout="this.src='storefront/images/status.gif'" onmouseover="this.src='storefront/images/MOstatus.gif'" src="storefront/images/status.gif" valign="bottom" width="65"/></a>
+</span>
+</nobr>
+</div>
+<!-- end header -->
+<table align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="storefront/images/sp_top_left.gif"/></td>
+<td bgcolor="#FFFFFF" rowspan="3" valign="top">
+<table align="center" border="0" cellpadding="0" cellspacing="0" style="height: 100%;" width="736">
+<tr>
+<td align="left" nowrap="" valign="top" width="10"></td>
+<td align="left" nowrap="" valign="top" width="118">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td height="10"></td>
+</tr>
+<tr>
+<td nowrap="">
+{% for ln in links %}
+  {% if ln.type == 'spacer' %}
+    <div class="menu_spacer"></div>
+  {% elseif ln.hidden is empty %}
+    {% if ln.current is not empty %}
+      <span><font face="Wingdings 3"><span class="menu_pointer">„</span></font> <a class="menu_item_current" href="{{ ln.url }}">{{ ln.label }}</a></span><br/>
+    {% else %}
+      <span><a class="menu_item" href="{{ ln.url }}">{{ ln.label }}</a></span><br/>
+    {% endif %}
+  {% endif %}
+{% endfor %}
+</td>
+</tr>
+</table>
+</td>
+<td width="8"><nobr></nobr></td>
+<td align="left" style="height: 100%" valign="top" width="100%">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td><span class="normal_text">
+
+<!-- Game header with background image -->
+<table background="{% if game.header_image %}storefront/images/apps/{{ game.header_image }}{% else %}storefront/images/apps/default_header.jpg{% endif %}" cellpadding="0" cellspacing="0" height="220" width="600">
+<tr>
+<td class="copy" height="194" valign="top">{{ game.description|raw }}</td>
+</tr>
+</table>
+
+<!-- MetaCritic Score Section (only if game has metascore) -->
+{% if game.metascore and game.metascore > 0 %}
+<table background="storefront/images/apps/metaCriticSpace.jpg" cellpadding="0" cellspacing="0" height="40" width="600">
+<tr>
+<td width="150"><img height="34" src="storefront/images/apps/metaCriticLogo.jpg" width="145"/></td>
+<td class="metaCriticNumber" valign="bottom" width="75">{{ game.metascore }}<img align="top" class="metaCriticLink" height="26" src="storefront/images/apps/metaCriticBase.jpg" width="33"/></td>
+<td class="metaCriticLink" valign="bottom"><a class="metaCriticLink" href="http://www.metacritic.com/games/platforms/pc/{{ game.name|lower|replace({' ': ''}) }}" target="_new">read reviews</a></td>
+</tr>
+</table>
+{% endif %}
+
+<!-- Screenshots Section -->
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td height="5"></td>
+</tr>
+<tr>
+<td background="storefront/images/screenshots.jpg" height="68" valign="middle" width="600">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td nowrap="" width="84"></td>
+<td width="100%">
+{% for screenshot in screenshots %}
+<a href="#" onclick="popup('/storefront/image/{{ screenshot.id }}', 810, 610, 0, 0);">
+<img border="0" hspace="10" src="storefront/images/screenshots/{{ screenshot.thumb_filename }}" style="border: 1px Solid #5594a3;"/>
+</a>
+{% endfor %}
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<div class="line_spacer"></div>
+
+<!-- Get Steam Notice -->
+<table cellpadding="0" cellspacing="0" width="600">
+<tr>
+<td colspan="6" width="100%">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td nowrap=""><img height="50" src="storefront/images/icon_info.gif" width="50"/></td>
+<td nowrap=""> </td>
+<td width="100%">To get this game or package, you need Steam. If you don't yet have it installed, click the button on the right to download Steam now.</td>
+<td nowrap="">     </td>
+<td nowrap="">
+<table cellpadding="0" cellspacing="0" width="110">
+<tr>
+<td background="storefront/images/tab_left_black.gif" height="20" nowrap="" width="5"></td>
+<td align="center" bgcolor="#000000" nowrap="" width="100%"><a class="get_steam_button" href="http://www.steampowered.com/?area=getsteamnow">Get Steam Now</a></td>
+<td background="storefront/images/tab_right_black.gif" height="20" nowrap="" width="5"></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="6" width="100%"><div class="line_spacer"></div></td>
+</tr>
+
+<!-- Purchase Section -->
+<tr>
+<td colspan="6" width="100%"><span class="purchase_header">Purchase:</span></td>
+</tr>
+<tr>
+<td valign="top" width="100%">
+<span class="package_title">{{ game.name }}</span><br/>
+<span class="package_description"></span><br/>
+</td>
+<td nowrap="" valign="top"></td>
+<td nowrap="" valign="top"> </td>
+<td align="right" nowrap="" valign="top"><span class="package_title">${{ "%.2f"|format(game.price/100) }}</span></td>
+<td nowrap="" valign="top"><span class="normal_text">  </span></td>
+<td nowrap="" valign="top">
+<table cellpadding="0" cellspacing="0" width="110">
+<tr>
+<td background="storefront/images/tab_left_red.gif" height="20" nowrap="" width="5"></td>
+<td align="center" background="storefront/images/tab_middle_red.gif" bgcolor="#800000" nowrap="" width="100%">
+{% if game.preload %}
+<a class="purchase_button" href="steam://preload/{{ game.appid }}">Pre-Load</a>
+{% else %}
+<a class="purchase_button" href="steam://purchase/{{ game.primary_subid }}">Purchase</a>
+{% endif %}
+</td>
+<td background="storefront/images/tab_right_red.gif" height="20" nowrap="" width="5"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td align="right" colspan="4" width="100%"><span class="discount_text"></span></td>
+<td colspan="2" width="100%"><span class="normal_text"></span></td>
+</tr>
+
+<!-- Package Options -->
+{% for package in packages %}
+<tr>
+<td colspan="6" width="100%"><div class="line_spacer"></div></td>
+</tr>
+<tr>
+<td colspan="6" width="100%"><span class="purchase_header">Purchase as part of:</span></td>
+</tr>
+<tr>
+<td valign="top" width="100%">
+<span class="package_title">{{ package.name }}</span><br/>
+<span class="package_description"></span><br/>
+</td>
+<td nowrap="" valign="top">
+<table cellpadding="0" cellspacing="0" width="110">
+<tr>
+<td background="storefront/images/tab_left_gray.gif" height="20" nowrap="" width="5"></td>
+<td align="center" background="storefront/images/tab_middle_gray.gif" bgcolor="#dddddd" nowrap="" width="100%"><a class="details_button" href="/storefront/package/{{ package.subid }}">Package Details</a></td>
+<td background="storefront/images/tab_right_gray.gif" height="20" nowrap="" width="5"></td>
+</tr>
+</table>
+</td>
+<td nowrap="" valign="top"> </td>
+<td align="right" nowrap="" valign="top"><span class="package_title">${{ "%.2f"|format(package.price/100) }}</span></td>
+<td nowrap="" valign="top"><span class="normal_text">  </span></td>
+<td nowrap="" valign="top">
+<table cellpadding="0" cellspacing="0" width="110">
+<tr>
+<td background="storefront/images/tab_left_red.gif" height="20" nowrap="" width="5"></td>
+<td align="center" background="storefront/images/tab_middle_red.gif" bgcolor="#800000" nowrap="" width="100%"><a class="purchase_button" href="steam://purchase/{{ package.subid }}">Purchase</a></td>
+<td background="storefront/images/tab_right_red.gif" height="20" nowrap="" width="5"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td align="right" colspan="4" width="100%"><span class="discount_text"></span></td>
+<td colspan="2" width="100%"><span class="normal_text"></span></td>
+</tr>
+{% endfor %}
+
+<tr>
+<td colspan="6" width="100%"><div class="line_spacer"></div></td>
+</tr>
+
+<!-- System Requirements -->
+{% if game.system_requirements %}
+<tr>
+<td colspan="6" width="100%">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td width="100%">
+<span class="purchase_header">System Requirements</span><br/>
+<span style="color:gray;">{{ game.system_requirements|raw }}</span>
+</td>
+<td nowrap="">     </td>
+</tr>
+</table><br/><br/>
+</td>
+</tr>
+{% endif %}
+
+</table>
+
+</span></td>
+</tr>
+</table><br/>
+</td>
+</tr>
+</table>
+</td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="storefront/images/sp_top_right.gif"/></td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF"></td>
+<td bgcolor="#FFFFFF"></td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="storefront/images/sp_bottom_left.gif"/></td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="storefront/images/sp_bottom_right.gif"/></td>
+</tr>
+</table>
+<!-- begin footer -->
+<div style="float: center; padding: 8px 0px 8px 0px; background: #4c5844; margin-bottom: 0px; width: 100%; font-size: 7pt; line-height: 8pt; color: #75806f; position: relative;">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td><a href="http://www.valvesoftware.com"><img border="0" src="storefront/images/valve_greenlogo.gif"/></a></td>
+<td> </td>
+<td><span style="font-size: 7pt; line-height: 8pt; color: #75806f;"> 2006 Valve Corporation. All rights reserved. Valve, the Valve logo, Half-Life, the Half-Life logo, the Lambda logo, Steam, the Steam logo, Team Fortress, the Team Fortress logo, Opposing Force, Day of Defeat, the Day of Defeat logo, Counter-Strike, the Counter-Strike logo, Source, the Source logo, Valve Source and Counter-Strike: Condition Zero are trademarks and/or registered trademarks of Valve Corporation. All other trademarks are property of their respective owners. <a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="http://www.steampowered.com/index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>.</span></td>
+<td width="15%"> </td>
+</tr>
+</table>
+</div>
+<!-- end footer -->
+
+<script>
+function popup(url, width, height, left, top) {
+    window.open(url, 'popup', 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top + ',scrollbars=yes');
+}
+</script>
+</body>
+</html>

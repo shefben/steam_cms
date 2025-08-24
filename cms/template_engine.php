@@ -595,23 +595,41 @@ function cms_twig_env(string $tpl_dir): Environment
             if (!$img) {
                 return '';
             }
-            $base = cms_base_url();
+            $root_path = rtrim(cms_get_setting('root_path', ''), '/');
+            if ($root_path === '') {
+                $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
+                if (strpos($script_name, '/storefront/') !== false) {
+                    $root_path = str_replace('/storefront', '', dirname($script_name));
+                } else {
+                    $root_path = rtrim(dirname($script_name), '/');
+                }
+                $root_path = $root_path === '/' ? '' : $root_path;
+            }
             if (strncasecmp($img, 'http', 4) !== 0) {
                 if ($img !== '' && $img[0] !== '/') {
                     $img = '/' . $img;
                 }
-                $img = $base . $img;
+                $img = $root_path . $img;
             }
             return '<img src="' . htmlspecialchars($img) . '" alt="">';
         }, 'content_header_image'), ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('logo', cms_hookable(function() {
             $theme = cms_get_current_theme();
             $data  = cms_get_theme_header_data($theme);
-            $logo  = $data['logo'] ?: '/img/steam_logo_onblack.gif';
-            $base  = cms_base_url();
-            $logo  = str_ireplace('{BASE}', $base, $logo);
+            $logo  = $data['logo'] ?: '/images/steam_logo_onblack.gif';
+            $root_path = rtrim(cms_get_setting('root_path', ''), '/');
+            if ($root_path === '') {
+                $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
+                if (strpos($script_name, '/storefront/') !== false) {
+                    $root_path = str_replace('/storefront', '', dirname($script_name));
+                } else {
+                    $root_path = rtrim(dirname($script_name), '/');
+                }
+                $root_path = $root_path === '/' ? '' : $root_path;
+            }
+            $logo  = str_ireplace('{BASE}', $root_path, $logo);
             if ($logo && $logo[0] == '/') {
-                $logo = $base . $logo;
+                $logo = $root_path . $logo;
             }
             return '<img src="'.htmlspecialchars($logo).'" alt="logo">';
         }, 'logo'), ['is_safe' => ['html']]));
@@ -620,7 +638,17 @@ function cms_twig_env(string $tpl_dir): Environment
             $html  = cms_get_theme_footer($theme);
             $html  = str_ireplace('{BASE}', '{{ BASE }}', $html);
             $env   = cms_twig_env('.');
-            return $env->createTemplate($html)->render(['BASE' => cms_base_url()]);
+            $root_path = rtrim(cms_get_setting('root_path', ''), '/');
+            if ($root_path === '') {
+                $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
+                if (strpos($script_name, '/storefront/') !== false) {
+                    $root_path = str_replace('/storefront', '', dirname($script_name));
+                } else {
+                    $root_path = rtrim(dirname($script_name), '/');
+                }
+                $root_path = $root_path === '/' ? '' : $root_path;
+            }
+            return $env->createTemplate($html)->render(['BASE' => $root_path]);
         }, 'footer'), ['is_safe' => ['html']]));
         $env->addFunction(new TwigFunction('nav_buttons', cms_hookable(function(string $theme = '', string $style = '', ?string $spacer = null, ?string $color = null) {
             $theme = $theme !== '' ? $theme : cms_get_current_theme();
@@ -891,23 +919,49 @@ function cms_twig_env(string $tpl_dir): Environment
 
         $env->addFunction(new TwigFunction('store_sidebar', function () {
             $file  = $_SERVER['SCRIPT_NAME'] ?? '';
-            $links = cms_load_store_links($file);
+            $path = '/storefront/' . basename($file);
+            $links = cms_store_sidebar_links();
             $out   = '';
             $base = cms_base_url();
+            
+            // Add query string parameters for continuity
+            $extra = [];
+            foreach (['l','s','i','a'] as $p) {
+                if (isset($_GET[$p]) && $_GET[$p] !== '') {
+                    $extra[$p] = $_GET[$p];
+                }
+            }
+            $qs = $extra ? ('?' . http_build_query($extra, '', '&')) : '';
+            
             foreach ($links as $ln) {
                 if ($ln['type'] === 'spacer') {
                     $out .= '<div class="menu_spacer"></div>';
                     continue;
                 }
+                
+                // Determine if this is the current page
+                $url = $ln['url'];
+                $target = parse_url($url, PHP_URL_PATH);
+                $current = ($target === $path);
+                
+                // Special case for all.php - also highlight for game.php and package.php
+                if (!$current && ($target === '/storefront/all.php')) {
+                    if (in_array($path, ['/storefront/game.php','/storefront/package.php','/storefront/all.php'], true)) {
+                        $current = true;
+                    }
+                }
+                
+                // Add query string
+                $url .= $qs;
+                
                 $label = htmlspecialchars($ln['label']);
-                $url   = $ln['url'];
                 if (str_starts_with($url, '/')) {
                     $url = ($base ? rtrim($base, '/') : '') . $url;
                 }
                 $url = htmlspecialchars($url);
-                if (!empty($ln['current'])) {
-                    $out .= '<span><font face="Wingdings 3"><span class="menu_pointer">&#132;</span></font> '
-                        .'<a class="menu_item_current" href="'.$url.'">'.$label.'</a></span><br/>';
+                
+                if ($current) {
+                    $out .= '<span class="menu_pointer">»</span>' .'<a class="menu_item_current" style="color: #34788A;" href="'.$url.'">'.$label.'</a></span><br/>';
                 } else {
                     $out .= '<span><a class="menu_item" href="'.$url.'">'.$label.'</a></span><br/>';
                 }
@@ -1790,6 +1844,7 @@ function cms_process_all_assets(string $html, array $vars, string $theme, string
             $ext    = strtolower(pathinfo($p, PATHINFO_EXTENSION));
             $assets = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'webp'];
             if (!in_array($ext, $assets, true)) {
+
                 return $m['attr'] . '"' . ($assetCache[$cacheKey] = $path) . '"';
             }
             $dir = '';
@@ -2063,6 +2118,7 @@ function cms_resolve_image(string $path, string $theme, string $theme_url, strin
     if (isset($imageCache[$key])) {
         return $imageCache[$key];
     }
+    //echo('1 <br> '. $path . '2 <br>'. $theme_url . '3 <br>'. $base_url . '4 <br>');
 
     // Check if we're in storefront context
     $isStorefront = strpos($theme_url, '/storefront') !== false;
@@ -2073,12 +2129,18 @@ function cms_resolve_image(string $path, string $theme, string $theme_url, strin
         if (is_file($storefrontFile)) {
             return $imageCache[$key] = $theme_url . '/images/' . $path;
         }
-        
+
+        $storefrontFile = $base_url . "/storefront/images/" . $path;
+        if (is_file($storefrontFile)) {
+            return $imageCache[$key] = $storefrontFile . $path;
+        }
+
         // Fall back to theme images directory
         $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
         if (is_file($themeFile)) {
             return $imageCache[$key] = rtrim(str_replace('/storefront', '', $theme_url), '/') . '/images/' . $path;
         }
+
     } else {
         // For regular pages, check theme images directory
         $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
@@ -2094,7 +2156,7 @@ function cms_resolve_image(string $path, string $theme, string $theme_url, strin
     }
 
     $base = $base_url ? rtrim($base_url, '/') . '/' : '';
-    return $imageCache[$key] = $base . 'image_not_found.jpg';
+    return $imageCache[$key] = $base_url; //'image_not_found.jpg';
 }
 
 function cms_rewrite_css_urls(string $css, string $theme, string $theme_url, string $css_dir, string $base_url): string
@@ -2206,3 +2268,19 @@ function cms_rewrite_css_file(string $theme, string $css_path, string $theme_url
     
     return $cache[$key] = ($base_url ? rtrim($base_url, '/'). '/' : '').'cms/cache/'.basename($cached);
 }
+
+/**
+ * Load store sidebar links from database
+ */
+function cms_store_sidebar_links(){
+    $db = cms_get_db();
+    try {
+        $res = $db->query('SELECT id,label,url,type,ord,visible FROM store_sidebar_links WHERE visible=1 ORDER BY ord,id');
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e){
+        if($e->getCode()==='42S02') return [];
+        throw $e;
+    }
+}
+
+

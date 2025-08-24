@@ -20,7 +20,7 @@ if (in_array($theme, ['2003', '2004', '2005_v1'], true)) {
     }
 }
 
-$area = preg_replace('/[^a-zA-Z0-9_]/', '', $_GET['area'] ?? 'browse');
+$area = preg_replace('/[^a-zA-Z0-9_]/', '', $_GET['area'] ?? '');
 
 // propagate legacy storefront parameters so included pages can access them
 foreach (['l','s','i','a'] as $p) {
@@ -34,14 +34,12 @@ if (in_array($area, ['browse', 'search', 'game', 'package', 'all'], true)) {
     exit;
 }
 
-$theme    = cms_get_setting('theme', '2005_v2');
-$tpl      = cms_theme_layout('index.twig', $theme);
-$links    = cms_load_store_links(__FILE__);
-$capsules = cms_get_featured_capsules($theme);
+$theme = cms_get_setting('theme', '2005_v2');
+$tpl   = cms_theme_layout('index.twig', $theme);
+$links = cms_store_sidebar_links();
 
 cms_render_template($tpl, [
     'links'        => $links,
-    'capsules'     => $capsules,
     'theme_subdir' => 'storefront'
 ]);
 ?>

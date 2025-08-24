@@ -105,9 +105,34 @@ function sort_link($label,$col,$params,$current,$order){
 }
 
 $theme = cms_get_setting('theme','2005_v2');
-$links = cms_load_store_links(__FILE__);
+$links = cms_store_sidebar_links();
 $page  = cms_get_store_page('search');
-$tpl = cms_theme_layout('default.twig', $theme);
+
+// Create sort link function for Twig
+function sort_link_func($label,$col,$base_params,$current,$order){
+    $params = $base_params;
+    $params['sort_by'] = $col;
+    $params['sort_last'] = $col;
+    $params['sort_order'] = ($current==$col && $order==='ASC') ? 'DESC' : 'ASC';
+    return 'search.php?' . http_build_query($params, '', '&');
+}
+
+// Determine layout based on theme
+$layout = 'default.twig';
+if (in_array($theme, ['2005_v2', '2006_v1'])) {
+    $layout = 'search.twig';
+}
+$tpl = cms_theme_layout($layout, $theme, 'storefront');
+// Create sort links
+$sort_links = [];
+foreach (['name', 'developer', 'metacritic', 'price'] as $col) {
+    $params = $base_params;
+    $params['sort_by'] = $col;
+    $params['sort_last'] = $col;
+    $params['sort_order'] = ($sort_by === $col && $sort_order === 'ASC') ? 'DESC' : 'ASC';
+    $sort_links[$col] = 'search.php?' . http_build_query($params, '', '&');
+}
+
 cms_render_template($tpl, [
     'base_params' => $base_params,
     'developers'  => $developers,
@@ -118,8 +143,10 @@ cms_render_template($tpl, [
     'developer'   => $developer,
     'category'    => $category,
     'price'       => $price,
+    'sort_by'     => $sort_by,
     'sort_last'   => $sort_last,
     'sort_order'  => $sort_order,
+    'sort_links'  => $sort_links,
     'links'       => $links,
     'lang'        => $lang,
     's'           => $s,

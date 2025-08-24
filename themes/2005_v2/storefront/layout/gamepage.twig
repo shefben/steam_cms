@@ -25,7 +25,7 @@
 	<td>
 
 		<!-- begin header -->
-{{ header("true") }}
+{{ header() }}
 		<!-- end header -->
 
 	</td>
@@ -50,17 +50,7 @@
 		<tr>
 			<td nowrap>
 
-{% for ln in links %}
-  {% if ln.type == 'spacer' %}
-    <div class="menu_spacer">&nbsp;</div>
-  {% elseif ln.hidden is empty %}
-    {% if ln.current is not empty %}
-      <span><font face="Wingdings 3"><span class="menu_pointer">&#132;</span></font> <a class="menu_item_current" href="{{ ln.url }}">{{ ln.label }}</a>&nbsp;</span><br>
-    {% else %}
-      <span><a class="menu_item" href="{{ ln.url }}">{{ ln.label }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
-    {% endif %}
-  {% endif %}
-{% endfor %}
+{{ store_sidebar() }}
 
 			</td>
 		</tr>

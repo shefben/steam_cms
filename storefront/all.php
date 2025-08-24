@@ -19,7 +19,7 @@ $sql = "SELECT appid, name, developer, price, availability, metascore
 $apps = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 $theme = cms_get_setting('theme','2005_v2');
-$links = cms_load_store_links(__FILE__);
+$links = cms_store_sidebar_links();
 $page = cms_get_store_page('all');
 
 // Generate the correct sorting URLs to match archived pages exactly

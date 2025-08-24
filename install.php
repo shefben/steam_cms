@@ -1076,12 +1076,12 @@ HTML;
              * --------------------------------------------------------- */
 
             $default_buttons = [
-                ['url' => 'index.php?area=news',          'text' => 'news'],
-                ['url' => 'index.php?area=getsteamnow',   'text' => 'getSteamNow'],
-                ['url' => 'index.php?area=cybercafes',    'text' => 'Cyber Cafes'],
-                ['url' => 'support.php',       'text' => 'Support'],
-                ['url' => 'index.php?area=forums',        'text' => 'Forums'],
-                ['url' => 'index.php?area=status','text' => 'Status']
+                ['url' => '/index.php?area=news',          'text' => 'news'],
+                ['url' => '/index.php?area=getsteamnow',   'text' => 'getSteamNow'],
+                ['url' => '/index.php?area=cybercafes',    'text' => 'Cyber Cafes'],
+                ['url' => '/support.php',       'text' => 'Support'],
+                ['url' => '/index.php?area=forums',        'text' => 'Forums'],
+                ['url' => '/index.php?area=status','text' => 'Status']
             ];
 
             /* theme-specific overrides                                    */
