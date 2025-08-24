@@ -570,10 +570,14 @@ function cms_render_tabs(string $theme): string
 }
 function cms_twig_env(string $tpl_dir): Environment
 {
-    static $env;
-    if (!$env instanceof Environment) {
-        $env = function_exists('apcu_fetch') ? apcu_fetch('cms_twig_env') : null;
-        if (!$env instanceof Environment) {
+    static $env_cache = [];
+    $cache_key = 'cms_twig_env_' . md5($tpl_dir);
+    
+    if (!isset($env_cache[$cache_key])) {
+        // Try APCu first
+        $env_cache[$cache_key] = function_exists('apcu_fetch') ? apcu_fetch($cache_key) : null;
+        
+        if (!$env_cache[$cache_key] instanceof Environment) {
             $loader = new FilesystemLoader($tpl_dir);
             require_once __DIR__ . '/utilities/text_styler.php';
             $cacheDir = __DIR__ . '/cache/twig';
@@ -1363,17 +1367,20 @@ function cms_twig_env(string $tpl_dir): Environment
             }
             return false;
         });
-        if (function_exists('apcu_store')) {
-            apcu_store('cms_twig_env', $env);
+            // Store the fully configured environment in cache
+            $env_cache[$cache_key] = $env;
+            if (function_exists('apcu_store')) {
+                apcu_store($cache_key, $env_cache[$cache_key], 3600); // Cache for 1 hour
+            }
         }
     }
-}
+    
     /** @var FilesystemLoader $loader */
-    $loader = $env->getLoader();
+    $loader = $env_cache[$cache_key]->getLoader();
     $loader->setPaths([$tpl_dir]);
     // Allow plugins to interact with the Twig environment before use
-    $env = cms_apply_hooks('twig_environment', $env);
-    return $env;
+    $env_cache[$cache_key] = cms_apply_hooks('twig_environment', $env_cache[$cache_key]);
+    return $env_cache[$cache_key];
 }
 
 // 2008 Theme Implementation Functions

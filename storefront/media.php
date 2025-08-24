@@ -14,7 +14,7 @@ $sort_field = $valid_sorts[$sort_by] ?? 'name';
 $sort_direction = strtoupper($sort_order) === 'DESC' ? 'DESC' : 'ASC';
 
 // Media items are typically trailers, demos, videos - we'll filter for media content
-$sql = "SELECT appid, name, developer, price, availability, metascore, app_type 
+$sql = "SELECT appid, name, developer, price, availability, metacritic, app_type 
         FROM store_apps 
         WHERE app_type IN ('trailer', 'video', 'demo', 'media') OR name LIKE '%trailer%' OR name LIKE '%movie%' OR name LIKE '%video%'
         ORDER BY $sort_field $sort_direction, name ASC";

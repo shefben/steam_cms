@@ -90,11 +90,11 @@ if ($browse == '1' && $category !== '') {
     }
 }
 // Debug: uncomment next line to see values
-error_log("DEBUG: browse='$browse', category='$category', category_name='$category_name'");
+// error_log("DEBUG: browse='$browse', category='$category', category_name='$category_name'");
 
-// Dropdown values
-$developers = $db->query('SELECT name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
-$categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
+// Dropdown values - use cached versions
+$developers = cms_get_cached_developers();
+$categories = cms_get_cached_categories();
 $prices = [
     ''       => '-',
     '1'      => 'Third-party',

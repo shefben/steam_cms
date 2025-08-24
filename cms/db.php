@@ -300,7 +300,10 @@ function cms_rewrite_legacy_paths(string $html): string
         'index.php',
         $html
     );
-    return str_replace('action="index.php"', 'action="/index.php"', $html);
+    // Fix form actions to use correct base path
+    $base_url = cms_root_path();
+    $action_url = ($base_url === '' ? '' : $base_url) . '/index.php';
+    return str_replace('action="index.php"', 'action="' . $action_url . '"', $html);
 }
 
 function cms_get_cafe_signup_page(string $theme): ?string
@@ -359,10 +362,25 @@ function cms_get_download_files(int $limit = 10, int $offset = 0): array
     $stmt->bindValue(2, $offset, PDO::PARAM_INT);
     $stmt->execute();
     $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $mStmt = $db->prepare('SELECT host,url FROM download_file_mirrors WHERE file_id=? ORDER BY ord,id');
-    foreach ($files as &$f) {
-        $mStmt->execute([$f['id']]);
-        $f['mirrors'] = $mStmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Fix N+1 query: Get all mirrors in single query
+    if (!empty($files)) {
+        $fileIds = array_column($files, 'id');
+        $placeholders = str_repeat('?,', count($fileIds) - 1) . '?';
+        $mirrorStmt = $db->prepare("SELECT file_id, host, url FROM download_file_mirrors WHERE file_id IN ($placeholders) ORDER BY file_id, ord, id");
+        $mirrorStmt->execute($fileIds);
+        $allMirrors = $mirrorStmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Group mirrors by file_id
+        $mirrorsByFile = [];
+        foreach ($allMirrors as $mirror) {
+            $mirrorsByFile[$mirror['file_id']][] = ['host' => $mirror['host'], 'url' => $mirror['url']];
+        }
+        
+        // Assign mirrors to files
+        foreach ($files as &$f) {
+            $f['mirrors'] = $mirrorsByFile[$f['id']] ?? [];
+        }
     }
     return $files;
 }
@@ -400,17 +418,57 @@ function cms_get_all_download_files(?string $theme = null, ?string $version = nu
         $files = $db->query('SELECT *, 1 as is_visible, "title_size_mirrors_buttons" as render_type, "main_content" as location, 0 as sort_order FROM download_files ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    $mStmt = $db->prepare('SELECT host,url FROM download_file_mirrors WHERE file_id=? ORDER BY ord,id');
+    // Fix N+1 query: Get all mirrors in single query
     $out = [];
-    foreach ($files as $f) {
-        $mStmt->execute([$f['id']]);
-        $f['mirrors'] = $mStmt->fetchAll(PDO::FETCH_ASSOC);
-        if (empty($f['main_url']) && !empty($f['mirrors'])) {
-            $f['main_url'] = $f['mirrors'][0]['url'];
+    if (!empty($files)) {
+        $fileIds = array_column($files, 'id');
+        $placeholders = str_repeat('?,', count($fileIds) - 1) . '?';
+        $mirrorStmt = $db->prepare("SELECT file_id, host, url FROM download_file_mirrors WHERE file_id IN ($placeholders) ORDER BY file_id, ord, id");
+        $mirrorStmt->execute($fileIds);
+        $allMirrors = $mirrorStmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Group mirrors by file_id
+        $mirrorsByFile = [];
+        foreach ($allMirrors as $mirror) {
+            $mirrorsByFile[$mirror['file_id']][] = ['host' => $mirror['host'], 'url' => $mirror['url']];
         }
-        $out[] = $f;
+        
+        // Process files with mirrors
+        foreach ($files as $f) {
+            $f['mirrors'] = $mirrorsByFile[$f['id']] ?? [];
+            if (empty($f['main_url']) && !empty($f['mirrors'])) {
+                $f['main_url'] = $f['mirrors'][0]['url'];
+            }
+            $out[] = $f;
+        }
     }
     return $out;
+}
+
+function cms_get_cached_categories(): array
+{
+    static $cached_categories = null;
+    static $cache_time = null;
+    
+    if ($cached_categories === null || (time() - $cache_time) > 300) { // 5min cache
+        $db = cms_get_db();
+        $cached_categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
+        $cache_time = time();
+    }
+    return $cached_categories;
+}
+
+function cms_get_cached_developers(): array
+{
+    static $cached_developers = null;
+    static $cache_time = null;
+    
+    if ($cached_developers === null || (time() - $cache_time) > 300) { // 5min cache
+        $db = cms_get_db();
+        $cached_developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+        $cache_time = time();
+    }
+    return $cached_developers;
 }
 
 function cms_render_download_file(array $file, string $theme = '2004'): string
@@ -862,9 +920,12 @@ function cms_root_path(): string
 
     // 2. Auto-detect from script name
     $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
+    
+    // Enhanced patterns to handle all installation scenarios
     $patterns = [
-        '/storefront/'  => '/storefront',
+        // Deep subfolder patterns (most specific first)
         '/cms/admin/'   => '/cms/admin',
+        '/storefront/'  => '/storefront',
         '/cms/'         => '/cms',
     ];
 
@@ -875,26 +936,29 @@ function cms_root_path(): string
         }
     }
 
-    // 3. Default: parent directory
+    // 3. Special handling for root installation 
+    // If script is directly in a known CMS file, try to detect CMS structure
+    $script_dir = dirname($script_name);
+    $script_base = basename($script_name, '.php');
+    
+    // Check if this looks like a CMS root file
+    $cms_root_files = ['index', 'downloads', 'faq', 'news', 'cybercafes', 'content_servers'];
+    if (in_array($script_base, $cms_root_files) || 
+        file_exists($_SERVER['DOCUMENT_ROOT'] . $script_dir . '/cms/db.php') ||
+        file_exists($_SERVER['DOCUMENT_ROOT'] . $script_dir . '/storefront/index.php')) {
+        
+        return $cached_root_path = ($script_dir === '/' ? '' : $script_dir);
+    }
+
+    // 4. Default fallback: parent directory
     $root_path = rtrim(dirname($script_name), '/');
     return $cached_root_path = ($root_path === '/' ? '' : $root_path);
 }
 
 
 function cms_base_url(){
-    $root = rtrim(cms_get_setting('root_path',''), '/');
-    if($root !== ''){
-        return $root === '/' ? '' : $root;
-    }
-    $dir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
-    if (str_ends_with($dir, '/cms/admin')) {
-        $dir = substr($dir, 0, -10);
-    } elseif (str_ends_with($dir, '/cms')) {
-        $dir = substr($dir, 0, -4);
-    } elseif (str_ends_with($dir, '/storefront')) {
-        $dir = substr($dir, 0, -11);
-    }
-    return $dir === '/' ? '' : $dir;
+    // Use consistent logic with cms_root_path()
+    return cms_root_path();
 }
 
 function cms_set_current_template(string $tpl): void {

@@ -6,8 +6,9 @@ $lang = $_GET['l'] ?? 'english';
 $s    = $_GET['s'] ?? '';
 $i    = $_GET['i'] ?? '';
 $a    = $_GET['a'] ?? '';
-$categories = $db->query('SELECT id,name FROM store_categories WHERE visible=1 ORDER BY ord')->fetchAll(PDO::FETCH_ASSOC);
-$developers = $db->query('SELECT id,name FROM store_developers ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
+// Use caching for frequently accessed data
+$categories = cms_get_cached_categories();
+$developers = cms_get_cached_developers(); 
 $apps = $db->query('SELECT * FROM store_apps ORDER BY name LIMIT 20')->fetchAll(PDO::FETCH_ASSOC);
 $links = cms_store_sidebar_links();
 

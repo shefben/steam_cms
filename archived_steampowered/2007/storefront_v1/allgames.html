@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Welcome to Steam</title>
+<link href="storefront.css" rel="stylesheet" type="text/css"/>
+<link href="styles_global.css" rel="stylesheet" type="text/css"/>
+<link href="styles_capsules.css" rel="stylesheet" type="text/css"/>
+<link href="styles_content.css" rel="stylesheet" type="text/css"/>
+<link href="styles_lists.css" rel="stylesheet" type="text/css"/>
+<script language="JavaScript" src="minmax.js" type="text/javascript"></script>
+<script language="JavaScript" src="javascript.js" type="text/javascript"></script>
+</head>
+<body>
+<!-- header bar -->
+<div style="min-width:850px;">
+<div class="globalHeadBar_logo"><a href="http://www.steampowered.com"><img alt="Steam main" border="0" src="img/logo_steam_header.jpg"/></a></div>
+<div class="globalHeadBar">
+<div class="globalNavItem"><a href="v2/index.php" title="Home"><span class="globalNavLink">HOME</span></a></div>
+<div class="globalNavItem"><a href="v2/index.php?area=news&amp;" title="News"><span class="globalNavLink">NEWS</span></a></div>
+<div class="globalNavItem"><a href="v2/index.php?area=getsteamnow&amp;" title="Get Steam"><span class="globalNavLink">GET STEAM NOW</span></a></div>
+<div class="globalNavItem"><a href="https://cafe.steampowered.com/" title="Cyber Cafes"><span class="globalNavLink">CYBER CAFÉS</span></a></div>
+<div class="globalNavItem"><a href="http://support.steampowered.com/" title="Support"><span class="globalNavLink">SUPPORT</span></a></div>
+<div class="globalNavItem"><a href="v2/index.php?area=forums&amp;" title="Forums"><span class="globalNavLink">FORUMS</span></a></div>
+<div class="globalNavItem"><a href="v/index.php?area=stats&amp;" title="Status"><span class="globalNavLink">STATS</span></a></div>
+</div>
+</div>
+<br clear="all"/>
+<!-- end header bar -->
+<center>
+<div class="contentBG_3">
+<div class="headerBG_3">
+<!-- Left Menu -->
+<div class="leftMenu_2" style="display: inline;">
+<div class="menu_item"><a href="v2/index.php">Home</a></div>
+<hr class="menu_spacer"/>
+<div class="menu_item_current"><a href="v2/index.php?area=all&amp;">All Games</a></div>
+<div class="menu_item"><a href="v2/index.php?area=browse&amp;">Browse Games</a></div>
+<div class="menu_item"><a href="v2/index.php?area=search&amp;">Search</a></div>
+<hr class="menu_spacer"/>
+<div class="menu_item"><a href="v2/index.php?area=free&amp;">Free Stuff</a></div>
+<div class="menu_item"><a href="v2/index.php?area=media&amp;">Videos</a></div>
+</div>
+<!-- End Left Menu -->
+<!-- Left Collumn Content -->
+<div class="leftCol_3">
+<table cellpadding="0" cellspacing="0" style="height: 100%;" width="710">
+<tr>
+<td align="left" valign="top"><span class="text_normal">
+<!-- start tabbed header -->
+<table background="img/headers/header_tabbedGames.jpg" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="right" height="31" width="710">
+<!-- Search field -->
+<form action="index.php" id="searchform" name="searchform">
+<input name="area" type="hidden" value="search"/>
+<input name="genre" type="hidden" value=""/>
+<div class="search_sm">
+<table background="img/search_sm_bg.gif" border="0" cellpadding="0" cellspacing="0" height="31" width="283">
+<tr>
+<td width="200"> <input id="searchterm" maxlength="64" name="term" style="width: 180px" type="text" value=""/></td>
+<!-- td width="83"><input type="submit" value="Search"></td -->
+<td width="83"><a class="btn_search" href="v2/index.php?area=all&amp;" onclick="document.searchform.submit();">Search</a></td>
+</tr>
+</table>
+</div>
+</form>
+<!-- End Search Field -->
+</td>
+</tr>
+<tr>
+<td height="58" valign="top"><h1> All Games</h1></td>
+</tr>
+<tr>
+<td height="31">
+<div class="tab" onclick="location.href='index.php?area=all&amp;';">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="20"><img src="img/tab_sel_l.gif"/></td>
+<td background="img/tab_sel_m.gif"><div class="tab_text"><a href="v2/index.php?area=all&amp;">All</a></div></td>
+<td width="20"><img height="31" src="img/tab_sel_r.gif" width="20"/></td>
+</tr>
+</table>
+</div><div class="tab" onclick="location.href='index.php?area=all&amp;genre=1&amp;';">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="20"><img src="img/tab_l.gif"/></td>
+<td background="img/tab_m.gif"><div class="tab_text"><a href="v2/index.php?area=all&amp;genre=1&amp;">Action</a></div></td>
+<td width="20"><img height="31" src="img/tab_r.gif" width="20"/></td>
+</tr>
+</table>
+</div><div class="tab" onclick="location.href='index.php?area=all&amp;genre=2&amp;';">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="20"><img src="img/tab_l.gif"/></td>
+<td background="img/tab_m.gif"><div class="tab_text"><a href="v2/index.php?area=all&amp;genre=2&amp;">Strategy</a></div></td>
+<td width="20"><img height="31" src="img/tab_r.gif" width="20"/></td>
+</tr>
+</table>
+</div><div class="tab" onclick="location.href='index.php?area=all&amp;genre=3&amp;';">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="20"><img src="img/tab_l.gif"/></td>
+<td background="img/tab_m.gif"><div class="tab_text"><a href="v2/index.php?area=all&amp;genre=3&amp;">RPG</a></div></td>
+<td width="20"><img height="31" src="img/tab_r.gif" width="20"/></td>
+</tr>
+</table>
+</div><div class="tab" onclick="location.href='index.php?area=all&amp;genre=4&amp;';">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="20"><img src="img/tab_l.gif"/></td>
+<td background="img/tab_m.gif"><div class="tab_text"><a href="v2/index.php?area=all&amp;genre=4&amp;">Casual</a></div></td>
+<td width="20"><img height="31" src="img/tab_r.gif" width="20"/></td>
+</tr>
+</table>
+</div><div class="tab" onclick="location.href='index.php?area=all&amp;genre=5&amp;';">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="20"><img src="img/tab_l.gif"/></td>
+<td background="img/tab_m.gif"><div class="tab_text"><a href="v2/index.php?area=all&amp;genre=5&amp;">Misc.</a></div></td>
+<td width="20"><img height="31" src="img/tab_r.gif" width="20"/></td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td height="10"></td>
+</tr>
+</table>
+<!-- end tabbed header -->
+<style>
+	<!--
+	.page_text { 
+		color: #909090; 
+		font-family: Tahoma; 
+		font-size: 11px; 
+		padding: 0px;
+		margin: 0px;
+		color: #808080;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	.page_text:hover { text-decoration: underline; }
+	-->
+	</style>
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td nowrap="" width="5"></td>
+<td align="left" class="page_text" nowrap="">Showing<!-- results --> 1 - 25 of 82 </td>
+<td align="right" class="page_text" width="100%"><span style="color: #323232;">« previous</span> [ <span style="color: #ffffff; background-color: #626262;"> 1 </span>-<a class="page_text" href="v2/index.php?area=all&amp;page=2&amp;"> 2 </a>-<a class="page_text" href="v2/index.php?area=all&amp;page=3&amp;"> 3 </a>-<a class="page_text" href="v2/index.php?area=all&amp;page=4&amp;"> 4 </a> ]<a class="page_text" href="v2/index.php?area=all&amp;page=2&amp;"> next »</a> </td>
+<td nowrap="" width="5"></td>
+</tr>
+<tr>
+<td colspan="4" height="5" width="100%"></td>
+</tr>
+</table>
+<div class="list_games">
+<table cellpadding="0" cellspacing="1" width="100%">
+<tr>
+<td bgcolor="#282828" colspan="2" height="26" onclick=" location.href='index.php?area=all&amp;sort_by=Name&amp;sort_last=Name&amp;sort_order=ASC&amp;' "><a class="list_colHeader" href="v2/index.php?area=all&amp;sort_by=Name&amp;sort_last=Name&amp;sort_order=ASC&amp;">Name <img border="0" height="10" src="img/up.gif" width="10"/></a></td>
+<td bgcolor="#282828" onclick="location.href='index.php?area=all&amp;sort_by=Metascore&amp;sort_last=Name&amp;sort_order=ASC&amp;'"><a class="list_colHeader" href="v2/index.php?area=all&amp;sort_by=Metascore&amp;sort_last=Name&amp;sort_order=ASC&amp;">Metascore® </a></td>
+<td align="right" bgcolor="#282828" onclick="location.href='index.php?area=all&amp;sort_by=Price&amp;sort_last=Name&amp;sort_order=ASC&amp;'"><a class="list_colHeader" href="v2/index.php?area=all&amp;sort_by=Price&amp;sort_last=Name&amp;sort_order=ASC&amp;">Price </a></td>
+</tr>
+<tr bgcolor="#424242" id="row_2900" onclick="location.href='index.php?area=game&amp;AppId=2900&amp;';" onmouseout="HiLiteRow('row_2900', '#424242');" onmouseover="HiLiteRow('row_2900', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/2900/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">688(I) Hunter-Killer <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Strategy First</span></td>
+<td align="center" width="94"><span class="list_metascore">--</span></td>
+<td align="right" width="74"><span class="price_text">$19.95</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_3800" onclick="location.href='index.php?area=game&amp;AppId=3800&amp;';" onmouseout="HiLiteRow('row_3800', '#4c4c4c');" onmouseover="HiLiteRow('row_3800', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/3800/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Advent Rising <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">GlyphX Games</span></td>
+<td align="center" width="94"><span class="list_metascore">70</span></td>
+<td align="right" width="74"><span class="price_text">$19.95</span></td>
+</tr> <tr bgcolor="#424242" id="row_3340" onclick="location.href='index.php?area=game&amp;AppId=3340&amp;';" onmouseout="HiLiteRow('row_3340', '#424242');" onmouseover="HiLiteRow('row_3340', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/3340/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">AstroPop Deluxe <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Popcap</span></td>
+<td align="center" width="94"><span class="list_metascore">--</span></td>
+<td align="right" width="74"><span class="free_app">Free Demo</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_3300" onclick="location.href='index.php?area=game&amp;AppId=3300&amp;';" onmouseout="HiLiteRow('row_3300', '#4c4c4c');" onmouseover="HiLiteRow('row_3300', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/3300/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Bejeweled 2 Deluxe <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Popcap</span></td>
+<td align="center" width="94"><span class="list_metascore">--</span></td>
+<td align="right" width="74"><span class="free_app">Free Demo</span></td>
+</tr> <tr bgcolor="#424242" id="row_3350" onclick="location.href='index.php?area=game&amp;AppId=3350&amp;';" onmouseout="HiLiteRow('row_3350', '#424242');" onmouseover="HiLiteRow('row_3350', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/3350/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Bejeweled Deluxe <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Popcap</span></td>
+<td align="center" width="94"><span class="list_metascore">--</span></td>
+<td align="right" width="74"><span class="free_app">Free Demo</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_3360" onclick="location.href='index.php?area=game&amp;AppId=3360&amp;';" onmouseout="HiLiteRow('row_3360', '#4c4c4c');" onmouseover="HiLiteRow('row_3360', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/3360/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">BigMoney Deluxe <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Popcap</span></td>
+<td align="center" width="94"><span class="list_metascore">--</span></td>
+<td align="right" width="74"><span class="free_app">Free Demo</span></td>
+</tr> <tr bgcolor="#424242" id="row_2930" onclick="location.href='index.php?area=game&amp;AppId=2930&amp;';" onmouseout="HiLiteRow('row_2930', '#424242');" onmouseover="HiLiteRow('row_2930', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/2930/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Birth Of America </span><br/><span class="list_devTitle">Strategy First</span></td>
+<td align="center" width="94"><span class="list_metascore">71</span></td>
+<td align="right" width="74"><span class="price_text">$39.95</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_3810" onclick="location.href='index.php?area=game&amp;AppId=3810&amp;';" onmouseout="HiLiteRow('row_3810', '#4c4c4c');" onmouseover="HiLiteRow('row_3810', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/3810/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">BloodRayne <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Terminal Reality</span></td>
+<td align="center" width="94"><span class="list_metascore">65</span></td>
+<td align="right" width="74"><span class="price_text">$9.95</span></td>
+</tr> <tr bgcolor="#424242" id="row_3820" onclick="location.href='index.php?area=game&amp;AppId=3820&amp;';" onmouseout="HiLiteRow('row_3820', '#424242');" onmouseover="HiLiteRow('row_3820', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/3820/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">BloodRayne 2 <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Terminal Reality</span></td>
+<td align="center" width="94"><span class="list_metascore">67</span></td>
+<td align="right" width="74"><span class="price_text">$19.95</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_3370" onclick="location.href='index.php?area=game&amp;AppId=3370&amp;';" onmouseout="HiLiteRow('row_3370', '#4c4c4c');" onmouseover="HiLiteRow('row_3370', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/3370/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Bookworm Deluxe <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Popcap</span></td>
+<td align="center" width="94"><span class="list_metascore">--</span></td>
+<td align="right" width="74"><span class="free_app">Free Demo</span></td>
+</tr> <tr bgcolor="#424242" id="row_2620" onclick="location.href='index.php?area=game&amp;AppId=2620&amp;';" onmouseout="HiLiteRow('row_2620', '#424242');" onmouseover="HiLiteRow('row_2620', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/2620/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Call of Duty <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Infinity Ward</span></td>
+<td align="center" width="94"><span class="list_metascore">91</span></td>
+<td align="right" width="74"><span class="price_text">$19.95</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_2630" onclick="location.href='index.php?area=game&amp;AppId=2630&amp;';" onmouseout="HiLiteRow('row_2630', '#4c4c4c');" onmouseover="HiLiteRow('row_2630', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/2630/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Call of Duty® 2 <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Infinity Ward</span></td>
+<td align="center" width="94"><span class="list_metascore">86</span></td>
+<td align="right" width="74"><span class="price_text">$39.95</span></td>
+</tr> <tr bgcolor="#424242" id="row_2640" onclick="location.href='index.php?area=game&amp;AppId=2640&amp;';" onmouseout="HiLiteRow('row_2640', '#424242');" onmouseover="HiLiteRow('row_2640', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/2640/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Call of Duty: United Offensive <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Gray Matter Studios</span></td>
+<td align="center" width="94"><span class="list_metascore">87</span></td>
+<td align="right" width="74"><span class="price_text">$19.95</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_3310" onclick="location.href='index.php?area=game&amp;AppId=3310&amp;';" onmouseout="HiLiteRow('row_3310', '#4c4c4c');" onmouseover="HiLiteRow('row_3310', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/3310/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Chuzzle Deluxe <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Popcap</span></td>
+<td align="center" width="94"><span class="list_metascore">--</span></td>
+<td align="right" width="74"><span class="free_app">Free Demo</span></td>
+</tr> <tr bgcolor="#424242" id="row_4400" onclick="location.href='index.php?area=game&amp;AppId=4400&amp;';" onmouseout="HiLiteRow('row_4400', '#424242');" onmouseover="HiLiteRow('row_4400', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/4400/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">City Life <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Monte Cristo</span></td>
+<td align="center" width="94"><span class="list_metascore">76</span></td>
+<td align="right" width="74"><span class="price_text">$39.95</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_92" onclick="location.href='index.php?area=game&amp;AppId=92&amp;';" onmouseout="HiLiteRow('row_92', '#4c4c4c');" onmouseover="HiLiteRow('row_92', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/92/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Codename Gordon</span><br/><span class="list_devTitle">Nuclear Vision</span></td>
+<td align="center" width="94"><span class="list_metascore">--</span></td>
+<td align="right" width="74"><span class="owned_app">In account</span></td>
+</tr> <tr bgcolor="#424242" id="row_10" onclick="location.href='index.php?area=game&amp;AppId=10&amp;';" onmouseout="HiLiteRow('row_10', '#424242');" onmouseover="HiLiteRow('row_10', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/10/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Counter-Strike</span><br/><span class="list_devTitle">Valve</span></td>
+<td align="center" width="94"><span class="list_metascore">88</span></td>
+<td align="right" width="74"><span class="price_text">$9.95</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_80" onclick="location.href='index.php?area=game&amp;AppId=80&amp;';" onmouseout="HiLiteRow('row_80', '#4c4c4c');" onmouseover="HiLiteRow('row_80', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/80/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Counter-Strike: Condition Zero</span><br/><span class="list_devTitle">Valve</span></td>
+<td align="center" width="94"><span class="list_metascore">65</span></td>
+<td align="right" width="74"><span class="price_text">$9.95</span></td>
+</tr> <tr bgcolor="#424242" id="row_240" onclick="location.href='index.php?area=game&amp;AppId=240&amp;';" onmouseout="HiLiteRow('row_240', '#424242');" onmouseover="HiLiteRow('row_240', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/240/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Counter-Strike: Source</span><br/><span class="list_devTitle">Valve</span></td>
+<td align="center" width="94"><span class="list_metascore">88</span></td>
+<td align="right" width="74"><span class="price_text">$19.95</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_1520" onclick="location.href='index.php?area=game&amp;AppId=1520&amp;';" onmouseout="HiLiteRow('row_1520', '#4c4c4c');" onmouseover="HiLiteRow('row_1520', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/1520/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">DEFCON <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Introversion Software</span></td>
+<td align="center" width="94"><span class="list_metascore">85</span></td>
+<td align="right" width="74"><span class="price_text">$14.95</span></td>
+</tr> <tr bgcolor="#424242" id="row_1522" onclick="location.href='index.php?area=game&amp;AppId=1522&amp;';" onmouseout="HiLiteRow('row_1522', '#424242');" onmouseover="HiLiteRow('row_1522', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/1522/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">DEFCON Demo <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Introversion Software</span></td>
+<td align="center" width="94"><span class="list_metascore">85</span></td>
+<td align="right" width="74"><span class="owned_app">In account</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_1600" onclick="location.href='index.php?area=game&amp;AppId=1600&amp;';" onmouseout="HiLiteRow('row_1600', '#4c4c4c');" onmouseover="HiLiteRow('row_1600', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/1600/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Dangerous Waters</span><br/><span class="list_devTitle">Sonalysts</span></td>
+<td align="center" width="94"><span class="list_metascore">82</span></td>
+<td align="right" width="74"><span class="price_text">$19.95</span></td>
+</tr> <tr bgcolor="#424242" id="row_2100" onclick="location.href='index.php?area=game&amp;AppId=2100&amp;';" onmouseout="HiLiteRow('row_2100', '#424242');" onmouseover="HiLiteRow('row_2100', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/2100/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Dark Messiah Might and Magic™ <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Arkane Studios</span></td>
+<td align="center" width="94"><span class="list_metascore">--</span></td>
+<td align="right" width="74"><span class="price_text">$49.95</span></td>
+</tr> <tr bgcolor="#4c4c4c" id="row_2120" onclick="location.href='index.php?area=game&amp;AppId=2120&amp;';" onmouseout="HiLiteRow('row_2120', '#4c4c4c');" onmouseover="HiLiteRow('row_2120', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/2120/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Dark Messiah Singleplayer Demo <span class="tag_new">NEW</span></span><br/><span class="list_devTitle">Arkane Studios</span></td>
+<td align="center" width="94"><span class="list_metascore">--</span></td>
+<td align="right" width="74"><span class="owned_app">In account</span></td>
+</tr> <tr bgcolor="#424242" id="row_1500" onclick="location.href='index.php?area=game&amp;AppId=1500&amp;';" onmouseout="HiLiteRow('row_1500', '#424242');" onmouseover="HiLiteRow('row_1500', '#5a5a5a');">
+<td height="20" width="120"><img height="45" src="gfx/apps/1500/capsule_sm_120.jpg" width="120"/></td>
+<td width="395"><span class="list_gameTitle">Darwinia</span><br/><span class="list_devTitle">Introversion Software</span></td>
+<td align="center" width="94"><span class="list_metascore">84</span></td>
+<td align="right" width="74"><span class="price_text">$19.95</span></td>
+</tr>
+</table>
+</div>
+<div style="display: none;">
+<p style="text-align: center;"><em>No results were returned for that query.</em></p>
+</div>
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td bgcolor="Black" colspan="4" height="1" width="100%"></td>
+</tr>
+<tr>
+<td colspan="4" height="5" width="100%"></td>
+</tr>
+<tr>
+<td nowrap="" width="5"></td>
+<td align="left" class="page_text" nowrap="">Showing<!-- results --> 1 - 25 of 82 </td>
+<td align="right" class="page_text" width="100%"><span style="color: #323232;">« previous</span> [ <span style="color: #ffffff; background-color: #626262;"> 1 </span>-<a class="page_text" href="v2/index.php?area=all&amp;page=2&amp;"> 2 </a>-<a class="page_text" href="v2/index.php?area=all&amp;page=3&amp;"> 3 </a>-<a class="page_text" href="v2/index.php?area=all&amp;page=4&amp;"> 4 </a> ]<a class="page_text" href="v2/index.php?area=all&amp;page=2&amp;"> next »</a> </td>
+<td nowrap="" width="5"></td>
+</tr>
+</table>
+</span></td>
+</tr>
+</table>
+<!-- 0.0318071842194 seconds --><br/>
+</div>
+<!-- End Left Collumn Content -->
+</div>
+<br clear="left">
+</br></div>
+<!-- Footer Content -->
+<div class="footer">
+<form action="index.php">
+<input name="area" type="hidden" value="all"/>
+<table background="img/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
+<tr>
+<td background="img/img_footer_l.jpg" height="73" width="12"> </td>
+<td align="center" width="110"><a href="http://www.valvesoftware.com"><img alt="link: Valve Software" border="0" height="26" src="img/logo_valve_footer.jpg" width="92"/></a></td>
+<td>
+<div class="legal">
+<select name="l" onchange="submit();">
+<option selected="" value="english">English</option>
+<option id="l_french" value="french">French</option>
+<option id="l_german" value="german">German</option>
+<option id="l_italian" value="italian">Italian</option>
+<option id="l_japanese" value="japanese">Japanese</option>
+<option id="l_korean" value="korean">Korean</option>
+<option id="l_portuguese" value="portuguese">Portuguese</option>
+<option id="l_russian" value="russian">Russian</option>
+<option id="l_schinese" value="schinese">Simplified Chinese</option>
+<option id="l_tchinese" value="tchinese">Traditional Chinese</option>
+<option id="l_spanish" value="spanish">Spanish</option>
+<option id="l_thai" value="thai">Thai</option>
+</select><br>
+
+				© 2006 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br>
+<a href="http://www.valvesoftware.com/privacy.htm"> Privacy Policy.</a> <a href="http://www.valvesoftware.com/legal.htm">Legal.</a> <a href="http://www.steampowered.com/index.php?area=subscriber_agreement">Steam Subscriber Agreement.</a>
+</br></br></div>
+</td>
+<td background="img/img_footer_r.jpg" height="73" width="14"> </td>
+</tr>
+</table>
+</form>
+</div>
+<!-- End Footer Content -->
+<br>
+</br></center>
+</body>
+
+<!-- 0.20 0.18 0.17 -->
+<!--  Server -->

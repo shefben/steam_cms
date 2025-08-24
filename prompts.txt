@@ -708,8 +708,88 @@ these are the different version download pages with the information they hold by
 - render type:	single button, mirrors as buttons w/o title (default steam install mirrors)
 - downloads:	default steam install mirrors [single button]{main content}, wind
 
+----------------------------------
+#1.) create all the twig templates and move all the css, js and image assets to the correct folders in the 2005_v2 theme.  currently onlt the index renders correctly.
+the storefront is 100% missing, it displays the header and footer only, the news pages and many others have a header and footer but is not themed.
+
+#2.) fix news rendering on news.php.  in 2004 the news article contents on the main news.php page (not in a individual article) the contents of each news article has html tags visible when it is supposed to actually render the html in the article.
+iin 2005_v1 and above, the news.php page displays no news at all.
+
+#3.) fix the storefront for 2006_v1 and above.  the storefront does not display the capsules at all, every page in the storefront shows the theme but no actual content other than the header and sidebar with links.
+
+#4.) fix the template engine navbar.css over ride.  it is supposed to FULLY any rules in the main navbar.css that are found within a themes 'css\navbar.css'. right now it keeps the original rule (globalheadbar_logo for example) and the override which causes the override to not do anything.
+
+#5.) make these changes to the download management system (cms/admin/download_settings.php / cms/admin/download_files.php) and download rendering system (getsteamnow.php):
+1. remove 'File Visibility by Version' table and save button from cms/admin/download_files.php. also remove the associated database table for visibility.
+2. put a dropdown box at the top of cms/admin/download_files.php which has entries for each page version available in the current theme.  display the default when the page first loads. when the user changes the selection, use ajax to reload the download file management settings from the database without refreshing the entire page.
+3. add 2 new columns to the download file management table labeled 'Visible' and 'Rendering'.
+4. Each download will have a checkbox within the 'Visible' cell for hiding the download on the getsteamnow.php page.
+5. each download entry will have a dropdown in the 'Rendering' column cell which depends on the available options for the specific current theme and page version selected:
+a. make these render options available:
+- title (with size) w/ mirrors as buttons
+- title (with size) w/ mirrors as links
+- title (no size) w/ mirrors as links
+- mirrors as buttons w/o title
+- single button
+- single link
+- title w/ single link with size next to link as text
+- floating box single link
+- floating box title (no size) w/ mirrors as links
+
+b. these are the render option constraints depending on the theme and page version: 
+- 2003_v2 v1, v2 and v3  and 2004 v1, v2 and v3 can have all render types except 'floating box single link' and 'floating box title (no size) w/ mirrors as links'  in the main content area available to them.
+- 2004 v2 and v3 also have the 'floating box' location available to them.
+-- the floating box can only contain these render types: 'single link' and 'title (no size) w/ mirrors as links', so add those two to the dropdown when the 2004 v2 or v3 pages are selected.
+
+6. allow the downloads to be re-ordered by dragging/dropping using a javascript library.
+7. design the necessary database tables for these changes.
+8. all of the render options can be viewed between all 6 archived 2003_v2 and 2004 getsteamnow page versions:
+a 'archived_steampowered\2003\v2\'
+- getsteamnow_v1.html
+- getsteamnow_v2.html
+- getsteamnow_v3.html
+b. 'archived_steampowered\2004\'
+- getsteamnow_v1.html
+- getsteamnow_v2.html
+- getsteamnow_v3.html
+
+9. for the single button, use this function to create the button image: 'renderGetSteamNowButton' which is found in the file 'cms\utilities\text_styler.php'.
+10. keep everything else the same, such as the edit/delete buttons and modal when editing a download.
+1
+dash.gif2
+/2004_cms/themes/2005_v2/storefront3
+/2004_cms4
+1
+webicon.png2
+/2004_cms/themes/2005_v2/storefront3
+/2004_cms4
+1
+sp_top_left.gif2
+/2004_cms/themes/2005_v2/storefront3
+/2004_cms4
+1
+title_red.jpg2
+/2004_cms/themes/2005_v2/storefront3
+/2004_cms4
+1
+sp_top_right.gif2
+/2004_cms/themes/2005_v2/storefront3
+/2004_cms4
+1
+sp_bottom_left.gif2
+/2004_cms/themes/2005_v2/storefront3
+/2004_cms4
+1
+sp_bottom_right.gif2
+/2004_cms/themes/2005_v2/storefront3
+/2004_cms4
+----------------------------
 
 
+edit the storefront search.php page so when browse=1 is set in GET variables, the search box will be invisible, the content title will display 'Browse Games' and under the content title and 
+background image there will be this text before the product table '}} Browsing games in category: <product catagory>'.  for example if the catagory selected from the main browse games
+page was 'New releases' the text under the content header would display `}} Browsing games in category: New releases`.  the page should match this exactly in format, make sure to 
+color the two '}}` red like in the example as well: F:\development\steam\emulator_v2\files\webroot\2004_cms\archived_steampowered\2005\storefront\v2\browse_new_releases.html
 
 
-
+----------

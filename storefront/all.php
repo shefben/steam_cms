@@ -9,11 +9,11 @@ $sort_by = $_GET['sort_by'] ?? 'Name';
 $sort_order = $_GET['sort_order'] ?? 'ASC';
 $sort_last = $_GET['sort_last'] ?? 'Name';
 
-$valid_sorts = ['Name' => 'name', 'Developer' => 'developer', 'Price' => 'price', 'ReleaseDate' => 'availability', 'Metascore' => 'metascore'];
+$valid_sorts = ['Name' => 'name', 'Developer' => 'developer', 'Price' => 'price', 'ReleaseDate' => 'availability', 'Metascore' => 'metacritic'];
 $sort_field = $valid_sorts[$sort_by] ?? 'name';
 $sort_direction = strtoupper($sort_order) === 'DESC' ? 'DESC' : 'ASC';
 
-$sql = "SELECT appid, name, developer, price, availability, metascore 
+$sql = "SELECT appid, name, developer, price, availability, metacritic
         FROM store_apps 
         ORDER BY $sort_field $sort_direction, name ASC";
 $apps = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
