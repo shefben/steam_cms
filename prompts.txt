@@ -785,11 +785,120 @@ sp_bottom_right.gif2
 /2004_cms4
 ----------------------------
 
+add the following important information into agents.md in a structured and categorized way and then output the full agents.md with the additions and changes, then also create a CLAUDE.md that is target and structured specifically for anthropics claude ai LLM:
+1. the template engine automatically changes image `src`, css style 'src' and javascript paths to the themes directory depending on the asset type.  
+for example: if the currently active theme is `2004` and a template or custom page has html like this: 
+```html
+<img border="0" src="logo_steam_header.jpg" alt="[Valve]" height="54" width="152">
+```
+it will automatically rewrite the `src` path, the html turns into:
+```html
+<img border="0" src="/2004_cms/themes/2006_v1/images/logo_steam_header.jpg" alt="[Valve]" height="54" width="152">
+```
 
+1 a. if an asset is used in multiple themes, the template engine path rewriting can be overridden by adding a period and forward slash before the path.  for example, if the image
+`blackdot.gif` is used between 3  or more themes, instead of copying it to every theme's `images` folder; the html path can be forced so the image is loaded from `<cms root>/images/`.
+ forced path image html:
+```html
+<img border="0" src="./images/blackdot.gif" alt="" height="50" width="125">
+```
+
+1 b. always remove any folders from image  paths if they use `img` or `image` folders.
+
+2. the template_engine.php is built in a way that hard-codes some of the functionality that is specific to some themes.  always be mindful of the different themes when making changes.
+
+3.  the admin panel pages which contain content that can be added or edited should ALWAYS open a MODAL for adding and editing and ALWAYS use ajax for saving, removing or adding entries/content to prevent full page refreshing.  
+- The modal must close when the user clicks outside of the modal.
+- Always put a translucent dark overlay behind the modal, covering the webpage to make the modal look focused.
+- tables should ALWAYS be paginated with a next button and previous button, with page number links in between.  the page numbers that are visible should be the previous 5 pages followed by `...` which is followed by the last 5 pages.
+
+4, when a page contains a way to upload an image, use a public javascript library with ajax support, so the admin can select an image already present on the server using preview based picking (no drop downs, lists, etc.. it should show previews of all the images) with the option to upload a new image if one doesnt exist that is needed.
+
+5. any areas that require selecting/setting an image must show a small preview of the current image.
+
+6. if a request requires a change to the admin themes, always edit ALL admin themes in the same way to ensure they all work the same way.
+
+7. amy content loaded from the database that contains a column for `order` should have drag and drop re-ordering built in with ajax so the admin can easily re-order content.
+
+8. cms back-end related code should always go in the `/cms/` and `cms/admin/` directories.
+
+9. third-party assets, libraries and fonts should be place within `/includes/` directory.
+
+10. all content editing text boxes should be full WYSIWYG boxes.
+
+general information about the different CMS themes:
+1. 2002_v1, 2002_v2 and 2003_v1 do not get a header bar.
+2. 2002 through 2005_v2 themes do not contain sidebars with the exception of the 2005_v2 storefront.
+3. 2006_v2 and above are pure storefront websites, meaning that the index page for those themes is the storefront index.
+
+------
+
+
+add these to agents.md and claude.md:
+1. NEVER refer to images or any other assets within the `archived_steampowered/` folder.
+
+------------------
+file:///F:/development/steam/emulator_v2/files/webroot/2004_cms/archived_steampowered/storefront/v2/index.php?area=search&l=&s=&i=&a=
+
+continue with the previous task while remembering to use the correct template_engine tags. the home/index
+  page does not display the 5 capsule images which are stored in the database.  ensure 2006_v1 uses the same
+  storefront as 2005_v2. the index page should be used for displaying the other pages in the storefront, for
+  example if the user clicks `search` on the sidebar, the url would be
+  `<domain>/storefront/index.php?area=search&l=&s=&i=&a=`.
+-----------------
+ - the storefront index page for 2005_v2 and 2006_v2 shows the 'browse games' page instead of the page that
+  shows the 5 capsule images which are grabbed from the database and loaded from the
+  storefront/images/capsules/(top,middle,bottom_right,bottom_left) folder.  this is how the index is supposed
+  to look `file:///F:/development/steam/emulator_v2/files/webroot/2004_cms/archived_steampowered/2005/storefron
+  t/index.html`.
+  - the sidebar on all of the pages is not spaced correctly, it is too close to the content area.
+  - the storefront itself is too far down the page in 2005_v2, it should be located in the same area as the
+  archived index.html page i mentioned earlier.
+  - when clicking a game, i get the error 'app not found'.
+  - the all games link tries to go to `allgames.php` it should be `all.php` aka `index.php?area=all`.
+  - fix the template_engine.php so the links in the header and footer lead to urls that are in the cms root
+  directory. currently, the buttons such as getsteamnow lead to
+  `http://192.168.3.180/2004_cms/storefront/index.php?area=getsteamnow` but it is supposed to be
+  `http://192.168.3.180/2004_cms/index.php?area=getsteamnow`.
+
+----------------------
 edit the storefront search.php page so when browse=1 is set in GET variables, the search box will be invisible, the content title will display 'Browse Games' and under the content title and 
 background image there will be this text before the product table '}} Browsing games in category: <product catagory>'.  for example if the catagory selected from the main browse games
 page was 'New releases' the text under the content header would display `}} Browsing games in category: New releases`.  the page should match this exactly in format, make sure to 
 color the two '}}` red like in the example as well: F:\development\steam\emulator_v2\files\webroot\2004_cms\archived_steampowered\2005\storefront\v2\browse_new_releases.html
 
+-----------------
+- using this archived pages html, `F:/development/steam/emulator_v2/files/webroot/2004_cms/archived_steampowe  │
+│   red/2005/storefront/product_page_with_discount.html`, if a product page is to be rendered with the metascore   │
+│   product page twig file and the product is unreleeased/prerelease, place the following html over the            │
+│   metacritic score area: `<table background="img/apps/metaCriticSpace.jpg" cellpadding="0" cellspacing="0"       │
+│   height="40" width="600">                                                                                       │
+│   <tbody><tr>                                                                                                    │
+│   <td align="center" style="font-size: 18px; color: White;"><strong>Coming soon</strong></td>                    │
+│   </tr>                                                                                                          │
+│   </tbody></table>`.  as shown in `product_page_with_discount.html`.                                             │
+│   - for all purchase types on an application/games product page, allow the admin to add a discount to the        │
+│   purchase.  the page `product_page_with_discount.html` shows `Pre-order Discount- $2.00` underneath the price   │
+│   on the next line, this is exactly how discounts should appear.                                                 │
+│   - for all product page templates allow the administrator to add any html they want OVER the content header     │
+│   background area,  examples can be found on `product_page_with_discount.html` for pages with metacritic bars    │
+│   and `product_page_normal.html` for the other pages.                                                            │
+│   - create a new mariadb table inside install.php that will hold the following columns: id (auto generated,      │
+│   index, unique, integer), appid (integer), purchase_type (string, can be 'preload' or 'normal'), theme_list     │
+│   (comma seperated list of themes this will show up on), content (html that will be displayed over the top of    │
+│   the product's content header background image).                                                                │
+│   - for each admin product management page for the storefront (not the 2004/2005 legacy storefront) add a        │
+│   section for discounts.  this will display all the different package and single product 'purchase' sections     │
+│   that this product  will render to the public along with a text box with a label for entering a discount which  │
+│   will then display the information using the same information on the page `product_page_with_discount.html`.    │
+│   you will need to create a new table to handle the discount information and then pull from it during rendering  │
+│   if it exists.                                                                                                  │
+│   - add these columns to the store_apps table in install.php and update `/sql/install_storefront.sql` as well;   │
+│   columns: release_date (date), product_type (string, allowed: video, demo, game, thirdparty, other),            │
+│   genre_list (comma seperated string, allowed values: action, strategy, RPG, casual, misc), forum_url (string),  │
+│   friends_enabled (bool), vac_enabled (bool), with_sdk (bool), hdr_enabled (bool),  languages (string),          │
+│   publisher_id (int, linked to store_developers table).                                                          │
+│   - create a new column for the store_developers table in install.php and update `/sql/install_storefront.sql`   │
+│   entries with the new column as well.  the column to add is `developer_website`. 
+----------------------
 
-----------

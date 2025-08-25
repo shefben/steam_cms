@@ -47,6 +47,22 @@ Generates the navigation bar using button definitions from `theme_headers`.
   {{ nav_buttons('2006_v2', 'font-weight:bold', '|', '#ffffff') }}
   ```
 
+### `nav_button_list(theme = '')`
+Generates the navigation bar using button definitions from `theme_headers`.
+ example:
+  ```twig
+  {% for btn in nav_button_list('2006_v2') %}
+    {% if btn.visible %}
+      <a href="{{ btn.url }}" style="font-weight:bold; color:#fff">
+        {{ btn.text }}
+      </a>
+      {# add any extra per-button code here #}
+      {% if not loop.last %}
+        <span class="navSpacer" style="font-weight:bold; color:#fff">|</span>
+      {% endif %}
+    {% endif %}
+  {% endfor %}```
+
 ### `logo()`
 Outputs the logo image defined for the active theme.
 

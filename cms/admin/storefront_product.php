@@ -2,6 +2,31 @@
 $isAjax = isset($_GET['ajax']) || isset($_POST['ajax']);
 if(!$isAjax){
     require_once 'admin_header.php';
+} else {
+    // For AJAX requests, we still need to include the core dependencies
+    // and handle admin session validation
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+    require_once __DIR__ . '/../db.php';
+    require_once __DIR__ . '/../template_engine.php';
+    
+    // Handle admin session validation for AJAX requests (copied from admin_header.php)
+    if (!cms_current_admin()) {
+        if (isset($_COOKIE['cms_admin_token'])) {
+            $uid = cms_validate_admin_token($_COOKIE['cms_admin_token']);
+            if ($uid) {
+                session_regenerate_id(true);
+                $_SESSION['admin_id'] = $uid;
+            }
+        }
+        if (!cms_current_admin()) {
+            if($isAjax){ echo '<div class="modal-content"><p>Session expired. Please refresh and log in again.</p></div>'; exit; }
+            $ret = urlencode($_SERVER['REQUEST_URI']);
+            header('Location: ../login.php?return=' . $ret);
+            exit;
+        }
+    }
 }
 cms_require_permission('manage_store');
 $db = cms_get_db();

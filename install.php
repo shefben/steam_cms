@@ -611,7 +611,13 @@ DROP TABLE IF EXISTS storefront_tab_games;
 DROP TABLE IF EXISTS store_pages;
 
 CREATE TABLE store_categories(id INT PRIMARY KEY,name TEXT,ord INT,visible TINYINT DEFAULT 1);
-CREATE TABLE store_developers(id INT AUTO_INCREMENT PRIMARY KEY,name TEXT);
+CREATE TABLE store_developers(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name TEXT,
+    website_url VARCHAR(255),
+    description TEXT,
+    logo_image VARCHAR(255)
+);
 CREATE TABLE store_apps(
     appid INT PRIMARY KEY,
     name TEXT,
@@ -631,7 +637,12 @@ CREATE TABLE store_apps(
     show_metascore TINYINT DEFAULT 0,
     is_preload TINYINT DEFAULT 0,
     preload_start DATE DEFAULT NULL,
-    preload_end DATE DEFAULT NULL
+    preload_end DATE DEFAULT NULL,
+    release_state ENUM('released', 'prerelease', 'coming_soon') NOT NULL DEFAULT 'released',
+    release_date DATETIME NULL,
+    preorder_available TINYINT(1) NOT NULL DEFAULT 0,
+    preload_available TINYINT(1) NOT NULL DEFAULT 0,
+    preorder_bonus_text TEXT
 );
 CREATE INDEX idx_storefront_products_appid ON store_apps(appid);
 CREATE TABLE subscriptions(subid INT PRIMARY KEY,name TEXT,price DECIMAL(10,2));
@@ -738,6 +749,41 @@ CREATE TABLE store_pages(
     title_image TEXT
 );
 
+-- Content overlays for product headers
+CREATE TABLE product_content_overlays (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    appid INT NOT NULL,
+    title VARCHAR(255) NOT NULL DEFAULT '',
+    content TEXT,
+    start_date DATETIME NULL,
+    end_date DATETIME NULL,
+    active TINYINT(1) NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_appid (appid),
+    INDEX idx_active (active),
+    INDEX idx_dates (start_date, end_date)
+);
+
+-- Discounts for packages/products
+CREATE TABLE product_discounts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    appid INT NULL,
+    package_id INT NULL,
+    discount_type ENUM('percentage', 'fixed_amount') NOT NULL DEFAULT 'percentage',
+    discount_value DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    discount_label VARCHAR(255) NOT NULL DEFAULT 'Discount',
+    start_date DATETIME NULL,
+    end_date DATETIME NULL,
+    active TINYINT(1) NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_appid (appid),
+    INDEX idx_package_id (package_id),
+    INDEX idx_active (active),
+    INDEX idx_dates (start_date, end_date)
+);
+
 CREATE TABLE download_files(
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -797,6 +843,13 @@ ALTER TABLE storefront_capsules_per_theme
 ALTER TABLE storefront_tab_games
     ADD CONSTRAINT fk_storefront_tab_games_tab FOREIGN KEY (tab_id) REFERENCES storefront_tabs(id) ON DELETE CASCADE,
     ADD CONSTRAINT fk_storefront_tab_games_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+
+ALTER TABLE product_content_overlays
+    ADD CONSTRAINT fk_product_content_overlays_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE;
+
+ALTER TABLE product_discounts
+    ADD CONSTRAINT fk_product_discounts_app FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE,
+    ADD CONSTRAINT fk_product_discounts_package FOREIGN KEY (package_id) REFERENCES subscriptions(subid) ON DELETE CASCADE;
 
 ");
             function split_sql_statements($sql)

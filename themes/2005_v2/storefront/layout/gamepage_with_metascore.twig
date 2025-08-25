@@ -74,14 +74,29 @@
 </style>
 <table background="{{ BASE }}/storefront/apps/{{ game.appid }}/headers/{{ game.productheader_path }}" cellpadding="0" cellspacing="0" height="220" width="600">
 <tbody><tr>
+{% if game.content_overlay and game.content_overlay.active %}
+<td class="copy" height="194" valign="bottom">
+    {% if game.content_overlay.title %}
+    <div class="title">{{ game.content_overlay.title }}</div>
+    {% endif %}
+    {% if game.content_overlay.content %}
+    <div>{{ game.content_overlay.content|raw }}</div>
+    {% endif %}
+</td>
+{% else %}
 <td class="copy" height="194" valign="top">{{ game.description }}</td>
+{% endif %}
 </tr>
 </tbody></table>
 <table background="apps/metaCriticSpace.jpg" cellpadding="0" cellspacing="0" height="40" width="600">
 <tbody><tr>
+{% if game.release_state == 'prerelease' or game.release_state == 'coming_soon' %}
+<td align="center" style="font-size: 18px; color: White;" colspan="3"><strong>Coming soon</strong></td>
+{% else %}
 <td width="150"><img height="34" src="apps/metaCriticLogo.jpg" width="145"></td>
 <td class="metaCriticNumber" valign="bottom" width="75">{{game.metascore_score}}<img align="top" class="metaCriticLink" height="26" src="apps/metaCriticBase.jpg" width="33"></td>
 <td class="metaCriticLink" valign="bottom"><a class="metaCriticLink" href="{{game.metascore_url}}" target="_new">read reviews </a></td>
+{% endif %}
 </tr>
 </tbody></table>
 <table cellpadding="0" cellspacing="0" width="100%">
@@ -135,14 +150,29 @@
 <table cellpadding="0" cellspacing="0" width="110">
 <tbody><tr>
 <td background="tab_left_red.gif" height="20" nowrap="" width="5"></td>
-<td align="center" background="tab_middle_red.gif" bgcolor="#800000" nowrap="" width="100%"><a class="purchase_button" href="steam://purchase/{{game.appid}}">Purchase</a></td>
+<td align="center" background="tab_middle_red.gif" bgcolor="#800000" nowrap="" width="100%">
+    <a class="purchase_button" href="steam://purchase/{{game.appid}}">
+        {% if game.release_state == 'prerelease' %}Pre-order{% else %}Purchase{% endif %}
+    </a>
+</td>
 <td background="tab_right_red.gif" height="20" nowrap="" width="5"></td>
 </tr>
 </tbody></table>
 </td>
 </tr>
 <tr>
-<td align="right" colspan="4" width="100%"><span class="discount_text"></span></td>
+<td align="right" colspan="4" width="100%"><span class="discount_text">
+    {% if game.discount and game.discount.active %}
+        {{ game.discount.discount_label }}
+        <span style="width: 100px;">
+            {% if game.discount.discount_type == 'percentage' %}
+                -{{ game.discount.discount_value }}%
+            {% else %}
+                -${{ "%.2f"|format(game.discount.discount_value) }}
+            {% endif %}
+        </span><br/>
+    {% endif %}
+    </span></td>
 <td colspan="2" width="100%"><span class="normal_text"></span></td>
 </tr>
 <tr>
@@ -179,7 +209,18 @@
 </td>
 </tr>
 <tr>
-<td align="right" colspan="4" width="100%"><span class="discount_text"></span></td>
+<td align="right" colspan="4" width="100%"><span class="discount_text">
+    {% if game.discount and game.discount.active %}
+        {{ game.discount.discount_label }}
+        <span style="width: 100px;">
+            {% if game.discount.discount_type == 'percentage' %}
+                -{{ game.discount.discount_value }}%
+            {% else %}
+                -${{ "%.2f"|format(game.discount.discount_value) }}
+            {% endif %}
+        </span><br/>
+    {% endif %}
+    </span></td>
 <td colspan="2" width="100%"><span class="normal_text"></span></td>
 </tr>
 <tr>
@@ -216,7 +257,18 @@
 </tbody></table>
 </td>
 </tr><tr>
-<td align="right" colspan="4" width="100%"><span class="discount_text"></span></td>
+<td align="right" colspan="4" width="100%"><span class="discount_text">
+    {% if game.discount and game.discount.active %}
+        {{ game.discount.discount_label }}
+        <span style="width: 100px;">
+            {% if game.discount.discount_type == 'percentage' %}
+                -{{ game.discount.discount_value }}%
+            {% else %}
+                -${{ "%.2f"|format(game.discount.discount_value) }}
+            {% endif %}
+        </span><br/>
+    {% endif %}
+    </span></td>
 <td colspan="2" width="100%"><span class="normal_text"></span></td>
 </tr>
 <tr>

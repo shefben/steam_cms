@@ -8,6 +8,30 @@ $stmt = $db->prepare('SELECT * FROM store_apps WHERE appid=?');
 $stmt->execute([$appid]);
 $app = $stmt->fetch(PDO::FETCH_ASSOC);
 if(!$app){ echo '<p>App not found. AppId: '.$appid.'</p>'; exit; }
+
+// Load content overlay data
+$overlay_stmt = $db->prepare('
+    SELECT title, content, active 
+    FROM product_content_overlays 
+    WHERE appid = ? AND active = 1 
+    AND (start_date IS NULL OR start_date <= NOW()) 
+    AND (end_date IS NULL OR end_date >= NOW())
+    LIMIT 1
+');
+$overlay_stmt->execute([$appid]);
+$content_overlay = $overlay_stmt->fetch(PDO::FETCH_ASSOC);
+
+// Load discount data for the app
+$discount_stmt = $db->prepare('
+    SELECT discount_type, discount_value, discount_label, active 
+    FROM product_discounts 
+    WHERE appid = ? AND active = 1 
+    AND (start_date IS NULL OR start_date <= NOW()) 
+    AND (end_date IS NULL OR end_date >= NOW())
+    LIMIT 1
+');
+$discount_stmt->execute([$appid]);
+$discount = $discount_stmt->fetch(PDO::FETCH_ASSOC);
 $images = [];
 try {
     $images = cms_get_app_screenshots($appid);
@@ -54,6 +78,13 @@ $game = [
     'trailer_url' => $app['trailer_url'],
     'show_trailer' => empty($app['hide_trailer']),
     'show_preload' => false,
+    'release_state' => $app['release_state'] ?? 'released',
+    'release_date' => $app['release_date'],
+    'preorder_available' => $app['preorder_available'] ?? 0,
+    'preload_available' => $app['preload_available'] ?? 0,
+    'preorder_bonus_text' => $app['preorder_bonus_text'],
+    'content_overlay' => $content_overlay,
+    'discount' => $discount,
     'package' => []
 ];
 if(!empty($app['is_preload'])){

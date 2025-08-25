@@ -638,6 +638,12 @@ function cms_twig_env(string $tpl_dir): Environment
             $theme = $theme !== '' ? $theme : cms_get_current_theme();
             return cms_nav_buttons_html($theme, $style, $spacer, $color);
         }, 'nav_buttons'), ['is_safe' => ['html']]));
+        $env->addFunction(new TwigFunction('nav_button_list', function(string $theme = '') {
+            $theme = $theme !== '' ? $theme : cms_get_current_theme();
+            $page  = cms_get_current_page();
+            $data  = cms_get_theme_header_data($theme, $page); // returns ['buttons'=>...]
+            return $data['buttons'];
+        }));
         $env->addFunction(new TwigFunction('news', cms_hookable(function(string $type, ?int $count = null) {
             $theme = cms_get_current_theme();
             $cfg   = cms_get_theme_config($theme);

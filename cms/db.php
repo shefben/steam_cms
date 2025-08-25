@@ -1263,14 +1263,34 @@ function cms_header_buttons_html($theme, string $spacer_style = '', ?string $spa
     $out = '';
     $first = true;
     $base = cms_base_url();
+    $root_path = cms_root_path();
     foreach($buttons as $b){
         if(!$b['visible']) continue;
         $text = trim($b['text']);
-        $url  = str_ireplace('{BASE}', $base, $b['url']);
+        
+        // Handle URL construction with proper root path
+        $url = $b['url'];
+        $url = str_ireplace('{BASE}', $base, $url);
+        
+        // If URL starts with /, make it relative to CMS root
+        if (strpos($url, '/') === 0) {
+            $url = $root_path . $url;
+        } elseif (strpos($url, 'index.php') === 0 || strpos($url, 'support.php') === 0 || strpos($url, 'contact.php') === 0) {
+            // For relative URLs like index.php?area=something, prepend root path
+            $url = $root_path . '/' . $url;
+        }
+        
         $url  = htmlspecialchars($url);
         $segment = '';
         if($b['img']){
-            $imgPath = str_ireplace('{BASE}', $base, $b['img']);
+            $imgPath = $b['img'];
+            $imgPath = str_ireplace('{BASE}', $base, $imgPath);
+            
+            // Handle image path with proper root path (similar to URL handling)
+            if (strpos($imgPath, '/') === 0) {
+                $imgPath = $root_path . $imgPath;
+            }
+            
             $img = htmlspecialchars($imgPath);
             $alt = htmlspecialchars($text);
             $segment = '<a href="'.$url.'"><img src="'.$img.'" alt="'.$alt.'"></a>';
