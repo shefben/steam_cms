@@ -1,11 +1,7 @@
 -- general storefront notes:
-- index.php?area=search page title changes to 'Browse Games' IF &browse=1 is set, otherwise it is just 'Search Games'
-
+- index.php?area=search page title changes to 'Browse Games' IF &browse=1 is set, otherwise it is just 'Search'
 
 - the 2006 storefront changes from v1 (light/white colored) to v2 (dark/gray colored) between august 23rd august 25th(first day captured with gray skin)
 - along with the skin change, the sidebar link label changes from Media to Videos
 - 2006 storefront changes from the v1 dark version to the 2007 v1 dark versions (all games has tabs) starting september 17th
 -
-
-grab:
-web.archive.org/web/20060820104431id_/http://storefront.steampowered.com:80/v2/index.php?area=media&

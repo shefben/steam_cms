@@ -40,6 +40,7 @@ if (isset($admin_layout) && $admin_layout) {
         'sidebar' => $sidebar,
         'content' => $content,
         'theme_url' => $theme_url,
+        'base_url' => $base_url,
         'page_id' => $page_id ?? '',
         'admin_name' => $admin_name,
         'notifications_html' => $notifications_html ?? '',

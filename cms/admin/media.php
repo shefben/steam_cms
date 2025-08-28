@@ -29,9 +29,25 @@ if(isset($_POST['delete'])){
 $rows = $db->query('SELECT * FROM media ORDER BY uploaded DESC')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Media Library</h2>
-<form method="post" enctype="multipart/form-data">
-<input type="file" name="file"> <input type="submit" name="upload" value="Upload">
-</form>
+<div class="upload-section" style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px;">
+    <button type="button" class="btn btn-primary" id="media-file-picker">
+        Choose or Upload Media File
+    </button>
+    <div id="upload-status" style="margin-top: 10px;"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('media-file-picker').addEventListener('click', function() {
+        openFilePickerForMedia('media', function(selectedPath) {
+            document.getElementById('upload-status').innerHTML = 
+                '<div style="color: green;">✓ File uploaded and registered: ' + selectedPath + '</div>';
+        }, { 
+            allowedTypes: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'mp3', 'pdf', 'zip'] 
+        });
+    });
+});
+</script>
 <table border="1" cellpadding="2">
 <tr><th>File</th><th>Uploaded</th><th>Action</th></tr>
 <?php foreach($rows as $r): ?>

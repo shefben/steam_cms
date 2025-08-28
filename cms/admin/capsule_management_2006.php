@@ -303,8 +303,19 @@ if ($use_all) {
     </div>
     <div class="form-row" id="row-image">
       <label for="cap-image">Game Capsule Image</label>
-      <input type="file" name="image" id="cap-image" accept="image/png">
-      <img id="cap-preview" src="" alt="Preview" style="max-width:100%;display:none;margin-top:5px;">
+      <input type="hidden" name="current_image" id="cap-current-image">
+      <div class="file-picker-container">
+        <button type="button" class="btn btn-primary" 
+                data-file-picker 
+                data-upload-path="storefront/images/capsules" 
+                data-target="#cap-current-image"
+                data-preview="#cap-preview"
+                data-allowed-types="png,jpg,jpeg">
+          Choose or Upload Image
+        </button>
+        <span id="selected-image-name" class="selected-file-name"></span>
+      </div>
+      <img id="cap-preview" src="" alt="Preview" style="max-width:200px;display:none;margin-top:5px;">
     </div>
     <div class="form-row" id="row-title" style="display:none;">
       <label for="cap-title">Capsule Title</label>
@@ -580,6 +591,26 @@ $(function(){
       r.readAsDataURL(f);
     }
   });
+  
+  // Handle dynamically created file picker buttons for tabbed capsules
+  $(document).on('click', '.game-image-picker[data-file-picker]', function() {
+    var $btn = $(this);
+    var $game = $btn.closest('.game');
+    var uploadPath = $btn.data('uploadPath') || 'storefront/images/capsules';
+    var allowedTypes = ($btn.data('allowedTypes') || 'png,jpg,jpeg').split(',');
+    
+    openFilePicker(uploadPath, function(selectedPath) {
+      // Update hidden input
+      $game.find('.game-img-path').val(selectedPath);
+      // Update preview image
+      var $preview = $game.find('.preview');
+      $preview.attr('src', '../' + selectedPath).show();
+      // Update button text to show selected file
+      var filename = selectedPath.split('/').pop();
+      $btn.text('Image: ' + filename);
+    }, { allowedTypes: allowedTypes });
+  });
+  
   $('#cap-cancel').on('click',function(){$('#capsule-modal').dialog('close');});
   $('#capsule-form').on('submit',function(e){
     e.preventDefault();
@@ -661,7 +692,7 @@ $(function(){
     var imgPath=data&&data.image?data.image:'';
     var html='<div class="game"><input type="hidden" class="game-img-path" value="'+imgPath+'">'
       +'<div><label>Existing Image<select class="game-existing">'+buildImageOptions(imgPath)+'</select></label></div>'
-      +'<div><label>Upload<input type="file" class="game-image" accept="image/png"></label><img class="preview"'+(imgPath?' src="../storefront/images/capsules/'+imgPath+'" style="display:block;"':'')+'></div>'
+      +'<div><button type="button" class="btn btn-small game-image-picker" data-file-picker data-upload-path="storefront/images/capsules" data-allowed-types="png,jpg,jpeg">Choose Image</button><img class="preview"'+(imgPath?' src="../storefront/images/capsules/'+imgPath+'" style="display:block;"':'')+'></div>'
       +'<div><label>Name<input type="text" class="game-name" value="'+(data&&data.name?data.name:'')+'"></label></div>'
       +'<div><label>Game ID<input type="text" class="game-appid" value="'+(data&&data.appid?data.appid:'')+'"></label></div>'
       +'<div><label>Price<input type="text" class="game-price" value="'+(data&&data.price?data.price:'')+'"></label></div>'

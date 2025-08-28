@@ -901,4 +901,19 @@ color the two '}}` red like in the example as well: F:\development\steam\emulato
 │   - create a new column for the store_developers table in install.php and update `/sql/install_storefront.sql`   │
 │   entries with the new column as well.  the column to add is `developer_website`. 
 ----------------------
+ do a fully analysis of the entire CMS and take thorough notes about the template_engine, functions found in
+  the files within `/cms/` and everything else and store it in your memory for this project.  limit yourself to
+  the root cms directory and cms, includes, sql, plugins, storefront and themes directorys only.
+---------------------
+
+
+this rip all of the information for each product within the product table from 
+https://web.archive.org/web/20071008164033/http://storefront.steampowered.com/v2/index.php?area=all&sort_by=Metascore&sort_last=Name&sort_order=ASC&l=English&cc=US. 
+grab the product title name, appid from the table entry url, download the game entry image and price. go through all the pages until you are complete. 
+then open each product page up and grab the following information from the products page: 
+game appid, game title, video trailer appid (if present), media + links urls (there can be multiple, add type of link that it is (forum, media, etc...)),meta score, metascore url (critic review link),
+ all information under the 'GAME DETAILS' sidebar header (title, developer, publisher, release date, languages, categorys, options, game rating, etc...), 
+system requirements (minimum and recommended), 'ABOUT THE GAME' description if present, screenshot file names and background header image file name.
+--------------------------
+
 
