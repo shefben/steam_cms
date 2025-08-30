@@ -11,7 +11,7 @@ $years = [
 ];
 
 function list_imgs($dir){
-    return glob($dir.'/*.{gif,jpg,png,GIF,JPG,PNG}', GLOB_BRACE) ?: [];
+    return glob($dir.'/*.{gif,jpg,jpeg,png,GIF,JPG,JPEG,PNG}', GLOB_BRACE) ?: [];
 }
 
 // gather banner lists for each year
@@ -26,6 +26,7 @@ foreach($years as $y){
 }
 
 $errors = [];
+$is_ajax = (isset($_POST['ajax']) && $_POST['ajax'] === '1') || (isset($_GET['ajax']) && $_GET['ajax'] === '1');
 if($_SERVER['REQUEST_METHOD']==='POST'){
     $year = $_POST['year'] ?? '';
     if(!in_array($year,$years,true)) $year = $years[0];
@@ -39,35 +40,133 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         }else{
             if(file_exists("$disabled_dir/$name")) rename("$disabled_dir/$name","$img_dir/$name");
         }
-        header('Location: contentserver_banners.php');
+        if ($is_ajax) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => true]);
+        } else {
+            header('Location: contentserver_banners.php?year=' . rawurlencode($year));
+        }
         exit;
     }
     if(isset($_POST['delete'])){
         $name = basename($_POST['delete']);
         if(file_exists("$img_dir/$name")) unlink("$img_dir/$name");
         if(file_exists("$disabled_dir/$name")) unlink("$disabled_dir/$name");
-        header('Location: contentserver_banners.php');
+        if ($is_ajax) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => true]);
+        } else {
+            header('Location: contentserver_banners.php?year=' . rawurlencode($year));
+        }
         exit;
     }
     if(isset($_POST['upload']) && isset($_FILES['banner']) && is_uploaded_file($_FILES['banner']['tmp_name'])){
-        $size = getimagesize($_FILES['banner']['tmp_name']);
-        if($size && $size[0]==340 && $size[1]==50){
-            $name = basename($_FILES['banner']['name']);
-            $ext = pathinfo($name, PATHINFO_EXTENSION);
-            $base = pathinfo($name, PATHINFO_FILENAME);
-            $target = "$img_dir/$name";
+        $tmp  = $_FILES['banner']['tmp_name'];
+        $name = basename($_FILES['banner']['name']);
+        $ext  = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+        $base = pathinfo($name, PATHINFO_FILENAME);
+
+        // Validate extension and dimensions/type
+        $allowed_exts  = ['gif','jpg','jpeg','png'];
+        $allowed_types = [IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG];
+        $size = @getimagesize($tmp);
+        $type_ok = $size && in_array($size[2], $allowed_types, true);
+        $ext_ok  = in_array($ext, $allowed_exts, true);
+
+        if($size && $size[0]===340 && $size[1]===56 && $ext_ok && $type_ok){
+            $target = "$img_dir/$base.$ext";
             $i=1;
             while(file_exists($target)){
                 $target = "$img_dir/{$base}_{$i}.{$ext}";
                 $i++;
             }
-            move_uploaded_file($_FILES['banner']['tmp_name'],$target);
-            header('Location: contentserver_banners.php');
-            exit;
-        }else{
-            $errors[$year] = 'Banner must be 340x50 pixels.';
+            if(move_uploaded_file($tmp, $target)){
+                if ($is_ajax) {
+                    header('Content-Type: application/json');
+                    echo json_encode(['ok' => true]);
+                } else {
+                    header('Location: contentserver_banners.php?year=' . rawurlencode($year));
+                }
+                exit;
+            } else {
+                $errors[$year] = 'Failed to move uploaded file.';
+                if ($is_ajax) {
+                    header('Content-Type: application/json');
+                    echo json_encode(['ok' => false, 'error' => $errors[$year]]);
+                    exit;
+                }
+            }
+        } else {
+            $errors[$year] = 'Banner must be exactly 340x56 and a GIF/JPG/PNG (.gif, .jpg, .jpeg, .png).';
+            if ($is_ajax) {
+                header('Content-Type: application/json');
+                echo json_encode(['ok' => false, 'error' => $errors[$year]]);
+                exit;
+            }
         }
     }
+}
+
+// AJAX: return table HTML for a given year
+if ($is_ajax && (($_POST['action'] ?? $_GET['action'] ?? '') === 'list')) {
+    $year = $_POST['year'] ?? $_GET['year'] ?? $years[0];
+    if (!in_array($year, $years, true)) {
+        http_response_code(400);
+        header('Content-Type: application/json');
+        echo json_encode(['ok' => false, 'error' => 'Invalid year']);
+        exit;
+    }
+    $y = $year; // local alias for template fragment
+    ob_start();
+    ?>
+    <table border="1" cellpadding="2">
+        <tr><th>Enabled</th><th>Image</th><th>Actions</th></tr>
+        <?php foreach($enabled_imgs[$y] as $img): $n=basename($img); ?>
+        <tr>
+            <td>
+                <form method="post" class="form-inline">
+                    <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
+                    <input type="hidden" name="file" value="<?php echo htmlspecialchars($n); ?>">
+                    <input type="hidden" name="status" value="disable">
+                    <input type="checkbox" onchange="this.form.submit()" checked>
+                    <input type="hidden" name="toggle" value="1">
+                </form>
+            </td>
+            <td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/'.$y.'/img/'.$n); ?>" width="340" height="56" alt=""></td>
+            <td>
+                <form method="post" class="form-inline">
+                    <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
+                    <button name="delete" value="<?php echo htmlspecialchars($n); ?>" onclick="return confirm('Delete banner?');" class="btn-small">Delete</button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+        <?php foreach($disabled_imgs[$y] as $img): $n=basename($img); ?>
+        <tr>
+            <td>
+                <form method="post" class="form-inline">
+                    <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
+                    <input type="hidden" name="file" value="<?php echo htmlspecialchars($n); ?>">
+                    <input type="hidden" name="status" value="enable">
+                    <input type="checkbox" onchange="this.form.submit()">
+                    <input type="hidden" name="toggle" value="1">
+                </form>
+            </td>
+            <td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/'.$y.'/img/disabled/'.$n); ?>" width="340" height="56" alt=""></td>
+            <td>
+                <form method="post" class="form-inline">
+                    <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
+                    <button name="delete" value="<?php echo htmlspecialchars($n); ?>" onclick="return confirm('Delete banner?');" class="btn-small">Delete</button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    <?php
+    $html = ob_get_clean();
+    header('Content-Type: application/json');
+    echo json_encode(['ok' => true, 'html' => $html]);
+    exit;
 }
 
 ?>
@@ -97,9 +196,14 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <?php endif; ?>
     <form class="uploadForm" method="post" enctype="multipart/form-data">
         <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
-        <input type="file" name="banner" required>
+        <input type="file" name="banner" accept="image/gif,image/jpeg,image/png" required>
         <button type="submit" name="upload" value="1">Upload</button>
     </form>
+    <div class="upload-progress" style="display:none; margin:8px 0;">
+        <div class="bar" style="height:10px;width:0;background:#3498db;border-radius:5px;"></div>
+        <div class="label" style="font-size:12px;color:#555;margin-top:4px;">0%</div>
+    </div>
+    <div id="table-<?php echo htmlspecialchars($y); ?>">
     <table border="1" cellpadding="2">
         <tr><th>Enabled</th><th>Image</th><th>Actions</th></tr>
         <?php foreach($enabled_imgs[$y] as $img): $n=basename($img); ?>
@@ -113,7 +217,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                     <input type="hidden" name="toggle" value="1">
                 </form>
             </td>
-            <td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/'.$y.'/img/'.$n); ?>" width="340" height="50" alt=""></td>
+            <td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/'.$y.'/img/'.$n); ?>" width="340" height="56" alt=""></td>
             <td>
                 <form method="post" style="display:inline">
                     <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
@@ -133,7 +237,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                     <input type="hidden" name="toggle" value="1">
                 </form>
             </td>
-            <td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/'.$y.'/img/disabled/'.$n); ?>" width="340" height="50" alt=""></td>
+            <td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/'.$y.'/img/disabled/'.$n); ?>" width="340" height="56" alt=""></td>
             <td>
                 <form method="post" style="display:inline">
                     <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
@@ -143,6 +247,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         </tr>
         <?php endforeach; ?>
     </table>
+    </div>
 </div>
 <?php endforeach; ?>
 
@@ -159,23 +264,7 @@ document.addEventListener('DOMContentLoaded', function(){
         $(this).addClass('active');
     });
 
-    $('.uploadForm').on('submit', function(e){
-        var file = $(this).find('input[type=file]')[0].files[0];
-        if(!file) return;
-        e.preventDefault();
-        var form = this;
-        var err = $(this).prevAll('.upload-error').first();
-        var img = new Image();
-        img.onload = function(){
-            if(this.width!=340 || this.height!=50){
-                err.text('Image must be 340x50 pixels.').show();
-            } else {
-                form.submit();
-            }
-        };
-        img.onerror = function(){ err.text('Invalid image.').show(); };
-        img.src = URL.createObjectURL(file);
-    });
+    // Normal form submission handles uploading; no JS interception
 });
 </script>
 <?php include 'admin_footer.php'; ?>
