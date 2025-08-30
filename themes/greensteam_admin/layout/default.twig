@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Green Steam CMS - Separate Windows</title>
-    <link rel="stylesheet" type="text/css" href="{{ theme_url }}/styles/steam_shared.css">
-    <link rel="stylesheet" type="text/css" href="{{ theme_url }}/styles/greensteam/greensteam.css">
+<!-- Theme-specific CSS -->
+<link rel="stylesheet" type="text/css" href="{{ theme_url }}/styles/steam_shared.css">
+<link rel="stylesheet" type="text/css" href="{{ theme_url }}/styles/greensteam/greensteam.css">
 </head>
-<body>
+<body class="admin-{{ page_id }}">
 <div class="desktop">
     <div class="header-bar">
         <div class="header-content">
@@ -21,6 +17,9 @@
                         </div>
                     </div>
                 </div>
+                <span class="user-info">Logged in as {{ admin_name }}</span>
+                <a href="{{ BASE }}/index.php" class="btn btn-small">Home</a>
+                <a href="../logout.php" class="btn btn-small">Logout</a>
             </div>
         </div>
     </div>
@@ -266,6 +265,7 @@ function escapeHtml(text) {
     };
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
+
+// Universal admin functionality now handled by admin_footer.php
 </script>
-</body>
-</html>
+<!-- Universal JavaScript functionality and closing tags now loaded from admin_footer.php -->

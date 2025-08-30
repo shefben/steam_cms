@@ -9,6 +9,7 @@ BODY	   {
 	background-position: center top;
 	text-align: center;
 	color: #CFCBC2;
+	z-index:1;
 }
 A:visited      { color: #44617A; text-decoration: underline }
 

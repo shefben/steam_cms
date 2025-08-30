@@ -49,19 +49,17 @@ Generates the navigation bar using button definitions from `theme_headers`.
 
 ### `nav_button_list(theme = '')`
 Generates the navigation bar using button definitions from `theme_headers`.
- example:
+- **Example:**
   ```twig
   {% for btn in nav_button_list('2006_v2') %}
     {% if btn.visible %}
-      <a href="{{ btn.url }}" style="font-weight:bold; color:#fff">
-        {{ btn.text }}
-      </a>
-      {# add any extra per-button code here #}
+      <a href="{{ btn.url }}" style="font-weight:bold; color:#fff">{{ btn.text }}</a>
       {% if not loop.last %}
         <span class="navSpacer" style="font-weight:bold; color:#fff">|</span>
       {% endif %}
     {% endif %}
-  {% endfor %}```
+  {% endfor %}
+  ```
 
 ### `logo()`
 Outputs the logo image defined for the active theme.
@@ -199,6 +197,41 @@ Returns JSON configuration for customizable sidebar elements on the index page.
 Displays a calendar of upcoming tournaments.
 - **months** (`int`, default `4`): number of months to show starting from current month.
 - **Example:** `{{ tournament_calendar(6) }}`
+
+### `cms_render_download_file(file, theme = '2004')`
+Renders a single download/file entry with a selectable layout.
+
+- **file** (`array`): associative array describing the file.
+  - `title` (`string`): display name.
+  - `file_size` (`string`, optional): e.g., "25 MB".
+  - `main_url` (`string`, optional): primary download URL.
+  - `mirrors` (`array`, optional): list of `{ host, url }` mirrors.
+  - `render_type` (`string`, optional): layout selector. Supported values:
+    - `black_buttons_table` – 2003 v2 black button table layout.
+    - `title_size_mirrors_buttons` – title + size + buttons for main and mirrors.
+    - `title_size_mirrors_links` – title + size + plain links.
+    - `title_no_size_mirrors_links` – title (no size) + links.
+    - `mirrors_buttons_no_title` – only buttons; no title line.
+    - `single_button` – one big themed button (uses `buttonText` if provided).
+    - `single_link` – a single text link using `title`.
+    - `title_single_link_with_size` – link with size suffix.
+    - `floating_box_single_link` – boxed single link.
+    - `floating_box_title_mirrors_links` – boxed title with mirror links.
+- **theme** (`string`, default `'2004'`): reserved for future theme-specific tweaks.
+- **Example:**
+  ```twig
+  {% set file = {
+    title: 'Steam Client Installer',
+    file_size: '1.5 MB',
+    main_url: 'https://cdn.example.com/SteamInstall.exe',
+    mirrors: [
+      { host: 'Mirror A', url: 'https://mirror-a.example.com/SteamInstall.exe' },
+      { host: 'Mirror B', url: 'https://mirror-b.example.com/SteamInstall.exe' }
+    ],
+    render_type: 'title_size_mirrors_buttons'
+  } %}
+  {{ cms_render_download_file(file) }}
+  ```
 
 ## 2008 Theme Tags
 
@@ -342,13 +375,13 @@ Tags beginning with `random_` or `scheduled_` are created on the fly.
 
 ### `random_<group>`
 Selects one random entry from `random_content` where the group name matches `<group>`.
-- **Example:** `{{ random_sidebar }}`
+- **Example:** `{{ random_sidebar() }}`
 - Image paths beginning with `images/` are rewritten to load from the CMS root (`./images/`).
 
 ### `scheduled_<tagname>`
 Outputs all active rows from `scheduled_content` with `tag_name` of `<tagname>` and whose schedule matches the current date.
 - Supports `every_n_days`, `day_of_month`, and `fixed_range` scheduling modes.
-- **Example:** `{{ scheduled_weekly_feature }}`
+- **Example:** `{{ scheduled_weekly_feature() }}`
 
 ## Development Notes
 
@@ -384,4 +417,4 @@ The following table lists each tag or tag group, where its content is managed in
 |`getsteamnow_button`|**Settings**|`settings`|
 |`random_<group>`|**Random Content** (`random_content.php`) and **Random Groups** (`random_groups.php`)|`random_content`, `random_groups`|
 |`scheduled_<tag>`|**Scheduled Content** (`scheduled_content.php`)|`scheduled_content`|
-
+|`cms_render_download_file`|**Downloads** (`download_files.php`, `download_settings.php`)|`download_files`, `download_file_mirrors`, `download_file_versions`, `download_categories`, `download_system_requirements`|

@@ -179,18 +179,54 @@ if(isset($_GET['edit'])){
     <select id="headerImageList"></select>
 </div>
 <script src="js/image-picker.min.js"></script>
-<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
-CKEDITOR.replace('content');
-var loadReq;
+// Wait for DOM and universal admin scripts to be ready
+$(document).ready(function(){
+    console.log('Custom pages: Initializing page functionality');
+    
+    // Load CKEditor dynamically with timeout handling
+    var ckEditorLoaded = false;
+    var ckEditorScript = document.createElement('script');
+    ckEditorScript.src = 'https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js';
+    ckEditorScript.onload = function() {
+        console.log('CKEditor loaded successfully');
+        ckEditorLoaded = true;
+        CKEDITOR.replace('content');
+    };
+    ckEditorScript.onerror = function() {
+        console.error('Failed to load CKEditor from CDN');
+        $('#content').css('height', '400px').css('font-family', 'monospace');
+    };
+    document.head.appendChild(ckEditorScript);
+    
+    // Fallback timeout
+    setTimeout(function() {
+        if (!ckEditorLoaded) {
+            console.warn('CKEditor loading timeout');
+            $('#content').css('height', '400px').css('font-family', 'monospace');
+        }
+    }, 10000);
+    
+    var loadReq;
 function autoSave(){
     var data=$('form').serializeArray();
     data.push({name:'autosave',value:1});
     data.push({name:'page_name',value:$('#page_name').val()});
-    data.push({name:'content',value:CKEDITOR.instances.content.getData()});
+    
+    // Get content from CKEditor if loaded, otherwise from textarea
+    var content = '';
+    if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances.content) {
+        content = CKEDITOR.instances.content.getData();
+    } else {
+        content = $('#content').val();
+    }
+    data.push({name:'content',value:content});
+    
     return $.post('custom_pages.php',data,function(res){
         $('#lastSaved').text('Last saved '+res.time);
-    },'json');
+    },'json').fail(function(){
+        console.error('Autosave failed');
+    });
 }
 setInterval(autoSave,30000);
 
@@ -200,7 +236,12 @@ function loadPage(slug,theme){
         form.reset();
     }
     $('#previewBtn,#restoreDraft').hide();
-    CKEDITOR.instances.content.setData('');
+    // Clear content - handle if CKEditor isn't loaded yet
+    if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances.content) {
+        CKEDITOR.instances.content.setData('');
+    } else {
+        $('#content').val('');
+    }
     setHeaderImage('');
     $('#slug').val(slug).prop('readonly',true);
     if (loadReq) {
@@ -216,7 +257,12 @@ function loadPage(slug,theme){
         $('#title').val(d.title||'');
         $('#template').val(d.template||'');
         setHeaderImage(d.header_image||'');
-        CKEDITOR.instances.content.setData(d.content||'');
+        // Set content - handle if CKEditor isn't loaded yet
+        if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances.content) {
+            CKEDITOR.instances.content.setData(d.content||'');
+        } else {
+            $('#content').val(d.content||'');
+        }
         $('.themeChk').prop('checked',false);
         if(d.theme){
             d.theme.split(',').forEach(function(t){
@@ -233,7 +279,12 @@ function loadPage(slug,theme){
                 $('#page_name').val(r.page_name||'');
                 $('#title').val(r.title||'');
                 $('#template').val(r.template||'');
-                CKEDITOR.instances.content.setData(r.content||'');
+                // Set content - handle if CKEditor isn't loaded yet
+                if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances.content) {
+                    CKEDITOR.instances.content.setData(r.content||'');
+                } else {
+                    $('#content').val(r.content||'');
+                }
             },'json');
         }).show();
         $('#editor').show();
@@ -241,17 +292,30 @@ function loadPage(slug,theme){
     });
 }
 
-$(document).on('click','.edit-btn',function(){
+// Bind edit button clicks with debugging
+$(document).on('click','.edit-btn',function(e){
+    e.preventDefault();
+    console.log('Edit button clicked');
     var slug=$(this).data('slug');
     var theme=$(this).data('theme')||'';
+    console.log('Loading page:', slug, 'theme:', theme);
     loadPage(slug,theme);
 });
 
+console.log('Edit button event handler bound');
+console.log('Found edit buttons:', $('.edit-btn').length);
+
 $('#addBtn').on('click',function(){
+    console.log('Add button clicked');
     $('#slug').prop('readonly',false).val('');
     $('#page_name').val('');
     $('#title').val('');
-    CKEDITOR.instances.content.setData('');
+    // Clear content - handle if CKEditor isn't loaded yet
+    if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances.content) {
+        CKEDITOR.instances.content.setData('');
+    } else {
+        $('#content').val('');
+    }
     $('.themeChk').prop('checked',false);
     $('#template').val('');
     setHeaderImage('');
@@ -326,6 +390,7 @@ $('#selectHeaderBtn').on('click',function(){
             }
         });
     });
-});
+
+}); // End document.ready
 </script>
 <?php include 'admin_footer.php'; ?>

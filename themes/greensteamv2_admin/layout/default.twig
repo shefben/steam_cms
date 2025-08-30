@@ -1,15 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Green Steam Admin v2</title>
-    <link rel="stylesheet" type="text/css" href="{{ theme_url }}/steam_shared.css">
-    <link rel="stylesheet" type="text/css" href="{{ theme_url }}/greensteam/greensteam.css">
+<!-- Theme-specific CSS -->
+<link rel="stylesheet" type="text/css" href="{{ theme_url }}/steam_shared.css">
+<link rel="stylesheet" type="text/css" href="{{ theme_url }}/greensteam/greensteam.css">
 </head>
-<body>
+<body class="admin-{{ page_id }}">
 <div class="desktop">
     <div class="header-bar">
-        <div class="header-title">Steam CMS Administration</div>
+        <div class="header-content">
+            <div class="header-title">Steam CMS Administration</div>
+            <div class="header-controls">
+                <div class="notification-icon" title="Recent Notifications">
+                    <span class="icon">🔔</span>
+                    <div class="notification-dropdown">
+                        <div class="notification-header">Recent Activity</div>
+                        <div class="notification-list">
+                            <!-- Notifications will be populated via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <span class="user-info">Logged in as {{ admin_name }}</span>
+                <a href="{{ BASE }}/index.php" class="btn btn-small">Home</a>
+                <a href="../logout.php" class="btn btn-small">Logout</a>
+            </div>
+        </div>
     </div>
     <div class="breadcrumb-bar">
         <div class="breadcrumb">{{ breadcrumbs_html|raw }}</div>
@@ -18,28 +30,8 @@
     {{ content|raw }}
 </div>
 <script>
-document.addEventListener('click', function(e){
-    if(e.target.classList && e.target.classList.contains('submenu-toggle')){
-        e.preventDefault();
-        var sub=document.getElementById(e.target.getAttribute('aria-controls'));
-        if(sub){
-            var expanded=e.target.getAttribute('aria-expanded')==='true';
-            e.target.setAttribute('aria-expanded', expanded?'false':'true');
-            sub.style.display=expanded?'none':'block';
-        }
-    } else {
-        var link=e.target.closest('.nav-menu li > a');
-        if(link){
-            var li=link.parentElement;
-            var toggle=li.querySelector('.submenu-toggle');
-            var submenu=li.querySelector('.sub-menu');
-            if(toggle && submenu){
-                e.preventDefault();
-                toggle.dispatchEvent(new Event('click',{bubbles:true}));
-            }
-        }
-    }
+$(function(){
+    // Universal admin functionality now handled by admin_footer.php
 });
 </script>
-</body>
-</html>
+<!-- Universal JavaScript functionality and closing tags now loaded from admin_footer.php -->

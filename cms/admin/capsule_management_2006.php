@@ -306,7 +306,7 @@ if ($use_all) {
       <input type="hidden" name="current_image" id="cap-current-image">
       <div class="file-picker-container">
         <button type="button" class="btn btn-primary" 
-                data-file-picker 
+                data-reliable-file-picker 
                 data-upload-path="storefront/images/capsules" 
                 data-target="#cap-current-image"
                 data-preview="#cap-preview"
@@ -593,13 +593,13 @@ $(function(){
   });
   
   // Handle dynamically created file picker buttons for tabbed capsules
-  $(document).on('click', '.game-image-picker[data-file-picker]', function() {
+  $(document).on('click', '.game-image-picker[data-reliable-file-picker]', function() {
     var $btn = $(this);
     var $game = $btn.closest('.game');
     var uploadPath = $btn.data('uploadPath') || 'storefront/images/capsules';
     var allowedTypes = ($btn.data('allowedTypes') || 'png,jpg,jpeg').split(',');
     
-    openFilePicker(uploadPath, function(selectedPath) {
+    openReliableFilePicker(uploadPath, function(selectedPath) {
       // Update hidden input
       $game.find('.game-img-path').val(selectedPath);
       // Update preview image
@@ -692,7 +692,7 @@ $(function(){
     var imgPath=data&&data.image?data.image:'';
     var html='<div class="game"><input type="hidden" class="game-img-path" value="'+imgPath+'">'
       +'<div><label>Existing Image<select class="game-existing">'+buildImageOptions(imgPath)+'</select></label></div>'
-      +'<div><button type="button" class="btn btn-small game-image-picker" data-file-picker data-upload-path="storefront/images/capsules" data-allowed-types="png,jpg,jpeg">Choose Image</button><img class="preview"'+(imgPath?' src="../storefront/images/capsules/'+imgPath+'" style="display:block;"':'')+'></div>'
+      +'<div><button type="button" class="btn btn-small game-image-picker" data-reliable-file-picker data-upload-path="storefront/images/capsules" data-allowed-types="png,jpg,jpeg">Choose Image</button><img class="preview"'+(imgPath?' src="../storefront/images/capsules/'+imgPath+'" style="display:block;"':'')+'></div>'
       +'<div><label>Name<input type="text" class="game-name" value="'+(data&&data.name?data.name:'')+'"></label></div>'
       +'<div><label>Game ID<input type="text" class="game-appid" value="'+(data&&data.appid?data.appid:'')+'"></label></div>'
       +'<div><label>Price<input type="text" class="game-price" value="'+(data&&data.price?data.price:'')+'"></label></div>'

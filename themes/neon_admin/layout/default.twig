@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon CMS Admin Panel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ theme_url }}/style.css">
-    <script src="{{ theme_url }}/js/jquery.min.js"></script>
-    <script src="{{ theme_url }}/js/chart.min.js"></script>
-    <link rel="stylesheet" href="<?php echo htmlspecialchars($theme_url); ?>/cropper.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<!-- Theme-specific CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ theme_url }}/style.css">
+<link rel="stylesheet" href="{{ theme_url }}/cropper.min.css">
 </head>
+<body class="admin-{{ page_id }}">&nbsp
+<div class="admin-wrapper">
     <header class="admin-header">
         <div class="header-content">
             <h1>CMS Administration</h1>
             <div class="header-controls">
                 <div class="notification-icon" title="Recent Notifications">
-                    <span class="nav-icon">🔔</span>
+                    <span class="icon">🔔</span>
                     <div class="notification-dropdown">
                         <div class="notification-header">Recent Activity</div>
                         <div class="notification-list">
@@ -26,152 +18,68 @@
                         </div>
                     </div>
                 </div>
+                <span class="user-info">Logged in as {{ admin_name }}</span>
+                <a href="{{ BASE }}/index.php" class="btn btn-small">Home</a>
+                <a href="../logout.php" class="btn btn-small">Logout</a>
             </div>
         </div>
+        {{ breadcrumbs_html|raw }}
+        {{ notifications_html|raw }}
     </header>
-    {{ breadcrumbs_html|raw }}
-<body class="admin-{{ page_id }}">
-
-    <div class="container">
-        <div class="neon-wrapper">
-            <div class="content-wrapper">
-                {{ sidebar|raw }}
-                {{ content|raw }}
+    <div class="admin-layout">
+        <div class="container">
+            <div class="neon-wrapper">
+                <div class="content-wrapper">
+                    {{ sidebar|raw }}
+                    {{ content|raw }}
+                </div>
             </div>
         </div>
     </div>
-    <script>
-    $(function(){
-        $('.nav-menu').on('click','.submenu-toggle', function(e){
-            e.preventDefault();
-            var $btn=$(this);
-            var $sub=$('#'+$btn.attr('aria-controls'));
-            $sub.slideToggle(150);
-            var expanded=$btn.attr('aria-expanded')==='true';
-            $btn.attr('aria-expanded', expanded?'false':'true');
-        });
-        
-        // Prevent parent dropdown links from navigating if they have submenus
-        $('.nav-menu li').each(function(){
-            var $li = $(this);
-            var $link = $li.children('a').first();
-            var $toggle = $li.children('.submenu-toggle').first();
-            var $submenu = $li.children('.sub-menu').first();
-
-            if($toggle.length && $submenu.length) {
-                $link.on('click', function(e){
-                    e.preventDefault();
-                    // Trigger the submenu toggle instead
-                    $toggle.trigger('click');
-                    return false;
-                });
-            }
-        });
-        
-        // Notification system
-        $('#notification-btn').on('click', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            $('#notification-dropdown').toggleClass('show');
-        });
-        
-        $('#close-notifications').on('click', function(e){
-            e.preventDefault();
+</div>
+<script>
+// Neon theme-specific JavaScript functionality
+$(function(){
+    // Neon-specific notification system handlers
+    $('#notification-btn').on('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $('#notification-dropdown').toggleClass('show');
+    });
+    
+    $('#close-notifications').on('click', function(e){
+        e.preventDefault();
+        $('#notification-dropdown').removeClass('show');
+    });
+    
+    // Close neon notification dropdown when clicking outside
+    $(document).on('click', function(e){
+        if (!$(e.target).closest('.notifications').length) {
             $('#notification-dropdown').removeClass('show');
-        });
-        
-        // Close notification dropdown when clicking outside
-        $(document).on('click', function(e){
-            if (!$(e.target).closest('.notifications').length) {
-                $('#notification-dropdown').removeClass('show');
-            }
-        });
-        
-        // Notification icon functionality
-        $('.notification-icon').on('click', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            var $dropdown = $(this).find('.notification-dropdown');
-            if($dropdown.is(':visible')) {
-                $dropdown.fadeOut(150);
-            } else {
-                loadNotifications();
-                $dropdown.fadeIn(150);
-            }
-        });
-
-        // Close notification dropdown when clicking outside
-        $(document).on('click', function(){
-            $('.notification-dropdown').fadeOut(150);
-        });
-
-        function loadNotifications() {
-            $.get('notifications.php?action=recent&limit=10')
-                .done(function(data) {
-                    var $list = $('.notification-list');
-                    $list.empty();
-                    if(data && data.length > 0) {
-                        data.forEach(function(notification) {
-                            var $item = $('<div class="notification-item">');
-                            $item.html('<div class="notification-type">' + 
-                                      escapeHtml(notification.type) + '</div>' +
-                                      '<div class="notification-message">' + 
-                                      escapeHtml(notification.message) + '</div>' +
-                                      '<div class="notification-time">' + 
-                                      escapeHtml(notification.created) + '</div>');
-                            $list.append($item);
-                        });
-                    } else {
-                        $list.html('<div class="no-notifications">No recent notifications</div>');
-                    }
-                })
-                .fail(function() {
-                    $('.notification-list').html('<div class="notification-error">Error loading notifications</div>');
-                });
         }
+    });
 
-        function escapeHtml(text) {
-            var map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
-            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-        }
-
-        $('.notify-dismiss').on('click', function(e){
-            e.preventDefault();
-            var id = $(this).data('id');
-            var $li = $(this).closest('li');
-            var $dropdown = $('#notification-dropdown');
-            
-            $.post('notifications.php', {id:id}).done(function(){
-                $li.fadeOut(150, function(){ 
-                    $(this).remove(); 
-                    
-                    // Check if there are any notifications left
-                    var remainingNotifications = $('.notifications ul li').length;
-                    if (remainingNotifications === 0) {
-                        // Hide notification dot and show "no notifications" message
-                        $('.notification-dot').fadeOut(200);
-                        $('.notification-content').html('<div class="no-notifications"><i class="fas fa-check-circle"></i><p>No new notifications</p></div>');
-                    }
-                });
+    // Neon-specific notification dismiss handling
+    $('.notify-dismiss').on('click', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        var $li = $(this).closest('li');
+        var $dropdown = $('#notification-dropdown');
+        
+        $.post('notifications.php', {id:id}).done(function(){
+            $li.fadeOut(150, function(){ 
+                $(this).remove(); 
+                
+                // Check if there are any notifications left
+                var remainingNotifications = $('.notifications ul li').length;
+                if (remainingNotifications === 0) {
+                    // Hide notification dot and show "no notifications" message
+                    $('.notification-dot').fadeOut(200);
+                    $('.notification-content').html('<div class="no-notifications"><i class="fas fa-check-circle"></i><p>No new notifications</p></div>');
+                }
             });
         });
-        $('body').on('click','.help-icon',function(e){
-            e.preventDefault();
-            var txt=$(this).data('help');
-            if(!txt) return;
-            var $m=$('<div class="help-modal" aria-label="Help"><div class="dialog"></div></div>');
-            $m.find('.dialog').text(txt);
-            $('body').append($m);
-            $m.fadeIn(100);
-            $m.on('click',function(){ $m.fadeOut(150,function(){ $m.remove(); }); });
-        });
     });
-    </script>
-</body>
-</html>
+});
+</script>
+<!-- Universal JavaScript functionality and closing tags now loaded from admin_footer.php -->

@@ -18,3 +18,6 @@ steamid_instructions.html -> index.php?area=steamid_instructions
 /marketing/hl2_preload/ -> Marketing.php?t=hl2_preload
 /marketing/hl2_preload2/ -> Marketing.php?t=hl2_preload2
 /marketing/cz_pricechange/ -> Marketing.php?t=cz_pricechange
+/platform/game_info/czero/ -> platform.php?area=game_info&p=czero
+/platform/friends/         -> platform.php?area=friends
+/steamtour/ -> steamtour.php?p=<page>

@@ -186,6 +186,32 @@ $render_items = function (string $parent) use (&$render_items, $items_by_parent,
 
 $nav_html = '<ul class="nav-menu">' . $render_items('') . '</ul>';
 
+// Load universal admin CSS and JavaScript resources
+if ($admin_layout) {
+    // Add standard HTML document elements
+    echo '<!DOCTYPE html>' . "\n";
+    echo '<html lang="en">' . "\n";
+    echo '<head>' . "\n";
+    echo '    <meta charset="utf-8">' . "\n";
+    echo '    <meta name="viewport" content="width=device-width, initial-scale=1.0">' . "\n";
+    echo '    <title>' . ($page_title ?? 'CMS Admin') . '</title>' . "\n";
+    
+    // Add universal CSS resources
+    echo '    <!-- Universal Admin CSS Resources -->' . "\n";
+    echo '    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">' . "\n";
+    echo '    <link rel="stylesheet" href="' . $base_url . '/cms/admin/css/filepond.min.css">' . "\n";
+    echo '    <link rel="stylesheet" href="' . $base_url . '/cms/admin/css/reliable-file-picker.css">' . "\n";
+    
+    // Add JavaScript resources
+    echo '    <!-- Universal Admin JavaScript Resources -->' . "\n";
+    echo '    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>' . "\n";
+    echo '    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>' . "\n";
+    echo '    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>' . "\n";
+    echo '    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>' . "\n";
+    echo '    <script src="' . $base_url . '/cms/admin/js/filepond.min.js"></script>' . "\n";
+    echo '    <script src="' . $base_url . '/cms/admin/js/reliable-file-picker.js"></script>' . "\n";
+}
+
 if (!$admin_layout) {
     include "$theme_dir/header.php";
 }
