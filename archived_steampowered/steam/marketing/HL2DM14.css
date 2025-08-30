@@ -47,7 +47,7 @@ a	{
   height: 550px;
   width: 596px;
   padding: 48px 0 0 20px;
-  background: url(img/background.gif) no-repeat center top;
+  background: url(img/background2.gif) no-repeat center top;
   /* make the image scale to exactly cover the div */
   background-size: 100% 100%;
   /* remove fixed‐to‐viewport behavior so it scrolls with the div */
