@@ -88,7 +88,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 </ul>
 
 <?php foreach($years as $i=>$y): ?>
-<div id="tab-<?php echo htmlspecialchars($y); ?>" class="tab-content" style="<?php echo $i===0?'':'display:contents;'; ?>">
+<div id="tab-<?php echo htmlspecialchars($y); ?>" class="tab-content" style="<?php echo $i===0?'':'display:none;'; ?>">
     <?php $err = $errors[$y] ?? null; ?>
     <?php if($err): ?>
     <div class="upload-error" style="color:red;"><?php echo htmlspecialchars($err); ?></div>
