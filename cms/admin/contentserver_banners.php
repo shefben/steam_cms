@@ -78,10 +78,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     .tab-link{display:block;padding:8px 15px;background:#ccc;color:#000;text-decoration:none;border:1px solid #888;border-bottom:none;transform:skewX(-20deg);border-radius:4px 4px 0 0;}
     .tab-link span{display:block;transform:skewX(20deg);}
     .tab-link.active{background:#fff;}
-    .tab-content{border:1px solid #888;padding:10px;background:#fff;}
-    .disabled-banner{position:relative;display:inline-block;}
-    .disabled-banner img{display:block;}
-    .disabled-banner::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(128,128,128,0.5);}
+    .tab-content{border:1px solid #888;padding:10px;background:#fff;display:contents;}
 </style>
 
 <ul class="tab-links">
@@ -91,7 +88,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 </ul>
 
 <?php foreach($years as $i=>$y): ?>
-<div id="tab-<?php echo htmlspecialchars($y); ?>" class="tab-content" style="<?php echo $i===0?'':'display:none;'; ?>">
+<div id="tab-<?php echo htmlspecialchars($y); ?>" class="tab-content" style="<?php echo $i===0?'':'display:contents;'; ?>">
     <?php $err = $errors[$y] ?? null; ?>
     <?php if($err): ?>
     <div class="upload-error" style="color:red;"><?php echo htmlspecialchars($err); ?></div>
@@ -136,11 +133,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
                     <input type="hidden" name="toggle" value="1">
                 </form>
             </td>
-            <td>
-                <div class="disabled-banner">
-                    <img src="<?php echo htmlspecialchars($base_url.'/platform/banner/'.$y.'/img/disabled/'.$n); ?>" width="340" height="50" alt="">
-                </div>
-            </td>
+            <td><img src="<?php echo htmlspecialchars($base_url.'/platform/banner/'.$y.'/img/disabled/'.$n); ?>" width="340" height="50" alt=""></td>
             <td>
                 <form method="post" style="display:inline">
                     <input type="hidden" name="year" value="<?php echo htmlspecialchars($y); ?>">
