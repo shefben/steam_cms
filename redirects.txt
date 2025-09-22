@@ -1,7 +1,6 @@
 html/betasignup.html -> index.php?area=getsteamnow
 legal.html -> index.php?area=legal
-status.php -> index.php?area=status
-cafesupport.domain.com -> /cafesupport/
+status.php -> index.php?area=statusenv vpport/
 beta.valvesoftware.com -> index.php?area=becomebetatester
 Games_Available/Games.htm -> index.php?area=games
 BetaSupport/support.htm -> index.php?area=support
@@ -21,3 +20,6 @@ steamid_instructions.html -> index.php?area=steamid_instructions
 /platform/game_info/czero/ -> platform.php?area=game_info&p=czero
 /platform/friends/         -> platform.php?area=friends
 /steamtour/ -> steamtour.php?p=<page>
+/steam/
+
+/paypal/(success, others) -> paypal.php
