@@ -42,7 +42,7 @@ $insertArray[] = [
     $content2003v2,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
-]
+];
 
 $content2004 = <<<HTML
 <div class="narrower">
@@ -56,7 +56,7 @@ function popup(src,scroll,x,y,target)
 
 
 <h3>STEAM TROUBLESHOOTER</h3>
-The <a href="javascript:popup('troubleshooter/live/index.php','yes',550,550,'')">troubleshooter</a> is the fastest way to get help with Steam-related issues.  It can provide immediate answers to the most common Steam problems, and can also help you contact Steam support when you need help with a more complicated issue.
+The <a href="javascript:popup('troubleshooter.php','yes',550,550,'')">troubleshooter</a> is the fastest way to get help with Steam-related issues.  It can provide immediate answers to the most common Steam problems, and can also help you contact Steam support when you need help with a more complicated issue.
 <br><br>
 
 <!-- <h3>CD KEYS AND STEAM ACCOUNT QUESTIONS</h3>
@@ -89,7 +89,7 @@ If you operate a gaming venue, Valve's Official <a href="index.php?area=cybercaf
 If your issue is not addressed in any of the above pages, use these email addresses to get in touch with the Steam team directly. (We'll do our best to answer your questions in a timely manner.)<br>
 <br>
 <strong>For support inquiries:</strong><br>
-<a href="javascript:popup('troubleshooter/live/index.php','yes',550,550,'')">Steam Troubleshooter</a><br>
+<a href="javascript:popup('troubleshooter.php','yes',550,550,'')">Steam Troubleshooter</a><br>
 <br>
 <strong>For business inquiries:</strong><br>
 <a href="mailto:biz@steampowered.com">biz@steampowered.com</a><br>
@@ -100,39 +100,34 @@ If your issue is not addressed in any of the above pages, use these email addres
 
 </div>
 HTML;
+
 $insertArray[] = [
     1,
     '2004',
     $content2004,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
-]
-
-
-$content2005v1 = <<<HTML
-HTML;
-$insertArray[] = [
-    1,
-    '2005v1',
-    $content2005v1,
-    date('Y-m-d H:i:s'),       // created
-    date('Y-m-d H:i:s')        // updated
-]
-
-
-$supportPages = [
-
-    ['2004','2004'],
-    ['2005_v1','2005_v1'],
-    ['2005_v2','2005_v2'],
 ];
 
 
-$pageStmt = $pdo->prepare('INSERT INTO support_pages(version,years,content,created,updated) VALUES(?,?,?,?,?)');
+$supportPages = $insertArray;
+
+$pdo->beginTransaction();
+
+$pageStmt = $pdo->prepare(
+    'INSERT INTO support_pages(version, years, content, created, updated) VALUES (?,?,?,?,?)'
+);
+
+$faqStmt = $pdo->prepare(
+    'INSERT INTO support_page_faqs(support_id, faqid1, faqid2, ord) VALUES (?,?,?,?)'
+);
+
 foreach ($supportPages as $sp) {
-    $pageStmt->execute([$sp[0], $sp[1], $supportContent, date('Y-m-d H:i:s'), date('Y-m-d H:i:s')]);
+    // $sp = [version, years, content, created, updated]
+    $pageStmt->execute([$sp[0], $sp[1], $sp[2], $sp[3], $sp[4]]);
     $id = $pdo->lastInsertId();
-    $faqStmt = $pdo->prepare('INSERT INTO support_page_faqs(support_id,faqid1,faqid2,ord) VALUES(?,?,?,?)');
+
+    // Seed FAQs (same set for each page per your example)
     $faqs = [
         [1050915714, '91503900'],
         [1050915726, '98098300'],
@@ -142,7 +137,9 @@ foreach ($supportPages as $sp) {
     ];
     $ord = 1;
     foreach ($faqs as $f) {
-        $faqStmt->execute([$id,$f[0],$f[1],$ord++]);
+        $faqStmt->execute([$id, $f[0], $f[1], $ord++]);
     }
 }
+
+$pdo->commit();
 ?>

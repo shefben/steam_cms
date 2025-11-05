@@ -16,3 +16,14 @@ RewriteRule ^marketing/css_preload/?$ Marketing.php?t=css_preload [L,R=302,QSA]
 RewriteRule ^marketing/hl2_preload/?$ Marketing.php?t=hl2_preload [L,R=302,QSA]
 RewriteRule ^marketing/hl2_preload2/?$ Marketing.php?t=hl2_preload2 [L,R=302,QSA]
 RewriteRule ^marketing/cz_pricechange/?$ Marketing.php?t=cz_pricechange [L,R=302,QSA]
+
+# Steam Marketing Archive Redirects
+# Handle case-insensitive Steam/Marketing/ requests
+RewriteCond %{REQUEST_URI} ^/[Ss]team/[Mm]arketing/([^/]+)/?(.*)$ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ steam/marketing/index.php?page=%1 [L,QSA]
+
+# Handle direct Steam/Marketing/ directory access
+RewriteCond %{REQUEST_URI} ^/[Ss]team/[Mm]arketing/?$ [NC]
+RewriteRule ^(.*)$ steam/marketing/index.php [L,QSA]

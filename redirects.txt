@@ -8,6 +8,9 @@ http://www.chatbear.com/cgi-bin/board.pl?boardid=1041&amp;view=flatold -> /forum
 Faq/FAQ.htm -> index.php?area=beta1faq
 steamsupport@valvesoftware.com -> steamsupport@<domain>
 /marketing/ -> steam/marketing/
+Steam/Marketing/ -> steam/marketing/
+steam/Marketing/ -> steam/marketing/
+STEAM/MARKETING/ -> steam/marketing/
 steamid_instructions.html -> index.php?area=steamid_instructions
 /autoupdate/ -> index.php?area=autoupdate
 /v/ -> /
@@ -23,3 +26,4 @@ steamid_instructions.html -> index.php?area=steamid_instructions
 /steam/
 
 /paypal/(success, others) -> paypal.php
+troubleshooter/live/index.php -> troubleshooter.php
