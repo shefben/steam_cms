@@ -943,6 +943,10 @@ ALTER TABLE product_discounts
                 $buffer = '';
                 $inBlock = false;
                 $blockDepth = 0;
+                $inString = false;
+                $stringChar = '';
+                $escaped = false;
+
                 foreach (preg_split("/\r?\n/", $sql) as $line) {
                     $trim = trim($line);
                     if ($inBlock) {
@@ -951,23 +955,48 @@ ALTER TABLE product_discounts
                         }
                         continue;
                     }
-                    if ($trim === '' || str_starts_with($trim, '--') || $trim[0] === '#') {
+                    if (!$inString && ($trim === '' || str_starts_with($trim, '--') || $trim[0] === '#')) {
                         continue;
                     }
-                    if (str_starts_with($trim, '/*')) {
+                    if (!$inString && str_starts_with($trim, '/*')) {
                         $inBlock = true;
                         continue;
                     }
 
-                    if (preg_match('/\bBEGIN\b/i', $trim)) {
+                    if (!$inString && preg_match('/\bBEGIN\b/i', $trim)) {
                         $blockDepth++;
                     }
-                    if ($blockDepth > 0 && preg_match('/\bEND\b/i', $trim) && !preg_match('/\bEND\s+(IF|LOOP|CASE|REPEAT)\b/i', $trim)) {
+                    if (!$inString && $blockDepth > 0 && preg_match('/\bEND\b/i', $trim) && !preg_match('/\bEND\s+(IF|LOOP|CASE|REPEAT)\b/i', $trim)) {
                         $blockDepth--;
                     }
 
                     $buffer .= $line."\n";
-                    if ($blockDepth === 0 && preg_match('/;\s*$/', $trim)) {
+
+                    // Track string state to avoid splitting on semicolons inside quoted strings
+                    for ($i = 0; $i < strlen($line); $i++) {
+                        $char = $line[$i];
+
+                        if ($escaped) {
+                            $escaped = false;
+                            continue;
+                        }
+
+                        if ($char === '\\') {
+                            $escaped = true;
+                            continue;
+                        }
+
+                        if (!$inString && ($char === "'" || $char === '"')) {
+                            $inString = true;
+                            $stringChar = $char;
+                        } elseif ($inString && $char === $stringChar) {
+                            $inString = false;
+                            $stringChar = '';
+                        }
+                    }
+
+                    // Only split on semicolons outside of quoted strings
+                    if ($blockDepth === 0 && !$inString && preg_match('/;\s*$/', $trim)) {
                         $stmts[] = trim($buffer);
                         $buffer = '';
                     }
