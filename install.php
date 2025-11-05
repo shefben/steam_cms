@@ -300,7 +300,7 @@ CREATE TABLE `0405_storefront_packages` (
             $pdo->exec("DROP TABLE IF EXISTS redirects");
             $pdo->exec("CREATE TABLE redirects(
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                slug VARCHAR(200) UNIQUE,
+                slug VARCHAR(200) COLLATE utf8mb4_bin UNIQUE,
                 target TEXT,
                 hits INT DEFAULT 0,
                 created DATETIME
