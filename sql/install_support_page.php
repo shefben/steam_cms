@@ -1,5 +1,7 @@
 <?php
 
+$insertArray = [];
+
 $content2003v2 = <<<HTML
 <div class="narrower">
 
@@ -17,8 +19,8 @@ For any issues related to credit cards or billing, please visit the Steam Billin
 <h3>SUBSCRIBER AGREEMENT, BILLING, AND ONLINE CONDUCT</h3>
 When you install Steam, you agree to be bound by the <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>. The billing policies for Steam can be found here [coming soon]. Also, please refer to the <a href="index.php?area=online_conduct">online conduct rules</a> for Steam and the Steam network.<br><br>
 
-<h3>CYBER CAFÉS</h3>
-If you operate a gaming venue, Valve's Official <a href="index.php?area=cybercafes">Cyber Café Program</a> lets you offer Steam games to your customers.<br><br>
+<h3>CYBER CAFï¿½S</h3>
+If you operate a gaming venue, Valve's Official <a href="index.php?area=cybercafes">Cyber Cafï¿½ Program</a> lets you offer Steam games to your customers.<br><br>
 
 <h3>CONTACT INFORMATION</h3>
 If your issue is not addressed in any of the above pages, use these email addresses to get in touch with the Steam team directly. (We'll do our best to answer your questions in a timely manner.)<br>
@@ -82,8 +84,8 @@ For any issues related to credit cards or billing, please visit the Steam Billin
 <h3>SUBSCRIBER AGREEMENT, BILLING, AND ONLINE CONDUCT</h3>
 When you install Steam, you agree to be bound by the <a href="index.php?area=subscriber_agreement">Steam Subscriber Agreement</a>. The billing policies for Steam can be found here [coming soon]. Also, please refer to the <a href="index.php?area=online_conduct">online conduct rules</a> for Steam and the Steam network.<br><br>
 
-<h3>CYBER CAFÉS</h3>
-If you operate a gaming venue, Valve's Official <a href="index.php?area=cybercafes">Cyber Café Program</a> lets you offer Steam games to your customers.<br><br>
+<h3>CYBER CAFï¿½S</h3>
+If you operate a gaming venue, Valve's Official <a href="index.php?area=cybercafes">Cyber Cafï¿½ Program</a> lets you offer Steam games to your customers.<br><br>
 
 <h3>CONTACT INFORMATION</h3>
 If your issue is not addressed in any of the above pages, use these email addresses to get in touch with the Steam team directly. (We'll do our best to answer your questions in a timely manner.)<br>
