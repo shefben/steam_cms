@@ -130,6 +130,19 @@ CREATE TABLE IF NOT EXISTS media_links (
     INDEX idx_app_type (app_id, link_type)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- Game packages table (modern Steam format)
+CREATE TABLE IF NOT EXISTS game_packages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    app_id INT NOT NULL,
+    sub_id INT NULL,
+    package_name VARCHAR(255) NULL,
+    price VARCHAR(50) NULL,
+    discount_percent INT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
+    INDEX idx_app_sub (app_id, sub_id)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- Insert some common languages
 INSERT IGNORE INTO languages (name, code) VALUES 
 ('English', 'en'),
