@@ -1070,6 +1070,8 @@ ALTER TABLE product_discounts
                     continue;
                 }
                 $sql = file_get_contents($file);
+                // Preprocess SQL to normalize date formats
+                $sql = normalizeSqlDates($sql);
                 foreach (split_sql_statements($sql) as $stmt) {
                     $stmt = trim($stmt);
                     if ($stmt === '') {
