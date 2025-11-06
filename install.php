@@ -1099,25 +1099,42 @@ ALTER TABLE product_discounts
             $sqlFiles = glob(__DIR__.'/sql/*.sql');
             sort($sqlFiles);
 
-            // Separate schema files from data files to ensure proper loading order
-            $schemaFiles = [];
-            $dataFiles = [];
+            // Separate files by type to ensure proper loading order
+            // This prevents "table does not exist" errors by ensuring CREATE TABLE
+            // statements are executed before INSERT INTO statements
+            $schemaFiles = [];       // Files with only CREATE TABLE
+            $mixedFiles = [];        // Files with both CREATE TABLE and INSERT INTO
+            $dataOnlyFiles = [];     // Files with only INSERT INTO
+
             foreach ($sqlFiles as $file) {
                 $base = basename($file);
                 if (in_array($base, ['install_storefront.sql', 'install_official_survey_stats.sql', 'install_sidebar_sections.sql'], true)) {
                     continue;
                 }
-                // Schema files must be loaded first (CREATE TABLE statements)
-                if (strpos($base, '_schema.sql') !== false) {
-                    $schemaFiles[] = $file;
+
+                // Read and classify file by its SQL statement types
+                $sql = file_get_contents($file);
+                $hasCreate = stripos($sql, 'CREATE TABLE') !== false;
+                $hasInsert = stripos($sql, 'INSERT INTO') !== false;
+
+                if ($hasCreate && !$hasInsert) {
+                    // Pure schema file (CREATE TABLE only)
+                    $schemaFiles[] = ['file' => $file, 'sql' => $sql];
+                } elseif ($hasCreate && $hasInsert) {
+                    // Mixed file (both CREATE and INSERT) - load after pure schema
+                    $mixedFiles[] = ['file' => $file, 'sql' => $sql];
                 } else {
-                    $dataFiles[] = $file;
+                    // Data-only file (INSERT INTO only) - load last
+                    $dataOnlyFiles[] = ['file' => $file, 'sql' => $sql];
                 }
             }
 
-            // Process schema files first, then data files
-            foreach (array_merge($schemaFiles, $dataFiles) as $file) {
-                $sql = file_get_contents($file);
+            // Process in correct dependency order:
+            // 1. Pure schema files (table definitions)
+            // 2. Mixed files (tables + their data)
+            // 3. Data-only files (data referencing previously created tables)
+            foreach (array_merge($schemaFiles, $mixedFiles, $dataOnlyFiles) as $fileData) {
+                $sql = $fileData['sql'];
                 // Convert from detected encoding to UTF-8
                 $sql = ensureUtf8Encoding($sql);
                 // Preprocess SQL to normalize date formats
