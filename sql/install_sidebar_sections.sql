@@ -4,7 +4,7 @@ CREATE TABLE sidebar_sections (
     sidebar_name VARCHAR(100) NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE sidebar_section_variants (
     variant_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,7 +19,7 @@ CREATE TABLE sidebar_section_variants (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (section_id) REFERENCES sidebar_sections(section_id) ON DELETE CASCADE
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE sidebar_section_entries (
     entry_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -28,14 +28,14 @@ CREATE TABLE sidebar_section_entries (
     theme_list VARCHAR(255) DEFAULT NULL,
     entry_content TEXT NOT NULL,
     FOREIGN KEY (parent_variant_id) REFERENCES sidebar_section_variants(variant_id) ON DELETE CASCADE
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE sidebar_section_types (
     type_name VARCHAR(100) PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     theme_list VARCHAR(255) DEFAULT NULL,
     entry_template TEXT NOT NULL
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE sidebar_section_type_fields (
     field_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -45,7 +45,7 @@ CREATE TABLE sidebar_section_type_fields (
     field_type VARCHAR(50) NOT NULL,
     field_order INT NOT NULL DEFAULT 0,
     FOREIGN KEY (type_name) REFERENCES sidebar_section_types(type_name) ON DELETE CASCADE
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE sidebar_section_entry_fields (
     entry_id INT NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE sidebar_section_entry_fields (
     field_value TEXT NOT NULL,
     PRIMARY KEY (entry_id, field_key),
     FOREIGN KEY (entry_id) REFERENCES sidebar_section_entries(entry_id) ON DELETE CASCADE
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO sidebar_sections (section_id, title, sidebar_name) VALUES
 (1, '', 'search'),
