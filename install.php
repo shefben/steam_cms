@@ -1007,6 +1007,56 @@ ALTER TABLE product_discounts
                 return $stmts;
             }
 
+            /**
+             * Convert human-readable dates to MySQL format (YYYY-MM-DD)
+             * Handles formats like: 'Friday, April 1 2005' -> '2005-04-01'
+             */
+            function normalize_date_format($stmt): string
+            {
+                // Only process INSERT statements for tables with date columns
+                if (!preg_match('/INSERT INTO\s+(steam_marketing|platform_update_history)/i', $stmt)) {
+                    return $stmt;
+                }
+
+                // Pattern to match quoted date strings like 'Friday, April 1 2005'
+                // This pattern looks for dates in quotes with optional day name, month name, day, and year
+                $datePattern = '/\'(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})\'/';
+
+                $stmt = preg_replace_callback($datePattern, function($matches) {
+                    $monthName = $matches[1];
+                    $day = $matches[2];
+                    $year = $matches[3];
+
+                    // Convert month name to number
+                    $monthMap = [
+                        'January' => '01', 'February' => '02', 'March' => '03',
+                        'April' => '04', 'May' => '05', 'June' => '06',
+                        'July' => '07', 'August' => '08', 'September' => '09',
+                        'October' => '10', 'November' => '11', 'December' => '12'
+                    ];
+
+                    $month = $monthMap[$monthName] ?? null;
+                    if (!$month) {
+                        // If month name not recognized, return original
+                        return $matches[0];
+                    }
+
+                    // Format as MySQL date
+                    $mysqlDate = sprintf('%s-%s-%02d', $year, $month, (int)$day);
+
+                    // Validate the date
+                    $parts = explode('-', $mysqlDate);
+                    if (checkdate((int)$parts[1], (int)$parts[2], (int)$parts[0])) {
+                        return "'" . $mysqlDate . "'";
+                    }
+
+                    // If invalid, return original
+                    return $matches[0];
+                }, $stmt);
+
+                return $stmt;
+            }
+
             function run_sql_file(PDO $pdo, string $file): void
             {
                 $sql = file_get_contents($file);
@@ -1015,6 +1065,10 @@ ALTER TABLE product_discounts
                     if ($stmt === '') {
                         continue;
                     }
+
+                    // Normalize date formats in the statement
+                    $stmt = normalize_date_format($stmt);
+
                     $pdo->exec($stmt);
                 }
             }
@@ -1079,8 +1133,11 @@ ALTER TABLE product_discounts
                                 'published'
                             ]);
                         }
-                        continue;  // skip $pdo->exec($stmt) — we’ve handled it.
+                        continue;  // skip $pdo->exec($stmt) — we've handled it.
                     }
+
+                    // Normalize date formats in the statement
+                    $stmt = normalize_date_format($stmt);
 
                     $pdo->exec($stmt);
                 }
