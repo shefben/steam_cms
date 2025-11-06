@@ -8,9 +8,9 @@ $step = isset($_GET['step']) ? (int)$_GET['step'] : 1;
 $errors = [];
 
 /**
- * Convert a loose, human-readable date (e.g. “Wed, 24 Aug 2005”
- * or “February 24, 2005, 12:33 pm”) to ‘Y-m-d H:i:s’.
- * If PHP can’t parse it, return the original string unchanged.
+ * Convert a loose, human-readable date (e.g. "Wed, 24 Aug 2005"
+ * or "February 24, 2005, 12:33 pm") to 'Y-m-d H:i:s'.
+ * If PHP can't parse it, return the original string unchanged.
  */
 function normalizeDate(string $raw): string
 {
@@ -18,6 +18,125 @@ function normalizeDate(string $raw): string
     $clean = trim($raw, " \t\n\r\0\x0B'\"");
     $ts    = strtotime($clean);
     return $ts !== false ? date('Y-m-d H:i:s', $ts) : $raw;
+}
+
+/**
+ * Preprocess SQL statement to convert human-readable dates to MySQL format.
+ * Detects and converts date values like 'Friday, April 1 2005' or 'Jan 15, 2005' to '2005-04-01'.
+ */
+function normalizeSqlDates(string $sql): string
+{
+    // Pattern to match quoted date strings that look like human-readable dates
+    // Examples: 'Friday, April 1 2005', 'Jan 15, 2005', 'Monday, January 15, 2004', etc.
+    // This pattern looks for: 'Optional-Weekday, Month Day[,] Year'
+    // The comma after the day is optional (,?)
+    $pattern = "/'((?:[A-Z][a-z]+day,\s*)?[A-Z][a-z]+\s+\d{1,2},?\s+\d{4})'/";
+
+    return preg_replace_callback($pattern, function($matches) {
+        $dateStr = $matches[1];
+        $timestamp = strtotime($dateStr);
+
+        // If strtotime successfully parsed it, convert to Y-m-d format
+        if ($timestamp !== false) {
+            // For DATE columns, use Y-m-d format
+            $mysqlDate = date('Y-m-d', $timestamp);
+            return "'" . $mysqlDate . "'";
+        }
+
+        // If parsing failed, return the original match unchanged
+        return $matches[0];
+    }, $sql);
+}
+
+/**
+ * Split SQL content into individual statements, handling multi-line strings and blocks
+ */
+function split_sql_statements($sql)
+{
+    $stmts = [];
+    $buffer = '';
+    $inBlock = false;
+    $blockDepth = 0;
+    $inString = false;
+    $stringChar = '';
+    $escaped = false;
+
+    foreach (preg_split("/\r?\n/", $sql) as $line) {
+        $trim = trim($line);
+        if ($inBlock) {
+            if (strpos($trim, '*/') !== false) {
+                $inBlock = false;
+            }
+            continue;
+        }
+        if (!$inString && ($trim === '' || str_starts_with($trim, '--') || $trim[0] === '#')) {
+            continue;
+        }
+        if (!$inString && str_starts_with($trim, '/*')) {
+            $inBlock = true;
+            continue;
+        }
+
+        if (!$inString && preg_match('/\bBEGIN\b/i', $trim)) {
+            $blockDepth++;
+        }
+        if (!$inString && $blockDepth > 0 && preg_match('/\bEND\b/i', $trim) && !preg_match('/\bEND\s+(IF|LOOP|CASE|REPEAT)\b/i', $trim)) {
+            $blockDepth--;
+        }
+
+        $buffer .= $line."\n";
+
+        // Track string state to avoid splitting on semicolons inside quoted strings
+        for ($i = 0; $i < strlen($line); $i++) {
+            $char = $line[$i];
+
+            if ($escaped) {
+                $escaped = false;
+                continue;
+            }
+
+            if ($char === '\\') {
+                $escaped = true;
+                continue;
+            }
+
+            if (!$inString && ($char === "'" || $char === '"')) {
+                $inString = true;
+                $stringChar = $char;
+            } elseif ($inString && $char === $stringChar) {
+                $inString = false;
+                $stringChar = '';
+            }
+        }
+
+        // Only split on semicolons outside of quoted strings
+        if ($blockDepth === 0 && !$inString && preg_match('/;\s*$/', $trim)) {
+            $stmts[] = trim($buffer);
+            $buffer = '';
+        }
+    }
+    if (trim($buffer) !== '') {
+        $stmts[] = trim($buffer);
+    }
+    return $stmts;
+}
+
+/**
+ * Execute SQL file with date normalization
+ */
+function run_sql_file(PDO $pdo, string $file): void
+{
+    $sql = file_get_contents($file);
+    // Preprocess SQL to normalize date formats
+    $sql = normalizeSqlDates($sql);
+
+    foreach (split_sql_statements($sql) as $stmt) {
+        $stmt = trim($stmt);
+        if ($stmt === '') {
+            continue;
+        }
+        $pdo->exec($stmt);
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -937,145 +1056,6 @@ ALTER TABLE product_discounts
     ADD CONSTRAINT fk_product_discounts_package FOREIGN KEY (package_id) REFERENCES subscriptions(subid) ON DELETE CASCADE;
 
 ");
-            function split_sql_statements($sql)
-            {
-                $stmts = [];
-                $buffer = '';
-                $inBlock = false;
-                $blockDepth = 0;
-                $inString = false;
-                $stringChar = '';
-                $escaped = false;
-
-                foreach (preg_split("/\r?\n/", $sql) as $line) {
-                    $trim = trim($line);
-                    if ($inBlock) {
-                        if (strpos($trim, '*/') !== false) {
-                            $inBlock = false;
-                        }
-                        continue;
-                    }
-                    if (!$inString && ($trim === '' || str_starts_with($trim, '--') || $trim[0] === '#')) {
-                        continue;
-                    }
-                    if (!$inString && str_starts_with($trim, '/*')) {
-                        $inBlock = true;
-                        continue;
-                    }
-
-                    if (!$inString && preg_match('/\bBEGIN\b/i', $trim)) {
-                        $blockDepth++;
-                    }
-                    if (!$inString && $blockDepth > 0 && preg_match('/\bEND\b/i', $trim) && !preg_match('/\bEND\s+(IF|LOOP|CASE|REPEAT)\b/i', $trim)) {
-                        $blockDepth--;
-                    }
-
-                    $buffer .= $line."\n";
-
-                    // Track string state to avoid splitting on semicolons inside quoted strings
-                    for ($i = 0; $i < strlen($line); $i++) {
-                        $char = $line[$i];
-
-                        if ($escaped) {
-                            $escaped = false;
-                            continue;
-                        }
-
-                        if ($char === '\\') {
-                            $escaped = true;
-                            continue;
-                        }
-
-                        if (!$inString && ($char === "'" || $char === '"')) {
-                            $inString = true;
-                            $stringChar = $char;
-                        } elseif ($inString && $char === $stringChar) {
-                            $inString = false;
-                            $stringChar = '';
-                        }
-                    }
-
-                    // Only split on semicolons outside of quoted strings
-                    if ($blockDepth === 0 && !$inString && preg_match('/;\s*$/', $trim)) {
-                        $stmts[] = trim($buffer);
-                        $buffer = '';
-                    }
-                }
-                if (trim($buffer) !== '') {
-                    $stmts[] = trim($buffer);
-                }
-                return $stmts;
-            }
-
-            /**
-             * Convert human-readable dates to MySQL format (YYYY-MM-DD)
-             * Handles formats like: 'Friday, April 1 2005' -> '2005-04-01'
-             */
-            function normalize_date_format($stmt): string
-            {
-                // Only process INSERT statements for tables with date columns
-                if (!preg_match('/INSERT INTO\s+(steam_marketing|platform_update_history)/i', $stmt)) {
-                    return $stmt;
-                }
-
-                // Pattern to match quoted date strings like 'Friday, April 1 2005'
-                // This pattern looks for dates in quotes with optional day name, month name, day, and year
-                $datePattern = '/\'(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})\'/';
-
-                $stmt = preg_replace_callback($datePattern, function($matches) {
-                    $monthName = $matches[1];
-                    $day = $matches[2];
-                    $year = $matches[3];
-
-                    // Convert month name to number
-                    $monthMap = [
-                        'January' => '01', 'February' => '02', 'March' => '03',
-                        'April' => '04', 'May' => '05', 'June' => '06',
-                        'July' => '07', 'August' => '08', 'September' => '09',
-                        'October' => '10', 'November' => '11', 'December' => '12'
-                    ];
-
-                    $month = $monthMap[$monthName] ?? null;
-                    if (!$month) {
-                        // If month name not recognized, return original
-                        return $matches[0];
-                    }
-
-                    // Format as MySQL date
-                    $mysqlDate = sprintf('%s-%s-%02d', $year, $month, (int)$day);
-
-                    // Validate the date
-                    $parts = explode('-', $mysqlDate);
-                    if (checkdate((int)$parts[1], (int)$parts[2], (int)$parts[0])) {
-                        return "'" . $mysqlDate . "'";
-                    }
-
-                    // If invalid, return original
-                    return $matches[0];
-                }, $stmt);
-
-                return $stmt;
-            }
-
-            function run_sql_file(PDO $pdo, string $file): void
-            {
-                $sql = file_get_contents($file);
-                // Preprocess SQL to normalize date formats
-                $sql = normalizeSqlDates($sql);
-
-                foreach (split_sql_statements($sql) as $stmt) {
-                    $stmt = trim($stmt);
-                    if ($stmt === '') {
-                        continue;
-                    }
-
-                    // Normalize date formats in the statement
-                    $stmt = normalize_date_format($stmt);
-
-                    $pdo->exec($stmt);
-                }
-            }
-
             // Migration SQL files are for upgrades only and are not executed during
             // a fresh installation.
 
@@ -1138,11 +1118,8 @@ ALTER TABLE product_discounts
                                 'published'
                             ]);
                         }
-                        continue;  // skip $pdo->exec($stmt) — we've handled it.
+                        continue;  // skip $pdo->exec($stmt) — we’ve handled it.
                     }
-
-                    // Normalize date formats in the statement
-                    $stmt = normalize_date_format($stmt);
 
                     $pdo->exec($stmt);
                 }
