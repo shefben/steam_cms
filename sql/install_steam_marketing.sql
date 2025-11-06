@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS steam_marketing (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_filename (filename),
     INDEX idx_date_published (date_published)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Steam Marketing Data Inserts
 INSERT INTO steam_marketing (filename, title, content, date_published, created_at, updated_at) VALUES ('64bit', 'Steam - Update', '<?xml version=\"1.0\" encoding=\"utf-8\"?>
@@ -12479,7 +12479,7 @@ HR.status	{
 
 						<div align=\"left\">
 
-							<span class=\"hed1\">Half-Life<sup class=\"hed1\">®</sup> 2</span>
+							<span class=\"hed1\">Half-Life<sup class=\"hed1\">ï¿½</sup> 2</span>
 
 							<p><span class=\"hed1\">Demo Released</span></p>
 
@@ -12521,7 +12521,7 @@ HR.status	{
 
 						<div align=\"center\">
 
-							<span class=\"footer\">© 2004 Valve Corporation. All rights reserved. Valve and Half-Life are trademarks<br>
+							<span class=\"footer\">ï¿½ 2004 Valve Corporation. All rights reserved. Valve and Half-Life are trademarks<br>
 
 								and/or registered trademarks of Valve Corporation.&nbsp; </span></div>
 

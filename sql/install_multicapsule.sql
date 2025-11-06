@@ -8,4 +8,4 @@ CREATE TABLE IF NOT EXISTS multicapsule (
     price DECIMAL(10,2),
     INDEX idx_group (`group`),
     INDEX idx_group_order (`group`, `order`)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

@@ -19,21 +19,21 @@ CREATE TABLE IF NOT EXISTS games (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_title (title),
     INDEX idx_metascore (metascore)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Developers table
 CREATE TABLE IF NOT EXISTS developers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Publishers table  
 CREATE TABLE IF NOT EXISTS publishers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Game details table
 CREATE TABLE IF NOT EXISTS game_details (
@@ -46,13 +46,13 @@ CREATE TABLE IF NOT EXISTS game_details (
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (developer_id) REFERENCES developers(id),
     FOREIGN KEY (publisher_id) REFERENCES publishers(id)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Categories table
 CREATE TABLE IF NOT EXISTS categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Game categories junction table
 CREATE TABLE IF NOT EXISTS game_categories (
@@ -61,14 +61,14 @@ CREATE TABLE IF NOT EXISTS game_categories (
     PRIMARY KEY (app_id, category_id),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Languages table
 CREATE TABLE IF NOT EXISTS languages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
     code VARCHAR(10) NOT NULL UNIQUE
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Game languages junction table
 CREATE TABLE IF NOT EXISTS game_languages (
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS game_languages (
     PRIMARY KEY (app_id, language_id),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (language_id) REFERENCES languages(id) ON DELETE CASCADE
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Game options/features table
 CREATE TABLE IF NOT EXISTS game_options (
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS game_options (
     option_value VARCHAR(255),
     PRIMARY KEY (app_id, option_name),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- System requirements table
 CREATE TABLE IF NOT EXISTS system_requirements (
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS system_requirements (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     UNIQUE KEY unique_req_type (app_id, requirement_type)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Screenshots table
 CREATE TABLE IF NOT EXISTS screenshots (
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS screenshots (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     INDEX idx_app_order (app_id, sort_order)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Media links table
 CREATE TABLE IF NOT EXISTS media_links (
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS media_links (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     INDEX idx_app_type (app_id, link_type)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Insert some common languages
 INSERT IGNORE INTO languages (name, code) VALUES 
