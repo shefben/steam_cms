@@ -1115,7 +1115,8 @@ ALTER TABLE product_discounts
                 // Read and classify file by its SQL statement types
                 $sql = file_get_contents($file);
                 $hasCreate = stripos($sql, 'CREATE TABLE') !== false;
-                $hasInsert = stripos($sql, 'INSERT INTO') !== false;
+                // Check for both INSERT INTO and INSERT IGNORE INTO
+                $hasInsert = (stripos($sql, 'INSERT INTO') !== false) || (stripos($sql, 'INSERT IGNORE') !== false);
 
                 if ($hasCreate && !$hasInsert) {
                     // Pure schema file (CREATE TABLE only)
