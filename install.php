@@ -1060,6 +1060,9 @@ ALTER TABLE product_discounts
             function run_sql_file(PDO $pdo, string $file): void
             {
                 $sql = file_get_contents($file);
+                // Preprocess SQL to normalize date formats
+                $sql = normalizeSqlDates($sql);
+
                 foreach (split_sql_statements($sql) as $stmt) {
                     $stmt = trim($stmt);
                     if ($stmt === '') {
@@ -1094,6 +1097,8 @@ ALTER TABLE product_discounts
                     continue;
                 }
                 $sql = file_get_contents($file);
+                // Preprocess SQL to normalize date formats
+                $sql = normalizeSqlDates($sql);
                 foreach (split_sql_statements($sql) as $stmt) {
                     $stmt = trim($stmt);
                     if ($stmt === '') {
@@ -2428,7 +2433,9 @@ $defaultCafes = [
                 $sql_dir = "$dir/sql";
                 if (is_dir($sql_dir)) {
                     foreach (glob($sql_dir.'/*.sql') as $sql) {
-                        $pdo->exec(file_get_contents($sql));
+                        $sqlContent = file_get_contents($sql);
+                        $sqlContent = normalizeSqlDates($sqlContent);
+                        $pdo->exec($sqlContent);
                     }
                 }
             }
