@@ -1098,11 +1098,25 @@ ALTER TABLE product_discounts
 
             $sqlFiles = glob(__DIR__.'/sql/*.sql');
             sort($sqlFiles);
+
+            // Separate schema files from data files to ensure proper loading order
+            $schemaFiles = [];
+            $dataFiles = [];
             foreach ($sqlFiles as $file) {
                 $base = basename($file);
                 if (in_array($base, ['install_storefront.sql', 'install_official_survey_stats.sql', 'install_sidebar_sections.sql'], true)) {
                     continue;
                 }
+                // Schema files must be loaded first (CREATE TABLE statements)
+                if (strpos($base, '_schema.sql') !== false) {
+                    $schemaFiles[] = $file;
+                } else {
+                    $dataFiles[] = $file;
+                }
+            }
+
+            // Process schema files first, then data files
+            foreach (array_merge($schemaFiles, $dataFiles) as $file) {
                 $sql = file_get_contents($file);
                 // Convert from detected encoding to UTF-8
                 $sql = ensureUtf8Encoding($sql);
