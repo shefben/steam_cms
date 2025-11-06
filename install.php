@@ -122,11 +122,32 @@ function split_sql_statements($sql)
 }
 
 /**
+ * Convert SQL string from any encoding to UTF-8
+ * Handles ISO-8859-1 (Latin-1) and other common encodings
+ */
+function ensureUtf8Encoding(string $sql): string
+{
+    // Detect the encoding of the string
+    $encoding = mb_detect_encoding($sql, ['UTF-8', 'ISO-8859-1', 'ASCII', 'Windows-1252'], true);
+
+    // If not UTF-8, convert it
+    if ($encoding && $encoding !== 'UTF-8') {
+        $sql = mb_convert_encoding($sql, 'UTF-8', $encoding);
+    }
+
+    return $sql;
+}
+
+/**
  * Execute SQL file with date normalization
  */
 function run_sql_file(PDO $pdo, string $file): void
 {
     $sql = file_get_contents($file);
+
+    // Convert from detected encoding to UTF-8
+    $sql = ensureUtf8Encoding($sql);
+
     // Preprocess SQL to normalize date formats
     $sql = normalizeSqlDates($sql);
 
@@ -153,6 +174,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             $dsn = "mysql:host=$host;port=$dbPort;charset=utf8mb4";
             $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+            // Ensure connection uses UTF-8
+            $pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $_SESSION['cms_install'] = [
                 'host' => $host,
@@ -181,8 +204,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             $dsn = "mysql:host=$host;port=$dbPort;charset=utf8mb4";
             $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+            // Ensure connection uses UTF-8
+            $pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("USE `$dbname`");
+            // Re-ensure connection charset after selecting database
+            $pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
             $pdo->exec("DROP TABLE IF EXISTS news");
             $pdo->exec("CREATE TABLE news(
                 id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -1077,6 +1104,8 @@ ALTER TABLE product_discounts
                     continue;
                 }
                 $sql = file_get_contents($file);
+                // Convert from detected encoding to UTF-8
+                $sql = ensureUtf8Encoding($sql);
                 // Preprocess SQL to normalize date formats
                 $sql = normalizeSqlDates($sql);
                 foreach (split_sql_statements($sql) as $stmt) {
@@ -2411,6 +2440,8 @@ $defaultCafes = [
                 if (is_dir($sql_dir)) {
                     foreach (glob($sql_dir.'/*.sql') as $sql) {
                         $sqlContent = file_get_contents($sql);
+                        // Convert from detected encoding to UTF-8
+                        $sqlContent = ensureUtf8Encoding($sqlContent);
                         $sqlContent = normalizeSqlDates($sqlContent);
                         $pdo->exec($sqlContent);
                     }
