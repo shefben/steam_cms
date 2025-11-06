@@ -108,7 +108,7 @@ INSERT INTO store_apps(appid,name,developer,availability,price,metacritic,descri
 (7260,'Loki','Unknown','Available',0,'','','','','[]',0,'released',NULL,0,0,NULL),
 (8400,'Geometry Wars: Retro Evolved','Unknown','Available',0,'','','','','[]',0,'released',NULL,0,0,NULL),
 (900352,'Unknown App 900352','Unknown','Available',0,'','','','','[]',0,'released',NULL,0,0,NULL),
-(9340,'Company of Heroes: Opposing Fronts','Unknown','Available',0,'','','','','[]',0);
+(9340,'Company of Heroes: Opposing Fronts','Unknown','Available',0,'','','','','[]',0,'released',NULL,0,0,NULL);
 INSERT INTO storefront_tabs(theme,title,ord) VALUES
 ('2007_v2','Top Sellers',1),
 ('2007_v2','Top Rated',2);
