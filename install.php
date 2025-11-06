@@ -1007,9 +1007,39 @@ ALTER TABLE product_discounts
                 return $stmts;
             }
 
+            /**
+             * Preprocess SQL statement to convert human-readable dates to MySQL format.
+             * Detects and converts date values like 'Friday, April 1 2005' to '2005-04-01'.
+             */
+            function normalizeSqlDates(string $sql): string
+            {
+                // Pattern to match quoted date strings that look like human-readable dates
+                // Examples: 'Friday, April 1 2005', 'Monday, January 15 2004', etc.
+                // This pattern looks for: 'Optional-Weekday, Month Day Year'
+                $pattern = "/'((?:[A-Z][a-z]+day,\s*)?[A-Z][a-z]+\s+\d{1,2}\s+\d{4})'/";
+
+                return preg_replace_callback($pattern, function($matches) {
+                    $dateStr = $matches[1];
+                    $timestamp = strtotime($dateStr);
+
+                    // If strtotime successfully parsed it, convert to Y-m-d format
+                    if ($timestamp !== false) {
+                        // For DATE columns, use Y-m-d format
+                        $mysqlDate = date('Y-m-d', $timestamp);
+                        return "'" . $mysqlDate . "'";
+                    }
+
+                    // If parsing failed, return the original match unchanged
+                    return $matches[0];
+                }, $sql);
+            }
+
             function run_sql_file(PDO $pdo, string $file): void
             {
                 $sql = file_get_contents($file);
+                // Preprocess SQL to normalize date formats
+                $sql = normalizeSqlDates($sql);
+
                 foreach (split_sql_statements($sql) as $stmt) {
                     $stmt = trim($stmt);
                     if ($stmt === '') {
@@ -2371,7 +2401,9 @@ $defaultCafes = [
                 $sql_dir = "$dir/sql";
                 if (is_dir($sql_dir)) {
                     foreach (glob($sql_dir.'/*.sql') as $sql) {
-                        $pdo->exec(file_get_contents($sql));
+                        $sqlContent = file_get_contents($sql);
+                        $sqlContent = normalizeSqlDates($sqlContent);
+                        $pdo->exec($sqlContent);
                     }
                 }
             }
