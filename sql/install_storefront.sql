@@ -331,8 +331,8 @@ INSERT INTO store_pages(slug,title,title_image) VALUES
  ('media','Media','title_grey.jpg');
 
 -- Sample data for product enhancements
-INSERT INTO product_content_overlays (appid, title, content, active) VALUES 
+INSERT INTO product_content_overlays (appid, title, content, active) VALUES
 (1300, 'Available May 9th', 'Pre-purchase now and save 10%.<br/>Plus get the original SiN game for free!<br/>Or <a class="specLink" href="steam://preload/1300">pre-load</a> now with no obligation.', 1);
 
-INSERT INTO product_discounts (package_id, discount_type, discount_value, discount_label, active) VALUES 
-(70, 'fixed_amount', 2.00, 'Pre-order Discount', 1);
+INSERT INTO product_discounts (appid, discount_type, discount_value, discount_label, active) VALUES
+(1300, 'fixed_amount', 2.00, 'Pre-order Discount', 1);
