@@ -1009,14 +1009,15 @@ ALTER TABLE product_discounts
 
             /**
              * Preprocess SQL statement to convert human-readable dates to MySQL format.
-             * Detects and converts date values like 'Friday, April 1 2005' to '2005-04-01'.
+             * Detects and converts date values like 'Friday, April 1 2005' or 'Jan 15, 2005' to '2005-04-01'.
              */
             function normalizeSqlDates(string $sql): string
             {
                 // Pattern to match quoted date strings that look like human-readable dates
-                // Examples: 'Friday, April 1 2005', 'Monday, January 15 2004', etc.
-                // This pattern looks for: 'Optional-Weekday, Month Day Year'
-                $pattern = "/'((?:[A-Z][a-z]+day,\s*)?[A-Z][a-z]+\s+\d{1,2}\s+\d{4})'/";
+                // Examples: 'Friday, April 1 2005', 'Jan 15, 2005', 'Monday, January 15, 2004', etc.
+                // This pattern looks for: 'Optional-Weekday, Month Day[,] Year'
+                // The comma after the day is optional (,?)
+                $pattern = "/'((?:[A-Z][a-z]+day,\s*)?[A-Z][a-z]+\s+\d{1,2},?\s+\d{4})'/";
 
                 return preg_replace_callback($pattern, function($matches) {
                     $dateStr = $matches[1];
