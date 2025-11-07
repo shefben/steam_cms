@@ -3,20 +3,22 @@ if (!defined('CMS_ROOT')) {
     define('CMS_ROOT', dirname(__DIR__));
 }
 /**
- * Cached configuration values to avoid repeated database queries.
- * @var array<string, string|null>
+ * PERFORMANCE: Global caches replaced with APCu-backed caching
+ * See apcu_cache.php for improved caching implementation
+ *
+ * Legacy global caches kept for backward compatibility but should use APCu wrappers
+ * @deprecated Use ApcuCache class or cms_cache_* functions instead
  */
 $cms_settings_cache = [];
-/**
- * Cached theme data to avoid repeated database queries.
- * @var array<string, mixed>
- */
 $cms_theme_header_cache = [];
 $cms_theme_footer_cache = [];
 $cms_theme_css_cache = [];
 $cms_theme_config_cache = [];
 $cms_theme_setting_cache = [];
 $cms_prepared_statements = [];
+
+// Load APCu cache wrapper
+require_once __DIR__ . '/apcu_cache.php';
 
 function cms_get_db(): PDO
 {

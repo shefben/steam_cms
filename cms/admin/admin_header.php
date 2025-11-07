@@ -77,9 +77,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
     }
     
     if ($is_save_operation) {
-        $cleared = cms_clear_all_caches();
+        // PERFORMANCE: Selective cache invalidation based on the page being saved
+        $page = basename($_SERVER['PHP_SELF'], '.php');
+        $context = 'templates'; // Default
+
+        // Map admin pages to cache contexts
+        $contextMap = [
+            'news' => 'news',
+            'news_edit' => 'news',
+            'sidebar_sections' => 'sidebar',
+            'sidebar_edit' => 'sidebar',
+            'theme_settings' => 'theme',
+            'settings' => 'settings',
+            'download_files' => 'download',
+            'support_pages' => 'support',
+            'storefront_games' => 'storefront',
+            'storefront_packages' => 'storefront',
+        ];
+
+        $context = $contextMap[$page] ?? 'templates';
+
+        // Use selective cache clearing instead of clearing everything
+        require_once __DIR__ . '/../cache_manager.php';
+        $cleared = cms_clear_selective_cache($context);
+
         // Store cache clear notification for display
         $_SESSION['cache_cleared'] = $cleared;
+        $_SESSION['cache_context'] = $context;
     }
 }
 
