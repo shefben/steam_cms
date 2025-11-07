@@ -3,11 +3,11 @@
 $servers = require __DIR__ . '/content_servers_seed.php';
 
 $stmtSrv = $pdo->prepare(
-    'INSERT INTO content_servers(name, ip, port, total_capacity, region, website, filtered) VALUES(?,?,?,?,?,?,?)'
+    'INSERT IGNORE INTO content_servers(name, ip, port, total_capacity, region, website, filtered) VALUES(?,?,?,?,?,?,?)'
 );
 
 $stmtStat = $pdo->prepare(
-    'INSERT INTO server_stats(server_id, available_bandwidth, unique_connections, last_checked, status) ' .
+    'INSERT IGNORE INTO server_stats(server_id, available_bandwidth, unique_connections, last_checked, status) ' .
     'VALUES(?, ?, 0, NOW(), ?)'
 );
 

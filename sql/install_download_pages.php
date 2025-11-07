@@ -50,10 +50,10 @@ $versions = [
     '2004_v2' => ['file'=>__DIR__.'/../archived_steampowered/2004/getsteamnow_v2.html','years'=>'2004'],
     '2004_v3' => ['file'=>__DIR__.'/../archived_steampowered/2004/getsteamnow_v3.html','years'=>'2004'],
 ];
-$pageStmt = $pdo->prepare('INSERT INTO download_pages(version,years,content,created,updated) VALUES(?,?,?,?,?)');
-$linkStmt = $pdo->prepare('INSERT INTO download_links(version,category,label,url,ord) VALUES(?,?,?,?,?)');
-$catStmt = $pdo->prepare('INSERT INTO download_categories(name,file_size) VALUES(?,?)');
-$sysStmt = $pdo->prepare('INSERT INTO download_system_requirements(theme,version,content) VALUES(?,?,?)');
+$pageStmt = $pdo->prepare('INSERT IGNORE INTO download_pages(version,years,content,created,updated) VALUES(?,?,?,?,?)');
+$linkStmt = $pdo->prepare('INSERT IGNORE INTO download_links(version,category,label,url,ord) VALUES(?,?,?,?,?)');
+$catStmt = $pdo->prepare('INSERT IGNORE INTO download_categories(name,file_size) VALUES(?,?)');
+$sysStmt = $pdo->prepare('INSERT IGNORE INTO download_system_requirements(theme,version,content) VALUES(?,?,?)');
 $seenCats = [];
 foreach ($versions as $ver=>$info) {
     $html = file_get_contents($info['file']);

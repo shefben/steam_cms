@@ -289,8 +289,8 @@ foreach($downloads2003v2 as $d2003v2){
 
 $downloads[] = ['title'=>'Windows HLDS Update Tool','size'=>'<3 MB','url'=>'https://web.archive.org/download/hlds_updatetool.exe','mirrors'=>[]];
 $downloads[] = ['title'=>'Linux HLDS Update Tool','size'=>'<3 MB','url'=>'https://web.archive.org/download/hldsupdatetool.bin','mirrors'=>[]];
-$fileStmt = $pdo->prepare('INSERT INTO download_files(title,file_size,main_url,visibleontheme,usingbutton,buttonText,created,updated) VALUES(?,?,?,?,?,?,NOW(),NOW())');
-$mirStmt   = $pdo->prepare('INSERT INTO download_file_mirrors(file_id,host,url,ord) VALUES(?,?,?,?)');
+$fileStmt = $pdo->prepare('INSERT IGNORE INTO download_files(title,file_size,main_url,visibleontheme,usingbutton,buttonText,created,updated) VALUES(?,?,?,?,?,?,NOW(),NOW())');
+$mirStmt   = $pdo->prepare('INSERT IGNORE INTO download_file_mirrors(file_id,host,url,ord) VALUES(?,?,?,?)');
 foreach ($downloads as $d) {
     $title = $d['title'];
     if (in_array($title, ['Windows HLDS Update Tool','Linux HLDS Update Tool'])) {

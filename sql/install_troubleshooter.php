@@ -1,7 +1,7 @@
 <?php
 $base = __DIR__ . '/../troubleshooter/live';
 $langs = ['en','fr','de','it','es'];
-$tsStmt = $pdo->prepare('INSERT INTO troubleshooter_pages(lang,slug,title,content,created,updated) VALUES(?,?,?,?,NOW(),NOW())');
+$tsStmt = $pdo->prepare('INSERT IGNORE INTO troubleshooter_pages(lang,slug,title,content,created,updated) VALUES(?,?,?,?,NOW(),NOW())');
 foreach ($langs as $lang) {
     $dir = "$base/$lang";
     if (!is_dir($dir)) continue;

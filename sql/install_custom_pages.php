@@ -1180,7 +1180,7 @@ $insertArray[] = [
     null,
 
     'Cyber Café Program',
-    file_get_contents(__DIR__.'/../html/cybercafe_program.html'),
+    file_exists(__DIR__.'/../html/cybercafe_program.html') ? file_get_contents(__DIR__.'/../html/cybercafe_program.html') : '',
     null,
     null,
     date('Y-m-d H:i:s'),
@@ -1191,7 +1191,7 @@ $insertArray[] = [
     null,
 
     'Valve Announces April Cyber Café Promotion',
-    file_get_contents(__DIR__.'/../html/cybercafe_promotion.html'),
+    file_get_contents(__DIR__.'/../archived_steampowered/2004/cybercafe_promotion.html'),
     null,
     null,
     date('Y-m-d H:i:s'),
@@ -1202,7 +1202,7 @@ $insertArray[] = [
     null,
 
     'Cyber Café Program Change Form',
-    file_get_contents(__DIR__.'/../html/cybercafe_changeform.html'),
+    file_exists(__DIR__.'/../html/cybercafe_changeform.html') ? file_get_contents(__DIR__.'/../html/cybercafe_changeform.html') : '',
     null,
     null,
     date('Y-m-d H:i:s'),
@@ -1213,7 +1213,7 @@ $insertArray[] = [
     null,
 
     'Welcome to Steam',
-    file_get_contents(__DIR__.'/../html/product_HL2bronsilvergold.html'),
+    file_exists(__DIR__.'/../html/product_HL2bronsilvergold.html') ? file_get_contents(__DIR__.'/../html/product_HL2bronsilvergold.html') : '',
     null,
     null,
     date('Y-m-d H:i:s'),
@@ -1236,7 +1236,7 @@ $insertArray[] = [
     null,
 
     'LIMITED GAME TOURNAMENT LICENSES',
-    file_get_contents(__DIR__.'/../html/tourney_limited.html'),
+    file_get_contents(__DIR__.'/../archived_steampowered/2004/tourney_limited.html'),
     '2004,2005_v1',
     null,
     date('Y-m-d H:i:s'),
@@ -1244,7 +1244,7 @@ $insertArray[] = [
 ];
 
 $stmtcp = $pdo->prepare(
-    'INSERT INTO custom_pages
+    'INSERT IGNORE INTO custom_pages
     (slug, page_name, title, content, theme, template, header_image, created, updated, status)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, "published")'
 );
