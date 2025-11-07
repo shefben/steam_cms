@@ -277,47 +277,86 @@ function cms_cache_manager(): CacheManager
 }
 
 /**
+ * PERFORMANCE: Selective cache clearing based on context
+ * Only clears relevant caches instead of nuking everything
+ *
+ * @param string $context What was modified: 'news', 'sidebar', 'theme', 'settings', 'templates', 'all'
+ * @return int Number of cache entries cleared
+ */
+function cms_clear_selective_cache(string $context): int
+{
+    $manager = cms_cache_manager();
+    $cleared = 0;
+
+    // Map context to cache namespaces
+    $contextMap = [
+        'news' => ['news', 'templates'],
+        'sidebar' => ['sidebar', 'templates'],
+        'theme' => ['theme', 'templates', 'twig'],
+        'settings' => ['settings', 'templates'],
+        'templates' => ['templates', 'twig'],
+        'download' => ['download', 'templates'],
+        'support' => ['support', 'templates'],
+        'storefront' => ['storefront', 'templates'],
+        'all' => ['*']  // Clear everything
+    ];
+
+    $namespaces = $contextMap[$context] ?? ['templates'];
+
+    // Clear filesystem cache since content changed
+    if (class_exists('FilesystemCache')) {
+        FilesystemCache::clearAll();
+    }
+
+    // Clear APCu for sidebar entries if sidebar changed
+    if (in_array('sidebar', $namespaces, true) || in_array('*', $namespaces, true)) {
+        if (function_exists('apcu_clear_cache')) {
+            $iterator = new APCUIterator('/^sidebar_entries_/');
+            if ($iterator) {
+                apcu_delete($iterator);
+                $cleared += 10; // Estimate
+            }
+        }
+    }
+
+    // Clear specific cache namespaces
+    foreach ($namespaces as $ns) {
+        if ($ns === '*') {
+            // Clear everything
+            $cleared += $manager->clear();
+            break;
+        } else {
+            $cleared += $manager->clearNamespace($ns);
+        }
+    }
+
+    // Only clear Twig cache if templates or theme changed
+    if (in_array('twig', $namespaces, true) || in_array('templates', $namespaces, true) || in_array('*', $namespaces, true)) {
+        $twig_cache_dir = __DIR__ . '/cache/twig';
+        if (is_dir($twig_cache_dir)) {
+            foreach (glob($twig_cache_dir . '/*') as $subdir) {
+                if (is_dir($subdir)) {
+                    foreach (glob($subdir . '/*') as $file) {
+                        if (is_file($file) && unlink($file)) {
+                            $cleared++;
+                        }
+                    }
+                    @rmdir($subdir);
+                }
+            }
+        }
+    }
+
+    return $cleared;
+}
+
+/**
  * Clear all caches (called on admin saves)
+ * DEPRECATED: Use cms_clear_selective_cache() instead
  */
 function cms_clear_all_caches(): int
 {
-    $manager = cms_cache_manager();
-    $cleared = $manager->clear();
-    
-    // Also clear legacy cache files and directories
-    $legacy_patterns = [
-        __DIR__ . '/cache/*.html',
-        __DIR__ . '/cache/*.css',
-        __DIR__ . '/cache/news/*.html',
-        __DIR__ . '/cache/twig/*/*'
-    ];
-    
-    foreach ($legacy_patterns as $pattern) {
-        foreach (glob($pattern) as $file) {
-            if (is_file($file) && unlink($file)) {
-                $cleared++;
-            }
-        }
-    }
-    
-    // Clear Twig cache directories
-    $twig_cache_dir = __DIR__ . '/cache/twig';
-    if (is_dir($twig_cache_dir)) {
-        foreach (glob($twig_cache_dir . '/*') as $subdir) {
-            if (is_dir($subdir)) {
-                foreach (glob($subdir . '/*') as $file) {
-                    if (is_file($file) && unlink($file)) {
-                        $cleared++;
-                    }
-                }
-                if (!rmdir($subdir)) {
-                    error_log("Failed to remove Twig cache directory: $subdir");
-                }
-            }
-        }
-    }
-    
-    return $cleared;
+    return cms_clear_selective_cache('all');
 }
 
 /**

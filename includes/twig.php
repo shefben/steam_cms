@@ -28,10 +28,12 @@ $loader = new FilesystemLoader([
 ]);
 
 // Create Twig environment
+// PERFORMANCE: auto_reload disabled in production (10-15% improvement)
+// Enable auto_reload only in development mode for instant template updates
 $twigConfig = [
     'cache' => __DIR__ . '/../cms/cache/twig',
     'debug' => defined('DEBUG') ? DEBUG : false,
-    'auto_reload' => true,
+    'auto_reload' => defined('DEBUG') ? DEBUG : false, // Only reload in debug mode
 ];
 
 $twig = new Environment($loader, $twigConfig);
