@@ -117,11 +117,11 @@ $supportPages = $insertArray;
 $pdo->beginTransaction();
 
 $pageStmt = $pdo->prepare(
-    'INSERT INTO support_pages(version, years, content, created, updated) VALUES (?,?,?,?,?)'
+    'INSERT IGNORE INTO support_pages(version, years, content, created, updated) VALUES (?,?,?,?,?)'
 );
 
 $faqStmt = $pdo->prepare(
-    'INSERT INTO support_page_faqs(support_id, faqid1, faqid2, ord) VALUES (?,?,?,?)'
+    'INSERT IGNORE INTO support_page_faqs(support_id, faqid1, faqid2, ord) VALUES (?,?,?,?)'
 );
 
 foreach ($supportPages as $sp) {
