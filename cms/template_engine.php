@@ -50,8 +50,20 @@ function cms_hookable(callable $fn, string $name): callable
     };
 }
 
+/**
+ * PERFORMANCE: Cache split title results (Optimization #22)
+ * Split title computation happens frequently, caching saves string operations
+ */
 function cms_split_title(string $title): string
 {
+    // Check cache first
+    $cacheKey = 'split_title_' . md5($title);
+    $cached = cms_cache_get($cacheKey);
+    if ($cached !== null) {
+        return $cached;
+    }
+
+    // Compute split title
     $words = preg_split('/\s+/', trim($title));
     $wordCount = count($words);
 
@@ -72,7 +84,12 @@ function cms_split_title(string $title): string
     $firstEsc = htmlspecialchars($first, ENT_QUOTES);
     $secondEsc = htmlspecialchars($second, ENT_QUOTES);
 
-    return '<h2 id="page1">' . $firstEsc . '<em>' . $secondEsc . '</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt="">';
+    $result = '<h2 id="page1">' . $firstEsc . '<em>' . $secondEsc . '</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt="">';
+
+    // Cache for 1 hour (titles rarely change)
+    cms_cache_set($cacheKey, $result, 3600);
+
+    return $result;
 }
 
 function cms_split_title_entry(string $name): string
@@ -2161,53 +2178,73 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
     echo $html;
 }
 
+/**
+ * PERFORMANCE: Cache theme path resolution (Optimization #23)
+ * Added APCu caching for persistent cache across requests
+ */
 function cms_resolve_image(string $path, string $theme, string $theme_url, string $base_url): string
 {
     static $imageCache = [];
     $path = ltrim($path, '/');
     $key  = $theme . '|' . $path . '|' . $theme_url . '|' . $base_url;
+
+    // Check static cache first (fastest)
     if (isset($imageCache[$key])) {
         return $imageCache[$key];
+    }
+
+    // Check APCu cache (persistent across requests)
+    $cacheKey = 'img_path_' . md5($key);
+    $cached = cms_cache_get($cacheKey);
+    if ($cached !== null) {
+        $imageCache[$key] = $cached;
+        return $cached;
     }
     //echo('1 <br> '. $path . '2 <br>'. $theme_url . '3 <br>'. $base_url . '4 <br>');
 
     // Check if we're in storefront context
     $isStorefront = strpos($theme_url, '/storefront') !== false;
     
+    $result = null;
+
     if ($isStorefront) {
         // For storefront pages, check storefront images directory first
         $storefrontFile = dirname(__DIR__) . "/themes/$theme/storefront/images/" . $path;
         if (cms_is_file($storefrontFile)) {
-            return $imageCache[$key] = $theme_url . '/images/' . $path;
+            $result = $theme_url . '/images/' . $path;
+        } elseif (cms_is_file($base_url . "/storefront/images/" . $path)) {
+            $result = $base_url . "/storefront/images/" . $path;
+        } else {
+            // Fall back to theme images directory
+            $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
+            if (cms_is_file($themeFile)) {
+                $result = rtrim(str_replace('/storefront', '', $theme_url), '/') . '/images/' . $path;
+            }
         }
-
-        $storefrontFile = $base_url . "/storefront/images/" . $path;
-        if (cms_is_file($storefrontFile)) {
-            return $imageCache[$key] = $storefrontFile . $path;
-        }
-
-        // Fall back to theme images directory
-        $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
-        if (cms_is_file($themeFile)) {
-            return $imageCache[$key] = rtrim(str_replace('/storefront', '', $theme_url), '/') . '/images/' . $path;
-        }
-
     } else {
         // For regular pages, check theme images directory
         $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
         if (cms_is_file($themeFile)) {
-            return $imageCache[$key] = $theme_url . '/images/' . $path;
+            $result = $theme_url . '/images/' . $path;
         }
     }
 
-    $rootFile = dirname(__DIR__) . '/images/' . $path;
-    if (cms_is_file($rootFile)) {
-        $base = $base_url ? rtrim($base_url, '/') . '/' : '';
-        return $imageCache[$key] = $base . 'images/' . $path;
+    // Check root images if not found in theme
+    if ($result === null) {
+        $rootFile = dirname(__DIR__) . '/images/' . $path;
+        if (cms_is_file($rootFile)) {
+            $base = $base_url ? rtrim($base_url, '/') . '/' : '';
+            $result = $base . 'images/' . $path;
+        } else {
+            $result = $base_url; //'image_not_found.jpg';
+        }
     }
 
-    $base = $base_url ? rtrim($base_url, '/') . '/' : '';
-    return $imageCache[$key] = $base_url; //'image_not_found.jpg';
+    // Cache the result (10 minute TTL)
+    $imageCache[$key] = $result;
+    cms_cache_set($cacheKey, $result, 600);
+
+    return $result;
 }
 
 function cms_rewrite_css_urls(string $css, string $theme, string $theme_url, string $css_dir, string $base_url): string
