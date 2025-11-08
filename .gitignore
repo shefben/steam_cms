@@ -1,0 +1,27 @@
+# Configuration files (contain sensitive data)
+cms/config.php
+
+# Cache directories
+cms/cache/
+cms/cache/twig/
+
+# Temporary files
+*.tmp
+*.log
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules (if using npm)
+node_modules/
+
+# Vendor (if using composer)
+vendor/
