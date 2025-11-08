@@ -1043,7 +1043,8 @@ CREATE TABLE IF NOT EXISTS tournaments (
     host VARCHAR(255) DEFAULT NULL,
     created DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-CREATE INDEX idx_news_publish_date ON news(publish_date);
+-- Index already created inline in news table (line ~225)
+-- Removed duplicate: CREATE INDEX idx_news_publish_date ON news(publish_date);
 
 ALTER TABLE admin_users
     ADD CONSTRAINT fk_admin_users_role FOREIGN KEY (role_id) REFERENCES admin_roles(id);
@@ -1108,7 +1109,16 @@ ALTER TABLE product_discounts
 
             foreach ($sqlFiles as $file) {
                 $base = basename($file);
-                if (in_array($base, ['install_storefront.sql', 'install_official_survey_stats.sql', 'install_sidebar_sections.sql'], true)) {
+                // Skip files that are either already loaded or meant for post-installation optimization
+                if (in_array($base, [
+                    'install_storefront.sql',
+                    'install_official_survey_stats.sql',
+                    'install_sidebar_sections.sql',
+                    // Performance optimization files - run these AFTER installation, not during
+                    'performance_indexes.sql',
+                    'performance_junction_tables.sql',
+                    'count_denormalization.sql'
+                ], true)) {
                     continue;
                 }
 

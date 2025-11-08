@@ -1,9 +1,30 @@
 # SteamCMS Performance Improvements
 
 ## Overview
-This document details the 10 highest-impact performance optimizations implemented for public pages, selected from 30 identified improvements.
+This document details all 30 performance optimizations implemented, including the 10 highest-impact optimizations for public pages.
 
 **Combined Estimated Impact: 2-4x faster page loads**
+
+## Installation Instructions
+
+### For Fresh Installations
+The performance optimizations are **NOT** automatically applied during fresh installation to avoid conflicts. After completing the standard installation, run these SQL files manually:
+
+```bash
+# 1. Apply database indexes (20-30% improvement)
+mysql -u root -p steamcms < sql/performance_indexes.sql
+
+# 2. Apply COUNT denormalization with triggers (100-500ms improvement)
+mysql -u root -p steamcms < sql/count_denormalization.sql
+
+# 3. (Optional) Apply junction tables for FIND_IN_SET optimization (200-1000ms improvement)
+mysql -u root -p steamcms < sql/performance_junction_tables.sql
+```
+
+**IMPORTANT:** All SQL files are **idempotent** - safe to run multiple times without errors.
+
+### For Existing Installations
+If you're upgrading an existing installation, the same SQL files can be run safely. They check for existing indexes/triggers/columns before creating new ones.
 
 ---
 
@@ -245,29 +266,51 @@ These provide diminishing returns or require more extensive refactoring:
 
 1. **Backup database:**
    ```bash
-   mysqldump -u user -p database > backup.sql
+   mysqldump -u user -p steamcms > backup_$(date +%Y%m%d).sql
    ```
 
-2. **Apply database indexes:**
+2. **Deploy code changes:**
    ```bash
-   mysql -u user -p database < sql/performance_indexes.sql
+   git pull origin your-branch
    ```
 
-3. **Optional - Apply junction tables (test thoroughly):**
+3. **Apply database indexes (REQUIRED):**
    ```bash
-   mysql -u user -p database < sql/performance_junction_tables.sql
+   mysql -u user -p steamcms < sql/performance_indexes.sql
+   ```
+   **Note:** This is idempotent - safe to run multiple times
+
+4. **Apply COUNT denormalization (RECOMMENDED):**
+   ```bash
+   mysql -u user -p steamcms < sql/count_denormalization.sql
+   ```
+
+5. **Optional - Apply junction tables (Advanced):**
+   ```bash
+   mysql -u user -p steamcms < sql/performance_junction_tables.sql
    # Then run migration procedures as documented in the file
+   # CALL migrate_support_page_years();
+   # CALL migrate_sidebar_variant_themes();
+   # CALL migrate_sidebar_entry_themes();
    ```
+   **Warning:** Test thoroughly in development first
 
-4. **Verify APCu is enabled:**
+6. **Verify APCu is enabled:**
    ```bash
-   php -r "var_dump(apcu_enabled());"  # Should output: bool(true)
+   php -r "var_dump(function_exists('apcu_enabled') && apcu_enabled());"
+   # Should output: bool(true)
+   # If false, install: sudo apt-get install php-apcu (Ubuntu/Debian)
    ```
 
-5. **Monitor performance:**
+7. **Clear caches:**
+   ```bash
+   php -r "require 'cms/cache_manager.php'; cms_clear_all_caches();"
+   ```
+
+8. **Monitor performance:**
    - Use browser DevTools Network tab
    - Check server access logs
-   - Monitor APCu hit rate
+   - Monitor APCu hit rate: `php -r "var_dump(apcu_cache_info());"`
 
 ---
 
