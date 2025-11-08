@@ -1109,18 +1109,18 @@ ALTER TABLE product_discounts
 
             foreach ($sqlFiles as $file) {
                 $base = basename($file);
-                // Skip files that are either already loaded or meant for post-installation optimization
+                // Skip files that are already loaded separately
                 if (in_array($base, [
                     'install_storefront.sql',
                     'install_official_survey_stats.sql',
-                    'install_sidebar_sections.sql',
-                    // Performance optimization files - run these AFTER installation, not during
-                    'performance_indexes.sql',
-                    'performance_junction_tables.sql',
-                    'count_denormalization.sql'
+                    'install_sidebar_sections.sql'
                 ], true)) {
                     continue;
                 }
+
+                // Performance optimization files are now IDEMPOTENT and safe to auto-load
+                // They check for existing indexes/triggers/columns before creating
+                // This ensures fresh installations get all optimizations automatically
 
                 // Read and classify file by its SQL statement types
                 $sql = file_get_contents($file);

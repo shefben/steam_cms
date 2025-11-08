@@ -403,16 +403,16 @@ function cms_get_all_download_files(?string $theme = null, ?string $version = nu
         try {
             // Get files with their version-specific settings from new table structure
             $stmt = $db->prepare('
-                SELECT df.*, 
+                SELECT df.*,
                        COALESCE(dfv.is_visible, 1) as is_visible,
                        COALESCE(dfv.render_type, "title_size_mirrors_buttons") as render_type,
                        COALESCE(dfv.location, "main_content") as location,
-                       COALESCE(dfv.sort_order, df.sort_order, 0) as sort_order
+                       COALESCE(dfv.sort_order, df.id) as sort_order
                 FROM download_files df
-                LEFT JOIN download_file_versions dfv ON df.id = dfv.file_id 
+                LEFT JOIN download_file_versions dfv ON df.id = dfv.file_id
                     AND dfv.theme = ? AND dfv.page_version = ?
                 WHERE COALESCE(dfv.is_visible, 1) = 1
-                ORDER BY COALESCE(dfv.sort_order, df.sort_order, 0), df.id
+                ORDER BY COALESCE(dfv.sort_order, df.id), df.id
             ');
             $stmt->execute([$theme, $version]);
             $files = $stmt->fetchAll(PDO::FETCH_ASSOC);

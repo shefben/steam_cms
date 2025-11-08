@@ -23,7 +23,7 @@ SET @preparedStatement = (SELECT IF(
      AND TABLE_NAME=@tablename
      AND COLUMN_NAME=@columnname) > 0,
   'SELECT 1', -- Column exists, do nothing
-  'ALTER TABLE download_files ADD COLUMN mirror_count INT NOT NULL DEFAULT 0 AFTER is_visible'
+  'ALTER TABLE download_files ADD COLUMN mirror_count INT NOT NULL DEFAULT 0 AFTER updated'
 ));
 PREPARE alterIfNotExists FROM @preparedStatement;
 EXECUTE alterIfNotExists;
