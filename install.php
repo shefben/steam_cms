@@ -60,6 +60,7 @@ function split_sql_statements($sql)
     $inString = false;
     $stringChar = '';
     $escaped = false;
+    $delimiter = ';';
 
     foreach (preg_split("/\r?\n/", $sql) as $line) {
         $trim = trim($line);
@@ -77,6 +78,13 @@ function split_sql_statements($sql)
             continue;
         }
 
+        if (!$inString && preg_match('/^DELIMITER\s+(\S+)/i', $trim, $matches)) {
+            $delimiter = $matches[1] !== '' ? $matches[1] : ';';
+            // Reset buffer when switching delimiters to avoid partial statements carrying over
+            $buffer = '';
+            continue;
+        }
+
         if (!$inString && preg_match('/\bBEGIN\b/i', $trim)) {
             $blockDepth++;
         }
@@ -86,7 +94,7 @@ function split_sql_statements($sql)
 
         $buffer .= $line."\n";
 
-        // Track string state to avoid splitting on semicolons inside quoted strings
+        // Track string state to avoid splitting on delimiters inside quoted strings
         for ($i = 0; $i < strlen($line); $i++) {
             $char = $line[$i];
 
@@ -109,10 +117,21 @@ function split_sql_statements($sql)
             }
         }
 
-        // Only split on semicolons outside of quoted strings
-        if ($blockDepth === 0 && !$inString && preg_match('/;\s*$/', $trim)) {
-            $stmts[] = trim($buffer);
-            $buffer = '';
+        $bufferTrimmed = rtrim($buffer);
+        if ($bufferTrimmed === '') {
+            continue;
+        }
+
+        if ($delimiter === ';') {
+            if ($blockDepth === 0 && !$inString && str_ends_with(rtrim($trim), $delimiter)) {
+                $stmts[] = trim(substr($bufferTrimmed, 0, -strlen($delimiter)));
+                $buffer = '';
+            }
+        } else {
+            if (!$inString && str_ends_with($bufferTrimmed, $delimiter)) {
+                $stmts[] = trim(substr($bufferTrimmed, 0, -strlen($delimiter)));
+                $buffer = '';
+            }
         }
     }
     if (trim($buffer) !== '') {
