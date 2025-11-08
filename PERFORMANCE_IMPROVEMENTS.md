@@ -8,23 +8,27 @@ This document details all 30 performance optimizations implemented, including th
 ## Installation Instructions
 
 ### For Fresh Installations
-The performance optimizations are **NOT** automatically applied during fresh installation to avoid conflicts. After completing the standard installation, run these SQL files manually:
+**Good news!** Performance optimizations are now **automatically applied** during fresh installation. The installer runs all performance SQL files automatically, including:
+
+- `sql/performance_indexes.sql` - Database indexes (20-30% improvement)
+- `sql/count_denormalization.sql` - COUNT optimization with triggers (100-500ms improvement)
+- `sql/performance_junction_tables.sql` - FIND_IN_SET optimization (200-1000ms improvement)
+
+All SQL files are **idempotent** (safe to run multiple times) - they check for existing indexes/triggers/columns before creating new ones.
+
+**No manual steps required** - just run install.php and all optimizations are included!
+
+### For Existing Installations
+If you're upgrading an existing installation, you can safely run the SQL files manually:
 
 ```bash
-# 1. Apply database indexes (20-30% improvement)
+# Apply all performance optimizations
 mysql -u root -p steamcms < sql/performance_indexes.sql
-
-# 2. Apply COUNT denormalization with triggers (100-500ms improvement)
 mysql -u root -p steamcms < sql/count_denormalization.sql
-
-# 3. (Optional) Apply junction tables for FIND_IN_SET optimization (200-1000ms improvement)
 mysql -u root -p steamcms < sql/performance_junction_tables.sql
 ```
 
-**IMPORTANT:** All SQL files are **idempotent** - safe to run multiple times without errors.
-
-### For Existing Installations
-If you're upgrading an existing installation, the same SQL files can be run safely. They check for existing indexes/triggers/columns before creating new ones.
+These are idempotent and safe to run multiple times.
 
 ---
 

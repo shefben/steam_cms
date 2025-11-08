@@ -196,16 +196,15 @@ mysql -u root -p steamcms < sql/performance_junction_tables.sql
 ## How to Use (For Users)
 
 ### Fresh Installation
-1. Complete normal installation via install.php
-2. After installation succeeds, run:
-   ```bash
-   mysql -u root -p steamcms < sql/performance_indexes.sql
-   mysql -u root -p steamcms < sql/count_denormalization.sql
-   ```
-3. Optionally run junction tables (advanced):
-   ```bash
-   mysql -u root -p steamcms < sql/performance_junction_tables.sql
-   ```
+**AUTOMATIC!** Just run install.php - all performance optimizations are now included automatically.
+
+The installer will:
+1. Create base database schema
+2. Automatically run all SQL files in sql/ directory
+3. Performance SQL files check for existing indexes/triggers before creating
+4. Installation completes with all optimizations enabled
+
+**No manual steps required!**
 
 ### Existing Installation (Upgrade)
 1. Pull latest code: `git pull`
