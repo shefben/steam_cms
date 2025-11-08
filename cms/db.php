@@ -35,6 +35,11 @@ function cms_get_db(): PDO
     if (!file_exists(__DIR__ . '/config.php')) {
         throw new RuntimeException('CMS not installed. Please run install.php');
     }
+
+    // Check if database is disabled
+    if (defined('USE_DATABASE') && !USE_DATABASE) {
+        throw new RuntimeException('Database is disabled in config (USE_DATABASE=false). Cannot proceed.');
+    }
     $cfg = include __DIR__ . '/config.php';
     $dsn = "mysql:host={$cfg['host']};port={$cfg['port']};dbname={$cfg['dbname']};charset=utf8mb4";
     $options = [
@@ -42,9 +47,8 @@ function cms_get_db(): PDO
         // PERFORMANCE: Enable persistent connections (reuse across requests)
         // Reduces connection overhead by ~5-10ms per request
         PDO::ATTR_PERSISTENT => true,
-        // PERFORMANCE: Unbuffered queries for memory efficiency
-        // Change to false to enable streaming large result sets
-        PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false,
+        // Keep buffered queries for compatibility (unbuffered mode breaks multiple queries)
+        PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
         PDO::ATTR_EMULATE_PREPARES => false,
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))",
     ];

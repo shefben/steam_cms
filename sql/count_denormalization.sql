@@ -12,9 +12,22 @@
 -- Instead of: SELECT COUNT(*) FROM download_file_mirrors WHERE file_id=?
 -- Use: SELECT mirror_count FROM download_files WHERE id=?
 
--- Add counter column to download_files
-ALTER TABLE download_files
-ADD COLUMN mirror_count INT NOT NULL DEFAULT 0 AFTER is_visible;
+-- Add counter column to download_files (if it doesn't exist)
+-- Check if column exists before adding
+SET @dbname = DATABASE();
+SET @tablename = 'download_files';
+SET @columnname = 'mirror_count';
+SET @preparedStatement = (SELECT IF(
+  (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+   WHERE TABLE_SCHEMA=@dbname
+     AND TABLE_NAME=@tablename
+     AND COLUMN_NAME=@columnname) > 0,
+  'SELECT 1', -- Column exists, do nothing
+  'ALTER TABLE download_files ADD COLUMN mirror_count INT NOT NULL DEFAULT 0 AFTER is_visible'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
 
 -- Populate initial counts
 UPDATE download_files df
@@ -26,6 +39,7 @@ SET mirror_count = (
 
 -- Trigger to increment count on INSERT
 DELIMITER $$
+DROP TRIGGER IF EXISTS increment_mirror_count$$
 CREATE TRIGGER increment_mirror_count
 AFTER INSERT ON download_file_mirrors
 FOR EACH ROW
@@ -36,6 +50,7 @@ BEGIN
 END$$
 
 -- Trigger to decrement count on DELETE
+DROP TRIGGER IF EXISTS decrement_mirror_count$$
 CREATE TRIGGER decrement_mirror_count
 AFTER DELETE ON download_file_mirrors
 FOR EACH ROW
@@ -46,6 +61,7 @@ BEGIN
 END$$
 
 -- Trigger to handle UPDATE (if file_id changes)
+DROP TRIGGER IF EXISTS update_mirror_count$$
 CREATE TRIGGER update_mirror_count
 AFTER UPDATE ON download_file_mirrors
 FOR EACH ROW
@@ -84,9 +100,21 @@ DELIMITER ;
 -- Example 3: Denormalize user notification counts
 -- ====================================================================
 
--- Add unread counter to admin users
-ALTER TABLE admin_users
-ADD COLUMN unread_notifications INT NOT NULL DEFAULT 0;
+-- Add unread counter to admin users (if it doesn't exist)
+SET @dbname = DATABASE();
+SET @tablename = 'admin_users';
+SET @columnname = 'unread_notifications';
+SET @preparedStatement = (SELECT IF(
+  (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+   WHERE TABLE_SCHEMA=@dbname
+     AND TABLE_NAME=@tablename
+     AND COLUMN_NAME=@columnname) > 0,
+  'SELECT 1', -- Column exists, do nothing
+  'ALTER TABLE admin_users ADD COLUMN unread_notifications INT NOT NULL DEFAULT 0'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
 
 -- Populate initial counts
 UPDATE admin_users au
@@ -98,6 +126,7 @@ SET unread_notifications = (
 
 -- Trigger to increment on INSERT
 DELIMITER $$
+DROP TRIGGER IF EXISTS increment_notification_count$$
 CREATE TRIGGER increment_notification_count
 AFTER INSERT ON notifications
 FOR EACH ROW
@@ -110,6 +139,7 @@ BEGIN
 END$$
 
 -- Trigger to decrement when marked as read
+DROP TRIGGER IF EXISTS decrement_notification_count$$
 CREATE TRIGGER decrement_notification_count
 AFTER UPDATE ON notifications
 FOR EACH ROW
@@ -127,6 +157,7 @@ BEGIN
 END$$
 
 -- Trigger on DELETE
+DROP TRIGGER IF EXISTS delete_notification_count$$
 CREATE TRIGGER delete_notification_count
 AFTER DELETE ON notifications
 FOR EACH ROW

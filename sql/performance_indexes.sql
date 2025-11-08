@@ -4,72 +4,113 @@
 -- This file adds critical indexes for improved query performance
 -- Estimated impact: 20-30% improvement on filtered queries
 -- Run this migration after installation or on existing database
+--
+-- IMPORTANT: This file is IDEMPOTENT and safe to run multiple times
+-- It checks for existing indexes before creating new ones
 -- ====================================================================
+
+-- Helper procedure to create index only if it doesn't exist
+DELIMITER $$
+DROP PROCEDURE IF EXISTS create_index_if_not_exists$$
+CREATE PROCEDURE create_index_if_not_exists(
+    IN tableName VARCHAR(128),
+    IN indexName VARCHAR(128),
+    IN indexDefinition TEXT
+)
+BEGIN
+    DECLARE indexExists INT;
+
+    SELECT COUNT(*) INTO indexExists
+    FROM information_schema.statistics
+    WHERE table_schema = DATABASE()
+      AND table_name = tableName
+      AND index_name = indexName;
+
+    IF indexExists = 0 THEN
+        SET @sql = CONCAT('ALTER TABLE ', tableName, ' ADD INDEX ', indexName, ' ', indexDefinition);
+        PREPARE stmt FROM @sql;
+        EXECUTE stmt;
+        DEALLOCATE PREPARE stmt;
+    END IF;
+END$$
+DELIMITER ;
 
 -- News table indexes (heavy filtering and sorting)
 -- Impact: 100-500ms improvement on news listing/search
-ALTER TABLE news ADD INDEX idx_news_status (status);
-ALTER TABLE news ADD INDEX idx_news_author (author);
-ALTER TABLE news ADD INDEX idx_news_publish_date (publish_date DESC);
-ALTER TABLE news ADD INDEX idx_news_views (views);
-ALTER TABLE news ADD FULLTEXT INDEX idx_news_title_fulltext (title);
+-- NOTE: idx_news_publish_date may already exist from install.php - skip if exists
+CALL create_index_if_not_exists('news', 'idx_news_status', '(status)');
+CALL create_index_if_not_exists('news', 'idx_news_author', '(author)');
+CALL create_index_if_not_exists('news', 'idx_news_publish_date', '(publish_date DESC)');
+CALL create_index_if_not_exists('news', 'idx_news_views', '(views)');
+
+-- Create FULLTEXT index separately (different syntax)
+SET @indexExists = (SELECT COUNT(*) FROM information_schema.statistics
+                    WHERE table_schema = DATABASE()
+                      AND table_name = 'news'
+                      AND index_name = 'idx_news_title_fulltext');
+SET @sql = IF(@indexExists = 0,
+              'ALTER TABLE news ADD FULLTEXT INDEX idx_news_title_fulltext (title)',
+              'SELECT "Index idx_news_title_fulltext already exists" as message');
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
 
 -- Composite index for common query pattern (status + date)
-ALTER TABLE news ADD INDEX idx_news_status_date (status, publish_date DESC);
+CALL create_index_if_not_exists('news', 'idx_news_status_date', '(status, publish_date DESC)');
 
 -- Admin logs indexes (for audit queries)
 -- Impact: 50-100ms improvement on admin log searches
-ALTER TABLE admin_logs ADD INDEX idx_admin_logs_ts (ts DESC);
-ALTER TABLE admin_logs ADD INDEX idx_admin_logs_user (user);
-ALTER TABLE admin_logs ADD INDEX idx_admin_logs_user_ts (user, ts DESC);
+CALL create_index_if_not_exists('admin_logs', 'idx_admin_logs_ts', '(ts DESC)');
+CALL create_index_if_not_exists('admin_logs', 'idx_admin_logs_user', '(user)');
+CALL create_index_if_not_exists('admin_logs', 'idx_admin_logs_user_ts', '(user, ts DESC)');
 
 -- Admin tokens indexes (for cleanup and validation)
-ALTER TABLE admin_tokens ADD INDEX idx_admin_tokens_expires (expires);
-ALTER TABLE admin_tokens ADD INDEX idx_admin_tokens_admin_id (admin_id);
+CALL create_index_if_not_exists('admin_tokens', 'idx_admin_tokens_expires', '(expires)');
+CALL create_index_if_not_exists('admin_tokens', 'idx_admin_tokens_admin_id', '(admin_id)');
 
 -- Notifications indexes (for user notification queries)
 -- Impact: 20-50ms improvement on notification checks
-ALTER TABLE notifications ADD INDEX idx_notifications_admin_id (admin_id);
-ALTER TABLE notifications ADD INDEX idx_notifications_is_read (is_read);
-ALTER TABLE notifications ADD INDEX idx_notifications_admin_read (admin_id, is_read);
-ALTER TABLE notifications ADD INDEX idx_notifications_created (created_at DESC);
+CALL create_index_if_not_exists('notifications', 'idx_notifications_admin_id', '(admin_id)');
+CALL create_index_if_not_exists('notifications', 'idx_notifications_is_read', '(is_read)');
+CALL create_index_if_not_exists('notifications', 'idx_notifications_admin_read', '(admin_id, is_read)');
+CALL create_index_if_not_exists('notifications', 'idx_notifications_created', '(created_at DESC)');
 
 -- Download files indexes (for file listing and mirrors)
-ALTER TABLE download_files ADD INDEX idx_download_files_category (category);
-ALTER TABLE download_files ADD INDEX idx_download_files_visible (is_visible);
+CALL create_index_if_not_exists('download_files', 'idx_download_files_category', '(category)');
+CALL create_index_if_not_exists('download_files', 'idx_download_files_visible', '(is_visible)');
 
 -- Download file mirrors indexes
-ALTER TABLE download_file_mirrors ADD INDEX idx_mirrors_file_id (file_id);
-ALTER TABLE download_file_mirrors ADD INDEX idx_mirrors_region (region);
+CALL create_index_if_not_exists('download_file_mirrors', 'idx_mirrors_file_id', '(file_id)');
+CALL create_index_if_not_exists('download_file_mirrors', 'idx_mirrors_region', '(region)');
 
 -- Support pages indexes (for theme filtering)
 -- Note: years column uses FIND_IN_SET which can't be indexed efficiently
 -- Consider denormalizing to junction table for better performance
-ALTER TABLE support_pages ADD INDEX idx_support_pages_section (section_id);
-ALTER TABLE support_pages ADD INDEX idx_support_pages_order (order_num);
+CALL create_index_if_not_exists('support_pages', 'idx_support_pages_section', '(section_id)');
+CALL create_index_if_not_exists('support_pages', 'idx_support_pages_order', '(order_num)');
 
 -- Sidebar sections indexes (for theme-based queries)
-ALTER TABLE sidebar_sections ADD INDEX idx_sidebar_section_id (section_id);
-ALTER TABLE sidebar_section_variants ADD INDEX idx_sidebar_variant_section (section_id);
-ALTER TABLE sidebar_section_variants ADD INDEX idx_sidebar_variant_sort (sort_order);
+CALL create_index_if_not_exists('sidebar_sections', 'idx_sidebar_section_id', '(section_id)');
+CALL create_index_if_not_exists('sidebar_section_variants', 'idx_sidebar_variant_section', '(section_id)');
+CALL create_index_if_not_exists('sidebar_section_variants', 'idx_sidebar_variant_sort', '(sort_order)');
 
 -- Sidebar entries indexes
-ALTER TABLE sidebar_section_entries ADD INDEX idx_sidebar_entry_variant (variant_id);
-ALTER TABLE sidebar_section_entries ADD INDEX idx_sidebar_entry_order (sort_order);
+CALL create_index_if_not_exists('sidebar_section_entries', 'idx_sidebar_entry_variant', '(variant_id)');
+CALL create_index_if_not_exists('sidebar_section_entries', 'idx_sidebar_entry_order', '(sort_order)');
 
 -- Theme settings indexes (for config lookups)
-ALTER TABLE theme_settings ADD INDEX idx_theme_settings_theme (theme);
-ALTER TABLE theme_settings ADD INDEX idx_theme_settings_name (name);
-ALTER TABLE theme_settings ADD INDEX idx_theme_settings_theme_name (theme, name);
+CALL create_index_if_not_exists('theme_settings', 'idx_theme_settings_theme', '(theme)');
+CALL create_index_if_not_exists('theme_settings', 'idx_theme_settings_name', '(name)');
+CALL create_index_if_not_exists('theme_settings', 'idx_theme_settings_theme_name', '(theme, name)');
 
 -- Storefront games indexes (for listing and filtering)
-ALTER TABLE storefront_games ADD INDEX idx_storefront_games_genre (genre);
-ALTER TABLE storefront_games ADD INDEX idx_storefront_games_platform (platform);
-ALTER TABLE storefront_games ADD INDEX idx_storefront_games_release (release_date DESC);
+CALL create_index_if_not_exists('storefront_games', 'idx_storefront_games_genre', '(genre)');
+CALL create_index_if_not_exists('storefront_games', 'idx_storefront_games_platform', '(platform)');
+CALL create_index_if_not_exists('storefront_games', 'idx_storefront_games_release', '(release_date DESC)');
 
 -- Storefront packages indexes
-ALTER TABLE storefront_packages ADD INDEX idx_storefront_packages_type (package_type);
-ALTER TABLE storefront_packages ADD INDEX idx_storefront_packages_visible (is_visible);
+CALL create_index_if_not_exists('storefront_packages', 'idx_storefront_packages_type', '(package_type)');
+CALL create_index_if_not_exists('storefront_packages', 'idx_storefront_packages_visible', '(is_visible)');
 
 -- Steam games 2007 indexes (if table exists)
 -- ALTER TABLE steam_games_2007 ADD INDEX idx_steam_games_genre (genre);
@@ -77,8 +118,11 @@ ALTER TABLE storefront_packages ADD INDEX idx_storefront_packages_visible (is_vi
 -- ALTER TABLE steam_games_2007 ADD INDEX idx_steam_games_release (release_date);
 
 -- FAQ indexes (for category and order)
-ALTER TABLE faq ADD INDEX idx_faq_category (category);
-ALTER TABLE faq ADD INDEX idx_faq_order (order_num);
+CALL create_index_if_not_exists('faq', 'idx_faq_category', '(category)');
+CALL create_index_if_not_exists('faq', 'idx_faq_order', '(order_num)');
+
+-- Clean up helper procedure
+DROP PROCEDURE IF EXISTS create_index_if_not_exists;
 
 -- ====================================================================
 -- PERFORMANCE NOTE: FIND_IN_SET Optimization
