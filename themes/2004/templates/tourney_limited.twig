@@ -1,0 +1,34 @@
+{% set hero = blocks.hero_title ?? null %}
+{% set subtitle = blocks.hero_subtitle ?? null %}
+<div class="content" id="container">
+    {% if hero %}
+        <h1>{{ hero.content }}</h1>
+    {% endif %}
+    {% if subtitle %}
+        <h2>{{ subtitle.content|raw }}</h2>
+    {% endif %}
+    <img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br>
+    <div class="box">
+        <div class="boxTop2">Valve Tournament Calendar</div>
+        {% if blocks.calendar_intro is defined %}
+            {{ blocks.calendar_intro.content|raw }}
+        {% endif %}
+        <div class="tournament-calendar-wrapper" style="display:flex; gap:24px; flex-wrap:wrap;">
+            <div class="tournament-calendar-grid" style="flex:2 1 360px;">
+                {% include 'partials/tournament_calendar_grid.twig' with { months: calendar_months } %}
+            </div>
+            <div class="tournament-calendar-sidebar" style="flex:1 1 240px; background:#3E4637; padding:12px; border:1px solid #56634d;">
+                <h3 style="margin-top:0; text-transform:uppercase;">Upcoming Events</h3>
+                {% include 'partials/tournament_sidebar.twig' with { events: sidebar_events } %}
+            </div>
+        </div>
+    </div>
+    {% for key, block in blocks %}
+        {% if key starts with 'section_' %}
+            <h3 style="text-transform:uppercase;">{{ block.label|upper }}</h3>
+            {% if block.content %}
+                {{ block.content|raw }}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>

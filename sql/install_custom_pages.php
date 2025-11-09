@@ -2392,18 +2392,6 @@ $insertArray[] = [
     date('Y-m-d H:i:s')
 ];
 
-$insertArray[] = [
-    'tourney_limited',
-    null,
-
-    'LIMITED GAME TOURNAMENT LICENSES',
-    file_get_contents(__DIR__.'/../archived_steampowered/2004/tourney_limited.html'),
-    '2004,2005_v1',
-    null,
-    date('Y-m-d H:i:s'),
-    date('Y-m-d H:i:s')
-];
-
 $stmtcp = $pdo->prepare(
     'INSERT IGNORE INTO custom_pages
     (slug, page_name, title, content, theme, template, header_image, created, updated, status)
@@ -2413,5 +2401,139 @@ $stmtcp = $pdo->prepare(
 foreach ($insertArray as $row) {
     array_splice($row, 6, 0, [null]);
     $stmtcp->execute($row);
+}
+
+$tournamentLimitedBlocks = [
+    'hero_title' => [
+        'label' => 'Hero Title',
+        'position' => 10,
+        'content' => 'LIMITED GAME TOURNAMENT LICENSES',
+    ],
+    'hero_subtitle' => [
+        'label' => 'Hero Subtitle',
+        'position' => 20,
+        'content' => 'BRING <em>STEAM GAMES</em> TO YOUR TOURNAMENT OR LAN PARTY!',
+    ],
+    'calendar_intro' => [
+        'label' => 'Calendar Intro',
+        'position' => 30,
+        'content' => 'The calendar below displays all of the Valve licensed tournaments occurring in the next 90 days.  (Tournament organizers may opt out of having their events displayed on this calendar.)<br><br><img src="img/yellowSquare.gif" alt="">&nbsp;<a href="index.php?area=tourney_calendar">view the full calendar</a><br><br>',
+    ],
+    'section_license' => [
+        'label' => 'What is a Limited Game Tournament License?',
+        'position' => 40,
+        'content' => <<<'HTML'
+All tournaments where Valve games are played require you to complete and agree to the terms of our Limited Game Tournament License Agreement (Tournament Agreement).  Neither the retail licenses nor the Steam Subscriber Agreement terms allow a licensee to host a tournament.  The Tournament Agreement is free and grants you the license to use and display identified games (Games) in your tournament.  <a href="index.php?area=tourney_limited_license" target="_blank">Click here</a> to view a complete version of the Agreement.<br><br>
+The Tournament Agreement grants you the right to use the Games to do the following activities:
+
+<ul>
+<li> Operate and use the Game(s) during the licensed tournament.
+        <li> Publicly display and publicly perform the Game(s) during the tournament.
+        <li> Record Game play at the tournament, and distribute and sublicense such recording for private linear viewing only.
+        <li> Promote the use of the Game(s) in connection with the tournament. You may only use copies of the Game(s) that you have properly acquired and licensed, at retail or via Valves Steam distribution system.
+</li></li></li></li></ul>
+
+You should consider whether you need permission from tournament participants, the tournament venue, or other third parties to exercise any of these rights.<br><br><table align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td colspan="3"><strong>Game(s) may include:</strong></td>
+</tr>
+<tr>
+<td valign="top">
+        Counter-Strike<br>
+        Counter-Strike: Source<br>
+        Counter-Strike: Condition Zero<br>
+        Day of Defeat<br>
+        Day of Defeat: Source<br>
+        Deathmatch Classic<br>
+</td>
+<td valign="top">&nbsp;&nbsp;</td>
+<td valign="top">
+        Half-Life 2<br>
+        Half-Life<br>
+        Half-Life Deathmatch<br>
+        Half-Life: Source<br>
+        Ricochete<br>
+        Team Fortress Classic<br>
+</td>
+</tr>
+</table><br>
+HTML
+    ],
+    'section_restrictions' => [
+        'label' => 'Tournament Restrictions',
+        'position' => 50,
+        'content' => <<<'HTML'
+The tournament license has the following restrictions:
+
+<ol type="a">
+<li> The tournament must occur within ninety (90) days after Valve receives the executed Agreement.
+        <li> You shall not use or permit the use of illegal copies of the Game(s).
+        <li> The tournament must be held at the physical location identified you identify in your application.
+        <li> You will be limited to no more then four tournaments per year.
+        <li> Each tournament will be limited to no more than one hundred (100) participants.
+        <li> The duration of the tournament will be no longer than three (3) sequential days.
+</li></li></li></li></li></li></ol>
+
+Any tournaments that fall outside of the above restrictions, need to contact <a href="mailto:cybercafes@valvesoftware.com">Valve</a> for approval.<br><br>
+HTML
+    ],
+    'section_calendar' => [
+        'label' => 'Advertise on the Tournament Calendar',
+        'position' => 60,
+        'content' => 'If your event has been approved, we will post your event on our  <a href="index.php?area=tourney_calendar">Tournament Calendar</a>.<br><br>',
+    ],
+    'section_registration' => [
+        'label' => 'How Do I Register My Tournament?',
+        'position' => 70,
+        'content' => 'If you are ready to register your tournament, please complete our <a href="index.php?area=tourney_limited_signup">Limited Game Tournament License Agreement Signup Form</a>.  If you agree to the terms of the <a href="index.php?area=tourney_limited_license" target="_blank">Tournament Agreement</a>, click Submit. If your tournament is approved, you will receive a confirmation email and your tournament will be added to our <a href="index.php?area=tourney_calendar">Tournament Calendar</a>. Please allow at least five (5) business days for your event to be approved.<br><br>',
+    ],
+    'section_temp_accounts' => [
+        'label' => 'Temporary Tournament Steam Accounts',
+        'position' => 80,
+        'content' => 'Most tournaments held around the world require their players to bring their own software and/or PCs. However, if you are providing the Games for your players or need extra copies for your event, you can purchase Temporary Tournament Steam Accounts. These accounts will be active for the dates of your event.<br><br>How much does it cost? $2 USD per account per day (25 account, 2 day minimum required). Members of our Cyber Café Program may receive a discount. Please indicate on the <a href="index.php?area=tourney_limited_signup">Limited Game Tournament License Agreement Signup Form</a> how many temporary accounts you want to purchase. After you have agreed to the terms of the Tournament Agreement and submitted the Signup Form, you will receive a confirmation email if your tournament has been approved with a link to enter your credit card information to purchase the Temporary Tournament Steam Accounts.  Please allow at least (5) business days to allow enough time for your tournament application to be reviewed and for the set up and testing of your temporary accounts.<br><br>',
+    ],
+    'section_closing' => [
+        'label' => 'Good Luck With Your Tournament',
+        'position' => 90,
+        'content' => '',
+    ],
+];
+
+$tournamentCalendarBlocks = [
+    'intro' => [
+        'label' => 'Calendar Intro',
+        'position' => 10,
+        'content' => 'This calendar displays all Valve licensed tournaments occurring in the next 90 days. (Tournament organizers may opt out of having their events displayed on this calendar.)<br><br>To advertise your next event on our Tournament Calendar, please visit our <a href="index.php?area=tourney_limited">Tournament Website</a> for more information and to complete a Tournament Signup Form.',
+    ],
+];
+
+$blockStmt = $pdo->prepare(
+    'INSERT INTO tournament_content_blocks (page_slug, theme, block_key, block_label, content, position, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())
+     ON DUPLICATE KEY UPDATE block_label = VALUES(block_label), content = VALUES(content), position = VALUES(position)'
+);
+
+foreach (['2004', '2005_v1'] as $theme) {
+    foreach ($tournamentLimitedBlocks as $key => $block) {
+        $blockStmt->execute([
+            'tourney_limited',
+            $theme,
+            $key,
+            $block['label'],
+            $block['content'],
+            $block['position'],
+        ]);
+    }
+
+    foreach ($tournamentCalendarBlocks as $key => $block) {
+        $blockStmt->execute([
+            'tourney_calendar',
+            $theme,
+            $key,
+            $block['label'],
+            $block['content'],
+            $block['position'],
+        ]);
+    }
 }
 ?>
