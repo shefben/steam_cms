@@ -71,7 +71,7 @@ $s = $_GET['s'] ?? '';
 </table>
 <br>
 <div style="max-width:720px;width:720px;text-align:left;">
-<b style="font-family:trebuchet ms bold; verdana, arial;font-size:16px;">THE CURRENT <a style="text-decoration:underline;" target="_new" href="/game_stats.html">MOST POPULAR</a> THIRD-PARTY GAMES ON STEAM:</b><br>
+<b style="font-family:trebuchet ms bold; verdana, arial;font-size:16px;">THE CURRENT <a style="text-decoration:underline;" target="_new" href="../?area=game_stats">MOST POPULAR</a> THIRD-PARTY GAMES ON STEAM:</b><br>
 </div>
 <?php
 require_once __DIR__.'/../cms/db.php';

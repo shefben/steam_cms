@@ -19,7 +19,7 @@ a {
 <body> 
 <center> 
 <br> 
-<img src="/custom_assets/img/steamLogoOldGreen.jpg" alt="Steam Logo"><br> 
+<img src="../images/steamLogoOldGreen.jpg" alt="Steam Logo"><br>
 <br><br> 
 <div style="background:#333d33;width:400px;padding:20px;"> 
 <b style="color:#C4B550;">This update news page is missing.</b><br> 
