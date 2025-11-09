@@ -1,0 +1,5 @@
+{% set error_content = error_html|default(content|default('')) %}
+{% include 'default.twig' with {
+    content: error_content,
+    page_title: page_title|default('Error')
+} %}
