@@ -1,0 +1,49 @@
+<div class="content">
+    <h1>STEAM PLAYER NUMBER STATISTICS</h1>
+    {% if last_updated_text %}
+        <span style="float:right;">This page last updated: {{ last_updated_text }}</span>
+    {% endif %}
+    <div style="margin-top:6px;">
+        Average unique users per month: {{ avg_users }}<br>
+        Average player minutes per month: {{ avg_minutes_label }}
+    </div>
+    <div class="capsule" name="players" style="margin-top:12px;">
+        <div class="captop"><div></div></div>
+        <div class="capcontent">
+            <table>
+                <tbody>
+                <tr>
+                    <td><b>Game</b></td>
+                    <td align="right"><b>Current Players</b></td>
+                    <td align="right"><b>Current Servers</b></td>
+                    <td align="right"><b>Player Minutes / Month</b></td>
+                </tr>
+                {% for game in stats %}
+                    <tr>
+                        <td>
+                            {% if game.game_website %}
+                                <a href="{{ game.game_website }}">{{ game.game_name }}</a>
+                            {% else %}
+                                {{ game.game_name }}
+                            {% endif %}
+                        </td>
+                        <td align="right">{{ game.players_formatted }}</td>
+                        <td align="right">{{ game.servers_formatted }}</td>
+                        <td align="right">{{ game.minutes_label }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4"><hr style="width:100%;margin:0;"></td>
+                </tr>
+                <tr>
+                    <td class="maize"><b>TOTAL</b></td>
+                    <td class="maize" align="right">{{ totals.players_formatted }}</td>
+                    <td class="maize" align="right">{{ totals.servers_formatted }}</td>
+                    <td class="maize" align="right">{{ totals.minutes_label }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="capbot"><div></div></div>
+    </div>
+</div>

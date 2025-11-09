@@ -1363,6 +1363,7 @@ ALTER TABLE product_discounts
             require_once 'sql/install_troubleshooter.php';
             require_once 'sql/install_download_pages.php';
             require_once 'sql/install_download_files.php';
+            require_once 'sql/install_game_stats.php';
             if (!empty($_POST['use_official_survey'])) {
                 run_sql_file($pdo, __DIR__.'/sql/install_official_survey_stats.sql');
             }
@@ -1454,6 +1455,8 @@ HTML;
                 ['file' => 'content_server_management','label' => 'Content Server Management','visible' => 1,'icon' => '🖥️'],
                 ['file' => 'content_servers.php','label' => 'Servers','visible' => 1, 'parent' => 'content_server_management','icon' => '🖥️'],
                 ['file' => 'contentserver_banners.php','label' => 'ContentServer Banner Management','visible' => 1, 'parent' => 'content_server_management','icon' => '🖼️'],
+                ['file' => 'stats_management','label' => 'Stats Management','visible' => 1,'icon' => '📊'],
+                ['file' => 'game_stats.php','label' => 'Game Stats','visible' => 1, 'parent' => 'stats_management','icon' => '🎮'],
                 ['file' => 'survey_stats.php','label' => 'Survey Stats','visible' => 1,'icon' => '📈'],
                 ['file' => 'update_history.php','label' => 'Update History Management','visible' => 1,'icon' => '📜'],
                 ['file' => 'theme.php','label' => 'Theme','visible' => 1,'icon' => '🎨'],
