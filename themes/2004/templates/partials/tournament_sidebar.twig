@@ -1,0 +1,25 @@
+{% if events %}
+    <ul class="tournament-sidebar" style="list-style:none; margin:0; padding:0;">
+        {% for event in events %}
+            <li style="margin-bottom:12px;">
+                <strong>{{ event.title }}</strong><br>
+                <span style="font-size:11px; color:#C3C9BC;">{{ event.dates }}</span><br>
+                {% if event.location %}
+                    <span style="font-size:11px; color:#C3C9BC;">{{ event.location }}</span><br>
+                {% endif %}
+                {% if event.games is iterable and event.games|length %}
+                    {% set labels = [] %}
+                    {% for game in event.games %}
+                        {% set labels = labels|merge([game.label]) %}
+                    {% endfor %}
+                    <span style="font-size:11px; color:#C3C9BC;">Games: {{ labels|join(', ') }}</span><br>
+                {% endif %}
+                {% if event.website %}
+                    <a href="{{ event.website }}" style="color:#BFBA50; font-size:11px;">Event Website</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No upcoming events.</p>
+{% endif %}

@@ -1,0 +1,89 @@
+<div class="content" id="container">
+    <div class="narrower">
+        {% if blocks.intro is defined %}
+            {{ blocks.intro.content|raw }}
+        {% endif %}
+    </div>
+    {% for monthKey, month in events_by_month %}
+        <div id="month-{{ monthKey }}" class="tournament-month" style="margin-bottom:24px;">
+            <h2 style="margin-top: 0px;">{{ month.label }}</h2>
+            {% if month.items %}
+                <table cellpadding="0" cellspacing="0" style="width:100%;">
+                    {% for event in month.items %}
+                        <tr>
+                            <td nowrap="nowrap" valign="top" style="width:140px; padding:4px;">
+                                <span class="date"><span>{{ event.calendar_label }}&nbsp;&nbsp;</span></span>
+                            </td>
+                            <td nowrap="nowrap" valign="top" style="padding:4px;">
+                                <strong>{{ event.title }}</strong>
+                                {% if event.organizer %}
+                                    <br><span style="font-size:11px; color:#C3C9BC;">Hosted by {{ event.organizer }}</span>
+                                {% endif %}
+                            </td>
+                            <td nowrap="nowrap" valign="top" width="100%" style="padding:4px;">
+                                {% if event.calendar_location %}
+                                    <span class="place"><span>{{ event.calendar_location }}</span></span>
+                                {% else %}
+                                    <span class="place"><span>Online</span></span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="2" valign="top" width="100%" style="padding:0 4px 12px 4px;">
+                                <div class="infobox" style="background:#000; padding:12px; border:1px solid #56634d;">
+                                    {% if event.description %}
+                                        <p style="margin-top:0;">{{ event.description|nl2br }}</p>
+                                    {% endif %}
+                                    {% if event.venue.name or event.venue.city or event.venue.country %}
+                                        <p style="margin:0;">
+                                            <span class="maize">
+                                                {% if event.venue.name %}{{ event.venue.name }}<br>{% endif %}
+                                                {% if event.venue.address1 %}{{ event.venue.address1 }}<br>{% endif %}
+                                                {% if event.venue.address2 %}{{ event.venue.address2 }}<br>{% endif %}
+                                                {% if event.venue.city %}{{ event.venue.city }}{% if event.venue.state %}, {{ event.venue.state }}{% endif %}{% if event.venue.country %}, {{ event.venue.country }}{% endif %}{% endif %}
+                                                {% if event.venue.postal_code %}<br>{{ event.venue.postal_code }}{% endif %}
+                                            </span>
+                                        </p>
+                                    {% endif %}
+                                    {% if event.games %}
+                                        {% set game_labels = [] %}
+                                        {% for game in event.games %}
+                                            {% set game_labels = game_labels|merge([game.label]) %}
+                                        {% endfor %}
+                                        <p style="margin:8px 0 0 0;">Valve games available: <em>{{ game_labels|join(', ') }}</em></p>
+                                    {% endif %}
+                                    {% if event.registration %}
+                                        {% set reg_labels = [] %}
+                                        {% for method in event.registration %}
+                                            {% set reg_labels = reg_labels|merge([method.label]) %}
+                                        {% endfor %}
+                                        <p style="margin:8px 0 0 0;">Registration: {{ reg_labels|join(', ') }}</p>
+                                    {% endif %}
+                                    {% if event.registration_notes %}
+                                        <p style="margin:8px 0 0 0;">{{ event.registration_notes|nl2br }}</p>
+                                    {% endif %}
+                                    <p style="margin:8px 0 0 0;">
+                                        {% if event.event_email %}
+                                            Contact: <a href="mailto:{{ event.event_email }}" style="color:#BFBA50;">{{ event.event_email }}</a><br>
+                                        {% endif %}
+                                        {% if event.event_website %}
+                                            Website: <a href="{{ event.event_website }}" style="color:#BFBA50;">{{ event.event_website }}</a><br>
+                                        {% endif %}
+                                        {% if event.organizer_phone %}
+                                            Phone: {{ event.organizer_phone }}<br>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No tournaments scheduled.</p>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>No tournaments scheduled.</p>
+    {% endfor %}
+</div>

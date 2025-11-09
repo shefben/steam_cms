@@ -1,0 +1,36 @@
+<table align="center" cellpadding="0" cellspacing="0" class="tournament-calendar-table">
+    <tr>
+    {% for month in months %}
+        <td style="padding:4px 12px; vertical-align:top;">
+            <b>{{ month.label }}</b><br>
+            <span style="font-family: courier new;">
+                {% for week in month.weeks %}
+                    {% for day in week %}
+                        {% if day.type == 'empty' %}
+                            <span style="border: 1px solid #282E22;">&nbsp;&nbsp;</span>
+                        {% else %}
+                            {% set style = 'border: 1px solid #282E22;;' %}
+                            {% set title_list = [] %}
+                            {% if day.has_events %}
+                                {% set style = 'background-color: #4B5640; border: 1px solid silver;' %}
+                                {% for event in day.events %}
+                                    {% set title_list = title_list|merge([event.title]) %}
+                                {% endfor %}
+                            {% endif %}
+                            {% if day.has_events %}
+                                <a href="index.php?area=tourney_calendar#month-{{ day.date|date('Y-m') }}" style="text-decoration:none; color:#C3C9BC;">
+                                    <span style="{{ style }}" title="{{ title_list|join(', ') }}">&nbsp;{{ day.day }}</span>
+                                </a>
+                            {% else %}
+                                <span style="{{ style }}">&nbsp;{{ day.day }}</span>
+                            {% endif %}
+                        {% endif %}
+                        {% if not loop.last %}&nbsp;{% endif %}
+                    {% endfor %}
+                    <br>
+                {% endfor %}
+            </span>
+        </td>
+    {% endfor %}
+    </tr>
+</table>
