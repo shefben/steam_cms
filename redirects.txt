@@ -1,6 +1,6 @@
 html/betasignup.html -> index.php?area=getsteamnow
 legal.html -> index.php?area=legal
-status.php -> index.php?area=statusenv vpport/
+status.php -> index.php?area=status
 beta.valvesoftware.com -> index.php?area=becomebetatester
 Games_Available/Games.htm -> index.php?area=games
 BetaSupport/support.htm -> index.php?area=support
@@ -24,6 +24,8 @@ steamid_instructions.html -> index.php?area=steamid_instructions
 /platform/friends/         -> platform.php?area=friends
 /steamtour/ -> steamtour.php?p=<page>
 /steam/
-
+/status/game_stats.html -> ?area=game_stats
+/status/content_servers.html -> ?area=content_servers
+/status/ -> ?area=status
 /paypal/(success, others) -> paypal.php
 troubleshooter/live/index.php -> troubleshooter.php
