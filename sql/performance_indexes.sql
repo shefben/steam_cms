@@ -17,8 +17,18 @@ CREATE PROCEDURE create_index_if_not_exists(
     IN indexName VARCHAR(128),
     IN indexDefinition TEXT
 )
-BEGIN
+main_block:BEGIN
+    DECLARE tableExists INT;
     DECLARE indexExists INT;
+
+    SELECT COUNT(*) INTO tableExists
+    FROM information_schema.tables
+    WHERE table_schema = DATABASE()
+      AND table_name = tableName;
+
+    IF tableExists = 0 THEN
+        LEAVE main_block;
+    END IF;
 
     SELECT COUNT(*) INTO indexExists
     FROM information_schema.statistics
@@ -32,7 +42,7 @@ BEGIN
         EXECUTE stmt;
         DEALLOCATE PREPARE stmt;
     END IF;
-END$$
+END main_block$$
 DELIMITER ;
 
 -- News table indexes (heavy filtering and sorting)
@@ -66,51 +76,36 @@ CALL create_index_if_not_exists('admin_logs', 'idx_admin_logs_user_ts', '(user, 
 
 -- Admin tokens indexes (for cleanup and validation)
 CALL create_index_if_not_exists('admin_tokens', 'idx_admin_tokens_expires', '(expires)');
-CALL create_index_if_not_exists('admin_tokens', 'idx_admin_tokens_admin_id', '(admin_id)');
+CALL create_index_if_not_exists('admin_tokens', 'idx_admin_tokens_user_id', '(user_id)');
 
 -- Notifications indexes (for user notification queries)
 -- Impact: 20-50ms improvement on notification checks
 CALL create_index_if_not_exists('notifications', 'idx_notifications_admin_id', '(admin_id)');
 CALL create_index_if_not_exists('notifications', 'idx_notifications_is_read', '(is_read)');
 CALL create_index_if_not_exists('notifications', 'idx_notifications_admin_read', '(admin_id, is_read)');
-CALL create_index_if_not_exists('notifications', 'idx_notifications_created', '(created_at DESC)');
+CALL create_index_if_not_exists('notifications', 'idx_notifications_created', '(created DESC)');
 
 -- Download files indexes (for file listing and mirrors)
-CALL create_index_if_not_exists('download_files', 'idx_download_files_category', '(category)');
-CALL create_index_if_not_exists('download_files', 'idx_download_files_visible', '(is_visible)');
+CALL create_index_if_not_exists('download_files', 'idx_download_files_created', '(created)');
+CALL create_index_if_not_exists('download_files', 'idx_download_files_updated', '(updated)');
 
 -- Download file mirrors indexes
 CALL create_index_if_not_exists('download_file_mirrors', 'idx_mirrors_file_id', '(file_id)');
-CALL create_index_if_not_exists('download_file_mirrors', 'idx_mirrors_region', '(region)');
-
--- Support pages indexes (for theme filtering)
--- Note: years column uses FIND_IN_SET which can't be indexed efficiently
--- Consider denormalizing to junction table for better performance
-CALL create_index_if_not_exists('support_pages', 'idx_support_pages_section', '(section_id)');
-CALL create_index_if_not_exists('support_pages', 'idx_support_pages_order', '(order_num)');
+CALL create_index_if_not_exists('download_file_mirrors', 'idx_mirrors_order', '(ord)');
 
 -- Sidebar sections indexes (for theme-based queries)
-CALL create_index_if_not_exists('sidebar_sections', 'idx_sidebar_section_id', '(section_id)');
+CALL create_index_if_not_exists('sidebar_sections', 'idx_sidebar_sections_name', '(sidebar_name)');
 CALL create_index_if_not_exists('sidebar_section_variants', 'idx_sidebar_variant_section', '(section_id)');
 CALL create_index_if_not_exists('sidebar_section_variants', 'idx_sidebar_variant_sort', '(sort_order)');
 
 -- Sidebar entries indexes
-CALL create_index_if_not_exists('sidebar_section_entries', 'idx_sidebar_entry_variant', '(variant_id)');
-CALL create_index_if_not_exists('sidebar_section_entries', 'idx_sidebar_entry_order', '(sort_order)');
+CALL create_index_if_not_exists('sidebar_section_entries', 'idx_sidebar_entry_variant', '(parent_variant_id)');
+CALL create_index_if_not_exists('sidebar_section_entries', 'idx_sidebar_entry_order', '(entry_order)');
 
 -- Theme settings indexes (for config lookups)
 CALL create_index_if_not_exists('theme_settings', 'idx_theme_settings_theme', '(theme)');
 CALL create_index_if_not_exists('theme_settings', 'idx_theme_settings_name', '(name)');
 CALL create_index_if_not_exists('theme_settings', 'idx_theme_settings_theme_name', '(theme, name)');
-
--- Storefront games indexes (for listing and filtering)
-CALL create_index_if_not_exists('storefront_games', 'idx_storefront_games_genre', '(genre)');
-CALL create_index_if_not_exists('storefront_games', 'idx_storefront_games_platform', '(platform)');
-CALL create_index_if_not_exists('storefront_games', 'idx_storefront_games_release', '(release_date DESC)');
-
--- Storefront packages indexes
-CALL create_index_if_not_exists('storefront_packages', 'idx_storefront_packages_type', '(package_type)');
-CALL create_index_if_not_exists('storefront_packages', 'idx_storefront_packages_visible', '(is_visible)');
 
 -- Steam games 2007 indexes (if table exists)
 -- ALTER TABLE steam_games_2007 ADD INDEX idx_steam_games_genre (genre);
