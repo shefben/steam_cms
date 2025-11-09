@@ -1,0 +1,139 @@
+<style type="text/css">
+.statsTop {
+    width: auto;
+    text-align: center;
+    margin: 10px 0 20px;
+}
+.statsTop table {
+    margin: 0 auto;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #787878;
+}
+.statsTop td {
+    padding: 3px 8px;
+}
+.statsTopHi { color: #c98d33; font-weight: bold; }
+.statsTopHi2 { color: #5b5b5b; font-weight: bold; }
+.statsTopSmall { font-size: 11px; }
+#detailLink {
+    color: #c98d33;
+    font-size: 13px;
+    text-decoration: none;
+}
+#detailLink:hover { text-decoration: underline; }
+#detailStats {
+    margin-top: 18px;
+}
+#detailStats table {
+    width: 100%;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #787878;
+}
+#detailStats td {
+    padding: 4px 6px;
+}
+#detailStats tr:nth-child(odd) td {
+    background: rgba(255,255,255,0.04);
+}
+.stats-placeholder {
+    background: #2d2d2d;
+    border: 1px solid #3b3b3b;
+    border-radius: 6px;
+    padding: 30px 20px;
+    color: #c0c0c0;
+    text-align: center;
+    margin: 15px 0;
+}
+.stats-placeholder a {
+    color: #c98d33;
+}
+.copyHead {
+    font-size: 16px;
+    font-weight: bold;
+    color: #c98d33;
+}
+</style>
+<div class="statsTop">
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td colspan="4" align="center"><span class="statsTopSmall">{% if last_updated_text %}Updated: {{ last_updated_text }}{% else %}&nbsp;{% endif %}</span></td>
+        </tr>
+        <tr>
+            <td align="left">Players Online:</td>
+            <td align="right"><span class="statsTopHi">{{ summary.current_players }}</span></td>
+            <td align="right"><span class="statsTopHi">{{ summary.peak_players }}</span></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="left">Servers Online:</td>
+            <td align="right"><span class="statsTopHi2">{{ summary.current_servers }}</span></td>
+            <td align="right"><span class="statsTopHi2">{{ summary.peak_servers }}</span></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="4" align="left" style="padding-top:12px;">
+                <span class="statsTopSmall">Minutes played per month (average): <span class="statsTopHi">{{ avg_minutes_label }}</span> (<span class="statsTopHi">{{ avg_minutes_years }}</span> years)</span><br>
+                <span class="statsTopSmall">Average unique users per month: <span class="statsTopHi">{{ avg_users }}</span></span>
+            </td>
+        </tr>
+    </table>
+</div>
+<p><span class="copyHead">Steam Players and Game Servers </span>(most recent 48 hours)</p>
+<div class="stats-placeholder">
+    <p>If you wish to view these stats, you will need to <a href="https://www.adobe.com/go/getflashplayer" target="_blank" rel="noopener">Download</a> the Flash plugin.</p>
+</div>
+<p style="text-align:center; width:100%;">
+    <a id="detailLink" href="#" role="button">View detailed statistics by game</a>
+</p>
+<div id="detailStats" style="display:none;" aria-live="polite">
+    <table cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="25">&nbsp;</td>
+            <td align="left"><b>Game</b></td>
+            <td align="right"><b>Current<br>Players</b></td>
+            <td align="right"><b>Current<br>Servers</b></td>
+            <td align="right"><b>Player Minutes<br>/ Month</b></td>
+        </tr>
+        <tr><td colspan="5">&nbsp;</td></tr>
+        {% for game in stats %}
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    {% if game.game_website %}
+                        <a href="{{ game.game_website }}">{{ game.game_name }}</a>
+                    {% else %}
+                        {{ game.game_name }}
+                    {% endif %}
+                </td>
+                <td align="right">{{ game.players_formatted }}</td>
+                <td align="right">{{ game.servers_formatted }}</td>
+                <td align="right">{{ game.minutes_label }}</td>
+            </tr>
+        {% endfor %}
+        <tr><td colspan="5">&nbsp;</td></tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td class="statsTopHi" align="left">TOTAL</td>
+            <td class="statsTopHi" align="right">{{ totals.players_formatted }}</td>
+            <td class="statsTopHi" align="right">{{ totals.servers_formatted }}</td>
+            <td class="statsTopHi" align="right">{{ totals.minutes_label }}</td>
+        </tr>
+    </table>
+</div>
+<script>
+(function(){
+    const link = document.getElementById('detailLink');
+    const detail = document.getElementById('detailStats');
+    if (!link || !detail) {
+        return;
+    }
+    link.addEventListener('click', function (event) {
+        event.preventDefault();
+        const isHidden = detail.style.display === 'none' || detail.style.display === '';
+        detail.style.display = isHidden ? 'block' : 'none';
+        link.textContent = isHidden ? 'Hide detailed statistics' : 'View detailed statistics by game';
+    });
+})();
+</script>
