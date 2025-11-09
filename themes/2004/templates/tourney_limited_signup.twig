@@ -1,0 +1,347 @@
+{% set selected_registration = values['tRegType'] ?? values['tRegType[]'] ?? values['registration_types'] ?? [] %}
+{% set selected_games = values['tValveGamesUsed'] ?? values['tValveGamesUsed[]'] ?? values['games'] ?? [] %}
+{% set reg_list = [] %}
+{% if selected_registration is iterable %}
+    {% for item in selected_registration %}
+        {% if item is not iterable and item is not same as(false) and item is not same as(null) %}
+            {% set reg_list = reg_list|merge([item]) %}
+        {% endif %}
+    {% endfor %}
+{% elseif selected_registration %}
+    {% set reg_list = [selected_registration] %}
+{% endif %}
+{% set game_list = [] %}
+{% if selected_games is iterable %}
+    {% for item in selected_games %}
+        {% if item is not iterable and item is not same as(false) and item is not same as(null) %}
+            {% set game_list = game_list|merge([item]) %}
+        {% endif %}
+    {% endfor %}
+{% elseif selected_games %}
+    {% set game_list = [selected_games] %}
+{% endif %}
+
+<div class="content" id="container">
+    <h1>LIMITED GAME TOURNAMENT LICENSE SIGNUP</h1>
+    {% if success %}
+        <p>Thank you for submitting your tournament application. Our team will review your request and contact you shortly.</p>
+        <p><a href="index.php?area=tourney_limited" style="color:#BFBA50;">Return to the Tournament page</a></p>
+    {% else %}
+        {% if errors %}
+            <div style="background:#5c2c2c; border:1px solid #8b4242; color:#ffdada; padding:12px; margin-bottom:16px;">
+                <strong>Please correct the following issues:</strong>
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div class="narrower">
+            <p>If you are hosting a LAN or online tournament that meets the requirements and restrictions described on the main <a href="index.php?area=tourney_limited" style="color:#BFBA50;">Game Tournament License Page</a>, this is where you sign up to request a license. We first need a little information about your event. We will also need to confirm your agreement to the terms of the <a href="index.php?area=tourney_limited_license" style="color:#BFBA50;" target="_blank">Limited Game Tournament License Agreement</a>. Please complete the signup form below. We will review your information and send you a confirmation email if your tournament has been approved for a Limited Game Tournament License. Please allow up to five (5) business days for us to review your information.</p>
+        </div>
+        <script>
+        function copyText() {
+            document.forms.signup.tTourAddress.value = document.forms.signup.tOrgAddress.value;
+            document.forms.signup.tTourAddress2.value = document.forms.signup.tOrgAddress2.value;
+            document.forms.signup.tTourCity.value = document.forms.signup.tOrgCity.value;
+            document.forms.signup.tTourZipPostal.value = document.forms.signup.tOrgZipPostal.value;
+            document.forms.signup.tTourEmail.value = document.forms.signup.tOrgEmail.value;
+            document.forms.signup.tTourStateProv.value = document.forms.signup.tOrgStateProv.value;
+            document.forms.signup.tTourCountry.value = document.forms.signup.tOrgCountry.value;
+        }
+        function check_online_only() {
+            var onlineOnly = document.getElementById('tTourOnlineOnly').checked;
+            var rows = document.querySelectorAll('.tTourAddressRow');
+            rows.forEach(function(row){
+                row.style.display = onlineOnly ? 'none' : 'table-row';
+            });
+        }
+        </script>
+        <form method="post" name="signup" id="signup">
+            <table cellpadding="4" cellspacing="2" width="100%" style="background:#3e4637; border:1px solid #56634d;">
+                <tr><td colspan="3"><strong>Organizer Information</strong></td></tr>
+                <tr>
+                    <td nowrap><label for="tOrgName">Organization Name</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgName" name="tOrgName" value="{{ values.tOrgName|default(values.organizer_company|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgType">Organization Type</label></td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select id="tOrgType" name="tOrgType" style="width:200px;">
+                            <option value=""></option>
+                            {% set orgType = values.tOrgType|default(values.organizer_type|default('')) %}
+                            {% for option in ['Corporation','Non-Profit','Partnership','Sole Proprietorship','Other'] %}
+                                <option value="{{ option }}" {% if orgType == option %}selected{% endif %}>{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tIsCafe">Are you a registered Cyber Café?</label></td>
+                    <td>&nbsp;</td>
+                    {% set cafe = values.tIsCafe|default(values.organizer_is_cafe|default(false)) %}
+                    <td>
+                        <select id="tIsCafe" name="tIsCafe" style="width:200px;">
+                            <option value=""></option>
+                            <option value="1" {% if cafe == '1' or cafe == 1 %}selected{% endif %}>Yes</option>
+                            <option value="0" {% if cafe == '0' or cafe == 0 %}selected{% endif %}>No</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgNameFirst">Organizer First Name</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgNameFirst" name="tOrgNameFirst" value="{{ values.tOrgNameFirst|default(values.organizer_first_name|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgNameLast">Organizer Last Name</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgNameLast" name="tOrgNameLast" value="{{ values.tOrgNameLast|default(values.organizer_last_name|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgAddress">Street Address</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgAddress" name="tOrgAddress" value="{{ values.tOrgAddress|default(values.organizer_address1|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgAddress2">Street Address 2</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgAddress2" name="tOrgAddress2" value="{{ values.tOrgAddress2|default(values.organizer_address2|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgCity">City</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgCity" name="tOrgCity" value="{{ values.tOrgCity|default(values.organizer_city|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgStateProv">State/Province</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgStateProv" name="tOrgStateProv" value="{{ values.tOrgStateProv|default(values.organizer_state|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgCountry">Country</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgCountry" name="tOrgCountry" value="{{ values.tOrgCountry|default(values.organizer_country|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgZipPostal">Zip/Postal Code</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgZipPostal" name="tOrgZipPostal" value="{{ values.tOrgZipPostal|default(values.organizer_postal_code|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgPhone">Phone</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgPhone" name="tOrgPhone" value="{{ values.tOrgPhone|default(values.organizer_phone|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgFax">Fax</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgFax" name="tOrgFax" value="{{ values.tOrgFax|default(values.organizer_fax|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tOrgEmail">Email</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tOrgEmail" name="tOrgEmail" value="{{ values.tOrgEmail|default(values.organizer_email|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr><td colspan="3"><hr style="height:2px; color:#404040;"></td></tr>
+                <tr><td colspan="3"><strong>Tournament Information</strong></td></tr>
+                <tr>
+                    <td nowrap><label for="tTourName">Name of Tournament</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourName" name="tTourName" value="{{ values.tTourName|default(values.title|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tTourParticipants">Est. Number of Participants</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourParticipants" name="tTourParticipants" value="{{ values.tTourParticipants|default(values.expected_participants|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap>Tournament Start Date</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td><input type="text" name="tTourStartMonth" value="{{ values.tTourStartMonth|default(values.start_date|default('')|slice(5,2)) }}" size="2" maxlength="2" placeholder="MM"></td>
+                                <td style="padding:0 6px;">/</td>
+                                <td><input type="text" name="tTourStartDay" value="{{ values.tTourStartDay|default(values.start_date|default('')|slice(8,2)) }}" size="2" maxlength="2" placeholder="DD"></td>
+                                <td style="padding:0 6px;">/</td>
+                                <td><input type="text" name="tTourStartYear" value="{{ values.tTourStartYear|default(values.start_date|default('')|slice(0,4)) }}" size="4" maxlength="4" placeholder="YYYY"></td>
+                                <td style="padding-left:10px;">Time:</td>
+                                <td><input type="text" name="tTourStartTime" value="{{ values.tTourStartTime|default(values.start_time|default('')|slice(0,5)) }}" size="5" placeholder="HH:MM"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap>Tournament End Date</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td><input type="text" name="tTourEndMonth" value="{{ values.tTourEndMonth|default(values.end_date|default('')|slice(5,2)) }}" size="2" maxlength="2" placeholder="MM"></td>
+                                <td style="padding:0 6px;">/</td>
+                                <td><input type="text" name="tTourEndDay" value="{{ values.tTourEndDay|default(values.end_date|default('')|slice(8,2)) }}" size="2" maxlength="2" placeholder="DD"></td>
+                                <td style="padding:0 6px;">/</td>
+                                <td><input type="text" name="tTourEndYear" value="{{ values.tTourEndYear|default(values.end_date|default('')|slice(0,4)) }}" size="4" maxlength="4" placeholder="YYYY"></td>
+                                <td style="padding-left:10px;">Time:</td>
+                                <td><input type="text" name="tTourEndTime" value="{{ values.tTourEndTime|default(values.end_time|default('')|slice(0,5)) }}" size="5" placeholder="HH:MM"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tTourTimezone">Time Zone</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourTimezone" name="tTourTimezone" value="{{ values.tTourTimezone|default(values.timezone|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tTourOnlineOnly">Online Only Event?</label></td>
+                    <td>&nbsp;</td>
+                    {% set onlineOnly = values.tTourOnlineOnly|default(values.is_online_only|default(false)) %}
+                    <td><input type="checkbox" id="tTourOnlineOnly" name="tTourOnlineOnly" value="1" {% if onlineOnly %}checked{% endif %} onclick="check_online_only();"> Yes, this event is fully online.</td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tTourVenueName">Venue Name</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourVenueName" name="tTourVenueName" value="{{ values.tTourVenueName|default(values.venue_name|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr class="tTourAddressRow">
+                    <td nowrap><label for="tTourAddress">Tournament Address</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourAddress" name="tTourAddress" value="{{ values.tTourAddress|default(values.venue_address1|default('')) }}" style="width:200px;"> <button type="button" onclick="copyText();" style="font-size:11px;">Copy organizer address</button></td>
+                </tr>
+                <tr class="tTourAddressRow">
+                    <td nowrap><label for="tTourAddress2">Tournament Address 2</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourAddress2" name="tTourAddress2" value="{{ values.tTourAddress2|default(values.venue_address2|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr class="tTourAddressRow">
+                    <td nowrap><label for="tTourCity">City</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourCity" name="tTourCity" value="{{ values.tTourCity|default(values.venue_city|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr class="tTourAddressRow">
+                    <td nowrap><label for="tTourStateProv">State/Province</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourStateProv" name="tTourStateProv" value="{{ values.tTourStateProv|default(values.venue_state|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr class="tTourAddressRow">
+                    <td nowrap><label for="tTourCountry">Country</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourCountry" name="tTourCountry" value="{{ values.tTourCountry|default(values.venue_country|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr class="tTourAddressRow">
+                    <td nowrap><label for="tTourZipPostal">Zip/Postal Code</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourZipPostal" name="tTourZipPostal" value="{{ values.tTourZipPostal|default(values.venue_postal_code|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tTourWeb">Tournament Website</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourWeb" name="tTourWeb" value="{{ values.tTourWeb|default(values.event_website|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tTourEmail">Tournament Contact Email</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tTourEmail" name="tTourEmail" value="{{ values.tTourEmail|default(values.event_email|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tLanOrOnline">Event Type</label></td>
+                    <td>&nbsp;</td>
+                    {% set lan = values.tLanOrOnline|default(values.lan_or_online|default('')) %}
+                    <td>
+                        <select id="tLanOrOnline" name="tLanOrOnline" style="width:200px;">
+                            <option value=""></option>
+                            <option value="lan" {% if lan == 'lan' %}selected{% endif %}>LAN Event</option>
+                            <option value="online" {% if lan == 'online' %}selected{% endif %}>Online Event</option>
+                            <option value="both" {% if lan == 'both' %}selected{% endif %}>Both</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tRegType">Registration Type</label></td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select id="tRegType" name="tRegType[]" multiple style="width:200px;" size="3">
+                            {% for slug, option in registration_options %}
+                                <option value="{{ slug }}" {% if slug in reg_list %}selected{% endif %}>{{ option.label }}</option>
+                            {% endfor %}
+                        </select>
+                        <p style="margin:0; font-size:11px;"><sup>* Hold CTRL to select multiple options</sup></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tTourDescription">Tournament Description</label></td>
+                    <td>&nbsp;</td>
+                    <td><textarea id="tTourDescription" name="tTourDescription" rows="4" style="width:200px;">{{ values.tTourDescription|default(values.description|default('')) }}</textarea></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tRegistrationNotes">Registration Notes</label></td>
+                    <td>&nbsp;</td>
+                    <td><textarea id="tRegistrationNotes" name="tRegistrationNotes" rows="3" style="width:200px;">{{ values.tRegistrationNotes|default(values.registration_notes|default('')) }}</textarea></td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tInCalendar">Would you like your event added to the calendar?</label></td>
+                    <td>&nbsp;</td>
+                    {% set inCal = values.tInCalendar|default(values.requested_calendar_listing|default(false)) %}
+                    <td>
+                        <select id="tInCalendar" name="tInCalendar" style="width:200px;">
+                            <option value="1" {% if inCal == '1' or inCal == 1 or inCal == true %}selected{% endif %}>Yes</option>
+                            <option value="0" {% if inCal == '0' or inCal == 0 %}selected{% endif %}>No</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tValveGamesUsed">Valve games to be used in Tournament:</label></td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select id="tValveGamesUsed" name="tValveGamesUsed[]" multiple style="width:200px;" size="4">
+                            {% for slug, option in games %}
+                                <option value="{{ slug }}" {% if slug in game_list %}selected{% endif %}>{{ option.label }}</option>
+                            {% endfor %}
+                        </select>
+                        <p style="margin:0; font-size:11px;"><sup>* Hold CTRL to select multiple games</sup></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tAgreeToLicense">Do you agree to the Valve Corporation Game Tournament License?</label></td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select id="tAgreeToLicense" name="tAgreeToLicense" style="width:200px;">
+                            <option value=""></option>
+                            <option value="1" {% if values.tAgreeToLicense == '1' %}selected{% endif %}>I Agree</option>
+                            <option value="2" {% if values.tAgreeToLicense == '2' %}selected{% endif %}>I Do Not Agree</option>
+                        </select>
+                        <p style="margin:0; font-size:11px;"><sup>* By choosing "I Agree" and clicking Submit, you are agreeing to the terms of the <a href="index.php?area=tourney_limited_license" style="color:#BFBA50;" target="_blank">Limited Game Tournament License Agreement</a></sup></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tPurchaseTemp">Would you like to purchase Temporary Tournament Steam Accounts?</label></td>
+                    <td>&nbsp;</td>
+                    {% set purchaseTemp = values.tPurchaseTemp|default(values.temporary_accounts_requested|default(false)) %}
+                    <td>
+                        <select id="tPurchaseTemp" name="tPurchaseTemp" style="width:200px;">
+                            <option value=""></option>
+                            <option value="1" {% if purchaseTemp == '1' or purchaseTemp == 1 or purchaseTemp == true %}selected{% endif %}>Yes</option>
+                            <option value="0" {% if purchaseTemp == '0' or purchaseTemp == 0 %}selected{% endif %}>No</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td nowrap><label for="tHowManyTemp">If yes, how many temporary tournament subscriptions?</label></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="tHowManyTemp" name="tHowManyTemp" value="{{ values.tHowManyTemp|default(values.temporary_accounts_quantity|default('')) }}" style="width:200px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="right" style="padding:12px;">
+                        <button type="submit" style="padding:6px 12px; font-size:12px;">Submit</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <script>check_online_only();</script>
+    {% endif %}
+</div>
