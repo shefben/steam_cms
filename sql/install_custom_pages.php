@@ -344,7 +344,7 @@ $content2004 = <<<HTML
 <br>
 <br clear="all">
 <h2 id="afterBox">HARDWARE <em>SURVEY</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
-Check out the <a href="http://steampowered.com/status/survey.html">results of the "Half-Life 2 Hardware Survey"</a>. More than half a million respondents have taken part so far.<br>
+Check out the <a href="./status/survey.html">results of the "Half-Life 2 Hardware Survey"</a>. More than half a million respondents have taken part so far.<br>
 <br>
 <h2>WHAT <em>IS STEAM?</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
 Steam is Valve's new way of getting games into your hands ASAP. Games like Half-Life, Counter-Strike, and Counter-Strike: Condition Zero are all being made available through Steam.<br>
@@ -1115,8 +1115,6 @@ Steam may provide links to other third party sites. Some of these sites may char
 <p>You agree that this Agreement shall be deemed to have been made and executed in the State of Washington, and any dispute arising hereunder shall be resolved in accordance with the law of Washington. You agree that any claim asserted in any legal proceeding by you against Valve shall be commenced and maintained in any state or federal court located in King County, Washington, having subject matter jurisdiction with respect to the dispute between the parties. In the event that any provision of this Agreement shall be held by a court or other tribunal of competent jurisdiction to be unenforceable, such provision will be enforced to the maximum extent permissible and the remaining portions of this Agreement shall remain in full force and effect. This Agreement constitutes and contains the entire agreement between the parties with respect to the subject matter hereof and supersedes any prior oral or written agreements. You agree that this Agreement is not intended to confer and does not confer any rights or remedies upon any person other than the parties to this Agreement. </p>
 <p align="left">You agree to comply with all applicable import/export laws and regulations of the United States and its governmental and regulatory agencies (including, without limitation, the Bureau of Export Administration and the U.S. Department of Commerce). You agree not to export the Steam Software or allow use of your Account by individuals of any terrorist supporting countries to which encryption exports are restricted by the Bureau of Export Administration, currently, Cuba, Iran, Iraq, Libya, North Korea, Sudan or Syria. You represent and warrant that you are not located in, under the control of, or a national or resident of any such prohibited country. </p>
 <p>I hereby agree to be bound by the Agreement. I also acknowledge and agree that this Agreement (including the Subscription Terms, Rules of Use, and Privacy Policy) is the complete and exclusive statement of the agreement between Valve and me, and that the Agreement supersedes any prior or contemporaneous agreement, or other communications, whether oral or written, between Valve and myself. </p>
-
-</div>
 HTML;
 
 $insertArray[] = [
@@ -1131,102 +1129,1265 @@ $insertArray[] = [
     date('Y-m-d H:i:s')        // updated
 ];
 
-$insertArray[] = [
-    'cybercafes',
-    null,
+$cafe_setup = <<<HTML
+<h1>CAFÉ SETUP INSTRUCTIONS</h1>
+<h2>HOW TO<em> GET UP AND RUNNING WITH STEAM</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+<div class="narrower">
 
-    'Cyber Cafés',
-    file_get_contents(__DIR__.'/../html/cybercafes.html'),
-    null,
-    null,
-    date('Y-m-d H:i:s'),
-    date('Y-m-d H:i:s')
-];
-$insertArray[] = [
-    'HL2GOLD_contest',
-    null,
+Here are instructions for setting up Steam in your café. Before you begin this process, you must be a member of the <a href="./?area=cybercafes">official Valve Cyber Café Program</a>. For additional information not covered here, please check the <a href="./?area=faq&amp;section=cybercafe">café section of our FAQ</a>.<br>
+<br>
+<h3 style="text-transform:uppercase;">1. Download the Steam Installer (or use the supplied DVD-ROM)</h3>
+When you join the Cyber Café Program, we will send you a DVD-ROM containing the Steam installer. If you would rather not wait for that to arrive, you can download the Steam client installer from the <a href="./?area=getsteamnow">Get Steam Now</a> page on this site. If you choose to download this installer rather than using the DVD-ROM, be sure to save the installer to disk -- you'll need to use it on each licensed computer in your café.<br>
+<br>
 
-    'VALVE HQ TRIP GIVEAWAY',
-    file_get_contents(__DIR__.'/../html/hl2gold_contest.html'),
-    null,
-    null,
-    date('Y-m-d H:i:s'),
-    date('Y-m-d H:i:s')
-];
-$insertArray[] = [
-    'get_cz',
-    null,
+<h3 style="text-transform:uppercase;">2. Run the Steam Installer</h3>
+To make things simple, you will probably want to choose the same install location on every machine in your café. We recommend that you have at least 1GB of free space on the drive before installing Steam.<br>
+<br>
+<h3 style="text-transform:uppercase;">3. Create an Account</h3>
+Follow these steps to create a Steam account:<br>
+<br>
+<img src="./images/square2.gif"> <strong>Email Address</strong><br>
+The first thing the Create Account wizard will ask you to do is enter a valid email address. Please note that for café Steam accounts, the address that you enter into this box does not actually need to be a valid email address. Instead, it should be an address like "computer1@the_name_of_your_cafe.com". Again, this does NOT need to be a valid email address -- it only needs to uniquely identify the specific machine in your café. The second machine on which you install Steam can use the address "computer2@the_name_of_your_cafe.com", and so on.<br>
+<br>
+<img src="./images/square2.gif"> <strong style="margin-bottom:4px;">Choose a Password and Secret Question &amp; Answer</strong><br>
+The normal security concerns apply when choosing your Steam password. Note that it is possible to use the same password on all of the machines in your café (but obviously, somewhat less secure).<br>
+<br>
+As an added security feature for cyber cafés, Steam will require this password to be entered in order to log OUT. A customer in your café will therefore not be able to log out of Steam or log in as a different user. Also, Steam will run automatically when your computer starts up, and will log in to the Steam servers using the credentials you've supplied during account creation.<br>
+<br>
+<img src="./images/square2.gif"> <strong>Enter a Nickname</strong><br>
+When entering a "Nickname" for each of your café computers, you should again use the name of the computer ("computer1" or similar). It is not necessary to enter a First or Last name.<br>
+<br>
+<img src="./images/square2.gif"> <strong>Finished creating account</strong><br>
+That's it for account creation. All that's left is entering your Product Keys.<br>
+<br>
+<h3 style="text-transform:uppercase;">4. Enter Your Cyber Café Product Key</h3>
+When Valve adds you to the Official Cyber Café Program, you will receive (via email and/or FedEx) a set of Product Keys. You will receive one for each computer you wish to license.<br>
+<br>
+After Steam is installed, open the "My Games" list. There, you'll see a list of all Steam Games. Double-Click on one that you intend to offer in your café. Steam will ask you for a product key at this point. Each computer will use one of the keys in your list. (Once you have used each Product Key in this way, it will be associated with the Steam account that you've created on that computer. Your Product Keys will, from this point on, not be usable by other people to create accounts or to play Steam games.)<br>
+<br>
+<h3 style="text-transform:uppercase;">5. Repeat Steps 2-4 for Each Computer</h3>
+Repeat these steps for every licensed computer on your network, using unique "email addresses" and Nicknames each time.<br>
+<br>
+<h3 style="text-transform:uppercase;">6. Configure Internet Ports</h3>
+Note that Steam requires certain ports to be open from your gaming machines to the Internet. If you haven't already done so, check that the following ports must are "open":<br>
+<br>
+UDP 1200<br>
+UDP 27000 to 27015 inclusive<br>
+TCP 27030 to 27039 inclusive<br>
+<br>
+<h3 style="text-transform:uppercase;">7. Start Playing!</h3>
+Log in to Steam and sit your first customer down. Be sure to have them try the Server Browser (for finding Internet game servers). Also, they can send instant messages through "Friends" to any other Steam user. Automatic updates will be sent to each of your computers automatically, and new games will be added as they become available. <a href="mailto:cafe@steampowered.com">Let us know</a> if you have any difficulty.<br>
+<br>
 
-    'Counter-Strike: Condition Zero',
-    file_get_contents(__DIR__.'/../html/get_cz.html'),
-    null,
-    null,
-    date('Y-m-d H:i:s'),
-    date('Y-m-d H:i:s')
-];
+<a href="./?area=cybercafes">Return to main Cyber Café page</a>
+HTML;
 $insertArray[] = [
     'cafe_setup',
     null,
 
     'Cyber Café Setup Instructions',
-    file_get_contents(__DIR__.'/../html/cafe_setup.html'),
+    $cafe_setup,
     null,
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
 ];
+
+$cybercafes_2003 = <<<HTML
+<h1>CYBER CAFÉS</h1>
+<h2>BRING<em> STEAM GAMES TO YOUR CUSTOMERS</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<div class="box">
+<div class="boxTop2">For Cyber Café<br>Program Members</div>
+<strong><a href="./?area=cafe_setup" style="text-decoration: none;">Step-by-Step Instructions</a></strong><br>Read about <a href="./?area=cafe_setup">how to get your cafe up and running</a> with Steam.<br><br>
+<strong><a href="./index.php?area=faq&amp;section=cybercafe" style="text-decoration: none;">Frequently Asked Questions</a></strong><br>Check the <a href="./index.php?area=faq&amp;section=cybercafe">FAQ</a> for info on cyber cafés, the official program, Steam, etc.<br>
+<br>Members can <a href="mailto:cafe@valvesoftware.com">contact us</a> any time for assistance with Steam or any of the Steam games.
+</div>
+<br>
+
+If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. There are currently over 800 gaming venues in our program, and more are signing up every day. Valve's cybercafé program is the only legal way to use Valve games in your cybercafé or gaming center.<br>
+<br>
+
+<h3 style="text-transform:uppercase;">APRIL CYBER CAFÉ PROMOTION</h3>
+During the month of April 2004, Valve is extending a <a href="./?area=cybercafe_promotion">special offer to Cyber Cafés</a>. During this time, a 12-month cyber café license for Valve’s games is being offered at a savings of 33%. <a href="./?area=cybercafe_promotion">See this page for details</a>.<br><br>
+
+<h3 style="text-transform:uppercase;">The Official Valve Cyber Café Program</h3>
+
+<img src="./images/valve_maizelogo.gif" align="left">
+The Official Valve Cyber Café Program is here. One low monthly fee gets you the most popular action games on the Internet, regular content updates, low maintenance, and fully legal licenses for all of your computers. Here are the details:<br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="./?area=cybercafe_program">Features and Benefits</a><br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="./?area=cafe_pricing">Pricing and Licensing</a><br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="./?area=cafe_signup">Cyber Café Sign-Up Form</a><br>
+<br>
+
+<br>
+<br>
+HTML;
+
+$insertArray[] = [
+    'cybercafes',
+    null,
+
+    'Cyber Cafés',
+    $cybercafes_2003,
+    "2003_v2",
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+
+$cybercafes_20042005 = <<<HTML
+<h1>CYBER CAFÉS</h1>
+<h2>BRING<em> STEAM GAMES TO YOUR CUSTOMERS</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<div class="box">
+<div class="boxTop2">For Cyber Café<br>Program Members</div>
+
+<strong><a href="./?area=cafe_setup" style="text-decoration: none;">Step-by-Step Instructions</a></strong><br>Read about <a href="./?area=cafe_setup">how to get your cafe up and running</a> with Steam.<br>
+<br>
+<strong><a href="./index.php?area=faq&amp;section=cybercafe" style="text-decoration: none;">Frequently Asked Questions</a></strong><br>
+Check the <a href="./index.php?area=faq&amp;section=cybercafe">FAQ</a> for info on cyber cafés, the official program, Steam, etc.<br>
+<br>
+<strong><a href="./?area=support" style="text-decoration: none;">Support</a></strong><br>
+Members can contact us via <a href="./cgi-bin/steampowered.cfg/php/enduser/entry.php">support</a> any time for assistance with Steam or any Steam game.<br>
+<br>
+<strong><a href="./?area=cybercafe_changeform" style="text-decoration: none;">Change Account Information</a></strong><br>
+Members can contact us via <a href="mailto:cybercafes@valvesoftware.com">cybercafes@valvesoftware.com</a> to change contact information, café locations, number of seats, etc.<br>
+<!-- <p align="right"><sub><a href="incdex.php?area=news" style="text-decoration: none;">read more &gt;</a></sub></p> -->
+</div>
+<br>
+
+If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. There are currently over 800 gaming venues in our program, and more are signing up every day. Valve's cybercafé program is the only legal way to use Valve games in your cybercafé or gaming center.<br>
+<br>
+
+<!--
+<h3 style="text-transform:uppercase;">APRIL CYBER CAF&Eacute; PROMOTION</h3>
+During the month of April 2004, Valve is extending a <a href="./?area=cybercafe_promotion">special offer to Cyber Caf&eacute;s</a>. During this time, a 12-month cyber café license for Valve’s games is being offered at a savings of 33%. <a href="./?area=cybercafe_promotion">See this page for details</a>.<br><br>
+-->
+
+<h3 style="text-transform:uppercase;">The Official Valve Cyber Café Program</h3>
+
+<img src="./images/valve_maizelogo.gif" align="left">
+The Official Valve Cyber Café Program is here. One low monthly fee gets you the most popular action games on the Internet, regular content updates, low maintenance, and fully legal licenses for all of your computers. Here are the details:<br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="./?area=cybercafe_program">Features and Benefits</a><br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="./?area=cafe_pricing">Pricing and Licensing</a><br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="./?area=cafe_signup">Cyber Café Sign-Up Form</a><br>
+<br>
+<br>
+
+<h3 style="text-transform:uppercase;">Valve Cyber Café Representatives</h3>
+
+If you would like to participate in the Official Valve Cyber Café Program, contact the representative nearest you.<br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="./?area=cafe_representatives">Browse the Cyber Café Representatives</a><br>
+<br>
+<br>
+
+<h3 style="text-transform:uppercase;">Valve Cyber Café Directory</h3>
+
+Find an Official Valve Cyber Café and play our latest games.<br>
+<br>
+<img src="./images/yellowSquare.gif"> &nbsp;<a href="./?area=cafe_directory">Browse the Cyber Café Directory</a><br>
+<br>
+<br>
+
+<h3 style="text-transform:uppercase;">For Immediate Release</h3>
+<br>
+Monday, November 29 at 4:52 pm PST.<br>
+<br>
+VALVE WINS SUMMARY JUDGMENT MOTIONS IN COPYRIGHT INFRINGEMENT CASE<br>
+<br>
+Valve today announced the U.S. Federal District Court in Seattle, WA granted its motion for summary judgment on the matters of Cyber Café Rights and Contractual Limitation of Liability in its copyright infringement suit with Sierra/Vivendi Universal Games.<br>
+<br>
+Judge Thomas S. Zilly ruled that Sierra/Vivendi Universal Games, and its affiliates, are not authorized to distribute (directly or indirectly) Valve games through cyber cafés to end users for pay-to-play activities pursuant to the parties' current publishing agreement. Valve games such as Counter-Strike, Counter-Strike: Condition Zero and the recently released Half-Life 2 and Counter-Strike: Source are all popular in cyber cafés.<br>
+<br>
+In addition, Judge Zilly ruled in favor of the Valve motion regarding the contractual limitation of liability, allowing Valve to recover copyright damages for any infringement as allowed by law without regard to the publishing agreement's limitation of liability clause. <br>
+<br>
+"We're happy the court has affirmed the meaning of our publishing contract. This is good news for Valve and its cyber café partners around the world," said Gabe Newell, founder and CEO of Valve. "We continue to add value to our program and we look forward to working with cafés to get them signed up and offering Valve's latest games to their customers." <br>
+<br>
+The Valve Cyber Café Program is the only legal way to use Valve games in your cyber café or gaming center. There are currently thousands of cyber cafés participating in the program throughout the world. <br>
+
+
+<!-- Fill out <a href="#">the sign-up form</a> and we'll get back to you right away. Once you're a member, your customers can begin playing right away.<br>-->
+<br>
+HTML;
+
+$insertArray[] = [
+    'cybercafes',
+    null,
+
+    'Cyber Cafés',
+    $cybercafes_20042005,
+    "2004,2005_v1",
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+$hl2gold_context = <<<HTML
+<h1>VALVE HQ TRIP GIVEAWAY</h1>
+<h2>WIN<em> A TRIP TO VALVE'S OFFICES</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+So you want to see Valve's headquarters? Well, how about if we fly you to Valve HQ to tour the facility and meet some of the team members responsible for Half-Life 2 and Valve's other games?<br>
+<br>
+Beginning now and ending December 31, 2004, Valve will automatically enter each eligible purchaser of the Half-Life 2 Gold package in the Valve HQ Trip Giveaway. On January 19th, 2005, Valve will randomly select one lucky winner for every 5,000 copies of the Half-Life 2 Gold package purchased by customers through Steam between October 7, 2004 and December 31, 2004 -- it could be you!<br>
+<br>
+The trip to Valve's headquarters includes:<br>
+<br>
+<ul>
+<li>Two nights' accommodation at a hotel of Valve's choice near Valve's Washington state headquarters.</li>
+<li>Coach class airfare to Seattle, Washington.</li>
+<li>A tour of Valve's facilities.</li>
+<li>Lunch with a select group of Valve employees.</li>
+<li>An autographed Half-Life 2 poster.</li>
+</ul>
+<br>
+NO PURCHASE NECESSARY<br>
+<br>
+How to enter:<br>
+<br>
+You can enter the Giveaway in one of two ways.<br>
+<br>
+1. Purchase the Half-Life 2 Gold Package via Steam by December 31, 2004.<br>
+2. Or if you are a United States resident you can enter by sending a postcard marked "Valve HQ Trip Giveaway" to the following address: PO Box 1688, Bellevue, WA 98009. Your postcard must be received by December 31, 2004 and include your full name, birth date, address, phone number and email. Incomplete or late entries will be rejected.<br>
+<hr>
+Conditions of Entry / Official Rules:<br>
+<br>
+1)      GIVEAWAY DESCRIPTION: Giveaway ends at 11:59 PM (PST) on December 31, 2004. The prize(s) will be awarded in a random drawing from eligible entries received. Only one entry per person accepted. Contestants must be over the age of 12.<br>
+<br>
+2)      HOW TO ENTER: You can enter the Giveaway in one of two ways.  You can purchase the Half-Life 2 Gold package via Steam by December 31, 2004. Or, if you are a United States resident, you can enter by sending a postcard marked "Valve HQ Giveaway" to the following address: PO Box 1688, Bellevue, WA 98009.  Your postcard must be received by 11:59 pm PST, December 31, 2004 and include your full name, birth date, address, phone number and email. Incomplete or late entries will be rejected.<br>
+<br>
+3)      WINNER SELECTION &amp; NOTIFICATION: A random drawing will be conducted by Valve on January 19, 2005. Valve's decision is final on all matters relating to the Giveaway. Odds of winning depend on the number of copies of the Half-Life 2 Gold package sold via Steam and the number of eligible entries received. The potential winner(s) will be notified by e-mail within one (1) week of prize drawing.<br>
+<br>
+4)      PRIZE: Valve will pay (i) two nights' accommodation at a hotel of Valve's choice near Valve's Washington state headquarters and (ii) coach class airfare to Seattle, Washington from either the major airport nearest to the winner's residence (if the winner resides in the United States) or the major international airport nearest to the winner's residence (if the winner does not reside in the United States).  Valve will give the prize winner(s) at least 8 weeks notice of the dates scheduled for the trip and prize winner(s) must provide Valve with any necessary information required for Valve to book air travel and hotel accommodations within 6 weeks of such date.  Any prize winner(s) under the age of 18 must travel with a parent or legal guardian.<br>
+<br>
+5)      GENERAL CONDITIONS: Giveaway entrants agree to be bound by the terms of these official rules.  The Giveaway is offered by Valve, which is not responsible for incompletion, illegible, or misdirected e-mail or postal mail, or for phone, electrical, network, computer, hardware or software program malfunctions, failures or difficulties. The laws of the United States govern this Giveaway. All Federal, State and Local laws and regulations apply. Acceptance of prize constitutes permission for Valve to use winner's name and likeness for advertising and promotional purposes without additional compensation unless prohibited by law. By entering, participants release and hold harmless Valve and its respective subsidiaries, affiliates, directors, officers, prize suppliers, employees and agents, including advertising and promotion agencies, from any and all liability or any injuries, loss or damage of any kind arising from or in connection with this Giveaway or acceptance or use of prize. Valve reserves the right to cancel or modify the Giveaway if fraud or technical failure destroys the integrity of the Giveaway, as determined by Valve in its sole discretion. Valve reserves the right to disqualify any winner, as determined by Valve in its sole discretion. No cash or other substitution for prizes except at the option of Valve, for a prize of equal or greater value. Taxes are the sole responsibility of the winners. Actual prizes may differ from images shown.<br>
+<br>
+<br>&nbsp;
+HTML;
+
+$insertArray[] = [
+    'HL2GOLD_contest',
+    null,
+
+    'VALVE HQ TRIP GIVEAWAY',
+    $hl2gold_context,
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+
+$get_cz = <<<HTML
+<div class="content" id="container">
+<br><img width="533" height="129" src="./images/cz_logo.gif" alt="Counter-Strike: Condition Zero"><br>
+<br>
+<div class="narrower">
+<h3>GET COUNTER-STRIKE: CONDITION ZERO NOW FOR $29.95!</h3>
+<br>
+Counter-Strike: Condition Zero™ advances the world’s number one online action game by introducing new single-player game modes, the official CS bot, and special enhancements for online play. <br>
+<br>
+<div style="background:black;padding:8px;width:440px;"><center>
+<img src="./images/01.cs_italy_cz0006-t.gif">&nbsp;
+<img src="./images/03.de_dust_cz0006-t.gif">&nbsp;
+<img src="./images/cz_screenshot.gif"></center>
+</div>
+<br>
+
+Get CS:CZ directly from Valve, the creators of Counter-Strike and Half-Life. Order your copy on Steam for only $29.95 and start playing in minutes.<br>
+<br>
+
+<!--
+<span style="color:#BFBA50;">
+<b>Special offer extended for CS owners</b> - If you already have Counter-Strike, you can order Condition-Zero through April 1st for just $29.95, $10 off the regular price.<br>
+</span>
+-->
+
+<br>
+If you already have Steam, <a href="steam://purchase/7">Click here</a> to purchase now!<br><br>
+
+If you don't already have Steam, <a href="./?area=getsteamnow">install it today</a>, and start playing within minutes. With Steam, you'll also get access to:
+<ul>
+<li>An instant messenger - chat with your friends while you play</li>
+<li>Automatic updates - say good-bye to downloading patches</li>
+<li>Server browser helps track friends and favorite servers </li>
+<li>Easy and fast access to the best games in the world!</li>
+</ul>
+<a href="./?area=getsteamnow"><img src="./images/but_getsteamnow.gif" height="24" width="124" alt="get steam now"></a>
+<br><br>
+
+Note: CS:CZ is also available on CD-ROM from your local retailer.<br>
+
+</div>
+</div>
+HTML;
+
+$insertArray[] = [
+    'get_cz',
+    null,
+
+    'Counter-Strike: Condition Zero',
+    $get_cz,
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+
+$cybercafe_program_2003 = <<<HTML
+<h1>FEATURES AND BENEFITS</h1>
+<h2>OF VALVE'S<em> OFFICIAL CYBER CAFÉ PROGRAM</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+<div class="narrower">
+
+<img src="./images/valve_maizelogo.gif" align="left">If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. When you <a href="./?area=cafe_signup">sign up</a> and become a memeber of our Cybercafé program, you'll enjoy the following benefits:<br>
+<br>
+<h3 style="text-transform:uppercase;">Current &amp; future products</h3>
+Cyber Café subscribers automatically receive access to newly released products in the Cyber Café program as long as they continue their regular monthly subscription.<br>
+<br>
+
+Products currently included in the Cyber Café Program are:<br>
+<ul>
+	<li>Counter-Strike: Condition Zero</li>
+	<li>Counter-Strike</li>
+	<li>Deathmatch Classic</li>
+	<li>Day of Defeat</li>
+	<li>Half-Life</li>
+	<li>Opposing Force</li>
+	<li>Half-Life Deathmatch</li>
+	<li>Ricochet</li>
+	<li>Team Fortress Classic</li>
+</ul>
+<br>
+
+<h3 style="text-transform:uppercase;">Automatic Updates Delivered Via Steam</h3>
+All of your game subscriptions will be kept up-to-date with the latest versions using Steam's distribution system. New content, bug fixes, and other items which have traditionally been distributed as "patches" will be handled automatically.<br>
+<br>
+<h3 style="text-transform:uppercase;">Fully licensed software and product keys</h3>
+When you sign up and become a member of our Cybercafé program, Valve will provide you with software and product keys for each computer you have licensed. <br>
+<!-- All commercial licensing of Valve's software is done directly with Valve Corporation -- games purchased at a retail store do not include a license for commercial cyber café use. -->
+<br>
+<h3 style="text-transform:uppercase;">Access to Valve Product Support</h3>
+Members will have priority access to Valve's product support services, for Steam issues and any game-related problems.<br>
+<br>
+<h3 style="text-transform:uppercase;">Product Key Protection</h3>
+Valve's Cyber Café program also protects members against banned accounts. We understand that it is sometimes difficult to prevent users from misusing your computers. To help combat this problem, cafés in the program can contact Valve to correct problems with "banned" accounts.<br>
+<br>
+<h3 style="text-transform:uppercase;">promotional materials</h3>
+We've got plenty of posters for your walls and windows, and other fun stuff that we'll send you when you sign up.<br>
+<br>
+<h3 style="text-transform:uppercase;">Free Tournament License</h3>
+Any time you'd like to host a gaming tournament or other local event, just drop us a line and let us know the details. We'll send you a tournament license right away, free of charge.<br>
+<br>
+<a href="./?area=cafe_signup">Sign up now!</a><br>
+<br>
+<a href="./?area=cybercafes">Return to main Cyber Café page</a>
+
+</div>
+HTML;
+
+
 $insertArray[] = [
     'cybercafe_program',
     null,
 
     'Cyber Café Program',
-    file_exists(__DIR__.'/../html/cybercafe_program.html') ? file_get_contents(__DIR__.'/../html/cybercafe_program.html') : '',
-    null,
+    $cybercafe_program_2003,
+    '2003_v2',
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
 ];
+
+
+$cybercafe_program_sourceengine = <<<HTML
+<h1>FEATURES AND BENEFITS</h1>
+<h2>OF VALVE'S<em> OFFICIAL CYBER CAFÉ PROGRAM</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+<div class="narrower">
+
+<img src="./images/valve_maizelogo.gif" align="left">If you run a cybercafe or other gaming venue, Valve makes it easy for you to bring our games to your customers. When you <a href="./?area=cafe_signup">sign up</a> and become a memeber of our Cybercafé program, you'll enjoy the following benefits:<br>
+<br>
+<h3 style="text-transform:uppercase;">Current &amp; future products</h3>
+Cyber Café subscribers automatically receive access to newly released products in the Cyber Café program as long as they continue their regular monthly subscription.<br>
+<br>
+
+Products currently included in the Cyber Café Program are:<br>
+<ul>
+    <li>Half-Life 2</li>
+    <li>Half-Life 2: Deathmatch</li>
+    <li>Half-Life: Source</li>
+    <li>Counter-Strike: Source</li>
+	<li>Counter-Strike: Condition Zero</li>
+	<li>Counter-Strike</li>
+	<li>Deathmatch Classic</li>
+	<li>Day of Defeat</li>
+	<li>Half-Life</li>
+	<li>Opposing Force</li>
+	<li>Half-Life Deathmatch</li>
+	<li>Ricochet</li>
+	<li>Team Fortress Classic</li>
+</ul>
+<br>
+
+<h3 style="text-transform:uppercase;">Automatic Updates Delivered Via Steam</h3>
+All of your game subscriptions will be kept up-to-date with the latest versions using Steam's distribution system. New content, bug fixes, and other items which have traditionally been distributed as "patches" will be handled automatically.<br>
+<br>
+<h3 style="text-transform:uppercase;">Fully licensed software and product keys</h3>
+When you sign up and become a member of our Cybercafé program, Valve will provide you with software and product keys for each computer you have licensed. <br>
+<!-- All commercial licensing of Valve's software is done directly with Valve Corporation -- games purchased at a retail store do not include a license for commercial cyber café use. -->
+<br>
+<h3 style="text-transform:uppercase;">Access to Valve Product Support</h3>
+Members will have priority access to Valve's product support services, for Steam issues and any game-related problems.<br>
+<br>
+<h3 style="text-transform:uppercase;">Product Key Protection</h3>
+Valve's Cyber Café program also protects members against banned accounts. We understand that it is sometimes difficult to prevent users from misusing your computers. To help combat this problem, cafés in the program can contact Valve to correct problems with "banned" accounts.<br>
+<br>
+<h3 style="text-transform:uppercase;">promotional materials</h3>
+We've got plenty of posters for your walls and windows, and other fun stuff that we'll send you when you sign up.<br>
+<br>
+<h3 style="text-transform:uppercase;">Free Tournament License</h3>
+Any time you'd like to host a gaming tournament or other local event, just drop us a line and let us know the details. We'll send you a tournament license right away, free of charge.<br>
+<br>
+<a href="./?area=cafe_signup">Sign up now!</a><br>
+<br>
+<a href="./?area=cybercafes">Return to main Cyber Café page</a>
+
+</div>
+HTML;
+
+$insertArray[] = [
+    'cybercafe_program',
+    null,
+
+    'Cyber Café Program',
+    $cybercafe_program_sourceengine,
+    "2004,2005_v1",
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+
+$cybercafe_promotion = <<<HTML
+<div class="narrower">
+<h1>APRIL CYBER CAFÉ PROMOTION</h1>
+<h2>VALVE'S<em> OFFICIAL CYBER CAFÉ PROGRAM</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+During the month of April 2004, Valve is extending a special offer to Cyber Cafés. <b>During this time, a 12-month cyber café license for Valve’s games is being offered at a savings of 33%</b>. The license includes all of Valve’s available Steam content, including Counter-Strike: Condition Zero, Counter-Strike, Half-Life, Day of Defeat, Team Fortress Classic, and more. Licensed Cyber Café’s also receive product key protection, promotional materials, tournament licenses, and priority access to Valve support.<br>
+<br>
+This offer ends at 11:59 pm PST on April 30, 2004, is subject to change and is not available in every territory. For more information, please email <a href="mailto:cafe@valvesoftware.com">cafe@valvesoftware.com</a>.
+<br><br><br><br>&nbsp;
+
+</div>
+HTML;
+
 $insertArray[] = [
     'cybercafe_promotion',
     null,
 
     'Valve Announces April Cyber Café Promotion',
-    file_get_contents(__DIR__.'/../archived_steampowered/2004/cybercafe_promotion.html'),
+    $cybercafe_promotion,
     null,
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
 ];
+
+$cafe_pricing = <<<HTML
+<h1>PRICING AND LICENSING</h1>
+<h2>VALVE'S<em> OFFICIAL CYBER CAFÉ PROGRAM</em></h2><img src="./images/Graphic_box.jpg" height="6" width="24" alt=""><br>
+<br>
+<div class="narrower">
+
+Valve's Official Cyber Café Program makes things simple for the café owner.<br>
+<br>
+<h3 style="text-transform:uppercase;">One low monthly fee</h3>
+For a low monthly fee per licensed computer, your café gets access to all of Valve's games. See the <a href="./?area=cybercafe_program">full list of Features and Benefits</a> for the details of what's included. Payment is handled in three-month blocks, in advance, either by recurring automatic billing or by invoice. <!-- For full details about licensing, payment, and the details of the Caf&eacute; Program, please see the official <a href="./?area=cafe_signup">Valve Cyber Caf&eacute; Agreement</a>. --><br>
+<br>
+<h3 style="text-transform:uppercase;">APRIL CYBER CAFÉ PROMOTION</h3>
+During the month of April 2004, Valve is extending a <a href="./?area=cybercafe_promotion">special offer to Cyber Cafés</a>. During this time, a 12-month cyber café license for Valve’s games is being offered at a savings of 33%. <a href="./?area=cybercafe_promotion">See this page for details</a>.<br>
+<br>
+<h3 style="text-transform:uppercase;">Fully licensed software</h3>
+Software purchased at retail is not licensed for commercial use such as cyber café play. If you operate a gaming center, our program is the legal way to obtain a commercial license and offer Valve's games to your customers.<br>
+<br>
+<h3 style="text-transform:uppercase;">As Always, Tournament Licenses Are Free</h3>
+If you'd like to host a LAN event or competition, just <a href="mailto:cafe@valvesoftware.com">let us know</a> and we'll issue you a Tournament License, free of charge.<br>
+<br>
+<a href="./?area=cafe_signup">Sign up now!</a><br>
+<br>
+<a href="./?area=cybercafes">Return to main Cyber Café page</a>
+
+</div>
+HTML;
+
+$insertArray[] = [
+    'cafe_pricing',
+    null,
+
+    'Cyber Café Pricing and Licensing',
+    $cafe_pricing,
+    null,
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+
+$cybercafe_changeform = <<<HTML
+<h1>CYBER CAFÉ CHANGE FORM</h1>
+<h2>FOR EXISTING <em>CUSTOMERS</em></h2>
+<br>
+<div class="narrower" style="width: 75%;">
+
+Please Note: This form is for making updates to your existing cafés already registered in the Valve Cyber Café Program. If you are a new customer, please visit the <a href="./?area=cafe_signup">Cyber Café Program Sign-up</a> webpage.<br>
+<br>
+
+
+
+<!-- removed margins from textfield -->
+<style>
+<!--
+    INPUT.textfield2{
+        width:200px;
+        background:#3E4637;
+        border-style:solid;
+        border-width:1px;
+        border-top-color:#1C261E;
+        border-right-color:#818D7C;
+        border-bottom-color:#818D7C;
+        border-left-color:#1C261E;
+        color:#BFBA50;
+        }
+    INPUT.submitter3{
+        height:24px;
+        width:200px;
+        text-align:center;
+        padding-left:8px;
+        margin:4px 0px 0px 0px;
+        background:#4C5844;
+        border-style:solid;
+        border-width:1px;
+        border-top-color:#818D7C;
+        border-right-color:#1C261E;
+        border-bottom-color:#1C261E;
+        border-left-color:#818D7C;
+        color:#C4CABE;
+        }
+-->
+</style>
+
+<script language="JavaScript">
+function showBranch(branch){
+    var objBranch = document.getElementById(branch).style;
+    if(objBranch.display=="block")
+    {
+        objBranch.display="none";
+    }
+    else
+    {
+        objBranch.display="block";
+    }
+}
+</script>
+
+<form style="background:black;padding:6px;width:100%;" action="./index.php?area=cybercafe_changeform" method="post">
+<input type="hidden" name="area" value="cybercafe_changeform">
+<table cellspacing="6" width="100%" style="background:#4C5844;">
+<tbody><tr>
+    <td valign="middle" align="right" width="50%"><p class="bright"><strong>Cafe ID Number: </strong></p></td>
+    <td width="50%" height="56">
+    
+        <input type="text" name="form_cafe_id" value="" class="textfield2" maxlength="32">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+
+        <p class="bright">
+        <input type="checkbox" name="form_update_parent_info" value="checked">
+        <strong>I would like to update my parent company name and/or address:</strong></p>
+    
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Company Name </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_new_company_name" value="" class="textfield2" maxlength="32">
+        <sup></sup>
+        
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Street Address </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_new_street_address" value="" class="textfield2" maxlength="32">
+        <sup></sup>
+        
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New City </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_new_city" value="" class="textfield2" maxlength="32">
+        <sup></sup>
+        
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Province/State </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_new_province_state" value="" class="textfield2" maxlength="64">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Country </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_new_country" value="" class="textfield2" maxlength="64">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Zip/Postal Code </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_new_postcode" value="" class="textfield2" maxlength="32">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td colspan="2">
+    
+        <p class="bright">
+        <input type="checkbox" name="form_update_billing_tech" value="checked">
+        <strong>I would like to update my billing and/or technical contact information:</strong></p>
+
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Billing Contact First Name </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_bill_fname" value="" class="textfield2" maxlength="32">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Billing Contact Last Name </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_bill_lname" value="" class="textfield2" maxlength="32">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Billing Contact Email Address</td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_bill_email" value="" class="textfield2" maxlength="32">
+
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" height="28" width="50%">New Billing Contact Phone Number </td>
+    <td valign="middle" height="28" width="50%">
+    
+        <input type="text" name="form_bill_phone" value="" class="textfield2" maxlength="24">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Billing Contact Fax Number </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_bill_fax" value="" class="textfield2" maxlength="24">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%"><br>New Technical Contact First Name </td>
+    <td valign="bottom" width="50%">
+    
+        <input type="text" name="form_tech_fname" value="" class="textfield2" maxlength="32">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Technical Contact Last Name </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_tech_lname" value="" class="textfield2" maxlength="32">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Technical Contact Email Address</td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_tech_email" value="" class="textfield2" maxlength="32">
+
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" height="28" width="50%">New Technical Contact Phone Number </td>
+    <td valign="middle" height="28" width="50%">
+    
+        <input type="text" name="form_tech_phone" value="" class="textfield2" maxlength="24">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">New Technical Contact Fax Number </td>
+    <td valign="middle" width="50%">
+    
+        <input type="text" name="form_tech_fax" value="" class="textfield2" maxlength="24">
+        <sup></sup>
+    
+    </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td colspan="2">
+    
+        <p class="bright">
+        <input type="checkbox" name="form_change_exist_seats" value="checked">
+        <strong>I would like to change the number of seats at my existing cafe:</strong></p>
+
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right">Current # of Seats:</td>
+    <td>
+        
+        <input type="text" name="form_current_seats" value="" class="textfield2" maxlength="5" style="width:32px;">
+
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right">New # of Seats:</td>
+    <td>
+    
+        <input type="text" name="form_new_seats" value="" class="textfield2" maxlength="5" style="width:32px;">
+    
+    </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td colspan="2">
+
+        <p class="bright">
+        <input type="checkbox" name="form_add_cafe_locations" value="checked">
+        <strong>I would like to add more cafe locations:</strong></p>
+        
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right">Current # of Locations:</td>
+    <td>
+    
+        <input type="text" name="form_current_locations" value="" class="textfield2" maxlength="5" style="width:32px;">
+
+    </td>
+</tr>
+<tr>
+    <td valign="middle" align="right">New # of Locations:</td>
+    <td><input type="text" name="form_new_locations" value="" class="textfield2" maxlength="5" style="width:32px;"></td>
+</tr>
+<tr>
+    <td width="50%"></td>
+    <td width="50%"><br><p class="bright"><strong>New Cafe Location</strong></p></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Name</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe2_name" value="" class="textfield2" maxlength="32"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Street Address</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe2_street" value="" class="textfield2" maxlength="32"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">City</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe2_city" value="" class="textfield2" maxlength="32"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Province/State</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe2_state" value="" class="textfield2" maxlength="32"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Country</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe2_country" value="" class="textfield2" maxlength="32"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Zip/Postal Code</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe2_postcode" value="" class="textfield2" maxlength="12"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Number of Computer Seats</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe2_stations" value="" class="textfield2" maxlength="12"></td>
+</tr>
+<tr>
+    <td width="50%"></td>
+    <td width="50%"><br><p class="bright"><strong>2nd New Cafe Location</strong></p></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Name</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe3_name" value="" class="textfield2" maxlength="32"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Street Address</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe3_street" value="" class="textfield2" maxlength="32"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">City</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe3_city" value="" class="textfield2" maxlength="32"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Province/State</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe3_state" value="" class="textfield2" maxlength="32"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Country</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe3_country" value="" class="textfield2" maxlength="32"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Zip/Postal Code</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe3_postcode" value="" class="textfield2" maxlength="12"></td>
+</tr>
+<tr>
+    <td valign="middle" align="right" width="50%">Number of Computer Seats</td>
+    <td valign="middle" width="50%"><input type="text" name="cafe3_stations" value="" class="textfield2" maxlength="12"></td>
+</tr>
+<tr>
+    <td width="50%"></td>
+    <td width="50%"><p><br><input type="submit" name="perform" value="Submit" class="submitter3"></p></td>
+</tr>
+<tr>
+    <td width="50%">&nbsp;</td>
+    <td width="50%"></td>
+</tr>
+</tbody></table>
+</form><br>
+
+<h3 style="text-transform:uppercase;">Next Steps</h3>
+
+You will receive a confirmation when your updates have been made to your account.<br>
+<br>
+<a href=".?area=cybercafes">Return to main Cyber Café page</a>
+
+</div>
+
+HTML;
+
 $insertArray[] = [
     'cybercafe_changeform',
     null,
 
     'Cyber Café Program Change Form',
-    file_exists(__DIR__.'/../html/cybercafe_changeform.html') ? file_get_contents(__DIR__.'/../html/cybercafe_changeform.html') : '',
+    $cybercafe_changeform,
     null,
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
 ];
+
+$product_hl2bronzesilvergold_2004 = <<<HTML
+<script>
+function popup2(src,scroll,x,y,target)
+{
+	open(src,target,"scrollbars="+scroll+",width="+x+",height="+y+",menubar=0,resizable=yes")
+}
+</script>
+<table width="800" align="center" border="0" cellspacing="0" cellpadding="0" background="./images//hl2_bronzesilvergoldpp/Background.jpg" cool="" gridx="16" gridy="16" height="668" showgridx="" showgridy="">
+	<tbody><tr height="138">
+		<td width="799" height="138" colspan="19"></td>
+		<td width="1" height="138"><spacer type="block" width="1" height="138"></spacer></td>
+	</tr>
+	<tr height="97">
+		<td width="193" height="97" colspan="3"></td>
+		<td content="" csheight="69" width="587" height="97" colspan="15" valign="top" xpos="193"><span class="statusProductPageHed"><font class="statusProductPageHed" size="3" color="black">Purchase any one of the three Half-Life® 2 Steam packages listed below, start playing Counter-Strike™: Source™ immediately, and be ready to start playing Half-Life 2 the moment it is made available! </font></span></td>
+		<td width="19" height="97"></td>
+		<td width="1" height="97"><spacer type="block" width="1" height="97"></spacer></td>
+	</tr>
+	<tr height="37">
+		<td width="200" height="46" colspan="4" rowspan="2"></td>
+		<td content="" csheight="33" width="146" height="37" colspan="2" valign="top" xpos="200">
+			<div align="left">
+				<font color="white"><b><span class="offerBRONZE">HALF-LIFE 2 BRONZE</span></b></font></div>
+		</td>
+		<td width="51" height="37" colspan="2"></td>
+		<td content="" csheight="33" width="137" height="37" colspan="2" valign="top" xpos="397"><font color="white"><b><span class="offerSILVER">HALF-LIFE&nbsp;2 SILVER</span></b></font></td>
+		<td width="62" height="37" colspan="3"></td>
+		<td content="" csheight="35" width="147" height="37" colspan="3" valign="top" xpos="596"><font color="white"><b><span class="offerGOLD">HALF-LIFE 2<br>
+						GOLD</span></b></font></td>
+		<td width="56" height="37" colspan="3"></td>
+		<td width="1" height="37"><spacer type="block" width="1" height="37"></spacer></td>
+	</tr>
+	<tr height="9">
+		<td width="197" height="9" colspan="4" valign="top" align="left" xpos="200"><img src="./images//index02/rule01.gif" alt="" width="166" height="2" border="0"></td>
+		<td width="199" height="9" colspan="5" valign="top" align="left" xpos="397"><img src="./images//hl2_bronzesilvergoldpp/rule01.gif" alt="" width="166" height="2" border="0"></td>
+		<td width="184" height="9" colspan="5" valign="top" align="left" xpos="596"><img src="./images//hl2_bronzesilvergoldpp/rule01.gif" alt="" width="166" height="2" border="0"></td>
+		<td width="19" height="9"></td>
+		<td width="1" height="9"><spacer type="block" width="1" height="9"></spacer></td>
+	</tr>
+	<tr height="1">
+		<td width="397" height="2" colspan="8" rowspan="2"></td>
+		<td content="" csheight="25" width="164" height="25" colspan="4" rowspan="3" valign="top" xpos="397"><font size="2" color="white"><b><span class="offerPRICE">$59.95<br>
+					</span></b></font></td>
+		<td width="238" height="1" colspan="7"></td>
+		<td width="1" height="1"><spacer type="block" width="1" height="1"></spacer></td>
+	</tr>
+	<tr height="1">
+		<td width="37" height="24" colspan="2" rowspan="2"></td>
+		<td content="" csheight="25" width="145" height="25" colspan="2" rowspan="3" valign="top" xpos="598"><font size="2" color="white"><b><span class="offerPRICE">$89.95<br>
+					</span></b></font></td>
+		<td width="56" height="25" colspan="3" rowspan="3"></td>
+		<td width="1" height="1"><spacer type="block" width="1" height="1"></spacer></td>
+	</tr>
+	<tr height="23">
+		<td width="200" height="45" colspan="4" rowspan="4"></td>
+		<td content="" csheight="25" width="164" height="25" colspan="3" rowspan="3" valign="top" xpos="200"><font size="2" color="white"><b><span class="offerPRICE">$49.95<br>
+					</span></b></font></td>
+		<td width="33" height="262" rowspan="5"></td>
+		<td width="1" height="23"><spacer type="block" width="1" height="23"></spacer></td>
+	</tr>
+	<tr height="1">
+		<td content="" csheight="106" width="163" height="239" colspan="3" rowspan="4" valign="top" xpos="397">
+			<p><span class="statusContent3">INCLUDES:</span><br>
+				<span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 2<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Counter-Strike: Source<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 1:&nbsp;Source</span></font><font size="2"><span class="statusContent"><br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Day of Defeat™:&nbsp;Source*<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent"><b>PLUS:</b> Valve's back catalog (listed <a href="javascript:popup2('http://www.steampowered.com/backcatalog/', 'no', 300, 200, '_blank');">here</a>) available on Steam!<br>
+					</span></font></p>
+		</td>
+		<td width="38" height="239" colspan="3" rowspan="4"></td>
+		<td width="1" height="1"><spacer type="block" width="1" height="1"></spacer></td>
+	</tr>
+	<tr height="1">
+		<td content="" csheight="223" width="159" height="238" colspan="3" rowspan="3" valign="top" xpos="598">
+			<p><span class="statusContent3">INCLUDES:</span><br>
+				<span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 2<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Counter-Strike:Source<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 1:&nbsp;Source</span></font><font size="2"><span class="statusContent"><br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Day of Defeat:&nbsp;Source*<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Valve's back catalog available (listed <a href="javascript:popup2('http://www.steampowered.com/backcatalog/', 'no', 300, 200, '_blank');">here</a>).<br>
+						<b>HL2 Merchandise:</b><br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">HL2 posters (3 total)<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">HL2 hat<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">HL2 soundtrack<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">HL2 sticker<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">City 17 postcard<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Prima's HL2 strat guide<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Special collector's box<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Chance to win trip to Valve! **</span></font></p>
+		</td>
+		<td width="42" height="360" colspan="2" rowspan="5"></td>
+		<td width="1" height="1"><spacer type="block" width="1" height="1"></spacer></td>
+	</tr>
+	<tr height="20">
+		<td content="" csheight="41" width="164" height="237" colspan="3" rowspan="2" valign="top" xpos="200">
+			<p><span class="statusContent3">INCLUDES:</span><br>
+				<span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 2<br>
+					</span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Counter-Strike: Source</span></font></p>
+		</td>
+		<td width="1" height="20"><spacer type="block" width="1" height="20"></spacer></td>
+	</tr>
+	<tr height="217">
+		<td width="11" height="339" rowspan="3"></td>
+		<td content="" csheight="321" width="154" height="339" rowspan="3" valign="top" xpos="11">
+			<div align="left">
+				<p><span class="statusGetTheGamesTextsmall"><b>ORDER&nbsp;NOW! </b>&nbsp;&gt;<br>
+						Orders will be processed immediately. All sales are final. </span><span class="statusGetTheGamesTextsmall">Allow 6 to 8 weeks for delivery of Half-Life 2 Gold merchandise. Shipping, taxes, and duties not included.<br>
+					</span><span class="statusGetTheGamesText"><br>
+					</span><span class="statusGetTheGamesTextsmall">* This is an unreleased product and will be made available to purchasers upon its release. The release date for this product is uncertain and purchasers should not rely on any estimated release date.<br>
+					</span><span class="statusGetTheGamesTextsmall">** 1 trip offered for every 5000 Gold packages purchased. For contest details, <a href="./?area=HL2GOLD_contest"><font color="black">click here</font></a>.<br>
+					</span></p>
+			</div>
+		</td>
+		<td width="35" height="217" colspan="2"></td>
+		<td width="1" height="217"><spacer type="block" width="1" height="217"></spacer></td>
+	</tr>
+	<tr height="43">
+		<td width="40" height="122" colspan="3" rowspan="2"></td>
+		<td width="159" height="43" colspan="2" valign="top" align="left" xpos="205"><a href="steam://purchase/9"><img src="./images/but_withsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+		<td width="41" height="122" colspan="2" rowspan="2"></td>
+		<td width="155" height="43" colspan="2" valign="top" align="left" xpos="405"><a href="steam://purchase/10"><img src="./images/but_withsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+		<td width="46" height="122" colspan="4" rowspan="2"></td>
+		<td width="151" height="43" colspan="2" valign="top" align="left" xpos="606"><a href="steam://purchase/13"><img src="./images/but_withsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+		<td width="1" height="43"><spacer type="block" width="1" height="43"></spacer></td>
+	</tr>
+	<tr height="79">
+		<td width="159" height="79" colspan="2" valign="top" align="left" xpos="205"><a href="./index.php?area=getsteamnow"><img src="./images/but_withoutsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+		<td width="155" height="79" colspan="2" valign="top" align="left" xpos="405"><a href="./index.php?area=getsteamnow"><img src="./images/but_withoutsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+		<td width="151" height="79" colspan="2" valign="top" align="left" xpos="606"><a href="./index.php?area=getsteamnow"><img src="./images/but_withoutsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+		<td width="1" height="79"><spacer type="block" width="1" height="79"></spacer></td>
+	</tr>
+	<tr height="1" cntrlrow="">
+		<td width="11" height="1"><spacer type="block" width="11" height="1"></spacer></td>
+		<td width="154" height="1"><spacer type="block" width="154" height="1"></spacer></td>
+		<td width="28" height="1"><spacer type="block" width="28" height="1"></spacer></td>
+		<td width="7" height="1"><spacer type="block" width="7" height="1"></spacer></td>
+		<td width="5" height="1"><spacer type="block" width="5" height="1"></spacer></td>
+		<td width="141" height="1"><spacer type="block" width="141" height="1"></spacer></td>
+		<td width="18" height="1"><spacer type="block" width="18" height="1"></spacer></td>
+		<td width="33" height="1"><spacer type="block" width="33" height="1"></spacer></td>
+		<td width="8" height="1"><spacer type="block" width="8" height="1"></spacer></td>
+		<td width="129" height="1"><spacer type="block" width="129" height="1"></spacer></td>
+		<td width="26" height="1"><spacer type="block" width="26" height="1"></spacer></td>
+		<td width="1" height="1"><spacer type="block" width="1" height="1"></spacer></td>
+		<td width="35" height="1"><spacer type="block" width="35" height="1"></spacer></td>
+		<td width="2" height="1"><spacer type="block" width="2" height="1"></spacer></td>
+		<td width="8" height="1"><spacer type="block" width="8" height="1"></spacer></td>
+		<td width="137" height="1"><spacer type="block" width="137" height="1"></spacer></td>
+		<td width="14" height="1"><spacer type="block" width="14" height="1"></spacer></td>
+		<td width="23" height="1"><spacer type="block" width="23" height="1"></spacer></td>
+		<td width="19" height="1"><spacer type="block" width="19" height="1"></spacer></td>
+		<td width="1" height="1"></td>
+	</tr>
+</tbody></table>
+HTML;
+
 $insertArray[] = [
     'product_HL2bronsilvergold',
     null,
 
     'Welcome to Steam',
-    file_exists(__DIR__.'/../html/product_HL2bronsilvergold.html') ? file_get_contents(__DIR__.'/../html/product_HL2bronsilvergold.html') : '',
-    null,
+    $product_hl2bronzesilvergold_2004,
+    "2004",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
 ];
+
+$product_hl2bronzesilvergold_2005 = <<<HTML
+<table width="800" border="0" cellspacing="0" cellpadding="0" background="./images/hl2_bronzesilvergoldpp/Background02.jpg" cool="" gridx="16" gridy="16" height="667">
+    <tbody><tr height="123">
+        <td width="799" height="123" colspan="20"></td>
+        <td width="1" height="123"><spacer type="block" width="1" height="123"></spacer></td>
+    </tr>
+    <tr height="104">
+        <td width="23" height="104"></td>
+        <td content="" csheight="99" width="590" height="104" colspan="16" valign="top" xpos="23"><font size="3" color="black"><span class="statusGetTheGamesSubhed">Featuring amazing digital actors, advanced AI, stunning graphics, and physical gameplay, </span><span class="statusGetTheGamesSubhedMod"><span>VALVE'S HALF-LIFE 2</span></span><span class="statusGetTheGamesSubhed"> has been called the greatest game ever made and earned over one dozen of the 2004 </span><span class="statusGetTheGamesSubhedMod"><span>GAME&nbsp;OF&nbsp;THE&nbsp;YEAR</span></span><span class="statusGetTheGamesSubhed"> Awards announced thus far. Purchase any one of the Steam packages listed below directly from Valve and </span><span class="statusGetTheGamesSubhedMod"><span>START&nbsp;PLAYING</span></span><span class="statusGetTheGamesSubhed"> the game </span><span class="statusGetTheGamesSubhedMod"><span>WITHIN&nbsp;MINUTES</span></span><span class="statusGetTheGamesSubhed">.</span></font></td>
+        <td width="186" height="104" colspan="3"></td>
+        <td width="1" height="104"><spacer type="block" width="1" height="104"></spacer></td>
+    </tr>
+    <tr height="37">
+        <td width="39" height="39" colspan="2" rowspan="2"></td>
+        <td content="" csheight="33" width="146" height="37" colspan="2" valign="top" xpos="39">
+            <div align="left">
+                <font color="white"><b><span class="offerBRONZE">HALF-LIFE 2 BRONZE</span></b></font></div>
+        </td>
+        <td width="50" height="37" colspan="2"></td>
+        <td content="" csheight="33" width="137" height="37" colspan="2" valign="top" xpos="235"><font color="white"><b><span class="offerSILVER">HALF-LIFE&nbsp;2 SILVER</span></b></font></td>
+        <td width="61" height="37" colspan="3"></td>
+        <td content="" csheight="35" width="160" height="37" colspan="3" valign="top" xpos="433"><font color="white"><b><span class="offerGOLD">HALF-LIFE 2<br>
+                        GOLD </span><span class="offerGOLD1">*NEW PRICE*</span></b></font></td>
+        <td width="206" height="37" colspan="6"></td>
+        <td width="1" height="37"><spacer type="block" width="1" height="37"></spacer></td>
+    </tr>
+    <tr height="2">
+        <td width="196" height="2" colspan="4" valign="top" align="left" xpos="39"><img src="./images/rule01.gif" alt="" width="166" height="2" border="0"></td>
+        <td width="168" height="2" colspan="4" valign="top" align="left" xpos="235"><img src="./images/hl2_bronzesilvergoldpp/rule01.gif" alt="" width="166" height="2" border="0"></td>
+        <td width="30" height="2"></td>
+        <td width="173" height="2" colspan="5" valign="top" align="left" xpos="433"><img src="./images/hl2_bronzesilvergoldpp/rule01.gif" alt="" width="166" height="2" border="0"></td>
+        <td width="193" height="2" colspan="4"></td>
+        <td width="1" height="2"><spacer type="block" width="1" height="2"></spacer></td>
+    </tr>
+    <tr height="1">
+        <td width="235" height="2" colspan="6" rowspan="2"></td>
+        <td content="" csheight="25" width="164" height="28" colspan="3" rowspan="3" valign="top" xpos="235"><font size="2" color="white"><b><span class="offerPRICE">$59.95<br>
+                    </span></b></font></td>
+        <td width="400" height="1" colspan="11"></td>
+        <td width="1" height="1"><spacer type="block" width="1" height="1"></spacer></td>
+    </tr>
+    <tr height="1">
+        <td width="36" height="27" colspan="3" rowspan="2"></td>
+        <td content="" csheight="25" width="171" height="27" colspan="4" rowspan="2" valign="top" xpos="435"><font size="2" color="white"><b><span class="offerPRICE"><strike>$89.95</strike></span><span class="offerPRICE1"> $84.95</span></b></font></td>
+        <td width="193" height="27" colspan="4" rowspan="2"></td>
+        <td width="1" height="1"><spacer type="block" width="1" height="1"></spacer></td>
+    </tr>
+    <tr height="26">
+        <td width="39" height="26" colspan="2"></td>
+        <td content="" csheight="25" width="164" height="26" colspan="3" valign="top" xpos="39"><font size="2" color="white"><b><span class="offerPRICE">$49.95<br>
+                    </span></b></font></td>
+        <td width="32" height="26"></td>
+        <td width="1" height="26"><spacer type="block" width="1" height="26"></spacer></td>
+    </tr>
+    <tr height="1">
+        <td width="235" height="2" colspan="6" rowspan="2"></td>
+        <td content="" csheight="119" width="168" height="260" colspan="4" rowspan="4" valign="top" xpos="235">
+            <p><span class="statusContent3">INCLUDES:</span><br>
+                <span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 2<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 2: Deathmatch<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Counter-Strike: Source<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 1:&nbsp;Source</span></font><font size="2"><span class="statusContent"><br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Day of Defeat™:&nbsp;Source*<br>
+                        <br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent" onclick="CSAction(new Array(/*CMP*/'343C81630'));return CSClickReturn()" csclick="343C81630"><b>PLUS:</b> Valve's back catalog (listed <a href="(EmptyReference!)">here</a>)!<br>
+                    </span></font></p>
+        </td>
+        <td width="396" height="1" colspan="10"></td>
+        <td width="1" height="1"><spacer type="block" width="1" height="1"></spacer></td>
+    </tr>
+    <tr height="1">
+        <td width="32" height="259" colspan="2" rowspan="3"></td>
+        <td content="" csheight="249" width="159" height="259" colspan="3" rowspan="3" valign="top" xpos="435">
+            <p><span class="statusContent3">INCLUDES:</span><br>
+                <span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 2<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 2: Deathmatch<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Counter-Strike:Source<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 1:&nbsp;Source</span></font><font size="2"><span class="statusContent"><br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Day of Defeat:&nbsp;Source*<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Valve's back catalog (listed <a onclick="CSAction(new Array(/*CMP*/'343C81821'));return CSClickReturn()" href="#" csclick="343C81821">here</a>)!<br>
+                        <br>
+                        <b>HL2 Merchandise:</b><br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">HL2 posters (3 total)<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">HL2 hat<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">HL2 soundtrack<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">HL2 sticker<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">City 17 postcard<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Prima's HL2 strat guide<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Special collector's box<br>
+                    </span></font></p>
+        </td>
+        <td width="205" height="47" colspan="5" rowspan="2"></td>
+        <td width="1" height="1"><spacer type="block" width="1" height="1"></spacer></td>
+    </tr>
+    <tr height="46">
+        <td width="39" height="46" colspan="2"></td>
+        <td content="" csheight="41" width="164" height="46" colspan="3" valign="top" xpos="39">
+            <p><span class="statusContent3">INCLUDES:</span><br>
+                <span class="statusContent">▪ </span><font size="2"><span class="statusContent">Half-Life 2<br>
+                    </span></font><span class="statusContent">▪ </span><font size="2"><span class="statusContent">Counter-Strike: Source</span></font></p>
+        </td>
+        <td width="32" height="46"></td>
+        <td width="1" height="46"><spacer type="block" width="1" height="46"></spacer></td>
+    </tr>
+    <tr height="212">
+        <td width="235" height="212" colspan="6"></td>
+        <td width="39" height="212" colspan="3"></td>
+        <td content="" csheight="303" width="157" height="324" rowspan="3" valign="top" xpos="633">
+            <div align="left">
+                <p><span class="statusGetTheGamesTextsmall"><b>ORDER&nbsp;NOW! </b>&nbsp;&gt;<br>
+                        Orders will be processed immediately. All sales are final. Allow 6 to 8 weeks for delivery of Half-Life 2 Gold merchandise. Shipping, taxes, and duties not included.<br>
+                        <br>
+                        * This is an unreleased product and will be made available to purchasers upon its release. The release date for this product is uncertain and purchasers should not rely on any estimated release date.<br>
+                    </span></p>
+            </div>
+        </td>
+        <td width="9" height="324" rowspan="3"></td>
+        <td width="1" height="212"><spacer type="block" width="1" height="212"></spacer></td>
+    </tr>
+    <tr height="41">
+        <td width="44" height="112" colspan="3" rowspan="2"></td>
+        <td width="159" height="41" colspan="2" valign="top" align="left" xpos="44"><a href="steam://purchase/9"><img src="./images/but_withsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+        <td width="40" height="112" colspan="2" rowspan="2"></td>
+        <td width="156" height="41" colspan="2" valign="top" align="left" xpos="243"><a href="steam://purchase/10"><img src="./images/but_withsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+        <td width="44" height="112" colspan="4" rowspan="2"></td>
+        <td width="150" height="41" valign="top" align="left" xpos="443"><a href="steam://purchase/13"><img src="./images/but_withsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+        <td width="40" height="112" colspan="4" rowspan="2"></td>
+        <td width="1" height="41"><spacer type="block" width="1" height="41"></spacer></td>
+    </tr>
+    <tr height="71">
+        <td width="159" height="71" colspan="2" valign="top" align="left" xpos="44"><a href="./index.php?area=getsteamnow"><img src="./images/but_withoutsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+        <td width="156" height="71" colspan="2" valign="top" align="left" xpos="243"><a href="./index.php?area=getsteamnow"><img src="./images/but_withoutsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+        <td width="150" height="71" valign="top" align="left" xpos="443"><a href="./index.php?area=getsteamnow"><img src="./images/but_withoutsteam.gif" alt="" width="150" height="35" border="0"></a></td>
+        <td width="1" height="71"><spacer type="block" width="1" height="71"></spacer></td>
+    </tr>
+    <tr height="1" cntrlrow="">
+        <td width="23" height="1"><spacer type="block" width="23" height="1"></spacer></td>
+        <td width="16" height="1"><spacer type="block" width="16" height="1"></spacer></td>
+        <td width="5" height="1"><spacer type="block" width="5" height="1"></spacer></td>
+        <td width="141" height="1"><spacer type="block" width="141" height="1"></spacer></td>
+        <td width="18" height="1"><spacer type="block" width="18" height="1"></spacer></td>
+        <td width="32" height="1"><spacer type="block" width="32" height="1"></spacer></td>
+        <td width="8" height="1"><spacer type="block" width="8" height="1"></spacer></td>
+        <td width="129" height="1"><spacer type="block" width="129" height="1"></spacer></td>
+        <td width="27" height="1"><spacer type="block" width="27" height="1"></spacer></td>
+        <td width="4" height="1"><spacer type="block" width="4" height="1"></spacer></td>
+        <td width="30" height="1"><spacer type="block" width="30" height="1"></spacer></td>
+        <td width="2" height="1"><spacer type="block" width="2" height="1"></spacer></td>
+        <td width="8" height="1"><spacer type="block" width="8" height="1"></spacer></td>
+        <td width="150" height="1"><spacer type="block" width="150" height="1"></spacer></td>
+        <td width="1" height="1"><spacer type="block" width="1" height="1"></spacer></td>
+        <td width="12" height="1"><spacer type="block" width="12" height="1"></spacer></td>
+        <td width="7" height="1"><spacer type="block" width="7" height="1"></spacer></td>
+        <td width="20" height="1"><spacer type="block" width="20" height="1"></spacer></td>
+        <td width="157" height="1"><spacer type="block" width="157" height="1"></spacer></td>
+        <td width="9" height="1"><spacer type="block" width="9" height="1"></spacer></td>
+        <td width="1" height="1"></td>
+    </tr>
+</tbody></table>
+HTML;
+
+$insertArray[] = [
+    'product_HL2bronsilvergold',
+    null,
+
+    'Welcome to Steam',
+    $product_hl2bronzesilvergold_2005,
+    "2005_v1,2005_v2",
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+
+$filtered_info = <<<HTML
+	<title>CD Key instructions</title>
+	<style>
+	<!--
+	body { scrollbar-base-color: #4C5844; }
+	body, p, td, h1 { font-family: Verdana; font-size: 12px; }
+	h1 { font-size: 14px; font-weight: bold; }
+	body { background:#4C5844; color:#D8DED3; }
+	.content { background:#3E4637; }
+	a { color: White; }
+	-->
+	</style>
+
+<body leftmargin="\&quot;20\&quot;" topmargin="\&quot;20\&quot;" rightmargin="\&quot;20\&quot;" bottommargin="\&quot;20\&quot;" marginwidth="\&quot;20\&quot;" marginheight="\&quot;20\&quot;">
+ 
+
+<table width="\&quot;100%\&quot;" height="\&quot;100%\&quot;" cellspacing="\&quot;0\&quot;" cellpadding="\&quot;10\&quot;" class="\&quot;content\&quot;">
+<tbody><tr>
+	<td width="\&quot;100%\&quot;" align="\&quot;left\&quot;" valign="\&quot;top\&quot;" style="\&quot;border:" solid="" 1px="" #56634d;\"="">
+	<h1>"Filtered" Content Servers</h1>
+	Some content servers on Steam's network are not public. These servers are called "filtered" because they only serve content to a select group of users (filtering out all others). <br><br>
+	On the content server status page, these servers are not counted in the Total Available Bandwidth or the Total Used Bandwidth numbers.<br>
+	</td>
+</tr>
+</tbody></table>
+HTML;
+
 $insertArray[] = [
     'filtered_info',
     null,
 
     '"Filtered" Content Servers',
-    file_get_contents(__DIR__.'/../archived_steampowered/2004/filtered_info.html'),
+    $filtered_info,
     null,
-    null,
+    "none.twig",
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
 ];
