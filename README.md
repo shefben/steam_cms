@@ -1,4 +1,55 @@
 # SteamPowered (2002–2010) CMS Re-Creation
+## PLEASE NOTE, YOU NEED TO ENABLE THE FOLLOWING APACHE MODULES AND ADD THE APPROPRIATE CONFIGURATIONS AND ALSO DOWNLOAD PHP_APCU EXTENSION IN ORDER TO USE THIS CMS!!!!!!!
+In apache's httpd.conf:
+remove the '#' from these three loadmodule configs in 80.conf and httpd.conf (some might already be enabled by default):
+```
+LoadModule expires_module modules/mod_expires.so
+
+LoadModule filter_module modules/mod_filter.so
+LoadModule http2_module modules/mod_http2.so
+LoadModule headers_module modules/mod_headers.so
+```
+
+at the bottom (anywhere at the bottom of httpd.conf) add:
+```
+Protocols h2 http/1.1
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Safe default
+    ExpiresDefault "access plus 1 hour"
+
+    # Long cache for versioned static assets
+    ExpiresByType text/css                      "access plus 1 year"
+    ExpiresByType application/javascript        "access plus 1 year"
+    ExpiresByType image/png                     "access plus 1 year"
+    ExpiresByType image/jpeg                    "access plus 1 year"
+    ExpiresByType image/webp                    "access plus 1 year"
+    ExpiresByType font/woff2                    "access plus 1 year"
+
+    # HTML short so deploys are not a lottery
+    ExpiresByType text/html "access plus 5 minutes"
+</IfModule>
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE \
+        text/html text/plain text/xml text/css \
+        application/javascript application/json application/xml \
+        application/rss+xml application/ld+json
+
+    # Don’t recompress things that are already compressed or binary blobs
+    SetEnvIfNoCase Request_URI "\.(?:gif|jpe?g|png|webp|avif|mp4|mp3|avi|mov|pdf|ico|zip|gz|bz2|7z|woff2?)$" no-gzip dont-vary
+
+    Header append Vary Accept-Encoding
+</IfModule>
+```
+
+lastly, download the apcu php extension and put the dll or so in your php's extension directory and enable it in php.ini by adding
+```
+extension=apcu
+```
+
+# without following the above steps, you will not get this to work!
+## to install the cms, go to localhost/install.php
 
 A comprehensive content management system that recreates the historical steampowered.com website from 2002 to 2010, pixel for pixel and link for link. This CMS supports multiple themes representing different years and provides a modern admin interface for managing content.
 
