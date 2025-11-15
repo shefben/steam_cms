@@ -1,0 +1,192 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+/* Copyright 2000-2008 (c) by Algorithmic Creations llc for ClickandBuy.com
+ $Id$ 
+ */var on_tooltip='none';var focus_on_off=1;var validate_date_counter=0;var isloaded=0;var errorcolor='#f88000';function process_focus(){if(focus_on_off==1){focus_on_off=0;}
+else{focus_on_off=1;}
+toggleDisplay('activate',!focus_on_off);toggleDisplay('deactivate',focus_on_off);document.getElementById("descriptionboxid").value=focus_on_off;return focus_on_off;}
+function hideTooltip(){document.getElementById("tooltip").style.display='none';document.getElementById("tooltiptop").style.display='none';on_tooltip='none';return false;}
+function showTooltip(name,location,message,txtname){var x,y,off;var location=name+"_q";var XY=findPosXY(document.getElementById(location));if(navigator.appName=="Microsoft Internet Explorer"){var bversion=navigator.appVersion.split("MSIE");if(bversion)
+version=parseFloat(bversion[1]);if(version&&version>=8){x=XY[0]+10;y=XY[1]-25;off=0;}else{x=XY[0]+20;y=XY[1]-13;off=2;}}
+else{x=XY[0]+10;y=XY[1]-25;off=0;}
+var istop='';var W=window.innerWidth||document.body.clientWidth;if((x+250>W)||name=='MasterAntwort'||name=='MasterFrage'){istop='top';x=x-220;}
+else if(name=='psylock'){istop='top';y=y+5;x=x-215;}
+var tt=document.getElementById('tooltip'+istop);tt.style.top=y+'px';tt.style.left=x+'px';tt.style.display='block';var desc=document.getElementById('descriptionbox'+istop);if(message){desc.innerHTML=message;}else if(txtname){desc.innerHTML=getMessage(txtname);}else{desc.innerHTML=getMessage(name);}
+if(istop=='top'){tt.style.top=(y-tt.offsetHeight-16)+'px';var arr=document.getElementById('tooltiptoparrow');arr.style.top=(tt.offsetHeight-1-off)+'px';}
+on_tooltip=name;}
+function empty(value){if(navigator.appName=="Microsoft Internet Explorer"){if(value==null)return true;else return false;}
+else{if(value==undefined)return true;else return false;}}
+function getMessage(name){var txt=messages[name];if(empty(txt))txt='';if(txt==''){var rex=/([a-zA-Z0-9]+)$/;var name2=rex.exec(name);if(name2){txt=messages[name2[0]];if(empty(txt))txt='';}}
+return txt;}
+function openTooltip(name,clicked,message,txtname){try{if(clicked=='close'){hideTooltip();}
+else
+if((clicked=='focus'&&document.getElementById('descbox_toggle_id').value==1)||clicked=='question'){if(/[^0-9a-zA-Z]CardVN$/.test(name)||/^CardVN$/.test(name)){document.getElementById('descriptionbox').style.width='340px';document.getElementById('descriptionboxtop').style.width='340px';}else
+document.getElementById('descriptionbox').style.width='200px';if(getMessage(name)!=''||message||(txtname&&getMessage(txtname)!='')){if(focus_on_off==1&&clicked=='focus'){showTooltip(name,'',message,txtname);}
+else
+if(clicked=='question'){if(on_tooltip==name)
+hideTooltip();else
+showTooltip(name,'',message,txtname);}}}}
+catch(e){}
+return false;}
+function traverseInputElements(inputFieldsList,description_box_question_on_off,description_box_focus_on_off,validation_on_off){if(inputFieldsList.length>0){var currentElements=document.getElementsByName(inputFieldsList[0]);for(var y=0;y<currentElements.length;y++){var currentInputElement=currentElements[y];if((currentInputElement.nodeName=='INPUT'&&(currentInputElement.attributes['type'].nodeValue=="text"||currentInputElement.attributes['type'].nodeValue=="radio"||currentInputElement.attributes['type'].nodeValue=="password"))||currentInputElement.nodeName=="SELECT"){var currentInputElementParent=currentInputElement.parentNode;for(var i=0;i<currentInputElementParent.childNodes.length;i++){var thisnode=currentInputElementParent.childNodes[i];if(description_box_question_on_off=='on'){if(thisnode==currentInputElement){var msg=getMessage(thisnode.attributes['id'].nodeValue);if(!empty(msg)&&msg.length!=0){if(description_box_question_on_off=='on'&&thisnode.attributes['id'].nodeValue!='Land'){try{var currName=thisnode.attributes['id'].nodeValue;thisnode.onclick=thisnode.onfocus=function(){openTooltip(currName,'focus');return false;};}catch(e){}
+var curr_attrib=document.getElementById(thisnode.attributes['id'].nodeValue+'_static_description');if(curr_attrib!=null){curr_attrib.style.display='none';}}
+var id_name=thisnode.attributes['id'].nodeValue;var q_id=id_name+"_q";var space=document.createTextNode(' ');var prg=document.createElement('span');var a=document.createElement('a');var currName=thisnode.attributes['id'].nodeValue;if(validation_on_off=='on'){thisnode.onblur=function(){field_validator(null,currName);hideTooltip();return false;};}else{thisnode.onblur=function(){hideTooltip();return false;};}
+a.setAttribute('href','#');a.setAttribute('onclick','');a.setAttribute('onblur','');a.setAttribute('tabindex','-2000');a.onclick=function(){openTooltip(currName,'question');return false;};a.onblur=function(){hideTooltip();return false;};if(navigator.appName=="Microsoft Internet Explorer"){if(thisnode.style.borderBottomColor.match('f88000')!=null){var span=document.createElement('span');span.setAttribute('class','test');span.setAttribute('id',q_id);var text;if(id_name=='psylock'&&whatisthis){text=document.createTextNode(whatisthis);}else{text=document.createTextNode('!');span.style.color=errorcolor;}
+span.style.textDecoration='underline';span.appendChild(text);a.appendChild(span);}else{var text;if(id_name=='psylock'&&whatisthis){text=document.createTextNode(whatisthis);}else{text=document.createTextNode('?');}
+var span=document.createElement('span');span.setAttribute('class','test');span.setAttribute('id',q_id);span.appendChild(text);a.appendChild(span);}}else{if(!empty(thisnode.getAttribute('style'))&&((thisnode.getAttribute('style').match('f88000')!=null)||(thisnode.getAttribute('style').match('F88000')!=null)||(thisnode.getAttribute('style').match("(248, 128, 0)")!=null))){var span=document.createElement('span');span.setAttribute('class','test');span.setAttribute('id',q_id);var text;if(id_name=='psylock'&&whatisthis){text=document.createTextNode(whatisthis);}else{text=document.createTextNode('!');span.style.color=errorcolor;}
+span.style.textDecoration='underline';span.appendChild(text);a.appendChild(span);}else{var text;if(id_name=='psylock'&&whatisthis){text=document.createTextNode(whatisthis);}else{text=document.createTextNode('?');}
+var span=document.createElement('span');span.setAttribute('class','test');span.setAttribute('id',q_id);span.appendChild(text);a.appendChild(span);}}
+prg.appendChild(a);var elements=new Array(currentInputElementParent.childNodes.length-1);for(var j=i+1;j<currentInputElementParent.childNodes.length;j++){var node=currentInputElementParent.childNodes[j];currentInputElementParent.removeChild(node);elements.push(node);}
+if(currentInputElementParent.childNodes[currentInputElementParent.childNodes.length-1].nodeName=='BR'){currentInputElementParent.removeChild(currentInputElementParent.childNodes[currentInputElementParent.childNodes.length-1]);currentInputElementParent.appendChild(space);currentInputElementParent.appendChild(space);currentInputElementParent.appendChild(prg);var br=document.createElement('BR');currentInputElementParent.appendChild(br);}else{currentInputElementParent.appendChild(space);currentInputElementParent.appendChild(space);currentInputElementParent.appendChild(prg);}
+for(var j=0;j<elements.length;j++){try{currentInputElementParent.appendChild(elements[j]);}catch(e){}}}
+if(thisnode.nodeName=='INPUT'&&thisnode.attributes['type'].nodeValue=='radio'){var currName=thisnode.attributes['id'].nodeValue;thisnode.setAttribute('onblur','');if(validation_on_off=='on'){thisnode.onblur=function(){field_validator(null,currName);return false;};}else{thisnode.onblur=function(){return false;};}}}}
+else if(validation_on_off=='on'&&thisnode!=null&&thisnode.attributes!=null&&thisnode.attributes['id']!=null&&thisnode==currentInputElement){var currName=thisnode.attributes['id'].nodeValue;thisnode.onblur=function(){hideTooltip();field_validator(null,currName);return false;};}}}}
+traverseInputElements(inputFieldsList.slice(1),description_box_question_on_off,description_box_focus_on_off,validation_on_off);}}
+function field_validator(formObj,name){var land=document.getElementById('Land')||document.getElementsByName('Land').item(0)||document.getElementsByName('Nation').item(0);if(name=='Vorname'||name=='_dd_Vorname'||name=='WGZ_Vorname'){toggleError(name,checkFirstName(name));toggleError("Name",checkFirstName(name));}
+else if(name=='Nachname'||name=='_dd_Nachname'||name=='WGZ_Nachname'){toggleError(name,checkLastName(name));toggleError("Name",checkLastName(name));}
+else if(name=='Herr'||name=='Frau'){toggleError('herrfrau',checkSalutation(name,land));}
+else if(name=='Strasse'||name=='_cc_Strasse'){toggleError(name,checkStreet(name,land));}
+else if(name=='_cc_Hausnummer'){}
+else if(name=='PLZ'||name=='_cc_PLZ'){var zip_chk_result=toggleError(name,checkZip(name,land),'PLZ');if(zip_chk_result&&typeof plz2city=='function')plz2city(document.getElementById(name),land.value);}
+else if(name=='Ort'||name=='_cc_Ort'){toggleError(name,checkCity(name,land),'Ort');}
+else if(name=='passwort1'){toggleError(name,checkPassword1_new(name));}
+else if(name=='passwort2'){toggleError(name,checkPassword2());}
+else if(name=='Email'||name=='PSPEmail'||name=='_cc_PSPEmail'||name=='_dd_PSPEmail'){var email_chk_result=toggleError(name,validateEmail(name));var email_chk=document.getElementById('email_greencheck');if(email_chk_result&&null!=email_chk&&typeof check_email_double=='function'){check_email_double(document.getElementById(name).value);}
+if(null!=email_chk&&!email_chk_result){email_chk.style.display='none';}}
+else if(name=='Telefon'){toggleError(name,checkPhoneNumber(name,land));}
+else if(name=='handynr'){toggleError(name,checkPhoneNumber(name,land));}
+else if(name=='Bank'||name=='WGZ_Bank'||name=='OMT_giropay_Bank'||name=='OMT_sofort_Bank'){toggleError(name,checkBank(name,land));}
+else if(name=='Konto'||name=='WGZ_Konto'||name=='OMT_giropay_Konto'||name=='OMT_sofort_Konto'){toggleError(name,checkBankAccount(name,land));}
+else if(name=='BLZ'||name=='WGZ_BLZ'||name=='OMT_giropay_BLZ'||name=='OMT_sofort_BLZ'){var blz_chk_res=toggleError(name,checkRouting(name,land));if(blz_chk_res&&typeof blz2bank=='function')blz2bank(document.getElementById(name),land.value);}
+else if(name=='WGZ_herrfrau_Herr'||name=='WGZ_herrfrau_Frau'){toggleError('WGZ_herrfrau',checkSalutation(name,land));}
+else if(name=='herrfrau_Herr'||name=='herrfrau_Frau'){toggleError('herrfrau',checkSalutation(name,land));}
+else if(name=='Kartentyp'){toggleError('Kartentyp',checkCreditCardName(name));}
+else if(name=='Kreditkartennummer'){var cardtype=document.getElementById('Kartentyp');toggleError('Kreditkartennummer',checkCreditCardNumber(name,cardtype));}
+else if(name=='CardVN'||name=='CVN'){var cardtype=document.getElementById('Kartentyp');toggleError('CardVN',checkCardVerificationNumber(name,cardtype));toggleError('Kreditkartennummer',checkCreditCardNumber('Kreditkartennummer',cardtype));var month=document.getElementById('gueltigmonat');var year=document.getElementById('gueltigjahr');var expok=checkCardExpirationDate(month,year);toggleError('gueltigmonat',expok);toggleError('gueltigjahr',expok);}
+else if(name=='_cc_Kontoinhaber'||name=='Kontoinhaber'){toggleError(name,checkCardHolderName(name),'Kontoinhaber');}
+else if(name=='DateOfBirthD'||name=='DateOfBirthM'||name=='DateOfBirthY'){var day=document.getElementById('DateOfBirthD');var month=document.getElementById('DateOfBirthM');var year=document.getElementById('DateOfBirthY');var isok=checkBirthDate(month,day,year);toggleError('DateOfBirthD',isok);toggleError('DateOfBirthM',isok);toggleError('DateOfBirthY',isok);toggleError('DateOfBirth',isok);}
+else if(name=='DOBD_CARTE'||name=='DOBM_CARTE'||name=='DOBY_CARTE'){var day=document.getElementById('DOBD_CARTE');var month=document.getElementById('DOBM_CARTE');var year=document.getElementById('DOBY_CARTE');var isok=checkBirthDate(month,day,year);toggleError('DOBD_CARTE',isok);toggleError('DOBM_CARTE',isok);toggleError('DOBY_CARTE',isok);}
+else if(name=='gueltigmonat'||name=='gueltigjahr'){var month=document.getElementById('gueltigmonat');var year=document.getElementById('gueltigjahr');var expok=checkCardExpirationDate(month,year);toggleError('gueltigmonat',expok);toggleError('gueltigjahr',expok);}
+else if(name=='_imgString'||name=='cb_param_imgString'){toggleError(name,checkCaptcha(name));}
+else if(name=='MasterFrage'){toggleError(name,checkLength(name,1));}
+else if(name=='MasterAntwort'){toggleError('MasterAntwort',checkAnswer(name));}
+else if(name=='password'||name=='passwort'||name=='user'||name=='username'){toggleError(name,checkLength(name,6));}
+return false;}
+function checkBirthDate(month,day,year){if(validate_date_counter>=2){if(empty(day)||day.value.length<=0)return false;if(empty(month)||month.value.length<=0||month.value>12)return false;if(empty(year)||year.value.length<=0)return false;var current=new Date();var curmonth=current.getMonth()+1;if(year.value>0&&year.value<100)year.value=1900+parseInt(year.value);var days=getDaysByMonth(month.value,year.value);if(current.getFullYear()-year.value>100)return false;if(day.value<0||day.value>days)return false;if(day.value<0||day.value>days)return false;if(current.getFullYear()-year.value==14){if(curmonth==month.value){if(current.getDate()<day.value){return false;}else{validate_date_counter=0;return true;}}else{if(curmonth<month.value){return false;}else{validate_date_counter=0;return true;}}}
+else
+if(current.getFullYear()-year.value<14){return false;}else if(current.getFullYear()-year.value>14){return true;}}
+validate_date_counter++;return true;}
+function getDaysByMonth(month,year){if(month==2&&year%4==0)return 29;if(month==2&&year%4!=0)return 28;if(month==4)return 30;if(month==6)return 30;if(month==9)return 30;if(month==11)return 30;else return 31;}
+function checkPassword1_new(name){if(empty(document.getElementById(name)))return false;var pw1=document.getElementById(name).value;if(pw1.length<6)return false;var negpattern=/[^a-zA-Z0-9ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ°º!@#%&()_=:,\[\]\*\.\?\;\^\$\-\+\/]/;var specialpattern=/[ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ°º!@#%&()_=:,\[\]\*\.\?\;\^\$\-\+\/]/;var digitpattern=/[0-9]/;var upperpattern=/[A-Z]/;if(0<=pw1.search(negpattern))return false;if(0>pw1.search(specialpattern))return false;if(0>pw1.search(digitpattern)&&0>pw1.search(upperpattern))return false;return true;}
+function checkPassword2(){if(!checkPassword1_new('passwort1'))return false;if(!checkPassword1_new('passwort2'))return false;var passwort1=document.getElementById('passwort1');var passwort2=document.getElementById('passwort2');if(passwort1.value!=passwort2.value)return false;return true;}
+function checkChars(field){var pattern=/[\!\@\#\$\%\^\&\*\(\)\_\-\+\=\[\]\?\.\:\;\/\,]/;var ok=field.search(pattern);if(ok<0)
+return false;return true;}
+function checkPhoneNumber(id,land){var field=document.getElementById(id);var pattern=/^[0-9\(\)\-\+ ]*$/;var ok=field.value.search(pattern);if(field.value.length<1)return true;if(ok<0)return false;if(empty(field)||field.value.length<5)return false;if(field.value.length>20)return false;if(land==null)return true;if(land.value=='US'||land.value=='CA'){if(field.value.length<10)return false;}
+else if(land.value=='UK'){if(field.value.length<8)return false;}
+return true;}
+function checkLength(id,len){var field=document.getElementById(id);if(empty(field)||field.value.length<len)return false;return true}
+function validate(){return false;}
+function checkCardExpirationDate(month,year){if(empty(month)||month.value.length<=0)return false;if(empty(year)||year.value.length<=0)return false;var current=new Date();if(year.value<current.getFullYear())return false;if(year.value==current.getFullYear()&&parseInt(month.value,10)<=1+current.getMonth())return false;return true;}
+function checkStreetNumber(id){var field=document.getElementById(id);if(empty(field)||field.value.length<=0)return false;return true;}
+function checkCreditCardName(id){var field=document.getElementById(id);if(field.options[0].selected)return false;else return true;}
+function checkStreet(id,land){var field=document.getElementById(id);if(empty(field)||field.value.length<3)return false;if(land!=null){if(land.value=='CH'){return true;}
+if(land.value=='UK'){if(empty(field)||field.value.length<4)return false;}
+else
+if(empty(field)||field.value.length<3)return false;}
+var pattern=/([a-z])\1\1\1/i;var ok=field.value.search(pattern);if(ok>=0)return false;return true;}
+function checkCardHolderName(id){var field=document.getElementById(id);if(empty(field)||field.value.length<=0)return false;return true;}
+function checkAnswer(id){var field=document.getElementById(id);if(empty(field)||field.value.length<=0)return false;return true;}
+function checkCardVerificationNumber(id,cardtype){var condition;var field=document.getElementById(id);if(empty(field))return false;if(cardtype!=null){if(cardtype.value=='AmericanExpress'){if(field.value.length!=3&&field.value.length!=4)return false;}else if(field.value.length!=3)return false;}else if(field.value.length<3)return false;var pattern=/^[0-9_]*$/;var ok=field.value.search(pattern);if(ok>=0)return true;return false;}
+function checkCreditCardNumber(id,cardtype){var field=document.getElementById(id);if(empty(field)||field.value.length<=11)return false;if(cardtype=='CarteAurore')return true;return CheckCCNumber(removeSpaces(field.value),cardtype);}
+function checkCaptcha(id){var field=document.getElementById(id);if(field!=null)
+{if(empty(field)||field.value.length<=4)
+return false;}
+return true;}
+function removeSpaces(string){var tstring="";string=''+string;splitstring=string.split(" ");for(i=0;i<splitstring.length;i++)
+tstring+=splitstring[i];return tstring;}
+function CheckCCNumber(digits,cardtype)
+{var sum=0;var alt=false;var numvar=0;for(var i=digits.length-1;i>=0;i--)
+{numvar=parseInt(digits.charAt(i));if(alt)
+{numvar*=2;if(numvar>9)
+{numvar-=9;}}
+sum+=numvar;alt=!alt;}
+return sum%10==0;}
+function checkBank(id){var field=document.getElementById(id);if(empty(field.value)||field.value.length<=0)return false;else return true;}
+function checkSalutation(field,land){var herr;var frau;if(land.value=='CH'||land.value=='UK')return true;if(field=='WGZ_herrfrau_Herr'||field=='WGZ_herrfrau_Frau'){herr=document.getElementById('WGZ_herrfrau_Herr');frau=document.getElementById('WGZ_herrfrau_Frau');if(!herr.checked&&!frau.checked)return false;}
+else if(field=='herrfrau_Herr'||field=='herrfrau_Frau'){herr=document.getElementById('herrfrau_Herr');frau=document.getElementById('herrfrau_Frau');if(!herr.checked&&!frau.checked)return false;}
+else if(field=='Herr'||field=='Frau'){herr=document.getElementById('Herr');frau=document.getElementById('Frau');if(!herr.checked&&!frau.checked)return false;}
+return true;}
+function checkRouting(id,land){var field=document.getElementById(id);var rout_pattern=/^[0-9]*$/;if(land.value=='NL')return true;if(!empty(field)&&field.value.length>0){if(land.value=='US'){if(field.value.length!=9)return false;}
+else if(land.value=='DE'){if(field.value.length!=8)return false;var digits_ok=field.value.search(rout_pattern);if(digits_ok<0)return false;}
+else if(land.value=='UK'){}
+else if(land.value=='ES'){}}
+if(empty(field)||field.value.length<=0)return false;return true;}
+function empty(value){if(navigator.appName=="Microsoft Internet Explorer"){if(value==null)return true;else return false;}
+else{if(value==undefined)return true;else return false;}}
+function checkZip(id,land){var field=document.getElementById(id);var zip_pattern=/^[0-9]*$/;field.value.replace(/(^\s+)|(\s+$)/,'');if(empty(field)||field.value.length==0)return false;if(land==null||land.value==null)return true;switch(land.value){case'AU':case'NZ':case'ZA':return/^\d{4}$/.test(field.value);case'US':if(/^\w\w-\d{5}$/.test(field.value))
+field.value=field.value.substring(3);case'DE':case'MX':case'EE':case'CZ':case'TR':return/^\d{5}$/.test(field.value);case'IN':case'KR':return/^\d{6}$/.test(field.value);case'CH':return/([Cc][Hh]-)?(\d{4})/.test(field.value);case'NO':return/([Nn][Oo]-)?(\d{4})/.test(field.value);case'DK':return/([Dd][Kk]-)?(\d{4})/.test(field.value);case'JP':return/^\d{3}-?\d{4}$/.test(field.value);case'PL':return/^\d{2}-?\d{3}$/.test(field.value);default:return true;}
+return true;}
+function checkCity(id,land){var field=document.getElementById(id);if(land!=null&&land.value=='UK'){if(empty(field)||field.value.length<3)return false;}else{if(empty(field)||field.value.length<2)return false;}
+return true;}
+function validateEmail(id){var field=document.getElementById(id);var pattern1=/^[a-zA-Z0-9\_\-\+][a-zA-Z0-9\.\_\-\+]*\@([a-zA-Z0-9][a-zA-Z0-9\-\.])*[a-zA-Z0-9]([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,5})$/;var pattern2=/^[a-zA-Z0-9\_\-\+][a-zA-Z0-9\.\_\-\+]*\@([0-9]{1,3}\.){3}([0-9]{1,3})$/;var ok1=field.value.search(pattern1);var ok2=field.value.search(pattern2);if(ok1<0&&ok2<0)return false;return true;}
+function checkBankAccount(id,land){var field=document.getElementById(id);var land=document.getElementById('Land');var bank_pattern=/^[0-9]*$/;if(land!=null&&!empty(field)&&field.value.length>0){if(land.value=='DE'){if(field.value.length<5||field.value.length>10)return false;var digits_ok=field.value.search(bank_pattern);if(digits_ok<0)
+return false;}
+if(land.value=='US'){if(field.value.length<5||field.value.length>15)return false;var digits_ok=field.value.search(bank_pattern);if(digits_ok<0)
+return false;}
+if(land.value=='UK'){if(field.value.length!=8)return false;var digits_ok=field.value.search(bank_pattern);if(digits_ok<0)
+return false;}}
+else{if(empty(field)||field.value.length<=0)return false;var digits_ok=field.value.search(bank_pattern);if(digits_ok<0)
+return false;}
+return true;}
+function checkFirstName(id){var field=document.getElementById(id);var land=document.getElementById('Land');if(empty(field)||field.value.length<=0)return false;var pattern=/([a-z])\1\1\1/i;var digitpattern=/[0-9]/;var ok=field.value.search(pattern);if(ok>=0)return false;if(land!=null&&land.value=='CH'){var digitok=field.value.search(digitpattern);if(digitok>=0)return false;}
+return true;}
+function checkLastName(id){var field=document.getElementById(id);var land=document.getElementById('Land');var digitpattern=/[0-9]/;if(land!=null&&land.value=='CH'){if(!empty(field)){var digitok=field.value.search(digitpattern);if(digitok>=0)return false;if(field.value.length==0)return true;}}
+if(empty(field)||field.value.length<2)return false;var pattern=/([a-z])\1\1\1/i;var ok=field.value.search(pattern);if(ok>=0)return false;return true;}
+function loadDynFeatures(url,description_box_question_on_off,description_box_focus_on_off,description_box_id,validation_on_off){if(isloaded==1)return true;if(description_box_question_on_off=='on'||validation_on_off=='on')
+{try
+{var body_element=document.getElementsByTagName("body").item(0);traverseInputElements(inputFields,description_box_question_on_off,description_box_focus_on_off,validation_on_off);dob_y=document.getElementsByName("DateOfBirthY").item(0);if(dob_y!=null){dob_d=document.getElementsByName("DateOfBirthD").item(0);dob_m=document.getElementsByName("DateOfBirthM").item(0);if(getMessage("DateOfBirthY")!=''){dob_d.onfocus=dob_m.onfocus=dob_y.onfocus;dob_d.onblur=dob_m.onblur=dob_y.onblur;}else if(getMessage("DateOfBirthD")!=''){dob_y.onfocus=dob_m.onfocus=dob_d.onfocus;dob_y.onblur=dob_m.onblur=dob_d.onblur;}}
+doby_carte=document.getElementsByName("DOBY_CARTE").item(0);if(doby_carte!=null){dobd_carte=document.getElementsByName("DOBD_CARTE").item(0);dobm_carte=document.getElementsByName("DOBM_CARTE").item(0);dobd_carte.onfocus=dobm_carte.onfocus=doby_carte.onfocus;dobd_carte.onblur=dobm_carte.onblur=doby_carte.onblur;}
+if(getMessage("AptNumber")!=''){addrh=document.getElementsByName("Hausnummer").item(0);addra=document.getElementsByName("AptNumber").item(0);addrh.onfocus=addra.onfocus;addrh.onblur=addra.onblur;}
+blz3=document.getElementsByName("BLZ3").item(0);if(blz3!=null){blz2=document.getElementsByName("BLZ2").item(0);blz1=document.getElementsByName("BLZ1").item(0);blz1.onfocus=blz2.onfocus=blz3.onfocus;blz1.onblur=blz2.onblur=blz3.onblur;}
+konto2=document.getElementsByName("Konto2").item(0);blz2=document.getElementsByName("BLZ2").item(0);if(konto2!=null&&blz2!=null){konto1=document.getElementsByName("Konto1").item(0);blz1=document.getElementsByName("BLZ1").item(0);blz1.onfocus=blz2.onfocus=konto1.onfocus=konto2.onfocus;blz1.onblur=blz2.onblur=konto1.onblur=konto2.onblur;}
+isloaded=1;}
+catch(E)
+{}}}
+function findPosXY(obj){var curleft=0;var curtop=0;if(obj.offsetParent){curtop+=obj.offsetHeight;while(obj.offsetParent){curtop+=obj.offsetTop;curleft+=obj.offsetLeft;obj=obj.offsetParent;}}
+else if(obj.x)
+{curleft+=obj.x;curtop+=obj.offsetTop;}
+return[curleft,curtop];}
+function setTempCookie(name,value,domain)
+{document.cookie=name+"="+escape(value)+";path=/;domain="+domain+";Secure"}
+
+}
+/*
+     FILE ARCHIVED ON 01:36:53 Jun 24, 2013 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:16:32 Sep 17, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.581
+  exclusion.robots: 0.018
+  exclusion.robots.policy: 0.009
+  esindex: 0.014
+  cdx.remote: 5.094
+  LoadShardBlock: 81.949 (3)
+  PetaboxLoader3.datanode: 124.098 (4)
+  load_resource: 427.85
+  PetaboxLoader3.resolve: 365.635
+*/

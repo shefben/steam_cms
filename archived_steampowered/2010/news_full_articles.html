@@ -1,0 +1,702 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>News - All News</title>
+<link href="public/css/styles_storev5_e7e88d73.css" rel="stylesheet" type="text/css"/>
+<!--[if lte IE 6]> <link href="http://cdn.store.steampowered.com/public/css/styles_storev5_ie6.css?v=3855293424" rel="stylesheet" type="text/css" />
+ <![endif]-->
+<!--[if lte IE 7]> <style type="text/css"> .iepoupfix{ display: block; } </style> <![endif]-->
+<link href="public/css/styles_newsv5_b4c4002f.css" rel="stylesheet" type="text/css"/>
+<script src="public/javascript/swfobject_b7fdcaeb.js" type="text/javascript"></script>
+<script src="public/javascript/prototype-1.6.0.2_b0958f95.js" type="text/javascript"></script>
+<script src="public/javascript/scriptaculous/scriptaculous_8513634f.js" type="text/javascript"></script>
+<script src="public/javascript/javascript_b486c2b5.js" type="text/javascript"></script>
+<script src="public/javascript/main_8f57076e.js" type="text/javascript"></script>
+<script src="public/javascript/jserrorreport_f0cc9da3.js" type="text/javascript"></script>
+<script src="public/javascript/header_ea9ec273.js" type="text/javascript"></script>
+<script src="public/javascript/search_271daeca.js" type="text/javascript"></script>
+<script src="public/javascript/news_1ce390cd.js" type="text/javascript"></script>
+<body>
+<div id="global_header">
+<div class="content">
+<div class="logo">
+<span id="logo_holder">
+<a href="">
+<img height="44" src="public/images/v5/globalheader_logo.png" width="176"/>
+</a>
+</span>
+<!--[if lt IE 7]>
+			<style type="text/css">
+			#logo_holder img { filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); }
+			#logo_holder { display: inline-block; width: 176px; height: 44px; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://cdn.store.steampowered.com/public/images/v5/globalheader_logo.png'); }
+			</style>
+			<![endif]-->
+</div>
+<a class="menuitem" href="">
+						STORE		</a>
+<a class="menuitem" href="https://steamcommunity.com/">
+			Community		</a>
+<a class="menuitem active" href="news/">
+<div class="activebg"> </div>			NEWS		</a>
+<a class="menuitem" href="forums/">
+						FORUMS		</a>
+<a class="menuitem" href="about/">
+						ABOUT		</a>
+<a class="menuitem" href="http://support.steampowered.com/">
+			SUPPORT		</a>
+<a class="menuitem" href="stats/">
+						STATS		</a>
+<div id="global_actions">
+<div id="global_action_menu">
+<a href="login/">Login</a>
+						 |  
+								<span class="pulldown" id="language_pulldown" onclick="ShowMenu( this, 'language_dropdown', 'right' );">language</span>
+<div class="popup_block" id="language_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepoupfix"><img class="iepoupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item tight" href="news/?l=czech">
+<h5>čeština (Czech)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=danish">
+<h5>Dansk (Danish)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=dutch">
+<h5>Nederlands (Dutch)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=finnish">
+<h5>Suomi (Finnish)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=french">
+<h5>Français (French)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=german">
+<h5>Deutsch (German)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=hungarian">
+<h5>magyar (Hungarian)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=italian">
+<h5>Italiano (Italian)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=japanese">
+<h5>日本語 (Japanese)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=koreana">
+<h5>한국어 (Korean)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=norwegian">
+<h5>Norsk (Norwegian)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=polish">
+<h5>Polski (Polish)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=portuguese">
+<h5>Português (Portuguese)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=russian">
+<h5>Русский (Russian)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=romanian">
+<h5>Română (Romanian)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=schinese">
+<h5>简体中文 (Simplified Chinese)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=spanish">
+<h5>Español (Spanish)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=swedish">
+<h5>Svenska (Swedish)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=tchinese">
+<h5>繁體中文 (Traditional Chinese)</h5>
+</a>
+<a class="popup_menu_item tight" href="news/?l=thai">
+<h5>ไทย (Thai)</h5>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	var g_SteamID = 0;
+</script>
+<!-- Main Background -->
+<div id="main">
+<div id="main_content">
+<div class="newsrightcol">
+<div class="page_title_area">
+<div id="main_header"><h1>All News</h1></div>
+<div id="viewmodelinks">
+<a class="view_active" href="news/?headlines=0">Full Stories</a>
+<a class="view_inactive" href="news/?headlines=1">Headlines</a>
+</div>
+</div>
+<div id="mainBlock">
+<div id="news">
+<div class="newshr"></div>
+<div id="post_527100936653219227">
+<div class="newsPostBlock steam_release">
+<div class="headline">
+<div class="date">11:27</div>
+<div class="posttitle"><a href="http://store.steampowered.com/news/3919/">Midweek Madness! Batman: Arkham Asylum™ GOTY Edition - 50% Off</a></div>
+</div>
+<div style="clear:both"></div>
+<div class="feed">Product Release - Valve</div>
+<div style="clear:both"></div>
+<div class="body">
+		Save 50% on Batman: Arkham Asylum™ Game of the Year Edition! Hurry, as the offer ends this Thursday at 4pm PDT.<br/><br/><a href="http://store.steampowered.com/app/35140/"><img src="v/gfx/apps/35140/capsule_467x181.jpg" style=" float: left; margin-right: 12px; height: 181px; width: 467px;"/></a> </div>
+<div class="share">
+		Share:				  <a href="http://www.google.com/reader/link?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3919%2F&amp;title=Midweek+Madness%21+Batman%3A+Arkham+Asylum%E2%84%A2+GOTY+Edition+-+50%25+Off&amp;snippet=+%0ASave+50%25+on+Batman%3A+Arkham+Asylum%26trade%3B+Game+of+the+Year+Edition%21+Hurry%2C+as+the+offer+ends+this+Thursday+at+4pm+PDT.%09%09%09%09..." title="Share on Google Buzz"><img src="public/images/v5/social/buzz_news.gif"/></a>
+		  <a href="http://digg.com/submit?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3919%2F&amp;title=Midweek+Madness%21+Batman%3A+Arkham+Asylum%E2%84%A2+GOTY+Edition+-+50%25+Off&amp;bodytext=+%0ASave+50%25+on+Batman%3A+Arkham+Asylum%26trade%3B+Game+of+the+Year+Edition%21+Hurry%2C+as+the+offer+ends+this+Thursday+at+4pm+PDT.%09%09%09%09...&amp;topic=gaming_news" title="Share on Digg"><img src="public/images/v5/social/digg.gif"/></a>
+		  <a href="http://twitter.com/home?source=steampowered.com&amp;status=From%20@steam_games:%20http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3919%2F" title="Share on Twitter"><img src="public/images/v5/social/twitter.gif"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3919%2F&amp;t=Midweek+Madness%21+Batman%3A+Arkham+Asylum%E2%84%A2+GOTY+Edition+-+50%25+Off" title="Share on Facebook"><img src="public/images/v5/social/facebook.gif"/></a>
+</div>
+<div style="clear:both"></div>
+</div> </div>
+<div class="newshr"></div>
+<div id="post_523722902383786261">
+<div class="newsPostBlock steam_release">
+<div class="headline">
+<div class="date">Jun 7, 2010</div>
+<div class="posttitle"><a href="http://store.steampowered.com/news/3918/">eversion Released - 10% off launch special until June 14th</a></div>
+</div>
+<div style="clear:both"></div>
+<div class="feed">Product Release - Valve</div>
+<div style="clear:both"></div>
+<div class="body">
+		The Princess of the Flower Kingdom has vanished! Taken by the Ghulibas of the north, it is now up to you, the brave Zee Tee, to rescue her.  On his quest, he - and you - will discover the hidden lands behind the peaceful kingdom, and come face to face with secrets that will set you on edge!<br/><br/><strong>Launch Special!</strong>  Purchase between now through June 14th and receive a 10% discount from an already attractive price.<br/><br/><a href="http://store.steampowered.com/app/33680/"><img src="v/gfx/apps/33680/capsule_231x87.jpg" style=" float: left; margin-right: 12px; height: 87px; width: 231px;"/></a> </div>
+<div class="share">
+		Share:				  <a href="http://www.google.com/reader/link?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3918%2F&amp;title=eversion+Released+-+10%25+off+launch+special+until+June+14th&amp;snippet=+%0AThe+Princess+of+the+Flower+Kingdom+has+vanished%21+Taken+by+the+Ghulibas+of+the+north%2C+it+is+now+up+to+you%2C+the+brave+Zee+Tee%2C+to+rescue+her.++On+his+quest%2C+he+-+and+you+-+will+discover+the+hidden+lan..." title="Share on Google Buzz"><img src="public/images/v5/social/buzz_news.gif"/></a>
+		  <a href="http://digg.com/submit?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3918%2F&amp;title=eversion+Released+-+10%25+off+launch+special+until+June+14th&amp;bodytext=+%0AThe+Princess+of+the+Flower+Kingdom+has+vanished%21+Taken+by+the+Ghulibas+of+the+north%2C+it+is+now+up+to+you%2C+the+brave+Zee+Tee%2C+to+rescue+her.++On+his+quest%2C+he+-+and+you+-+will+discover+the+hidden+lan...&amp;topic=gaming_news" title="Share on Digg"><img src="public/images/v5/social/digg.gif"/></a>
+		  <a href="http://twitter.com/home?source=steampowered.com&amp;status=From%20@steam_games:%20http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3918%2F" title="Share on Twitter"><img src="public/images/v5/social/twitter.gif"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3918%2F&amp;t=eversion+Released+-+10%25+off+launch+special+until+June+14th" title="Share on Facebook"><img src="public/images/v5/social/facebook.gif"/></a>
+</div>
+<div style="clear:both"></div>
+</div> </div>
+<div class="newshr"></div>
+<div id="post_523722902383650079">
+<div class="newsPostBlock steam_release">
+<div class="headline">
+<div class="date">Jun 7, 2010</div>
+<div class="posttitle"><a href="http://store.steampowered.com/news/3917/">Jolly Rover Released on PC  Mac</a></div>
+</div>
+<div style="clear:both"></div>
+<div class="feed">Product Release - Valve</div>
+<div style="clear:both"></div>
+<div class="body">
+		Arrrrr!  Meet the swashbuckling sausage-dog star Gaius James Rover, son of the famous clown Jolly Rover, who died from a blow to the groin from an improperly loaded joke cannon.<br/><br/>Jolly Rover is a traditional 2D point and click adventure, including casual elements, such as an integrated hint system, and task bar. Bonus elements include unlockable Captain Bio's, music, concept art and developer commentary!<br/><br/>Want to get a taste of Rover's adventure?  Fret not as a demo is also available on both PC &amp; Mac.<br/><br/><a href="http://store.steampowered.com/app/58200/"><img src="v/gfx/apps/58200/capsule_231x87.jpg" style=" float: left; margin-right: 12px; height: 87px; width: 231px;"/></a> </div>
+<div class="share">
+		Share:				  <a href="http://www.google.com/reader/link?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3917%2F&amp;title=Jolly+Rover+Released+on+PC++Mac&amp;snippet=+%0AArrrrr%21++Meet+the+swashbuckling+sausage-dog+star+Gaius+James+Rover%2C+son+of+the+famous+clown+Jolly+Rover%2C+who+died+from+a+blow+to+the+groin+from+an+improperly+loaded+joke+cannon.Jolly+Rover+is+a+trad..." title="Share on Google Buzz"><img src="public/images/v5/social/buzz_news.gif"/></a>
+		  <a href="http://digg.com/submit?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3917%2F&amp;title=Jolly+Rover+Released+on+PC++Mac&amp;bodytext=+%0AArrrrr%21++Meet+the+swashbuckling+sausage-dog+star+Gaius+James+Rover%2C+son+of+the+famous+clown+Jolly+Rover%2C+who+died+from+a+blow+to+the+groin+from+an+improperly+loaded+joke+cannon.Jolly+Rover+is+a+trad...&amp;topic=gaming_news" title="Share on Digg"><img src="public/images/v5/social/digg.gif"/></a>
+		  <a href="http://twitter.com/home?source=steampowered.com&amp;status=From%20@steam_games:%20http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3917%2F" title="Share on Twitter"><img src="public/images/v5/social/twitter.gif"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3917%2F&amp;t=Jolly+Rover+Released+on+PC++Mac" title="Share on Facebook"><img src="public/images/v5/social/facebook.gif"/></a>
+</div>
+<div style="clear:both"></div>
+</div> </div>
+<div class="newshr"></div>
+<div id="post_523722902380875141">
+<div class="newsPostBlock steam_client">
+<div class="headline">
+<div class="date">Jun 7, 2010</div>
+<div class="posttitle"><a href="http://store.steampowered.com/news/3913/">Steam client update released</a></div>
+</div>
+<div style="clear:both"></div>
+<div class="feed">Client Update - Valve</div>
+<div style="clear:both"></div>
+<div class="body">
+		A Steam client update is now available. To apply the update, click the File menu inside of Steam and then select "Check for Steam Client Updates...".  The specific changes include:<br/><br/><b>Steam Client</b><br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><li>Fixed an issue on Windows 2000 requiring the SP4 update rollup 1 package to be installed for Steam to run<br/><li>Fixed in-game overlay generating spurious D3D11 debug runtime warnings about CSSetUnorderedAccessViews when running on downlevel hardware<br/><li>Fix regression causing a crash on exit in the in-game overlay<br/><li>Small startup performance optimization to not initialize settings dialog data until needed<br/><li>Fix the you have been logged in elsewhere dialog to not leave Steam in a broken state on Cancel<br/><li>Support for a forthcoming news URL format change<br/><li>Fixed Retail not prompting for a CD key when creating a new account<br/><li>Fixed VGUI crashing when the number of panels was very large (ie, for users with huge friends/clan membership lists)<br/><li>Decreased number of VGUI panels active at once for friends list<br/><li>Decreased the time it takes Steam to launch some games<br/><li>Fixed memory leak when resizing in-game overlay web browser<br/><li>Fixed potential failure or client hang when failing talking to content server directory servers<br/><li>Fixed overlapping text for pending group invites in the friends list invites section<br/><li>Fixed error message “You don't currently have any games ready to backup..” when restoring a previous game backup<br/><li>Fixed Cloud changing last modified times on clouded files.<br/><li>Fixed the Cloud sync transfer rate display in list view<br/><li>Steamworks - Fixed case where building an installer could randomly fail due to an error in the Microsoft crypto library<br/></li></li></li></li></li></li></li></li></li></li></li></li></li></li></li></li></li></ul> </div>
+<div class="share">
+		Share:				  <a href="http://www.google.com/reader/link?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3913%2F&amp;title=Steam+client+update+released&amp;snippet=+%0AA+Steam+client+update+is+now+available.+To+apply+the+update%2C+click+the+File+menu+inside+of+Steam+and+then+select+%22Check+for+Steam+Client+Updates...%22.++The+specific+changes+include%3ASteam+ClientFixed+..." title="Share on Google Buzz"><img src="public/images/v5/social/buzz_news.gif"/></a>
+		  <a href="http://digg.com/submit?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3913%2F&amp;title=Steam+client+update+released&amp;bodytext=+%0AA+Steam+client+update+is+now+available.+To+apply+the+update%2C+click+the+File+menu+inside+of+Steam+and+then+select+%22Check+for+Steam+Client+Updates...%22.++The+specific+changes+include%3ASteam+ClientFixed+...&amp;topic=gaming_news" title="Share on Digg"><img src="public/images/v5/social/digg.gif"/></a>
+		  <a href="http://twitter.com/home?source=steampowered.com&amp;status=From%20@steam_games:%20http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3913%2F" title="Share on Twitter"><img src="public/images/v5/social/twitter.gif"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3913%2F&amp;t=Steam+client+update+released" title="Share on Facebook"><img src="public/images/v5/social/facebook.gif"/></a>
+</div>
+<div style="clear:both"></div>
+</div> </div>
+<div class="newshr"></div>
+<div id="post_523722902379484058">
+<div class="newsPostBlock steam_release">
+<div class="headline">
+<div class="date">Jun 7, 2010</div>
+<div class="posttitle"><a href="http://store.steampowered.com/news/3912/">Hearts of Iron III: Semper Fi Expansion - Released</a></div>
+</div>
+<div style="clear:both"></div>
+<div class="feed">Product Release - Valve</div>
+<div style="clear:both"></div>
+<div class="body">
+		Purchase now to experience the first expansion to the critically acclaimed <a href="http://store.steampowered.com/app/25890/">Hearts of Iron III</a>.  Take charge (or delegate) at any level, from division to nation, through a variety of scenarios.<br/><br/><a href="http://store.steampowered.com/app/42900/"><img src="v/gfx/apps/42900/capsule_231x87.jpg" style=" float: left; margin-right: 12px; height: 87px; width: 231px;"/></a> </div>
+<div class="share">
+		Share:				  <a href="http://www.google.com/reader/link?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3912%2F&amp;title=Hearts+of+Iron+III%3A+Semper+Fi+Expansion+-+Released&amp;snippet=+%0APurchase+now+to+experience+the+first+expansion+to+the+critically+acclaimed+Hearts+of+Iron+III.++Take+charge+%28or+delegate%29+at+any+level%2C+from+division+to+nation%2C+through+a+variety+of+scenarios.%09%09%09%09..." title="Share on Google Buzz"><img src="public/images/v5/social/buzz_news.gif"/></a>
+		  <a href="http://digg.com/submit?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3912%2F&amp;title=Hearts+of+Iron+III%3A+Semper+Fi+Expansion+-+Released&amp;bodytext=+%0APurchase+now+to+experience+the+first+expansion+to+the+critically+acclaimed+Hearts+of+Iron+III.++Take+charge+%28or+delegate%29+at+any+level%2C+from+division+to+nation%2C+through+a+variety+of+scenarios.%09%09%09%09...&amp;topic=gaming_news" title="Share on Digg"><img src="public/images/v5/social/digg.gif"/></a>
+		  <a href="http://twitter.com/home?source=steampowered.com&amp;status=From%20@steam_games:%20http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3912%2F" title="Share on Twitter"><img src="public/images/v5/social/twitter.gif"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3912%2F&amp;t=Hearts+of+Iron+III%3A+Semper+Fi+Expansion+-+Released" title="Share on Facebook"><img src="public/images/v5/social/facebook.gif"/></a>
+</div>
+<div style="clear:both"></div>
+</div> </div>
+<div class="newshr"></div>
+<div id="post_523722902377695402">
+<div class="newsPostBlock steam_updates">
+<div class="headline">
+<div class="date">Jun 7, 2010</div>
+<div class="posttitle"><a href="http://store.steampowered.com/news/3911/">The Settlers 7 Update Released</a></div>
+</div>
+<div style="clear:both"></div>
+<div class="feed">Product Update - Valve</div>
+<div style="clear:both"></div>
+<div class="body">
+		Updates to The Settlers 7 have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include:<br/><br/><b>Version 1.05</b><br/><br/>Improvements<br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><li>Event sectors for which players have gained free passage (by finishing quests) are now indicated on the overview map by a free passage icon<br/><li>Added a warning icon to construction buildings whose constructor cannot spawn due to a missing tool<br/><li>Added a warning icon to special buildings where trainings stalls due to the population or army limit<br/><li>The handling of the logistics menu has been improved. A left click on a task will now open a context menu which allows the player to move the task to the front of the panel, pause it or cancel it altogether<br/><li>Added information about the player's position as well as improved navigation options to the leader board screen<br/><li>Added the option to change the game's default port if a router does not separate two connections correctly:<br/> <br/>	Add these lines to your "Options.ini" file (C:\Documents and Settings\YourName\My Documents\Settlers7\Options.ini)<br/> <br/>	[Network]<br/>	DefaultPort = 9205<br/> <br/>	The default value is 9103 - anything else should do<br/></li></li></li></li></li></li></ul> <br/> <br/>Bug Fixes<br/> <br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><li>Fixed a concurrency issue during account authentication (first login)<br/><li>Fixed various random crashes<br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"> <li>Fixed a rare crash when activating the earthquake<br/> <li>Fixed a bug that prevented achievements from being unlocked <br/> <li>Fixed a possible exploit with retreating armies delaying the conquest of a sector<br/> <li>Fixed a bug with the calculation of coins rewarded for completing a map<br/> <li>Fixed a bug with player profile points being reset<br/> <li>Blazing Heat: Adjusted amount of units in a neutral sector<br/></li></li></li></li></li></li></ul></li></li></ul> <br/>New Content<br/>Enjoy the sixth and eighth campaign map optimized for skirmish and multiplayer: <br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><li>Wolffelden<br/><li>Sandbeken<br/></li></li></ul> </div>
+<div class="share">
+		Share:				  <a href="http://www.google.com/reader/link?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3911%2F&amp;title=The+Settlers+7+Update+Released&amp;snippet=+%0AUpdates+to+The+Settlers+7+have+been+released.+The+updates+will+be+applied+automatically+when+your+Steam+client+is+restarted.+The+major+changes+include%3AVersion+1.05ImprovementsEvent+sectors+for+which..." title="Share on Google Buzz"><img src="public/images/v5/social/buzz_news.gif"/></a>
+		  <a href="http://digg.com/submit?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3911%2F&amp;title=The+Settlers+7+Update+Released&amp;bodytext=+%0AUpdates+to+The+Settlers+7+have+been+released.+The+updates+will+be+applied+automatically+when+your+Steam+client+is+restarted.+The+major+changes+include%3AVersion+1.05ImprovementsEvent+sectors+for+which...&amp;topic=gaming_news" title="Share on Digg"><img src="public/images/v5/social/digg.gif"/></a>
+		  <a href="http://twitter.com/home?source=steampowered.com&amp;status=From%20@steam_games:%20http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3911%2F" title="Share on Twitter"><img src="public/images/v5/social/twitter.gif"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3911%2F&amp;t=The+Settlers+7+Update+Released" title="Share on Facebook"><img src="public/images/v5/social/facebook.gif"/></a>
+</div>
+<div style="clear:both"></div>
+</div> </div>
+<div class="newshr"></div>
+<div id="post_528226219984078804">
+<div class="newsPostBlock steam_updates">
+<div class="headline">
+<div class="date">Jun 4, 2010</div>
+<div class="posttitle"><a href="http://store.steampowered.com/news/3910/">Half-Life 2 Update Released</a></div>
+</div>
+<div style="clear:both"></div>
+<div class="feed">Product Update - Valve</div>
+<div style="clear:both"></div>
+<div class="body">
+		Updates to Half-Life 2 have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include:<br/><br/><b>Half-Life 2</b><br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><li>Fix getting stuck after doing level transition from d2_prison_08 to d3_c17_01, the Nova Prospekt end battle<br/></li></ul><br/><i>If you have a save game that causes you to be stuck in the teleporter with Alyx after this level transition you will need to manually restart this level to continue. To do that enable the developer console and type "map d3_c17_01" to load into this map.</i> </div>
+<div class="share">
+		Share:				  <a href="http://www.google.com/reader/link?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3910%2F&amp;title=Half-Life+2+Update+Released&amp;snippet=+%0AUpdates+to+Half-Life+2+have+been+released.+The+updates+will+be+applied+automatically+when+your+Steam+client+is+restarted.+The+major+changes+include%3AHalf-Life+2Fix+getting+stuck+after+doing+level+tra..." title="Share on Google Buzz"><img src="public/images/v5/social/buzz_news.gif"/></a>
+		  <a href="http://digg.com/submit?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3910%2F&amp;title=Half-Life+2+Update+Released&amp;bodytext=+%0AUpdates+to+Half-Life+2+have+been+released.+The+updates+will+be+applied+automatically+when+your+Steam+client+is+restarted.+The+major+changes+include%3AHalf-Life+2Fix+getting+stuck+after+doing+level+tra...&amp;topic=gaming_news" title="Share on Digg"><img src="public/images/v5/social/digg.gif"/></a>
+		  <a href="http://twitter.com/home?source=steampowered.com&amp;status=From%20@steam_games:%20http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3910%2F" title="Share on Twitter"><img src="public/images/v5/social/twitter.gif"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3910%2F&amp;t=Half-Life+2+Update+Released" title="Share on Facebook"><img src="public/images/v5/social/facebook.gif"/></a>
+</div>
+<div style="clear:both"></div>
+</div> </div>
+<div class="newshr"></div>
+<div id="post_528226219983419880">
+<div class="newsPostBlock steam_release">
+<div class="headline">
+<div class="date">Jun 4, 2010</div>
+<div class="posttitle"><a href="http://store.steampowered.com/news/3909/">Sword of the Stars Complete Collection Released</a></div>
+</div>
+<div style="clear:both"></div>
+<div class="feed">Product Release - Valve</div>
+<div style="clear:both"></div>
+<div class="body">
+		Sword of the Stars: Complete Collection includes the original Sword of the Stars game and three expansions: Born of Blood, A Murder of Crows, and Argos Naval Yard.<br/><br/><a href="http://store.steampowered.com/app/42890/"><img src="v/gfx/apps/42890/header.jpg" style=" float: left; margin-right: 12px; height: 215px; width: 460px;"/></a> </div>
+<div class="share">
+		Share:				  <a href="http://www.google.com/reader/link?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3909%2F&amp;title=Sword+of+the+Stars+Complete+Collection+Released&amp;snippet=+%0ASword+of+the+Stars%3A+Complete+Collection+includes+the+original+Sword+of+the+Stars+game+and+three+expansions%3A+Born+of+Blood%2C+A+Murder+of+Crows%2C+and+Argos+Naval+Yard.%09%09%09%09..." title="Share on Google Buzz"><img src="public/images/v5/social/buzz_news.gif"/></a>
+		  <a href="http://digg.com/submit?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3909%2F&amp;title=Sword+of+the+Stars+Complete+Collection+Released&amp;bodytext=+%0ASword+of+the+Stars%3A+Complete+Collection+includes+the+original+Sword+of+the+Stars+game+and+three+expansions%3A+Born+of+Blood%2C+A+Murder+of+Crows%2C+and+Argos+Naval+Yard.%09%09%09%09...&amp;topic=gaming_news" title="Share on Digg"><img src="public/images/v5/social/digg.gif"/></a>
+		  <a href="http://twitter.com/home?source=steampowered.com&amp;status=From%20@steam_games:%20http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3909%2F" title="Share on Twitter"><img src="public/images/v5/social/twitter.gif"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3909%2F&amp;t=Sword+of+the+Stars+Complete+Collection+Released" title="Share on Facebook"><img src="public/images/v5/social/facebook.gif"/></a>
+</div>
+<div style="clear:both"></div>
+</div> </div>
+<div class="newshr"></div>
+<div id="post_528226219982043436">
+<div class="newsPostBlock steam_updates">
+<div class="headline">
+<div class="date">Jun 4, 2010</div>
+<div class="posttitle"><a href="http://store.steampowered.com/news/3903/">Left 4 Dead 2 Update Released</a></div>
+</div>
+<div style="clear:both"></div>
+<div class="feed">Product Update - Valve</div>
+<div style="clear:both"></div>
+<div class="body">
+		Updates to Left 4 Dead 2 have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include:<br/><br/><b>Left 4 Dead 2</b><br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><li>New mutation: Chainsaw Massacre<br/><li>In Versus Special Infected bots spawn within 10 seconds of the Survivors leaving the safe room<br/><li>Shortened spawn times for human Special Infected when the Infected team isn’t full.   The time difference is added to the timer of the next bot in line to spawn<br/><li>Exposed client console variable cl_viewmodelfovsurvivor to let players adjust their viewmodel FOV<br/><li>To use this type cl_viewmodelfovsurvivor ## in the console.  ## can be any number from 0-128 the default is 51<br/></li></li></li></li></li></ul> </div>
+<div class="share">
+		Share:				  <a href="http://www.google.com/reader/link?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3903%2F&amp;title=Left+4+Dead+2+Update+Released&amp;snippet=+%0AUpdates+to+Left+4+Dead+2+have+been+released.+The+updates+will+be+applied+automatically+when+your+Steam+client+is+restarted.+The+major+changes+include%3ALeft+4+Dead+2New+mutation%3A+Chainsaw+MassacreIn+V..." title="Share on Google Buzz"><img src="public/images/v5/social/buzz_news.gif"/></a>
+		  <a href="http://digg.com/submit?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3903%2F&amp;title=Left+4+Dead+2+Update+Released&amp;bodytext=+%0AUpdates+to+Left+4+Dead+2+have+been+released.+The+updates+will+be+applied+automatically+when+your+Steam+client+is+restarted.+The+major+changes+include%3ALeft+4+Dead+2New+mutation%3A+Chainsaw+MassacreIn+V...&amp;topic=gaming_news" title="Share on Digg"><img src="public/images/v5/social/digg.gif"/></a>
+		  <a href="http://twitter.com/home?source=steampowered.com&amp;status=From%20@steam_games:%20http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3903%2F" title="Share on Twitter"><img src="public/images/v5/social/twitter.gif"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3903%2F&amp;t=Left+4+Dead+2+Update+Released" title="Share on Facebook"><img src="public/images/v5/social/facebook.gif"/></a>
+</div>
+<div style="clear:both"></div>
+</div> </div>
+<div class="newshr"></div>
+<div id="post_528226219980963608">
+<div class="newsPostBlock steam_announce">
+<div class="headline">
+<div class="date">Jun 3, 2010</div>
+<div class="posttitle"><a href="http://store.steampowered.com/news/3907/">Weekend Special - Shattered Horizon at 50% Off + FREE Weekend</a></div>
+</div>
+<div style="clear:both"></div>
+<div class="feed">Announcement - Valve</div>
+<div style="clear:both"></div>
+<div class="body">
+		Play <a href="http://store.steampowered.com/app/18110/">Shattered Horizon</a> FREE this weekend but why stop there? Make it yours at 50% off the regular price.  Sale ends on Monday June 7th - don't miss it!<br/><br/><a href="http://store.steampowered.com/app/18110/"><img src="v/gfx/apps/18110/capsule_231x87.jpg" style=" float: left; margin-right: 12px; height: 87px; width: 231px;"/></a> </div>
+<div class="share">
+		Share:				  <a href="http://www.google.com/reader/link?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3907%2F&amp;title=Weekend+Special+-+Shattered+Horizon+at+50%25+Off+%2B+FREE+Weekend&amp;snippet=+%0APlay+Shattered+Horizon+FREE+this+weekend+but+why+stop+there%3F+Make+it+yours+at+50%25+off+the+regular+price.++Sale+ends+on+Monday+June+7th+-+don%27t+miss+it%21%09%09%09%09..." title="Share on Google Buzz"><img src="public/images/v5/social/buzz_news.gif"/></a>
+		  <a href="http://digg.com/submit?url=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3907%2F&amp;title=Weekend+Special+-+Shattered+Horizon+at+50%25+Off+%2B+FREE+Weekend&amp;bodytext=+%0APlay+Shattered+Horizon+FREE+this+weekend+but+why+stop+there%3F+Make+it+yours+at+50%25+off+the+regular+price.++Sale+ends+on+Monday+June+7th+-+don%27t+miss+it%21%09%09%09%09...&amp;topic=gaming_news" title="Share on Digg"><img src="public/images/v5/social/digg.gif"/></a>
+		  <a href="http://twitter.com/home?source=steampowered.com&amp;status=From%20@steam_games:%20http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3907%2F" title="Share on Twitter"><img src="public/images/v5/social/twitter.gif"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fstore.steampowered.com%2Fnews%2F3907%2F&amp;t=Weekend+Special+-+Shattered+Horizon+at+50%25+Off+%2B+FREE+Weekend" title="Share on Facebook"><img src="public/images/v5/social/facebook.gif"/></a>
+</div>
+<div style="clear:both"></div>
+</div> </div>
+<a href="news/posts/?enddate=1275614399" id="more_posts_url" onclick="LoadMoreNews(); return false;">...</a>
+</div>
+<br/>
+<div id="more_posts">
+<h3>...</h3>
+</div>
+</div>
+</div>
+<div class="newsleftcol">
+<div class="block">
+<div class="block_header">
+<div>Channels</div>
+</div>
+<div class="block_content">
+<div class="block_content_inner">
+<a class="linkbar linkbar_active" href="news/">All News</a>
+<a class="linkbar" href="news/?feed=steam_announce">Announcements</a>
+<a class="linkbar" href="news/?feed=steam_client">Client Updates</a>
+<a class="linkbar" href="news/?feed=steam_press">Press Releases</a>
+<a class="linkbar" href="news/?feed=steam_release">Product Releases</a>
+<a class="linkbar" href="news/?feed=steam_updates">Product Updates</a>
+<a class="linkbar" href="news/?feed=steam_blog">Steam Blog</a>
+<div class="block_sub_header_channels">Syndicated</div>
+<a class="linkbar" href="news/?feed=kotaku">Kotaku</a>
+<a class="linkbar" href="news/?feed=l4d_blog">Left 4 Dead Official Blog</a>
+<a class="linkbar" href="news/?feed=pcgamer">PC Gamer</a>
+<a class="linkbar" href="news/?feed=rps">Rock, Paper, Shotgun</a>
+<a class="linkbar" href="news/?feed=shacknews">Shacknews</a>
+<a class="linkbar" href="news/?feed=tf2_blog">TF2 Official Blog</a>
+</div>
+</div>
+</div>
+<div class="block">
+<div class="block_header">
+<div>Search</div>
+</div>
+<div class="block_content">
+<div class="block_content_inner">
+<div id="news_search">
+<form action="http://store.steamgames.com/news/search/" id="searchform" method="get" name="searchform" onsubmit="return checkTerm(this);">
+<div class="searchbox_news" id="searchbox_news">
+<input autocomplete="off" class="default" name="term" onblur="SetDefaultNewsSearchText(this);" onclick="ClearDefaultNewsSearchText(this);" type="text" value="enter search term"/> 
+								| <a href="news/" onclick="var form = $(this).up('form'); checkTerm( form ); form.submit(); return false;"><img border="0" height="18" src="public/images/v5/ico_search.gif" width="18"/></a>
+</div>
+<div class="autocomplete" id="searchterm_options" style="display: none;">
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script language="JavaScript">
+		<!--
+
+		if ( Ajax && Ajax.Autocompleter )
+			new Ajax.Autocompleter( $('searchform').elements['term'], 'searchterm_options', 'http://store.steamgames.com/search/suggest', {frequency: 0.2, setWidth: false, method: "get", allowFreeEntry: true, afterUpdateElement:function() {document.searchform.submit();} });
+			
+				
+		function ClearDefaultNewsSearchText( elem )
+		{
+			var text = elem.value;
+			if ( text == 'enter search term' )
+			{
+				elem.value = '';
+				$(elem).removeClassName( 'default' );
+			}
+		}
+		function SetDefaultNewsSearchText( elem )
+		{
+			var text = elem.value;
+			if ( text == '' )
+			{
+				elem.value = 'enter search term';
+				$(elem).addClassName( 'default' );
+			}
+		}
+		function checkTerm( theform )
+		{
+			if ( theform.term.value == 'search the store' )
+			{
+				theform.term.value = '';
+			}
+			return true;
+		}
+		//-->
+		</script>
+<div class="block">
+<div class="block_header">
+<div>Archive</div>
+</div>
+<div class="block_content">
+<div class="block_content_inner">
+<div class="block_sub_region">
+<div class="block_sub_header">2010</div>
+<a href="news/?enddate=1277967600">Jun </a> 
+																<a href="news/?enddate=1275375600">May </a> 
+																<a href="news/?enddate=1272697200">Apr </a> 
+																<a href="news/?enddate=1270105200">Mar </a> 
+																<a href="news/?enddate=1267430400">Feb </a> 
+																<a href="news/?enddate=1265011200">Jan </a> 
+													</div>
+<div class="block_sub_region">
+<div class="block_sub_header">Archives By Year</div>
+<a href="news/?enddate=1293868800">2010 </a> 
+														<a href="news/?enddate=1262332800">2009 </a> 
+														<a href="news/?enddate=1230796800">2008 </a> 
+														<a href="news/?enddate=1199174400">2007 </a> 
+														<a href="news/?enddate=1167638400">2006 </a> 
+															<br/>
+<a href="news/?enddate=1136102400">2005 </a> 
+														<a href="news/?enddate=1104566400">2004 </a> 
+														<a href="news/?enddate=1072944000">2003 </a> 
+														<a href="news/?enddate=1041408000">2002 </a> 
+												</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="clear: both"></div>
+<div id="footer">
+<div class="footer_content">
+<div class="rule"></div>
+<div id="footer_nav">
+<span class="pulldown" id="footer_genre_pulldown">
+					SHOP BY GENRE				</span>
+<div class="popup_block" id="footer_genre_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepoupfix"><img class="iepoupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="genre/Action/">
+<h5>Action</h5>
+</a>
+<a class="popup_menu_item" href="genre/Adventure/">
+<h5>Adventure</h5>
+</a>
+<a class="popup_menu_item" href="genre/Strategy/">
+<h5>Strategy</h5>
+</a>
+<a class="popup_menu_item" href="genre/RPG/">
+<h5>RPG</h5>
+</a>
+<a class="popup_menu_item" href="genre/Indie/">
+<h5>Indie</h5>
+</a>
+<a class="popup_menu_item" href="genre/Massively%20Multiplayer/">
+<h5>Massively Multiplayer</h5>
+</a>
+<a class="popup_menu_item" href="genre/Casual/">
+<h5>Casual</h5>
+</a>
+<a class="popup_menu_item" href="genre/Family/">
+<h5>Family Games</h5>
+</a>
+<a class="popup_menu_item" href="genre/Simulation/">
+<h5>Simulation</h5>
+</a>
+<a class="popup_menu_item" href="genre/Racing/">
+<h5>Racing</h5>
+</a>
+<a class="popup_menu_item" href="genre/Sports/">
+<h5>Sports</h5>
+</a>
+</div>
+</div>
+<span class="pulldown" id="footer_category_pulldown">
+				SHOP BY CATEGORY			</span>
+<div class="popup_block" id="footer_category_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepoupfix"><img class="iepoupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="freestuff/demos/">
+<h5>Demos</h5>
+</a>
+<a class="popup_menu_item" href="freestuff/videos/">
+<h5>Videos</h5>
+</a>
+<a class="popup_menu_item" href="search/?category2=21">
+<h5>Downloadable Content</h5>
+</a>
+<a class="popup_menu_item" href="browse/publishers">
+<h5>Game Publisher Catalogs</h5>
+</a>
+<a class="popup_menu_item" href="browse/under10">
+<h5>Games Under $10</h5>
+</a>
+<a class="popup_menu_item" href="browse/under5">
+<h5>Games Under $5</h5>
+</a>
+</div>
+</div>
+<span class="pulldown" id="footer_steam_pulldown">
+				ABOUT STEAM			</span>
+<div class="popup_block" id="footer_steam_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepoupfix"><img class="iepoupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="about/">
+<h5>What is Steam?</h5>
+</a>
+<!--
+					<a class="popup_menu_item" href="">
+						<h5>Download Steam now</h5>
+					</a>
+					-->
+<a class="popup_menu_item" href="https://support.steampowered.com/kb_article.php?p_faqid=549#gifts" target="_blank">
+<h5>Gifting on Steam</h5>
+</a>
+<a class="popup_menu_item" href="https://steamcommunity.com/">
+<h5>The Steam Community</h5>
+</a>
+</div>
+</div>
+<span class="pulldown" id="footer_valve_pulldown">
+				ABOUT VALVE			</span>
+<div class="popup_block" id="footer_valve_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepoupfix"><img class="iepoupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="http://www.valvesoftware.com/about.html" target="_blank">
+<h5>About Valve</h5>
+</a>
+<a class="popup_menu_item" href="http://www.valvesoftware.com/business/" target="_blank">
+<h5>Business Solutions</h5>
+</a>
+<a class="popup_menu_item" href="http://www.steampowered.com/steamworks/" target="_blank">
+<h5>Steamworks</h5>
+</a>
+<a class="popup_menu_item" href="http://source.valvesoftware.com/" target="_blank">
+<h5>Source Engine</h5>
+</a>
+<a class="popup_menu_item" href="https://cafe.steampowered.com" target="_blank">
+<h5>Cyber Cafés</h5>
+</a>
+<a class="popup_menu_item" href="http://www.valvesoftware.com/jobs.html" target="_blank">
+<h5>Jobs</h5>
+</a>
+</div>
+</div>
+<span class="pulldown" id="footer_help_pulldown">
+				HELP			</span>
+<div class="popup_block" id="footer_help_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepoupfix"><img class="iepoupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="http://support.steampowered.com/" target="_blank">
+<h5>Support</h5>
+</a>
+<a class="popup_menu_item" href="forums/" target="_blank">
+<h5>Forums</h5>
+</a>
+<a class="popup_menu_item" href="stats/" target="_blank">
+<h5>Stats</h5>
+</a>
+</div>
+</div>
+<span class="pulldown" id="footer_tools_pulldown">
+				TOOLS			</span>
+<div class="popup_block" id="footer_tools_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepoupfix"><img class="iepoupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="http://storefront.steampowered.com/download/hldsupdatetool.exe">
+<h5>Windows HLDS Update Tool</h5>
+</a>
+<a class="popup_menu_item" href="http://storefront.steampowered.com/download/hldsupdatetool.bin">
+<h5>Linux HLDS Update Tool</h5>
+</a>
+</div>
+</div>
+<span class="pulldown" id="footer_feeds_pulldown">
+				NEWS FEEDS			</span>
+<div class="popup_block" id="footer_feeds_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepoupfix"><img class="iepoupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="feeds/news.xml">
+<img align="top" alt="" border="0" height="13" src="public/images/ico/ico_rss2.gif" width="13"/>  Steam News					</a>
+<a class="popup_menu_item" href="feeds/newreleases.xml">
+<img align="top" alt="" border="0" height="13" src="public/images/ico/ico_rss2.gif" width="13"/>  Game Releases					</a>
+</div>
+</div>
+<div style="clear: left;"></div>
+<script type="text/javascript">
+				RegisterFlyout( 'footer_genre_pulldown', 'footer_genre_dropdown' );
+				RegisterFlyout( 'footer_category_pulldown', 'footer_category_dropdown' );
+				RegisterFlyout( 'footer_steam_pulldown', 'footer_steam_dropdown' );
+				RegisterFlyout( 'footer_valve_pulldown', 'footer_valve_dropdown' );
+				RegisterFlyout( 'footer_help_pulldown', 'footer_help_dropdown' );
+				RegisterFlyout( 'footer_tools_pulldown', 'footer_tools_dropdown' );
+				RegisterFlyout( 'footer_feeds_pulldown', 'footer_feeds_dropdown' );
+			</script>
+</div>
+<div class="footer_box">
+<h3>Publisher Catalogs</h3>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/1C Company">1C Company</a></div>
+<div class="ellipsis"><a href="publisher/2K Games">2K Games</a></div>
+<div class="ellipsis"><a href="publisher/Activision">Activision</a></div>
+<div class="ellipsis"><a href="publisher/Atari">Atari</a></div>
+<div class="ellipsis"><a href="publisher/Bethesda Softworks">Bethesda</a></div>
+<div class="ellipsis"><a href="publisher/Big Fish Games">Big Fish Games</a></div>
+<div class="ellipsis"><a href="publisher/Capcom">Capcom</a></div>
+</div>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/Codemasters">Codemasters</a></div>
+<div class="ellipsis"><a href="publisher/Electronic Arts">Electronic Arts</a></div>
+<div class="ellipsis"><a href="publisher/Epic Games, Inc.">Epic Games</a></div>
+<div class="ellipsis"><a href="publisher/Focus Home Interactive">Focus</a></div>
+<div class="ellipsis"><a href="publisher/Her Interactive">Her Interactive</a></div>
+<div class="ellipsis"><a href="publisher/id Software">id Software</a></div>
+<div class="ellipsis"><a href="publisher/Interplay Inc.">Interplay</a></div>
+</div>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/iWin">iWin</a></div>
+<div class="ellipsis"><a href="publisher/JoWooD Entertainment, DreamCatcher">JoWooD / DreamCatcher</a></div>
+<div class="ellipsis"><a href="publisher/Kalypso Media Digital">Kalypso</a></div>
+<div class="ellipsis"><a href="publisher/LucasArts">LucasArts</a></div>
+<div class="ellipsis"><a href="publisher/Majesco">Majesco</a></div>
+<div class="ellipsis"><a href="publisher/Meridian4">Meridian4</a></div>
+<div class="ellipsis"><a href="publisher/MumboJumbo">MumboJumbo</a></div>
+</div>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/NCsoft">NCsoft</a></div>
+<div class="ellipsis"><a href="publisher/NovaLogic">NovaLogic</a></div>
+<div class="ellipsis"><a href="publisher/Paradox Interactive">Paradox Interactive</a></div>
+<div class="ellipsis"><a href="publisher/PlayFirst">PlayFirst</a></div>
+<div class="ellipsis"><a href="publisher/PopCap Games, Inc.">PopCap</a></div>
+<div class="ellipsis"><a href="publisher/Prima Games">Prima Games</a></div>
+<div class="ellipsis"><a href="publisher/RailSimulator.com">RailSimulator.com</a></div>
+</div>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/Rockstar Games">Rockstar Games</a></div>
+<div class="ellipsis"><a href="publisher/Sandlot Games">Sandlot Games</a></div>
+<div class="ellipsis"><a href="publisher/SEGA">SEGA</a></div>
+<div class="ellipsis"><a href="publisher/Sony Online Entertainment">Sony Online</a></div>
+<div class="ellipsis"><a href="publisher/SouthPeak Games">SouthPeak Games</a></div>
+<div class="ellipsis"><a href="publisher/SQUARE ENIX, Eidos Interactive">SQUARE ENIX, Eidos Interactive</a></div>
+<div class="ellipsis"><a href="publisher/Strategy First">Strategy First</a></div>
+</div>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/Telltale Games">Telltale Games</a></div>
+<div class="ellipsis"><a href="publisher/THQ">THQ</a></div>
+<div class="ellipsis"><a href="publisher/Tilted Mill Entertainment, Inc.">Tilted Mill</a></div>
+<div class="ellipsis"><a href="publisher/Topware Interactive">Topware</a></div>
+<div class="ellipsis"><a href="publisher/Ubisoft">Ubisoft</a></div>
+<div class="ellipsis"><a href="publisher/Valve">Valve</a></div>
+<div class="ellipsis"><a href="publisher/Warner Bros. Interactive Entertainment">Warner Bros.</a></div>
+</div>
+<div style="clear: left;"></div>
+</div>
+<div>
+<a href="http://www.valvesoftware.com/about.html" target="_blank">About Valve</a> 
+			| <a href="http://www.valvesoftware.com/business/" target="_blank">Business Solutions</a> 
+			| <a href="http://www.steampowered.com/steamworks/" target="_blank">Steamworks</a>
+			| <a href="http://source.valvesoftware.com/" target="_blank">Source Engine</a>
+			| <a href="https://cafe.steampowered.com" target="_blank">Cyber Cafés</a> 
+			| <a href="http://www.valvesoftware.com/jobs.html" target="_blank">Jobs</a>
+</div>
+<div class="rule"></div>
+<div id="footer_text">
+<div id="footer_logo"><a href="http://www.valvesoftware.com" target="_blank"><img alt="Valve Software" border="0" src="public/images/logo_valve_footer.jpg"/></a></div>
+<div>© 2010 Valve Corporation.  All rights reserved.  All trademarks are property of their respective owners in the US and other countries.</div>
+<div class="valve_links">
+<a href="http://www.valvesoftware.com/privacy.htm" target="_blank">Privacy Policy</a>
+			        
+			<a href="http://www.valvesoftware.com/legal.htm" target="_blank">Legal</a>
+			        
+			<a href="subscriber_agreement/">Steam Subscriber Agreement</a>
+</div>
+<div style="clear: left;"></div>
+</div>
+</div>
+</div></body>
+</head></html>

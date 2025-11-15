@@ -5,7 +5,7 @@ function toggle_section( section )
 	section_cookie = section+'_cookie';
 
 	img_src = document.getElementById( section_header ).src;
-	if ( img_src.indexOf( 'http://steampowered.com/v/up.gif' ) != -1 )
+	if ( img_src.indexOf( 'up.gif.html' ) != -1 )
 	{
 		document.getElementById( section_header ).src = 'img/ico/ico_arrow_dn.gif';
 		document.getElementById( section_content ).style.display = 'none';

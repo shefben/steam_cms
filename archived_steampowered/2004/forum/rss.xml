@@ -1,0 +1,355 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:cc="http://web.resource.org/cc/" xmlns="http://purl.org/rss/1.0/">
+	<channel rdf:about="http://www.steampowered.com">
+		<title>Valve RSS News Feed</title> 
+		<link>http://www.steampowered.com/</link> 
+		<description>All Valve news, all the time!</description> 
+		<language>en</language> 
+		<pubDate>Fri, 3 Dec 2004 09:35:42 -0800</pubDate> 
+		<generator>http://www.steampowered.com/</generator> 
+		<items>
+			<rdf:Seq>
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=367" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=363" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=362" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=361" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=359" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=366" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=365" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=370" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=369" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=368" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=364" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=357" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=356" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=355" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=354" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=351" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=353" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=352" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=350" />
+				<rdf:li rdf:resource="http://www.steampowered.com/index.php?area=news&amp;id=349" />
+			</rdf:Seq>
+		</items>
+	</channel>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=367">
+		<title>HL2DM, Source SDK, Source Engine Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=367</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 2 Dec 2004 05:41:23 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-12-2T05:41:23-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Half-Life 2: Deathmatch, Source SDK, and Source Engine updates are available and will be applied automatically when Steam is restarted. The changes include:<br><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Half-Life 2: Deathmatch<br><li>Players now play grenade throw animation and RPG fire animation <br><li>Items and weapons punted from their original spawn position now return after x time has passed (sv_hl2mp_weapon_respawn_time, sv_hl2mp_item_respawn_time) <br><li>Improved player crouch animations<br></ul><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Source SDK<br><li>Included support for making HL2DM maps<br><li>Included sample source HL2DM map: dm_lockdown.vmf <br><li>Added xwad, vtf2tga, and glview tools <br><li>Fixed problems running vrad on certain machines <br><li>Fixed bugs adding game configurations with long paths <br><li>Improved detection of bad game paths</ul><br><ul style="padding-bottom: 0px; margin-bottom: 0px;" >Source Engine<br><li>Fixed server plugins not loading under Steam <br><li>Fixed rcon kick failing <br><li>Fixed UDP logging functions not working properly with quoted strings</ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=363">
+		<title>[REVIEW] Good 'Half-Life' got better - Miami Herald</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=363</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 2 Dec 2004 04:23:01 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-12-2T04:23:01-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+by Lissett Fernandez<br>I knew <i>Half-Life 2</i> was a worthy sequel when I found myself screaming in front of my computer as hordes of zombie-like aliens crawled out of every dark nook. Four hours later, I was still hooked and you'll be too if you appreciate an involving first-person shooter.    <b>4 out of 4 STARS</b><br><a href="http://www.miami.com/mld/miamiherald/entertainment/10268950.htm?1c"><b>Miami Herald</b></a>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=362">
+		<title>[REVIEW] GAME THEORY - New York Times</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=362</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 2 Dec 2004 04:22:38 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-12-2T04:22:38-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+by Charles Herald<br><b>A Big Sequel That's Worthy of Its Lineage</b><br>"This is the game you have to buy ... the most important game of the year, follow-up to the greatest shooter ever made, and you need it."<br><a href="http://www.nytimes.com/2004/11/25/technology/circuits/25game.html?ex=1102341027&ei=1&en=36ea42be51e5f71c"><b>New York Times</b></a>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=361">
+		<title>'Half-Life 2' Review - CBSNews.com</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=361</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 2 Dec 2004 04:20:30 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-12-2T04:20:30-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+by William Vitka, <i>Game Core</i>'s Weekly Columnist<br><b><i>Half-Life 2</i>s graphics will rock your face off repeatedly.</b><br>Read the full article at <a href="http://www.cbsnews.com/stories/2004/11/09/entertainment/main654455.shtml"><b> CBSNews.com</b></a>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=359">
+		<title>[REVIEW] 'Half-Life 2' a long-awaited tech masterpiece - USA Today</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=359</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Thu, 2 Dec 2004 04:20:01 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-12-2T04:20:01-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+by Matt Slagle, Associated Press<br><i>"Half-Life 2</i> is a brilliant sequel that raises the bar on what we should expect from video games. <br>On technical merits, <i>Half-Life 2</i> is unsurpassed."    <b>4 out of 4 STARS</b><br><a href="http://www.usatoday.com/tech/products/games/2004-11-24-halflife2-slagle_x.htm"><b>USA Today</a></b>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=366">
+		<title>Source Engine Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=366</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 1 Dec 2004 08:00:00 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-12-1T08:00:00-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+A Source Engine update is available and will be applied automatically when Steam is restarted. The change includes:<br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Fixed clients being able to kick other clients from a server<br></ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=365">
+		<title>Notes on the Half-Life 2: Deathmatch release</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=365</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 1 Dec 2004 03:50:28 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-12-1T03:50:28-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Last night at about 9:00 PST, Half-Life 2: Deathmatch was released. Earlier today there were about 12,000 simultaneous HL2DM players. People seem to have gotten the hang of tossing toilets and radiators and cars at each other pretty quickly.<br> <br>Immediately after the release of HL2DM last night, users who run Source Engine games (including Half-Life 2 and Counter-Strike: Source) under DirectX 7 or who run with less than the recommended amount of RAM were affected by a game crash. This caused them to be unable to run HL2 or CS:S for a short time. Shortly after midnight PST, we released a fix which cleared the problem up.<br> <br>We're planning a small dedicated server release soon to improve weapon re-spawn behavior.<br> <br>Also, If you're handy with Hammer (Valve's level editor), be sure to enter the <a href="http://steampowered.com/?area=map_contest">HL2DM map contest</a>. <br> <br>We hope everyone's enjoying the game.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=370">
+		<title>Blue 'Hearts' Half-Life 2</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=370</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 1 Dec 2004 03:28:04 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-12-1T03:28:04-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+<a href="http://bluesnews.com/cgi-bin/board.pl?action=viewthread&threadid=53237"><b>Out of the Blue</b></a> <br><br>"I finished <i>Half-Life 2</i>...in spite of my efforts to prolong the experience, the further along I got, the harder it was to resist pushing on. Let me just say this outright...Believe the hype."
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=369">
+		<title>[REVIEW] Half-Life 2 - The Times (UK)</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=369</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 1 Dec 2004 02:44:01 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-12-1T02:44:01-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+by Jim Rossignol<br>"<i>Half-Life 2</i> is a seamless adventure that is so exquisitely produced as to diminish all previous achievements of the genre."   <b>5 STARS</b><br><a href="http://entertainment.timesonline.co.uk/article/0,,14935-1358760,00.html"><b>Times UK</b></a>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=368">
+		<title>GameBiz Australia reviews Half-Life 2</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=368</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 1 Dec 2004 02:30:23 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-12-1T02:30:23-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+by Rich Nolan<br>"This is your FPS benchmark, this is the game of the year; this game is the beautiful, imaginative, detailed masterpiece of 2004. Theres not really much else to say."  <b>97%</b><br><a href="http://www.gamebiz.com.au/reviews.php?action=display&id=493"><b>GameBiz</b></a>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=364">
+		<title>Half-Life 2: Deathmatch and SDK Update</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=364</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 30 Nov 2004 08:05:44 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-11-30T08:05:44-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+A Half-Life 2 update has been released via Steam. Please restart Steam to apply the update.<br><p><br>Included in this update:<br><p><br>Half-Life 2: Deathmatch<br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>New multiplayer game featuring physics simulation system</li></ul><br>Half-Life 2/Source SDK<br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>Includes game code needed to create Half-Life 2/Source MODs</li><br><li>Ability to edit Half-Life 2 maps</li><br><li>Maya model exporter</li><br><li>3d Studio Max model exporter source code</li><br><li>Sample MOD with vehicles</li><br></ul><br>Source Updates<br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>HTTP and non-HTTP map auto downloading functionality</li><br><li>Enhanced dedicated server logging capabilities</li><br><li>Various tweaks and fixes</li><br></ul><br>*Also: A Half-Life 2: Deathmatch <a href="http://steampowered.com/?area=map_contest">Map Making Contest</a> has been announced. The winning entry will receive a cash prize of $5,000. Two runner up entries will receive a cash prize of $3,000.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=357">
+		<title>Valve Wins Summary Judgment Motions in Copyright Infringement Case</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=357</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Mon, 29 Nov 2004 04:47:38 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-11-29T04:47:38-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Valve today announced the U.S. Federal District Court in Seattle, WA granted its motion for summary judgment on the matters of Cyber Caf&eacute; Rights and Contractual Limitation of Liability in its copyright infringement suit with Sierra/Vivendi Universal Games. Click <a href="http://www.valvesoftware.com/C02-1683Z.htm">here</a> to read the judge's order.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=356">
+		<title>Half-Life 2 Update</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=356</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Wed, 24 Nov 2004 05:00:18 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-11-24T05:00:18-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+The changes in this release are directed at reducing the problem some users are experiencing with sound stuttering. The sound stuttering is not indicative of a sound problem, sound stuttering is only a symptom of texture thrashing on your video card or AGP memory. For information on how to reduce texture thrashing visit this link on our support site:<br> <br><a href="http://steampowered.custhelp.com/cgi-bin/steampowered.cfg/php/enduser/std_adp.php?p_faqid=280">http://steampowered.custhelp.com/cgi-bin/steampowered.cfg/php/enduser/std_adp.php?p_faqid=280</a><br> <br>This update will fix sound stuttering that users were experiencing that would last for longer than a few seconds during normal gameplay. This update will also eliminate this same behavior following a quicksave or autosave. There will still be a short pause while the autosave happens, but not the more drawn out stuttering behavior.<br> <br>We are still investigating another performance problem on some hardware, which will manifest where the game is getting into a state where performance drops to less than 5 fps and does not recover or crashes.<br> <br>Next week we will be releasing the Source SDK, along with a surprise for the community.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=355">
+		<title>HL2.net Reviews Raising the Bar</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=355</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 23 Nov 2004 08:48:38 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-11-23T08:48:38-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+Halflife2.net has posted <a href="http://www.halflife2.net/index.php?page=review_rtb">an extensive review of</a> the Raising the Bar book. The review contains twelve exclusive pages of content straight from the publication.<br><br>Raising the Bar. Half-Life 2: Raising the Bar is a 288-page, hard-bound publication that chronicles the origins of Valve, development of Valves first games, and covers the making of Half-Life 2 in great detail with hundreds of exclusive images, interviews and more.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=354">
+		<title>Steam Client Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=354</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Tue, 23 Nov 2004 06:33:21 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-11-23T06:33:21-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+A platform update is available and will be applied automatically when Steam is restarted. The change includes:<br><ul style="padding-bottom: 0px; margin-bottom: 0px;" ><li>No longer require "remember password" to be checked to play offline<br></ul>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=351">
+		<title>Steam Client Update Released</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=351</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 19 Nov 2004 11:03:06 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-11-19T11:03:06-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+A small number of Half-Life 2 customers have been experiencing problems while playing the game, and we have traced these issues to corrupt Steam cache files. We've released a Steam update to help resolve these issues. If you have been experiencing problems such as crashing during gameplay or startup of Half-Life 2, please <span style="color:#BFBA50;font-weight:bold;">restart Steam</span> and then click on one of the links below. Steam will then automatically verify your cache files. The verification process will take roughly five minutes to complete.<br><br><a href="steam://validate/220">To validate Half-Life 2 click here</a><br><br><a href="steam://validate/240">To validate Counter-Strike: Source click here</a><br><br><a href="steam://validate/280">To validate Half-Life: Source click here</a><br><br>We're also investigating a solution for the sound skipping problems a small number of users are running into. We'll have a solution for this as soon as possible.
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=353">
+		<title>[HALF-LIFE 2 REVIEW] Games Domain</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=353</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 19 Nov 2004 03:16:08 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-11-19T03:16:08-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+By Russ Fischer, Special to Yahoo! Games<br><br><b>10/10</b><br><br>"This is a jaw-dropping, exhilarating game. It's the game you'll remember for years. After about half an hour of play, you'll begin to save every few minutes, just so it'll be easier to replay the really cool moments."<br><br><br><br>Read the full story here: <a href="http://gamesdomain.yahoo.com/pc/halflife_2/review/53636">http://gamesdomain.yahoo.com</a>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=352">
+		<title>[STEAM REVIEW] Please, More Steam-Powered Games  - Wired</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=352</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 19 Nov 2004 03:12:51 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-11-19T03:12:51-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+By Suneel Ratan<br><br>"my bottom line is that Steam is huge"<br><br>Read the full story here: <a href="http://www.wired.com/news/games/0,2101,65758,00.html?tw=wn_tophead_3">http://www.wired.com</a>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=350">
+		<title>[HALF-LIFE 2 REVIEW]  No half measures with Half-Life 2 - BBC</title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=350</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 19 Nov 2004 02:55:12 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-11-19T02:55:12-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+By James Bregman, BBC News<br><br>"The bar has been raised, and so far out of sight that you have to sympathise with any game that tries to do anything remotely similar in the near future."<br>  <br>Read the full story here: <a href="http://news.bbc.co.uk/1/hi/technology/4025515.stm"> http://news.bbc.co.uk</a>
+			]]> 
+		</content:encoded>
+	</item>
+	<item rdf:about="http://www.steampowered.com/index.php?area=news&amp;id=349">
+		<title>[HALF-LIFE 2 REVIEW]  'Half-Life 2' provides full-speed action - Chicago Tribune </title> 
+		<link>http://www.steampowered.com/index.php?area=news&amp;id=349</link> 
+		<comments>http://www.steampowered.com/index.php?area=forums</comments> 
+		<pubDate>Fri, 19 Nov 2004 02:51:23 -0800</pubDate> 
+		<author>valve</author> 
+		<category>Valve news update</category> 
+		<dc:subject>Valve news update</dc:subject> 
+		<dc:creator>valve</dc:creator> 
+		<dc:date>2004-11-19T02:51:23-08:00</dc:date> 
+		<content:encoded>
+			<![CDATA[ 
+By Levi Buchanan, Special to the Tribune 11/19/2004<br>"<i>Half-Life 2</i> is a heart-stopper of a video game that shows off all the reasons a personal computer still can rival game consoles as the place to play."<br>Read the full story here: <a href="http://www.chicagotribune.com/technology/reviews/chi-0411190002nov19,1,1609666.story?coll=chi-technology-utl">http://www.chicagotribune.com</a>
+			]]> 
+		</content:encoded>
+	</item>
+</rdf:RDF>

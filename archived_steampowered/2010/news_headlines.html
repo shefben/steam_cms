@@ -1,0 +1,840 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>News - All News</title>
+<link href="public/css/styles_storev5_670a8e42.css" rel="stylesheet" type="text/css"/>
+<!--[if lte IE 6]> <link href="http://cdn.store.steampowered.com/public/css/styles_storev5_ie6.css?v=362381950" rel="stylesheet" type="text/css" />
+ <![endif]-->
+<!--[if lte IE 7]> <style type="text/css"> .iepopupfix{ display: block; } </style> <![endif]-->
+<link href="public/css/styles_newsv5_b4c4002f.css" rel="stylesheet" type="text/css"/>
+<script src="public/javascript/swfobject_78a04980.js" type="text/javascript"></script>
+<script src="public/javascript/prototype-1.6.0.2_2aefc357.js" type="text/javascript"></script>
+<script src="public/javascript/scriptaculous/scriptaculous_20ad39a0.js" type="text/javascript"></script>
+<script src="public/javascript/javascript_b262dab4.js" type="text/javascript"></script>
+<script src="public/javascript/main_2167c3dc.js" type="text/javascript"></script>
+<script src="public/javascript/jserrorreport_c30be06e.js" type="text/javascript"></script>
+<script src="public/javascript/header_27d74635.js" type="text/javascript"></script>
+<script src="public/javascript/search_94f9c27d.js" type="text/javascript"></script>
+<script src="public/javascript/news_1ce390cd.js" type="text/javascript"></script>
+<body>
+<div id="global_header">
+<div class="content">
+<div class="logo">
+<span id="logo_holder">
+<a href="">
+<img height="44" src="public/images/v5/globalheader_logo.png" width="176"/>
+</a>
+</span>
+<!--[if lt IE 7]>
+			<style type="text/css">
+			#logo_holder img { filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); }
+			#logo_holder { display: inline-block; width: 176px; height: 44px; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://cdn.store.steampowered.com/public/images/v5/globalheader_logo.png'); }
+			</style>
+			<![endif]-->
+</div>
+<a class="menuitem" href="">
+						STORE		</a>
+<a class="menuitem" href="https://steamcommunity.com/">
+			Community		</a>
+<a class="menuitem active" href="news/">
+<div class="activebg"> </div>			NEWS		</a>
+<a class="menuitem" href="forums/">
+						FORUMS		</a>
+<a class="menuitem" href="about/">
+						ABOUT		</a>
+<a class="menuitem" href="http://support.steampowered.com/">
+			SUPPORT		</a>
+<a class="menuitem" href="stats/">
+						STATS		</a>
+<div id="global_actions">
+<div id="global_action_menu">
+<div class="header_installsteam_btn header_installsteam_btn_green">
+<div class="header_installsteam_btn_leftcap"></div>
+<div class="header_installsteam_btn_rightcap"></div>
+<a class="header_installsteam_btn_content" href="about/">
+						Install Steam					</a>
+</div>
+<a class="global_action_link" href="login/">login</a>
+					 |  
+					<span class="pulldown global_action_link" id="language_pulldown" onclick="ShowMenu( this, 'language_dropdown', 'right' );">language</span>
+<div class="popup_block" id="language_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepopupfix"><img class="iepopupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item tight" href="news/?l=czech">čeština (Czech)</a>
+<a class="popup_menu_item tight" href="news/?l=danish">Dansk (Danish)</a>
+<a class="popup_menu_item tight" href="news/?l=dutch">Nederlands (Dutch)</a>
+<a class="popup_menu_item tight" href="news/?l=finnish">Suomi (Finnish)</a>
+<a class="popup_menu_item tight" href="news/?l=french">Français (French)</a>
+<a class="popup_menu_item tight" href="news/?l=german">Deutsch (German)</a>
+<a class="popup_menu_item tight" href="news/?l=hungarian">magyar (Hungarian)</a>
+<a class="popup_menu_item tight" href="news/?l=italian">Italiano (Italian)</a>
+<a class="popup_menu_item tight" href="news/?l=japanese">日本語 (Japanese)</a>
+<a class="popup_menu_item tight" href="news/?l=koreana">한국어 (Korean)</a>
+<a class="popup_menu_item tight" href="news/?l=norwegian">Norsk (Norwegian)</a>
+<a class="popup_menu_item tight" href="news/?l=polish">Polski (Polish)</a>
+<a class="popup_menu_item tight" href="news/?l=portuguese">Português (Portuguese)</a>
+<a class="popup_menu_item tight" href="news/?l=russian">Русский (Russian)</a>
+<a class="popup_menu_item tight" href="news/?l=romanian">Română (Romanian)</a>
+<a class="popup_menu_item tight" href="news/?l=schinese">简体中文 (Simplified Chinese)</a>
+<a class="popup_menu_item tight" href="news/?l=spanish">Español (Spanish)</a>
+<a class="popup_menu_item tight" href="news/?l=swedish">Svenska (Swedish)</a>
+<a class="popup_menu_item tight" href="news/?l=tchinese">繁體中文 (Traditional Chinese)</a>
+<a class="popup_menu_item tight" href="news/?l=thai">ไทย (Thai)</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	var g_SteamID = 0;
+</script>
+<!-- Main Background -->
+<div id="main">
+<div id="main_content">
+<div class="newsrightcol">
+<div class="page_title_area">
+<div id="main_header"><h1>All News</h1></div>
+<div id="viewmodelinks">
+<a class="view_inactive" href="news/?headlines=0">Full Stories</a>
+<a class="view_active" href="news/?headlines=1">Headlines</a>
+</div>
+</div>
+<div id="mainBlock">
+<div id="news">
+<div class="newshr"></div>
+<div id="post_566513076715160448">
+<div class="newsHeadlineBlock" id="posthead_566513076715160448" title="You can now enjoy Victoria II on Steam, and if you purchase by Aug 20th you will also receive Victoria I Complete for free! Guide your nation through expansion and colonization, to finally become a truly great power by the dawn of the 20th century. ">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076715160448' ); return false;">New Release - Victoria II</a></div>
+<div class="date">14:44</div>
+</div>
+<div id="postcontent_566513076715160448" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076711666810">
+<div class="newsHeadlineBlock" id="posthead_566513076711666810" title="Updates to Left 4 Dead 2 have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Left 4 Dead 2 * New Mutation: Iron Man; * Fixed Russian localization strings; ">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076711666810' ); return false;">Left 4 Dead 2 Update Released</a></div>
+<div class="date">09:20</div>
+</div>
+<div id="postcontent_566513076711666810" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076711484650">
+<div class="newsHeadlineBlock" id="posthead_566513076711484650" title="Another exciting day at QuakeCon 2010 brings another exciting day of sales here on Steam! Today offers 66% off all DOOM titles available on Steam. For the best deal, grab the DOOM Pack Complete . Check out the QuakeCon Sale Page for all of today's offers. ">
+<div class="feed">Announcement</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076711484650' ); return false;">QuakeCon 2010 Steam Sale Continues with DOOM</a></div>
+<div class="date">08:06</div>
+</div>
+<div id="postcontent_566513076711484650" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076704631347">
+<div class="newsHeadlineBlock" id="posthead_566513076704631347" title="Updates to Counter-Strike: Source Beta have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Counter-Strike: Source Beta * Fixed point contents not respecting detail brushes. Fixes bullet penetration bug in some community maps. ...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076704631347' ); return false;">Counter-Strike: Source Beta Update Released</a></div>
+<div class="date">Aug 12, 2010</div>
+</div>
+<div id="postcontent_566513076704631347" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076704104427">
+<div class="newsHeadlineBlock" id="posthead_566513076704104427" title="Kick off the weekend by playing Booster Trooper for free! You can also save 50% purchasing a single copy or 4-pack this weekend. Free weekend ends Sunday at 1pm (PST). 50% off sale ends Monday at 10am (PST). ">
+<div class="feed">Announcement</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076704104427' ); return false;">Free Weekend! - Booster Trooper</a></div>
+<div class="date">Aug 12, 2010</div>
+</div>
+<div id="postcontent_566513076704104427" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076701248599">
+<div class="newsHeadlineBlock" id="posthead_566513076701248599" title="Burn Zombie Burn! is now available on Steam. To celebrate its launch, the game will be offered a 10% discount during launch week. Hurry, as offer ends on August 18th, 2010! Welcome to the char-grilled world of Burn Zombie Burn, where the best type of undead is barbequed undead. The goals are simple:...">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076701248599' ); return false;">New Release - Burn Zombie Burn!</a></div>
+<div class="date">Aug 12, 2010</div>
+</div>
+<div id="postcontent_566513076701248599" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076699949568">
+<div class="newsHeadlineBlock" id="posthead_566513076699949568" title="Puzzle Quest 2 is now available for purchase. Escape to a puzzle game fantasy world filled with amazing creatures, powerful weapons, and challenging minigames! Addicting Match 3 gameplay is blended seamlessly with immersive role playing in this sequel to the award-winning Puzzle Quest! Jump right in...">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076699949568' ); return false;">New Release - Puzzle Quest 2</a></div>
+<div class="date">Aug 12, 2010</div>
+</div>
+<div id="postcontent_566513076699949568" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076699627370">
+<div class="newsHeadlineBlock" id="posthead_566513076699627370" title="To commemorate launch of the FREE Sandstorm Expansion, Global Agenda is available at 25% off now through August 19th, 2010, 10AM Pacific Time. ">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076699627370' ); return false;">25% off on Global Agenda with Sandstorm Expansion</a></div>
+<div class="date">Aug 12, 2010</div>
+</div>
+<div id="postcontent_566513076699627370" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076698713678">
+<div class="newsHeadlineBlock" id="posthead_566513076698713678" title="Global Agenda Version 1.36 has been released. The updates will be applied automatically when your Steam client is restarted. Version 1.36 introduces significant modifications to the Agency-vs-Agency system, as well as a variety of cleanups and improvements to the previously released Sandstorm functi...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076698713678' ); return false;">Global Agenda v1.36 Update Released</a></div>
+<div class="date">Aug 12, 2010</div>
+</div>
+<div id="postcontent_566513076698713678" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076698001036">
+<div class="newsHeadlineBlock" id="posthead_566513076698001036" title="Can't make it to Texas for QuakeCon this year? Or maybe you're already there, playing in the largest LAN event in North America. Either way, you can take part in the partying and fun with four days of huge sales on id and Bethesda games on Steam. Come back each day for a different deal, or just go a...">
+<div class="feed">Announcement</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076698001036' ); return false;">QuakeCon 2010 Steam Sale Starts Now</a></div>
+<div class="date">Aug 12, 2010</div>
+</div>
+<div id="postcontent_566513076698001036" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076692059110">
+<div class="newsHeadlineBlock" id="posthead_566513076692059110" title="Steam's browser and chat windows are now grouped as tabs! You can manage multiple chats and web pages each in a single window in our latest Beta. We've also been making some improvements to Steam's browser performance and stability, with the biggest gains on the Mac in particular. Flash video playba...">
+<div class="feed">Steam Blog</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076692059110' ); return false;">Now in Beta: Tabbed chat  browser improvements</a></div>
+<div class="date">Aug 11, 2010</div>
+</div>
+<div id="postcontent_566513076692059110" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076691714994">
+<div class="newsHeadlineBlock" id="posthead_566513076691714994" title="Updates to Counter-Strike: Source Beta have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Counter-Strike: Source Beta * Fixed a bug where some video configuration could get reset by restarting the engine. * Fixed a case of un...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076691714994' ); return false;">Counter-Strike: Source Beta Update Released</a></div>
+<div class="date">Aug 11, 2010</div>
+</div>
+<div id="postcontent_566513076691714994" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076690654307">
+<div class="newsHeadlineBlock" id="posthead_566513076690654307" title="Pre-purchase Tom Clancy's H.A.W.X.&amp;reg; 2 before launch and receive a FREE copy of Blazing Angels&amp;reg; 2 ! ">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076690654307' ); return false;">Tom Clancy's H.A.W.X.® 2 now available for Pre-Purchase with Bonus Offer</a></div>
+<div class="date">Aug 11, 2010</div>
+</div>
+<div id="postcontent_566513076690654307" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076689124453">
+<div class="newsHeadlineBlock" id="posthead_566513076689124453" title="Updates to Killing Floor have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Killing Floor * Fixed a number of exploits in core maps and code; * Potential fix for performance issues on ATI graphics cards; * Increased weapon ar...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076689124453' ); return false;">Killing Floor Update Released</a></div>
+<div class="date">Aug 11, 2010</div>
+</div>
+<div id="postcontent_566513076689124453" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076678723661">
+<div class="newsHeadlineBlock" id="posthead_566513076678723661" title="Horrid Henry is now available on Steam. Now Horrid Henry moves from the multi-million selling book series and massively successful TV show onto the PC! Henry is a head-strong boy, constantly raging against the tyranny of adults and infuriating girls. Henry has a range of special skills and equipment...">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076678723661' ); return false;">Now Available - Horrid Henry</a></div>
+<div class="date">Aug 10, 2010</div>
+</div>
+<div id="postcontent_566513076678723661" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076677921462">
+<div class="newsHeadlineBlock" id="posthead_566513076677921462" title="Plants vs. Zombies: GOTY Edition is now available with updated and expanded content including 20 new Steam Achievements, Steam Cloud support, and the interactive Zombatar&amp;trade;. Now with SteamPlay, Plants vs. Zombies can be played on either Mac or PC! ">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076677921462' ); return false;">Plants vs. Zombies Game of the Year Edition Released</a></div>
+<div class="date">Aug 10, 2010</div>
+</div>
+<div id="postcontent_566513076677921462" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076676752536">
+<div class="newsHeadlineBlock" id="posthead_566513076676752536" title="Updates to Moonbase Alpha have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: * Fix for Player names with spaces not being able join password protected servers; * Fix for Crash when audio bitrates higher than 48khz; * Fix for ...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076676752536' ); return false;">Moonbase Alpha Update Released</a></div>
+<div class="date">Aug 10, 2010</div>
+</div>
+<div id="postcontent_566513076676752536" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076675718868">
+<div class="newsHeadlineBlock" id="posthead_566513076675718868" title="To celebrate the new update , Nation Red is now on sale until Thursday, August 12th, 2010. Horde rush? Yes. Online co-op? You bet. Now's the perfect time to get yourself and your friend hooked in the all-new online co-op mode and enjoy the new weapon, perks, power-ups, and Achievements. ">
+<div class="feed">Announcement</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076675718868' ); return false;">Midweek Madness Sale: Nation Red - 50% OFF</a></div>
+<div class="date">Aug 10, 2010</div>
+</div>
+<div id="postcontent_566513076675718868" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076677168943">
+<div class="newsHeadlineBlock" id="posthead_566513076677168943" title="The Mafia II Demo is now available for download. ">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076677168943' ); return false;">Mafia II Demo Released</a></div>
+<div class="date">Aug 9, 2010</div>
+</div>
+<div id="postcontent_566513076677168943" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_566513076670510103">
+<div class="newsHeadlineBlock" id="posthead_566513076670510103" title="Updates to Commander: Conquest of the America have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Version 1.03 (Patch 1) 9.8.2010 Features: - Ship highlighting in tactical level - AI will now build fleets with 1-3 squadrons - ...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '566513076670510103' ); return false;">Commander: Conquest of the Americas Update Released</a></div>
+<div class="date">Aug 9, 2010</div>
+</div>
+<div id="postcontent_566513076670510103" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132223171100">
+<div class="newsHeadlineBlock" id="posthead_559757132223171100" title="Updates to Alien Swarm SDK have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Alien Swarm SDK * Alien Swarm Authoring Tools updated with support for mod configurations; ">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132223171100' ); return false;">Alien Swarm SDK Update Released</a></div>
+<div class="date">Aug 9, 2010</div>
+</div>
+<div id="postcontent_559757132223171100" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132223124609">
+<div class="newsHeadlineBlock" id="posthead_559757132223124609" title="&amp;nbsp; Version 1.6.1 Graphics Engine * Fixed storm lightning so that it doesn't always affect doors inside levels. UI * Added auto-complete support for new email &quot;To&quot; field using the Friends, clan members, and other player names that you have used for the current session. * Added recipe linking to t...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132223124609' ); return false;">Fallen Earth Updated</a></div>
+<div class="date">Aug 9, 2010</div>
+</div>
+<div id="postcontent_559757132223124609" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132222767797">
+<div class="newsHeadlineBlock" id="posthead_559757132222767797" title="Updates to Nation Red have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Nation Red * On-Line Coop! Friends + Matchmaking. Last Man Standing, Shared XP and more; * Added Primary &amp; Secondary weapon system; * More blood and gor...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132222767797' ); return false;">Nation Red Update Released</a></div>
+<div class="date">Aug 9, 2010</div>
+</div>
+<div id="postcontent_559757132222767797" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132222335573">
+<div class="newsHeadlineBlock" id="posthead_559757132222335573" title="Updates to Europa Universalis: Rome have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: * Annexation of two province states allowed; * Rebels can now declare independence; * Rebels and pirates now fight as if they had a martia...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132222335573' ); return false;">Europa Universalis: Rome Update Released</a></div>
+<div class="date">Aug 9, 2010</div>
+</div>
+<div id="postcontent_559757132222335573" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132222190207">
+<div class="newsHeadlineBlock" id="posthead_559757132222190207" title="Updates to Hearts of Iron III: Semper Fi have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: * Fixed multiple crash bugs, most related to nations being annexed; * Fixed the missing unit model picture bug; * Fixed the Arcade Mo...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132222190207' ); return false;">Hearts of Iron III: Semper Fi Update Released</a></div>
+<div class="date">Aug 9, 2010</div>
+</div>
+<div id="postcontent_559757132222190207" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132220792978">
+<div class="newsHeadlineBlock" id="posthead_559757132220792978" title="Updates to Booster Trooper have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Booster Trooper * Added: BOT AI for CTF and DTB in singleplayer and multiplayer; * Improved: BOT AI; * Added: new map - Hidden Corridor; * Added: n...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132220792978' ); return false;">Booster Trooper Update Released</a></div>
+<div class="date">Aug 9, 2010</div>
+</div>
+<div id="postcontent_559757132220792978" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132190015760">
+<div class="newsHeadlineBlock" id="posthead_559757132190015760" title="Updates to Counter-Strike: Source Beta have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Counter-Strike: Source Beta * Fixed a case where vsync wasn&amp;#146;t disabled; ">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132190015760' ); return false;">Counter-Strike: Source Beta Update Released</a></div>
+<div class="date">Aug 6, 2010</div>
+</div>
+<div id="postcontent_559757132190015760" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132188416948">
+<div class="newsHeadlineBlock" id="posthead_559757132188416948" title="Starting today the Counter-Strike: Source Beta will be available to all PC Counter-Strike: Source players. As we continue to update CSS and address issues, we want to make sure to not destabilize the core game. By releasing updates to CSS Beta first, we will be able to solicit community feedback bef...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132188416948' ); return false;">Counter-Strike: Source Beta Reopened</a></div>
+<div class="date">Aug 6, 2010</div>
+</div>
+<div id="postcontent_559757132188416948" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132187756402">
+<div class="newsHeadlineBlock" id="posthead_559757132187756402" title='Updates to Rhythm Zone have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: * Unicode Support; * New "Play My Music" results screen implemented that features current Friend and Global leaderboard status, and presents current or...'>
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132187756402' ); return false;">Rhythm Zone Update Released</a></div>
+<div class="date">Aug 6, 2010</div>
+</div>
+<div id="postcontent_559757132187756402" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132186429642">
+<div class="newsHeadlineBlock" id="posthead_559757132186429642" title="Updates to Garry's Mod have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Garry's Mod * Fixed server freezing; * Fixed Cloudscript failing in non english; * [TTT] Changed ragdoll (corpse) carrying to be easier; * [TTT] Change...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132186429642' ); return false;">Garry's Mod Update Released</a></div>
+<div class="date">Aug 6, 2010</div>
+</div>
+<div id="postcontent_559757132186429642" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132186266258">
+<div class="newsHeadlineBlock" id="posthead_559757132186266258" title="Fantasy Wars is now available for purchase on Steam. Fantasy Wars is a turn-based strategy game set in a fantasy world, combining both classic strategy gameplay and sophisticated 3D graphics players can experience epic battles like never before. ">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132186266258' ); return false;">New Release - Fantasy Wars</a></div>
+<div class="date">Aug 6, 2010</div>
+</div>
+<div id="postcontent_559757132186266258" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132185350524">
+<div class="newsHeadlineBlock" id="posthead_559757132185350524" title="Updates to Left 4 Dead 2 have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Left 4 Dead 2 * New Mutation: Gib Fest! * Localization updates and fixes; ">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132185350524' ); return false;">Left 4 Dead 2 Update Released</a></div>
+<div class="date">Aug 6, 2010</div>
+</div>
+<div id="postcontent_559757132185350524" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132178275392">
+<div class="newsHeadlineBlock" id="posthead_559757132178275392" title="Updates to Counter-Strike: Source have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Counter-Strike: Source * Fixed a possible memory corruption on player disconnect, likely the cause of windows dedicated server crashes; * Ad...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132178275392' ); return false;">Counter-Strike: Source Update Released</a></div>
+<div class="date">Aug 5, 2010</div>
+</div>
+<div id="postcontent_559757132178275392" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132177998519">
+<div class="newsHeadlineBlock" id="posthead_559757132177998519" title="Updates to Alien Swarm have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: Alien Swarm * Fixed Assault Jets using up more than one charge when you have high ping; * Fixed HLMV material loading when running a mod; * Fixed a Ste...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132177998519' ); return false;">Alien Swarm Update Released</a></div>
+<div class="date">Aug 5, 2010</div>
+</div>
+<div id="postcontent_559757132177998519" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132178556292">
+<div class="newsHeadlineBlock" id="posthead_559757132178556292" title="Puzzle Quest 2 , a sequel to the award-winning, genre-defining puzzle game PuzzleQuest: Challenge of the Warlords , is now available for Pre-purchase. Purchase between now and August 17th's launch day and save 10%! ">
+<div class="feed">Announcement</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132178556292' ); return false;">Pre-Purchase Puzzle Quest 2 Now and Save 10%</a></div>
+<div class="date">Aug 5, 2010</div>
+</div>
+<div id="postcontent_559757132178556292" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132174071780">
+<div class="newsHeadlineBlock" id="posthead_559757132174071780" title="Who needs backstory? Who needs resource-gathering? Diplomacy is so last year. Take advantage of this Gratuitous Weekend Deal and save 75% off Gratuitous Space Battles and all the Gratuitous DLC. Gratuitous Space Battles cuts right to the chase of sci-fi strategy games, and deals with large, complete...">
+<div class="feed">Announcement</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132174071780' ); return false;">Weekend Deal - 75% Off Gratuitous Space Battles</a></div>
+<div class="date">Aug 5, 2010</div>
+</div>
+<div id="postcontent_559757132174071780" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132178000623">
+<div class="newsHeadlineBlock" id="posthead_559757132178000623" title="Now on Steam, you can play all of your favorites from the creators of MYST! Cyan Worlds released the following titles today: realMYST , Riven: The Sequel to Myst , URU: Complete Chronicles as well as The Cyan Complete Pack . Revisit the world of Myst like you've never seen it before! ">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132178000623' ); return false;">New Release - Cyan Worlds</a></div>
+<div class="date">Aug 4, 2010</div>
+</div>
+<div id="postcontent_559757132178000623" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132166488781">
+<div class="newsHeadlineBlock" id="posthead_559757132166488781" title="Updates to Warhammer&amp;reg; 40,000: Dawn of War II&amp;reg;have been released. The updates will be applied automatically when your Steam client is restarted. The specific changes include: New Features - Free for All and Team Free for All are now available game modes in Find a Game - The Player Stats scree...">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132166488781' ); return false;">Warhammer® 40,000: Dawn of War II® Update Released</a></div>
+<div class="date">Aug 4, 2010</div>
+</div>
+<div id="postcontent_559757132166488781" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132166365908">
+<div class="newsHeadlineBlock" id="posthead_559757132166365908" title="Updates to Borderlands have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include: * Added support for Logitech LCD screens on the G13 gameboard and G15/G19 keyboards; * Added Steam achievements; ">
+<div class="feed">Product Update</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132166365908' ); return false;">Borderlands Update Released</a></div>
+<div class="date">Aug 4, 2010</div>
+</div>
+<div id="postcontent_559757132166365908" style="display: none;">
+</div>
+</div>
+<div class="newshr"></div>
+<div id="post_559757132165635982">
+<div class="newsHeadlineBlock" id="posthead_559757132165635982" title="Launch special! Purchase Power of Defense between now and August 11th and save 10% off . Experience a mix of new strategy and defense and save the world from upcoming evil and oil-smelling robots. Power of Defense supports STEAMPLAY - buy once and play it on either Mac or PC! ">
+<div class="feed">Product Release</div>
+<div class="title"><a href="news/?headlines=1" onclick="PullNewsPost( '559757132165635982' ); return false;">Now available - Power of Defense on PC  Mac</a></div>
+<div class="date">Aug 4, 2010</div>
+</div>
+<div id="postcontent_559757132165635982" style="display: none;">
+</div>
+</div>
+<a href="news/posts/?headlines=1&amp;enddate=1280957279" id="more_posts_url" onclick="LoadMoreNews(); return false;">...</a>
+</div>
+<br/>
+<div id="more_posts">
+<h3>...</h3>
+</div>
+</div>
+</div>
+<div class="newsleftcol">
+<div class="block">
+<div class="block_header">
+<div>Channels</div>
+</div>
+<div class="block_content">
+<div class="block_content_inner">
+<a class="linkbar linkbar_active" href="news/?headlines=1">All News</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=steam_announce">Announcements</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=steam_client">Client Updates</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=steam_press">Press Releases</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=steam_release">Product Releases</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=steam_updates">Product Updates</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=steam_blog">Steam Blog</a>
+<div class="block_sub_header_channels">Syndicated</div>
+<a class="linkbar" href="news/?headlines=1&amp;feed=kotaku">Kotaku</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=l4d_blog">Left 4 Dead Official Blog</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=pcgamer">PC Gamer</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=rps">Rock, Paper, Shotgun</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=shacknews">Shacknews</a>
+<a class="linkbar" href="news/?headlines=1&amp;feed=tf2_blog">TF2 Official Blog</a>
+</div>
+</div>
+</div>
+<div class="block">
+<div class="block_header">
+<div>Search</div>
+</div>
+<div class="block_content">
+<div class="block_content_inner">
+<div id="news_search">
+<form action="http://store.steamgames.com/news/search/" id="searchform" method="get" name="searchform" onsubmit="return checkTerm(this);">
+<div class="searchbox_news" id="searchbox_news">
+<input autocomplete="off" class="default" name="term" onblur="SetDefaultNewsSearchText(this);" onclick="ClearDefaultNewsSearchText(this);" type="text" value="enter search term"/> 
+								| <a href="news/?headlines=1" onclick="var form = $(this).up('form'); checkTerm( form ); form.submit(); return false;"><img border="0" height="18" src="public/images/v5/ico_search.gif" width="18"/></a>
+</div>
+<div class="autocomplete" id="searchterm_options" style="display: none;">
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script language="JavaScript">
+		<!--
+
+		if ( Ajax && Ajax.Autocompleter )
+			new Ajax.Autocompleter( $('searchform').elements['term'], 'searchterm_options', 'http://store.steamgames.com/search/suggest', {frequency: 0.2, setWidth: false, method: "get", allowFreeEntry: true, afterUpdateElement:function() {document.searchform.submit();} });
+			
+				
+		function ClearDefaultNewsSearchText( elem )
+		{
+			var text = elem.value;
+			if ( text == 'enter search term' )
+			{
+				elem.value = '';
+				$(elem).removeClassName( 'default' );
+			}
+		}
+		function SetDefaultNewsSearchText( elem )
+		{
+			var text = elem.value;
+			if ( text == '' )
+			{
+				elem.value = 'enter search term';
+				$(elem).addClassName( 'default' );
+			}
+		}
+		function checkTerm( theform )
+		{
+			if ( theform.term.value == 'search the store' )
+			{
+				theform.term.value = '';
+			}
+			return true;
+		}
+		//-->
+		</script>
+<div class="block">
+<div class="block_header">
+<div>Archive</div>
+</div>
+<div class="block_content">
+<div class="block_content_inner">
+<div class="block_sub_region">
+<div class="block_sub_header">2010</div>
+<a href="news/?headlines=1&amp;enddate=1283324400">Aug </a> 
+																<a href="news/?headlines=1&amp;enddate=1280646000">Jul </a> 
+																<a href="news/?headlines=1&amp;enddate=1277967600">Jun </a> 
+																<a href="news/?headlines=1&amp;enddate=1275375600">May </a> 
+																<a href="news/?headlines=1&amp;enddate=1272697200">Apr </a> 
+																<a href="news/?headlines=1&amp;enddate=1270105200">Mar </a> 
+																	<br/>
+<a href="news/?headlines=1&amp;enddate=1267430400">Feb </a> 
+																<a href="news/?headlines=1&amp;enddate=1265011200">Jan </a> 
+													</div>
+<div class="block_sub_region">
+<div class="block_sub_header">Archives By Year</div>
+<a href="news/?headlines=1&amp;enddate=1293868800">2010 </a> 
+														<a href="news/?headlines=1&amp;enddate=1262332800">2009 </a> 
+														<a href="news/?headlines=1&amp;enddate=1230796800">2008 </a> 
+														<a href="news/?headlines=1&amp;enddate=1199174400">2007 </a> 
+														<a href="news/?headlines=1&amp;enddate=1167638400">2006 </a> 
+															<br/>
+<a href="news/?headlines=1&amp;enddate=1136102400">2005 </a> 
+														<a href="news/?headlines=1&amp;enddate=1104566400">2004 </a> 
+														<a href="news/?headlines=1&amp;enddate=1072944000">2003 </a> 
+														<a href="news/?headlines=1&amp;enddate=1041408000">2002 </a> 
+												</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="clear: both"></div>
+<div id="footer">
+<div class="footer_content">
+<div class="rule"></div>
+<div id="footer_nav">
+<span class="pulldown" id="footer_genre_pulldown">
+					SHOP BY GENRE				</span>
+<div class="popup_block" id="footer_genre_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepopupfix"><img class="iepopupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="genre/Action/">
+								Action							</a>
+<a class="popup_menu_item" href="genre/Adventure/">
+								Adventure							</a>
+<a class="popup_menu_item" href="genre/Strategy/">
+								Strategy							</a>
+<a class="popup_menu_item" href="genre/RPG/">
+								RPG							</a>
+<a class="popup_menu_item" href="genre/Indie/">
+								Indie							</a>
+<a class="popup_menu_item" href="genre/Massively%20Multiplayer/">
+								Massively Multiplayer							</a>
+<a class="popup_menu_item" href="genre/Casual/">
+								Casual							</a>
+<a class="popup_menu_item" href="genre/Family/">
+								Family Games							</a>
+<a class="popup_menu_item" href="genre/Simulation/">
+								Simulation							</a>
+<a class="popup_menu_item" href="genre/Racing/">
+								Racing							</a>
+<a class="popup_menu_item" href="genre/Sports/">
+								Sports							</a>
+</div>
+</div>
+<span class="pulldown" id="footer_category_pulldown">
+				SHOP BY CATEGORY			</span>
+<div class="popup_block" id="footer_category_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepopupfix"><img class="iepopupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="freestuff/demos/">
+						Demos					</a>
+<a class="popup_menu_item" href="freestuff/videos/">
+						Videos					</a>
+<a class="popup_menu_item" href="search/?category2=21">
+						Downloadable Content					</a>
+<a class="popup_menu_item" href="browse/publishers">
+						Game Publisher Catalogs					</a>
+<a class="popup_menu_item" href="browse/under10">
+							Games Under $10						</a>
+<a class="popup_menu_item" href="browse/under5">
+							Games Under $5						</a>
+</div>
+</div>
+<span class="pulldown" id="footer_steam_pulldown">
+				ABOUT STEAM			</span>
+<div class="popup_block" id="footer_steam_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepopupfix"><img class="iepopupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="about/">
+						What is Steam?					</a>
+<!--
+					<a class="popup_menu_item" href="">
+						Download Steam now					</a>
+					-->
+<a class="popup_menu_item" href="https://support.steampowered.com/kb_article.php?p_faqid=549#gifts" target="_blank">
+						Gifting on Steam					</a>
+<a class="popup_menu_item" href="https://steamcommunity.com/">
+						The Steam Community					</a>
+</div>
+</div>
+<span class="pulldown" id="footer_valve_pulldown">
+				ABOUT VALVE			</span>
+<div class="popup_block" id="footer_valve_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepopupfix"><img class="iepopupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="http://www.valvesoftware.com/about.html" target="_blank">
+						About Valve					</a>
+<a class="popup_menu_item" href="http://www.valvesoftware.com/business/" target="_blank">
+						Business Solutions					</a>
+<a class="popup_menu_item" href="http://www.steampowered.com/steamworks/" target="_blank">
+						Steamworks					</a>
+<a class="popup_menu_item" href="http://source.valvesoftware.com/" target="_blank">
+						Source Engine					</a>
+<a class="popup_menu_item" href="https://cafe.steampowered.com" target="_blank">
+						Cyber Cafés					</a>
+<a class="popup_menu_item" href="http://www.valvesoftware.com/jobs.html" target="_blank">
+						Jobs					</a>
+</div>
+</div>
+<span class="pulldown" id="footer_help_pulldown">
+				HELP			</span>
+<div class="popup_block" id="footer_help_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepopupfix"><img class="iepopupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="http://support.steampowered.com/" target="_blank">
+						Support					</a>
+<a class="popup_menu_item" href="forums/" target="_blank">
+						Forums					</a>
+<a class="popup_menu_item" href="stats/" target="_blank">
+						Stats					</a>
+</div>
+</div>
+<span class="pulldown" id="footer_tools_pulldown">
+				TOOLS			</span>
+<div class="popup_block" id="footer_tools_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepopupfix"><img class="iepopupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="http://storefront.steampowered.com/download/hldsupdatetool.exe">
+						Windows HLDS Update Tool					</a>
+<a class="popup_menu_item" href="http://storefront.steampowered.com/download/hldsupdatetool.bin">
+						Linux HLDS Update Tool					</a>
+</div>
+</div>
+<span class="pulldown" id="footer_feeds_pulldown">
+				NEWS FEEDS			</span>
+<div class="popup_block" id="footer_feeds_dropdown" style="display: none;">
+<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div><div class="shadow_left"></div><div class="shadow_right"></div><div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div><div class="iepopupfix"><img class="iepopupfix_img" src="public/images/blank.gif"/></div> <div class="popup_body popup_menu shadow_content">
+<a class="popup_menu_item" href="feeds/news.xml">
+<img align="top" alt="" border="0" height="13" src="public/images/ico/ico_rss2.gif" width="13"/>  Steam News					</a>
+<a class="popup_menu_item" href="feeds/newreleases.xml">
+<img align="top" alt="" border="0" height="13" src="public/images/ico/ico_rss2.gif" width="13"/>  Game Releases					</a>
+</div>
+</div>
+<div style="clear: left;"></div>
+<script type="text/javascript">
+				RegisterFlyout( 'footer_genre_pulldown', 'footer_genre_dropdown' );
+				RegisterFlyout( 'footer_category_pulldown', 'footer_category_dropdown' );
+				RegisterFlyout( 'footer_steam_pulldown', 'footer_steam_dropdown' );
+				RegisterFlyout( 'footer_valve_pulldown', 'footer_valve_dropdown' );
+				RegisterFlyout( 'footer_help_pulldown', 'footer_help_dropdown' );
+				RegisterFlyout( 'footer_tools_pulldown', 'footer_tools_dropdown' );
+				RegisterFlyout( 'footer_feeds_pulldown', 'footer_feeds_dropdown' );
+			</script>
+</div>
+<div class="footer_box">
+<h3>Publisher Catalogs</h3>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/1C Company">1C Company</a></div>
+<div class="ellipsis"><a href="publisher/2K Games">2K Games</a></div>
+<div class="ellipsis"><a href="publisher/Activision">Activision</a></div>
+<div class="ellipsis"><a href="publisher/Atari">Atari</a></div>
+<div class="ellipsis"><a href="publisher/Bethesda Softworks">Bethesda</a></div>
+<div class="ellipsis"><a href="publisher/Big Fish Games">Big Fish Games</a></div>
+<div class="ellipsis"><a href="publisher/Capcom">Capcom</a></div>
+<div class="ellipsis"><a href="publisher/City Interactive S.A.">City Interactive</a></div>
+</div>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/Codemasters">Codemasters</a></div>
+<div class="ellipsis"><a href="publisher/Electronic Arts">Electronic Arts</a></div>
+<div class="ellipsis"><a href="publisher/Epic Games, Inc.">Epic Games</a></div>
+<div class="ellipsis"><a href="publisher/Focus Home Interactive">Focus</a></div>
+<div class="ellipsis"><a href="publisher/Her Interactive">Her Interactive</a></div>
+<div class="ellipsis"><a href="publisher/id Software">id Software</a></div>
+<div class="ellipsis"><a href="publisher/Interplay Inc.">Interplay</a></div>
+<div class="ellipsis"><a href="publisher/iWin">iWin</a></div>
+</div>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/JoWooD Entertainment, DreamCatcher">JoWooD / DreamCatcher</a></div>
+<div class="ellipsis"><a href="publisher/Kalypso Media Digital">Kalypso</a></div>
+<div class="ellipsis"><a href="publisher/LucasArts">LucasArts</a></div>
+<div class="ellipsis"><a href="publisher/Majesco">Majesco</a></div>
+<div class="ellipsis"><a href="publisher/Meridian4">Meridian4</a></div>
+<div class="ellipsis"><a href="publisher/MumboJumbo">MumboJumbo</a></div>
+<div class="ellipsis"><a href="publisher/NCsoft">NCsoft</a></div>
+<div class="ellipsis"><a href="publisher/NovaLogic">NovaLogic</a></div>
+</div>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/Paradox Interactive">Paradox Interactive</a></div>
+<div class="ellipsis"><a href="publisher/PlayFirst">PlayFirst</a></div>
+<div class="ellipsis"><a href="publisher/PopCap Games, Inc.">PopCap</a></div>
+<div class="ellipsis"><a href="publisher/Prima Games">Prima Games</a></div>
+<div class="ellipsis"><a href="publisher/RailSimulator.com">RailSimulator.com</a></div>
+<div class="ellipsis"><a href="publisher/Rockstar Games">Rockstar Games</a></div>
+<div class="ellipsis"><a href="publisher/Sandlot Games">Sandlot Games</a></div>
+<div class="ellipsis"><a href="publisher/SEGA">SEGA</a></div>
+</div>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/Sony Online Entertainment">Sony Online</a></div>
+<div class="ellipsis"><a href="publisher/SouthPeak Games">SouthPeak Games</a></div>
+<div class="ellipsis"><a href="publisher/SQUARE ENIX, Eidos Interactive">SQUARE ENIX, Eidos Interactive</a></div>
+<div class="ellipsis"><a href="publisher/Strategy First">Strategy First</a></div>
+<div class="ellipsis"><a href="publisher/Telltale Games">Telltale Games</a></div>
+<div class="ellipsis"><a href="publisher/THQ">THQ</a></div>
+<div class="ellipsis"><a href="publisher/Tilted Mill Entertainment, Inc.">Tilted Mill</a></div>
+<div class="ellipsis"><a href="publisher/Topware Interactive">Topware</a></div>
+</div>
+<div class="publishercol">
+<div class="ellipsis"><a href="publisher/Ubisoft">Ubisoft</a></div>
+<div class="ellipsis"><a href="publisher/Valve">Valve</a></div>
+<div class="ellipsis"><a href="publisher/Warner Bros. Interactive Entertainment">Warner Bros.</a></div>
+</div>
+<div style="clear: left;"></div>
+</div>
+<div>
+<a href="http://www.valvesoftware.com/about.html" target="_blank">About Valve</a> 
+			| <a href="http://www.valvesoftware.com/business/" target="_blank">Business Solutions</a> 
+			| <a href="http://www.steampowered.com/steamworks/" target="_blank">Steamworks</a>
+			| <a href="http://source.valvesoftware.com/" target="_blank">Source Engine</a>
+			| <a href="https://cafe.steampowered.com" target="_blank">Cyber Cafés</a> 
+			| <a href="http://www.valvesoftware.com/jobs.html" target="_blank">Jobs</a>
+</div>
+<div class="rule"></div>
+<div id="footer_text">
+<div id="footer_logo"><a href="http://www.valvesoftware.com" target="_blank"><img alt="Valve Software" border="0" src="public/images/logo_valve_footer.jpg"/></a></div>
+<div>© 2010 Valve Corporation.  All rights reserved.  All trademarks are property of their respective owners in the US and other countries.</div>
+<div class="valve_links">
+<a href="http://www.valvesoftware.com/privacy.htm" target="_blank">Privacy Policy</a>
+			        
+			<a href="http://www.valvesoftware.com/legal.htm" target="_blank">Legal</a>
+			        
+			<a href="subscriber_agreement/">Steam Subscriber Agreement</a>
+</div>
+<div style="clear: left;"></div>
+</div>
+</div>
+</div></body>
+</head></html>

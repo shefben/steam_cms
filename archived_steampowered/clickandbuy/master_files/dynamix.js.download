@@ -1,0 +1,1454 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+// $Source: /mnt/space/cvs/fg/de/inc/js/dynamix.js,v $  $Revision: 2.39 $ $Date: 2007/06/14 16:24:53 $
+// dynamix.js   (c) Copyright 2001  by Ossip Kaehr, Steffen Belz
+// --------------------------------------------------------------------------
+// zentrale javascript funktionen
+// ACHTUNG: auf der Produktion muss hier z.T. https://firstgate.de/ vor die links geschrieben werden,
+//  	    entsprechend kommentare ändern!
+//
+
+
+// fix for weird IE6 bug... http://www.mister-pixel.com/#Content__state=is_that_simple
+try {
+  document.execCommand("BackgroundImageCache", false, true);
+} catch(err) {} ;
+
+
+// moved here, was in startoben.html before /
+function mvwin(url) {
+      if (url.match(/^javascript:/i)) return true;
+
+      if (window.name == "firstgatezss" && top.opener && top.opener.location && !top.opener.closed) {
+          top.opener.location.href=url;
+	  top.opener.focus();
+	  top.close();
+	  return false;
+      } else {
+         window.location.href=url;
+      }
+}
+
+
+function sheet() {
+ 
+//  if( navigator.appName == "Microsoft Internet Explorer" ) {
+  	// overwrite classes for IENetscape Browsers
+	//document.write('<link rel="stylesheet" type="text/css" href="/inc/css/redesign_ie.css">');
+	//document.write('<link rel="stylesheet" type="text/css" href="/inc/css/acstyle_ie.css">');
+//  }
+}
+
+var e;
+var t;
+var fo;
+var shift
+// ---------------------focus on next form element--------------------------
+
+function MM_openBrWindow(theURL,winName,features) {
+  window.open(theURL,winName,features);
+}
+
+function linkwinopen( link, lang ) {
+	linkwin = window.open("/servicebereich/anbieter/angebotsverwaltung/link_"+lang+".html?"+link+"&lang="+lang,"linkwin","status=1,scrollbars=1,resizable=1,width=650,height=550"); 
+linkwin.focus();
+return false;
+}
+
+// --------------------------------------------------
+function poptip(message,lang) {
+ if (message=="infoftp") {infoftp = window.open("/servicebereich/anbieter/service/infoftp.html?lang="+lang,"infoftp","resizable=1,width="+b+",height="+h);b = 380;h = 200;infoftp.moveTo(10,10);infoftp.focus();}
+ if (message == 'benutzer') {b = 380;h = 550;poptip = window.open("/servicebereich/anbieter/angebotsverwaltung/benutzertip.html?lang="+lang,"poptip","scrollbars=1,resizable=1,width="+b+",height="+h);poptip.moveTo(10,10);poptip.focus();}
+ if (message == 'gesperrt') {b = 380;h = 650;poptip = window.open("/servicebereich/anbieter/angebotsverwaltung/gesperrttip.html?lang="+lang,"poptip","scrollbars=1,resizable=1,width="+b+",height="+h);poptip.moveTo(10,10);poptip.focus();}
+ if (message == 'mitarbeiter') {b = 380;h = 550;poptip = window.open("/servicebereich/anbieter/angebotsverwaltung/mitarbeitertip.html?lang="+lang,"poptip","scrollbars=1,resizable=1,width="+b+",height="+h);poptip.moveTo(10,10);poptip.focus();}
+
+b=380;
+h=550;
+
+if (message == 'anbieter-0') {
+anbieter = window.open("/clicknbuy/anbieter0.html?lang="+lang,"anbieter","Toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width="+b+",height="+h);
+anbieter.moveTo(10,10);
+anbieter.focus();
+}
+if (message == 'anbieter-1') {
+anbieter = window.open("/clicknbuy/anbieter1.html?lang="+lang,"anbieter","Toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width="+b+",height="+h);
+anbieter.moveTo(10,10);
+anbieter.focus();
+}
+if (message == 'anbieter-2') {
+anbieter = window.open("/clicknbuy/anbieter2.html?lang="+lang,"anbieter","Toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width="+b+",height="+h);
+anbieter.moveTo(10,10);
+anbieter.focus();
+}
+if (message == 'anbieter-2.2') {
+anbieter = window.open("/clicknbuy/anbieter2.2.html?lang="+lang,"anbieter","Toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width="+b+",height="+h);
+anbieter.moveTo(10,10);
+anbieter.focus();
+}
+if (message == 'anbieter-3') {
+anbieter = window.open("/clicknbuy/anbieter3.html?lang="+lang,"anbieter","Toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width="+b+",height="+h);
+anbieter.moveTo(10,10);
+anbieter.focus();
+}
+
+if (message == 'surfer-0') {
+surfer = window.open("/clicknbuy/surfer0.html?lang="+lang,"surfer","Toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width="+b+",height="+h);
+surfer.moveTo(10,10);
+surfer.focus();
+}
+if (message == 'surfer-1') {
+surfer = window.open("/clicknbuy/surfer1.html?lang="+lang,"surfer","Toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width="+b+",height="+h);
+surfer.moveTo(10,10);
+surfer.focus();
+}
+if (message == 'surfer-2') {
+surfer = window.open("/clicknbuy/surfer2.html?lang="+lang,"surfer","Toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width="+b+",height="+h);
+surfer.moveTo(10,10);
+surfer.focus();
+}
+if (message == 'surfer-2.2') {
+surfer = window.open("/clicknbuy/surfer2.2.html?lang="+lang,"surfer","Toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width="+b+",height="+h);
+surfer.moveTo(10,10);
+surfer.focus();
+}
+if (message == 'surfer-3') {
+surfer = window.open("/clicknbuy/surfer3.html?lang="+lang,"surfer","Toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width="+b+",height="+h);
+surfer.moveTo(10,10);
+surfer.focus();
+}
+
+
+
+}
+
+
+function keyDown(ee) {
+	if (document.layers) { // 
+	if (ee.modifiers & Event.SHIFT_MASK) shift = 1;
+	}
+	if (document.all) {
+	if (window.event.shiftKey) shift = 1;
+	}
+}
+
+
+function bl(x) {
+
+	if (document) {
+	fo = eval('document.regform');
+	}
+	for (i=0; i<fo.elements.length; i++) {
+	if (x == fo.elements[i].name) e = i;
+	}
+	t = window.setTimeout("tab()",5);
+}
+
+function fc() {
+	window.clearTimeout(t);
+}
+
+function tab() {
+
+if (shift == 1) { 
+	fo.elements[(e-1)].focus();
+	e = null;
+	shift = null;
+	} else {
+	fo.elements[(e+1)].focus();
+	e = null;
+	shift = null;
+	}
+}
+
+// ---------------------end focus on next form element--------------------------
+
+function checkheight() {
+var h = screen.availHeight;
+//h = h/2;
+if (h > 600) { 
+h = 600; return(h); 
+/*} else if (h < 500) {
+h = 500; return(h);
+} else {*/
+return(h);
+}
+}
+
+function tip (tip)
+{
+tipweitergeben = window.open("/cgi-bin/formmail-tip.cgi?tip="+tip,"tipweitergeben","status=1,resizable=1,width=600,height=350");
+}
+
+function tip_en (tip)
+{
+tipweitergeben = window.open("/cgi-bin/formmail-tip.cgi?lang=en&tip="+tip,"tipweitergeben","status=1resizable=1,width=600,height=350");
+}
+
+
+
+
+function showagb(agb)       {h = screen.height - 100; agb = window.open(agb,"agb","scrollbars=1,resizable=1,width=380,height="+h);agb.focus();}
+
+function jumpto( dir, lang ) {
+
+server = "";
+// server = "https://web.archive.org/web/20070802063857/https://premium-link.net";  // HIER KOMMENTAR rausnehmen wenn auf Produktion!!!
+// server = "https://web.archive.org/web/20070802063857/https://devel2-lx.kfg400.net";  // kommentar rausnehmen wenn auf test (optional)
+
+//Bugfix 8429 -- Added ".html?lang="+lang" parameter for mitarbeitertip ------ //
+if (dir == 'mitarbeitertip'){b = 600;h = 400;mitarbeitertip = window.open("/de_servicebereich/anbieter/angebotsverwaltung/mitarbeitertip.html?lang="+lang,"mitarbeitertip","scrollbars=1,resizable=1,width="+b+",height="+h); mitarbeitertip.moveTo(10,10);}
+if (dir == 'gesperrttip')   {b = 600;h = 400;gesperrttip = window.open("/de_servicebereich/anbieter/angebotsverwaltung/gesperrttip.html?lang="+lang,"gesperrttip","scrollbars=1,resizable=1,width="+b+",height="+h); gesperrttip.moveTo(10,10);}
+
+if( dir == 'benutzertip' ) {
+	b = 600;
+	h = 400;
+	benutzertip = window.open("/servicebereich/anbieter/angebotsverwaltung/benutzertip_"+lang+".html?lang="+lang,"benutzertip","scrollbars=1,resizable=1,width="+b+",height="+h); 
+	benutzertip.moveTo(10,10);
+}
+
+
+
+if (dir == 'ticker')        {b = 450;h = checkheight();anbiereg = window.open("/de_servicebereich/anbieter/service/webcam_tickerinfo.html","anbiereg","status=1,menubar=0,scrollbars=1,width="+b+",height="+h);}
+
+if (dir == 'bewerbung')     {b = 500;h = checkheight();bewerbung = window.open("/company/bewerbung.html","bewerbung","scrollbars=1,resizable=1,width="+b+",height="+h); bewerbung.moveTo(10,10);}
+if (dir == 'info')          {b = 300;h = 200;info = window.open("/info/infopop.html","info","resizable=1,width="+b+",height="+h); info.moveTo(10,10);}
+if (dir == 'callme')        {b = 470;h = checkheight();callme = window.open("/info/callme.html","callme","scrollbars=1,resizable=1,width="+b+",height="+h); callme.moveTo(10,10);}
+if (dir == 'prospekt')      {b = 380;h = checkheight();prospekt = window.open("/info/register.html","prospekt","scrollbars=1,resizable=1,width="+b+",height="+h); prospekt.moveTo(10,10);}
+// if (dir == 'agb')           {b = 380;h = checkheight();agb = window.open("/company/agb_anbieter_popup.html","agb","scrollbars=1,resizable=1,width="+b+",height="+h); agb.moveTo(10,10);}
+
+if (dir == 'agb')           {agb = window.open("https://web.archive.org/web/20070802063857/http://www.firstgate.de/company/agb_kleinanbieter.html","agb","scrollbars=1,resizable=1,width=615,height=500"); agb.moveTo(10,10);}
+
+if (dir == 'surfagb')       {agb = window.open("https://web.archive.org/web/20070802063857/http://www.firstgate.de/company/agb_surfer.html","agb","scrollbars=1,resizable=1,width=615,height=500"); agb.moveTo(10,10);}
+
+if (dir == 'en_surfagb')    {b = 460;h = checkheight();agb = window.open("/en_agb/agb-surfer.html","agb","scrollbars=1,resizable=1,width="+b+",height="+h); agb.moveTo(10,10);}
+
+if (dir == 'anbieterreg')   {b = 490;h = 600;anbiereg = window.open(server + "/cgi-bin/register.pl?mode=anbieter","anbiereg","status=1,scrollbars=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'en_anbieterreg'){b = 490;h = 600;anbiereg = window.open(server + "/cgi-bin/register.pl?mode=anbieter&lang=en","anbiereg","status=1,scrollbars=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'surferreg')     {b = 490;h = 600;surferreg = window.open(server + "/cgi-bin/register.pl?mode=surfer","surferreg","status=1,scrollbars=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'en_surferreg')  {b = 490;h = 600;surferreg = window.open(server + "/cgi-bin/register.pl?mode=surfer&lang=en","surferreg","status=1,scrollbars=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'at_surferreg')  {b = 490;h = 600;surferreg = window.open(server + "/cgi-bin/register.pl?mode=surfer&Land=AT","surferreg","status=1,scrollbars=1,resizable=1,width="+b+",height="+h);}
+
+if (dir == 'tipweitergeben'){b = 550;h = 300;tipweitergeben = window.open("/hp/tipweitergeben.html","tipweitergeben","status=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'swatch')        {b = 430;h = 300;swatch = window.open("/hp/swatchuhr/startgeschenk_anbieter.html","swatch","status=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'swatchsurf')    {b = 430;h = 300;swatch = window.open("/hp/swatchuhr/startgeschenk_surfer.html","swatchsurf","status=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'swatch1')       {b = 400;h = 300;swatch1 = window.open("/hp/swatchuhr/startgeschenk_anbieter.html","swatch1","status=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'swatchsurf1')   {b = 400;h = 300;swatch = window.open("/hp/swatchuhr/startgeschenk_surfer.html","swatchsurf1",",status=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'kosten')        {b = 550;h = checkheight();kosten = window.open("/wasist/kosten.html","kosten","menubar=0,scrollbars=1,resizable=0,width="+b+",height="+h); kosten.moveTo(10,10);}
+if (dir == 'newsletter')    {b = 392;h = 235;info = window.open("https://web.archive.org/web/20070802063857/http://194.77.139.24/cgi-bin/mailer","newsletter","resizable=1,width="+b+",height="+h); info.moveTo(10,10);}
+if (dir == 'anbieterliste') {b = 200;h = 200;anbieterliste = window.open("/portal/anbieter_liste/anbieterliste.html","anbieterliste","scrollbars=1,resizable=1,width="+b+",height="+h); anbieterliste.moveTo(10,10);}
+if (dir == 'vorschaltseite'){b = 450;h = 300;vorschaltseite = window.open("/vorschaltseite/vorschaltseite.html","vorschaltseite","scrollbars=1,resizable=1,width="+b+",height="+h); vorschaltseite.moveTo(10,10);}
+if (dir == 'hpfirstgate')   {b = 400;h = 300;hpfirstgate = window.open("/presse/hpfirstgate.html","hpfirstgate","status=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'hprtlspenden')  {b = 400;h = 300;hprtlspenden = window.open("/presse/hprtlspenden.html","hprtlspenden","status=1,resizable=1,width="+b+",height="+h);}
+if (dir == 'wasist')        {parent.firstmain.location = "/wasist/frameset.html";}
+if (dir == 'company')       {parent.firstmain.location = "/company/frameset.html";}
+if (dir == 'pressenews')    {parent.firstmain.location = "/presse/frameset.html";}
+}
+
+  
+function Is (){
+
+    var agt        = navigator.userAgent.toLowerCase();
+
+    this.major     = parseInt(navigator.appVersion);
+    this.minor     = parseFloat(navigator.appVersion);
+
+    this.nav       = ((agt.indexOf('mozilla') !=-1) && 
+		      (agt.indexOf('spoofer') ==-1)
+                   && (agt.indexOf('compatible') ==-1) && 
+		      (agt.indexOf('opera') ==-1)
+                   && (agt.indexOf('webtv') == -1));
+
+    this.ie        =  (agt.indexOf("msie") !=-1);
+    this.ie5       = (this.ie  && (this.major== 4) && (agt.indexOf("msie 5.0")!=-1) );
+    this.win      = ((agt.indexOf("win")!=-1) || (agt.indexOf("16bit")!=-1));
+
+
+    this.win98    = ((agt.indexOf("win98") !=-1) ||  (agt.indexOf("windows 98")!=-1));
+    this.winnt    = ((agt.indexOf("winnt")    !=-1) || (agt.indexOf("windows nt") !=-1));
+    this.win32    = (this.win95 || this.winnt || this.win98 ||
+                    ((this.major >= 4) && (navigator.platform == "Win32")) ||
+                      (agt.indexOf("win32")     !=-1) || (agt.indexOf("32bit") !=-1) );
+    this.os2      = ((agt.indexOf("os/2") !=-1) ||
+                     (navigator.appVersion.indexOf("OS/2") !=-1) ||
+                     (agt.indexOf("ibm-webexplorer") !=-1));
+    this.mac      =  (agt.indexOf("mac")!=-1);
+    this.sun      =  (agt.indexOf("sunos")!=-1);
+    this.irix     =  (agt.indexOf("irix") !=-1);
+    this.hpux     =  (agt.indexOf("hp-ux")!=-1);
+    this.aix      =  (agt.indexOf("aix") !=-1);
+    this.linux    =  (agt.indexOf("inux")!=-1);
+    this.sco      =  (agt.indexOf("sco")!=-1) ||  (agt.indexOf("unix_sv")!=-1);
+    this.unixware =  (agt.indexOf("unix_system_v")!=-1);
+    this.sinix    =  (agt.indexOf("sinix")!=-1);
+    this.freebsd  =  (agt.indexOf("freebsd") !=-1);
+    this.bsd      =  (agt.indexOf("bsd") !=-1);
+    this.unix     = ((agt.indexOf("x11") !=-1) 
+					|| this.sun 
+					|| this.irix 
+					|| this.hpux 
+					|| this.sco 
+					|| this.unixware 
+					|| this.sinix 
+					|| this.aix 
+					|| this.linux 
+					|| this.bsd 
+					|| this.freebsd);
+    this.vms      = ((agt.indexOf("vax")!=-1) ||  (agt.indexOf("openvms") !=-1));
+}
+
+var is;
+var isIE3Mac = false;
+// this section is designed specifically for IE3 for the Mac
+
+if ((navigator.appVersion.indexOf("Mac") !=-1) &&
+	(navigator.userAgent.indexOf("MSIE") !=-1) && (parseInt(navigator.appVersion)	== 3))
+       isIE3Mac = true;
+else   is = new Is();
+
+
+//---------------------rollover-images-----------------------------------
+
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+    var d=document; 
+    if(d.images){ 
+	if(!d.MM_p) d.MM_p=new Array();
+	var i,j=d.MM_p.length,a=MM_preloadImages.arguments; 
+
+	for(i=0; i<a.length; i++)
+        if (a[i].indexOf("#")!=0 ){
+		d.MM_p[j]=new Image; 
+		d.MM_p[j++].src=a[i];
+	}
+    }
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+
+
+//payment options
+function enablepayment( paymentType ){
+	var count = document.regform.bezahltyp.length
+	for( i =0 ;i<count;++i ){
+		if( document.regform.bezahltyp[i] ){
+			if ( document.regform.bezahltyp[i].value == paymentType ){
+				document.regform.bezahltyp[i].checked =  1  
+   			}	 
+		}
+	}
+
+	//Set Acccount Holder Name for Dutch Customer Registration
+	if( paymentType == 'Bankeinzug' ){
+	      if( document.regform.Land && ( document.regform.Land.value == 'NL' || document.regform.Land.value == 'ES' ) && document.regform.Vorname.value && document.regform.Nachname.value ){
+		     if( ! document.regform.Kontoinhaber.value	)	
+		            document.regform.Kontoinhaber.value = document.regform.Vorname.value + " " + document.regform.Nachname.value	
+	      }
+        }
+}
+
+//This function is used in stammdatenedit pages.
+function selector( x ){
+	var obj = document.forms[1].bezahltyp
+	var count =  obj.length
+	if( x == 1 && count == 2){
+ 	    obj[1].checked = 1
+	}else{
+	    obj[0].checked = 1
+	}
+}
+
+function showagburl( agb ){ 
+	h = screen.height - 100; 
+	agb = window.open(agb,"agb","scrollbars=1,resizable=1,width=800,height="+h);
+	agb.focus();
+}
+
+// email preview javascript function
+function previewemail( typ ,name ){
+       document.emailpreviewform.type.value = typ;
+       varname = "document.subscriptionemail."+name+".value";
+       document.emailpreviewform.MerchantText.value = eval( varname );
+       document.emailpreviewform.submit();	
+}
+
+// set button width for IE browsers
+function setButtonWidth(){
+	if( document.regform && document.regform.jsenabled ){
+		document.regform.jsenabled.value = "yes";
+	}
+
+	if( document.loginform && document.loginform.cb_param_js ){
+		document.loginform.cb_param_js.value = "yes";
+        }
+
+	var w;
+	if ( navigator.appName == "Microsoft Internet Explorer" ) {
+       		var elements = document.all
+		if ( elements ) {
+
+			for (i=0; i < elements.length; i++) {
+				w = 12;
+				if( elements.item(i).type == "submit"  ||  elements.item(i).type == "button" || elements.item(i).className.match(/hlinka/) ){
+					//if( elements.item(i).id == "input" ) 
+					 w = 20;
+		               		//elements.tspan.innerText = elements.item(i).value;
+					elements.tspan.innerHTML = elements.item(i).value;
+					
+					if (elements.item(i).className.match(/hlinka/)) {	// fix button width for IE7
+						elements.tspan.innerHTML = elements.item(i).innerHTML;
+						w=0;
+					}
+
+					 elements.item(i).name =  'X_' +elements.item(i).name
+					if( elements.tspan.offsetWidth ) elements.item(i).style.width = elements.tspan.offsetWidth + w;
+				}
+				
+			}	
+		}
+        }	
+}	
+
+
+//Hide/show enable/ disable form elements by ID - merch reg master question pages, link edit page in callcenter
+
+
+function setVisible(element, visible) {
+	var x=document.getElementById(element);
+	if( x != null ) {
+		if (visible) {
+			x.disabled=false;
+			x.style.visibility = "visible";
+		} else {
+			x.checked=false;
+			x.style.visibility = "hidden";
+			x.disabled=true;
+		}
+	}
+}
+
+//Deprecated!!! Replaced by setVisible
+function makeEnabled(element) {
+	var x=document.getElementById(element);
+	x.disabled=false;
+	x.style.visibility="visible";
+}
+
+//Deprecated!!! Replaced by setVisible
+function makeDisabled(element) {
+	var x=document.getElementById(element);
+        x.checked=false;
+	x.disabled=true;
+	x.style.visibility="hidden";
+}
+
+//check the status of the custom qusetion field on load
+
+function checkSQ(){
+ if( document.getElementById('customSQ') ){
+ 	if(document.getElementById('customSQ').checked){
+  		setVisible('customField', true)
+ 	}else{
+  		setVisible('customField', false)
+ 	}
+  }
+}
+
+//check the status of the Auto-RollBack option 
+
+function checkQQ(){
+ if(document.getElementById('customQQ').checked){
+  setVisible('customQQ', true)
+ }else{
+  setVisible('customQQ', false)
+ }
+}
+
+//check radio buttons onChange
+function checkradio(id) {
+	document.getElementById(id).checked = "true";
+}
+
+
+//for promotion page
+
+var countField;
+var textField;
+var intervalID;
+var maxDscrLength = 200;
+
+/* Triggered by onFocus()
+ *
+ */
+function countDscrChars() {
+    countField = document.promotion.chars;
+    textField = document.promotion.limitedtextarea;
+    intervalID = setInterval("doCount()", 30);
+}
+
+/* Triggered by onBlur()
+ * 
+ */
+function stopCounting() {
+    clearInterval(intervalID);
+}
+
+/* Started by event handler
+ * Stops pastes and keypresses.
+ */
+function doCount() {
+    countField = document.promotion.chars;
+    textField = document.promotion.limitedtextarea;
+    countField.value = maxDscrLength - textField.value.length;
+    if (textField.value.length > maxDscrLength) {
+        var dscrText = textField.value.substring(0, maxDscrLength);
+        textField.value = dscrText;
+        
+    }
+}
+
+/* Triggered by onkeyup()
+ * Prevents entered data through keypresses gracefully.
+ */
+function checkLength(field, e) {
+    var charCode = (navigator.appName == "Netscape") ? e.which : e.keyCode;
+    //alert(charCode);
+    if (field.value.length >= maxDscrLength) {
+        /* Allow backspace (8)
+         * Allow Arrow keys and Delete key (0)
+         */
+        if (charCode != 8 && charCode != 0) {
+            return false;
+        }
+    }
+}
+
+
+//disable the submit button after accepting payment for startsession, startsubscription and ddauthaccept
+function disableSubmit(){
+	if( document.getElementById('confirmdiv') ){
+		document.getElementById('confirmdiv').className =  "button_gray";
+		document.getElementById('confirmbutton').disabled = true;
+		document.getElementById('confirmbutton').className = "button_gray";
+		document.getElementById('pleaseWait').style.display = "block";
+
+	}
+}
+
+function clickedPayPerMinute(form) {
+	if (form.IsPayPerMinute && form.IsPayPerMinute.checked) {
+		form.IsTransaction.checked = false;
+		form.rollbackManualCommit.disabled = false;
+	}
+
+	configPayPerMinute(form);
+}
+
+function DisableTransactionTypes(form) {
+
+	if( form ) {
+		if( form.IsTransaction.checked ) {
+			form.bdraction[1].checked = true;	
+			form.rollbackManualCommit.disabled = true;
+			form.rollbackManualCommit.checked = false;
+			//form.IsPayPerMinute.checked = false;
+		}else{
+			form.rollbackManualCommit.disabled = false;
+		}	
+
+		configPayPerMinute(form);
+
+	}
+}	
+
+function configPayPerMinute(form) {
+	if (form.IsPayPerMinute && form.IsPayPerMinute.checked) {
+		form.bdraction[0].disabled = false;
+	} else {
+		if( form.bdraction[0] ){
+			form.bdraction[0].checked = false;
+			form.bdraction[0].disabled = true;
+		}
+
+		if( form.bdraction[1] )
+			form.bdraction[1].checked = true;
+	}
+
+	if( form.bdraction[1] && form.bdraction[1].checked ){
+		setVisible('customFieldQQ', true);	
+	}
+}
+
+var alertShown;
+/**
+ * Always show the warning for the change in BDR Type. Additionally, show a 
+ * warning for manual commit if the manual commit checkbox is selected.
+ * 
+ * After user clicks on "Ok", user must click on submit button again.
+ */
+function showAlert(form, bdrMsg, commitMsg, saveSettingsMsg) {
+	var msg = "";
+	if ( form.IsPayPerMinute && form.IsPayPerMinute.checked) {
+		msg += bdrMsg;
+	}
+	if (form.rollbackManualCommit.checked) {
+		msg += "\n\n" + commitMsg;
+	}
+	
+	//Add the message which explains that the submit button has to be clicked again to save the data
+	if (!msg) {
+		return true;
+	}
+
+ 	msg += "\n\n" + saveSettingsMsg;
+
+	if (!alertShown) {
+		alert(msg);
+		alertShown = 1;
+		return false;
+	} else {
+		return true;
+	}
+}
+
+
+function regcountrychange( form, val ) {
+	form._page.value = "";
+	form._show.value = val;
+	form.submit();
+}
+
+
+function setfirstregpaymenttype ( form, val ){
+	var count = form.typ.length
+	for( i =0 ;i<count;++i ){
+		if( form.typ[i] ){
+			if ( form.typ[i].value == val ){
+				form.typ[i].checked =  1  
+   			}	 
+		}
+	}
+}
+
+function usphonebillprivatedata ( form, field ){
+	var privatedata = form.privatedata.value;
+	var privandarray = privatedata.split( "#" );
+	var count = 0;
+	var ok = 1;
+	while ( count < privandarray.length && ok)
+	{
+		fields = privandarray[count]
+		var fieldarray = fields.split( "," );
+		if( fields.match( field ) ){
+			i = 0;	
+			while ( i < fieldarray.length ){
+				str = fieldarray[i]
+				if( str != field ){
+					if( str == "SSN" ){
+						form.USPhone_SSN1.value = "";
+						form.USPhone_SSN2.value = "";
+						form.USPhone_SSN3.value = "";
+
+					}else if( str == "BIRTHDATE"){
+						form.USPhone_DateOfBirthM.value = "";
+						form.USPhone_DateOfBirthD.value = "";
+						form.USPhone_DateOfBirthY.value = "";
+					}else{
+						str = "USPhone_"+ str
+						if( eval("form."+str ) ){
+							eval("form."+str ).value = "";
+						}
+					}
+				}	
+				++i
+			}
+			ok = 0;
+		}
+		++count;
+	}
+}
+
+function setusphonebillbirthdate ( form, field ){
+
+	if( form.bezahltyp.value == "USPhoneBill" && form.USPhone_DateOfBirthM ){
+
+		if( form.DateOfBirthM.value && field == "DateOfBirthM" ) {
+			form.USPhone_DateOfBirthM.value = form.DateOfBirthM.value 
+		}else if ( form.USPhone_DateOfBirthM.value && field == "USPhone_DateOfBirthM" ){
+			form.DateOfBirthM.value = form.USPhone_DateOfBirthM.value
+		}
+
+		if( form.DateOfBirthD.value && field == "DateOfBirthD") 
+			form.USPhone_DateOfBirthD.value = form.DateOfBirthD.value 
+		else if ( form.USPhone_DateOfBirthD.value && field == "USPhone_DateOfBirthD")
+			form.DateOfBirthD.value = form.USPhone_DateOfBirthD.value
+
+		if( form.DateOfBirthY.value && field == "DateOfBirthY" ) 
+			form.USPhone_DateOfBirthY.value = form.DateOfBirthY.value 
+		else if ( form.USPhone_DateOfBirthY.value && field == "USPhone_DateOfBirthY")
+			form.DateOfBirthY.value = form.USPhone_DateOfBirthY.value
+
+	}
+}
+
+var giropaywindow
+
+function giropayformsubmit ( ) {
+
+	giropaywindow = window.open( "", "cb_giropay","status=1,resizable=1,scrollbars=1,width=900,height=600,left=100,top=150;");
+
+	if( giropaywindow != null ){
+		document.giropay.target = "cb_giropay";
+		document.giropay.submit();
+		giropaywindow.focus()
+	}else{
+		//x.style.visibility = "visible";
+	}
+}
+
+function giropaywindowclose ( ) {
+	if( giropaywindow != null  && ! giropaywindow.closed ){
+		giropaywindow.close();
+	}
+}
+
+function jumptogiropayconfirm( result ) {
+	if( result == 'ok' && top.opener ){	
+ 	     top.opener.focus();	
+     	     window.close();
+        }
+	if( result == 'nok' && top.opener ){	
+ 	     winnok = top.opener;
+	     winnok.document.giropaypurchase.submit();	
+     	     window.close();
+        }
+}
+
+function showpayment ( id ){
+	
+	if( id && document.getElementById(id) )
+		document.getElementById(id).style.display = 'block';
+
+	if( document.selectpayment && document.selectpayment.cb_param_javascript )
+		document.selectpayment.cb_param_javascript.value = "yes";
+
+	if( id == 'cc' ){
+
+	  	if( document.getElementById('dd') != null ){
+		  document.getElementById('dd').style.display='none';
+	  	if(  document.getElementById('DD_error') != null )
+			  document.getElementById('DD_error').style.display='none';
+		}
+		if( document.getElementById('omt') != null ) {
+		  document.getElementById('omt').style.display='none';
+  	  	  if(  document.getElementById('OMT_error') != null )
+			  document.getElementById('OMT_error').style.display='none';
+	 	}
+
+		if(  document.getElementById('CC_error') != null )
+			document.getElementById('CC_error').style.display='block';
+
+
+		if( 	document.getElementById('prepaidpin' ) )
+			document.getElementById('prepaidpin').style.display='none';
+	        if ( document.getElementById('PREPAIDPIN_error') )
+			document.getElementById('PREPAIDPIN_error').style.display='none';
+
+
+	}else if( id == 'dd' ) {
+
+		if( 	document.getElementById('omt' ) )
+			document.getElementById('omt').style.display='none';
+	        if ( document.getElementById('OMT_error') )
+			document.getElementById('OMT_error').style.display='none';
+
+
+		if( 	document.getElementById('cc' ) )
+			document.getElementById('cc').style.display='none';
+	        if ( document.getElementById('CC_error') )
+			document.getElementById('CC_error').style.display='none';
+
+		if( id == 'dd' && document.getElementById('DD_error') != null)
+			document.getElementById('DD_error').style.display='block';
+
+	
+	       
+		if( 	document.getElementById('prepaidpin' ) )
+			document.getElementById('prepaidpin').style.display='none';
+	        if ( document.getElementById('PREPAIDPIN_error') )
+			document.getElementById('PREPAIDPIN_error').style.display='none';	
+
+
+	}else if( id == 'omt' ){
+
+		if( 	document.getElementById('dd' ) )
+			document.getElementById('dd').style.display='none';
+	        if ( document.getElementById('DD_error') )
+			document.getElementById('DD_error').style.display='none';
+
+
+		if( 	document.getElementById('cc' ) )
+			document.getElementById('cc').style.display='none';
+	        if ( document.getElementById('CC_error') )
+			document.getElementById('CC_error').style.display='none';
+
+	
+		if( id == 'omt' && document.getElementById('OMT_error') != null )
+			document.getElementById('OMT_error').style.display='block';
+
+	}else if( id == 'prepaidpin' ){
+
+		if( 	document.getElementById('dd' ) )
+			document.getElementById('dd').style.display='none';
+	        if ( document.getElementById('DD_error') )
+			document.getElementById('DD_error').style.display='none';
+
+
+		if( 	document.getElementById('cc' ) )
+			document.getElementById('cc').style.display='none';
+	        if ( document.getElementById('CC_error') )
+			document.getElementById('CC_error').style.display='none';
+
+		if( document.getElementById('omt') != null ) {
+		  document.getElementById('omt').style.display='none';
+  	  	  if(  document.getElementById('OMT_error') != null )
+			  document.getElementById('OMT_error').style.display='none';
+	 	}
+
+	}else{
+	    	if( document.getElementById('dd') != null ){
+		  document.getElementById('dd').style.display='none';
+	  	if(  document.getElementById('DD_error') != null )
+		  document.getElementById('DD_error').style.display='none';
+		}	
+
+		if( document.getElementById('omt') != null ) {
+		  document.getElementById('omt').style.display='none';
+	  	if(  document.getElementById('OMT_error') != null )
+		  document.getElementById('OMT_error').style.display='none';
+	 	}
+
+		if( document.getElementById('cc') != null ) {
+		  document.getElementById('cc').style.display='none';
+		  if(  document.getElementById('CC_error') != null )
+		  	document.getElementById('CC_error').style.display='none';
+	 	}
+               	if( document.getElementById('prepaidpin' ) )
+			document.getElementById('prepaidpin').style.display='none';
+	        if ( document.getElementById('PREPAIDPIN_error') )
+			document.getElementById('PREPAIDPIN_error').style.display='none'; 
+		 
+        }
+}
+
+function showhelp( id, text, error ) {
+	
+	if( document.getElementById('help') ) {
+
+		var obj = document.getElementById(id)
+		var curleft;
+		var curtop;
+
+		if (obj.offsetParent) {
+			curleft = obj.offsetLeft
+			curtop = obj.offsetTop
+
+			while (obj = obj.offsetParent) {
+				curleft += obj.offsetLeft
+				curtop += obj.offsetTop
+			}
+		}
+
+	
+		curleft = curleft + 210;
+		curtop = curtop + 5;
+
+		document.getElementById('help').style.top = curtop + 'px';
+		document.getElementById('help').style.left =  curleft + 'px';
+
+		document.getElementById('help').style.display = 'block';  
+		document.getElementById('help').innerHTML = text;
+
+	}
+}
+
+function setdivposition( rid, id ) {
+
+        if( document.getElementById(id) &&  document.getElementById(rid) ) {
+
+                var obj = document.getElementById(rid);
+                var curleft;
+                var curtop;
+
+                if (obj.offsetParent) {
+                        curleft = obj.offsetLeft
+                        curtop = obj.offsetTop
+
+                        while (obj = obj.offsetParent) {
+                                curleft += obj.offsetLeft
+                                curtop += obj.offsetTop
+                        }
+                }
+
+		//alert( curtop )
+		//curleft = curleft + 210;
+		if(  navigator.appName == "Microsoft Internet Explorer" ) {
+	                curtop = curtop;
+		}else{ 
+		       curtop = curtop;	
+		}
+
+                document.getElementById(id).style.top = curtop + 'px';
+                //document.getElementById(id).style.left =  curleft + 'px';
+
+                //document.getElementById('id').style.display = 'block';
+                //document.getElementById('id').innerHTML = text;
+
+        }
+
+}
+
+
+
+function hidehelp(){
+	if( document.getElementById('help') )
+			document.getElementById('help').style.display = 'none'; 
+}
+
+function showhtmlblock( id ) {
+	if( document.getElementById(id) != null )
+	  document.getElementById(id).style.display= 'block';
+}
+
+function hidehtmlblock( id ) {
+	if( document.getElementById(id) != null )
+	  document.getElementById(id).style.display= 'none';
+}
+
+function togglehtmlblock( id ) {
+	if( document.getElementById(id) != null ) {
+//	alert(document.getElementById(id).style.display);
+	    if (document.getElementById(id).style.display == 'block' ) {
+		document.getElementById(id).style.display= 'none';
+	    } else {
+	  	document.getElementById(id).style.display= 'block';
+	    }
+	}
+}
+
+//
+// ossip testing. takes input field name, assumes label with id=field+'label'
+//  needs to be more generic 
+
+function toggleError (field,onoff) {
+  var inp=document.getElementsByName(field)[0];
+  var lab=document.getElementById(field + '_label');
+  var err=document.getElementById(field + '_error');
+
+  if(onoff) { // set on = no error
+      if (lab) lab.style.color = '#404040';
+      if (err) err.style.display = 'none';  // IE ?
+      inp.style.border = '1px solid #7f9db9';
+      return true;
+
+  } else { // set off = error
+      if (lab) lab.style.color = '#D20F15';
+      if (err) err.style.display = 'block';
+      inp.style.border = '1px solid #D20F15';
+      return false;
+  }
+}
+
+function checkifempty (field, len) {
+  var inp=document.getElementsByName(field)[0];
+   return toggleError(field, inp.value != '' && inp.value.length >= len);
+}
+
+function checkEmail (field) {
+  var inp=document.getElementsByName(field)[0];
+  return toggleError(field, inp.value != '' && inp.value.length > 6 
+	&& inp.value.indexOf('@')>=0 && inp.value.indexOf('@')<inp.value.length -4)
+}
+
+//
+// these are for the preview mode -- don't delete!!   /ossip
+//
+
+function textedit( table,id,nation,lang,subclient ) {
+    editw = window.open("/cgi-bin/callcenter/txtchng.pl?prv=1&table="+table+"&edit="+id+"&lang="+lang+"&nat="+nation+"&subclientid="+subclient,"txtedit","status=1,scrollbars=1,resizable=1,width=700,height=600");
+    editw.focus();
+    return false;
+}
+
+function toggleBox(divID, state) // 1 visible, 0 hidden, 2 : toggle
+{
+    if(document.layers)	   //NN4+
+    {
+       document.layers[divID].visibility = state ? "show" : "hide";
+    }
+    else if(document.getElementById)	  //gecko(NN6) + IE 5+
+    {
+        var obj = document.getElementById(divID);
+	if (obj && state == 2) {
+	    if (obj.style.visibility  == "visible" ) {
+		obj.style.visibility = "hidden";
+	    } else {
+		obj.style.visibility = "visible";
+	    }
+	} else if (obj) {
+	    obj.style.visibility = state ? "visible" : "hidden";
+	}
+    }
+    else if(document.all)	// IE 4
+    {
+        document.all[divID].style.visibility = state ? "visible" : "hidden";
+    }
+}
+
+
+// -- -end preview code.
+
+
+// make a help popup for the v51 service area. provide txtdb path
+function openHelp(txt, lang, nation) {
+    var url = "/cgi-bin/clicknbuy-service.pl/show_help/" + txt + "?lang="+lang+"&Nation="+nation;
+
+    var w = window.open(url,"cbHelp","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=auto,resizable=1,width=400,height=400,top=200,left=400");
+    if (w) {
+    	w.focus();
+    }else{
+	// document.location.href = url;  // what to do? blocked.
+	return true;
+    }
+    return false;
+}
+
+function openHelpA(txt, lang, nation) {
+    var url = "/cgi-bin/clicknbuy-service.pl/show_helpdiv/" + txt;
+    var param = "lang="+lang+"&nation="+nation;
+    var myAjax = new Ajax.Updater( 'placeholder', url, { method: 'get', parameters: param });
+}
+
+//country or language change setup show variable and submit the form 
+function CountryLangChange(){
+
+	document.regform._show.value="mainpage"
+	document.regform._page.value=""
+	document.regform.submit()
+}
+
+
+function buttonSubmit ( buttonname, obj ) {
+	if ( navigator.appName == "Microsoft Internet Explorer" ) {
+       		var elements = document.all;
+		var buttonfound = 0;
+		if ( elements ) {
+
+			for (i=0; i < elements.length; i++) {
+				if( elements.item(i).type == "submit" ){
+				
+					if( elements.item(i).name != "X_"+buttonname ){
+						elements.item(i).name = "X_";
+					}else{
+					    buttonfound = 1;
+					}
+				}
+			}
+				// set  clicked button name
+				
+		}
+	        if( ! buttonfound && obj ) {
+			obj.name = "X_"+buttonname;
+		}
+	}
+}
+
+function showpage( f, v ) {
+
+	if( f._page )
+		f._page.value = "";
+	
+	if( f._show )
+		f._show.value = v; 
+	
+	f.submit()
+}
+
+
+function selectfundingoption ( paymentType ){
+	var count = document.selectfunding.fundingtype.length
+	for( i =0 ;i<count;++i ){
+		if( document.selectfunding.fundingtype[i] ){
+			if ( document.selectfunding.fundingtype[i].value == paymentType ){
+				document.selectfunding.fundingtype[i].checked =  1  
+   			}	 
+		}
+	}
+	
+}
+
+// V520 Javascript functions
+function showregisterpayment ( id, img, hide, focuselement ){
+
+	if( paymentoptioncount == 1 ){	
+		return
+	}
+
+	if( id && document.getElementById(id) && hide ){
+		document.regform._paymenttype.value = "";
+
+		if( document.getElementById(id) )
+			document.getElementById(id).style.display = 'none';
+
+
+		if( id == "creditcard" ){
+			if( document.getElementById(id+'2') )
+				document.getElementById(id+'2').style.display = 'none';
+
+			if( ccaddressrequired )
+				hidebillingaddress()
+
+		}
+	
+		if( document.getElementById(id+'hr') )
+			document.getElementById(id+'hr').style.display = 'none';
+
+		if( document.getElementById(id+'label') )
+			document.getElementById(id+'label').style.display = 'none';
+
+		if( document.getElementById(id+'labellink'))
+			document.getElementById(id+'labellink').style.display = 'block';	
+
+	}else if(  id && document.getElementById(id) ){
+
+		document.regform._paymenttype.value = id;
+		
+					
+
+		if( document.getElementById(id+'label') )
+			document.getElementById(id+'label').style.display = 'block';
+		
+		if( document.getElementById(id+'labellink'))
+			document.getElementById(id+'labellink').style.display = 'none';	
+
+		if( document.getElementById(id) )
+			document.getElementById(id).style.display = 'block';
+
+
+		if( id == "creditcard" ){
+			if( document.getElementById(id+'2') )
+				document.getElementById(id+'2').style.display = 'block';
+
+			if( ccaddressrequired )
+				setbillingaddress()
+
+		}
+
+
+		if( document.getElementById(id+'hr') )
+			document.getElementById(id+'hr').style.display = 'block';
+		
+
+		// set focus
+		if( focuselement && eval("document.regform."+focuselement ) ){
+
+			eval("document.regform."+focuselement ).focus();
+
+		}else if( id == "creditcard" ){
+		
+			if( document.regform.Kartentyp && document.regform.Kartentyp.selectedIndex == 0 )
+				document.regform.Kartentyp.focus();
+			else if( document.regform.Kreditkartennummer )  
+				document.regform.Kreditkartennummer.focus();
+
+		}else if ( id == "directdebit" && document.regform.Konto ){
+		
+			document.regform.Bank.focus();
+
+		}else if ( id == "omt" && document.regform.Konto ){
+	
+			document.regform.OMT_Konto.focus();
+
+		}else if ( id == "wgz" && document.regform.Konto ){
+	
+			document.regform.WGZ_Konto.focus();
+		}
+
+	}
+
+
+	if( img && img == "arrowup" ){
+		if(document.getElementById(id+'arrowup') ) {
+			document.getElementById(id+'arrowup').style.display = 'none';
+		}
+		if( document.getElementById(id+'arrowdown') )
+			document.getElementById(id+'arrowdown').style.display = 'block';
+	}
+	if( img && img == "arrowdown" ){
+		if( document.getElementById(id+'arrowdown') )
+			document.getElementById(id+'arrowdown').style.display = 'none';
+	
+		if( document.getElementById(id+'arrowup') )
+			document.getElementById(id+'arrowup').style.display = 'block';
+	}
+
+	for( i=0; i<payments.length;i++){
+		p = payments[i];
+		if( p != id && document.getElementById(p) ){
+	
+			document.getElementById(p).style.display = 'none';
+			
+			if( document.getElementById(p+'2') )
+				document.getElementById(p+'2').style.display = 'none';	
+	
+			if( document.getElementById(p+'label') )
+				document.getElementById(p+'label').style.display = 'none';
+
+			if( document.getElementById(p+'labellink'))
+				document.getElementById(p+'labellink').style.display = 'block';
+
+
+			if( document.getElementById(p+'arrowdown') )
+				document.getElementById(p+'arrowdown').style.display = 'none';
+	
+			if( document.getElementById(id+'arrowup') )
+				document.getElementById(p+'arrowup').style.display = 'block';
+
+			if( 	document.getElementById(p+'hr') )
+				document.getElementById(p+'hr').style.display = 'none';
+		}
+	}
+
+
+	// hide credit card billing address block	
+	if( (id && id != "creditcard") || (id == "creditcard" && img && img == "arrowdown") ) {
+		if( document.getElementById('ccbillingaddress2') )
+	 		document.getElementById('ccbillingaddress2').style.display = 'none';
+
+
+		if( document.getElementById('ccbillingaddress') )
+	 		document.getElementById('ccbillingaddress').style.display = 'none';
+	}
+
+
+	if( document.regform.ddccfallback && document.regform.ddccfallback.value && id ){
+
+
+		if( document.getElementById('dd_creditcard2') ) {
+	 		
+			if( (img && img == "arrowdown") || id != 'directdebit' )
+				document.getElementById('dd_creditcard2').style.display = 'none';
+			else
+				document.getElementById('dd_creditcard2').style.display = 'block';	
+		}	
+
+
+
+		if( document.getElementById('dd_ccbillingaddress2') ) {
+	 		
+			if( (img && img == "arrowdown") || id != 'directdebit' )
+				document.getElementById('dd_ccbillingaddress2').style.display = 'none';
+			else
+				document.getElementById('dd_ccbillingaddress2').style.display = 'block';	
+		}		
+
+		if( document.getElementById('dd_ccbillingaddress') ) {
+
+			if( img && img == "arrowdown" )
+				document.getElementById('dd_ccbillingaddress').style.display = 'none';
+			else
+				document.getElementById('dd_ccbillingaddress').style.display = 'block';
+
+		}
+	}
+}
+
+function setbillingaddress() {
+
+	if( document.getElementById('ccbillingaddress2') )
+		document.getElementById('ccbillingaddress2').style.display = 'block';
+
+	if( document.getElementById('ccbillingaddress') )
+		document.getElementById('ccbillingaddress').style.display = 'block';
+
+}
+
+function hidebillingaddress() {
+
+	if( document.getElementById('ccbillingaddress2') )
+		document.getElementById('ccbillingaddress2').style.display = 'none';
+
+	if( document.getElementById('ccbillingaddress') )
+		document.getElementById('ccbillingaddress').style.display = 'none';
+
+}
+
+
+function setbillingaddress_cardtype ( form, cardtypes, ccindex ){
+	
+	if ( ccaddressrequired )
+			return; 
+
+	var cardarray = cardtypes.split(",");
+
+	count = 0;
+	ok = 1;
+	flag = 0;
+	while ( count < cardarray.length && ok)
+	{
+		cc = cardarray[count];
+
+		if( (!ccindex && cc == form[form.selectedIndex].value ) || ( form[ccindex] && cc ==  form[ccindex].value ) ){
+
+			
+
+			if( document.getElementById('ccbillingaddress2') )
+				document.getElementById('ccbillingaddress2').style.display = 'block';
+
+			if( document.getElementById('ccbillingaddress') )
+				document.getElementById('ccbillingaddress').style.display = 'block';
+
+			ok = null;
+			flag = 1;
+		}
+
+		++count
+
+	}
+
+	if( !flag && document.getElementById('ccbillingaddress2') )
+	 	document.getElementById('ccbillingaddress2').style.display = 'none';
+
+
+	if( !flag && document.getElementById('ccbillingaddress') )
+	 	document.getElementById('ccbillingaddress').style.display = 'none';
+
+
+
+	if( ccindex )
+		form.selectedIndex = ccindex;
+}
+
+function submitpayment ( form, field ) {
+
+	form._paymenttype.value = field;
+	form.submit()
+}
+
+function CopyEmail ( ) { 
+
+	if (document.pspregform.PSPEmail.value && !document.regform.Email.value){ 
+	document.regform.Email.value = document.pspregform.PSPEmail.value;
+	}
+
+}
+
+//Auto-tab for PSP Dob
+
+var isNN = (navigator.appName.indexOf("Netscape")!=-1);
+function autoTab(input,len, e) {
+
+	var keyCode = (isNN) ? e.which : e.keyCode;
+	var filter = (isNN) ? [0,8,9] : [0,8,9,16,17,18,37,38,39,40,46];
+
+	if(input.value.length >= len && !containsElement(filter,keyCode)) {
+
+		input.value = input.value.slice(0, len);
+
+		input.form[(getIndex(input)+1) % input.form.length].focus();	
+	}
+
+
+	function containsElement(arr, ele) {
+		var found = false, index = 0;
+	
+		while(!found && index < arr.length)
+			if(arr[index] == ele)
+				found = true;
+			else
+				index++;
+
+		return found;
+	}	
+
+	function getIndex(input) {
+		var index = -1, i = 0, found = false;
+
+		while (i < input.form.length && index == -1)
+			if (input.form[i] == input)index = i;
+			else i++;
+
+		return index;
+	}
+
+	return true;
+}
+
+// V530
+function onloadlandcheck( n ){
+
+	if( n == 1 )
+	     return;
+
+	if(document.regform && document.regform.Land && document.regform.Nation){
+		//var Land=document.regform.Land[document.regform.Land.selectedIndex].value;
+		var Land=document.regform.Land.value;
+		var Nation=document.regform.Nation.value;
+		if( Land && Nation && Land != Nation ){
+			document.regform.Land.value = Nation
+			//document.regform._show.value="mainpage";
+			//document.regform.submit();
+		}
+	}
+}
+
+
+
+}
+/*
+     FILE ARCHIVED ON 06:38:57 Aug 02, 2007 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:14:35 Sep 17, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.516
+  exclusion.robots: 0.02
+  exclusion.robots.policy: 0.008
+  esindex: 0.011
+  cdx.remote: 6.772
+  LoadShardBlock: 81.471 (3)
+  PetaboxLoader3.datanode: 71.594 (4)
+  load_resource: 93.658
+  PetaboxLoader3.resolve: 72.61
+*/

@@ -1,0 +1,3021 @@
+/* $HeadURL: https://submav.clickandbuy.com/svn/AlgorithmicCreations/sources/tags/v814-rc6/de/inc/css/acstyle_newdesign.css $ $Revision: 95362 $ $Date: 2012-06-06 14:05:26 +0000 (Wed, 06 Jun 2012) $ */
+
+/* DEFAULT PAGE STYLES */
+/* If error color changes, description-box.js and dynamix.js need to be updated accordingly. -sjw */
+
+body{
+	background-color:#ececec; /* 395275 */
+	height: 100%;
+	font-family:Verdana;
+	font-size:11px;
+	color:#666666;
+}
+
+div.super-container{
+	margin:6px;
+	height:auto;
+	background-repeat:no-repeat;
+	background-position:bottom left;
+	padding-bottom:10px;
+	margin-bottom:10px;
+}
+
+.divider{
+border-left:1px solid #999999;
+display:block;
+height:50px;
+margin-left:1px;
+width:2px;
+}
+
+.helptext{
+	font-weight:normal; 
+	font-size:9px;}
+
+div.main-form{
+	margin-top:-4px;
+	overflow:hidden;
+        width:660px;
+        text-align:left;
+        margin-left:auto;
+        margin-right:auto;
+        padding-right:16px;
+        padding-left:20px;
+        padding-bottom:0px;
+}
+
+.imagePadding{margin-bottom:2px;}
+
+div.merchant-table{
+	width:700px;
+	height:60px;
+	margin-top:10px;
+	margin-bottom:16px;
+	margin-left:auto;
+	margin-right:auto;
+	overflow:hidden;
+}
+
+.merchant-logo{
+    width:468px;
+	height:60px;
+	overflow:hidden;
+}
+
+td#merchant-styling{
+	vertical-align:top; 
+	height:60px;
+	width:232px;
+	line-height:12px;
+	padding-left:10px;
+ 	color:#666666;
+	text-align:left;
+	white-space:normal; 
+}
+
+div.header{
+	padding: 13px 16px 13px 20px;
+	width:660px;
+}
+
+.headermessage{
+	font-family:Verdana;
+	display:block;
+	width: 190px;
+	font-family:Verdana;
+	font-size:12px;
+	color:#666666;
+	vertical-align:middle;
+}
+
+div.step-container{
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/number_step_bg.gif);
+	height:25px;
+	padding:5px;
+	width:500px;
+	margin:1px;
+	margin-top:2px;
+	font-weight:bold;
+}
+
+div.step-container-psp {
+        border-top:1px solid #9CA8BA;
+        border-bottom:1px solid #9CA8BA;
+        height:21px;
+        padding:5px 0 2px 20px;
+        width:675px;
+        margin:0;
+        overflow:hidden;
+}
+
+.breadcrumb {
+	color:#6B7D98;
+}
+
+.breadcrumb_selected {
+	color:#122744;
+}
+
+.small-header{
+	padding-left:12px;
+	font-family:Verdana;
+	font-size:13px;
+	font-weight:bold;
+	color:#FFFFFF;
+	width:100%;
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/header_bg.gif);
+	height:26px;
+}
+
+.left-image{
+background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/left_round_big_psp_new.gif);
+height:26px;
+width:13px;
+}
+
+.right-image{
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/header_right.gif);
+	width:13px;
+	height:26px;
+}
+
+.right-image-4p {
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/header_right-4p.gif);
+        width:13px;
+        height:27px;
+}
+
+div.contentboxleft_new{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box_left_new.gif);
+        margin-bottom:-2px;
+        width:448px;
+        padding-bottom:13px;
+}
+
+.blueb{
+	font-size:11px;
+	font-family:verdana;
+	font-weight:bold;
+	color:#666666;
+}
+
+.user-data{
+	font-size:11px;
+	font-weight:normal; 
+	color:#666666; 
+}
+
+.user-data th{
+	font-size:11px;
+	text-align:left;
+        height:30px;
+        width:150px;
+}
+
+.user-data-wallet th{
+        font-size:11px;
+        text-align:left;
+        height:30px;
+        width:170px;
+}
+
+.countrysp{
+	width:120px; 
+	padding-bottom:10px;
+	padding-top:7px;
+}
+
+#select1 {
+	width:150px;
+	float:left;
+	position:relative;
+}
+
+#select1 select {
+	width:150px;
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+select.color160{
+	text-align:left;
+	width:150px;
+        /* height:20px; */
+}
+
+.optionbox{
+	margin-top:9px; 
+	margin-left:0px; 
+	margin-bottom:8px; 
+	width:390px;
+}
+
+.xpsplink{
+        text-decoration:none;
+        font-weight:normal;
+        font-size:11px;
+        color:#666666;
+}
+
+.psplinkb{
+	text-decoration:none;
+        font-weight:bold;
+        font-size:12px;
+        color:#666666;
+}
+
+.user-psp{
+        font-size:11px;
+        font-weight:normal;
+	color:#666666;
+}
+
+.user-psp th{
+        font-size:11px;
+        font-weight:normal;
+        text-align:left;
+        height:29px;
+        width:165px;
+	color:#666666;
+	vertical-align:top;
+}
+
+.user-psp td{
+	vertical-align:top;
+}
+input.textarea3{
+	width:173px;
+}
+
+.graytext{
+	color:#666666;
+}
+
+hr-psp{
+        height:1px;
+	border:none;
+        color:#999999;
+        background:#999999;
+        margin-top:25px;
+        margin-bottom:16px;
+	width:380px;
+}
+
+.radiopsp{
+        padding:0px 1px 0px 0px;
+        vertical-align:middle;
+}
+
+.radiopsp2{
+        padding:0px 1px 0px 15px;
+        vertical-align:middle;
+}
+
+.paymentdisplay {
+	display:none;
+}
+
+.paymentdisplay_show {
+	display:block;
+}
+
+.gap5r{
+	padding-right:7px;
+}
+
+.ccbillingaddress {
+	display:none;
+	padding-bottom:10px;
+}
+.ccbillingaddress_show {
+	display:block;
+	padding-bottom:10px;
+}
+
+.small{
+	font-size:9px;
+	font-weight:normal;
+}
+
+div.contentboxfooter{
+	height:12px;
+	padding-bottom:14px;
+	padding-left:1px;
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/footer_form_box.gif);
+	background-repeat:no-repeat;
+}
+
+div.contentboxfooter2{
+	height:12px;
+	padding-bottom:14px;
+	padding-left:1px;
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/footer_form_box_left_new.gif);
+	background-repeat:no-repeat;
+}
+
+.left_blue_new{
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/left_round_big_psp_new.gif);
+	width:13px;
+	height:26px;
+}
+
+.left_topborder {
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/left_round_gray.gif);
+        width:13px;
+        height:12px;
+}
+
+.right_topborder{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/header_round_gray.gif);
+        background-repeat:no-repeat;
+        padding-left:12px;
+	width:165px;
+}
+
+.right_topborder_wallet{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/header_round_gray2.gif);
+        background-repeat:no-repeat;
+        padding-left:12px;
+        width:165px;
+}
+
+div.contentboxright_blue_new{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box_right_blue.gif);
+        margin-bottom:-2px;
+        width:188px;
+        padding-bottom:5px;
+        margin-left:20px;
+}
+
+div.contentboxright_blue_wallet{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box_right_blue2.gif);
+        margin-bottom:-2px;
+        width:178px;
+        padding-bottom:5px;
+        margin-left:20px;
+}
+.small-header-login_new {
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/header_big_bg_psp_new.gif);
+	background-repeat:no-repeat;
+        padding-left:12px;
+        font-family:Verdana;
+        font-size:13px;
+        font-weight:bold;
+        color:#FFFFFF;
+        width:165px;
+}
+
+.psploginborder{
+        padding:7px 17px 0px 17px;
+}
+
+.walletloginborder{
+	padding:0 10px 0px 10px;
+}
+
+.logintitle{
+	font-family:verdana; 
+	font-weight:bold; 
+	font-size:13px; 
+	color:#f88000;
+}
+
+.loginuser{
+	padding-top:11px; 
+	padding-bottom:2px; 
+	color:#666666;
+}
+
+.loginpass{
+	padding-top:4px; 
+	padding-bottom:2px; 
+	color:#666666;
+}
+
+div.contentboxfooter_right{
+        height:12px;
+        padding-bottom:14px;
+	margin-left:20px;
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/footer_form_box_right_blue.gif);
+	background-repeat:no-repeat;
+}
+
+div.contentboxfooter_right_wallet{
+        height:12px;
+        padding-bottom:14px;
+        margin-left:20px;
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/footer_form_box_right_blue2.gif);
+        background-repeat:no-repeat;
+}
+
+xdiv.text-bottom{
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	height:70px;
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/footer_main.gif);
+	background-color:transparent;
+	width:700px;
+	font-size:9px;
+	color:#777676;
+	padding-top:-1px;
+}
+
+div.text-bottom-keyaccount{
+        text-align:center;
+        margin-left:auto;
+        margin-right:auto;
+        height:69px;
+        width:700px;
+        font-size:9px;
+        color:#666666;
+        padding-top:-1px;
+}
+
+div.textfooter{
+		    padding-top:6px;
+}
+
+div.textfooter-keyaccount{
+                    padding-top:2px;
+}
+a.gray {
+	font-weight:normal;
+	font-size:10px;
+	color:#666666;
+}
+
+div.contentboxtop{
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box.gif);
+        margin-bottom:-2px;
+	margin-top:0px;
+	width:656px;
+	padding-bottom:13px;
+	position:relative;
+}
+
+/* for showddauthselectpayment */
+div.contentboxtoppay{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box.gif);
+        margin-bottom:-2px;
+        margin-top:0px;
+        width:656px;
+        padding-bottom:43px;
+        position:relative;
+}
+
+/*6P DESIGN*/
+
+div.main-6p{
+	background-color:#FFFFFF;
+	width:696px;
+	text-align:left;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+div.super-container-6p{
+	margin:6px;
+	height:auto;
+	background-repeat:no-repeat;
+	margin-top:-9px;
+	background-position:bottom left;
+	padding-bottom:10px;
+	margin-bottom:10px;
+}
+
+
+div.super-container-popup{
+	margin:6px;
+	height:auto;
+	background-repeat:no-repeat;
+	background-position:bottom left;
+	padding-left:10px;
+	padding-right:10px;
+	margin-bottom:10px;
+}
+
+
+
+div.merchant-table-6p{
+	width:656px;
+	height:60px;
+	margin-top:10px;
+	margin-bottom:16px;
+	margin-left:auto;
+	margin-right:auto;
+	overflow:hidden;
+}
+
+.contentboxtop-6p{
+	margin-bottom:-2px;
+	margin-top:0px;
+	width:656px;
+	padding-bottom:13px;
+	position:relative;
+}
+
+.merchant-logo-6p{
+	height:60px;
+	line-height:12px;
+	overflow:hidden;
+	width:410px;
+	vertical-align:bottom;
+}
+
+.merchtext-6p{
+	margin-left:250px;
+	width:170px;
+}
+
+#mcafee-styling{
+        width:75px;
+        padding-left:10px;
+        text-align:left;
+        white-space:normal;
+}
+
+.mcafeetext-logo{
+        margin-left:250px;
+        width:170px;
+}
+
+#merchant-styling-6p{
+	vertical-align:bottom; 
+	height:60px;
+	width:246px;
+	line-height:12px;
+	padding-left:10px;
+ 	text-align:left;
+	white-space:normal; 
+}
+
+.textlogo-6p{
+	overflow:hidden;
+	float:right;
+}
+
+.poweredstyle-6p{
+	font-size:9px;
+	vertical-align:bottom;
+	color:#666666 !important;
+}
+
+div.merchant-table table{
+
+}
+
+div.merchant-table img{
+}
+
+.margin-push{margin-left:18px;}
+
+.optionbox-6p{
+	margin-top:0px; 
+	margin-left:0px; 
+	margin-bottom:0px; 
+	width:390px;
+}
+
+
+
+.contentboxright_blue_new-6p{
+	width:188px;
+	height:108px;
+	padding-bottom:5px;
+	margin-left:20px;
+}
+
+.loginbox-6p{
+	width:188px;
+	height:30px;
+	padding-bottom:5px;
+	margin-left:20px;
+}
+
+
+/* below is for swisscom maintemplate page per request */
+.headermessage1{
+	font-family:Verdana;
+	display:block;
+	width: 240px;
+	font-family:Verdana;
+	font-size:9px;
+	color:#666666;
+	vertical-align:middle;
+}
+
+input,a,select {
+	font-family:Verdana;
+	font-size:9px;
+	color:#666666;
+}
+
+button {
+	font-family:Verdana;
+	font-size:11px;
+	color:#666666;
+}
+
+input,select {
+	border:1px solid #999999;
+	font-size:11px;
+	color:#666666;
+
+}
+
+input {
+	padding:2px !important;
+}
+
+#tspan {
+	font-family:Verdana;
+	font-size:11px;
+	font-weight:bold;
+	visibility:hidden;
+}
+
+.bgwhite{
+	background-color:#fff;
+}
+
+
+.set_space{height:11px;} /* space between table rows  */
+.set_space2{height:21px;} /* space between table rows  */
+.set_space3{height:30px;}
+
+.move_leftwindow{margin-left:390px;} 
+.move_rightwindow{margin-left:200px;}
+
+.msg{text-align:right;} /* moves login message text  */
+
+.room{padding-top:8px; padding-bottom:8px;}
+
+/* styles for us direct debit check-like form */
+
+div#check{width:400px;}
+div#check_inner{width:100%;}
+html > body div#check_inner{width:auto;}
+div#check {background-color:#dededd; padding:3px;}
+div#check_inner{border:1px dashed #000;padding:0px;}
+div#check_inner table{width:100%;}
+div#check_inner table td,div#check_inner table th{text-align:center;padding:5px;}
+div#check_inner table#lower td{text-align:center;padding:2px;}
+div#check_inner table#middle{margin:10px 0; color:#999;}
+div#check_inner table#middle td{text-align:left;}
+div#check_inner table td.under{border:1px solid #999;border-width:0 0 1px 0;}
+div#check_inner table td.around{border:1px solid #999; width:50px;}
+div#check_inner table input{width:150px;border:1px solid #006;}
+
+.side_space{padding: 0 8px 0 8px;}
+
+.uk_DDfield{
+	width:25px;
+}
+
+.setHeight{height:31px;}
+
+.setHeight2{height:11px;}
+
+.es_DDfield{
+	width:40px;
+}
+
+#customField{margin-left:22px;}
+
+.es_DDfieldshort{
+	width:20px;
+}
+
+.es_DDfieldlong{
+	width:70px;
+}
+
+input.textarea_error{
+	border:1px solid #F88000;
+	width:194px;
+	padding:2px;
+	font-size:11px;
+	color: #000;
+}
+
+.textarea_error{
+/* not really..   	font-weight: bold; */
+	color:#F88000;
+}
+
+.error_bold{
+    font-weight:bold;
+    color:#F88000;
+}
+
+.input_error{
+	font-weight: bold;
+	color:#F88000;
+	font-size: 15px;
+}
+
+.display_correction{
+	position:absolute;
+	margin-top:-17px;
+	margin-left:229px;
+	width:149px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color:#e0e0e0;
+	color:#666666;
+	font-weight:normal;
+	font-size:11px;
+}
+
+td.text{
+	font-size:11px; 
+	line-height:13px; 
+	color:#404040; 
+	font-weight:normal;
+}
+
+form{
+	display:inline;
+}
+
+input.textarea{
+	width:194px;
+}
+
+input.textareasmall{
+	width:35px;
+}
+
+input.textarea2{
+        width:190px;
+}
+
+
+
+/* ossip testing. */
+input.textarea2_error {
+        border:1px solid #F88000;
+        width:190px;
+}
+
+
+input.textarea-short{
+	width:150px;
+}
+
+input.textarea-short1{
+	width:137px;
+}
+
+input.textarea-ddmm{
+	width:30px;
+}
+
+input.textarea-yyyy{
+	width:45px;
+}
+
+input.center{
+	vertical-align:middle; 
+	border:none !important;
+}
+
+.space{
+	height:25px;
+	font-weight:normal;
+	font-size:11px;
+	color:#999999;
+}
+
+
+space_1{
+	height:25px;
+	font-weight:normal;
+	font-size:11px;
+	color:#999999;
+	width:150px;}
+
+.normal{
+        font-weight:normal;
+        font-size:11px;
+        color:#999999;
+}
+
+.normal-10{
+        height:10px;
+        font-weight:normal;
+        font-size:11px;
+        color:#999999;
+}
+
+
+.normal-15{
+	height:15px;
+	font-weight:normal;
+	font-size:11px;
+	color:#666666;
+}
+
+.space_bank{
+	height:30px;
+	width:150px;
+}
+
+.space_bank_error{
+	height:30px;
+	width:150px;
+	color:#F88000;
+	font-weight:bold;
+}
+
+.space_bank2{
+        height:30px;
+        width:700px;
+}
+
+/* select tab properties */
+
+select.color200, select.color200_error {
+        text-align:left;
+        width:200px;
+}
+
+select.color270, select.color270_error {
+        text-align:left;
+        width:270px;
+}
+
+select.color300, select.color300_error {
+        text-align:left;
+        width:300px;
+}
+
+select.color200_c{
+        width:200px;
+	
+}
+
+select.color100{
+	text-align:left;
+	width:110px;
+	height:20px;
+}
+
+select.color40{
+	text-align:left;
+	width:46px;
+}
+
+select.color60{
+	text-align:left;
+	width:60px;
+}
+
+/* input style for payzone */
+
+input#payzone{
+        width:45px;
+        height:13px;
+        padding-top:2px;
+        padding-left:2px;
+        font-size:11px;
+}
+
+/* checkbox properties */
+
+checkbox.error{
+	border-color:#F88000;
+}
+
+.indentInstruct{margin-left:22px;}
+
+.indentGeneral{margin-left:19px;}
+
+.indentCC{
+	margin-left:27px; 
+	margin-top:10px; 
+	margin-bottom:10px;
+}
+
+.column_spec{
+	width:132px;
+}
+
+
+img{
+	border:0px;
+	vertical-align:middle;
+}
+
+
+#error {
+	color:#F88000;
+	font-weight:bold;
+	font-size:15px;
+	margin:0 0 7px 0;
+}
+
+#small_error {
+	color:#F88000;
+	font-weight:bold;
+	font-size:11px;
+	margin:0 0 7px 0;
+}
+
+ ._error {
+	color:#F88000;
+	font-weight:bold;
+	font-size:15px;
+	margin:0 0 7px 0;
+}
+
+.error{
+	color:#F88000;
+	font-weight:bold;
+	font-size:11px;
+	margin:0 0 7px 0;
+}
+
+.small_error{
+	color:#F88000;
+	font-weight:bold;
+	font-size:11px;
+	margin:0 0 7px 0;
+}
+
+ul{
+	padding: 0px 0px 0px 12px ;
+}
+
+.radiotext{
+	padding:0px 8px 0px 0px;
+	vertical-align:middle; 
+}
+
+.radiotext2{
+        padding:0px 8px 0px 25px;
+        vertical-align:middle;
+}
+
+/* Project 3319 */
+.radiotext3{
+	padding:0px 9px 0px 4px;
+	vertical-align:middle;
+}
+
+.checkboxtext{
+	padding:0px 8px 0px 0px;
+	vertical-align: middle; 
+	border:none;
+}
+
+li{
+	padding-top:5px;
+}
+
+#small{
+	font-size:9px;
+	margin:2px 0 2px 0;
+	font-weight:normal;
+}
+
+
+
+
+hr {
+	color: #999999;
+	height: 1px;
+	border: 0;
+	background-color: #999999;
+	margin: 20px 0 16px 0;
+	width: 100%;
+}
+
+img.hr{
+	margin: 20px 0 16px 0;
+}
+
+hr.spec{color:#999999;}
+
+hr.hr-strong{
+	background-color: #999999 ;		
+	border: 0;
+	width: 100%;
+	margin: 5px 0 5px 0;
+}
+
+hr.hr-normal{
+        background-color: #999999;
+	height: 1px;
+        border: 0;
+        width: 100%;
+        margin: 10px 0 10px 0;
+}
+
+hr.hr-slim{
+        background-color: #e0e0e0;
+        height: 1px;
+        border: 0;
+        width: 100%;
+        margin: 2px 0 10px 0;
+}
+
+hr.hr-u10{
+        background-color: #999999;
+        height: 1px;
+        border: 0;
+        width: 100%;
+        margin: 15px 0 0 0;
+}
+
+.dark-gray {
+	font-weight:normal;
+	font-size:9px;
+	color:#F88000;
+}
+
+.light-gray{
+	font-weight:normal;
+	font-size:11px;
+	color:#666666;
+}
+
+.light-gray2{
+	font-weight:bold;
+	font-size:13px;
+	color:#999999;
+}
+
+div.clear{
+	clear:both;
+}
+
+
+
+div.sub-header{
+	margin-top:25px;
+	width:656px;
+}
+
+div.box-left{
+	float:left;
+	width:350px;
+	height: 100px;
+	vertical-align:top;
+	margin-right:36px;
+}
+
+div.label {
+	font-family:Verdana;
+	font-size:13px;
+	font-weight:bold;
+	color:#666666;
+}
+
+.pt7 {
+	padding-top:7px;
+	vertical-align:top;
+}
+
+.pt18 {
+	padding-top:18px;
+	vertical-align:top;
+}
+
+/* new orange button style for msa */
+
+div.msahlink_left {
+	height:20px;
+	margin-bottom:3px;
+	padding-left:6px;
+	background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_wl.png) no-repeat left top;
+	float:right;
+	}
+
+div.msahlink {
+        height:20px;
+        margin-bottom:3px;
+        padding-left:6px;
+        background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_wl.png) no-repeat left top;
+        float:right;
+        }
+
+        a.msahlinka:link, a.msahlinka:visited, a.msahlinka:hover {  
+        display:block;
+        height:20px;
+        background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_wr.png) no-repeat right top;
+        border:none;
+        margin:0;
+        padding-top:-2px !important;
+	padding-right:14px;
+	padding-bottom:0px;
+	padding-left:8px;
+        color:#FFF;
+        font-size:11px;
+        font-weight:bold;
+        text-decoration:none;
+        cursor:pointer;
+        white-space:nowrap;
+        width:1px;
+        width:inherit !important;
+        }
+
+a.msahlinka img{
+	margin-top:4px;
+	margin-bottom:3px;
+}
+
+/* Left side of Button */
+
+div.button {
+	height:36px; 
+	margin-bottom:0px; 	
+	background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_left_v2.gif) no-repeat left top;
+	float:right;
+	border-left:0px;
+	border-right:0px;
+}
+
+div.button_left {
+        height:36px;
+        margin-bottom:0px;
+        background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_left_v2.gif) no-repeat left top;
+        float:left;
+        border-left:0px;
+        border-right:0px;
+}
+
+/* Right Side of button */
+
+input.button{
+	height:20px; 
+	border:none;
+	padding-top:1px; 
+	padding-left:6px;
+	padding-bottom:7px;
+	padding-right:8px; /* TLBR */ 
+	margin-left:5px;
+	color:#FFF; 
+	font-size:11px; 
+	font-weight:bold; 		
+	background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_wr.png) no-repeat right top;  
+	cursor:pointer;
+}
+
+input.button img{}
+
+button.button img {
+	margin-top:4px;
+	margin-bottom:3px;
+}
+
+/* Left side of Grayed-Out Button */
+
+div.button_gray {
+        height:36px;
+        margin-bottom:0px;
+        background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_left_v2.gif) no-repeat left top;
+        float:right;
+        border-left:0px;
+        border-right:0px;
+}
+
+div.button_left_gray {
+        height:36px;
+        margin-bottom:0px;
+        background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_left_v2.gif) no-repeat left top;
+        float:left;
+        border-left:0px;
+        border-right:0px;
+}
+
+/* Right Side of button */
+
+button.button_gray{
+	height:36px;
+        border:none;
+        padding-top:11px;
+	padding-right:40px;
+        padding-bottom:11px;
+	padding-left:0px;
+        margin-left:8px;
+        color:#666666;
+        font-size:11px;
+        font-weight:bold;
+        background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_new_i_gray.gif) no-repeat right top;
+        cursor:pointer;
+	text-transform:uppercase;
+}
+
+button.button_gray img {
+	margin-top:3px;
+	margin-bottom:3px;
+}
+
+/* Left side of Hyperlink */
+
+.left {
+	float:left;
+	}
+
+div.hlinkleft {
+        height:36px;
+        margin-bottom:0px;
+        background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_left_v2.gif) no-repeat left top;
+        float:left;
+        border-left:0px;
+        border-right:0px;
+}
+
+div.hlink {
+        height:36px;
+        margin-bottom:0px;
+        background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_left_v2.gif) no-repeat left top;
+        float:right;
+	border-left:0px;
+        border-right:0px;
+}
+
+
+/* Right side of Hyperlink */
+
+a.hlinka{
+	display:block; /* Fix for IE7 */
+	height:36px;
+        border:none;
+        padding-top:10px;
+	padding-right:50px;
+	padding-bottom:12px;
+        padding-left:0px;
+        margin-left:8px;
+        color:#666666;
+        font-size:11px;
+        font-weight:bold;
+	text-decoration:none !important;
+        background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_new_i.gif) no-repeat right top;
+        cursor:pointer;
+        text-transform:uppercase;
+}
+
+a.hlinka img {
+       margin-top:4px;
+       margin-bottom:3px;
+}
+
+
+/* Button positions */
+
+div.rightalign{
+	margin:0 0 0 110px;
+}
+
+img.hlink{padding-top:3px;}
+
+/* New back arrow style bug 1068 */
+        div.back_arrow {
+        background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/back_arrow.gif) no-repeat left;
+	height:10px;
+	padding-bottom:9px;
+        }
+
+	a.back_arrow2{
+        display:block; /* Fix for IE7 */
+        height:12px;
+        border:none;
+        padding-top:0px;
+        padding-right:0px;
+        padding-bottom:0px;
+        padding-left:12px;
+        color:#666666;
+        font-size:12px;
+        font-weight:bold;
+        text-decoration:none !important;
+        cursor:pointer;
+}
+
+div.box-right{
+	float:right;
+	width:306px;
+	vertical-align:top;
+	height:120px;
+	margin-bottom:-1px;
+}
+
+div.article{
+	background-color:#e0e0e0;
+	font-weight:bold;
+	padding:3px;
+	color:#999999;
+}
+
+/* Internet explorer breadcrumb fix below */
+
+div.step-container-topsa {
+	border-top:2px solid #D3141B;
+	border-bottom:1px solid #D3141B;
+	height:21px;
+	padding:3px 0 2px 19px;
+	width:677px;
+	margin:0;
+	overflow:hidden;
+}
+
+div.step-container-topsa img {
+	display:block;
+	float:left;
+	width:20px;
+	height:20px;
+	margin-right:10px;
+}
+
+div.step-container-topsa span {
+	display:block;
+	float:left;
+	height:17px;
+	font-weight:bold;
+	margin-right:25px;
+	padding:0;
+	padding-top:3px;
+}
+
+/* Internet explorer breadcrumb fix end */
+
+/* PSP Breadcrumb version */
+
+
+
+div.step-container-psppopup {
+        border-top:1px solid #9CA8BA;
+        border-bottom:1px solid #9CA8BA;
+        height:21px;
+        padding:5px 0 2px 0px;
+        width:675px;
+        margin:0;
+        overflow:hidden;
+}
+
+div.step-container-psppopup img {
+        display:block;
+        float:left;
+        width:18px;
+        height:18px;
+        margin-right:6px;
+}
+
+div.step-container-psp img {
+        display:block;
+        float:left;
+        width:18px;
+        height:18px;
+        margin-right:6px;
+}
+
+div.step-container-psp span{
+        display:block;
+        float:left;
+        height:17px;
+        font-weight:bold;
+        margin-right:20px;
+        padding:0;
+        padding-top:2px;
+}
+
+
+
+div.step-not-ready{
+	height: 25px;
+	float:left;
+	color:#999999;
+	margin-left:8px;
+	margin-right:8px;
+}
+
+div.cont{
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box.gif);
+	margin-bottom:-1px;
+	margin-top:-2px;
+}
+
+div.contentboxtoppopup{
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_boxpopup.gif);
+        margin-bottom:-2px;
+	margin-top:0px;
+	width:790px;
+	padding-bottom:13px;
+	position:relative;
+}
+
+div.contentboxtop_small{
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box.gif);
+        margin-bottom:-2px;
+	margin-top:0px;
+	width:400px;
+	padding-bottom:13px;
+	position:relative;
+}
+
+div.contentboxbottom{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box.gif);
+        margin-bottom:-2px;
+        width:656px;
+	padding-bottom:13px;
+}
+
+.contenttop_borderless-6p{
+	width:700;
+	border-top:1px solid #9CA8BA;
+	padding-bottom:5px;
+}
+
+.contentbottom_borderless-6p{
+	width:700;
+	border-bottom:1px solid #9CA8BA;
+	padding-top:5px;
+}
+
+/* PSP showregister */
+div.contentboxleft{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box_left.gif);
+	margin-bottom:-2px;	
+        width:400px;
+        padding-bottom:13px;
+}
+
+div.contentboxright{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box_right.gif);
+	margin-bottom:-2px;
+        width:240px;
+        padding-bottom:13px;
+	margin-left:15px;
+}
+
+/* Use for PSP and PSP New */
+
+div.contentboxfooter-6p{
+	height:12px;
+	padding-bottom:4px;
+	padding-left:1px;
+}
+
+div.contentboxfooter2{
+	height:12px;
+	padding-bottom:14px;
+	padding-left:1px;
+}
+
+div.contentboxfooter2-6p{
+	height:12px;
+	padding-bottom:14px;
+	padding-left:1px;
+}
+
+/* PSP New showregister */
+
+
+
+div.contentboxleft_new-6p{
+	margin-top:-10px;
+	margin-bottom:-2px;
+	width:448px;
+	padding-bottom:13px;
+}
+
+
+div.box {
+	border:none;
+	margin: 14px 0px 0px 23px;
+	width:300px;
+}
+
+/* Table properties */
+
+table.maincontent{
+		    width:656px;
+		    padding:0;
+		    border-spacing:0;
+}
+
+table.general{
+		    width:100%;
+		    padding:0;
+		    border-spacing:0;
+		    	    
+}
+table.insidecontent{
+                    width:100%;
+                    padding:0;
+                    border-spacing:0;
+		    font-size:11px;
+		    font-weight:bold;
+		    color:#666666;
+}
+/* TD properties */
+
+td.toplabel{
+                    font-weight:bold;
+}
+
+td.bottomlabel{
+                    height:35px;
+                    font-weight:bold;
+}
+
+td.spacer-5{
+                    height:5px;
+}
+
+td.spacer-10{
+                    height:10px;
+}
+
+
+td.spacer-15{
+		    height:15px;
+}
+
+th.col-100, td.col-100{
+	width:100px;
+}
+
+th.col-150, td.col-150{
+	width:150px;
+}
+
+div.main-form-6p{
+	margin-top:-12px;
+	width:656px;
+	overflow:hidden;
+        width:660px;
+        text-align:left;
+        margin-left:auto;
+        margin-right:auto;
+        padding-right:16px;
+        padding-left:20px;
+        padding-bottom:0px;
+}
+
+div.form{		    /* space around the container */
+	margin-left:22px;
+	margin-right:22px;
+	margin-top:16px;	
+	}
+
+div.form-wallet{		    /* space around the container */
+	margin-left:22px;
+	margin-right:22px;
+	}
+
+div.graybox{
+	margin:5px; 5px; 5px 5px;
+}
+
+a{
+	color:#F88000;
+	font-size:11px;
+	line-height:18px;
+	text-decoration: none;
+}
+
+a:hover {
+        text-decoration: underline;
+}
+
+a.blue2 {
+	font-weight:bold;
+	text-decoration:none;
+	color:#666666;
+	line-height:13px;
+}
+
+
+
+
+div.title{
+	margin-top:8px;
+	float:left;
+	color:#666666;
+	font-weight:bold;
+	font-size:11px;
+	width:150px;
+	display:table;
+}
+
+div.big-title{
+	font-family:Verdana;
+	font-size:14px;
+	font-weight:bold;
+	color:#666666;
+	height:40px;
+}
+
+div.input{
+	margin-top:5px;
+	color:#666666;
+	font-weight:bold;
+	font-size:11px;
+	display:table;
+}
+
+input.text-short{
+	width:135px;
+}
+
+input.text{
+	width:190px;
+}
+
+input.large{
+	width:200px;
+}
+
+input.mid{
+	width:182px;
+}
+
+
+
+div.helpbox{
+	padding:9px 12px 9px 12px;
+	display:none;
+	background-color:#e0e0e0;
+	font-size:11px;
+	font-weight:normal;
+	position:absolute;
+	width:150px;
+	z-index:10;	
+}
+
+div.gray-box{
+	text-align:left;
+	line-height:13px;
+	padding:15px;
+	background-color:#e0e0e0;
+	font-size:11px;
+	color:#666666;
+	border:1px solid #395175;
+	font-weight:normal;
+	width:200px;
+}
+
+div.gray-box2{
+	text-align:left;
+	padding:7px;
+	font-size:11px;
+	background-color:#e0e0e0;
+	border:1px solid #666666;
+	width:auto;
+	margin-top:16px;
+}
+
+div.gray-box3{
+	text-align:center;
+	padding:7px;
+	font-size:11px;
+	background-color:#e0e0e0;
+	border:1px solid #395175;
+	width:auto;
+	margin-top:16px;
+}
+
+div.gray-boxsub{
+	text-align:left;
+	font-size:11px;
+	background-color:#e0e0e0;
+	border:1px solid #395175;
+	padding:5px;
+	width:auto;
+}
+
+div.box-195-body{
+	padding:0px;
+	padding-left:10px;
+	padding-bottom:5px;
+	width:200px;
+}
+
+div.box-195{
+	padding-top:4px;
+	padding-left:24px;
+	font-family:Verdana;
+	font-size:13px;
+	font-weight:bold;
+	color:#FFFFFF;
+	width:195px;
+	height:23px;
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_195_header.gif);
+}
+
+div.box-700{
+	padding-top:4px;
+	padding-left:24px;
+	font-family:Verdana;
+	font-size:13px;
+	font-weight:bold;
+	color:#FFFFFF;
+	width:701px;
+	height:23px;
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_700_header.gif);
+}
+
+div.box-321{
+	padding-top:4px;
+	padding-left:24px;
+	font-family:Verdana;
+	font-size:13px;
+	font-weight:bold;
+	color:#FFFFFF;
+	width:321px;
+	height:23px;
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_700_header.gif);
+}
+
+
+
+.small-headers{
+	padding-left:18px;
+	font-family:Verdana;
+	font-size:11px;
+}
+
+
+
+
+
+div.text-bottom-6p{
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	height:44px;
+	background-color:transparent;
+	width:700px;
+	font-size:9px;
+	color:#666666;
+	padding-top:-1px;
+}
+
+
+div.text-header{
+	font-family:Verdana;
+	font-size:18px;
+	color:#666666;
+}
+
+div.user{
+	width:410px;
+	font-size:11px;
+	color:#666666;
+	text-align:right;
+}
+
+
+
+
+div.dyn-bg-right{
+	background-image:  url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/servicearea/ao/pixel_blu.gif);
+	background-repeat:repeat-y;
+	background-position:right;
+		}
+
+div.dyn-bg-left{
+	background-image:  url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/servicearea/ao/pixel_blu.gif);
+	background-repeat:repeat-y;
+	padding:0px 0px 0px 0px;
+	}
+
+div.dyn-bg-footer{
+	background-image:  url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/servicearea/ao/bottom_bg.gif);
+	background-repeat:repeat-x;
+		}
+
+sup{font-size:7px; vertical-align:top; text-decoration:none !important;}
+
+
+
+
+.formtable{
+	font-size:11px;
+	font-weight:normal; 
+	color:#666666; 
+}
+
+.formtable th{
+	font-size:11px;
+	font-weight:bold;
+	text-align:left;
+        height:30px;
+}
+
+.address-data{
+	font-size:12px;
+	padding:0px 10px 0px 10px;
+	font-weight:bold; 
+      	color:#666666; 
+	margin-left:19px;
+}
+
+.address-data td{
+	padding:5px 0 0px 0;
+	vertical-align:top;
+}
+
+.ordertable{
+	font-size:11px;
+	font-weight:normal; 
+	color:#666666;; 
+}
+
+.ordertable th{
+	font-size:12px;
+	font-weight:bold;
+	text-align:left;
+        width:150px;
+}
+
+.orderwidth {
+	width:533px;
+}
+
+/*beloqw used on founddouble pages */
+.founddouble{
+	font-size:11px;
+	font-weight:normal; 
+	color:#666666; 
+}
+
+.founddouble th{
+	font-size:11px;
+	font-weight:bold;
+	text-align:left;
+        width:320px;
+}
+
+/* Adding new styles */
+
+/* table header corner */
+
+input.text_error{
+		border:1px solid #F88000;
+		width:190px;
+		padding:2px;
+		font-size:11px;
+
+/* not red font		color: #D20F15;  */
+		}
+
+
+input._error {
+		border:1px solid #F88000;
+}
+
+/* old styles */
+
+/* added from service area 10/10/06 */
+
+/* added from service area 10/11/06 */
+div.red-box{
+                text-align:left;
+                font-weight:normal;
+		color:#F88000;
+                padding:7px;
+                font-size:11px;
+                /* color:#; */
+                border:1px solid #F88000;
+                width:290px;
+                margin-top:5px;
+		margin-bottom:16px;
+                }
+
+hr{
+                height:1px;
+                border:none;
+                color:#666666;
+                background:#e0e0e0;
+                margin-top:20px;
+                margin-bottom:16px;
+                }
+
+.xsymbol {
+		color:#D20F15;
+		font-size:12px;
+		padding:0px 8px 0px 6px;
+		font-weight:bold;
+}
+
+
+div#pleaseWait{
+	font-family:Verdana,Arial,sans-serif;
+	color:#999999;
+	font-size:11px;
+	font-weight:bold;
+	display:none;
+	float:right;
+}
+
+/* PSP Styles */
+
+/* used in showregister and mainpage */
+
+
+
+.user-billing{
+        font-size:11px;
+        font-weight:normal;
+}
+
+.user-billing th{
+        font-size:11px;
+        font-weight:normal;
+        text-align:left;
+        height:29px;
+        width:172px;
+        color:#666666;
+}
+
+
+.normLink{
+        font-weight:normal;
+        font-size:11px;
+        color:#F88000;
+}
+
+div.contentboxright_blue{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box_right_blue.gif);
+        margin-bottom:-2px;
+        width:188px;
+        padding-bottom:5px;
+        margin-left:20px;
+}
+
+
+
+div.bluebox{
+	padding-left:23px;
+	
+}
+
+
+/* _margin-bottom:12px; added to support Internet Explorer */
+.errorbox{
+        display: block;
+	background-color:#E0E0E0 !important;
+	border:1px solid #999999;
+        padding-top:7px; 
+	padding-right:12px;
+	padding-bottom: 9px; 
+	padding-left: 12px;
+        background-color:#E0E0E0 !important;
+        font-size: 11px;
+        color:#F88000;
+	font-family:Verdana;
+	font-weight:bold;
+	line-height: 13px;
+	margin-bottom:16px;
+	_margin-bottom:12px;
+		
+}
+
+.errorbox2{
+        display: block;
+        background-color:#FDE6BD !important;
+        padding-top:7px;
+        padding-right:12px;
+        padding-bottom: 9px;
+        padding-left: 12px;
+        background-color:#FDE6BD !important;
+        font-size: 11px;
+        color:#f88000;
+        font-family:Verdana;
+        line-height: 13px;
+        _margin-bottom:12px;
+
+}
+
+.ulerror {
+	font-family: Verdana;
+	font-size: 11px;
+	line-height: 13px;
+	background-color: #E0E0E0;
+	list-style-type: disc;
+	color:#F88000;
+	margin: 0px;
+	margin-top:-5px;
+}
+
+
+
+.small-header-login {
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/header_big_bg_psp.gif);
+	padding-left:12px;
+	font-family:Verdana;
+	font-size:13px;
+	font-weight:bold;
+	color:#FFFFFF;
+	width:169px;
+}
+
+
+
+
+
+/* Styles for PSP 2nd page */
+
+.topemail_out{
+	padding-bottom:11px;
+}
+
+.topemail_in{
+	padding-left:10px;
+	margin-top:2px;
+	vertical-align:top;
+}
+
+.topemail_or{
+	vertical-align:top;
+	color:#666666;
+	font-weight:bold;
+}
+
+.topemail_savetime{
+	font-family:verdana;
+	font-size:11px;
+	color:#999999;
+}
+
+/* PSP Login styles START */
+
+
+	
+
+.forgot1{
+	padding-bottom:15px;
+}
+
+x.forgot2{
+	font-weight:normal; 
+	font-size:9px; 
+	color:#666666;
+}
+
+
+
+/* Style for What is this? hyperlink */
+
+.psplinks{
+        font-weight:normal;
+        font-size:9px;
+        color:#F88000;
+}
+
+.psplinksb{
+        font-weight:bold;
+        font-size:9px;
+        color:#666666;
+}
+/* PSP Login styles END */
+
+.pspbox{
+	padding:23px 23px 23px 23px; 
+	border:1px solid #395275; 
+	background-color:#e0e0e0;
+}
+
+.pspboxpayzone{
+	padding:13px 13px 23px 23px; 
+	border:1px solid #395275; 
+	background-color:#e0e0e0;
+}
+
+.orstyle{
+	padding:12px 0 12px 0;
+}
+
+.benefit{
+	padding:0 10px 2px 1px;
+}
+
+.pspgraybox{
+	padding:12px 23px 13px 23px; 
+	border:1px solid #999999; 
+	background-color: #fff;
+}
+
+.regform_show{
+	display:block; 
+}
+
+.regform{
+        display:block;
+}
+.regform_hide{
+        display:none;
+}
+
+.streamline{
+	padding:0 0 16px 0;
+	vertical-align:top;
+}
+
+.blue_style{
+	font-size:11px; 
+	font-family:verdana; 
+	color:#666666;
+}
+
+.blue13{
+	font-size:13px;
+	font-family:verdana;
+	font-weight:bold;
+	color:#666666;
+}
+
+.blueb{
+	font-size:12px;
+	font-family:verdana;
+	font-weight:bold;
+	color:#666666;
+}
+
+.blue_style_sm{
+        font-size:9px;
+        font-family:verdana;
+        color:#666666;
+}
+
+.emailmsg{
+	padding-left:8px; 
+	color:#404040;
+}
+
+.helplink{
+	padding-left:8px;
+	padding-right:120px;
+	color:#666666;
+}
+
+.dob{
+	padding:0px 2px 0px 2px;
+}
+
+.gap25{
+	padding-top:8px; 
+	padding-bottom:8px;
+}
+
+
+.gap10b{
+	padding-bottom:10px;
+}
+
+.gap5t{
+	padding-top:5px;
+}
+
+.gap5b{
+	padding-bottom:5px;
+}
+
+.gap10t{
+	padding-top:10px;
+}
+
+.gap10b{
+	padding-bottom:10px;
+}
+
+.small-psp{
+        font-size:9px;
+        font-weight:normal;
+	color:#404040;
+}
+
+
+
+.dobspace{
+	padding:0 2px 0 2px;
+}
+
+/* styles of wood frame for robotguard*/
+
+.woodframe {
+   background: #850;
+   width:150px; 
+   height:60px;
+   float: left;
+   padding:2px;
+   }
+.woodframe img {
+   background: #FFFFFF;
+   border: inset 0px gray;
+   display: block;
+}
+p {
+   clear: both;
+}
+
+// #captcha{background-color:#fff; background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/inc/css/--_registerhost--/cgi-bin/dynamicimage.pl?sid=--cb_param_session--&id=--cb_param_rnd--);background-repeat:no-repeat; width:150px; height:60px;}
+
+.woodx {
+//   background: #850 url('/web/20130624001321im_/https://us.clickandbuy.com/images/all/reg/wood.jpg');
+   background: #999 ;
+   width:150px; 
+   height:60px;
+   xborder: outset #a50 0.5px;
+   xfloat: left;
+   padding:3px;
+   }
+.woodx img {
+   background: #FFFFFF;
+   xborder: inset 0px gray;
+   display: block;
+}
+
+
+
+/* PSP US check-like form redesign */
+
+div#check_psp{width:350px;}
+div#check_inner_psp{width:100%;}
+html > body div#check_inner_psp{width:auto;}
+div#check_psp{background-color:#dededd; padding:3px; border:1px solid;}
+div#check_inner_psp{border:1px dashed #000;padding:0px;}
+div#check_inner_psp table{width:100%;}
+div#check_inner_psp table td,div#check_inner table th{text-align:center;padding:5px;}
+div#check_inner_psp table#lower td{text-align:center;padding:2px;}
+div#check_inner_psp table#middle{margin:10px 0; color:#999;}
+div#check_inner_psp table#middle td{text-align:left;}
+div#check_inner_psp table td.under{border:1px solid #999;border-width:0 0 1px 0;}
+div#check_inner_psp table td.around{border:1px solid #999; width:50px;}
+div#check_inner_psp table input{width:150px;border:1px solid #006;}
+
+
+
+.arrow_h{
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/arrow_up.gif) no-repeat;
+	height:26px;
+	width:26px;
+}
+
+.arrowup_hide {
+	display:none;
+	padding-top:7px;
+	border:0px;
+}
+.arrowup {
+	display:block;
+	padding:7px 15px 0px 18px;
+	border:0px;
+}
+.arrowdown {
+	display:none;
+	padding:0px 0px 0px 2px;
+	border:0px;
+}
+
+.arrowup_show {
+	display:block;
+	padding-top:7px;
+	border:0px;
+}
+
+
+
+
+/* psp_redesign PSP Improve Pg 2 */
+
+.postpaid2p {
+	display:block;
+}
+
+.postpaid2p_hide {
+	display:none;
+}
+
+.postpaid2pcab {
+	display:none;
+}
+
+.postpaid2pcab_show {
+	display:block;
+}
+
+
+
+div.contentgraybox_left{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/reg/psp_redesign/bg_form_graybox.gif);
+        margin-bottom:-2px;
+	width:300px;
+        padding-bottom:5px;
+}
+
+div.contentgraybox_right{
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/reg/psp_redesign/bg_form_graybox.gif);
+        margin-bottom:-2px;
+        width:300px;
+        padding-bottom:5px;
+}
+
+.no-header-graybox {
+        background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/reg/psp_redesign/header_graybox.gif);
+        padding-left:12px;
+	width:281px;
+}
+
+.grayboxborder{
+        padding:0px 17px 0px 17px;
+}
+
+div.grayboxfooter_left{
+        height:12px;
+        padding-bottom:14px;
+        padding-left:3px;
+        margin-left:-3px;
+	padding-right:3px;
+}
+
+div.grayboxfooter_right{
+        height:12px;
+        padding-bottom:14px;
+        padding-right:3px;
+        margin-left:-3px;
+	padding-left:3px;
+}
+
+
+/* added by Lewis 4p project */
+div.contentboxtop-4p{
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bg_form_box-4p.gif);
+	backgground-color: #e0e0e0;
+        margin-bottom:-2px;
+	margin-top:0px;
+	width:656px;
+	padding-bottom:7px;
+	position:relative;
+}
+.small-header-4p{
+	padding-left:12px;
+	font-family:Verdana;
+	font-size:13px;
+	font-weight:bold;
+	width:100%;
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/header_bg-4p.gif);
+}
+
+.left-image-4p{
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/left_round_big_psp_new.gif);
+	width:6px;
+	height:27px;
+}
+div.form-4p{		    /* space around the container */
+	margin-left:22px;
+	margin-right:22px;
+	margin-top:4px;	
+	}
+
+div.contentboxfooter-4p{
+        height:12px;
+	padding-bottom:14px;
+	padding-left:1px;
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/footer_form_box-4p.gif);
+	background-repeat:no-repeat;
+}
+  	/* added for project 3496 */
+.small3496{
+	font-family:Verdana;
+	font-size:9px;
+	color:#666666;
+}	
+
+a.swisscomtext:link, a.swisscomtext:visited { 
+  	height: 100%;
+  	font-family:Verdana;
+  	font-size:11px;
+  	color:#000000;
+	background-color: #FFF;	
+  	color:#666666;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+/* project 3319 */
+.borderright{
+border-right:1px solid #cfd2df; 
+padding-right:20px;
+}
+
+div.buttonyellow_left {
+	height:20px; 
+	margin-bottom:0px; 	
+	float:left;
+}
+div.buttonyellow {
+	height:20px; 
+	margin-bottom:0px; 	
+	float:right;
+}
+
+.buttonyellows{
+	height:20px; 
+	border:none;
+	padding-top:1px; 
+	padding-left:6px;
+	padding-bottom:7px;
+	padding-right:8px; /* TLBR */ 
+	margin-left:5px;
+	color:#FFF; 
+	font-size:11px; 
+	font-weight:bold; 		
+	cursor:pointer;
+}
+
+#stepselected {
+	display:block;
+	margin-top:10px;
+	margin-right:5px;
+	width: 19px;
+	height:17px;
+}
+
+#stepselectedinfo {
+	display:block;
+	margin-right:5px;
+	width: 19px;
+	height:17px;
+}
+.stepselectimage{background: url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/breadcrumb/numbers.gif) no-repeat;}
+
+.stepselectimage.step_selected1{ background-position:0px 1px;}
+.stepselectimage.step1{ background-position:0px -25px;}
+.stepselectimage.step_selected2{ background-position:0px -51px;}
+.stepselectimage.step2{ background-position:0px -77px;}
+.stepselectimage.step_selected3{ background-position:0px -103px;}
+.stepselectimage.step3{ background-position:0px -129px;}
+.stepselectimage.step_selected4{ background-position:0px -155px;}
+.stepselectimage.step4{ background-position:0px -181px;}
+
+
+div.step-container-pspa {
+        border-top:1px solid #9CA8BA;
+        border-bottom:1px solid #9CA8BA;
+        height:43px;
+        padding:5px 0 2px 20px;
+        width:636px;
+        margin-right:auto;
+	margin-left:auto;
+        overflow:hidden;
+}
+
+div.step-container-pspa span{
+        display:block;
+        float:left;
+        font-weight:bold;
+        padding-top:2px;
+	height:39px; 
+	width:175px;
+	margin-right:0px;
+}
+
+div.step-container-pspa .desc {
+	font-weight:normal !important;
+	width:174px;
+	height:23px;
+	font-size:9px;
+}
+
+
+/* added stuff for Dmitry */
+.tip {font:10px/12px
+                    Arial,Helvetica,sans-serif; border:solid 1px
+                    #666666; width:270px; padding:1px;
+                    position:absolute; z-index:100;
+                    visibility:hidden; color:#333333; top:20px;
+                    left:90px; background-color:#ffffcc;
+                    layer-background-color:#ffffcc;
+}
+                  
+#t1 {width:130px;}
+#t2 {width:480px;}
+#t3 {font:bold 14pt verdana,arial,sans-serif;
+background-color:#ffcccc; layer-background-color:#ffcccc;}
+#tooltip {
+ font-size:12px;
+ width:30px; 
+ color:#333333; 
+ top:0px;
+ left:90px;
+ padding-right:100px;
+ position:absolute; 
+ display:none;
+}
+#tooltiptop {
+ font-size:12px;
+ width:30px; 
+ color:#333333; 
+ top:0px;
+ left:90px;
+ padding-right:100px;
+ position:absolute; 
+ display:none;
+}
+#activate{
+text-decoration:none;
+}
+/** -- testing step selected breadcrumb Lewis **/
+#stepselected1a {
+display:block;
+height:23px;
+margin-right:5px;
+width:25px;
+}
+#stepselected2a {
+display:block;
+height:23px;
+margin-right:5px;
+width:25px;
+}
+#stepselected3a {
+display:block;
+height:23px;
+margin-right:5px;
+width:25px;
+}
+
+#stepselected4a {
+display:block;
+height:23px;
+margin-right:5px;
+width:25px;
+}
+
+div.step-container-pspa1 span{
+    display:block;
+    float:left;
+    font-weight:bold;
+    font-size:12px;
+    padding-top:4px;
+    height:29px;
+    margin-right:30px;
+}
+div.step-container-pspa14 span{
+    display:block;
+    float:left;
+    font-weight:bold;
+	font-size:13px;
+    padding-top:3px;
+	height:29px;
+	margin-right:20px;
+}
+xdiv.step-container-pspa1 {
+        border-top:1px solid #9CA8BA;
+        border-bottom:1px solid #9CA8BA;  
+        padding:5px 0 2px 20px;
+		height:20px;
+        margin-right:auto;
+	margin-left:auto;
+        overflow:hidden;
+}
+
+/** vertical line for showlogin **/
+
+.VerticalLine{
+        border-left:1px solid #999999;
+        text-align:center;
+        vertical-align:top;
+}
+
+select.color180{
+        text-align:left;
+        width:180px;
+        height:18px;
+}
+
+select.color200b{
+	text-align:left;
+	width:200px;
+	height:18px;
+}
+
+.padtop6{
+        padding-top:6px;
+}
+/*extra stuff added Lewis */
+.box { 
+  background: #FFFFFF; 
+}
+.boxtop { 
+  background: url(/web/20130624001321im_/https://us.clickandbuy.com/images/boxmodel/ne.gif) no-repeat top right; 
+}
+.boxtop div { 
+  font-size: 0;
+  height: 10px; 
+  background: url(/web/20130624001321im_/https://us.clickandbuy.com/images/boxmodel/nw.gif) no-repeat top left; 
+}
+.boxbottom { 
+  background: url(/web/20130624001321im_/https://us.clickandbuy.com/images/boxmodel/se.gif) no-repeat bottom right; 
+}
+.boxbottom div { 
+  font-size: 0;
+  height: 10px; 
+  background: url(/web/20130624001321im_/https://us.clickandbuy.com/images/boxmodel/sw.gif) no-repeat bottom left; 
+}
+.boxcontent {
+  padding: 0px 10px 0px 10px;
+}
+
+div.main {
+background-color:#FFFFFF;
+xbackground-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/boxmodel/header.gif) no-repeat;
+-moz-border-radius-bottomleft:0px;
+-moz-border-radius-bottomright:0px;
+-moz-border-radius-topleft:10px;
+-moz-border-radius-topright:10px;
+background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/footer_top.gif);
+background-repeat:no-repeat;
+border:0px;
+padding:2px;
+margin-left:auto;
+margin-right:auto;
+text-align:left;
+width:696px;
+}
+.contentboxleft_new .small-header {
+background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/middle_02.gif);
+color:#FFFFFF;
+font-family:Verdana;
+font-size:13px;
+font-weight:bold;
+height:26px;
+padding-left:9px;
+width:100%;
+}
+.contentboxtop .small-header {
+background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/middle02a_02.gif);
+background-repeat:no-repeat;
+color:#FFFFFF;
+font-family:Verdana;
+font-size:13px;
+font-weight:bold;
+height:26px;
+padding-left:8px;
+width:100%;
+}
+
+.contentboxright_blue_new .left_blue_new {
+background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/left_round_big_psp_new1.gif);
+height:26px;
+width:13px;
+}
+
+div.text-bottom {
+	height:70px;
+	border:0px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	background-repeat:no-repeat;
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/footer_main.gif);
+	width:700px;
+}
+
+div.step-container-pspa1 {
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/breadcrumbbackground.gif);
+	background-repeat:no-repeat;
+        padding:9px 0px 0px 40px;
+	height:52px;
+	width:633px
+        margin-right:auto;
+	margin-left:auto;
+        overflow:hidden;
+}
+
+div.step-container-pspa14 {
+	background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/breadcrumbbackground.gif);
+	background-repeat:no-repeat;
+        padding:9px 0px 0px 35px;
+	height:52px;
+	width:633px
+        margin-right:auto;
+	margin-left:auto;
+        overflow:hidden;
+}
+
+button.button{
+	height:36px;
+	border:none;
+	padding-top:11px;
+	padding-right:40px;
+	padding-bottom:11px;
+	padding-left:0px;
+	margin-left:8px;
+	color:#666666; 
+	font-size:11px; 
+	font-weight:bold; 		
+	background:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/buttons/but_new_i.gif) no-repeat right top;
+	cursor:pointer;
+	text-transform:uppercase;
+}
+
+x#buttonlogin{border-bottom:1px solid #cccccc;}
+#lang, #lang_q a {color:#666666}
+td span a span#Land_q.test {
+color:#F88000;
+font-size:11px;
+font-weight:normal;
+line-height:18px;
+text-decoration:none;
+}
+td span a span#Lang_q.test  {
+color:#F88000;
+font-size:11px;
+font-weight:normal;
+line-height:18px;
+text-decoration:none;
+}td span a span#Lang.test {
+color:#F88000;
+font-size:11px;
+font-weight:normal;
+line-height:18px;
+text-decoration:none;
+}
+td span a span#lang.test  {
+color:#F88000;
+font-size:11px;
+font-weight:normal;
+line-height:18px;
+text-decoration:none;
+}
+
+td span a span#lang_q.test,
+ td span a span#user_q.test, td span a span#password_q.test {
+color:#F88000;
+font-size:11px;
+font-weight:normal;
+line-height:18px;
+text-decoration:none;
+}
+
+xtable.user-psp td a {
+	color:#999999;
+	font-size:9px; 
+}
+table.user-psp td span.forgot2 a {
+	color:#999999;
+	font-size:9px; 
+}
+
+table.user-psp td div.blueb {font-weight:bold;
+	color:#666666;
+	font-size:12px; 
+}
+
+table td #directdebitlabel span.blueb, table td span#creditcardlabel span.blueb, div#wgzlabel td span.blueb {font-weight:bold;
+color:#666666;
+	font-size:12px; 
+text-decoration:none;}
+
+xtable.user-psp span a {color:#666666;}
+div.formsa{
+		margin-left:19px;
+		margin-right:22px;
+		}	
+.button1{
+-moz-border-radius-bottomleft:15px;
+-moz-border-radius-bottomright:25px;
+-moz-border-radius-topleft:15px;
+-moz-border-radius-topright:25px;
+background:#FFFFFF url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/backnew.gif) no-repeat scroll -1px -1px;
+border:1px solid #CCCCCC;
+height:32px;
+padding-right:15px;
+color:#666666; 
+font-size:11px;
+font-weight:bold;
+width:200px;
+}
+.button2{
+padding-right:15px;
+color:#666666; 
+font-size:11px;
+font-weight:bold;
+}
+.button2
+{
+ position: relative;
+
+ border: 1px solid #cccccc;
+  background: #ffffff url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/backnew.gif) 0 0 no-repeat;
+
+
+ padding: 10px 10px;
+  height:32px;
+ }
+
+ .button2:before, .button2:after
+ {
+ font-size: 1px;
+
+ position: absolute;
+
+ display: block;
+ width: 400px;
+ height: 32px;
+
+ content: url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/backnew.gif);
+
+ text-align: left;
+ padding-left: 2px;
+ margin-top: -52px;
+ margin-left: -10px;
+
+ background: transparent url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/backnew.gif) 0 0 no-repeat;
+ }
+ 
+
+
+/************************/
+/*************************/
+h1{
+background:#ffffff none repeat scroll 0 0;
+border:1px solid #cccccc;
+padding:0px 10px;
+position:relative;
+color:#666666; 
+height:21px;
+font-size:11px;
+font-weight:bold;
+padding-top:8px;
+width:110px;
+}
+
+h1:before, h1:after {
+background:transparent url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/top1.gif) no-repeat scroll 0 0;
+content:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/right-t.gif);
+display:block;
+font-size:1px;
+height:31px;
+padding-left:2px;
+margin-top:-12px;
+position:absolute;
+text-align:right;
+width:100%;
+}
+
+h1:before {
+left:-1px;
+margin-top:-9px;
+}
+
+h1:after {
+background-image:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bottom1.gif);
+content:url(/web/20130624001321im_/https://us.clickandbuy.com/images/all/css/bottom2-r.gif);
+right:-1px;
+padding-top:-11px;
+}
+ 
+.inputempty{
+	height:0px;
+	display:none;
+}
+
+/* password strength meter */
+div.pwdmeter_box{
+    height:9px;
+    border:0px solid #A1A1A1;
+    width:64px;
+    margin:2px;
+    float:left;
+    top:0;
+    /*background-color:#334433;*/
+}
+div.pwdmeter_fill {
+    height: 6px;
+    width: 4px;
+    border:0px;
+    top:0;
+    float:left;
+}
+div.pwdmeter_red {
+    height: 6px;
+    width: 20px;
+    border:0px solid #E00000;
+    background-color:#E00000;
+    top:0;
+    float:left;
+}
+div.pwdmeter_yellow {
+    height: 6px;
+    width: 20px;
+    border:0px solid #E0E000;
+    background-color:#E0E000;
+    top:0;
+    float:left;
+}
+div.pwdmeter_green {
+    height: 6px;
+    width: 20px;
+    border:0px solid #00E000;
+    background-color:#00E000;
+    top:0;
+    float:left;
+}
+#pwdmeter_arrow{
+    font-size: 0px; line-height: 0%; width: 1px;
+    border-bottom: 8px solid #77c;
+    border-left: 4px solid #f6f6f6;
+    border-right: 4px solid #f6f6f6;
+    position:relative;
+    left:0;
+    float:left;
+    clear:both;
+}
+/* end password meter */
+
+/* error msg on right side of input fields */
+div.new-design-error-right-side {
+    float:right;
+    top:5px;
+    width:173px;
+    border:0px;
+    font-weight:bold;
+    color:#F88000;
+    padding-right:15px;
+}
+/* class for switch langs */
+
+.grayboldtext {
+    font-weight:bold;
+    color:#666666;
+}
+
+.orangeboldtext {
+    font-weight:bold;
+    color:#F88000;
+}
+
+/* This fixed all IE browser by removing borders to radio and checkbox */
+
+input[type=checkbox] {
+border:0px
+}
+
+input[type=radio] {
+border:0px
+}
+
+/* This style replaced tableless for checkbox and text */
+.txtboxwrap320 {
+	display:block;
+	padding-left:15px;
+	text-indent:-15px
+	width:320px;
+}
+
+.ccinfo1 {
+	width:605px;
+}
+
+.ccinfo2 {
+	width:124px;
+}
+
+.ccinfo3 {
+	width:250px;
+}
+
+.pt6 {
+	padding-top:6px;
+}
+
+.heightselect {
+	height:19px;
+}
+
+#paypagecontainer { 
+	position: relative; 
+}
+
+#paypagecontainer iframe {
+	overflow: hidden;
+}
+
+/*
+     FILE ARCHIVED ON 00:13:21 Jun 24, 2013 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:16:31 Sep 17, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 1.417
+  exclusion.robots: 0.028
+  exclusion.robots.policy: 0.011
+  esindex: 0.013
+  cdx.remote: 7.633
+  LoadShardBlock: 81.141 (3)
+  PetaboxLoader3.datanode: 81.152 (4)
+  load_resource: 59.013
+  PetaboxLoader3.resolve: 46.118
+*/

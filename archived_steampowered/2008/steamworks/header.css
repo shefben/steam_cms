@@ -1,0 +1,49 @@
+#headerBar {
+	text-align:left;
+	margin:0;
+	padding:0;
+	background-color:#000000;
+	width:100%;
+	color:#545454;
+	font-family:tahoma, helvetica, arial, trebuchet ms, sans-serif;
+	font-size:10px;
+	height:73px;
+	background-image:url('images/header_bg.gif');
+	background-repeat:repeat-x;
+	position:relative;
+}
+
+#headerRight {
+	float:right;
+	width:196px;
+	height:50px;
+	margin:0;
+	padding:0;
+}
+
+#headerLeft {
+	width:253px;
+	height:50px;
+	margin:0;
+	padding:0;
+}
+
+#headerLinks {
+	position:absolute;
+	top:50px;
+	left:50px;
+	height:23px;
+	padding-top:3px;
+}
+
+a.headerLink,a.headerLink:active,a.headerLink:visited,a.headerLink:hover {
+	text-decoration:none;
+	color:#d7d7d7;
+}
+
+.headerLinkActive {
+	color:#ebebeb;
+	font-weight:bold;
+}
+
+

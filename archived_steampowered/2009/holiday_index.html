@@ -1,0 +1,1021 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>The Steam Holiday Sale</title>
+<link href="public/css/styles_global_12087e46.css" rel="stylesheet" type="text/css"/>
+<link href="public/css/header_b83f5f79.css" rel="stylesheet" type="text/css"/>
+<link href="public/css/styles_tabs_3b1b51dc.css" rel="stylesheet" type="text/css"/>
+<link href="public/css/styles_browse_3a030be1.css" rel="stylesheet" type="text/css"/>
+<link href="public/css/promo/styles_holiday09_1683e390.css" rel="stylesheet" type="text/css"/>
+<script src="public/javascript/swfobject_78a04980.js" type="text/javascript"></script>
+<script src="public/javascript/prototype-1.6.0.2_2aefc357.js" type="text/javascript"></script>
+<script src="public/javascript/scriptaculous/scriptaculous_667b5906.js" type="text/javascript"></script>
+<script src="public/javascript/javascript_b262dab4.js" type="text/javascript"></script>
+<script src="public/javascript/main_0e83835a.js" type="text/javascript"></script>
+<script src="public/javascript/jserrorreport_c30be06e.js" type="text/javascript"></script>
+<script src="public/javascript/header_27d74635.js" type="text/javascript"></script>
+<script language="JavaScript">
+	<!--
+	function screenshot_popup( url )
+	{
+		if ( screen.width >= 1280 && screen.height >= 1024 )
+			popup( url+'?size=1024', 1044, 803, 1, 1 );
+		else
+			popup( url+'?size=800', 820, 635, 1, 1 );
+	}
+
+	var g_nextSaleLocalTime = 1262019600 + ( Math.round( new Date().getTime() / 1000 ) - 1261954975 );
+	var g_bEnded = false;
+
+	var g_clockImages = new Array;
+	for ( var i = 0 ; i < 10; i++ )
+	{
+		g_clockImages[i] = new Image;
+		g_clockImages[i].src = 'http://cdn.store.steampowered.com/public/images/promo/holiday09/' + i + '.gif';
+	}
+
+	function refreshClock()
+	{
+		var timeCur = Math.round( new Date().getTime() / 1000 );
+		var secsRemaining = g_nextSaleLocalTime - timeCur;
+
+		if ( secsRemaining < 0 )
+		{
+			if ( !g_bEnded )
+			{
+				g_bEnded = true;
+				window.setTimeout( function() {window.location = window.location}, Math.floor( Math.random() * 1000 * 60 ) );
+			}
+			return;
+		}
+
+		var remainHours = Math.floor( secsRemaining / 3600 );
+		setClock( 'hour_ten', Math.floor( remainHours / 10 ) );
+		setClock( 'hour_one', remainHours % 10 );
+
+		var remainMinutes = Math.floor( ( secsRemaining % 3600 ) / 60 );
+		setClock( 'minute_ten', Math.floor( remainMinutes / 10 ) );
+		setClock( 'minute_one', remainMinutes % 10 );
+
+		var remainSeconds = secsRemaining % 60;
+		setClock( 'second_ten', Math.floor( remainSeconds / 10 ) );
+		setClock( 'second_one', remainSeconds % 10 );		
+	}
+
+	function setClock( id, val )
+	{
+		$(id).src = g_clockImages[val].src;
+	}
+	Event.observe( window, 'load', function() {
+		refreshClock();
+		$('clock').show();
+	 	window.setInterval( refreshClock, 1000 );
+	} );
+
+
+	//
+	// Page-able tabs
+	//
+	var tabStart = { };
+	var tabMax = { };
+	var tabTransition = { };
+	function PagePublisherTab( tab, delta, max, params )
+	{
+		if ( tabTransition[tab] )
+			return;
+		
+		if ( !tabStart[tab] )
+			tabStart[tab] = 0;
+		if ( !tabMax[tab] )
+			tabMax[tab] = 0;
+		
+		if ( tabStart[tab] + delta >= max )
+			return;
+		
+		tabStart[tab] += delta;
+		tabTransition[tab] = true;
+		new Effect.Move( $('tab_' + tab + '_items'), {y: -24 * delta, afterFinish: PublisherTabScrollFinishClosure( tab, delta ), duration: 0.5 } );
+		PublisherTabUpdateCounts( tab, delta, max );
+		
+	}
+
+	function PublisherTabScrollFinishClosure( tab, delta )
+	{
+		var tab_closure = tab;
+		var delta_closure = delta;
+		return function() { 
+			tabTransition[tab_closure] = false; 
+		};
+	}
+
+	function PublisherTabUpdateCounts( tab, delta, max )
+	{
+		$('tab_' + tab + '_count').update( (tabStart[tab] + 1) + '-' + Math.min( tabStart[tab] + Math.abs(delta), max ) );
+		if ( tabStart[tab] > 0 )
+			$('tab_' + tab + '_prev').style.visibility='visible';
+		else
+			$('tab_' + tab + '_prev').style.visibility='hidden';
+		
+		if ( tabStart[tab] + delta >= max )
+			$('tab_' + tab + '_next').style.visibility='hidden';
+		else
+			$('tab_' + tab + '_next').style.visibility='visible';
+	}
+	
+	-->
+</script>
+</head>
+<body>
+<div id="all">
+<div id="v4headerBar">
+<div id="steamLogo"><img border="0" height="54" src="public/images/steamLogo.jpg" width="105"/></div>
+<div id="steamText">
+<img border="0" height="35" src="public/images/steamText.jpg" width="72"/>
+</div>
+<div id="v4headerLinks">
+<p>
+<span id="v4headerMenuItems">
+<a class="v4headerLinkActive" href="">Home</a>   |   
+			<a class="v4headerLink" href="about/">What is Steam?</a>   |  
+			<a class="v4headerLink" href="https://steamcommunity.com/">Community</a>   |  
+			<a class="v4headerLink" href="news/">News</a>   |  
+			<a class="v4headerLink" href="https://cafe.steampowered.com">Cyber Cafés</a>   |  
+			<a class="v4headerLink" href="forums/">Forums</a>   |  
+			<a class="v4headerLink" href="http://support.steampowered.com/">Support</a>   |  
+			<a class="v4headerLink" href="stats/">Stats</a>
+</span>
+</p>
+</div>
+<div id="v4headerStatusItems">
+<p>
+<a class="v4loginLink" href="login/">Login</a>
+</p>
+</div>
+</div>
+<div id="cart_status_row">
+<center>
+<div id="cart_status_center">
+<div id="cart_status_data">
+												
+									 
+							</div>
+</div>
+</center>
+</div>
+<center>
+<div id="pageContainer">
+<div id="pageContainer_inner">
+<div id="topContainer">
+<div id="banner" style="background-image: url(http://cdn.store.steampowered.com/public/images/promo/holiday09/english/home_1.jpg)">
+</div>
+<div id="topAreaLabels" style="background-image: url(http://cdn.store.steampowered.com/public/images/promo/holiday09/english/home_2.jpg)">
+</div>
+<div id="topArea">
+<div id="topAreaFlash" style="height: 384px;">
+<div id="capsule_large_content"><p>You will need to <a href="http://www.adobe.com/go/getflashplayer" target="_blank">Install</a> the latest Flash plugin to view this page properly.</p></div>
+<script type="text/javascript">;
+														var flashvars = {
+								clientLanguage: "english",
+								BASE_URL: "http://store.steampowered.com/",
+								APP_GFX_URL: "http://cdn.steampowered.com/v/",
+																capsuleSize: "huge",
+txt1: "Rockstar+Collection+-+33%25+off%21",
+price1: "%2469.99",
+discount1: "%2446.89",
+img1: "1360",
+type1: "subs",
+timestamp1: "1261524937",
+url1: "http%3A%2F%2Fstore.steampowered.com%2Fsub%2F1360%2F",
+fullurl1: "http%3A%2F%2Fcdn.steampowered.com%2Fv%2Fgfx%2Fsubs%2F1360%2Fcapsule_lrg.jpg%3Ft%3D1261524937",
+txt2: "Unreal+Deal+Pack+-+66%25+off%21",
+price2: "%2439.99",
+discount2: "%2413.59",
+img2: "683",
+type2: "subs",
+timestamp2: "1261593605",
+url2: "http%3A%2F%2Fstore.steampowered.com%2Fsub%2F683%2F",
+fullurl2: "http%3A%2F%2Fcdn.steampowered.com%2Fv%2Fgfx%2Fsubs%2F683%2Fcapsule_lrg.jpg%3Ft%3D1261593605",
+txt3: "Eidos+Collector+Pack+-+50%25+off%21",
+price3: "%2499.99",
+discount3: "%2449.99",
+img3: "2687",
+type3: "subs",
+timestamp3: "1261852220",
+url3: "http%3A%2F%2Fstore.steampowered.com%2Fsub%2F2687%2F",
+fullurl3: "http%3A%2F%2Fcdn.steampowered.com%2Fv%2Fgfx%2Fsubs%2F2687%2Fcapsule_lrg.jpg%3Ft%3D1261852220",
+txt4: "Codemasters+Complete+Pack+-+25%25+off%21",
+price4: "%2499.99",
+discount4: "%2474.99",
+img4: "2684",
+type4: "subs",
+timestamp4: "1261613785",
+url4: "http%3A%2F%2Fstore.steampowered.com%2Fsub%2F2684%2F",
+fullurl4: "http%3A%2F%2Fcdn.steampowered.com%2Fv%2Fgfx%2Fsubs%2F2684%2Fcapsule_lrg.jpg%3Ft%3D1261613785",
+txt5: "Great+Indie+games+up+to+80+percent+off%21",
+price5: "",
+img5: "901266",
+type5: "apps",
+timestamp5: "1261594424",
+url5: "http%3A%2F%2Fstore.steampowered.com%2Fgenre%2FIndie%2F",
+fullurl5: "http%3A%2F%2Fcdn.steampowered.com%2Fv%2Fgfx%2Fapps%2F901266%2Fcapsule_lrg.jpg%3Ft%3D1261594424",
+txt6: "Ubisoft+-+entire+catalog+50+percent+off%21",
+price6: "",
+img6: "901250",
+type6: "apps",
+timestamp6: "1261521119",
+url6: "http%3A%2F%2Fstore.steampowered.com%2Fpublisher%2FUbisoft%2F",
+fullurl6: "http%3A%2F%2Fcdn.steampowered.com%2Fv%2Fgfx%2Fapps%2F901250%2Fcapsule_lrg.jpg%3Ft%3D1261521119",
+txt7: "All+2K+games+33+percent+off%21",
+price7: "",
+img7: "901265",
+type7: "apps",
+timestamp7: "1261520906",
+url7: "http%3A%2F%2Fstore.steampowered.com%2Fpublisher%2F2K%2520Games%2F",
+fullurl7: "http%3A%2F%2Fcdn.steampowered.com%2Fv%2Fgfx%2Fapps%2F901265%2Fcapsule_lrg.jpg%3Ft%3D1261520906",
+txt8: "All+THQ+games+25+-+50%25+off%21",
+price8: "",
+img8: "901246",
+type8: "apps",
+timestamp8: "1261528047",
+url8: "http%3A%2F%2Fstore.steampowered.com%2Fpublisher%2FTHQ%2F",
+fullurl8: "http%3A%2F%2Fcdn.steampowered.com%2Fv%2Fgfx%2Fapps%2F901246%2Fcapsule_lrg.jpg%3Ft%3D1261528047",
+txt9: "All+Atari+games+66+percent+off%21",
+price9: "",
+img9: "901264",
+type9: "apps",
+timestamp9: "1261520279",
+url9: "http%3A%2F%2Fstore.steampowered.com%2Fpublisher%2FAtari%2F",
+fullurl9: "http%3A%2F%2Fcdn.steampowered.com%2Fv%2Fgfx%2Fapps%2F901264%2Fcapsule_lrg.jpg%3Ft%3D1261520279"							};
+							var params = {
+								wmode: "Transparent",
+allowscriptaccess: "always"							};
+							swfobject.embedSWF( 'http://cdn.store.steampowered.com/public/swf/capsule_lg.swf?t=16', 'capsule_large_content', '467', '384', '8', false, flashvars, params );
+						</script>
+</div>
+<div id="topAreaGenreList">
+<a href="http://store.steampowered.com/genre/Action">
+<div class="genre rowfix">
+									Action <span class="genre_count">(222 games)</span>
+</div>
+</a>
+<a href="http://store.steampowered.com/genre/Adventure">
+<div class="genre">
+									Adventure <span class="genre_count">(78)</span>
+</div>
+</a>
+<a href="http://store.steampowered.com/genre/Family">
+<div class="genre">
+									Family Gaming <span class="genre_count">(127)</span>
+</div>
+</a>
+<a href="http://store.steampowered.com/genre/Strategy">
+<div class="genre rowfix">
+									Strategy <span class="genre_count">(131)</span>
+</div>
+</a>
+<a href="http://store.steampowered.com/genre/Massively Multiplayer">
+<div class="genre">
+									Massively Multiplayer <span class="genre_count">(23)</span>
+</div>
+</a>
+<a href="http://store.steampowered.com/genre/RPG">
+<div class="genre">
+									RPG <span class="genre_count">(60)</span>
+</div>
+</a>
+<a href="http://store.steampowered.com/genre/Casual">
+<div class="genre rowfix">
+									Casual <span class="genre_count">(104)</span>
+</div>
+</a>
+<a href="http://store.steampowered.com/genre/Indie">
+<div class="genre">
+									Indie <span class="genre_count">(51)</span>
+</div>
+</a>
+<a href="http://store.steampowered.com/genre/Racing">
+<div class="genre">
+									Racing <span class="genre_count">(24)</span>
+</div>
+</a>
+<a href="http://store.steampowered.com/genre/Sports">
+<div class="genre rowfix">
+									Sports <span class="genre_count">(19)</span>
+</div>
+</a>
+<a href="http://store.steampowered.com/genre/Simulation">
+<div class="genre">
+									Simulation <span class="genre_count">(75)</span>
+</div>
+</a>
+</div>
+<div class="ctnBrowseBtn" id="topAreaBrowseBtn1">
+<a href="http://store.steampowered.com/browse/under10">
+<div class="browseBtn">
+									Top Games Under $10								</div>
+</a>
+</div>
+<div class="ctnBrowseBtn" id="topAreaBrowseBtn2">
+<a href="http://store.steampowered.com/browse/under5">
+<div class="browseBtn">
+									Top Games Under $5								</div>
+</a>
+</div>
+</div>
+<!--[if lt IE 7]>
+				<style type="text/css">
+				.publisherRow { margin-top: -10px; }
+				</style>
+				<![endif]-->
+<div id="topAreaPublisherSearch">
+<div id="topAreaPublishers" style="background-image: url(http://cdn.store.steampowered.com/public/images/promo/holiday09/english/home_4_next.jpg)">
+<div id="ctnPublishers">
+<div id="tab_publishers_items">
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/publisher/NovaLogic/">
+<div class="publisherPrice">
+</div>
+<span class="publisherName">Novalogic Games 50% off</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/sub/2673/">
+<div class="publisherPrice">
+<span class="originalPrice">$89.99</span> 
+																						$44.99										</div>
+<span class="publisherName">Aspyr Complete Pack</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/publisher/Paradox%20Interactive/">
+<div class="publisherPrice">
+</div>
+<span class="publisherName">Paradox Games 50% off</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/publisher/Strategy%20First/">
+<div class="publisherPrice">
+</div>
+<span class="publisherName">Strategy First Games 50-80% off!</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/search/?publisher=1C%20Company">
+<div class="publisherPrice">
+</div>
+<span class="publisherName">1C Company Games 50% off</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/publisher/Meridian4/">
+<div class="publisherPrice">
+</div>
+<span class="publisherName">Meridian4 Games 80% off</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/publisher/Bethesda%20Softworks/">
+<div class="publisherPrice">
+</div>
+<span class="publisherName">Bethesda Softworks Games 25% off</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/publisher/JoWooD%20Entertainment%2C%20DreamCatcher/">
+<div class="publisherPrice">
+</div>
+<span class="publisherName">JoWood Entertainment, DreamCatcher Games 50% off</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/search/?publisher=Rebellion">
+<div class="publisherPrice">
+</div>
+<span class="publisherName">Rebellion Games 80% off</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/publisher/Kalypso%20Media%20Digital/">
+<div class="publisherPrice">
+</div>
+<span class="publisherName">Kalypso Media Digital Games 50% off</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/publisher/SQUARE%20ENIX%2C%20Eidos%20Interactive/">
+<div class="publisherPrice">
+</div>
+<span class="publisherName">Eidos Games 33% off</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/sub/2693/">
+<div class="publisherPrice">
+<span class="originalPrice">$89.99</span> 
+																						$49.99										</div>
+<span class="publisherName">Square Enix Pack</span>
+<div style="clear: right;"></div>
+</a>
+<div class="publisherSep"></div>
+<a class="publisherRow" href="http://store.steampowered.com/sub/2683/">
+<div class="publisherPrice">
+<span class="originalPrice">$99.99</span> 
+																						$49.99										</div>
+<span class="publisherName">Telltale Everything Pack</span>
+<div style="clear: right;"></div>
+</a>
+</div>
+</div>
+<div class="tab_page_link_holder" id="publisherTabControl">
+<div class="tab_page_link tab_page_link_prev" id="tab_publishers_prev" style="visibility: hidden;"><a href="javascript:PagePublisherTab('publishers', -4, 13, {} )"><img src="public/images/btn_up_small.gif"/> prev 4</a></div>
+<div class="tab_page_link tab_page_link_next" id="tab_publishers_next"><a href="javascript:PagePublisherTab('publishers', 4, 13, {} )">next 4 <img src="public/images/btn_down_small.gif"/></a></div>
+<div class="tab_page_count" id="tab_publishers_count">1-4</div>
+<div style="clear: both;"></div>
+</div>
+</div>
+<div id="topAreaSearch">
+<div id="global_area_search">
+<form action="http://store.steampowered.com/search/" id="searchform" method="get" name="searchform" onsubmit="return checkTerm(this)">
+<input id="searchterm" name="term" onblur="SetDefaultSearchText();" onclick="ClearDefaultSearchText();" size="22" type="text" value="enter search term"/>
+<div class="autocomplete" id="searchterm_options" style="display: none;">
+</div>
+<img align="top" alt="Steam Search" height="22" onclick="if (document.searchform.onsubmit()) document.searchform.submit();" src="public/images/btn_search.gif" width="22"/>
+</form>
+</div>
+<script language="JavaScript">
+			<!--
+			if ( Ajax && Ajax.Autocompleter )
+				new Ajax.Autocompleter( $('searchform').elements['term'], 'searchterm_options', 'http://store.steampowered.com/search/suggest', {frequency: 0.2, method: "get", allowFreeEntry: true, afterUpdateElement:function() {document.searchform.submit();} });
+			
+			function ClearDefaultSearchText()
+			{
+				var text = document.getElementById( 'searchterm' ).value;
+				if ( text == 'enter search term' )
+				{
+					document.getElementById( 'searchterm' ).value = '';
+				}
+			}
+			function SetDefaultSearchText()
+			{
+				var text = document.getElementById( 'searchterm' ).value;
+				if ( text == '' )
+				{
+					document.getElementById( 'searchterm' ).value = 'enter search term';
+				}
+			}
+			function checkTerm( theform )
+			{
+				if ( theform.term.value == "enter search term" )
+				{
+					theform.term.value = '';
+				}
+				return true;
+			}
+			//-->
+			</script> <div id="topAreaGift">
+<a href="https://support.steampowered.com/kb_article.php?p_faqid=549#gifts" target="_blank">Give the gift of game</a><br/>
+<p>Gift purchasing is available on Steam. Simply indicate your purchase is a gift during checkout, write a little gift message for your friend, and we'll do the rest.</p>
+</div>
+</div>
+</div>
+<div id="topAreaRowHeader" style="background-image: url(http://cdn.store.steampowered.com/public/images/promo/holiday09/english/list_top.jpg)">
+<div id="clock" style="display: none;">
+<img height="24" id="hour_ten" src="public/images/promo/holiday09/0.gif" width="21"/><img height="24" id="hour_one" src="public/images/promo/holiday09/0.gif" width="21"/><img height="24" src="public/images/promo/holiday09/colon.gif" width="13"/><img height="24" id="minute_ten" src="public/images/promo/holiday09/0.gif" width="21"/><img height="24" id="minute_one" src="public/images/promo/holiday09/0.gif" width="21"/><img height="24" src="public/images/promo/holiday09/colon.gif" width="13"/><img height="24" id="second_ten" src="public/images/promo/holiday09/0.gif" width="21"/><img height="24" id="second_one" src="public/images/promo/holiday09/0.gif" width="21"/>
+</div>
+</div>
+</div>
+<div id="bottomContainer">
+<!--Newest Indie Titles//-->
+<div class="Row">
+<div class="RowInner">
+<div class="capsule">
+<a href="http://store.steampowered.com/app/17470/"><img border="0" height="87" src="v/gfx/apps/17470/capsule_231x87_df3df884.jpg" width="231"/></a>
+</div>
+<div class="sticker">
+<span id="sticker_17470" style="width: 83px; height: 84px;">
+<img height="84" src="public/images/promo/holiday09/english/today_66.png" width="83"/>
+</span>
+<!--[if gte IE 5.5]>
+									<![if lt IE 7]>
+									<style type="text/css">
+									#sticker_17470 img, { filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); }
+									#sticker_17470 { display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://cdn.store.steampowered.com/public/images/promo/holiday09/english/today_66.png'); }
+									</style>
+									<![endif]>
+									<![endif]-->
+</div>
+<div class="gameDesc">
+<div class="title">
+<a class="titleLink" href="http://store.steampowered.com/app/17470/">Dead Space</a>
+<div style="clear: both;"></div>
+</div>
+<div class="desc">Only the Dead Survive.                    					A massive deep-space mining ship goes dark after unearthing a strange artifact on a distant planet.... <a class="white" href="http://store.steampowered.com/app/17470/">more</a></div>
+</div>
+<div class="gameActions">
+<div class="price"> 
+																			<span class="originalPrice">$29.99</span> 
+																		$10.19								</div>
+<div class="button">
+<form action="http://store.steampowered.com/cart/" method="POST" name="add_to_cart_1290">
+<input name="action" type="hidden" value="add_to_cart"/>
+<input name="subid" type="hidden" value="1290"/>
+</form>
+<a class="btn_blue_sale" href="javascript:addToCart( '1290');">Add to Cart</a>
+</div>
+</div>
+</div>
+</div>
+<div class="Row">
+<div class="RowInner">
+<div class="capsule">
+<a href="http://store.steampowered.com/sub/1606/"><img border="0" height="87" src="v/gfx/subs/1606/capsule_231x87_458fb280.jpg" width="231"/></a>
+</div>
+<div class="sticker">
+<span id="sticker_1606" style="width: 83px; height: 84px;">
+<img height="84" src="public/images/promo/holiday09/english/today_50.png" width="83"/>
+</span>
+<!--[if gte IE 5.5]>
+									<![if lt IE 7]>
+									<style type="text/css">
+									#sticker_1606 img, { filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); }
+									#sticker_1606 { display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://cdn.store.steampowered.com/public/images/promo/holiday09/english/today_50.png'); }
+									</style>
+									<![endif]>
+									<![endif]-->
+</div>
+<div class="gameDesc">
+<div class="title">
+<a class="titleLink" href="http://store.steampowered.com/sub/1606/">Complete PopCap Collection</a>
+<div style="clear: both;"></div>
+</div>
+<div class="desc">The Complete PopCap Collection includes all 30 titles from PopCap on Steam. If ever you've considered jumping on the PopCap bandwagon, now is the time, and this is the pack!... <a class="white" href="http://store.steampowered.com/sub/1606/">more</a></div>
+</div>
+<div class="gameActions">
+<div class="price"> 
+																			<span class="originalPrice">$99.99</span> 
+																		$49.99								</div>
+<div class="button">
+<form action="http://store.steampowered.com/cart/" method="POST" name="add_to_cart_1606">
+<input name="action" type="hidden" value="add_to_cart"/>
+<input name="subid" type="hidden" value="1606"/>
+</form>
+<a class="btn_blue_sale" href="javascript:addToCart( '1606');">Add to Cart</a>
+</div>
+</div>
+</div>
+</div>
+<div class="Row">
+<div class="RowInner">
+<div class="capsule">
+<a href="http://store.steampowered.com/app/300/"><img border="0" height="87" src="v/gfx/apps/300/capsule_231x87_df3df884.jpg" width="231"/></a>
+</div>
+<div class="sticker">
+<span id="sticker_300" style="width: 83px; height: 84px;">
+<img height="84" src="public/images/promo/holiday09/english/today_75.png" width="83"/>
+</span>
+<!--[if gte IE 5.5]>
+									<![if lt IE 7]>
+									<style type="text/css">
+									#sticker_300 img, { filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); }
+									#sticker_300 { display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://cdn.store.steampowered.com/public/images/promo/holiday09/english/today_75.png'); }
+									</style>
+									<![endif]>
+									<![endif]-->
+</div>
+<div class="gameDesc">
+<div class="title">
+<a class="titleLink" href="http://store.steampowered.com/app/300/">Day of Defeat: Source</a>
+<div style="clear: both;"></div>
+</div>
+<div class="desc">Day of Defeat offers intense online action gameplay set in Europe during WWII. Assume the role of infantry, sniper or machine-gunner classes, and more. DoD:S features enhanced graphics and sounds design to leverage the power of Source, Valve's new engine technology.... <a class="white" href="http://store.steampowered.com/app/300/">more</a></div>
+</div>
+<div class="gameActions">
+<div class="price"> 
+																			<span class="originalPrice">$9.99</span> 
+																		$2.49								</div>
+<div class="button">
+<form action="http://store.steampowered.com/cart/" method="POST" name="add_to_cart_25">
+<input name="action" type="hidden" value="add_to_cart"/>
+<input name="subid" type="hidden" value="25"/>
+</form>
+<a class="btn_blue_sale" href="javascript:addToCart( '25');">Add to Cart</a>
+</div>
+</div>
+</div>
+</div>
+<div class="Row">
+<div class="RowInner">
+<div class="capsule">
+<a href="http://store.steampowered.com/app/25890/"><img border="0" height="87" src="v/gfx/apps/25890/capsule_231x87_a27b81b6.jpg" width="231"/></a>
+</div>
+<div class="sticker">
+<span id="sticker_25890" style="width: 83px; height: 84px;">
+<img height="84" src="public/images/promo/holiday09/english/today_75.png" width="83"/>
+</span>
+<!--[if gte IE 5.5]>
+									<![if lt IE 7]>
+									<style type="text/css">
+									#sticker_25890 img, { filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); }
+									#sticker_25890 { display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://cdn.store.steampowered.com/public/images/promo/holiday09/english/today_75.png'); }
+									</style>
+									<![endif]>
+									<![endif]-->
+</div>
+<div class="gameDesc">
+<div class="title">
+<a class="titleLink" href="http://store.steampowered.com/app/25890/">Hearts of Iron III</a>
+<div style="clear: both;"></div>
+</div>
+<div class="desc">Hearts of Iron III lets you play the most engaging conflict in world history, World War 2, on all fronts as any country and through multiple different scenarios.... <a class="white" href="http://store.steampowered.com/app/25890/">more</a></div>
+</div>
+<div class="gameActions">
+<div class="price"> 
+																			<span class="originalPrice">$29.99</span> 
+																		$7.49								</div>
+<div class="button">
+<form action="http://store.steampowered.com/cart/" method="POST" name="add_to_cart_1909">
+<input name="action" type="hidden" value="add_to_cart"/>
+<input name="subid" type="hidden" value="1909"/>
+</form>
+<a class="btn_blue_sale" href="javascript:addToCart( '1909');">Add to Cart</a>
+</div>
+</div>
+</div>
+</div>
+<div class="Row">
+<div class="RowInner">
+<div class="capsule">
+<a href="http://store.steampowered.com/app/31410/"><img border="0" height="87" src="v/gfx/apps/31410/capsule_231x87_d5bc47da.jpg" width="231"/></a>
+</div>
+<div class="sticker">
+<span id="sticker_31410" style="width: 83px; height: 84px;">
+<img height="84" src="public/images/promo/holiday09/english/today_75.png" width="83"/>
+</span>
+<!--[if gte IE 5.5]>
+									<![if lt IE 7]>
+									<style type="text/css">
+									#sticker_31410 img, { filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); }
+									#sticker_31410 { display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://cdn.store.steampowered.com/public/images/promo/holiday09/english/today_75.png'); }
+									</style>
+									<![endif]>
+									<![endif]-->
+</div>
+<div class="gameDesc">
+<div class="title">
+<a class="titleLink" href="http://store.steampowered.com/app/31410/">Zombie Driver</a>
+<div style="clear: both;"></div>
+</div>
+<div class="desc">Fight your way through the streets of a zombie infested city to save the survivors of a disastrous chemical accident that changed most of the city's population into mindless brain hungry monsters.... <a class="white" href="http://store.steampowered.com/app/31410/">more</a></div>
+</div>
+<div class="gameActions">
+<div class="price"> 
+																			<span class="originalPrice">$9.99</span> 
+																		$2.49								</div>
+<div class="button">
+<form action="http://store.steampowered.com/cart/" method="POST" name="add_to_cart_2554">
+<input name="action" type="hidden" value="add_to_cart"/>
+<input name="subid" type="hidden" value="2554"/>
+</form>
+<a class="btn_blue_sale" href="javascript:addToCart( '2554');">Add to Cart</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footerContainer">
+				 
+			</div>
+<div id="topSellers">
+<div id="topSellers_logo" style="background-image: url(http://cdn.store.steampowered.com/public/images/promo/holiday09/english/ts_title.jpg)">
+</div>
+<div id="topSellers_top">
+</div>
+<div id="topSellers_caps">
+<div id="topSellers_capsArea">
+<div class="browse_capsule_sm">
+<a href="http://store.steampowered.com/app/17470/">
+<div class="browse_rank browse_rank_ctn">#1</div>
+<img border="0" src="v/gfx/apps/17470/capsule_231x87_df3df884.jpg" title="Dead Space">
+<h5>
+<span style="color: #888888;"><strike>$29.99</strike></span> 								$10.19								</h5>
+</img></a>
+</div>
+<div class="browse_capsule_sm">
+<a href="http://store.steampowered.com/app/550/">
+<div class="browse_rank browse_rank_ctn">#2</div>
+<img border="0" src="v/gfx/apps/550/capsule_231x87_85c6a395.jpg" title="Left 4 Dead 2">
+<h5>
+<span style="color: #888888;"><strike>$49.99</strike></span> 								$37.49								</h5>
+</img></a>
+</div>
+<div class="browse_capsule_sm">
+<a href="http://store.steampowered.com/app/10180/">
+<div class="browse_rank browse_rank_ctn">#3</div>
+<img border="0" src="v/gfx/apps/10180/capsule_231x87_9babf110.jpg" title="Call of Duty: Modern Warfare 2">
+<h5>
+																$59.99								</h5>
+</img></a>
+</div>
+<div style="clear: left"></div>
+<div class="browse_capsule_sm">
+<a href="http://store.steampowered.com/sub/1606/">
+<div class="browse_rank browse_rank_ctn">#4</div>
+<img border="0" src="v/gfx/subs/1606/capsule_231x87_458fb280.jpg" title="Complete PopCap Collection">
+<h5>
+<span style="color: #888888;"><strike>$99.99</strike></span> 								$49.99								</h5>
+</img></a>
+</div>
+<div class="browse_capsule_sm">
+<a href="http://store.steampowered.com/app/41500/">
+<div class="browse_rank browse_rank_ctn">#5</div>
+<img border="0" src="v/gfx/apps/41500/capsule_231x87_6e9e6b50.jpg" title="Torchlight">
+<h5>
+<span style="color: #888888;"><strike>$19.99</strike></span> 								$9.99								</h5>
+</img></a>
+</div>
+<div class="browse_capsule_sm">
+<a href="http://store.steampowered.com/app/31410/">
+<div class="browse_rank browse_rank_ctn">#6</div>
+<img border="0" src="v/gfx/apps/31410/capsule_231x87_d5bc47da.jpg" title="Zombie Driver">
+<h5>
+<span style="color: #888888;"><strike>$9.99</strike></span> 								$2.49								</h5>
+</img></a>
+</div>
+<br clear="left"/>
+</div>
+</div>
+<div id="topSellers_listtop">
+</div>
+<div id="topSellers_list">
+<div id="topSellers_listArea">
+<div class="browse_rank" style="margin-bottom: 4px;">#7 - #20</div>
+<div class="global_area_tabs_ctn_wide_search global_area_tabs" id="global_area_tabs_ctn">
+<!-- Extra empty div to hack around lame IE7 layout bug -->
+<div></div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/300/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Day of Defeat: Source" height="45" src="v/gfx/apps/300/capsule_sm_120_df3df884.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Day of Defeat: Source</h3>
+										Released Sep 26, 2005									</div>
+<div class="global_area_tabs_item_rating">80</div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$9.99</strike></span> 										$2.49									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/8980/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Borderlands" height="45" src="v/gfx/apps/8980/capsule_sm_120_b46c0925.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Borderlands</h3>
+										Released Oct 26, 2009									</div>
+<div class="global_area_tabs_item_rating">82</div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$49.99</strike></span> 										$33.49									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/25890/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Hearts of Iron III" height="45" src="v/gfx/apps/25890/capsule_sm_120_a27b81b6.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Hearts of Iron III</h3>
+										Released Aug 7, 2009									</div>
+<div class="global_area_tabs_item_rating"></div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$29.99</strike></span> 										$7.49									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/901037/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Dragon Age: Origins Digital Deluxe Edition" height="45" src="v/gfx/apps/901037/capsule_sm_120_4de511c6.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Dragon Age: Origins Digital Deluxe Edition</h3>
+										Released Nov 5, 2009									</div>
+<div class="global_area_tabs_item_rating">91</div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+																				$64.99									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/sub/2687/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Eidos Collector Pack" height="45" src="v/gfx/subs/2687/capsule_sm_120_795fba7a.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Eidos Collector Pack</h3>
+</div>
+<div class="global_area_tabs_item_rating"></div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_sub.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$99.99</strike></span> 										$49.99									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/22370/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Fallout 3: Game of the Year Edition" height="45" src="v/gfx/apps/22370/capsule_sm_120_38e24899.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Fallout 3: Game of the Year Edition</h3>
+										Released Dec 17, 2009									</div>
+<div class="global_area_tabs_item_rating">91</div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$49.99</strike></span> 										$37.49									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/17450/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Dragon Age: Origins" height="45" src="v/gfx/apps/17450/capsule_sm_120_ef95889a.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Dragon Age: Origins</h3>
+										Released Nov 5, 2009									</div>
+<div class="global_area_tabs_item_rating">91</div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+																				$49.99									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/240/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Counter-Strike: Source" height="45" src="v/gfx/apps/240/capsule_sm_120_921889e7.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Counter-Strike: Source</h3>
+										Released Nov 1, 2004									</div>
+<div class="global_area_tabs_item_rating">88</div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$19.99</strike></span> 										$14.99									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/sub/683/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Unreal Deal Pack" height="45" src="v/gfx/subs/683/capsule_sm_120_7d809372.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Unreal Deal Pack</h3>
+										Released Mar 17, 2008									</div>
+<div class="global_area_tabs_item_rating"></div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_sub.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$39.99</strike></span> 										$13.59									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/20900/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy The Witcher: Enhanced Edition Director's Cut" height="45" src="v/gfx/apps/20900/capsule_sm_120_5e4a8010.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>The Witcher: Enhanced Edition Director's Cut</h3>
+										Released Sep 19, 2008									</div>
+<div class="global_area_tabs_item_rating">86</div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$39.99</strike></span> 										$13.59									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/10500/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Empire: Total War™" height="45" src="v/gfx/apps/10500/capsule_sm_120_b2294772.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Empire: Total War™</h3>
+										Released Mar 4, 2009									</div>
+<div class="global_area_tabs_item_rating">90</div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$49.99</strike></span> 										$24.99									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/1250/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Killing Floor" height="45" src="v/gfx/apps/1250/capsule_sm_120_fc62f7d7.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Killing Floor</h3>
+										Released May 14, 2009									</div>
+<div class="global_area_tabs_item_rating">71</div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$19.99</strike></span> 										$9.99									</div>
+</div>
+<div class="global_area_tabs_item">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/app/15620/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Warhammer® 40,000™: Dawn of War® II" height="45" src="v/gfx/apps/15620/capsule_sm_120_677c4189.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Warhammer® 40,000™: Dawn of War® II</h3>
+										Released Feb 18, 2009									</div>
+<div class="global_area_tabs_item_rating">85</div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_app.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$39.99</strike></span> 										$19.99									</div>
+</div>
+<div class="global_area_tabs_item" style="border-bottom: none;">
+<div class="global_area_tabs_item_overlay">
+<a href="http://store.steampowered.com/sub/1618/">
+<img src="public/images/blank.gif"/>
+</a>
+</div>
+<div class="global_area_tabs_item_img"><img alt="Buy Sid Meier's Civilization® IV: The Complete Edition" height="45" src="v/gfx/subs/1618/capsule_sm_120_3a2f8a36.jpg" width="120"/></div>
+<div class="global_area_tabs_item_txt">
+<h3>Sid Meier's Civilization® IV: The Complete Edition</h3>
+										Released May 14, 2009									</div>
+<div class="global_area_tabs_item_rating"></div>
+<div class="global_area_tabs_item_type"><img src="public/images/ico/ico_type_sub.gif"/></div>
+<div class="global_area_tabs_item_price">
+<span style="color: #888888;"><strike>$39.99</strike></span> 										$26.79									</div>
+</div>
+</div>
+</div>
+</div>
+<div id="topSellers_footer">
+</div>
+</div>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+</div>
+</div>
+</center>
+<!-- Footer -->
+<div id="footer">
+<div id="footer_logo"><a href="http://www.valvesoftware.com"><img alt="Valve Software" border="0" src="public/images/logo_valve_footer.jpg"/></a></div>
+<div id="footer_text">
+<form action="http://store.steampowered.com/">
+<select name="l" onchange="submit();" style="width: 200px;">
+<option id="l_czech" value="czech">Czech</option>
+<option id="l_danish" value="danish">Danish</option>
+<option id="l_dutch" value="dutch">Dutch</option>
+<option id="l_english" selected="" value="english">English</option>
+<option id="l_finnish" value="finnish">Finnish</option>
+<option id="l_french" value="french">French</option>
+<option id="l_german" value="german">German</option>
+<option id="l_hungarian" value="hungarian">Hungarian</option>
+<option id="l_italian" value="italian">Italian</option>
+<option id="l_japanese" value="japanese">Japanese</option>
+<option id="l_korean" value="korean">Korean</option>
+<option id="l_norwegian" value="norwegian">Norwegian</option>
+<option id="l_polish" value="polish">Polish</option>
+<option id="l_portuguese" value="portuguese">Portuguese</option>
+<option id="l_romanian" value="romanian">Romanian</option>
+<option id="l_russian" value="russian">Russian</option>
+<option id="l_schinese" value="schinese">Simplified Chinese</option>
+<option id="l_tchinese" value="tchinese">Traditional Chinese</option>
+<option id="l_spanish" value="spanish">Spanish</option>
+<option id="l_swedish" value="swedish">Swedish</option>
+<option id="l_thai" value="thai">Thai</option>
+</select><br>
+</br></form>
+<p>© 2009 Valve Corporation.  All rights reserved.  All trademarks are property of their respective owners in the US and other countries.			<a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy</a>. <a href="http://www.valvesoftware.com/legal.htm">Legal</a>. <a href="http://store.steampowered.com/subscriber_agreement/">Steam Subscriber Agreement</a>.
+			</p>
+<p>
+<br/>
+<a href="http://www.valvesoftware.com/about.html" target="_blank">About Valve</a> | <a href="http://www.valvesoftware.com/business/" target="_blank">Business Solutions</a> | <a href="http://www.valvesoftware.com/jobs.html" target="_blank">Jobs</a> | <a href="https://cafe.steampowered.com" target="_blank">Cyber Cafés</a>
+</p>
+</div>
+</div>
+<!-- End Footer -->
+</div>
+</body>
+</html>

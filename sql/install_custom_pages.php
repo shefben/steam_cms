@@ -67,6 +67,7 @@ $insertArray[] = [
     $content2002v1,              // content
     '2002_v1',                 // theme
     'index.twig',               // template
+    null,                       // header image
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -111,11 +112,12 @@ HTML;
 
 $insertArray[] = [
     '2002v2_index',            // slug
-    null,
+    null,                       // page name
     'Steam Powered',           // title
     $content2002v2,              // content
     '2002_v2',                 // theme
     'index.twig',               // template
+    null,                       // header image
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -266,6 +268,7 @@ $insertArray[] = [
     $content2003v1,
     '2003_v1',
     'index.twig',
+    null,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -312,6 +315,7 @@ $insertArray[] = [
     $content2003v2,
     '2003_v2',
     'index.twig',
+    null,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -367,6 +371,7 @@ $insertArray[] = [
     $content2004,
     '2004',
     'index.twig',
+    null,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -762,6 +767,7 @@ $insertArray[] = [
     $content2005v1,
     '2005_v1',
     'index.twig',
+    null,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -1025,10 +1031,10 @@ $insertArray[] = [
     $content2005v2,
     '2005_v2',
     'index.twig',
+    null,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
-
 
 $insertArray[] = [
     '2006v1_index',
@@ -1037,6 +1043,7 @@ $insertArray[] = [
     "",
     '2006_v1',
     'index.twig',
+    null,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -1048,6 +1055,7 @@ $insertArray[] = [
     "",
     '2006_v2',
     'index.twig',
+    null,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
 ];
@@ -1120,10 +1128,10 @@ HTML;
 $insertArray[] = [
     'subscriber_agreement',
     null,
-
     'Steam Subscriber Agreement',
     $sa_html,
     null,
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),       // created
     date('Y-m-d H:i:s')        // updated
@@ -1185,10 +1193,10 @@ HTML;
 $insertArray[] = [
     'cafe_setup',
     null,
-
     'Cyber Café Setup Instructions',
     $cafe_setup,
     null,
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -1230,10 +1238,10 @@ HTML;
 $insertArray[] = [
     'cybercafes',
     null,
-
     'Cyber Cafés',
     $cybercafes_2003,
     "2003_v2",
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -1320,10 +1328,10 @@ HTML;
 $insertArray[] = [
     'cybercafes',
     null,
-
     'Cyber Cafés',
     $cybercafes_20042005,
     "2004,2005_v1",
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -1373,10 +1381,10 @@ HTML;
 $insertArray[] = [
     'HL2GOLD_contest',
     null,
-
     'VALVE HQ TRIP GIVEAWAY',
     $hl2gold_context,
     null,
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -1429,10 +1437,10 @@ HTML;
 $insertArray[] = [
     'get_cz',
     null,
-
     'Counter-Strike: Condition Zero',
     $get_cz,
     null,
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -1494,10 +1502,10 @@ HTML;
 $insertArray[] = [
     'cybercafe_program',
     null,
-
     'Cyber Café Program',
     $cybercafe_program_2003,
     '2003_v2',
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -1563,10 +1571,10 @@ HTML;
 $insertArray[] = [
     'cybercafe_program',
     null,
-
     'Cyber Café Program',
     $cybercafe_program_sourceengine,
     "2004,2005_v1",
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -1588,10 +1596,10 @@ HTML;
 $insertArray[] = [
     'cybercafe_promotion',
     null,
-
     'Valve Announces April Cyber Café Promotion',
     $cybercafe_promotion,
     null,
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -1627,10 +1635,10 @@ HTML;
 $insertArray[] = [
     'cafe_pricing',
     null,
-
     'Cyber Café Pricing and Licensing',
     $cafe_pricing,
     null,
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -2002,10 +2010,10 @@ HTML;
 $insertArray[] = [
     'cybercafe_changeform',
     null,
-
     'Cyber Café Program Change Form',
     $cybercafe_changeform,
     null,
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -2171,10 +2179,10 @@ HTML;
 $insertArray[] = [
     'product_HL2bronsilvergold',
     null,
-
     'Welcome to Steam',
     $product_hl2bronzesilvergold_2004,
     "2004",
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -2344,10 +2352,10 @@ HTML;
 $insertArray[] = [
     'product_HL2bronsilvergold',
     null,
-
     'Welcome to Steam',
     $product_hl2bronzesilvergold_2005,
     "2005_v1,2005_v2",
+    "default.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
@@ -2383,11 +2391,11 @@ HTML;
 $insertArray[] = [
     'filtered_info',
     null,
-
     '"Filtered" Content Servers',
     $filtered_info,
     null,
     "none.twig",
+    null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
 ];
@@ -2482,6 +2490,7 @@ $insertArray[] = [
     'SteamWorks',
     $steamworks_2007,
     "2007_v1,2007_v2",
+    "default_with_sidebar.twig",
     null,
     date('Y-m-d H:i:s'),
     date('Y-m-d H:i:s')
