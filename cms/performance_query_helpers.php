@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+$cms_junction_tables_cached = null;
+$cms_sidebar_entries_cache = [];
+
 /**
  * Performance Query Helpers
  *
@@ -16,19 +19,10 @@ declare(strict_types=1);
  */
 function cms_has_junction_tables(): bool
 {
-    static $has_tables = null;
+    global $cms_junction_tables_cached;
 
-    if ($has_tables !== null) {
-        return $has_tables;
-    }
-
-    // Check APCu cache (1 hour TTL)
-    if (function_exists('apcu_fetch')) {
-        $cached = apcu_fetch('has_junction_tables');
-        if ($cached !== false) {
-            $has_tables = (bool)$cached;
-            return $has_tables;
-        }
+    if ($cms_junction_tables_cached !== null) {
+        return $cms_junction_tables_cached;
     }
 
     $db = cms_get_db();
@@ -43,14 +37,9 @@ function cms_has_junction_tables(): bool
         $stmt = $db->query("SHOW TABLES LIKE 'sidebar_entry_themes'");
         $table3 = $stmt->fetch();
 
-        $has_tables = $table1 && $table2 && $table3;
+        $cms_junction_tables_cached = $table1 && $table2 && $table3;
 
-        // Cache the result for 1 hour
-        if (function_exists('apcu_store')) {
-            apcu_store('has_junction_tables', $has_tables, 3600);
-        }
-
-        return $has_tables;
+        return $cms_junction_tables_cached;
     } catch (PDOException $e) {
         return false;
     }
@@ -109,15 +98,11 @@ function cms_get_support_page_optimized(string $theme): ?array
  */
 function cms_get_sidebar_entries_optimized(string $theme): array
 {
+    global $cms_sidebar_entries_cache;
     $db = cms_get_db();
 
-    // Check APCu cache first
-    $cacheKey = 'sidebar_entries_opt_' . $theme;
-    if (function_exists('apcu_fetch')) {
-        $cached = apcu_fetch($cacheKey);
-        if ($cached !== false) {
-            return $cached;
-        }
+    if (isset($cms_sidebar_entries_cache[$theme])) {
+        return $cms_sidebar_entries_cache[$theme];
     }
 
     try {
@@ -161,12 +146,9 @@ function cms_get_sidebar_entries_optimized(string $theme): array
             $result[$sidebarName][] = $row['entry_content'];
         }
 
-        // Cache for 5 minutes
-        if (function_exists('apcu_store')) {
-            apcu_store($cacheKey, $result, 300);
-        }
+        $cms_sidebar_entries_cache[$theme] = $result;
 
-        return $result;
+        return $cms_sidebar_entries_cache[$theme];
     } catch (PDOException $e) {
         return [];
     }
@@ -178,13 +160,8 @@ function cms_get_sidebar_entries_optimized(string $theme): array
  */
 function cms_clear_junction_cache(): void
 {
-    if (function_exists('apcu_delete')) {
-        apcu_delete('has_junction_tables');
+    global $cms_junction_tables_cached, $cms_sidebar_entries_cache;
 
-        // Clear all sidebar cache entries
-        $iterator = new APCUIterator('/^sidebar_entries_/');
-        if ($iterator) {
-            apcu_delete($iterator);
-        }
-    }
+    $cms_junction_tables_cached = null;
+    $cms_sidebar_entries_cache = [];
 }

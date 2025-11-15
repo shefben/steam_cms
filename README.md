@@ -43,11 +43,6 @@ Protocols h2 http/1.1
 </IfModule>
 ```
 
-lastly, download the apcu php extension and put the dll or so in your php's extension directory and enable it in php.ini by adding
-```
-extension=apcu
-```
-
 # without following the above steps, you will not get this to work!
 ## to install the cms, go to localhost/install.php
 

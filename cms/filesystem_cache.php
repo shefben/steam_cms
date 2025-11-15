@@ -5,77 +5,55 @@ declare(strict_types=1);
 /**
  * Filesystem Cache Helper
  *
- * Caches filesystem operations (file_exists, filemtime, is_file, is_dir)
- * using APCu to avoid repeated stat() system calls.
- *
- * PERFORMANCE IMPACT: Saves 140-235ms per page render by caching 47+ fs checks
+ * Provides lightweight request-level caching for filesystem checks without
+ * requiring APCu or other optional PHP extensions.
  */
-
 class FilesystemCache
 {
-    private const CACHE_TTL = 300; // 5 minutes
-    private const CACHE_PREFIX = 'fs_cache_';
-
-    private static $useApcu = null;
-    private static $localCache = [];
+    /**
+     * @var array<string, mixed>
+     */
+    private static array $localCache = [];
 
     /**
-     * Check if APCu is available
+     * Retrieve a cached value.
+     *
+     * @param string $key
+     * @param bool   $found Populated with true when the cache entry exists.
+     * @return mixed
      */
-    private static function hasApcu(): bool
+    private static function getCache(string $key, bool &$found)
     {
-        if (self::$useApcu === null) {
-            self::$useApcu = function_exists('apcu_enabled') && apcu_enabled();
-        }
-        return self::$useApcu;
-    }
-
-    /**
-     * Get cached value
-     */
-    private static function getCache(string $key)
-    {
-        // Check local cache first (fastest)
-        if (isset(self::$localCache[$key])) {
+        if (array_key_exists($key, self::$localCache)) {
+            $found = true;
             return self::$localCache[$key];
         }
-
-        // Try APCu if available
-        if (self::hasApcu()) {
-            $value = apcu_fetch(self::CACHE_PREFIX . $key, $success);
-            if ($success) {
-                self::$localCache[$key] = $value;
-                return $value;
-            }
-        }
-
-        return false;
+        $found = false;
+        return null;
     }
 
     /**
-     * Set cached value
+     * Store a value in the cache.
+     *
+     * @param string $key
+     * @param mixed  $value
      */
     private static function setCache(string $key, $value): void
     {
-        // Store in local cache
         self::$localCache[$key] = $value;
-
-        // Store in APCu if available
-        if (self::hasApcu()) {
-            apcu_store(self::CACHE_PREFIX . $key, $value, self::CACHE_TTL);
-        }
     }
 
     /**
-     * Cached file_exists()
+     * Cached file_exists().
      */
     public static function fileExists(string $path): bool
     {
         $key = 'exists_' . md5($path);
-        $cached = self::getCache($key);
+        $found = false;
+        $cached = self::getCache($key, $found);
 
-        if ($cached !== false) {
-            return (bool)$cached;
+        if ($found) {
+            return (bool) $cached;
         }
 
         $exists = file_exists($path);
@@ -85,15 +63,16 @@ class FilesystemCache
     }
 
     /**
-     * Cached is_file()
+     * Cached is_file().
      */
     public static function isFile(string $path): bool
     {
         $key = 'isfile_' . md5($path);
-        $cached = self::getCache($key);
+        $found = false;
+        $cached = self::getCache($key, $found);
 
-        if ($cached !== false) {
-            return (bool)$cached;
+        if ($found) {
+            return (bool) $cached;
         }
 
         $isFile = is_file($path);
@@ -103,15 +82,16 @@ class FilesystemCache
     }
 
     /**
-     * Cached is_dir()
+     * Cached is_dir().
      */
     public static function isDir(string $path): bool
     {
         $key = 'isdir_' . md5($path);
-        $cached = self::getCache($key);
+        $found = false;
+        $cached = self::getCache($key, $found);
 
-        if ($cached !== false) {
-            return (bool)$cached;
+        if ($found) {
+            return (bool) $cached;
         }
 
         $isDir = is_dir($path);
@@ -121,65 +101,55 @@ class FilesystemCache
     }
 
     /**
-     * Cached filemtime()
-     * Note: Returns false on error, just like filemtime()
+     * Cached filemtime().
+     * Note: Returns false on error, just like filemtime().
      */
     public static function filemtime(string $path)
     {
         $key = 'mtime_' . md5($path);
-        $cached = self::getCache($key);
+        $found = false;
+        $cached = self::getCache($key, $found);
 
-        if ($cached !== false) {
+        if ($found) {
             return $cached;
         }
 
         $mtime = @filemtime($path);
-        if ($mtime !== false) {
-            self::setCache($key, $mtime);
-        }
+        self::setCache($key, $mtime);
 
         return $mtime;
     }
 
     /**
-     * Cached filesize()
+     * Cached filesize().
      */
     public static function filesize(string $path)
     {
         $key = 'size_' . md5($path);
-        $cached = self::getCache($key);
+        $found = false;
+        $cached = self::getCache($key, $found);
 
-        if ($cached !== false) {
+        if ($found) {
             return $cached;
         }
 
         $size = @filesize($path);
-        if ($size !== false) {
-            self::setCache($key, $size);
-        }
+        self::setCache($key, $size);
 
         return $size;
     }
 
     /**
-     * Clear all filesystem caches
-     * Call this when files are modified (e.g., after admin saves)
+     * Clear all filesystem caches.
+     * Call this when files are modified (e.g., after admin saves).
      */
     public static function clearAll(): void
     {
         self::$localCache = [];
-
-        if (self::hasApcu()) {
-            // Clear all APCu entries with our prefix
-            $iterator = new APCUIterator('/^' . preg_quote(self::CACHE_PREFIX, '/') . '/');
-            if ($iterator) {
-                apcu_delete($iterator);
-            }
-        }
     }
 
     /**
-     * Clear cache for specific path
+     * Clear cache for specific path.
      */
     public static function clearPath(string $path): void
     {
@@ -194,28 +164,24 @@ class FilesystemCache
 
         foreach ($keys as $key) {
             unset(self::$localCache[$key]);
-            if (self::hasApcu()) {
-                apcu_delete(self::CACHE_PREFIX . $key);
-            }
         }
     }
 
     /**
-     * Get cache statistics
+     * Get cache statistics.
      */
     public static function getStats(): array
     {
         return [
             'local_cache_size' => count(self::$localCache),
-            'apcu_available' => self::hasApcu(),
-            'cache_ttl' => self::CACHE_TTL,
+            'uses_extensions' => false,
         ];
     }
 }
 
 /**
- * Global helper functions for easy use throughout codebase
- * These are drop-in replacements for standard PHP filesystem functions
+ * Global helper functions for easy use throughout codebase.
+ * These are drop-in replacements for standard PHP filesystem functions.
  */
 
 if (!function_exists('cms_file_exists')) {
@@ -250,12 +216,5 @@ if (!function_exists('cms_filesize')) {
     function cms_filesize(string $path)
     {
         return FilesystemCache::filesize($path);
-    }
-}
-
-if (!function_exists('cms_clear_filesystem_cache')) {
-    function cms_clear_filesystem_cache(): void
-    {
-        FilesystemCache::clearAll();
     }
 }

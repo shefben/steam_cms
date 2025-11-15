@@ -1,5 +1,7 @@
 <?php
 declare(strict_types=1);
+
+require_once __DIR__ . '/cache.php';
 /**
  * SteamCMS Cache Manager
  *
@@ -308,14 +310,10 @@ function cms_clear_selective_cache(string $context): int
         FilesystemCache::clearAll();
     }
 
-    // Clear APCu for sidebar entries if sidebar changed
+    // Reset request-level sidebar caches when sidebar content changes
     if (in_array('sidebar', $namespaces, true) || in_array('*', $namespaces, true)) {
-        if (function_exists('apcu_clear_cache')) {
-            $iterator = new APCUIterator('/^sidebar_entries_/');
-            if ($iterator) {
-                apcu_delete($iterator);
-                $cleared += 10; // Estimate
-            }
+        if (function_exists('cms_clear_junction_cache')) {
+            cms_clear_junction_cache();
         }
     }
 
@@ -324,6 +322,9 @@ function cms_clear_selective_cache(string $context): int
         if ($ns === '*') {
             // Clear everything
             $cleared += $manager->clear();
+            if (function_exists('cms_cache_clear_all')) {
+                cms_cache_clear_all();
+            }
             break;
         } else {
             $cleared += $manager->clearNamespace($ns);
