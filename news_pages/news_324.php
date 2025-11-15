@@ -1,3 +1,0 @@
-<p>
-
-The fifth phase of the Half-Life 2 preload begins to Steam account holders today. This will allow users to download the Counter-Strike: Source maps in encrypted form. No purchase is required to pre-load Half-Life 2, but is required to activate the game. The moment the game is made available, those who have pre-loaded and purchased the game via Steam will be ready to start playing.<br/><br/>In addition, an update to the Counter-Strike: Source beta has just been released. Steam will update itself automatically when you restart. Here is a list of the change:<br/><br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><b>COUNTER-STRIKE: SOURCE BETA CHANGE:</b><br/><li>Fixed voice comm not working on certain servers</li></ul><br/></p>

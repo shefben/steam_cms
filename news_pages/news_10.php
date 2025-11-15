@@ -1,3 +1,0 @@
-<p>
-
-The RCL (RealCombat.com League) has now added a "Day of Defeat" ladder to the league. Players of the game DOD are welcome to join the RCL to create a DOD team of their own, or to simply join the ladder and be recruited by an existing team.<br/><br/>The RCL provides all the DOD match servers at no cost. Teams play a 12 week season and then advance into playoffs to compete in the DOD Championship game.<br/><br/>To join: Go to <a href="http://www.realcombat.com/" target="_blank">http://www.RealCombat.com</a> and signup. From there you will be able to join a DOD team, or create one of your own.<br/><br/>Happy gaming,<br/><br/>Andy Hodges<br/>RCL League<br/>IRC Gamesnet (Channel: #RCL)<br/>IRC Gamesnet (Channel: #RCL-DOD)<br/></p>

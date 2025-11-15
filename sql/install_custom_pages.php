@@ -2392,6 +2392,101 @@ $insertArray[] = [
     date('Y-m-d H:i:s')
 ];
 
+$steamworks_2007 = <<<HTML
+<div class="contentBG_2">
+    <div class="headerBG_2">
+    
+        <!-- Left Collumn Content -->
+        <div class="leftCol_6">
+    
+            <center><img src="SteamworksBanner.jpg"><br>
+            <img src="triple.jpg"></center>
+    
+            <div style="margin:0px 32px 12px 38px; font-size:108%;">
+            <br>
+            <br>
+            <h3 style="margin:0px;">Focus on your game</h3><br>
+            <br>
+            Save months of development time and eliminate technology licensing fees.  Plus, all of the features of Steamworks can be used alone or in combination with each other or your own existing solution.<br>
+            <br>
+            Steamworks is not engine specific and will work with any underlying technology.  Whether you're publishing your games on Steam or not, Steamworks lets you take advantage of Steam features in retail products.<br>
+            <br>
+            <br>
+            <hr style="border-style:dotted;height:2px;color:#232323;">
+            <br>
+            <br>
+            <h3 style="margin:0px;">Watch this space</h3><br>
+            <br>
+            Much more information coming soon. In the meantime, please contact <a style="color:white;" href="mailto:%20jasonh@valvesoftware.com">Jason Holtman</a>, Valve's Director of Business Development.<br>
+        </div>
+    
+            <br>
+            <br clear="all">
+    
+            
+    
+            <br>
+            <br clear="all">
+    
+        </div>
+        <!-- End Left Collumn Content -->
+    
+        <!-- Right Collumn Content -->
+        <div class="rightCol_2" style="padding-top:100px;">
+        
+            
+    
+            <div class="usr_edit_right_header"><div style="float:left; "> Game services </div></div>
+    
+            <div class="rightCol_2_Hr"></div>
+             <ul>
+             <li>Auto-updating</li>
+            <li>Game stats collection and display</li>
+            <li>Multiplayer matchmaking</li>
+            <li>The Steam Community</li>
+            <li>Voice chat</li>
+        </ul>
+        <br>
+            <div class="usr_edit_right_header"><div style="float:left; "> Retail back-end services</div></div>
+            <ul>
+            <li>Key-based authentication</li>
+            <li>Territory control</li>
+            <li>Zero-day piracy protection</li>
+            <li>DRM	</li>				
+            </ul>
+            <br>
+            <div class="usr_edit_right_header"><div style="float:left; "> Development tools </div></div>
+            <ul>
+            <li>Rapid &amp; secure build distribution</li>
+            <li>Crash testing, MDMP collection</li>
+            <li>Testing &amp; usability data collection</li>
+    
+             </ul>
+             <br>
+             <br>
+             <br>
+    
+    
+            </div>
+        </div>
+        <!-- End Right Collumn Content -->
+    
+        <br clear="left">
+    
+    </div>
+HTML;
+
+$insertArray[] = [
+    'steamworks',
+    null,
+    'SteamWorks',
+    $steamworks_2007,
+    "2007_v1,2007_v2",
+    null,
+    date('Y-m-d H:i:s'),
+    date('Y-m-d H:i:s')
+];
+
 $stmtcp = $pdo->prepare(
     'INSERT IGNORE INTO custom_pages
     (slug, page_name, title, content, theme, template, header_image, created, updated, status)

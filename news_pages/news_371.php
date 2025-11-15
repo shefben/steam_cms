@@ -1,3 +1,0 @@
-<p>
-
-The race is beginning.  As the year comes to a close, it is time for websites to begin polling for <b>2004's Game of the Year</b>. <br/><br/>Over at <a href="http://www.gamespy.com/articles/570/570601p1.html"><b>Gamespy</b></a>, <i>Half-Life 2</i> is eligible for <b>PC Action GOTY</b> and <b>PC Overall GOTY.</b> It's multiplayer components,<i> HL2DM</i> and <i>Counter-Strike: Source</i>, as well as <i>Counter-Strike: Condition Zero,</i> are eligible for <b>PC Multiplayer GOTY. </b><br/><br/>The polls close on Monday, December 20th and, just like in the elections, you can only vote once. <br/>So, get out there, make your opinion known and pass the good word.     <b><a href="http://www.gamespy.com/articles/570/570601p1.html">VOTE HERE</a></b><br/></p>

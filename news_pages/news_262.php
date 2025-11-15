@@ -1,3 +1,0 @@
-<p>
-
-An update for CS:CZ, Counter-Strike, and all Steam games has just been released. Here is the changelog:<br/><br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><b>COUNTER-STRIKE: CONDITION ZERO</b><br/><li>Scaled crosshair based on 1024 * 768<br/><li>Tweaked weapon sounds<br/><li>New custom mission creation document (/manual/czmissiondoc.rtf)<br/><li>Updated headshot icon<br/><br/><b>COUNTER-STRIKE</b> <br/><li>Scaled crosshair based on 1024 * 768<br/><li>Updated de_vertigo<br/><li>Updated headshot icon<br/><br/><b>ALL STEAM GAMES</b><br/><li>Updated HLTV with sv_downloadurl</li></li></li></li></li></li></li></li></ul><br/></p>

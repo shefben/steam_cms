@@ -1,3 +1,0 @@
-<p>
-
-An update to the Steam client has just been released. There are no changes to the games in this release, only to Steam itself. As always, Steam will update itself automatically when you restart. Here's a list of what's included:<br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><li>Improved startup time for the Steam client</li><br/><li>Added the ability to retrieve account names using a CD key or contact email address (by using the "Retrieve Account" button on Steam's login dialog</li><br/><li>Added user's Steam account name to the initial "Loading..." dialog</li><br/></ul><br/></p>

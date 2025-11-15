@@ -24,8 +24,12 @@ steamid_instructions.html -> index.php?area=steamid_instructions
 /platform/friends/         -> platform.php?area=friends
 /steamtour/ -> steamtour.php?p=<page>
 /steam/
+/steamworks/ -> ?area=steamworks
 /status/game_stats.html -> ?area=game_stats
 /status/content_servers.html -> ?area=content_servers
 /status/ -> ?area=status
 /paypal/(success, others) -> paypal.php
 troubleshooter/live/index.php -> troubleshooter.php
+
+https://cafe.steampowered.com/index.php?area=cafe/cafeHome
+https://cafe.steampowered.com/index.php?area=cafe/cafeManual&page=usingcac

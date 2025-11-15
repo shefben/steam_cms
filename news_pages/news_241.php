@@ -1,3 +1,0 @@
-<p>
-
-The maintenance to the Steam system is now complete.<br/><br/>When you start your Steam client you be automatically be updated to the latest version, which includes these major changes:<br/><br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><li>Offline Play</li><br/><li>Account validation (via e-mail)</li><br/><li>A new Half-Life 2 hardware survey</li><br/><li>Support for purchasing games through Steam</li></ul><br/>There are a number of bug fixes in Steam included as well.<br/><br/>The Half-Life 2 survey will be updated throughout the day with the results tallied <a href="/status/survey.html">here</a>.<br/><br/>Thank you for your patience during the downtime.<br/></p>

@@ -1,3 +1,0 @@
-<p>
-
-Battle for Europe, a war simulation based on Day of Defeat, is beginning its 4th campaign. The last three campaigns have been dominated by the Axis forces, don't let it happen a fourth time. The site has been revamped to include more territories and the best DoD maps. BFE is not your typical "Clan Match" DoD Tournament so you need not be a member of a clan, although clans are welcome to participate. Join your comrades in arms as you fight a 6 week campaign for control of Europe. Enlist now at <a href="http://www.dayofdefeat.com/newsarchive01.html#" target="_blank">BattleForEurope.com</a> to join the largest Day of Defeat tournament to date.<br/></p>

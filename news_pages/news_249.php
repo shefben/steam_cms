@@ -1,3 +1,0 @@
-<p>
-
-If you pre-ordered your copy of Counter-Strike: Condition Zero (CS:CZ) over Steam, first restart Steam then double click the CS:CZ icon in your Steam Games list to begin playing. Those who did not pre-order the game over Steam can purchase CS:CZ at any time.<br/><br/>Special offer extended for CS owners - If you already have a Counter-Strike Steam subscription, order your copy on Steam by April 1st and receive a special price of $29.95 for Condition Zero.<br/><br/>A new dedicated server release is also available for CZ; it can be downloaded <a href="/?area=dedicated_server">here</a>.<br/></p>

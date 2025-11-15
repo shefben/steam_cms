@@ -1,3 +1,0 @@
-<p>
-
-During the month of April 2004, Valve is extending a special offer to Cyber Cafés. <b>During this time, a 12-month cyber café license for Valve's games is being offered at a savings of 33%</b>. The license includes all of Valve's available Steam content, including Counter-Strike: Condition Zero, Counter-Strike, Half-Life, Day of Defeat, Team Fortress Classic, and more. Licensed Cyber Café's also receive product key protection, promotional materials, tournament licenses, and priority access to Valve support.<br/><br/>This offer ends at 11:59 pm PST on April 30, 2004, is subject to change and is not available in every territory. For more information, please email <a href="mailto:cafe@valvesoftware.com">cafe@valvesoftware.com</a>.<br/></p>

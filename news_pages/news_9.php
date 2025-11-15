@@ -1,3 +1,0 @@
-<p>
-
-The Team's Public Day Of Defeat Server is open for play on Recongamer.com at DoDTeam Public Server<br/><br/>     146.20.86.252:27015<br/><br/>Come enjoy a mix of official and custom maps on our quality recongamer.com server.You will also be able to check your stats on our Psychostats server. Our admins and latest anti-cheat software will help to give you hassle free game play. You might even see some of the Team drop in. Hey how many people can say "I fragged Thunder_Weenie last night!" Well ok almost anyone that has played with him can say that but still....:p<br/><br/>We will also be making this server available to any clans that might like to reserve it for a night. Contact [DoD]ShellShock for details.<br/><br/>We hope to see you there.<br/></p>

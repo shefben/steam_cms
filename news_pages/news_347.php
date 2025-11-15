@@ -1,3 +1,0 @@
-<p>
-
-The nominees for <b>The 2004 SpikeTV Video Game Awards</b> have been announced and <b>Half-Life 2</b> has been nominated in these 5 categories:<br/><br/> <ul type="CIRCLE">Game of the Year <br/>Best First Person Action Game <br/>Best PC Game <br/>Best Graphics <br/>Best New Technology </ul><br/>The 2nd Annual Awards Take Place LIVE Tuesday, December 14th in Los Angeles hosted by Snoop Dogg and featured musical Performances Include SUM 41, Ludacris and first ever live performances By Snoop Dogg and The Doors.<br/><br/>Here is the link and pass on the good word to vote for HL2!<br/><a href="http://www.spiketv.com/events/vga2004/">http://www.spiketv.com/events/vga2004/</a><br/><br/><br/><br/></p>

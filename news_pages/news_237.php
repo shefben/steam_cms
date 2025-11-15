@@ -1,3 +1,0 @@
-<p>
-
-There will be a number of significant Steam events in the coming days.<br/><br/>The first will be a long-awaited Steam client release. The highlights from this release will be:<br/><br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><li>Offline Play</li><br/><li>Account validation (via e-mail)</li><br/><li>A new Half-Life 2 hardware survey</li><br/><li>Support for purchasing games through Steam</li></ul><br/>There are a number of other small changes along with the ones listed above, as well as a number of changes planned out past the launch of Counter-Strike: Condition Zero.<br/></p>

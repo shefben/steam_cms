@@ -1,3 +1,0 @@
-<p>
-
-There has been a small update to Steam this evening. This release mainly affects the server browser.<br/><br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><b>SERVER BROWSER:</b><br/><li>Fixed bug where "no LAN servers on network" message wouldn't appear in server list if no servers responded to LAN ping</li><br/><li>Fixed bug where servers weren't being sorted by ping by default</li><br/><li>Added region to filter info string</li><br/><li>Added installed MODS to game filter dropdown</li><br/><li>Change game filter to display full game name instead of short name</li><br/></ul><br/></p>

@@ -1,3 +1,0 @@
-<p>
-
-<a href="http://fubart.clan-palestra.net/charity/charity.php" target="_blank"><img align="right" border="0" src="http://www.dayofdefeat.com/images/News/ClanPalestra.gif"/></a>Clan Palestra has organized a charity match for war victims between the Day of Defeat developement team and their clan to be held on Friday, December 19th at 12 noon PST. Please visit their page <a href="http://fubart.clan-palestra.net/charity/charity.php" target="_blank">here</a> for more information and to donate to the cause! Proceeds from the match will be forwarded to the International Committe of the Red Cross (ICRC), specifically to help victims of the conflict in Iraq.<br/></p>

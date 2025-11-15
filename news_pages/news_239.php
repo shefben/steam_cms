@@ -1,3 +1,0 @@
-<p>
-
-There will be an update to Steam this Wednesday beginning at approximately 6:00am PST. Steam will be unavailable for the duration of the update, which is expected to last three hours.<br/><br/>This update will include the changes previously mentioned:<br/><br/><ul style="padding-bottom: 0px; margin-bottom: 0px;"><li>Offline Play</li><br/><li>Account validation (via e-mail)</li><br/><li>A new Half-Life 2 hardware survey</li><br/><li>Support for purchasing games through Steam</li></ul><br/>The Steampowered.com website will be avilable during the downtime window, and will be updated as status changes.<br/></p>

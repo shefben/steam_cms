@@ -1,3 +1,0 @@
-<p>
-
-In Wednesday's update, Steam introduced the "Half-Life 2 Hardware Survey". This mostly automated survey collects information about  Steam users' computer hardware (and some software). Valve plans to use this information to tune the performance of Half-Life 2. In three days, the survey has so far collected information from almost half a million respondents. The <a href="/status/survey.html">results of the survey</a> are pretty interesting -- check them out and see how your configuration compares to everyone else's.<br/><br/>Since Wednesday's update, the Steam network has returned to <a href="/status/status.html">normal operating levels</a>. There will be a small update to the Steam client this coming week. Details will be posted here first.<br/></p>
