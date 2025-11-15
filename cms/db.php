@@ -3,11 +3,11 @@ if (!defined('CMS_ROOT')) {
     define('CMS_ROOT', dirname(__DIR__));
 }
 /**
- * PERFORMANCE: Global caches replaced with APCu-backed caching
- * See apcu_cache.php for improved caching implementation
+ * PERFORMANCE: Global in-memory caches for repeated lookups.
  *
- * Legacy global caches kept for backward compatibility but should use APCu wrappers
- * @deprecated Use ApcuCache class or cms_cache_* functions instead
+ * Legacy globals are kept for backward compatibility; new code should prefer
+ * the cms_cache_* helpers which now use a simple runtime cache that does not
+ * rely on optional PHP extensions.
  */
 $cms_settings_cache = [];
 $cms_theme_header_cache = [];
@@ -17,8 +17,8 @@ $cms_theme_config_cache = [];
 $cms_theme_setting_cache = [];
 $cms_prepared_statements = [];
 
-// Load APCu cache wrapper
-require_once __DIR__ . '/apcu_cache.php';
+// Load lightweight runtime cache helpers
+require_once __DIR__ . '/cache.php';
 
 function cms_get_db(): PDO
 {
@@ -110,23 +110,6 @@ function cms_load_settings(): void
         return;
     }
 
-    if (function_exists('apcu_entry')) {
-        $cms_settings_cache = apcu_entry('cms_settings_cache', function () {
-            $db = cms_get_db();
-            try {
-                return $db
-                    ->query('SELECT `key`, value FROM settings')
-                    ->fetchAll(PDO::FETCH_KEY_PAIR);
-            } catch (PDOException $e) {
-                if ($e->getCode() === '42S02') {
-                    return [];
-                }
-                throw $e;
-            }
-        }, 60);
-        return;
-    }
-
     $db = cms_get_db();
     try {
         $cms_settings_cache = $db
@@ -155,9 +138,6 @@ function cms_set_setting($key, $value): void
     $stmt = $db->prepare('REPLACE INTO settings(`key`,value) VALUES(?,?)');
     $stmt->execute([$key, $value]);
     $cms_settings_cache[$key] = $value;
-    if (function_exists('apcu_delete')) {
-        apcu_delete('cms_settings_cache');
-    }
 }
 
 function cms_get_custom_page($slug,$theme=null){

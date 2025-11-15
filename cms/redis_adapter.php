@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/cache.php';
+
 /**
  * Redis/Memcached Adapter (Optimization #28)
  *
  * Distributed caching layer for multi-server deployments
- * Falls back to APCu if Redis/Memcached unavailable
+ * Falls back to the runtime cache when Redis/Memcached are unavailable.
  *
  * PERFORMANCE IMPACT: Enables horizontal scaling, shared cache across servers
- * Better than APCu for multi-server setups
+ * while remaining functional without optional extensions.
  */
 
 class DistributedCache
@@ -46,8 +48,8 @@ class DistributedCache
             return;
         }
 
-        // Fallback to APCu (already implemented)
-        error_log('[DistributedCache] No Redis/Memcached available, using APCu fallback');
+        // Fallback to in-process runtime cache (already implemented)
+        error_log('[DistributedCache] No Redis/Memcached available, using runtime cache fallback');
     }
 
     /**
@@ -141,7 +143,7 @@ class DistributedCache
                     return $value !== false ? $value : $default;
 
                 default:
-                    // Fallback to APCu
+                    // Fallback to runtime cache
                     return cms_cache_get($key, $default);
             }
         } catch (Exception $e) {
@@ -164,7 +166,7 @@ class DistributedCache
                     return $this->client->set($key, $value, $ttl);
 
                 default:
-                    // Fallback to APCu
+                    // Fallback to runtime cache
                     return cms_cache_set($key, $value, $ttl);
             }
         } catch (Exception $e) {
@@ -210,7 +212,7 @@ class DistributedCache
                     return $value !== false ? $value : 0;
 
                 default:
-                    // APCu fallback (not atomic)
+                    // Runtime cache fallback (not atomic)
                     $value = (int)cms_cache_get($key, 0);
                     $value += $step;
                     cms_cache_set($key, $value);
@@ -236,7 +238,10 @@ class DistributedCache
                     return $this->client->flush();
 
                 default:
-                    return ApcuCache::clearAll() > 0;
+                    if (function_exists('cms_cache_clear_all')) {
+                        cms_cache_clear_all();
+                    }
+                    return true;
             }
         } catch (Exception $e) {
             error_log('[DistributedCache] Flush failed: ' . $e->getMessage());
@@ -274,8 +279,8 @@ class DistributedCache
 
                 default:
                     return [
-                        'type' => 'apcu',
-                        'connected' => function_exists('apcu_enabled') && apcu_enabled(),
+                        'type' => 'runtime',
+                        'connected' => true,
                     ];
             }
         } catch (Exception $e) {

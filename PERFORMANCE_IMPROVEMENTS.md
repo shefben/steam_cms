@@ -101,7 +101,7 @@ Enabled mod_deflate compression for:
 **Files Added:** `cms/filesystem_cache.php`
 **Files Modified:** `cms/template_engine.php`
 
-Implemented APCu-backed caching for:
+Implemented runtime caching for:
 - `file_exists()` → `cms_file_exists()`
 - `is_file()` → `cms_is_file()`
 - `is_dir()` → `cms_is_dir()`
@@ -128,7 +128,7 @@ To single batch query:
 cms_batch_load_sidebar_entries($theme);  // One query loads all sections
 ```
 
-**Why this works:** Reduces 5-10 database queries to 1, with results cached in APCu for 5 minutes.
+**Why this works:** Reduces 5-10 database queries to 1, with results cached in-memory for the rest of the request.
 
 ---
 
@@ -194,9 +194,9 @@ WHERE svt.theme = '2004'
 
 ---
 
-### 10. APCu-Backed Global Caches ✅
+### 10. Runtime Cache Helpers ✅
 **Impact:** Better memory management, faster lookups
-**Files Added:** `cms/apcu_cache.php`
+**Files Added:** `cms/cache.php`
 **Files Modified:** `cms/db.php`
 
 Replaced unbounded global arrays:
@@ -205,16 +205,16 @@ global $cms_settings_cache;  // Grows without limit
 $cms_settings_cache[$key] = $value;
 ```
 
-With APCu-backed caching:
+With lightweight runtime caching:
 ```php
-ApcuCache::set($key, $value, $ttl);  // TTL-based eviction
-ApcuCache::get($key);                // Shared across requests
+cms_cache_set($key, $value, $ttl);   // Request-scoped with TTL semantics
+cms_cache_get($key);                 // Fast in-memory lookup
 ```
 
 **Why this works:**
-- APCu cache persists across requests (faster warmup)
-- Automatic eviction prevents memory leaks
-- Shared memory faster than array lookups for large datasets
+- Keeps caches bounded within the request lifecycle
+- Eliminates reliance on optional PHP extensions
+- Helper functions provide a consistent API across the codebase
 
 ---
 
@@ -299,12 +299,8 @@ These provide diminishing returns or require more extensive refactoring:
    ```
    **Warning:** Test thoroughly in development first
 
-6. **Verify APCu is enabled:**
-   ```bash
-   php -r "var_dump(function_exists('apcu_enabled') && apcu_enabled());"
-   # Should output: bool(true)
-   # If false, install: sudo apt-get install php-apcu (Ubuntu/Debian)
-   ```
+6. **Runtime cache note:** No additional PHP extensions are required. The CMS
+   now uses request-scoped caches that work with stock PHP.
 
 7. **Clear caches:**
    ```bash
@@ -312,9 +308,8 @@ These provide diminishing returns or require more extensive refactoring:
    ```
 
 8. **Monitor performance:**
-   - Use browser DevTools Network tab
-   - Check server access logs
-   - Monitor APCu hit rate: `php -r "var_dump(apcu_cache_info());"`
+    - Use browser DevTools Network tab
+    - Check server access logs
 
 ---
 
@@ -331,10 +326,10 @@ These provide diminishing returns or require more extensive refactoring:
 
 ### Monitoring Commands
 
-**Check APCu cache stats:**
+**Check runtime cache stats:**
 ```php
-require_once 'cms/apcu_cache.php';
-print_r(ApcuCache::stats());
+require_once 'cms/cache.php';
+print_r(cms_cache_stats());
 ```
 
 **Check filesystem cache stats:**
@@ -367,10 +362,10 @@ If issues occur:
    -- etc.
    ```
 
-3. **Disable APCu temporarily:**
+3. **Reset runtime caches (if needed):**
    ```php
-   // In cms/apcu_cache.php, change:
-   private static $useApcu = false;  // Force disable
+   require_once 'cms/cache.php';
+   cms_cache_clear_all();
    ```
 
 ---
@@ -385,9 +380,10 @@ apachectl restart
 ```
 
 ### Issue: Sidebar sections missing
-**Solution:** Clear APCu cache
+**Solution:** Reset sidebar caches
 ```php
-ApcuCache::clearPrefix('sidebar_');
+require_once 'cms/performance_query_helpers.php';
+cms_clear_junction_cache();
 ```
 
 ### Issue: Templates not updating
@@ -398,10 +394,10 @@ ApcuCache::clearPrefix('sidebar_');
 ```
 
 ### Issue: High memory usage
-**Solution:** Reduce APCu TTL values
+**Solution:** Clear runtime caches
 ```php
-// In cms/apcu_cache.php:
-private const DEFAULT_TTL = 60;  // Reduce from 300
+require_once 'cms/cache.php';
+cms_cache_clear_all();
 ```
 
 ---
@@ -527,7 +523,7 @@ Recommendations implemented:
 **Impact:** 5-10ms saved per title
 **Files Modified:** `cms/template_engine.php`
 
-Added APCu caching to title splitting function:
+Added runtime caching to title splitting function:
 ```php
 $cacheKey = 'split_title_' . md5($title);
 $cached = cms_cache_get($cacheKey);
@@ -607,9 +603,9 @@ foreach (QueryStreaming::stream($db, $sql) as $row) {
 Distributed caching for multi-server deployments:
 - Redis support with connection pooling
 - Memcached support as alternative
-- APCu fallback for single-server
+- Runtime cache fallback for single-server
 
-**Why this works:** Shared cache across multiple servers, better than per-server APCu.
+**Why this works:** Shared cache across multiple servers while still functioning without extra extensions on single hosts.
 
 ---
 
@@ -652,7 +648,7 @@ Recommended for future implementation:
 7. ✅ Twig environment caching
 8. ✅ Selective cache invalidation
 9. ✅ FIND_IN_SET replacement (with fallback)
-10. ✅ APCu global caches
+10. ✅ Runtime global caches
 
 ### Advanced Optimizations (New - 20 more):
 11. ✅ PDO persistent connections
@@ -679,7 +675,7 @@ Recommended for future implementation:
 ### Prerequisites
 ```bash
 # Check PHP extensions
-php -m | grep -E 'pdo|redis|memcached|apcu'
+php -m | grep -E 'pdo|redis|memcached'
 
 # Check Apache modules
 apache2ctl -M | grep -E 'deflate|expires|headers|http2'
@@ -715,9 +711,6 @@ mysql -u user -p database < sql/count_denormalization.sql
 
 4. **Configure Caching**
 ```bash
-# Verify APCu is enabled
-php -r "var_dump(apcu_enabled());"
-
 # Optional: Configure Redis
 export REDIS_HOST=localhost
 export REDIS_PORT=6379
@@ -849,15 +842,15 @@ $nPlusOne = QueryLogger::analyzeNPlusOne();
 ### Cache Not Working
 
 ```bash
-# Check APCu
-php -r "var_dump(apcu_cache_info());"
+# Inspect runtime cache state
+php -r "require 'cms/cache.php'; var_dump(cms_cache_stats());"
 
 # Check filesystem permissions
 ls -la cms/cache/
 
 # Clear all caches
 rm -rf cms/cache/*
-php -r "require 'cms/apcu_cache.php'; ApcuCache::clearAll();"
+php -r "require 'cms/cache.php'; cms_cache_clear_all();"
 ```
 
 ### Service Worker Issues
@@ -911,7 +904,7 @@ $db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false);
 - `public_cache_bootstrap.php` - Full-page cache bootstrap
 
 ### Modified Core Files
-- `cms/db.php` - Persistent connections, APCu integration
+- `cms/db.php` - Persistent connections, runtime cache integration
 - `cms/template_engine.php` - Multiple caching optimizations
 - `includes/twig.php` - Auto-reload disabled
 - `cms/cache_manager.php` - Selective invalidation

@@ -2,6 +2,7 @@
 require_once __DIR__.'/news.php';
 require_once __DIR__.'/../includes/twig.php';
 require_once __DIR__.'/plugin_api.php';
+require_once __DIR__.'/cache.php';
 require_once __DIR__.'/cache_manager.php';
 require_once __DIR__.'/filesystem_cache.php';
 
@@ -245,16 +246,6 @@ function cms_batch_load_sidebar_entries(string $theme): array
         return $cache[$theme];
     }
 
-    // Check APCu cache (5 minute TTL)
-    $cacheKey = 'sidebar_entries_' . $theme;
-    if (function_exists('apcu_fetch')) {
-        $cached = apcu_fetch($cacheKey);
-        if ($cached !== false) {
-            $cache[$theme] = $cached;
-            return $cached;
-        }
-    }
-
     // Load all sidebar entries in one query
     $stmt = cms_get_prepared_statement(
         'SELECT s.sidebar_name, e.entry_content, e.entry_order '
@@ -280,9 +271,6 @@ function cms_batch_load_sidebar_entries(string $theme): array
 
     // Store in caches
     $cache[$theme] = $result;
-    if (function_exists('apcu_store')) {
-        apcu_store($cacheKey, $result, 300); // 5 minutes
-    }
 
     return $result;
 }
@@ -641,23 +629,19 @@ function cms_twig_env(string $tpl_dir): Environment
     static $env_cache = [];
     $cache_key = 'cms_twig_env_' . md5($tpl_dir);
     
-    if (!isset($env_cache[$cache_key])) {
-        // Try APCu first
-        $env_cache[$cache_key] = function_exists('apcu_fetch') ? apcu_fetch($cache_key) : null;
-        
-        if (!$env_cache[$cache_key] instanceof Environment) {
-            $loader = new FilesystemLoader($tpl_dir);
-            require_once __DIR__ . '/utilities/text_styler.php';
-            $cacheDir = __DIR__ . '/cache/twig';
-            if (!is_dir($cacheDir)) {
-                mkdir($cacheDir, 0777, true);
-            }
-            cms_load_plugins();
-            // PERFORMANCE: auto_reload disabled in production (matches twig.php config)
-            $env = new Environment($loader, [
-                'cache' => $cacheDir,
-                'auto_reload' => defined('DEBUG') ? DEBUG : false
-            ]);
+    if (!isset($env_cache[$cache_key]) || !$env_cache[$cache_key] instanceof Environment) {
+        $loader = new FilesystemLoader($tpl_dir);
+        require_once __DIR__ . '/utilities/text_styler.php';
+        $cacheDir = __DIR__ . '/cache/twig';
+        if (!is_dir($cacheDir)) {
+            mkdir($cacheDir, 0777, true);
+        }
+        cms_load_plugins();
+        // PERFORMANCE: auto_reload disabled in production (matches twig.php config)
+        $env = new Environment($loader, [
+            'cache' => $cacheDir,
+            'auto_reload' => defined('DEBUG') ? DEBUG : false
+        ]);
         $env->addFunction(new TwigFunction('header', cms_hookable(function(bool $withButtons = true) {
             $theme = cms_get_current_theme();
             return cms_render_header($theme, $withButtons);
@@ -1445,12 +1429,8 @@ function cms_twig_env(string $tpl_dir): Environment
             }
             return false;
         });
-            // Store the fully configured environment in cache
-            $env_cache[$cache_key] = $env;
-            if (function_exists('apcu_store')) {
-                apcu_store($cache_key, $env_cache[$cache_key], 3600); // Cache for 1 hour
-            }
-        }
+        // Store the fully configured environment in cache
+        $env_cache[$cache_key] = $env;
     }
     
     /** @var FilesystemLoader $loader */
@@ -1844,13 +1824,6 @@ function cms_render_string(string $html, array $vars, string $tpl_dir): string
 function cms_cache_last_modified(string $path, string $theme): int
 {
     $key = 'cms_last_mod|' . $theme . '|' . $path;
-    if (function_exists('apcu_fetch')) {
-        $cached = apcu_fetch($key);
-        if ($cached !== false) {
-            return (int) $cached;
-        }
-    }
-
     static $manifest;
     static $localCache = [];
     if (isset($localCache[$key])) {
@@ -1877,9 +1850,6 @@ function cms_cache_last_modified(string $path, string $theme): int
     }
 
     $last = $times ? max($times) : 0;
-    if (function_exists('apcu_store')) {
-        apcu_store($key, $last, 60);
-    }
     $localCache[$key] = $last;
     return $last;
 }
@@ -2180,7 +2150,7 @@ function cms_render_template_theme(string $path, string $theme, array $vars = []
 
 /**
  * PERFORMANCE: Cache theme path resolution (Optimization #23)
- * Added APCu caching for persistent cache across requests
+ * Added runtime caching for persistent lookups across requests
  */
 function cms_resolve_image(string $path, string $theme, string $theme_url, string $base_url): string
 {
@@ -2193,7 +2163,7 @@ function cms_resolve_image(string $path, string $theme, string $theme_url, strin
         return $imageCache[$key];
     }
 
-    // Check APCu cache (persistent across requests)
+    // Check runtime cache (persists across a single request lifecycle)
     $cacheKey = 'img_path_' . md5($key);
     $cached = cms_cache_get($cacheKey);
     if ($cached !== null) {

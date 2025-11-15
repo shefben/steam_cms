@@ -1488,7 +1488,7 @@ if (cms_get_plugin_setting('admin_toolkit', 'performance_monitoring', true)) {
             'max_execution_time' => ini_get('max_execution_time'),
             'server_software' => $_SERVER['SERVER_SOFTWARE'] ?? 'Unknown',
             'document_root' => $_SERVER['DOCUMENT_ROOT'] ?? 'Unknown',
-            'cache_enabled' => extension_loaded('apcu') || extension_loaded('memcached') || extension_loaded('redis'),
+            'cache_enabled' => extension_loaded('memcached') || extension_loaded('redis'),
             'opcache_enabled' => extension_loaded('Zend OPcache') && opcache_get_status()['opcache_enabled'] ?? false
         ];
         cms_set_plugin_cache('performance_metrics', $system_metrics_key, $system_overview, 3600);
