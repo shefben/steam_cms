@@ -1500,6 +1500,9 @@ HTML;
                 'favicon' => '/favicon.ico',
                 'error_html' => $error_html,
                 'nav_items' => json_encode($default_nav),
+                'forum_base_url' => '/forum',
+                'forum_site_name' => 'Steam Support Forums',
+                'forum_admin_username' => 'admin',
                 'root_path' => $root_path,
                 'gzip' => '0',
                 'enable_cache'   => '0',
@@ -2707,6 +2710,42 @@ $defaultCafes = [
                 
             } catch (PDOException $e) {
                 // Ignore errors for now as this is sample data
+            }
+
+            // Install the 2002 forum schema using the CMS connection so data lives
+            // in the same database as the rest of the site.
+            $forumSqlPath = __DIR__ . '/2002_forum/db.sql';
+            if (file_exists($forumSqlPath)) {
+                foreach (['posts', 'threads', 'boards', 'users'] as $forumTable) {
+                    $pdo->exec("DROP TABLE IF EXISTS `$forumTable`");
+                }
+
+                run_sql_file($pdo, $forumSqlPath);
+
+                $forumAdminUsername = 'admin';
+                $forumAdminPassword = 'password';
+                $forumAdminEmail    = 'admin@steampowered.com';
+                $forumUserCheck = $pdo->prepare('SELECT COUNT(*) FROM users WHERE username = ?');
+                $forumUserCheck->execute([$forumAdminUsername]);
+
+                if ((int) $forumUserCheck->fetchColumn() === 0) {
+                    $now = date('Y-m-d H:i:s');
+                    $forumInsert = $pdo->prepare(
+                        'INSERT INTO users '
+                        . '(username, passhash, email, registered, last_login, signature, is_mod, banned) '
+                        . 'VALUES (?,?,?,?,?,?,?,?)'
+                    );
+                    $forumInsert->execute([
+                        $forumAdminUsername,
+                        password_hash($forumAdminPassword, PASSWORD_DEFAULT),
+                        $forumAdminEmail,
+                        $now,
+                        $now,
+                        '',
+                        1,
+                        0,
+                    ]);
+                }
             }
 
             $cfgArray = [
