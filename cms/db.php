@@ -952,6 +952,46 @@ function cms_base_url(){
     return cms_root_path();
 }
 
+/**
+ * Normalise a base path so it is always safe to prepend to asset URLs.
+ *
+ * When the CMS is installed at the web root the stored base path is an
+ * empty string. In those cases browsers require a leading slash for
+ * absolute asset references ("/themes/..." instead of "themes/...").
+ * This helper returns "/" for root installs and "{base}/" for
+ * subdirectory installs, ensuring the generated URLs remain absolute
+ * regardless of deployment location.
+ */
+function cms_base_href_prefix(?string $base = null): string
+{
+    $base = $base ?? cms_root_path();
+
+    if ($base === '' || $base === '/') {
+        return '/';
+    }
+
+    return rtrim($base, '/') . '/';
+}
+
+/**
+ * Prepend the installation base path to a relative asset path.
+ *
+ * @param string      $path Asset path relative to the CMS root.
+ * @param string|null $base Optional base override; defaults to the
+ *                          current CMS base path.
+ */
+function cms_prepend_base_path(string $path, ?string $base = null): string
+{
+    $prefix = cms_base_href_prefix($base);
+    $path   = ltrim($path, '/');
+
+    if ($path === '') {
+        return rtrim($prefix, '/');
+    }
+
+    return $prefix . $path;
+}
+
 function cms_set_current_template(string $tpl): void {
     $GLOBALS['cms_current_template'] = basename($tpl, '.twig');
 }
