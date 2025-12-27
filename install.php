@@ -1452,6 +1452,7 @@ HTML;
                 ['file' => 'random_content.php','label' => 'Random Content','visible' => 1, 'parent' => 'random_content','icon' => '🎲'],
                 ['file' => 'random_groups.php','label' => 'Random Groups','visible' => 1, 'parent' => 'random_content','icon' => '📁'],
                 ['file' => 'preload_marketing.php','label' => 'Preload Marketing Content','visible' => 1,'icon' => ''],
+                ['file' => 'marketing_messages.php','label' => 'Marketing Messages','visible' => 1,'icon' => '📢'],
                 ['file' => 'content_server_management','label' => 'Content Server Management','visible' => 1,'icon' => '🖥️'],
                 ['file' => 'content_servers.php','label' => 'Servers','visible' => 1, 'parent' => 'content_server_management','icon' => '🖥️'],
                 ['file' => 'contentserver_banners.php','label' => 'ContentServer Banner Management','visible' => 1, 'parent' => 'content_server_management','icon' => '🖼️'],

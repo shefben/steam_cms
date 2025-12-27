@@ -1,0 +1,166 @@
+/* CSS Document */
+BODY	   {
+	font-size: 62.5%;
+	background-color: #000000;
+	margin: 0px;
+	background-repeat: repeat-y;
+	background-position: center top;
+}
+DIV	{
+	padding:0px;
+	margin:0px;
+	}
+#all {
+	width: 100%;
+	/* position: absolute; */
+	top: 0px;
+}
+#GameImage {
+	cursor: pointer;
+	height: 463px;
+	width: 570px;
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+#TextTop {
+	height: 230px;
+	width: 570px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-weight: normal;
+	color: #FFFFFF;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+#TextBottom {
+	height: 233px;
+	width: 570px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-weight: normal;
+	color: #FFFFFF;
+	display: block;
+	position:relative;
+}
+#TextBottom2 {
+	position:absolute ;
+	bottom: 0px;
+	left: 0px;
+	width: 570px;
+	max-width: 548px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-bottom: 20px!important;
+	padding-bottom: 10px;
+}
+A:visited      { color: #FFFFFF; text-decoration: none }
+A:link         { color: #FFFFFF; text-decoration: none }
+A:hover        { color: #000000; text-decoration: none }
+A:active  { color: #000000; text-decoration: none }
+.legal {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #666666;
+	margin-bottom: 3px;
+	padding-left: 10px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 8px;
+	text-align: left;
+	width: 570px;
+	margin-top: 6px;
+}
+#ButtonContainer {
+	position: relative;
+	width: auto;
+	height: 59px;
+	background: #141b27;
+	padding-top: 8px;
+}
+.btn {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin: 2px auto;
+	padding: 16px 0px 0px;
+	height: 30px;
+	width: 280px;
+	line-height: 15px;
+	transition: background 0.15s ease-out;
+}
+.btn a, .btn a:hover {
+	color: #FFFFFF;
+}
+.btn:hover {
+	transition: background 0.25s ease-in;
+}
+#NoPrice {
+	width:124px;
+	height: 65px;
+	float: right;
+}
+.content {
+	color: #a09d8f;
+	width: 477px;
+	font-size: 14px;
+	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	text-align: left;
+}
+.capsuleHolder {
+	width: 477px;
+	height: 191px;
+	background-color: #b3b0a0;
+	margin-top: 24px;
+	margin-bottom: 12px;
+}
+.capsuleHolderTop, .capsuleHolderBottom {
+	height: 5px;
+	position: relative;
+}
+.ulhc, .urhc, .lrhc, .llhc {
+	height: 5px;
+	width: 5px;
+	overflow: hidden;
+}
+.ulhc {
+	background-image: url(../images/template/ULHC.gif);
+	position: absolute;
+	left: 0px;
+}
+.urhc {
+	background-image: url(../images/template/URHC.gif);
+	position: absolute;
+	right: 0px;
+}
+.lrhc {
+	background-image: url(../images/template/LRHC.gif);
+	position: absolute;
+	right: 0px;
+}
+.llhc {
+	background-image: url(../images/template/LLHC.gif);
+	position: absolute;
+	left: 0px;
+}
+.gameCapsule {
+	width: 467px;
+	height: 181px;
+}
+.giftBox {
+	float: left;
+	margin-right: 24px;
+}
+h1 {
+	color: #918f82;
+	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	line-height: 28px;
+	text-align: left;
+	margin-top: 15px;
+}

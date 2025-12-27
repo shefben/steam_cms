@@ -114,3 +114,14 @@ RewriteRule ^(.*)$ steam/marketing/index.php?page=%1 [L,QSA]
 # Handle direct Steam/Marketing/ directory access
 RewriteCond %{REQUEST_URI} ^/[Ss]team/[Mm]arketing/?$ [NC]
 RewriteRule ^(.*)$ steam/marketing/index.php [L,QSA]
+
+# ====================================================================
+# Marketing Messages by GID (MarketingMessages table)
+# ====================================================================
+# Handle /message/<GID>/ pattern
+RewriteCond %{REQUEST_URI} ^/message/(\d+)/?$ [NC]
+RewriteRule ^message/(\d+)/?$ message/index.php?gid=$1 [L,QSA]
+
+# Handle /message<GID> pattern (no slash between message and GID)
+RewriteCond %{REQUEST_URI} ^/message(\d+)/?$ [NC]
+RewriteRule ^message(\d+)/?$ message/index.php?gid=$1 [L,QSA]

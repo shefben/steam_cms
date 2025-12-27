@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Handle /message/<GID>/ pattern
+# Rewrites: /message/12345/ -> /message/index.php?gid=12345
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(\d+)/?$ index.php?gid=$1 [L,QSA]
