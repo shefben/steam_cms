@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>{{ game.name }} on Steam</title>
+<link href="styles_global.css" rel="stylesheet" type="text/css"/>
+<link href="styles_game.css" rel="stylesheet" type="text/css"/>
+<link href="styles_tabs.css" rel="stylesheet" type="text/css"/>
+<link href="header.css" rel="stylesheet" type="text/css"/>
+<script src="swfobject.js" type="text/javascript"></script>
+<script src="prototype.js" type="text/javascript"></script>
+<script src="scriptaculous.js" type="text/javascript"></script>
+<script src="javascript.js" type="text/javascript"></script>
+<script src="main.js" type="text/javascript"></script>
+<script src="header.js" type="text/javascript"></script>
+</head>
+<body>
+<!-- Main Background -->
+<div id="all">
+<!-- Header -->
+{{ header_2009()|raw }}
+<!-- End Header -->
+<center>
+<div id="col_parent">
+<!-- Left Column -->
+<div id="col_left" style="height: 600px;">
+<div id="global_area_search">
+<form action="search/" id="searchform" method="get" name="searchform" onsubmit="return checkTerm(this)">
+<input id="searchterm" name="term" onblur="SetDefaultSearchText();" onclick="ClearDefaultSearchText();" size="22" type="text" value="enter search term"/>
+<div class="autocomplete" id="searchterm_options" style="display: none;"></div>
+<img align="top" alt="Steam Search" height="22" onclick="if (document.searchform.onsubmit()) document.searchform.submit();" src="btn_search.gif" width="22"/>
+</form>
+</div>
+<script language="JavaScript">
+<!--
+if ( Ajax && Ajax.Autocompleter )
+	new Ajax.Autocompleter( $('searchform').elements['term'], 'searchterm_options', 'search/suggest', {frequency: 0.2, method: "get", allowFreeEntry: true, afterUpdateElement:function() {document.searchform.submit();} });
+
+function ClearDefaultSearchText()
+{
+	var text = document.getElementById( 'searchterm' ).value;
+	if ( text == 'enter search term' )
+	{
+		document.getElementById( 'searchterm' ).value = '';
+	}
+}
+function SetDefaultSearchText()
+{
+	var text = document.getElementById( 'searchterm' ).value;
+	if ( text == '' )
+	{
+		document.getElementById( 'searchterm' ).value = 'enter search term';
+	}
+}
+function checkTerm( theform )
+{
+	if ( theform.term.value == "enter search term" )
+	{
+		theform.term.value = '';
+	}
+	return true;
+}
+//-->
+</script>
+<div id="global_area_browse"><h2>Browse Games</h2></div>
+{{ browse_genres_list()|raw }}
+<div id="global_area_gift_left">
+<h1>Give the<br/>Gift of Game</h1>
+<p>Gift purchasing<br/> available at checkout</p>
+</div>
+</div>
+<!-- End Left Column -->
+<!-- Center Column -->
+<div id="col_center_game">
+{{ game_header_image(game)|raw }}
+<div id="col_center_game_content">
+{{ game_media_section(game)|raw }}
+{{ game_description(game)|raw }}
+{{ game_purchase_area(game)|raw }}
+{{ game_system_requirements(game)|raw }}
+</div>
+</div>
+<!-- End Center Column -->
+<!-- Right Column -->
+<div id="col_right_game">
+<div id="game_area_details">
+<h2>Game Details</h2>
+<p>
+<b>Title:</b> {{ game.name }}<br/>
+<b>Genre:</b> {{ game_genres(game)|raw }}<br/>
+<b>Developer:</b> {{ game.developer }}<br/>
+<b>Publisher:</b> {{ game.publisher }}<br/>
+<b>Release Date:</b> {{ game.release_date|date('M d, Y') }}<br/>
+{% if game.languages %}
+<b>Languages:</b> {{ game.languages }}<br/>
+{% endif %}
+</p>
+{{ game_features_icons(game)|raw }}
+<ul id="game_area_media_list">
+<li><a href="news/?appids={{ game.appid }}"><img align="top" alt="" border="0" height="16" src="link_news.gif" width="16"/> Read related news</a></li>
+</ul>
+</div>
+</div>
+<!-- End Right Column -->
+<br clear="all"/>
+</div>
+</center>
+<!-- Footer -->
+{{ footer_2009()|raw }}
+<!-- End Footer -->
+</div>
+<!-- End Main Background -->
+</body>
+</html>

@@ -1,33 +1,50 @@
 /* Steam 2003 Forum Style - Based on archived steampowered.com 2003 forum design */
+/* Matches the vBulletin 2.2.9 Steam Forums aesthetic from April 2003 */
 
-/* Basic body and color scheme */
+/* Basic body styling */
 body {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
     background-color: #626d5c;
-    color: #c4cabe;
+    color: #000000;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 11px;
-    margin: 10px;
     scrollbar-base-color: #4C5844;
     scrollbar-arrow-color: #969F8E;
 }
 
-/* Tables and main layout */
-table {
-    border-collapse: collapse;
+/* Form elements */
+select {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #969F8E;
+    background-color: #CFCFCF;
 }
 
-.table1 {
-    background-color: #626d5c;
-    border: 0;
+textarea, .bginput, input[type="text"], input[type="password"] {
+    font-size: 12px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #000000;
+    background-color: #CFCFCF;
+    border: 1px solid #969F8E;
 }
 
-/* Header styling */
-.headerbar {
-    background-color: #626d5c;
-    color: #c4cabe;
+input[type="submit"], .button, .button1, .button2 {
+    font-size: 11px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #000000;
+    background-color: #CFCFCF;
+    border: 1px outset #969F8E;
+    padding: 2px 6px;
+    cursor: pointer;
 }
 
-/* Navigation and links */
+input[type="submit"]:hover, .button:hover, .button1:hover, .button2:hover {
+    color: #000000;
+}
+
+/* Links */
 a:link, a:visited, a:active {
     color: #C4CABE;
     text-decoration: none;
@@ -38,27 +55,55 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Category links (green) */
+/* Category links (yellow-olive color) */
+#cat a:link, #cat a:visited, #cat a:active,
 .cat a:link, .cat a:visited, .cat a:active {
     color: #B4BA50;
     text-decoration: none;
 }
 
-.cat a:hover {
+#cat a:hover, .cat a:hover {
     color: #B4BA50;
     text-decoration: underline;
 }
 
-/* Category headers */
-.cat {
-    background-color: #3E4637;
-    color: #B4BA50;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 4px;
+/* Last thread/post links */
+#ltlink a:link, #ltlink a:visited, #ltlink a:active,
+.ltlink a:link, .ltlink a:visited, .ltlink a:active {
+    color: #C4CABE;
+    text-decoration: none;
 }
 
-/* Forum row styling */
+#ltlink a:hover, .ltlink a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+/* Thread header color class */
+.thtcolor {
+    color: #D8DED3;
+}
+
+/* Spoiler styling */
+.spoiler {
+    color: black;
+    text-decoration: none;
+    background-color: black;
+    font-weight: normal;
+}
+
+/* Tables and main layout */
+table {
+    border-collapse: collapse;
+}
+
+/* Main forum table wrapper */
+.forumbg {
+    background-color: #3E4637;
+    border: 0;
+}
+
+/* Forum row styling - 2003 uses alternating within rows */
 .row1 {
     background-color: #626d5c;
     padding: 4px;
@@ -69,8 +114,22 @@ a:hover {
     padding: 4px;
 }
 
+.row3 {
+    background-color: #545F4E;
+    padding: 4px;
+}
+
+/* Category header rows */
+.cat, .category {
+    background-color: #3E4637;
+    color: #B4BA50;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+}
+
 /* Forum headers */
-.forum-header {
+.forum-header, th {
     background-color: #3E4637;
     color: #D8DED3;
     font-size: 11px;
@@ -78,75 +137,36 @@ a:hover {
     padding: 4px;
 }
 
-/* Forum statistics and info */
-.forum-stats {
-    font-size: 11px;
-    color: #c4cabe;
-    text-align: center;
-}
-
-/* Last post info */
-.lastpost {
-    font-size: 11px;
-    color: #c4cabe;
-}
-
-.lastpost-time {
-    color: #969F8E;
-}
-
-/* Navigation bar */
-.navbar {
-    background-color: #626d5c;
-    color: #c4cabe;
-    padding: 10px;
-    text-align: center;
-}
-
-/* Form inputs */
-input, textarea, select {
-    background-color: #CFCFCF;
-    color: #000000;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    border: 1px solid #969F8E;
-}
-
-input.button {
-    background-color: #CFCFCF;
-    color: #000000;
-    border: 1px outset #969F8E;
-    padding: 2px 6px;
-}
-
-/* Content wrapper */
-.wrap {
-    background-color: #626d5c;
-    width: 800px;
-    margin: 0 auto;
-    padding: 10px;
-}
-
-/* Forum icons */
-.forum-icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-}
-
-/* Post styling */
+/* Post container styling */
 .post {
     background-color: #545F4E;
     border: 1px solid #3E4637;
-    margin: 4px 0;
-    padding: 6px;
+    margin: 0;
+    padding: 4px;
 }
 
-.post-header {
-    background-color: #3E4637;
-    color: #D8DED3;
+.postbody {
+    color: #000000;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* Author info panel */
+.postauthor {
+    background-color: #545F4E;
+    color: #000000;
+    font-size: 11px;
     padding: 4px;
-    font-weight: bold;
+    width: 175px;
+    vertical-align: top;
+}
+
+/* Post footer with date/icons */
+.postfooter {
+    background-color: #545F4E;
+    height: 16px;
+    padding: 4px;
 }
 
 /* Topic list styling */
@@ -158,32 +178,48 @@ input.button {
 .topiclist th {
     background-color: #3E4637;
     color: #D8DED3;
-    padding: 6px;
+    padding: 4px;
     font-size: 11px;
     font-weight: bold;
     text-align: left;
 }
 
 .topiclist td {
-    padding: 6px;
-    border-bottom: 1px solid #3E4637;
+    padding: 4px;
     font-size: 11px;
 }
 
-/* Who's online styling */
-.online-info {
-    background-color: #545F4E;
-    color: #c4cabe;
-    padding: 6px;
+/* Forum statistics */
+.forum-stats {
     font-size: 11px;
-}
-
-/* Footer styling */
-.copyright {
+    color: #000000;
     text-align: center;
-    font-size: 10px;
+}
+
+/* Last post info */
+.lastpost {
+    font-size: 11px;
+    color: #000000;
+}
+
+.lastpost-time {
     color: #969F8E;
-    padding: 10px;
+}
+
+/* Navigation and breadcrumbs */
+.breadcrumbs, .navbar, .navlinks {
+    background-color: #626d5c;
+    color: #000000;
+    padding: 2px;
+    font-size: 11px;
+}
+
+/* Who is online section */
+.online-info, .whos-online {
+    background-color: #545F4E;
+    color: #000000;
+    padding: 6px;
+    font-size: 11px;
 }
 
 /* Login form */
@@ -197,19 +233,18 @@ input.button {
 /* Welcome message */
 .welcome {
     background-color: #626d5c;
-    color: #c4cabe;
+    color: #000000;
     padding: 8px;
     font-size: 12px;
 }
 
-/* Steam header styling */
+/* Steam header styling - 2003 uses Steam_header2.jpg banner */
 .steam-header {
     text-align: center;
-    padding: 10px 0;
 }
 
 .steam-logo {
-    margin: 10px 0;
+    text-align: center;
 }
 
 .steam-nav {
@@ -217,31 +252,295 @@ input.button {
     padding: 5px 0;
 }
 
-/* Forum list container */
-.forumlist {
-    background-color: #3E4637;
-    border: 1px solid #3E4637;
+/* Content wrapper */
+.wrap, .content-wrapper {
+    background-color: #626d5c;
+    width: 800px;
+    margin: 0 auto;
+    padding: 10px;
 }
 
-/* Breadcrumbs */
-.breadcrumbs {
-    background-color: #626d5c;
-    color: #c4cabe;
-    padding: 6px;
+/* Horizontal rule */
+hr {
+    border: 0;
+    border-top: 1px solid #3E4637;
+    margin: 8px 0;
+}
+
+/* Quote boxes */
+.quotetitle {
+    background-color: #3E4637;
+    color: #D8DED3;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+.quotecontent {
+    background-color: #3E4637;
+    color: #D8DED3;
+    border: 1px solid #545F4E;
+    padding: 8px;
     font-size: 11px;
 }
 
-/* Page footer */
-.page-footer {
+/* Code boxes */
+.codetitle {
+    background-color: #3E4637;
+    color: #D8DED3;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+.codecontent {
+    background-color: #3E4637;
+    color: #D8DED3;
+    border: 1px solid #545F4E;
+    padding: 8px;
+    font-family: monospace;
+    font-size: 11px;
+    overflow: auto;
+}
+
+/* Pagination */
+.pagination {
+    font-size: 11px;
+    color: #000000;
+}
+
+.pagination a {
+    color: #C4CABE;
+}
+
+.pagination a:hover {
+    color: #FFFFFF;
+}
+
+.pagination strong {
+    color: #FFFFFF;
+}
+
+/* Footer styling */
+.copyright, .page-footer {
     text-align: center;
-    background-color: #626d5c;
+    font-size: 10px;
     color: #969F8E;
     padding: 10px;
-    font-size: 10px;
+    background-color: #626d5c;
+}
+
+.page-footer a {
+    color: #C4CABE;
 }
 
 /* Timezone info */
 .timezone {
     color: #969F8E;
     font-size: 11px;
+}
+
+/* Forum icons container */
+.forum-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+/* Announcement and sticky styling */
+.announce, .sticky {
+    background-color: #545F4E;
+    border-left: 3px solid #B4BA50;
+}
+
+/* Poll styling */
+.poll {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    padding: 8px;
+}
+
+.pollbar {
+    background-color: #B4BA50;
+    height: 10px;
+}
+
+/* Error and info boxes */
+.errorbox {
+    background-color: #3E4637;
+    border: 1px solid #B4BA50;
+    color: #D8DED3;
+    padding: 10px;
+}
+
+.infobox {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    color: #000000;
+    padding: 10px;
+}
+
+/* Quick reply styling */
+.quick-reply {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    padding: 10px;
+}
+
+/* Search box */
+.search-box {
+    background-color: #545F4E;
+    padding: 6px;
+}
+
+/* Member list styling */
+.memberlist {
+    width: 100%;
+}
+
+.memberlist th {
+    background-color: #3E4637;
+    color: #D8DED3;
+    padding: 4px;
+    font-weight: bold;
+}
+
+.memberlist td {
+    background-color: #545F4E;
+    padding: 4px;
+    border-bottom: 1px solid #3E4637;
+}
+
+/* Private message styling */
+.pm-box {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    padding: 8px;
+}
+
+/* Signature styling */
+.signature {
+    border-top: 1px solid #3E4637;
+    padding-top: 8px;
+    margin-top: 10px;
+    font-size: 10px;
+    color: #969F8E;
+}
+
+/* Profile styling */
+.profile-box {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    padding: 10px;
+}
+
+/* BBCode styling */
+.bbcode_bold, b, strong {
+    font-weight: bold;
+}
+
+.bbcode_italic, i, em {
+    font-style: italic;
+}
+
+.bbcode_underline, u {
+    text-decoration: underline;
+}
+
+/* Smilies */
+.smilies img {
+    vertical-align: middle;
+}
+
+/* Attachment styling */
+.attachbox {
+    background-color: #3E4637;
+    border: 1px solid #545F4E;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+.attachbox dt {
+    color: #D8DED3;
+    font-weight: bold;
+}
+
+.attachbox dd {
+    color: #969F8E;
+    font-size: 10px;
+}
+
+/* Time display */
+.post-time {
+    color: #969F8E;
+}
+
+/* Online/offline indicators */
+.online {
+    color: #B4BA50;
+}
+
+.offline {
+    color: #969F8E;
+}
+
+/* phpBB specific overrides */
+.forumbg, .forabg, .panel {
+    background-color: #3E4637;
+}
+
+.bg1 {
+    background-color: #626d5c;
+}
+
+.bg2 {
+    background-color: #545F4E;
+}
+
+.bg3 {
+    background-color: #545F4E;
+}
+
+/* Header bar */
+.headerbar {
+    background-color: #626d5c;
+}
+
+/* Post profile styling */
+.postprofile {
+    background-color: #545F4E;
+    color: #000000;
+    font-size: 11px;
+}
+
+/* Post content styling */
+.content {
+    color: #000000;
+    font-size: 12px;
+}
+
+/* Dropdown menus */
+.dropdown-container {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+}
+
+.dropdown-container a {
+    color: #C4CABE;
+}
+
+.dropdown-container a:hover {
+    background-color: #3E4637;
+    color: #FFFFFF;
+}
+
+/* Image thumbnails */
+.thumbnail {
+    border: 1px solid #3E4637;
+}
+
+/* Attachment images */
+.inline-attachment img {
+    max-width: 100%;
+    border: 1px solid #3E4637;
 }

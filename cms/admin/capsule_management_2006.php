@@ -23,7 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = trim($_POST['name'] ?? '');
         $price = isset($_POST['price']) && $_POST['price'] !== '' ? (float)$_POST['price'] : null;
         $img_path = $_POST['current_image'] ?? '';
-        if (!in_array($type, ['gear', 'free'], true)) {
+        // Single-large capsules don't need appid/image, they use their own admin panel
+        if ($type === 'single-large' || $type === 'single-large-2008') {
+            $appid = null;
+            $price = null;
+            $img_path = '';
+            $title = '';
+            $content = '';
+        }
+        if (!in_array($type, ['gear', 'free', 'single-large', 'single-large-2008'], true)) {
             if (!empty($_FILES['image']['tmp_name'])) {
                 $target = $use_all ? 'all' : $theme;
                 $base = dirname(__DIR__, 2) . '/storefront/images/capsules/' . $target;
@@ -261,12 +269,24 @@ if ($use_all) {
   <div class="capsule <?php echo htmlspecialchars($r['type']); ?>" data-id="<?php echo $r['id']; ?>" data-appid="<?php echo $r['appid']; ?>" data-price="<?php echo htmlspecialchars($r['price']); ?>" data-type="<?php echo htmlspecialchars($r['type']); ?>" data-image="<?php echo htmlspecialchars($r['image_path']); ?>" data-title="<?php echo htmlspecialchars($r['title'] ?? '', ENT_QUOTES); ?>" data-content="<?php echo htmlspecialchars($r['content'] ?? '', ENT_QUOTES); ?>">
     <span class="handle">&#9776;</span>
     <button type="button" class="delete-circle">&times;</button>
-    <?php if ($r['image_path']): ?><img src="<?php echo htmlspecialchars('../storefront/images/capsules/' . $r['image_path']); ?>" alt="">
+    <?php if ($r['type'] === 'single-large'): ?>
+      <div style="padding:20px;text-align:center;background:#f5f5f5;border:1px dashed #ccc;">
+        <strong>🖼️ Single Large Capsule (2007)</strong><br>
+        <small>Configure via: <a href="single_large_capsule.php" target="_blank">Single Large Capsule Admin</a></small>
+      </div>
+    <?php elseif ($r['type'] === 'single-large-2008'): ?>
+      <div style="padding:20px;text-align:center;background:#4A4945;border:1px dashed #ccc;color:#cfcbc2;">
+        <strong>🖼️ Single Large Capsule (2008-2010)</strong><br>
+        <small>Configure via: <a href="single_large_capsule.php" target="_blank" style="color:#b6d9ff;">Single Large Capsule Admin</a></small>
+      </div>
+    <?php else: ?>
+      <?php if ($r['image_path']): ?><img src="<?php echo htmlspecialchars('../storefront/images/capsules/' . $r['image_path']); ?>" alt="">
+      <?php endif; ?>
+      <?php if (!empty($r['content'])): ?>
+        <div class="cap-content"><?php echo $r['content']; ?></div>
+      <?php endif; ?>
     <?php endif; ?>
-    <?php if (!empty($r['content'])): ?>
-      <div class="cap-content"><?php echo $r['content']; ?></div>
-    <?php endif; ?>
-    <div class="cap-name"><?php echo htmlspecialchars($r['name'] ?: ($r['title'] ?? ''), ENT_QUOTES); ?></div>
+    <div class="cap-name"><?php echo htmlspecialchars(in_array($r['type'], ['single-large', 'single-large-2008']) ? ($r['type'] === 'single-large' ? 'Single Large Capsule (2007)' : 'Single Large Capsule (2008-2010)') : ($r['name'] ?: ($r['title'] ?? '')), ENT_QUOTES); ?></div>
     <button type="button" class="edit btn btn-small">Edit</button>
   </div>
 <?php endforeach; ?>
@@ -285,6 +305,8 @@ if ($use_all) {
         <option value="small">Small Capsule</option>
         <option value="tabbed">Tabbed Capsule</option>
         <option value="multi-large">Multi-App Large Capsule</option>
+        <option value="single-large">Single Large Capsule (2007)</option>
+        <option value="single-large-2008">Single Large Capsule (2008-2010)</option>
         <option value="gear">GetTheGear</option>
         <option value="free">Freestuff/Custom</option>
       </select>
@@ -403,7 +425,7 @@ foreach ($cssFiles as $css) {
   .capsule-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
   .capsule{border:1px solid #ccc;padding:5px;position:relative;text-align:left;transform:scale(0.8);transform-origin:top left;overflow:hidden;}
   .capsule.small{flex:0 0 calc(50% - 10px);width:231px;}
-  .capsule.large,.capsule.tabbed,.capsule.multi-large{flex:0 0 100%;width:467px;}
+  .capsule.large,.capsule.tabbed,.capsule.multi-large,.capsule.single-large,.capsule.single-large-2008{flex:0 0 100%;width:467px;}
   .capsule.gear,.capsule.free{flex:0 0 <?php echo $gearLarge ? '100%' : 'calc(50% - 10px)'; ?>;width:<?php echo $gearLarge ? 467 : 231; ?>px;}
   .capsule .handle{cursor:move;position:absolute;top:5px;left:5px;}
   .capsule .delete-circle{position:absolute;top:5px;right:5px;width:20px;height:20px;border-radius:50%;border:1px solid #666;background:#fff;color:#666;line-height:18px;padding:0;cursor:pointer;}
@@ -466,6 +488,9 @@ $(function(){
     }else if(t==='multi-large'){
       $('#row-name,#row-appid,#row-price,#row-image,#row-title,#row-content').hide();
       $('#row-multi-apps').show();
+    }else if(t==='single-large'||t==='single-large-2008'){
+      // Single large capsules - no fields needed, they use their own admin panel
+      $('#row-name,#row-appid,#row-price,#row-image,#row-title,#row-content,#row-multi-apps').hide();
     }else{
       $('#row-name,#row-appid,#row-price,#row-image').show();
       $('#row-title,#row-content,#row-multi-apps').hide();
@@ -663,10 +688,18 @@ $(function(){
         }else{
           var el=$('<div class="capsule '+type+'" data-id="'+r.id+'" data-appid="'+appid+'" data-price="'+price+'" data-type="'+type+'" data-image="'+img+'"></div>');
           el.append('<span class="handle">&#9776;</span><button type="button" class="delete-circle">&times;</button>');
-          if(img){el.append('<img src="../storefront/images/capsules/'+img+'" alt="">');}
-          if(content){el.append('<div class="cap-content">'+content+'</div>');}
-          el.append('<div class="cap-name">'+$('<div>').text(type==='gear'||type==='free'?title:name).html()+'</div><button type="button" class="edit btn btn-small">Edit</button>');
-          fixPaths(el.find('.cap-content'));
+          if(type==='single-large'){
+            el.append('<div style="padding:20px;text-align:center;background:#f5f5f5;border:1px dashed #ccc;"><strong>🖼️ Single Large Capsule (2007)</strong><br><small>Configure via: <a href="single_large_capsule.php" target="_blank">Single Large Capsule Admin</a></small></div>');
+            el.append('<div class="cap-name">Single Large Capsule (2007)</div><button type="button" class="edit btn btn-small">Edit</button>');
+          }else if(type==='single-large-2008'){
+            el.append('<div style="padding:20px;text-align:center;background:#4A4945;border:1px dashed #ccc;color:#cfcbc2;"><strong>🖼️ Single Large Capsule (2008-2010)</strong><br><small>Configure via: <a href="single_large_capsule.php" target="_blank" style="color:#b6d9ff;">Single Large Capsule Admin</a></small></div>');
+            el.append('<div class="cap-name">Single Large Capsule (2008-2010)</div><button type="button" class="edit btn btn-small">Edit</button>');
+          }else{
+            if(img){el.append('<img src="../storefront/images/capsules/'+img+'" alt="">');}
+            if(content){el.append('<div class="cap-content">'+content+'</div>');}
+            el.append('<div class="cap-name">'+$('<div>').text(type==='gear'||type==='free'?title:name).html()+'</div><button type="button" class="edit btn btn-small">Edit</button>');
+            fixPaths(el.find('.cap-content'));
+          }
           el.data({appid:appid,price:price,type:type,image:img,title:title,content:content});
           $('#capsule-grid').append(el);
         }

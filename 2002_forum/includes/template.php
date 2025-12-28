@@ -2,10 +2,19 @@
 /*  template.php – pulls the raw header/footer you extracted,
  *  then opens/closes a wrapper that matches index.html exactly.
  */
+
+require_once __DIR__.'/db.php';
+require_once __DIR__.'/auth.php';
+
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 function cb_header() : void
 {
     /* banner from header.inc (already contains <html><body…> + black bar) */
-    readfile(__DIR__.'/layout/header.inc');
+    include __DIR__.'/layout/header.inc';
 
     /* gap between banner and forum – exactly one <br> in the archive */
     echo '<br>';

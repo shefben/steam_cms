@@ -179,6 +179,332 @@ function run_sql_file(PDO $pdo, string $file): void
     }
 }
 
+/**
+ * Convert phpBB schema.json type to MySQL column definition
+ */
+function phpbb_type_to_mysql($type, $default = null, $extra = null): string
+{
+    $unsigned = '';
+    $mysql_type = '';
+
+    // Handle type with size specifier (e.g., VCHAR:50, TINT:2)
+    if (strpos($type, ':') !== false) {
+        [$base_type, $size] = explode(':', $type, 2);
+    } else {
+        $base_type = $type;
+        $size = null;
+    }
+
+    switch ($base_type) {
+        case 'UINT':
+            $mysql_type = 'INT(10) UNSIGNED';
+            break;
+        case 'ULINT':
+            $mysql_type = 'BIGINT(20) UNSIGNED';
+            break;
+        case 'USINT':
+            $mysql_type = 'SMALLINT(4) UNSIGNED';
+            break;
+        case 'BINT':
+            $mysql_type = 'BIGINT(20)';
+            break;
+        case 'TINT':
+            $mysql_type = 'TINYINT(' . ($size ?? 4) . ')';
+            break;
+        case 'INT':
+            $mysql_type = 'INT(' . ($size ?? 11) . ')';
+            break;
+        case 'VCHAR':
+        case 'VCHAR_UNI':
+        case 'VCHAR_CI':
+            $mysql_type = 'VARCHAR(' . ($size ?? 255) . ')';
+            break;
+        case 'CHAR':
+            $mysql_type = 'CHAR(' . ($size ?? 1) . ')';
+            break;
+        case 'XSTEXT':
+        case 'XSTEXT_UNI':
+            $mysql_type = 'VARCHAR(' . ($size ?? 1000) . ')';
+            break;
+        case 'STEXT':
+        case 'STEXT_UNI':
+            $mysql_type = 'TEXT';
+            break;
+        case 'TEXT':
+        case 'TEXT_UNI':
+            $mysql_type = 'TEXT';
+            break;
+        case 'MTEXT':
+        case 'MTEXT_UNI':
+            $mysql_type = 'MEDIUMTEXT';
+            break;
+        case 'TIMESTAMP':
+            $mysql_type = 'INT(11) UNSIGNED';
+            break;
+        case 'BOOL':
+            $mysql_type = 'TINYINT(1) UNSIGNED';
+            break;
+        case 'PDEC':
+            // Decimal with precision, size format is "precision,scale"
+            $mysql_type = 'DECIMAL(' . ($size ?? '5,2') . ')';
+            break;
+        default:
+            $mysql_type = 'TEXT';
+    }
+
+    // Build the column definition
+    $def = $mysql_type;
+
+    // Handle default value
+    if ($default !== null) {
+        if (is_string($default) && $default !== '') {
+            $def .= " DEFAULT '" . addslashes($default) . "'";
+        } elseif (is_numeric($default)) {
+            $def .= " DEFAULT " . $default;
+        } elseif ($default === '') {
+            $def .= " DEFAULT ''";
+        }
+    } else {
+        $def .= ' NOT NULL';
+    }
+
+    // Handle auto_increment
+    if ($extra === 'auto_increment') {
+        $def .= ' AUTO_INCREMENT';
+    }
+
+    return $def;
+}
+
+/**
+ * Generate MySQL CREATE TABLE statements from phpBB schema.json
+ */
+function generate_phpbb_schema(string $schema_json_path): array
+{
+    $statements = [];
+
+    if (!file_exists($schema_json_path)) {
+        return $statements;
+    }
+
+    $schema = json_decode(file_get_contents($schema_json_path), true);
+    if (!$schema) {
+        return $statements;
+    }
+
+    foreach ($schema as $table_name => $table_def) {
+        $columns = [];
+        $primary_key = null;
+        $keys = [];
+
+        // Process columns
+        if (isset($table_def['COLUMNS'])) {
+            foreach ($table_def['COLUMNS'] as $col_name => $col_def) {
+                $type = $col_def[0];
+                $default = $col_def[1] ?? null;
+                $extra = $col_def[2] ?? null;
+
+                $col_sql = "`$col_name` " . phpbb_type_to_mysql($type, $default, $extra);
+                $columns[] = $col_sql;
+            }
+        }
+
+        // Process primary key
+        if (isset($table_def['PRIMARY_KEY'])) {
+            $pk = $table_def['PRIMARY_KEY'];
+            if (is_array($pk)) {
+                $primary_key = 'PRIMARY KEY (`' . implode('`, `', $pk) . '`)';
+            } else {
+                $primary_key = "PRIMARY KEY (`$pk`)";
+            }
+        }
+
+        // Process indexes
+        if (isset($table_def['KEYS'])) {
+            foreach ($table_def['KEYS'] as $key_name => $key_def) {
+                $key_type = $key_def[0];
+                $key_cols = $key_def[1];
+
+                if (is_array($key_cols)) {
+                    $cols_str = '`' . implode('`, `', $key_cols) . '`';
+                } else {
+                    $cols_str = "`$key_cols`";
+                }
+
+                switch ($key_type) {
+                    case 'UNIQUE':
+                        $keys[] = "UNIQUE KEY `$key_name` ($cols_str)";
+                        break;
+                    case 'INDEX':
+                    default:
+                        $keys[] = "KEY `$key_name` ($cols_str)";
+                        break;
+                }
+            }
+        }
+
+        // Build CREATE TABLE statement
+        $parts = array_merge($columns, $primary_key ? [$primary_key] : [], $keys);
+        $sql = "CREATE TABLE IF NOT EXISTS `$table_name` (\n  " . implode(",\n  ", $parts) . "\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+
+        $statements[] = $sql;
+    }
+
+    return $statements;
+}
+
+/**
+ * Install phpBB forum database and config
+ */
+function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string $admin_pass, string $admin_email): bool
+{
+    $forum_dir = __DIR__ . '/forum';
+    $schema_json = $forum_dir . '/install1/schemas/schema.json';
+    $schema_data_sql = $forum_dir . '/install1/schemas/schema_data.sql';
+
+    // Generate and run schema
+    $schema_statements = generate_phpbb_schema($schema_json);
+    if (empty($schema_statements)) {
+        return false;
+    }
+
+    // Drop existing phpBB tables first (clean install)
+    $result = $pdo->query("SHOW TABLES LIKE 'phpbb_%'");
+    $tables = $result->fetchAll(PDO::FETCH_COLUMN);
+    if (!empty($tables)) {
+        $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
+        foreach ($tables as $table) {
+            $pdo->exec("DROP TABLE IF EXISTS `$table`");
+        }
+        $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
+    }
+
+    // Create tables
+    foreach ($schema_statements as $sql) {
+        $pdo->exec($sql);
+    }
+
+    // Load schema_data.sql (initial configuration)
+    if (file_exists($schema_data_sql)) {
+        $data_sql = file_get_contents($schema_data_sql);
+        // The file has # POSTGRES BEGIN # and # POSTGRES COMMIT # markers as comments
+        // split_sql_statements already skips comment lines starting with #
+
+        $statements = split_sql_statements($data_sql);
+        foreach ($statements as $stmt) {
+            $stmt = trim($stmt);
+            if ($stmt === '' || strpos($stmt, '#') === 0) {
+                continue;
+            }
+            try {
+                $pdo->exec($stmt);
+            } catch (PDOException $e) {
+                // Ignore duplicate key errors on initial data
+            }
+        }
+    }
+
+    // Get phpBB settings from config
+    $cookie_name = $config['phpbb_cookie_name'] ?? 'stmserverbb__';
+    $board_email = $config['phpbb_board_email'] ?? 'forum@steampowered.com';
+    $root_path = $config['root_path'] ?? '';
+    $script_path = $root_path . '/forum';
+    $server_name = $_SERVER['HTTP_HOST'] ?? 'localhost';
+
+    // Update phpBB configuration values
+    $config_updates = [
+        'sitename' => 'Steam Users Forums',
+        'site_desc' => '',
+        'board_email' => $board_email,
+        'board_contact' => $board_email,
+        'server_name' => $server_name,
+        'script_path' => $script_path,
+        'cookie_name' => $cookie_name,
+        'cookie_domain' => '',
+        'cookie_path' => '/',
+        'default_style' => '1',
+    ];
+
+    $update_stmt = $pdo->prepare('UPDATE phpbb_config SET config_value = ? WHERE config_name = ?');
+    foreach ($config_updates as $name => $value) {
+        $update_stmt->execute([$value, $name]);
+    }
+
+    // Update admin user (user_id 2 is the admin created by schema_data.sql)
+    $now = time();
+    $password_hash = password_hash($admin_pass, PASSWORD_BCRYPT);
+
+    $pdo->prepare('UPDATE phpbb_users SET username = ?, username_clean = ?, user_email = ?, user_password = ?, user_regdate = ? WHERE user_id = 2')
+        ->execute([$admin_user, strtolower($admin_user), $admin_email, $password_hash, $now]);
+
+    // Also update the forum post author name to match
+    $pdo->prepare('UPDATE phpbb_forums SET forum_last_poster_name = ? WHERE forum_last_poster_id = 2')
+        ->execute([$admin_user]);
+
+    // Update user_group for admin
+    $pdo->exec("INSERT IGNORE INTO phpbb_user_group (group_id, user_id, user_pending, group_leader) VALUES (5, 2, 0, 1)");
+
+    // Register Steam styles in phpbb_styles table
+    // First, check if prosilver exists to get a template reference
+    $prosilver_check = $pdo->query("SELECT style_id FROM phpbb_styles WHERE style_name = 'prosilver' LIMIT 1");
+    $prosilver_id = $prosilver_check->fetchColumn();
+
+    // Install Steam 2003 style
+    $pdo->exec("INSERT IGNORE INTO phpbb_styles (style_name, style_copyright, style_active, style_path, bbcode_bitfield, style_parent_id, style_parent_tree)
+        VALUES ('Steam 2003', 'Valve Corporation, 2003', 1, 'steam_2003', 'kNg=', 0, '')");
+
+    // Install Steam 2004 style
+    $pdo->exec("INSERT IGNORE INTO phpbb_styles (style_name, style_copyright, style_active, style_path, bbcode_bitfield, style_parent_id, style_parent_tree)
+        VALUES ('Steam 2004', 'Valve Corporation, 2004', 1, 'steam_2004', 'kNg=', 0, '')");
+
+    // Get the Steam 2004 style_id and set it as default
+    $steam2004_check = $pdo->query("SELECT style_id FROM phpbb_styles WHERE style_name = 'Steam 2004' LIMIT 1");
+    $steam2004_id = $steam2004_check->fetchColumn();
+    if ($steam2004_id) {
+        $pdo->prepare("UPDATE phpbb_config SET config_value = ? WHERE config_name = 'default_style'")->execute([$steam2004_id]);
+    }
+
+    // Enable the steamcms/theme_sync extension
+    $pdo->exec("INSERT IGNORE INTO phpbb_ext (ext_name, ext_active, ext_state)
+        VALUES ('steamcms/theme_sync', 1, 'b:0;')");
+
+    // Clear phpBB cache to ensure extension is loaded properly
+    $cache_dir = $forum_dir . '/cache/production/';
+    if (is_dir($cache_dir)) {
+        $files = glob($cache_dir . '*');
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                @unlink($file);
+            }
+        }
+    }
+
+    // Generate phpBB config.php
+    $phpbb_config = "<?php
+// phpBB 3.x auto-generated configuration file
+// Created by SteamCMS installer
+
+\$dbms = 'phpbb\\\\db\\\\driver\\\\mysqli';
+\$dbhost = '{$config['host']}';
+\$dbport = '{$config['port']}';
+\$dbname = '{$config['dbname']}';
+\$dbuser = '{$config['user']}';
+\$dbpasswd = '{$config['pass']}';
+
+\$table_prefix = 'phpbb_';
+\$phpbb_adm_relative_path = 'adm/';
+\$acm_type = 'phpbb\\\\cache\\\\driver\\\\file';
+
+@define('PHPBB_INSTALLED', true);
+@define('PHPBB_ENVIRONMENT', 'production');
+// @define('DEBUG_CONTAINER', true);
+";
+
+    file_put_contents($forum_dir . '/config.php', $phpbb_config);
+
+    return true;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($step == 1) {
         $host = trim($_POST['host']);
@@ -190,6 +516,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pass = trim($_POST['dbpass']);
         $dbname = trim($_POST['dbname']);
         $root_path = trim($_POST['root_path'] ?? '');
+        $phpbb_cookie_name = trim($_POST['phpbb_cookie_name'] ?? 'stmserverbb__');
+        $phpbb_board_email = trim($_POST['phpbb_board_email'] ?? 'forum@steampowered.com');
         try {
             $dsn = "mysql:host=$host;port=$dbPort;charset=utf8mb4";
             $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
@@ -203,6 +531,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'pass' => $pass,
                 'dbname' => $dbname,
                 'root_path' => $root_path,
+                'phpbb_cookie_name' => $phpbb_cookie_name,
+                'phpbb_board_email' => $phpbb_board_email,
             ];
             header('Location: install.php?step=2');
             exit;
@@ -220,6 +550,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $admin_user = trim($_POST['admin_user']);
         $admin_pass = trim($_POST['admin_pass']);
         $admin_email = trim($_POST['admin_email']);
+        $install_historical_data = isset($_POST['install_2004_forum_data']) ? 1 : 0;
+        $install_historical_data = isset($_POST['install_2004_forum_data']) ? 1 : 0;
+        $install_historical_data = isset($_POST['install_2004_forum_data']) ? 1 : 0;
+        $install_historical_data = isset($_POST['install_2004_forum_data']) ? 1 : 0;
         try {
             $dsn = "mysql:host=$host;port=$dbPort;charset=utf8mb4";
             $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
@@ -993,6 +1327,32 @@ CREATE TABLE tabbed_capsule_games(
     FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE CASCADE,
     INDEX idx_tab_order (tab_id, game_order)
 );
+CREATE TABLE single_large_capsule(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    theme VARCHAR(50) NOT NULL,
+    appid INT DEFAULT NULL,
+    image_path VARCHAR(255) NOT NULL DEFAULT '',
+    description TEXT,
+    url VARCHAR(255) NOT NULL DEFAULT '',
+    `order` INT NOT NULL DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_theme (theme),
+    INDEX idx_theme_order (theme, `order`),
+    FOREIGN KEY (appid) REFERENCES store_apps(appid) ON DELETE SET NULL
+);
+CREATE TABLE game_stats (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    game_name VARCHAR(255) NOT NULL,
+    game_website VARCHAR(255) DEFAULT NULL,
+    current_players INT UNSIGNED NOT NULL DEFAULT 0,
+    current_servers INT UNSIGNED NOT NULL DEFAULT 0,
+    player_minutes_per_month BIGINT UNSIGNED NOT NULL DEFAULT 0,
+    display_order INT UNSIGNED NOT NULL DEFAULT 0,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uniq_game_stats_name (game_name)
+);
 CREATE TABLE store_pages(
     slug VARCHAR(20) PRIMARY KEY,
     title TEXT,
@@ -1044,7 +1404,8 @@ CREATE TABLE download_files(
     usingbutton TINYINT(1) NOT NULL DEFAULT 0,
     buttonText VARCHAR(64) NOT NULL DEFAULT '',
     created DATETIME,
-    updated DATETIME
+    updated DATETIME,
+    sort_order INT DEFAULT 0
 );
 CREATE TABLE download_file_mirrors(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -1053,6 +1414,32 @@ CREATE TABLE download_file_mirrors(
     url TEXT,
     ord INT DEFAULT 0,
     FOREIGN KEY(file_id) REFERENCES download_files(id) ON DELETE CASCADE
+);
+CREATE TABLE download_file_versions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    file_id INT NOT NULL,
+    theme VARCHAR(32) NOT NULL,
+    page_version VARCHAR(32) NOT NULL,
+    is_visible TINYINT(1) DEFAULT 1,
+    render_type ENUM(
+        'title_size_mirrors_buttons',
+        'title_size_mirrors_links',
+        'title_no_size_mirrors_links',
+        'mirrors_buttons_no_title',
+        'single_button',
+        'single_link',
+        'title_single_link_with_size',
+        'floating_box_single_link',
+        'floating_box_title_mirrors_links'
+    ) DEFAULT 'title_size_mirrors_buttons',
+    location VARCHAR(32) DEFAULT 'main_content',
+    sort_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_file_theme_version (file_id, theme, page_version),
+    INDEX idx_theme_version (theme, page_version),
+    INDEX idx_visible_sort (is_visible, sort_order),
+    FOREIGN KEY (file_id) REFERENCES download_files(id) ON DELETE CASCADE
 );
 CREATE TABLE tournaments (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -1364,6 +1751,7 @@ ALTER TABLE product_discounts
             require_once 'sql/install_download_pages.php';
             require_once 'sql/install_download_files.php';
             require_once 'sql/install_game_stats.php';
+            require_once 'sql/install_single_large_capsule.php';
             if (!empty($_POST['use_official_survey'])) {
                 run_sql_file($pdo, __DIR__.'/sql/install_official_survey_stats.sql');
             }
@@ -1432,7 +1820,6 @@ HTML;
                 ['file' => 'cafe_representatives.php','label' => 'Cafe Representatives','visible' => 1, 'parent' => 'cafe_management','icon' => '🤝'],
                 ['file' => 'tournaments.php','label' => 'Tournament Management','visible' => 1,'icon' => '🏆'],
                 ['file' => 'media.php','label' => 'Media','visible' => 1,'icon' => ''],
-                ['file' => 'redirects.php','label' => 'Redirects','visible' => 1,'icon' => '↪️'],
                 ['file' => 'support_faq','label' => 'Support & FAQ Management','visible' => 1,'icon' => '🛟'],
                 ['file' => 'faq_management','label' => 'FAQ Management','visible' => 1, 'parent' => 'support_faq','icon' => '📚'],
                 ['file' => 'faq.php','label' => 'FAQ','visible' => 1, 'parent' => 'faq_management','icon' => '❓'],
@@ -1458,19 +1845,20 @@ HTML;
                 ['file' => 'contentserver_banners.php','label' => 'ContentServer Banner Management','visible' => 1, 'parent' => 'content_server_management','icon' => '🖼️'],
                 ['file' => 'stats_management','label' => 'Stats Management','visible' => 1,'icon' => '📊'],
                 ['file' => 'game_stats.php','label' => 'Game Stats','visible' => 1, 'parent' => 'stats_management','icon' => '🎮'],
-                ['file' => 'survey_stats.php','label' => 'Survey Stats','visible' => 1,'icon' => '📈'],
+                ['file' => 'survey_stats.php','label' => 'Survey Stats','visible' => 1, 'parent' => 'stats_management','icon' => '📈'],
                 ['file' => 'update_history.php','label' => 'Update History Management','visible' => 1,'icon' => '📜'],
-                ['file' => 'theme.php','label' => 'Theme','visible' => 1,'icon' => '🎨'],
-                ['file' => 'settings.php','label' => 'Settings','visible' => 1,'icon' => '⚙️'],
                 ['file' => 'download_management','label' => 'Download Management','visible' => 1,'icon' => '📥'],
                 ['file' => 'download_files.php','label' => 'File Management','visible' => 1, 'parent' => 'download_management','icon' => '⬇️'],
                 ['file' => 'download_settings.php','label' => 'Download Settings','visible' => 1, 'parent' => 'download_management','icon' => '🛠️'],
-                ['file' => 'header_footer.php','label' => 'Header & Footer','visible' => 1,'icon' => '📑'],
                 ['file' => 'cms_settings','label' => 'CMS Settings','visible' => 1,'icon' => '🛠️'],
-                ['file' => 'admin_users.php','label' => 'Administrators','visible' => 1, 'parent' => 'cms_settings','icon' => '👥'],
-                ['file' => 'roles.php','label' => 'Roles','visible' => 1, 'parent' => 'cms_settings','icon' => '🔑'],
                 ['file' => 'activity_log.php','label' => 'Activity Log','visible' => 1, 'parent' => 'cms_settings','icon' => '📜'],
+                ['file' => 'admin_users.php','label' => 'Administrators','visible' => 1, 'parent' => 'cms_settings','icon' => '👥'],
                 ['file' => 'error_log.php','label' => 'Error Log','visible' => 1, 'parent' => 'cms_settings','icon' => '🐞'],
+                ['file' => 'header_footer.php','label' => 'Header & Footer','visible' => 1, 'parent' => 'cms_settings','icon' => '📑'],
+                ['file' => 'redirects.php','label' => 'Redirects','visible' => 1, 'parent' => 'cms_settings','icon' => '↪️'],
+                ['file' => 'roles.php','label' => 'Roles','visible' => 1, 'parent' => 'cms_settings','icon' => '🔑'],
+                ['file' => 'settings.php','label' => 'Settings','visible' => 1, 'parent' => 'cms_settings','icon' => '⚙️'],
+                ['file' => 'theme.php','label' => 'Themes','visible' => 1, 'parent' => 'cms_settings','icon' => '🎨'],
                 ['file' => 'storefront_management','label' => 'Storefront Management','visible' => 1,'icon' => '🏪'],
                 ['file' => 'storefront','label' => 'Storefront','visible' => 1, 'parent' => 'storefront_management','icon' => '🏬'],
                 ['file' => 'storefront_main.php','label' => 'Main Page','visible' => 1, 'parent' => 'storefront','icon' => '🖼️'],
@@ -1480,6 +1868,7 @@ HTML;
                 ['file' => 'storefront_developers.php','label' => 'Developers','visible' => 1, 'parent' => 'storefront','icon' => '👥'],
                 ['file' => 'index_management','label' => '2006+ Index Management','visible' => 1,'icon' => '🗂️'],
                 ['file' => 'capsule_management_2006.php','label' => 'Index Capsule Management','visible' => 1, 'parent' => 'index_management','icon' => '🧩'],
+                ['file' => 'single_large_capsule.php','label' => 'Single Large Capsule','visible' => 1, 'parent' => 'index_management','icon' => '🖼️'],
                 ['file' => 'index_sidebar_management.php','label' => 'Index Sidebar Management','visible' => 1, 'parent' => 'index_management','icon' => '📚'],
                 ['file' => 'legacy_storefront','label' => '2004/2005 Storefront Management','visible' => 1, 'parent' => 'storefront','icon' => '🎮'],
                 ['file' => 'legacy_storefront_games.php','label' => 'Game management','visible' => 1, 'parent' => 'legacy_storefront','icon' => '🎮'],
@@ -1551,16 +1940,16 @@ HTML;
              * --------------------------------------------------------- */
             $logos = [
                 '2002_v1' => '',   // special-case: no header bar
-                '2002_v2' => 'themes/2002_v2/images/LOGO_Steam2.gif',
-                '2003_v1' => 'themes/2003_v1/images/LOGO_Steam2.gif',
-                '2003_v2' => 'themes/2003_v2/images/valve_head.gif',
-                '2004'    => 'themes/2004/images/valve_head.gif',
-                '2005_v1' => 'themes/2005_v1/images/steam_logo_onblack.gif',
-                '2005_v2' => 'themes/2005_v2/images/steam_logo_onblack.gif',
-                '2006_v1' => 'logo_steam_header.jpg',
-                '2006_v2' => 'logo_steam_header.jpg',
-                '2007_v1' => 'logo_steam_header.jpg',
-                '2007_v2' => 'logo_steam_header.jpg',
+                '2002_v2' => 'images/LOGO_Steam2.gif',
+                '2003_v1' => 'images/LOGO_Steam2.gif',
+                '2003_v2' => 'images/valve_head.gif',
+                '2004'    => 'images/valve_head.gif',
+                '2005_v1' => 'images/steam_logo_onblack.gif',
+                '2005_v2' => 'images/steam_logo_onblack.gif',
+                '2006_v1' => 'themes/2006_v1/images/logo_steam_header.jpg',
+                '2006_v2' => 'themes/2006_v2/images/logo_steam_header.jpg',
+                '2007_v1' => 'themes/2007_v1/images/logo_steam_header.jpg',
+                '2007_v2' => 'themes/2007_v2/images/logo_steam_header.jpg',
             ];
 
             /* -----------------------------------------------------------
@@ -2723,9 +3112,15 @@ $defaultCafes = [
 
                 run_sql_file($pdo, $forumSqlPath);
 
-                $forumAdminUsername = 'admin';
-                $forumAdminPassword = 'password';
-                $forumAdminEmail    = 'admin@steampowered.com';
+                // Use the same credentials as the CMS admin so they can log in without re-registering
+                $forumAdminUsername = $admin_user;
+                $forumAdminPassword = $admin_pass;
+                $forumAdminEmail    = $admin_email;
+
+                // Remove the default admin created by db.sql (if any)
+                $pdo->exec("DELETE FROM users WHERE username = 'admin'");
+
+                // Check if admin user already exists
                 $forumUserCheck = $pdo->prepare('SELECT COUNT(*) FROM users WHERE username = ?');
                 $forumUserCheck->execute([$forumAdminUsername]);
 
@@ -2733,8 +3128,8 @@ $defaultCafes = [
                     $now = date('Y-m-d H:i:s');
                     $forumInsert = $pdo->prepare(
                         'INSERT INTO users '
-                        . '(username, passhash, email, registered, last_login, signature, is_mod, banned) '
-                        . 'VALUES (?,?,?,?,?,?,?,?)'
+                        . '(username, passhash, email, registered, last_login, signature, is_mod, is_admin, banned) '
+                        . 'VALUES (?,?,?,?,?,?,?,?,?)'
                     );
                     $forumInsert->execute([
                         $forumAdminUsername,
@@ -2743,10 +3138,176 @@ $defaultCafes = [
                         $now,
                         $now,
                         '',
-                        1,
-                        0,
+                        1,  // is_mod
+                        1,  // is_admin
+                        0,  // banned
                     ]);
                 }
+            }
+
+            // Install phpBB forum (uses same database with phpbb_ prefix)
+            $phpbbInstallConfig = [
+                'host' => $host,
+                'port' => $dbPort,
+                'dbname' => $dbname,
+                'user' => $user,
+                'pass' => $pass,
+                'root_path' => $root_path,
+                'phpbb_cookie_name' => $config['phpbb_cookie_name'] ?? 'stmserverbb__',
+                'phpbb_board_email' => $config['phpbb_board_email'] ?? 'forum@steampowered.com',
+            ];
+
+            try {
+                install_phpbb_forum($pdo, $phpbbInstallConfig, $admin_user, $admin_pass, $admin_email);
+
+                // Install historical 2004 forum data if checkbox was checked
+                if ($install_historical_data) {
+                    echo "Installing historical 2004 forum data...\n";
+
+                    // Install SQL data
+                    $historical_sql_file = __DIR__ . '/scripts/historical_forum_data_with_attachments.sql';
+                    if (file_exists($historical_sql_file)) {
+                        try {
+                            run_sql_file($pdo, $historical_sql_file);
+                            echo "✓ Installed historical forum data\n";
+                        } catch (Exception $e) {
+                            error_log('Historical forum data installation error: ' . $e->getMessage());
+                            echo "⚠ Historical forum data installation failed: " . $e->getMessage() . "\n";
+                        }
+                    } else {
+                        echo "⚠ Historical forum data file not found: $historical_sql_file\n";
+                    }
+
+                    // Install attachment files
+                    $attachments_staging = __DIR__ . '/attachments_staging';
+                    $phpbb_files_dir = __DIR__ . '/forum/files';
+                    if (is_dir($attachments_staging)) {
+                        try {
+                            if (!is_dir($phpbb_files_dir)) {
+                                mkdir($phpbb_files_dir, 0755, true);
+                            }
+
+                            $attachment_files = glob($attachments_staging . '/attachment_*.???*');
+                            $copied_count = 0;
+
+                            foreach ($attachment_files as $source_file) {
+                                $filename = basename($source_file);
+                                if (preg_match('/attachment_(\d+)\.(\w+)/', $filename, $matches)) {
+                                    $vb_id = intval($matches[1]);
+                                    $extension = $matches[2];
+                                    $phpbb_id = 100000 + $vb_id;
+                                    $timestamp = time();
+                                    $dest_filename = "{$phpbb_id}_{$timestamp}.{$extension}";
+                                    $dest_file = $phpbb_files_dir . '/' . $dest_filename;
+
+                                    if (copy($source_file, $dest_file)) {
+                                        chmod($dest_file, 0644);
+                                        $copied_count++;
+                                    }
+                                }
+                            }
+
+                            if ($copied_count > 0) {
+                                echo "✓ Installed {$copied_count} historical attachment files\n";
+                            }
+                        } catch (Exception $e) {
+                            error_log('Historical attachment installation error: ' . $e->getMessage());
+                            echo "⚠ Historical attachment installation failed: " . $e->getMessage() . "\n";
+                        }
+                    }
+                }
+
+                // Install historical 2004 forum data if checkbox was checked
+                if ($install_historical_data) {
+                    echo "Installing historical 2004 forum data...\n";
+
+                    // Install SQL data
+                    $historical_sql_file = __DIR__ . '/scripts/historical_forum_data_with_attachments.sql';
+                    if (file_exists($historical_sql_file)) {
+                        try {
+                            run_sql_file($pdo, $historical_sql_file);
+                            echo "✓ Installed historical forum data\n";
+                        } catch (Exception $e) {
+                            error_log('Historical forum data installation error: ' . $e->getMessage());
+                            echo "⚠ Historical forum data installation failed: " . $e->getMessage() . "\n";
+                        }
+                    } else {
+                        echo "⚠ Historical forum data file not found: $historical_sql_file\n";
+                    }
+
+                    // Install attachment files
+                    $attachments_staging = __DIR__ . '/attachments_staging';
+                    $phpbb_files_dir = __DIR__ . '/forum/files';
+                    if (is_dir($attachments_staging)) {
+                        try {
+                            if (!is_dir($phpbb_files_dir)) {
+                                mkdir($phpbb_files_dir, 0755, true);
+                            }
+
+                            $attachment_files = glob($attachments_staging . '/attachment_*.???*');
+                            $copied_count = 0;
+
+                            foreach ($attachment_files as $source_file) {
+                                $filename = basename($source_file);
+                                if (preg_match('/attachment_(\d+)\.(\w+)/', $filename, $matches)) {
+                                    $vb_id = intval($matches[1]);
+                                    $extension = $matches[2];
+                                    $phpbb_id = 100000 + $vb_id;
+                                    $timestamp = time();
+                                    $dest_filename = "{$phpbb_id}_{$timestamp}.{$extension}";
+                                    $dest_file = $phpbb_files_dir . '/' . $dest_filename;
+
+                                    if (copy($source_file, $dest_file)) {
+                                        chmod($dest_file, 0644);
+                                        $copied_count++;
+                                    }
+                                }
+                            }
+
+                            if ($copied_count > 0) {
+                                echo "✓ Installed {$copied_count} historical attachment files\n";
+                            }
+                        } catch (Exception $e) {
+                            error_log('Historical attachment installation error: ' . $e->getMessage());
+                            echo "⚠ Historical attachment installation failed: " . $e->getMessage() . "\n";
+                        }
+                    }
+                }
+
+                // Install historical 2004 forum data if checkbox was checked
+                if ($install_historical_data) {
+                    $historical_sql_file = __DIR__ . '/scripts/historical_forum_data.sql';
+                    if (file_exists($historical_sql_file)) {
+                        try {
+                            run_sql_file($pdo, $historical_sql_file);
+                            echo "✓ Installed historical 2004 forum data\n";
+                        } catch (Exception $e) {
+                            error_log('Historical forum data installation error: ' . $e->getMessage());
+                            echo "⚠ Historical forum data installation failed: " . $e->getMessage() . "\n";
+                        }
+                    } else {
+                        echo "⚠ Historical forum data file not found: $historical_sql_file\n";
+                    }
+                }
+
+                // Install historical 2004 forum data if checkbox was checked
+                if ($install_historical_data) {
+                    $historical_sql_file = __DIR__ . '/scripts/historical_forum_data.sql';
+                    if (file_exists($historical_sql_file)) {
+                        try {
+                            run_sql_file($pdo, $historical_sql_file);
+                            echo "✓ Installed historical 2004 forum data\n";
+                        } catch (Exception $e) {
+                            error_log('Historical forum data installation error: ' . $e->getMessage());
+                            echo "⚠ Historical forum data installation failed: " . $e->getMessage() . "\n";
+                        }
+                    } else {
+                        echo "⚠ Historical forum data file not found: $historical_sql_file\n";
+                    }
+                }
+            } catch (Exception $e) {
+                // Log phpBB installation errors but don't halt CMS installation
+                error_log('phpBB installation error: ' . $e->getMessage());
             }
 
             $cfgArray = [
@@ -2772,6 +3333,9 @@ $defaultCafes = [
 <head>
     <meta charset="utf-8">
     <title>Install CMS</title>
+    <?php if ($step > 2 && empty($errors)): ?>
+    <meta http-equiv="refresh" content="5;url=cms/">
+    <?php endif; ?>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -2949,12 +3513,25 @@ $defaultCafes = [
             </div>
             <div class="form-group">
                 <label for="root_path">CMS Root Path</label>
-                <input id="root_path" class="form-control" name="root_path" value="<?php 
+                <input id="root_path" class="form-control" name="root_path" value="<?php
                     $script_name = $_SERVER['SCRIPT_NAME'] ?? '/install.php';
                     $root_path = dirname($script_name);
                     echo htmlspecialchars($root_path === '/' ? '' : $root_path);
                 ?>" placeholder="e.g. /somefolder or leave empty for root">
                 <small class="form-text text-muted">The directory path where the CMS is installed (without domain name). Leave empty if installed in domain root.</small>
+            </div>
+
+            <h3 style="color:#ffffff; margin: 30px 0 15px 0; border-top: 1px solid #3c4043; padding-top: 20px;">phpBB Forum Settings</h3>
+
+            <div class="form-group">
+                <label for="phpbb_cookie_name">phpBB Cookie Name</label>
+                <input id="phpbb_cookie_name" class="form-control" name="phpbb_cookie_name" value="stmserverbb__" placeholder="e.g. stmserverbb__">
+                <small class="form-text text-muted">Cookie prefix used by phpBB forum. Change if you have multiple phpBB installations.</small>
+            </div>
+            <div class="form-group">
+                <label for="phpbb_board_email">Forum Contact Email</label>
+                <input id="phpbb_board_email" type="email" class="form-control" name="phpbb_board_email" value="forum@steampowered.com" placeholder="e.g. forum@steampowered.com">
+                <small class="form-text text-muted">Email address displayed for forum contact and notifications.</small>
             </div>
             <button class="btn btn-primary" type="submit">Continue</button>
         </form>
@@ -2976,11 +3553,40 @@ $defaultCafes = [
             <div class="form-group">
                 <label><input type="checkbox" name="use_official_survey" value="1"> Use official survey stats</label>
             </div>
+            <div class="form-group">
+                <label><input type="checkbox" name="install_2004_forum_data" value="1" checked> Insert official 2004 forum data</label>
+                <small class="form-text text-muted">Includes historical Steam forum threads and posts from 2004. Only visible when using 2003_v2 or 2004 phpBB styles.</small>
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" name="install_2004_forum_data" value="1" checked> Insert official 2004 forum data</label>
+                <small class="form-text text-muted">Includes historical Steam forum threads and posts from 2004. Only visible when using 2003_v2 or 2004 phpBB styles.</small>
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" name="install_2004_forum_data" value="1" checked> Insert official 2004 forum data</label>
+                <small class="form-text text-muted">Includes historical Steam forum threads and posts from 2004. Only visible when using 2003_v2 or 2004 phpBB styles.</small>
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" name="install_2004_forum_data" value="1" checked> Insert official 2004 forum data</label>
+                <small class="form-text text-muted">Includes historical Steam forum threads and posts from 2004. Only visible when using 2003_v2 or 2004 phpBB styles.</small>
+            </div>
             <button class="btn btn-primary" type="submit">Install</button>
         </form>
     <?php else: ?>
         <h2 style="color:#ffffff; margin-bottom:20px;">Installation Complete</h2>
-        <p><a href="cms/login.php" class="btn btn-primary">Log in</a></p>
+        <p style="margin-bottom: 15px;">You will be automatically redirected to the CMS in <span id="countdown">5</span> seconds.</p>
+        <p style="margin-bottom: 10px;"><a href="cms/" class="btn btn-primary">Go to CMS</a></p>
+        <p><a href="cms/login.php" class="btn btn-primary" style="background: #3c4043;">Log in directly</a></p>
+        <script>
+            (function() {
+                var seconds = 5;
+                var countdown = document.getElementById('countdown');
+                var timer = setInterval(function() {
+                    seconds--;
+                    if (countdown) countdown.textContent = seconds;
+                    if (seconds <= 0) clearInterval(timer);
+                }, 1000);
+            })();
+        </script>
     <?php endif; ?>
 </div>
 </body>

@@ -1199,6 +1199,28 @@ function cms_twig_env(string $tpl_dir): Environment
                         $capsuleUrl .= 'cms/multi_app_large_capsule.php?group=' . urlencode($group);
                         $html .= '<iframe src="' . $capsuleUrl . '" width="589" height="267" frameborder="0" style="display: block;"></iframe>';
                         break;
+                    case 'single-large':
+                        // Single Large Capsule (2007 style) - uses theme-specific configuration from database
+                        if ($open) {
+                            $html .= $is2007 ? '</div>' : '<br clear="all"></div>';
+                            $open = false;
+                        }
+                        $base = cms_base_url();
+                        $capsuleUrl = $base ? rtrim($base, '/') . '/' : '';
+                        $capsuleUrl .= 'cms/single_large_capsule.php?theme=' . urlencode($theme);
+                        $html .= '<iframe src="' . $capsuleUrl . '" width="589" height="267" frameborder="0" style="display: block;"></iframe>';
+                        break;
+                    case 'single-large-2008':
+                        // Single Large Capsule (2008/2009/2010 style) - grey background, smaller dimensions
+                        if ($open) {
+                            $html .= $is2007 ? '</div>' : '<br clear="all"></div>';
+                            $open = false;
+                        }
+                        $base = cms_base_url();
+                        $capsuleUrl = $base ? rtrim($base, '/') . '/' : '';
+                        $capsuleUrl .= 'cms/single_large_capsule_2008.php?theme=' . urlencode($theme);
+                        $html .= '<iframe src="' . $capsuleUrl . '" width="467" height="225" frameborder="0" style="display: block;"></iframe>';
+                        break;
                     case 'gear':
                     case 'free':
                         if ($is2007) {
@@ -2170,11 +2192,10 @@ function cms_resolve_image(string $path, string $theme, string $theme_url, strin
         $imageCache[$key] = $cached;
         return $cached;
     }
-    //echo('1 <br> '. $path . '2 <br>'. $theme_url . '3 <br>'. $base_url . '4 <br>');
 
     // Check if we're in storefront context
     $isStorefront = strpos($theme_url, '/storefront') !== false;
-    
+
     $result = null;
 
     if ($isStorefront) {
@@ -2182,31 +2203,47 @@ function cms_resolve_image(string $path, string $theme, string $theme_url, strin
         $storefrontFile = dirname(__DIR__) . "/themes/$theme/storefront/images/" . $path;
         if (cms_is_file($storefrontFile)) {
             $result = $theme_url . '/images/' . $path;
-        } elseif (cms_is_file($base_url . "/storefront/images/" . $path)) {
-            $result = $base_url . "/storefront/images/" . $path;
         } else {
             // Fall back to theme images directory
             $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
             if (cms_is_file($themeFile)) {
                 $result = rtrim(str_replace('/storefront', '', $theme_url), '/') . '/images/' . $path;
+            } else {
+                // Always prefer theme path over root - attempt theme path even if file doesn't exist
+                $result = rtrim(str_replace('/storefront', '', $theme_url), '/') . '/images/' . $path;
             }
         }
     } else {
-        // For regular pages, check theme images directory
+        // For regular pages, always try theme images directory first
         $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
         if (cms_is_file($themeFile)) {
             $result = $theme_url . '/images/' . $path;
-        }
-    }
-
-    // Check root images if not found in theme
-    if ($result === null) {
-        $rootFile = dirname(__DIR__) . '/images/' . $path;
-        if (cms_is_file($rootFile)) {
-            $base = $base_url ? rtrim($base_url, '/') . '/' : '';
-            $result = $base . 'images/' . $path;
         } else {
-            $result = $base_url; //'image_not_found.jpg';
+            // Check if file exists in root images directory
+            $rootFile = dirname(__DIR__) . '/images/' . $path;
+            if (cms_is_file($rootFile)) {
+                // If found in root, try to copy to theme directory for future requests
+                $themeDir = dirname(__DIR__) . "/themes/$theme/images";
+                if (!is_dir($themeDir)) {
+                    @mkdir($themeDir, 0755, true);
+                }
+                $themeTargetFile = $themeDir . '/' . $path;
+                $themeTargetDir = dirname($themeTargetFile);
+                if (!is_dir($themeTargetDir)) {
+                    @mkdir($themeTargetDir, 0755, true);
+                }
+                // Attempt to copy the file to theme directory
+                if (@copy($rootFile, $themeTargetFile)) {
+                    // Successfully copied, now use theme path
+                    $result = $theme_url . '/images/' . $path;
+                } else {
+                    // Copy failed, but still prefer theme path over root
+                    $result = $theme_url . '/images/' . $path;
+                }
+            } else {
+                // File not found anywhere - still use theme path (let it 404 from theme)
+                $result = $theme_url . '/images/' . $path;
+            }
         }
     }
 

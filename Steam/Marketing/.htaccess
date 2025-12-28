@@ -1,0 +1,20 @@
+RewriteEngine On
+
+# Redirect requests for marketing pages to index.php
+# Handles: domain.com/Steam/Marketing/April1.2005/ -> steam/marketing/index.php?page=April1.2005
+# Handles: domain.com/Steam/Marketing/April1.2005/index.php -> steam/marketing/index.php?page=April1.2005
+# Handles: domain.com/Steam/Marketing/April1.2005/?l=english -> steam/marketing/index.php?page=April1.2005&l=english
+
+# Case insensitive redirect for Steam/Marketing/
+RewriteCond %{REQUEST_URI} ^/[Ss]team/[Mm]arketing/([^/]+)/?(.*)$ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /steam/marketing/index.php?page=%1&%{QUERY_STRING} [L,QSA]
+
+# Handle direct access to marketing directory with trailing slash
+RewriteCond %{REQUEST_URI} ^/[Ss]team/[Mm]arketing/?$ [NC]
+RewriteRule ^(.*)$ /steam/marketing/index.php [L,QSA]
+
+# Handle index.php requests within subdirectories
+RewriteCond %{REQUEST_URI} ^/[Ss]team/[Mm]arketing/([^/]+)/index\.php$ [NC]
+RewriteRule ^(.*)$ /steam/marketing/index.php?page=%1&%{QUERY_STRING} [L,QSA]

@@ -327,7 +327,7 @@ function cms_clear_selective_cache(string $context): int
             }
             break;
         } else {
-            $cleared += $manager->clearNamespace($ns);
+            $cleared += $manager->clear($ns);
         }
     }
 

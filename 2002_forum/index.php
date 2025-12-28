@@ -2,7 +2,18 @@
 require_once 'includes/template.php';
 require_once 'includes/db.php';          // your PDO helper
 require_once __DIR__.'/includes/bootstrap.php';
+
+$user = cb_current_user();
+$canMod = $user && cb_can_moderate($user);
+
 cb_header();
+
+/* Admin panel link for mods/admins */
+if ($canMod) {
+    echo '<table border="0" cellspacing="0" cellpadding="4" width="100%"><tr><td align="right">';
+    echo '<font face="Arial" size="1"><a href="admin/">Admin Panel</a></font>';
+    echo '</td></tr></table>';
+}
 
 /* pull boards */
 $boards = cb_db()->query('SELECT id,name,description FROM boards ORDER BY ordering,name')

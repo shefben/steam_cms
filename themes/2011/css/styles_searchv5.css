@@ -1,0 +1,340 @@
+/* CSS Document */
+
+.search_content {
+	color: #626366;
+}
+
+.search_content a {
+	color: #b0aeac;
+	text-decoration: underline;
+}
+
+.search_rule {
+	border-top: 1px solid #626366;
+	margin-bottom: 8px;
+}
+
+.search_controls {
+	font-size: 14px;
+	margin-bottom: 8px;
+	color: #b0aeac;
+}
+
+#default_search_controls {
+	
+}
+
+#advanced_search_controls {
+	border: 1px solid #626366;
+	padding: 7px;
+	padding-bottom: 0px;
+}
+
+.search_controls .control {
+	float: left;
+	width: 308px;
+	margin-bottom: 8px;
+}
+
+.search_controls .dselect_container, .search_controls .trigger, .search_controls .activetrigger  {
+	width: 290px;
+}
+
+.search_controls #os_control .dselect_container, .search_controls #os_control .trigger, 
+.search_controls #os_control .activetrigger  {
+	width: 190px;
+} 
+
+#os_control .dropcontainer ul {
+	width: 200px;
+}
+
+.search_controls .search_button {
+	text-align: right;
+	float: right;
+}
+
+input.search_button {
+	border: 1px solid #82807c;
+	
+	background-color: #333333;
+	background-image: url( ../images/v5/ico_search.gif );
+	background-position: 2px 2px;
+	background-repeat: no-repeat;
+	
+	padding-left: 24px;
+	padding-right: 8px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	
+	color: #ffffff;
+	text-transform: uppercase;
+	font-size: 11px;
+}
+
+.search_controls input.text {
+	background-color: #000000;
+	border: 1px solid #82807c;
+	color: #ffffff;
+	
+	width: 292px;
+	padding-left: 8px;
+	
+	height: 20px;
+	padding-top: 2px;
+}
+
+
+
+
+
+
+
+
+.dselect_container {
+	padding: 0px;
+	display: inline;
+}
+
+.dselect_container a, .dselect_container a:hover, .dselect_container a:active, .dselect_container a:visited
+{
+	font-size: 12px;
+	line-height: 22px;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+#default_search_controls .trigger, #default_search_controls .activetrigger {
+	border: 1px solid #82807c;
+}
+
+.trigger, .activetrigger {
+	background:#333333 url(../images/v5/ico_search_dropdown.gif) no-repeat scroll right center;
+	
+	display:block;
+	float:left;
+	color: #B0AEAC;
+	height: 22px;
+	padding-left:8px;
+	padding-right:2px;
+	overflow: hidden;
+	font-style: italic;
+}
+
+.trigger {
+}
+
+.activetrigger{
+}
+
+.control.withvalue .activetrigger, .control.withvalue .trigger {
+	background-color: #000000;
+	font-style: normal;
+}
+
+.dropcontainer ul {
+	background-color:#262626;
+	border:1px solid #82807C;
+	list-style-type:none;
+	margin:0;
+	width:300px;
+	position:absolute;
+	line-height: 22px;
+	z-index: 999999; 
+	
+	overflow: auto;
+	overflow-x: hidden;
+}
+
+#developer_control .dropcontainer ul, #publisher_control .dropcontainer ul {
+	height: 250px;
+}	
+
+.dropdownhidden{
+	display: none;
+}
+.dropdownvisible{
+	top:23px;
+	display: block;
+}
+.dropcontainer ul li {
+	padding: 0px;
+	margin: 0px;
+}
+.dropcontainer ul li.emptyvalue {
+	font-style: italic;
+}
+.dropcontainer ul a {
+	padding-left:2px;
+	padding-right:2px;
+	display:block;
+	text-decoration:none;
+	color:#B0AEAC;
+	line-height: 22px;
+	height: 22px;
+}
+.dropcontainer a.highlighted_selection {
+	background:#3196FF;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.dropcontainer{
+	position:relative;
+}
+
+
+
+
+
+#search_header {
+	background-color: #262626;
+	margin-bottom: 1px;
+	color: #B0AEAC;
+}
+
+#search_header .col {
+	float: right;
+	border-left: 1px solid #000000;
+	text-align: center;
+	cursor: pointer;
+	padding: 4px 8px;
+}
+
+#search_header .search_name {
+	cursor: pointer;
+	padding: 4px 16px;
+}
+
+#search_results {
+	margin-top: 17px;
+}
+
+
+.search_price {
+	width: 50px;
+}
+.search_type {
+	width: 40px;
+}
+.search_metascore {
+	width: 80px;
+}
+
+.search_result_row {
+	display: block;
+	position: relative;
+	height: 58px;
+	margin-bottom: 1px;
+	border: 1px solid;
+}
+
+.search_content a.search_result_row {
+	text-decoration: none;
+}
+
+.search_result_row.even:hover, .search_result_row.odd:hover {
+	text-decoration: none;
+	border: 1px solid #8bb9e0;
+}
+
+.search_result_row.even {
+	background-color: #1f1f1f;
+	border-color: #1f1f1f;
+}
+
+.search_result_row.odd {
+	background-color: #1a1a1a;
+	border-color: #1a1a1a;
+}
+
+.search_result_row .search_price, .search_result_row .search_type,
+.search_result_row .search_metascore, .search_result_row .search_released {
+	float: right;
+	padding: 4px 8px;
+	margin-left: 1px;
+	margin-top: 18px;
+}
+
+.search_result_row .search_metascore {
+	color: #8BC53F;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: center;
+}
+
+.search_result_row .search_type {
+	text-align: center;
+}
+	
+
+.search_result_row .search_price {
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 16px;
+}
+
+.search_result_row .search_capsule {
+	position: absolute;
+	left: 16px;
+	top: 8px;
+}
+
+.search_result_row .search_name {
+	margin-left: 153px;
+	margin-top: 14px;
+	margin-right: 14px;
+	
+	color: #626366;
+	font-size: 12px;
+	
+	
+	overflow: hidden;
+}
+
+.search_result_row .search_name h4 {
+	font-weight: normal;
+	font-size: 14px;
+	color: #ffffff;
+	
+}
+
+.search_released {
+	width: 76px;
+}
+
+h2.results_description {
+	color: #ffffff;
+	text-transform: lowercase;
+	padding: 0px 16px;
+}
+
+.search_pagination {
+	padding: 0px 16px;
+	margin: 8px 0px;
+}
+.search_pagination_left {
+	float: left;
+}
+.search_pagination_right {
+	float: right;
+}	
+/*
+     FILE ARCHIVED ON 15:33:32 Apr 04, 2011 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 05:53:13 Dec 27, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.698
+  exclusion.robots: 0.025
+  exclusion.robots.policy: 0.011
+  esindex: 0.011
+  cdx.remote: 18.205
+  LoadShardBlock: 88.843 (3)
+  PetaboxLoader3.datanode: 109.899 (4)
+  load_resource: 131.486
+  PetaboxLoader3.resolve: 96.517
+*/

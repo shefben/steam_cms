@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{{ game.name }} on Steam</title>
+<link href="css/styles_storev5.css" rel="stylesheet" type="text/css"/>
+<!--[if lte IE 6]> <link href="css/styles_storev5_ie6.css" rel="stylesheet" type="text/css" /> <![endif]-->
+<!--[if lte IE 7]> <style type="text/css"> .iepoupfix{ display: block; } </style> <![endif]-->
+<link href="css/styles_gamev5.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript" src="js/prototype.js"></script>
+<script type="text/javascript" src="js/scriptaculous.js"></script>
+<script type="text/javascript" src="js/javascript.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/header.js"></script>
+<script type="text/javascript" src="js/search.js"></script>
+<script type="text/javascript" src="js/modal.js"></script>
+<script type="text/javascript" src="js/gamehighlightplayer.js"></script>
+<meta name="description" content="{{ game.short_description }}">
+</head>
+<body>
+
+<div id="global_header">
+	<div class="content">
+		<div class="logo">
+			<span id="logo_holder">
+				<a href="{{ base_url }}">
+					<img src="images/v5/globalheader_logo.png" width="176" height="44">
+				</a>
+			</span>
+		</div>
+		{{ global_header_menu_2010() }}
+		<div id="global_actions">
+			<div id="global_action_menu">
+				{{ login_status() }}
+				{{ language_dropdown() }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="game_background_holder">
+	<div id="game_background">
+		<img src="{{ game.background_image }}">
+	</div>
+</div>
+
+<div id="store_header">
+	<div class="content">
+		<div id="store_controls">
+			<div id="cart_status_data">
+				{{ cart_status() }}
+			</div>
+		</div>
+		<div id="store_nav_area">
+			<div class="store_nav_leftcap"></div>
+			<div class="store_nav_bg">
+				<div class="store_nav">
+					<a class="tab" href="{{ base_url }}">Featured Items</a>
+					{{ genre_flyout_menu() }}
+					<a class="tab" href="{{ base_url }}freestuff/demos/">Demos</a>
+					<a class="tab" href="{{ base_url }}freestuff/videos/">Videos</a>
+					<a class="tab" href="{{ base_url }}browse/mac">
+						<img class="platform_small" height="16" src="images/v5/platforms/platform_mac_16.png" style="vertical-align: text-bottom;" width="16"/> Mac
+					</a>
+					<div id="store_search">
+						{{ store_search_form() }}
+					</div>
+				</div>
+			</div>
+			<div class="store_nav_rightcap"></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var g_SteamID = 0;
+</script>
+
+<!-- Main Background -->
+<div id="main">
+	<div id="main_content">
+		<div class="page_title_area game_title_area">
+			<div class="breadcrumbs">
+				<div class="blockbg">
+					<a href="{{ base_url }}search/?term=">All Games</a>
+					{% if game.genre %}
+					&gt; <a href="{{ base_url }}genre/{{ game.genre }}/">{{ game.genre }} Games</a>
+					{% endif %}
+					&gt; <a href="{{ base_url }}app/{{ game.appid }}">{{ game.name }}</a>
+				</div>
+				<div style="clear: left;"></div>
+			</div>
+			<div class="game_name">
+				<div class="blockbg">
+					{{ game.name }}
+				</div>
+				<div style="clear: left;"></div>
+			</div>
+		</div>
+
+		<div class="block">
+			<div class="block_content" id="game_highlights">
+				<div class="leftcol">
+					<div class="highlight_ctn">
+						<div class="highlight_overflow">
+							<div id="highlight_player_area">
+								{{ game_highlight_player(game) }}
+							</div>
+							<div id="highlight_strip">
+								{{ game_highlight_strip(game) }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="rightcol">
+					<div class="game_header_image_ctn">
+						<img class="game_header_image_full" src="{{ game.header_image }}">
+					</div>
+					<div class="game_description_snippet">
+						{{ game.short_description }}
+					</div>
+					<div class="game_meta_data">
+						<div class="game_details">
+							<div class="details_block">
+								<b>Release Date:</b> {{ game.release_date }}<br>
+								<b>Developer:</b> <a href="{{ base_url }}search/?developer={{ game.developer|url_encode }}">{{ game.developer }}</a><br>
+								<b>Publisher:</b> <a href="{{ base_url }}search/?publisher={{ game.publisher|url_encode }}">{{ game.publisher }}</a><br>
+							</div>
+						</div>
+					</div>
+					<div class="platform_area">
+						{{ game_platform_icons_v5(game) }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Purchase Area -->
+		<div class="game_purchase_area_outer">
+			<div class="game_purchase_area">
+				{{ game_purchase_options_v5(game) }}
+			</div>
+		</div>
+
+		<!-- Game Description -->
+		<div class="block">
+			<div class="block_content" id="game_area_description">
+				<h2>About the Game</h2>
+				{{ game.full_description|raw }}
+			</div>
+		</div>
+
+		<!-- System Requirements -->
+		<div class="block">
+			<div class="block_content" id="game_area_sys_req">
+				<h2>System Requirements</h2>
+				<div class="sysreq_contents">
+					{{ game_system_requirements_v5(game) }}
+				</div>
+			</div>
+		</div>
+
+		<div style="clear: both;"></div>
+	</div>
+</div>
+
+<!-- Global Hover Popup -->
+<div class="popup_block" id="global_hover" style="display: none;">
+	<div class="shadow_ul"></div><div class="shadow_top"></div><div class="shadow_ur"></div>
+	<div class="shadow_left"></div><div class="shadow_right"></div>
+	<div class="shadow_bl"></div><div class="shadow_bottom"></div><div class="shadow_br"></div>
+	<div class="popup_body shadow_content" id="global_hover_content"></div>
+</div>
+
+{{ footer_2010() }}
+
+</body>
+</html>

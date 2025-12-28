@@ -122,6 +122,12 @@ class user extends \phpbb\session
 		global $db, $request, $template, $config, $auth, $phpEx, $phpbb_root_path, $cache;
 		global $phpbb_dispatcher, $phpbb_container;
 
+		// Include Steam theme date-based selection functions
+		if (!function_exists('get_steam_theme_by_date'))
+		{
+			require_once($phpbb_root_path . 'includes/functions_steam_theme.' . $phpEx);
+		}
+
 		$this->language->set_default_language($config['default_lang']);
 
 		if ($this->data['user_id'] != ANONYMOUS)
@@ -248,6 +254,12 @@ class user extends \phpbb\session
 		}
 		unset($lang_set_ext);
 
+		// Steam Date-Based Theme Selection
+		// Override style selection based on CDRDATE from settings table (cached for 15 minutes)
+		$steam_theme_name = get_steam_theme_by_date($db, $cache);
+		$steam_style_id = get_style_id_by_theme_name($db, $steam_theme_name);
+
+		// If we found a valid steam theme, use it unless explicitly overridden
 		$style_request = $request->variable('style', 0);
 		if ($style_request && (!$config['override_user_style'] || $auth->acl_get('a_styles')) && !defined('ADMIN_START'))
 		{
@@ -257,10 +269,25 @@ class user extends \phpbb\session
 			$SID .= '&amp;style=' . $style_id;
 			$_EXTRA_URL = array('style=' . $style_id);
 		}
+		else if ($steam_style_id > 0)
+		{
+			// Use date-based Steam theme
+			$style_id = $steam_style_id;
+		}
 		else
 		{
-			// Set up style
+			// Fallback to original logic if Steam theme not found
 			$style_id = ($style_id) ? $style_id : ((!$config['override_user_style']) ? $this->data['user_style'] : $config['default_style']);
+
+			// If still no valid style, try to use any available Steam theme as fallback
+			if (!$style_id)
+			{
+				$fallback_steam_style_id = get_default_steam_theme_style_id($db);
+				if ($fallback_steam_style_id > 0)
+				{
+					$style_id = $fallback_steam_style_id;
+				}
+			}
 		}
 
 		$sql = 'SELECT *

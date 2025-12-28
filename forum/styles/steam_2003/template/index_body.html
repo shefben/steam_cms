@@ -26,7 +26,7 @@
 
         <!-- BEGIN forumrow -->
         <!-- IF forumrow.S_IS_CAT -->
-        <tr class="cat">
+        <tr id="cat">
             <td bgcolor="#3E4637" colspan="6">
                 <a href="{forumrow.U_VIEWFORUM}">
                     <font face="verdana, arial, helvetica" size="2" color="#B4BA50"><b>{forumrow.FORUM_NAME}</b></font>
@@ -38,37 +38,37 @@
         </tr>
         <!-- ELSE -->
         <tr align="center">
-            <td bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->" valign="top">
+            <td bgcolor="#626d5c" valign="top">
                 <!-- IF forumrow.FORUM_FOLDER_IMG -->
                 <img src="{forumrow.FORUM_FOLDER_IMG}" border="0" alt="{forumrow.FORUM_FOLDER_IMG_ALT}" />
                 <!-- ELSE -->
                 <img src="{T_THEME_PATH}/images/<!-- IF forumrow.S_LOCKED -->offlock<!-- ELSEIF forumrow.S_HAS_UNREAD -->on<!-- ELSE -->off<!-- ENDIF -->.gif" border="0" alt="" />
                 <!-- ENDIF -->
             </td>
-            <td bgcolor="<!-- IF forumrow.S_ROW_COUNT is even -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->" align="left">
+            <td bgcolor="#545F4E" align="left">
                 <a href="{forumrow.U_VIEWFORUM}">
-                    <font face="verdana, arial, helvetica" size="2" color="#000000"><b>{forumrow.FORUM_NAME}</b></font>
+                    <font face="verdana, arial, helvetica" size="2"><b>{forumrow.FORUM_NAME}</b></font>
                 </a>
                 <!-- IF forumrow.FORUM_DESC -->
-                <br /><font face="verdana,arial,helvetica" size="1" color="#000000">{forumrow.FORUM_DESC}</font>
+                <br /><font face="verdana,arial,helvetica" size="1">{forumrow.FORUM_DESC}</font>
                 <!-- ENDIF -->
             </td>
-            <td bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->">
-                <font face="verdana, arial, helvetica" size="2" color="#000000">{forumrow.POSTS}</font>
+            <td bgcolor="#626d5c">
+                <font face="verdana, arial, helvetica" size="2">{forumrow.POSTS}</font>
             </td>
-            <td bgcolor="<!-- IF forumrow.S_ROW_COUNT is even -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->">
-                <font face="verdana, arial, helvetica" size="2" color="#000000">{forumrow.TOPICS}</font>
+            <td bgcolor="#545F4E">
+                <font face="verdana, arial, helvetica" size="2">{forumrow.TOPICS}</font>
             </td>
-            <td bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->">
+            <td bgcolor="#626d5c">
                 <font face="verdana,arial,helvetica" size="1">
                 <!-- IF forumrow.LAST_POST_TIME -->
-                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" id="ltlink">
                     <tr align="right">
                         <td nowrap="nowrap">
-                            <font face="verdana,arial,helvetica" size="1" color="#000000">
-                            {forumrow.LAST_POST_TIME}
+                            <font face="verdana,arial,helvetica" size="1">
+                            {forumrow.LAST_POST_TIME} <font color="#969F8E"></font>
                             <!-- IF forumrow.LAST_POST_AUTHOR -->
-                            <br />by <a href="{forumrow.U_LAST_POST_AUTHOR}" style="color: #27346f">{forumrow.LAST_POST_AUTHOR}</a>
+                            <br />by <a href="{forumrow.U_LAST_POST_AUTHOR}"><b>{forumrow.LAST_POST_AUTHOR}</b></a>
                             <!-- ENDIF -->
                             </font>
                         </td>
@@ -80,12 +80,12 @@
                     </tr>
                     </table>
                 <!-- ELSE -->
-                    <font color="#000000">{L_NO_POSTS}</font>
+                    {L_NO_POSTS}
                 <!-- ENDIF -->
                 </font>
             </td>
-            <td bgcolor="<!-- IF forumrow.S_ROW_COUNT is even -->#F1F1F1<!-- ELSE -->#DFDFDF<!-- ENDIF -->">
-                <font face="verdana,arial,helvetica" size="1" color="#000000">
+            <td bgcolor="#545F4E">
+                <font face="verdana,arial,helvetica" size="1">
                 <!-- IF forumrow.MODERATORS -->
                     {forumrow.MODERATORS}
                 <!-- ELSE -->
@@ -99,22 +99,20 @@
 
         <!-- IF .forumrow -->
         <!-- Currently Active Users Section -->
-        <tr class="cat">
+        <tr id="cat">
             <td bgcolor="#3E4637" colspan="6">
                 <a href="{U_VIEWONLINE}">
-                    <font face="verdana, arial, helvetica" size="2" color="#B4BA50"><b>{L_WHO_IS_ONLINE}</b>
+                    <font face="verdana, arial, helvetica" size="2" color="#B4BA50"><b>{L_WHO_IS_ONLINE}</b></font>
                 </a>
-                <!-- IF TOTAL_USERS_ONLINE -->: {TOTAL_USERS_ONLINE}<!-- ENDIF -->
-                </font>
+                <!-- IF TOTAL_USERS_ONLINE --><font face="verdana, arial, helvetica" size="2" color="#B4BA50"><b>: {TOTAL_USERS_ONLINE}</b></font><!-- ENDIF -->
             </td>
         </tr>
         <tr>
-            <td bgcolor="#DFDFDF" colspan="6">
-                <font face="verdana,arial,helvetica" size="1" color="#000000">
+            <td bgcolor="#545F4E" colspan="6">
+                <font face="verdana,arial,helvetica" size="1">
                 <!-- IF TOTAL_USERS_ONLINE -->
-                    {LOGGED_IN_USER_LIST}
-                    <br />
-                    {RECORD_USERS}
+                    <nobr>{LOGGED_IN_USER_LIST}</nobr><br />
+                    <nobr>{RECORD_USERS}</nobr>
                 <!-- ELSE -->
                     {L_NO_ONLINE_USERS}
                 <!-- ENDIF -->
@@ -124,8 +122,8 @@
 
         <!-- IF BIRTHDAY_LIST -->
         <tr>
-            <td bgcolor="#DFDFDF" colspan="6">
-                <font face="verdana,arial,helvetica" size="1" color="#000000">
+            <td bgcolor="#545F4E" colspan="6">
+                <font face="verdana,arial,helvetica" size="1">
                 {L_BIRTHDAYS}: {BIRTHDAY_LIST}
                 </font>
             </td>

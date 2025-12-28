@@ -2503,7 +2503,6 @@ $stmtcp = $pdo->prepare(
 );
 
 foreach ($insertArray as $row) {
-    array_splice($row, 6, 0, [null]);
     $stmtcp->execute($row);
 }
 

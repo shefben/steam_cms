@@ -4,6 +4,7 @@ ob_start();
 require_once 'admin_header.php';
 cms_require_permission('manage_settings');
 $site_title = cms_get_setting('site_title','Steam');
+$news_cdr_date_limit = cms_get_setting('news_cdr_date_limit','0');
 $support_email = cms_get_setting('supportemail','');
 $smtp_host = cms_get_setting('smtp_host','');
 $smtp_port = cms_get_setting('smtp_port','');
@@ -41,6 +42,7 @@ if(isset($_POST['reorder']) && isset($_POST['items'])){
 }
 if(isset($_POST['save'])){
     cms_set_setting('site_title',trim($_POST['site_title']));
+    cms_set_setting('news_cdr_date_limit', $_POST['news_cdr_date_limit']);
     cms_set_setting('supportemail',trim($_POST['supportemail']));
     cms_set_setting('smtp_host',trim($_POST['smtp_host']));
     cms_set_setting('smtp_port',trim($_POST['smtp_port']));
@@ -80,6 +82,11 @@ if(isset($_POST['save'])){
 <h2>Site Settings <?php echo cms_help_icon('settings','site'); ?></h2>
 <form method="post" enctype="multipart/form-data">
 Site Title: <input type="text" name="site_title" value="<?php echo htmlspecialchars($site_title); ?>" title="Displayed in browser titles"><br><br>
+Use STMServer CDR Date to limit displayed news:
+<select name="news_cdr_date_limit" title="When enabled, only news articles up to and including the CDRDATE will be displayed">
+    <option value="1" <?php echo $news_cdr_date_limit==='1'?'selected':''; ?>>Enabled</option>
+    <option value="0" <?php echo $news_cdr_date_limit==='0'?'selected':''; ?>>Disabled</option>
+</select><br><br>
 Admin Theme: <select name="admin_theme" title="Color scheme for the admin panel">
 <?php foreach($themes as $t): ?>
 <option value="<?php echo htmlspecialchars($t); ?>" <?php echo $t==$admin_theme?'selected':''; ?>><?php echo htmlspecialchars($t); ?></option>

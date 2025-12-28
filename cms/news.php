@@ -45,7 +45,9 @@ function cms_render_news($type,$count=null){
     if($count===null) $count = $settings['articles_per_page'];
 
     $theme = cms_get_setting('theme','2004');
-    $cache_key = $type.'|'.$count.'|'.$settings['source'].'|'.$theme;
+    $cdr_date_enabled = cms_get_setting('news_cdr_date_limit','0');
+    $cdr_date_val = $cdr_date_enabled === '1' ? cms_get_setting('CDRDATE','') : '';
+    $cache_key = $type.'|'.$count.'|'.$settings['source'].'|'.$theme.'|'.$cdr_date_enabled.'|'.$cdr_date_val;
     
     // Check memory cache first
     if (isset($cms_news_cache[$cache_key])) {
@@ -82,6 +84,27 @@ function cms_render_news($type,$count=null){
         $theme = cms_get_setting('theme','2004');
         if(preg_match('/^(\d{4})/', $theme, $m)){
             $where[] = 'YEAR(' . $publishCol . ')='.(int)$m[1];
+        }
+    }
+    // Filter news by date based on CDR date limit setting
+    $cdr_date_limit = cms_get_setting('news_cdr_date_limit','0') === '1';
+    if($cdr_date_limit){
+        // When enabled: show news up to and including CDRDATE
+        $cdr_date = cms_get_setting('CDRDATE','');
+        if($cdr_date !== ''){
+            // CDRDATE is in m/d/Y format, convert to Y-m-d for SQL comparison
+            $parsed_date = DateTime::createFromFormat('m/d/Y', $cdr_date);
+            if($parsed_date){
+                $sql_date = $parsed_date->format('Y-m-d');
+                $where[] = "DATE($publishCol) <= '$sql_date'";
+            }
+        }
+    } else {
+        // When disabled: show news up to and including December 31st of theme's year
+        $theme = cms_get_setting('theme','2004');
+        if(preg_match('/^(\d{4})/', $theme, $m)){
+            $theme_year = (int)$m[1];
+            $where[] = "DATE($publishCol) <= '$theme_year-12-31'";
         }
     }
     if($settings['source']==='official'){

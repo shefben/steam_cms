@@ -31,7 +31,20 @@
 <td align="left" content="" csheight="71" height="80" rowspan="2" valign="top" width="545" xpos="241">
 <div align="right">
 <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><b><a href="../index.php">Home</a></b> |<b> </b><b><a href="../support.php">Support</a></b> |<b> </b><b><a href="index.php">Forums</a></b><b> | </b><b><a href="../faq.php">Bugs</a></b><b> | </b><b><a href="../support.php#troubleshooting">Troubleshooting</a></b><b> | </b><b><a href="../support.php#contact">Contact</a></b></font><br>
-<font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="1"><a href="signup.php">Create Account</a> | <a href="account.php">Account Options</a> | <a href="password_reset.php">Lost Password</a> | <a href="messages.php">Private Messages (?)</a></font>
+<font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="1">
+<?php
+$_cb_user = cb_current_user();
+if ($_cb_user):
+    // Get unread PM count
+    $_cb_stmt = cb_db()->prepare('SELECT COUNT(*) FROM private_messages WHERE to_user=? AND read_at IS NULL AND deleted_by_receiver=0');
+    $_cb_stmt->execute([$_cb_user['id']]);
+    $_cb_unread = (int)$_cb_stmt->fetchColumn();
+?>
+<a href="account.php">Account Options</a> | <a href="messages.php">Private Messages (<?= $_cb_unread ?>)</a> | <a href="logout.php">Logout (<?= htmlspecialchars($_cb_user['username']) ?>)</a>
+<?php else: ?>
+<a href="signup.php">Create Account</a> | <a href="login.php">Login</a> | <a href="password_reset.php">Lost Password</a>
+<?php endif; ?>
+</font>
 </div>
 </td>
 <td height="80" rowspan="2" width="13"><spacer height="80" type="block" width="13"></spacer></td>

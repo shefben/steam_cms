@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Package: {{ package.name }}</title>
+<link href="styles_global.css" rel="stylesheet" type="text/css"/>
+<link href="styles_package.css" rel="stylesheet" type="text/css"/>
+<link href="styles_game.css" rel="stylesheet" type="text/css"/>
+<link href="styles_tabs.css" rel="stylesheet" type="text/css"/>
+<link href="header.css" rel="stylesheet" type="text/css"/>
+<script src="swfobject.js" type="text/javascript"></script>
+<script src="prototype.js" type="text/javascript"></script>
+<script src="scriptaculous.js" type="text/javascript"></script>
+<script src="javascript.js" type="text/javascript"></script>
+<script src="main.js" type="text/javascript"></script>
+<script src="header.js" type="text/javascript"></script>
+</head>
+<body>
+<!-- Main Background -->
+<div id="all">
+<!-- Header -->
+{{ header_2009()|raw }}
+<!-- End Header -->
+<center>
+<div id="col_parent">
+<!-- Left Column -->
+<div id="col_left" style="height: 600px;">
+<div id="global_area_search">
+<form action="search/" id="searchform" method="get" name="searchform" onsubmit="return checkTerm(this)">
+<input id="searchterm" name="term" onblur="SetDefaultSearchText();" onclick="ClearDefaultSearchText();" size="22" type="text" value="enter search term"/>
+<div class="autocomplete" id="searchterm_options" style="display: none;"></div>
+<img align="top" alt="Steam Search" height="22" onclick="if (document.searchform.onsubmit()) document.searchform.submit();" src="btn_search.gif" width="22"/>
+</form>
+</div>
+<script language="JavaScript">
+<!--
+if ( Ajax && Ajax.Autocompleter )
+	new Ajax.Autocompleter( $('searchform').elements['term'], 'searchterm_options', 'search/suggest', {frequency: 0.2, method: "get", allowFreeEntry: true, afterUpdateElement:function() {document.searchform.submit();} });
+
+function ClearDefaultSearchText()
+{
+	var text = document.getElementById( 'searchterm' ).value;
+	if ( text == 'enter search term' )
+	{
+		document.getElementById( 'searchterm' ).value = '';
+	}
+}
+function SetDefaultSearchText()
+{
+	var text = document.getElementById( 'searchterm' ).value;
+	if ( text == '' )
+	{
+		document.getElementById( 'searchterm' ).value = 'enter search term';
+	}
+}
+function checkTerm( theform )
+{
+	if ( theform.term.value == "enter search term" )
+	{
+		theform.term.value = '';
+	}
+	return true;
+}
+//-->
+</script>
+<div id="global_area_browse"><h2>Browse Games</h2></div>
+{{ browse_genres_list()|raw }}
+<div id="global_area_gift_left">
+<h1>Give the<br/>Gift of Game</h1>
+<p>Gift purchasing<br/> available at checkout</p>
+</div>
+</div>
+<!-- End Left Column -->
+<!-- Main Column -->
+<div id="col_package">
+<div id="col_package_header"><img alt="{{ package.name }}" height="232" src="{{ package.header_image }}" width="707"/></div>
+<!-- Center Column -->
+<div id="col_package_contentsList">
+<!-- Tab Section -->
+<div id="global_area_tabs">
+<h2>Items included:</h2>
+<!-- List Items -->
+<div class="global_area_tabs_ctn_norm_pkg" id="global_area_tabs_ctn_pkg">
+<div></div>
+{{ package_items_list(package)|raw }}
+</div>
+<!-- End List Items -->
+</div>
+<!-- End Tab Section -->
+<!-- Pricing breakdown -->
+<div id="col_package_subTotals">
+<div id="col_package_subTotals_right">
+{{ package.individual_price }}<br/>
+{{ package.package_price }}<br/>
+</div>
+<div id="col_package_subTotals_left">
+Individual price<br/>
+Package price<br/>
+</div>
+<br clear="all"/>
+<br/>
+<div id="col_package_subTotals_right"><strong>{{ package.package_price }}</strong></div>
+<div id="col_package_subTotals_left"><strong>Cost to you</strong></div>
+<br clear="all"/>
+<br/>
+<div id="col_package_subTotals_right"><span class="package_savings">{{ package.savings }}</span></div>
+<div id="col_package_subTotals_left"><span class="package_savings">You save</span></div>
+</div>
+<!-- End Pricing breakdown -->
+<!-- Purchase area -->
+<div id="game_area_purchase">
+<div class="game_area_purchase_game">
+<form action="cart/" method="POST" name="add_to_cart_{{ package.subid }}">
+<input name="action" type="hidden" value="add_to_cart"/>
+<input name="subid" type="hidden" value="{{ package.subid }}"/>
+</form>
+<div class="game_area_purchase_price">{{ package.package_price }}</div>
+<h1>Buy {{ package.name }}</h1>
+<div class="game_area_purchase_button"><a class="btn_yellow" href="javascript:addToCart( {{ package.subid }});">Add to Cart</a></div>
+<br clear="all"/>
+</div>
+</div>
+<!-- End Purchase area -->
+<br/>
+<div id="col_package_content">
+{{ package.description|raw }}
+</div>
+</div>
+<!-- End Center Column -->
+<!-- Right Column -->
+<div id="col_right_game">
+<div id="game_area_details">
+<h2>Package Details</h2>
+<p>
+<b>Title:</b> {{ package.name }}<br/>
+<b>Genre:</b> {{ package_genres(package)|raw }}<br/>
+<b>Developer:</b> {{ package_developers(package)|raw }}<br/>
+<b>Publisher:</b> {{ package_publishers(package)|raw }}<br/>
+<b>Release Date:</b> {{ package.release_date|date('M d, Y') }}<br/>
+{% if package.languages %}
+<b>Languages:</b> {{ package.languages }}<br/>
+{% endif %}
+</p>
+{{ package_features_icons(package)|raw }}
+<ul id="game_area_media_list">
+<li><a href="news/?appids={{ package.appids }}"><img align="top" alt="" border="0" height="16" src="link_news.gif" width="16"/> Read related news</a></li>
+</ul>
+</div>
+</div>
+<!-- End Right Column -->
+</div>
+<!-- End Main Column -->
+<br clear="all"/>
+</div>
+</center>
+<!-- Footer -->
+{{ footer_2009()|raw }}
+<!-- End Footer -->
+</div>
+<!-- End Main Background -->
+</body>
+</html>

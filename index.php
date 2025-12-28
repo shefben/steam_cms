@@ -1,4 +1,8 @@
 <?php
+if (!is_file(__DIR__ . '/cms/config.php')) {
+    header('Location: ./install.php');
+    exit;
+}
 if (isset($_GET['area'])) {
         $area = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['area']);
 } else {
@@ -10,11 +14,27 @@ if (isset($_GET['area'])) {
         // page expects a template that doesn't exist in the default theme
         // leading to a blank page on first load.  Simply delegate to
         // home.php.
-        require_once __DIR__.'/cms/db.php';
-        require 'home.php';
+        try {
+                require_once __DIR__.'/cms/db.php';
+                require 'home.php';
+        } catch (RuntimeException $e) {
+                if (strpos($e->getMessage(), 'CMS not installed') !== false) {
+                        header('Location: ./install.php');
+                        exit;
+                }
+                throw $e;
+        }
         exit;
 }
-require_once __DIR__.'/cms/db.php';
+try {
+        require_once __DIR__.'/cms/db.php';
+} catch (RuntimeException $e) {
+        if (strpos($e->getMessage(), 'CMS not installed') !== false) {
+                header('Location: ./install.php');
+                exit;
+        }
+        throw $e;
+}
 $storeDir = __DIR__ . '/storefront/';
 require_once __DIR__.'/cms/template_engine.php';
 

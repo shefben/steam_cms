@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Welcome to Steam</title>
+<link href="styles_global.css" rel="stylesheet" type="text/css"/>
+<link href="styles_home.css" rel="stylesheet" type="text/css"/>
+<link href="styles_tabs.css" rel="stylesheet" type="text/css"/>
+<link href="header.css" rel="stylesheet" type="text/css"/>
+<script src="swfobject.js" type="text/javascript"></script>
+<script src="prototype.js" type="text/javascript"></script>
+<script src="scriptaculous.js" type="text/javascript"></script>
+<script src="javascript.js" type="text/javascript"></script>
+<script src="main.js" type="text/javascript"></script>
+<script src="header.js" type="text/javascript"></script>
+</head>
+<body>
+<!-- Main Background -->
+<div id="all">
+<!-- Header -->
+{{ header_2009()|raw }}
+<!-- End Header -->
+<center>
+<div id="col_parent">
+{{ storefront_promo_banner()|raw }}
+<div style="clear:both;"></div>
+<!-- Left Column -->
+<div id="col_left">
+<div id="global_area_search">
+<form action="search/" id="searchform" method="get" name="searchform" onsubmit="return checkTerm(this)">
+<input id="searchterm" name="term" onblur="SetDefaultSearchText();" onclick="ClearDefaultSearchText();" size="22" type="text" value="enter search term"/>
+<div class="autocomplete" id="searchterm_options" style="display: none;">
+</div>
+<img align="top" alt="Steam Search" height="22" onclick="if (document.searchform.onsubmit()) document.searchform.submit();" src="btn_search.gif" width="22"/>
+</form>
+</div>
+<script language="JavaScript">
+<!--
+if ( Ajax && Ajax.Autocompleter )
+	new Ajax.Autocompleter( $('searchform').elements['term'], 'searchterm_options', 'search/suggest', {frequency: 0.2, method: "get", allowFreeEntry: true, afterUpdateElement:function() {document.searchform.submit();} });
+
+function ClearDefaultSearchText()
+{
+	var text = document.getElementById( 'searchterm' ).value;
+	if ( text == 'enter search term' )
+	{
+		document.getElementById( 'searchterm' ).value = '';
+	}
+}
+function SetDefaultSearchText()
+{
+	var text = document.getElementById( 'searchterm' ).value;
+	if ( text == '' )
+	{
+		document.getElementById( 'searchterm' ).value = 'enter search term';
+	}
+}
+function checkTerm( theform )
+{
+	if ( theform.term.value == "enter search term" )
+	{
+		theform.term.value = '';
+	}
+	return true;
+}
+//-->
+</script>
+<div id="global_area_browse"><h2>Browse Games</h2></div>
+{{ browse_genres_list()|raw }}
+<br/>
+<ul>
+<li><a href="browse/under10">Games Under $10</a></li>
+<li><a href="browse/under5">Games Under $5</a></li>
+</ul>
+<div id="global_area_install_steam">
+<a href="download/SteamInstall.msi"><img alt="Get Steam Now" border="0" height="36" src="btn_getSteam_english.gif" width="163"/></a>
+</div>
+<div id="global_area_freeloads"><h2>Free Stuff</h2></div>
+<ul id="global_area_freeloads_list">
+<li><a href="freestuff/demos/">Game Demos</a></li>
+<li><a href="freestuff/videos/">Videos/Trailers</a></li>
+<li><a href="freestuff/mods/">Game Mods</a></li>
+</ul>
+<div id="home_area_news"><h2>Steam News</h2></div>
+<ul id="global_area_news_list">
+<li><a href="news/">All Steam News</a></li>
+<li><a href="news/?filter=releases">Game Releases</a></li>
+</ul>
+<div id="home_area_hardware"><h2>Hardware</h2></div>
+<ul id="global_area_hardware_list">
+{{ hardware_sidebar()|raw }}
+</ul>
+<div id="home_area_catalogs"><h2>Publisher Catalogs</h2></div>
+<ul id="global_area_catalogs_list">
+{{ publisher_catalogs_list()|raw }}
+</ul>
+<div id="home_area_steam">
+<img alt="Get Steam Now" src="col_left_logo_steam.jpg"/>
+<p>Join Steam for free and get games delivered straight to your desktop with automatic updates and a massive gaming community.</p>
+<br/>
+<a class="btn_blue" href="about/">More about Steam</a>
+</div>
+</div>
+<!-- End Left Column -->
+<!-- Center Column -->
+<div id="col_center">
+<div id="home_area_capsule_lrg">
+{{ storefront_carousel_2009()|raw }}
+</div>
+<br clear="all"/>
+{{ storefront_capsules_small()|raw }}
+<br clear="all"/>
+<!-- Tab Section -->
+<div id="global_area_tabs">
+<div>
+<ul id="main_tab_list">
+<li class="main_tab_off main_tab_on" id="tab_1_li"><span class="tab_link" id="tab_1" onclick="SelectTab( 1 );">New releases</span></li>
+<li class="main_tab_off" id="tab_2_li"><span class="tab_link" id="tab_2" onclick="SelectTab( 2 );">Top Sellers</span></li>
+<li class="main_tab_off" id="tab_4_li"><span class="tab_link" id="tab_4" onclick="SelectTab( 4 );">Coming soon</span></li>
+<li class="main_tab_off" id="tab_5_li"><span class="tab_link" id="tab_5" onclick="SelectTab( 5 );">Specials</span></li>
+</ul>
+</div>
+<br clear="all"/>
+<!-- List Items -->
+<div class="global_area_tabs_ctn_norm" id="global_area_tabs_ctn">
+<div></div>
+<div id="tab_1_content">
+{{ storefront_tab_content('new_releases', 10)|raw }}
+</div>
+<div id="tab_2_content" style="display: none;">
+{{ storefront_tab_content('top_sellers', 10)|raw }}
+</div>
+<div id="tab_4_content" style="display: none;">
+{{ storefront_tab_content('coming_soon', 10)|raw }}
+</div>
+<div id="tab_5_content" style="display: none;">
+{{ storefront_tab_content('specials', 10)|raw }}
+</div>
+</div>
+<!-- End List Items -->
+</div>
+<!-- End Tab Section -->
+<div class="home_area_extras_header"><h2>Gifting on Steam</h2></div>
+<div class="home_area_extras_bg">
+<a href="https://support.steampowered.com/kb_article.php?p_faqid=549#gifts" target="_blank"><img align="left" alt="Gifting on Steam" border="0" height="65" src="home_area_extras_gifts.jpg" width="113"/></a>
+<a href="https://support.steampowered.com/kb_article.php?p_faqid=549#gifts" target="_blank">Give the gift of game</a><br/>
+Gift purchasing is available on Steam. Simply indicate your purchase is a gift during checkout, write a little gift message for your friend, and we'll do the rest.
+</div>
+<div class="home_area_extras_header"><h2>Merchandise</h2></div>
+<div class="home_area_extras_bg">
+<a href="http://store.valvesoftware.com" target="_blank"><img align="left" alt="Merchandise" border="0" height="65" src="home_area_extras_merch.jpg" width="113"/></a>
+<a href="http://store.valvesoftware.com" target="_blank">Valve store </a><img align="bottom" border="0" src="iconExternalLink.gif"/><br/>
+Open 24/7, The Valve Store is your source for swagalicious apparel, posters, books, and collectibles for all your favorite Valve games.
+</div>
+</div>
+<!-- End Center Column -->
+<!-- Right Column -->
+<div id="col_right">
+{{ storefront_spotlight()|raw }}
+<div id="home_area_browse_options">
+<a class="home_gradient_btn" href="browse/under10">
+Top Games Under $10
+</a>
+<a class="home_gradient_btn" href="browse/under5">
+Top Games Under $5
+</a>
+</div>
+<div id="home_area_steam_news">
+<h2>Steam News</h2>
+<ul id="home_area_news_list">
+{{ news_sidebar_list(8)|raw }}
+</ul>
+<br/>
+<a class="btn_blue" href="news/">View all news</a>
+</div>
+<div id="home_area_videos">
+<div id="home_area_videos_banner"> </div>
+<h2>Videos/Trailers</h2>
+<ul id="home_area_videos_list">
+{{ videos_sidebar_list(5)|raw }}
+</ul>
+<br/>
+<a class="btn_blue" href="freestuff/videos/">Browse all videos</a>
+</div>
+<div id="home_area_demos">
+<div id="home_area_demos_banner"> </div>
+<h2>Demos</h2>
+<ul id="home_area_demos_list">
+{{ demos_sidebar_list(5)|raw }}
+</ul>
+<br/>
+<a class="btn_blue" href="freestuff/demos/">Browse all demos</a>
+</div>
+</div>
+<!-- End Right Column -->
+<br clear="all">
+</div>
+</center>
+<!-- Footer -->
+{{ footer_2009()|raw }}
+<!-- End Footer -->
+</div>
+<!-- End Main Background -->
+<script language="JavaScript">
+<!--
+function SelectTab( selected )
+{
+	var tab = 'tab_'+selected+'_li';
+	$(tab).siblings().invoke( 'removeClassName', 'main_tab_on')
+	$(tab).addClassName( 'main_tab_on' );
+
+	var tab_content = 'tab_'+selected+'_content';
+	$(tab_content).siblings().invoke( 'hide' );
+	$(tab_content).show();
+}
+//-->
+</script>
+</body>
+</html>
