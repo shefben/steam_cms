@@ -31,7 +31,7 @@ We''ve been working with AMD to get the Source&trade; engine up and running in 6
 
 <br>
 
-The official press release is available <a target="_new" href="http://steampowered.com/index.php?area=news&id=496">here</a>. <br>
+The official press release is available <a target="_new" href="{{ BASE }}/index.php?area=news&id=496">here</a>. <br>
 
 
 
@@ -526,7 +526,7 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('April8.2005', 'engli
 
 		<br>
 
-		Next week we''ll be releasing the three HL2DM map contest winners on Steam. The winners of the contest along with some images of the maps were first mentioned <a href="http://steampowered.com/Steam/Marketing/Mar18.2005/">here</a>. Also next week, we''ll have a small sneak peak for you of the upcoming Half-Life 2 episode "Aftermath".<br>
+		Next week we''ll be releasing the three HL2DM map contest winners on Steam. The winners of the contest along with some images of the maps were first mentioned <a href="{{ BASE }}/Steam/Marketing/Mar18.2005/">here</a>. Also next week, we''ll have a small sneak peak for you of the upcoming Half-Life 2 episode "Aftermath".<br>
 
 		<br>
 
@@ -739,7 +739,7 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('April22.2005', 'engl
 
 		through de_port and tried to give people an idea of what our design intentions were. Click
 
-		<a href="http://steampowered.com/games/css/strategy/">here</a> to get to a page that outlines six
+		<a href="{{ BASE }}/games/css/strategy/">here</a> to get to a page that outlines six
 
 		different strategies to try once the map is available. We''re still shooting for release of
 
@@ -759,7 +759,7 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('April22.2005', 'engl
 
 		<br>
 
-		<a href="http://steampowered.com/games/css/strategy/">de_port pre-release strategy guide</a>
+		<a href="{{ BASE }}/games/css/strategy/">de_port pre-release strategy guide</a>
 
 		<br>
 
@@ -1275,7 +1275,7 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('buy_hl2_2', 'english
 
 							</span></font><span class="statusContent3">PLUS HALF-LIFE 2&nbsp;MERCHANDISE**:<br>
 
-						</span><font size="2"><span class="statusContent">HL2 posters (3 total), soundtrack</span></font><font size="2"><span class="statusContent">, hat, sticker</span></font><font size="2"><span class="statusContent">, postcard</span></font><font size="2"><span class="statusContent">, Prima''s HL2 strat guide, collector''s box and the chance to win a trip to Valve! (For contest details, click <a target="_new" href="http://steampowered.com/?area=HL2GOLD_contest">here</a>). </span></font></p>
+						</span><font size="2"><span class="statusContent">HL2 posters (3 total), soundtrack</span></font><font size="2"><span class="statusContent">, hat, sticker</span></font><font size="2"><span class="statusContent">, postcard</span></font><font size="2"><span class="statusContent">, Prima''s HL2 strat guide, collector''s box and the chance to win a trip to Valve! (For contest details, click <a target="_new" href="{{ BASE }}/?area=HL2GOLD_contest">here</a>). </span></font></p>
 
 					<div align="right">
 
@@ -2363,7 +2363,7 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('demo_released', 'eng
 
 						<div align="left">
 
-							<span class="hed1">Half-Life<sup class="hed1">®</sup> 2</span>
+							<span class="hed1">Half-Life<sup class="hed1">ï¿½</sup> 2</span>
 
 							<p><span class="hed1">Demo Released</span></p>
 
@@ -2405,7 +2405,7 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('demo_released', 'eng
 
 						<div align="center">
 
-							<span class="footer">© 2004 Valve Corporation. All rights reserved. Valve and Half-Life are trademarks<br>
+							<span class="footer">ï¿½ 2004 Valve Corporation. All rights reserved. Valve and Half-Life are trademarks<br>
 
 								and/or registered trademarks of Valve Corporation.&nbsp; </span></div>
 
@@ -2961,7 +2961,7 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('February24.2006', 'e
 
 	<br>
 
-	<a href="steam://openurl/http://steampowered.com/Steam/Marketing/February24.2006/img/HL2_EP1_Alyx_Silhouette1.jpg"><img src="February24.2006/img/HL2_EP1_Alyx_Silhouette1_s.jpg"></a><br>
+	<a href="steam://openurl/{{ BASE }}/Steam/Marketing/February24.2006/img/HL2_EP1_Alyx_Silhouette1.jpg"><img src="February24.2006/img/HL2_EP1_Alyx_Silhouette1_s.jpg"></a><br>
 
 	<br>
 
@@ -3005,7 +3005,7 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('HL2DM', 'english', '
 		<br>
 		<hr>
 		<h1>HALF-LIFE&reg; 2: DEATHMATCH MAP CONTEST</h1>
-		<a target="_new" href="http://steampowered.com/?area=map_contest">Read all about it!</a><br>
+		<a target="_new" href="{{ BASE }}/?area=map_contest">Read all about it!</a><br>
 		<br><br>
 
 		<span class="footer">&copy; Valve Corporation. All rights reserved. Valve, Half-Life, and the Lambda logo are trademarks<br>and/or registered trademarks of Valve Corporation.&nbsp;</span>
@@ -3630,11 +3630,11 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('January20.2006', 'en
 
   <br>  
 
-  Next week we''ll be releasing the new map for <a href="steam://store/300">Day of Defeat: Source</a>, named <i>Kalt</i>, which we <a href="steam://openurl/http://steampowered.com/Steam/Marketing/January6.2006/">mentioned</a> a couple of weeks ago. Playtesting internally has wrapped up on the map (although we''re still playing daily), and we''re expecting this sixth map to be one of the more popular releases we''ve done so far. Also, there will be a Day of Defeat: Source retail box available at software retailers around the start of February. As with all of our games, expect more updates and more content to keep coming.<br>
+  Next week we''ll be releasing the new map for <a href="steam://store/300">Day of Defeat: Source</a>, named <i>Kalt</i>, which we <a href="steam://openurl/{{ BASE }}/Steam/Marketing/January6.2006/">mentioned</a> a couple of weeks ago. Playtesting internally has wrapped up on the map (although we''re still playing daily), and we''re expecting this sixth map to be one of the more popular releases we''ve done so far. Also, there will be a Day of Defeat: Source retail box available at software retailers around the start of February. As with all of our games, expect more updates and more content to keep coming.<br>
 
 <br>
 
-<a href="steam://openurl/http://steampowered.com/Steam/Marketing/January20.2006/img/Kalt_06.jpg"><img width="300" height="188" src="January20.2006/img/Kalt_06_thumb.jpg"></a><br>
+<a href="steam://openurl/{{ BASE }}/Steam/Marketing/January20.2006/img/Kalt_06.jpg"><img width="300" height="188" src="January20.2006/img/Kalt_06_thumb.jpg"></a><br>
 
 	<br>
 
@@ -4470,7 +4470,7 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('March03.2006', 'engl
 
 	<br>
 
-	<a href="steam://openurl/http://steampowered.com/Steam/Marketing/March03.2006/img/empires1.jpg"><img width="133" height="100" src="March03.2006/img/empires1_thumb.jpg"></a><a href="steam://openurl/http://steampowered.com/Steam/Marketing/March03.2006/img/empires2.jpg"><img width="133" height="100" src="March03.2006/img/empires2_thumb.jpg"></a><br><br>
+	<a href="steam://openurl/{{ BASE }}/Steam/Marketing/March03.2006/img/empires1.jpg"><img width="133" height="100" src="March03.2006/img/empires1_thumb.jpg"></a><a href="steam://openurl/{{ BASE }}/Steam/Marketing/March03.2006/img/empires2.jpg"><img width="133" height="100" src="March03.2006/img/empires2_thumb.jpg"></a><br><br>
 
 	Meanwhile, the next installment of the popular single player mod Minerva was released today. You may download it over at the official <a href="steam://openurl/http://www.hylobatidae.org/minerva/phosphenes.shtml">site</a>.<br>
 
@@ -4801,15 +4801,15 @@ INSERT INTO marketing (msgtype, language, content) VALUES ('May12.2005', 'englis
 
 <br>
 
-  The first of the two maps we''ll be adding is a brand new design named de_port, which focuses on giving the two teams a number of initial routes to take in a bomb/diffuse scenario. A couple of weeks ago we sketched out some of our intentions with the map layout, which you can go back and check out <a href="http://steampowered.com/games/css/strategy/">here</a>.<br>
+  The first of the two maps we''ll be adding is a brand new design named de_port, which focuses on giving the two teams a number of initial routes to take in a bomb/diffuse scenario. A couple of weeks ago we sketched out some of our intentions with the map layout, which you can go back and check out <a href="{{ BASE }}/games/css/strategy/">here</a>.<br>
 
 <br>
 
-  The second map we''ll be adding to the rotation is a remade de_inferno. As part of our effort to give the community more insight into what we''re doing here at Valve, we thought people might find it interesting to see how a map changes over its development cycle. To that end, we''ve put together a set of screenshots that were taken once each day during de_inferno''s development, taken from a variety of camera angles around the map. You can take a look at that <a href="http://steampowered.com/games/css/de_inferno/">here</a>.<br>
+  The second map we''ll be adding to the rotation is a remade de_inferno. As part of our effort to give the community more insight into what we''re doing here at Valve, we thought people might find it interesting to see how a map changes over its development cycle. To that end, we''ve put together a set of screenshots that were taken once each day during de_inferno''s development, taken from a variety of camera angles around the map. You can take a look at that <a href="{{ BASE }}/games/css/de_inferno/">here</a>.<br>
 
   <br>
 
-  <a href="http://steampowered.com/games/css/de_inferno/"><img src="May12.2005/img/de_inferno_longhall.gif"></a>
+  <a href="{{ BASE }}/games/css/de_inferno/"><img src="May12.2005/img/de_inferno_longhall.gif"></a>
 
   <br><br>
 

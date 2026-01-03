@@ -1,0 +1,111 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Topic Navigation / Breadcrumbs -->
+<div class="breadcrumbs">
+    <a href="{U_INDEX}">{L_INDEX}</a> &raquo;
+    <a href="{U_VIEWFORUM}">{FORUM_NAME}</a> &raquo;
+    <strong>{TOPIC_TITLE}</strong>
+</div>
+
+<!-- Topic Header -->
+<div class="forum-header">
+    <table cellspacing="0" width="600">
+    <tr>
+        <td width="50%"><strong>{TOPIC_TITLE}</strong></td>
+        <td width="50%" align="right">
+            <!-- IF TOTAL_POSTS -->{TOTAL_POSTS} posts<!-- ENDIF -->
+            <!-- IF PAGINATION -->&nbsp;&bull;&nbsp; {PAGINATION}<!-- ENDIF -->
+        </td>
+    </tr>
+    </table>
+</div>
+
+<!-- Posts Container -->
+<div class="topiclist">
+    <!-- BEGIN postrow -->
+    <table cellspacing="0" width="600">
+    <tr class="<!-- IF postrow.S_ROW_COUNT is odd -->row1<!-- ELSE -->row2<!-- ENDIF -->">
+        <td width="20%">
+            <!-- Simple user info (ChatBear style) -->
+            <strong>{postrow.POST_AUTHOR_FULL}</strong><br />
+            <!-- IF postrow.POSTER_JOINED -->
+            <small>Joined: {postrow.POSTER_JOINED}</small><br />
+            <!-- ENDIF -->
+            <!-- IF postrow.POSTER_POSTS -->
+            <small>Posts: {postrow.POSTER_POSTS}</small>
+            <!-- ENDIF -->
+        </td>
+        <td width="80%">
+            <!-- Post content -->
+            <div class="postbody">
+                <!-- Post time -->
+                <div style="margin-bottom: 10px; font-size: 10px;">
+                    Posted: {postrow.POST_DATE}
+                    <!-- IF postrow.U_EDIT -->
+                    &nbsp;|&nbsp; <a href="{postrow.U_EDIT}">Edit</a>
+                    <!-- ENDIF -->
+                    <!-- IF postrow.U_DELETE -->
+                    &nbsp;|&nbsp; <a href="{postrow.U_DELETE}">Delete</a>
+                    <!-- ENDIF -->
+                </div>
+
+                <!-- Post content -->
+                <div class="post-content">
+                    {postrow.MESSAGE}
+                </div>
+
+                <!-- Post signature (if enabled) -->
+                <!-- IF postrow.SIGNATURE -->
+                <div class="post-signature" style="border-top: 1px solid #606275; margin-top: 10px; padding-top: 5px; font-size: 10px;">
+                    {postrow.SIGNATURE}
+                </div>
+                <!-- ENDIF -->
+            </div>
+        </td>
+    </tr>
+    </table>
+    <!-- END postrow -->
+</div>
+
+<!-- If no posts to display -->
+<!-- IF not postrow -->
+<div class="topiclist">
+    <table cellspacing="0" width="600">
+    <tr class="row1">
+        <td width="100%" align="center">
+            <strong>No posts in this topic.</strong>
+        </td>
+    </tr>
+    </table>
+</div>
+<!-- ENDIF -->
+
+<!-- Topic Actions (simplified for ChatBear) -->
+<!-- IF S_LOGGED_IN -->
+<div class="forum-header" style="margin-top: 10px;">
+    <table cellspacing="0" width="600">
+    <tr>
+        <td align="center">
+            <!-- IF U_POST_REPLY_TOPIC -->
+            <a href="{U_POST_REPLY_TOPIC}">Reply to Topic</a>
+            <!-- ENDIF -->
+            <!-- IF U_POST_NEW_TOPIC -->
+            &nbsp;|&nbsp; <a href="{U_POST_NEW_TOPIC}">New Topic</a>
+            <!-- ENDIF -->
+        </td>
+    </tr>
+    </table>
+</div>
+<!-- ENDIF -->
+
+<!-- Pagination -->
+<!-- IF TOTAL_POSTS -->
+<div class="pagination">
+    <strong>{TOTAL_POSTS}</strong> posts
+    <!-- IF PAGINATION -->
+    &nbsp;&bull;&nbsp; {PAGINATION}
+    <!-- ENDIF -->
+</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

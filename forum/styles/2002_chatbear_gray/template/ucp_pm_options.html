@@ -1,0 +1,109 @@
+<!-- INCLUDE ucp_header.html -->
+
+<!-- PM Options Form -->
+<form id="ucp" method="post" action="{S_UCP_ACTION}">
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+    <td>
+        <table cellpadding="3" cellspacing="1" border="0" width="100%">
+        <tr bgcolor="#424B3C">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_PM_OPTIONS}</b></font>
+            </td>
+        </tr>
+
+        <!-- IF ERROR -->
+        <tr bgcolor="#4C5844">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="2" color="#FF6600"><b>{ERROR}</b></font>
+            </td>
+        </tr>
+        <!-- ENDIF -->
+
+        <!-- IF S_EDIT_FOLDER -->
+        <!-- Folder Management -->
+        <tr bgcolor="#4C5844">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="2"><b>{L_EDIT_FOLDERS}</b></font>
+            </td>
+        </tr>
+        <!-- BEGIN folder -->
+        <tr bgcolor="<!-- IF folder.S_ROW_COUNT is odd -->#545F4E<!-- ELSE -->#4C5844<!-- ENDIF -->">
+            <td width="30%">
+                <font face="verdana,arial,helvetica" size="2">{folder.FOLDER_NAME}:</font>
+            </td>
+            <td width="70%">
+                <!-- IF folder.S_EDITABLE -->
+                <input type="text" name="folder[{folder.FOLDER_ID}]" value="{folder.FOLDER_NAME}" size="30" class="bginput" />
+                <!-- IF folder.S_DELETABLE -->
+                <input type="checkbox" name="delete_folder[{folder.FOLDER_ID}]" value="1" /> <font face="verdana,arial,helvetica" size="1">{L_DELETE}</font>
+                <!-- ENDIF -->
+                <!-- ELSE -->
+                <font face="verdana,arial,helvetica" size="2">{folder.FOLDER_NAME}</font>
+                <!-- ENDIF -->
+                <font face="verdana,arial,helvetica" size="1"> ({folder.NUM_MESSAGES} {L_MESSAGES})</font>
+            </td>
+        </tr>
+        <!-- END folder -->
+
+        <!-- IF S_FULL_FOLDER_ACTION -->
+        <tr bgcolor="#4C5844">
+            <td width="30%">
+                <font face="verdana,arial,helvetica" size="2">{L_FULL_FOLDER_OPTION}:</font>
+            </td>
+            <td width="70%">
+                <select name="full_action" class="bginput">{S_FULL_FOLDER_ACTION}</select>
+            </td>
+        </tr>
+        <!-- ENDIF -->
+
+        <!-- IF S_MAX_FOLDER_REACHED neq true -->
+        <tr bgcolor="#545F4E">
+            <td width="30%">
+                <font face="verdana,arial,helvetica" size="2">{L_ADD_FOLDER}:</font>
+            </td>
+            <td width="70%">
+                <input type="text" name="add_folder" value="" size="30" class="bginput" />
+            </td>
+        </tr>
+        <!-- ENDIF -->
+        <!-- ENDIF -->
+
+        <!-- Rules Section -->
+        <!-- IF S_RULE_DEFINED -->
+        <tr bgcolor="#4C5844">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="2"><b>{L_RULES}</b></font>
+            </td>
+        </tr>
+        <!-- BEGIN rule -->
+        <tr bgcolor="<!-- IF rule.S_ROW_COUNT is odd -->#545F4E<!-- ELSE -->#4C5844<!-- ENDIF -->">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="2">
+                    <input type="checkbox" name="delete_rule[{rule.RULE_ID}]" value="1" />
+                    {rule.RULE_STRING}
+                </font>
+            </td>
+        </tr>
+        <!-- END rule -->
+        <!-- ENDIF -->
+        </table>
+
+        <br />
+        <table cellpadding="3" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td align="center">
+                {S_HIDDEN_FIELDS}
+                <input type="submit" name="submit" value="{L_SUBMIT}" class="bginput" />
+                {S_FORM_TOKEN}
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

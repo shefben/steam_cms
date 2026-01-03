@@ -1,0 +1,46 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Message Display -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<tr>
+    <td>
+        <table cellpadding="4" cellspacing="1" border="0" width="100%">
+        <tr>
+            <td bgcolor="#3E4637" align="center">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{MESSAGE_TITLE}</b></font>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#545F4E" align="center">
+                <font face="verdana,arial,helvetica" size="2">
+                {MESSAGE_TEXT}
+                </font>
+                
+                <!-- IF S_USER_NOTICE -->
+                <br /><br />
+                <font face="verdana,arial,helvetica" size="1">
+                <a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a>
+                </font>
+                <!-- ENDIF -->
+                
+                <!-- IF L_RETURN_TO -->
+                <br /><br />
+                <font face="verdana,arial,helvetica" size="1">
+                <a href="{U_RETURN_TO}">{L_RETURN_TO}</a>
+                </font>
+                <!-- ENDIF -->
+                
+                <!-- IF S_META -->
+                <br /><br />
+                <font face="verdana,arial,helvetica" size="1">
+                {L_REDIRECT}
+                </font>
+                <!-- ENDIF -->
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->

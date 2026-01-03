@@ -96,7 +96,7 @@ if(isset($_GET['move']) && isset($_GET['id'])){
     header('Location: news.php');
     return;
 }
-$sql = 'SELECT id,title,author,publish_date,status,views FROM news WHERE 1';
+$sql = 'SELECT id,title,author,category,publish_date,status,views,associated_appids FROM news WHERE 1';
 $params = [];
 if ($titleFilter !== '') {
     $sql .= ' AND title LIKE ?';
@@ -114,8 +114,8 @@ $stmt->execute($params);
 $export = $_GET['export'] ?? '';
 if ($export === 'csv' || $export === 'json') {
     $expSql = str_replace(
-        'SELECT id,title,author,publish_date,status,views',
-        'SELECT id,title,author,publish_date,status,views,content',
+        'SELECT id,title,author,category,publish_date,status,views,associated_appids',
+        'SELECT id,title,author,category,publish_date,status,views,associated_appids,content',
         $sql
     );
     $expStmt = $db->prepare($expSql);
@@ -163,9 +163,14 @@ foreach ($rows as $i => $row) {
     $tbodyHtml .= '<td class="handle">☰</td>';
     $tbodyHtml .= '<td>' . htmlspecialchars($row['title']) . '</td>';
     $tbodyHtml .= '<td>' . htmlspecialchars($row['author']) . '</td>';
-    $tbodyHtml .= '<td>' . htmlspecialchars($row['publish_date']) . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($row['category'] ?? '') . '</td>';
+    // Format Unix timestamp to readable date
+    $timestamp = is_numeric($row['publish_date']) ? (int)$row['publish_date'] : strtotime($row['publish_date']);
+    $formatted_date = date('F j, Y  g:i a', $timestamp);
+    $tbodyHtml .= '<td>' . htmlspecialchars($formatted_date) . '</td>';
     $tbodyHtml .= '<td>' . htmlspecialchars($row['status']) . '</td>';
     $tbodyHtml .= '<td>' . (int)$row['views'] . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($row['associated_appids'] ?? '') . '</td>';
     $tbodyHtml .= '<td>';
     if (cms_has_permission('news_edit')) {
         $tbodyHtml .= '<button type="button" class="btn btn-primary btn-small edit-btn" data-id="' . $row['id'] . '">Edit</button>';
@@ -240,7 +245,7 @@ if (isset($_GET['ajax'])) {
 <form id="orderForm" method="post">
 <input type="hidden" name="order" id="order-input">
 <table id="news-table" class="data-table">
-<thead><tr><th></th><th class="sortable">Title</th><th class="sortable">Author</th><th class="sortable">Date</th><th class="sortable">Status</th><th class="sortable">Views</th><th colspan="2">Actions</th></tr></thead>
+<thead><tr><th></th><th class="sortable">Title</th><th class="sortable">Author</th><th class="sortable">Category</th><th class="sortable">Date</th><th class="sortable">Status</th><th class="sortable">Views</th><th class="sortable">App IDs</th><th colspan="2">Actions</th></tr></thead>
 <tbody id="news-body">
 <?php echo $tbodyHtml; ?>
 </tbody>

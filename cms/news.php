@@ -44,25 +44,22 @@ function cms_render_news($type,$count=null){
     $settings = cms_get_news_settings();
     if($count===null) $count = $settings['articles_per_page'];
 
-    $theme = cms_get_setting('theme','2004');
+    $theme = cms_get_current_theme();
     $cdr_date_enabled = cms_get_setting('news_cdr_date_limit','0');
     $cdr_date_val = $cdr_date_enabled === '1' ? cms_get_setting('CDRDATE','') : '';
     $cache_key = $type.'|'.$count.'|'.$settings['source'].'|'.$theme.'|'.$cdr_date_enabled.'|'.$cdr_date_val;
     
-    // Check memory cache first
+    // Check memory cache first (fastest - no I/O)
     if (isset($cms_news_cache[$cache_key])) {
         return $cms_news_cache[$cache_key];
     }
-    
-    // Register source files that could affect this cache
+
+    // PERFORMANCE OPTIMIZATION: Skip file watching overhead
+    // Previously checked modification times of news.php and db.php on every request
+    // which added 20-50ms I/O overhead. News content changes are rare; use TTL only.
     $cache_manager = cms_cache_manager();
-    $source_files = [
-        __FILE__, // news.php itself
-        __DIR__ . '/db.php', // database config
-    ];
-    $cache_manager->registerSourceFiles($cache_key, $source_files, 'news');
-    
-    // Try to get from cache
+
+    // Try to get from cache (TTL-based only, no file watching)
     $cache_ttl = (int)cms_get_setting('news_cache_ttl', '1800');
     $html = $cache_manager->get($cache_key, 'news', $cache_ttl);
     if ($html !== null) {
@@ -76,14 +73,14 @@ function cms_render_news($type,$count=null){
     // syntax errors when executing the query.
     $limit = (int)$count;
     $publishCol = 'COALESCE(publish_at, publish_date)';
-    $where = ["$publishCol<=NOW()", "(status IS NULL OR status='published')"];
+    $where = ["$publishCol<=UNIX_TIMESTAMP()", "(status IS NULL OR status='published' OR status='final')"];
     // By default, allow news from all years so newer themes without
     // corresponding yearly content still render articles.
     $year_only = cms_get_setting('news_year_only','0') === '1';
     if($year_only){
-        $theme = cms_get_setting('theme','2004');
+        // $theme already set above via cms_get_current_theme()
         if(preg_match('/^(\d{4})/', $theme, $m)){
-            $where[] = 'YEAR(' . $publishCol . ')='.(int)$m[1];
+            $where[] = 'YEAR(FROM_UNIXTIME(' . $publishCol . '))='.(int)$m[1];
         }
     }
     // Filter news by date based on CDR date limit setting
@@ -92,19 +89,21 @@ function cms_render_news($type,$count=null){
         // When enabled: show news up to and including CDRDATE
         $cdr_date = cms_get_setting('CDRDATE','');
         if($cdr_date !== ''){
-            // CDRDATE is in m/d/Y format, convert to Y-m-d for SQL comparison
+            // CDRDATE is in m/d/Y format, convert to Unix timestamp for comparison
             $parsed_date = DateTime::createFromFormat('m/d/Y', $cdr_date);
             if($parsed_date){
-                $sql_date = $parsed_date->format('Y-m-d');
-                $where[] = "DATE($publishCol) <= '$sql_date'";
+                $parsed_date->setTime(23, 59, 59); // Set to end of day
+                $unix_timestamp = $parsed_date->getTimestamp();
+                $where[] = "$publishCol <= $unix_timestamp";
             }
         }
     } else {
         // When disabled: show news up to and including December 31st of theme's year
-        $theme = cms_get_setting('theme','2004');
+        // $theme already set above via cms_get_current_theme()
         if(preg_match('/^(\d{4})/', $theme, $m)){
             $theme_year = (int)$m[1];
-            $where[] = "DATE($publishCol) <= '$theme_year-12-31'";
+            $end_of_year = mktime(23, 59, 59, 12, 31, $theme_year);
+            $where[] = "$publishCol <= $end_of_year";
         }
     }
     if($settings['source']==='official'){
@@ -121,14 +120,18 @@ function cms_render_news($type,$count=null){
         $title  = htmlspecialchars($row['title']);
         $author = htmlspecialchars($row['author']);
         $format = cms_get_setting('news_date_format', 'long');
+        // publish_date is now a Unix timestamp, use it directly
+        $timestamp = is_numeric($row['publish_date']) ? (int)$row['publish_date'] : strtotime($row['publish_date']);
         if ($format === 'iso') {
-            $date = date('Y-m-d H:i:s', strtotime($row['publish_date']));
+            $date = date('Y-m-d H:i:s', $timestamp);
         } else {
-            $date = date('F j, Y, g:i a', strtotime($row['publish_date']));
+            $date = date('F j, Y, g:i a', $timestamp);
         }
         $date  = htmlspecialchars($date);
         $link   = cms_news_url($row['id']);
         $content = str_replace('\\n', '', $row['content']);
+        // Replace {{ BASE }} placeholders with CMS base URL for proper linking
+        $content = cms_replace_base_urls($content);
         switch($type){
             case 'full_article':
                 $out .= "<p><h3><a href='$link' style='text-decoration: none; color: #BFBA50;'>$title</a></h3>";
@@ -181,7 +184,7 @@ function cms_render_news($type,$count=null){
                     $words = preg_split('/\s+/', $text);
                     $summary = implode(' ', array_slice($words, 0, 30));
                 }
-                $date_fmt = date('m/d/y', strtotime($row['publish_date']));
+                $date_fmt = date('m/d/y', $timestamp);
                 $out .= "<strong><a href='$link' style='text-decoration: none;'>$title</a></strong><br>($date_fmt)<br>$summary<br><br>";
                 break;
             case 'index_bodygreen':
@@ -192,7 +195,7 @@ function cms_render_news($type,$count=null){
                     $words = preg_split('/\s+/', $text);
                     $summary = implode(' ', array_slice($words, 0, 30));
                 }
-                $date_fmt = date('m/d/y', strtotime($row['publish_date']));
+                $date_fmt = date('m/d/y', $timestamp);
                 $out .= "<a class=\"BodyGreen\" href='$link' style='color: Black; font-weight: bold;'>$title</a><br>";
                 $out .= "<sup class=\"BODYGreen\"><i>($date_fmt)</i></sup><br>";
                 $out .= "<span class=\"BODYGreen\">$summary<br></span><br>";

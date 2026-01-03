@@ -1,0 +1,32 @@
+services:
+    valve.minimized_replies.helper:
+        class: valve\minimized_replies\helper\minimized_helper
+        arguments:
+            - '@config'
+            - '@user'
+            - '@dbal.conn'
+
+    valve.minimized_replies.controller:
+        class: valve\minimized_replies\controller\main_controller
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '@request'
+            - '@dbal.conn'
+            - '@valve.minimized_replies.helper'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+
+    valve.minimized_replies.listener:
+        class: valve\minimized_replies\event\main_listener
+        arguments:
+            - '@config'
+            - '@template'
+            - '@user'
+            - '@request'
+            - '@dbal.conn'
+            - '@valve.minimized_replies.helper'
+        tags:
+            - { name: event.listener }

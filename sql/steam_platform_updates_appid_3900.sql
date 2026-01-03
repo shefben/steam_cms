@@ -12,7 +12,7 @@ Changes/Additions
 <li> Released on Steam</li> </ul>
 </div>'),
 (3900, '2006-10-25', '2k Games Now Available On Steam', '<div class=\"post_content\" id=\"content_801\" style=\"display: none;\">
-<p>2K Games are here.  Sid Meier\'s Civilization® IV, Sid Meier\'s Civilization® III Complete, Sid Meier\'s Pirates!, and Shattered Union are available now via Steam.  Go <a href=\"http://steampowered.com/v/index.php?publisher=2kgames\">here</a> to check pricing and get busy with pirate ships, tanks, and the entire planet.</p>
+<p>2K Games are here.  Sid Meier\'s Civilization® IV, Sid Meier\'s Civilization® III Complete, Sid Meier\'s Pirates!, and Shattered Union are available now via Steam.  Go <a href=\"{{ BASE }}/v/index.php?publisher=2kgames\">here</a> to check pricing and get busy with pirate ships, tanks, and the entire planet.</p>
 <br clear=\"left\"/>
 </div>'),
 (3900, '2007-10-04', 'Sid Meier\'s Civilization Iv: Beyond The Sword Update Released', '<div class=\"post_content\" id=\"content_1239\" style=\"display: ;\">

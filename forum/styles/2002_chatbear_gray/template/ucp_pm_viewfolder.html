@@ -1,0 +1,189 @@
+<!-- INCLUDE ucp_header.html -->
+
+<!-- IF not PROMPT -->
+    <!-- INCLUDE ucp_pm_message_header.html -->
+<!-- ENDIF -->
+
+<!-- IF PROMPT -->
+    <!-- Export Options -->
+    <table cellpadding="3" cellspacing="1" border="0" width="100%">
+    <tr bgcolor="#424B3C">
+        <td colspan="2">
+            <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_EXPORT_AS_CSV}</b></font>
+        </td>
+    </tr>
+    <tr bgcolor="#4C5844">
+        <td width="30%">
+            <font face="verdana,arial,helvetica" size="2">{L_DELIMITER}:</font>
+        </td>
+        <td width="70%">
+            <input class="bginput" type="text" id="delimiter" name="delimiter" value="," size="5" />
+        </td>
+    </tr>
+    <tr bgcolor="#545F4E">
+        <td width="30%">
+            <font face="verdana,arial,helvetica" size="2">{L_ENCLOSURE}:</font>
+        </td>
+        <td width="70%">
+            <input class="bginput" type="text" id="enclosure" name="enclosure" value="&#034;" size="5" />
+        </td>
+    </tr>
+    <tr bgcolor="#4C5844">
+        <td colspan="2" align="center">
+            <input type="hidden" name="export_option" value="CSV" />
+            <input class="bginput" type="submit" name="submit_export" value="{L_EXPORT_FOLDER}" />
+            {S_FORM_TOKEN}
+        </td>
+    </tr>
+    </table>
+
+<!-- ELSE -->
+
+    <!-- IF NUM_REMOVED -->
+        <table cellpadding="3" cellspacing="0" border="0" width="100%">
+        <tr bgcolor="#545F4E">
+            <td><font face="verdana,arial,helvetica" size="2">{RULE_REMOVED_MESSAGES}</font></td>
+        </tr>
+        </table>
+        <br />
+    <!-- ENDIF -->
+
+    <!-- IF NUM_NOT_MOVED -->
+        <table cellpadding="3" cellspacing="0" border="0" width="100%">
+        <tr bgcolor="#545F4E">
+            <td><font face="verdana,arial,helvetica" size="2">{NOT_MOVED_MESSAGES}<br />{RELEASE_MESSAGE_INFO}</font></td>
+        </tr>
+        </table>
+        <br />
+    <!-- ENDIF -->
+
+    <!-- IF .messagerow -->
+        <form id="viewfolder" method="post" action="{S_PM_ACTION}">
+
+        <!-- Message List Header -->
+        <table cellpadding="3" cellspacing="1" border="0" width="100%">
+        <tr bgcolor="#424B3C">
+            <td width="5%"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>#</b></font></td>
+            <td width="50%"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_MESSAGE}</b></font></td>
+            <!-- IF S_SHOW_RECIPIENTS -->
+            <td width="25%"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_RECIPIENTS}</b></font></td>
+            <!-- ELSE -->
+            <td width="20%"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_FROM}</b></font></td>
+            <!-- ENDIF -->
+            <td width="15%"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_SENT_DATE}</b></font></td>
+            <td width="5%" align="center"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_MARK}</b></font></td>
+        </tr>
+
+        <!-- BEGIN messagerow -->
+        <tr bgcolor="<!-- IF messagerow.S_ROW_COUNT is odd -->#4C5844<!-- ELSE -->#545F4E<!-- ENDIF --><!-- IF messagerow.S_PM_UNREAD --> style="font-weight: bold;"<!-- ENDIF -->">
+            <td>
+                <font face="verdana,arial,helvetica" size="1">
+                    <!-- IF messagerow.S_PM_UNREAD --><b>*</b><!-- ELSE -->&nbsp;<!-- ENDIF -->
+                </font>
+            </td>
+            <td>
+                <font face="verdana,arial,helvetica" size="2">
+                    <!-- IF messagerow.S_PM_DELETED -->
+                        <a href="{messagerow.U_REMOVE_PM}">{L_DELETE_MESSAGE}</a><br />
+                        <font color="#FF6600" size="1">{L_MESSAGE_REMOVED_FROM_OUTBOX}</font>
+                    <!-- ELSE -->
+                        <a href="{messagerow.U_VIEW_PM}">{messagerow.SUBJECT}</a>
+                    <!-- ENDIF -->
+                    <!-- IF messagerow.S_AUTHOR_DELETED -->
+                        <br /><font size="1"><em>{L_PM_FROM_REMOVED_AUTHOR}</em></font>
+                    <!-- ENDIF -->
+                    <!-- IF messagerow.ATTACH_ICON_IMG --> [{L_ATTACHMENT}]<!-- ENDIF -->
+                </font>
+            </td>
+            <td>
+                <font face="verdana,arial,helvetica" size="1">
+                    <!-- IF S_SHOW_RECIPIENTS -->
+                        {messagerow.RECIPIENTS}
+                    <!-- ELSE -->
+                        {messagerow.MESSAGE_AUTHOR_FULL}
+                    <!-- ENDIF -->
+                </font>
+            </td>
+            <td>
+                <font face="verdana,arial,helvetica" size="1">{messagerow.SENT_TIME}</font>
+            </td>
+            <td align="center">
+                <input type="checkbox" name="marked_msg_id[]" value="{messagerow.MESSAGE_ID}" />
+            </td>
+        </tr>
+        <!-- END messagerow -->
+        </table>
+
+        <!-- IF FOLDER_CUR_MESSAGES neq 0 -->
+        <br />
+        <table cellpadding="3" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td align="left">
+                <font face="verdana,arial,helvetica" size="1">
+                    {L_EXPORT_FOLDER}:
+                    <select name="export_option" class="bginput">
+                        <option value="CSV">{L_EXPORT_AS_CSV}</option>
+                        <option value="CSV_EXCEL">{L_EXPORT_AS_CSV_EXCEL}</option>
+                        <option value="XML">{L_EXPORT_AS_XML}</option>
+                    </select>
+                    <input class="bginput" type="submit" name="submit_export" value="{L_GO}" />
+                </font>
+            </td>
+            <td align="right">
+                <font face="verdana,arial,helvetica" size="1">
+                    <select name="mark_option" class="bginput">{S_MARK_OPTIONS}{S_MOVE_MARKED_OPTIONS}</select>
+                    <input class="bginput" type="submit" name="submit_mark" value="{L_GO}" />
+                </font>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
+                <font face="verdana,arial,helvetica" size="1">
+                    <a href="#" onclick="marklist('viewfolder', 'marked_msg', true); return false;">{L_MARK_ALL}</a> |
+                    <a href="#" onclick="marklist('viewfolder', 'marked_msg', false); return false;">{L_UNMARK_ALL}</a>
+                </font>
+            </td>
+        </tr>
+        </table>
+
+        <input type="hidden" name="cur_folder_id" value="{CUR_FOLDER_ID}" />
+        {S_FORM_TOKEN}
+        </form>
+
+        <!-- Pagination -->
+        <!-- IF .pagination -->
+        <br />
+        <table cellpadding="3" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td align="center">
+                <font face="verdana,arial,helvetica" size="1">
+                    {TOTAL_MESSAGES} | <!-- INCLUDE pagination.html -->
+                </font>
+            </td>
+        </tr>
+        </table>
+        <!-- ENDIF -->
+        <!-- ENDIF -->
+
+    <!-- ELSE -->
+        <table cellpadding="3" cellspacing="1" border="0" width="100%">
+        <tr bgcolor="#4C5844">
+            <td align="center">
+                <font face="verdana,arial,helvetica" size="2">
+                    <b>
+                    <!-- IF S_COMPOSE_PM_VIEW and S_NO_AUTH_SEND_MESSAGE -->
+                        <!-- IF S_USER_NEW -->{L_USER_NEW_PERMISSION_DISALLOWED}<!-- ELSE -->{L_NO_AUTH_SEND_MESSAGE}<!-- ENDIF -->
+                    <!-- ELSE -->
+                        {L_NO_MESSAGES}
+                    <!-- ENDIF -->
+                    </b>
+                </font>
+            </td>
+        </tr>
+        </table>
+    <!-- ENDIF -->
+
+    <!-- INCLUDE ucp_pm_message_footer.html -->
+<!-- ENDIF -->
+
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,70 @@
+				<!-- Main Content Area End -->
+			</div>
+			<br clear="left">
+		</div>
+		</center>
+	</div>
+
+	<!-- EVENT overall_footer_page_body_after -->
+
+	<!-- Steam 2006 v1 Footer -->
+	<div id="page-footer" class="page-footer" role="contentinfo">
+		<div class="footer">
+			<form action="{U_INDEX}">
+				<input name="area" type="hidden" value="404"/>
+				<table background="{T_THEME_PATH}/img/img_footer_bg.jpg" border="0" cellpadding="0" cellspacing="0" width="910px">
+					<tr>
+						<td background="{T_THEME_PATH}/img/img_footer_l.jpg" height="73" width="12"> </td>
+						<td align="center" width="110">
+							<a href="http://www.valvesoftware.com">
+								<img alt="link: Valve Software" border="0" height="26" src="{T_THEME_PATH}/img/logo_valve_footer.jpg" width="92"/>
+							</a>
+						</td>
+						<td>
+							<div class="legal">
+								<!-- IF S_USER_LANG_SELECT -->
+									<select name="l" onchange="submit();">
+										<option selected="" value="english">English</option>
+										<option value="french">French</option>
+										<option value="german">German</option>
+										<option value="italian">Italian</option>
+										<option value="japanese">Japanese</option>
+										<option value="korean">Korean</option>
+										<option value="polish">Polish</option>
+										<option value="portuguese">Portuguese</option>
+										<option value="russian">Russian</option>
+										<option value="schinese">Simplified Chinese</option>
+										<option value="tchinese">Traditional Chinese</option>
+										<option value="spanish">Spanish</option>
+										<option value="thai">Thai</option>
+									</select><br />
+								<!-- ENDIF -->
+								© 2006 Valve Corporation. All rights reserved. All trademarks are property of their respective owners in the US and other countries.<br>
+								<a href="http://www.valvesoftware.com/privacy.htm">Privacy Policy.</a>
+								<a href="http://www.valvesoftware.com/legal.htm">Legal.</a>
+								<a href="{U_TERMS_USE}">Steam Subscriber Agreement.</a>
+
+								<!-- EVENT overall_footer_copyright_append -->
+								<!-- IF TRANSLATION_INFO -->
+								<br/>{{ TRANSLATION_INFO }}
+								<!-- ENDIF -->
+
+								<!-- IF DEBUG_OUTPUT -->
+								<br/>{{ DEBUG_OUTPUT }}
+								<!-- ENDIF -->
+							</div>
+						</td>
+						<td background="{T_THEME_PATH}/img/img_footer_r.jpg" height="73" width="14"> </td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+
+	<!-- EVENT overall_footer_after -->
+</div>
+
+<!-- EVENT overall_footer_body_after -->
+
+</body>
+</html>

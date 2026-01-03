@@ -1,5 +1,33 @@
 <?php
 /**
+ * URL path to the install root (works whether installed at / or /2004_cms).
+ * Assumes this PHP file lives under: <install_root>/cms/utilities/
+ */
+function cms_install_root_url(): string
+{
+    $docRoot = rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']), '/');
+    $thisDir = str_replace('\\', '/', __DIR__);
+
+    // "/2004_cms/cms/utilities" (or "/cms/utilities")
+    $thisUrlDir = '/' . ltrim(str_replace($docRoot, '', $thisDir), '/');
+
+    // Strip "/cms/utilities" to get "/2004_cms" or ""
+    $installRootUrl = preg_replace('#/cms/utilities$#', '', $thisUrlDir);
+
+    // Make sure empty becomes "" not null
+    return $installRootUrl ?? '';
+}
+
+/**
+ * Filesystem path to the install root.
+ * Assumes this PHP file lives under: <install_root>/cms/utilities/
+ */
+function cms_install_root_fs(): string
+{
+    return realpath(__DIR__ . '/../..') ?: (__DIR__ . '/../..');
+}
+
+/**
  * Draw TTF text with constant extra letter‑spacing.
  *
  * @param resource $im        GD image
@@ -124,13 +152,15 @@ function render0203CatagoryBar(string $text): string
         $strong = htmlspecialchars(implode(' ', array_slice($words, 0, $break)) . ' ', ENT_QUOTES, 'UTF-8');
         $light  = htmlspecialchars(implode(' ', array_slice($words, $break)),          ENT_QUOTES, 'UTF-8');
     }
+$rootUrl = cms_install_root_url();
+$fontUrl = htmlspecialchars($rootUrl . '/includes/fonts/DINMittelschriftStd.otf', ENT_QUOTES, 'UTF-8');
 
     // Inline-styled bar markup
     return '
 <style>
 @font-face {
     font-family: "DINMittelschriftStd";
-    src: url("DINMittelschriftStd.otf") format("opentype");
+    src: url("' . $fontUrl . '") format("opentype");
 }
 </style>
 <div style="width:531px;height:36px;background:#626d5c;
@@ -155,11 +185,15 @@ function render0203CatagoryBar(string $text): string
  */
 function render0203PageTitle(string $text): string
 {
+$rootUrl  = cms_install_root_url();
+$fontUrl  = htmlspecialchars($rootUrl . '/includes/fonts/DINEngschriftStd.otf', ENT_QUOTES, 'UTF-8');
+$arrowUrl = htmlspecialchars($rootUrl . '/images/title_arrow.gif', ENT_QUOTES, 'UTF-8'); // change if gif lives elsewhere
+
     return '
 <style>
 @font-face {
     font-family: "DINEngschriftStd";
-    src: url("DINEngschriftStd.otf") format("opentype");
+    src: url("' . $fontUrl . '") format("opentype");
 }
 </style>
 <div style="width:531px;height:38px;
@@ -167,7 +201,7 @@ function render0203PageTitle(string $text): string
             letter-spacing:1px;padding-left:7px;position:relative;
             color:#f0f0f0;white-space:nowrap;overflow:hidden;">
     <span style="display:inline-flex;align-items:center;gap:5px;">
-        <img src="title_arrow.gif" alt=">">
+        <img src="' . $arrowUrl . '" alt=">">
         ' . htmlspecialchars($text, ENT_QUOTES, 'UTF-8') . '
     </span>
 </div>';
@@ -235,20 +269,23 @@ function renderGetSteamNowButton(string $inputText): string
     // Allocate text colour.
     $textColour = imagecolorallocate($button, 191, 186, 80);
 
-    // Locate a TrueType font.
-    $fontPathCandidates = [
-        __DIR__ . '/../../includes/font/DejaVuSans-Bold.ttf'
-    ];
-    $fontPath = null;
-    foreach ($fontPathCandidates as $path) {
-        if (file_exists($path)) {
-            $fontPath = $path;
-            break;
-        }
+  $rootFs = cms_install_root_fs();
+
+// Locate a TrueType font.
+$fontPathCandidates = [
+    $rootFs . '/includes/fonts/DejaVuSans-Bold.ttf',
+];
+
+$fontPath = null;
+foreach ($fontPathCandidates as $path) {
+    if (is_file($path)) {
+        $fontPath = $path;
+        break;
     }
-    if ($fontPath === null) {
-        return 'No suitable TrueType font found for rendering text.';
-    }
+}
+if ($fontPath === null) {
+    return 'No suitable TrueType font found for rendering text.';
+}
 
     // Determine font size and spacing.
     $fontSize       = 8;

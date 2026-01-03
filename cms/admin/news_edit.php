@@ -19,26 +19,30 @@ if($id){
     $article = $stmt->fetch(PDO::FETCH_ASSOC);
     if(!$article) { echo 'Article not found'; exit; }
 }else{
-    $now = date('Y-m-d H:i:s');
+    $now = time();
     $article = [
-        'title'       => '',
-        'author'      => getenv('USER') ?: 'Admin',
-        'content'     => '',
-        'publish_at'  => $now,
-        'publish_date'=> $now
+        'title'            => '',
+        'author'           => getenv('USER') ?: 'Admin',
+        'content'          => '',
+        'category'         => '',
+        'publish_at'       => $now,
+        'publish_date'     => $now,
+        'associated_appids'=> ''
     ];
 }
 if(isset($_POST['autosave'])){
     $title = $_POST['title'];
     $author = $_POST['author'];
     $content = $_POST['content'];
-    $pub    = $_POST['publish_at'];
+    $category = $_POST['category'] ?? '';
+    $associated_appids = $_POST['associated_appids'] ?? '';
+    $pub_timestamp = is_numeric($_POST['publish_at']) ? (int)$_POST['publish_at'] : strtotime($_POST['publish_at']);
     if($id){
-        $stmt = $db->prepare('UPDATE news SET title=?, author=?, content=?, publish_date=?, publish_at=?, status="draft" WHERE id=?');
-        $stmt->execute([$title,$author,$content,$pub,$pub,$id]);
+        $stmt = $db->prepare('UPDATE news SET title=?, author=?, category=?, content=?, publish_date=?, publish_at=?, associated_appids=?, status="draft" WHERE id=?');
+        $stmt->execute([$title,$author,$category,$content,$pub_timestamp,$pub_timestamp,$associated_appids,$id]);
     }else{
-        $stmt = $db->prepare('INSERT INTO news(title,author,publish_date,publish_at,content,views,is_official,status) VALUES(?,?,?,?,?,0,0,\'draft\')');
-        $stmt->execute([$title,$author,$pub,$pub,$content]);
+        $stmt = $db->prepare('INSERT INTO news(title,author,category,publish_date,publish_at,content,views,is_official,status,associated_appids) VALUES(?,?,?,?,?,?,0,0,\'draft\',?)');
+        $stmt->execute([$title,$author,$category,$pub_timestamp,$pub_timestamp,$content,$associated_appids]);
         $id = $db->lastInsertId();
     }
     cms_admin_log('Autosaved news article '.$id);
@@ -50,15 +54,17 @@ if(isset($_POST['save'])){
     $title  = $_POST['title'];
     $author = $_POST['author'];
     $content = $_POST['content'];
-    $pub    = $_POST['publish_at'];
-    $status = (strtotime($pub) > time()) ? 'scheduled' : 'published';
+    $category = $_POST['category'] ?? '';
+    $associated_appids = $_POST['associated_appids'] ?? '';
+    $pub_timestamp = is_numeric($_POST['publish_at']) ? (int)$_POST['publish_at'] : strtotime($_POST['publish_at']);
+    $status = ($pub_timestamp > time()) ? 'scheduled' : 'published';
     if($id){
-        $stmt = $db->prepare('UPDATE news SET title=?, author=?, content=?, publish_date=?, publish_at=?, status=? WHERE id=?');
-        $stmt->execute([$title,$author,$content,$pub,$pub,$status,$id]);
+        $stmt = $db->prepare('UPDATE news SET title=?, author=?, category=?, content=?, publish_date=?, publish_at=?, associated_appids=?, status=? WHERE id=?');
+        $stmt->execute([$title,$author,$category,$content,$pub_timestamp,$pub_timestamp,$associated_appids,$status,$id]);
         cms_admin_log('Updated news article '.$id);
     }else{
-        $stmt = $db->prepare('INSERT INTO news(title,author,publish_date,publish_at,content,views,is_official,status) VALUES(?,?,?,?,?,0,0,?)');
-        $stmt->execute([$title,$author,$pub,$pub,$content,$status]);
+        $stmt = $db->prepare('INSERT INTO news(title,author,category,publish_date,publish_at,content,views,is_official,status,associated_appids) VALUES(?,?,?,?,?,?,0,0,?,?)');
+        $stmt->execute([$title,$author,$category,$pub_timestamp,$pub_timestamp,$content,$status,$associated_appids]);
         $id = $db->lastInsertId();
         cms_admin_log(($status==='scheduled'?'Scheduled':'Created').' news article '.$id);
     }
@@ -79,6 +85,8 @@ function autoSave(){
         autosave:1,
         title:document.querySelector('input[name=title]').value,
         author:document.querySelector('input[name=author]').value,
+        category:document.querySelector('input[name=category]').value,
+        associated_appids:document.querySelector('input[name=associated_appids]').value,
         publish_at:document.querySelector('input[name=publish_at]').value,
         content:CKEDITOR.instances.content.getData()
     };
@@ -99,7 +107,12 @@ setInterval(autoSave,30000);
 <form method="post">
 Title: <input type="text" name="title" value="<?php echo htmlspecialchars($article['title']); ?>" size="60"><br><br>
 Author: <input type="text" name="author" value="<?php echo htmlspecialchars($article['author']); ?>"><br><br>
-Publish Date: <input type="datetime-local" name="publish_at" value="<?php echo htmlspecialchars(date('Y-m-d\TH:i', strtotime($article['publish_at']))); ?>"><br><br>
+Category: <input type="text" name="category" value="<?php echo htmlspecialchars($article['category'] ?? ''); ?>"><br><br>
+Associated App IDs: <input type="text" name="associated_appids" value="<?php echo htmlspecialchars($article['associated_appids'] ?? ''); ?>" placeholder="Comma-separated, e.g. 10,240,70"><br><br>
+Publish Date: <input type="datetime-local" name="publish_at" value="<?php
+$timestamp = is_numeric($article['publish_at']) ? (int)$article['publish_at'] : strtotime($article['publish_at']);
+echo htmlspecialchars(date('Y-m-d\TH:i', $timestamp));
+?>"><br><br>
 <textarea id="content" name="content" style="width:100%;height:300px;"><?php echo htmlspecialchars($article['content']); ?></textarea><br>
 <input type="submit" name="save" value="Save">
 <span id="lastSaved" style="margin-left:10px;color:green;"></span>
@@ -116,7 +129,17 @@ document.getElementById('restoreDraft').addEventListener('click',function(){
     .then(r=>r.json()).then(function(d){
         document.querySelector('input[name=title]').value=d.title;
         document.querySelector('input[name=author]').value=d.author;
-        document.querySelector('input[name=publish_at]').value=d.publish_at.replace(' ','T');
+        document.querySelector('input[name=category]').value=d.category||'';
+        document.querySelector('input[name=associated_appids]').value=d.associated_appids||'';
+        // Convert Unix timestamp to datetime-local format
+        var timestamp = parseInt(d.publish_at);
+        var date = new Date(timestamp * 1000);
+        var localDateTime = date.getFullYear() + '-' +
+            String(date.getMonth() + 1).padStart(2, '0') + '-' +
+            String(date.getDate()).padStart(2, '0') + 'T' +
+            String(date.getHours()).padStart(2, '0') + ':' +
+            String(date.getMinutes()).padStart(2, '0');
+        document.querySelector('input[name=publish_at]').value=localDateTime;
         CKEDITOR.instances.content.setData(d.content);
     });
 });

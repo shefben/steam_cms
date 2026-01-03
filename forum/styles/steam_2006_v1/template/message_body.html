@@ -1,0 +1,34 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Main Content Area -->
+<div class="leftCol_3">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td background="{T_THEME_PATH}/img/title_red.jpg" height="50" width="600">
+<span class="page_title">  <!-- IF MESSAGE_TITLE -->{MESSAGE_TITLE}<!-- ELSE -->Error<!-- ENDIF --></span>
+</td>
+</tr>
+<tr>
+<td height="10"></td>
+</tr>
+<tr>
+<td>
+<span class="normal_text">
+<!-- IF MESSAGE_TEXT -->
+{MESSAGE_TEXT}
+<!-- ELSE -->
+The page you requested could not be found.
+<!-- ENDIF -->
+<br/><br/>
+<!-- IF U_RETURN_LINK -->
+<a href="{U_RETURN_LINK}" onclick="history.back();">Click here</a> to go back.
+<!-- ELSE -->
+<a href="{U_INDEX}" onclick="history.back();">Click here</a> to go back.
+<!-- ENDIF -->
+</span>
+</td>
+</tr>
+</table><br/>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

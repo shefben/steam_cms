@@ -1,0 +1,50 @@
+<!-- PM Message Header -->
+<table cellpadding="3" cellspacing="1" border="0" width="100%">
+<tr bgcolor="#424B3C">
+    <td>
+        <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_TITLE}<!-- IF CUR_FOLDER_NAME -->: {CUR_FOLDER_NAME}<!-- ENDIF --></b></font>
+    </td>
+</tr>
+<tr bgcolor="#4C5844">
+    <td>
+        <!-- IF FOLDER_STATUS and FOLDER_MAX_MESSAGES neq 0 -->
+        <font face="verdana,arial,helvetica" size="1">{FOLDER_STATUS}</font><br />
+        <!-- ENDIF -->
+
+        <!-- PM Actions -->
+        <table cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <!-- IF U_POST_NEW_TOPIC -->
+            <td><a href="{U_POST_NEW_TOPIC}"><img src="{T_THEME_PATH}/images/buttons/grey/postnewtopic.gif" border="0" alt="{L_UCP_PM_COMPOSE}" /></a></td>
+            <!-- ENDIF -->
+            <!-- IF U_POST_REPLY_PM -->
+            <td><a href="{U_POST_REPLY_PM}"><font face="verdana,arial,helvetica" size="1">[{L_BUTTON_PM_REPLY}]</font></a></td>
+            <!-- ENDIF -->
+            <!-- IF U_FORWARD_PM -->
+            <td><a href="{U_FORWARD_PM}"><font face="verdana,arial,helvetica" size="1">[{L_BUTTON_PM_FORWARD}]</font></a></td>
+            <!-- ENDIF -->
+        </tr>
+        </table>
+
+        <!-- IF TOTAL_MESSAGES or S_VIEW_MESSAGE -->
+        <table cellpadding="2" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td align="right">
+                <!-- IF S_VIEW_MESSAGE -->
+                <a href="{U_CURRENT_FOLDER}"><font face="verdana,arial,helvetica" size="1">&laquo; {L_RETURN_TO_FOLDER}</font></a>
+                <!-- ELSE -->
+                <!-- IF U_MARK_ALL --><a href="{U_MARK_ALL}"><font face="verdana,arial,helvetica" size="1">{L_PM_MARK_ALL_READ}</font></a> | <!-- ENDIF -->
+                <font face="verdana,arial,helvetica" size="1">{TOTAL_MESSAGES}</font>
+                <!-- IF .pagination -->
+                    | <!-- INCLUDE pagination.html -->
+                <!-- ELSE -->
+                    | <font face="verdana,arial,helvetica" size="1">{PAGE_NUMBER}</font>
+                <!-- ENDIF -->
+                <!-- ENDIF -->
+            </td>
+        </tr>
+        </table>
+        <!-- ENDIF -->
+    </td>
+</tr>
+</table>

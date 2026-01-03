@@ -7,12 +7,45 @@
  * modifying core files. Plugins live in `/plugins/{name}/plugin.php` and call
  * the registration functions defined here. Each function is documented with
  * verbose comments to make creating plugins approachable.
+ *
+ * PERFORMANCE OPTIMIZATION: Plugin Type System
+ * Plugins can declare their type to avoid being loaded in irrelevant contexts:
+ * - 'admin'    : Only loaded in admin panel (sidebar links, admin pages, etc.)
+ * - 'template' : Only loaded when template engine is used (template tags, hooks)
+ * - 'global'   : Always loaded (rare - use sparingly)
+ *
+ * Default type is 'global' for backwards compatibility.
  */
 
 declare(strict_types=1);
 
 use Twig\Environment;
 use Twig\TwigFunction;
+
+/**
+ * Plugin type constants for context-aware loading.
+ */
+define('CMS_PLUGIN_TYPE_ADMIN', 'admin');       // Admin panel only
+define('CMS_PLUGIN_TYPE_TEMPLATE', 'template'); // Template rendering only
+define('CMS_PLUGIN_TYPE_GLOBAL', 'global');     // Always loaded
+
+/**
+ * Current loading context for plugins.
+ * @var string|null
+ */
+$cms_plugin_context = null;
+
+/**
+ * Registry of plugin types for lazy loading.
+ * @var array<string, string>
+ */
+$cms_plugin_types = [];
+
+/**
+ * Track which plugins have been loaded.
+ * @var array<string, bool>
+ */
+$cms_plugins_loaded = [];
 
 // Global container for registered plugin features.
 $cms_plugins = [
@@ -40,6 +73,71 @@ $cms_plugins = [
     'language_packs' => [],  // Multi-language support
     'dev_tools'     => [],   // Development tools
 ];
+
+/**
+ * Declare a plugin's type for context-aware loading.
+ * Call this at the TOP of your plugin.php before any registrations.
+ *
+ * @param string $plugin_name Unique plugin identifier
+ * @param string $type        One of: 'admin', 'template', 'global'
+ */
+function cms_declare_plugin_type(string $plugin_name, string $type): void
+{
+    global $cms_plugin_types;
+    $cms_plugin_types[$plugin_name] = $type;
+}
+
+/**
+ * Get the current plugin loading context.
+ *
+ * @return string|null Current context or null if not set
+ */
+function cms_get_plugin_context(): ?string
+{
+    global $cms_plugin_context;
+    return $cms_plugin_context;
+}
+
+/**
+ * Check if a plugin should be loaded in the current context.
+ *
+ * @param string $plugin_path Path to plugin.php
+ * @return bool
+ */
+function cms_should_load_plugin(string $plugin_path): bool
+{
+    global $cms_plugin_context, $cms_plugin_types;
+
+    // If no context set, load all plugins (backwards compatibility)
+    if ($cms_plugin_context === null) {
+        return true;
+    }
+
+    // Extract plugin name from path
+    $plugin_name = basename(dirname($plugin_path));
+
+    // Check if plugin has declared its type
+    if (!isset($cms_plugin_types[$plugin_name])) {
+        // Unknown type - check the file for a type declaration
+        $contents = @file_get_contents($plugin_path, false, null, 0, 2048);
+        if ($contents && preg_match('/cms_declare_plugin_type\s*\(\s*[\'"]([^\'"]+)[\'"]\s*,\s*[\'"]([^\'"]+)[\'"]/', $contents, $m)) {
+            $cms_plugin_types[$plugin_name] = $m[2];
+        } else {
+            // Default to global for backwards compatibility
+            $cms_plugin_types[$plugin_name] = CMS_PLUGIN_TYPE_GLOBAL;
+        }
+    }
+
+    $plugin_type = $cms_plugin_types[$plugin_name];
+
+    // Global plugins always load
+    if ($plugin_type === CMS_PLUGIN_TYPE_GLOBAL) {
+        return true;
+    }
+
+    // Match context to plugin type
+    return $plugin_type === $cms_plugin_context;
+}
 
 /**
  * Register a new link in the admin sidebar.
@@ -302,42 +400,70 @@ function cms_add_sidebar_entry(string $type, array $fields, int $variantId): voi
 }
 
 /**
- * Load all plugins from the /plugins directory.
+ * Load plugins from the /plugins directory.
+ *
+ * PERFORMANCE OPTIMIZATION: Context-aware plugin loading
+ * - 'admin'    : Only loads admin-type plugins (for admin panel)
+ * - 'template' : Only loads template-type plugins (for frontend rendering)
+ * - null       : Loads all plugins (backwards compatibility)
+ *
+ * @param string|null $context Loading context ('admin', 'template', or null for all)
  */
-function cms_load_plugins(): void
+function cms_load_plugins(?string $context = null): void
 {
-    static $pluginsLoaded = false;
-    if ($pluginsLoaded) {
+    global $cms_plugin_context, $cms_plugins_loaded;
+
+    // Set the loading context
+    $cms_plugin_context = $context;
+
+    // Build cache key based on context
+    $cache_suffix = $context ? '_' . $context : '';
+    $loaded_key = 'loaded' . $cache_suffix;
+
+    // Check if we've already loaded plugins for this context
+    if (isset($cms_plugins_loaded[$loaded_key]) && $cms_plugins_loaded[$loaded_key]) {
         return;
     }
 
     $cache_file = __DIR__ . '/cache/plugins.php';
-    if (file_exists($cache_file) && filemtime($cache_file) >= time() - 3600) {
-        $plugins = include $cache_file;
-        foreach ($plugins as $plugin) {
-            if (file_exists($plugin)) {
-                include_once $plugin;
-            }
-        }
-        $pluginsLoaded = true;
-        return;
-    }
-
     $pluginDir = realpath(__DIR__ . '/../plugins');
-    $foundPlugins = glob($pluginDir . '/*/plugin.php') ?: [];
-    foreach ($foundPlugins as $file) {
-        $real = realpath($file);
-        if ($real && str_starts_with($real, $pluginDir . DIRECTORY_SEPARATOR)) {
-            include $real;
+
+    // Get list of all plugins (from cache or filesystem)
+    if (file_exists($cache_file) && filemtime($cache_file) >= time() - 3600) {
+        $allPlugins = include $cache_file;
+    } else {
+        $allPlugins = glob($pluginDir . '/*/plugin.php') ?: [];
+
+        // Cache the plugin list
+        if (!is_dir(dirname($cache_file))) {
+            mkdir(dirname($cache_file), 0777, true);
         }
+        file_put_contents($cache_file, '<?php return ' . var_export($allPlugins, true) . ';');
     }
 
-    if (!is_dir(dirname($cache_file))) {
-        mkdir(dirname($cache_file), 0777, true);
-    }
-    file_put_contents($cache_file, '<?php return ' . var_export($foundPlugins, true) . ';');
+    // Load plugins that match the context
+    foreach ($allPlugins as $plugin) {
+        $real = is_string($plugin) ? realpath($plugin) : false;
+        if (!$real || !str_starts_with($real, $pluginDir . DIRECTORY_SEPARATOR)) {
+            continue;
+        }
 
-    $pluginsLoaded = true;
+        // Check if this plugin should be loaded in the current context
+        if (!cms_should_load_plugin($real)) {
+            continue;
+        }
+
+        // Skip if already loaded
+        $plugin_name = basename(dirname($real));
+        if (isset($cms_plugins_loaded[$plugin_name])) {
+            continue;
+        }
+
+        include_once $real;
+        $cms_plugins_loaded[$plugin_name] = true;
+    }
+
+    $cms_plugins_loaded[$loaded_key] = true;
 }
 
 /**

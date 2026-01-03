@@ -1,0 +1,307 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Steam 2008 User Profile View - vBulletin 3.6.10 Style -->
+<div class="steam-profile-container">
+
+    <!-- Profile Header -->
+    <table cellpadding="6" cellspacing="1" border="0" width="100%" align="center">
+    <tr>
+        <td class="thead" style="background: #3B3B37; color: #E5E5E5;">
+            <strong>User Profile: {MEMBER_PROFILE.USERNAME}</strong>
+            <!-- IF MEMBER_PROFILE.USER_RANK_TITLE -->
+            <br /><span class="rank-title">{MEMBER_PROFILE.USER_RANK_TITLE}</span>
+            <!-- ENDIF -->
+        </td>
+    </tr>
+    </table>
+
+    <!-- Main Profile Content -->
+    <table cellpadding="6" cellspacing="1" border="0" width="100%" align="center">
+    <tr valign="top">
+
+        <!-- Left Column - Avatar and Basic Info -->
+        <td class="alt2" width="175" style="background: #4A4945; color: #E5E5E5;">
+
+            <!-- Avatar -->
+            <div class="profile-avatar" align="center">
+                <!-- IF MEMBER_PROFILE.AVATAR_IMG -->
+                    {MEMBER_PROFILE.AVATAR_IMG}
+                <!-- ELSE -->
+                    <img src="{T_THEME_PATH}/images/no_avatar.gif" width="80" height="80" alt="No Avatar" style="border: 1px solid #232323;" />
+                <!-- ENDIF -->
+            </div>
+
+            <!-- Username and Status -->
+            <div class="profile-username" align="center">
+                <div class="bigusername" style="color: {MEMBER_PROFILE.USER_COLOUR}; font-size: 13px; font-weight: bold;">
+                    {MEMBER_PROFILE.USERNAME}
+                </div>
+                <!-- IF S_USER_STATUS_ENABLED -->
+                <div class="user-status" style="margin-top: 4px;">{MEMBER_STATUS_INDICATOR}</div>
+                <!-- ENDIF -->
+            </div>
+
+            <!-- Basic User Info -->
+            <div class="profile-basic-info">
+                <div class="smallfont" style="margin: 10px 0; padding: 6px; background: #363530; border: 1px solid #232323;">
+                    <strong>User Title:</strong><br />
+                    <!-- IF MEMBER_PROFILE.USER_RANK_TITLE -->
+                        {MEMBER_PROFILE.USER_RANK_TITLE}
+                    <!-- ELSE -->
+                        Steam User
+                    <!-- ENDIF -->
+                </div>
+
+                <!-- User Status Message -->
+                <!-- IF MEMBER_STATUS_MESSAGE -->
+                <div class="profile-status-message" style="margin: 10px 0; padding: 6px; background: #363530; border: 1px solid #232323;">
+                    <strong>Status:</strong><br />
+                    <em style="color: #CCCCCC;">"{MEMBER_STATUS_MESSAGE}"</em>
+                </div>
+                <!-- ENDIF -->
+
+                <!-- Steam Status -->
+                <!-- IF MEMBER_STEAM_STATUS and MEMBER_STEAM_STATUS neq 'offline' -->
+                <div class="steam-status-display" style="margin: 10px 0; padding: 6px; background: #363530; border: 1px solid #232323;">
+                    <strong>Steam:</strong><br />
+                    <span class="steam-status steam-status-{MEMBER_STEAM_STATUS}">
+                        <!-- IF MEMBER_CURRENT_GAME -->
+                            Playing: {MEMBER_CURRENT_GAME}
+                        <!-- ELSE -->
+                            {MEMBER_STEAM_STATUS}
+                        <!-- ENDIF -->
+                    </span>
+                </div>
+                <!-- ENDIF -->
+            </div>
+
+            <!-- Online/Offline Status -->
+            <div class="profile-online-status" align="center" style="padding: 8px; background: #363530; border: 1px solid #232323;">
+                <!-- IF MEMBER_PROFILE.S_ONLINE -->
+                    <img src="{T_THEME_PATH}/images/status_online.gif" alt="Online" />
+                    <strong style="color: #57CBDE;">User is Online</strong>
+                <!-- ELSE -->
+                    <img src="{T_THEME_PATH}/images/status_offline.gif" alt="Offline" />
+                    <span style="color: #999999;">User is Offline</span>
+                <!-- ENDIF -->
+
+                <!-- IF MEMBER_LAST_VISIT_FORMATTED -->
+                <br /><span class="smallfont" style="color: #CCCCCC;">Last Visit: {MEMBER_LAST_VISIT_FORMATTED}</span>
+                <!-- ENDIF -->
+            </div>
+        </td>
+
+        <!-- Right Column - Detailed Information -->
+        <td class="alt1" style="background: #363530; color: #E5E5E5;">
+
+            <!-- Profile Information -->
+            <table cellpadding="6" cellspacing="1" border="0" width="100%">
+
+            <!-- Basic Info -->
+            <tr>
+                <td class="thead" colspan="2" style="background: #3B3B37; color: #E5E5E5;">
+                    <strong>Basic Information</strong>
+                </td>
+            </tr>
+            <tr class="alt2">
+                <td width="25%" style="background: #4A4945; color: #E5E5E5;"><strong>Username:</strong></td>
+                <td style="background: #363530; color: #E5E5E5;">{MEMBER_PROFILE.USERNAME}</td>
+            </tr>
+            <tr class="alt1">
+                <td style="background: #363530; color: #E5E5E5;"><strong>Join Date:</strong></td>
+                <td style="background: #4A4945; color: #E5E5E5;">{MEMBER_PROFILE.JOINED}</td>
+            </tr>
+            <tr class="alt2">
+                <td style="background: #4A4945; color: #E5E5E5;"><strong>Total Posts:</strong></td>
+                <td style="background: #363530; color: #E5E5E5;">{MEMBER_PROFILE.POSTS}</td>
+            </tr>
+
+            <!-- Location Info -->
+            <!-- IF MEMBER_PROFILE.LOCATION -->
+            <tr class="alt1">
+                <td style="background: #363530; color: #E5E5E5;"><strong>Location:</strong></td>
+                <td style="background: #4A4945; color: #E5E5E5;">{MEMBER_PROFILE.LOCATION}</td>
+            </tr>
+            <!-- ENDIF -->
+
+            <!-- Steam Information -->
+            <tr>
+                <td class="thead" colspan="2" style="background: #3B3B37; color: #E5E5E5;">
+                    <strong>Steam Information</strong>
+                </td>
+            </tr>
+            <tr class="alt2">
+                <td style="background: #4A4945; color: #E5E5E5;"><strong>Steam Status:</strong></td>
+                <td style="background: #363530; color: #E5E5E5;">
+                    <!-- IF MEMBER_STEAM_STATUS -->
+                        <span class="steam-status steam-status-{MEMBER_STEAM_STATUS}">
+                            <!-- IF MEMBER_CURRENT_GAME -->
+                                Playing: {MEMBER_CURRENT_GAME}
+                            <!-- ELSE -->
+                                {MEMBER_STEAM_STATUS}
+                            <!-- ENDIF -->
+                        </span>
+                    <!-- ELSE -->
+                        Unknown
+                    <!-- ENDIF -->
+                </td>
+            </tr>
+            <tr class="alt1">
+                <td style="background: #363530; color: #E5E5E5;"><strong>Steam ID:</strong></td>
+                <td style="background: #4A4945; color: #E5E5E5;">
+                    <!-- IF MEMBER_STEAM_ID -->
+                        {MEMBER_STEAM_ID}
+                    <!-- ELSE -->
+                        Not specified
+                    <!-- ENDIF -->
+                </td>
+            </tr>
+            <tr class="alt2">
+                <td style="background: #4A4945; color: #E5E5E5;"><strong>Current Game:</strong></td>
+                <td style="background: #363530; color: #E5E5E5;">
+                    <!-- IF MEMBER_CURRENT_GAME -->
+                        {MEMBER_CURRENT_GAME}
+                    <!-- ELSE -->
+                        None
+                    <!-- ENDIF -->
+                </td>
+            </tr>
+
+            <!-- Contact Information -->
+            <tr>
+                <td class="thead" colspan="2" style="background: #3B3B37; color: #E5E5E5;">
+                    <strong>Contact Information</strong>
+                </td>
+            </tr>
+            <!-- IF S_LOGGED_IN and not S_IS_BOT and U_PM -->
+            <tr class="alt1">
+                <td style="background: #363530; color: #E5E5E5;"><strong>Private Message:</strong></td>
+                <td style="background: #4A4945; color: #E5E5E5;">
+                    <a href="{U_PM}" style="color: #57CBDE;">Send private message</a>
+                </td>
+            </tr>
+            <!-- ENDIF -->
+            <!-- IF MEMBER_PROFILE.WEBSITE -->
+            <tr class="alt2">
+                <td style="background: #4A4945; color: #E5E5E5;"><strong>Website:</strong></td>
+                <td style="background: #363530; color: #E5E5E5;">
+                    <a href="{MEMBER_PROFILE.WEBSITE}" target="_blank" style="color: #57CBDE;">{MEMBER_PROFILE.WEBSITE}</a>
+                </td>
+            </tr>
+            <!-- ENDIF -->
+
+            <!-- Statistics -->
+            <tr>
+                <td class="thead" colspan="2" style="background: #3B3B37; color: #E5E5E5;">
+                    <strong>Forum Statistics</strong>
+                </td>
+            </tr>
+            <tr class="alt1">
+                <td style="background: #363530; color: #E5E5E5;"><strong>Total Posts:</strong></td>
+                <td style="background: #4A4945; color: #E5E5E5;">{MEMBER_PROFILE.POSTS}</td>
+            </tr>
+            <tr class="alt2">
+                <td style="background: #4A4945; color: #E5E5E5;"><strong>Posts Per Day:</strong></td>
+                <td style="background: #363530; color: #E5E5E5;">{MEMBER_PROFILE.POSTS_PER_DAY}</td>
+            </tr>
+            <tr class="alt1">
+                <td style="background: #363530; color: #E5E5E5;"><strong>Last Activity:</strong></td>
+                <td style="background: #4A4945; color: #E5E5E5;">{MEMBER_LAST_VISIT_FORMATTED}</td>
+            </tr>
+
+            </table>
+        </td>
+    </tr>
+    </table>
+
+    <!-- User Actions -->
+    <!-- IF S_LOGGED_IN and not S_IS_BOT -->
+    <table cellpadding="6" cellspacing="1" border="0" width="100%" align="center">
+    <tr>
+        <td class="tfoot" align="center" style="background: #363530; color: #E5E5E5;">
+            <div class="profile-actions">
+                <!-- IF U_PM -->
+                <a href="{U_PM}" style="color: #57CBDE;"><img src="{T_THEME_PATH}/images/icon_pm.gif" alt="PM" border="0" /> Send Private Message</a>
+                <!-- ENDIF -->
+                <!-- IF U_EMAIL -->
+                | <a href="{U_EMAIL}" style="color: #57CBDE;"><img src="{T_THEME_PATH}/images/icon_email.gif" alt="Email" border="0" /> Send Email</a>
+                <!-- ENDIF -->
+                <!-- IF U_WWW -->
+                | <a href="{U_WWW}" target="_blank" style="color: #57CBDE;"><img src="{T_THEME_PATH}/images/icon_www.gif" alt="WWW" border="0" /> Visit Website</a>
+                <!-- ENDIF -->
+            </div>
+        </td>
+    </tr>
+    </table>
+    <!-- ENDIF -->
+
+</div>
+
+<!-- Steam 2008 Profile CSS -->
+<style type="text/css">
+.steam-profile-container {
+    margin: 10px 0;
+}
+
+.profile-avatar img {
+    border: 1px solid #232323;
+    background: #4A4945;
+    padding: 2px;
+}
+
+.profile-actions {
+    font-size: 11px;
+}
+
+.profile-actions a {
+    color: #57CBDE;
+    text-decoration: none;
+    margin: 0 8px;
+}
+
+.profile-actions a:hover {
+    text-decoration: underline;
+}
+
+.profile-actions img {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+/* Steam status styling for 2008 theme */
+.steam_2008 .steam-status {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.steam_2008 .steam-status-online {
+    background: #57cbde;
+    color: #000;
+}
+
+.steam_2008 .steam-status-busy {
+    background: #be5a38;
+    color: #fff;
+}
+
+.steam_2008 .steam-status-away {
+    background: #d4a547;
+    color: #000;
+}
+
+.steam_2008 .steam-status-in-game {
+    background: #90ba3c;
+    color: #000;
+}
+
+.steam_2008 .steam-status-offline {
+    background: #505050;
+    color: #999;
+}
+</style>
+
+<!-- INCLUDE overall_footer.html -->

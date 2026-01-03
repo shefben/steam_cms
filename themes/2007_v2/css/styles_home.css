@@ -680,7 +680,7 @@ a:hover.rightLink {
 	border-bottom-style: solid;
 	border-bottom-color: #000000;
 	list-style-type: none;
-	background-image: url('img/ico/ico_arrow_grey.gif');
+	background-image: url('img/icons/ico_arrow_grey.gif');
 	background-repeat: no-repeat;
 	background-position: -15px;
 }
@@ -697,17 +697,17 @@ a:hover.rightLink {
 	background-position: -15px;
 }
 .rightLink_newOnSteam .game {
-	background-image: url('img/ico/ico_mouse_13.gif');
+	background-image: url('img/icons/ico_mouse_13.gif');
 }
 .rightLink_newOnSteam .mod {
-	background-image: url('img/ico/ico_mod_13.gif');
+	background-image: url('img/icons/ico_mod_13.gif');
 }
 .rightLink_newOnSteam .demo {
-	background-image: url('img/ico/ico_mouse_13.gif');
+	background-image: url('img/icons/ico_mouse_13.gif');
 }
 .rightLink_newOnSteam .media {
-	background-image: url('img/ico/ico_film_13.gif');
+	background-image: url('img/icons/ico_film_13.gif');
 }
 .rightLink_newOnSteam .package {
-	background-image: url('img/ico/ico_sub_13.gif');
+	background-image: url('img/icons/ico_sub_13.gif');
 }

@@ -1,0 +1,169 @@
+<!-- INCLUDE ucp_header.html -->
+
+<!-- INCLUDE ucp_pm_message_header.html -->
+
+<!-- IF S_DISPLAY_HISTORY and (U_VIEW_PREVIOUS_HISTORY or U_VIEW_NEXT_HISTORY) -->
+<table cellpadding="3" cellspacing="0" border="0" width="100%">
+<tr>
+    <td>
+        <!-- IF U_VIEW_PREVIOUS_HISTORY -->
+        <a href="{U_VIEW_PREVIOUS_HISTORY}"><font face="verdana,arial,helvetica" size="1">&laquo; {L_VIEW_PREVIOUS_HISTORY}</font></a>
+        <!-- ENDIF -->
+    </td>
+    <td align="right">
+        <!-- IF U_VIEW_NEXT_HISTORY -->
+        <a href="{U_VIEW_NEXT_HISTORY}"><font face="verdana,arial,helvetica" size="1">{L_VIEW_NEXT_HISTORY} &raquo;</font></a>
+        <!-- ENDIF -->
+    </td>
+</tr>
+</table>
+<!-- ENDIF -->
+
+<form id="viewfolder" method="post" action="{S_PM_ACTION}">
+
+<!-- Message Display -->
+<table cellpadding="3" cellspacing="1" border="0" width="100%">
+<tr bgcolor="#424B3C">
+    <td colspan="2">
+        <font face="verdana,arial,helvetica" size="2" color="#D8DED3"><b>{SUBJECT}</b></font>
+    </td>
+</tr>
+<tr bgcolor="#4C5844">
+    <td width="150" valign="top">
+        <!-- Author Info -->
+        <font face="verdana,arial,helvetica" size="2"><b>{MESSAGE_AUTHOR_FULL}</b></font><br />
+        <!-- IF AUTHOR_AVATAR -->
+        <br />{AUTHOR_AVATAR}<br />
+        <!-- ENDIF -->
+        <!-- IF RANK_TITLE or RANK_IMG -->
+        <font face="verdana,arial,helvetica" size="1">{RANK_TITLE}</font><br />
+        <!-- IF RANK_IMG -->{RANK_IMG}<br /><!-- ENDIF -->
+        <!-- ENDIF -->
+        <br />
+        <font face="verdana,arial,helvetica" size="1">
+            <b>{L_POSTS}:</b> <!-- IF U_AUTHOR_POSTS != '' --><a href="{U_AUTHOR_POSTS}">{AUTHOR_POSTS}</a><!-- ELSE -->{AUTHOR_POSTS}<!-- ENDIF --><br />
+            <!-- IF AUTHOR_JOINED --><b>{L_JOINED}:</b> {AUTHOR_JOINED}<br /><!-- ENDIF -->
+        </font>
+
+        <!-- BEGIN custom_fields -->
+            <!-- IF not custom_fields.S_PROFILE_CONTACT -->
+            <font face="verdana,arial,helvetica" size="1">
+                <b>{custom_fields.PROFILE_FIELD_NAME}:</b> {custom_fields.PROFILE_FIELD_VALUE}<br />
+            </font>
+            <!-- ENDIF -->
+        <!-- END custom_fields -->
+    </td>
+    <td valign="top">
+        <!-- Message Header -->
+        <table cellpadding="2" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td>
+                <font face="verdana,arial,helvetica" size="1">
+                    <b>{L_SENT_AT}:</b> {SENT_DATE}<br />
+                    <b>{L_PM_FROM}:</b> {MESSAGE_AUTHOR_FULL}<br />
+                    <!-- IF S_TO_RECIPIENT -->
+                    <b>{L_TO}:</b> <!-- BEGIN to_recipient --><!-- IF to_recipient.NAME_FULL -->{to_recipient.NAME_FULL}<!-- ELSE --><a href="{to_recipient.U_VIEW}"<!-- IF to_recipient.COLOUR --> style="color:{to_recipient.COLOUR};"<!-- ENDIF -->><b>{to_recipient.NAME}</b></a><!-- ENDIF --> <!-- END to_recipient --><br />
+                    <!-- ENDIF -->
+                    <!-- IF S_BCC_RECIPIENT -->
+                    <b>{L_BCC}:</b> <!-- BEGIN bcc_recipient --><!-- IF bcc_recipient.NAME_FULL -->{bcc_recipient.NAME_FULL}<!-- ELSE --><a href="{bcc_recipient.U_VIEW}"<!-- IF bcc_recipient.COLOUR --> style="color:{bcc_recipient.COLOUR};"<!-- ENDIF -->><b>{bcc_recipient.NAME}</b></a><!-- ENDIF --> <!-- END bcc_recipient --><br />
+                    <!-- ENDIF -->
+                </font>
+            </td>
+            <td align="right" valign="top">
+                <!-- IF U_EDIT or U_DELETE or U_REPORT or U_QUOTE -->
+                <font face="verdana,arial,helvetica" size="1">
+                    <!-- IF U_QUOTE --><a href="{U_QUOTE}">[{L_POST_QUOTE_PM}]</a> <!-- ENDIF -->
+                    <!-- IF U_EDIT --><a href="{U_EDIT}">[{L_POST_EDIT_PM}]</a> <!-- ENDIF -->
+                    <!-- IF U_DELETE --><a href="{U_DELETE}">[{L_DELETE_MESSAGE}]</a> <!-- ENDIF -->
+                    <!-- IF U_REPORT --><a href="{U_REPORT}">[{L_REPORT_PM}]</a><!-- ENDIF -->
+                </font>
+                <!-- ENDIF -->
+            </td>
+        </tr>
+        </table>
+
+        <hr size="1" />
+
+        <!-- Message Content -->
+        <font face="verdana,arial,helvetica" size="2">
+            {MESSAGE}
+        </font>
+
+        <!-- IF S_HAS_ATTACHMENTS -->
+        <br /><br />
+        <font face="verdana,arial,helvetica" size="1"><b>{L_ATTACHMENTS}</b></font><br />
+        <!-- BEGIN attachment -->
+        {attachment.DISPLAY_ATTACHMENT}<br />
+        <!-- END attachment -->
+        <!-- ENDIF -->
+
+        <!-- IF S_DISPLAY_NOTICE -->
+        <br />
+        <font face="verdana,arial,helvetica" size="1" color="#FF6600">{L_DOWNLOAD_NOTICE}</font>
+        <!-- ENDIF -->
+
+        <!-- IF EDITED_MESSAGE or EDIT_REASON -->
+        <br /><br />
+        <font face="verdana,arial,helvetica" size="1">
+            {EDITED_MESSAGE}
+            <!-- IF EDIT_REASON --><br /><b>{L_REASON}:</b> <em>{EDIT_REASON}</em><!-- ENDIF -->
+        </font>
+        <!-- ENDIF -->
+
+        <!-- IF SIGNATURE -->
+        <br /><hr size="1" />
+        <font face="verdana,arial,helvetica" size="1">{SIGNATURE}</font>
+        <!-- ENDIF -->
+    </td>
+</tr>
+</table>
+
+<!-- IF S_VIEW_MESSAGE -->
+<br />
+<table cellpadding="3" cellspacing="0" border="0" width="100%">
+<tr>
+    <td>
+        <font face="verdana,arial,helvetica" size="1">
+            <!-- IF S_MARK_OPTIONS -->
+            <select name="mark_option" class="bginput">{S_MARK_OPTIONS}</select>
+            <input class="bginput" type="submit" name="submit_mark" value="{L_GO}" />
+            <!-- ENDIF -->
+        </font>
+    </td>
+    <td align="center">
+        <font face="verdana,arial,helvetica" size="1">
+            <!-- IF U_PREVIOUS_PM -->
+            <a href="{U_PREVIOUS_PM}">&laquo; {L_VIEW_PREVIOUS_PM}</a>
+            <!-- ENDIF -->
+            <!-- IF U_PREVIOUS_PM and U_NEXT_PM --> | <!-- ENDIF -->
+            <!-- IF U_NEXT_PM -->
+            <a href="{U_NEXT_PM}">{L_VIEW_NEXT_PM} &raquo;</a>
+            <!-- ENDIF -->
+        </font>
+    </td>
+    <td align="right">
+        <font face="verdana,arial,helvetica" size="1">
+            <!-- IF not S_UNREAD and not S_SPECIAL_FOLDER -->
+            {L_MOVE_TO_FOLDER}:
+            <select name="dest_folder" class="bginput">{S_TO_FOLDER_OPTIONS}</select>
+            <input class="bginput" type="submit" name="move_pm" value="{L_GO}" />
+            <!-- ENDIF -->
+        </font>
+    </td>
+</tr>
+</table>
+<input type="hidden" name="marked_msg_id[]" value="{MSG_ID}" />
+<input type="hidden" name="cur_folder_id" value="{CUR_FOLDER_ID}" />
+<input type="hidden" name="p" value="{MSG_ID}" />
+{S_FORM_TOKEN}
+<!-- ENDIF -->
+
+</form>
+
+<!-- INCLUDE ucp_pm_message_footer.html -->
+
+<!-- IF S_DISPLAY_HISTORY -->
+<!-- INCLUDE ucp_pm_history.html -->
+<!-- ENDIF -->
+
+<!-- INCLUDE ucp_footer.html -->

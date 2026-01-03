@@ -1,0 +1,420 @@
+/*
+Steam 2011 phpBB Style
+Based on vBulletin 3.8.7 "v5 vb386 REL" archived forum from 2011
+Colors extracted from archived steampowered.com forum pages
+*/
+
+/* General page styling */
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 75%;
+    color: #dddddd;
+    background-color: #000000;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+}
+
+/* Links */
+a:link {
+    color: #DFDCD6;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #DFDCD6;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    color: #6EBCFF;
+    text-decoration: underline;
+}
+
+/* Main table border */
+.tborder {
+    background: #000000;
+    border: 1px solid #232323;
+}
+
+/* Category headers */
+.tcat {
+    background: #537aa8 url({T_THEME_PATH}/images/maincol_bg_v5_g.png) repeat-y right;
+    color: #CFCBC2;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px;
+    border-top: 1px solid #537aa8;
+}
+
+.tcat a:link {
+    color: #E5E4DC;
+}
+
+.tcat a:hover, .tcat a:active {
+    color: silver;
+}
+
+/* Thread headers */
+.thead {
+    background: #2d415d;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px;
+}
+
+.thead a:link {
+    color: #FFFFFF;
+}
+
+.thead a:hover, .thead a:active {
+    color: silver;
+}
+
+/* Footer */
+.tfoot {
+    background: #262626;
+    color: #dddddd;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px;
+}
+
+/* Alternating row colors */
+.alt1, .alt1Active {
+    background: #262626;
+    color: #dddddd;
+}
+
+.alt2, .alt2Active {
+    background: #262626;
+    color: #dddddd;
+}
+
+/* Forum rows */
+.row1 {
+    background: #262626;
+    padding: 6px;
+}
+
+.row2 {
+    background: #262626;
+    padding: 6px;
+}
+
+.row3 {
+    background: #2d415d;
+    padding: 6px;
+}
+
+/* Input fields and forms */
+input, textarea, select {
+    background-color: #262626;
+    color: #dddddd;
+    border: 1px solid #232323;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    padding: 2px;
+}
+
+/* Buttons */
+.button {
+    font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+    background-color: #2d415d;
+    color: #FFFFFF;
+    border: 1px solid #232323;
+    padding: 2px 6px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #537aa8;
+    color: #FFFFFF;
+}
+
+/* Small font */
+.smallfont {
+    font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+    color: #dddddd;
+}
+
+/* Time display */
+.time {
+    color: #FFFFFF;
+    font-size: 11px;
+}
+
+/* Navigation bar */
+.navbar {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #D6D7D8;
+    font-size: 16px;
+    background-color: #000000;
+    padding: 6px;
+}
+
+/* Highlighting */
+.highlight {
+    color: #FF0000;
+    font-weight: bold;
+}
+
+/* Panels */
+.panel {
+    background: #262626;
+    color: #d0d0d0;
+    padding: 10px;
+    border: 1px solid #232323;
+}
+
+.panelsurround {
+    background: #262626;
+    color: #d0d0d0;
+    border: 1px solid #232323;
+}
+
+/* Menu controls */
+.vbmenu_control {
+    background: #2d415d;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 6px 3px 6px;
+    white-space: nowrap;
+    border: 1px solid #232323;
+}
+
+.vbmenu_control a:link {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.vbmenu_control a:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.vbmenu_control a:hover, .vbmenu_control a:active {
+    color: #CFCBC2;
+    text-decoration: none;
+}
+
+/* Menu popups */
+.vbmenu_popup {
+    background: #525252;
+    color: #ABACAD;
+    border: solid 1px #232323;
+}
+
+.vbmenu_option {
+    background: #4A4945;
+    color: #ABACAD;
+    font-size: 11px;
+    white-space: nowrap;
+    cursor: pointer;
+    border: solid 1px #232323;
+    padding: 2px 6px;
+}
+
+.vbmenu_option a:link, .vbmenu_option a:visited {
+    color: #6EBCFF;
+}
+
+.vbmenu_option a:hover, .vbmenu_option a:active {
+    color: #6EBCFF;
+}
+
+.vbmenu_hilite {
+    background: #4A4945;
+    color: #6EBCFF;
+    font-size: 11px;
+    white-space: nowrap;
+    cursor: pointer;
+    border: solid 1px #232323;
+    padding: 2px 6px;
+}
+
+.vbmenu_hilite a:link, .vbmenu_hilite a:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.vbmenu_hilite a:hover, .vbmenu_hilite a:active {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/* Forum-specific styles */
+.forumbit_post {
+    background: #262626;
+    padding: 6px;
+    border-bottom: 1px solid #232323;
+}
+
+.forumtitle {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.forumtitle a:link, .forumtitle a:visited {
+    color: #6EBCFF;
+    text-decoration: none;
+}
+
+.forumtitle a:hover, .forumtitle a:active {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.forumdesc {
+    color: #dddddd;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.forumstats {
+    color: #dddddd;
+    font-size: 11px;
+}
+
+.foruminfo {
+    background: #262626;
+    padding: 6px;
+}
+
+/* Post styling */
+.postbit, .postbitlegacy {
+    background: #262626;
+    border: 1px solid #232323;
+    margin-bottom: 6px;
+}
+
+.postbody {
+    padding: 6px;
+    color: #dddddd;
+    line-height: 1.4;
+}
+
+.posttitle {
+    font-weight: bold;
+    color: #6EBCFF;
+    margin-bottom: 6px;
+}
+
+.postinfo {
+    background: #2d415d;
+    color: #FFFFFF;
+    padding: 4px 6px;
+    font-size: 11px;
+    border-bottom: 1px solid #232323;
+}
+
+/* User info in posts */
+.userinfo {
+    background: #262626;
+    padding: 6px;
+    border-right: 1px solid #232323;
+    vertical-align: top;
+    width: 160px;
+}
+
+.username {
+    font-weight: bold;
+    color: #6EBCFF;
+}
+
+.usertitle {
+    color: #dddddd;
+    font-size: 11px;
+}
+
+/* Pagination */
+.pagenav {
+    color: #dddddd;
+    font-size: 11px;
+}
+
+.pagenav a {
+    color: #6EBCFF;
+    text-decoration: none;
+    padding: 2px 4px;
+}
+
+.pagenav a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+/* Thread info */
+.threadinfo {
+    background: #262626;
+    padding: 4px;
+    border: 1px solid #232323;
+    margin: 4px 0;
+}
+
+/* Search highlighting */
+.searchmatch {
+    background-color: #537aa8;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+/* Big usernames */
+.bigusername {
+    font-size: 14pt;
+    color: #6EBCFF;
+    font-weight: bold;
+}
+
+/* De-emphasized text */
+.shade, a.shade:link, a.shade:visited {
+    color: #777777;
+    text-decoration: none;
+}
+
+a.shade:active, a.shade:hover {
+    color: #FF4400;
+    text-decoration: underline;
+}
+
+.tcat .shade, .thead .shade, .tfoot .shade {
+    color: #DDDDDD;
+}
+
+/* Fieldsets */
+.fieldset {
+    margin-bottom: 6px;
+    border: 1px solid #232323;
+    background: #262626;
+}
+
+.fieldset td, .fieldset p, .fieldset li {
+    font-size: 11px;
+    color: #dddddd;
+}
+
+legend {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    background: #2d415d;
+    padding: 2px 6px;
+    border: 1px solid #232323;
+}
+
+/* Global header wrapper to match 2011 design */
+#wrapper {
+    float: left;
+    width: 100%;
+    text-align: center;
+    background-color: #000000;
+}
+
+#content {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    width: 960px;
+    margin: auto;
+    padding: 0 0 10px 0;
+    text-align: left;
+}

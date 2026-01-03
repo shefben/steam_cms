@@ -141,7 +141,7 @@ if(isset($_GET['ajax'])){
 }
 
 $contestEnd = cms_get_setting('MapContest','0') === '1';
-$banner = ($base ? rtrim($base, '/').'/' : '/').'archived_steampowered/2005/v1/img/map_contest/ProductBanner_HL2DM.jpg';
+$banner = ($base ? rtrim($base, '/').'/' : '/').'images/map_contest/ProductBanner_HL2DM.jpg';
 $content = '';
 if ($contestEnd) {
     $content = <<<HTML

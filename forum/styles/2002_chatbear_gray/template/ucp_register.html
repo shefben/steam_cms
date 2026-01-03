@@ -1,0 +1,180 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Registration Form -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<tr>
+    <td>
+        <table cellpadding="4" cellspacing="1" border="0" width="100%">
+        <tr>
+            <td bgcolor="#3E4637" colspan="2" align="center">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_REGISTRATION}</b></font>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#545F4E" colspan="2">
+                <form id="register" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+                <!-- IF ERROR -->
+                <table cellpadding="3" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td bgcolor="#424B3C" align="center">
+                        <font face="verdana,arial,helvetica" size="2" color="#FF6600"><b>{ERROR}</b></font>
+                    </td>
+                </tr>
+                </table>
+                <br />
+                <!-- ENDIF -->
+
+                <!-- IF L_REG_COND -->
+                <table cellpadding="3" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td bgcolor="#424B3C">
+                        <font face="verdana,arial,helvetica" size="2"><b>{L_REG_COND}</b></font>
+                    </td>
+                </tr>
+                </table>
+                <br />
+                <!-- ENDIF -->
+
+                <font face="verdana,arial,helvetica" size="2">
+                    {L_ITEMS_REQUIRED}
+                </font>
+                <br /><br />
+
+                <table cellpadding="3" cellspacing="1" border="0" width="100%">
+                <tr bgcolor="#424B3C">
+                    <td colspan="2">
+                        <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_REGISTRATION}</b></font>
+                    </td>
+                </tr>
+                <tr bgcolor="#4C5844">
+                    <td width="30%">
+                        <font face="verdana,arial,helvetica" size="2">{L_USERNAME}: *</font><br />
+                        <font face="verdana,arial,helvetica" size="1">{L_USERNAME_EXPLAIN}</font>
+                    </td>
+                    <td width="70%">
+                        <input type="text" tabindex="1" name="username" id="username" size="25" maxlength="40" value="{USERNAME}" class="bginput" />
+                    </td>
+                </tr>
+                <tr bgcolor="#545F4E">
+                    <td width="30%">
+                        <font face="verdana,arial,helvetica" size="2">{L_EMAIL_ADDRESS}: *</font>
+                    </td>
+                    <td width="70%">
+                        <input type="email" tabindex="2" name="email" id="email" size="25" maxlength="100" value="{EMAIL}" class="bginput" />
+                    </td>
+                </tr>
+                <tr bgcolor="#4C5844">
+                    <td width="30%">
+                        <font face="verdana,arial,helvetica" size="2">{L_PASSWORD}: *</font><br />
+                        <font face="verdana,arial,helvetica" size="1">{L_PASSWORD_EXPLAIN}</font>
+                    </td>
+                    <td width="70%">
+                        <input type="password" tabindex="3" name="new_password" id="new_password" size="25" maxlength="32" value="{PASSWORD}" class="bginput" />
+                    </td>
+                </tr>
+                <tr bgcolor="#545F4E">
+                    <td width="30%">
+                        <font face="verdana,arial,helvetica" size="2">{L_CONFIRM_PASSWORD}: *</font>
+                    </td>
+                    <td width="70%">
+                        <input type="password" tabindex="4" name="password_confirm" id="password_confirm" size="25" maxlength="32" value="{PASSWORD_CONFIRM}" class="bginput" />
+                    </td>
+                </tr>
+                </table>
+
+                <!-- IF S_LANG_OPTIONS -->
+                <br />
+                <table cellpadding="3" cellspacing="1" border="0" width="100%">
+                <tr bgcolor="#424B3C">
+                    <td colspan="2">
+                        <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_PREFERENCES}</b></font>
+                    </td>
+                </tr>
+                <tr bgcolor="#4C5844">
+                    <td width="30%">
+                        <font face="verdana,arial,helvetica" size="2">{L_LANGUAGE}:</font>
+                    </td>
+                    <td width="70%">
+                        <select name="lang" id="lang" tabindex="5">{S_LANG_OPTIONS}</select>
+                    </td>
+                </tr>
+                </table>
+                <!-- ENDIF -->
+
+                <!-- BEGIN profile_fields -->
+                <br />
+                <table cellpadding="3" cellspacing="1" border="0" width="100%">
+                <!-- IF profile_fields.S_FIRST_ROW -->
+                <tr bgcolor="#424B3C">
+                    <td colspan="2">
+                        <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_PROFILE}</b></font>
+                    </td>
+                </tr>
+                <!-- ENDIF -->
+                <tr bgcolor="<!-- IF profile_fields.S_ROW_COUNT is odd -->#4C5844<!-- ELSE -->#545F4E<!-- ENDIF -->">
+                    <td width="30%">
+                        <font face="verdana,arial,helvetica" size="2">{profile_fields.LANG_NAME}:<!-- IF profile_fields.S_REQUIRED --> *<!-- ENDIF --></font>
+                        <!-- IF profile_fields.LANG_EXPLAIN --><br /><font face="verdana,arial,helvetica" size="1">{profile_fields.LANG_EXPLAIN}</font><!-- ENDIF -->
+                        <!-- IF profile_fields.ERROR --><br /><font face="verdana,arial,helvetica" size="1" color="#FF6600">{profile_fields.ERROR}</font><!-- ENDIF -->
+                    </td>
+                    <td width="70%">
+                        {profile_fields.FIELD}
+                    </td>
+                </tr>
+                <!-- END profile_fields -->
+                </table>
+
+                <!-- IF CAPTCHA_TEMPLATE -->
+                <br />
+                <table cellpadding="3" cellspacing="1" border="0" width="100%">
+                <tr bgcolor="#424B3C">
+                    <td colspan="2">
+                        <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_CONFIRMATION}</b></font>
+                    </td>
+                </tr>
+                <tr bgcolor="#4C5844">
+                    <td colspan="2">
+                        <!-- DEFINE $CAPTCHA_TAB_INDEX = 8 -->
+                        <!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+                    </td>
+                </tr>
+                </table>
+                <!-- ENDIF -->
+
+                <!-- IF S_COPPA -->
+                <br />
+                <table cellpadding="3" cellspacing="1" border="0" width="100%">
+                <tr bgcolor="#424B3C">
+                    <td>
+                        <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_COPPA_COMPLIANCE}</b></font>
+                    </td>
+                </tr>
+                <tr bgcolor="#4C5844">
+                    <td>
+                        <font face="verdana,arial,helvetica" size="2">{L_COPPA_EXPLAIN}</font>
+                    </td>
+                </tr>
+                </table>
+                <!-- ENDIF -->
+
+                <br />
+                <table cellpadding="3" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td align="center">
+                        {S_HIDDEN_FIELDS}
+                        <input type="submit" tabindex="9" name="submit" id="submit" value="{L_SUBMIT}" class="bginput" />
+                        {S_FORM_TOKEN}
+                    </td>
+                </tr>
+                </table>
+
+                </form>
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->

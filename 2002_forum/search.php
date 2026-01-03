@@ -94,7 +94,7 @@ cb_header('Search Board – '.$board['name']);
         <tr><td>
           <p align="right">
             <a href="board.php?boardid=<?=$boardId?>">
-              <img src="images/buttons/grey/returntoboard.gif" width="88" height="19" border="0">
+              <img src="../images/2002_forum/buttons/grey/returntoboard.gif" width="88" height="19" border="0">
             </a>
           </p>
           <p align="left">

@@ -1,0 +1,448 @@
+/**
+ * Fancybox 5 CSS - Downloaded from CDN
+ * @version 5.0
+ */
+
+:root {
+  --fancybox-bg: rgba(24, 24, 27, 0.92);
+  --fancybox-color: #f4f4f5;
+  --fancybox-bg-accent: rgb(59, 130, 246);
+  --fancybox-accent: rgb(59, 130, 246);
+}
+
+.fancybox__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1050;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+}
+
+.fancybox__container * {
+  box-sizing: border-box;
+}
+
+.fancybox__container:not(.is-compact) .fancybox__backdrop {
+  background: var(--fancybox-bg);
+}
+
+.fancybox__backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.25s cubic-bezier(0.47, 0, 0.745, 0.715);
+}
+
+.fancybox__container.is-animated .fancybox__backdrop {
+  opacity: 1;
+}
+
+.fancybox__carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  z-index: 20;
+}
+
+.fancybox__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.fancybox__slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 64px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: none;
+}
+
+.fancybox__slide::before,
+.fancybox__slide::after {
+  content: "";
+  flex: 0 0 0;
+  height: 0;
+}
+
+.fancybox__slide .fancybox__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  min-height: 1px;
+  color: var(--fancybox-color);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.7;
+}
+
+.fancybox__slide .fancybox__content > * {
+  max-width: 100%;
+  height: auto;
+}
+
+.fancybox__slide.has-iframe .fancybox__content,
+.fancybox__slide.has-map .fancybox__content,
+.fancybox__slide.has-pdf .fancybox__content,
+.fancybox__slide.has-video .fancybox__content,
+.fancybox__slide.has-html5video .fancybox__content {
+  max-width: 100%;
+  flex-shrink: 1;
+  min-height: 1px;
+}
+
+.fancybox__slide.has-iframe iframe,
+.fancybox__slide.has-map iframe,
+.fancybox__slide.has-pdf iframe,
+.fancybox__slide.has-video video,
+.fancybox__slide.has-html5video video {
+  background: transparent;
+  border: 0;
+  display: block;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+}
+
+.fancybox__slide.has-image .fancybox__content {
+  overflow: visible;
+}
+
+.fancybox__slide.has-image img {
+  position: relative;
+  border: 0;
+  border-radius: 0;
+  cursor: default;
+  display: block;
+  height: auto;
+  margin: 0;
+  max-height: none;
+  max-width: 100%;
+  padding: 0;
+  width: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.fancybox__slide.is-selected .fancybox__content {
+  opacity: 1;
+}
+
+.fancybox__slide.can-zoom-in img,
+.fancybox__slide.can-zoom-out img {
+  cursor: pointer;
+}
+
+.fancybox__slide.is-dragging * {
+  cursor: grabbing!important;
+}
+
+.fancybox__slide.has-spinner .fancybox__content,
+.fancybox__slide.is-loading .fancybox__content {
+  min-height: 6rem;
+}
+
+.fancybox__slide.has-spinner .fancybox__content::after,
+.fancybox__slide.is-loading .fancybox__content::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  color: var(--fancybox-accent);
+  border: 3px solid currentColor;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: fancybox-rotate 1s linear infinite;
+}
+
+.fancybox__slide.has-error .fancybox__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 6rem;
+}
+
+.fancybox__slide.has-error .fancybox__content::after {
+  content: "⚠";
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  color: var(--fancybox-accent);
+}
+
+@keyframes fancybox-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.fancybox__button {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  line-height: 1;
+  margin: 0;
+  padding: 6px;
+  border: 0;
+  background: transparent;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  color: var(--fancybox-color);
+  opacity: 0.8;
+  transition: all 0.2s ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fancybox__button:hover,
+.fancybox__button:focus {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.fancybox__button:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.fancybox__button svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  fill: currentColor;
+}
+
+.fancybox__button--close svg {
+  width: 18px;
+  height: 18px;
+}
+
+.fancybox__button--fullscreen svg,
+.fancybox__button--slideshow svg,
+.fancybox__button--thumbs svg,
+.fancybox__button--zoom svg {
+  width: 20px;
+  height: 20px;
+}
+
+.fancybox__button--prev,
+.fancybox__button--next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+}
+
+.fancybox__button--prev {
+  left: 24px;
+}
+
+.fancybox__button--next {
+  right: 24px;
+}
+
+.fancybox__button--prev svg,
+.fancybox__button--next svg {
+  width: 28px;
+  height: 28px;
+}
+
+.fancybox__toolbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+  padding: 12px;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.fancybox__toolbar > * {
+  pointer-events: auto;
+  flex-shrink: 0;
+}
+
+.fancybox__counter {
+  min-width: 72px;
+  margin: 0 8px;
+  padding: 0 12px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--fancybox-color);
+  opacity: 0.7;
+}
+
+.fancybox__progress {
+  background: var(--fancybox-accent);
+  height: 3px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: scaleX(0);
+  transform-origin: 0;
+  transition: transform 0.33s linear;
+  z-index: 30;
+}
+
+.fancybox__container.is-compact .fancybox__slide {
+  padding: 44px 0;
+}
+
+.fancybox__container.is-compact .fancybox__button--prev {
+  left: 8px;
+}
+
+.fancybox__container.is-compact .fancybox__button--next {
+  right: 8px;
+}
+
+.fancybox__container.is-compact .fancybox__toolbar {
+  padding: 8px;
+}
+
+@media all and (max-height: 576px) {
+  .fancybox__slide {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .fancybox__slide {
+    padding: 44px 12px;
+  }
+  
+  .fancybox__button--prev {
+    left: 12px;
+  }
+  
+  .fancybox__button--next {
+    right: 12px;
+  }
+}
+
+.fancybox__thumbs {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  z-index: 30;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 44px);
+  padding: 12px 44px 0;
+}
+
+.fancybox__thumbs .carousel__track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 0 12px 0;
+}
+
+.fancybox__thumb {
+  width: 66px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  background-repeat: no-repeat;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.fancybox__thumb::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  border: 2px solid currentColor;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.fancybox__thumb.is-nav-selected {
+  opacity: 1;
+  border-color: var(--fancybox-accent);
+}
+
+.fancybox__thumb.is-nav-selected::after {
+  opacity: 1;
+}
+
+@media all and (max-width: 768px) {
+  .fancybox__thumbs {
+    padding: 12px 12px 0;
+  }
+  
+  .fancybox__thumb {
+    width: 54px;
+    height: 32px;
+  }
+}

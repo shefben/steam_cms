@@ -1,0 +1,240 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<head>
+<title>UO Trace</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name="generator" content="RoboHelp by eHelp Corporation www.ehelp.com">
+<link rel="stylesheet" href="../default_ns.css"><script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='../default.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute; left:0px; top:0px; z-index:4; visibility:hidden; }
+-->
+</style><script type="text/javascript" language="javascript1.2" src="../whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="../whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js"></script>
+</head>
+<body><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Online Connectivity and Performance Troubleshooting\nUO Trace");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("../Electronic_Arts_Technical_Support.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<h1>UO Trace</h1>
+
+<p><em>UO Trace</em> 
+ &nbsp;will allow you to find out exactly where any problems in your Internet 
+ connection may be occurring. If you are online, <a href="ftp://ftp.ea.com/pub/ez/support_files/uotrace.exe"
+													target=_blank>click 
+ here</a> to get the program. Click once on the link, and save it to your 
+ computer's desktop.&nbsp;</p>
+
+<ol>
+	
+	<li class=kadov-p
+		class=kadov-p>Double-click on the <strong><em>uotrace.exe</em></strong> 
+ to run it. </li>
+	
+	<li class=kadov-p
+		class=kadov-p>You will be asked if you wish to download the server 
+ list. Answer <strong>No</strong> to the question. (this option is no longer 
+ available) </li>
+	
+	<li class=kadov-p
+		class=kadov-p>Click on the <strong>Options</strong> menu then select 
+ <strong>Advanced</strong>. </li>
+	
+	<li class=kadov-p
+		class=kadov-p>Enter in the name of the server you are trying to 
+ connect to. This can either be an IP 
+ address or a web address without the www (ea.com 
+ for example) </li>
+	
+	<li class=kadov-p
+		class=kadov-p>Click on the <strong>Trace Route</strong> button. 
+ A succession of host names will begin to appear in the main window. These 
+ are the computers your data passes through on its way to the <em>UO</em> 
+ Server. Once the function is complete, a message that says <strong><em>Traceroute 
+ successful</em></strong> will appear in the lower left corner of the window. 
+ </li>
+	
+	<ul>
+		
+		<li class=kadov-p
+			class=kadov-p>If you get a message saying <strong><em>Maximum 
+ number of hops exceeded</em></strong> : </li>
+		
+		<ul>
+			
+			<li class=kadov-p
+				class=kadov-p>Click on <strong>Options</strong></li>
+			
+			<li class=kadov-p
+				class=kadov-p>Then click on <strong>Settings</strong></li>
+			
+			<li class=kadov-p
+				class=kadov-p>Change the max hops to a higher number and 
+ re-trace. </li>
+		</ul>
+	</ul>
+	
+	<li class=kadov-p
+		class=kadov-p>To the left of each host name there is a shield icon. 
+ These should be green, indicating no problems. </li>
+	
+	<li class=kadov-p
+		class=kadov-p>Select the <strong>Poll</strong> button.&nbsp; This 
+ tells the program to send packets of data through the route to the final 
+ host. As the data is being sent, look at the &quot;pkts 
+ r/s&quot; column. 
+ Let it send about <strong>40</strong> packets then select <strong>Stop 
+ Poll</strong>. </li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p>How to interpret the results:</p>
+
+<ul>
+	
+	<li class=kadov-p
+		class=kadov-p><strong style="font-weight: bold;"><em style="font-style: italic;">Host 
+ names/servers</em></strong> &nbsp;- These are the individual computers 
+ that make up the Internet. The connection you make to the server may travel 
+ through 15-25 individual hosts before reaching it. Problems suffered by 
+ these hosts can cause poor game performance. The shield icons next to 
+ the host names give a graphical display of quality.&nbsp; Green indicating 
+ a good connection and as it worsens, the colors pass through various shades 
+ of yellow, red, gray, and finally, black. </li>
+	
+	<li class=kadov-p
+		class=kadov-p><strong style="font-weight: bold;"><em style="font-style: italic;">Ping 
+ Average</em></strong> &nbsp;&amp;ndash; 
+ Most games use the <strong>TCP/IP</strong> protocol that sends data in 
+ the form of packets. A ping time is the amount of time it takes for a 
+ packet of data to be sent from your computer to a host server. </li>
+	
+	<ul>
+		
+		<li class=kadov-p
+			class=kadov-p>If you are getting pings that are higher than 
+ <strong>200ms</strong> then you will notice a bit of latency in the game. 
+ </li>
+		
+		<li class=kadov-p
+			class=kadov-p>If the ping for a particular host is too high 
+ (<strong>above 225ms</strong>) it usually signifies that the host you 
+ are testing is either receiving more traffic than it can effectively handle, 
+ or is having some type of technical issue. </li>
+	</ul>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>A high ping will cause your client to not be able to communicate fast 
+ enough with the server for the game to maintain fluid motion. This will 
+ result in your game's movements appearing jerky and you will notice that 
+ the players around you seem to be able to move much faster than you can. 
+ This is due to the fact that the other players are most likely taking 
+ a different route to the server and are not being affected by the problem.&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>If you consistently notice high ping times, contact your ISP and discuss 
+ the problem with them. Be sure to have a list of the problem hosts or 
+ to actually be running <strong><em>UOtrace</em></strong> while you are 
+ speaking with them.&nbsp;</p>
+
+<p>There will be some routers that your data will pass through that are 
+ independent companies and your ISP may not have any influence over them. 
+ In this case you can use the nifty <strong><em>Who is?</em></strong>&nbsp;feature 
+ of <strong><em>UOtrace.</em></strong></p>
+
+<ol>
+	
+	<li class=kadov-p
+		class=kadov-p>Simply right-click on a host name </li>
+	
+	<li class=kadov-p
+		class=kadov-p>Select <strong>Who is?</strong></li>
+	
+	<li class=kadov-p
+		class=kadov-p>You will be given information about that hop, usually 
+ including an email address and telephone numbers which you can use to 
+ contact them yourself. </li>
+</ol>
+
+<ul>
+	
+	<li class=kadov-p
+		class=kadov-p><strong style="font-weight: bold;"><em style="font-style: italic;">% 
+ Loss</em></strong> &nbsp;- This is the percentage of packets that are 
+ being lost. In other words, you are sending information to or through 
+ that host and the host is either not receiving the data or is not able 
+ to return it to you. Any packet loss is a sign of some type of problem. 
+ These problems could be caused by hardware issues at the host server, 
+ bottlenecking (too many users communicating through that host), telephone 
+ line noise, and other causes. </li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>Most packet loss issues are generally resolved quickly by the hosts 
+ (a matter of minutes), although some may take several days to resolve. 
+ If you consistently notice packet loss, you should contact your provider 
+ to discuss possible solutions. You may also consider trying a different 
+ ISP.</p>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+</html>

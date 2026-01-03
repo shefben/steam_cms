@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Steam: Game and Player Statistics</title>
+<link href="styles_global.css" rel="stylesheet" type="text/css"/>
+<link href="styles_content.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+div.statsTop {
+    width:auto;
+    text-align:center;
+}
+.statsTop table {
+    margin-left:15px;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:16px;
+    font-weight:normal;
+    color:#787878;
+}
+.statsTop td {
+    padding-top:2px;
+    padding-bottom:3px;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:11px;
+}
+.statsTopHi {
+    color:#c98d33;
+    font-weight:bold;
+}
+.statsTopHi2 {
+    color:#787878;
+    font-weight:bold;
+}
+.statsTopSmall {
+    font-size:11px;
+}
+.centeredDiv {
+    text-align:center;
+}
+td a {
+    color:#c98d33;
+    font-weight:bold;
+}
+a#detailLink{
+    color:#c98d33;
+    font-size:13px;
+}
+.hrnormal {
+    width: 680px;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    border-top-color: #282828;
+    height: 2px;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+.gameLink, a.gameLink, a:visited.gameLink {
+    color:#787878;
+    font-weight:bold;
+}
+.currentPlayers {
+    color:#c98d33;
+}
+.currentServers {
+    color:#787878;
+}
+.averageMinutes {
+    color:#a5a5a5;
+}
+.foot_total {
+    color:#c98d33;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+<div style="min-width:850px;">
+{{ header(true) }}
+</div>
+<br clear="all"/>
+<center>
+<div class="contentBG_4">
+<div class="headerBG_4">
+<div class="leftCol_4">
+<p>&nbsp;</p>
+<h1>STEAM &amp; GAME STATS </h1>
+<p><img height="10" src="./images/hr_stats_clr.gif" width="636"/></p>
+<p>Our on-going goal with Steam is to improve the service we offer customers. We believe that by sharing this<br/>
+data, we'll be able to spot problems earlier, improve the Steam service more efficiently, and ultimately build<br/>
+better products and experiences. <a href="index.php?area=forums">Let us know</a> what you think. What would you like to see here?</p>
+<div class="statsTop">
+<table border="0" cellpadding="0" cellspacing="0" width="638">
+<tr>
+<td align="center" colspan="4"><span class="statsTopSmall">Updated: {{ last_updated_text }}</span></td>
+</tr>
+</table>
+</div>
+<p><span class="copyHead">Steam Players and Game Servers </span>(most recent 48 hours)</p>
+<table border="0" cellpadding="0" cellspacing="0" width="680">
+<tr>
+<td>
+<div id="stats">
+<p style="background:#2d2d2d; border:1px solid #3b3b3b; border-radius:6px; padding:30px 20px; color:#c0c0c0; text-align:center; margin:15px 0;">
+<a href="./cms/utilities/player_graph.php"><img src="./cms/utilities/player_graph.php" alt="Player Graph" style="max-width:100%;"/></a>
+</p>
+</div>
+</td>
+</tr>
+</table>
+<div class="statsTop">
+<table border="0" cellpadding="0" cellspacing="0" width="612">
+<tr>
+<td align="left" width="100%"><table border="0" cellpadding="5" cellspacing="0">
+<tr>
+<td align="left" width="110">&nbsp;</td>
+<td align="right" width="85">current</td>
+<td align="right" width="110">peak</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="left">Players Online:</td>
+<td align="right"><span class="statsTopHi">{{ summary.current_players }}</span></td>
+<td align="right"><span class="statsTopHi">{{ summary.peak_players }}</span></td>
+</tr>
+<tr>
+<td align="left">Servers Online:</td>
+<td align="right"><span class="statsTopHi2">{{ summary.current_servers }}</span></td>
+<td align="right"><span class="statsTopHi2">{{ summary.peak_servers }}</span></td>
+</tr>
+</table><br/>
+<table border="0" cellpadding="5" cellspacing="0">
+<tr>
+<td align="left"><span class="statsTopSmall">Minutes played per month (average): <span class="statsTopHi">{{ avg_minutes_label }}</span> (<span class="statsTopHi">{{ avg_minutes_years }}</span> years)</span></td>
+</tr>
+<tr>
+<td align="left"><span class="statsTopSmall">Average unique users per month: <span class="statsTopHi">{{ avg_users }}</span></span></td>
+</tr></table></td>
+</tr>
+</table>
+</div>
+<p align="center" style="width:auto; text-align:center;"><a href="javascript:void(0)" id="detailLink" onclick="toggleDetailStats()">View detailed statistics by game</a></p>
+<div id="detailStats" style="display:none;" width="680">
+<table width="663">
+<tr>
+<td width="25">&nbsp;</td>
+<td align="left"><b>Game</b></td>
+<td align="right"><b>Current<br/>Players</b></td>
+<td align="right"><b>Current<br/>Servers</b></td>
+<td align="right"><b>Player Minutes<br/>/ Month</b></td>
+</tr>
+<tr>
+<td colspan="5">&nbsp;</td>
+</tr>
+{% for game in stats %}
+<tr>
+<td width="25">&nbsp;</td>
+<td align="left">{% if game.game_website %}<a class="gameLink" href="{{ game.game_website }}">{{ game.game_name }}</a>{% else %}<span class="gameLink">{{ game.game_name }}</span>{% endif %}</td>
+<td align="right"><span class="currentPlayers">{{ game.players_formatted }}</span></td>
+<td align="right"><span class="currentServers">{{ game.servers_formatted }}</span></td>
+<td align="right"><span class="averageMinutes">{{ game.minutes_label }}</span></td>
+</tr>
+{% endfor %}
+<tr>
+<td colspan="5">&nbsp;</td>
+</tr><tr>
+<td width="25">&nbsp;</td>
+<td align="left" class="foot_total"><b>TOTAL</b></td>
+<td align="right" class="foot_total"><b>{{ totals.players_formatted }}</b></td>
+<td align="right" class="foot_total"><b>{{ totals.servers_formatted }}</b></td>
+<td align="right" class="foot_total"><b>{{ totals.minutes_label }}</b></td>
+</tr>
+</table>
+</div>
+<p><img height="10" src="./images/hr_stats.gif" width="636"/></p>
+<div class="statsOverview">
+<table border="0" cellpadding="2" cellspacing="0" width="638">
+<tr>
+<td width="302"><img src="./images/icons/ico_arrow_blue.gif"/>&nbsp;<a href="index.php?area=content_stats">Content Server Statistics</a></td>
+<td width="328"><img src="./images/icons/ico_arrow_blue.gif"/>&nbsp;<a href="http://www.dayofdefeat.com/stats/">Day of Defeat Gameplay Stats</a></td>
+</tr>
+<tr>
+<td><img src="./images/icons/ico_arrow_blue.gif"/>&nbsp;<a href="index.php?area=survey">Steam Hardware Survey</a></td>
+<td><img src="./images/icons/ico_arrow_blue.gif"/>&nbsp;<a href="index.php?area=ep1_stats">Half-Life 2: Episode One Gameplay Stats</a></td>
+</tr>
+<tr>
+<td><img src="./images/icons/ico_arrow_blue.gif"/>&nbsp;<a href="index.php?area=csmarket">Counter-Strike Weapons Market</a></td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</div>
+<br/>
+</div>
+<br clear="left"/>
+</div>
+<br clear="all"/>
+</div>
+<div class="footer">
+{{ footer() }}
+</div>
+<br/>
+</center>
+<script type="text/javascript">
+function toggleDetailStats() {
+    var thediv = document.getElementById("detailStats");
+    if(thediv.style.display == "block") {
+        thediv.style.display = "none";
+    } else {
+        thediv.style.display = "block";
+    }
+}
+</script>
+</body>
+</html>

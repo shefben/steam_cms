@@ -5,8 +5,15 @@ require_once __DIR__.'/cms/utilities/functions.php';
 require_once __DIR__.'/cms/template_engine.php';
 require_once __DIR__.'/cms/db.php';
 $theme = cms_get_setting('theme', '2004');
-if (!in_array($theme, ['2003', '2004', '2005'], true)) {
-    readfile(__DIR__.'/archived_steampowered/2006+2007_statistics/index.html');
+
+// 2006+ themes use a different stats layout (2002-2005 use the capsule style)
+$is2002to2005Theme = preg_match('/^(2002|2003|2004|2005)/', $theme);
+if (!$is2002to2005Theme) {
+    // Load game stats from database
+    $gameStatsData = load_game_stats_data();
+
+    $tpl = cms_theme_layout('status.twig', $theme);
+    cms_render_template($tpl, $gameStatsData);
     return;
 }
 

@@ -1,0 +1,116 @@
+{
+  "root": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message",
+  "groups": [],
+  "uniques": [
+    {
+      "group_number": 1,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1189\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1189",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1189\\img\\background.jpg",
+      "sha1": "7c8fd01f5f301746ec88f7fb7a687856f8189e89",
+      "ext": ".jpg",
+      "root_dest_background": "img/background1.jpg"
+    },
+    {
+      "group_number": 2,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1207\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1207",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1207\\img\\background.jpg",
+      "sha1": "dc7447ad38c389c868bcab41bb189209642056ee",
+      "ext": ".jpg",
+      "root_dest_background": "img/background2.jpg"
+    },
+    {
+      "group_number": 3,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1631\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1631",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1631\\img\\background.jpg",
+      "sha1": "8d7b1c0ac704888e5a9de758828786d365ca034f",
+      "ext": ".jpg",
+      "root_dest_background": "img/background3.jpg"
+    },
+    {
+      "group_number": 4,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1671\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1671",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1671\\img\\background.jpg",
+      "sha1": "fbe0f2b97379b6bc97c7f1e309ad85b6511ce817",
+      "ext": ".jpg",
+      "root_dest_background": "img/background4.jpg"
+    },
+    {
+      "group_number": 5,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1735\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1735",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1735\\img\\background.jpg",
+      "sha1": "536940bbb622d18f3477b58d204b8d10151f20de",
+      "ext": ".jpg",
+      "root_dest_background": "img/background5.jpg"
+    },
+    {
+      "group_number": 6,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\701\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\701",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\701\\img\\background.jpg",
+      "sha1": "f0af71e42ca425c40e016b7d8d750e8c793417ca",
+      "ext": ".jpg",
+      "root_dest_background": "img/background6.jpg"
+    },
+    {
+      "group_number": 7,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\821\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\821",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\821\\img\\background.jpg",
+      "sha1": "c6efd3ed0d78a1ddc384f002d24c7825477da434",
+      "ext": ".jpg",
+      "root_dest_background": "img/background7.jpg"
+    },
+    {
+      "group_number": 8,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\861\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\861",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\861\\img\\background.jpg",
+      "sha1": "56db8212d5b7c7d5b7233ba6b8e4eae98f737433",
+      "ext": ".jpg",
+      "root_dest_background": "img/background8.jpg"
+    },
+    {
+      "group_number": 9,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\863\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\863",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\863\\img\\background.jpg",
+      "sha1": "9277ed21ca792b4304bdc710e83628715c364d4b",
+      "ext": ".jpg",
+      "root_dest_background": "img/background9.jpg"
+    },
+    {
+      "group_number": 10,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\939\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\939",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\939\\img\\background.jpg",
+      "sha1": "7b55c8abb0928aadb5cc52e988f086c25e063ccf",
+      "ext": ".jpg",
+      "root_dest_background": "img/background10.jpg"
+    },
+    {
+      "group_number": 11,
+      "reference_image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\973\\img\\background.jpg",
+      "reference_ext": ".jpg",
+      "folder": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\973",
+      "image": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\973\\img\\background.jpg",
+      "sha1": "8d4af65ba3c0872c7e2c22f51e43127184adc6a5",
+      "ext": ".jpg",
+      "root_dest_background": "img/background11.jpg"
+    }
+  ]
+}

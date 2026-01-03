@@ -12,7 +12,7 @@ Changes/Additions
 <li> Added Day of Defeat: Source to <em>Coming Soon</em>.</li> </ul>
 </div>'),
 (300, '2005-09-26', 'Day Of Defeat: Source Available Now', '<div class=\"post_content\" id=\"content_449\" style=\"display: none;\">
-<p>Day of Defeat: Source is available now via Steam for just $19.95. If you have Steam installed, you can <a href=\"steam://run/300\">get Day of Defeat now</a>! If you don\'t have Steam installed yet, <a href=\"http://steampowered.com/?area=getsteamnow\">click here for the Steam installer<a>.</a></a></p>
+<p>Day of Defeat: Source is available now via Steam for just $19.95. If you have Steam installed, you can <a href=\"steam://run/300\">get Day of Defeat now</a>! If you don\'t have Steam installed yet, <a href=\"{{ BASE }}/?area=getsteamnow\">click here for the Steam installer<a>.</a></a></p>
 <br clear=\"left\"/>
 </div>'),
 (300, '2005-09-27', NULL, '<div class=\"details\" id=\"September 27, 2005\" style=\"display: none;\">

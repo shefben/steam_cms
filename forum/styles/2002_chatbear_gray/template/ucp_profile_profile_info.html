@@ -1,0 +1,54 @@
+<!-- INCLUDE ucp_header.html -->
+
+<!-- Profile Information Form -->
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+    <td>
+        <table cellpadding="3" cellspacing="1" border="0" width="100%">
+        <tr bgcolor="#424B3C">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_TITLE}</b></font>
+            </td>
+        </tr>
+
+        <!-- IF ERROR -->
+        <tr bgcolor="#4C5844">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="2" color="#FF6600"><b>{ERROR}</b></font>
+            </td>
+        </tr>
+        <!-- ENDIF -->
+
+        <!-- BEGIN profile_fields -->
+        <tr bgcolor="<!-- IF profile_fields.S_ROW_COUNT is odd -->#4C5844<!-- ELSE -->#545F4E<!-- ENDIF -->">
+            <td width="30%">
+                <font face="verdana,arial,helvetica" size="2">{profile_fields.LANG_NAME}:<!-- IF profile_fields.S_REQUIRED --> *<!-- ENDIF --></font>
+                <!-- IF profile_fields.LANG_EXPLAIN --><br /><font face="verdana,arial,helvetica" size="1">{profile_fields.LANG_EXPLAIN}</font><!-- ENDIF -->
+                <!-- IF profile_fields.ERROR --><br /><font face="verdana,arial,helvetica" size="1" color="#FF6600">{profile_fields.ERROR}</font><!-- ENDIF -->
+            </td>
+            <td width="70%">
+                {profile_fields.FIELD}
+            </td>
+        </tr>
+        <!-- END profile_fields -->
+        </table>
+
+        <br />
+        <table cellpadding="3" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td align="center">
+                {S_HIDDEN_FIELDS}
+                <input type="submit" name="submit" value="{L_SUBMIT}" class="bginput" />
+                {S_FORM_TOKEN}
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

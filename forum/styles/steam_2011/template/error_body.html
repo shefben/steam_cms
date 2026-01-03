@@ -1,0 +1,40 @@
+<!-- INCLUDE overall_header.html -->
+
+<div class="content" role="main">
+	<div align="center">
+		<table bgcolor="#626D5C" border="0" cellpadding="5" cellspacing="0" width="798">
+			<tr valign="top">
+				<td align="left" bgcolor="#4c5844" width="100%">
+					<div align="center">
+						<table border="0" cellspacing="0" width="100%">
+							<tr>
+								<td width="100%">
+									<b><font color="#FFFFFF" face="Arial" size="5">Information</font></b><br/>
+									<font face="Arial" size="2">{MESSAGE_TEXT}</font>
+									<p><font face="Arial" size="2"></font></p>
+									
+									<!-- IF S_META_REFRESH -->
+									<p align="center">
+										<font face="Arial" size="2">
+											<a href="{META_REFRESH_LINK}">Click here if you are not automatically redirected</a>
+										</font>
+									</p>
+									<!-- ELSE -->
+									<p align="center">
+										<font face="Arial" size="2">
+											<a href="javascript:history.go(-1)">Go back</a> | 
+											<a href="{U_INDEX}">Return to forum index</a>
+										</font>
+									</p>
+									<!-- ENDIF -->
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

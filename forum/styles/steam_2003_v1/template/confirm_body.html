@@ -1,0 +1,31 @@
+<!-- INCLUDE overall_header.html -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<tr>
+    <td>
+        <table cellpadding="4" cellspacing="1" border="0" width="100%">
+        <tr>
+            <td bgcolor="#3E4637" align="center">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{MESSAGE_TITLE}</b></font>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#545F4E" align="center">
+                <font face="verdana,arial,helvetica" size="2">
+                {MESSAGE_TEXT}<br /><br />
+                
+                <form method="post" action="{S_CONFIRM_ACTION}">
+                <input type="submit" name="confirm" value="{L_YES}" class="bginput" />
+                &nbsp;&nbsp;
+                <input type="submit" name="cancel" value="{L_NO}" class="bginput" />
+                {S_HIDDEN_FIELDS}
+                </form>
+                </font>
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,47 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Login Form -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<tr>
+    <td>
+        <table cellpadding="4" cellspacing="1" border="0" width="100%">
+        <tr>
+            <td bgcolor="#3E4637" colspan="2" align="center">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_LOGIN}</b></font>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#545F4E" colspan="2" align="center">
+                <form method="post" action="{S_LOGIN_ACTION}">
+                <table cellpadding="3" cellspacing="1" border="0">
+                <tr>
+                    <td><font face="verdana,arial,helvetica" size="2">{L_USERNAME}:</font></td>
+                    <td><input type="text" name="username" size="25" maxlength="40" value="{USERNAME}" class="bginput" /></td>
+                </tr>
+                <tr>
+                    <td><font face="verdana,arial,helvetica" size="2">{L_PASSWORD}:</font></td>
+                    <td><input type="password" name="password" size="25" maxlength="32" class="bginput" /></td>
+                </tr>
+                <!-- IF S_AUTOLOGIN_ENABLED -->
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="checkbox" name="autologin" /> <font face="verdana,arial,helvetica" size="1">{L_LOG_ME_ON}</font>
+                    </td>
+                </tr>
+                <!-- ENDIF -->
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="login" value="{L_LOGIN}" class="bginput" />
+                    </td>
+                </tr>
+                </table>
+                {S_HIDDEN_FIELDS}
+                </form>
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->

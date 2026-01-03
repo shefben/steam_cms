@@ -1,0 +1,31 @@
+<!-- INCLUDE overall_header.html -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<tr>
+    <td>
+        <table cellpadding="4" cellspacing="1" border="0" width="100%">
+        <tr>
+            <td bgcolor="#3E4637">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_FAQ_TITLE}</b></font>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#545F4E">
+                <font face="verdana,arial,helvetica" size="2">
+                <!-- BEGIN faq_block -->
+                <b>{faq_block.BLOCK_TITLE}</b><br />
+                <!-- BEGIN faq_row -->
+                <br /><b>{faq_block.faq_row.FAQ_QUESTION}</b><br />
+                {faq_block.faq_row.FAQ_ANSWER}<br />
+                <!-- END faq_row -->
+                <br />
+                <!-- END faq_block -->
+                </font>
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->

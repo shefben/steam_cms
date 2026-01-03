@@ -12,7 +12,7 @@ Changes/Additions
 <li> Released on Steam</li> </ul>
 </div>'),
 (2630, '2006-10-13', 'Four From Activision Live On Steam', '<div class=\"post_content\" id=\"content_783\" style=\"display: none;\">
-<p>Four PC game tiles from Activision -- Call of Duty® 2, Gun<sup>TM</sup>, Call of Duty® and Call of Duty® United Offensive® -- are available now via Steam. Those who purchase any of the games during their first two weeks of availability on Steam will receive a 10% discount. Go <a href=\"http://steampowered.com/?publisher=activision\">here</a> to check pricing and grab a few.</p>
+<p>Four PC game tiles from Activision -- Call of Duty® 2, Gun<sup>TM</sup>, Call of Duty® and Call of Duty® United Offensive® -- are available now via Steam. Those who purchase any of the games during their first two weeks of availability on Steam will receive a 10% discount. Go <a href=\"{{ BASE }}/?publisher=activision\">here</a> to check pricing and grab a few.</p>
 <br clear=\"left\"/>
 </div>'),
 (2630, '2006-10-16', NULL, '<div class=\"details\" id=\"October 16, 2006\" style=\"display: block;\">

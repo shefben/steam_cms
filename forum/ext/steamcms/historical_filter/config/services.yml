@@ -1,0 +1,8 @@
+services:
+    steamcms.historicalfilter.listener:
+        class: steamcms\historicalfilter\event\main_listener
+        arguments:
+            - "@user"
+            - "@template"
+        tags:
+            - { name: event.listener }

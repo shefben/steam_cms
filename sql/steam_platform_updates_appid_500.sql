@@ -7,11 +7,11 @@
 
 INSERT INTO `platform_update_history` (`appid`, `date`, `title`, `content`) VALUES
 (500, '2008-11-17', 'Left 4 Dead Is Live On Steam', '<div class=\"post_content\" id=\"content_2029\" style=\"display: none;\">
-<p>As of midnight EST, the PC version of <a href=\"http://store.steampowered.com/app/500/\">Left 4 Dead</a>, Valve\'s zombie thriller, is now available via Steam to gamers around the globe. The title will be available for the PC and Xbox 360 at retail stores on Tuesday, November 18 in North America, and worldwide on Friday, November 21.</p>
+<p>As of midnight EST, the PC version of <a href=\"{{ BASE }}/app/500/\">Left 4 Dead</a>, Valve\'s zombie thriller, is now available via Steam to gamers around the globe. The title will be available for the PC and Xbox 360 at retail stores on Tuesday, November 18 in North America, and worldwide on Friday, November 21.</p>
 <br clear=\"left\"/>
 </div>'),
 (500, '2008-11-17', 'Left 4 Dead Tomorrow, Tv Spot #2 Now', '<div class=\"post_content\" id=\"content_2023\" style=\"display: none;\">
-<p>The second Left 4 Dead television commercial starts its run on network and cable television tomorrow — Tuesday, November 18 — the same day Valve\'s zombie thriller launches worldwide on Steam. The commercial is part of a $10 million marketing campaign for the highly-anticipated title, which is available for a special pre-order price until the time of launch at participating retail outlets and via Steam.<br/><br/>The second TV spot is available in <a href=\"http://store.steampowered.com/app/5149/\">720p</a> and <a href=\"http://store.steampowered.com/app/5150/\">1080p</a> formats as well as downloadable versions for your <a href=\"http://storefront.steampowered.com/v/gfx/apps_extras/5149/L4D_TVspot2.m4v\">iPod</a> and <a href=\"http://storefront.steampowered.com/v/gfx/apps_extras/5149/L4D_TVspot2_iPhone.m4v\">iPhone</a>.</p>
+<p>The second Left 4 Dead television commercial starts its run on network and cable television tomorrow — Tuesday, November 18 — the same day Valve\'s zombie thriller launches worldwide on Steam. The commercial is part of a $10 million marketing campaign for the highly-anticipated title, which is available for a special pre-order price until the time of launch at participating retail outlets and via Steam.<br/><br/>The second TV spot is available in <a href=\"{{ BASE }}/app/5149/\">720p</a> and <a href=\"{{ BASE }}/app/5150/\">1080p</a> formats as well as downloadable versions for your <a href=\"http://storefront.steampowered.com/v/gfx/apps_extras/5149/L4D_TVspot2.m4v\">iPod</a> and <a href=\"http://storefront.steampowered.com/v/gfx/apps_extras/5149/L4D_TVspot2_iPhone.m4v\">iPhone</a>.</p>
 <br clear=\"left\"/>
 </div>'),
 (500, '2008-11-25', 'Left 4 Dead Update Released', '<div class=\"post_content\" id=\"content_2060\" style=\"display: none;\">
@@ -119,7 +119,7 @@ INSERT INTO `platform_update_history` (`appid`, `date`, `title`, `content`) VALU
 <br clear=\"left\"/>
 </div>'),
 (500, '2010-09-04', 'Left 4 Dead Update Released', '<div class=\"post_content\" id=\"content_4303\" style=\"display: none;\">
-<p>Updates to Left 4 Dead have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include:<br/><ul style=\"padding-bottom: 0px; margin-bottom: 0px;\"><li>Fixed audio client concommands that could lag a server.<br/><li>Fixed a remote DLL loading exploit (MS KB2264107).<br/><li>Fixed a crash when disconnecting a rcon connection due to an invalid password when multiple sessions were already connected.<br/></li></li></li></ul><br/><a href=\"http://store.steampowered.com/app/500/\"><img src=\"http://storefront.steampowered.com/v/gfx/apps/500/capsule_231x87.jpg\" style=\" float: left; margin-right: 12px; height: 87px; width: 231px;\"/></a></p>
+<p>Updates to Left 4 Dead have been released. The updates will be applied automatically when your Steam client is restarted. The major changes include:<br/><ul style=\"padding-bottom: 0px; margin-bottom: 0px;\"><li>Fixed audio client concommands that could lag a server.<br/><li>Fixed a remote DLL loading exploit (MS KB2264107).<br/><li>Fixed a crash when disconnecting a rcon connection due to an invalid password when multiple sessions were already connected.<br/></li></li></li></ul><br/><a href=\"{{ BASE }}/app/500/\"><img src=\"http://storefront.steampowered.com/v/gfx/apps/500/capsule_231x87.jpg\" style=\" float: left; margin-right: 12px; height: 87px; width: 231px;\"/></a></p>
 <br clear=\"left\"/>
 </div>'),
 (500, '2010-10-06', 'Left 4 Dead Update Released', '<div class=\"post_content\" id=\"content_4440\" style=\"display: none;\">
@@ -151,7 +151,7 @@ INSERT INTO `platform_update_history` (`appid`, `date`, `title`, `content`) VALU
 <br clear=\"left\"/>
 </div>'),
 (500, '2011-03-10', 'Left 4 Dead Updated', '<div class=\"post_content\" id=\"content_5108\" style=\"display: none;\">
-<p>Changes:<br/>- Added support for raw mouse input<br/><br/><a href=\"http://store.steampowered.com/app/500/\"><img src=\"http://storefront.steampowered.com/v/gfx/apps/500/capsule_231x87.jpg\" style=\" float: left; margin-right: 12px; height: 87px; width: 231px;\"/></a></p>
+<p>Changes:<br/>- Added support for raw mouse input<br/><br/><a href=\"{{ BASE }}/app/500/\"><img src=\"http://storefront.steampowered.com/v/gfx/apps/500/capsule_231x87.jpg\" style=\" float: left; margin-right: 12px; height: 87px; width: 231px;\"/></a></p>
 <br clear=\"left\"/>
 </div>'),
 (500, '2011-10-07', 'Left 4 Dead Update Released', '<div class=\"post_content\" id=\"content_6458\" style=\"display: none;\">

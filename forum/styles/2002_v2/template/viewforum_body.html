@@ -1,0 +1,88 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Forum Navigation / Breadcrumbs -->
+<div class="breadcrumbs">
+    <a href="{U_INDEX}">{L_INDEX}</a> &raquo; <strong>{FORUM_NAME}</strong>
+</div>
+
+<!-- Forum Description -->
+<!-- IF FORUM_DESC -->
+<div class="forum-description">
+    <p>{FORUM_DESC}</p>
+</div>
+<!-- ENDIF -->
+
+<!-- Topics List Header -->
+<div class="forum-header">
+    <table cellspacing="0" width="100%">
+    <tr>
+        <td width="50%"><strong>Topic</strong></td>
+        <td width="15%" align="center"><strong>Replies</strong></td>
+        <td width="15%" align="center"><strong>Views</strong></td>
+        <td width="20%"><strong>Last Post</strong></td>
+    </tr>
+    </table>
+</div>
+
+<!-- Topics List -->
+<div class="topiclist">
+    <!-- BEGIN topicrow -->
+    <table cellspacing="0" width="100%">
+    <tr class="<!-- IF topicrow.S_ROW_COUNT is odd -->row1<!-- ELSE -->row2<!-- ENDIF -->">
+        <td width="50%">
+            <!-- IF topicrow.S_TOPIC_TYPE_ANNOUNCE -->
+            <strong>[Announcement]</strong>
+            <!-- ELSEIF topicrow.S_TOPIC_TYPE_STICKY -->
+            <strong>[Sticky]</strong>
+            <!-- ENDIF -->
+            <a href="{topicrow.U_VIEW_TOPIC}">{topicrow.TOPIC_TITLE}</a>
+            <!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED -->
+            <span class="unapproved">(!)</span>
+            <!-- ENDIF -->
+            <!-- IF topicrow.TOPIC_AUTHOR -->
+            <br /><small>by {topicrow.TOPIC_AUTHOR}</small>
+            <!-- ENDIF -->
+        </td>
+        <td width="15%" align="center">
+            {topicrow.REPLIES}
+        </td>
+        <td width="15%" align="center">
+            {topicrow.VIEWS}
+        </td>
+        <td width="20%">
+            <!-- IF topicrow.LAST_POST_TIME -->
+            {topicrow.LAST_POST_TIME}<br />
+            <small>by <!-- IF topicrow.U_LAST_POST_AUTHOR -->{topicrow.LAST_POST_AUTHOR}<!-- ELSE -->{topicrow.LAST_POST_AUTHOR_FULL}<!-- ENDIF --></small>
+            <!-- ELSE -->
+            Never
+            <!-- ENDIF -->
+        </td>
+    </tr>
+    </table>
+    <!-- END topicrow -->
+</div>
+
+<!-- If no topics to display -->
+<!-- IF not topicrow -->
+<div class="topiclist">
+    <table cellspacing="0" width="100%">
+    <tr class="row1">
+        <td width="100%" align="center">
+            <strong>No topics in this forum.</strong>
+        </td>
+    </tr>
+    </table>
+</div>
+<!-- ENDIF -->
+
+<!-- Pagination -->
+<!-- IF TOTAL_TOPICS -->
+<div class="pagination">
+    <strong>{TOTAL_TOPICS}</strong> topics
+    <!-- IF PAGINATION -->
+    &nbsp;&bull;&nbsp; {PAGINATION}
+    <!-- ENDIF -->
+</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

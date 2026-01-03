@@ -1,0 +1,47 @@
+<!-- INCLUDE overall_header.html -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<tr>
+    <td>
+        <table cellpadding="4" cellspacing="1" border="0" width="100%">
+        <tr>
+            <td bgcolor="#3E4637" colspan="4">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_MEMBERLIST}</b></font>
+            </td>
+        </tr>
+        <tr align="center">
+            <td bgcolor="#3E4637" width="25%">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_USERNAME}</b></font>
+            </td>
+            <td bgcolor="#3E4637" width="25%">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_JOINED}</b></font>
+            </td>
+            <td bgcolor="#3E4637" width="25%">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_POSTS}</b></font>
+            </td>
+            <td bgcolor="#3E4637" width="25%">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_LOCATION}</b></font>
+            </td>
+        </tr>
+        <!-- BEGIN memberrow -->
+        <tr>
+            <td bgcolor="<!-- IF memberrow.S_ROW_COUNT is odd -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
+                <font face="verdana, arial, helvetica" size="2">{memberrow.USERNAME_FULL}</font>
+            </td>
+            <td bgcolor="<!-- IF memberrow.S_ROW_COUNT is even -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
+                <font face="verdana,arial,helvetica" size="1">{memberrow.JOINED}</font>
+            </td>
+            <td bgcolor="<!-- IF memberrow.S_ROW_COUNT is odd -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
+                <font face="verdana,arial,helvetica" size="1">{memberrow.POSTS}</font>
+            </td>
+            <td bgcolor="<!-- IF memberrow.S_ROW_COUNT is even -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
+                <font face="verdana,arial,helvetica" size="1">{memberrow.LOCATION}</font>
+            </td>
+        </tr>
+        <!-- END memberrow -->
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->

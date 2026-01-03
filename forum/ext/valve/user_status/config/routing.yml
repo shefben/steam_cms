@@ -1,0 +1,20 @@
+valve_user_status_update:
+    path: /valve/user_status/update
+    defaults: { _controller: valve.user_status.controller:update_status }
+    methods: [POST]
+
+valve_user_status_get:
+    path: /valve/user_status/get/{user_id}
+    defaults: { _controller: valve.user_status.controller:get_status }
+    requirements:
+        user_id: \d+
+    methods: [GET]
+
+valve_user_status_online_users:
+    path: /valve/user_status/online
+    defaults: { _controller: valve.user_status.controller:get_online_users }
+    methods: [GET]
+
+valve_user_status_settings:
+    path: /valve/user_status/settings
+    defaults: { _controller: valve.user_status.controller:settings }

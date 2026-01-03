@@ -7,7 +7,7 @@
 
 INSERT INTO `platform_update_history` (`appid`, `date`, `title`, `content`) VALUES
 (15620, '2009-02-18', 'Warhammer 40,000: Dawn of War II Now Available', '<div class=\"post_content\" id=\"content_2261\" style=\"display: none;\">
-<p><a href=\"http://store.steampowered.com/app/15620/\">Warhammer® 40,000™: Dawn of War® II</a> is now available on Steam for customers in most parts of the world. European customers will be able to play, starting Friday morning (GMT).<br/><br/>Developed by award winning Relic Entertainment, Dawn of War II ushers in a new chapter in the acclaimed RTS series - taking players to the brutal frontlines of war to lead an Elite Strike Force on a mission to save the galaxy.</p>
+<p><a href=\"{{ BASE }}/app/15620/\">Warhammer® 40,000™: Dawn of War® II</a> is now available on Steam for customers in most parts of the world. European customers will be able to play, starting Friday morning (GMT).<br/><br/>Developed by award winning Relic Entertainment, Dawn of War II ushers in a new chapter in the acclaimed RTS series - taking players to the brutal frontlines of war to lead an Elite Strike Force on a mission to save the galaxy.</p>
 <br clear=\"left\"/>
 </div>'),
 (15620, '2009-02-20', 'Warhammer 40,000: Dawn of War II Update Released', '<div class=\"post_content\" id=\"content_2276\" style=\"display: none;\">

@@ -308,4 +308,72 @@ function bw_data(int $pts, int $start, int $step, int $cap): array {
     }*/
     return rng_bw_series($pts, $start, $step, $cap);
 }
+
+/**
+ * Load game stats data for the 2006+ status page template
+ */
+function load_game_stats_data(): array {
+    $db = db_connect();
+
+    // Load game stats from database
+    $stats = [];
+    $totalPlayers = 0;
+    $totalServers = 0;
+    $totalMinutes = 0;
+
+    try {
+        $res = $db->query('SELECT * FROM game_stats ORDER BY display_order ASC');
+        while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+            $players = (int)$row['current_players'];
+            $servers = (int)$row['current_servers'];
+            $minutes = (int)$row['player_minutes_per_month'];
+
+            $totalPlayers += $players;
+            $totalServers += $servers;
+            $totalMinutes += $minutes;
+
+            $stats[] = [
+                'game_name'         => $row['game_name'],
+                'game_website'      => $row['game_website'] ?? null,
+                'players_formatted' => number_format($players),
+                'servers_formatted' => number_format($servers),
+                'minutes_label'     => human_unit_format($minutes),
+            ];
+        }
+    } catch (PDOException $e) {
+        // Table might not exist
+    }
+
+    // Load summary settings
+    $avgUsers         = get_setting($db, 'game_stats_avg_users') ?: '2,357,340';
+    $avgMinutes       = (int)(get_setting($db, 'game_stats_avg_minutes') ?: 9434000000);
+    $lastUpdatedText  = get_setting($db, 'game_stats_last_updated_text') ?: date('g:ia T, F d Y');
+    $currentPlayersTotal = get_setting($db, 'game_stats_current_players_total') ?: number_format($totalPlayers);
+    $peakPlayersTotal    = get_setting($db, 'game_stats_peak_players_total') ?: number_format($totalPlayers);
+    $currentServersTotal = get_setting($db, 'game_stats_current_servers_total') ?: number_format($totalServers);
+    $peakServersTotal    = get_setting($db, 'game_stats_peak_servers_total') ?: number_format($totalServers);
+
+    // Format avg minutes as "X.XXX billion (Y,YYY years)"
+    $avgMinutesLabel = human_unit_format($avgMinutes);
+    $avgMinutesYears = number_format(floor($avgMinutes / 60 / 24 / 365));
+
+    return [
+        'stats' => $stats,
+        'summary' => [
+            'current_players' => is_numeric($currentPlayersTotal) ? number_format((int)$currentPlayersTotal) : $currentPlayersTotal,
+            'peak_players'    => is_numeric($peakPlayersTotal) ? number_format((int)$peakPlayersTotal) : $peakPlayersTotal,
+            'current_servers' => is_numeric($currentServersTotal) ? number_format((int)$currentServersTotal) : $currentServersTotal,
+            'peak_servers'    => is_numeric($peakServersTotal) ? number_format((int)$peakServersTotal) : $peakServersTotal,
+        ],
+        'totals' => [
+            'players_formatted' => number_format($totalPlayers),
+            'servers_formatted' => number_format($totalServers),
+            'minutes_label'     => human_unit_format($totalMinutes),
+        ],
+        'avg_users'          => is_numeric($avgUsers) ? number_format((int)$avgUsers) : $avgUsers,
+        'avg_minutes_label'  => $avgMinutesLabel,
+        'avg_minutes_years'  => $avgMinutesYears,
+        'last_updated_text'  => $lastUpdatedText,
+    ];
+}
 ?>

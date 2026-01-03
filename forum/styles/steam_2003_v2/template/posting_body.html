@@ -1,0 +1,142 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Breadcrumbs -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+    <td>
+        <font face="verdana,arial,helvetica" size="1">
+        <a href="{U_INDEX}">{L_INDEX}</a>
+        <!-- IF U_VIEW_FORUM -->
+        &nbsp;&#187;&nbsp;<a href="{U_VIEW_FORUM}">{FORUM_NAME}</a>
+        <!-- ENDIF -->
+        <!-- IF U_VIEW_TOPIC -->
+        &nbsp;&#187;&nbsp;<a href="{U_VIEW_TOPIC}">{TOPIC_TITLE}</a>
+        <!-- ENDIF -->
+        </font>
+    </td>
+</tr>
+</table>
+
+<br />
+
+<!-- Posting Form -->
+<form method="post" action="{S_POST_ACTION}" enctype="multipart/form-data">
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<tr>
+    <td>
+        <table cellpadding="4" cellspacing="1" border="0" width="100%">
+        <tr>
+            <td bgcolor="#3E4637" colspan="2">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_POST_A}</b></font>
+            </td>
+        </tr>
+        
+        <!-- IF S_POST_REVIEW -->
+        <tr>
+            <td bgcolor="#545F4E" colspan="2">
+                <font face="verdana,arial,helvetica" size="2"><b>{L_POST_REVIEW}</b></font>
+                <br />{POST_REVIEW_BOX}
+            </td>
+        </tr>
+        <!-- ENDIF -->
+        
+        <!-- Username (for guests) -->
+        <!-- IF S_USERNAME_FIELD -->
+        <tr>
+            <td bgcolor="#545F4E" width="22%">
+                <font face="verdana,arial,helvetica" size="2"><b>{L_USERNAME}:</b></font>
+            </td>
+            <td bgcolor="#626d5c" width="78%">
+                <input type="text" name="username" value="{USERNAME}" size="25" maxlength="25" class="bginput" />
+            </td>
+        </tr>
+        <!-- ENDIF -->
+        
+        <!-- Subject -->
+        <!-- IF S_SHOW_SUBJECT -->
+        <tr>
+            <td bgcolor="#545F4E" width="22%">
+                <font face="verdana,arial,helvetica" size="2"><b>{L_SUBJECT}:</b></font>
+            </td>
+            <td bgcolor="#626d5c" width="78%">
+                <input type="text" name="subject" value="{SUBJECT}" size="45" maxlength="100" class="bginput" />
+            </td>
+        </tr>
+        <!-- ENDIF -->
+        
+        <!-- Message -->
+        <tr>
+            <td bgcolor="#545F4E" width="22%" valign="top">
+                <font face="verdana,arial,helvetica" size="2"><b>{L_MESSAGE_BODY}:</b></font>
+            </td>
+            <td bgcolor="#626d5c" width="78%">
+                <textarea name="message" rows="15" cols="76" class="bginput">{MESSAGE}</textarea>
+            </td>
+        </tr>
+        
+        <!-- Options -->
+        <tr>
+            <td bgcolor="#545F4E" width="22%" valign="top">
+                <font face="verdana,arial,helvetica" size="2"><b>{L_OPTIONS}:</b></font>
+            </td>
+            <td bgcolor="#626d5c" width="78%">
+                <font face="verdana,arial,helvetica" size="1">
+                <!-- IF S_BBCODE_ALLOWED -->
+                <input type="checkbox" name="disable_bbcode" value="1" {S_BBCODE_CHECKED} /> {L_DISABLE_BBCODE}<br />
+                <!-- ENDIF -->
+                <!-- IF S_SMILIES_ALLOWED -->
+                <input type="checkbox" name="disable_smilies" value="1" {S_SMILIES_CHECKED} /> {L_DISABLE_SMILIES}<br />
+                <!-- ENDIF -->
+                <!-- IF S_LINKS_ALLOWED -->
+                <input type="checkbox" name="disable_magic_url" value="1" {S_MAGIC_URL_CHECKED} /> {L_DISABLE_MAGIC_URL}<br />
+                <!-- ENDIF -->
+                <!-- IF S_SIG_ALLOWED -->
+                <input type="checkbox" name="attach_sig" value="1" {S_SIGNATURE_CHECKED} /> {L_ATTACH_SIG}<br />
+                <!-- ENDIF -->
+                <!-- IF S_NOTIFY_ALLOWED -->
+                <input type="checkbox" name="notify" value="1" {S_NOTIFY_CHECKED} /> {L_NOTIFY_ON_REPLY}<br />
+                <!-- ENDIF -->
+                <!-- IF S_LOCK_TOPIC_ALLOWED -->
+                <input type="checkbox" name="lock_topic" value="1" {S_LOCK_TOPIC_CHECKED} /> {L_LOCK_TOPIC}<br />
+                <!-- ENDIF -->
+                </font>
+            </td>
+        </tr>
+        
+        <!-- File attachment -->
+        <!-- IF S_SHOW_ATTACH_BOX -->
+        <tr>
+            <td bgcolor="#545F4E" width="22%" valign="top">
+                <font face="verdana,arial,helvetica" size="2"><b>{L_ATTACHMENT}:</b></font>
+            </td>
+            <td bgcolor="#626d5c" width="78%">
+                <input type="file" name="fileupload" class="bginput" />
+                <font face="verdana,arial,helvetica" size="1"><br />{L_ATTACHMENT_EXPLAIN}</font>
+            </td>
+        </tr>
+        <!-- ENDIF -->
+        
+        <!-- Submit buttons -->
+        <tr>
+            <td bgcolor="#545F4E" width="22%">&nbsp;</td>
+            <td bgcolor="#626d5c" width="78%">
+                <input type="submit" name="post" value="{L_SUBMIT}" class="bginput" />
+                &nbsp;
+                <input type="submit" name="preview" value="{L_PREVIEW}" class="bginput" />
+                <!-- IF S_SAVE_ALLOWED -->
+                &nbsp;
+                <input type="submit" name="save" value="{L_SAVE_DRAFT}" class="bginput" />
+                <!-- ENDIF -->
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+{S_FORM_TOKEN}
+{S_HIDDEN_FIELDS}
+</form>
+
+<!-- INCLUDE overall_footer.html -->

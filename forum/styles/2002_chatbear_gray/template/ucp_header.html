@@ -1,0 +1,51 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- UCP Navigation -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<tr>
+    <td>
+        <table cellpadding="4" cellspacing="1" border="0" width="100%">
+        <tr>
+            <td bgcolor="#3E4637">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_UCP}</b></font>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#545F4E">
+                <!-- UCP Navigation Menu -->
+                <table border="0" cellpadding="2" cellspacing="0" width="100%">
+                <tr>
+                    <td width="150" valign="top" bgcolor="#4C5844">
+                        <!-- Navigation Menu -->
+                        <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_UCP_MAIN}</b></font><br />
+                        <!-- BEGIN t_block1 -->
+                        <font face="verdana,arial,helvetica" size="1">
+                            <!-- IF t_block1.S_SELECTED --><b>&raquo;</b> <!-- ENDIF -->
+                            <a href="{t_block1.U_TITLE}">{t_block1.L_TITLE}</a>
+                        </font><br />
+                        <!-- END t_block1 -->
+
+                        <!-- IF S_PRIVMSGS -->
+                        <br />
+                        <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_PRIVATE_MESSAGES}</b></font><br />
+                        <!-- BEGIN folder -->
+                            <font face="verdana,arial,helvetica" size="1">
+                                <!-- IF folder.S_CUR_FOLDER --><b>&raquo;</b> <!-- ENDIF -->
+                                <a href="{folder.U_FOLDER}"><!-- IF folder.UNREAD_MESSAGES > 0 --><b>{folder.FOLDER_NAME} ({folder.UNREAD_MESSAGES})</b><!-- ELSE -->{folder.FOLDER_NAME}<!-- ENDIF --></a>
+                            </font><br />
+                        <!-- END folder -->
+                        <!-- ENDIF -->
+
+                        <br />
+                        <!-- BEGIN t_block2 -->
+                        <font face="verdana,arial,helvetica" size="1">
+                            <!-- IF t_block2.S_SELECTED --><b>&raquo;</b> <!-- ENDIF -->
+                            <a href="{t_block2.U_TITLE}">{t_block2.L_TITLE}</a>
+                        </font><br />
+                        <!-- END t_block2 -->
+                    </td>
+                    <td valign="top" bgcolor="#545F4E">
+                        <!-- Content Area -->
+                        <!-- IF S_COMPOSE_PM -->
+                        <form id="postform" method="post" action="{S_POST_ACTION}"{S_FORM_ENCTYPE}>
+                        <!-- ENDIF -->

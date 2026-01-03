@@ -4,7 +4,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/../cms/db.php';
 
 $db = cms_get_db();
-$stmt = $db->query("SELECT id FROM news WHERE status='scheduled' AND publish_at<=NOW()");
+$stmt = $db->query("SELECT id FROM news WHERE status='scheduled' AND publish_at<=UNIX_TIMESTAMP()");
 $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
 foreach ($ids as $id) {
     $db->prepare("UPDATE news SET status='published', publish_date=publish_at WHERE id=?")

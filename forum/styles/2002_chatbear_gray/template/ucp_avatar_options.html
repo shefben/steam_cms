@@ -1,0 +1,14 @@
+<!-- Avatar Options -->
+<!-- BEGIN avatar_drivers -->
+<tr bgcolor="<!-- IF avatar_drivers.S_ROW_COUNT is odd -->#545F4E<!-- ELSE -->#4C5844<!-- ENDIF -->">
+    <td width="30%">
+        <font face="verdana,arial,helvetica" size="2">
+            <input type="radio" name="avatar_driver" value="{avatar_drivers.DRIVER}"<!-- IF avatar_drivers.SELECTED --> checked="checked"<!-- ENDIF --> />
+            {avatar_drivers.L_TITLE}
+        </font>
+    </td>
+    <td width="70%">
+        <font face="verdana,arial,helvetica" size="1">{avatar_drivers.L_EXPLAIN}</font>
+    </td>
+</tr>
+<!-- END avatar_drivers -->

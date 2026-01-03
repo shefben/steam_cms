@@ -1,0 +1,84 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Posting Navigation / Breadcrumbs -->
+<div class="breadcrumbs">
+    <a href="{U_INDEX}">{L_INDEX}</a> &raquo;
+    <a href="{U_VIEWFORUM}">{FORUM_NAME}</a> &raquo;
+    <strong><!-- IF S_EDIT_POST -->Edit Post<!-- ELSEIF S_POST_NEW_TOPIC -->New Topic<!-- ELSE -->Reply<!-- ENDIF --></strong>
+</div>
+
+<!-- Posting Form Header -->
+<div class="forum-header">
+    <table cellspacing="0" width="100%">
+    <tr>
+        <td><strong><!-- IF S_EDIT_POST -->Edit Post<!-- ELSEIF S_POST_NEW_TOPIC -->Post New Topic<!-- ELSE -->Post Reply<!-- ENDIF --></strong></td>
+    </tr>
+    </table>
+</div>
+
+<!-- Posting Form (simplified for ChatBear) -->
+<div class="topiclist">
+    <form action="{S_POST_ACTION}" method="post">
+
+    <table cellspacing="0" width="100%">
+
+    <!-- Topic Title (for new topics only) -->
+    <!-- IF S_POST_NEW_TOPIC -->
+    <tr class="row1">
+        <td width="25%"><strong>Topic Title:</strong></td>
+        <td width="75%">
+            <input type="text" name="subject" value="{SUBJECT}" style="width: 90%;" maxlength="60" />
+        </td>
+    </tr>
+    <!-- ENDIF -->
+
+    <!-- Message Body -->
+    <tr class="row2">
+        <td width="25%" valign="top"><strong>Message:</strong></td>
+        <td width="75%">
+            <textarea name="message" rows="15" cols="50" style="width: 90%;">{MESSAGE}</textarea>
+            <br /><small>Simple text only - no HTML or formatting codes.</small>
+        </td>
+    </tr>
+
+    <!-- Submit Buttons -->
+    <tr class="row1">
+        <td colspan="2" align="center" style="padding: 10px;">
+            <input type="submit" name="post" value="<!-- IF S_EDIT_POST -->Update Post<!-- ELSE -->Submit<!-- ENDIF -->" />
+            &nbsp;&nbsp;
+            <input type="submit" name="preview" value="Preview" />
+            &nbsp;&nbsp;
+            <input type="button" value="Cancel" onclick="history.back();" />
+        </td>
+    </tr>
+
+    </table>
+
+    {S_FORM_TOKEN}
+    </form>
+</div>
+
+<!-- Preview (if applicable) -->
+<!-- IF PREVIEW_MESSAGE -->
+<div class="forum-header" style="margin-top: 10px;">
+    <table cellspacing="0" width="100%">
+    <tr>
+        <td><strong>Preview</strong></td>
+    </tr>
+    </table>
+</div>
+
+<div class="topiclist">
+    <table cellspacing="0" width="100%">
+    <tr class="row1">
+        <td>
+            <div class="postbody">
+                {PREVIEW_MESSAGE}
+            </div>
+        </td>
+    </tr>
+    </table>
+</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

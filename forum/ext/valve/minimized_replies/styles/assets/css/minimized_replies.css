@@ -1,0 +1,270 @@
+/**
+ * Steam Forum Minimized Replies CSS
+ * Replicates vBulletin-style minimized reply system
+ *
+ * @copyright (c) 2024 Valve Corporation
+ * @license GPL-2.0-only
+ */
+
+/* Minimized post containers (rectangular boxes like vBulletin) */
+.minimized-post {
+    padding: 4px 6px;
+    margin: 1px 0;
+    border: 1px solid #232323;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11px;
+}
+
+.minimized-post:hover {
+    background-color: #2d415d !important;
+}
+
+.minimized-post img {
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.minimized-post b {
+    color: #6EBCFF;
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.minimized-post a {
+    color: #DFDCD6;
+    text-decoration: none;
+}
+
+.minimized-post a:hover {
+    color: #6EBCFF;
+    text-decoration: underline;
+}
+
+.minimized-post .time {
+    color: #FFFFFF;
+}
+
+/* Expanded post styling */
+.expanded-post {
+    margin: 6px 0;
+}
+
+.expanded-post .post-content {
+    line-height: 1.4;
+    padding: 6px 0;
+}
+
+.expanded-post .signature {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #232323;
+    font-size: 10px;
+    color: #999;
+}
+
+.expanded-post .post-controls {
+    text-align: right;
+}
+
+.expanded-post .post-controls a {
+    color: #6EBCFF;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+.expanded-post .post-controls a:hover {
+    text-decoration: underline;
+}
+
+/* View mode controls */
+#view-mode-controls {
+    background: #262626;
+    border: 1px solid #232323;
+    padding: 6px;
+    margin: 6px 0;
+}
+
+#view-mode-controls div {
+    margin: 2px 0;
+}
+
+#view-mode-controls img {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+#view-mode-controls a {
+    color: #6EBCFF;
+    text-decoration: none;
+}
+
+#view-mode-controls a:hover {
+    text-decoration: underline;
+}
+
+/* Thread navigation */
+.thread-navigation {
+    text-align: center;
+    padding: 6px;
+    background: #262626;
+    border: 1px solid #232323;
+    margin: 6px 0;
+}
+
+.thread-navigation a {
+    color: #6EBCFF;
+    text-decoration: none;
+    margin: 0 4px;
+}
+
+.thread-navigation a:hover {
+    text-decoration: underline;
+}
+
+.thread-navigation img {
+    vertical-align: middle;
+}
+
+/* Tree structure styling for threaded view */
+.post-tree {
+    margin-left: 20px;
+}
+
+.tree-level-0 { margin-left: 0px; }
+.tree-level-1 { margin-left: 20px; }
+.tree-level-2 { margin-left: 40px; }
+.tree-level-3 { margin-left: 60px; }
+.tree-level-4 { margin-left: 80px; }
+
+/* Loading and error states */
+.minimized-post.loading {
+    opacity: 0.7;
+}
+
+.minimized-post.error {
+    background-color: #4d1f1f !important;
+    border-color: #8b0000;
+}
+
+.minimized-post.error a {
+    color: #ff6666 !important;
+}
+
+/* Post status indicators */
+.post-status-new {
+    font-weight: bold;
+}
+
+.post-status-old {
+    font-weight: normal;
+}
+
+/* Specific styling for Steam 2011 theme */
+.steam_2011 .minimized-post {
+    background: #262626;
+    border-color: #232323;
+}
+
+.steam_2011 .minimized-post.alt1 {
+    background: #262626;
+}
+
+.steam_2011 .minimized-post.alt2 {
+    background: #2d415d;
+}
+
+/* Specific styling for Steam 2008 theme */
+.steam_2008 .minimized-post {
+    background: #4A4945;
+    border-color: #232323;
+}
+
+.steam_2008 .minimized-post.alt1 {
+    background: #4A4945;
+}
+
+.steam_2008 .minimized-post.alt2 {
+    background: #4C5844;
+}
+
+/* Specific styling for Steam 2003 themes */
+.steam_2003_v1 .minimized-post,
+.steam_2003_v2 .minimized-post {
+    background: #626d5c;
+    border-color: #545F4E;
+}
+
+.steam_2003_v1 .minimized-post.alt1,
+.steam_2003_v2 .minimized-post.alt1 {
+    background: #626d5c;
+}
+
+.steam_2003_v1 .minimized-post.alt2,
+.steam_2003_v2 .minimized-post.alt2 {
+    background: #545F4E;
+}
+
+.steam_2003_v1 .minimized-post a,
+.steam_2003_v2 .minimized-post a {
+    color: #C4CABE;
+}
+
+.steam_2003_v1 .minimized-post a:hover,
+.steam_2003_v2 .minimized-post a:hover {
+    color: #FFFFFF;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .minimized-post {
+        white-space: normal;
+        word-wrap: break-word;
+    }
+
+    .tree-level-1,
+    .tree-level-2,
+    .tree-level-3,
+    .tree-level-4 {
+        margin-left: 10px;
+    }
+
+    #view-mode-controls {
+        text-align: center;
+    }
+}
+
+/* Animation for expanding/collapsing posts */
+.expanded-post {
+    animation: expandPost 0.3s ease-in-out;
+}
+
+@keyframes expandPost {
+    from {
+        opacity: 0;
+        transform: scaleY(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+/* Print styles */
+@media print {
+    .minimized-post {
+        display: none;
+    }
+
+    .expanded-post {
+        page-break-inside: avoid;
+    }
+
+    #view-mode-controls,
+    .thread-navigation,
+    .post-controls {
+        display: none;
+    }
+}

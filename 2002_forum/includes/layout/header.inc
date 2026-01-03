@@ -23,7 +23,7 @@
 </tr>
 <tr height="38">
 <td colspan="2" height="38" width="17"><spacer height="38" type="block" width="17"></spacer></td>
-<td align="left" colspan="3" height="38" valign="top" width="782" xpos="17"><img border="0" height="29" src="support/Images/Type_SupportSite2.jpg" width="770"></td>
+<td align="left" colspan="3" height="38" valign="top" width="782" xpos="17"><img border="0" height="29" src="../images/2002_forum/support/Type_SupportSite2.jpg" width="770"></td>
 <td height="38" width="1"><spacer height="38" type="block" width="1"></spacer></td>
 </tr>
 <tr height="18">
@@ -52,7 +52,7 @@ if ($_cb_user):
 </tr>
 <tr height="62">
 <td height="62" width="15"><spacer height="62" type="block" width="15"></spacer></td>
-<td align="left" colspan="2" height="62" valign="top" width="226" xpos="15"><img border="0" height="51" src="support/Images/Logo_Steam2.jpg" width="188"></td>
+<td align="left" colspan="2" height="62" valign="top" width="226" xpos="15"><img border="0" height="51" src="../images/2002_forum/support/Logo_Steam2.jpg" width="188"></td>
 <td height="62" width="1"><spacer height="62" type="block" width="1"></spacer></td>
 </tr>
 <tr cntrlrow="" height="1">

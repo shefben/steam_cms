@@ -1,0 +1,66 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Forum List Header (matching #001052 background) -->
+<div class="forum-header">
+    <table cellspacing="0" width="600">
+    <tr>
+        <td width="50%"><strong>Name</strong></td>
+        <td width="15%" align="center"><strong>Topics</strong></td>
+        <td width="15%" align="center"><strong>Posts</strong></td>
+        <td width="20%"><strong>Updated</strong></td>
+    </tr>
+    </table>
+</div>
+
+<!-- Forum List Container -->
+<div class="forum-list">
+    <!-- BEGIN forumrow -->
+    <!-- IF forumrow.S_IS_CAT -->
+        <!-- Category headers are hidden in ChatBear style -->
+    <!-- ELSEIF forumrow.S_IS_FORUM -->
+        <table cellspacing="0" width="600">
+        <tr class="forum-row<!-- IF forumrow.S_ROW_COUNT is odd --> alt<!-- ENDIF -->">
+            <td width="50%" class="forum-name">
+                <strong>
+                    <a href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a>
+                </strong>
+                <!-- IF forumrow.FORUM_DESC -->
+                <br />
+                <div class="forum-description">{forumrow.FORUM_DESC}</div>
+                <!-- ENDIF -->
+            </td>
+            <td width="15%" align="center" class="forum-topics">
+                {forumrow.TOPICS}
+            </td>
+            <td width="15%" align="center" class="forum-posts">
+                {forumrow.POSTS}
+            </td>
+            <td width="20%" class="forum-updated">
+                <!-- IF forumrow.LAST_POST_TIME -->
+                {forumrow.LAST_POST_TIME}<br />
+                <span class="lastpost">Last Visit: <!-- IF forumrow.U_LAST_POSTER -->{forumrow.LAST_POSTER}<!-- ELSE -->Never<!-- ENDIF --></span>
+                <!-- ELSE -->
+                Never<br />
+                <span class="lastpost">Last Visit: Never</span>
+                <!-- ENDIF -->
+            </td>
+        </tr>
+        </table>
+    <!-- ENDIF -->
+    <!-- END forumrow -->
+</div>
+
+<!-- If no forums to display -->
+<!-- IF not forumrow -->
+<div class="forum-list">
+    <table cellspacing="0" width="600">
+    <tr class="forum-row">
+        <td width="100%" align="center">
+            <strong>No forums to display</strong>
+        </td>
+    </tr>
+    </table>
+</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

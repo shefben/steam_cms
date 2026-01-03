@@ -41,9 +41,9 @@ echo '<table border="0" cellspacing="0" width="100%"><tr>
         ' -- Currently: ',cb_fmt(date('Y-m-d H:i:s')),
         '</font></td>
         <td width="50%" align="right">
-          <a href="newtopic.php?boardid=',$boardId,'"><img src="images/buttons/grey/postnewtopic.gif"  width="88" height="19" border="0"></a>
-          <a href="board.php?boardid=',$boardId,'"><img src="images/buttons/grey/boardlistings.gif" width="82" height="19" border="0"></a>
-          <a href="search.php?boardid=',$boardId,'"><img src="images/buttons/grey/search.gif"         width="48" height="19" border="0"></a>
+          <a href="newtopic.php?boardid=',$boardId,'"><img src="../images/2002_forum/buttons/grey/postnewtopic.gif"  width="88" height="19" border="0"></a>
+          <a href="board.php?boardid=',$boardId,'"><img src="../images/2002_forum/buttons/grey/boardlistings.gif" width="82" height="19" border="0"></a>
+          <a href="search.php?boardid=',$boardId,'"><img src="../images/2002_forum/buttons/grey/search.gif"         width="48" height="19" border="0"></a>
         </td></tr>';
 
 // Admin panel link for moderators

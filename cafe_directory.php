@@ -1,40 +1,16 @@
 <?php
 require_once __DIR__.'/cms/template_engine.php';
 require_once __DIR__.'/cms/db.php';
+require_once __DIR__.'/cms/cafe_utils.php';
 
-$theme      = cms_get_setting('theme', '2004');
+$theme      = cms_get_current_theme();
 $page_title = 'Cyber Café Directory';
 $db         = cms_get_db();
 ob_start();
 
-function cafe_country_names(): array {
-    static $map = null;
-    if ($map !== null) return $map;
-    $html = file_get_contents(__DIR__.'/archived_steampowered/2004/cafe_directory.html');
-    preg_match_all('/country=([A-Z]{2})[^>]*>([^<]+)/', $html, $m, PREG_SET_ORDER);
-    $map = [];
-    foreach ($m as $row) {
-        $map[$row[1]] = trim(html_entity_decode($row[2], ENT_QUOTES));
-    }
-    return $map;
-}
-
-function cafe_state_names(string $country): array {
-    $file = __DIR__.'/archived_steampowered/2004/cafe_directory/'.$country.'.txt';
-    if (!is_file($file)) return [];
-    $html = file_get_contents($file);
-    preg_match_all('/state=([^"&]+)[^>]*>([^<]+)/', $html, $m, PREG_SET_ORDER);
-    $states = [];
-    foreach ($m as $row) {
-        if ($row[1] === '?') continue;
-        $states[$row[1]] = trim(html_entity_decode($row[2], ENT_QUOTES));
-    }
-    return $states;
-}
-
 $country = isset($_GET['country']) ? strtoupper(preg_replace('/[^A-Z]/', '', $_GET['country'])) : null;
 $state   = isset($_GET['state']) ? preg_replace('/[^A-Za-z0-9 ]/', '', $_GET['state']) : null;
-$names   = cafe_country_names();
+$names   = cms_cafe_country_names();
 
 if ($country === null) {
     echo '<div class="content" id="container">';
@@ -53,9 +29,10 @@ if ($country === null) {
 }
 
 $countryName = $names[$country] ?? $country;
-$stateDir = __DIR__.'/archived_steampowered/2004/cafe_directory/'.$country;
-if ($state === null && is_dir($stateDir)) {
-    $states = cafe_state_names($country);
+$states = cms_cafe_state_names($country);
+
+// Show state list if country has states
+if ($state === null && !empty($states)) {
     echo '<div class="content" id="container">';
     echo '<h1>CYBER CAF&Eacute; DIRECTORY</h1><div class="narrower">';
     echo '<h3>'.htmlspecialchars($countryName).'</h3><ul>';
@@ -110,4 +87,3 @@ cms_render_template($tpl, [
     'page_title' => $page_title,
     'content'    => $content,
 ]);
-

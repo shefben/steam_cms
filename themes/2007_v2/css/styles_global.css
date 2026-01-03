@@ -226,7 +226,7 @@ A:hover.menu_item_pub {	color: #e6e6e6;}
 	margin-right: 15px;
 	margin-top: 4px;
 	background-attachment: scroll;
-	background-image:  url('img/ico/ico_arrow_green.gif');
+	background-image:  url('img/icons/ico_arrow_green.gif');
 	background-repeat: no-repeat;
 	background-position: 0px 3px;
 	padding-left: 6px;
@@ -304,7 +304,7 @@ background-repeat: no-repeat;
 */
 .rightLink_news_area li {
 	list-style-position: outside;
-	list-style-image: url('img/ico/ico_arrow_grey.gif');
+	list-style-image: url('img/icons/ico_arrow_grey.gif');
 	margin: 0px;
 	margin-left: 30px !important;
 	margin-left: 22px;
@@ -398,18 +398,18 @@ a.btn_search:hover {
 .ico_game {
 	width: 26px;
 	height: 16px;
-	background-image: url('img/ico/ico_mouse_lg.gif');
+	background-image: url('img/icons/ico_mouse_lg.gif');
 	background-repeat: no-repeat;
 }
 .ico_demo {
 	width: 26px;
 	height: 16px;
-	background-image: url('img/ico/ico_demo.gif');
+	background-image: url('img/icons/ico_demo.gif');
 	background-repeat: no-repeat;
 }
 .ico_trailer {
 	width: 26px;
 	height: 16px;
-	background-image: url('img/ico/ico_film_lg.gif');
+	background-image: url('img/icons/ico_film_lg.gif');
 	background-repeat: no-repeat;
 }

@@ -568,13 +568,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 id BIGINT AUTO_INCREMENT PRIMARY KEY,
                 title TEXT,
                 author TEXT,
-                publish_date DATETIME,
-                publish_at DATETIME,
+                category VARCHAR(100) DEFAULT '',
+                publish_date INT(11) DEFAULT 0,
+                publish_at INT(11) DEFAULT 0,
                 views INT DEFAULT 0,
                 content TEXT,
                 products TEXT,
                 is_official TINYINT(1) DEFAULT 1,
                 status VARCHAR(20) DEFAULT 'draft',
+                associated_appids TEXT DEFAULT '',
                 INDEX(publish_date),
                 INDEX(publish_at)
             );
@@ -1752,6 +1754,8 @@ ALTER TABLE product_discounts
             require_once 'sql/install_download_files.php';
             require_once 'sql/install_game_stats.php';
             require_once 'sql/install_single_large_capsule.php';
+            require_once 'sql/install_legacy_forms.php';
+            require_once 'sql/install_cafe_directory_names.php';
             if (!empty($_POST['use_official_survey'])) {
                 run_sql_file($pdo, __DIR__.'/sql/install_official_survey_stats.sql');
             }
@@ -3552,18 +3556,6 @@ $defaultCafes = [
             </div>
             <div class="form-group">
                 <label><input type="checkbox" name="use_official_survey" value="1"> Use official survey stats</label>
-            </div>
-            <div class="form-group">
-                <label><input type="checkbox" name="install_2004_forum_data" value="1" checked> Insert official 2004 forum data</label>
-                <small class="form-text text-muted">Includes historical Steam forum threads and posts from 2004. Only visible when using 2003_v2 or 2004 phpBB styles.</small>
-            </div>
-            <div class="form-group">
-                <label><input type="checkbox" name="install_2004_forum_data" value="1" checked> Insert official 2004 forum data</label>
-                <small class="form-text text-muted">Includes historical Steam forum threads and posts from 2004. Only visible when using 2003_v2 or 2004 phpBB styles.</small>
-            </div>
-            <div class="form-group">
-                <label><input type="checkbox" name="install_2004_forum_data" value="1" checked> Insert official 2004 forum data</label>
-                <small class="form-text text-muted">Includes historical Steam forum threads and posts from 2004. Only visible when using 2003_v2 or 2004 phpBB styles.</small>
             </div>
             <div class="form-group">
                 <label><input type="checkbox" name="install_2004_forum_data" value="1" checked> Insert official 2004 forum data</label>

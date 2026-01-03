@@ -1,0 +1,497 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Steam 2011 User Profile View - vBulletin Style -->
+<div class="steam-profile-container">
+
+    <!-- Profile Header -->
+    <table cellpadding="6" cellspacing="1" border="0" width="100%" align="center">
+    <tr>
+        <td class="tcat" style="background: #537aa8;">
+            <span class="smallfont">
+                <strong>User Profile: {MEMBER_PROFILE.USERNAME}</strong>
+                <!-- IF MEMBER_PROFILE.USER_RANK_TITLE -->
+                <br /><span class="rank-title">{MEMBER_PROFILE.USER_RANK_TITLE}</span>
+                <!-- ENDIF -->
+            </span>
+        </td>
+    </tr>
+    </table>
+
+    <!-- Main Profile Content -->
+    <table cellpadding="6" cellspacing="1" border="0" width="100%" align="center">
+    <tr valign="top">
+
+        <!-- Left Column - Avatar and Basic Info -->
+        <td class="alt2" width="175" style="border: 1px solid #000000;">
+
+            <!-- Avatar -->
+            <div class="profile-avatar">
+                <!-- IF MEMBER_PROFILE.AVATAR_IMG -->
+                    {MEMBER_PROFILE.AVATAR_IMG}
+                <!-- ELSE -->
+                    <img src="{T_THEME_PATH}/images/no_avatar.gif" width="80" height="80" alt="No Avatar" />
+                <!-- ENDIF -->
+            </div>
+
+            <!-- Username and Status -->
+            <div class="profile-username">
+                <span class="bigusername" style="color: {MEMBER_PROFILE.USER_COLOUR}">{MEMBER_PROFILE.USERNAME}</span>
+                <!-- IF S_USER_STATUS_ENABLED -->
+                <br /><span class="user-status">{MEMBER_STATUS_INDICATOR}</span>
+                <!-- ENDIF -->
+            </div>
+
+            <!-- Basic User Info -->
+            <div class="profile-basic-info">
+                <div class="smallfont">
+                    <strong>User Title:</strong><br />
+                    <!-- IF MEMBER_PROFILE.USER_RANK_TITLE -->
+                        {MEMBER_PROFILE.USER_RANK_TITLE}
+                    <!-- ELSE -->
+                        Steam User
+                    <!-- ENDIF -->
+                </div>
+
+                <!-- User Status Message -->
+                <!-- IF MEMBER_STATUS_MESSAGE -->
+                <div class="profile-status-message">
+                    <strong>Status:</strong><br />
+                    <em>"{MEMBER_STATUS_MESSAGE}"</em>
+                </div>
+                <!-- ENDIF -->
+
+                <!-- Steam Status -->
+                <!-- IF MEMBER_STEAM_STATUS and MEMBER_STEAM_STATUS neq 'offline' -->
+                <div class="steam-status-display">
+                    <strong>Steam:</strong><br />
+                    <span class="steam-status steam-status-{MEMBER_STEAM_STATUS}">
+                        <!-- IF MEMBER_CURRENT_GAME -->
+                            Playing: {MEMBER_CURRENT_GAME}
+                        <!-- ELSE -->
+                            {MEMBER_STEAM_STATUS}
+                        <!-- ENDIF -->
+                    </span>
+                </div>
+                <!-- ENDIF -->
+            </div>
+
+            <!-- Online/Offline Status -->
+            <div class="profile-online-status">
+                <!-- IF MEMBER_PROFILE.S_ONLINE -->
+                    <img src="{T_THEME_PATH}/images/status_online.gif" alt="Online" /> <strong style="color: #00FF00;">User is Online</strong>
+                <!-- ELSE -->
+                    <img src="{T_THEME_PATH}/images/status_offline.gif" alt="Offline" /> <span style="color: #666666;">User is Offline</span>
+                <!-- ENDIF -->
+
+                <!-- IF MEMBER_LAST_VISIT_FORMATTED -->
+                <br /><span class="smallfont">Last Visit: {MEMBER_LAST_VISIT_FORMATTED}</span>
+                <!-- ENDIF -->
+            </div>
+        </td>
+
+        <!-- Right Column - Detailed Information -->
+        <td class="alt1" style="border: 1px solid #000000; border-left: 0px;">
+
+            <!-- Profile Information Tabs -->
+            <div class="profile-tabs">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td class="vbmenu_control active-tab"><a href="#profile-info">Profile Info</a></td>
+                    <td class="vbmenu_control"><a href="#contact-info">Contact Info</a></td>
+                    <td class="vbmenu_control"><a href="#steam-info">Steam Info</a></td>
+                    <td class="vbmenu_control"><a href="#statistics">Statistics</a></td>
+                </tr>
+                </table>
+            </div>
+
+            <!-- Profile Info Tab -->
+            <div id="profile-info" class="profile-tab-content">
+                <table cellpadding="6" cellspacing="1" border="0" width="100%">
+
+                <!-- Basic Info -->
+                <tr>
+                    <td class="thead" colspan="2">Basic Information</td>
+                </tr>
+                <tr class="alt2">
+                    <td width="25%"><strong>Username:</strong></td>
+                    <td>{MEMBER_PROFILE.USERNAME}</td>
+                </tr>
+                <tr class="alt1">
+                    <td><strong>Join Date:</strong></td>
+                    <td>{MEMBER_PROFILE.JOINED}</td>
+                </tr>
+                <tr class="alt2">
+                    <td><strong>Total Posts:</strong></td>
+                    <td>{MEMBER_PROFILE.POSTS} ({MEMBER_PROFILE.POSTS_PCT}% of total posts)</td>
+                </tr>
+                <tr class="alt1">
+                    <td><strong>User Title:</strong></td>
+                    <td>
+                        <!-- IF MEMBER_PROFILE.USER_RANK_TITLE -->
+                            {MEMBER_PROFILE.USER_RANK_TITLE}
+                        <!-- ELSE -->
+                            Steam User
+                        <!-- ENDIF -->
+                    </td>
+                </tr>
+
+                <!-- Location Info -->
+                <!-- IF MEMBER_PROFILE.LOCATION -->
+                <tr class="alt2">
+                    <td><strong>Location:</strong></td>
+                    <td>{MEMBER_PROFILE.LOCATION}</td>
+                </tr>
+                <!-- ENDIF -->
+
+                <!-- Age Info -->
+                <!-- IF MEMBER_PROFILE.AGE -->
+                <tr class="alt1">
+                    <td><strong>Age:</strong></td>
+                    <td>{MEMBER_PROFILE.AGE}</td>
+                </tr>
+                <!-- ENDIF -->
+
+                <!-- Interests -->
+                <!-- IF MEMBER_PROFILE.INTERESTS -->
+                <tr class="alt2">
+                    <td><strong>Interests:</strong></td>
+                    <td>{MEMBER_PROFILE.INTERESTS}</td>
+                </tr>
+                <!-- ENDIF -->
+
+                <!-- Occupation -->
+                <!-- IF MEMBER_PROFILE.OCCUPATION -->
+                <tr class="alt1">
+                    <td><strong>Occupation:</strong></td>
+                    <td>{MEMBER_PROFILE.OCCUPATION}</td>
+                </tr>
+                <!-- ENDIF -->
+                </table>
+            </div>
+
+            <!-- Steam Information Tab -->
+            <div id="steam-info" class="profile-tab-content" style="display: none;">
+                <table cellpadding="6" cellspacing="1" border="0" width="100%">
+                <tr>
+                    <td class="thead" colspan="2">Steam Information</td>
+                </tr>
+                <tr class="alt2">
+                    <td width="25%"><strong>Steam Status:</strong></td>
+                    <td>
+                        <!-- IF MEMBER_STEAM_STATUS -->
+                            <span class="steam-status steam-status-{MEMBER_STEAM_STATUS}">
+                                <!-- IF MEMBER_CURRENT_GAME -->
+                                    Playing: {MEMBER_CURRENT_GAME}
+                                <!-- ELSE -->
+                                    {MEMBER_STEAM_STATUS}
+                                <!-- ENDIF -->
+                            </span>
+                        <!-- ELSE -->
+                            Unknown
+                        <!-- ENDIF -->
+                    </td>
+                </tr>
+                <tr class="alt1">
+                    <td><strong>Steam ID:</strong></td>
+                    <td>
+                        <!-- IF MEMBER_STEAM_ID -->
+                            {MEMBER_STEAM_ID}
+                        <!-- ELSE -->
+                            Not specified
+                        <!-- ENDIF -->
+                    </td>
+                </tr>
+                <tr class="alt2">
+                    <td><strong>Current Game:</strong></td>
+                    <td>
+                        <!-- IF MEMBER_CURRENT_GAME -->
+                            {MEMBER_CURRENT_GAME}
+                        <!-- ELSE -->
+                            None
+                        <!-- ENDIF -->
+                    </td>
+                </tr>
+                <tr class="alt1">
+                    <td><strong>Favorite Games:</strong></td>
+                    <td>
+                        <!-- IF MEMBER_FAVORITE_GAMES -->
+                            {MEMBER_FAVORITE_GAMES}
+                        <!-- ELSE -->
+                            Not specified
+                        <!-- ENDIF -->
+                    </td>
+                </tr>
+                </table>
+            </div>
+
+            <!-- Statistics Tab -->
+            <div id="statistics" class="profile-tab-content" style="display: none;">
+                <table cellpadding="6" cellspacing="1" border="0" width="100%">
+                <tr>
+                    <td class="thead" colspan="2">Forum Statistics</td>
+                </tr>
+                <tr class="alt2">
+                    <td width="25%"><strong>Total Posts:</strong></td>
+                    <td>{MEMBER_PROFILE.POSTS}</td>
+                </tr>
+                <tr class="alt1">
+                    <td><strong>Posts Per Day:</strong></td>
+                    <td>{MEMBER_PROFILE.POSTS_PER_DAY}</td>
+                </tr>
+                <tr class="alt2">
+                    <td><strong>Join Date:</strong></td>
+                    <td>{MEMBER_PROFILE.JOINED}</td>
+                </tr>
+                <tr class="alt1">
+                    <td><strong>Last Activity:</strong></td>
+                    <td>{MEMBER_LAST_VISIT_FORMATTED}</td>
+                </tr>
+                <tr class="alt2">
+                    <td><strong>Local Time:</strong></td>
+                    <td>{MEMBER_PROFILE.LOCAL_TIME}</td>
+                </tr>
+                </table>
+            </div>
+
+            <!-- Contact Information Tab -->
+            <div id="contact-info" class="profile-tab-content" style="display: none;">
+                <table cellpadding="6" cellspacing="1" border="0" width="100%">
+                <tr>
+                    <td class="thead" colspan="2">Contact Information</td>
+                </tr>
+                <!-- IF MEMBER_PROFILE.EMAIL -->
+                <tr class="alt2">
+                    <td width="25%"><strong>Email:</strong></td>
+                    <td><a href="mailto:{MEMBER_PROFILE.EMAIL}">Send Email</a></td>
+                </tr>
+                <!-- ENDIF -->
+                <!-- IF MEMBER_PROFILE.WEBSITE -->
+                <tr class="alt1">
+                    <td><strong>Website:</strong></td>
+                    <td><a href="{MEMBER_PROFILE.WEBSITE}" target="_blank">{MEMBER_PROFILE.WEBSITE}</a></td>
+                </tr>
+                <!-- ENDIF -->
+                <!-- IF MEMBER_PROFILE.JABBER -->
+                <tr class="alt2">
+                    <td><strong>Jabber:</strong></td>
+                    <td>{MEMBER_PROFILE.JABBER}</td>
+                </tr>
+                <!-- ENDIF -->
+                <!-- IF MEMBER_PROFILE.ICQ -->
+                <tr class="alt1">
+                    <td><strong>ICQ Number:</strong></td>
+                    <td>{MEMBER_PROFILE.ICQ}</td>
+                </tr>
+                <!-- ENDIF -->
+                <!-- IF MEMBER_PROFILE.AIM -->
+                <tr class="alt2">
+                    <td><strong>AIM Screen name:</strong></td>
+                    <td>{MEMBER_PROFILE.AIM}</td>
+                </tr>
+                <!-- ENDIF -->
+                <!-- IF MEMBER_PROFILE.MSN -->
+                <tr class="alt1">
+                    <td><strong>MSN:</strong></td>
+                    <td>{MEMBER_PROFILE.MSN}</td>
+                </tr>
+                <!-- ENDIF -->
+                <!-- IF MEMBER_PROFILE.YIM -->
+                <tr class="alt2">
+                    <td><strong>Yahoo:</strong></td>
+                    <td>{MEMBER_PROFILE.YIM}</td>
+                </tr>
+                <!-- ENDIF -->
+                <tr class="alt1">
+                    <td><strong>Private Message:</strong></td>
+                    <td>
+                        <!-- IF S_LOGGED_IN and not S_IS_BOT -->
+                        <a href="{U_PM}">Send private message</a>
+                        <!-- ELSE -->
+                        You must be logged in to send private messages
+                        <!-- ENDIF -->
+                    </td>
+                </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+    </table>
+
+    <!-- User Actions -->
+    <!-- IF S_LOGGED_IN and not S_IS_BOT -->
+    <table cellpadding="6" cellspacing="1" border="0" width="100%" align="center">
+    <tr>
+        <td class="tfoot" align="center">
+            <div class="profile-actions">
+                <!-- IF U_PM -->
+                <a href="{U_PM}"><img src="{T_THEME_PATH}/images/icon_pm.gif" alt="PM" border="0" /> Send Private Message</a>
+                <!-- ENDIF -->
+                <!-- IF U_EMAIL -->
+                | <a href="{U_EMAIL}"><img src="{T_THEME_PATH}/images/icon_email.gif" alt="Email" border="0" /> Send Email</a>
+                <!-- ENDIF -->
+                <!-- IF U_WWW -->
+                | <a href="{U_WWW}" target="_blank"><img src="{T_THEME_PATH}/images/icon_www.gif" alt="WWW" border="0" /> Visit Website</a>
+                <!-- ENDIF -->
+            </div>
+        </td>
+    </tr>
+    </table>
+    <!-- ENDIF -->
+
+</div>
+
+<!-- JavaScript for Profile Tabs -->
+<script type="text/javascript">
+// Profile tab switching
+function switchProfileTab(activeTab) {
+    // Hide all tab contents
+    var tabs = document.querySelectorAll('.profile-tab-content');
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = 'none';
+    }
+
+    // Remove active class from all tabs
+    var tabControls = document.querySelectorAll('.vbmenu_control');
+    for (var i = 0; i < tabControls.length; i++) {
+        tabControls[i].classList.remove('active-tab');
+    }
+
+    // Show active tab content
+    var activeContent = document.getElementById(activeTab);
+    if (activeContent) {
+        activeContent.style.display = 'block';
+    }
+
+    // Add active class to clicked tab
+    event.target.closest('.vbmenu_control').classList.add('active-tab');
+}
+
+// Setup tab click handlers
+document.addEventListener('DOMContentLoaded', function() {
+    var tabLinks = document.querySelectorAll('.profile-tabs a');
+    for (var i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].addEventListener('click', function(e) {
+            e.preventDefault();
+            var tabId = this.getAttribute('href').substring(1);
+            switchProfileTab(tabId);
+        });
+    }
+});
+</script>
+
+<!-- Steam Profile CSS -->
+<style type="text/css">
+.steam-profile-container {
+    margin: 10px 0;
+}
+
+.profile-avatar {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.profile-avatar img {
+    border: 1px solid #000000;
+}
+
+.profile-username {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.bigusername {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.profile-basic-info {
+    margin-bottom: 15px;
+}
+
+.profile-basic-info div {
+    margin: 8px 0;
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.profile-status-message {
+    font-style: italic;
+}
+
+.profile-online-status {
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #000000;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.profile-tabs {
+    margin-bottom: 10px;
+}
+
+.vbmenu_control {
+    background: #262626;
+    border: 1px solid #000000;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.vbmenu_control.active-tab {
+    background: #537aa8;
+}
+
+.vbmenu_control a {
+    color: #DFDCD6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.profile-tab-content {
+    margin-top: 1px;
+}
+
+.profile-actions {
+    font-size: 11px;
+}
+
+.profile-actions a {
+    color: #6EBCFF;
+    text-decoration: none;
+    margin: 0 8px;
+}
+
+.profile-actions a:hover {
+    text-decoration: underline;
+}
+
+.profile-actions img {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+/* Steam 2011 specific styling */
+body.steam_2011 .steam-profile-container .alt1 {
+    background: #262626;
+    color: #DFDCD6;
+}
+
+body.steam_2011 .steam-profile-container .alt2 {
+    background: #2d415d;
+    color: #DFDCD6;
+}
+
+body.steam_2011 .steam-profile-container .thead {
+    background: #537aa8;
+    color: #CFCBC2;
+    font-weight: bold;
+}
+
+body.steam_2011 .steam-profile-container .tfoot {
+    background: #262626;
+    color: #DFDCD6;
+}
+</style>
+
+<!-- INCLUDE overall_footer.html -->

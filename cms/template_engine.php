@@ -389,7 +389,7 @@ function cms_news_archive_months(int $year, int $months = 12): string
 function cms_theme_layout(?string $file, ?string $theme = null)
 {
     static $pathCache = [];
-    $theme = $theme ?: cms_get_setting('theme', '2004');
+    $theme = $theme ?: cms_get_current_theme();
     $file  = $file ?: 'default.twig';
     $file  = preg_replace('/\.tpl$/', '.twig', $file);
     $cacheKey = $theme . '|' . $file;
@@ -432,7 +432,7 @@ function cms_theme_layout(?string $file, ?string $theme = null)
 function cms_theme_page_template(string $page, ?string $theme = null, ?string $version = null): string
 {
     static $pathCache = [];
-    $theme = $theme ?: cms_get_setting('theme', '2004');
+    $theme = $theme ?: cms_get_current_theme();
     $page  = preg_replace('/\.twig$/', '', $page);
     $cacheKey = $theme . '|' . $page . '|' . ($version ?? '');
     if (isset($pathCache[$cacheKey])) {
@@ -636,7 +636,8 @@ function cms_twig_env(string $tpl_dir): Environment
         if (!is_dir($cacheDir)) {
             mkdir($cacheDir, 0777, true);
         }
-        cms_load_plugins();
+        // PERFORMANCE: Only load template-type plugins (not admin plugins)
+        cms_load_plugins(CMS_PLUGIN_TYPE_TEMPLATE);
         // PERFORMANCE: auto_reload disabled in production (matches twig.php config)
         $env = new Environment($loader, [
             'cache' => $cacheDir,
@@ -1019,7 +1020,7 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('custom_index_sidebar_configurations', function () {
-            $theme = cms_get_setting('theme', '2004');
+            $theme = cms_get_current_theme();
             return cms_get_sidebar_sections_html($theme);
         }, ['is_safe' => ['html']]));
 
@@ -1732,7 +1733,7 @@ function cms_render_2008_sidebar_right(): string
     $db = cms_get_db();
     
     // Get recent news
-    $stmt = $db->prepare("SELECT id, title FROM news ORDER BY date_created DESC LIMIT 8");
+    $stmt = $db->prepare("SELECT id, title FROM news WHERE status IN ('published', 'final') ORDER BY publish_at DESC LIMIT 8");
     $stmt->execute();
     $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -2024,7 +2025,11 @@ function cms_process_all_assets(string $html, array $vars, string $theme, string
 
 function cms_render_template(string $path, array $vars = []): void
 {
-    $theme = cms_get_setting('theme', '2004');
+    $theme = cms_get_current_theme(); // Use safer function that ensures non-empty theme
+    // Defensive fallback in case theme is still empty
+    if ($theme === '' || $theme === null) {
+        $theme = '2004';
+    }
     $cache_enabled = cms_get_setting('enable_cache', '0') === '1';
     
     if ($cache_enabled) {
@@ -2118,6 +2123,13 @@ function cms_render_template(string $path, array $vars = []): void
 
 function cms_render_template_theme(string $path, string $theme, array $vars = []): void
 {
+    // Defensive fallback in case theme is empty
+    if ($theme === '' || $theme === null) {
+        $theme = cms_get_current_theme();
+        if ($theme === '' || $theme === null) {
+            $theme = '2004';
+        }
+    }
     cms_set_current_theme($theme);
     $tpl_dir = dirname($path);
     $subdir   = $vars['theme_subdir'] ?? '';
@@ -2178,6 +2190,15 @@ function cms_resolve_image(string $path, string $theme, string $theme_url, strin
 {
     static $imageCache = [];
     $path = ltrim($path, '/');
+
+    // Defensive fallback: ensure theme is never empty
+    if ($theme === '') {
+        $theme = '2004';
+        // Also fix theme_url if it's missing the theme name
+        if (strpos($theme_url, '/themes/images') !== false || preg_match('#/themes/?$#', $theme_url)) {
+            $theme_url = rtrim(preg_replace('#/themes/?$#', '', $theme_url), '/') . '/themes/' . $theme;
+        }
+    }
     $key  = $theme . '|' . $path . '|' . $theme_url . '|' . $base_url;
 
     // Check static cache first (fastest)
@@ -2214,34 +2235,17 @@ function cms_resolve_image(string $path, string $theme, string $theme_url, strin
             }
         }
     } else {
-        // For regular pages, always try theme images directory first
+        // Check theme images directory FIRST
         $themeFile = dirname(__DIR__) . "/themes/$theme/images/" . $path;
         if (cms_is_file($themeFile)) {
             $result = $theme_url . '/images/' . $path;
         } else {
-            // Check if file exists in root images directory
+            // Fallback to root images directory
             $rootFile = dirname(__DIR__) . '/images/' . $path;
             if (cms_is_file($rootFile)) {
-                // If found in root, try to copy to theme directory for future requests
-                $themeDir = dirname(__DIR__) . "/themes/$theme/images";
-                if (!is_dir($themeDir)) {
-                    @mkdir($themeDir, 0755, true);
-                }
-                $themeTargetFile = $themeDir . '/' . $path;
-                $themeTargetDir = dirname($themeTargetFile);
-                if (!is_dir($themeTargetDir)) {
-                    @mkdir($themeTargetDir, 0755, true);
-                }
-                // Attempt to copy the file to theme directory
-                if (@copy($rootFile, $themeTargetFile)) {
-                    // Successfully copied, now use theme path
-                    $result = $theme_url . '/images/' . $path;
-                } else {
-                    // Copy failed, but still prefer theme path over root
-                    $result = $theme_url . '/images/' . $path;
-                }
+                $result = rtrim($base_url, '/') . '/images/' . $path;
             } else {
-                // File not found anywhere - still use theme path (let it 404 from theme)
+                // File not found - use theme path (let it 404 from theme)
                 $result = $theme_url . '/images/' . $path;
             }
         }

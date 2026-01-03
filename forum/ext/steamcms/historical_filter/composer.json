@@ -1,0 +1,26 @@
+{
+    "name": "steamcms\/historical_filter",
+    "type": "phpbb-extension",
+    "description": "Filters historical 2004 Steam forum data based on active style",
+    "homepage": "",
+    "version": "1.0.0",
+    "time": "2025-12-27",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "SteamCMS",
+            "email": "",
+            "homepage": "",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "extra": {
+        "display-name": "Historical Data Filter",
+        "soft-require": {
+            "phpbb\/phpbb": ">=3.1.0,<4.0.0@dev"
+        }
+    }
+}

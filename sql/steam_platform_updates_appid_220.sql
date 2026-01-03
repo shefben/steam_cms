@@ -12,7 +12,7 @@ Changes/Additions
 <li> Made available for pre-load</li> </ul>
 </div>'),
 (220, '2004-11-16', 'Half-life® 2 Released For Play', '<div class=\"post_content\" id=\"content_345\" style=\"display: none;\">
-<p>Half-Life 2 is available now for purchase and to play. Those who pre-purchased their copy via Steam may access the game by restarting Steam, then double-clicking on the Half-Life 2 icon in their Steam Games directory. To purchase your copy via Steam, <a href=\"http://steampowered.com/index.php?area=getsteamnow\">get Steam now</a>.<br/><br/>We hope you enjoy it!</p>
+<p>Half-Life 2 is available now for purchase and to play. Those who pre-purchased their copy via Steam may access the game by restarting Steam, then double-clicking on the Half-Life 2 icon in their Steam Games directory. To purchase your copy via Steam, <a href=\"{{ BASE }}/index.php?area=getsteamnow\">get Steam now</a>.<br/><br/>We hope you enjoy it!</p>
 <br clear=\"left\"/>
 </div>'),
 (220, '2004-11-24', 'Half-life 2 Update', '<div class=\"post_content\" id=\"content_356\" style=\"display: none;\">

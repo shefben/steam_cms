@@ -1,0 +1,481 @@
+/**
+ * ChatBear 2002 v2 Theme - Green/Brown
+ * Authentic recreation of early Steam ChatBear forum from 2002 v2
+ *
+ * @copyright (c) 2024 Valve Corporation
+ * @license GPL-2.0-only
+ */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and general layout - matching archived page */
+body {
+    background-color: #626d5c;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #c4cabe;
+    margin: 0;
+    padding: 0;
+}
+
+/* Links matching ChatBear v2 styling */
+a {
+    color: #bfba50;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #938f3c;
+    text-decoration: none;
+}
+
+/* Main container - matching 800px content width */
+.chatbear-v2-container {
+    width: 800px;
+    margin: 0 auto;
+    background: #626d5c;
+}
+
+/* Simple header recreation */
+.simple-header {
+    background-color: #000000;
+    height: 135px;
+    position: relative;
+}
+
+.support-site-title {
+    position: absolute;
+    top: 30px;
+    left: 17px;
+}
+
+.support-site-title img {
+    width: 770px;
+    height: 29px;
+}
+
+.steam-logo-v2 {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+}
+
+.steam-logo-v2 img {
+    width: 188px;
+    height: 51px;
+}
+
+.header-navigation {
+    position: absolute;
+    top: 50px;
+    right: 15px;
+    text-align: right;
+}
+
+.header-navigation .main-nav {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.header-navigation .sub-nav {
+    font-size: 10px;
+}
+
+/* Main content area - matching #4c5844 background */
+.main-content {
+    background-color: #4c5844;
+    width: 798px;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+/* Forum list header - matching #424B3C */
+.forum-header {
+    background-color: #424B3C;
+    color: #EBEDEA;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.forum-header table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.forum-header td {
+    background-color: #424B3C;
+    color: #EBEDEA;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Forum list */
+.forum-list {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.forum-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.forum-row {
+    background-color: #424B3C;
+}
+
+.forum-row.alt {
+    background-color: #4C5844;
+}
+
+.forum-row td {
+    padding: 5px;
+    color: #c4cabe;
+    font-size: 12px;
+    vertical-align: top;
+}
+
+.forum-row .forum-name {
+    width: 50%;
+}
+
+.forum-row .forum-topics,
+.forum-row .forum-posts {
+    width: 15%;
+    text-align: center;
+}
+
+.forum-row .forum-updated {
+    width: 20%;
+}
+
+/* Forum links */
+.forum-row a {
+    color: #bfba50;
+    font-weight: bold;
+}
+
+.forum-row a:hover {
+    color: #938f3c;
+}
+
+/* Footer styling */
+.footer-info {
+    text-align: center;
+    padding: 10px;
+    font-size: 11px;
+    color: #c4cabe;
+    background-color: #626d5c;
+}
+
+.footer-info a {
+    color: #bfba50;
+    font-weight: bold;
+}
+
+.footer-info a:hover {
+    color: #938f3c;
+}
+
+/* Advertisement */
+.chatbear-ad {
+    text-align: center;
+    margin: 5px 0;
+    background-color: #626d5c;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+}
+
+/* Specific phpBB integration */
+.forumlist {
+    margin: 0;
+    padding: 0;
+}
+
+.forumlist li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.forum-item {
+    display: block;
+}
+
+/* Hide modern phpBB elements not present in ChatBear */
+.forum-stats,
+.forum-desc-stat,
+.forum-image,
+.last-post-icon,
+.icon,
+.forum-icon {
+    display: none !important;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background-color: #424B3C;
+    padding: 5px;
+    color: #EBEDEA;
+    font-size: 11px;
+}
+
+.breadcrumbs a {
+    color: #bfba50;
+}
+
+/* Posts and topics */
+.post {
+    margin: 0;
+    padding: 0;
+}
+
+.postbody {
+    background-color: #424B3C;
+    padding: 10px;
+    color: #c4cabe;
+    font-size: 11px;
+}
+
+/* Topic list */
+.topiclist {
+    margin: 0;
+    width: 100%;
+}
+
+.topiclist table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.topiclist .row1 {
+    background-color: #424B3C;
+}
+
+.topiclist .row2 {
+    background-color: #4C5844;
+}
+
+.topiclist td {
+    padding: 5px;
+    color: #c4cabe;
+    font-size: 11px;
+    border: none;
+}
+
+/* Header elements */
+.headerbar {
+    background-color: #424B3C;
+    color: #EBEDEA;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+/* Simplify pagination */
+.pagination {
+    text-align: center;
+    padding: 5px;
+    color: #c4cabe;
+    font-size: 11px;
+}
+
+.pagination a {
+    color: #bfba50;
+    margin: 0 2px;
+}
+
+.pagination a:hover {
+    color: #938f3c;
+}
+
+/* Remove modern styling elements */
+.inner,
+.forabg,
+.forumbg,
+.topicbg {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Private messages indicator */
+.private-messages {
+    color: #c4cabe;
+    font-size: 11px;
+}
+
+.private-messages a {
+    color: #bfba50;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 820px) {
+    .chatbear-v2-container,
+    .simple-header,
+    .main-content {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .forum-list,
+    .topiclist {
+        width: 100%;
+    }
+
+    .forum-header table,
+    .forum-list table {
+        width: 100%;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    .chatbear-ad,
+    .header-navigation {
+        display: none;
+    }
+}
+
+/* Focus and accessibility */
+a:focus {
+    outline: 1px dotted #bfba50;
+}
+
+/* Ensure text is readable */
+.forum-row,
+.topiclist td,
+.postbody {
+    line-height: 1.3;
+}
+
+/* Match exact ChatBear styling */
+.forum-description {
+    font-size: 11px;
+    color: #c4cabe;
+    margin-top: 2px;
+}
+
+/* Last post information */
+.lastpost {
+    font-size: 10px;
+    color: #EBEDEA;
+}
+
+/* Remove any gradients or modern effects */
+.bg1, .bg2, .bg3 {
+    background: none;
+}
+
+/* ChatBear-specific feature hiding */
+/* Hide modern phpBB features not present in ChatBear */
+.postprofile,
+.postprofile-avatar,
+.avatar,
+.online,
+.rank-img,
+.rank-title,
+.profile-rank,
+.postprofile-name,
+.postprofile-details,
+.postprofile-contact,
+.has-avatar .postprofile,
+.postprofile-avatar img,
+.signature,
+.notice,
+.rules,
+.jumpbox,
+.action-bar,
+.topic-poster,
+.post-buttons,
+.post-rating,
+.poll,
+.attachbox,
+.codebox,
+.quotebox,
+.spoilerbox {
+    display: none !important;
+}
+
+/* Simplify post layout for ChatBear */
+.post-content {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    line-height: 1.3;
+    color: #c4cabe;
+}
+
+/* Hide complex pagination */
+.pagination .ellipsis,
+.pagination .page-jump,
+.pagination .page-sep {
+    display: none !important;
+}
+
+/* Simplify topic icons */
+.topic-icon,
+.icon-global,
+.icon-announce,
+.icon-sticky,
+.icon-locked {
+    display: none !important;
+}
+
+/* Hide user status indicators */
+.username-coloured,
+.colour-groups,
+.online-indicator {
+    color: #bfba50 !important;
+}
+
+/* Remove complex forum statistics */
+.forum-stats,
+.stat-block,
+.forum-desc-stat {
+    display: none !important;
+}
+
+/* Simplify breadcrumbs */
+.breadcrumbs .crumb {
+    color: #bfba50;
+}
+
+/* Hide posting options not available in ChatBear */
+.posting-attachment,
+.posting-poll,
+.posting-options,
+.smilies-status,
+.bbcode-status,
+.url-status,
+.flash-status {
+    display: none !important;
+}
+
+/* Simple form styling */
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    background: #4c5844;
+    border: 1px solid #424B3C;
+    color: #c4cabe;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+}

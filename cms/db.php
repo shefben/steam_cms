@@ -296,6 +296,37 @@ function cms_rewrite_legacy_paths(string $html): string
     return str_replace('action="index.php"', 'action="' . $action_url . '"', $html);
 }
 
+/**
+ * Get legacy form page content from database or fallback to archived file.
+ * @param string $formType Type of form (cafe_signup, cheat_form, cd_account)
+ * @param string $version Version key (e.g., 2004_signup_v1)
+ * @param array $files Fallback file paths keyed by version
+ * @return string|null Processed content or null if not found
+ */
+function cms_get_legacy_form_page(string $formType, string $version, array $files): ?string
+{
+    // Try database first
+    try {
+        $db = cms_get_db();
+        $stmt = $db->prepare('SELECT content FROM legacy_form_pages WHERE form_type = ? AND version = ?');
+        $stmt->execute([$formType, $version]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row && !empty($row['content'])) {
+            return $row['content'];
+        }
+    } catch (PDOException $e) {
+        // Table doesn't exist yet (during installation) - fall through to file fallback
+    }
+
+    // Fallback to archived file (for installation/migration)
+    if (!isset($files[$version]) || !file_exists($files[$version])) {
+        return null;
+    }
+    $html = file_get_contents($files[$version]);
+    $html = cms_rewrite_legacy_paths($html);
+    return cms_extract_legacy_body($html);
+}
+
 function cms_get_cafe_signup_page(string $theme): ?string
 {
     $files = [
@@ -304,12 +335,7 @@ function cms_get_cafe_signup_page(string $theme): ?string
     ];
     $default = '2004_signup_v1';
     $ver = cms_get_setting('cafe_signup_page_' . $theme, $default);
-    if (!isset($files[$ver]) || !file_exists($files[$ver])) {
-        return null;
-    }
-    $html = file_get_contents($files[$ver]);
-    $html = cms_rewrite_legacy_paths($html);
-    return cms_extract_legacy_body($html);
+    return cms_get_legacy_form_page('cafe_signup', $ver, $files);
 }
 
 function cms_get_cheat_form_page(string $theme): ?string
@@ -320,12 +346,7 @@ function cms_get_cheat_form_page(string $theme): ?string
     ];
     $default = '2004_cheat_v1';
     $ver = cms_get_setting('cheat_form_page_' . $theme, $default);
-    if (!isset($files[$ver]) || !file_exists($files[$ver])) {
-        return null;
-    }
-    $html = file_get_contents($files[$ver]);
-    $html = cms_rewrite_legacy_paths($html);
-    return cms_extract_legacy_body($html);
+    return cms_get_legacy_form_page('cheat_form', $ver, $files);
 }
 
 function cms_get_cd_account_page(string $theme): ?string
@@ -336,12 +357,7 @@ function cms_get_cd_account_page(string $theme): ?string
     ];
     $default = '2004_cd_v1';
     $ver = cms_get_setting('cd_account_page_' . $theme, $default);
-    if (!isset($files[$ver]) || !file_exists($files[$ver])) {
-        return null;
-    }
-    $html = file_get_contents($files[$ver]);
-    $html = cms_rewrite_legacy_paths($html);
-    return cms_extract_legacy_body($html);
+    return cms_get_legacy_form_page('cd_account', $ver, $files);
 }
 
 function cms_get_download_files(int $limit = 10, int $offset = 0): array
@@ -952,6 +968,22 @@ function cms_base_url(){
     return cms_root_path();
 }
 
+/**
+ * Replace {{ BASE }} placeholders in content with the CMS base URL.
+ * This mirrors Twig's {{ BASE }} variable for use in database content
+ * such as news articles, allowing URLs to work regardless of CMS install path.
+ *
+ * Example: <a href="{{ BASE }}/app/123"> becomes <a href="/cms/app/123">
+ *          (if CMS is installed at /cms/)
+ *
+ * @param string $content The content containing {{ BASE }} placeholders
+ * @return string Content with placeholders replaced by actual base URL
+ */
+function cms_replace_base_urls(string $content): string {
+    $base_url = cms_base_url();
+    return str_replace('{{ BASE }}', $base_url, $content);
+}
+
 function cms_set_current_template(string $tpl): void {
     $GLOBALS['cms_current_template'] = basename($tpl, '.twig');
 }
@@ -961,7 +993,12 @@ function cms_set_current_theme(string $theme): void {
 }
 
 function cms_get_current_theme(): string {
-    return $GLOBALS['cms_current_theme'] ?? cms_get_setting('theme', '2004');
+    if (!empty($GLOBALS['cms_current_theme'])) {
+        return $GLOBALS['cms_current_theme'];
+    }
+    $theme = cms_get_setting('theme', '2004');
+    // Ensure theme is never empty - fallback to '2004' if empty string
+    return ($theme !== '' && $theme !== null) ? $theme : '2004';
 }
 
 function cms_get_current_page(): string {

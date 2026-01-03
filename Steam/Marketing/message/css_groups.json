@@ -1,0 +1,871 @@
+{
+  "matching_groups": [
+    {
+      "normalized_sha1": "d0c7c56ee4f5780dff51b4f1db6688110d1c1616",
+      "directories": [
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1005",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1009",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1013",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1018",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1026",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1038",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1045",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1055",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1070",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1083",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1100",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1114",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1119",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1125",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1135",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1140",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1155",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1171",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\620",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\624",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\627",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\639",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\649",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\656",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\670",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\689",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\716",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\718",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\723",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\729",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\745",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\761",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\768",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\775",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\794",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\807",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\823",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\837",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\866",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\889",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\893",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\903",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\916",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\942",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\951",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\958",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\967",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\974",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\988",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\995"
+      ],
+      "files": [
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1005",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1005\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1009",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1009\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1013",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1013\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1018",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1018\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1026",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1026\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1038",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1038\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1045",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1045\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1055",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1055\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1070",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1070\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1083",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1083\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1100",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1100\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1114",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1114\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1119",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1119\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1125",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1125\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1135",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1135\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1140",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1140\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1155",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1155\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1171",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1171\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\620",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\620\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\624",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\624\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\627",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\627\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\639",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\639\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\649",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\649\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\656",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\656\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\670",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\670\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\689",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\689\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\716",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\716\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\718",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\718\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\723",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\723\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\729",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\729\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\745",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\745\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\761",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\761\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\768",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\768\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\775",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\775\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\794",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\794\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\807",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\807\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\823",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\823\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\837",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\837\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\866",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\866\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\889",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\889\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\893",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\893\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\903",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\903\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\916",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\916\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\942",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\942\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\951",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\951\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\958",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\958\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\967",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\967\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\974",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\974\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\988",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\988\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\995",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\995\\message.css"
+        }
+      ],
+      "count_files": 50,
+      "count_dirs": 50
+    },
+    {
+      "normalized_sha1": "5a044444e3671b69ff2f2aee3074eedfb65f920d",
+      "directories": [
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1187",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1205",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1223",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1242",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1254",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1266",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1273",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1287",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1301",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1318",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1328",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1337",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1346",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1364",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1378",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1384",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1396",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1412",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1419",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1426",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1435",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1468",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1476",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1487",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1547",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1608",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1727",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1737",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1750",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1788",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1804",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1843",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1904",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\2167",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\2236"
+      ],
+      "files": [
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1187",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1187\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1205",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1205\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1223",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1223\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1242",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1242\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1254",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1254\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1266",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1266\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1273",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1273\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1287",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1287\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1301",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1301\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1318",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1318\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1328",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1328\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1337",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1337\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1346",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1346\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1364",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1364\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1378",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1378\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1384",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1384\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1396",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1396\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1412",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1412\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1419",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1419\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1426",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1426\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1435",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1435\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1468",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1468\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1476",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1476\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1487",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1487\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1547",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1547\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1608",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1608\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1727",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1727\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1737",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1737\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1750",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1750\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1788",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1788\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1804",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1804\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1843",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1843\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1904",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1904\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\2167",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\2167\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\2236",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\2236\\message.css"
+        }
+      ],
+      "count_files": 35,
+      "count_dirs": 35
+    },
+    {
+      "normalized_sha1": "c80ce29a8bc3a6ad30ddfdeb1383ed8fb8cc6802",
+      "directories": [
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\879",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\885",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\886",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\887",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\939",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\946",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\947",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\950"
+      ],
+      "files": [
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\879",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\879\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\885",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\885\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\886",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\886\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\887",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\887\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\939",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\939\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\946",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\946\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\947",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\947\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\950",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\950\\message.css"
+        }
+      ],
+      "count_files": 8,
+      "count_dirs": 8
+    },
+    {
+      "normalized_sha1": "2b0d4540d7a464118ccd5573b736d19fbe579a5b",
+      "directories": [
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\846",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\861",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\863",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\869"
+      ],
+      "files": [
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\846",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\846\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\861",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\861\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\863",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\863\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\869",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\869\\message.css"
+        }
+      ],
+      "count_files": 4,
+      "count_dirs": 4
+    },
+    {
+      "normalized_sha1": "16dcab3632b314c6503e817f598ff69676cbea14",
+      "directories": [
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1064",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\925"
+      ],
+      "files": [
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1064",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1064\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\925",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\925\\message.css"
+        }
+      ],
+      "count_files": 2,
+      "count_dirs": 2
+    },
+    {
+      "normalized_sha1": "5f186f57b04eaf60d7573e36d24bbcee9348865b",
+      "directories": [
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\970",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\972"
+      ],
+      "files": [
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\970",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\970\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\972",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\972\\message.css"
+        }
+      ],
+      "count_files": 2,
+      "count_dirs": 2
+    },
+    {
+      "normalized_sha1": "9ac5b2db22afc9a4f2aebcca45ed5a13746e0615",
+      "directories": [
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\830",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\832"
+      ],
+      "files": [
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\830",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\830\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\832",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\832\\message.css"
+        }
+      ],
+      "count_files": 2,
+      "count_dirs": 2
+    },
+    {
+      "normalized_sha1": "d8b2d9c734a149ea8feac40f78e9a6a81804db28",
+      "directories": [
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\821",
+        "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\836"
+      ],
+      "files": [
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\821",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\821\\message.css"
+        },
+        {
+          "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\836",
+          "file": "message.css",
+          "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\836\\message.css"
+        }
+      ],
+      "count_files": 2,
+      "count_dirs": 2
+    }
+  ],
+  "unique_css_files": [
+    {
+      "normalized_sha1": "8e8da2412ec1416001fb3dc9361031200b5f7975",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1000",
+      "file": "message2.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1000\\message2.css"
+    },
+    {
+      "normalized_sha1": "a0cc72ba26196065b700671398a9d489e72ea3ae",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1020",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1020\\message.css"
+    },
+    {
+      "normalized_sha1": "ee4e8b0ddf818931715f1ab19667383c2fd3a143",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1173",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1173\\message.css"
+    },
+    {
+      "normalized_sha1": "6eedabf7f942be0e595905e1d9feb65891dd430f",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1189",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1189\\message.css"
+    },
+    {
+      "normalized_sha1": "2a6907dd10601fe0d75358953aed1c4e0f4018a1",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1207",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1207\\message.css"
+    },
+    {
+      "normalized_sha1": "e25f31341f727dfdfb94ca5ccfc2bb98c05d47ba",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1448",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1448\\message.css"
+    },
+    {
+      "normalized_sha1": "b407fb9c2fe49f0b2e420a8dcd00e01d289f8789",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1631",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\1631\\message.css"
+    },
+    {
+      "normalized_sha1": "41f425b82fde7a5f43f784d8db00ed2cdcd0ae45",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\2269",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\2269\\message.css"
+    },
+    {
+      "normalized_sha1": "e8dfab36d666db90c79efb55765830a8ff30f6c6",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\595",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\595\\message.css"
+    },
+    {
+      "normalized_sha1": "e8a8b1423547946c2cf40cc1fb953ca6e56873df",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\661",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\661\\message.css"
+    },
+    {
+      "normalized_sha1": "28948fd60ab21802bd05eefea97a4bd952c79638",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\701",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\701\\message.css"
+    },
+    {
+      "normalized_sha1": "c014372871e5d65634b335842173c5eeade90b32",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\770",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\770\\message.css"
+    },
+    {
+      "normalized_sha1": "de55f7d096fc4982a65eb3a9be187c6bc635ad54",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\782",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\782\\message.css"
+    },
+    {
+      "normalized_sha1": "ccd2bde4bde2c41bc7774de636d80ba794946694",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\787",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\787\\message.css"
+    },
+    {
+      "normalized_sha1": "eea06366c548457130510cbd438cec912ef05b42",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\809",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\809\\message.css"
+    },
+    {
+      "normalized_sha1": "f6e8a318eb9a20f389746f37016571fbcfebd4d3",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\815",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\815\\message.css"
+    },
+    {
+      "normalized_sha1": "76c3d052b6c7ed38f33a225bb2dd9edac3c2e4f7",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\816",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\816\\message.css"
+    },
+    {
+      "normalized_sha1": "199b089e54c8916ca017be22401faaef7282243b",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\817",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\817\\message.css"
+    },
+    {
+      "normalized_sha1": "1b029e2e12c70bc9c31293a50cd46696efe94f21",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\824",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\824\\message.css"
+    },
+    {
+      "normalized_sha1": "a6a066c1a4f1a4377a1070dccf0a79bb773722c9",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\827",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\827\\message.css"
+    },
+    {
+      "normalized_sha1": "9caab0d8f2ed87e4fe502234457811c50a4d40d1",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\854",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\854\\message.css"
+    },
+    {
+      "normalized_sha1": "4dd54f52e82d3094ea265faf48b0b5e70efa9dd4",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\855",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\855\\message.css"
+    },
+    {
+      "normalized_sha1": "3beeec6f5e4e1bf742361ab77b2fd5df9a0eb6e1",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\878",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\878\\message.css"
+    },
+    {
+      "normalized_sha1": "99bc3511d8009f4791f0869e773401cf8fe7f950",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\880",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\880\\message.css"
+    },
+    {
+      "normalized_sha1": "c6c71730b89d4f07fc6bf666adaa92307df7d7df",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\906",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\906\\message.css"
+    },
+    {
+      "normalized_sha1": "83f05544ca37562e7ffa8b1c23bf6ad5435c4a4d",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\953",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\953\\message.css"
+    },
+    {
+      "normalized_sha1": "9e815afd36c3a48effe6629b62a0dec34c370585",
+      "dir": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\959",
+      "file": "message.css",
+      "path": "F:\\development\\steam\\emulator_v2\\files\\webroot\\2004_cms\\Steam\\Marketing\\message\\959\\message.css"
+    }
+  ],
+  "total_css_files": 132
+}

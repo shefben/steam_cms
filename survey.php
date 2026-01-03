@@ -15,15 +15,15 @@ $categories = $db->query('SELECT id,slug,title FROM survey_categories ORDER BY o
 <meta content="Steam, account, account creation, signup" name="KEYWORDS"/>
 <meta content="Valve Corporation" name="AUTHOR"/>
 <meta content="300" http-equiv="refresh"/>
-<link href="archived_steampowered/2006/v1/steampowered.css" rel="stylesheet" type="text/css"/>
+<link href="themes/2006_v1/steampowered.css" rel="stylesheet" type="text/css"/>
 </head>
 <style type="text/css">
         BODY    {color:#A0AA95; font-size:8pt;}
         .capsule        { background: #2C3329; width: 100%; margin:8px 0px 8px 0px;}
-        .captop div  { background: url(archived_steampowered/2006/v1/img/tl.gif) no-repeat top left; }
-        .captop      { background: url(archived_steampowered/2006/v1/img/tr.gif) no-repeat top right; }
-        .capbot div  { background: url(archived_steampowered/2006/v1/img/bl.gif) no-repeat bottom left; }
-        .capbot      { background: url(archived_steampowered/2006/v1/img/br.gif) no-repeat bottom right; }
+        .captop div  { background: url(images/tl.gif) no-repeat top left; }
+        .captop      { background: url(images/tr.gif) no-repeat top right; }
+        .capbot div  { background: url(images/bl.gif) no-repeat bottom left; }
+        .capbot      { background: url(images/br.gif) no-repeat bottom right; }
         .captop div, .captop, .capbot div, .capbot {
                 width: 100%;
                 height: 7px;
@@ -59,14 +59,14 @@ $categories = $db->query('SELECT id,slug,title FROM survey_categories ORDER BY o
 <body>
 <!-- begin header -->
 <div class="header">
-<nobr><a href="index.php"><img align="top" alt="[Valve]" height="54" src="archived_steampowered/2006/v1/img/steam_logo_onblack.gif" width="152"/></a>
+<nobr><a href="index.php"><img align="top" alt="[Valve]" height="54" src="images/steam_logo_onblack.gif" width="152"/></a>
 <span class="navBar">
-<a href="news.php"><img alt="news" height="22" name="news" onmouseout="this.src='archived_steampowered/2006/v1/img/news.gif';" onmouseover="this.src='archived_steampowered/2006/v1/img/MOnews.gif';" src="archived_steampowered/2006/v1/img/news.gif" valign="bottom" width="54"/></a>
-<a href="getsteamnow.php"><img alt="getSteamNow" height="22" onmouseout="this.src='archived_steampowered/2006/v1/img/getSteamNow.gif'" onmouseover="this.src='archived_steampowered/2006/v1/img/MOgetSteamNow.gif'" src="archived_steampowered/2006/v1/img/getSteamNow.gif" valign="bottom" width="108"/></a>
-<a href="cybercafes.php"><img alt="Cyber Cafes" height="22" onmouseout="this.src='archived_steampowered/2006/v1/img/cafes.gif'" onmouseover="this.src='archived_steampowered/2006/v1/img/MOcafes.gif'" src="archived_steampowered/2006/v1/img/cafes.gif" valign="bottom" width="95"/></a>
-<a href="support.php"><img alt="Support" height="22" onmouseout="this.src='archived_steampowered/2006/v1/img/support.gif'" onmouseover="this.src='archived_steampowered/2006/v1/img/MOsupport.gif'" src="archived_steampowered/2006/v1/img/support.gif" valign="bottom" width="68"/></a>
-<a href="forums"><img alt="Forums" height="22" onmouseout="this.src='archived_steampowered/2006/v1/img/forums.gif'" onmouseover="this.src='archived_steampowered/2006/v1/img/MOforums.gif'" src="archived_steampowered/2006/v1/img/forums.gif" valign="bottom" width="68"/></a>
-<a href="status/status.html"><img alt="Status" height="22" onmouseout="this.src='archived_steampowered/2006/v1/img/status.gif'" onmouseover="this.src='archived_steampowered/2006/v1/img/MOstatus.gif'" src="archived_steampowered/2006/v1/img/status.gif" valign="bottom" width="65"/></a>
+<a href="news.php"><img alt="news" height="22" name="news" onmouseout="this.src='images/news.gif';" onmouseover="this.src='images/MOnews.gif';" src="images/news.gif" valign="bottom" width="54"/></a>
+<a href="getsteamnow.php"><img alt="getSteamNow" height="22" onmouseout="this.src='images/getSteamNow.gif'" onmouseover="this.src='images/MOgetSteamNow.gif'" src="images/getSteamNow.gif" valign="bottom" width="108"/></a>
+<a href="cybercafes.php"><img alt="Cyber Cafes" height="22" onmouseout="this.src='images/cafes.gif'" onmouseover="this.src='images/MOcafes.gif'" src="images/cafes.gif" valign="bottom" width="95"/></a>
+<a href="support.php"><img alt="Support" height="22" onmouseout="this.src='images/support.gif'" onmouseover="this.src='images/MOsupport.gif'" src="images/support.gif" valign="bottom" width="68"/></a>
+<a href="forums"><img alt="Forums" height="22" onmouseout="this.src='images/forums.gif'" onmouseover="this.src='images/MOforums.gif'" src="images/forums.gif" valign="bottom" width="68"/></a>
+<a href="status/status.html"><img alt="Status" height="22" onmouseout="this.src='images/status.gif'" onmouseover="this.src='images/MOstatus.gif'" src="images/status.gif" valign="bottom" width="65"/></a>
 </span>
 </nobr>
 </div>
@@ -93,7 +93,7 @@ foreach ($stmt as $row):
 <td align="right" width="200"><?php echo htmlspecialchars($row['label']); ?></td>
 <td align="right" width="32"><?php echo number_format($row['count']); ?></td>
 <td align="right" width="64"><?php echo number_format($row['percentage'],2); ?> %</td>
-<td align="left" width="400"><?php for ($i=0; $i<$blips; $i++): ?><img alt="#" src="archived_steampowered/2006/v1/blip.png"/><?php endfor; ?></td>
+<td align="left" width="400"><?php for ($i=0; $i<$blips; $i++): ?><img alt="#" src="images/blip.png"/><?php endfor; ?></td>
 </tr>
 <?php endforeach; ?>
 </table>

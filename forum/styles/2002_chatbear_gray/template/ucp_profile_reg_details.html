@@ -1,0 +1,115 @@
+<!-- INCLUDE ucp_header.html -->
+
+<!-- Account Details Form -->
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+    <td>
+        <table cellpadding="3" cellspacing="1" border="0" width="100%">
+        <tr bgcolor="#424B3C">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_TITLE}</b></font>
+            </td>
+        </tr>
+
+        <!-- IF S_FORCE_PASSWORD -->
+        <tr bgcolor="#4C5844">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="2" color="#FF6600"><b>{L_FORCE_PASSWORD_EXPLAIN}</b></font>
+            </td>
+        </tr>
+        <!-- ENDIF -->
+
+        <!-- IF ERROR -->
+        <tr bgcolor="#4C5844">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="2" color="#FF6600"><b>{ERROR}</b></font>
+            </td>
+        </tr>
+        <!-- ENDIF -->
+
+        <tr bgcolor="#4C5844">
+            <td width="30%">
+                <font face="verdana,arial,helvetica" size="2">{L_USERNAME}:</font><br />
+                <font face="verdana,arial,helvetica" size="1">{L_USERNAME_EXPLAIN}</font>
+            </td>
+            <td width="70%">
+                <!-- IF S_CHANGE_USERNAME -->
+                <input type="text" name="username" id="username" value="{USERNAME}" class="bginput" size="25" />
+                <!-- ELSE -->
+                <font face="verdana,arial,helvetica" size="2"><b>{USERNAME}</b></font>
+                <!-- ENDIF -->
+            </td>
+        </tr>
+        <tr bgcolor="#545F4E">
+            <td width="30%">
+                <font face="verdana,arial,helvetica" size="2">{L_EMAIL_ADDRESS}:</font>
+            </td>
+            <td width="70%">
+                <!-- IF S_CHANGE_EMAIL -->
+                <input type="email" name="email" id="email" maxlength="100" value="{EMAIL}" class="bginput" size="25" />
+                <!-- ELSE -->
+                <font face="verdana,arial,helvetica" size="2"><b>{EMAIL}</b></font>
+                <!-- ENDIF -->
+            </td>
+        </tr>
+
+        <!-- IF S_CHANGE_PASSWORD -->
+        <tr bgcolor="#4C5844">
+            <td width="30%">
+                <font face="verdana,arial,helvetica" size="2">{L_NEW_PASSWORD}:</font><br />
+                <font face="verdana,arial,helvetica" size="1">{L_CHANGE_PASSWORD_EXPLAIN}</font>
+            </td>
+            <td width="70%">
+                <input type="password" name="new_password" id="new_password" maxlength="255" value="{NEW_PASSWORD}" class="bginput" size="25" />
+            </td>
+        </tr>
+        <tr bgcolor="#545F4E">
+            <td width="30%">
+                <font face="verdana,arial,helvetica" size="2">{L_CONFIRM_PASSWORD}:</font><br />
+                <font face="verdana,arial,helvetica" size="1">{L_CONFIRM_PASSWORD_EXPLAIN}</font>
+            </td>
+            <td width="70%">
+                <input type="password" name="password_confirm" id="password_confirm" maxlength="255" value="{PASSWORD_CONFIRM}" class="bginput" size="25" />
+            </td>
+        </tr>
+        <!-- ENDIF -->
+        </table>
+
+        <br />
+
+        <table cellpadding="3" cellspacing="1" border="0" width="100%">
+        <tr bgcolor="#424B3C">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_CURRENT_PASSWORD}</b></font>
+            </td>
+        </tr>
+        <tr bgcolor="#4C5844">
+            <td width="30%">
+                <font face="verdana,arial,helvetica" size="2">{L_CURRENT_PASSWORD}:</font><br />
+                <font face="verdana,arial,helvetica" size="1"><!-- IF S_CHANGE_PASSWORD -->{L_CURRENT_CHANGE_PASSWORD_EXPLAIN}<!-- ELSE -->{L_CURRENT_PASSWORD_EXPLAIN}<!-- ENDIF --></font>
+            </td>
+            <td width="70%">
+                <input type="password" name="cur_password" id="cur_password" maxlength="255" value="{CUR_PASSWORD}" class="bginput" size="25" />
+            </td>
+        </tr>
+        </table>
+
+        <br />
+        <table cellpadding="3" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td align="center">
+                {S_HIDDEN_FIELDS}
+                <input type="submit" name="submit" value="{L_SUBMIT}" class="bginput" />
+                {S_FORM_TOKEN}
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

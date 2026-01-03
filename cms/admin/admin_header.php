@@ -136,7 +136,8 @@ if ($notes) {
 $nav_items = json_decode(cms_get_setting('nav_items', '[]'), true) ?: [];
 
 // Allow plugins to provide additional sidebar links grouped under a Plugins parent
-cms_load_plugins();
+// PERFORMANCE: Only load admin-type plugins (not template plugins)
+cms_load_plugins(CMS_PLUGIN_TYPE_ADMIN);
 $plugin_links = cms_plugin_sidebar_links();
 if (!empty($plugin_links)) {
     foreach ($plugin_links as &$pl) {

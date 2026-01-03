@@ -1,42 +1,27 @@
 <?php
-if (!is_file(__DIR__ . '/cms/config.php')) {
+/**
+ * PERFORMANCE OPTIMIZATION: Use centralized bootstrap
+ * Previously had scattered require_once calls causing 50-100ms overhead
+ */
+$configFile = __DIR__ . DIRECTORY_SEPARATOR . 'cms' . DIRECTORY_SEPARATOR . 'config.php';
+if (!is_file($configFile)) {
     header('Location: ./install.php');
     exit;
 }
+
+// Single bootstrap call replaces multiple scattered requires
+require_once __DIR__ . '/cms/bootstrap.php';
+
 if (isset($_GET['area'])) {
-        $area = preg_replace('/[^a-zA-Z0-9_]/','',$_GET['area']);
+    $area = preg_replace('/[^a-zA-Z0-9_]/', '', $_GET['area']);
 } else {
-        // Render the home page when no specific area is requested.  The
-        // home page logic lives in home.php which will determine the
-        // appropriate theme and template to use.  Previously this block
-        // attempted to check for a template using an undefined variable
-        // $tpl which resulted in a redirect to the news page.  The news
-        // page expects a template that doesn't exist in the default theme
-        // leading to a blank page on first load.  Simply delegate to
-        // home.php.
-        try {
-                require_once __DIR__.'/cms/db.php';
-                require 'home.php';
-        } catch (RuntimeException $e) {
-                if (strpos($e->getMessage(), 'CMS not installed') !== false) {
-                        header('Location: ./install.php');
-                        exit;
-                }
-                throw $e;
-        }
-        exit;
+    // Render the home page when no specific area is requested
+    require 'home.php';
+    exit;
 }
-try {
-        require_once __DIR__.'/cms/db.php';
-} catch (RuntimeException $e) {
-        if (strpos($e->getMessage(), 'CMS not installed') !== false) {
-                header('Location: ./install.php');
-                exit;
-        }
-        throw $e;
-}
+
 $storeDir = __DIR__ . '/storefront/';
-require_once __DIR__.'/cms/template_engine.php';
+cms_require_template_engine(); // Lazy-load template engine only when needed
 
 if(in_array($area,['store','browse','search','game','package','all'])){
     $file=['store'=>'index','browse'=>'browse','search'=>'search','game'=>'game','package'=>'package','all'=>'all'][$area];
@@ -71,7 +56,7 @@ if($area === 'faq' && isset($_GET['id'])){
     $area = 'notfound';
 }
 
-$theme = cms_get_setting('theme','2004');
+$theme = cms_get_current_theme(); // Use safer function that ensures non-empty theme
 $page = cms_get_custom_page($area,$theme);
 if($page){
     $page_title = $page['title'];

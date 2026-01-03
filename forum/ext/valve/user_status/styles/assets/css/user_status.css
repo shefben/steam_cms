@@ -1,0 +1,297 @@
+/**
+ * Steam User Status Extension CSS
+ * vBulletin-style user status indicators
+ *
+ * @copyright (c) 2024 Valve Corporation
+ * @license GPL-2.0-only
+ */
+
+/* User Status Indicators */
+.user-status {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.user-status img {
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.user-status-online {
+    color: #00FF00;
+}
+
+.user-status-away {
+    color: #FFAA00;
+}
+
+.user-status-busy {
+    color: #FF6666;
+}
+
+.user-status-invisible {
+    color: #999999;
+}
+
+.user-status-offline {
+    color: #666666;
+}
+
+/* Steam Status Integration */
+.steam-status {
+    display: inline-block;
+    padding: 2px 6px;
+    margin-left: 4px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.steam-status-online {
+    background: #57cbde;
+    color: #000;
+}
+
+.steam-status-busy {
+    background: #be5a38;
+    color: #fff;
+}
+
+.steam-status-away {
+    background: #d4a547;
+    color: #000;
+}
+
+.steam-status-snooze {
+    background: #8f98a0;
+    color: #fff;
+}
+
+.steam-status-in-game {
+    background: #90ba3c;
+    color: #000;
+}
+
+.steam-status-offline {
+    background: #505050;
+    color: #999;
+}
+
+/* Online Users List */
+.online-users-status {
+    margin: 10px 0;
+}
+
+.online-users-status .user-entry {
+    display: inline-block;
+    margin: 2px 8px 2px 0;
+    white-space: nowrap;
+}
+
+.online-users-status .username {
+    font-weight: bold;
+}
+
+.online-users-status .status-message {
+    font-style: italic;
+    color: #888;
+}
+
+/* User Status Settings Form */
+.user-status-form fieldset {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+}
+
+.user-status-form label {
+    display: block;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.user-status-form input[type="text"],
+.user-status-form textarea,
+.user-status-form select {
+    width: 100%;
+    max-width: 400px;
+    padding: 4px;
+    border: 1px solid #ccc;
+}
+
+.user-status-form .status-preview {
+    margin: 10px 0;
+    padding: 8px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+/* Post Integration */
+.post .author .user-status {
+    display: block;
+    margin-top: 4px;
+}
+
+.postprofile .user-status {
+    margin: 4px 0;
+}
+
+/* Member Profile Integration */
+.member-profile .user-status {
+    margin: 8px 0;
+    font-size: 12px;
+}
+
+.member-profile .status-details {
+    margin: 8px 0;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+/* Theme-specific Styling */
+
+/* Steam 2003 v1 Theme */
+.steam_2003_v1 .user-status-online { color: #B4BA50; }
+.steam_2003_v1 .user-status-away { color: #D4A547; }
+.steam_2003_v1 .user-status-busy { color: #BE5A38; }
+.steam_2003_v1 .user-status-offline { color: #8B8D67; }
+
+.steam_2003_v1 .steam-status {
+    border: 1px solid #545F4E;
+    background: #626d5c;
+    color: #C4CABE;
+}
+
+/* Steam 2003 v2 Theme */
+.steam_2003_v2 .user-status-online { color: #B4BA50; }
+.steam_2003_v2 .user-status-away { color: #D4A547; }
+.steam_2003_v2 .user-status-busy { color: #BE5A38; }
+.steam_2003_v2 .user-status-offline { color: #8B8D67; }
+
+.steam_2003_v2 .steam-status {
+    border: 1px solid #545F4E;
+    background: #626d5c;
+    color: #C4CABE;
+}
+
+/* Steam 2008 Theme */
+.steam_2008 .user-status-online { color: #57CBDE; }
+.steam_2008 .user-status-away { color: #D4A547; }
+.steam_2008 .user-status-busy { color: #BE5A38; }
+.steam_2008 .user-status-offline { color: #999999; }
+
+.steam_2008 .steam-status {
+    border: 1px solid #232323;
+    background: #4A4945;
+    color: #E5E5E5;
+}
+
+/* Steam 2011 Theme */
+.steam_2011 .user-status-online { color: #6EBCFF; }
+.steam_2011 .user-status-away { color: #D4A547; }
+.steam_2011 .user-status-busy { color: #BE5A38; }
+.steam_2011 .user-status-offline { color: #ADADAD; }
+
+.steam_2011 .steam-status {
+    border: 1px solid #232323;
+    background: #262626;
+    color: #DFDCD6;
+}
+
+.steam_2011 .steam-status-in-game {
+    background: #90ba3c;
+    color: #000000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .online-users-status .user-entry {
+        display: block;
+        margin: 4px 0;
+    }
+
+    .user-status-form input[type="text"],
+    .user-status-form textarea,
+    .user-status-form select {
+        width: 100%;
+    }
+
+    .steam-status {
+        display: block;
+        margin-top: 2px;
+        margin-left: 0;
+    }
+}
+
+/* Animation for status changes */
+.user-status.updating {
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.user-status.updated {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Status indicator icons */
+.status-icon {
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+/* Quick status selector */
+.quick-status-selector {
+    display: inline-block;
+    position: relative;
+}
+
+.quick-status-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+    display: none;
+}
+
+.quick-status-menu.active {
+    display: block;
+}
+
+.quick-status-menu .status-option {
+    display: block;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.quick-status-menu .status-option:hover {
+    background: #f5f5f5;
+}
+
+/* Print styles */
+@media print {
+    .steam-status,
+    .user-status {
+        background: none !important;
+        color: #000 !important;
+        border: none !important;
+    }
+
+    .quick-status-selector,
+    .quick-status-menu {
+        display: none !important;
+    }
+}

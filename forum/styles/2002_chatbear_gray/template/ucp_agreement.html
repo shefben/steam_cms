@@ -1,0 +1,60 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- Terms Agreement -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<tr>
+    <td>
+        <table cellpadding="4" cellspacing="1" border="0" width="100%">
+        <tr>
+            <td bgcolor="#3E4637" colspan="2" align="center">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_TERMS_OF_USE}</b></font>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#545F4E" colspan="2">
+                <font face="verdana,arial,helvetica" size="2">
+                {AGREEMENT_TEXT}
+                </font>
+            </td>
+        </tr>
+        <!-- IF S_SHOW_COPPA -->
+        <tr>
+            <td bgcolor="#4C5844" colspan="2">
+                <font face="verdana,arial,helvetica" size="2">
+                {L_COPPA_EXPLAIN}
+                </font>
+            </td>
+        </tr>
+        <!-- ENDIF -->
+        <tr>
+            <td bgcolor="#424B3C" colspan="2" align="center">
+                <!-- IF S_REGISTRATION -->
+                <font face="verdana,arial,helvetica" size="2">
+                    <!-- IF S_SHOW_COPPA -->
+                    <a href="{U_COPPA_NO}">{L_AGREE_OVER_13}</a><br /><br />
+                    <a href="{U_COPPA_YES}">{L_AGREE_UNDER_13}</a>
+                    <!-- ELSE -->
+                    <a href="{U_AGREED}">{L_AGREE}</a>
+                    <!-- ENDIF -->
+                </font>
+                <!-- ENDIF -->
+
+                <!-- IF S_PRIVACY -->
+                <form method="post" action="{S_UCP_ACTION}">
+                    <font face="verdana,arial,helvetica" size="2">
+                    {S_HIDDEN_FIELDS}
+                    <input type="submit" name="agree" value="{L_I_AGREE}" class="bginput" />
+                    &nbsp;
+                    <input type="submit" name="cancel" value="{L_I_DO_NOT_AGREE}" class="bginput" />
+                    {S_FORM_TOKEN}
+                    </font>
+                </form>
+                <!-- ENDIF -->
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- INCLUDE overall_footer.html -->

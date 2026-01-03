@@ -1,0 +1,171 @@
+<!-- IF S_MINIMIZED_REPLIES_ENABLED -->
+<!-- Steam Forum Minimized Replies Integration -->
+
+<!-- Load CSS and JavaScript for minimized replies -->
+<link rel="stylesheet" href="{T_ASSETS_PATH}/css/minimized_replies.css" type="text/css" />
+
+<!-- Minimized Replies JavaScript Variables -->
+<script type="text/javascript">
+//<![CDATA[
+var MINIMIZED_POSTS = '{MINIMIZED_POSTS|addslashes}';
+var POST_TREE_DATA = '{POST_TREE_DATA|addslashes}';
+var MINIMIZED_REPLIES_THRESHOLD = {MINIMIZED_REPLIES_THRESHOLD};
+var MINIMIZED_REPLIES_PREVIEW_LENGTH = {MINIMIZED_REPLIES_PREVIEW_LENGTH};
+//]]>
+</script>
+
+<!-- Load minimized replies JavaScript -->
+<script type="text/javascript" src="{MINIMIZED_REPLIES_JS_PATH}minimized_replies.js"></script>
+
+<!-- IF S_THREADED_MODE -->
+<!-- Threaded View Container -->
+<div id="threaded-view-container">
+    <table cellpadding="6" cellspacing="1" border="0" width="100%" align="center">
+    <tr>
+        <td class="tcat">
+            <span class="nav">
+                <a href="javascript:void(0)" onclick="showPrevNextPost(0)">Prev</a>
+                <a href="javascript:void(0)" onclick="showPrevNextPost(0)"><img class="inlineimg" src="{T_THEME_PATH}/images/sortdesc.gif" alt="Previous Post" border="0" title="Previous Post"></a>
+                &nbsp;
+                <a href="javascript:void(0)" onclick="showPrevNextPost(1)"><img class="inlineimg" src="{T_THEME_PATH}/images/sortasc.gif" alt="Next Post" border="0" title="Next Post"></a>
+                <a href="javascript:void(0)" onclick="showPrevNextPost(1)">Next</a>
+            </span>
+        </td>
+    </tr>
+    <tr>
+        <td class="alt2">
+            <div id="post-links-container">
+                <!-- Minimized post links will be generated here -->
+                <script type="text/javascript">
+                //<![CDATA[
+                // Generate writeLink calls for each post
+                document.write('<!-- start post links -->');
+                if (typeof POST_TREE_DATA !== 'undefined' && POST_TREE_DATA) {
+                    try {
+                        var postTree = JSON.parse(POST_TREE_DATA);
+                        for (var postId in postTree) {
+                            var post = postTree[postId];
+                            writeLink(
+                                parseInt(postId),
+                                post.parent_id || 0,
+                                post.depth || 0,
+                                0, // user_id placeholder
+                                post.tree_icon || 'tree_t.gif',
+                                post.preview || '',
+                                post.post_time || '',
+                                post.post_time || '',
+                                post.is_new ? 1 : 0
+                            );
+                        }
+                    } catch(e) {
+                        console.error('Error parsing post tree data:', e);
+                    }
+                }
+                document.write('<!-- end post links -->');
+                //]]>
+                </script>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="tfoot" align="center">
+            <div class="smallfont">
+                <a href="javascript:showPrevNextPost(0)">Prev</a>
+                <a href="javascript:showPrevNextPost(0)"><img class="inlineimg" src="{T_THEME_PATH}/images/sortdesc.gif" alt="Previous Post" border="0" title="Previous Post"></a>
+                &nbsp;
+                <a href="javascript:showPrevNextPost(1)"><img class="inlineimg" src="{T_THEME_PATH}/images/sortasc.gif" alt="Next Post" border="0" title="Next Post"></a>
+                <a href="javascript:showPrevNextPost(1)">Next</a>
+            </div>
+        </td>
+    </tr>
+    </table>
+    <br>
+</div>
+<!-- ENDIF -->
+
+<!-- Thread Display Mode Controls -->
+<table cellpadding="6" cellspacing="1" border="0" width="100%" align="center">
+<tr valign="top">
+    <td class="alt2" colspan="2">
+        <!-- thread display modes -->
+        <div class="smallfont">
+            <div><img class="inlineimg" src="{T_ASSETS_PATH}/images/mode_linear.gif" alt="Linear Mode" vspace="1" title="Linear Mode"> <a href="{U_VIEW_TOPIC}&amp;mode=linear">Switch to Linear Mode</a></div>
+            <div><img class="inlineimg" src="{T_ASSETS_PATH}/images/mode_hybrid.gif" alt="Hybrid Mode" vspace="1" title="Hybrid Mode"> <a href="{U_VIEW_TOPIC}&amp;mode=hybrid">Switch to Hybrid Mode</a></div>
+            <!-- IF S_THREADED_MODE -->
+            <div><img class="inlineimg" src="{T_ASSETS_PATH}/images/mode_threaded.gif" alt="Threaded Mode" vspace="1" title="Threaded Mode"> <strong>Threaded Mode</strong></div>
+            <!-- ELSE -->
+            <div><img class="inlineimg" src="{T_ASSETS_PATH}/images/mode_threaded.gif" alt="Threaded Mode" vspace="1" title="Threaded Mode"> <a href="{U_VIEW_TOPIC}&amp;mode=threaded">Switch to Threaded Mode</a></div>
+            <!-- ENDIF -->
+        </div>
+        <!-- / thread display modes -->
+    </td>
+</tr>
+</table>
+
+<!-- Container for expanded posts (will be populated via JavaScript) -->
+<div id="expanded-posts-container"></div>
+
+<!-- Additional CSS for Steam theme integration -->
+<style type="text/css">
+/* Ensure compatibility with Steam themes */
+body.steam_2011 #threaded-view-container .tcat {
+    background: #537aa8 url('{T_THEME_PATH}/images/maincol_bg_v5_g.png') repeat-y right;
+    color: #CFCBC2;
+}
+
+body.steam_2011 #threaded-view-container .alt2 {
+    background: #262626;
+}
+
+body.steam_2011 #threaded-view-container .tfoot {
+    background: #262626;
+}
+
+body.steam_2008 #threaded-view-container .tcat {
+    background: #3B3B37;
+    color: #E5E5E5;
+}
+
+body.steam_2008 #threaded-view-container .alt2 {
+    background: #4A4945;
+}
+
+body.steam_2003_v1 #threaded-view-container .tcat,
+body.steam_2003_v2 #threaded-view-container .tcat {
+    background: #3E4637;
+    color: #B4BA50;
+}
+
+body.steam_2003_v1 #threaded-view-container .alt2,
+body.steam_2003_v2 #threaded-view-container .alt2 {
+    background: #626d5c;
+}
+
+/* Navigation links styling */
+.nav a {
+    color: inherit;
+    text-decoration: none;
+    margin: 0 2px;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+.nav img {
+    vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #threaded-view-container table {
+        width: 100% !important;
+    }
+
+    .smallfont div {
+        margin: 4px 0;
+    }
+}
+</style>
+
+<!-- ENDIF -->

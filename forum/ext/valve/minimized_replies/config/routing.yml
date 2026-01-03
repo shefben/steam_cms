@@ -1,0 +1,10 @@
+valve_minimized_replies_get_post:
+    path: /valve/minimized_replies/get_post/{post_id}
+    defaults: { _controller: valve.minimized_replies.controller:get_post }
+    requirements:
+        post_id: \d+
+
+valve_minimized_replies_toggle_mode:
+    path: /valve/minimized_replies/toggle_mode
+    defaults: { _controller: valve.minimized_replies.controller:toggle_view_mode }
+    methods: [POST]

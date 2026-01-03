@@ -2,7 +2,7 @@
 require_once __DIR__.'/cms/template_engine.php';
 require_once __DIR__.'/cms/db.php';
 
-$theme = cms_get_setting('theme','2004');
+$theme = cms_get_current_theme(); // Use safer function that ensures non-empty theme
 $tpl = cms_theme_layout('index.twig', $theme);
 
 $slug_clean  = str_replace('_','',$theme).'_index';

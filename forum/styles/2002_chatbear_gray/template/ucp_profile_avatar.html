@@ -1,0 +1,57 @@
+<!-- INCLUDE ucp_header.html -->
+
+<!-- Avatar Form -->
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+    <td>
+        <table cellpadding="3" cellspacing="1" border="0" width="100%">
+        <tr bgcolor="#424B3C">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_AVATAR}</b></font>
+            </td>
+        </tr>
+
+        <!-- IF ERROR -->
+        <tr bgcolor="#4C5844">
+            <td colspan="2">
+                <font face="verdana,arial,helvetica" size="2" color="#FF6600"><b>{ERROR}</b></font>
+            </td>
+        </tr>
+        <!-- ENDIF -->
+
+        <tr bgcolor="#4C5844">
+            <td width="30%">
+                <font face="verdana,arial,helvetica" size="2">{L_CURRENT_AVATAR}:</font>
+            </td>
+            <td width="70%">
+                <!-- IF AVATAR -->
+                {AVATAR}<br />
+                <input type="checkbox" name="avatar_delete" /> <font face="verdana,arial,helvetica" size="1">{L_DELETE_AVATAR}</font>
+                <!-- ELSE -->
+                <font face="verdana,arial,helvetica" size="2">{L_NO_AVATAR}</font>
+                <!-- ENDIF -->
+            </td>
+        </tr>
+
+        <!-- INCLUDE ucp_avatar_options.html -->
+        </table>
+
+        <br />
+        <table cellpadding="3" cellspacing="0" border="0" width="100%">
+        <tr>
+            <td align="center">
+                {S_HIDDEN_FIELDS}
+                <input type="submit" name="submit" value="{L_SUBMIT}" class="bginput" />
+                {S_FORM_TOKEN}
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,32 @@
+services:
+    valve.user_status.helper:
+        class: valve\user_status\helper\status_helper
+        arguments:
+            - '@config'
+            - '@user'
+            - '@dbal.conn'
+            - '@request'
+
+    valve.user_status.listener:
+        class: valve\user_status\event\main_listener
+        arguments:
+            - '@config'
+            - '@template'
+            - '@user'
+            - '@dbal.conn'
+            - '@valve.user_status.helper'
+        tags:
+            - { name: event.listener }
+
+    valve.user_status.controller:
+        class: valve\user_status\controller\main_controller
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '@request'
+            - '@dbal.conn'
+            - '@valve.user_status.helper'
+            - '%core.root_path%'
+            - '%core.php_ext%'
