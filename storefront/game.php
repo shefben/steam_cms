@@ -51,13 +51,32 @@ $packs->execute([$appid]);
 $packages = $packs->fetchAll(PDO::FETCH_ASSOC);
 $is_demo = (bool)$db->query('SELECT 1 FROM app_categories WHERE appid='.$appid.' AND category_id=10')->fetchColumn();
 
+// Look up parent game for demos
+$parent_game = null;
+if ($is_demo) {
+    // First try parent_appid column, then try app_links table
+    $parent_appid = $app['parent_appid'] ?? null;
+    if (!$parent_appid) {
+        $link_stmt = $db->prepare('SELECT linked_appid FROM app_links WHERE appid = ? AND link_type = ? LIMIT 1');
+        $link_stmt->execute([$appid, 'parent']);
+        $parent_appid = $link_stmt->fetchColumn();
+    }
+    if ($parent_appid) {
+        $parent_stmt = $db->prepare('SELECT appid, name, price FROM store_apps WHERE appid = ?');
+        $parent_stmt->execute([$parent_appid]);
+        $parent_game = $parent_stmt->fetch(PDO::FETCH_ASSOC);
+    }
+}
+
 $theme = cms_get_setting('theme','2005_v2');
 $links = cms_store_sidebar_links();
 $now = date('Y-m-d');
 
 // Determine template variant based on database fields
 $tpl_name = 'gamepage.twig'; // Default normal variant
-if (!empty($app['is_preload']) && $now >= ($app['preload_start'] ?: $now) && $now <= ($app['preload_end'] ?: $now)) {
+if ($is_demo) {
+    $tpl_name = 'gamepage_demo.twig'; // Demo variant with "This Game" block
+} elseif (!empty($app['is_preload']) && $now >= ($app['preload_start'] ?: $now) && $now <= ($app['preload_end'] ?: $now)) {
     $tpl_name = 'gamepage_preload.twig'; // Preload variant
 } elseif (!empty($app['show_metascore']) || !empty($app['metacritic'])) {
     $tpl_name = 'gamepage_with_metascore.twig'; // Metascore variant
@@ -101,6 +120,7 @@ cms_render_template($tpl,[
     'game'=>$game,
     'images'=>$images,
     'is_demo'=>$is_demo,
+    'parent_game'=>$parent_game,
     'links'=>$links,
     'theme_subdir'=>'storefront',
     'page_title'=>$app['name']

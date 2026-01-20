@@ -11,16 +11,21 @@ if (!defined('IN_PHPBB'))
 
 /**
  * Check if current style allows historical data display
+ * Style names must match what get_steam_theme_by_date() returns in functions_steam_theme.php
  */
 function is_historical_style_active()
 {
     global $user;
 
     $style_name = isset($user->style['style_name']) ? $user->style['style_name'] : '';
+
+    // All styles that should show historical forum data
     $allowed_styles = [
+        // Date-based theme names (from functions_steam_theme.php)
+        'steam_2003_v1', 'steam_2003_v2', 'steam_2004',
+        // Legacy style names for backwards compatibility
         'Steam 2003', 'Steam 2004',
-        'steam_2003', 'steam_2004',
-        '2003_v2', '2004'
+        'steam_2003', '2003_v2', '2004'
     ];
 
     return in_array($style_name, $allowed_styles, true);

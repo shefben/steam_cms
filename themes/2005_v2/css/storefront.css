@@ -103,8 +103,15 @@ a:hover {
 	font-size: 10px;
 }
 
-.discount_text {
+.old_discount_text {
 	color: #909090;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.discount_text {
+	color: #000000;
 	font-family: Tahoma;
 	font-weight: bold;
 	font-size: 10px;
@@ -118,7 +125,7 @@ a:hover {
 }
 
 .purchase_button {
-	color: #bbaaaa;
+	color: #ffffff;
 	font-family: Tahoma;
 	font-weight: bold;
 	font-size: 10px;
@@ -128,7 +135,7 @@ a:hover {
 }
 
 .purchase_button:hover {
-	color: #ffffff;
+	color: #ffdddd;
 	font-family: Tahoma;
 	font-weight: bold;
 	font-size: 10px;
@@ -139,7 +146,7 @@ a:hover {
 }
 
 .get_steam_button {
-	color: #c0c0c0;
+	color: #ffffff;
 	font-family: Tahoma;
 	font-weight: bold;
 	font-size: 10px;
@@ -149,7 +156,7 @@ a:hover {
 }
 
 .get_steam_button:hover {
-	color: #ffffff;
+	color: #dddddd;
 	font-family: Tahoma;
 	font-weight: bold;
 	font-size: 10px;
@@ -205,13 +212,13 @@ a:hover {
 }
 
 .package_title_beta {
-	color: Magenta;
+	color: Blue;
 	font-family: Arial;
 	font-size: 22px;
 }
 
 .package_description_beta {
-	color: Magenta;
+	color: Blue;
 	font-family: Tahoma;
 	font-size: 11px;
 }
@@ -281,7 +288,7 @@ a:hover {
 }
 
 .line_link_game_beta, .line_link_game_beta:hover {
-	color: Magenta;
+	color: Blue;
 	width: 100%;
 	text-decoration: none;
 }
@@ -349,3 +356,32 @@ a.browse_link:hover {
 	font-size: 11px;
 	cursor:pointer;
 }
+
+.trailerLink {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+}
+A:link.trailerLink {
+	color: #FFFFFF; text-decoration:underline;
+}
+.copy {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	padding-right: 325px;
+	padding-left: 15px;
+	padding-bottom: 15px;
+}
+.metaCriticNumber {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	color: #e5c02d;
+}
+.metaCriticLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+	padding-bottom: 4px;
+}
+A.metaCriticLink:Link { color:#FFFFFF; }

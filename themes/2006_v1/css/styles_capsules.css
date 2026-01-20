@@ -160,7 +160,7 @@
 	border: 1px solid #000000;
 	vertical-align: top;
 	background-attachment: scroll;
-	background-image: url('../images/capsules/_releases.jpg');
+	background-image: url('http://steampowered.com/v/img/capsules/_releases.jpg');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
 }
@@ -226,7 +226,7 @@ A:hover.capsuleMediaLink {
 	background-color: #000000;
 	margin: 5px 5px 10px 5px;
 	background-attachment: scroll;
-	background-image: url('../images/capsules/_gear.jpg');
+	background-image: url('img/capsules/_gear.jpg');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
 	border: 1px solid #000000;
@@ -277,7 +277,7 @@ A:hover.capsuleMediaLink {
 	background-color: #000000;
 	margin: 5px 5px 10px 5px;
 	background-attachment: scroll;
-	background-image: url('../images/capsules/_stuff.jpg');
+	background-image: url('img/capsules/_stuff.jpg');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
 	border: 1px solid #000000;
@@ -424,7 +424,7 @@ a:hover.capsuleArea_lg {
 	font-weight: bold;
 	text-transform: uppercase;
 	color: #000000;
-	background-image: url('../images/btn_getSteam.gif');
+	background-image: url('img/btn_getSteam.gif');
 	padding: 6px 0px 0px 60px;
 	margin: 0px 0px 0px 45px;
 	width: 152px !important;

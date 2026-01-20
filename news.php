@@ -10,8 +10,8 @@ if (in_array($theme, $sidebar_themes, true)) {
     if (isset($_GET['news']) || isset($_GET['id'])) {
         $id = isset($_GET['news']) ? (int)$_GET['news'] : (int)$_GET['id'];
         $is_archive = (isset($_GET['archive']) && $_GET['archive'] === 'yes');
-        $stmt = $db->prepare('SELECT * FROM news WHERE id=? AND status="published"');
-        $stmt->execute([$id]);
+        $stmt = $db->prepare('SELECT * FROM news WHERE id=? AND (status IN ("published","final") OR (status="scheduled" AND publish_at <= ?))');
+        $stmt->execute([$id, time()]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row) {
             $db->prepare('UPDATE news SET views=views+1 WHERE id=?')->execute([$id]);
@@ -39,8 +39,8 @@ $content = '<h1>STEAM NEWS</h1>';
 if (isset($_GET['news']) || isset($_GET['id'])) {
     $id = isset($_GET['news']) ? (int)$_GET['news'] : (int)$_GET['id'];
     $is_archive = (isset($_GET['archive']) && $_GET['archive'] === 'yes');
-    $stmt = $db->prepare('SELECT * FROM news WHERE id=? AND status="published"');
-    $stmt->execute([$id]);
+    $stmt = $db->prepare('SELECT * FROM news WHERE id=? AND (status IN ("published","final") OR (status="scheduled" AND publish_at <= ?))');
+    $stmt->execute([$id, time()]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $content .= '<h2>VALVE <em>NEWS</em></h2><img src="/img/Graphic_box.jpg" height="6" width="24" alt=""><br><br><div class="narrower">';
     if ($row) {

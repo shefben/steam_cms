@@ -1,49 +1,51 @@
 <!-- INCLUDE overall_header.html -->
 
+<!-- 2002 Chatbear Gray Forum Index - Blue-Gray Color Scheme -->
 <div align="center">
-<table border="0" cellspacing="0" width="100%">
+<table border="0" cellspacing="1" width="100%" bgcolor="#001052">
 <tr>
-<td bgcolor="#424B3C" width="50%">
-<p align="left"><font color="#EBEDEA" face="Arial" size="2"><b>Name</b></font></p>
+<td bgcolor="#001052" width="50%">
+<p align="left"><font color="#E2E3E6" face="Arial" size="2"><b>Name</b></font></p>
 </td>
-<center>
-<td align="center" bgcolor="#424B3C" width="15%">
-<p align="center"><font color="#EBEDEA" face="Arial" size="2"><b>Topics</b></font></p>
+<td align="center" bgcolor="#001052" width="15%">
+<p align="center"><font color="#E2E3E6" face="Arial" size="2"><b>Topics</b></font></p>
 </td>
-<td align="center" bgcolor="#424B3C" width="15%">
-<p align="center"><font color="#EBEDEA" face="Arial" size="2"><b>Posts</b></font></p>
+<td align="center" bgcolor="#001052" width="15%">
+<p align="center"><font color="#E2E3E6" face="Arial" size="2"><b>Posts</b></font></p>
 </td>
-</center>
-<td align="center" bgcolor="#424B3C" width="20%">
-<p align="left"><font color="#EBEDEA" face="Arial" size="2"><b>Updated</b></font></p>
+<td align="center" bgcolor="#001052" width="20%">
+<p align="left"><font color="#E2E3E6" face="Arial" size="2"><b>Updated</b></font></p>
 </td>
 </tr>
-</table>
-</div>
 
 <!-- BEGIN forumrow -->
-<!-- IF not forumrow.S_IS_CAT -->
-<div align="center">
-<table border="0" cellspacing="0" width="100%">
+<!-- IF forumrow.S_IS_CAT -->
+<!-- Category row -->
 <tr>
-<td bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="50%">
-<p align="left"><font face="Arial" size="2"><b><a href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a><br/>
-</b><!-- IF forumrow.FORUM_DESC -->{forumrow.FORUM_DESC}<!-- ENDIF --> </font></p>
+<td colspan="4" bgcolor="#3C4770">
+<font color="#E2E3E6" face="Arial" size="2"><b>{forumrow.FORUM_NAME}</b></font>
 </td>
-<center>
-<td align="center" bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="15%">
-<p align="center"><font face="Arial" size="2">{forumrow.TOPICS}</font></p>
-</td>
-<td align="center" bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="15%">
-<p align="center"><font face="Arial" size="2">{forumrow.POSTS}</font></p>
-</td>
-</center>
-<td align="center" bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#424B3C<!-- ELSE -->#4C5844<!-- ENDIF -->" width="20%">
-<p align="left"><font face="Arial" size="2"><!-- IF forumrow.LAST_POST_TIME -->{forumrow.LAST_POST_TIME}<br/><font size="1">Last Visit: <!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ELSE -->Never<!-- ENDIF --></font><!-- ELSE -->No Posts<br/><font size="1">Last Visit: Never</font><!-- ENDIF --></font></p></td>
 </tr>
-</table>
-</div>
+<!-- ELSE -->
+<!-- Forum row -->
+<tr>
+<td bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#606275<!-- ELSE -->#6b6d84<!-- ENDIF -->" width="50%">
+<p align="left"><font face="Arial" size="2" color="#FFFFFF"><b><a href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a></b><br/>
+<!-- IF forumrow.FORUM_DESC --><font size="1" color="#FFFFFF">{forumrow.FORUM_DESC}</font><!-- ENDIF --> </font></p>
+</td>
+<td align="center" bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#606275<!-- ELSE -->#6b6d84<!-- ENDIF -->" width="15%">
+<p align="center"><font face="Arial" size="2" color="#FFFFFF">{forumrow.TOPICS}</font></p>
+</td>
+<td align="center" bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#606275<!-- ELSE -->#6b6d84<!-- ENDIF -->" width="15%">
+<p align="center"><font face="Arial" size="2" color="#FFFFFF">{forumrow.POSTS}</font></p>
+</td>
+<td align="center" bgcolor="<!-- IF forumrow.S_ROW_COUNT is odd -->#606275<!-- ELSE -->#6b6d84<!-- ENDIF -->" width="20%">
+<p align="left"><font face="Arial" size="2" color="#FFFFFF"><!-- IF forumrow.LAST_POST_TIME -->{forumrow.LAST_POST_TIME}<br/><font size="1" color="#C0C0C0">Last Visit: <!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ELSE -->Never<!-- ENDIF --></font><!-- ELSE -->No Posts<br/><font size="1" color="#C0C0C0">Last Visit: Never</font><!-- ENDIF --></font></p></td>
+</tr>
 <!-- ENDIF -->
 <!-- END forumrow -->
+
+</table>
+</div>
 
 <!-- INCLUDE overall_footer.html -->

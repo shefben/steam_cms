@@ -1,6 +1,7 @@
 <?php
 /**
- * Preprocesses cafe directory country and state names from archived_steampowered into database
+ * Installs preprocessed cafe directory country and state names into database
+ * Data has been extracted from archived_steampowered HTML files
  * This allows distributing the CMS without the archived_steampowered folder
  */
 
@@ -23,34 +24,107 @@ try {
 
 $stmt = $pdo->prepare('INSERT IGNORE INTO cafe_directory_names (country_code, state_code, name, type) VALUES (?, ?, ?, ?)');
 
-// Extract country names from cafe_directory.html
-$cafeDirectoryFile = __DIR__ . '/../archived_steampowered/2004/cafe_directory.html';
-if (file_exists($cafeDirectoryFile)) {
-    $html = file_get_contents($cafeDirectoryFile);
-    preg_match_all('/country=([A-Z]{2})[^>]*>([^<]+)/', $html, $matches, PREG_SET_ORDER);
-    foreach ($matches as $match) {
-        $countryCode = $match[1];
-        $countryName = trim(html_entity_decode($match[2], ENT_QUOTES));
-        $stmt->execute([$countryCode, null, $countryName, 'country']);
-    }
+// Preprocessed country names from cafe_directory.html (2004)
+$countries = [
+    'AR' => 'Argentina',
+    'AU' => 'Australia',
+    'BN' => 'Brunei Darussalam',
+    'BO' => 'Bolivia',
+    'BR' => 'Brazil',
+    'CA' => 'Canada',
+    'CO' => 'Colombia',
+    'DE' => 'Germany',
+    'DK' => 'Denmark',
+    'EE' => 'Estonia',
+    'ES' => 'Spain',
+    'FR' => 'France',
+    'GR' => 'Greece',
+    'HU' => 'Hungary',
+    'IE' => 'Ireland',
+    'JP' => 'Japan',
+    'KR' => 'Korea, Republic Of',
+    'MN' => 'Mongolia',
+    'MY' => 'Malaysia',
+    'NG' => 'Nigeria',
+    'NL' => 'Netherlands',
+    'NO' => 'Norway',
+    'NZ' => 'New Zealand',
+    'PH' => 'Philippines',
+    'PT' => 'Portugal',
+    'SE' => 'Sweden',
+    'SK' => 'Slovakia',
+    'UK' => 'United Kingdom',
+    'US' => 'United States',
+    'ZA' => 'South Africa',
+];
+
+foreach ($countries as $code => $name) {
+    $stmt->execute([$code, null, $name, 'country']);
 }
 
-// Extract state names from each country file
-$cafeDirectoryDir = __DIR__ . '/../archived_steampowered/2004/cafe_directory';
-if (is_dir($cafeDirectoryDir)) {
-    $files = glob($cafeDirectoryDir . '/*.txt');
-    foreach ($files as $file) {
-        $countryCode = basename($file, '.txt');
-        $html = file_get_contents($file);
-        preg_match_all('/state=([^"&]+)[^>]*>([^<]+)/', $html, $matches, PREG_SET_ORDER);
-        foreach ($matches as $match) {
-            $stateCode = $match[1];
-            // Skip uncategorized entries (state=?)
-            if ($stateCode === '?') {
-                continue;
-            }
-            $stateName = trim(html_entity_decode($match[2], ENT_QUOTES));
-            $stmt->execute([$countryCode, $stateCode, $stateName, 'state']);
-        }
+// Preprocessed state/province names from country-specific files
+$states = [
+    // United States
+    'US' => [
+        'AK' => 'Alaska',
+        'AL' => 'Alabama',
+        'AZ' => 'Arizona',
+        'CA' => 'California',
+        'CO' => 'Colorado',
+        'CT' => 'Connecticut',
+        'FL' => 'Florida',
+        'GA' => 'Georgia',
+        'HI' => 'Hawaii',
+        'ID' => 'Idaho',
+        'IL' => 'Illinois',
+        'IN' => 'Indiana',
+        'KS' => 'Kansas',
+        'KY' => 'Kentucky',
+        'LA' => 'Louisiana',
+        'MA' => 'Massachusetts',
+        'MD' => 'Maryland',
+        'ME' => 'Maine',
+        'MI' => 'Michigan',
+        'MN' => 'Minnesota',
+        'MO' => 'Missouri',
+        'MS' => 'Mississippi',
+        'MT' => 'Montana',
+        'NC' => 'North Carolina',
+        'NE' => 'Nebraska',
+        'NH' => 'New Hampshire',
+        'NJ' => 'New Jersey',
+        'NV' => 'Nevada',
+        'NY' => 'New York',
+        'OR' => 'Oregon',
+        'PA' => 'Pennsylvania',
+        'SD' => 'South Dakota',
+        'TN' => 'Tennessee',
+        'TX' => 'Texas',
+        'UT' => 'Utah',
+        'VA' => 'Virginia',
+        'VT' => 'Vermont',
+        'WA' => 'Washington',
+        'WI' => 'Wisconsin',
+        'WY' => 'Wyoming',
+    ],
+    // Canada
+    'CA' => [
+        'AB' => 'Alberta',
+        'BC' => 'British Columbia',
+        'MB' => 'Manitoba',
+        'ON' => 'Ontario',
+        'QC' => 'Quebec',
+        'YT' => 'Yukon',
+    ],
+    // Malaysia
+    'MY' => [
+        'Sarawak' => 'Sarawak',
+        'Temerloh' => 'Temerloh',
+    ],
+];
+
+foreach ($states as $countryCode => $stateList) {
+    foreach ($stateList as $stateCode => $stateName) {
+        $stmt->execute([$countryCode, $stateCode, $stateName, 'state']);
     }
 }

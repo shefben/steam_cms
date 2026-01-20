@@ -3317,27 +3317,4 @@ INSERT IGNORE INTO phpbb_users (user_id, username, username_clean, user_email, u
 (161146, '[2004] 7Shot', '7shot', '7shot@2004forums.steam', 1072936800, 0, '', '', 1),
 (115135, '[2004] Nitrodist', 'nitrodist', 'nitrodist@2004forums.steam', 1062392400, 0, '', '', 1);
 
--- Historical Forums
-INSERT IGNORE INTO phpbb_forums (forum_id, forum_name, forum_desc, forum_type, forum_posts, forum_topics, is_historical) VALUES
-(1011, 'Historical Forum 11', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1012, 'Counter-Strike Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1013, 'Steam Users Forums', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1014, 'Steam Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1015, 'Steam Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1016, 'Valve Back Catalog Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1017, 'Steam Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1018, 'Historical Forum 18', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1019, 'Server Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1002, 'Historical Forum 2', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1026, 'Steam Users Forums', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1034, 'Steam Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1035, 'Steam Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1037, 'Source Game Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1041, 'Source Game Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1043, 'Source Game Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1044, 'Source Game Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1005, 'Steam Users Forums', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1007, 'Valve Back Catalog Discussions', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1),
-(1008, 'Historical Forum 8', 'Historical forum data from 2004 Steam forums', 1, 0, 0, 1);
-
 SET FOREIGN_KEY_CHECKS = 1;

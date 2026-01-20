@@ -1,21 +1,21 @@
 <?php
-if (!defined('IN_PHPBB'))
-{
-    exit;
-}
+/**
+ * Historical Data Filter Extension for phpBB
+ *
+ * Filters historical 2004 Steam forum data based on active style.
+ */
 
-return array(
-    'name'        => 'Historical Data Filter',
-    'description' => 'Filters historical 2004 Steam forum data based on active style',
-    'version'     => '1.0.0',
-    'time'        => '2025-12-27',
-    'vendor'      => 'steamcms',
-    'authors'     => array(
-        'SteamCMS' => array(
-            'name'     => 'SteamCMS',
-            'email'    => '',
-            'homepage' => '',
-            'role'     => 'Developer'
-        ),
-    ),
-);
+namespace steamcms\historical_filter;
+
+class ext extends \phpbb\extension\base
+{
+    /**
+     * Check whether the extension can be enabled.
+     *
+     * @return bool
+     */
+    public function is_enableable()
+    {
+        return true;
+    }
+}

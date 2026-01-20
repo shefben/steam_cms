@@ -284,12 +284,22 @@ function generate_phpbb_schema(string $schema_json_path): array
     $statements = [];
 
     if (!file_exists($schema_json_path)) {
-        return $statements;
+        throw new Exception("Schema file not found: $schema_json_path");
     }
 
-    $schema = json_decode(file_get_contents($schema_json_path), true);
-    if (!$schema) {
-        return $statements;
+    $json_content = file_get_contents($schema_json_path);
+    if ($json_content === false) {
+        throw new Exception("Failed to read schema file: $schema_json_path");
+    }
+
+    $schema = json_decode($json_content, true);
+    if ($schema === null) {
+        $json_error = json_last_error_msg();
+        throw new Exception("Failed to parse schema JSON: $json_error (file: $schema_json_path)");
+    }
+
+    if (empty($schema)) {
+        throw new Exception("Schema is empty: $schema_json_path");
     }
 
     foreach ($schema as $table_name => $table_def) {
@@ -325,10 +335,20 @@ function generate_phpbb_schema(string $schema_json_path): array
                 $key_type = $key_def[0];
                 $key_cols = $key_def[1];
 
+                // Handle column definitions - may include prefix length like "column_name:255"
+                $format_key_col = function($col) {
+                    if (strpos($col, ':') !== false) {
+                        // Format: column_name:prefix_length -> `column_name`(prefix_length)
+                        [$col_name, $prefix_len] = explode(':', $col, 2);
+                        return "`$col_name`($prefix_len)";
+                    }
+                    return "`$col`";
+                };
+
                 if (is_array($key_cols)) {
-                    $cols_str = '`' . implode('`, `', $key_cols) . '`';
+                    $cols_str = implode(', ', array_map($format_key_col, $key_cols));
                 } else {
-                    $cols_str = "`$key_cols`";
+                    $cols_str = $format_key_col($key_cols);
                 }
 
                 switch ($key_type) {
@@ -354,6 +374,387 @@ function generate_phpbb_schema(string $schema_json_path): array
 }
 
 /**
+ * Install phpBB modules (ACP, MCP, UCP)
+ * This is required for the admin control panel to function
+ */
+function install_phpbb_modules(PDO $pdo): void
+{
+    echo "  [phpBB] Installing modules...\n";
+
+    // Module structure based on phpBB's add_modules.php
+    // Format: [class => [category => [subcategories]]]
+    $module_categories = [
+        'acp' => [
+            'ACP_CAT_GENERAL' => [
+                'ACP_QUICK_ACCESS',
+                'ACP_BOARD_CONFIGURATION',
+                'ACP_CLIENT_COMMUNICATION',
+                'ACP_SERVER_CONFIGURATION',
+            ],
+            'ACP_CAT_FORUMS' => [
+                'ACP_MANAGE_FORUMS',
+                'ACP_FORUM_BASED_PERMISSIONS',
+            ],
+            'ACP_CAT_POSTING' => [
+                'ACP_MESSAGES',
+                'ACP_ATTACHMENTS',
+            ],
+            'ACP_CAT_USERGROUP' => [
+                'ACP_CAT_USERS',
+                'ACP_GROUPS',
+                'ACP_USER_SECURITY',
+            ],
+            'ACP_CAT_PERMISSIONS' => [
+                'ACP_GLOBAL_PERMISSIONS',
+                'ACP_FORUM_BASED_PERMISSIONS',
+                'ACP_PERMISSION_ROLES',
+                'ACP_PERMISSION_MASKS',
+            ],
+            'ACP_CAT_CUSTOMISE' => [
+                'ACP_STYLE_MANAGEMENT',
+                'ACP_EXTENSION_MANAGEMENT',
+                'ACP_LANGUAGE',
+            ],
+            'ACP_CAT_MAINTENANCE' => [
+                'ACP_FORUM_LOGS',
+                'ACP_CAT_DATABASE',
+            ],
+            'ACP_CAT_SYSTEM' => [
+                'ACP_AUTOMATION',
+                'ACP_GENERAL_TASKS',
+                'ACP_MODULE_MANAGEMENT',
+            ],
+            'ACP_CAT_DOT_MODS' => [],
+        ],
+        'mcp' => [
+            'MCP_MAIN' => [],
+            'MCP_QUEUE' => [],
+            'MCP_REPORTS' => [],
+            'MCP_NOTES' => [],
+            'MCP_WARN' => [],
+            'MCP_LOGS' => [],
+            'MCP_BAN' => [],
+        ],
+        'ucp' => [
+            'UCP_MAIN' => [],
+            'UCP_PROFILE' => [],
+            'UCP_PREFS' => [],
+            'UCP_PM' => [],
+            'UCP_USERGROUPS' => [],
+            'UCP_ZEBRA' => [],
+        ],
+    ];
+
+    // Module basenames for categories that have them
+    $category_basenames = [
+        'UCP_PM' => 'ucp_pm',
+    ];
+
+    // ACP module info - maps basename to modes with their categories
+    // Based on acp_* info files in phpBB
+    $acp_modules = [
+        'acp_main' => [
+            'main' => ['cat' => ['ACP_QUICK_ACCESS'], 'title' => 'ACP_INDEX', 'auth' => 'acl_a_'],
+        ],
+        'acp_board' => [
+            'settings' => ['cat' => ['ACP_BOARD_CONFIGURATION'], 'title' => 'ACP_BOARD_SETTINGS', 'auth' => 'acl_a_board'],
+            'features' => ['cat' => ['ACP_BOARD_CONFIGURATION'], 'title' => 'ACP_BOARD_FEATURES', 'auth' => 'acl_a_board'],
+            'avatar' => ['cat' => ['ACP_BOARD_CONFIGURATION'], 'title' => 'ACP_AVATAR_SETTINGS', 'auth' => 'acl_a_board'],
+            'message' => ['cat' => ['ACP_MESSAGES'], 'title' => 'ACP_MESSAGE_SETTINGS', 'auth' => 'acl_a_board'],
+            'post' => ['cat' => ['ACP_MESSAGES'], 'title' => 'ACP_POST_SETTINGS', 'auth' => 'acl_a_board'],
+            'signature' => ['cat' => ['ACP_MESSAGES'], 'title' => 'ACP_SIGNATURE_SETTINGS', 'auth' => 'acl_a_board'],
+            'registration' => ['cat' => ['ACP_CAT_USERS'], 'title' => 'ACP_REGISTER_SETTINGS', 'auth' => 'acl_a_board'],
+            'auth' => ['cat' => ['ACP_CAT_USERS'], 'title' => 'ACP_AUTH_SETTINGS', 'auth' => 'acl_a_board'],
+            'cookie' => ['cat' => ['ACP_CLIENT_COMMUNICATION'], 'title' => 'ACP_COOKIE_SETTINGS', 'auth' => 'acl_a_board'],
+            'load' => ['cat' => ['ACP_SERVER_CONFIGURATION'], 'title' => 'ACP_LOAD_SETTINGS', 'auth' => 'acl_a_board'],
+            'server' => ['cat' => ['ACP_SERVER_CONFIGURATION'], 'title' => 'ACP_SERVER_SETTINGS', 'auth' => 'acl_a_board'],
+            'security' => ['cat' => ['ACP_SERVER_CONFIGURATION'], 'title' => 'ACP_SECURITY_SETTINGS', 'auth' => 'acl_a_board'],
+            'email' => ['cat' => ['ACP_CLIENT_COMMUNICATION'], 'title' => 'ACP_EMAIL_SETTINGS', 'auth' => 'acl_a_board'],
+        ],
+        'acp_users' => [
+            'overview' => ['cat' => ['ACP_CAT_USERS'], 'title' => 'ACP_MANAGE_USERS', 'auth' => 'acl_a_user'],
+        ],
+        'acp_groups' => [
+            'manage' => ['cat' => ['ACP_GROUPS'], 'title' => 'ACP_GROUPS_MANAGE', 'auth' => 'acl_a_group'],
+        ],
+        'acp_forums' => [
+            'manage' => ['cat' => ['ACP_MANAGE_FORUMS'], 'title' => 'ACP_MANAGE_FORUMS', 'auth' => 'acl_a_forum'],
+        ],
+        'acp_permissions' => [
+            'intro' => ['cat' => ['ACP_GLOBAL_PERMISSIONS'], 'title' => 'ACP_PERMISSIONS', 'auth' => 'acl_a_viewauth'],
+            'admins' => ['cat' => ['ACP_GLOBAL_PERMISSIONS'], 'title' => 'ACP_ADMINISTRATORS', 'auth' => 'acl_a_aauth'],
+            'global' => ['cat' => ['ACP_GLOBAL_PERMISSIONS'], 'title' => 'ACP_GLOBAL_MODERATORS', 'auth' => 'acl_a_aauth'],
+            'forum' => ['cat' => ['ACP_FORUM_BASED_PERMISSIONS'], 'title' => 'ACP_FORUM_PERMISSIONS', 'auth' => 'acl_a_fauth'],
+            'moderators' => ['cat' => ['ACP_FORUM_BASED_PERMISSIONS'], 'title' => 'ACP_FORUM_MODERATORS', 'auth' => 'acl_a_fauth'],
+        ],
+        'acp_permission_roles' => [
+            'admin_roles' => ['cat' => ['ACP_PERMISSION_ROLES'], 'title' => 'ACP_ADMIN_ROLES', 'auth' => 'acl_a_roles'],
+            'user_roles' => ['cat' => ['ACP_PERMISSION_ROLES'], 'title' => 'ACP_USER_ROLES', 'auth' => 'acl_a_roles'],
+            'mod_roles' => ['cat' => ['ACP_PERMISSION_ROLES'], 'title' => 'ACP_MOD_ROLES', 'auth' => 'acl_a_roles'],
+            'forum_roles' => ['cat' => ['ACP_PERMISSION_ROLES'], 'title' => 'ACP_FORUM_ROLES', 'auth' => 'acl_a_roles'],
+        ],
+        'acp_styles' => [
+            'style' => ['cat' => ['ACP_STYLE_MANAGEMENT'], 'title' => 'ACP_STYLES', 'auth' => 'acl_a_styles'],
+            'install' => ['cat' => ['ACP_STYLE_MANAGEMENT'], 'title' => 'ACP_STYLES_INSTALL', 'auth' => 'acl_a_styles'],
+        ],
+        'acp_extensions' => [
+            'main' => ['cat' => ['ACP_EXTENSION_MANAGEMENT'], 'title' => 'ACP_EXTENSIONS', 'auth' => 'acl_a_extensions'],
+        ],
+        'acp_language' => [
+            'lang_packs' => ['cat' => ['ACP_LANGUAGE'], 'title' => 'ACP_LANGUAGE_PACKS', 'auth' => 'acl_a_language'],
+        ],
+        'acp_logs' => [
+            'admin' => ['cat' => ['ACP_FORUM_LOGS'], 'title' => 'ACP_ADMIN_LOGS', 'auth' => 'acl_a_viewlogs'],
+            'mod' => ['cat' => ['ACP_FORUM_LOGS'], 'title' => 'ACP_MOD_LOGS', 'auth' => 'acl_a_viewlogs'],
+            'users' => ['cat' => ['ACP_FORUM_LOGS'], 'title' => 'ACP_USERS_LOGS', 'auth' => 'acl_a_viewlogs'],
+            'critical' => ['cat' => ['ACP_FORUM_LOGS'], 'title' => 'ACP_CRITICAL_LOGS', 'auth' => 'acl_a_viewlogs'],
+        ],
+        'acp_database' => [
+            'backup' => ['cat' => ['ACP_CAT_DATABASE'], 'title' => 'ACP_BACKUP', 'auth' => 'acl_a_backup'],
+            'restore' => ['cat' => ['ACP_CAT_DATABASE'], 'title' => 'ACP_RESTORE', 'auth' => 'acl_a_backup'],
+        ],
+        'acp_bots' => [
+            'bots' => ['cat' => ['ACP_CAT_USERS'], 'title' => 'ACP_BOTS', 'auth' => 'acl_a_bots'],
+        ],
+        'acp_php_info' => [
+            'info' => ['cat' => ['ACP_GENERAL_TASKS'], 'title' => 'ACP_PHP_INFO', 'auth' => 'acl_a_phpinfo'],
+        ],
+        'acp_prune' => [
+            'users' => ['cat' => ['ACP_CAT_USERS'], 'title' => 'ACP_PRUNE_USERS', 'auth' => 'acl_a_userdel'],
+            'forums' => ['cat' => ['ACP_MANAGE_FORUMS'], 'title' => 'ACP_PRUNE_FORUMS', 'auth' => 'acl_a_prune'],
+        ],
+        'acp_modules' => [
+            'acp' => ['cat' => ['ACP_MODULE_MANAGEMENT'], 'title' => 'ACP_MODULE_MANAGEMENT', 'auth' => 'acl_a_modules'],
+            'ucp' => ['cat' => ['ACP_MODULE_MANAGEMENT'], 'title' => 'UCP', 'auth' => 'acl_a_modules'],
+            'mcp' => ['cat' => ['ACP_MODULE_MANAGEMENT'], 'title' => 'MCP', 'auth' => 'acl_a_modules'],
+        ],
+        'acp_attachments' => [
+            'attach' => ['cat' => ['ACP_ATTACHMENTS'], 'title' => 'ACP_ATTACHMENT_SETTINGS', 'auth' => 'acl_a_attach'],
+            'extensions' => ['cat' => ['ACP_ATTACHMENTS'], 'title' => 'ACP_MANAGE_EXTENSIONS', 'auth' => 'acl_a_attach'],
+            'ext_groups' => ['cat' => ['ACP_ATTACHMENTS'], 'title' => 'ACP_EXTENSION_GROUPS', 'auth' => 'acl_a_attach'],
+            'orphan' => ['cat' => ['ACP_ATTACHMENTS'], 'title' => 'ACP_ORPHAN_ATTACHMENTS', 'auth' => 'acl_a_attach'],
+        ],
+        'acp_search' => [
+            'settings' => ['cat' => ['ACP_SERVER_CONFIGURATION'], 'title' => 'ACP_SEARCH_SETTINGS', 'auth' => 'acl_a_search'],
+            'index' => ['cat' => ['ACP_GENERAL_TASKS'], 'title' => 'ACP_SEARCH_INDEX', 'auth' => 'acl_a_search'],
+        ],
+    ];
+
+    // MCP modules
+    $mcp_modules = [
+        'mcp_main' => [
+            'front' => ['cat' => ['MCP_MAIN'], 'title' => 'MCP_MAIN_FRONT', 'auth' => ''],
+            'forum_view' => ['cat' => ['MCP_MAIN'], 'title' => 'MCP_MAIN_FORUM_VIEW', 'auth' => 'acl_m_'],
+            'topic_view' => ['cat' => ['MCP_MAIN'], 'title' => 'MCP_MAIN_TOPIC_VIEW', 'auth' => 'acl_m_'],
+            'post_details' => ['cat' => ['MCP_MAIN'], 'title' => 'MCP_MAIN_POST_DETAILS', 'auth' => 'acl_m_'],
+        ],
+        'mcp_queue' => [
+            'unapproved_topics' => ['cat' => ['MCP_QUEUE'], 'title' => 'MCP_QUEUE_UNAPPROVED_TOPICS', 'auth' => 'acl_m_approve'],
+            'unapproved_posts' => ['cat' => ['MCP_QUEUE'], 'title' => 'MCP_QUEUE_UNAPPROVED_POSTS', 'auth' => 'acl_m_approve'],
+            'deleted_topics' => ['cat' => ['MCP_QUEUE'], 'title' => 'MCP_QUEUE_DELETED_TOPICS', 'auth' => 'acl_m_approve'],
+            'deleted_posts' => ['cat' => ['MCP_QUEUE'], 'title' => 'MCP_QUEUE_DELETED_POSTS', 'auth' => 'acl_m_approve'],
+        ],
+        'mcp_reports' => [
+            'reports' => ['cat' => ['MCP_REPORTS'], 'title' => 'MCP_REPORTS_OPEN', 'auth' => 'acl_m_report'],
+            'reports_closed' => ['cat' => ['MCP_REPORTS'], 'title' => 'MCP_REPORTS_CLOSED', 'auth' => 'acl_m_report'],
+            'report_details' => ['cat' => ['MCP_REPORTS'], 'title' => 'MCP_REPORT_DETAILS', 'auth' => 'acl_m_report', 'display' => 0],
+        ],
+        'mcp_notes' => [
+            'front' => ['cat' => ['MCP_NOTES'], 'title' => 'MCP_NOTES_FRONT', 'auth' => ''],
+            'user_notes' => ['cat' => ['MCP_NOTES'], 'title' => 'MCP_NOTES_USER', 'auth' => ''],
+        ],
+        'mcp_warn' => [
+            'front' => ['cat' => ['MCP_WARN'], 'title' => 'MCP_WARN_FRONT', 'auth' => 'acl_m_warn'],
+            'list' => ['cat' => ['MCP_WARN'], 'title' => 'MCP_WARN_LIST', 'auth' => 'acl_m_warn'],
+            'warn_user' => ['cat' => ['MCP_WARN'], 'title' => 'MCP_WARN_USER', 'auth' => 'acl_m_warn'],
+            'warn_post' => ['cat' => ['MCP_WARN'], 'title' => 'MCP_WARN_POST', 'auth' => 'acl_m_warn', 'display' => 0],
+        ],
+        'mcp_logs' => [
+            'front' => ['cat' => ['MCP_LOGS'], 'title' => 'MCP_LOGS_FRONT', 'auth' => 'acl_m_'],
+            'forum_logs' => ['cat' => ['MCP_LOGS'], 'title' => 'MCP_LOGS_FORUM_VIEW', 'auth' => 'acl_m_'],
+            'topic_logs' => ['cat' => ['MCP_LOGS'], 'title' => 'MCP_LOGS_TOPIC_VIEW', 'auth' => 'acl_m_'],
+        ],
+        'mcp_ban' => [
+            'user' => ['cat' => ['MCP_BAN'], 'title' => 'MCP_BAN_USERNAMES', 'auth' => 'acl_m_ban'],
+            'ip' => ['cat' => ['MCP_BAN'], 'title' => 'MCP_BAN_IPS', 'auth' => 'acl_m_ban'],
+            'email' => ['cat' => ['MCP_BAN'], 'title' => 'MCP_BAN_EMAILS', 'auth' => 'acl_m_ban'],
+        ],
+    ];
+
+    // UCP modules
+    $ucp_modules = [
+        'ucp_main' => [
+            'front' => ['cat' => ['UCP_MAIN'], 'title' => 'UCP_MAIN_FRONT', 'auth' => ''],
+            'subscribed' => ['cat' => ['UCP_MAIN'], 'title' => 'UCP_MAIN_SUBSCRIBED', 'auth' => ''],
+            'bookmarks' => ['cat' => ['UCP_MAIN'], 'title' => 'UCP_MAIN_BOOKMARKS', 'auth' => 'cfg_allow_bookmarks'],
+            'drafts' => ['cat' => ['UCP_MAIN'], 'title' => 'UCP_MAIN_DRAFTS', 'auth' => ''],
+        ],
+        'ucp_profile' => [
+            'profile_info' => ['cat' => ['UCP_PROFILE'], 'title' => 'UCP_PROFILE_PROFILE_INFO', 'auth' => ''],
+            'signature' => ['cat' => ['UCP_PROFILE'], 'title' => 'UCP_PROFILE_SIGNATURE', 'auth' => ''],
+            'avatar' => ['cat' => ['UCP_PROFILE'], 'title' => 'UCP_PROFILE_AVATAR', 'auth' => ''],
+            'reg_details' => ['cat' => ['UCP_PROFILE'], 'title' => 'UCP_PROFILE_REG_DETAILS', 'auth' => ''],
+            'autologin_keys' => ['cat' => ['UCP_PROFILE'], 'title' => 'UCP_PROFILE_AUTOLOGIN_KEYS', 'auth' => ''],
+        ],
+        'ucp_prefs' => [
+            'personal' => ['cat' => ['UCP_PREFS'], 'title' => 'UCP_PREFS_PERSONAL', 'auth' => ''],
+            'post' => ['cat' => ['UCP_PREFS'], 'title' => 'UCP_PREFS_POST', 'auth' => ''],
+            'view' => ['cat' => ['UCP_PREFS'], 'title' => 'UCP_PREFS_VIEW', 'auth' => ''],
+        ],
+        'ucp_pm' => [
+            'view' => ['cat' => ['UCP_PM'], 'title' => 'UCP_PM_VIEW', 'auth' => 'cfg_allow_privmsg'],
+            'compose' => ['cat' => ['UCP_PM'], 'title' => 'UCP_PM_COMPOSE', 'auth' => 'cfg_allow_privmsg'],
+            'drafts' => ['cat' => ['UCP_PM'], 'title' => 'UCP_PM_DRAFTS', 'auth' => 'cfg_allow_privmsg'],
+            'options' => ['cat' => ['UCP_PM'], 'title' => 'UCP_PM_OPTIONS', 'auth' => 'cfg_allow_privmsg'],
+        ],
+        'ucp_groups' => [
+            'membership' => ['cat' => ['UCP_USERGROUPS'], 'title' => 'UCP_USERGROUPS_MEMBER', 'auth' => ''],
+            'manage' => ['cat' => ['UCP_USERGROUPS'], 'title' => 'UCP_USERGROUPS_MANAGE', 'auth' => ''],
+        ],
+        'ucp_zebra' => [
+            'friends' => ['cat' => ['UCP_ZEBRA'], 'title' => 'UCP_ZEBRA_FRIENDS', 'auth' => ''],
+            'foes' => ['cat' => ['UCP_ZEBRA'], 'title' => 'UCP_ZEBRA_FOES', 'auth' => ''],
+        ],
+        'ucp_notifications' => [
+            'notification_options' => ['cat' => ['UCP_PREFS'], 'title' => 'UCP_NOTIFICATION_OPTIONS', 'auth' => ''],
+        ],
+        'ucp_attachments' => [
+            'attachments' => ['cat' => ['UCP_MAIN'], 'title' => 'UCP_MAIN_ATTACHMENTS', 'auth' => 'acl_u_attach'],
+        ],
+    ];
+
+    // Clear existing modules
+    $pdo->exec("DELETE FROM phpbb_modules");
+
+    // Helper to insert module and return its ID
+    $insert_module = function($module_class, $parent_id, $langname, $basename = '', $mode = '', $auth = '', $display = 1) use ($pdo) {
+        // Get max right_id for this class
+        $stmt = $pdo->query("SELECT MAX(right_id) as max_right FROM phpbb_modules WHERE module_class = " . $pdo->quote($module_class));
+        $row = $stmt->fetch();
+        $left_id = ($row['max_right'] ?? 0) + 1;
+        $right_id = $left_id + 1;
+
+        $stmt = $pdo->prepare("INSERT INTO phpbb_modules
+            (module_enabled, module_display, module_basename, module_class, parent_id, left_id, right_id, module_langname, module_mode, module_auth)
+            VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$display, $basename, $module_class, $parent_id, $left_id, $right_id, $langname, $mode, $auth]);
+        return $pdo->lastInsertId();
+    };
+
+    $category_ids = [];
+    $module_count = 0;
+
+    // First pass: Create all categories
+    foreach ($module_categories as $module_class => $categories) {
+        $category_ids[$module_class] = [];
+
+        foreach ($categories as $cat_name => $subs) {
+            // Check if this category has a basename
+            $basename = $category_basenames[$cat_name] ?? '';
+
+            // Insert top-level category
+            $cat_id = $insert_module($module_class, 0, $cat_name, $basename);
+            $category_ids[$module_class][$cat_name] = $cat_id;
+            $module_count++;
+
+            // Insert subcategories
+            if (is_array($subs) && !empty($subs)) {
+                foreach ($subs as $sub_name) {
+                    $sub_basename = $category_basenames[$sub_name] ?? '';
+                    $sub_id = $insert_module($module_class, $cat_id, $sub_name, $sub_basename);
+                    $category_ids[$module_class][$sub_name] = $sub_id;
+                    $module_count++;
+                }
+            }
+        }
+    }
+
+    // Second pass: Add ACP modules
+    foreach ($acp_modules as $basename => $modes) {
+        foreach ($modes as $mode => $info) {
+            foreach ($info['cat'] as $cat_name) {
+                if (isset($category_ids['acp'][$cat_name])) {
+                    $display = $info['display'] ?? 1;
+                    $insert_module('acp', $category_ids['acp'][$cat_name], $info['title'], $basename, $mode, $info['auth'], $display);
+                    $module_count++;
+                }
+            }
+        }
+    }
+
+    // Third pass: Add MCP modules
+    foreach ($mcp_modules as $basename => $modes) {
+        foreach ($modes as $mode => $info) {
+            foreach ($info['cat'] as $cat_name) {
+                if (isset($category_ids['mcp'][$cat_name])) {
+                    $display = $info['display'] ?? 1;
+                    $insert_module('mcp', $category_ids['mcp'][$cat_name], $info['title'], $basename, $mode, $info['auth'], $display);
+                    $module_count++;
+                }
+            }
+        }
+    }
+
+    // Fourth pass: Add UCP modules
+    foreach ($ucp_modules as $basename => $modes) {
+        foreach ($modes as $mode => $info) {
+            foreach ($info['cat'] as $cat_name) {
+                if (isset($category_ids['ucp'][$cat_name])) {
+                    $display = $info['display'] ?? 1;
+                    $insert_module('ucp', $category_ids['ucp'][$cat_name], $info['title'], $basename, $mode, $info['auth'], $display);
+                    $module_count++;
+                }
+            }
+        }
+    }
+
+    // Rebuild nested set tree (left_id, right_id) properly
+    // This is a simplified rebuild that just numbers everything sequentially
+    foreach (['acp', 'mcp', 'ucp'] as $module_class) {
+        $counter = 1;
+
+        // Get all top-level categories
+        $stmt = $pdo->prepare("SELECT module_id FROM phpbb_modules WHERE module_class = ? AND parent_id = 0 ORDER BY module_id");
+        $stmt->execute([$module_class]);
+        $top_cats = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach ($top_cats as $cat_id) {
+            $left = $counter++;
+
+            // Get all children
+            $stmt = $pdo->prepare("SELECT module_id FROM phpbb_modules WHERE module_class = ? AND parent_id = ? ORDER BY module_id");
+            $stmt->execute([$module_class, $cat_id]);
+            $children = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            foreach ($children as $child_id) {
+                $child_left = $counter++;
+
+                // Get grandchildren
+                $stmt2 = $pdo->prepare("SELECT module_id FROM phpbb_modules WHERE module_class = ? AND parent_id = ? ORDER BY module_id");
+                $stmt2->execute([$module_class, $child_id]);
+                $grandchildren = $stmt2->fetchAll(PDO::FETCH_COLUMN);
+
+                foreach ($grandchildren as $gchild_id) {
+                    $pdo->prepare("UPDATE phpbb_modules SET left_id = ?, right_id = ? WHERE module_id = ?")
+                        ->execute([$counter, $counter + 1, $gchild_id]);
+                    $counter += 2;
+                }
+
+                $child_right = $counter++;
+                $pdo->prepare("UPDATE phpbb_modules SET left_id = ?, right_id = ? WHERE module_id = ?")
+                    ->execute([$child_left, $child_right, $child_id]);
+            }
+
+            $right = $counter++;
+            $pdo->prepare("UPDATE phpbb_modules SET left_id = ?, right_id = ? WHERE module_id = ?")
+                ->execute([$left, $right, $cat_id]);
+        }
+    }
+
+    echo "  [phpBB] Installed $module_count modules\n";
+}
+
+/**
  * Install phpBB forum database and config
  */
 function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string $admin_pass, string $admin_email): bool
@@ -362,16 +763,25 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
     $schema_json = $forum_dir . '/install1/schemas/schema.json';
     $schema_data_sql = $forum_dir . '/install1/schemas/schema_data.sql';
 
+    echo "  [phpBB] Forum dir: $forum_dir\n";
+
     // Generate and run schema
+    if (!file_exists($schema_json)) {
+        throw new Exception("phpBB schema.json not found at: $schema_json");
+    }
+    echo "  [phpBB] Schema JSON found\n";
+
     $schema_statements = generate_phpbb_schema($schema_json);
     if (empty($schema_statements)) {
-        return false;
+        throw new Exception("Failed to generate phpBB schema from: $schema_json");
     }
+    echo "  [phpBB] Generated " . count($schema_statements) . " schema statements\n";
 
     // Drop existing phpBB tables first (clean install)
     $result = $pdo->query("SHOW TABLES LIKE 'phpbb_%'");
     $tables = $result->fetchAll(PDO::FETCH_COLUMN);
     if (!empty($tables)) {
+        echo "  [phpBB] Dropping " . count($tables) . " existing tables\n";
         $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
         foreach ($tables as $table) {
             $pdo->exec("DROP TABLE IF EXISTS `$table`");
@@ -380,17 +790,41 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
     }
 
     // Create tables
+    echo "  [phpBB] Creating tables...\n";
+    $table_count = 0;
     foreach ($schema_statements as $sql) {
-        $pdo->exec($sql);
+        try {
+            $pdo->exec($sql);
+            $table_count++;
+        } catch (PDOException $e) {
+            // Extract table name from CREATE TABLE statement for better error message
+            if (preg_match('/CREATE TABLE.*?`(\w+)`/i', $sql, $m)) {
+                throw new Exception("Failed to create table {$m[1]}: " . $e->getMessage());
+            }
+            throw $e;
+        }
     }
+    echo "  [phpBB] Created $table_count tables\n";
+
+    // Verify critical tables were created
+    $verify_tables = ['phpbb_styles', 'phpbb_config', 'phpbb_users', 'phpbb_forums'];
+    foreach ($verify_tables as $table) {
+        $check = $pdo->query("SHOW TABLES LIKE '$table'");
+        if (!$check->fetch()) {
+            throw new Exception("Critical table '$table' was not created. Schema generation may have failed.");
+        }
+    }
+    echo "  [phpBB] Verified critical tables exist\n";
 
     // Load schema_data.sql (initial configuration)
     if (file_exists($schema_data_sql)) {
+        echo "  [phpBB] Loading schema_data.sql...\n";
         $data_sql = file_get_contents($schema_data_sql);
         // The file has # POSTGRES BEGIN # and # POSTGRES COMMIT # markers as comments
         // split_sql_statements already skips comment lines starting with #
 
         $statements = split_sql_statements($data_sql);
+        $data_count = 0;
         foreach ($statements as $stmt) {
             $stmt = trim($stmt);
             if ($stmt === '' || strpos($stmt, '#') === 0) {
@@ -398,11 +832,16 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
             }
             try {
                 $pdo->exec($stmt);
+                $data_count++;
             } catch (PDOException $e) {
                 // Ignore duplicate key errors on initial data
             }
         }
+        echo "  [phpBB] Executed $data_count data statements\n";
     }
+
+    // Install phpBB modules (ACP, MCP, UCP) - required for admin panel to work
+    install_phpbb_modules($pdo);
 
     // Get phpBB settings from config
     $cookie_name = $config['phpbb_cookie_name'] ?? 'stmserverbb__';
@@ -425,12 +864,14 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
         'default_style' => '1',
     ];
 
+    echo "  [phpBB] Updating config values...\n";
     $update_stmt = $pdo->prepare('UPDATE phpbb_config SET config_value = ? WHERE config_name = ?');
     foreach ($config_updates as $name => $value) {
         $update_stmt->execute([$value, $name]);
     }
 
     // Update admin user (user_id 2 is the admin created by schema_data.sql)
+    echo "  [phpBB] Setting up admin user...\n";
     $now = time();
     $password_hash = password_hash($admin_pass, PASSWORD_BCRYPT);
 
@@ -444,42 +885,215 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
     // Update user_group for admin
     $pdo->exec("INSERT IGNORE INTO phpbb_user_group (group_id, user_id, user_pending, group_leader) VALUES (5, 2, 0, 1)");
 
-    // Register Steam styles in phpbb_styles table
-    // First, check if prosilver exists to get a template reference
-    $prosilver_check = $pdo->query("SELECT style_id FROM phpbb_styles WHERE style_name = 'prosilver' LIMIT 1");
-    $prosilver_id = $prosilver_check->fetchColumn();
+    try {
+        // Register Steam styles in phpbb_styles table
+        // Style names must match what get_steam_theme_by_date() returns in functions_steam_theme.php
+        echo "  [phpBB] Registering Steam styles...
+    ";
 
-    // Install Steam 2003 style
-    $pdo->exec("INSERT IGNORE INTO phpbb_styles (style_name, style_copyright, style_active, style_path, bbcode_bitfield, style_parent_id, style_parent_tree)
-        VALUES ('Steam 2003', 'Valve Corporation, 2003', 1, 'steam_2003', 'kNg=', 0, '')");
 
-    // Install Steam 2004 style
-    $pdo->exec("INSERT IGNORE INTO phpbb_styles (style_name, style_copyright, style_active, style_path, bbcode_bitfield, style_parent_id, style_parent_tree)
-        VALUES ('Steam 2004', 'Valve Corporation, 2004', 1, 'steam_2004', 'kNg=', 0, '')");
+        // Get prosilver style_id for parent inheritance (incomplete styles fall back to prosilver)
+        // Use try-catch in case table doesn't have prosilver yet
+        $prosilver_id = 1; // Default prosilver ID
+        try {
+            $prosilver_check = $pdo->query("SELECT style_id FROM phpbb_styles WHERE style_path = 'prosilver' LIMIT 1");
+            $prosilver_result = $prosilver_check->fetchColumn();
+            if ($prosilver_result) {
+                $prosilver_id = $prosilver_result;
+            }
+        } catch (PDOException $e) {
+            // Table might not have prosilver yet, use default ID
+        }
 
-    // Get the Steam 2004 style_id and set it as default
-    $steam2004_check = $pdo->query("SELECT style_id FROM phpbb_styles WHERE style_name = 'Steam 2004' LIMIT 1");
-    $steam2004_id = $steam2004_check->fetchColumn();
-    if ($steam2004_id) {
-        $pdo->prepare("UPDATE phpbb_config SET config_value = ? WHERE config_name = 'default_style'")->execute([$steam2004_id]);
+        // All Steam styles that can be selected by date-based theme selection
+        // These names MUST match the theme names returned by get_steam_theme_by_date()
+        // Styles with 'needs_parent' => true have incomplete templates and inherit from prosilver
+        $steam_styles = [
+            '2002_v1'        => ['copyright' => 'Valve Corporation, 2002', 'path' => '2002_v1', 'needs_parent' => true],
+            '2002_v2'        => ['copyright' => 'Valve Corporation, 2002', 'path' => '2002_v2', 'needs_parent' => true],
+            'steam_2003_v1'  => ['copyright' => 'Valve Corporation, 2003', 'path' => 'steam_2003_v1', 'needs_parent' => false],
+            'steam_2003_v2'  => ['copyright' => 'Valve Corporation, 2003', 'path' => 'steam_2003_v2', 'needs_parent' => false],
+            'steam_2004'     => ['copyright' => 'Valve Corporation, 2004', 'path' => 'steam_2004', 'needs_parent' => true],
+            'steam_2008'     => ['copyright' => 'Valve Corporation, 2008', 'path' => 'steam_2008', 'needs_parent' => false],
+            'steam_2011'     => ['copyright' => 'Valve Corporation, 2011', 'path' => 'steam_2011', 'needs_parent' => false],
+        ];
+
+        foreach ($steam_styles as $style_name => $style_data) {
+            $parent_id = $style_data['needs_parent'] ? $prosilver_id : 0;
+            $parent_tree = $style_data['needs_parent'] ? 'prosilver' : '';
+            $pdo->exec("INSERT IGNORE INTO phpbb_styles (style_name, style_copyright, style_active, style_path, bbcode_bitfield, style_parent_id, style_parent_tree)
+                VALUES (" . $pdo->quote($style_name) . ", " . $pdo->quote($style_data['copyright']) . ", 1, " . $pdo->quote($style_data['path']) . ", 'kNg=', $parent_id, " . $pdo->quote($parent_tree) . ")");
+        }
+        echo "  [phpBB] Registered " . count($steam_styles) . " Steam styles
+    ";
+
+
+        // Update existing styles to have proper parent inheritance (for upgrades)
+        $pdo->exec("UPDATE phpbb_styles SET style_parent_id = $prosilver_id, style_parent_tree = 'prosilver'
+                    WHERE style_path IN ('2002_v1', '2002_v2', 'steam_2004', 'steam_2006_v1') AND style_parent_id = 0");
+
+        // Get the steam_2004 style_id and set it as default
+        $steam2004_check = $pdo->query("SELECT style_id FROM phpbb_styles WHERE style_name = 'steam_2004' LIMIT 1");
+        $steam2004_id = $steam2004_check->fetchColumn();
+        if ($steam2004_id) {
+            $pdo->prepare("UPDATE phpbb_config SET config_value = ? WHERE config_name = 'default_style'")->execute([$steam2004_id]);
+            echo "  [phpBB] Set default style to steam_2004 (ID: $steam2004_id)\n";
+        } else {
+            echo "  [phpBB] Warning: Could not find steam_2004 style to set as default\n";
+        }
+
+    } catch (PDOException $e) {
+        echo "  [phpBB] Warning: Failed to register Steam styles: " . $e->getMessage() . "
+";
+        echo "  [phpBB] This may indicate the phpbb_styles table was not created properly.
+";
+        // Continue with installation - styles can be registered manually later
     }
 
     // Enable the steamcms/theme_sync extension
     $pdo->exec("INSERT IGNORE INTO phpbb_ext (ext_name, ext_active, ext_state)
         VALUES ('steamcms/theme_sync', 1, 'b:0;')");
 
-    // Clear phpBB cache to ensure extension is loaded properly
-    $cache_dir = $forum_dir . '/cache/production/';
-    if (is_dir($cache_dir)) {
-        $files = glob($cache_dir . '*');
-        foreach ($files as $file) {
-            if (is_file($file)) {
-                @unlink($file);
+    // Add is_historical columns for historical forum data filtering
+    echo "  [phpBB] Adding is_historical columns...\n";
+    // This is done manually instead of via phpBB migrations since we're installing from scratch
+    $historical_columns = [
+        'phpbb_users' => 'is_historical',
+        'phpbb_forums' => 'is_historical',
+        'phpbb_topics' => 'is_historical',
+        'phpbb_posts' => 'is_historical',
+    ];
+
+    foreach ($historical_columns as $table => $column) {
+        // Check if column exists
+        $check = $pdo->query("SHOW COLUMNS FROM `$table` LIKE '$column'")->fetch();
+        if (!$check) {
+            $pdo->exec("ALTER TABLE `$table` ADD COLUMN `$column` TINYINT(1) NOT NULL DEFAULT 0");
+        }
+    }
+
+    // Add indexes for is_historical columns
+    $tables_with_index = ['phpbb_users', 'phpbb_topics', 'phpbb_posts'];
+    foreach ($tables_with_index as $table) {
+        // Check if index exists
+        $check = $pdo->query("SHOW INDEX FROM `$table` WHERE Key_name = 'is_historical'")->fetch();
+        if (!$check) {
+            try {
+                $pdo->exec("CREATE INDEX `is_historical` ON `$table` (`is_historical`)");
+            } catch (PDOException $e) {
+                // Ignore if index already exists
             }
         }
     }
 
+    // Enable the steamcms/historical_filter extension
+    // ext_state serialized format indicates migration has been run
+    $migration_state = serialize([
+        'steamcms\\historical_filter\\migrations\\add_historical_columns' => [
+            'effectively_installed' => true,
+            'state' => 'installed',
+        ]
+    ]);
+    $pdo->exec("INSERT IGNORE INTO phpbb_ext (ext_name, ext_active, ext_state)
+        VALUES ('steamcms/historical_filter', 1, " . $pdo->quote($migration_state) . ")");
+    echo "  [phpBB] Enabled historical_filter extension\n";
+
+    // Run steam_theme_setup.sql for Steam-specific settings
+    $steam_theme_sql = $forum_dir . '/install/steam_theme_setup.sql';
+    if (file_exists($steam_theme_sql)) {
+        $sql_content = file_get_contents($steam_theme_sql);
+        $statements = array_filter(array_map('trim', explode(';', $sql_content)));
+        foreach ($statements as $stmt) {
+            if (!empty($stmt) && strpos($stmt, '--') !== 0) {
+                try {
+                    $pdo->exec($stmt);
+                } catch (PDOException $e) {
+                    // Ignore errors for INSERT IGNORE type statements
+                }
+            }
+        }
+    }
+
+    // Ensure the historical_filter extension files exist
+    // These provide the event listeners for style-based filtering
+    $ext_dir = $forum_dir . '/ext/steamcms/historical_filter';
+    $config_dir = $ext_dir . '/config';
+
+    // Create config directory if needed
+    if (!is_dir($config_dir)) {
+        @mkdir($config_dir, 0755, true);
+    }
+
+    // Create services.yml if it doesn't exist
+    $services_file = $config_dir . '/services.yml';
+    if (!file_exists($services_file)) {
+        $services_yml = "services:\n    steamcms.historical_filter.listener:\n        class: steamcms\\historical_filter\\event\\main_listener\n        arguments:\n            - '@user'\n            - '@template'\n        tags:\n            - { name: event.listener }\n";
+        file_put_contents($services_file, $services_yml);
+    }
+
+    // Create helper functions file for phpBB integration
+    $helper_file = $forum_dir . '/includes/historical_filter.php';
+    if (!file_exists($helper_file)) {
+        $helper_code = '<?php
+/**
+ * Historical Data Filter Helper Functions
+ * Style names must match what get_steam_theme_by_date() returns in functions_steam_theme.php
+ */
+if (!defined(\'IN_PHPBB\')) { exit; }
+
+function is_historical_style_active() {
+    global $user;
+    $style_name = isset($user->style[\'style_name\']) ? $user->style[\'style_name\'] : \'\';
+    // All styles that should show historical forum data
+    $allowed_styles = [
+        \'steam_2003_v1\', \'steam_2003_v2\', \'steam_2004\',  // Date-based theme names
+        \'Steam 2003\', \'Steam 2004\', \'steam_2003\', \'2003_v2\', \'2004\'  // Legacy names
+    ];
+    return in_array($style_name, $allowed_styles, true);
+}
+
+function get_historical_filter_sql($table_alias = \'\') {
+    if (is_historical_style_active()) { return \'\'; }
+    $prefix = $table_alias ? $table_alias . \'.\' : \'\';
+    return \' AND (\' . $prefix . \'is_historical IS NULL OR \' . $prefix . \'is_historical = 0)\';
+}
+';
+        file_put_contents($helper_file, $helper_code);
+    }
+
+    // Clear phpBB cache to ensure extension is loaded properly
+    echo "  [phpBB] Clearing cache...\n";
+    $cache_dirs = [
+        $forum_dir . '/cache/',
+        $forum_dir . '/cache/production/',
+        $forum_dir . '/cache/production/twig/',
+    ];
+    foreach ($cache_dirs as $cache_dir) {
+        if (is_dir($cache_dir)) {
+            $files = glob($cache_dir . '*');
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    @unlink($file);
+                } elseif (is_dir($file) && basename($file) !== '.' && basename($file) !== '..') {
+                    // Recursively delete subdirectories
+                    $subfiles = glob($file . '/*');
+                    foreach ($subfiles as $subfile) {
+                        if (is_file($subfile)) {
+                            @unlink($subfile);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Also remove container cache files
+    $container_files = glob($forum_dir . '/cache/production/container_*.php');
+    foreach ($container_files as $cf) {
+        @unlink($cf);
+    }
+
     // Generate phpBB config.php
+    echo "  [phpBB] Generating config.php...\n";
     $phpbb_config = "<?php
 // phpBB 3.x auto-generated configuration file
 // Created by SteamCMS installer
@@ -500,8 +1114,22 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
 // @define('DEBUG_CONTAINER', true);
 ";
 
-    file_put_contents($forum_dir . '/config.php', $phpbb_config);
+    $config_path = $forum_dir . '/config.php';
+    echo "  [phpBB] Writing config to: $config_path\n";
+    $result = file_put_contents($config_path, $phpbb_config);
+    if ($result === false) {
+        throw new Exception("Failed to write phpBB config.php to: $config_path - Check directory permissions");
+    }
+    echo "  [phpBB] Config written ($result bytes)\n";
 
+    // Remove the install directory placeholder to prevent redirect loops
+    $install_dir = $forum_dir . '/install';
+    if (is_dir($install_dir)) {
+        // Create a simple index.php that redirects to forum root
+        file_put_contents($install_dir . '/app.php', "<?php\nheader('Location: ../index.php');\nexit;\n");
+    }
+
+    echo "  [phpBB] Installation complete!\n";
     return true;
 }
 
@@ -540,6 +1168,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors[] = $e->getMessage();
         }
     } elseif ($step == 2 && isset($_SESSION['cms_install'])) {
+        // Extend execution time for large installations (phpBB schema, historical data, etc.)
+        set_time_limit(600); // 10 minutes
+        ini_set('max_execution_time', 600);
+
         $config = $_SESSION['cms_install'];
         $host = $config['host'];
         $dbPort = isset($config['port']) && (int) $config['port'] > 0 ? (int) $config['port'] : 3306;
@@ -1704,39 +2336,12 @@ ALTER TABLE product_discounts
                     }
 
                     if (stripos($stmt, 'INSERT INTO news') === 0) {
-                        // isolate the part after “VALUES”
-                        $vals = trim(substr($stmt, stripos($stmt, 'VALUES') + 6));
-                        $vals = rtrim($vals, ';');
-                        $rows = preg_split('/\),\s*\(/', trim($vals, '()'));   // split rows
-
-                        $newsStmt = $pdo->prepare(
-                            'INSERT INTO news(id,title,author,publish_date,publish_at,content,status) VALUES(?,?,?,?,?,?,?)'
-                        );
-
-                        foreach ($rows as $row) {
-                            $parts = str_getcsv($row, ',', "'");
-                            if (count($parts) < 5) {
-                                continue;
-                            }
-
-                            // undo doubled single-quotes, trim whitespace
-                            $id      = trim($parts[0]);
-                            $title   = str_replace("''", "'", $parts[1]);
-                            $author  = str_replace("''", "'", $parts[2]);
-                            $date    = normalizeDate($parts[3]);
-                            $content = str_replace("''", "'", $parts[4]);
-
-                            $newsStmt->execute([
-                                $id,
-                                $title,
-                                $author,
-                                $date,
-                                $date,
-                                $content,
-                                'published'
-                            ]);
-                        }
-                        continue;  // skip $pdo->exec($stmt) — we’ve handled it.
+                        // The SQL file now contains complete INSERT statements with explicit
+                        // column names (id, title, author, category, publish_date, publish_at,
+                        // views, content, products, is_official, status, associated_appids)
+                        // and ON DUPLICATE KEY UPDATE clauses. Execute directly.
+                        $pdo->exec($stmt);
+                        continue;
                     }
 
                     $pdo->exec($stmt);
@@ -3163,26 +3768,38 @@ $defaultCafes = [
 
             try {
                 install_phpbb_forum($pdo, $phpbbInstallConfig, $admin_user, $admin_pass, $admin_email);
+                echo "✓ phpBB forum installed successfully\n";
 
                 // Install historical 2004 forum data if checkbox was checked
                 if ($install_historical_data) {
                     echo "Installing historical 2004 forum data...\n";
 
-                    // Install SQL data
-                    $historical_sql_file = __DIR__ . '/scripts/historical_forum_data_with_attachments.sql';
-                    if (file_exists($historical_sql_file)) {
-                        try {
-                            run_sql_file($pdo, $historical_sql_file);
-                            echo "✓ Installed historical forum data\n";
-                        } catch (Exception $e) {
-                            error_log('Historical forum data installation error: ' . $e->getMessage());
-                            echo "⚠ Historical forum data installation failed: " . $e->getMessage() . "\n";
+                    // Try complete file first (with real content), then attachments version, then basic fallback
+                    $historical_sql_files = [
+                        __DIR__ . '/scripts/historical_forum_data_complete.sql',  // Complete file with real extracted content
+                        __DIR__ . '/scripts/historical_forum_data_with_attachments.sql',  // Fallback with attachments
+                        __DIR__ . '/scripts/historical_forum_data.sql',  // Basic fallback
+                    ];
+
+                    $historical_data_installed = false;
+                    foreach ($historical_sql_files as $historical_sql_file) {
+                        if (file_exists($historical_sql_file) && !$historical_data_installed) {
+                            try {
+                                run_sql_file($pdo, $historical_sql_file);
+                                echo "✓ Installed historical forum data from: " . basename($historical_sql_file) . "\n";
+                                $historical_data_installed = true;
+                            } catch (Exception $e) {
+                                error_log('Historical forum data installation error (' . basename($historical_sql_file) . '): ' . $e->getMessage());
+                                echo "⚠ Failed to install from " . basename($historical_sql_file) . ": " . $e->getMessage() . "\n";
+                            }
                         }
-                    } else {
-                        echo "⚠ Historical forum data file not found: $historical_sql_file\n";
                     }
 
-                    // Install attachment files
+                    if (!$historical_data_installed) {
+                        echo "⚠ No historical forum data files found in scripts/ directory\n";
+                    }
+
+                    // Install attachment files from staging directory
                     $attachments_staging = __DIR__ . '/attachments_staging';
                     $phpbb_files_dir = __DIR__ . '/forum/files';
                     if (is_dir($attachments_staging)) {
@@ -3219,99 +3836,51 @@ $defaultCafes = [
                             echo "⚠ Historical attachment installation failed: " . $e->getMessage() . "\n";
                         }
                     }
-                }
 
-                // Install historical 2004 forum data if checkbox was checked
-                if ($install_historical_data) {
-                    echo "Installing historical 2004 forum data...\n";
-
-                    // Install SQL data
-                    $historical_sql_file = __DIR__ . '/scripts/historical_forum_data_with_attachments.sql';
-                    if (file_exists($historical_sql_file)) {
-                        try {
-                            run_sql_file($pdo, $historical_sql_file);
-                            echo "✓ Installed historical forum data\n";
-                        } catch (Exception $e) {
-                            error_log('Historical forum data installation error: ' . $e->getMessage());
-                            echo "⚠ Historical forum data installation failed: " . $e->getMessage() . "\n";
-                        }
-                    } else {
-                        echo "⚠ Historical forum data file not found: $historical_sql_file\n";
-                    }
-
-                    // Install attachment files
-                    $attachments_staging = __DIR__ . '/attachments_staging';
-                    $phpbb_files_dir = __DIR__ . '/forum/files';
-                    if (is_dir($attachments_staging)) {
-                        try {
-                            if (!is_dir($phpbb_files_dir)) {
-                                mkdir($phpbb_files_dir, 0755, true);
-                            }
-
-                            $attachment_files = glob($attachments_staging . '/attachment_*.???*');
-                            $copied_count = 0;
-
-                            foreach ($attachment_files as $source_file) {
-                                $filename = basename($source_file);
-                                if (preg_match('/attachment_(\d+)\.(\w+)/', $filename, $matches)) {
-                                    $vb_id = intval($matches[1]);
-                                    $extension = $matches[2];
-                                    $phpbb_id = 100000 + $vb_id;
-                                    $timestamp = time();
-                                    $dest_filename = "{$phpbb_id}_{$timestamp}.{$extension}";
-                                    $dest_file = $phpbb_files_dir . '/' . $dest_filename;
-
-                                    if (copy($source_file, $dest_file)) {
-                                        chmod($dest_file, 0644);
-                                        $copied_count++;
-                                    }
-                                }
-                            }
-
-                            if ($copied_count > 0) {
-                                echo "✓ Installed {$copied_count} historical attachment files\n";
-                            }
-                        } catch (Exception $e) {
-                            error_log('Historical attachment installation error: ' . $e->getMessage());
-                            echo "⚠ Historical attachment installation failed: " . $e->getMessage() . "\n";
-                        }
-                    }
-                }
-
-                // Install historical 2004 forum data if checkbox was checked
-                if ($install_historical_data) {
-                    $historical_sql_file = __DIR__ . '/scripts/historical_forum_data.sql';
-                    if (file_exists($historical_sql_file)) {
-                        try {
-                            run_sql_file($pdo, $historical_sql_file);
-                            echo "✓ Installed historical 2004 forum data\n";
-                        } catch (Exception $e) {
-                            error_log('Historical forum data installation error: ' . $e->getMessage());
-                            echo "⚠ Historical forum data installation failed: " . $e->getMessage() . "\n";
-                        }
-                    } else {
-                        echo "⚠ Historical forum data file not found: $historical_sql_file\n";
-                    }
-                }
-
-                // Install historical 2004 forum data if checkbox was checked
-                if ($install_historical_data) {
-                    $historical_sql_file = __DIR__ . '/scripts/historical_forum_data.sql';
-                    if (file_exists($historical_sql_file)) {
-                        try {
-                            run_sql_file($pdo, $historical_sql_file);
-                            echo "✓ Installed historical 2004 forum data\n";
-                        } catch (Exception $e) {
-                            error_log('Historical forum data installation error: ' . $e->getMessage());
-                            echo "⚠ Historical forum data installation failed: " . $e->getMessage() . "\n";
-                        }
-                    } else {
-                        echo "⚠ Historical forum data file not found: $historical_sql_file\n";
-                    }
+                    echo "✓ Historical forum data installation complete\n";
                 }
             } catch (Exception $e) {
-                // Log phpBB installation errors but don't halt CMS installation
+                // Log phpBB installation errors and store in session to display on step 3
                 error_log('phpBB installation error: ' . $e->getMessage());
+                $_SESSION['phpbb_install_error'] = $e->getMessage();
+
+                // FALLBACK: Try to create config.php anyway so phpBB doesn't show install page
+                $forum_config_path = __DIR__ . '/forum/config.php';
+                if (!file_exists($forum_config_path)) {
+                    $fallback_config = "<?php
+// phpBB 3.x configuration file (created after installation error)
+// Error during install: " . addslashes($e->getMessage()) . "
+
+\$dbms = 'phpbb\\\\db\\\\driver\\\\mysqli';
+\$dbhost = '{$host}';
+\$dbport = '{$dbPort}';
+\$dbname = '{$dbname}';
+\$dbuser = '{$user}';
+\$dbpasswd = '{$pass}';
+
+\$table_prefix = 'phpbb_';
+\$phpbb_adm_relative_path = 'adm/';
+\$acm_type = 'phpbb\\\\cache\\\\driver\\\\file';
+
+@define('PHPBB_INSTALLED', true);
+@define('PHPBB_ENVIRONMENT', 'production');
+";
+                    $write_result = @file_put_contents($forum_config_path, $fallback_config);
+                    if ($write_result === false) {
+                        $_SESSION['phpbb_install_error'] .= ' | Additionally, failed to write fallback config.php - check forum directory permissions';
+                        error_log('Failed to write fallback phpBB config.php');
+                    } else {
+                        $_SESSION['phpbb_install_error'] .= ' | Fallback config.php was created - you may need to reinstall';
+                        error_log('Created fallback phpBB config.php');
+                    }
+                }
+            }
+
+            // Double-check: Ensure forum config.php exists
+            $forum_config_final_check = __DIR__ . '/forum/config.php';
+            if (!file_exists($forum_config_final_check)) {
+                error_log('CRITICAL: forum/config.php still does not exist after installation!');
+                $_SESSION['phpbb_config_missing'] = true;
             }
 
             $cfgArray = [
@@ -3337,7 +3906,7 @@ $defaultCafes = [
 <head>
     <meta charset="utf-8">
     <title>Install CMS</title>
-    <?php if ($step > 2 && empty($errors)): ?>
+    <?php if ($step > 2 && empty($errors) && !isset($_SESSION['phpbb_install_error'])): ?>
     <meta http-equiv="refresh" content="5;url=cms/">
     <?php endif; ?>
     <style>
@@ -3565,6 +4134,31 @@ $defaultCafes = [
         </form>
     <?php else: ?>
         <h2 style="color:#ffffff; margin-bottom:20px;">Installation Complete</h2>
+        <?php if (isset($_SESSION['phpbb_install_error']) || isset($_SESSION['phpbb_config_missing'])): ?>
+            <div style="background:#ff6b6b;color:#fff;padding:15px;margin:15px 0;border-radius:5px;">
+                <strong>⚠ phpBB Forum Installation Error:</strong><br>
+                <?php if (isset($_SESSION['phpbb_install_error'])): ?>
+                    <?php echo nl2br(htmlspecialchars($_SESSION['phpbb_install_error'])); ?>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['phpbb_config_missing'])): ?>
+                    <br><strong>CRITICAL:</strong> forum/config.php could not be created. Check directory permissions!
+                <?php endif; ?>
+                <br><br>
+                <strong>Debug info:</strong>
+                <ul style="margin-top:10px;margin-left:20px;">
+                    <li>Check your PHP error log for detailed messages</li>
+                    <li>Verify forum/ directory is writable</li>
+                    <li>Forum path: <?php echo htmlspecialchars(__DIR__ . '/forum/'); ?></li>
+                    <li>Config exists: <?php echo file_exists(__DIR__ . '/forum/config.php') ? 'YES' : 'NO'; ?></li>
+                </ul>
+                <br>
+                <a href="install.php" style="color:#fff;text-decoration:underline;">Re-run installer</a>
+            </div>
+            <?php
+            unset($_SESSION['phpbb_install_error']);
+            unset($_SESSION['phpbb_config_missing']);
+            ?>
+        <?php endif; ?>
         <p style="margin-bottom: 15px;">You will be automatically redirected to the CMS in <span id="countdown">5</span> seconds.</p>
         <p style="margin-bottom: 10px;"><a href="cms/" class="btn btn-primary">Go to CMS</a></p>
         <p><a href="cms/login.php" class="btn btn-primary" style="background: #3c4043;">Log in directly</a></p>
