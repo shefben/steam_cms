@@ -1,98 +1,116 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- Search Form -->
-<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<!-- Breadcrumb -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
 <tr>
-    <td>
-        <table cellpadding="4" cellspacing="1" border="0" width="100%">
-        <tr>
-            <td bgcolor="#3E4637" colspan="2">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_SEARCH}</b></font>
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor="#545F4E" colspan="2">
-                <form method="post" action="{S_SEARCH_ACTION}">
-                <table cellpadding="3" cellspacing="1" border="0" width="100%">
-                <tr>
-                    <td width="20%"><font face="verdana,arial,helvetica" size="2">{L_SEARCH_KEYWORDS}:</font></td>
-                    <td><input type="text" name="keywords" value="{SEARCH_KEYWORDS}" size="30" class="bginput" /></td>
-                </tr>
-                <tr>
-                    <td><font face="verdana,arial,helvetica" size="2">{L_SEARCH_AUTHOR}:</font></td>
-                    <td><input type="text" name="author" value="{SEARCH_AUTHOR}" size="30" class="bginput" /></td>
-                </tr>
-                <tr>
-                    <td><font face="verdana,arial,helvetica" size="2">{L_SEARCH_IN_FORUMS}:</font></td>
-                    <td>
-                        <select name="fid[]" multiple="multiple" size="6" class="bginput">
-                        {S_FORUM_OPTIONS}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                        <input type="submit" name="submit" value="{L_SEARCH}" class="bginput" />
-                    </td>
-                </tr>
-                </table>
-                {S_HIDDEN_FIELDS}
-                </form>
-            </td>
-        </tr>
-        </table>
-    </td>
+	<td><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="" />
+	<font face="verdana, arial, helvetica" size="2"><b><a href="{U_INDEX}">{SITENAME}</a> &gt; {L_SEARCH}</b></font></td>
 </tr>
 </table>
 
-<!-- Search Results -->
-<!-- IF .searchresults -->
 <br />
-<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+
+<form action="{S_SEARCH_ACTION}" method="get">
+
+<!-- Table 1: Search Engine -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0" width="100%">
 <tr>
-    <td>
-        <table cellpadding="4" cellspacing="1" border="0" width="100%">
-        <tr>
-            <td bgcolor="#3E4637" colspan="4">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_SEARCH_RESULTS}</b></font>
-            </td>
-        </tr>
-        <tr align="center">
-            <td bgcolor="#3E4637" width="50%" align="left">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_TOPICS}</b></font>
-            </td>
-            <td bgcolor="#3E4637">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_AUTHOR}</b></font>
-            </td>
-            <td bgcolor="#3E4637">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_REPLIES}</b></font>
-            </td>
-            <td bgcolor="#3E4637">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_LAST_POST}</b></font>
-            </td>
-        </tr>
-        <!-- BEGIN searchresults -->
-        <tr>
-            <td bgcolor="<!-- IF searchresults.S_ROW_COUNT is odd -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->" align="left">
-                <a href="{searchresults.U_VIEW_TOPIC}">
-                    <font face="verdana, arial, helvetica" size="2">{searchresults.TOPIC_TITLE}</font>
-                </a>
-            </td>
-            <td bgcolor="<!-- IF searchresults.S_ROW_COUNT is even -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
-                <font face="verdana, arial, helvetica" size="2">{searchresults.TOPIC_AUTHOR_FULL}</font>
-            </td>
-            <td bgcolor="<!-- IF searchresults.S_ROW_COUNT is odd -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
-                <font face="verdana, arial, helvetica" size="2">{searchresults.TOPIC_REPLIES}</font>
-            </td>
-            <td bgcolor="<!-- IF searchresults.S_ROW_COUNT is even -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->">
-                <font face="verdana,arial,helvetica" size="1">{searchresults.LAST_POST_TIME}</font>
-            </td>
-        </tr>
-        <!-- END searchresults -->
-        </table>
-    </td>
+	<td bgcolor="#3E4637" colspan="2"><font face="verdana, arial, helvetica" size="2" color="#B4BA50"><b>
+	{SITENAME} Search Engine
+	</b></font></td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="1" color="#D8DED3"><b>{L_SEARCH_KEYWORDS}</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="1" color="#D8DED3"><b>{L_SEARCH_AUTHOR}</b></font></td>
+</tr>
+<tr valign="top">
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="1">
+	<br /><input type="text" class="bginput" name="keywords" value="{SEARCH_KEYWORDS}" size="35" />
+	<br /><br />
+	<input type="radio" name="terms" value="all" checked="checked" /> Search for all terms<br />
+	<input type="radio" name="terms" value="any" /> Search for any terms
+	<br /><br />
+	<b>Advanced query:</b>
+	Join words with AND, OR and NOT to control your search in more detail.<br />
+	Add asterisks (*) to use wild cards in your search
+	(<i>*bullet*</i> matches <i>vBulletin</i> etc.)
+	</font></td>
+	<!-- *** -->
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="1">
+	<br /><input type="text" class="bginput" name="author" value="{SEARCH_AUTHOR}" size="25" maxlength="25" />
+	<br /><br />
+	Use * as a wildcard for partial matches.
+	</font></td>
 </tr>
 </table>
-<!-- ENDIF -->
+</td></tr></table>
+
+<br />
+
+<!-- Table 2: Search Options -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0" width="100%">
+<tr>
+	<td bgcolor="#3E4637" colspan="3"><font face="verdana, arial, helvetica" size="2" color="#B4BA50"><b>
+	Search Options
+	</b></font></td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="1" color="#D8DED3"><b>Search Forum...</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="1" color="#D8DED3"><b>Search For Posts From...</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="1" color="#D8DED3"><b>Sort Results By...</b></font></td>
+</tr>
+<tr valign="top">
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="1">
+	<br /><select name="fid[]" class="bginput">
+		{S_FORUM_OPTIONS}
+	</select><br /><br />
+	<table cellpadding="0" cellspacing="0" border="0"><tr>
+		<td><font face="verdana, arial, helvetica" size="1">
+		<input type="radio" name="sf" value="all" checked="checked" /> Search entire posts&nbsp;<br />
+		<input type="radio" name="sf" value="titleonly" /> Search titles only&nbsp;
+		</font></td>
+		<td><font face="verdana, arial, helvetica" size="1">
+		<input type="radio" name="sr" value="posts" /> Show results as posts&nbsp;<br />
+		<input type="radio" name="sr" value="topics" checked="checked" /> Show results as threads&nbsp;
+		</font></td>
+	</tr></table>
+	<input type="hidden" name="sc" value="1" />
+	</font></td>
+	<!-- *** -->
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="1">
+	<br /><select name="st" class="bginput">
+		{S_SELECT_SORT_DAYS}
+	</select><br /><br />
+	<input type="radio" name="ch" value="newer" checked="checked" /> and newer<br />
+	<input type="radio" name="ch" value="older" /> and older
+	</font></td>
+	<!-- *** -->
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="1">
+	<br /><select name="sk" class="bginput">
+		{S_SELECT_SORT_KEY}
+	</select><br /><br />
+	<input type="radio" name="sd" value="a" /> in ascending order<br />
+	<input type="radio" name="sd" value="d" checked="checked" /> in descending order
+	</font></td>
+</tr>
+</table>
+</td></tr></table>
+
+<br />
+
+<!-- Submit Buttons -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td align="center"><font face="verdana, arial, helvetica" size="2">
+	{S_HIDDEN_FIELDS}
+	<input type="submit" class="bginput" name="submit" value="Perform Search" accesskey="s" />
+	<input type="reset" class="bginput" name="reset" value="Reset Fields" />
+	</font></td>
+</tr>
+</table>
+
+</form>
 
 <!-- INCLUDE overall_footer.html -->

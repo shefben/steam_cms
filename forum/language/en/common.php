@@ -198,7 +198,7 @@ $lang = array_merge($lang, array(
 	'COOKIE_CONSENT_OK'		=> 'Got it!',
 	'COOKIE_CONSENT_HREF'	=> 'http://cookiesandyou.com',
 	'COOKIES_DELETED'		=> 'All board cookies successfully deleted.',
-	'CURRENT_TIME'			=> 'It is currently %s',
+	'CURRENT_TIME'			=> '%s',
 
 	'DAY'					=> 'Day',
 	'DAYS'					=> 'Days',
@@ -937,7 +937,7 @@ $lang = array_merge($lang, array(
 	'YEAR'				=> 'Year',
 	'YEAR_MONTH_DAY'	=> '(YYYY-MM-DD)',
 	'YES'				=> 'Yes',
-	'YOU_LAST_VISIT'	=> 'Last visit was: %s',
+	'YOU_LAST_VISIT'	=> '%s',
 
 	'datetime'			=> array(
 		'TODAY'		=> 'Today',

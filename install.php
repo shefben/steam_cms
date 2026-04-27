@@ -1,5 +1,16 @@
 <?php
 session_start();
+
+// The installer can run for a long time (esp. step that imports the 2.3GB
+// vBulletin dump). Disable PHP execution / input timeouts and raise memory
+// from inside the script so this works even if Apache hasn't been restarted
+// to pick up php.ini changes.
+@set_time_limit(0);
+@ini_set('max_execution_time', '0');
+@ini_set('max_input_time',     '-1');
+@ini_set('memory_limit',       '2048M');
+@ignore_user_abort(true);
+
 if (file_exists(__DIR__.'/cms/config.php')) {
     echo 'CMS already installed.';
     exit;
@@ -18,6 +29,147 @@ function normalizeDate(string $raw): string
     $clean = trim($raw, " \t\n\r\0\x0B'\"");
     $ts    = strtotime($clean);
     return $ts !== false ? date('Y-m-d H:i:s', $ts) : $raw;
+}
+
+/**
+ * Split a multi_query batch buffer back into individual statements when the
+ * whole-batch path fails. We built the buffer ourselves with `;\n` between
+ * statements, so a literal split is safe here — no need for a full SQL parser.
+ */
+function self_split_sql_batch(string $buf): array
+{
+    $parts = explode(";\n", $buf);
+    $out   = [];
+    foreach ($parts as $p) {
+        $t = trim($p);
+        if ($t !== '' && $t !== ';') {
+            $out[] = $t;
+        }
+    }
+    return $out;
+}
+
+/**
+ * Convert a single SQL VALUES-tuple line into one TSV row.
+ *
+ * Input  : "(1005, '[2004] Steam Discussions', '', 0, NULL, 1),"
+ * Output : "1005\t[2004] Steam Discussions\t\t0\t\\N\t1\n"
+ *
+ * Critical correctness note: mysqldump's INSERT-string escape sequences
+ * (\n, \r, \t, \0, \\, \', \") decode byte-for-byte the same way under
+ * LOAD DATA's default escape rules. So we copy the bytes between the outer
+ * `'` quotes verbatim — no decoding+re-encoding pass needed. This is what
+ * makes the conversion fast enough for a 2GB+ dump.
+ *
+ * Returns "" on parse failure (caller skips the row).
+ */
+function vbimport_tuple_to_tsv(string $line): string
+{
+    $n = strlen($line);
+    $i = 0;
+
+    // Skip to opening `(`
+    while ($i < $n && $line[$i] !== '(') $i++;
+    if ($i >= $n) return '';
+    $i++;
+
+    $fields = [];
+    while ($i < $n) {
+        // Skip whitespace
+        while ($i < $n) {
+            $c = $line[$i];
+            if ($c === ' ' || $c === "\t" || $c === "\n" || $c === "\r") $i++;
+            else break;
+        }
+        if ($i >= $n) break;
+
+        $c = $line[$i];
+
+        if ($c === "'") {
+            // Quoted string: walk to matching `'`, skipping `\X` pairs
+            $i++;
+            $start = $i;
+            while ($i < $n) {
+                $ch = $line[$i];
+                if ($ch === '\\') {
+                    $i += 2;        // skip escaped char (incl. its body byte)
+                } elseif ($ch === "'") {
+                    break;
+                } else {
+                    $i++;
+                }
+            }
+            $fields[] = substr($line, $start, $i - $start);
+            if ($i < $n) $i++;       // past closing '
+        } elseif (($c === 'N' || $c === 'n')
+                  && $i + 3 < $n
+                  && strcasecmp(substr($line, $i, 4), 'NULL') === 0) {
+            $fields[] = "\\N";
+            $i += 4;
+        } else {
+            // Unquoted (number / boolean / unquoted ident) — copy until `,` or `)`
+            $start = $i;
+            while ($i < $n && $line[$i] !== ',' && $line[$i] !== ')') $i++;
+            $fields[] = trim(substr($line, $start, $i - $start));
+        }
+
+        // Skip whitespace, then expect `,` (next field) or `)` (end of tuple)
+        while ($i < $n) {
+            $c = $line[$i];
+            if ($c === ' ' || $c === "\t") $i++;
+            else break;
+        }
+        if ($i >= $n) break;
+        if ($line[$i] === ',') { $i++; continue; }
+        if ($line[$i] === ')') break;
+        // Anything else is a parse error — bail
+        return '';
+    }
+
+    return implode("\t", $fields) . "\n";
+}
+
+/**
+ * Split a tail-of-line tuple sequence like:
+ *   "(1, 'a'), (2, 'b'), (3, 'c');"
+ * into ["(1, 'a')", "(2, 'b')", "(3, 'c')"]
+ *
+ * Handles strings (so commas/parens inside `'...'` don't split the tuple).
+ * Used only when an INSERT header has tuples appended on the same line —
+ * mysqldump's default extended-INSERT format puts each tuple on its own line,
+ * so this path is rare but cheap to support.
+ */
+function vbimport_split_inline_tuples(string $s): array
+{
+    $n = strlen($s);
+    $i = 0;
+    $out = [];
+    while ($i < $n) {
+        while ($i < $n && $s[$i] !== '(') $i++;
+        if ($i >= $n) break;
+        $start = $i;
+        $i++;
+        // Walk to matching `)`, respecting strings
+        while ($i < $n) {
+            $c = $s[$i];
+            if ($c === "'") {
+                $i++;
+                while ($i < $n) {
+                    $cc = $s[$i];
+                    if ($cc === '\\')      { $i += 2; }
+                    elseif ($cc === "'")   { $i++; break; }
+                    else                   { $i++; }
+                }
+            } elseif ($c === ')') {
+                $i++;
+                break;
+            } else {
+                $i++;
+            }
+        }
+        $out[] = substr($s, $start, $i - $start);
+    }
+    return $out;
 }
 
 /**
@@ -255,9 +407,17 @@ function phpbb_type_to_mysql($type, $default = null, $extra = null): string
     // Build the column definition
     $def = $mysql_type;
 
+    // MySQL 5.7+ strict mode and MySQL 8 reject DEFAULT clauses on TEXT/BLOB columns
+    // (error 1101). phpBB's native installer omits DEFAULT for these types and uses
+    // NOT NULL, requiring callers to supply an explicit value on INSERT. MariaDB
+    // 10.2.1+ allows it, but skipping is safe on both engines.
+    $is_text_blob = in_array($mysql_type, ['TEXT', 'MEDIUMTEXT', 'LONGTEXT', 'BLOB', 'MEDIUMBLOB', 'LONGBLOB'], true);
+
     // Handle default value
     if ($default !== null) {
-        if (is_string($default) && $default !== '') {
+        if ($is_text_blob) {
+            $def .= ' NOT NULL';
+        } elseif (is_string($default) && $default !== '') {
             $def .= " DEFAULT '" . addslashes($default) . "'";
         } elseif (is_numeric($default)) {
             $def .= " DEFAULT " . $default;
@@ -807,7 +967,7 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
     echo "  [phpBB] Created $table_count tables\n";
 
     // Verify critical tables were created
-    $verify_tables = ['phpbb_styles', 'phpbb_config', 'phpbb_users', 'phpbb_forums'];
+    $verify_tables = ['phpbb_styles', 'phpbb_config', 'phpbb_users', 'phpbb_forums', 'phpbb_topics', 'phpbb_posts', 'phpbb_modules'];
     foreach ($verify_tables as $table) {
         $check = $pdo->query("SHOW TABLES LIKE '$table'");
         if (!$check->fetch()) {
@@ -822,6 +982,15 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
         $data_sql = file_get_contents($schema_data_sql);
         // The file has # POSTGRES BEGIN # and # POSTGRES COMMIT # markers as comments
         // split_sql_statements already skips comment lines starting with #
+
+        // Replace phpBB language placeholders with actual English text
+        $lang_replacements = [
+            '{L_FORUMS_FIRST_CATEGORY}' => 'Your first category',
+            '{L_FORUMS_TEST_FORUM_TITLE}' => 'Your first forum',
+            '{L_FORUMS_TEST_FORUM_DESC}' => 'Description of your first forum.',
+            '{L_TOPICS_TOPIC_TITLE}' => 'Welcome to phpBB3',
+        ];
+        $data_sql = str_replace(array_keys($lang_replacements), array_values($lang_replacements), $data_sql);
 
         $statements = split_sql_statements($data_sql);
         $data_count = 0;
@@ -862,6 +1031,9 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
         'cookie_domain' => '',
         'cookie_path' => '/',
         'default_style' => '1',
+        // vBulletin 2004-style date formats
+        'default_dateformat' => 'm-d-Y h:i A',
+        'board_timezone' => 'UTC',
     ];
 
     echo "  [phpBB] Updating config values...\n";
@@ -998,6 +1170,61 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
         VALUES ('steamcms/historical_filter', 1, " . $pdo->quote($migration_state) . ")");
     echo "  [phpBB] Enabled historical_filter extension\n";
 
+    // Enable the steamcms/historical_manager extension
+    $manager_migration_state = serialize([
+        'steamcms\\historical_manager\\migrations\\install_acp_module' => [
+            'effectively_installed' => true,
+            'state' => 'installed',
+        ]
+    ]);
+    $pdo->exec("INSERT IGNORE INTO phpbb_ext (ext_name, ext_active, ext_state)
+        VALUES ('steamcms/historical_manager', 1, " . $pdo->quote($manager_migration_state) . ")");
+    echo "  [phpBB] Enabled historical_manager extension\n";
+
+    // Register Historical Manager ACP module in phpbb_modules
+    // Find parent module for extensions category (ACP_CAT_DOT_MODS)
+    $ext_cat_id = 0;
+    $stmt = $pdo->query("SELECT module_id FROM phpbb_modules WHERE module_class = 'acp' AND module_langname = 'ACP_CAT_DOT_MODS' LIMIT 1");
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+        $ext_cat_id = (int) $row['module_id'];
+    } else {
+        // Create the extensions category if it doesn't exist
+        $max_stmt = $pdo->query("SELECT MAX(right_id) as max_right FROM phpbb_modules WHERE module_class = 'acp'");
+        $max_row = $max_stmt->fetch();
+        $left = ($max_row['max_right'] ?? 0) + 1;
+        $pdo->prepare("INSERT INTO phpbb_modules (module_enabled, module_display, module_basename, module_class, parent_id, left_id, right_id, module_langname, module_mode, module_auth) VALUES (1, 1, '', 'acp', 0, ?, ?, 'ACP_CAT_DOT_MODS', '', '')")
+             ->execute([$left, $left + 1]);
+        $ext_cat_id = (int) $pdo->lastInsertId();
+    }
+
+    if ($ext_cat_id) {
+        // Create the Historical Manager parent module
+        $max_stmt = $pdo->query("SELECT MAX(right_id) as max_right FROM phpbb_modules WHERE module_class = 'acp'");
+        $max_row = $max_stmt->fetch();
+        $left = ($max_row['max_right'] ?? 0) + 1;
+        $pdo->prepare("INSERT INTO phpbb_modules (module_enabled, module_display, module_basename, module_class, parent_id, left_id, right_id, module_langname, module_mode, module_auth) VALUES (1, 1, '', 'acp', ?, ?, ?, 'ACP_HISTORICAL_MANAGER', '', '')")
+             ->execute([$ext_cat_id, $left, $left + 1]);
+        $hist_parent_id = (int) $pdo->lastInsertId();
+
+        // Add sub-modules (modes)
+        $modes = [
+            ['dashboard', 'ACP_HISTORICAL_MANAGER_DASHBOARD'],
+            ['users', 'ACP_HISTORICAL_MANAGER_USERS'],
+            ['forums', 'ACP_HISTORICAL_MANAGER_FORUMS'],
+            ['topics', 'ACP_HISTORICAL_MANAGER_TOPICS'],
+            ['import', 'ACP_HISTORICAL_MANAGER_IMPORT'],
+        ];
+        foreach ($modes as $m) {
+            $max_stmt = $pdo->query("SELECT MAX(right_id) as max_right FROM phpbb_modules WHERE module_class = 'acp'");
+            $max_row = $max_stmt->fetch();
+            $left = ($max_row['max_right'] ?? 0) + 1;
+            $pdo->prepare("INSERT INTO phpbb_modules (module_enabled, module_display, module_basename, module_class, parent_id, left_id, right_id, module_langname, module_mode, module_auth) VALUES (1, 1, '\\\\steamcms\\\\historical_manager\\\\acp\\\\main_module', 'acp', ?, ?, ?, ?, ?, 'ext_steamcms/historical_manager && acl_a_board')")
+                 ->execute([$hist_parent_id, $left, $left + 1, $m[1], $m[0]]);
+        }
+        echo "  [phpBB] Registered Historical Manager ACP modules\n";
+    }
+
     // Run steam_theme_setup.sql for Steam-specific settings
     $steam_theme_sql = $forum_dir . '/install/steam_theme_setup.sql';
     if (file_exists($steam_theme_sql)) {
@@ -1027,7 +1254,7 @@ function install_phpbb_forum(PDO $pdo, array $config, string $admin_user, string
     // Create services.yml if it doesn't exist
     $services_file = $config_dir . '/services.yml';
     if (!file_exists($services_file)) {
-        $services_yml = "services:\n    steamcms.historical_filter.listener:\n        class: steamcms\\historical_filter\\event\\main_listener\n        arguments:\n            - '@user'\n            - '@template'\n        tags:\n            - { name: event.listener }\n";
+        $services_yml = "services:\n    steamcms.historical_filter.listener:\n        class: steamcms\\historical_filter\\event\\main_listener\n        arguments:\n            - '@user'\n            - '@template'\n            - '@dbal.conn'\n        tags:\n            - { name: event.listener }\n";
         file_put_contents($services_file, $services_yml);
     }
 
@@ -1168,9 +1395,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors[] = $e->getMessage();
         }
     } elseif ($step == 2 && isset($_SESSION['cms_install'])) {
-        // Extend execution time for large installations (phpBB schema, historical data, etc.)
-        set_time_limit(600); // 10 minutes
-        ini_set('max_execution_time', 600);
+        // Disable execution timeout entirely — the vBulletin import alone can
+        // run for a long time. The top-of-file ini_set already disables this,
+        // but call again here to override any SAPI-level reset between requests.
+        @set_time_limit(0);
+        @ini_set('max_execution_time', '0');
+        @ini_set('max_input_time',     '-1');
+        @ini_set('memory_limit',       '2048M');
+        @ignore_user_abort(true);
 
         $config = $_SESSION['cms_install'];
         $host = $config['host'];
@@ -2292,7 +2524,13 @@ ALTER TABLE product_discounts
                 if (in_array($base, [
                     'install_storefront.sql',
                     'install_official_survey_stats.sql',
-                    'install_sidebar_sections.sql'
+                    'install_sidebar_sections.sql',
+                    'fix_forum_style_parents.sql',
+                    // The fix_* files below operate on phpbb_* tables which don't
+                    // exist yet at this point — phpBB is installed later. They run
+                    // after install_phpbb_forum() further down.
+                    'fix_forum_categories.sql',
+                    'fix_topic_views.sql',
                 ], true)) {
                     continue;
                 }
@@ -3785,8 +4023,26 @@ $defaultCafes = [
                     foreach ($historical_sql_files as $historical_sql_file) {
                         if (file_exists($historical_sql_file) && !$historical_data_installed) {
                             try {
-                                run_sql_file($pdo, $historical_sql_file);
-                                echo "✓ Installed historical forum data from: " . basename($historical_sql_file) . "\n";
+                                // Use detailed per-statement execution for better error reporting
+                                $hist_sql = file_get_contents($historical_sql_file);
+                                $hist_sql = ensureUtf8Encoding($hist_sql);
+                                $hist_stmts = split_sql_statements($hist_sql);
+                                $hist_ok = 0;
+                                $hist_err = 0;
+                                foreach ($hist_stmts as $hist_stmt) {
+                                    $hist_stmt = trim($hist_stmt);
+                                    if ($hist_stmt === '') continue;
+                                    try {
+                                        $pdo->exec($hist_stmt);
+                                        $hist_ok++;
+                                    } catch (PDOException $he) {
+                                        $hist_err++;
+                                        // Log first 200 chars of failing statement for debugging
+                                        $preview = substr($hist_stmt, 0, 200);
+                                        error_log("Historical SQL error: {$he->getMessage()} | Statement: {$preview}");
+                                    }
+                                }
+                                echo "✓ Installed historical forum data from: " . basename($historical_sql_file) . " ($hist_ok OK, $hist_err errors)\n";
                                 $historical_data_installed = true;
                             } catch (Exception $e) {
                                 error_log('Historical forum data installation error (' . basename($historical_sql_file) . '): ' . $e->getMessage());
@@ -3837,7 +4093,492 @@ $defaultCafes = [
                         }
                     }
 
+                    // Install vBulletin SQL dump import (full database) AFTER the archived page data
+                    // This contains the complete forum database and uses INSERT IGNORE
+                    // so it won't overwrite any records already inserted above
+                    $vbulletin_import_file = __DIR__ . '/scripts/historical_forum_vbulletin_import.sql';
+                    if (file_exists($vbulletin_import_file)) {
+                        echo "Installing vBulletin database import (this may take a while)...\n";
+                        @ob_flush(); @flush();
+
+                        // Force-disable execution timeout & raise memory regardless of php.ini.
+                        // Apache may not have been restarted to pick up php.ini changes; these
+                        // ini_set/set_time_limit calls override for this request.
+                        @set_time_limit(0);
+                        @ini_set('max_execution_time', '0');
+                        @ini_set('max_input_time', '-1');
+                        @ini_set('memory_limit', '2048M');
+                        @ignore_user_abort(true);
+
+                        // Strategy: stream the dump, parse INSERT-IGNORE row tuples into
+                        // per-table TSV chunks, and bulk-load each chunk with
+                        // `LOAD DATA LOCAL INFILE`. This is the canonical fast path for
+                        // restoring large mysqldump-style files — the server skips the
+                        // SQL parser per-row and InnoDB does batch index builds, which is
+                        // typically 10-20× faster than executing the INSERTs directly.
+                        //
+                        // Why we can write SQL string contents straight into TSV without
+                        // re-encoding: mysqldump's INSERT escape sequences (\n, \r, \t,
+                        // \0, \\, \', \") decode identically to LOAD DATA's default
+                        // escape rules. So the bytes between an INSERT string's outer `'`
+                        // already form a valid TSV field. No O(N) re-escaping pass.
+                        $vb_started = microtime(true);
+                        $vb_mysqli  = null;
+                        $tsv_dir    = sys_get_temp_dir() . DIRECTORY_SEPARATOR
+                                    . 'vbimport_' . bin2hex(random_bytes(4));
+
+                        try {
+                            if (!is_dir($tsv_dir) && !mkdir($tsv_dir, 0700, true)) {
+                                throw new RuntimeException("Could not create temp dir: $tsv_dir");
+                            }
+
+                            // Connect with LOCAL INFILE option enabled. `mysqli.allow_local_infile`
+                            // defaults to Off in PHP 8.1+, so we must request it per-connection.
+                            mysqli_report(MYSQLI_REPORT_OFF);
+                            $vb_mysqli = mysqli_init();
+                            $vb_mysqli->options(MYSQLI_OPT_LOCAL_INFILE, true);
+                            if (!@$vb_mysqli->real_connect($host, $user, $pass, $dbname, (int)$dbPort)) {
+                                throw new RuntimeException(
+                                    'mysqli connect failed: ' . mysqli_connect_error()
+                                );
+                            }
+                            $vb_mysqli->set_charset('utf8mb4');
+
+                            // Some MySQL/MariaDB builds ship with local_infile = OFF.
+                            // Best-effort flip it on; user is install-time admin.
+                            @$vb_mysqli->query('SET GLOBAL local_infile = 1');
+
+                            // Bulk-import session tweaks (per-INSERT InnoDB cost killers)
+                            $vb_mysqli->query('SET SESSION FOREIGN_KEY_CHECKS = 0');
+                            $vb_mysqli->query('SET SESSION UNIQUE_CHECKS = 0');
+                            $vb_mysqli->query('SET SESSION autocommit = 0');
+
+                            // Pre-compiled regex for INSERT-header detection: captures
+                            // table name, column list, and any tail after VALUES (in case
+                            // tuples are inlined on the same line).
+                            $insert_re = '/^INSERT\s+(?:IGNORE\s+)?INTO\s+`?(\w+)`?\s*\(([^)]+)\)\s*VALUES\b\s*(.*)$/is';
+
+                            $vb_handle = fopen($vbulletin_import_file, 'rb');
+                            if (!$vb_handle) {
+                                throw new RuntimeException('Could not open vBulletin import file');
+                            }
+
+                            // Per-table accumulator state
+                            $cur_table   = null;        // current table being loaded
+                            $cur_cols    = null;        // column names from INSERT header
+                            $tsv_handle  = null;        // open file handle for current TSV chunk
+                            $tsv_path    = null;
+                            $tsv_bytes   = 0;
+                            $tsv_rows    = 0;
+                            $flush_size  = 32 * 1024 * 1024;  // bulk-load every 32MB of TSV
+
+                            // Misc-statement accumulator (for ALTER, SET, etc.)
+                            $misc_stmt   = '';
+
+                            $rows_loaded = 0;
+                            $errors      = 0;
+
+                            // ─── Helpers ────────────────────────────────────────────
+                            $exec_misc = function (string $sql) use ($vb_mysqli, &$errors) {
+                                $sql = trim($sql);
+                                if ($sql === '' || $sql === ';') return;
+                                if (!$vb_mysqli->query($sql)) {
+                                    $errors++;
+                                    if ($errors <= 10) {
+                                        error_log('vBulletin misc SQL error: '
+                                            . $vb_mysqli->error . ' | '
+                                            . substr($sql, 0, 200));
+                                    }
+                                }
+                            };
+
+                            $do_load = function () use (
+                                &$tsv_handle, &$tsv_path, &$tsv_bytes, &$tsv_rows,
+                                &$cur_table, &$cur_cols, &$rows_loaded, &$errors,
+                                $vb_mysqli
+                            ) {
+                                if (!$tsv_handle) return;
+                                fclose($tsv_handle);
+                                $tsv_handle = null;
+
+                                if ($tsv_rows === 0 || !$cur_table) {
+                                    @unlink($tsv_path);
+                                    $tsv_path = null;
+                                    $tsv_bytes = 0;
+                                    $tsv_rows  = 0;
+                                    return;
+                                }
+
+                                $cols_sql = '`' . implode('`, `', $cur_cols) . '`';
+                                // LOAD DATA wants forward-slash paths, even on Windows
+                                $load_path = str_replace('\\', '/', $tsv_path);
+                                $load_path_esc = $vb_mysqli->real_escape_string($load_path);
+                                $tbl_esc       = str_replace('`', '``', $cur_table);
+
+                                $sql = "LOAD DATA LOCAL INFILE '{$load_path_esc}' "
+                                     . "IGNORE INTO TABLE `{$tbl_esc}` "
+                                     . "CHARACTER SET utf8mb4 "
+                                     . "FIELDS TERMINATED BY '\\t' "
+                                     . "ENCLOSED BY '' "
+                                     . "ESCAPED BY '\\\\' "
+                                     . "LINES TERMINATED BY '\\n' "
+                                     . "({$cols_sql})";
+
+                                if ($vb_mysqli->query($sql)) {
+                                    $rows_loaded += $vb_mysqli->affected_rows;
+                                } else {
+                                    $errors++;
+                                    error_log('vBulletin LOAD DATA error for ' . $cur_table . ': '
+                                        . $vb_mysqli->error);
+                                }
+
+                                @unlink($tsv_path);
+                                $tsv_path  = null;
+                                $tsv_bytes = 0;
+                                $tsv_rows  = 0;
+                                @set_time_limit(0);
+                            };
+
+                            $open_tsv = function () use (
+                                &$tsv_handle, &$tsv_path, &$tsv_bytes, &$tsv_rows,
+                                &$cur_table, $tsv_dir
+                            ) {
+                                $tsv_path = $tsv_dir . DIRECTORY_SEPARATOR
+                                          . $cur_table . '_' . bin2hex(random_bytes(3)) . '.tsv';
+                                $tsv_handle = fopen($tsv_path, 'wb');
+                                if (!$tsv_handle) {
+                                    throw new RuntimeException("Could not open TSV temp file: $tsv_path");
+                                }
+                                $tsv_bytes = 0;
+                                $tsv_rows  = 0;
+                            };
+
+                            // ─── Main streaming loop ────────────────────────────────
+                            while (($vb_line = fgets($vb_handle, 1048576)) !== false) {
+                                // Mid-tuple state: line begins with `(` and we have an
+                                // active table — parse fastest.
+                                if ($cur_table !== null && isset($vb_line[0]) && $vb_line[0] === '(') {
+                                    $tsv_row = vbimport_tuple_to_tsv($vb_line);
+                                    if ($tsv_row !== '') {
+                                        $written = fwrite($tsv_handle, $tsv_row);
+                                        $tsv_bytes += $written;
+                                        $tsv_rows++;
+
+                                        // Detect end of INSERT block (line ends with `;`)
+                                        $tail = rtrim($vb_line);
+                                        $is_end = $tail !== '' && substr($tail, -1) === ';';
+
+                                        if ($is_end || $tsv_bytes >= $flush_size) {
+                                            $do_load();
+                                            if ($is_end) {
+                                                $cur_table = null;
+                                                $cur_cols  = null;
+
+                                                $elapsed = (int)(microtime(true) - $vb_started);
+                                                $rate    = $elapsed > 0
+                                                         ? (int)($rows_loaded / $elapsed) : 0;
+                                                echo "  ...{$rows_loaded} rows loaded ({$elapsed}s, {$rate}/s)\n";
+                                                @ob_flush(); @flush();
+                                            } else {
+                                                // mid-block flush: re-open TSV for same table
+                                                $open_tsv();
+                                            }
+                                        }
+                                    }
+                                    continue;
+                                }
+
+                                $first = ltrim($vb_line);
+                                if ($first === '' || $first[0] === "\n" || $first[0] === "\r"
+                                    || strncmp($first, '--', 2) === 0
+                                    || strncmp($first, '/*', 2) === 0) {
+                                    continue;
+                                }
+
+                                // INSERT header on its own line (most common in mysqldump)
+                                if (preg_match($insert_re, $first, $m)) {
+                                    // Close any active block from previous table
+                                    if ($tsv_handle) $do_load();
+                                    $cur_table = $m[1];
+                                    $cur_cols  = array_map(
+                                        fn($c) => trim($c, " \t`"),
+                                        explode(',', $m[2])
+                                    );
+                                    $open_tsv();
+
+                                    // Inline tuples after VALUES on the same line?
+                                    $tail = trim($m[3]);
+                                    if ($tail !== '') {
+                                        // Could be one or more tuples. Split on `),(` boundaries.
+                                        $tuples = vbimport_split_inline_tuples($tail);
+                                        foreach ($tuples as $tup) {
+                                            $row = vbimport_tuple_to_tsv($tup);
+                                            if ($row !== '') {
+                                                $tsv_bytes += fwrite($tsv_handle, $row);
+                                                $tsv_rows++;
+                                            }
+                                        }
+                                        // If the original line ended with `;`, close the block
+                                        if (substr(rtrim($vb_line), -1) === ';') {
+                                            $do_load();
+                                            $cur_table = null;
+                                            $cur_cols  = null;
+                                        }
+                                    }
+                                    continue;
+                                }
+
+                                // Misc statement (ALTER, SET, CREATE, etc.) — accumulate to `;`
+                                $misc_stmt .= $vb_line;
+                                if (substr(rtrim($vb_line), -1) === ';') {
+                                    $exec_misc($misc_stmt);
+                                    $misc_stmt = '';
+                                }
+                            }
+                            fclose($vb_handle);
+
+                            // Tail flush
+                            if ($tsv_handle) $do_load();
+                            if (trim($misc_stmt) !== '') $exec_misc($misc_stmt);
+
+                            $vb_mysqli->query('COMMIT');
+
+                            $total = (int)(microtime(true) - $vb_started);
+                            echo "✓ Installed vBulletin database import "
+                               . "({$rows_loaded} rows, {$errors} errors, {$total}s)\n";
+                        } catch (Exception $e) {
+                            if ($vb_mysqli) {
+                                @$vb_mysqli->query('ROLLBACK');
+                            }
+                            error_log('vBulletin import error: ' . $e->getMessage());
+                            echo "⚠ vBulletin database import failed: " . $e->getMessage() . "\n";
+                        } finally {
+                            if ($vb_mysqli) {
+                                @$vb_mysqli->query('SET SESSION FOREIGN_KEY_CHECKS = 1');
+                                @$vb_mysqli->query('SET SESSION UNIQUE_CHECKS = 1');
+                                @$vb_mysqli->query('SET SESSION autocommit = 1');
+                                @$vb_mysqli->close();
+                            }
+                            // Best-effort cleanup of the temp dir (any remaining TSVs)
+                            if (is_dir($tsv_dir)) {
+                                foreach (glob($tsv_dir . DIRECTORY_SEPARATOR . '*.tsv') ?: [] as $f) {
+                                    @unlink($f);
+                                }
+                                @rmdir($tsv_dir);
+                            }
+                        }
+                    }
+
                     echo "✓ Historical forum data installation complete\n";
+                }
+
+                // Run phpBB-dependent fix scripts now that phpbb_* tables exist
+                foreach (['fix_forum_categories.sql', 'fix_topic_views.sql'] as $fixFile) {
+                    $fixPath = __DIR__ . '/sql/' . $fixFile;
+                    if (file_exists($fixPath)) {
+                        try {
+                            run_sql_file($pdo, $fixPath);
+                            echo "  [phpBB] Applied $fixFile\n";
+                        } catch (PDOException $e) {
+                            // These fixes are best-effort — log but don't fail the install
+                            error_log("$fixFile failed: " . $e->getMessage());
+                            echo "  ⚠ $fixFile failed: " . $e->getMessage() . "\n";
+                        }
+                    }
+                }
+
+                // Fix forum_type and rebuild phpBB nested set tree for ALL forums
+                // Historical forums are inserted without forum_type (defaults to 0 = category)
+                // and without left_id/right_id which phpBB needs for its nested set model.
+                // Also fixes the default forums from schema_data.sql.
+                try {
+                    echo "Rebuilding phpBB forum tree...\n";
+
+                    // Set historical forums: categories (parent_id=0) = forum_type 0, others = forum_type 1
+                    // Dynamically detect categories rather than hardcoding IDs, since the
+                    // vBulletin import adds many more categories beyond the original 4
+                    $pdo->exec("UPDATE phpbb_forums SET forum_type = 0 WHERE is_historical = 1 AND parent_id = 0");
+                    $pdo->exec("UPDATE phpbb_forums SET forum_type = 1 WHERE is_historical = 1 AND parent_id != 0");
+
+                    // Rebuild the nested set (left_id / right_id) for the entire forum tree
+                    // phpBB uses a modified preorder tree traversal (nested set model)
+                    $forums = $pdo->query("SELECT forum_id, parent_id FROM phpbb_forums ORDER BY parent_id, forum_id")->fetchAll(PDO::FETCH_ASSOC);
+
+                    // Build parent->children map
+                    $children = [];
+                    foreach ($forums as $f) {
+                        $pid = (int)$f['parent_id'];
+                        $children[$pid][] = (int)$f['forum_id'];
+                    }
+
+                    // Recursive nested set numbering
+                    $counter = 0;
+                    $updates = [];
+                    $rebuild_tree = function($parent_id) use (&$rebuild_tree, &$children, &$counter, &$updates) {
+                        if (empty($children[$parent_id])) return;
+                        foreach ($children[$parent_id] as $forum_id) {
+                            $counter++;
+                            $left = $counter;
+                            $rebuild_tree($forum_id);
+                            $counter++;
+                            $right = $counter;
+                            $updates[] = ['id' => $forum_id, 'left' => $left, 'right' => $right];
+                        }
+                    };
+                    $rebuild_tree(0);
+
+                    $update_stmt = $pdo->prepare("UPDATE phpbb_forums SET left_id = ?, right_id = ? WHERE forum_id = ?");
+                    foreach ($updates as $u) {
+                        $update_stmt->execute([$u['left'], $u['right'], $u['id']]);
+                    }
+
+                    echo "✓ Rebuilt nested set for " . count($updates) . " forums\n";
+
+                    // Fix visibility: phpBB 3.3 defaults topic_visibility and post_visibility to 0
+                    // (unapproved). Historical data must be set to 1 (ITEM_APPROVED) to be visible.
+                    $pdo->exec("UPDATE phpbb_topics SET topic_visibility = 1 WHERE is_historical = 1");
+                    $pdo->exec("UPDATE phpbb_posts SET post_visibility = 1 WHERE is_historical = 1");
+                    echo "  [phpBB] Set visibility=approved on historical topics and posts\n";
+
+                    // Update forum counters (phpBB reads these cached counts, not live queries)
+                    $pdo->exec("UPDATE phpbb_forums f SET
+                        forum_topics_approved = (SELECT COUNT(*) FROM phpbb_topics t WHERE t.forum_id = f.forum_id AND t.topic_visibility = 1),
+                        forum_posts_approved = (SELECT COUNT(*) FROM phpbb_posts p WHERE p.forum_id = f.forum_id AND p.post_visibility = 1)
+                    WHERE f.is_historical = 1");
+
+                    // Update per-topic post counts
+                    $pdo->exec("UPDATE phpbb_topics t SET
+                        topic_posts_approved = (SELECT COUNT(*) FROM phpbb_posts p WHERE p.topic_id = t.topic_id AND p.post_visibility = 1)
+                    WHERE t.is_historical = 1");
+
+                    // Set topic_first_post_id and topic_last_post_id for proper thread display
+                    $pdo->exec("UPDATE phpbb_topics t SET
+                        topic_first_post_id = (SELECT MIN(post_id) FROM phpbb_posts p WHERE p.topic_id = t.topic_id),
+                        topic_last_post_id = (SELECT MAX(post_id) FROM phpbb_posts p WHERE p.topic_id = t.topic_id),
+                        topic_last_post_time = (SELECT MAX(post_time) FROM phpbb_posts p WHERE p.topic_id = t.topic_id)
+                    WHERE t.is_historical = 1");
+
+                    // Set forum last post info for forum index display
+                    $pdo->exec("UPDATE phpbb_forums f SET
+                        forum_last_post_id = (SELECT MAX(post_id) FROM phpbb_posts p WHERE p.forum_id = f.forum_id AND p.post_visibility = 1),
+                        forum_last_post_time = (SELECT MAX(post_time) FROM phpbb_posts p WHERE p.forum_id = f.forum_id AND p.post_visibility = 1)
+                    WHERE f.is_historical = 1");
+
+                    echo "  [phpBB] Updated forum and topic counters\n";
+
+                    // Fix historical users: set user_lang (phpBB requires it for display)
+                    $pdo->exec("UPDATE phpbb_users SET user_lang = 'en' WHERE is_historical = 1 AND (user_lang = '' OR user_lang IS NULL)");
+
+                    // Add historical users to the REGISTERED user group (group_id=2)
+                    // phpBB memberlist and many queries JOIN on phpbb_user_group, so without
+                    // this entry users won't appear in memberlist or profile pages.
+                    $pdo->exec("INSERT IGNORE INTO phpbb_user_group (group_id, user_id, user_pending, group_leader)
+                        SELECT 2, user_id, 0, 0 FROM phpbb_users WHERE is_historical = 1");
+
+                    // Update user_posts count from actual approved posts
+                    $pdo->exec("UPDATE phpbb_users u SET
+                        user_posts = (SELECT COUNT(*) FROM phpbb_posts p WHERE p.poster_id = u.user_id AND p.post_visibility = 1)
+                    WHERE u.is_historical = 1");
+
+                    // Set poster username on ALL historical posts (phpBB caches this in the posts table)
+                    $affected = $pdo->exec("UPDATE phpbb_posts p
+                        INNER JOIN phpbb_users u ON p.poster_id = u.user_id
+                        SET p.post_username = u.username
+                    WHERE p.is_historical = 1");
+                    echo "  [phpBB] Set post_username on $affected historical posts\n";
+
+                    // Verify: check how many historical posts still have no matching user
+                    $orphaned = $pdo->query("SELECT COUNT(*) FROM phpbb_posts p
+                        LEFT JOIN phpbb_users u ON p.poster_id = u.user_id
+                        WHERE p.is_historical = 1 AND u.user_id IS NULL")->fetchColumn();
+                    if ($orphaned > 0) {
+                        echo "  ⚠ Warning: $orphaned historical posts have poster_id with no matching user\n";
+                    }
+
+                    // Set topic last poster name for forum display
+                    $pdo->exec("UPDATE phpbb_topics t
+                        INNER JOIN phpbb_posts p ON p.post_id = t.topic_last_post_id
+                        INNER JOIN phpbb_users u ON u.user_id = p.poster_id
+                        SET t.topic_last_poster_id = p.poster_id,
+                            t.topic_last_poster_name = u.username,
+                            t.topic_last_poster_colour = ''
+                    WHERE t.is_historical = 1");
+
+                    // Set topic first poster name
+                    $pdo->exec("UPDATE phpbb_topics t
+                        INNER JOIN phpbb_posts p ON p.post_id = t.topic_first_post_id
+                        INNER JOIN phpbb_users u ON u.user_id = p.poster_id
+                        SET t.topic_first_poster_name = u.username,
+                            t.topic_first_poster_colour = ''
+                    WHERE t.is_historical = 1");
+
+                    // Set forum last poster name for forum index
+                    $pdo->exec("UPDATE phpbb_forums f
+                        INNER JOIN phpbb_posts p ON p.post_id = f.forum_last_post_id
+                        INNER JOIN phpbb_users u ON u.user_id = p.poster_id
+                        SET f.forum_last_poster_id = p.poster_id,
+                            f.forum_last_poster_name = u.username,
+                            f.forum_last_poster_colour = ''
+                    WHERE f.is_historical = 1");
+
+                    // Update REGISTERED group user count
+                    $pdo->exec("UPDATE phpbb_groups SET group_type = 3 WHERE group_id = 2");
+
+                    // Set user_type = 0 (USER_NORMAL) for historical users
+                    $pdo->exec("UPDATE phpbb_users SET user_type = 0 WHERE is_historical = 1 AND (user_type IS NULL OR user_type != 0)");
+
+                    echo "  [phpBB] Fixed historical users: lang, group membership, post counts, poster names\n";
+
+                    // Add ACL permissions for historical forums
+                    // Without these, no group can view/access the forums even if they exist
+                    // Role IDs: 14=FORUM_FULL, 15=FORUM_STANDARD, 17=FORUM_READONLY, 19=FORUM_BOT, 10=MOD_FULL
+                    // Group IDs: 1=GUESTS, 2=REGISTERED, 3=REGISTERED_COPPA, 4=GLOBAL_MODS, 5=ADMINS, 6=BOTS, 7=NEW_MEMBERS
+                    echo "Setting up ACL permissions for historical forums...\n";
+                    $hist_forums = $pdo->query("SELECT forum_id FROM phpbb_forums WHERE is_historical = 1")->fetchAll(PDO::FETCH_COLUMN);
+                    if (!empty($hist_forums)) {
+                        $acl_stmt = $pdo->prepare("INSERT IGNORE INTO phpbb_acl_groups (group_id, forum_id, auth_option_id, auth_role_id, auth_setting) VALUES (?, ?, 0, ?, 0)");
+                        foreach ($hist_forums as $hfid) {
+                            // GUESTS: readonly access
+                            $acl_stmt->execute([1, $hfid, 17]);
+                            // REGISTERED: standard access (can read and post)
+                            $acl_stmt->execute([2, $hfid, 15]);
+                            // REGISTERED_COPPA: standard access
+                            $acl_stmt->execute([3, $hfid, 15]);
+                            // GLOBAL_MODERATORS: standard access + polls
+                            $acl_stmt->execute([4, $hfid, 21]);
+                            // ADMINISTRATORS: full forum access + full moderator access
+                            $acl_stmt->execute([5, $hfid, 14]);
+                            $acl_stmt->execute([5, $hfid, 10]);
+                            // BOTS: bot access
+                            $acl_stmt->execute([6, $hfid, 19]);
+                            // NEW_MEMBERS: on queue
+                            $acl_stmt->execute([7, $hfid, 24]);
+                        }
+                        echo "  [phpBB] Added ACL permissions for " . count($hist_forums) . " historical forums\n";
+                    }
+
+                    // Create "Forum Staff" moderation group and assign all historical forums to it
+                    echo "Creating Forum Staff moderation group...\n";
+                    $pdo->exec("INSERT IGNORE INTO phpbb_groups (group_name, group_type, group_desc, group_colour)
+                        VALUES ('Forum Staff', 3, 'Forum moderation staff', '00AA00')");
+                    $forum_staff_gid = $pdo->query("SELECT group_id FROM phpbb_groups WHERE group_name = 'Forum Staff'")->fetchColumn();
+                    if ($forum_staff_gid) {
+                        // Add admin (user_id=2) as group leader
+                        $pdo->exec("INSERT IGNORE INTO phpbb_user_group (group_id, user_id, user_pending, group_leader)
+                            VALUES ($forum_staff_gid, 2, 0, 1)");
+
+                        // Assign Forum Staff as moderator of all historical forums
+                        if (!empty($hist_forums)) {
+                            $mod_stmt = $pdo->prepare("INSERT IGNORE INTO phpbb_acl_groups (group_id, forum_id, auth_option_id, auth_role_id, auth_setting) VALUES (?, ?, 0, 10, 0)");
+                            foreach ($hist_forums as $hfid) {
+                                $mod_stmt->execute([$forum_staff_gid, $hfid]);
+                            }
+                        }
+                        echo "  [phpBB] Created Forum Staff group (ID: $forum_staff_gid) with admin as leader\n";
+                    }
+                } catch (Exception $e) {
+                    error_log('Forum tree rebuild error: ' . $e->getMessage());
+                    echo "⚠ Forum tree rebuild failed: " . $e->getMessage() . "\n";
                 }
             } catch (Exception $e) {
                 // Log phpBB installation errors and store in session to display on step 3

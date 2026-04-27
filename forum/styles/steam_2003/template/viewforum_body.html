@@ -59,11 +59,7 @@
         <!-- BEGIN topicrow -->
         <tr align="center">
             <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is odd -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->" valign="top">
-                <!-- IF topicrow.TOPIC_FOLDER_IMG -->
-                <img src="{topicrow.TOPIC_FOLDER_IMG}" border="0" alt="{topicrow.TOPIC_FOLDER_IMG_ALT}" />
-                <!-- ELSE -->
-                <img src="{T_THEME_PATH}/images/<!-- IF topicrow.S_TOPIC_LOCKED -->lockfolder<!-- ELSEIF topicrow.S_UNREAD_TOPIC -->newfolder<!-- ELSE -->folder<!-- ENDIF -->.gif" border="0" alt="Topic Status" />
-                <!-- ENDIF -->
+                <img src="{T_THEME_PATH}/images/<!-- IF topicrow.S_TOPIC_LOCKED -->lockfolder<!-- ELSEIF topicrow.S_UNREAD_TOPIC -->newfolder<!-- ELSE -->folder<!-- ENDIF -->.gif" border="0" alt="<!-- IF topicrow.TOPIC_FOLDER_IMG_ALT -->{topicrow.TOPIC_FOLDER_IMG_ALT}<!-- ELSE -->Topic Status<!-- ENDIF -->" />
             </td>
             <td bgcolor="<!-- IF topicrow.S_ROW_COUNT is even -->#626d5c<!-- ELSE -->#545F4E<!-- ENDIF -->" align="left">
                 <!-- IF topicrow.S_UNREAD_TOPIC and not S_IS_BOT --><a href="{topicrow.U_NEWEST_POST}"><img src="{T_THEME_PATH}/images/icon_newest_reply.gif" border="0" alt="View newest post" /></a>&nbsp;<!-- ENDIF -->

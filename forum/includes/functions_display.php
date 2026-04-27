@@ -280,6 +280,17 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 		}
 		else if ($row['forum_type'] != FORUM_CAT)
 		{
+			// Skip orphan subforums whose displayable parent isn't in $forum_rows
+			// (e.g. when an extension's SQL filter removes a parent but leaves its
+			// children, or the first returned row is a subforum so $parent_id is still 0).
+			// Without this guard, auto-vivification creates a bogus $forum_rows[0]
+			// entry that triggers PHP 8 "Undefined array key" warnings here and
+			// later in the foreach over $forum_rows.
+			if (!isset($forum_rows[$parent_id]))
+			{
+				continue;
+			}
+
 			$subforums[$parent_id][$forum_id]['display'] = ($row['display_on_index'] && (!$parent_subforum_limit || $parent_id == $row['parent_id']));
 			$subforums[$parent_id][$forum_id]['name'] = $row['forum_name'];
 			$subforums[$parent_id][$forum_id]['orig_forum_last_post_time'] = $row['forum_last_post_time'];

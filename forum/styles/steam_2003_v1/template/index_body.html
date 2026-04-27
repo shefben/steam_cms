@@ -39,11 +39,7 @@
         <!-- ELSE -->
         <tr align="center">
             <td bgcolor="#626d5c" valign="top">
-                <!-- IF forumrow.FORUM_FOLDER_IMG -->
-                <img src="{forumrow.FORUM_FOLDER_IMG}" border="0" alt="{forumrow.FORUM_FOLDER_IMG_ALT}" />
-                <!-- ELSE -->
-                <img src="{T_THEME_PATH}/images/<!-- IF forumrow.S_LOCKED -->offlock<!-- ELSEIF forumrow.S_HAS_UNREAD -->on<!-- ELSE -->off<!-- ENDIF -->.gif" border="0" alt="" />
-                <!-- ENDIF -->
+                <img src="{T_THEME_PATH}/images/<!-- IF forumrow.S_LOCKED -->offlock<!-- ELSEIF forumrow.S_UNREAD -->on<!-- ELSE -->off<!-- ENDIF -->.gif" border="0" alt="{forumrow.FORUM_FOLDER_IMG_ALT}" />
             </td>
             <td bgcolor="#545F4E" align="left">
                 <a href="{forumrow.U_VIEWFORUM}">

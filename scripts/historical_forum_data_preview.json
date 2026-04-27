@@ -1,0 +1,694 @@
+{
+  "stats": {
+    "total_threads": 665,
+    "total_posts": 8187,
+    "total_users": 0,
+    "total_forums": 16,
+    "total_announcements": 11
+  },
+  "forums": {
+    "12": {
+      "forum_id": 12,
+      "name": "Support / Help",
+      "description": "Discussion forum for Support / Help"
+    },
+    "13": {
+      "forum_id": 13,
+      "name": "Steam Discussions",
+      "description": "Discussion forum for Steam Discussions"
+    },
+    "14": {
+      "forum_id": 14,
+      "name": "General",
+      "description": "Discussion forum for General"
+    },
+    "15": {
+      "forum_id": 15,
+      "name": "Suggestions / Ideas",
+      "description": "Discussion forum for Suggestions / Ideas"
+    },
+    "16": {
+      "forum_id": 16,
+      "name": "Windows Dedicated Server",
+      "description": "Discussion forum for Windows Dedicated Server"
+    },
+    "17": {
+      "forum_id": 17,
+      "name": "Community Help and Tips",
+      "description": "Discussion forum for Community Help and Tips"
+    },
+    "19": {
+      "forum_id": 19,
+      "name": "Linux Dedicated Server",
+      "description": "Discussion forum for Linux Dedicated Server"
+    },
+    "26": {
+      "forum_id": 26,
+      "name": "Server Discussions",
+      "description": "Discussion forum for Server Discussions"
+    },
+    "34": {
+      "forum_id": 34,
+      "name": "Off Topic",
+      "description": "Discussion forum for Off Topic"
+    },
+    "35": {
+      "forum_id": 35,
+      "name": "VAC",
+      "description": "Discussion forum for VAC"
+    },
+    "37": {
+      "forum_id": 37,
+      "name": "Counter-Strike: Source",
+      "description": "Discussion forum for Counter-Strike: Source"
+    },
+    "41": {
+      "forum_id": 41,
+      "name": "Source SDK",
+      "description": "Discussion forum for Source SDK"
+    },
+    "43": {
+      "forum_id": 43,
+      "name": "Half-Life 2",
+      "description": "Discussion forum for Half-Life 2"
+    },
+    "44": {
+      "forum_id": 44,
+      "name": "Source DS (Windows)",
+      "description": "Discussion forum for Source DS (Windows)"
+    },
+    "5": {
+      "forum_id": 5,
+      "name": "Valve Back Catalog Discussions",
+      "description": "Discussion forum for Valve Back Catalog Discussions"
+    },
+    "7": {
+      "forum_id": 7,
+      "name": "Counter-Strike",
+      "description": "Discussion forum for Counter-Strike"
+    }
+  },
+  "announcements": [
+    {
+      "id": 1,
+      "forum_id": 14,
+      "forum_name": "General",
+      "title": "Please, DO NOT be abusive on the Vivendi/Sierra forums!",
+      "author": "Waldo",
+      "date_range": "11-14-2004 until 12-17-2004",
+      "content": "OK guys, we've gotten some official type communications from some of our brother and sister admins and moderators over at VU/Sierra.  They have had a few people really abuse their forums and spam some pretty lame and insane stuff.  And together we have traced the posters back to people also with accounts here on our own forums.\n\n\n\nWe don't wish that kind of abuse on anyone and any forum.  We'd certainly ban people abusing our forums as would any other forum who is trying to maintain some order. ..."
+    },
+    {
+      "id": 2,
+      "forum_id": 14,
+      "forum_name": "General",
+      "title": "Posting Rules - Read These First!",
+      "author": "Ritchey007",
+      "date_range": "02-09-2004 until 03-10-2006",
+      "content": "Please read and follow all of these rules before posting a response or new thread:\n\n\n\n\nAdministrators/Moderators reserve the right to change/edit/delete any content at any time they feel it is inappropriate. \n\n\n\n\n[color=yellow]General Forum Rules:[/color]\n\n\n\n\n\n\n\n\n\n-  Any thread flaming another person or organization gets closed on spot. \n\n\n- Dont post porn, gross stuff, or anything else NSFW (not safe for work).\n\n\n- Any Swearing in the topic gets closed on spot or that one post deleted.\n\n\n- No \"..."
+    },
+    {
+      "id": 3,
+      "forum_id": 16,
+      "forum_name": "Windows Dedicated Server",
+      "title": "\"Servers too busy\" for cd-key",
+      "author": "Taylor Sherman",
+      "date_range": "08-06-2004 until 09-06-2004",
+      "content": "If you are trying to register a cd-key that has 25 digits (DoD, CZ, or ATI Bundle key), and getting a \"The Steam servers are too busy... sorry for the inconvenience\" message, please enter the key [b]including[/b] the original dashes, like this:\n\n\n\nabcde-12345-fghij-67890-klmno\n\n\n\n\n\nthanks,\n\n\n\nTaylor"
+    },
+    {
+      "id": 4,
+      "forum_id": 16,
+      "forum_name": "Windows Dedicated Server",
+      "title": "NEW! Steam Troubleshooter",
+      "author": "Taylor Sherman",
+      "date_range": "05-17-2004 until 09-17-2004",
+      "content": "Check out the new Steam Troubleshooter -- if you are having problems with cd-keys, your account, connection problems, etc.\n\n\n\n[url=/index.php?area=support]/index.php?area=support[/url]"
+    },
+    {
+      "id": 5,
+      "forum_id": 16,
+      "forum_name": "Windows Dedicated Server",
+      "title": "Posting Rules - Read These First!",
+      "author": "Ritchey007",
+      "date_range": "02-09-2004 until 03-10-2006",
+      "content": "Please read and follow all of these rules before posting a response or new thread:\n\n\n\n\nAdministrators/Moderators reserve the right to change/edit/delete any content at any time they feel it is inappropriate. \n\n\n\n\n[color=yellow]General Forum Rules:[/color]\n\n\n\n\n\n\n\n\n\n-  Any thread flaming another person or organization gets closed on spot. \n\n\n- Dont post porn, gross stuff, or anything else NSFW (not safe for work).\n\n\n- Any Swearing in the topic gets closed on spot or that one post deleted.\n\n\n- No \"..."
+    },
+    {
+      "id": 6,
+      "forum_id": 17,
+      "forum_name": "Steam Support / Help",
+      "title": "\"Servers too busy\" for cd-key",
+      "author": "Taylor Sherman",
+      "date_range": "08-06-2004 until 09-06-2004",
+      "content": "If you are trying to register a cd-key that has 25 digits (DoD, CZ, or ATI Bundle key), and getting a \"The Steam servers are too busy... sorry for the inconvenience\" message, please enter the key [b]including[/b] the original dashes, like this:\n\n\n\nabcde-12345-fghij-67890-klmno\n\n\n\n\n\nthanks,\n\n\n\nTaylor"
+    },
+    {
+      "id": 7,
+      "forum_id": 17,
+      "forum_name": "Steam Support / Help",
+      "title": "NEW! Steam Troubleshooter",
+      "author": "Taylor Sherman",
+      "date_range": "05-17-2004 until 09-17-2004",
+      "content": "Check out the new Steam Troubleshooter -- if you are having problems with cd-keys, your account, connection problems, etc.\n\n\n\n[url=/index.php?area=support]/index.php?area=support[/url]"
+    },
+    {
+      "id": 8,
+      "forum_id": 17,
+      "forum_name": "Steam Support / Help",
+      "title": "Posting Rules - Read These First!",
+      "author": "Ritchey007",
+      "date_range": "02-09-2004 until 03-10-2006",
+      "content": "Please read and follow all of these rules before posting a response or new thread:\n\n\n\n\nAdministrators/Moderators reserve the right to change/edit/delete any content at any time they feel it is inappropriate. \n\n\n\n\n[color=yellow]General Forum Rules:[/color]\n\n\n\n\n\n\n\n\n\n-  Any thread flaming another person or organization gets closed on spot. \n\n\n- Dont post porn, gross stuff, or anything else NSFW (not safe for work).\n\n\n- Any Swearing in the topic gets closed on spot or that one post deleted.\n\n\n- No \"..."
+    },
+    {
+      "id": 9,
+      "forum_id": 7,
+      "forum_name": "Counter-Strike",
+      "title": "\"Servers too busy\" for cd-key",
+      "author": "Taylor Sherman",
+      "date_range": "08-06-2004 until 09-06-2004",
+      "content": "If you are trying to register a cd-key that has 25 digits (DoD, CZ, or ATI Bundle key), and getting a \"The Steam servers are too busy... sorry for the inconvenience\" message, please enter the key [b]including[/b] the original dashes, like this:\n\n\n\nabcde-12345-fghij-67890-klmno\n\n\n\n\n\nthanks,\n\n\n\nTaylor"
+    },
+    {
+      "id": 10,
+      "forum_id": 7,
+      "forum_name": "Counter-Strike",
+      "title": "NEW! Steam Troubleshooter",
+      "author": "Taylor Sherman",
+      "date_range": "05-17-2004 until 09-17-2004",
+      "content": "Check out the new Steam Troubleshooter -- if you are having problems with cd-keys, your account, connection problems, etc.\n\n\n\n[url=/index.php?area=support]/index.php?area=support[/url]"
+    },
+    {
+      "id": 11,
+      "forum_id": 7,
+      "forum_name": "Counter-Strike",
+      "title": "Posting Rules - Read These First!",
+      "author": "Ritchey007",
+      "date_range": "02-09-2004 until 03-10-2006",
+      "content": "Please read and follow all of these rules before posting a response or new thread:\n\n\n\n\nAdministrators/Moderators reserve the right to change/edit/delete any content at any time they feel it is inappropriate. \n\n\n\n\n[color=yellow]General Forum Rules:[/color]\n\n\n\n\n\n\n\n\n\n-  Any thread flaming another person or organization gets closed on spot. \n\n\n- Dont post porn, gross stuff, or anything else NSFW (not safe for work).\n\n\n- Any Swearing in the topic gets closed on spot or that one post deleted.\n\n\n- No \"..."
+    }
+  ],
+  "sample_threads": {
+    "78948": {
+      "title": "Backward facing players",
+      "forum_id": 17,
+      "post_count": 120,
+      "first_posts": [
+        {
+          "post_id": 544310,
+          "author": "ocarD",
+          "subject": "Backward facing players",
+          "content": "Whos seen this bug in CS/CZ where you are looking at a player and it appears they are looking away from you when they are in fact facing you?  It sems to have appeared more frequently over the past 4-6 weeks.\n\n\n\nQuestions:\n\n---------------\n\n1) how often have you seen it?\n\n2) When did you see it first?\n\n3) Can you re-create it?\n\n4) Were you runnning custom skins?\n\n5) Was it CS or CZ or another mod?\n\n\n\nAny other info you can provide?"
+        },
+        {
+          "post_id": 544329,
+          "author": "|CC|Animal",
+          "subject": "",
+          "content": "Ive seen it a couple of times in the past week.\n\n1) on the overpass in avalanche  i was coming out of axis house to go across to church, though i had a nife kill...but no\n\n2) under the bridge on kalt.  \n\nI dont know if i can re-create it, i try not to, but ill see.\n\n\n\nNo i was not running custom skins,\n\nand it was DoD, for those who dont know the maps.\n\nboth kills were with the Thompson, i dont know if that matters.\n\nIf i think of anything else, ill give it a try.  Ill also go opn a 24-7 Ava/Kal..."
+        },
+        {
+          "post_id": 544353,
+          "author": "retribution",
+          "subject": "",
+          "content": "ocarD, from what I have been able to determine this problem is prevalent in all official mods at the moment, at varying degrees in each. However, I have yet to observe the phenomena on any unofficial Steam mod.\n\n\n\nIt is quite common in Counter-Strike/Condition Zero, and not nearly as much in the others, but a problem nonetheless. While I'm not sure of the exact timeframe it appeared over, it may have been introduced with the 2.09 update [Someone else please confirm this].\n\n\n\nI'm still attempting..."
+        }
+      ]
+    },
+    "106627": {
+      "title": "Age of the average C.S player?",
+      "forum_id": 7,
+      "post_count": 73,
+      "first_posts": [
+        {
+          "post_id": 788484,
+          "author": "Lo-Rez",
+          "subject": "Age of the average C.S player?",
+          "content": "Just wondering what everyones age is...\n\n\n\nI'm 16.\n\n\n\n\n\nI started playing counter-strike three years ago."
+        },
+        {
+          "post_id": 788526,
+          "author": "UnKnOwNGuY",
+          "subject": "",
+          "content": "i say average is 16 cuz lots of them r 16 n im 16 also"
+        },
+        {
+          "post_id": 788532,
+          "author": "Atari",
+          "subject": "",
+          "content": "19 :x"
+        }
+      ]
+    },
+    "110442": {
+      "title": "ATi HL2 Key, how to input?",
+      "forum_id": 17,
+      "post_count": 67,
+      "first_posts": [
+        {
+          "post_id": 827531,
+          "author": "SuperRob",
+          "subject": "ATi HL2 Key, how to input?",
+          "content": "Hearing the new that people with ATI Half-Life 2 keys would be able to get teh CounterStrike: Source beta, I decided to go ahead and pop the key into Steam, only, I can't figure out how to put it in.\n\n\n\nI've already got the Premier Pack, by virtue of my original Half-Life purchase, so where do I put the key in to make sure I can get the CounterStrike: Source beta, not to mention Half-Life 2?"
+        },
+        {
+          "post_id": 827540,
+          "author": "vurk",
+          "subject": ":)",
+          "content": "goto www.ati.com/online/hl2 (http://www.ati.com/online/hl2) \n\nthen follow instructons..."
+        },
+        {
+          "post_id": 827543,
+          "author": "vurk",
+          "subject": "oops... lol",
+          "content": "oops, sry.. didnt read it all [] you gotta re-install steam or a new account or summat like that"
+        }
+      ]
+    },
+    "119103": {
+      "title": "The complete Counter-Strike Source review/article!",
+      "forum_id": 37,
+      "post_count": 45,
+      "first_posts": [
+        {
+          "post_id": 916263,
+          "author": "Raziel1Slipknot",
+          "subject": "The complete Counter-Strike Source review/article!",
+          "content": "Counter-Strike: Source\n\n\n\nGameplay changes.\n\n\n\n-] Boosting is back, you can boost just like in 1.6.\n\n-] A lot of things can be moved. For example in de_dust there are a lot of barrels lying around. A t/ct can be hiding behind \n\n\n\none that has been moved to a spot you wont expect.\n\n-] If you fall from a high place, you cant start walking right away, for about 1-2 seconds you stay still.\n\n-] It seems like you jump higher and longer. I jumped from this car infront of ct spawn to the top part of ct ..."
+        },
+        {
+          "post_id": 916284,
+          "author": "uBeRed",
+          "subject": "",
+          "content": "er why is stop sound a cheat? The ringing noise? Or tis there something I wasn't aware of?"
+        },
+        {
+          "post_id": 916288,
+          "author": "ebugg",
+          "subject": "",
+          "content": "nice review , ty"
+        }
+      ]
+    },
+    "119413": {
+      "title": "CS Pro Mode",
+      "forum_id": 15,
+      "post_count": 45,
+      "first_posts": [
+        {
+          "post_id": 919846,
+          "author": "knzd",
+          "subject": "CS Pro Mode",
+          "content": "This post is directed to the STEAM/VALVe staff if you happen to be browsing this forum =).\n\n\n\nI've played cs for over 4 years, and I think the game is great.. I've stuck with it through the recent changes that caused you guys all that grief; awp delay, crosshair fiasco, etc. I've played CS:S at LAN last night, and I mean - the graphics are awesome. The concept of the game is great, but the gameplay is really lacking some of the barebone essentials of counter-strike. I mean, there IS a big compet..."
+        },
+        {
+          "post_id": 919894,
+          "author": "poNzi",
+          "subject": "AGREED",
+          "content": "Completely agree with you... VALVe whether or not you realize it, competitive cs players have kept this game alive. Making it popular with their friends, keeping server companies up and running, advertising for the game... without this cs WILL die. I love the new graphics engine but the pro mode is much needed in order to keep this great game we love alive.\n\n\n\nTommy \"poNzi\" McDonough\n\n#globalmenace\n\n#ponzi"
+        },
+        {
+          "post_id": 919909,
+          "author": "D@rk M@tter",
+          "subject": "",
+          "content": "i think if there were a pro-mode, everyone would play only that, its like the maps, some are different and nice but we all play de_maps."
+        }
+      ]
+    },
+    "121263": {
+      "title": "\"This Steam account as been disabled\"",
+      "forum_id": 17,
+      "post_count": 45,
+      "first_posts": [
+        {
+          "post_id": 938366,
+          "author": "Klaiik",
+          "subject": "\"This Steam account as been disabled\"",
+          "content": "Hi!\n\n\n\nWhen i logging steam appear a error \"This Steam account as been disabled\" , Someone have this problem too? \n\n\n\nThanks"
+        },
+        {
+          "post_id": 954788,
+          "author": "Klaiik",
+          "subject": "This Steam account as been disabled",
+          "content": "nobody?"
+        },
+        {
+          "post_id": 1025404,
+          "author": "sc0per",
+          "subject": "omg",
+          "content": "lol wtf is that?\n\ni got this error 2!\n\n\n\nCant login into steam!\n\n****in **** i want to play cs!!!!\n\n\n\nwhy has my acccount been disabled?"
+        }
+      ]
+    },
+    "22178": {
+      "title": "HALF-LIFE 2 Source LEAKED????",
+      "forum_id": 14,
+      "post_count": 45,
+      "first_posts": [
+        {
+          "post_id": 142564,
+          "author": "freefrag123",
+          "subject": "HALF-LIFE 2 Source LEAKED????",
+          "content": "Okay, There have been words spread that the HALF-LIFE 2 Source have been leaked to the public and there are lots of people comipiling it. This is really SAD to see.....\n\n\n\n\n\nhttp://www.dirtysolicitor.com/t0y/001.JPG (http://www.dirtysolicitor.com/t0y/001.JPG)\n\nhttp://www.dirtysolicitor.com/t0y/002.JPG (http://www.dirtysolicitor.com/t0y/002.JPG)\n\nhttp://www.dirtysolicitor.com/t0y/003.JPG (http://www.dirtysolicitor.com/t0y/003.JPG)\n\n\n\n\n\nhttp://arstechnica.infopop.net/Open...mp;m=8750932885 (http:/..."
+        },
+        {
+          "post_id": 142574,
+          "author": "Calhoun",
+          "subject": "HALF-LIFE 2 Source LEAKED????",
+          "content": "[quote=\"freefrag123\"]Okay, There have been words spread that the HALF-LIFE 2 Source have been leaked to the public and there are lots of people comipiling it. This is really SAD to see.....\n\n\n\n\n\nhttp://www.dirtysolicitor.com/t0y/001.JPG\n\nhttp://www.dirtysolicitor.com/t0y/002.JPG\n\nhttp://www.dirtysolicitor.com/t0y/003.JPG\n\n\n\n\n\nIt seams pretty real and its leaked from a developers computer...\n\n\n\nGG[/quote] \n\n\n\nI think its fake because the editor it uses is called Hammer 2 and there is a folder cal..."
+        },
+        {
+          "post_id": 142581,
+          "author": "freefrag123",
+          "subject": "",
+          "content": "Go try downloading the source\n\n\n\nMessage me and I'll Give you an address"
+        }
+      ]
+    },
+    "115405": {
+      "title": "Steam update released",
+      "forum_id": 14,
+      "post_count": 40,
+      "first_posts": [
+        {
+          "post_id": 879237,
+          "author": "cliffe",
+          "subject": "",
+          "content": "[quote=\"nikefido\"]does cliffe and others read the repsonses to these posts do you think?[/quote] \n\n\n\nYes."
+        },
+        {
+          "post_id": 879241,
+          "author": "-=CSA=-*MATT",
+          "subject": "",
+          "content": "[quote=\"cliffe\"]Yes.[/quote] \n\nIt's 9pm PST right now. Still at the office hammering out code? []"
+        },
+        {
+          "post_id": 879308,
+          "author": "Raziel1Slipknot",
+          "subject": "Steam update released",
+          "content": "[quote=\"cliffe\"]An update to the Steam client has just been released. Steam will update itself automatically when you restart. Here is a list of the changes:\n\n\n\nSTEAM CLIENT CHANGES / ADDITIONS: \n\nImproved how Steam handles corrupted cache files \n\nListed '3rd Party Games' under 'My Games'[/quote] \n\n\n\nSweet."
+        }
+      ]
+    },
+    "94910": {
+      "title": "ds updates... are there any?",
+      "forum_id": 33,
+      "post_count": 39,
+      "first_posts": [
+        {
+          "post_id": 680915,
+          "author": "DragonGC",
+          "subject": "ds updates... are there any?",
+          "content": "have there EVER been ne ds updates?"
+        },
+        {
+          "post_id": 680950,
+          "author": "NinjaGaijin",
+          "subject": "DS",
+          "content": "Just a small fix for a few bugs on 1.1 I think..."
+        },
+        {
+          "post_id": 680968,
+          "author": "NinjaGaijin",
+          "subject": "DS",
+          "content": "I mean when CZ updated to 1.1, I think they fixed a few issues causing DS to crash, other than that, just the standard HL.exe updates apply."
+        }
+      ]
+    },
+    "11562": {
+      "title": "Steam Status",
+      "forum_id": 14,
+      "post_count": 37,
+      "first_posts": [
+        {
+          "post_id": 79914,
+          "author": "Erik Johnson",
+          "subject": "Steam Status",
+          "content": "The Steam beta is now drawing to an end. This means that there are some significant changes coming to the way that Steam will be run.\n\n\n\nThe next major release of Steam will be the first step towards converting the entire Half-Life user base to Steam. This means that we will be resetting the Steam account database from scratch. After this, you will need to have a valid CD-Key to access games via Steam, so you will want to treat your Steam account as permanent. One CD-Key will grant you access to..."
+        },
+        {
+          "post_id": 79916,
+          "author": "FISKER_Q",
+          "subject": "",
+          "content": "Kickass, but what's the status on using multiple users on i.e. cyber cafés?"
+        },
+        {
+          "post_id": 79917,
+          "author": "Jap",
+          "subject": "",
+          "content": "Does this mean won will entirely dissapear? or just exist for pre steam games?\n\n\n\n[QUOTE]Originally posted by Erik Johnson \n\nThanks to everyone who has participated in the beta up until now.\n\n\n\nIm Glad i could help [] Since steam will be big, i can tell new gamers i was 1 of the original beta testers of steam []\n\n\n\nthree times Cheers!\n\nCheers!\n\nCheers!\n\nCheers!\n\n__________________\n\nNeed Help?\n\n#steam on:\n\nirc.gamesurge.net\n\n\n\nWanne Chat?\n\n#steam-hangout on:\n\nirc.gamesurge.net"
+        }
+      ]
+    },
+    "41870": {
+      "title": "Bug Finding Help",
+      "forum_id": 14,
+      "post_count": 32,
+      "first_posts": [
+        {
+          "post_id": 261926,
+          "author": "Erik Johnson",
+          "subject": "Bug Finding Help",
+          "content": "There are a couple of bugs that we're having a bit of trouble tracking down. It would be extremely helpful if someone in the community could help out.\n\n\n\nThe bugs are:\n\n\n\n- Players starting the map either stuck in the floor or floating above ground.\n\n- Slow demo recording performance.\n\n- Crash on demo playback, possibly related to +showscores.\n\n\n\nIf you'd like to help, record a demo that exhibits one or all of these behaviors and mail it to me at erik@valvesoftware.com (mailto:erik@valvesoftware..."
+        },
+        {
+          "post_id": 262086,
+          "author": "Fragalishus",
+          "subject": "",
+          "content": "Hello Erik,\n\n\n\nNot sure if this will help you or not, but MiSmith7 has found a temporary solution that seems to help.  It involves a demo fix written by Martino@valvesoftware.com (mailto:Martino@valvesoftware.com) that was dated a little over a year ago.\n\n\n\nThis was a fix for 1.5 demos that updated the GameEditor.dll and GameUI.dll in the valve\\cl_dlls folder, and the core.dll in the Counter Strike folder.  It was a \"viewdemo\" fix, or something like that.\n\n\n\nThe thread on how to watch demos with..."
+        },
+        {
+          "post_id": 262112,
+          "author": "Fragalishus",
+          "subject": "",
+          "content": "Also, as for the players floating in the air... someone in the bug list thread suggested this is caused by custom decals being downloaded to the client.  This makes perfect sense because generally the only time it happens is during the pistol round on a map change (when most decals are downloaded, obviously).  And I would bet money the random times it happens during a round is when a new player has just connected, and his decal is being uploaded.\n\n\n\nSo far, the only testing of this theory I can ..."
+        }
+      ]
+    },
+    "12899": {
+      "title": "Changing Fonts in CS1.6 + STEAM",
+      "forum_id": 7,
+      "post_count": 30,
+      "first_posts": [
+        {
+          "post_id": 90074,
+          "author": "DashSpeed",
+          "subject": "Changing Fonts in CS1.6 + STEAM",
+          "content": "******* Check at the end of this post for new Tutorial ********\n\n******* Check the Second Post to get the Fonts + Updated Optimal TrackerScheme File!********\n\n\n\nCheck the screenshot to see how you can probably change the fonts and sizes to the maximum in CS 1.6\n\n\n\nIt's really easy. You can use -ANY- font that you have in your fonts foler (usually c:\\windows\\fonts) and I've tested it with a lot of resolution, it works great.\n\n\n\nFirst, you'll need to use the GRAY skin in Steam. So load it in your ..."
+        },
+        {
+          "post_id": 90476,
+          "author": "DashSpeed",
+          "subject": "",
+          "content": "Update:\n\n\n\nFor resolutions 1280+ use the following:\n\n\n\nFonts originally under 14 = 14\n\nFonts originally over 14 = 16\n\n\n\nWith Fonts like Terbuchet MS, Arial, Verdana.\n\n\n\n** Square 721 BT Download here ** (VERY GOOD FONT FOR CS!!! (IMO))\n\n*** Download the updated TrackerScheme.res File here (/forums/showthread.php?s=&postid=93023#post93023)"
+        },
+        {
+          "post_id": 90800,
+          "author": "mf4",
+          "subject": "",
+          "content": "Thank God, my faith in VALVe is 60% restored, lol.  The rest will come when they fix the bugs (incl. font bug seen here): http://mexicanstandoff.org/cs_screens/lol.jpg (http://mexicanstandoff.org/cs_screens/lol.jpg) (happens when you change Legacy_CreditsFont (when it's not actually legacy, seeing how its used in CS 1.6.. just for text menus)."
+        }
+      ]
+    },
+    "21578": {
+      "title": "NAT / LAN / Dedicated Server - Invalid Steam Userid Ticket - Read This!",
+      "forum_id": 17,
+      "post_count": 30,
+      "first_posts": [
+        {
+          "post_id": 138902,
+          "author": "PoisOnouS",
+          "subject": "NAT / LAN / Dedicated Server - Invalid Steam Userid Ticket - Read This!",
+          "content": "Some of you have had this problem and none of the solutions have worked for you.  I'm going to tell you why:\n\n\n\nSteam has a rather shortsighted design approach to authentication.  It tries to tie your authentication to your IP address.  When your client PC is using NAT and has direct private access to the HLDS via LAN, you wil NOT be able to connect to your server.\n\n\n\nLook at the console of your HLDS.  When you try to connect, you will see that you're connecting to the server using your private ..."
+        },
+        {
+          "post_id": 138971,
+          "author": "cmoz",
+          "subject": "",
+          "content": "/bumpage \n\n\n\nsame problem here. You reading this valve?"
+        },
+        {
+          "post_id": 139000,
+          "author": "Taylor Sherman",
+          "subject": "",
+          "content": "Yes. The problem isn't quite that simple [] , and we're aware of the issue and working on it. Thanks,\n\n\n\nTaylor"
+        }
+      ]
+    },
+    "30309": {
+      "title": "Potential Fix for 1.6 FPS problem ?!",
+      "forum_id": 7,
+      "post_count": 30,
+      "first_posts": [
+        {
+          "post_id": 190398,
+          "author": "Hage",
+          "subject": "Potential Fix for 1.6 FPS problem ?!",
+          "content": "The guys from #take2 (quakenet) seem to found out what the problem for the fps problems in 1.6 was. Valve is using an old opengl driver.\n\n\n\nHere is their way to fix it:\n\n- Go to the Windows\\System32 directory and look for your opengl.dll\n\n\n\nIf you're using a nvidia card the nvoglnt.dll is the right one.\n\nFor Ati cards it's the atioglxx.dll.\n\nAnd for the rest the opengl32.dll.\n\n\n\n- copy that file to your ..\\SteamApps\\user@user.de\\counter-strike\\gldrv directory.\n\n\n\n- open the drvmap.txt in that di..."
+        },
+        {
+          "post_id": 190479,
+          "author": "SpIt",
+          "subject": "",
+          "content": "ill test that and ill tell you if it really works"
+        },
+        {
+          "post_id": 190483,
+          "author": "germanjulian",
+          "subject": "",
+          "content": "god i just posted that as well lol\n\n\n\nworks fine by the way"
+        }
+      ]
+    },
+    "30673": {
+      "title": "SteamProcessCall(WaitforAppReadytoLaunch) error 15:Cache read failure",
+      "forum_id": 17,
+      "post_count": 30,
+      "first_posts": [
+        {
+          "post_id": 192709,
+          "author": "Releqy",
+          "subject": "Valve Premier Pack Errors with Counter Strike and Team Fortress",
+          "content": "I get error 15: Cache Read Failure, everytime I attempt to play Counter Strike or Team Fortress with the new Valve Premier Pack I just downloaded. Could someone please tell me the problem here?\n\nthanks\n\nReleqy"
+        },
+        {
+          "post_id": 192716,
+          "author": "nQben",
+          "subject": "Can't start any games",
+          "content": "Hi there... \n\n\n\nI having a big problem here [] when I try starting Counter Strike I get this error\n\n\n\nSteam Has Found the following problem with your game\n\n  SteamProcessCall(WaitForAppReadyToLaunch) failed with error 15: cache Read Failure\n\n\n\nThe game data cache need to bee flushed in order to run.\n\nDid you wish to do this now?\n\n\n\nhave tried to click ok to it, but nothing happends it shows again and a again."
+        },
+        {
+          "post_id": 192721,
+          "author": "nQben",
+          "subject": "",
+          "content": "My computer is a\n\n\n\nP4 2.6\n\n768 MB DDR\n\nGf4 Ti4200 Agpx8\n\n\n\nso that shouldn't be a problem"
+        }
+      ]
+    },
+    "34788": {
+      "title": "Greaaaaaaaat new update now i can't play with direct3d",
+      "forum_id": 17,
+      "post_count": 30,
+      "first_posts": [
+        {
+          "post_id": 220044,
+          "author": "PsychiatristNET",
+          "subject": "Greaaaaaaaat new update now i can't play with direct3d",
+          "content": "ok i'm getting pretty fed up\n\n\n\n\n\nfirst i get the ID ticket error then i walk away to do something else...\n\n\n\nreconnect yay it works now i come back hours later and this new UPDATE comes up WTF another update so i download the update and BOOOOOOM! i can't play in direct3d it says not compatible BULL i was running it with no problems before now whats the deal?\n\n\n\ni think this may be the end of my joy with HL and its mods this is just getting rediculess...\n\n\n\nanyone able to help me out on why it w..."
+        },
+        {
+          "post_id": 220078,
+          "author": "Squid4Brains",
+          "subject": "",
+          "content": "One of the fixes in the most recent update is listed as...\n\n\n\nAdded fallback to software mode if selected video mode is not supported when game tries to start\n\n\n\n...it's possible that Steam is (incorrectly) detecting that D3D is not supported on your system. Can you post more detailed system specs including what drivers you are using?\n\n\n\nIn the meantime, have you tried running CS in OpenGL or Software mode?"
+        },
+        {
+          "post_id": 220205,
+          "author": "Postal_noob",
+          "subject": "software mode",
+          "content": "I have the same problem and when I change to software mode it changes my gun to left handed.  Sheeshh...took me tooooo long to learn to play right handed, now I have to learn all over again....  OpenGL just lags me to death, is there any fix or work around for direct3D?????  Or someone can tell me how to make it shoot right handed again-  I did go into options and advanced to be sure it was set to right hand as well as in my config file-  Thanks"
+        }
+      ]
+    },
+    "40325": {
+      "title": "ATI users with fps drops -- Look here",
+      "forum_id": 17,
+      "post_count": 30,
+      "first_posts": [
+        {
+          "post_id": 251870,
+          "author": "Jools",
+          "subject": "ATI users with fps drops -- Look here",
+          "content": "i just found this on the ATI webpage. it seems that its a driver fault from the ATI that makes theese framdrops for us ATI users. To resolve this issue you should vissit this link and do as told\n\n\n\nhttp://www.ati.com/support/infobase/4280.html (http://www.ati.com/support/infobase/4280.html)\n\n\n\nI personaly think this should be a sticky []"
+        },
+        {
+          "post_id": 252405,
+          "author": "Intrepid00",
+          "subject": "",
+          "content": "I use 3.9 and I have full FPS on a 9800 Pro. I checked the fixed log though of 3.9 and it says nothing. Perhaps it only effects certain cards cause I think when I was playing on my 8500 I noticed some loss. I will have to try this.\n\n__________________\n\nNo1 speles as gooder than eye.\n\n\n\nI do not work for Valve. My opnion is my own."
+        },
+        {
+          "post_id": 252527,
+          "author": "Hobo_Joe",
+          "subject": "",
+          "content": "mines good im on a 9800 with 3.9's and no prob constant 100fps, drops only to 85fps!!\n\n__________________\n\n=-Resistance is not futile! It's the key to your survival! Fight back against those who would deny you freedom and claim your independance.\n\n\n\n=- \"War is not about dying for your country. It's about getting the other *�&^$!% to die for his country.\" -Gen. George Patton (Ret.-Army)(1885-1945) \n\n\n\n=- \"Here's to alcohol: the source of, and answer to, all of life's problems.\" Homer J. Simpson\n\n..."
+        }
+      ]
+    },
+    "49683": {
+      "title": "update=LAGG",
+      "forum_id": 16,
+      "post_count": 30,
+      "first_posts": [
+        {
+          "post_id": 318551,
+          "author": "|CS|Headshot",
+          "subject": "STUPID UPDATE",
+          "content": "Same you guys i just started a server to day and what the helll is going on ? i am suppose to have 8 - 16 as ping and i have *****ing 130 wtf?\n\n\n\nAnyways steam really needs to fix this cause its g4y\n\n\n\nRegards\n\n\n\nmarkus"
+        },
+        {
+          "post_id": 318587,
+          "author": "EBK4|-IbaneZ",
+          "subject": "",
+          "content": "I have the same lag problem since the update...My scoreboard shows me having a 40ping when before the update i would ping anywhere from 0-5ms...It also shows everyone in my server having about 20-35ms ping increase...\n\n\n\nWhen I use net_graph 3 it shows my ping as normal...So there is definatly a problem with the scoreboard...\n\n\n\n20 player cs server\n\n1.3 Duron 1gig of ram\n\nT1 connection w/bursts over 2.5mg\n\nWin Xp Os w/Sp1"
+        },
+        {
+          "post_id": 318760,
+          "author": "ARICE",
+          "subject": "",
+          "content": "getting same problem as everyone here\n\n\n\nrunning on windows 2003 interprise, cpu load @ 16-20 %\n\n194.47.143.35:27015 [100Mbit][Cr4p.eu]1.6 \n\n24 players\n\namx 9.0.6j\n\nmetamod 1.17\n\namd 2400+\n\n512 DDram\n\nunknown  motherboard\n\n100mbits connection"
+        }
+      ]
+    },
+    "73756": {
+      "title": "VAC and the Banned. How many is too many?",
+      "forum_id": 14,
+      "post_count": 30,
+      "first_posts": [
+        {
+          "post_id": 501233,
+          "author": "Zot IamCND!",
+          "subject": "VAC and the Banned. How many is too many?",
+          "content": "Gentlemen:\n\n\n\nA simple question really....\n\n\n\nI have noticed a huge increase in the number of \"I'm banned but I never cheated/hacked/haxor etc etc\" threads and posts.\n\n\n\nIt appears Steam-Valve has made VAC more and more strict in banning hacks and/or possible hacks with the result that some innocent users are being banned.\n\n\n\n1. How many of these \"I didn't do it\" posts are legit? Are they ALL crying because they got caught or are some truely innocent?\n\n\n\n2. If any are truely innocent, how many i..."
+        },
+        {
+          "post_id": 501247,
+          "author": "bgesley426",
+          "subject": "",
+          "content": "One of the main reasons why you might have seen a recent increase in those \"I got baned but dinnit do no thnig\" threads was because 2500 people were banned by mistake by VAC. Those people have been unbanned.\n\n__________________\n\nDescribe a color"
+        },
+        {
+          "post_id": 501270,
+          "author": "cgh.com",
+          "subject": "",
+          "content": "[quote=\"bgesley426\"]One of the main reasons why you might have seen a recent increase in those \"I got baned but dinnit do no thnig\" threads was because 2500 people were banned by mistake by VAC. Those people have been unbanned.[/quote] \n\n\n\nthey have been, yes, but all the posts lately are obviously after april 1st...\n\n\n\ni really do think some of them are innocent. my step brother was banned and he told me about it. he was confused like \"why the heck did it ban me? i didn't do anything.\" no he is..."
+        }
+      ]
+    },
+    "77674": {
+      "title": "Allowing Steam: Response from Dunkle requested",
+      "forum_id": 31,
+      "post_count": 30,
+      "first_posts": [
+        {
+          "post_id": 532416,
+          "author": "RevH",
+          "subject": "Allowing Steam: Response from Dunkle requested",
+          "content": "At the last E3 Mike Dunkle told me that cafe's that did not buy into the program could still have the Steam client downloaded as well as all the modules so that individual could use their own Steam accounts at the cafes.  Now it is my understanding that Valve has changed their stance on this matter.\n\n\n\nValve has now been quoted as saying, \"you would be required to erase the copy of the Valve products after that user logged off the system\".\n\n\n\nThis makes little sense to me as those products are u..."
+        },
+        {
+          "post_id": 533200,
+          "author": "Mr. Chris",
+          "subject": "",
+          "content": "It's a waste of money and bandwidth, better off trying the new games that don't have Steam.\n\n__________________\n\nDon't vote for Bush/Cheney 2004!\n\nLeet speak and shortened English (U, UR, Y, etc) is stupid, don't use it\n\nWhy Pro gaming is stupid - http://www.gamespy.com/articles/489/489731p1.html?fromint=1"
+        },
+        {
+          "post_id": 533883,
+          "author": "cgh.com",
+          "subject": "",
+          "content": "this is a good question revh. i also would like to know\n\n__________________\n\n<!--\n\nOMG get it right PEOPLE!\n\n\n\nIt's \"ocarD\" NOT \"oscarD\" get it?\n\n\n\nocarD = Draco. \n\n\n\n:eek:\n\n\n\n-->"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,696 @@
+{
+  "forums": {
+    "12": {
+      "forum_id": 12,
+      "name": "Support / Help",
+      "description": ""
+    },
+    "13": {
+      "forum_id": 13,
+      "name": "Steam Discussions",
+      "description": ""
+    },
+    "14": {
+      "forum_id": 14,
+      "name": "General",
+      "description": ""
+    },
+    "15": {
+      "forum_id": 15,
+      "name": "Suggestions / Ideas",
+      "description": ""
+    },
+    "16": {
+      "forum_id": 16,
+      "name": "Windows Dedicated Server",
+      "description": ""
+    },
+    "17": {
+      "forum_id": 17,
+      "name": "Community Help and Tips",
+      "description": ""
+    },
+    "19": {
+      "forum_id": 19,
+      "name": "Linux Dedicated Server",
+      "description": ""
+    },
+    "26": {
+      "forum_id": 26,
+      "name": "Server Discussions",
+      "description": ""
+    },
+    "34": {
+      "forum_id": 34,
+      "name": "Off Topic",
+      "description": ""
+    },
+    "35": {
+      "forum_id": 35,
+      "name": "VAC",
+      "description": ""
+    },
+    "37": {
+      "forum_id": 37,
+      "name": "Counter-Strike: Source",
+      "description": ""
+    },
+    "41": {
+      "forum_id": 41,
+      "name": "Source SDK",
+      "description": ""
+    },
+    "43": {
+      "forum_id": 43,
+      "name": "Half-Life 2",
+      "description": ""
+    },
+    "44": {
+      "forum_id": 44,
+      "name": "Source DS (Windows)",
+      "description": ""
+    },
+    "5": {
+      "forum_id": 5,
+      "name": "Valve Back Catalog Discussions",
+      "description": ""
+    },
+    "7": {
+      "forum_id": 7,
+      "name": "Counter-Strike",
+      "description": ""
+    }
+  },
+  "threads": {
+    "1": {
+      "title": "",
+      "post_count": 0,
+      "posts": []
+    },
+    "101029": {
+      "title": "CZ players deserve CS:S free",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 733177,
+          "author": "alb1221",
+          "subject": "CZ players deserve CS:S free",
+          "content": "it is my general belief that CS:Z players should not be left in the dust. We payed the money for a full priced game and with all do respect I will feel spat on if after CS:S releases CZ players are just forgotten. I think that at least somthing should come of paying for this full price game."
+        },
+        {
+          "post_id": 733178,
+          "author": "SteveTauber",
+          "subject": "Re: CZ players deserve CS:S free",
+          "content": "quote:Originally posted by alb1221 it is my general belief that CS:Z players should not be left in the dust. We payed the money for a full priced game and with all do respect I will feel spat on if after CS:S releases CZ players are just forgotten. I think that at least somthing should come of paying for this full price game. Yeah you get bots. So stop your bitching. -- Steve Tauber"
+        },
+        {
+          "post_id": 733180,
+          "author": "alb1221",
+          "subject": "",
+          "content": "I tried to get this thread polite so please if you want to reply at least to so respectfuly. Bots were a welcome addition but they were already widely available on the counter-strike scene. The cz content was simply not somthing that should have been advertised and marketed as a full priced piece of software, this imo (giving us CS:S) would be a way or redeeming our purchases to give us this all new amazing experience. That is it however.. im not suggesting we deserve more then css.. just that cs port which would make most of us CZ players more then happy for paying for the game."
+        },
+        {
+          "post_id": 733184,
+          "author": "SteveTauber",
+          "subject": "",
+          "content": "quote:Originally posted by alb1221 I tried to get this thread polite so please if you want to reply at least to so respectfuly. Bots were a welcome addition but they were already widely available on the counter-strike scene. The cz content was simply not somthing that should have been advertised and marketed as a full priced piece of software, this imo (giving us CS:S) would be a way or redeeming our purchases to give us this all new amazing experience. That is it however.. im not suggesting we deserve more then css.. just that cs port which would make most of us CZ players more then happy for paying for the game. You could just do what I did and NOT BUY IT.!!!! OMG>!. So just buy HL2 and you get CS:S for free. So have fun. -- Steve Tauber"
+        },
+        {
+          "post_id": 733187,
+          "author": "alb1221",
+          "subject": "",
+          "content": "Im just suggesting what valve may want to do to be a respectable buisness. Deliver to there dedicated fans and such."
+        }
+      ]
+    },
+    "101329": {
+      "title": "Ultimate fix to the shield",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 735878,
+          "author": "Wudge",
+          "subject": "Ultimate fix to the shield",
+          "content": "Remove the shield or do the following. If it must be kept in, fix the hitboxes and make it a Hostage Rescue map only piece of equipment just like the defusal kit is Defusal map only piece of equipment. The shield is balanced when the CTs are on the offensive and the Terrorists like on maps such as militia have far better positions and with a good awper or two can dominate the entire map easily enough and start going on the offensive themselves. The shields in these situations where campers, AWPers and the like are rife and the CTs need a way to get close without dieing and to enter a room without being taken out on the spot. Works good on Hostage Rescue maps, on Defusal Maps is just is unbalancing and is banned in every war due to that fact (and the fact its hitboxes are so buggy). Otherwise ditch the thing. The problems with the shield are manifold. 1. It slows down the gameplay on defusal maps When the Counter-terrorists are offensive then the shield is nice, lets them get past the AWPer and campers and get those hostages and get out. On defusal maps its a different story. It slows things down, makes a rush much harder as a shielder is a threat not easily taken out on your average pub server. If he has a team picking at you then you have to split your attention, one eye on the guy with the M4 bursting at you on Aztec 40-50 metres away and the shielder to your left who will cap you the moment you turn to fight the M4er. As a result, it gives the CTs who already typically have the advantage on defusal maps, an even greater advantage and one that can make a rush lose its momentum quite quickly and be driven back. 2. Buggy Hitboxes and hit detection and generally buggy Since its introduction the thing has been plagued with problems, many problems. From invisibility bugs to throwing it through walls to being able to shoot the server thinking your shield is still up. Its worst problem is its buggy hitboxes and hit detection. Lets just say too many times has a player stopped, crouched and aimed right on a shielders head and watch a \"spark\" from the shield appear and the noise of hitting the shield sound off. Too many times has a player gotten around a shielders side and still found himself spamming into the shield, too many times then they have reloaded has the player found himself not hitting the guy despite the shield being down. Occassionally you'd shoot the shield itself and it would hit the guy's head if he was moving. This is yet even more bugginess but typically the shield stops shots whether they are on the shield or just near it. 3. It gives too much protection, even when its down. This is one of the biggest issues which is due partly to the second point I made above, the thing even when you have it down means that half your target is covered when you shoot if not more and its so quick to bring up or drop down. Now how the shield is held and moved about and the name of a \"Riot shield\" which has been thrown about would indicate that the thing shouldn't exacltly be stopping high calibur rifles that are repeatedly hitting the thing in the same spots. Shields that strong are mounted on wheels because they are too heavy to hold for any real length of time let alone shoot accurately while holding. 4. The thing is so cheap At a bit over two grand you can get it most rounds. With all the problems accociated with it such as slowing down enemy rushes and all, if its there every round then the problem becomes worse. 5. Too lethal with it Lets face it, pistols are made overly strong for what they are so then they are actually useful back ups. Its a good thing too that they are but when it comes to combining that mechanism to keep pistols useful with something like the shield, it results in a shielder just being too dangerous when everything is put together. A shielder with a DEagler who has good aim can be a nightmare as he only needs one or two shots for a bink and then he can put his shield back up and due to the pistol's accuracy on the move for those first shots, he doesn't have to stop to do it. The shield when it was originally being talked about I imagined as something that covered you upper body and if you crouched all your body. I figured fair enough, you could still be shot but if you crouched you could slowly push up, you could crouch and hide an AWPer behind you or if you saw an enemy you could crouch quickly for the protection. I didn't envisage a shield that completely covered your body, gave awesome protection even when down and happened to clip through the floor when you crouched. I mean, I've thrown a few ideas about before. One idea was to make it so you couldn't crouch with a shield, at least limiting their mobility to main entrances and preventing them from getting into odd camping spots or through certain ways by crouch jumping or from boosting on top of other player's heads easily full stop. Another was that when you lower your shield, the guy brings it so the long edge is roughly horizontal with the ground and to the side so his entire body pretty much can be seen by a player standing in front of him thus meaning if the shield comes down, so does most of the protective quality of the shield. A lot of ideas have been played with, most like the second one found wanting as they make shielders then camp more. Some had a little promise but didn't quite fix the main issues at hand like the first idea, sure it was alright but it didn't quite solve the problem of shielders being too lethal and too protected and thus slowing down rushes on defusal maps and being a CT item it would be used defensively and for hostage rescue maps where its real use would come into play the crouch thing would simply limit it. So, I came upon the conclusion that you either do the following. 1. Limit it to hostage rescue maps ONLY and fix its bugginess OR 2. Remove it completely."
+        },
+        {
+          "post_id": 735924,
+          "author": "Darius",
+          "subject": "",
+          "content": "that's. . .that's actually a damn good idea. wow, I don't know what to say now []"
+        },
+        {
+          "post_id": 736032,
+          "author": "Wudge",
+          "subject": "",
+          "content": "Haha. I've suggested this for a while now, its so simple yet it fixes most of the problems with the thing. Then just fix the hitboxes and you got yourself something that far fewer will whinge about. Personally, I'd prefer it to be gone completely but hey, if people MUST have it still in then this fix would make it a far better fitting in with the gameplay. I sat down one day when considering how to speed up gameplay to make CS a more spectator friendly game after reading about the money changes (+800 for the team after planting bomb and all that) and worked out this: On a Hostage Rescue map the shield means less of a camp fest and more assaulting happening. On a defusal map it means more camping and slows the gameplay down as the T's have a harder time rushing, have to take longer as the shield is a threat not easily dealt with. The shield on a defusal map detracts from the gameplay as a fair few DE_ maps are already favour the CTs while in a Hostage Rescue map it adds to it as most CS_ maps favour the Terrorists if they camp like they are meant to. Therefore, take it out of the Defusal maps and it loses all its detracting qualities and just adds to the gameplay in CS, well, apart from its buggy hit detection and so forth. :/"
+        },
+        {
+          "post_id": 736038,
+          "author": "Darius",
+          "subject": "",
+          "content": "gives more flavor to the game, too. like for DE makes, I always got the feeling that both sides go there at basically the same time. but with CS maps, the T's have obviously been there a while, and the CT's kind made a planned assult. so, if they change the shield the way you suggest, they could say \"whoa, we've got more time, grab yonder shield, my terrorist fighting friend.\""
+        },
+        {
+          "post_id": 736059,
+          "author": "Wudge",
+          "subject": "",
+          "content": "quote:Originally posted by Darius so, if they change the shield the way you suggest, they could say \"whoa, we've got more time, grap yonder shield, my terrorist fighting friend.\" rofl, nice way of putting it [] btw: http://www.forumplanet.com/counters...amp;tid=1411072 (http://www.forumplanet.com/counterstrike/topic.asp?fid=6695&tid=1411072) Seems the folks over there intially are loving it too. [Edit: BTW if you have a Gamespy account with the CS forums, please do post there that you like it. The more people who do, the more chance of it happening.]"
+        }
+      ]
+    },
+    "10137": {
+      "title": "Do your bink videos run like crap in a bucket???",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 67934,
+          "author": "thehunter1320",
+          "subject": "Do your bink videos run like crap in a bucket???",
+          "content": "Do you want to change that? well now you can! with this quick and easy method! I'm going to explain what the problem is and how to fix it! it's the blitting that messes up, it makes low-ended machines lag the movies terribly, to fix this go to binks website and download the RAD Tools, install and startup RAD Tools. Then select the bink video and click advanced play, then under blitting style switch it from the default to: DIRECTDRAW UYVY off-screen. u'll have a perfect framerate! this won't be permanent unless u click make EXE and use that one to play the video instead of the steam one in the movie folder. B4 you say, \"I don't care, i'm a computerz genuizez and that won'tz fixz it. I PWN JOO!!!!!!\" just read these testimonies! Poster - Memory Gap: yep this worked, thanks a bunch hunter. also the sound was synched properly too. Poster - mr_badger: Thanks Hunter. Now the videos look the way they should. Perhaps making this a sticky guide for ppl will help them to experiance the videos as they were meant. Poster - Kilko: Btw, thehunter1320, it looks much better now!!!! Soooo smoooth!!!!! I thought they just put it bad together before, but now it's all good! THX ALOT thehunter1320!!!! Poster - trepid_jon: Yeah, thanks for that info. They play all smooth now. Very cool. Everything's lined up right now. The crowbar swing actually looks right. Man, I'm glad I read that post in this thread. the web site where you can get RAD Tools is www.radgametools.com (http://www.radgametools.com) Happy watching! P.S.: if this helped you achieve a better frame-rate please bump this topic."
+        },
+        {
+          "post_id": 67941,
+          "author": "LoneDeranger",
+          "subject": "",
+          "content": "I thought it looked OK at first, but now it's much better. Thanks."
+        },
+        {
+          "post_id": 67951,
+          "author": "DiSTuRbEdofX",
+          "subject": "",
+          "content": "If you have nothing running in the background it should work fine, mine lagged really bad with IRC and PHL open. Closed those tried it again, worked fine."
+        },
+        {
+          "post_id": 67952,
+          "author": "crucher",
+          "subject": "",
+          "content": "it was good. now its perfect [] []"
+        },
+        {
+          "post_id": 67964,
+          "author": "Mongo Wulf",
+          "subject": "",
+          "content": "I did this on the bugbait movie. Excellent frame-rate, even for a 400mhz computer! However, the other movies was still lagging a bit. Guess that's plain hardware limitation."
+        }
+      ]
+    },
+    "101650": {
+      "title": "CD KEY issues",
+      "post_count": 6,
+      "posts": [
+        {
+          "post_id": 738680,
+          "author": "Taylor Sherman",
+          "subject": "CD KEY issues",
+          "content": "If you are having trouble registering a cd-key with Steam, please use the Steam Troubleshooter. Please read everything it says carefully, and try the methods it recommends to find any account of yours that may be using the key already. If that doesn't work, the Troubleshooter tells you everything else you need to know. Posting a thread here won't do you any good, and I'm going to start closing all of the new threads about cd-keys I see. /support.php/ (/support.php)"
+        },
+        {
+          "post_id": 739214,
+          "author": "Taylor Sherman",
+          "subject": "",
+          "content": "Note: There is currently a bug in Steam that may tell you your cd-key is invalid if you enter it when trying to join a game server (double=clicked on a server in the Servers window). You'll need to go to the Steam Games window, double-click the game you want to play, and enter the key there. Thanks, Taylor"
+        },
+        {
+          "post_id": 752409,
+          "author": "Taylor Sherman",
+          "subject": "",
+          "content": "There has been a change in procedure for people that are having trouble with cd-keys they just purchased. Instead of emailing Hien, please follow these instructions (this only applies to troubles with cd-keys from freshly opened boxes): quote: From this point on, all such inquiries should now be emailed only to halflifekeys@vugames.com and no longer to Hien Nguyen. The customer must include the following within the message in .jpeg format: 1. A copy of the actual game CD. 2. A copy of the HL/CS packaging which clearly displays the CD key number. 3. A copy of the sales receipt."
+        },
+        {
+          "post_id": 811510,
+          "author": "Taylor Sherman",
+          "subject": "Duplicate CD-keys -- Valve, Sierra, etc",
+          "content": "There seems to be some confusion over this item from the Troubleshooter. On the page about newly-purchased cd-keys, it suggests you email pictures of the keys to \"halflifekeys@vugames.com\". VU Games is the parent company of Sierra - the publishers of the games, and printers of the keys. They are a different company from us (Valve). They provided us with this email address as a place to send customers who were having difficulty using keys from newly-purchased games -- specifically, keys that they might have accidentally printed more than once. They know which keys this happened to (we don't), and so can properly attend to their needs. To the best of our knowledge, they are checking that email address and helping out customers in this condition. But we can't check on the status of your request, you'll have to contact them for that. Thanks, Taylor"
+        },
+        {
+          "post_id": 811516,
+          "author": "Taylor Sherman",
+          "subject": "",
+          "content": "Note: As I mentioned in this other thread (/forums/showthread.php?s=&threadid=108755), VU Games is not the same company as Valve."
+        }
+      ]
+    },
+    "102034": {
+      "title": "*FIX* To Input Lag Issues",
+      "post_count": 1,
+      "posts": [
+        {
+          "post_id": 741901,
+          "author": "minus_human",
+          "subject": "*FIX* To Input Lag Issues",
+          "content": "Ok, a while ago i read a large thread on people suffering Input lag like myself. This is where occasionally the mouse goes dead and the keyboard becomes unresponsive for a second or two. I can't seem to find the thread on it again but the general consensus of how to fix it was to everytime you start a hl game ctrl-alt-del out of it and set hl.exe's priority to Low. This is all well and good as it worked for a lot of people but it is an annoying and time consuming excercise which has to repeated each time you start CS. Another fix was to lower the acceleration of Direct sound, which also worked but left the sound out of sync... nuts to that. So in my very limited resourcefulness i came up with this easier solution to the Priority fix. Right click your steam icon and in the traget box type this: C:\\WINDOWS\\system32\\cmd.exe /c start \"\" /low \"C:\\Program Files\\Steam\\Steam.exe\" You may need to edit the icon back to the original steam one but now everytime you start Steam it will start under Low priority and anything it launches (ie. HL.exe) also starts as low priority. Simple.\n\n__________________ Touch me so i think im here ... Skin my senses, Barely breathin mi-nus hu-man, Come squeeze the world an drip it down my throat a-"
+        }
+      ]
+    },
+    "102049": {
+      "title": "Valve Unveils New Games And Services For Valve Cybercafe Program",
+      "post_count": 1,
+      "posts": [
+        {
+          "post_id": 742029,
+          "author": "Mike Dunkle",
+          "subject": "Valve Unveils New Games And Services For Valve Cybercafe Program",
+          "content": "Counter-Strike: Source, Half-Life 2, and More Coming Soon Valve Corporation today revealed a series of new games and features being added to the Valve Cybercafé Program over the coming months. Effective immediately, subscribers of the Valve Cybercafe Program will receive a free license to use Xbox versions of Valve's games in their cafés, up to the number of active cybercafe subscriptions held in the Valve Cybercafe Program. In similar fashion, Counter-Strike: Source and Half-Life 2 will be added to the program for active subscribers in the Valve Cybercafe Program. These new games will be included as part of the regular monthly fee as soon as they are released. \"Valve has a long tradition of developing award-winning action games, online technologies and services for our individual customers,\" said Gabe Newell, Valve president and founder. \"As we prepare for the launch of our next generation content and services, we are eager to extend that tradition to our Cybercafe partners by developing features and content that will make it easier to administer Valve games in a Cybercafe setting and provide compelling games for their customers. We are hoping to hear feedback from the Cybercafes so we can continue to improve the program and better understand how we can best support our subscribers.\" In addition to the new games, Valve is also readying a Cybercafe License Server. Among other features, the Cybercafe License Server will allow café's to manage their licenses on a concurrent user basis, locally update individual computers on a café's local area network (reducing bandwidth needs for updates), and allow individual users with personal Steam accounts to access their account on any computer station located at a cybercafé site. Active Valve Cybercafe Program subscribers receive access and a commercial license to use Valve games in their café (including Counter-Strike, Counter-Strike: Condition Zero, Day of Defeat and Half-Life), access to upcoming new releases in the program such as Half-Life 2 and Counter-Strike: Source, free tournament licenses, promotional materials and priority customer service and support. To find out more information and subscribe today, please visit /index.php?area=cybercafes (/index.php?area=cybercafes) About Valve Founded in 1996, Valve creates entertainment software titles, including Half-Life�, Counter-StrikeTM, and Team Fortress�. Valve's portfolio accounts for over 11 million retail units sold worldwide, and over 88% of the online action market. More information about Valve is available through the company's Web site at www.valvesoftware.com (/valvesoftware)"
+        }
+      ]
+    },
+    "102551": {
+      "title": "The TFC Bug List - Fix Please",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 747165,
+          "author": "Whit",
+          "subject": "The TFC Bug List - Fix Please",
+          "content": "This is a comprehensive list of TFC bugs that NEED fixing, some of these bugs are over 4 years old and its about time Valve fixed them instead of ignoring TFC. This list has been created by Whit. Name: Nail Gren & MIRV Bug. Explanation: The nail bug is the chief problem. This particular bug is rather nasty and can be achieved by tossing a nail grenade upwards into a ceiling just before the first stage is activated. Upon beginning its routine, the nail grenade moves upwards by a little without checking to determine whether there is a solid surface overhead. As a consequence, it “burrows” into the ceiling or other surface and carries on its routine as normal. However, upon exploding, the detonation gains many times more explosive power than normal, both in terms of range and damage. The resultant bug can destroy level one and two sentries through a massive area of solid geometry. A good example of this bug in action can be seen with the maps well (a nail grenade in the cap point ceiling can destroy the entire flag room defence) and bases_r2 (a nail grenade in the ramp room ceiling can destroy the flag room defence). The MIRV bug operates in a similar fashion, except it is tougher to reproduce and less effective. Name: Lift bug. Explanation: You go up a lift and you just get stuck at the top – you can’t get of the lift. This normally happens towards the end of the map when a lift has been used a lot, the only known way to escape the “lift bug” is to jump-crouch constantly, but this isn’t a sure way to get off the lift as the lift may have descended by the time you have negated this effect. Name:Ghost Nail grenade bug.. Explanation: The ghost nail grenade bug is a particularly annoying and less than consistent quirk. Sometimes, upon a nail grenade exploding after spinning on the ground as normal, one can tread upon the ground the nail grenade occupied, only to lose health to the long departed grenade’s “ghost”. This can occur over three seconds afterwards. The only noticeable property surrounding this bug is that when multiple nail grenades are thrown in the same spot it is much more likely to occur, but even then it is not a guaranteed occurrence. A double dose of ghost nail grenades can kill a fully stocked medic, it is infuriating at times! Name: Timeleft doesn’t display when dead. Explanation: Die, press your timeleft button and it won’t show the timeleft. Name: Gren entity bug. Explanation: This is an infuriating bug if I’ve ever witnessed one (particularly for the engineers out there). If a grenade lands under the sentry tripod, it assumes qualities similar to that of the nail grenade bug. The grenade multiplies in power and size causing huge damage. This bug also possesses the capacity to destroy a level three sentry gun with a single grenade. All an engineer can attempt to do is dismantle or detonate the sentry before the grenade detonates. In addition to this bug, grenades can become 'trapped' under other surfaces. For example, if a pillar is located one mapping unit from the floor leaving a miniscule gap (a practice frequently used to lower r_speeds by stopping csg cutting up the map so badly) a grenade can fit under it, despite the grenade's model being much larger. This then creates a very large blast in a similar manner to the sg/nailgren bug. I had to incur higher r_speeds on sm_reloaded because of this bug (since all pillars touch the floor, thus cutting the floor up). Name: _special Explanation: Special is a bug that has a great deal of applications and uses. I am not particularly sure about the way in which it works, but I have been informed it is something to do with an overloaded operator. Basically, special abuse allows the player to create scripts that loop indefinitely and without performance penalties (typical looping scripts are unworkable almost solely because wait statements are required, consequently “lagging” the player executing the script). With a special script under one’s control, a multitude of shady applications are available. Some examples of _special in action: • Perfect bunny hop jump timing whilst holding a key indefinitely • Switch press script employed mid-air on maps like openfire • Flag throw scripts to toss the flag on the first instance of touching it (very useful for maps like well if a sentry is operating in the flag room) • Fast pipe det script for the demoman • Assault cannon spinning script to help with jumping whilst maintaining the AC in a state of readiness to fire • Chopping indefinitely There are many more uses of _special (and no doubt some of which I am currently unaware). Name: Chopping Explanation: Chopping, as I’ve put it in the past, is bunnyhopping’s less intelligent, uglier and less entertaining cousin. Chopping is a name given to the act of repeatedly ducking and then releasing the duck to stand up once more. Because the valve solution to the bunnyhopping cap was to check whether the player is above the cap upon pressing the jump button (or similar), the chop hopping exploit works because there is no jump involved. The legs are pulled up into the body whilst crouching, so by looping the action multiple times in a second, the ground is not “touched” so to speak. Chopping is useful in places, but is not nearly as effective as bunnyhopping due to the fact that, when performing the action, one cannot turn much at all. Chopping also looks eminently stupid. Name: Fullupdate – Anti-Conc Explanation: The fullupdate anti-conc hack is something which can be explained better by someone in possession of the technical facts regarding it. My guess is that the client polls the server repeatedly using the fullupdate command, causing some kind of a processing request overrule the conc effect being called. It is easy to spot in first person demos due to entities flickering when the cheat is activated. Cheaters have also been known to use this hack in CS to avoid the white-out flashbang effect. (I can get hold of the script that enables this to happen if a member of valve wants to see it). Name: Death bug. Explanation: The death bug is a long-standing and highly amusing problem that presents itself at the most inopportune of times. Upon reaching a low value of health close to zero, the client seems to decide that the player has died and pushes the view down to the death style camera (parallel to the ground rather than perpendicular as normal). The server, however, knows better. As a result, the player can wander around with a tipped view and even “resurrect” themselves using a health pack or friendly medic. It is a rarity but a bug nonetheless. Name: Disappearing grenades. Explanation: The disappearing grenades bug is another old school remnant that really should have been taking care of three to four years ago. Still, it remains. One used to lose grenades when picking up the flag with a primed primary or secondary grenade; this was fixed. However, it is still very common to lose a grenade whilst priming and throwing the flag, especially if said grenade is the player’s last remaining grenade of that type (i.e. if one was to prime a frag grenade and throw the flag, it (the grenade) would be likely to disappear). Some players have also reported that capping with a grenade primed on many maps (well included) causes the primed grenade to disappear in a similar manner. I have not been able to reproduce this, though. Name: Respawn grenades. Explanation: This is another strange and rather inconsistent bug. The respawn grenade bug occurs when an unfortunate player has a grenade primed upon dying. When the respawn occurs, the grenade appears to travel with the player into the respawn and explodes causing damage to the player and his or her team mates. Name: Dud Concussion grenade. Explanation: It’s quite hard to reproduce this bug, but the faulty concussion grenade can be chiefly witnessed on maps like shutdown2. I repeatedly get this problem when defending the plank and an enemy offence player concussion jumps from below. The affected (conced) player must be on the very edge of the blast, because they are thrown high into the air, yet no concussion effect is administered. Name: Client Concussed Animation Anomalies. Explanation: This is a slightly confusing problem for those that do not fully understand the concussion effect and client decal system whilst concussed. When shocked, the player’s client decals appear under the crosshair every time a shot is fired. However, these decals are not real but can still trigger certain events. An example of this happens on the map well. A concussed player can shoot the well front door button causing it to light up and emanate the activated sound. However, no action is forthcoming as both of these properties were just triggered client-side, not server-side."
+        },
+        {
+          "post_id": 747168,
+          "author": "Whit",
+          "subject": "",
+          "content": "Name: Passing Through Door Heals Caltrop Wounds. Explanation: Another strange bug. When wounded by a scout’s caltrop, a player with reduced mobility can simply pass through a door entity and have their injuries magically healed. This may extend to sniper leg shot victims but I haven’t tested the theory. Name: Phantom sniper charge. Explanation: he phantom sniper charge is another common bug with which people should mostly be familiar. This bug occurs when one charges the sniper rifle as movement begins. By doing so in certain circumstances, it is possible to project a red dot as if the rifle were charging up a shot. It is not presently clear whether this is a client-side effect, or whether other players can see the dot, too. This bug is largely harmless, seeing as the charge time whilst moving is not added to the charge when one stops moving and begins to charge the rifle correctly (i.e. from a standstill). In effect, the bug is more of a problem for the sniper it affects rather than the other players. Name: No Damage When Next to Exploding Grenade. Explanation: This is another long-standing grievance that appears usually in the most irritating of circumstances. When one is juxtaposed with another player and holding a frag grenade, it is possible for either player (usually the player without the grenade) to take absolutely zero damage from the grenade blast. I am fairly certain this can occur for either player. It is not particularly clear as to what causes this phenomenon or how a fix could be administered Name: Phantom infection. Explanation: This bug occurs when a discrepancy between the sounds and actions of a player conspire to make one think one has infected the enemy, yet the enemy remains unaffected. This typically happens when the medic attacks an enemy with his or her medikit. Upon coming within close enough range, the medikit “hits” the soldier and the infection sound can be heard, either solely by the client of the infecting medic or by both players. After a few seconds, it becomes plainly obvious to the apparently infected player that no such infection has taken place. The attacking medic can usually not even tell whether the infection has been successful unless the enemy makes an audible pain noise a few seconds after the infection was administered. On the flip side, it is possible for a medic to infect a soldier from what looks to be a great distance from the affected player’s perspective. This is usually down to the Half-Life netcode and players’ rates, pings and so forth. Name: Looping assault cannon sound. Explanation: There is not a great deal to state about this bug. Upon firing the assault cannon, one can sometimes initiate a looping of sound. This can be repeated several times over (infuriating and LOUD) to the point where one must stop to type “stopsound” into the console. Valve supposedly fixed this bug with two patches (one specific TFC patch [which does little more than halt the existing assault cannon .wav file when the weapon is fired again – a rather ineffective and not always successful solution in many situations] and general Half-Life engine patch [which still did not solve the problem entirely]). In short, it has been reduced in frequency but still occurs at times. Name: Tracer Commands For Concussed Aiming. Explanation: When concussed and firing the assault cannon, it is possible to exploit tracer commands to ensure concussed aiming is significantly simpler to grasp and perform. This is partly due to the tracer_ set of commands and partly due to the way in which the assault cannon projects two tracers whilst the user is concussed. The crux of the tracer issue is that there are various tracer_ commands (such as alpha, offset, red, green, blue and so forth) that can be used to make the faint secondary “true aim” tracer very bright. This consequently makes finding one’s true aim whilst concussed very easy. As a result, it can make the weapon very overpowered. Name: +Use Command Stopping Motion Explanation: When activating the +use command (traditionally employed to press switches and so forth) the player (if touching the ground) comes to a halt. Many heavies use this command, combined with a counter-directional press of the moment keys, to stop far more abruptly whilst concussed. The +use key is probably given the stopping effect to stop players being able to script the pressing of buttons and so forth. Name: Telefragged by spectator. Explanation: If one is occupying the space also shared by the info_player_start within a map, if a spectator should join the server at that exact moment, then one becomes a victim of a spectator telefrag. That is, it is possible to be killed by a non-existent player! It should be simple to fix this problem, either by strategically placed vantage points using the info_player_start or due to a rewrite of the entity code. Name: Fickle Concussion Jumping Explanation: When playing a fortress modification, concussion jumping is one of the staple skills that are extremely important. Unfortunately, TFC’s concussion jumping system is very dependent on ping, frame-rate and network settings (amongst other things, including server quality). Should one have access to a frame-rate of 60 that is consistent, a decent connection that provides latency of 100 or under and adequate rates, it is usually simple to perform a high percentage of concussion jumps. As frame-rates, connections and rates deteriorate, the finesse and success rate of concussion jumps suffer sharp decline. Trying to concussion jump using a 56k modem on a pIII-666 is almost impossible at a high level of play. Using a poor connection, one cannot set the correct rates to achieve quality gameplay. Even if a broadband connection is available for gaming, the frame-rate of the computer is extremely important when concussion jumping. A poor or inconsistent frame-rate typically results in poor concussion jumping. Valve should attempt to reduce this problem through any number of techniques without adversely affecting the other facets of gameplay. A good example of ways around this problem can be witnessed in the “no lag” TFC grenade timer. Instead of utilising the default grenade timer, the no lag timer works by triggering the custom speak timer immediately after the grenade has “clicked” to signify a successful prime. The default timer starts as soon as you push the prime key, meaning the concussion grenade detonates by (roughly) one’s ping in timing differences (though this does deviate slightly according to rates)."
+        },
+        {
+          "post_id": 747170,
+          "author": "Whit",
+          "subject": "",
+          "content": "Name: Lip bug. Explanation: On maps where players swim whilst fighting (the \"well\" pipe being a typical example) it is possible to exploit the discrepancy between the player's pov and the world model positions to basically allow an attacking player to give one way fire. For example, a HW swimming in the main flag room water (water area with the bridge) can shoot into the water pipe leading into the base whilst being almost impervious to damage if the HW sticks close to the bottom of the floor. The HW can fire into the pipe from their perspective without problem, but the enemy in the pipe cannot see the HW, only their fire. This is due to the swimming animations and the positioning of the player's gun on the world model AFAIK. When upright, the player's gun is halfway down their body. When swimming, the gun is almost parallel with their head (while their first person POV remains the same for both, causing a discrepancy). It basically makes a HW in this position unstoppable. (A demo may be needed to illustrate this one clearly.) Name: Weapon switching. Explanation: Switching quickly between weapons and firing instantly doesn't actually fire a shot. But the model animates and sound is produced. Name: Dodgy Gas / Gas suits. Explanation: Taking a suit to be protected from the gas on a map like rock2, but it randomly not protecting you, this also happens in the gas chamber where you trigger the gas release. Sometimes you are also unable to pick suits up. Also sometimes the gas does not actually do anything. Name: Detpack – Spectator bug. Explanation: If a demoman tries to a lay a detpack whilst a spectator is watching this particular player, the detpack cannot be layed until the spectator changes view mode or player. Name: Hitscan / Hitbox bug. Explanation: This is a bug that's occurring frequently on most servers. When in effect, the hitbox bug results in 'afflicted' players being extremely tough to hit successfully with hitscan weapons. The effect appears to move the hitboxes ahead of the player (in that the player is always behind their hitbox). As a consequence, it is like a reverse of the old interp effect, and a return to the days of leading targets. Unfortunately, the faster the class, the more pronounced the effect. A scout with the hitbox bug is so fast and the hitboxes so seperated from the player that using grenades and projectile weapons (like the RPG) is the only way to kill them. No one has ever figured out for sure what causes this bug. It can affect players usiing the rates and configs they've always used. Their game does not suffer as a result, everything appears normal to them. Some players seem to experience this bug more than others, but in general, it can potentially affect anyone. Reconnecting to the server usually has little or no effect (for either the person experiencing the bug, or the players faced with the problem of dealing with the aforementioned player). In general, on an 18 person clanserver, you can expect one or two to be experiencing the bug. Curiously, some people appear to only be partially unhittable (in that a full on shot will do half damage) whilst others are just totally unhittable unless one leads them with the shot by half to one bodylength (sometimes more, if they are a scout). Name: Hitbox Distortion When Crouching. Explanation: If an enemy crouches, it becomes very difficult to snipe them at times. A good example of this is when an enemy sniper slowly 'crawls' out from behind the sniper deck sides on the map \"well\". An enemy sniper can take aim and fire, but the shot will appear to pass right through their enemy if areas around the shoulders, upper chest or head are targetted. Very annoying. Name: Hitscan Weapons Penetrate Lifts. Explanation: If a player heads up a lift (such as the shutdown 2 FR lift, or the well FR lifts) and an enemy player stands under the lift, shooting up, with a hitscan weapon (such as the super shotgun) the buckshot will still do damage to the enemy at times. This is easily reproduced, most people don't even notice they are being shot through a solid surface purely because of the netcode -- they just assume they are being shot by someone in their line of sight and the server lag makes it look strange. Name: HLTV “bug” Explanation: Not a bug exactly, but when you're watching HLTV or in spectator mode the announcements about the flag being moved/touched/capped/returned etc. say \"the enemy flag\" and it's not clear which flag it is. Would be kind of nice if it said \"red flag\" or \"blue flag\" when spectating. Name: Detpack score bug. Explanation: This has only appeared in Steam. Basically, when trying to activate a team scoring thing with a detpack, like detting the computer on bases or the control room on cz2, the demo must be alive for it to work. If the demo is killed by the detpack itself, it won't work either, making cz2 much harder to det. Name: Prematch with control maps. Explanation: Adding prematch breaks the map, with the gates failing to open. (E.g. Dustbowl, Avanti & Warpath). Name: The Climbing out of water and getting stuck bug. Explanation: When climbing out of water and something blocks your path directly above you become stuck and cannot move apart from a very slow sinking for a few seconds. Most easily reproducable on Well under the bridges outside the bases. Doesn't seem to even be a random occurance - it happens every time and always when its likely to be irritating and get you killed. Name: Water bug. Explanation: When firing out of the water to someone moving on land blood sprites do not show and sounds can not be heard making it very hard to know if your shots are registering. Name: Spy feigning death bug. Explanation: This allows a spy to feign death and fall into a wall and be nearly completely invisible (you can normally just see their feet sticking out). Many thanks go to the F2C community (which can be found here: http://forums.far2cool.com/forum.aspx?FID=2 (http://forums.far2cool.com/forum.aspx?FID=2)) for helping me to compile this list. A special thanks goes to “Defrag” as he put a lot of thought and effort into describing a lot of these bugs. Please Valve fix these bugs and make TFC even better. If you need any demo’s or AVIs of these bugs, I would be happy to re-create them with some of my clan mates and send them to you. A Word document of this list can be found here: http://homepage.ntlworld.com/whitmo...%20List%202.doc (http://homepage.ntlworld.com/whitmore2/TFC%20bug%20List%202.doc) By Whit"
+        },
+        {
+          "post_id": 747182,
+          "author": "KoncreteAngel",
+          "subject": "",
+          "content": "who cares about tfc anymore? only about 100 people play it"
+        },
+        {
+          "post_id": 747188,
+          "author": "GingerNinja",
+          "subject": "",
+          "content": "How about those 100 players. And its considerably more than 100 players btw. []"
+        }
+      ]
+    },
+    "102574": {
+      "title": "CS:S Chris Bokitch plz reply",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 747387,
+          "author": "fsjk85",
+          "subject": "CS:S Chris Bokitch plz reply",
+          "content": "can we all get a realease dateor aNY INFO on the CS:S beta"
+        },
+        {
+          "post_id": 747404,
+          "author": "{Neoblade} 111",
+          "subject": "",
+          "content": "Do you really expect him to reply to this? they said end of summer wich means that there is NO official release date YET."
+        },
+        {
+          "post_id": 747407,
+          "author": "DiSTuRbEdofX",
+          "subject": "Re: CS:S Chris Bokitch plz reply",
+          "content": "quote:Originally posted by fsjk85 can we all get a realease dateor aNY INFO on the CS:S beta Does it really matter that much? Doubtful they will give you any of that stuff, seeing as how they are working on it right now to get it to beta, which I bet probably won't be long till beta."
+        },
+        {
+          "post_id": 747415,
+          "author": "fsjk85",
+          "subject": "",
+          "content": "I JUST WATED AN ANSEWR, the waiting is killing me"
+        },
+        {
+          "post_id": 747423,
+          "author": "DiSTuRbEdofX",
+          "subject": "",
+          "content": "quote:Originally posted by fsjk85 I JUST WATED AN ANSEWR, the waiting is killing me Ummmmm, they announced the date yesturday, you need to get out or something, its not something to kill people over."
+        }
+      ]
+    },
+    "10308": {
+      "title": "",
+      "post_count": 0,
+      "posts": []
+    },
+    "10333": {
+      "title": "Steam 8/05",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 69634,
+          "author": "Erik Johnson",
+          "subject": "Steam 8/05",
+          "content": "There is a new version of Steam available to the beta. If you shutdown Steam now and restart you will automatically be brought up to date. Changelist: - Fixed bug where steam monitor would occasionally show incorrect data when first opened - Fixed game name of mods showing incorrectly in 'third party' section of Games list - Changed friends authorization request dialogs to appear sequentially, instead of all opening at the same time - Fixed bug where you couldn't re-add a user to your list who had previously been removed - Increased heartbeat rate to server if friends or chat dialog windows are open - Fixed a problem when using Friends behind a firewall. - Fixed logged friends chats being saved incorrectly. - Fixed problem where users would not always get disconnected properly, and have messages build up to be sent to them. - Fixed problem where Steam would not properly update for users running WindowBlinds."
+        },
+        {
+          "post_id": 69636,
+          "author": "Tyl3n0L",
+          "subject": "",
+          "content": "Thank you Mr.Johnson []"
+        },
+        {
+          "post_id": 69638,
+          "author": "Tyl3n0L",
+          "subject": "",
+          "content": "Edit: I have this strange error just after the install ... i have a fresh install of steam. look:\n\n[]Attachment: exe error.jpg (attachment.php?s=3316f8436429dc53737e4b1d11a01c99&postid=69638) This has been downloaded 870 time(s)."
+        },
+        {
+          "post_id": 69639,
+          "author": "Erik Johnson",
+          "subject": "",
+          "content": "Can you send me an e-mail (erik@valvesoftware.com)?"
+        },
+        {
+          "post_id": 69640,
+          "author": "ZODD",
+          "subject": "",
+          "content": "quote:Originally posted by Tyl3n0L Edit: I have this strange error just after the install ... i have a fresh install of steam. look: same, I was just getting ready to host my own SS. Im running XP Pro SP1, XP2200+ Radeon 8500 128mb"
+        }
+      ]
+    },
+    "103448": {
+      "title": "Friends list deleted fix",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 755680,
+          "author": "Skatoony",
+          "subject": "Friends list deleted fix",
+          "content": "If you have lost your contacts on your friends list, here is what to do, make sure steam is closed before you attempt this! Go into your steam directory and look in the config directory. There should be some files like \"friendsdata.vdf\" and \"userdata_*******.vdf\" (where * is a number) Find that file, delete your \"friendsdata.vdf\" and rename the userdata to \"friendsdata.vdf\" (WITH .vdf or it won't work!) Start steam up. If you have more than 1 userdata, choose the one that is the biggest in size (mine was 4kb, the empty one was 1kb). Good luck to you!"
+        },
+        {
+          "post_id": 755736,
+          "author": "Sibylle",
+          "subject": "",
+          "content": "it does work for once. But then i restarted steam and got the same problem.......it doesn't work twice though, cuz my friendsdata is set back to 1KB (used to be 7KB) and the filename with the number is gone (only have the empty one)......"
+        },
+        {
+          "post_id": 755740,
+          "author": "Skatoony",
+          "subject": "",
+          "content": "Try deleting the other userdatas you have remaining that arn't 7kb, and see if that works. Post back if it does or don't, and i'l have a look into it."
+        },
+        {
+          "post_id": 755743,
+          "author": "Skatoony",
+          "subject": "",
+          "content": "Seems to work for me, closed steam and re-started it, without a problem I got my contacts still."
+        },
+        {
+          "post_id": 755751,
+          "author": "Sibylle",
+          "subject": "",
+          "content": "well my old friendsdata used to be 7KB, now it is replaced by one about the size of 1KB..... So i only have 1KB big Friendsdata and 2x userdata_******.vdf of 1KB...... Plz i want my friendslist back...."
+        }
+      ]
+    },
+    "103452": {
+      "title": "Friends List Gone FIX - By SKATOONY",
+      "post_count": 12,
+      "posts": [
+        {
+          "post_id": 755690,
+          "author": "devilman",
+          "subject": "Friends List Gone FIX - By SKATOONY",
+          "content": "Instead of everyone digging, here's a fix posted by this guy. Skatoony Senior Member Registered: Oct 2003 He's right, here is what to do: (make sure steam is closed) Go into your steam directory and look in config. There should be some files like \"friendsdata.vdf\" and \"userdata_*******.vdf\" (where * is a number) Find that file, delete your \"friendsdata.vdf\" and rename the userdata to \"friendsdata.vdf\" (WITH .vdf or it won't work!) Start steam up. If you have more than 1 userdata, choose the one that is the biggest in size (mine was 4kb, the empty one was 1kb). Hopefully this help!"
+        },
+        {
+          "post_id": 755720,
+          "author": "PlayRoar^",
+          "subject": "",
+          "content": "Yeah the solution works apart from the fact that its not the biggest file thats yours. All those userdata.vdf files are friends lists of people that have logged into friends on that computer, you'll just have to find the friends that belongs to you."
+        },
+        {
+          "post_id": 755728,
+          "author": "Skatoony",
+          "subject": "",
+          "content": "Well I said biggest because I went for the biggest one and it worked, so basically try any of them, if it don't work you can just easly use another one without it playing up."
+        },
+        {
+          "post_id": 755815,
+          "author": "Maxey",
+          "subject": "",
+          "content": "Worked for me!"
+        },
+        {
+          "post_id": 755851,
+          "author": "Maxey",
+          "subject": "",
+          "content": "lol... no, it's totally borked... gotta add em all over again..."
+        }
+      ]
+    },
+    "103606": {
+      "title": "Error! Server verification failed.",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 757048,
+          "author": "jetli",
+          "subject": "Error! Server verification failed.",
+          "content": "um.,...yea it does that when it says validating game resources while connecting to server. never happened before....this is the first time i steam'ed since the whole cache verification thing (a few days ago?). if that helps."
+        },
+        {
+          "post_id": 757054,
+          "author": "superd",
+          "subject": "",
+          "content": "I was just about to post this too! I can't join any server, keep getting that error yeah! [][]"
+        },
+        {
+          "post_id": 757057,
+          "author": "goldenchild",
+          "subject": "",
+          "content": "I was gonna post the same exact thing. ... >.< im getting the same error..."
+        },
+        {
+          "post_id": 757060,
+          "author": "rampage",
+          "subject": "",
+          "content": "Same exact thing is happening to me. Steam worked fine last night. I can startup any game but when it gets to the \"Validating resources\" screen it gives me the same error message as jet."
+        },
+        {
+          "post_id": 757066,
+          "author": "deadeye29",
+          "subject": "",
+          "content": "i just have posted the same thing :-/ should of looked at yours first"
+        }
+      ]
+    },
+    "103640": {
+      "title": "STEAM [didn't get] hacked!",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 757191,
+          "author": "trueplayer",
+          "subject": "Wtf friends list??",
+          "content": "I went on firneds list today and when i looked on the bottom of my screen it said Friends [- A-K-S] W .^.rrior and who the hell is what happend??"
+        },
+        {
+          "post_id": 757309,
+          "author": "FetusFarmer",
+          "subject": "STEAM got hacked!",
+          "content": "It's official! They've been hacked! Sign on friends, if you can, and you'll notice something is out of line. Yeah, your normal friends are on. Same names, you can see if they're online or offline. HOWEVER! Your name will be \"[A-K-S] W .^. R R ! O R\" This is on mine and 3 people ive contacted. STEAM, you guys got served."
+        },
+        {
+          "post_id": 757322,
+          "author": "GingerNinja",
+          "subject": "",
+          "content": "Interesting... Could be the first name in the steam data base of players? Just a regular feck up!? Or I guess it could be a hack. But I dunno..."
+        },
+        {
+          "post_id": 757332,
+          "author": "Bi0-HaZaRD",
+          "subject": "",
+          "content": "Yea thats the name I ****in see is what u said and when I remove one 2 others come up im like wtf? Or I get 2 and I remove one and 1 comes back up maybe steam did get hacked wonder why the ****ing friends wasnt working for sometime and now u cant connect in an god damn game now wtf?"
+        },
+        {
+          "post_id": 757350,
+          "author": "PureEvilCS",
+          "subject": "",
+          "content": "mines fine!"
+        }
+      ]
+    },
+    "10430": {
+      "title": "CS:CZ Models Preloaded on Steam..",
+      "post_count": 14,
+      "posts": [
+        {
+          "post_id": 70374,
+          "author": "Tyl3n0L",
+          "subject": "CS:CZ Models Preloaded on Steam..",
+          "content": "Hi, if you guys don't read CS-Nation... Here i found a nice news about CS:CZ on Steam.... Two CS:CZ players models are preloaded on steam right now. Head to: C:\\Program Files\\Steam\\SteamCache\\email@email.com\\Counter-Strike\\cstrike\\models\\player\\ and look at millitia and spetznaz, it's two CS:CZ players models. here i have two screenshots of the models in question: Spetznaz: http://tinyurl.com/j8yk (http://tinyurl.com/j8yk) Millitia: http://tinyurl.com/j8yo (http://tinyurl.com/j8yo) So, i think CS:CZ is coming soon... sooner than you think"
+        },
+        {
+          "post_id": 70378,
+          "author": "Swiftwind",
+          "subject": "",
+          "content": "Cool, will it let you replace the other player models with it?"
+        },
+        {
+          "post_id": 70411,
+          "author": "hotbot",
+          "subject": "",
+          "content": "aug / sep 2003"
+        },
+        {
+          "post_id": 70416,
+          "author": "Emfoor",
+          "subject": "",
+          "content": "I don't see any models in there. Only folders."
+        },
+        {
+          "post_id": 70426,
+          "author": "nw909",
+          "subject": "",
+          "content": "quote:Originally posted by Emfoor I don't see any models in there. Only folders. Thats what he meant."
+        }
+      ]
+    },
+    "104397": {
+      "title": "To the Mighty Cliffe",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 765584,
+          "author": "mentality",
+          "subject": "To the Mighty Cliffe",
+          "content": "I used to have some respect for you, for developing a big community and game out of no where. You are the reason why CS is so big today. Now I'm sorry to say, my respect to you is gone. You washed away my respect to you times after times. Don't you realize that these unecessary changes are making loads of frustration for people? First you forced people, especially competitive players to use a buggy application called Steam, then steam drains our computer performance, which affect our game play greatly. Which is all fine, we could deal with that. Then you took huge changes to our beloved game. Whats the point? Honestly and I think a lot of people would agree, including the pubbers, people who dont check this forum. The BEST solution is to keep the game exactly the same as HL CS 1.5, except with VAC, the new money system, the timer, and the two weapon, gali + famas. Thats it. Don't mess with it anymore. These new changes are just ridiculous. I don't spend hours working on a game just to be screw over by you. It's darn right disrespectful to us. Restore the hitboxes, etc into the CS 1.5 state. Seriously 1.5 was more of a consistent environment and in order for players to improve and to get anywhere in the game, they need consistent environment to work on. If pubbers don't like 1.5, why do you think they still play 1.5? They know about steam, they just choose not to use it. They are pubbers, not clan players, not in any leagues so they aren't required to switch. But for clan players, you are really messing us up. Do us all a favor, conduct a poll and do a research , do the poll on steam whenever a user connect, and let them decide if they want this CURRENT 1.6 stuff or 1.5 on steam plus VAC plus money system plus round timer and 2 additional weapon. Dont mess with anything else. I know you probably don't care, but if you ever play the game as much as we do, you will see my point. Please do your supporter a favor and just conduct that research and see what people truly want. Forcing your customer to obey a product that they don't really like is no different than punking them. Please be a good company and show us that we can trust you guys for dedicating our time onto this game. The awp being taken out without a word, the new hitboxes, the new recoil, etc. These \"small changes\" to you are big changes to players who spent numerous hours to get these things natural state. I hope you read this and only you. Disregard the people who reply to this thread, because thats only one portion of the opinion, to effectively determine what your customer wants, conduct a poll on Steam whenever they connect on-line, just like how you guys did for the HL2 survey. I hope you will restore my respect for you, otherwise you will see lots of people like me. Please do us all a favor. Thank you."
+        },
+        {
+          "post_id": 765642,
+          "author": "D-Monkey",
+          "subject": "",
+          "content": "waaaaa waaa waaaa Do u think anybody cares. Go away and play some other game."
+        },
+        {
+          "post_id": 765660,
+          "author": "mentality",
+          "subject": "",
+          "content": "http://www.forumplanet.com/counters...amp;tid=1416711 (http://www.forumplanet.com/counterstrike/topic.asp?fid=4954&tid=1416711) This is another thread started by someone else who carry similar opinions. I think people do care. Otherwise I don't see why people still play 1.5, especially the pubbers."
+        },
+        {
+          "post_id": 765730,
+          "author": "bunze",
+          "subject": "",
+          "content": "Although I love you... You make a good point, but... GO PLAY 1.5 IF IT IS SO ****ING PERFECT!!!!!11!!111!!1!!!11!!1!1!111!!!!!!1 Why would we have 2 separate games (1.5 + 1.6) that are the exact same thing? It makes no sense."
+        },
+        {
+          "post_id": 765816,
+          "author": "Calcium",
+          "subject": "",
+          "content": "This is what happens when keys never expire. Games just get worse and worse. Soon the game will get so crappy, even the p00r nubs will buy the new version!"
+        }
+      ]
+    },
+    "104585": {
+      "title": "Hand Cuffs in Counter-Strike",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 767561,
+          "author": "MaGoO99",
+          "subject": "Hand Cuffs in Counter-Strike",
+          "content": "Ok, this idea is a little far fetched but I think it would be really cool. Also realistic, in that whole cop sense. This is it, the CT's should have \"Hand Cuffs\". They could sneak up behind a T and cuff him thus for getting him out off the round. Also on AMX mod you could add a sound file to it just liek \"Headshot\" but it would be from the cops theme\". \"Bad boys, Bad boys, what ya gonna do?\" How cool would that be!! And if the T's think that unfair you can give them...err...rope. To tie the CTs hands. I don't want to start a war here it's just a idea. Ohhh it would also give you and your team money for I don't know \"Good Policing\" w3rd"
+        },
+        {
+          "post_id": 767576,
+          "author": "Jac",
+          "subject": "",
+          "content": "Most retarded idea ever. CT's aren't cops, they kill terrorists."
+        },
+        {
+          "post_id": 767578,
+          "author": "MaGoO99",
+          "subject": "",
+          "content": "Dude, incase your didn'y know or your just an idiot killing is a last resort. also have u never heard of terrorists taking hostiges? i mean Iraq.... jeez"
+        },
+        {
+          "post_id": 767590,
+          "author": "Jac",
+          "subject": "",
+          "content": "quote:Originally posted by MaGoO99 Dude, incase your didn'y know or your just an idiot killing is a last resort. Oh yes, when terrorists are shooting at your buddies, killing is always a last resort. When was the last time you heard of a Counter-terrorist team taking armed assailents alive? Please just shut up, your idea sucks, you're obviously not a bright person so let's leave the thinking to people who are good at it. quote:Originally posted by MaGoO99 also have u never heard of terrorists taking hostiges? i mean Iraq.... jeez You said this was for CTs, when was the last time a terrorist took an armed Counter-terrorist hostage? Your supposed realism immediately comes in conflict with several other realisms."
+        },
+        {
+          "post_id": 767597,
+          "author": "MaGoO99",
+          "subject": "",
+          "content": "Hahahaha dude if your being shot aat then you shoot back, that being your last resort. You stupid idiot, so your saying if the Terrorist gives up the pull out there Socom and blow his head off? Nice way of thinking dumba*s"
+        }
+      ]
+    },
+    "104756": {
+      "title": "I just Purchased the Valve Premiem pack....",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 769597,
+          "author": "WHUdaman",
+          "subject": "I just Purchased the Valve Premiem pack....",
+          "content": "I didn't realise it wont allow you to play c/s. Is there anyway I can download the counter strike app? to play on the Halflife game i just brought for $35!?"
+        },
+        {
+          "post_id": 769784,
+          "author": "Chronos7",
+          "subject": "",
+          "content": "do you mean the Half-Life Platinum Pack and if you do it has cs and every other game except cs:cz"
+        },
+        {
+          "post_id": 769793,
+          "author": "Urban Terror",
+          "subject": "",
+          "content": "Make sure you click \"I already own this product\" after clicking the game icon in the Steam games tab. Make sure your not trying to play Condition Zero, the platinum pack comes with every official HL game available through Steam exept for CZ."
+        },
+        {
+          "post_id": 769805,
+          "author": "WHUdaman",
+          "subject": "",
+          "content": "its called the valve premium pack on the reciept. It allows me to play everything apart from The original C/s and Condition Zero."
+        },
+        {
+          "post_id": 769807,
+          "author": "WHUdaman",
+          "subject": "",
+          "content": "When I click on I already own this product for Counter strike I just get the cdkey screen up."
+        }
+      ]
+    },
+    "104780": {
+      "title": "Bazooka",
+      "post_count": 15,
+      "posts": [
+        {
+          "post_id": 770025,
+          "author": "ghimpheng",
+          "subject": "Bazooka",
+          "content": "I think they shoud invent something called Bazooka so we can shoot thru the shield of CTs instead that they keep hiding behind shield acting like a coward or remove shield since so many server have ban shield already"
+        },
+        {
+          "post_id": 770082,
+          "author": "cgh.com",
+          "subject": "",
+          "content": "Love the game already has two .50 caliber guns in it, deagle and the magnum. That's armor piercing there, but yet it still can't get through shield [] lol Bazooka no no I think I would have too much fun with that []"
+        },
+        {
+          "post_id": 770137,
+          "author": "I2o[G]uE TacT-X",
+          "subject": "",
+          "content": "The shield needs more accurate hitboxes. That's it."
+        },
+        {
+          "post_id": 770806,
+          "author": "Darius",
+          "subject": "",
+          "content": "how about NO FREAKIN ROCKET LAUNCHERS IN CS. play quake or somethin, man."
+        },
+        {
+          "post_id": 770872,
+          "author": "krecent2",
+          "subject": "",
+          "content": "how about we just keep it the way it is before they screw everything up plus when i pub i never see anyone use the shield anyways so its fine the way it is"
+        }
+      ]
+    }
+  }
+}

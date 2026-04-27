@@ -808,7 +808,7 @@ a:hover.rightLink_news {
 
 	width: 910px;
 	background-attachment: scroll;
-	background-image: url('http://steampowered.com/v/img/img_content_bg_full.jpg');
+	background-image: url('img/img_content_bg_full.jpg');
 	background-repeat: repeat-y;
 	background-position: 0px 0px;
 	margin-top: 15px;
@@ -817,7 +817,7 @@ a:hover.rightLink_news {
 .fullHeaderBG {
 
 	background-attachment: scroll;
-	background-image: url('http://steampowered.com/v/img/img_content_header_full.jpg');
+	background-image: url('img/img_content_header_full.jpg');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
 	height: 120px;

@@ -1,258 +1,103 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- Steam 2003 v2 User Profile View - vBulletin Style with Navigation Bar -->
-<div class="steam-profile-container">
-
-    <!-- Profile Header -->
-    <table cellpadding="4" cellspacing="1" border="0" width="95%" align="center">
-    <tr>
-        <td bgcolor="#3E4637" colspan="2">
-            <font face="verdana,arial,helvetica" size="1" color="#B4BA50">
-                <b>User Profile: {MEMBER_PROFILE.USERNAME}</b>
-                <!-- IF MEMBER_PROFILE.USER_RANK_TITLE -->
-                <br /><span class="rank-title">{MEMBER_PROFILE.USER_RANK_TITLE}</span>
-                <!-- ENDIF -->
-            </font>
-        </td>
-    </tr>
-    </table>
-
-    <!-- Main Profile Content -->
-    <table cellpadding="4" cellspacing="1" border="0" width="95%" align="center">
-    <tr valign="top">
-
-        <!-- Left Column - Avatar and Basic Info -->
-        <td bgcolor="#626d5c" width="175">
-
-            <!-- Avatar -->
-            <div align="center">
-                <!-- IF MEMBER_PROFILE.AVATAR_IMG -->
-                    {MEMBER_PROFILE.AVATAR_IMG}
-                <!-- ELSE -->
-                    <img src="{T_THEME_PATH}/images/no_avatar.gif" width="80" height="80" alt="No Avatar" />
-                <!-- ENDIF -->
-            </div>
-
-            <!-- Username and Status -->
-            <div align="center">
-                <font face="verdana,arial,helvetica" size="2" color="{MEMBER_PROFILE.USER_COLOUR}">
-                    <b>{MEMBER_PROFILE.USERNAME}</b>
-                </font>
-                <!-- IF S_USER_STATUS_ENABLED -->
-                <br /><span class="user-status">{MEMBER_STATUS_INDICATOR}</span>
-                <!-- ENDIF -->
-            </div>
-
-            <!-- Basic User Info -->
-            <div style="margin: 10px 0;">
-                <font face="verdana,arial,helvetica" size="1" color="#C4CABE">
-                    <b>User Title:</b><br />
-                    <!-- IF MEMBER_PROFILE.USER_RANK_TITLE -->
-                        {MEMBER_PROFILE.USER_RANK_TITLE}
-                    <!-- ELSE -->
-                        Steam User
-                    <!-- ENDIF -->
-                </font>
-
-                <!-- User Status Message -->
-                <!-- IF MEMBER_STATUS_MESSAGE -->
-                <div style="margin: 8px 0; padding: 4px; background: #545F4E;">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE">
-                        <b>Status:</b><br />
-                        <em>"{MEMBER_STATUS_MESSAGE}"</em>
-                    </font>
-                </div>
-                <!-- ENDIF -->
-
-                <!-- Steam Status -->
-                <!-- IF MEMBER_STEAM_STATUS and MEMBER_STEAM_STATUS neq 'offline' -->
-                <div style="margin: 8px 0; padding: 4px; background: #545F4E;">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE">
-                        <b>Steam:</b><br />
-                        <span class="steam-status steam-status-{MEMBER_STEAM_STATUS}">
-                            <!-- IF MEMBER_CURRENT_GAME -->
-                                Playing: {MEMBER_CURRENT_GAME}
-                            <!-- ELSE -->
-                                {MEMBER_STEAM_STATUS}
-                            <!-- ENDIF -->
-                        </span>
-                    </font>
-                </div>
-                <!-- ENDIF -->
-            </div>
-
-            <!-- Online/Offline Status -->
-            <div align="center" style="padding: 6px; background: #545F4E;">
-                <!-- IF MEMBER_PROFILE.S_ONLINE -->
-                    <img src="{T_THEME_PATH}/images/on.gif" alt="Online" />
-                    <font face="verdana,arial,helvetica" size="1" color="#B4BA50"><b>User is Online</b></font>
-                <!-- ELSE -->
-                    <img src="{T_THEME_PATH}/images/off.gif" alt="Offline" />
-                    <font face="verdana,arial,helvetica" size="1" color="#8B8D67">User is Offline</font>
-                <!-- ENDIF -->
-
-                <!-- IF MEMBER_LAST_VISIT_FORMATTED -->
-                <br /><font face="verdana,arial,helvetica" size="1" color="#C4CABE">Last Visit: {MEMBER_LAST_VISIT_FORMATTED}</font>
-                <!-- ENDIF -->
-            </div>
-        </td>
-
-        <!-- Right Column - Detailed Information -->
-        <td bgcolor="#545F4E">
-
-            <!-- Profile Information -->
-            <table cellpadding="4" cellspacing="1" border="0" width="100%">
-
-            <!-- Basic Info -->
-            <tr>
-                <td bgcolor="#3E4637" colspan="2">
-                    <font face="verdana,arial,helvetica" size="1" color="#B4BA50"><b>Basic Information</b></font>
-                </td>
-            </tr>
-            <tr>
-                <td bgcolor="#626d5c" width="25%">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE"><b>Username:</b></font>
-                </td>
-                <td bgcolor="#545F4E">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE">{MEMBER_PROFILE.USERNAME}</font>
-                </td>
-            </tr>
-            <tr>
-                <td bgcolor="#545F4E">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE"><b>Join Date:</b></font>
-                </td>
-                <td bgcolor="#626d5c">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE">{MEMBER_PROFILE.JOINED}</font>
-                </td>
-            </tr>
-            <tr>
-                <td bgcolor="#626d5c">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE"><b>Total Posts:</b></font>
-                </td>
-                <td bgcolor="#545F4E">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE">{MEMBER_PROFILE.POSTS}</font>
-                </td>
-            </tr>
-
-            <!-- Location Info -->
-            <!-- IF MEMBER_PROFILE.LOCATION -->
-            <tr>
-                <td bgcolor="#545F4E">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE"><b>Location:</b></font>
-                </td>
-                <td bgcolor="#626d5c">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE">{MEMBER_PROFILE.LOCATION}</font>
-                </td>
-            </tr>
-            <!-- ENDIF -->
-
-            <!-- Steam Information -->
-            <tr>
-                <td bgcolor="#3E4637" colspan="2">
-                    <font face="verdana,arial,helvetica" size="1" color="#B4BA50"><b>Steam Information</b></font>
-                </td>
-            </tr>
-            <tr>
-                <td bgcolor="#626d5c">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE"><b>Steam Status:</b></font>
-                </td>
-                <td bgcolor="#545F4E">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE">
-                        <!-- IF MEMBER_STEAM_STATUS -->
-                            <span class="steam-status steam-status-{MEMBER_STEAM_STATUS}">
-                                <!-- IF MEMBER_CURRENT_GAME -->
-                                    Playing: {MEMBER_CURRENT_GAME}
-                                <!-- ELSE -->
-                                    {MEMBER_STEAM_STATUS}
-                                <!-- ENDIF -->
-                            </span>
-                        <!-- ELSE -->
-                            Unknown
-                        <!-- ENDIF -->
-                    </font>
-                </td>
-            </tr>
-
-            <!-- Contact Information -->
-            <tr>
-                <td bgcolor="#3E4637" colspan="2">
-                    <font face="verdana,arial,helvetica" size="1" color="#B4BA50"><b>Contact Information</b></font>
-                </td>
-            </tr>
-            <!-- IF S_LOGGED_IN and not S_IS_BOT and U_PM -->
-            <tr>
-                <td bgcolor="#545F4E">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE"><b>Private Message:</b></font>
-                </td>
-                <td bgcolor="#626d5c">
-                    <font face="verdana,arial,helvetica" size="1">
-                        <a href="{U_PM}" style="color: #B4BA50;">Send private message</a>
-                    </font>
-                </td>
-            </tr>
-            <!-- ENDIF -->
-            <!-- IF MEMBER_PROFILE.WEBSITE -->
-            <tr>
-                <td bgcolor="#626d5c">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE"><b>Website:</b></font>
-                </td>
-                <td bgcolor="#545F4E">
-                    <font face="verdana,arial,helvetica" size="1">
-                        <a href="{MEMBER_PROFILE.WEBSITE}" target="_blank" style="color: #B4BA50;">{MEMBER_PROFILE.WEBSITE}</a>
-                    </font>
-                </td>
-            </tr>
-            <!-- ENDIF -->
-
-            <!-- Statistics -->
-            <tr>
-                <td bgcolor="#3E4637" colspan="2">
-                    <font face="verdana,arial,helvetica" size="1" color="#B4BA50"><b>Forum Statistics</b></font>
-                </td>
-            </tr>
-            <tr>
-                <td bgcolor="#545F4E">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE"><b>Total Posts:</b></font>
-                </td>
-                <td bgcolor="#626d5c">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE">{MEMBER_PROFILE.POSTS}</font>
-                </td>
-            </tr>
-            <tr>
-                <td bgcolor="#626d5c">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE"><b>Last Activity:</b></font>
-                </td>
-                <td bgcolor="#545F4E">
-                    <font face="verdana,arial,helvetica" size="1" color="#C4CABE">{MEMBER_LAST_VISIT_FORMATTED}</font>
-                </td>
-            </tr>
-
-            </table>
-        </td>
-    </tr>
-    </table>
-
-    <!-- User Actions -->
-    <!-- IF S_LOGGED_IN and not S_IS_BOT -->
-    <table cellpadding="4" cellspacing="1" border="0" width="95%" align="center">
-    <tr>
-        <td bgcolor="#3E4637" align="center">
-            <font face="verdana,arial,helvetica" size="1">
-                <!-- IF U_PM -->
-                <a href="{U_PM}" style="color: #B4BA50;"><img src="{T_THEME_PATH}/images/icon_pm.gif" alt="PM" border="0" /> Send Private Message</a>
-                <!-- ENDIF -->
-                <!-- IF U_EMAIL -->
-                | <a href="{U_EMAIL}" style="color: #B4BA50;"><img src="{T_THEME_PATH}/images/icon_email.gif" alt="Email" border="0" /> Send Email</a>
-                <!-- ENDIF -->
-                <!-- IF U_WWW -->
-                | <a href="{U_WWW}" target="_blank" style="color: #B4BA50;"><img src="{T_THEME_PATH}/images/icon_www.gif" alt="WWW" border="0" /> Visit Website</a>
-                <!-- ENDIF -->
-            </font>
-        </td>
-    </tr>
-    </table>
-    <!-- ENDIF -->
-
-</div>
+<br />
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="" />
+	<font face="verdana, arial, helvetica" size="2"><b><a href="{U_INDEX}">{SITENAME}</a> &gt;
+	<a href="{U_MEMBERLIST}">Members List</a> &gt;
+	{USERNAME}</b></font></td>
+</tr>
+</table>
+<br />
+<table align="center" bgcolor="#3E4637" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+<table class="vb-grid" border="0" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+	<td bgcolor="#3E4637" colspan="2">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr id="cat">
+		<td align="left"><font color="#D8DED3" face="verdana, arial, helvetica" size="2"><b>Profile For {USERNAME}</b></font></td>
+		<td align="right"><!-- IF S_DISPLAY_SEARCH --><a href="{U_SEARCH_USER}"><font class="thtcolor" color="#D8DED3" face="verdana,arial,helvetica" size="1">Search for all posts by this user.</font></a><!-- ENDIF --></td>
+	</tr>
+	</table>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#626d5c"><font face="verdana, arial, helvetica" size="2"><b>Date Registered:</b></font></td>
+	<td bgcolor="#626d5c"><font face="verdana, arial, helvetica" size="2">{JOINED}</font></td>
+</tr>
+<tr>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2"><b>Status:</b></font></td>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2"><!-- IF RANK_TITLE -->{RANK_TITLE}<!-- ELSE -->Member<!-- ENDIF --> <!-- IF RANK_IMG -->{RANK_IMG}<!-- ENDIF --></font></td>
+</tr>
+<tr>
+	<td bgcolor="#626d5c"><font face="verdana, arial, helvetica" size="2"><b>Total Posts:</b></font></td>
+	<td bgcolor="#626d5c"><font face="verdana, arial, helvetica" size="2">{POSTS}<!-- IF POSTS_DAY --> ({POSTS_DAY})<!-- ENDIF --></font></td>
+</tr>
+<tr>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2"><b>Last Active:</b></font></td>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2">{LAST_ACTIVE}</font></td>
+</tr>
+<tr>
+	<td bgcolor="#626d5c"><font face="verdana, arial, helvetica" size="2"><b>Contact {USERNAME}:</b></font></td>
+	<td bgcolor="#626d5c"><font face="verdana, arial, helvetica" size="2">
+<!-- IF U_EMAIL --><a href="{U_EMAIL}">Click here to email {USERNAME}</a><br /><!-- ENDIF -->
+<!-- IF U_PM --><a href="{U_PM}">Send {USERNAME} a Private Message!</a><!-- ENDIF -->
+	</font></td>
+</tr>
+<!-- IF U_JABBER and S_JABBER_ENABLED -->
+<tr>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2"><b>Jabber:</b></font></td>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2"><a href="{U_JABBER}" onclick="popup(this.href, 750, 320); return false;">{L_SEND_JABBER_MESSAGE}</a></font></td>
+</tr>
+<!-- ELSEIF USER_JABBER -->
+<tr>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2"><b>Jabber:</b></font></td>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2">{USER_JABBER}</font></td>
+</tr>
+<!-- ENDIF -->
+<!-- BEGIN custom_fields -->
+<tr>
+	<td bgcolor="#626d5c"><font face="verdana, arial, helvetica" size="2"><b>{custom_fields.PROFILE_FIELD_NAME}:</b></font></td>
+	<td bgcolor="#626d5c"><font face="verdana, arial, helvetica" size="2"><!-- IF custom_fields.PROFILE_FIELD_CONTACT --><a href="{custom_fields.PROFILE_FIELD_CONTACT}">{custom_fields.PROFILE_FIELD_DESC}</a><!-- ELSE -->{custom_fields.PROFILE_FIELD_VALUE}<!-- ENDIF --></font></td>
+</tr>
+<!-- END custom_fields -->
+<!-- IF AGE !== '' -->
+<tr>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2"><b>Age:</b></font></td>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2">{AGE}</font></td>
+</tr>
+<!-- ENDIF -->
+<!-- IF AVATAR_IMG -->
+<tr>
+	<td bgcolor="#626d5c"><font face="verdana, arial, helvetica" size="2"><b>Avatar:</b></font></td>
+	<td bgcolor="#626d5c">{AVATAR_IMG}</td>
+</tr>
+<!-- ENDIF -->
+<!-- IF SIGNATURE -->
+<tr>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2"><b>Signature:</b></font></td>
+	<td bgcolor="#545F4E"><font face="verdana, arial, helvetica" size="2"><div class="signature">{SIGNATURE}</div></font></td>
+</tr>
+<!-- ENDIF -->
+<!-- IF S_USER_LOGGED_IN and S_ZEBRA -->
+<tr>
+	<td align="center" bgcolor="#3E4637" colspan="2"><font face="verdana,arial,helvetica" size="1">
+<!-- IF U_ADD_FRIEND --><a href="{U_ADD_FRIEND}"><font color="#D8DED3">{L_ADD_FRIEND}</font></a><!-- ENDIF -->
+<!-- IF U_ADD_FOE --> &nbsp; <a href="{U_ADD_FOE}"><font color="#D8DED3">{L_ADD_FOE}</font></a><!-- ENDIF -->
+<!-- IF U_REMOVE_FRIEND --><a href="{U_REMOVE_FRIEND}"><font color="#D8DED3">{L_REMOVE_FRIEND}</font></a><!-- ENDIF -->
+<!-- IF U_REMOVE_FOE --><a href="{U_REMOVE_FOE}"><font color="#D8DED3">{L_REMOVE_FOE}</font></a><!-- ENDIF -->
+	</font></td>
+</tr>
+<!-- ENDIF -->
+<!-- IF U_USER_ADMIN -->
+<tr>
+	<td align="center" bgcolor="#3E4637" colspan="2"><font face="verdana,arial,helvetica" size="1">
+	Administrative Options: <a href="{U_USER_ADMIN}">{L_USER_ADMIN}</a>
+	</font></td>
+</tr>
+<!-- ENDIF -->
+</table>
+</td></tr></table>
 
 <!-- INCLUDE overall_footer.html -->

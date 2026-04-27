@@ -1,47 +1,166 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- Login Form -->
-<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
-<tr>
-    <td>
-        <table cellpadding="4" cellspacing="1" border="0" width="100%">
-        <tr>
-            <td bgcolor="#3E4637" colspan="2" align="center">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_LOGIN}</b></font>
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor="#545F4E" colspan="2" align="center">
-                <form method="post" action="{S_LOGIN_ACTION}">
-                <table cellpadding="3" cellspacing="1" border="0">
-                <tr>
-                    <td><font face="verdana,arial,helvetica" size="2">{L_USERNAME}:</font></td>
-                    <td><input type="text" name="username" size="25" maxlength="40" value="{USERNAME}" class="bginput" /></td>
-                </tr>
-                <tr>
-                    <td><font face="verdana,arial,helvetica" size="2">{L_PASSWORD}:</font></td>
-                    <td><input type="password" name="password" size="25" maxlength="32" class="bginput" /></td>
-                </tr>
-                <!-- IF S_AUTOLOGIN_ENABLED -->
-                <tr>
-                    <td colspan="2" align="center">
-                        <input type="checkbox" name="autologin" /> <font face="verdana,arial,helvetica" size="1">{L_LOG_ME_ON}</font>
-                    </td>
-                </tr>
-                <!-- ENDIF -->
-                <tr>
-                    <td colspan="2" align="center">
-                        <input type="submit" name="login" value="{L_LOGIN}" class="bginput" />
-                    </td>
-                </tr>
-                </table>
-                {S_HIDDEN_FIELDS}
-                </form>
-            </td>
-        </tr>
-        </table>
-    </td>
-</tr>
+<form action="{S_LOGIN_ACTION}" method="post" id="login">
+
+<!-- IF S_ADMIN_AUTH -->
+<!-- Admin re-authentication: simple password-only form -->
+<br />
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="70%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0" width="100%">
+	<tr>
+		<td bgcolor="#3E4637" colspan="2">
+			<img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="" />
+			<font face="verdana, arial, helvetica" size="2" color="#D8DED3"><b>Administrator Log In</b></font>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#545F4E" colspan="2">
+			<font face="verdana, arial, helvetica" size="2">
+			Please re-enter your password to verify your identity.
+			</font>
+			<br /><br />
+			<!-- IF LOGIN_ERROR -->
+			<font face="verdana, arial, helvetica" size="2" color="#FF6060"><b>{LOGIN_ERROR}</b></font>
+			<br /><br />
+			<!-- ENDIF -->
+			<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%"><tr><td>
+			<table cellpadding="4" cellspacing="1" border="0" width="100%">
+				<tr>
+					<td bgcolor="#626d5c" nowrap="nowrap">
+						<font face="verdana, arial, helvetica" size="2">{L_USERNAME}:</font>
+					</td>
+					<td bgcolor="#626d5c" width="100%">
+						<font face="verdana, arial, helvetica" size="2"><b>{ADMIN_USERNAME}</b></font>
+					</td>
+				</tr>
+				<tr>
+					<td bgcolor="#626d5c" nowrap="nowrap">
+						<font face="verdana, arial, helvetica" size="2">{L_PASSWORD}:</font>
+					</td>
+					<td bgcolor="#626d5c" width="100%">
+						<input type="password" name="{PASSWORD_CREDENTIAL}" size="25" maxlength="255" class="bginput" tabindex="1" autocomplete="off" />
+					</td>
+				</tr>
+			</table>
+			</td></tr></table>
+			<br />
+			<div align="center">
+				<input type="hidden" name="{USERNAME_CREDENTIAL}" value="{ADMIN_USERNAME}" />
+				{S_HIDDEN_FIELDS}
+				{S_FORM_TOKEN_LOGIN}
+				<input type="submit" name="login" value="{L_LOGIN}" class="bginput" tabindex="2" />
+			</div>
+			<br />
+		</td>
+	</tr>
 </table>
+</td></tr></table>
+<br />
+
+<!-- ELSE -->
+<!-- Full login form in vBulletin Message style -->
+<br />
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="70%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0" width="100%">
+	<tr>
+		<td bgcolor="#3E4637" colspan="2">
+			<img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="" />
+			<font face="verdana, arial, helvetica" size="2" color="#D8DED3"><b>vBulletin Message</b></font>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#545F4E" colspan="2">
+			<!-- IF LOGIN_ERROR -->
+			<font face="verdana, arial, helvetica" size="2" color="#FF6060"><b>{LOGIN_ERROR}</b></font>
+			<br /><br />
+			<!-- ENDIF -->
+			<!-- IF LOGIN_EXPLAIN -->
+			<font face="verdana, arial, helvetica" size="2">{LOGIN_EXPLAIN}</font>
+			<br /><br />
+			<!-- ENDIF -->
+			<!-- IF not LOGIN_ERROR and not LOGIN_EXPLAIN -->
+			<font face="verdana, arial, helvetica" size="2">
+			You are not logged in or you do not have permission to access this page. This could be due to one of several reasons:
+			</font>
+			<font face="verdana, arial, helvetica" size="1">
+			<ol>
+				<li>You are not logged in. Fill in the form at the bottom of this page and try again.</li>
+				<li>You may not have sufficient privileges to access this page. Are you trying to edit someone else's post, access administrative features or some other privileged system?</li>
+				<li>If you are trying to post, the administrator may have disabled your account, or it may be awaiting activation.</li>
+			</ol>
+			</font>
+			<!-- ENDIF -->
+
+			<!-- Login sub-table -->
+			<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%"><tr><td>
+			<table cellpadding="4" cellspacing="1" border="0" width="100%">
+				<tr>
+					<td bgcolor="#626d5c" nowrap="nowrap">
+						<font face="verdana, arial, helvetica" size="2">Your User Name:</font>
+					</td>
+					<td bgcolor="#626d5c" width="100%">
+						<input type="text" name="{USERNAME_CREDENTIAL}" size="25" maxlength="255" value="{USERNAME}" class="bginput" tabindex="1" />
+						<!-- IF S_REGISTER_ENABLED -->
+						&nbsp;&nbsp;<font face="verdana, arial, helvetica" size="1">(<a href="{U_REGISTER}">Want to register?</a>)</font>
+						<!-- ENDIF -->
+					</td>
+				</tr>
+				<tr>
+					<td bgcolor="#626d5c" nowrap="nowrap">
+						<font face="verdana, arial, helvetica" size="2">Your Password:</font>
+					</td>
+					<td bgcolor="#626d5c" width="100%">
+						<input type="password" name="{PASSWORD_CREDENTIAL}" size="25" maxlength="255" class="bginput" tabindex="2" />
+						&nbsp;&nbsp;<font face="verdana, arial, helvetica" size="1">(<a href="{U_SEND_PASSWORD}">{L_FORGOT_PASS}</a>)</font>
+					</td>
+				</tr>
+			</table>
+			</td></tr></table>
+			<br />
+
+			<!-- IF S_AUTOLOGIN_ENABLED -->
+			<div align="center">
+				<font face="verdana, arial, helvetica" size="1">
+				<label><input type="checkbox" name="autologin" id="autologin" tabindex="3" /> {L_LOG_ME_IN}</label>
+				&nbsp;&nbsp;
+				<label><input type="checkbox" name="viewonline" id="hide-me" tabindex="4" /> {L_HIDE_ME}</label>
+				</font>
+			</div>
+			<br />
+			<!-- ENDIF -->
+
+			<!-- IF S_CONFIRM_CODE -->
+			<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+			<br />
+			<!-- ENDIF -->
+
+			<div align="center">
+				{S_HIDDEN_FIELDS}
+				{S_FORM_TOKEN_LOGIN}
+				<input type="submit" name="login" value="{L_LOGIN}" class="bginput" tabindex="5" />
+			</div>
+			<br />
+
+			<!-- IF S_REGISTER_ENABLED and S_DISPLAY_FULL_LOGIN -->
+			<hr size="1" color="#3E4637" noshade="noshade" />
+			<font face="verdana, arial, helvetica" size="1">
+			{L_LOGIN_INFO}
+			</font>
+			<br /><br />
+			<div align="center">
+				<font face="verdana, arial, helvetica" size="2">
+				<a href="{U_REGISTER}"><b>{L_REGISTER}</b></a>
+				</font>
+			</div>
+			<br />
+			<!-- ENDIF -->
+		</td>
+	</tr>
+</table>
+</td></tr></table>
+<br />
+<!-- ENDIF -->
+
+</form>
 
 <!-- INCLUDE overall_footer.html -->

@@ -39,7 +39,7 @@ a:hover, a:active {
 
 /* Category headers */
 .tcat {
-    background: #537aa8 url({T_THEME_PATH}/images/maincol_bg_v5_g.png) repeat-y right;
+    background: #537aa8;
     color: #CFCBC2;
     font-size: 12px;
     font-weight: bold;

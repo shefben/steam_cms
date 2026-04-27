@@ -51,7 +51,7 @@ a:hover {
 .steam-logo {
     width: 677px;
     height: 116px;
-    background: url('images/Steam-Logo.gif') no-repeat;
+    /* Steam-Logo.gif not available - header rendered by template instead */
 }
 
 .steam-navigation {
@@ -192,6 +192,27 @@ a:hover {
 .chatbear-ad {
     text-align: center;
     margin: 5px 0;
+}
+
+/* Steam footer (page-bottom + valve/links/copy strips) */
+.steam-footer {
+    width: 679px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.steam-footer img {
+    display: block;
+    margin: 0 auto;
+}
+
+.steam-footer-content {
+    width: 679px;
+    margin: 0 auto;
+}
+
+.footer-table {
+    margin: 0 auto;
 }
 
 /* Tables */

@@ -1,6 +1,29 @@
 /* Steam 2004 Forum Style - Based on ripped steampowered.com 2004 forum design */
 /* Matches the vBulletin 2.3.3 Steam Forums aesthetic */
 
+/* === PROSILVER RESET - Override all inherited borders/outlines === */
+table, tr, td, th {
+    border: 0 none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+.post, .panel, .forumbg, .forabg, .inner, .wrap,
+.headerbar, .navbar, .action-bar, .postprofile,
+.postbody, .content, p, div, fieldset, ul, li, dl, dt, dd {
+    border: 0 none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background-image: none !important;
+}
+.post {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+}
+/* === END PROSILVER RESET === */
+
 /* Basic body styling */
 body {
     margin-top: 0px;
@@ -27,7 +50,7 @@ textarea, .bginput, input[type="text"], input[type="password"] {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: #D8DED3;
     background-color: #3E4637;
-    border: 1px solid #282E22;
+    border: 2px inset #969F8E !important;
 }
 
 input[type="submit"], .button, .button1, .button2 {
@@ -35,7 +58,7 @@ input[type="submit"], .button, .button1, .button2 {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: #D8DED3;
     background-color: #3E4637;
-    border: 1px outset #4C5844;
+    border: 1px outset #4C5844 !important;
     padding: 2px 6px;
     cursor: pointer;
 }
@@ -93,8 +116,20 @@ a:hover {
 }
 
 /* Tables and main layout */
+/* vBulletin uses cellspacing="1" with dark bgcolor on outer table to create thin border lines.
+   border-collapse must be separate (default) for cellspacing to work. */
 table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+/* 1px grid lines matching vBulletin cellspacing=1 effect */
+table.vb-grid {
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+}
+table.vb-grid > tbody > tr > td,
+table.vb-grid > tr > td {
+    border: 1px solid #282E22 !important;
 }
 
 /* Main forum table wrapper */
@@ -253,26 +288,40 @@ table {
 
 /* Horizontal rule */
 hr {
-    border: 0;
-    border-top: 1px solid #282E22;
+    border: 0 none !important;
+    border-top: 1px solid #282E22 !important;
     margin: 8px 0;
 }
 
-/* Quote boxes */
+/* Quote boxes - vBulletin 2.3.3 style */
+blockquote {
+    margin: 4px 0 4px 20px;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+blockquote hr {
+    border: none !important;
+    border-top: 1px solid #A0AA95 !important;
+    margin: 4px 0;
+    height: 0;
+}
+
+blockquote cite {
+    display: none;
+}
+
 .quotetitle {
-    background-color: #282E22;
-    color: #D8DED3;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 4px;
+    display: none;
 }
 
 .quotecontent {
-    background-color: #282E22;
-    color: #D8DED3;
-    border: 1px solid #3E4637;
-    padding: 8px;
-    font-size: 11px;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font-size: inherit;
 }
 
 /* Code boxes */
@@ -411,7 +460,7 @@ hr {
 
 /* Signature styling */
 .signature {
-    border-top: 1px solid #282E22;
+    border-top: 1px solid #282E22 !important;
     padding-top: 8px;
     margin-top: 10px;
     font-size: 10px;

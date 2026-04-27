@@ -14,6 +14,11 @@ Please visit the following link in order to activate your account:
 
 {U_ACTIVATE}
 
+Alternatively, you may activate your account manually by visiting the activation page and entering your username along with the following activation code:
+
+Activation Code: {ACTIVATION_CODE}
+Activation Page: {U_ACTIVATE_FORM}
+
 Your password has been securely stored in our database and cannot be retrieved. In the event that it is forgotten, you will be able to reset it using the email address associated with your account.
 
 Thank you for registering.

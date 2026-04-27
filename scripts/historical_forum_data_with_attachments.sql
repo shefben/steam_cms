@@ -6,6 +6,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 -- Historical Forums
 INSERT IGNORE INTO phpbb_forums (forum_id, forum_name, forum_desc, parent_id, is_historical) VALUES
+(1001, '[2004] Steam Users Forums', 'Historical Steam forum from 2004 (ID: 1)', 0, 1),
 (1011, '[2004] Steam Users Forums', 'Historical Steam forum from 2004 (ID: 11)', 0, 1),
 (1012, '[2004] Support / Help', 'Historical Steam forum from 2004 (ID: 12)', 0, 1),
 (1013, '[2004] Steam Discussions', 'Historical Steam forum from 2004 (ID: 13)', 0, 1),
@@ -28,7 +29,7 @@ INSERT IGNORE INTO phpbb_forums (forum_id, forum_name, forum_desc, parent_id, is
 (1008, '[2004] Steam Users Forums', 'Historical Steam forum from 2004 (ID: 8)', 0, 1);
 
 -- Historical Threads
-INSERT IGNORE INTO phpbb_topics (topic_id, forum_id, topic_title, topic_poster, topic_time, topic_posts, topic_views, is_historical) VALUES
+INSERT IGNORE INTO phpbb_topics (topic_id, forum_id, topic_title, topic_poster, topic_time, topic_posts_approved, topic_views, is_historical) VALUES
 (100001, 1001, '[2004] Steam Users Forums', 100000, 1072936800, 1, 0, 1),
 (201029, 1001, '[2004] CZ players deserve CS:S free', 100000, 1072936800, 19, 0, 1),
 (201329, 1001, '[2004] Ultimate fix to the shield', 100000, 1072936800, 19, 0, 1),

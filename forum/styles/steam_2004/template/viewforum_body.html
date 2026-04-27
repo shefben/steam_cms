@@ -1,146 +1,169 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- Breadcrumbs -->
+<!-- Breadcrumbs with moderators and new thread button -->
 <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
 <tr>
-    <td>
-        <font face="verdana,arial,helvetica" size="1">
-        <a href="{U_INDEX}">{L_INDEX}</a>
-        <!-- BEGIN navlinks -->
-        &nbsp;&#187;&nbsp;<a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a>
-        <!-- END navlinks -->
-        </font>
-    </td>
-    <td align="right">
-        <!-- IF S_DISPLAY_POST_INFO and not S_IS_BOT -->
-        <a href="{U_POST_NEW_TOPIC}"><img src="{T_THEME_PATH}/images/newthread.gif" border="0" alt="{L_POST_NEW_TOPIC}" /></a>
-        <!-- ENDIF -->
-    </td>
+	<td valign="top"><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="{SITENAME}" />
+	<font face="verdana, arial, helvetica" size="2"><b><a href="{U_INDEX}">Steam Users Forums</a>
+	<!-- BEGIN navlinks -->
+	 &gt; <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a>
+	<!-- END navlinks -->
+	</b></font>
+	<!-- IF MODERATORS -->
+	<font face="verdana,arial,helvetica" size="1"><br /><br />(Moderated by: <b><!-- IF S_SINGLE_MODERATOR -->{MODERATORS}<!-- ELSE -->{MODERATORS}<!-- ENDIF --></b>)</font>
+	<!-- ENDIF -->
+	</td>
+	<td align="right" valign="bottom"><font face="verdana,arial,helvetica" size="1">
+	<!-- IF S_DISPLAY_POST_INFO and not S_IS_BOT -->
+	<a href="{U_POST_NEW_TOPIC}"><img src="{T_THEME_PATH}/images/newthread.gif" border="0" alt="{L_POST_NEW_TOPIC}" /></a><br />
+	<!-- ENDIF -->
+	<nobr><!-- IF U_WATCH_FORUM --><a href="{U_WATCH_FORUM}">{S_WATCHING_FORUM_IMG}</a><br /><!-- ENDIF -->
+	<!-- IF U_MARK_TOPICS --><a href="{U_MARK_TOPICS}" data-ajax="mark_topics_read">{L_MARK_TOPICS_READ}</a><!-- ENDIF --></nobr>
+	</font></td>
 </tr>
 </table>
+<br />
 
-<!-- Forum Description -->
-<!-- IF FORUM_DESC -->
-<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<!-- topic table -->
+<form method="post" action="{S_FORUM_ACTION}">
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22" width="100%" align="center"><tr><td>
+<table class="vb-grid" cellpadding="4" cellspacing="1" border="0" width="100%">
+<tr align="center" bgcolor="#3E4637" id="cat">
+	<td align="center" bgcolor="#3E4637" colspan="3" nowrap><font face="verdana,arial,helvetica" size="1"><font color="#D8DED3"><b>{L_TOPICS}</b></font></font></td>
+	<td bgcolor="#3E4637" nowrap><font face="verdana,arial,helvetica" size="1"><font color="#D8DED3"><b>{L_AUTHOR}</b></font></font></td>
+	<td bgcolor="#3E4637" nowrap><font face="verdana,arial,helvetica" size="1"><font color="#D8DED3"><b>{L_REPLIES}</b></font></font></td>
+	<td bgcolor="#3E4637" nowrap><font face="verdana,arial,helvetica" size="1"><font color="#D8DED3"><b>{L_VIEWS}</b></font></font></td>
+	<td bgcolor="#3E4637" nowrap><font face="verdana,arial,helvetica" size="1"><font color="#D8DED3"><b>{L_LAST_POST}</b></font></font></td>
+</tr>
+
+<!-- BEGIN topicrow -->
+<tr align="center">
+	<td bgcolor="#3E4637"><img src="{T_THEME_PATH}/images/<!-- IF topicrow.S_TOPIC_MOVED -->movedfolder<!-- ELSEIF topicrow.S_TOPIC_LOCKED -->lockfolder<!-- ELSEIF topicrow.S_UNREAD_TOPIC -->newfolder<!-- ELSE -->folder<!-- ENDIF -->.gif" border="0" alt="<!-- IF topicrow.TOPIC_FOLDER_IMG_ALT -->{topicrow.TOPIC_FOLDER_IMG_ALT}<!-- ENDIF -->" /></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1">&nbsp;</font></td>
+	<td align="left" bgcolor="#3E4637" width="70%"><font face="verdana, arial, helvetica" size="2">
+	<!-- IF topicrow.S_POST_ANNOUNCE -->Announcement: <!-- ELSEIF topicrow.S_POST_STICKY --><font color="red" size="1"><b>STICKY: </b></font><!-- ELSEIF topicrow.S_TOPIC_MOVED -->Moved: <!-- ENDIF -->
+	<!-- IF topicrow.S_UNREAD_TOPIC and not S_IS_BOT --><a href="{topicrow.U_NEWEST_POST}"><img src="{T_THEME_PATH}/images/icon_newest_reply.gif" border="0" alt="View newest post" /></a>&nbsp;<!-- ENDIF -->
+	<a href="{topicrow.U_VIEW_TOPIC}">{topicrow.TOPIC_TITLE}</a></font>
+	<!-- IF topicrow.GOTO_PAGE --><font face="verdana,arial,helvetica" size="1"> ({L_GOTO_PAGE}: {topicrow.GOTO_PAGE})</font><!-- ENDIF -->
+	</td>
+	<td bgcolor="#3E4637" nowrap width="30%"><font face="verdana, arial, helvetica" size="2">{topicrow.TOPIC_AUTHOR_FULL}</font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{topicrow.REPLIES}</font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{topicrow.VIEWS}</font></td>
+	<td bgcolor="#3E4637">
+	<table border="0" cellpadding="0" cellspacing="0" id="ltlink" width="100%"><tr align="right">
+	<td nowrap><font face="verdana,arial,helvetica" size="1">{topicrow.LAST_POST_TIME}<br />
+		by <!-- IF topicrow.LAST_POST_AUTHOR --><a href="{topicrow.U_LAST_POST_AUTHOR}"><b>{topicrow.LAST_POST_AUTHOR}</b></a><!-- ENDIF --></font></td>
+	<td nowrap>&nbsp;<a href="{topicrow.U_LAST_POST}"><img src="{T_THEME_PATH}/images/lastpost.gif" border="0" alt="{L_VIEW_LATEST_POST}" /></a></td>
+	</tr></table>
+	</td>
+</tr>
+<!-- END topicrow -->
+
+<!-- IF not .topicrow -->
 <tr>
-    <td>
-        <font face="verdana,arial,helvetica" size="2">{FORUM_DESC}</font>
-    </td>
+	<td bgcolor="#3E4637" colspan="7" align="center">
+	<font face="verdana,arial,helvetica" size="2" color="#D8DED3">{L_NO_TOPICS}</font>
+	</td>
+</tr>
+<!-- ENDIF -->
+
+<!-- Sort options row -->
+<!-- IF S_SELECT_SORT_DAYS -->
+<tr id="cat">
+	<td align="center" bgcolor="#3E4637" colspan="7" width="100%"><font color="#D8DED3" face="verdana,arial,helvetica" size="1">
+	<nobr>
+	<b>Showing threads, sorted by </b>
+	{S_SELECT_SORT_KEY}
+	</nobr><nobr>
+	<b>in</b>
+	{S_SELECT_SORT_DIR}
+	<b>order, from</b>
+	{S_SELECT_SORT_DAYS}
+	<input type="submit" name="sort" value="Go" class="button2" />
+	</nobr>
+	</font></td>
+</tr>
+<!-- ENDIF -->
+</table>
+</td></tr></table>
+</form>
+
+<!-- Below topic table: new thread button, subscribe/mark read, pagination -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr valign="top">
+	<td><font face="verdana,arial,helvetica" size="1">
+	<!-- IF S_DISPLAY_POST_INFO and not S_IS_BOT -->
+	<a href="{U_POST_NEW_TOPIC}"><img src="{T_THEME_PATH}/images/newthread.gif" border="0" alt="{L_POST_NEW_TOPIC}" /></a><br />
+	<!-- ENDIF -->
+	<nobr><!-- IF U_WATCH_FORUM --><a href="{U_WATCH_FORUM}">Subscribe to this Forum</a><br /><!-- ENDIF -->
+	<!-- IF U_MARK_TOPICS --><a href="{U_MARK_TOPICS}" data-ajax="mark_topics_read">Mark this Forum Read</a><!-- ENDIF --></nobr>
+	</font></td>
+	<td align="right"><font face="verdana,arial,helvetica" size="1">
+	<!-- IF PAGINATION -->Pages ({PAGE_NUMBER}): <b>{PAGINATION}</b><!-- ENDIF -->
+	</font></td>
+</tr>
+</table>
+<br />
+
+<!-- Search this Forum -->
+<!-- IF S_DISPLAY_SEARCHBOX -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr valign="bottom">
+	<td></td>
+	<td align="right">
+	<table border="0" cellpadding="0" cellspacing="0"><tr>
+	<form method="get" action="{S_SEARCHBOX_ACTION}">
+	<td><font face="verdana,arial,helvetica" size="1"><b>Search this Forum:</b>
+	{S_SEARCH_LOCAL_HIDDEN_FIELDS}
+	<br /><input class="bginput" type="search" name="keywords" size="20" />
+	<input type="submit" value="Go" class="button2" />
+	</font></td>
+	</form>
+	</tr></table>
+	</td>
 </tr>
 </table>
 <!-- ENDIF -->
-
 <br />
 
-<!-- Topic List -->
-<table cellpadding="0" cellspacing="0" border="1" bordercolor="#000000" bgcolor="#282E22" width="100%" align="center">
-<tr>
-    <td>
-        <table cellpadding="4" cellspacing="1" border="0" width="100%">
-        <tr align="center">
-            <td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1">&nbsp;</font></td>
-            <td bgcolor="#3E4637" width="50%" align="left">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_TOPICS}</b></font>
-            </td>
-            <td bgcolor="#3E4637">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_AUTHOR}</b></font>
-            </td>
-            <td bgcolor="#3E4637">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_REPLIES}</b></font>
-            </td>
-            <td bgcolor="#3E4637">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_VIEWS}</b></font>
-            </td>
-            <td bgcolor="#3E4637" nowrap="nowrap">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_LAST_POST}</b></font>
-            </td>
-        </tr>
-
-        <!-- BEGIN topicrow -->
-        <tr align="center">
-            <td bgcolor="#3E4637" valign="top" style="border: 1px solid #000000;">
-                <!-- IF topicrow.TOPIC_FOLDER_IMG -->
-                <img src="{topicrow.TOPIC_FOLDER_IMG}" border="0" alt="{topicrow.TOPIC_FOLDER_IMG_ALT}" />
-                <!-- ELSE -->
-                <img src="{T_THEME_PATH}/images/<!-- IF topicrow.S_TOPIC_LOCKED -->lockfolder<!-- ELSEIF topicrow.S_UNREAD_TOPIC -->newfolder<!-- ELSE -->folder<!-- ENDIF -->.gif" border="0" alt="Topic Status" />
-                <!-- ENDIF -->
-            </td>
-            <td bgcolor="#3E4637" align="left" style="border: 1px solid #000000;">
-                <!-- IF topicrow.S_UNREAD_TOPIC and not S_IS_BOT --><a href="{topicrow.U_NEWEST_POST}"><img src="{T_THEME_PATH}/images/icon_newest_reply.gif" border="0" alt="View newest post" /></a>&nbsp;<!-- ENDIF -->
-                <a href="{topicrow.U_VIEW_TOPIC}">
-                    <font face="verdana, arial, helvetica" size="2" color="#D8DED3">{topicrow.TOPIC_TITLE}</font>
-                </a>
-                <!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED -->
-                <br /><font face="verdana,arial,helvetica" size="1" color="#FF6600">{L_TOPIC_UNAPPROVED}</font>
-                <!-- ENDIF -->
-                <!-- IF topicrow.GOTO_PAGE -->
-                <br /><font face="verdana,arial,helvetica" size="1" color="#D8DED3">{L_GOTO_PAGE}: {topicrow.GOTO_PAGE}</font>
-                <!-- ENDIF -->
-            </td>
-            <td bgcolor="#3E4637" style="border: 1px solid #000000;">
-                <font face="verdana, arial, helvetica" size="2" color="#D8DED3">{topicrow.TOPIC_AUTHOR_FULL}</font>
-            </td>
-            <td bgcolor="#3E4637" style="border: 1px solid #000000;">
-                <font face="verdana, arial, helvetica" size="2" color="#D8DED3">{topicrow.REPLIES}</font>
-            </td>
-            <td bgcolor="#3E4637" style="border: 1px solid #000000;">
-                <font face="verdana, arial, helvetica" size="2" color="#D8DED3">{topicrow.VIEWS}</font>
-            </td>
-            <td bgcolor="#3E4637" style="border: 1px solid #000000;">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3">
-                <!-- IF topicrow.LAST_POST_TIME -->
-                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                    <tr align="right">
-                        <td nowrap="nowrap">
-                            <font face="verdana,arial,helvetica" size="1" color="#D8DED3">
-                            {topicrow.LAST_POST_TIME}
-                            <!-- IF topicrow.LAST_POST_AUTHOR -->
-                            <br />by <a href="{topicrow.U_LAST_POST_AUTHOR}" style="color: #C4CABE">{topicrow.LAST_POST_AUTHOR}</a>
-                            <!-- ENDIF -->
-                            </font>
-                        </td>
-                        <td nowrap="nowrap">
-                            &nbsp;<a href="{topicrow.U_LAST_POST}" style="color: #C4CABE">
-                                <img src="{T_THEME_PATH}/images/lastpost.gif" border="0" alt="{L_VIEW_LATEST_POST}" />
-                            </a>
-                        </td>
-                    </tr>
-                    </table>
-                <!-- ELSE -->
-                    <font color="#D8DED3">{L_NO_POSTS}</font>
-                <!-- ENDIF -->
-                </font>
-            </td>
-        </tr>
-        <!-- END topicrow -->
-
-        <!-- IF not .topicrow -->
-        <tr>
-            <td bgcolor="#3E4637" colspan="6" align="center" style="border: 1px solid #000000;">
-                <font face="verdana,arial,helvetica" size="2" color="#D8DED3">{L_NO_TOPICS}</font>
-            </td>
-        </tr>
-        <!-- ENDIF -->
-
-        </table>
-    </td>
-</tr>
-</table>
-
-<!-- Pagination -->
-<!-- IF .pagination -->
-<br />
+<!-- icon key -->
 <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr><td align="center" colspan="5"><font face="verdana,arial,helvetica" size="1">{L_TIMEZONE}: {S_TIMEZONE}. {CURRENT_TIME}</font></td></tr>
+<tr><td rowspan="2" width="50%">&nbsp;</td>
+<td nowrap><font face="verdana,arial,helvetica" size="1"><img src="{T_THEME_PATH}/images/newfolder.gif" border="0" alt="New Posts" /> <b>New posts</b>&nbsp;&nbsp;&nbsp;</font></td>
+<td nowrap><font face="verdana,arial,helvetica" size="1">( <img src="{T_THEME_PATH}/images/newhotfolder.gif" border="0" alt="Hot Thread" /> <b>More than 15 replies or 150 views</b> )&nbsp;&nbsp;</font></td>
+<td nowrap><font face="verdana,arial,helvetica" size="1"><img src="{T_THEME_PATH}/images/lockfolder.gif" border="0" alt="Closed Thread" /> <b>Closed thread</b></font></td>
+</tr>
 <tr>
-    <td>
-        <font face="verdana,arial,helvetica" size="1">
-        <!-- IF PAGINATION -->
-        <b>{L_GOTO_PAGE}:</b> {PAGINATION}
-        <!-- ENDIF -->
-        </font>
-    </td>
+<td nowrap><font face="verdana,arial,helvetica" size="1"><img src="{T_THEME_PATH}/images/folder.gif" border="0" alt="No New Posts" /> <b>No new posts</b>&nbsp;&nbsp;&nbsp;</font></td>
+<td colspan="2" nowrap><font face="verdana,arial,helvetica" size="1">( <img src="{T_THEME_PATH}/images/hotfolder.gif" border="0" alt="Hot Thread" /> <b>More than 15 replies or 150 views</b> )&nbsp;&nbsp;</font></td>
+<td rowspan="2" width="50%">&nbsp;</td></tr>
+</table>
+<br />
+
+<!-- forum rules -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr valign="bottom">
+	<td><font face="verdana,arial,helvetica" size="1"><b>Forum Rules:</b><table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22"><tr><td>
+<table class="vb-grid" cellpadding="4" cellspacing="1" border="0">
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1">
+		You <b>may not</b> post new threads<br />
+		You <b>may not</b> post replies<br />
+		You <b>may not</b> post attachments<br />
+		You <b>may not</b> edit your posts
+	</font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1">
+		HTML code is <b>OFF</b><br />
+		<a href="{U_FAQ}">vB code</a> is <b>ON</b><br />
+		<a href="{U_FAQ}">Smilies</a> are <b>ON</b><br />
+		<a href="{U_FAQ}">[IMG]</a> code is <b>OFF</b>
+	</font></td>
 </tr>
 </table>
-<!-- ENDIF -->
+</td></tr></table></font></td>
+	<td align="right">&nbsp;</td>
+</tr>
+</table>
 
 <!-- INCLUDE overall_footer.html -->

@@ -1,27 +1,28 @@
+    <!-- IF not TOPIC_TITLE and not FORUM_NAME -->
         <br />
 
         <!-- Timezone/Login -->
         <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
         <tr valign="top">
-            <td><font face="verdana,arial,helvetica" size="1">{L_TIMEZONE}: {S_TIMEZONE}. {CURRENT_TIME}</font></td>
+            <td><font face="verdana,arial,helvetica" size="1">All times are GMT. The time now is {CURRENT_TIME}.</font></td>
             <td align="right">
                 <font face="verdana,arial,helvetica" size="1">
-                <a href="{U_MARK_FORUMS}">{L_MARK_FORUMS_READ}</a> | 
-                <a href="{U_TEAM}">{L_THE_TEAM}</a>
+                <a href="{U_MARK_FORUMS}">Mark All Forums Read</a> |
+                <a href="{U_TEAM}">Forum Leaders</a>
                 </font>
 
                 <!-- IF not S_USER_LOGGED_IN -->
                 <form action="{S_LOGIN_ACTION}" method="post">
                 <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td nowrap="nowrap"><font face="verdana,arial,helvetica" size="1"><b>{L_LOGIN_LOGOUT}</b><br />{L_USERNAME}: </font></td>
+                    <td nowrap="nowrap"><font face="verdana,arial,helvetica" size="1"><b>Not cookied?</b><br />Login with username and password:</font></td>
                 </tr>
                 <tr>
                     <td nowrap="nowrap">
                     <input type="hidden" name="redirect" value="{S_REDIRECT}" />
                     <input type="text" class="bginput" name="username" size="7" maxlength="40" value="{USERNAME}" />
                     <input type="password" class="bginput" name="password" size="7" maxlength="32" />
-                    <input type="submit" class="bginput" value="{L_LOGIN}" />
+                    <input type="submit" class="bginput" value="Login!" />
                     </td>
                 </tr>
                 </table>
@@ -44,10 +45,11 @@
                 <b><font face="verdana,arial,helvetica" size="1">{L_NO_NEW_POSTS}</font></b>
                 &nbsp;&nbsp;
                 <img src="{T_THEME_PATH}/images/offlock.gif" border="0" alt="{L_FORUM_LOCKED}" align="absmiddle" />
-                <b><font face="verdana,arial,helvetica" size="1">{L_FORUM_LOCKED}</font></b>
+                <b><font face="verdana,arial,helvetica" size="1">A closed forum</font></b>
             </td>
         </tr>
         </table>
+    <!-- ENDIF -->
 
     </td>
 </tr>

@@ -24,8 +24,8 @@ function is_historical_style_active()
         // Date-based theme names (from functions_steam_theme.php)
         'steam_2003_v1', 'steam_2003_v2', 'steam_2004',
         // Legacy style names for backwards compatibility
-        'Steam 2003', 'Steam 2004',
-        'steam_2003', '2003_v2', '2004'
+        'Steam 2003', 'Steam 2003 v1', 'Steam 2003 v2', 'Steam 2004',
+        'steam_2003', '2003_v1', '2003_v2', '2004'
     ];
 
     return in_array($style_name, $allowed_styles, true);

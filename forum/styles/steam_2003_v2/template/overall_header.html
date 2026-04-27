@@ -156,11 +156,9 @@
             <td><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="{SITENAME}" />
             <font face="verdana, arial, helvetica" size="2"><b>{SITENAME}</b></font></td>
             <td align="right">
-                <!-- IF S_USER_LOGGED_IN -->
-                    <font face="verdana,arial,helvetica" size="1">
-                    <br /><b><a href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS}</a></b>
-                    </font>
-                <!-- ENDIF -->
+                <font face="verdana,arial,helvetica" size="1">
+                <br /><b><a href="{U_SEARCH_ACTIVE_TOPICS}">View Today's Active Threads</a></b>
+                </font>
             </td>
         </tr>
         </table>
@@ -182,14 +180,14 @@
         <tr valign="bottom">
             <td>
                 <font face="verdana,arial,helvetica" size="1">
-                {TOTAL_POSTS} • {TOTAL_TOPICS} • {TOTAL_USERS}<br />
-                <!-- IF NEWEST_USER -->{L_NEWEST_USER}: <a href="{NEWEST_USER_FULL_URL}">{NEWEST_USER_COLOUR}</a><!-- ENDIF -->
+                Members: {TOTAL_USERS}, Threads: {TOTAL_TOPICS}, Posts: {TOTAL_POSTS}<br />
+                <!-- IF NEWEST_USER -->Welcome to our newest member, <a href="{NEWEST_USER_FULL_URL}">{NEWEST_USER_COLOUR}</a><!-- ENDIF -->
                 </font>
             </td>
             <td align="right">
                 <font face="verdana,arial,helvetica" size="1">
-                {CURRENT_TIME}<br />
-                <!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ENDIF -->
+                The time now is {CURRENT_TIME}.<br />
+                <!-- IF S_USER_LOGGED_IN -->You last visited: {LAST_VISIT_DATE}.<!-- ENDIF -->
                 </font>
             </td>
         </tr>

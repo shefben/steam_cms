@@ -1,31 +1,66 @@
 <!-- INCLUDE overall_header.html -->
 
-<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center">
+<!-- Breadcrumb -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
 <tr>
-    <td>
-        <table cellpadding="4" cellspacing="1" border="0" width="100%">
-        <tr>
-            <td bgcolor="#3E4637">
-                <font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>{L_FAQ_TITLE}</b></font>
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor="#545F4E">
-                <font face="verdana,arial,helvetica" size="2">
-                <!-- BEGIN faq_block -->
-                <b>{faq_block.BLOCK_TITLE}</b><br />
-                <!-- BEGIN faq_row -->
-                <br /><b>{faq_block.faq_row.FAQ_QUESTION}</b><br />
-                {faq_block.faq_row.FAQ_ANSWER}<br />
-                <!-- END faq_row -->
-                <br />
-                <!-- END faq_block -->
-                </font>
-            </td>
-        </tr>
-        </table>
-    </td>
+    <td><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="" />
+    <font face="verdana, arial, helvetica" size="2"><b><a href="{U_INDEX}">{SITENAME}</a></b> &gt; <b>{L_FAQ_TITLE}</b></font></td>
 </tr>
 </table>
+<br />
+
+<!-- FAQ Index - Table of Contents -->
+<!-- BEGIN faq_block -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0" width="100%">
+    <tr id="cat">
+        <td bgcolor="#3E4637">
+            <font face="verdana, arial, helvetica" size="2" color="#B4BA50"><b><a href="#faq_block_{faq_block.S_ROW_COUNT}" style="color:#B4BA50;">{faq_block.BLOCK_TITLE}</a></b></font>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#545F4E">
+            <font face="verdana, arial, helvetica" size="1">
+            <ul>
+            <!-- BEGIN faq_row -->
+                <li><a href="#faq_{faq_block.S_ROW_COUNT}_{faq_block.faq_row.S_ROW_COUNT}"><font color="#A0AA95">{faq_block.faq_row.FAQ_QUESTION}</font></a></li>
+            <!-- END faq_row -->
+            </ul>
+            </font>
+        </td>
+    </tr>
+</table>
+</td></tr></table>
+<br />
+<!-- END faq_block -->
+
+<!-- FAQ Answers -->
+<!-- BEGIN faq_block -->
+<a name="faq_block_{faq_block.S_ROW_COUNT}"></a>
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0" width="100%">
+    <tr id="cat">
+        <td bgcolor="#3E4637">
+            <font face="verdana, arial, helvetica" size="2" color="#B4BA50"><b>{faq_block.BLOCK_TITLE}</b></font>
+        </td>
+    </tr>
+    <!-- BEGIN faq_row -->
+    <tr>
+        <td bgcolor="#545F4E">
+            <a name="faq_{faq_block.S_ROW_COUNT}_{faq_block.faq_row.S_ROW_COUNT}"></a>
+            <font face="verdana, arial, helvetica" size="2" color="#D8DED3"><b>{faq_block.faq_row.FAQ_QUESTION}</b></font>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#626d5c">
+            <font face="verdana, arial, helvetica" size="2">{faq_block.faq_row.FAQ_ANSWER}</font>
+            <br /><br />
+        </td>
+    </tr>
+    <!-- END faq_row -->
+</table>
+</td></tr></table>
+<br />
+<!-- END faq_block -->
 
 <!-- INCLUDE overall_footer.html -->
