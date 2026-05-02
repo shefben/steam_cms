@@ -6,7 +6,7 @@
 	<td valign="top"><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="{SITENAME}" />
 	<font face="verdana, arial, helvetica" size="2"><b><a href="{U_INDEX}">Steam Users Forums</a>
 	<!-- BEGIN navlinks -->
-	 &gt; <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a>
+	 &gt; <a href="{navlinks.U_BREADCRUMB}">{navlinks.BREADCRUMB_NAME}</a>
 	<!-- END navlinks -->
 	</b></font>
 	<!-- IF MODERATORS -->
@@ -99,7 +99,16 @@
 	<!-- IF U_MARK_TOPICS --><a href="{U_MARK_TOPICS}" data-ajax="mark_topics_read">Mark this Forum Read</a><!-- ENDIF --></nobr>
 	</font></td>
 	<td align="right"><font face="verdana,arial,helvetica" size="1">
-	<!-- IF PAGINATION -->Pages ({PAGE_NUMBER}): <b>{PAGINATION}</b><!-- ENDIF -->
+	<!-- IF .pagination -->Pages ({TOTAL_PAGES}): <b>
+		<!-- BEGIN pagination -->
+			<!-- IF pagination.S_IS_PREV --><a href="{pagination.PAGE_URL}" title="{L_PREVIOUS}">&laquo;&nbsp;Prev</a>&nbsp;
+			<!-- ELSEIF pagination.S_IS_CURRENT --><font size="2">[{pagination.PAGE_NUMBER}]</font>&nbsp;
+			<!-- ELSEIF pagination.S_IS_ELLIPSIS -->...&nbsp;
+			<!-- ELSEIF pagination.S_IS_NEXT --><a href="{pagination.PAGE_URL}" title="{L_NEXT}">Next&nbsp;&raquo;</a>&nbsp;
+			<!-- ELSE --><a href="{pagination.PAGE_URL}">{pagination.PAGE_NUMBER}</a>&nbsp;
+			<!-- ENDIF -->
+		<!-- END pagination -->
+	</b><!-- ENDIF -->
 	</font></td>
 </tr>
 </table>

@@ -1,0 +1,61 @@
+<!-- INCLUDE overall_header.html -->
+
+<br />
+<form action="{S_ACTIVATE_ACTION}" method="post">
+
+<!-- IF ACTIVATE_SUCCESS -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22" width="100%" align="center"><tr><td>
+<table class="vb-grid" cellpadding="4" cellspacing="1" border="0" width="100%">
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2" color="#C4B550"><b>Account Activated</b></font></td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{ACTIVATE_SUCCESS}</font></td>
+</tr>
+</table>
+</td></tr></table>
+<!-- ELSE -->
+
+<!-- IF ACTIVATE_ERROR -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22" width="100%" align="center"><tr><td>
+<table class="vb-grid" cellpadding="4" cellspacing="1" border="0" width="100%">
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2" color="#C4B550"><b>Error</b></font></td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2" color="#FF6060"><b>{ACTIVATE_ERROR}</b></font></td>
+</tr>
+</table>
+</td></tr></table>
+<br />
+<!-- ENDIF -->
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22" width="100%" align="center"><tr><td>
+<table class="vb-grid" cellpadding="4" cellspacing="1" border="0" width="100%">
+<tr>
+	<td bgcolor="#3E4637" colspan="2"><font face="verdana, arial, helvetica" size="2" color="#D8DED3"><b>Activate Your Account</b></font></td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><b>User Name:</b></font></td>
+	<td bgcolor="#3E4637"><input type="text" class="bginput" name="username" size="25" value="{USERNAME_VALUE}" /></td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><b>Activation code:</b></font></td>
+	<td bgcolor="#3E4637"><input type="text" class="bginput" name="activateid" size="25" /></td>
+</tr>
+</table>
+</td></tr></table>
+
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td align="center"><font face="verdana, arial, helvetica" size="2">
+	<input type="submit" class="bginput" name="submit" value="Submit Now" />
+	</font></td>
+</tr>
+</table>
+
+<!-- ENDIF -->
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,22 @@
+services:
+    steamcms.account_activation.controller:
+        class: steamcms\account_activation\controller\main
+        arguments:
+            - '@dbal.conn'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@config'
+            - '@auth'
+            - '@log'
+            - '@dispatcher'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+
+    steamcms.account_activation.listener:
+        class: steamcms\account_activation\event\main_listener
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+        tags:
+            - { name: event.listener }

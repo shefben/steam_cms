@@ -1,0 +1,16 @@
+{
+    "name": "steamcms/forum_rules",
+    "type": "phpbb-extension",
+    "description": "Custom forum rules with BBCode support for registration page",
+    "homepage": "",
+    "version": "1.0.0",
+    "require": {
+        "php": ">=7.2"
+    },
+    "extra": {
+        "display-name": "Steam Forum Rules",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.3.0"
+        }
+    }
+}

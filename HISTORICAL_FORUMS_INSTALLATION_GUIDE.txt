@@ -1,0 +1,133 @@
+Historical Steam Forums Installation Guide
+==========================================
+
+This guide explains how to install and use the historical 2004 Steam forum data
+that conditionally displays based on the active phpBB style.
+
+OVERVIEW
+--------
+The historical forum system adds authentic 2004 Steam forum content to your phpBB
+installation while keeping it separate from modern user content. Historical data
+only appears when using the 2003_v2 or 2004 phpBB styles, creating an authentic
+period-appropriate experience.
+
+FEATURES
+--------
+✓ Historical forum data only visible with specific styles
+✓ Real users can reply to historical threads
+✓ No avatar dependencies (historical users have no avatars)
+✓ Separate ID ranges prevent conflicts with real users
+✓ Automatic filtering based on active style
+
+INSTALLATION STEPS
+------------------
+
+1. SETUP HISTORICAL DATA
+   Run: php scripts/setup_historical_forums.php
+   This generates all necessary files and modifications.
+
+2. RUN CMS INSTALLER
+   - Open install.php in your browser
+   - Complete Step 1 (Database Configuration)
+   - On Step 2, CHECK 'Insert official 2004 forum data'
+   - Complete the installation
+
+3. ENABLE PHPBB EXTENSION
+   - Log into phpBB Admin Panel
+   - Go to Customise > Extensions
+   - Find 'Historical Data Filter' and click Enable
+   - Clear phpBB cache
+
+4. TEST THE SYSTEM
+   - Switch to Steam 2003 or 2004 style - historical data appears
+   - Switch to other styles - historical data hidden
+   - Create test posts as real users - they appear in all styles
+
+TECHNICAL DETAILS
+-----------------
+
+Historical Data Identification:
+- Users: ID 100000+ with '[2004]' prefix
+- Forums: ID 1000+ with historical descriptions
+- Threads: ID 100000+ with '[2004]' prefix in title
+- Posts: ID 1000000+ with historical content
+
+Database Schema:
+- Added 'is_historical' column to users, forums, topics, posts tables
+- Historical data marked with is_historical = 1
+- Real data has is_historical = 0 or NULL
+
+Style Detection:
+- Extension checks active style name
+- Allowed styles: 'Steam 2003', 'Steam 2004', 'steam_2003', 'steam_2004', '2003_v2', '2004'
+- SQL queries filtered automatically via event listeners
+
+TROUBLESHOOTING
+---------------
+
+Historical data not appearing:
+- Verify style name matches allowed list
+- Check extension is enabled in Admin Panel
+- Confirm historical data was imported during installation
+
+Historical data appearing in wrong styles:
+- Clear phpBB cache
+- Check extension event listeners are working
+- Verify style names are correct
+
+Database errors:
+- Ensure is_historical columns exist in all tables
+- Run extension migration if needed
+- Check SQL queries include proper filtering
+
+Real users can't post:
+- This is normal behavior - extension only filters display
+- Real users can always post new content
+- Their posts appear in all styles
+
+FILES AND DIRECTORIES
+---------------------
+
+Generated Files:
+- scripts/historical_forum_data.sql (Historical data SQL)
+- forum/ext/steamcms/historical_filter/ (phpBB extension)
+- forum/includes/historical_filter.php (Helper functions)
+- install.php.backup.* (Original install.php backup)
+
+Extension Structure:
+- composer.json (Extension metadata)
+- ext.php (Extension configuration)
+- config/services.yml (Service definitions)
+- event/main_listener.php (Event handlers)
+- migrations/add_historical_columns.php (Database schema)
+
+MAINTENANCE
+-----------
+
+To update historical data:
+1. Regenerate: php scripts/vbulletin_parser_historical.py
+2. Run SQL updates in database
+3. Clear phpBB cache
+
+To add new allowed styles:
+1. Edit event/main_listener.php
+2. Update $allowed_styles array
+3. Clear phpBB cache
+
+To disable historical data:
+1. Disable extension in Admin Panel
+2. Historical data becomes hidden in all styles
+
+SUPPORT
+-------
+
+Common issues and solutions are documented in this guide.
+For additional help, check:
+- phpBB logs in Admin Panel
+- Web server error logs
+- Database query logs
+
+The system is designed to be safe - if anything fails, historical
+data simply becomes hidden without affecting real forum operation.
+
+Generated on: 2025-12-27 16:21:41

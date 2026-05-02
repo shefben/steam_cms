@@ -1,0 +1,103 @@
+<!-- INCLUDE overall_header.html -->
+
+<br />
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="" />
+	<font face="verdana, arial, helvetica" size="2"><b><a href="{U_INDEX}">{SITENAME}</a> &gt;
+	<a href="{U_MEMBERLIST}">Members List</a> &gt;
+	{USERNAME}</b></font></td>
+</tr>
+</table>
+<br />
+<table align="center" bgcolor="#282E22" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+<table class="vb-grid" border="0" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+	<td bgcolor="#3E4637" colspan="2">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr id="cat">
+		<td align="left"><font color="#D8DED3" face="verdana, arial, helvetica" size="2"><b>Profile For {USERNAME}</b></font></td>
+		<td align="right"><!-- IF S_DISPLAY_SEARCH --><a href="{U_SEARCH_USER}"><font class="thtcolor" color="#D8DED3" face="verdana,arial,helvetica" size="1">Search for all posts by this user.</font></a><!-- ENDIF --></td>
+	</tr>
+	</table>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#4C5844"><font face="verdana, arial, helvetica" size="2"><b>Date Registered:</b></font></td>
+	<td bgcolor="#4C5844"><font face="verdana, arial, helvetica" size="2">{JOINED}</font></td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><b>Status:</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><!-- IF RANK_TITLE -->{RANK_TITLE}<!-- ELSE -->Member<!-- ENDIF --> <!-- IF RANK_IMG -->{RANK_IMG}<!-- ENDIF --></font></td>
+</tr>
+<tr>
+	<td bgcolor="#4C5844"><font face="verdana, arial, helvetica" size="2"><b>Total Posts:</b></font></td>
+	<td bgcolor="#4C5844"><font face="verdana, arial, helvetica" size="2">{POSTS}<!-- IF POSTS_DAY --> ({POSTS_DAY})<!-- ENDIF --></font></td>
+</tr>
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><b>Last Active:</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{LAST_ACTIVE}</font></td>
+</tr>
+<tr>
+	<td bgcolor="#4C5844"><font face="verdana, arial, helvetica" size="2"><b>Contact {USERNAME}:</b></font></td>
+	<td bgcolor="#4C5844"><font face="verdana, arial, helvetica" size="2">
+<!-- IF U_EMAIL --><a href="{U_EMAIL}">Click here to email {USERNAME}</a><br /><!-- ENDIF -->
+<!-- IF U_PM --><a href="{U_PM}">Send {USERNAME} a Private Message!</a><!-- ENDIF -->
+	</font></td>
+</tr>
+<!-- IF U_JABBER and S_JABBER_ENABLED -->
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><b>Jabber:</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><a href="{U_JABBER}" onclick="popup(this.href, 750, 320); return false;">{L_SEND_JABBER_MESSAGE}</a></font></td>
+</tr>
+<!-- ELSEIF USER_JABBER -->
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><b>Jabber:</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{USER_JABBER}</font></td>
+</tr>
+<!-- ENDIF -->
+<!-- BEGIN custom_fields -->
+<tr>
+	<td bgcolor="#4C5844"><font face="verdana, arial, helvetica" size="2"><b>{custom_fields.PROFILE_FIELD_NAME}:</b></font></td>
+	<td bgcolor="#4C5844"><font face="verdana, arial, helvetica" size="2"><!-- IF custom_fields.PROFILE_FIELD_CONTACT --><a href="{custom_fields.PROFILE_FIELD_CONTACT}">{custom_fields.PROFILE_FIELD_DESC}</a><!-- ELSE -->{custom_fields.PROFILE_FIELD_VALUE}<!-- ENDIF --></font></td>
+</tr>
+<!-- END custom_fields -->
+<!-- IF AGE !== '' -->
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><b>Age:</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{AGE}</font></td>
+</tr>
+<!-- ENDIF -->
+<!-- IF AVATAR_IMG -->
+<tr>
+	<td bgcolor="#4C5844"><font face="verdana, arial, helvetica" size="2"><b>Avatar:</b></font></td>
+	<td bgcolor="#4C5844">{AVATAR_IMG}</td>
+</tr>
+<!-- ENDIF -->
+<!-- IF SIGNATURE -->
+<tr>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><b>Signature:</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><div class="signature">{SIGNATURE}</div></font></td>
+</tr>
+<!-- ENDIF -->
+<!-- IF S_USER_LOGGED_IN and S_ZEBRA -->
+<tr>
+	<td align="center" bgcolor="#3E4637" colspan="2"><font face="verdana,arial,helvetica" size="1">
+<!-- IF U_ADD_FRIEND --><a href="{U_ADD_FRIEND}"><font color="#D8DED3">{L_ADD_FRIEND}</font></a><!-- ENDIF -->
+<!-- IF U_ADD_FOE --> &nbsp; <a href="{U_ADD_FOE}"><font color="#D8DED3">{L_ADD_FOE}</font></a><!-- ENDIF -->
+<!-- IF U_REMOVE_FRIEND --><a href="{U_REMOVE_FRIEND}"><font color="#D8DED3">{L_REMOVE_FRIEND}</font></a><!-- ENDIF -->
+<!-- IF U_REMOVE_FOE --><a href="{U_REMOVE_FOE}"><font color="#D8DED3">{L_REMOVE_FOE}</font></a><!-- ENDIF -->
+	</font></td>
+</tr>
+<!-- ENDIF -->
+<!-- IF U_USER_ADMIN -->
+<tr>
+	<td align="center" bgcolor="#3E4637" colspan="2"><font face="verdana,arial,helvetica" size="1">
+	Administrative Options: <a href="{U_USER_ADMIN}">{L_USER_ADMIN}</a>
+	</font></td>
+</tr>
+<!-- ENDIF -->
+</table>
+</td></tr></table>
+
+<!-- INCLUDE overall_footer.html -->

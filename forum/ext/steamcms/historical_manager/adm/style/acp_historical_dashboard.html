@@ -1,0 +1,79 @@
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+
+<h1>{L_ACP_HISTORICAL_MANAGER_DASHBOARD}</h1>
+
+<p>{L_HISTORICAL_STATS}</p>
+
+<table class="table1" style="margin-bottom: 20px;">
+	<thead>
+		<tr>
+			<th>Data Type</th>
+			<th style="text-align: right;">Count</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="row1">
+			<td><strong>{L_HISTORICAL_USERS_COUNT}</strong></td>
+			<td style="text-align: right;">{HISTORICAL_USERS}</td>
+		</tr>
+		<tr class="row2">
+			<td><strong>{L_HISTORICAL_FORUMS_COUNT}</strong></td>
+			<td style="text-align: right;">{HISTORICAL_FORUMS}</td>
+		</tr>
+		<tr class="row1">
+			<td><strong>{L_HISTORICAL_TOPICS_COUNT}</strong></td>
+			<td style="text-align: right;">{HISTORICAL_TOPICS}</td>
+		</tr>
+		<tr class="row2">
+			<td><strong>{L_HISTORICAL_POSTS_COUNT}</strong></td>
+			<td style="text-align: right;">{HISTORICAL_POSTS}</td>
+		</tr>
+		<tr class="row1">
+			<td><strong>{L_HISTORICAL_ATTACHMENTS_COUNT}</strong></td>
+			<td style="text-align: right;">{HISTORICAL_ATTACHMENTS}</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Maintenance Tools</h2>
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+	<form method="post" action="{U_ACTION}" style="display: inline;">
+		<input type="hidden" name="action" value="recalculate" />
+		{S_FORM_TOKEN}
+		<input type="submit" name="submit" value="{L_HISTORICAL_RECALCULATE}" class="button1" />
+	</form>
+
+	<form method="post" action="{U_ACTION}" style="display: inline;">
+		<input type="hidden" name="action" value="rebuild_tree" />
+		{S_FORM_TOKEN}
+		<input type="submit" name="submit" value="{L_HISTORICAL_REBUILD_TREE}" class="button1" />
+	</form>
+
+	<form method="post" action="{U_ACTION}" style="display: inline;">
+		<input type="hidden" name="action" value="fix_permissions" />
+		{S_FORM_TOKEN}
+		<input type="submit" name="submit" value="{L_HISTORICAL_FIX_PERMISSIONS}" class="button1" />
+	</form>
+
+	<form method="post" action="{U_ACTION}" style="display: inline;" onsubmit="return confirm('{L_HISTORICAL_PURGE_CONFIRM}');">
+		<input type="hidden" name="action" value="purge" />
+		{S_FORM_TOKEN}
+		<input type="submit" name="submit" value="{L_HISTORICAL_PURGE}" class="button1" style="background-color: #c00; color: #fff;" />
+	</form>
+</div>
+
+<div style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-left: 4px solid #369;">
+	<strong>Quick Reference:</strong>
+	<ul style="margin: 5px 0 0 20px;">
+		<li>Historical users use IDs 100000+</li>
+		<li>Historical forums use IDs 1001+</li>
+		<li>Historical topics use IDs 100001+</li>
+		<li>Historical posts use IDs 1000001+</li>
+		<li>Data only displays when Steam 2003/2004 forum style is active</li>
+	</ul>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,78 @@
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+
+<h1>{L_ACP_HISTORICAL_MANAGER_FORUMS}</h1>
+
+<!-- IF S_EDIT or action == 'add' -->
+	<!-- Forum add/edit form -->
+	<form method="post" action="{U_ACTION}">
+		<fieldset>
+			<legend><!-- IF S_EDIT -->{L_HISTORICAL_FORUM_EDIT}<!-- ELSE -->{L_HISTORICAL_FORUM_ADD}<!-- ENDIF --></legend>
+			<dl>
+				<dt><label for="forum_name">{L_HISTORICAL_FORUM_NAME}:</label></dt>
+				<dd><input type="text" id="forum_name" name="forum_name" value="{FORUM_NAME}" size="50" maxlength="255" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="forum_desc">{L_HISTORICAL_FORUM_DESC}:</label></dt>
+				<dd><textarea id="forum_desc" name="forum_desc" rows="3" cols="50">{FORUM_DESC}</textarea></dd>
+			</dl>
+			<dl>
+				<dt><label for="parent_id">{L_HISTORICAL_FORUM_PARENT}:</label></dt>
+				<dd>
+					<select id="parent_id" name="parent_id">
+						<option value="0">(No parent - top level)</option>
+						<!-- BEGIN parent_options -->
+						<option value="{parent_options.FORUM_ID}"<!-- IF parent_options.SELECTED --> selected="selected"<!-- ENDIF -->>{parent_options.FORUM_NAME}</option>
+						<!-- END parent_options -->
+					</select>
+				</dd>
+			</dl>
+			<p class="submit-buttons">
+				<input class="button1" type="submit" name="submit" value="{L_HISTORICAL_SAVE}" />
+				<a class="button2" href="{U_BACK}">{L_HISTORICAL_CANCEL}</a>
+			</p>
+		</fieldset>
+		{S_FORM_TOKEN}
+	</form>
+<!-- ELSE -->
+	<div style="margin-bottom: 15px;">
+		<a href="{U_ADD}" class="button1">{L_HISTORICAL_FORUM_ADD}</a>
+	</div>
+
+	<!-- BEGIN forums -->
+		<!-- IF forums.S_FIRST_ROW -->
+		<table class="table1">
+			<thead>
+				<tr>
+					<th>{L_HISTORICAL_ID}</th>
+					<th>{L_HISTORICAL_FORUM_NAME}</th>
+					<th>{L_HISTORICAL_FORUM_DESC}</th>
+					<th style="text-align: right;">Topics</th>
+					<th style="text-align: right;">Posts</th>
+					<th>{L_HISTORICAL_ACTIONS}</th>
+				</tr>
+			</thead>
+			<tbody>
+		<!-- ENDIF -->
+				<tr class="row{forums.S_ROW_COUNT}">
+					<td>{forums.FORUM_ID}</td>
+					<td><strong>{forums.FORUM_NAME}</strong></td>
+					<td>{forums.FORUM_DESC}</td>
+					<td style="text-align: right;">{forums.TOPICS}</td>
+					<td style="text-align: right;">{forums.POSTS}</td>
+					<td>
+						<a href="{forums.U_EDIT}">Edit</a> |
+						<a href="{forums.U_DELETE}" onclick="return confirm('{L_HISTORICAL_CONFIRM_DELETE}');">Delete</a>
+					</td>
+				</tr>
+		<!-- IF forums.S_LAST_ROW -->
+			</tbody>
+		</table>
+		<!-- ENDIF -->
+	<!-- BEGINELSE -->
+		<p>{L_HISTORICAL_NO_RESULTS}</p>
+	<!-- END forums -->
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

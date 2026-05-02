@@ -1,0 +1,779 @@
+/* Steam 2006 v1 Forum Style - Based on archived steampowered.com 2006 forum design */
+/* Dark olive/green color scheme matching the 2006 Steam storefront wrapper */
+
+/* Basic body styling */
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 75%;
+    background-color: #4C5844;
+    color: #C5CAB6;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+}
+
+/* Form elements */
+select {
+    font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+
+option, optgroup {
+    font-size: 11px;
+    font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+
+textarea, .bginput, input[type="text"], input[type="password"], input[type="email"] {
+    background-color: #e6e6e6;
+    border: 1px solid #000000;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #000000;
+    font-size: 10px;
+}
+
+input[type="submit"], .button, .button1, .button2 {
+    font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+    cursor: pointer;
+}
+
+/* Links - 2006 style with cyan/blue links */
+a:link, a:visited, body_alink, body_avisited {
+    color: #B6C5CA;
+    text-decoration: none;
+}
+
+a:hover, a:active, body_ahover {
+    color: #6F9FC8;
+    text-decoration: none;
+}
+
+/* Small font class */
+.smallfont {
+    font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+
+/* Time display */
+.time {
+    color: #FFFFFF;
+}
+
+/* Highlight */
+.highlight {
+    color: #FF0000;
+    font-weight: bold;
+}
+
+/* Table border - dark gray */
+.tborder {
+    background: #3E4637;
+}
+
+/* Category header - olive green */
+.tcat {
+    background: #4C5844;
+    color: #C5CAB6;
+    text-valign: middle;
+}
+
+.tcat a:link, .tcat_alink {
+    color: #C5CAB6;
+}
+
+.tcat a:hover, .tcat a:active, .tcat_ahover {
+    color: #FFFFFF;
+}
+
+/* Table header */
+.thead {
+    background: #3E4637;
+    font-size: 11px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.thead a:link, .thead a:visited {
+    color: #FFFFFF;
+}
+
+.thead a:hover, .thead a:active, .thead_ahover {
+    color: #C5CAB6;
+}
+
+/* Table footer */
+.tfoot {
+    background: #3E4637;
+    font-size: 11px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+/* Alternating row backgrounds - olive green tones */
+.alt1, .alt1Active {
+    background: #4C5844;
+    color: #C5CAB6;
+}
+
+.alt2, .alt2Active {
+    background: #545F4E;
+    color: #C5CAB6;
+}
+
+/* Inline moderation */
+td.inlinemod {
+    background: #FFFFCC;
+    color: #000000;
+}
+
+/* WYSIWYG editor */
+.wysiwyg {
+    background-color: #e6e6e6;
+    border: 1px solid #3E4637;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #000000;
+    font-size: 10px;
+    margin: 0 0 5px 0;
+}
+
+/* Forum jump select */
+.fjsel {
+    background: #4C5844;
+    color: #C5CAB6;
+}
+
+.fjdpth0 {
+    background: #e6e6e6;
+    color: #000000;
+}
+
+/* Panel styling */
+.panel {
+    color: #C5CAB6;
+    padding: 10px;
+    border: none;
+    background: #4C5844;
+}
+
+.panelsurround {
+    background: #4C5844;
+    color: #C5CAB6;
+}
+
+/* Legend */
+legend {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* vBulletin menu control */
+.vbmenu_control {
+    background: #3E4637;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 6px 3px 6px;
+    white-space: nowrap;
+    color: #FFFFFF;
+}
+
+.vbmenu_control a:link, .vbmenu_control_alink {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.vbmenu_control a:visited, .vbmenu_control_avisited {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.vbmenu_control a:hover, .vbmenu_control a:active, .vbmenu_control_ahover {
+    color: #C5CAB6;
+    text-decoration: none;
+}
+
+/* vBulletin popup menu */
+.vbmenu_popup {
+    background: #4C5844;
+    color: #C5CAB6;
+    border: solid 1px #3E4637;
+}
+
+.vbmenu_option {
+    background: #545F4E;
+    color: #C5CAB6;
+    font-size: 11px;
+    white-space: nowrap;
+    cursor: pointer;
+    border: solid 1px #3E4637;
+}
+
+.vbmenu_option a:link, .vbmenu_option_alink {
+    color: #B6C5CA;
+    text-decoration: none;
+}
+
+.vbmenu_option a:visited, .vbmenu_option_avisited {
+    color: #B6C5CA;
+    text-decoration: none;
+}
+
+.vbmenu_option a:hover, .vbmenu_option a:active, .vbmenu_option_ahover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/* Content and forum styling */
+.forumbg, .forabg {
+    background-color: #3E4637;
+}
+
+.row1 {
+    background-color: #4C5844;
+    padding: 4px;
+    color: #C5CAB6;
+}
+
+.row2 {
+    background-color: #545F4E;
+    padding: 4px;
+    color: #C5CAB6;
+}
+
+.row3 {
+    background-color: #3E4637;
+    padding: 4px;
+    color: #FFFFFF;
+}
+
+/* Category styling */
+.cat, .category {
+    background-color: #3E4637;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+/* Forum headers */
+.forum-header, th {
+    background-color: #3E4637;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+/* Post container styling */
+.post {
+    background-color: #4C5844;
+    border: 1px solid #3E4637;
+    margin: 0;
+    padding: 4px;
+    color: #C5CAB6;
+}
+
+.postbody {
+    color: #C5CAB6;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* Author info panel */
+.postauthor {
+    background-color: #545F4E;
+    color: #C5CAB6;
+    font-size: 11px;
+    padding: 4px;
+    width: 175px;
+    vertical-align: top;
+}
+
+/* Topic list styling */
+.topiclist {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.topiclist th {
+    background-color: #3E4637;
+    color: #FFFFFF;
+    padding: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.topiclist td {
+    background-color: #4C5844;
+    color: #C5CAB6;
+    padding: 4px;
+    font-size: 11px;
+}
+
+/* Last post info */
+.lastpost {
+    font-size: 11px;
+    color: #C5CAB6;
+}
+
+/* Navigation and breadcrumbs */
+.breadcrumbs, .navbar, .navlinks {
+    background-color: #4C5844;
+    color: #C5CAB6;
+    padding: 2px;
+    font-size: 11px;
+}
+
+/* Who is online section */
+.online-info, .whos-online {
+    background-color: #545F4E;
+    color: #C5CAB6;
+    padding: 6px;
+    font-size: 11px;
+}
+
+/* Login form */
+.login-box {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    padding: 6px;
+    font-size: 11px;
+    color: #C5CAB6;
+}
+
+/* Welcome message */
+.welcome {
+    background-color: #4C5844;
+    color: #C5CAB6;
+    padding: 8px;
+    font-size: 12px;
+}
+
+/* Content wrapper */
+.wrap, .content-wrapper {
+    background-color: #4C5844;
+    width: 95%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Horizontal rule */
+hr {
+    border: 0;
+    border-top: 1px solid #3E4637;
+    margin: 8px 0;
+}
+
+/* Quote boxes */
+.quotetitle {
+    background-color: #3E4637;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+.quotecontent, blockquote {
+    background-color: #545F4E;
+    color: #C5CAB6;
+    border: 1px solid #3E4637;
+    padding: 8px;
+    font-size: 11px;
+}
+
+/* Code boxes */
+.codetitle {
+    background-color: #3E4637;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+.codecontent, code, pre {
+    background-color: #545F4E;
+    color: #C5CAB6;
+    border: 1px solid #3E4637;
+    padding: 8px;
+    font-family: monospace;
+    font-size: 11px;
+    overflow: auto;
+}
+
+/* Pagination */
+.pagination {
+    font-size: 11px;
+    color: #C5CAB6;
+}
+
+.pagination a {
+    color: #B6C5CA;
+}
+
+.pagination a:hover {
+    color: #FFFFFF;
+}
+
+.pagination strong {
+    color: #FFFFFF;
+}
+
+/* Footer styling */
+.copyright, .page-footer {
+    text-align: center;
+    font-size: 10px;
+    color: #626366;
+    padding: 10px;
+    background-color: #4C5844;
+}
+
+.page-footer a {
+    color: #999999;
+}
+
+.page-footer a:hover {
+    color: #FFFFFF;
+}
+
+/* Forum icons container */
+.forum-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+/* Announcement and sticky styling */
+.announce, .sticky {
+    background-color: #545F4E;
+    border-left: 3px solid #8BC53F;
+}
+
+/* Poll styling */
+.poll {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    padding: 8px;
+}
+
+.pollbar {
+    background-color: #8BC53F;
+    height: 10px;
+}
+
+/* Error and info boxes */
+.errorbox {
+    background-color: #545F4E;
+    border: 1px solid #FF0000;
+    color: #C5CAB6;
+    padding: 10px;
+}
+
+.infobox {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    color: #C5CAB6;
+    padding: 10px;
+}
+
+/* Quick reply styling */
+.quick-reply {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    padding: 10px;
+}
+
+/* Member list styling */
+.memberlist {
+    width: 100%;
+}
+
+.memberlist th {
+    background-color: #3E4637;
+    color: #FFFFFF;
+    padding: 4px;
+    font-weight: bold;
+}
+
+.memberlist td {
+    background-color: #4C5844;
+    color: #C5CAB6;
+    padding: 4px;
+    border-bottom: 1px solid #3E4637;
+}
+
+/* Signature styling */
+.signature {
+    border-top: 1px solid #3E4637;
+    padding-top: 8px;
+    margin-top: 10px;
+    font-size: 10px;
+    color: #999999;
+}
+
+/* Profile styling */
+.profile-box {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    padding: 10px;
+    color: #C5CAB6;
+}
+
+/* Attachment styling */
+.attachbox {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+.attachbox dt {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.attachbox dd {
+    color: #999999;
+    font-size: 10px;
+}
+
+/* Online/offline indicators */
+.online {
+    color: #8BC53F;
+}
+
+.offline {
+    color: #999999;
+}
+
+/* phpBB specific overrides */
+.forumbg, .forabg, .panel {
+    background-color: #3E4637;
+}
+
+.bg1 {
+    background-color: #4C5844;
+}
+
+.bg2 {
+    background-color: #545F4E;
+}
+
+.bg3 {
+    background-color: #3E4637;
+}
+
+/* Header bar */
+.headerbar {
+    background-color: #000000;
+}
+
+/* Post profile styling */
+.postprofile {
+    background-color: #545F4E;
+    color: #C5CAB6;
+    font-size: 11px;
+}
+
+/* Post content styling */
+.content {
+    color: #C5CAB6;
+    font-size: 12px;
+}
+
+/* Dropdown menus */
+.dropdown-container {
+    background-color: #545F4E;
+    border: 1px solid #3E4637;
+}
+
+.dropdown-container a {
+    color: #B6C5CA;
+}
+
+.dropdown-container a:hover {
+    background-color: #4C5844;
+    color: #FFFFFF;
+}
+
+/* Spoiler styling */
+.spoiler {
+    background-color: #000000;
+    color: #000000;
+}
+
+/* Global header bar styling */
+.globalHeadBar {
+    font-size: 10px;
+    background: #000000;
+    margin: 0px;
+    width: 80%;
+    padding-top: 30px;
+    padding-bottom: 9px;
+    float: left;
+}
+
+.globalHeadBar_logo {
+    background: #000000;
+    margin: 0px;
+    width: 20%;
+    padding-top: 4px;
+    padding-bottom: 9px;
+    float: left;
+}
+
+.globalNavItem {
+    display: inline;
+    vertical-align: top;
+    margin-bottom: 0px;
+}
+
+.globalNavItem a {
+    display: inline;
+    margin-right: 15px;
+    margin-left: 15px;
+    padding-bottom: 9px;
+    background-color: #000000;
+    text-decoration: none;
+}
+
+.globalNavItem a:hover {
+    background-color: #4C5844;
+    text-decoration: none;
+}
+
+.globalNavLink {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    background-color: #000000;
+    text-decoration: none;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+/* Left menu styling */
+.leftMenu_2 {
+    width: 150px;
+    float: left;
+    padding: 15px;
+}
+
+.menu_item {
+    color: #FFFFFF;
+    font-family: Verdana;
+    font-size: 10px;
+    font-weight: normal;
+    height: 15px;
+    margin: 0px 15px 0px 0px;
+    margin-top: 4px;
+}
+
+.menu_item a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.menu_item a:hover {
+    color: #999999;
+    text-decoration: none;
+}
+
+.menu_item_current {
+    color: #8BC53F;
+    font-family: Verdana;
+    font-size: 10px;
+    font-weight: normal;
+    text-decoration: none;
+    height: 15px;
+    margin-right: 15px;
+    margin-top: 4px;
+    padding-left: 6px;
+}
+
+.menu_item_current a {
+    color: #8BC53F;
+    text-decoration: none;
+    padding-left: 6px;
+}
+
+.menu_spacer {
+    width: 80%;
+    height: 2px;
+    border-top: 1px solid #000000;
+    margin-top: 5px;
+    border-bottom: 1px solid #626366;
+    padding: 0px;
+    margin-bottom: 5px;
+}
+
+/* Legal text */
+.legal {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: #626366;
+    padding-left: 25px;
+    padding-right: 15px;
+    text-align: left;
+}
+
+.legal a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    color: #999999;
+    text-decoration: underline;
+}
+
+.legal a:hover {
+    color: #FFFFFF;
+}
+
+/* Heading styles */
+h1 {
+    letter-spacing: 2px;
+    font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 10px;
+    text-align: left;
+    padding: 0px;
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 7px;
+}
+
+h3 {
+    font-family: "Trebuchet MS", "Arial Narrow", HelveticaNeue-Thin, Helvetica-Light;
+    font-size: 1.6em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #CCCCCC;
+    letter-spacing: 1px;
+    line-height: 1px;
+    text-align: left;
+    padding: 0px;
+    margin-left: 15px;
+    margin-top: 0px;
+}
+
+p {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    line-height: 1.4em;
+    font-weight: normal;
+    color: #C5CAB6;
+    text-decoration: none;
+    text-align: left;
+    padding: 0px;
+    margin: 10px 20px 15px 25px;
+}
+
+li {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    color: #C5CAB6;
+    padding: 5px 10px 0px 0px;
+    list-style-type: square;
+    list-style-position: outside;
+    margin: 0px 0px 0px 30px;
+}

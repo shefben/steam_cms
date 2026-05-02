@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ->execute([$boardId, $_POST['subject'], $logged ? $_SESSION['user']['id'] : null]);
     $tid = (int)$pdo->lastInsertId();
     $pdo->prepare('INSERT INTO posts(thread_id,user_id,message,created,ip_addr)
-                   VALUES (?,?,?,?,?)')
+                   VALUES (?,?,?,NOW(),?)')
         ->execute([$tid, $logged ? $_SESSION['user']['id'] : null,
-                   $_POST['message'], date('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR']]);
+                   $_POST['message'], $_SERVER['REMOTE_ADDR']]);
     $pdo->commit();
     header("Location: thread.php?threadid=$tid");
     exit;

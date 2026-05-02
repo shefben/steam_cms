@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>{{ page_title|default('Steam News Archive') }}</title>
+<link href="themes/2008/css/styles_global.css" rel="stylesheet" type="text/css"/>
+<link href="themes/2008/css/styles_home.css" rel="stylesheet" type="text/css"/>
+<link href="themes/2008/css/header.css" rel="stylesheet" type="text/css"/>
+<script src="themes/2008/js/main.js" type="text/javascript"></script>
+<script src="themes/2008/js/header.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="all">
+{{ header_2008() }}
+<div id="cart_status_row">
+<center>
+<div id="cart_status_center">
+<div id="cart_status_data">
+{{ cart_status() }}							
+</div>
+</div>
+</center>
+</div>
+<center>
+<div id="col_parent">
+<br clear="all"/>
+<div id="col_left">
+{{ sidebar_2008_search() }}
+{{ sidebar_2008_browse() }}
+{{ sidebar_2008_install_steam() }}
+</div>
+<div id="col_center" style="width:600px;">
+<h1 style="color:#fff;font-size:18px;margin-bottom:20px;">Steam News Archive</h1>
+{{ content|raw }}
+</div>
+<div id="col_right">
+{{ sidebar_right_2008() }}
+</div>
+<br clear="all">
+</div>
+</center>
+{{ footer_2008() }}
+</div>
+</body>
+</html>

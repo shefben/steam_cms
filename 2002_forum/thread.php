@@ -78,9 +78,9 @@ if ($thread['locked']) {
 
 // Get posts (include hidden posts for moderators)
 if ($canMod) {
-    $posts = cb_db()->prepare('SELECT p.*, u.username, u.signature, u.is_mod, u.is_admin FROM posts p LEFT JOIN users u ON u.id=p.user_id WHERE p.thread_id=? ORDER BY p.created');
+    $posts = cb_db()->prepare('SELECT p.*, u.username, u.signature, u.is_mod, u.is_admin FROM posts p LEFT JOIN users u ON u.id=p.user_id WHERE p.thread_id=? ORDER BY p.id');
 } else {
-    $posts = cb_db()->prepare('SELECT p.*, u.username, u.signature, u.is_mod, u.is_admin FROM posts p LEFT JOIN users u ON u.id=p.user_id WHERE p.thread_id=? AND (p.hidden=0 OR p.hidden IS NULL) ORDER BY p.created');
+    $posts = cb_db()->prepare('SELECT p.*, u.username, u.signature, u.is_mod, u.is_admin FROM posts p LEFT JOIN users u ON u.id=p.user_id WHERE p.thread_id=? AND (p.hidden=0 OR p.hidden IS NULL) ORDER BY p.id');
 }
 $posts->execute([$tid]);
 

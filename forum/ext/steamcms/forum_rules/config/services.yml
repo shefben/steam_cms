@@ -1,0 +1,10 @@
+services:
+    steamcms.forum_rules.listener:
+        class: steamcms\forum_rules\event\main_listener
+        arguments:
+            - '@config'
+            - '@config_text'
+            - '@template'
+            - '@text_formatter.renderer'
+        tags:
+            - { name: event.listener }

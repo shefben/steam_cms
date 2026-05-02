@@ -2,9 +2,11 @@
 
 <!-- Topic Navigation / Breadcrumbs -->
 <div class="breadcrumbs">
-    <a href="{U_INDEX}">{L_INDEX}</a> &raquo;
-    <a href="{U_VIEWFORUM}">{FORUM_NAME}</a> &raquo;
-    <strong>{TOPIC_TITLE}</strong>
+    <a href="{U_INDEX}">{L_INDEX}</a>
+    <!-- BEGIN navlinks -->
+    &raquo; <a href="{navlinks.U_BREADCRUMB}">{navlinks.BREADCRUMB_NAME}</a>
+    <!-- END navlinks -->
+    &raquo; <strong>{TOPIC_TITLE}</strong>
 </div>
 
 <!-- Topic Header -->

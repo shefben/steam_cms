@@ -4153,6 +4153,32 @@ $defaultCafes = [
                             $vb_mysqli->query('SET SESSION UNIQUE_CHECKS = 0');
                             $vb_mysqli->query('SET SESSION autocommit = 0');
 
+                            // Probe LOAD DATA LOCAL INFILE up-front. If the server (or PHP's
+                            // mysqli.allow_local_infile) refuses it, we silently load 0 rows
+                            // forever — so detect once and switch to direct-INSERT mode.
+                            $use_load_data = true;
+                            $probe_path = $tsv_dir . DIRECTORY_SEPARATOR . '_probe.tsv';
+                            @file_put_contents($probe_path, "1\n");
+                            @$vb_mysqli->query('DROP TEMPORARY TABLE IF EXISTS _vbimport_probe');
+                            @$vb_mysqli->query('CREATE TEMPORARY TABLE _vbimport_probe (n INT)');
+                            $probe_load = str_replace('\\', '/', $probe_path);
+                            $probe_esc  = $vb_mysqli->real_escape_string($probe_load);
+                            $probe_sql  = "LOAD DATA LOCAL INFILE '{$probe_esc}' "
+                                        . "INTO TABLE _vbimport_probe "
+                                        . "FIELDS TERMINATED BY '\\t' "
+                                        . "LINES TERMINATED BY '\\n' (n)";
+                            if (!@$vb_mysqli->query($probe_sql)) {
+                                echo "  ⚠ LOAD DATA LOCAL INFILE unavailable: "
+                                   . $vb_mysqli->error . "\n";
+                                echo "    Falling back to direct INSERT mode "
+                                   . "(slower, but works without local_infile).\n";
+                                @ob_flush(); @flush();
+                                $use_load_data = false;
+                            }
+                            @$vb_mysqli->query('DROP TEMPORARY TABLE IF EXISTS _vbimport_probe');
+                            @unlink($probe_path);
+                            $load_data_warned = false;
+
                             // Pre-compiled regex for INSERT-header detection: captures
                             // table name, column list, and any tail after VALUES (in case
                             // tuples are inlined on the same line).
@@ -4177,6 +4203,13 @@ $defaultCafes = [
 
                             $rows_loaded = 0;
                             $errors      = 0;
+                            // Periodic-commit checkpoint. With autocommit=0 and a single
+                            // COMMIT at the end of a 2 GB import, a crash mid-stream rolls
+                            // back every row — so we batch a COMMIT every ~250 K rows. The
+                            // resume script keys on MAX(pk) of each table, so any work
+                            // already committed will be skipped on restart.
+                            $commit_every  = 250000;
+                            $rows_at_last_commit = 0;
 
                             // ─── Helpers ────────────────────────────────────────────
                             $exec_misc = function (string $sql) use ($vb_mysqli, &$errors) {
@@ -4192,10 +4225,82 @@ $defaultCafes = [
                                 }
                             };
 
+                            // Direct-INSERT fallback. Reads the staged TSV chunk and replays
+                            // it as one or more `INSERT IGNORE ... VALUES (...)...` statements.
+                            //
+                            // The TSV preserves mysqldump's SQL-escape sequences verbatim within
+                            // each field (we copied bytes directly from between the source `'`
+                            // quotes), so we can safely re-wrap each field in single quotes —
+                            // MySQL parses the escapes back out. NULL is encoded as `\N` in TSV
+                            // and emitted as the SQL NULL literal.
+                            $do_load_via_insert = function () use (
+                                &$tsv_path, &$tsv_rows,
+                                &$cur_table, &$cur_cols, &$rows_loaded, &$errors,
+                                $vb_mysqli
+                            ) {
+                                $fh = @fopen($tsv_path, 'rb');
+                                if (!$fh) {
+                                    $errors++;
+                                    @unlink($tsv_path);
+                                    return;
+                                }
+                                $cols_sql = '`' . implode('`, `', $cur_cols) . '`';
+                                $tbl_esc  = str_replace('`', '``', $cur_table);
+                                $insert_prefix = "INSERT IGNORE INTO `{$tbl_esc}` ({$cols_sql}) VALUES ";
+
+                                $batch       = [];
+                                $batch_bytes = 0;
+                                $max_batch   = 4 * 1024 * 1024;  // ~4MB per packet — safe under default max_allowed_packet
+
+                                $flush = function () use (
+                                    &$batch, &$batch_bytes, $vb_mysqli, $insert_prefix,
+                                    &$rows_loaded, &$errors
+                                ) {
+                                    if (empty($batch)) return;
+                                    $sql = $insert_prefix . implode(',', $batch);
+                                    if ($vb_mysqli->query($sql)) {
+                                        $rows_loaded += $vb_mysqli->affected_rows;
+                                    } else {
+                                        $errors++;
+                                        if ($errors <= 10) {
+                                            error_log('vBulletin INSERT fallback error: '
+                                                . $vb_mysqli->error);
+                                        }
+                                    }
+                                    $batch       = [];
+                                    $batch_bytes = 0;
+                                };
+
+                                while (($line = fgets($fh, 1048576)) !== false) {
+                                    $line = rtrim($line, "\n\r");
+                                    if ($line === '') continue;
+                                    $fields = explode("\t", $line);
+                                    $parts  = [];
+                                    foreach ($fields as $f) {
+                                        if ($f === '\\N') {
+                                            $parts[] = 'NULL';
+                                        } else {
+                                            $parts[] = "'" . $f . "'";
+                                        }
+                                    }
+                                    $tuple = '(' . implode(',', $parts) . ')';
+                                    $tlen  = strlen($tuple) + 1;
+                                    if ($batch_bytes + $tlen >= $max_batch && !empty($batch)) {
+                                        $flush();
+                                    }
+                                    $batch[]      = $tuple;
+                                    $batch_bytes += $tlen;
+                                }
+                                fclose($fh);
+                                $flush();
+                                @unlink($tsv_path);
+                            };
+
                             $do_load = function () use (
                                 &$tsv_handle, &$tsv_path, &$tsv_bytes, &$tsv_rows,
                                 &$cur_table, &$cur_cols, &$rows_loaded, &$errors,
-                                $vb_mysqli
+                                &$use_load_data, &$load_data_warned,
+                                $vb_mysqli, $do_load_via_insert
                             ) {
                                 if (!$tsv_handle) return;
                                 fclose($tsv_handle);
@@ -4209,30 +4314,44 @@ $defaultCafes = [
                                     return;
                                 }
 
-                                $cols_sql = '`' . implode('`, `', $cur_cols) . '`';
-                                // LOAD DATA wants forward-slash paths, even on Windows
-                                $load_path = str_replace('\\', '/', $tsv_path);
-                                $load_path_esc = $vb_mysqli->real_escape_string($load_path);
-                                $tbl_esc       = str_replace('`', '``', $cur_table);
+                                if ($use_load_data) {
+                                    $cols_sql = '`' . implode('`, `', $cur_cols) . '`';
+                                    // LOAD DATA wants forward-slash paths, even on Windows
+                                    $load_path     = str_replace('\\', '/', $tsv_path);
+                                    $load_path_esc = $vb_mysqli->real_escape_string($load_path);
+                                    $tbl_esc       = str_replace('`', '``', $cur_table);
 
-                                $sql = "LOAD DATA LOCAL INFILE '{$load_path_esc}' "
-                                     . "IGNORE INTO TABLE `{$tbl_esc}` "
-                                     . "CHARACTER SET utf8mb4 "
-                                     . "FIELDS TERMINATED BY '\\t' "
-                                     . "ENCLOSED BY '' "
-                                     . "ESCAPED BY '\\\\' "
-                                     . "LINES TERMINATED BY '\\n' "
-                                     . "({$cols_sql})";
+                                    $sql = "LOAD DATA LOCAL INFILE '{$load_path_esc}' "
+                                         . "IGNORE INTO TABLE `{$tbl_esc}` "
+                                         . "CHARACTER SET utf8mb4 "
+                                         . "FIELDS TERMINATED BY '\\t' "
+                                         . "ENCLOSED BY '' "
+                                         . "ESCAPED BY '\\\\' "
+                                         . "LINES TERMINATED BY '\\n' "
+                                         . "({$cols_sql})";
 
-                                if ($vb_mysqli->query($sql)) {
-                                    $rows_loaded += $vb_mysqli->affected_rows;
-                                } else {
-                                    $errors++;
-                                    error_log('vBulletin LOAD DATA error for ' . $cur_table . ': '
-                                        . $vb_mysqli->error);
+                                    if ($vb_mysqli->query($sql)) {
+                                        $rows_loaded += $vb_mysqli->affected_rows;
+                                        @unlink($tsv_path);
+                                        $tsv_path  = null;
+                                        $tsv_bytes = 0;
+                                        $tsv_rows  = 0;
+                                        @set_time_limit(0);
+                                        return;
+                                    }
+                                    // First failure: surface to user output and switch modes.
+                                    if (!$load_data_warned) {
+                                        echo "  ⚠ LOAD DATA failed for `{$cur_table}`: "
+                                           . $vb_mysqli->error . "\n";
+                                        echo "    Switching to direct INSERT mode for the rest of the import.\n";
+                                        @ob_flush(); @flush();
+                                        $load_data_warned = true;
+                                    }
+                                    $use_load_data = false;
+                                    // Fall through to INSERT fallback for this chunk.
                                 }
 
-                                @unlink($tsv_path);
+                                $do_load_via_insert();
                                 $tsv_path  = null;
                                 $tsv_bytes = 0;
                                 $tsv_rows  = 0;
@@ -4273,6 +4392,13 @@ $defaultCafes = [
                                             if ($is_end) {
                                                 $cur_table = null;
                                                 $cur_cols  = null;
+
+                                                // Periodic checkpoint: commit so a later
+                                                // crash doesn't wipe progress already loaded.
+                                                if ($rows_loaded - $rows_at_last_commit >= $commit_every) {
+                                                    $vb_mysqli->query('COMMIT');
+                                                    $rows_at_last_commit = $rows_loaded;
+                                                }
 
                                                 $elapsed = (int)(microtime(true) - $vb_started);
                                                 $rate    = $elapsed > 0
@@ -4371,6 +4497,12 @@ $defaultCafes = [
 
                     echo "✓ Historical forum data installation complete\n";
                 }
+
+                // Relax sql_mode so fix_forum_categories.sql's INSERTs into
+                // phpbb_forums (which omit `forum_parents` — a MEDIUMBLOB NOT NULL
+                // with no default) aren't rejected by STRICT_TRANS_TABLES. phpBB
+                // regenerates forum_parents lazily so an empty value is fine.
+                try { $pdo->exec("SET SESSION sql_mode = ''"); } catch (Exception $e) {}
 
                 // Run phpBB-dependent fix scripts now that phpbb_* tables exist
                 foreach (['fix_forum_categories.sql', 'fix_topic_views.sql'] as $fixFile) {

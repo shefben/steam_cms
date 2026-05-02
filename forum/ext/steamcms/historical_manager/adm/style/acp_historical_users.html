@@ -1,0 +1,78 @@
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+
+<h1>{L_ACP_HISTORICAL_MANAGER_USERS}</h1>
+
+<!-- IF S_EDIT or action == 'add' -->
+	<!-- User add/edit form -->
+	<form method="post" action="{U_ACTION}">
+		<fieldset>
+			<legend><!-- IF S_EDIT -->{L_HISTORICAL_USER_EDIT}<!-- ELSE -->{L_HISTORICAL_USER_ADD}<!-- ENDIF --></legend>
+			<dl>
+				<dt><label for="username">{L_HISTORICAL_USERNAME}:</label></dt>
+				<dd><input type="text" id="username" name="username" value="{USERNAME}" size="40" maxlength="255" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="email">{L_HISTORICAL_USER_EMAIL}:</label></dt>
+				<dd><input type="text" id="email" name="email" value="{EMAIL}" size="40" maxlength="255" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="regdate">{L_HISTORICAL_USER_REGDATE}:</label></dt>
+				<dd><input type="date" id="regdate" name="regdate" value="{REGDATE}" /></dd>
+			</dl>
+			<p class="submit-buttons">
+				<input class="button1" type="submit" name="submit" value="{L_HISTORICAL_SAVE}" />
+				<a class="button2" href="{U_BACK}">{L_HISTORICAL_CANCEL}</a>
+			</p>
+		</fieldset>
+		{S_FORM_TOKEN}
+	</form>
+<!-- ELSE -->
+	<!-- Search and Add -->
+	<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+		<form method="get" action="{U_ACTION}" style="display: inline;">
+			<input type="text" name="search" value="{SEARCH}" placeholder="Search users..." size="30" />
+			<input type="submit" value="Search" class="button2" />
+		</form>
+		<a href="{U_ADD}" class="button1">{L_HISTORICAL_USER_ADD}</a>
+	</div>
+
+	<!-- IF TOTAL_USERS -->
+		<p>Total: {TOTAL_USERS} historical users</p>
+
+		<table class="table1">
+			<thead>
+				<tr>
+					<th>{L_HISTORICAL_ID}</th>
+					<th>{L_HISTORICAL_USERNAME}</th>
+					<th>{L_HISTORICAL_USER_EMAIL}</th>
+					<th>{L_HISTORICAL_USER_REGDATE}</th>
+					<th style="text-align: right;">{L_HISTORICAL_USER_POSTS}</th>
+					<th>{L_HISTORICAL_ACTIONS}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- BEGIN users -->
+				<tr class="row{users.S_ROW_COUNT}">
+					<td>{users.USER_ID}</td>
+					<td><strong>{users.USERNAME}</strong></td>
+					<td>{users.EMAIL}</td>
+					<td>{users.REGDATE}</td>
+					<td style="text-align: right;">{users.POSTS}</td>
+					<td>
+						<a href="{users.U_EDIT}">Edit</a> |
+						<a href="{users.U_DELETE}" onclick="return confirm('{L_HISTORICAL_CONFIRM_DELETE}');">Delete</a>
+					</td>
+				</tr>
+				<!-- END users -->
+			</tbody>
+		</table>
+
+		{PAGINATION}
+	<!-- ELSE -->
+		<p>{L_HISTORICAL_NO_RESULTS}</p>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

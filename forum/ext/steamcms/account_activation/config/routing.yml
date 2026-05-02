@@ -1,0 +1,4 @@
+steamcms_account_activation:
+    path: /activate
+    defaults:
+        _controller: steamcms.account_activation.controller:handle

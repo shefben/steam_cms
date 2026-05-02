@@ -1,0 +1,197 @@
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+
+<h1>{L_ACP_HISTORICAL_MANAGER_TOPICS}</h1>
+
+<!-- IF action == 'add' or action == 'edit' -->
+	<!-- Topic add/edit form -->
+	<form method="post" action="{U_ACTION}">
+		<fieldset>
+			<legend><!-- IF S_EDIT -->{L_HISTORICAL_TOPIC_EDIT}<!-- ELSE -->{L_HISTORICAL_TOPIC_ADD}<!-- ENDIF --></legend>
+			<dl>
+				<dt><label for="topic_title">{L_HISTORICAL_TOPIC_TITLE}:</label></dt>
+				<dd><input type="text" id="topic_title" name="topic_title" value="{TOPIC_TITLE}" size="60" maxlength="255" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="forum_id">{L_HISTORICAL_TOPIC_FORUM}:</label></dt>
+				<dd>
+					<select id="forum_id" name="forum_id">
+						<!-- BEGIN forum_options -->
+						<option value="{forum_options.FORUM_ID}"<!-- IF forum_options.SELECTED --> selected="selected"<!-- ENDIF -->>{forum_options.FORUM_NAME}</option>
+						<!-- END forum_options -->
+					</select>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="poster_id">{L_HISTORICAL_TOPIC_POSTER}:</label></dt>
+				<dd>
+					<select id="poster_id" name="poster_id">
+						<!-- BEGIN user_options -->
+						<option value="{user_options.USER_ID}"<!-- IF user_options.SELECTED --> selected="selected"<!-- ENDIF -->>{user_options.USERNAME}</option>
+						<!-- END user_options -->
+					</select>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="post_time">{L_HISTORICAL_TOPIC_TIME}:</label></dt>
+				<dd><input type="date" id="post_time" name="post_time" value="{POST_TIME}" /></dd>
+			</dl>
+			<!-- IF not S_EDIT -->
+			<dl>
+				<dt><label for="post_text">First Post Content (optional):</label></dt>
+				<dd><textarea id="post_text" name="post_text" rows="8" cols="60"></textarea></dd>
+			</dl>
+			<!-- ENDIF -->
+			<p class="submit-buttons">
+				<input class="button1" type="submit" name="submit" value="{L_HISTORICAL_SAVE}" />
+				<a class="button2" href="{U_BACK}">{L_HISTORICAL_CANCEL}</a>
+			</p>
+		</fieldset>
+		{S_FORM_TOKEN}
+	</form>
+
+<!-- ELSEIF action == 'view_posts' -->
+	<!-- Posts within a topic -->
+	<p><a href="{U_BACK}">&laquo; {L_HISTORICAL_BACK} to Topics</a></p>
+	<h2>Posts in: {TOPIC_TITLE}</h2>
+
+	<div style="margin-bottom: 15px;">
+		<a href="{U_ADD_POST}" class="button1">{L_HISTORICAL_POST_ADD}</a>
+		<span style="margin-left: 10px;">Total: {TOTAL_POSTS} posts</span>
+	</div>
+
+	<!-- BEGIN posts -->
+		<!-- IF posts.S_FIRST_ROW -->
+		<table class="table1">
+			<thead>
+				<tr>
+					<th>{L_HISTORICAL_ID}</th>
+					<th>{L_HISTORICAL_POST_SUBJECT}</th>
+					<th>Preview</th>
+					<th>{L_HISTORICAL_POST_POSTER}</th>
+					<th>{L_HISTORICAL_POST_TIME}</th>
+					<th>Historical</th>
+					<th>{L_HISTORICAL_ACTIONS}</th>
+				</tr>
+			</thead>
+			<tbody>
+		<!-- ENDIF -->
+				<tr class="row{posts.S_ROW_COUNT}">
+					<td>{posts.POST_ID}</td>
+					<td><strong>{posts.SUBJECT}</strong></td>
+					<td>{posts.TEXT_PREVIEW}</td>
+					<td>{posts.POSTER}</td>
+					<td>{posts.DATE}</td>
+					<td><!-- IF posts.IS_HISTORICAL -->Yes<!-- ELSE -->No<!-- ENDIF --></td>
+					<td>
+						<a href="{posts.U_EDIT}">Edit</a> |
+						<a href="{posts.U_DELETE}" onclick="return confirm('{L_HISTORICAL_CONFIRM_DELETE}');">Delete</a>
+					</td>
+				</tr>
+		<!-- IF posts.S_LAST_ROW -->
+			</tbody>
+		</table>
+		<!-- ENDIF -->
+	<!-- BEGINELSE -->
+		<p>No posts in this topic.</p>
+	<!-- END posts -->
+
+	{PAGINATION}
+
+<!-- ELSEIF action == 'add_post' or action == 'edit_post' -->
+	<!-- Post add/edit form -->
+	<p><a href="{U_BACK}">&laquo; {L_HISTORICAL_BACK} to Posts</a></p>
+	<h2><!-- IF S_EDIT -->{L_HISTORICAL_POST_EDIT}<!-- ELSE -->{L_HISTORICAL_POST_ADD}<!-- ENDIF --> in: {TOPIC_TITLE}</h2>
+
+	<form method="post" action="{U_ACTION}">
+		<fieldset>
+			<dl>
+				<dt><label for="post_subject">{L_HISTORICAL_POST_SUBJECT}:</label></dt>
+				<dd><input type="text" id="post_subject" name="post_subject" value="{POST_SUBJECT}" size="60" maxlength="255" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="poster_id">{L_HISTORICAL_POST_POSTER}:</label></dt>
+				<dd>
+					<select id="poster_id" name="poster_id">
+						<!-- BEGIN user_options -->
+						<option value="{user_options.USER_ID}"<!-- IF user_options.SELECTED --> selected="selected"<!-- ENDIF -->>{user_options.USERNAME}</option>
+						<!-- END user_options -->
+					</select>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="post_time">{L_HISTORICAL_POST_TIME}:</label></dt>
+				<dd><input type="date" id="post_time" name="post_time" value="{POST_TIME}" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="post_text">{L_HISTORICAL_POST_TEXT}:</label></dt>
+				<dd><textarea id="post_text" name="post_text" rows="12" cols="70">{POST_TEXT}</textarea></dd>
+			</dl>
+			<p class="submit-buttons">
+				<input class="button1" type="submit" name="submit" value="{L_HISTORICAL_SAVE}" />
+				<a class="button2" href="{U_BACK}">{L_HISTORICAL_CANCEL}</a>
+			</p>
+		</fieldset>
+		{S_FORM_TOKEN}
+	</form>
+
+<!-- ELSE -->
+	<!-- Topic list -->
+	<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+		<form method="get" action="{U_ACTION}" style="display: inline;">
+			<input type="text" name="search" value="{SEARCH}" placeholder="Search topics..." size="25" />
+			<select name="forum_id">
+				<option value="0">All forums</option>
+				<!-- BEGIN forum_filter -->
+				<option value="{forum_filter.FORUM_ID}"<!-- IF forum_filter.SELECTED --> selected="selected"<!-- ENDIF -->>{forum_filter.FORUM_NAME}</option>
+				<!-- END forum_filter -->
+			</select>
+			<input type="submit" value="Filter" class="button2" />
+		</form>
+		<a href="{U_ADD}" class="button1">{L_HISTORICAL_TOPIC_ADD}</a>
+	</div>
+
+	<!-- IF TOTAL_TOPICS -->
+		<p>Total: {TOTAL_TOPICS} historical topics</p>
+
+		<table class="table1">
+			<thead>
+				<tr>
+					<th>{L_HISTORICAL_ID}</th>
+					<th>{L_HISTORICAL_TOPIC_TITLE}</th>
+					<th>{L_HISTORICAL_TOPIC_FORUM}</th>
+					<th>{L_HISTORICAL_TOPIC_POSTER}</th>
+					<th>{L_HISTORICAL_TOPIC_TIME}</th>
+					<th style="text-align: right;">Posts</th>
+					<th>{L_HISTORICAL_ACTIONS}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- BEGIN topics -->
+				<tr class="row{topics.S_ROW_COUNT}">
+					<td>{topics.TOPIC_ID}</td>
+					<td>
+						<strong><a href="{topics.U_VIEW_POSTS}">{topics.TOPIC_TITLE}</a></strong>
+					</td>
+					<td>{topics.FORUM_NAME}</td>
+					<td>{topics.POSTER}</td>
+					<td>{topics.DATE}</td>
+					<td style="text-align: right;">{topics.POSTS}</td>
+					<td>
+						<a href="{topics.U_VIEW_POSTS}">Posts</a> |
+						<a href="{topics.U_EDIT}">Edit</a> |
+						<a href="{topics.U_DELETE}" onclick="return confirm('{L_HISTORICAL_CONFIRM_DELETE}');">Delete</a>
+					</td>
+				</tr>
+				<!-- END topics -->
+			</tbody>
+		</table>
+
+		{PAGINATION}
+	<!-- ELSE -->
+		<p>{L_HISTORICAL_NO_RESULTS}</p>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

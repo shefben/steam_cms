@@ -2,7 +2,10 @@
 
 <!-- Forum Navigation / Breadcrumbs -->
 <div class="breadcrumbs">
-    <a href="{U_INDEX}">{L_INDEX}</a> &raquo; <strong>{FORUM_NAME}</strong>
+    <a href="{U_INDEX}">{L_INDEX}</a>
+    <!-- BEGIN navlinks -->
+    &raquo; <!-- IF navlinks.S_LAST_ROW --><strong>{navlinks.BREADCRUMB_NAME}</strong><!-- ELSE --><a href="{navlinks.U_BREADCRUMB}">{navlinks.BREADCRUMB_NAME}</a><!-- ENDIF -->
+    <!-- END navlinks -->
 </div>
 
 <!-- Forum Description -->
@@ -79,8 +82,16 @@
 <!-- IF TOTAL_TOPICS -->
 <div class="pagination">
     <strong>{TOTAL_TOPICS}</strong> topics
-    <!-- IF PAGINATION -->
-    &nbsp;&bull;&nbsp; {PAGINATION}
+    <!-- IF .pagination -->
+    &nbsp;&bull;&nbsp; <strong>{L_GOTO_PAGE}:</strong>
+        <!-- BEGIN pagination -->
+            <!-- IF pagination.S_IS_PREV --><a href="{pagination.PAGE_URL}" title="{L_PREVIOUS}">&laquo;&nbsp;Prev</a>&nbsp;
+            <!-- ELSEIF pagination.S_IS_CURRENT --><strong>[{pagination.PAGE_NUMBER}]</strong>&nbsp;
+            <!-- ELSEIF pagination.S_IS_ELLIPSIS -->...&nbsp;
+            <!-- ELSEIF pagination.S_IS_NEXT --><a href="{pagination.PAGE_URL}" title="{L_NEXT}">Next&nbsp;&raquo;</a>&nbsp;
+            <!-- ELSE --><a href="{pagination.PAGE_URL}">{pagination.PAGE_NUMBER}</a>&nbsp;
+            <!-- ENDIF -->
+        <!-- END pagination -->
     <!-- ENDIF -->
 </div>
 <!-- ENDIF -->

@@ -1,0 +1,12 @@
+services:
+    steamcms.historical_manager.admin_controller:
+        class: steamcms\historical_manager\controller\admin_controller
+        arguments:
+            - '@dbal.conn'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@config'
+            - '@log'
+            - '%core.root_path%'
+            - '%core.php_ext%'

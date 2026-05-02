@@ -1,0 +1,112 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF S_SHOW_COPPA or S_REGISTRATION -->
+
+<!-- IF S_LANG_OPTIONS -->
+<script>
+	/**
+	* Change language
+	*/
+	function change_language(lang_iso)
+	{
+		document.cookie = '{COOKIE_NAME}_lang=' + lang_iso + '; path={COOKIE_PATH}';
+		document.forms['register'].change_lang.value = lang_iso;
+		document.forms['register'].submit();
+	}
+</script>
+
+<form method="post" action="{S_UCP_ACTION}" id="register">
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td align="right">
+		<font face="verdana,arial,helvetica" size="1">{L_LANGUAGE}: </font>
+		<select name="lang" onchange="change_language(this.value); return false;" title="{L_LANGUAGE}">{S_LANG_OPTIONS}</select>
+		{S_HIDDEN_FIELDS}
+	</td>
+</tr>
+</table>
+</form>
+<!-- ENDIF -->
+
+<!-- Breadcrumb -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="" />
+	<font face="verdana, arial, helvetica" size="2"><b><a href="{U_INDEX}">{SITENAME}</a></b> &gt; <b>Registration</b></font></td>
+</tr>
+</table>
+<br />
+
+<!-- Rules / Terms of Use -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0" width="100%">
+	<tr id="cat">
+		<td bgcolor="#3E4637">
+			<font face="verdana, arial, helvetica" size="2" color="#D8DED3"><b>{SITENAME} Rules</b></font>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#545F4E">
+			<font face="verdana, arial, helvetica" size="2">
+			<!-- IF S_SHOW_COPPA -->
+			{{ lang('COPPA_BIRTHDAY') }}
+			<!-- ELSEIF STEAMCMS_FORUM_RULES -->
+			{STEAMCMS_FORUM_RULES}
+			<!-- ELSE -->
+			{{ lang('TERMS_OF_USE') }}
+			<!-- ENDIF -->
+			</font>
+		</td>
+	</tr>
+</table>
+</td></tr></table>
+<br />
+
+<!-- Agree / Cancel Buttons -->
+<form method="post" action="{S_UCP_ACTION}" id="agreement">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td align="center">
+		<!-- IF S_SHOW_COPPA -->
+		<input type="submit" name="coppa_no" value="{{ L_COPPA_NO }}" class="bginput" />&nbsp;&nbsp;
+		<input type="submit" name="coppa_yes" value="{{ L_COPPA_YES }}" class="bginput" />
+		<!-- ELSE -->
+		<input type="submit" name="agreed" value="{L_AGREE}" class="bginput" />&nbsp;&nbsp;
+		<input type="submit" name="not_agreed" value="{L_NOT_AGREE}" class="bginput" />
+		<!-- ENDIF -->
+		{S_HIDDEN_FIELDS}
+		{S_FORM_TOKEN}
+	</td>
+</tr>
+</table>
+</form>
+
+<!-- ELSEIF S_AGREEMENT -->
+
+<!-- Breadcrumb -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="" />
+	<font face="verdana, arial, helvetica" size="2"><b><a href="{U_INDEX}">{SITENAME}</a></b> &gt; <b>{{ AGREEMENT_TITLE }}</b></font></td>
+</tr>
+</table>
+<br />
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#3E4637" width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0" width="100%">
+	<tr id="cat">
+		<td bgcolor="#3E4637">
+			<font face="verdana, arial, helvetica" size="2" color="#D8DED3"><b>{{ AGREEMENT_TITLE }}</b></font>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#545F4E">
+			<font face="verdana, arial, helvetica" size="2">{{ AGREEMENT_TEXT }}</font>
+		</td>
+	</tr>
+</table>
+</td></tr></table>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

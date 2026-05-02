@@ -1,0 +1,76 @@
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+
+<h1>{L_ACP_HISTORICAL_MANAGER_IMPORT}</h1>
+
+<form method="post" action="{U_ACTION}" enctype="multipart/form-data">
+	<fieldset>
+		<legend>{L_HISTORICAL_IMPORT}</legend>
+
+		<h3>{L_HISTORICAL_IMPORT_AVAILABLE}</h3>
+		<!-- BEGIN available_files -->
+			<!-- IF available_files.S_FIRST_ROW -->
+			<table class="table1" style="margin-bottom: 15px;">
+				<thead>
+					<tr>
+						<th style="width: 30px;"></th>
+						<th>Filename</th>
+						<th>Size</th>
+						<th>Lines</th>
+					</tr>
+				</thead>
+				<tbody>
+			<!-- ENDIF -->
+					<tr class="row{available_files.S_ROW_COUNT}">
+						<td><input type="radio" name="selected_file" value="{available_files.FILENAME}" /></td>
+						<td><strong>{available_files.FILENAME}</strong></td>
+						<td>{available_files.SIZE}</td>
+						<td>{available_files.LINES}</td>
+					</tr>
+			<!-- IF available_files.S_LAST_ROW -->
+				</tbody>
+			</table>
+			<!-- ENDIF -->
+		<!-- BEGINELSE -->
+			<p>No SQL files found in scripts/ directory.</p>
+		<!-- END available_files -->
+
+		<h3>Or Upload SQL File</h3>
+		<dl>
+			<dt><label for="sql_file">{L_HISTORICAL_IMPORT_UPLOAD}:</label></dt>
+			<dd><input type="file" id="sql_file" name="sql_file" accept=".sql" /></dd>
+		</dl>
+
+		<hr style="margin: 15px 0;" />
+
+		<dl>
+			<dt><label for="reimport">{L_HISTORICAL_IMPORT_REIMPORT}:</label></dt>
+			<dd>
+				<label>
+					<input type="checkbox" id="reimport" name="reimport" value="1" />
+					Purge all existing historical data before importing
+				</label>
+				<br /><em style="color: #c00;">Warning: This will permanently delete all existing historical data first.</em>
+			</dd>
+		</dl>
+
+		<p class="submit-buttons">
+			<input class="button1" type="submit" name="submit" value="{L_HISTORICAL_IMPORT_START}" onclick="return confirm('Are you sure you want to start the import? This may take a while for large files.');" />
+		</p>
+	</fieldset>
+	{S_FORM_TOKEN}
+</form>
+
+<div style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-left: 4px solid #369;">
+	<strong>Import Notes:</strong>
+	<ul style="margin: 5px 0 0 20px;">
+		<li>SQL files should contain INSERT statements for phpbb_users, phpbb_forums, phpbb_topics, and phpbb_posts.</li>
+		<li>All data should include <code>is_historical = 1</code> to be properly filtered.</li>
+		<li>After import, forum counters and permissions are automatically recalculated.</li>
+		<li>Use the "Reimport" option to start fresh - this deletes ALL historical data first.</li>
+		<li>Available files are loaded from the <code>scripts/</code> directory.</li>
+	</ul>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

@@ -7,7 +7,7 @@
         <font face="verdana,arial,helvetica" size="1">
         <a href="{U_INDEX}">{L_INDEX}</a>
         <!-- BEGIN navlinks -->
-        &nbsp;&#187;&nbsp;<a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a>
+        &nbsp;&#187;&nbsp;<a href="{navlinks.U_BREADCRUMB}">{navlinks.BREADCRUMB_NAME}</a>
         <!-- END navlinks -->
         </font>
     </td>
@@ -130,9 +130,15 @@
 <tr>
     <td>
         <font face="verdana,arial,helvetica" size="1">
-        <!-- IF PAGINATION -->
-        <b>{L_GOTO_PAGE}:</b> {PAGINATION}
-        <!-- ENDIF -->
+        <b>{L_GOTO_PAGE}:</b>
+        <!-- BEGIN pagination -->
+            <!-- IF pagination.S_IS_PREV --><a href="{pagination.PAGE_URL}" title="{L_PREVIOUS}">&laquo;&nbsp;Prev</a>&nbsp;
+            <!-- ELSEIF pagination.S_IS_CURRENT --><strong>[{pagination.PAGE_NUMBER}]</strong>&nbsp;
+            <!-- ELSEIF pagination.S_IS_ELLIPSIS -->...&nbsp;
+            <!-- ELSEIF pagination.S_IS_NEXT --><a href="{pagination.PAGE_URL}" title="{L_NEXT}">Next&nbsp;&raquo;</a>&nbsp;
+            <!-- ELSE --><a href="{pagination.PAGE_URL}">{pagination.PAGE_NUMBER}</a>&nbsp;
+            <!-- ENDIF -->
+        <!-- END pagination -->
         </font>
     </td>
 </tr>

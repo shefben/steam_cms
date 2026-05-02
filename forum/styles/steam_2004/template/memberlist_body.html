@@ -1,0 +1,155 @@
+<!-- IF S_IN_SEARCH_POPUP -->
+	<!-- INCLUDE simple_header.html -->
+	<!-- INCLUDE memberlist_search.html -->
+	<form method="post" id="results" action="{S_MODE_ACTION}" onsubmit="insert_marked_users('#results', this.user); return false;" data-form-name="{S_FORM_NAME}" data-field-name="{S_FIELD_NAME}">
+<!-- ELSE -->
+	<!-- INCLUDE overall_header.html -->
+	<form method="post" action="{S_MODE_ACTION}">
+<!-- ENDIF -->
+
+<!-- IF S_SHOW_GROUP -->
+
+<!-- Group Members Display -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="" />
+	<font face="verdana, arial, helvetica" size="2"><b><a href="{U_INDEX}">{SITENAME}</a> &gt;
+	Members List</b></font></td>
+</tr>
+</table>
+
+<br />
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22" width="100%" align="center"><tr><td>
+<table class="vb-grid" cellpadding="4" cellspacing="1" border="0" width="100%">
+<tr id="cat">
+	<td bgcolor="#3E4637" colspan="5"><font face="verdana, arial, helvetica" size="2" color="#C4B550"><b>{GROUP_NAME}</b></font>
+	<!-- IF GROUP_DESC --><br /><font face="verdana,arial,helvetica" size="1" color="#C4B550">{GROUP_DESC}</font><!-- ENDIF -->
+	</td>
+</tr>
+<tr align="center">
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>User Name</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>Find Posts</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>Join Date</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>Posts</b></font></td>
+	<!-- IF U_SORT_ACTIVE --><td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>Last Active</b></font></td><!-- ENDIF -->
+</tr>
+<!-- BEGIN memberrow -->
+<tr align="center">
+	<td bgcolor="#3E4637" align="left"><font face="verdana, arial, helvetica" size="2">{memberrow.USERNAME_FULL}</font></td>
+	<td bgcolor="#3E4637"><!-- IF memberrow.POSTS and S_DISPLAY_SEARCH --><a href="{memberrow.U_SEARCH_USER}"><img src="{T_THEME_PATH}/images/find.gif" border="0" alt="Find more posts" /></a><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{memberrow.JOINED}</font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{memberrow.POSTS}</font></td>
+	<!-- IF S_VIEWONLINE --><td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{memberrow.LAST_ACTIVE}&nbsp;</font></td><!-- ENDIF -->
+</tr>
+<!-- BEGINELSE -->
+<tr>
+	<td bgcolor="#3E4637" colspan="<!-- IF S_VIEWONLINE -->5<!-- ELSE -->4<!-- ENDIF -->"><font face="verdana,arial,helvetica" size="1">{L_NO_MEMBERS}</font></td>
+</tr>
+<!-- END memberrow -->
+</table>
+</td></tr></table>
+
+<!-- ELSE -->
+
+<!-- Regular Memberlist -->
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td><img src="{T_THEME_PATH}/images/vb_bullet.gif" border="0" align="middle" alt="" />
+	<font face="verdana, arial, helvetica" size="2"><b><a href="{U_INDEX}">{SITENAME}</a> &gt;
+	Members List</b></font></td>
+</tr>
+</table>
+
+<br />
+
+<!-- Search Action Buttons -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22" width="100%" align="center"><tr><td>
+<table cellpadding="4" cellspacing="1" border="0" width="100%">
+<tr align="center">
+	<!-- IF U_FIND_MEMBER -->
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1"><a href="{U_FIND_MEMBER}"><b>Advanced Search</b></a></font></td>
+	<!-- ENDIF -->
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1"><a href="{U_SORT_POSTS}"><b>Top Posters</b></a></font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1"><a href="{U_SORT_USERNAME}"><b>List Alphabetically</b></a></font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1"><a href="{U_SORT_JOINED}"><b>List by Date Joined</b></a></font></td>
+</tr>
+</table>
+</td></tr></table>
+
+<font face="verdana,arial,helvetica" size="1"><br /></font>
+
+<!-- A-Z Letter Navigation -->
+<!-- IF .first_char -->
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#282E22" width="100%" align="center"><tr><td>
+<table cellpadding="2" cellspacing="0" border="0" width="100%">
+<tr align="center">
+<!-- BEGIN first_char -->
+<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2"><a href="{first_char.U_SORT}">{first_char.DESC}</a></font></td>
+<!-- END first_char -->
+</tr>
+</table>
+</td></tr></table>
+
+<br />
+<!-- ENDIF -->
+
+<!-- Members Table -->
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#282E22" width="100%" align="center"><tr><td>
+<table class="vb-grid" cellpadding="4" cellspacing="1" border="0" width="100%">
+<tr id="cat">
+	<td bgcolor="#3E4637" colspan="5"><font face="verdana, arial, helvetica" size="2" color="#C4B550"><b>Steam Users Forums Members List</b></font></td>
+</tr>
+<tr align="center">
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>User Name</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>Email</b></font></td>
+	<td bgcolor="#3E4637" nowrap="nowrap"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>Find Posts</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>Join Date</b></font></td>
+	<td bgcolor="#3E4637"><font face="verdana,arial,helvetica" size="1" color="#D8DED3"><b>Posts</b></font></td>
+</tr>
+<!-- BEGIN memberrow -->
+<tr align="center">
+	<td bgcolor="#3E4637" align="left"><font face="verdana, arial, helvetica" size="2">{memberrow.USERNAME_FULL}</font></td>
+	<td bgcolor="#3E4637"><!-- IF memberrow.S_PROFILE_EMAIL --><a href="{memberrow.U_EMAIL}"><img src="{T_THEME_PATH}/images/icon_email.gif" border="0" alt="Email" /></a><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
+	<td bgcolor="#3E4637"><!-- IF memberrow.POSTS and S_DISPLAY_SEARCH --><a href="{memberrow.U_SEARCH_USER}"><img src="{T_THEME_PATH}/images/find.gif" border="0" alt="Find more posts" /></a><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{memberrow.JOINED}</font></td>
+	<td bgcolor="#3E4637"><font face="verdana, arial, helvetica" size="2">{memberrow.POSTS}</font></td>
+</tr>
+<!-- BEGINELSE -->
+<tr>
+	<td bgcolor="#3E4637" colspan="5"><font face="verdana,arial,helvetica" size="1">{L_NO_MEMBERS}</font></td>
+</tr>
+<!-- END memberrow -->
+</table>
+</td></tr></table>
+
+<!-- Pagination -->
+<br />
+<table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td><font face="verdana,arial,helvetica" size="1">
+	{TOTAL_USERS}
+	<!-- IF .pagination -->
+		<!-- INCLUDE pagination.html -->
+	<!-- ELSE -->
+		&bull; {PAGE_NUMBER}
+	<!-- ENDIF -->
+	</font></td>
+</tr>
+</table>
+
+<!-- ENDIF -->
+
+<!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE -->
+<fieldset class="display-actions">
+	<input type="submit" name="submit" value="{L_SELECT_MARKED}" class="button2" />
+</fieldset>
+<!-- ENDIF -->
+
+</form>
+
+<!-- IF S_IN_SEARCH_POPUP -->
+	<!-- INCLUDE simple_footer.html -->
+<!-- ELSE -->
+	<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

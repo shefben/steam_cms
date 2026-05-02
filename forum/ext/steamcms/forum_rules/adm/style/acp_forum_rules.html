@@ -1,0 +1,37 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_FORUM_RULES_SETTINGS}</h1>
+
+<form id="acp_forum_rules" method="post" action="{U_ACTION}">
+
+<fieldset>
+    <legend>{L_ACP_FORUM_RULES_SETTINGS}</legend>
+
+    <dl>
+        <dt><label for="steamcms_forum_rules_enabled">{L_ACP_FORUM_RULES_ENABLE}:</label></dt>
+        <dd>
+            <input type="checkbox" name="steamcms_forum_rules_enabled" id="steamcms_forum_rules_enabled" value="1"<!-- IF STEAMCMS_FORUM_RULES_ENABLED --> checked="checked"<!-- ENDIF --> />
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>
+            <label for="steamcms_forum_rules_text">{L_ACP_FORUM_RULES_TEXT}:</label>
+            <br /><span>{L_ACP_FORUM_RULES_TEXT_EXPLAIN}</span>
+        </dt>
+        <dd>
+            <textarea name="steamcms_forum_rules_text" id="steamcms_forum_rules_text" cols="80" rows="15">{STEAMCMS_FORUM_RULES_TEXT}</textarea>
+        </dd>
+    </dl>
+
+</fieldset>
+
+<fieldset class="submit-buttons">
+    {S_FORM_TOKEN}
+    <input class="button1" type="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+    <input class="button2" type="reset" value="{L_RESET}" />
+</fieldset>
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->

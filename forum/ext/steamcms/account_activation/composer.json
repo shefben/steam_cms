@@ -1,0 +1,15 @@
+{
+    "name": "steamcms/account_activation",
+    "type": "phpbb-extension",
+    "description": "Form-based account activation page where users enter username and activation code",
+    "version": "1.0.0",
+    "require": {
+        "php": ">=7.2"
+    },
+    "extra": {
+        "display-name": "Steam Account Activation",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.3.0"
+        }
+    }
+}
