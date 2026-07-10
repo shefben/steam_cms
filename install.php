@@ -1606,6 +1606,15 @@ CREATE TABLE `0405_storefront_packages` (
                 updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 UNIQUE KEY(lang,slug)
             )");
+            $pdo->exec("DROP TABLE IF EXISTS troubleshooter_edges");
+            $pdo->exec("CREATE TABLE troubleshooter_edges(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                lang VARCHAR(8) NOT NULL,
+                from_slug VARCHAR(64) NOT NULL,
+                to_slug VARCHAR(64) NOT NULL,
+                label VARCHAR(256),
+                UNIQUE KEY(lang, from_slug, to_slug)
+            )");
             $pdo->exec("DROP TABLE IF EXISTS support_requests");
             $pdo->exec("CREATE TABLE support_requests(
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -1954,7 +1963,8 @@ CREATE TABLE `0405_storefront_packages` (
                 message TEXT NOT NULL,
                 data JSON NULL,
                 is_read TINYINT(1) DEFAULT 0,
-                created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                INDEX idx_notifications_admin_read (admin_id, is_read)
             )");
             $pdo->exec("DROP TABLE IF EXISTS page_views");
             $pdo->exec("CREATE TABLE page_views(
@@ -2592,7 +2602,7 @@ ALTER TABLE product_discounts
 
             require_once 'sql/install_custom_pages.php';
             require_once 'sql/install_support_page.php';
-            require_once 'sql/install_troubleshooter.php';
+            run_sql_file($pdo, __DIR__.'/troubleshooter_seed.sql');
             require_once 'sql/install_download_pages.php';
             require_once 'sql/install_download_files.php';
             require_once 'sql/install_game_stats.php';

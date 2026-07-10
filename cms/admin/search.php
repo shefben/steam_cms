@@ -86,6 +86,7 @@ if ($q !== '') {
 }
 ?>
 <h2>Search Results</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Configure site search settings and behavior.</p>
 <?php if ($q === ''): ?>
 <p>Enter a search term above.</p>
 <?php else: ?>

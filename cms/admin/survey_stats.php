@@ -64,6 +64,7 @@ if ($catId) {
 }
 ?>
 <h2>Survey Statistics</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">View survey and hardware survey statistics.</p>
 <div class="survey-admin">
     <div class="categories">
         <h3>Categories</h3>

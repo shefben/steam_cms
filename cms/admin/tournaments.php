@@ -233,6 +233,7 @@ $statusLabels = [
 <div class="admin-content tournament-admin">
     <div class="content-header">
         <h2>Tournament Management</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage tournament listings.</p>
         <div class="current-theme">Workflow Tools</div>
     </div>
 

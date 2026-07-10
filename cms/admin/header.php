@@ -58,6 +58,7 @@ if(isset($_POST['add'])){
 }
 ?>
 <h2>Edit Header</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Configure the site header logo and navigation buttons.</p>
 <p>Current logo:</p>
 <?php $logo = $data['logo']; if($logo && $logo[0]=='/') $logo = $base.$logo; ?>
 <img src="<?php echo htmlspecialchars($logo); ?>" id="logo-preview" alt="logo" style="max-height:40px"><br>

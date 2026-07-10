@@ -16,6 +16,7 @@ if(isset($_POST['send']) && trim($_POST['message'])!=''){
 }
 ?>
 <h2>Bulk Email</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Compose and send bulk email to signed-up cafe or user accounts.</p>
 <form method="post">
 Subject: <input type="text" name="subject" size="60"><br>
 <textarea name="message" style="width:100%;height:200px;"></textarea><br>

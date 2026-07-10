@@ -21,6 +21,7 @@ if(isset($_POST['save'])){
 }
 ?>
 <h2>Edit Signup</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Edit an individual Internet Cafe sign-up application.</p>
 <form method="post">
 <?php foreach($entry as $k=>$v){ if($k=='id'||$k=='created') continue; ?>
 <div><?php echo ucfirst($k);?>: <input type="text" name="<?php echo $k; ?>" value="<?php echo htmlspecialchars($v); ?>"></div>

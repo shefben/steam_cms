@@ -20,6 +20,7 @@ if(isset($_POST['save'])){
 }
 ?>
 <h2>Localization Manager (<?php echo htmlspecialchars($lang); ?><?php echo $isAdmin ? ' - Admin' : ''; ?>)</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Configure language and localization settings.</p>
 <form method="get" style="margin-bottom:10px;">
 <select name="lang">
 <?php

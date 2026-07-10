@@ -248,6 +248,7 @@ if ($selected_tab_id) {
         
         <div class="tab-section">
             <h2>Tabs</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage tabbed capsule image groups shown on the storefront.</p>
             <button class="btn btn-success" onclick="openCreateTabModal()">Create New Tab</button>
             
             <table class="admin-table" style="width: 100%; margin-top: 20px; border-collapse: collapse;">

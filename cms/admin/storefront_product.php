@@ -228,6 +228,7 @@ if(isset($_POST['save'])){
 ob_start();
 ?>
 <h2><?php echo $isNew ? 'Add Product' : 'Edit Product'; ?></h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Add or edit a single storefront product/game entry.</p>
 <form id="product-form" method="post" enctype="multipart/form-data">
 <label>App ID <input type="text" name="appid" value="<?php echo $app['appid']?>"></label><br>
 <label>Name <input type="text" name="name" value="<?php echo htmlspecialchars($app['name'])?>"></label><br>

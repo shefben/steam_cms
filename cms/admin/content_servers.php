@@ -53,42 +53,106 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 }
 $servers = get_servers($db);
 ?>
+<style>
+.col-small { width: 60px; }
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: flex; justify-content: center; align-items: center; }
+.modal { background: #fff; padding: 20px; border-radius: 8px; width: 400px; max-width: 90%; }
+.modal label { display: block; margin-bottom: 10px; font-weight: bold; }
+.modal input[type="text"], .modal input[type="number"] { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+.modal-actions { margin-top: 20px; text-align: right; }
+</style>
 <h2>Content Servers</h2>
-<table border="1">
-<tr><th>Select</th><th>Name</th><th>IP</th><th>Port</th><th>Capacity</th><th>Region</th><th>Website</th><th>Filtered</th><th>Actions</th></tr>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage the list of content/download servers available to clients.</p>
+<table class="data-table">
+<tr><th class="col-small">Select</th><th>Name</th><th>IP</th><th class="col-small">Port</th><th class="col-small">Capacity</th><th>Region</th><th>Website</th><th class="col-small">Filtered</th><th>Actions</th></tr>
 <?php foreach($servers as $s): ?>
 <tr>
-<form method="post">
 <td><input type="radio" name="main_server" value="<?php echo $s['id']; ?>" form="mainForm" <?php echo ($s['ip']==$main_ip && $s['port']==$main_port)?'checked':''; ?>></td>
-<td><input type="text" name="name" value="<?php echo htmlspecialchars($s['name']); ?>"></td>
-<td><input type="text" name="ip" value="<?php echo htmlspecialchars($s['ip']); ?>"></td>
-<td><input type="number" name="port" value="<?php echo $s['port']; ?>"></td>
-<td><input type="number" name="capacity" value="<?php echo $s['total_capacity']; ?>"></td>
-<td><input type="text" name="region" value="<?php echo htmlspecialchars($s['region']); ?>"></td>
-<td><input type="text" name="website" value="<?php echo htmlspecialchars($s['website']); ?>"></td>
-<td><input type="checkbox" name="filtered" value="1" <?php echo $s['filtered']?'checked':''; ?>></td>
+<td><?php echo htmlspecialchars($s['name']); ?></td>
+<td><?php echo htmlspecialchars($s['ip']); ?></td>
+<td><?php echo $s['port']; ?></td>
+<td><?php echo $s['total_capacity']; ?></td>
+<td><?php echo htmlspecialchars($s['region']); ?></td>
+<td><?php echo htmlspecialchars($s['website']); ?></td>
+<td><?php echo $s['filtered'] ? 'Yes' : 'No'; ?></td>
 <td>
-<input type="hidden" name="id" value="<?php echo $s['id']; ?>">
-<button name="update" value="1">Update</button>
-<button name="delete" value="<?php echo $s['id']; ?>" onclick="return confirm('delete?')">Delete</button>
+    <button type="button" class="btn btn-primary btn-small edit-btn" data-id="<?php echo $s['id']; ?>" data-name="<?php echo htmlspecialchars($s['name']); ?>" data-ip="<?php echo htmlspecialchars($s['ip']); ?>" data-port="<?php echo $s['port']; ?>" data-capacity="<?php echo $s['total_capacity']; ?>" data-region="<?php echo htmlspecialchars($s['region']); ?>" data-website="<?php echo htmlspecialchars($s['website']); ?>" data-filtered="<?php echo $s['filtered']; ?>">Edit</button>
+    <form method="post" style="display:inline;">
+        <button type="submit" name="delete" value="<?php echo $s['id']; ?>" class="btn btn-danger btn-small" onclick="return confirm('Delete server?')">Delete</button>
+    </form>
 </td>
-</form>
 </tr>
 <?php endforeach; ?>
 </table>
-<form id="mainForm" method="post">
+<form id="mainForm" method="post" style="margin-top:10px; margin-bottom: 20px;">
 <input type="hidden" name="set_main_server" value="1">
-<button type="submit">Save Default Server</button>
+<button type="submit" class="btn btn-primary">Save Default Server</button>
 </form>
-<h3>Add New Server</h3>
-<form method="post">
-<input type="text" name="name" placeholder="Name">
-<input type="text" name="ip" placeholder="IP">
-<input type="number" name="port" placeholder="Port">
-<input type="number" name="capacity" placeholder="Capacity">
-<input type="text" name="region" placeholder="Region">
-<input type="text" name="website" placeholder="Website">
-<label>Filtered <input type="checkbox" name="filtered" value="1"></label>
-<button name="add" value="1">Add</button>
-</form>
+
+<button type="button" id="addBtn" class="btn btn-secondary">Add new Content server</button>
+
+<div id="serverModal" class="modal-overlay" style="display:none;">
+    <div class="modal">
+        <h3 id="modalTitle" style="margin-top:0;">Add Server</h3>
+        <form method="post">
+            <input type="hidden" name="id" id="serverId">
+            <input type="hidden" name="action" id="serverAction" value="add">
+            <label>Name <input type="text" name="name" id="serverName" required></label>
+            <label>IP <input type="text" name="ip" id="serverIp" required></label>
+            <label>Port <input type="number" name="port" id="serverPort" required></label>
+            <label>Capacity <input type="number" name="capacity" id="serverCapacity" required></label>
+            <label>Region <input type="text" name="region" id="serverRegion"></label>
+            <label>Website <input type="text" name="website" id="serverWebsite"></label>
+            <label style="font-weight:normal;"><input type="checkbox" name="filtered" id="serverFiltered" value="1"> Filtered</label>
+            
+            <div class="modal-actions">
+                <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                <button type="submit" name="save_server" value="1" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#addBtn').on('click', function() {
+        $('#modalTitle').text('Add new Content server');
+        $('#serverId').val('');
+        $('#serverName').val('');
+        $('#serverIp').val('');
+        $('#serverPort').val('');
+        $('#serverCapacity').val('');
+        $('#serverRegion').val('');
+        $('#serverWebsite').val('');
+        $('#serverFiltered').prop('checked', false);
+        $('#serverModal form').find('button[name="save_server"]').attr('name', 'add');
+        $('#serverModal').css('display', 'flex');
+    });
+
+    $('.edit-btn').on('click', function() {
+        $('#modalTitle').text('Edit Content server');
+        $('#serverId').val($(this).data('id'));
+        $('#serverName').val($(this).data('name'));
+        $('#serverIp').val($(this).data('ip'));
+        $('#serverPort').val($(this).data('port'));
+        $('#serverCapacity').val($(this).data('capacity'));
+        $('#serverRegion').val($(this).data('region'));
+        $('#serverWebsite').val($(this).data('website'));
+        $('#serverFiltered').prop('checked', $(this).data('filtered') == 1);
+        $('#serverModal form').find('button[type="submit"]').attr('name', 'update');
+        $('#serverModal').css('display', 'flex');
+    });
+
+    $('#cancelBtn').on('click', function() {
+        $('#serverModal').hide();
+    });
+
+    $('#serverModal').on('click', function(e) {
+        if (e.target === this) {
+            $(this).hide();
+        }
+    });
+});
+</script>
+
 <?php include 'admin_footer.php'; ?>

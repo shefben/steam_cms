@@ -5,6 +5,7 @@ $db=cms_get_db();
 $pages=$db->query('SELECT DISTINCT page FROM support_requests ORDER BY page')->fetchAll(PDO::FETCH_COLUMN);
 ?>
 <h2>Support Requests</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Review troubleshooter support requests submitted by users.</p>
 <?php foreach($pages as $p): ?>
 <h3><?php echo htmlspecialchars($p); ?></h3>
 <input type="text" class="filter" data-table="table-<?php echo htmlspecialchars($p); ?>" placeholder="Filter...">

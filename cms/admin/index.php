@@ -1,48 +1,78 @@
 <?php
 require_once 'admin_header.php';
 $db = cms_get_db();
-// gather visit stats
-$total = (int)$db->query("SELECT SUM(views) FROM page_views")->fetchColumn();
-// top pages in last month
-$popular = $db->query("SELECT page, SUM(views) v FROM page_views WHERE date>=DATE_SUB(CURDATE(),INTERVAL 30 DAY) GROUP BY page ORDER BY v DESC LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+
+require_once __DIR__ . '/../cache_manager.php';
+$cache = cms_cache_manager();
+$dashboard_data_json = $cache->get('dashboard_stats', 'admin', 3600); // 1 hour TTL
+if ($dashboard_data_json) {
+    $dashboard_data = json_decode($dashboard_data_json, true);
+    $total = $dashboard_data['total'];
+    $popular = $dashboard_data['popular'];
+    $weekly = $dashboard_data['weekly'];
+    $monthly = $dashboard_data['monthly'];
+    $news_count = $dashboard_data['news_count'];
+    $faq_count = $dashboard_data['faq_count'];
+    $user_count = $dashboard_data['user_count'];
+    $signup_count = $dashboard_data['signup_count'];
+} else {
+    // gather visit stats
+    $total = (int)$db->query("SELECT SUM(views) FROM page_views")->fetchColumn();
+    // top pages in last month
+    $popular = $db->query("SELECT page, SUM(views) v FROM page_views WHERE date>=DATE_SUB(CURDATE(),INTERVAL 30 DAY) GROUP BY page ORDER BY v DESC LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+
+    // visits per week (last 12 weeks)
+    $weekly = [];
+    $start = new DateTime('monday this week');
+    $start->modify('-11 week');
+    for($i=0;$i<12;$i++){
+        $weekly[$start->format('M j')] = 0;
+        $start->modify('+1 week');
+    }
+    $rows = $db->query("SELECT YEARWEEK(date,3) wk, MIN(date) start_date, SUM(views) v FROM page_views WHERE date>=DATE_SUB(CURDATE(),INTERVAL 12 WEEK) GROUP BY wk ORDER BY wk")->fetchAll(PDO::FETCH_ASSOC);
+    foreach($rows as $r){
+        $label = date('M j', strtotime($r['start_date']));
+        $weekly[$label] = (int)$r['v'];
+    }
+    // visits per month (last 12 months)
+    $monthly = [];
+    $start = new DateTime('first day of this month');
+    $start->modify('-11 month');
+    for($i=0;$i<12;$i++){
+        $monthly[$start->format('M Y')] = 0;
+        $start->modify('+1 month');
+    }
+    $rows = $db->query("SELECT DATE_FORMAT(date,'%Y-%m') ym, SUM(views) v FROM page_views WHERE date>=DATE_SUB(CURDATE(),INTERVAL 12 MONTH) GROUP BY ym ORDER BY ym")->fetchAll(PDO::FETCH_ASSOC);
+    foreach($rows as $r){
+        $label = date('M Y', strtotime($r['ym'].'-01'));
+        $monthly[$label] = (int)$r['v'];
+    }
+    // other counts
+    $news_count = (int)$db->query("SELECT COUNT(*) FROM news")->fetchColumn();
+    $faq_count = (int)$db->query("SELECT COUNT(*) FROM faq_content")->fetchColumn();
+    $user_count = (int)$db->query("SELECT COUNT(*) FROM admin_users")->fetchColumn();
+    $signup_count = (int)$db->query("SELECT COUNT(*) FROM ccafe_registration")->fetchColumn();
+
+    $cache->set('dashboard_stats', json_encode([
+        'total' => $total,
+        'popular' => $popular,
+        'weekly' => $weekly,
+        'monthly' => $monthly,
+        'news_count' => $news_count,
+        'faq_count' => $faq_count,
+        'user_count' => $user_count,
+        'signup_count' => $signup_count
+    ]), 'admin');
+}
+
 $popular_page = $popular ? $popular[0]['page'] : 'N/A';
-// visits per week (last 12 weeks)
-$weekly = [];
-$start = new DateTime('monday this week');
-$start->modify('-11 week');
-for($i=0;$i<12;$i++){
-    $weekly[$start->format('M j')] = 0;
-    $start->modify('+1 week');
-}
-$rows = $db->query("SELECT YEARWEEK(date,3) wk, MIN(date) start_date, SUM(views) v FROM page_views WHERE date>=DATE_SUB(CURDATE(),INTERVAL 12 WEEK) GROUP BY wk ORDER BY wk")->fetchAll(PDO::FETCH_ASSOC);
-foreach($rows as $r){
-    $label = date('M j', strtotime($r['start_date']));
-    $weekly[$label] = (int)$r['v'];
-}
-// visits per month (last 12 months)
-$monthly = [];
-$start = new DateTime('first day of this month');
-$start->modify('-11 month');
-for($i=0;$i<12;$i++){
-    $monthly[$start->format('M Y')] = 0;
-    $start->modify('+1 month');
-}
-$rows = $db->query("SELECT DATE_FORMAT(date,'%Y-%m') ym, SUM(views) v FROM page_views WHERE date>=DATE_SUB(CURDATE(),INTERVAL 12 MONTH) GROUP BY ym ORDER BY ym")->fetchAll(PDO::FETCH_ASSOC);
-foreach($rows as $r){
-    $label = date('M Y', strtotime($r['ym'].'-01'));
-    $monthly[$label] = (int)$r['v'];
-}
-// other counts
-$news_count = (int)$db->query("SELECT COUNT(*) FROM news")->fetchColumn();
-$faq_count = (int)$db->query("SELECT COUNT(*) FROM faq_content")->fetchColumn();
-$user_count = (int)$db->query("SELECT COUNT(*) FROM admin_users")->fetchColumn();
-$signup_count = (int)$db->query("SELECT COUNT(*) FROM ccafe_registration")->fetchColumn();
 // server info
 $php_version = phpversion();
 $mysql_version = $db->query("SELECT VERSION()")->fetchColumn();
 ?>
 <div class="stat-header">
     <h2>Admin Dashboard</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Admin dashboard providing an overview and quick links to CMS management pages.</p>
     <div class="stats">
         <table class="data-table">
             <tr><th colspan="2">Site Stats</th></tr>

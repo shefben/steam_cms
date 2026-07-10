@@ -82,6 +82,7 @@ reset($verNums);
 $firstVer = key($verNums);
 ?>
 <h2>Download/Get Steam Now Management</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Configure download page appearance and available client versions.</p>
 <form method="post">
 <div style="display:flex;gap:20px;">
 <?php foreach ($versions as $ver => $label):

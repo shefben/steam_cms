@@ -1,5 +1,6 @@
 <?php
-require_once 'admin_header.php';
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/admin_auth.php';
 cms_require_permission('manage_store');
 $db = cms_get_db();
 
@@ -92,8 +93,11 @@ $total = (int)$db->query('SELECT COUNT(*) FROM store_apps')->fetchColumn();
      echo json_encode(['tbody' => $tbodyHtml, 'pagination' => $paginationHtml]);
      exit;
  }
+ 
+require_once 'admin_header.php';
 ?>
 <h2>Store Products</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage storefront product/game listings.</p>
 <p>
     <a class="btn btn-secondary" href="storefront_products.php?export=csv">Export CSV</a>
     <a class="btn btn-secondary" href="storefront_products.php?export=json">Export JSON</a>

@@ -264,6 +264,7 @@ if ($use_all) {
 }
 ?>
 <h2>Index Capsule Management</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage 2006-era storefront capsule images for games and packages.</p>
 <div id="capsule-grid" class="capsule-grid">
 <?php foreach ($rows as $r): ?>
   <div class="capsule <?php echo htmlspecialchars($r['type']); ?>" data-id="<?php echo $r['id']; ?>" data-appid="<?php echo $r['appid']; ?>" data-price="<?php echo htmlspecialchars($r['price']); ?>" data-type="<?php echo htmlspecialchars($r['type']); ?>" data-image="<?php echo htmlspecialchars($r['image_path']); ?>" data-title="<?php echo htmlspecialchars($r['title'] ?? '', ENT_QUOTES); ?>" data-content="<?php echo htmlspecialchars($r['content'] ?? '', ENT_QUOTES); ?>">

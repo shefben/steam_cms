@@ -166,6 +166,7 @@ $entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $entryCount = count($entries);
 ?>
 <h2>Single Large Capsule Management</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage the large capsule banner shown on the storefront.</p>
 <p>Manage the rotating large capsule entries for 2007-2010 themes. Maximum 12 entries per theme.</p>
 
 <div class="form-row" style="margin-bottom: 15px;">

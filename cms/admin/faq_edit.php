@@ -32,6 +32,7 @@ if(isset($_POST['save'])){
 $cats=$db->query('SELECT * FROM faq_categories ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2><?php echo $faqid1? 'Edit':'Add'; ?> FAQ</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Add or edit an individual FAQ entry.</p>
 <form method="post">
 Category:
 <select name="category">
@@ -47,7 +48,7 @@ Body:<br>
 </form>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
-CKEDITOR.replace('faq-body');
+CKEDITOR.replace('faq-body', {baseHref: '/' });
 </script>
 <p><a href="faq.php">Back</a></p>
 <?php include 'admin_footer.php'; ?>

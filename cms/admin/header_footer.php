@@ -144,6 +144,7 @@ if(isset($_POST['add'])){
 }
 ?>
 <h2>Header &amp; Footer</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage header/footer button links and their display order.</p>
 <label>Theme: <select id="theme-select" name="theme">
 <?php foreach($theme_list as $t): ?>
   <option value="<?php echo htmlspecialchars($t); ?>" <?php if($t==$theme) echo 'selected'; ?>><?php echo htmlspecialchars($t); ?></option>
@@ -267,7 +268,6 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('page-input').addEventListener('change',loadForm);
 });
 </script>
-<p><a href="index.php">Back</a></p>
 <?php
 $content = ob_get_clean();
 if($ajax){

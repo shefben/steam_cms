@@ -75,6 +75,7 @@ if (isset($_POST['save_package'])) {
 $packages = $db->query('SELECT * FROM `0405_storefront_packages` ORDER BY subid')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Legacy Storefront Package Management</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage legacy storefront package listings.</p>
 <table class="data-table" id="pkg-table">
 <thead><tr><th class="sortable">Subscription ID</th><th class="sortable">Title</th><th>Image Preview</th><th>Price</th><th>Hidden</th><th>Tasks</th></tr></thead>
 <tbody>

@@ -9,6 +9,7 @@ $entry=$stmt->fetch(PDO::FETCH_ASSOC);
 if(!$entry){echo '<p>Entry not found.</p>';include 'admin_footer.php';exit;}
 ?>
 <h2>Map Contest Submission</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">View details of a single map contest submission.</p>
 <table class="data-table">
 <?php foreach($entry as $k=>$v): if(strpos($k,'screenshot')===0) continue; ?>
 <tr><th><?php echo htmlspecialchars($k); ?></th><td><?php echo htmlspecialchars($v); ?></td></tr>

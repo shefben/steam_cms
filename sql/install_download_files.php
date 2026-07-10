@@ -1,5 +1,23 @@
 <?php
 try{
+    $pdo->exec("ALTER TABLE download_file_versions MODIFY COLUMN render_type ENUM(
+        'title_size_mirrors_buttons',
+        'title_size_mirrors_links',
+        'title_no_size_mirrors_links',
+        'mirrors_buttons_no_title',
+        'single_button',
+        'single_link',
+        'title_single_link_with_size',
+        'floating_box_single_link',
+        'floating_box_title_mirrors_links',
+        'black_buttons_table'
+    ) DEFAULT 'title_size_mirrors_buttons'");
+}catch(PDOException $e){
+    if($e->getCode() !== '42S02') {
+        throw $e;
+    }
+}
+try{
     $pdo->query("SELECT host FROM download_file_mirrors LIMIT 1");
 }catch(PDOException $e){
     if($e->getCode()==="42S22"){
@@ -68,7 +86,7 @@ $downloads = [];
 $parsed = parse_2004_downloads(__DIR__.'/../archived_steampowered/2004/getsteamnow_v1.html');
 foreach($parsed as $p){
     $url = '';
-    if($p['title'] === 'Minimal Steam Installer'){
+    if($p['title'] === 'Steam Installer'){
         $url = './download/steaminstaller.exe';
     }
     $downloads[] = ['title'=>$p['title'],'size'=>$p['size'],'url'=>$url,'mirrors'=>$p['mirrors']];
@@ -77,7 +95,7 @@ foreach($parsed as $p){
 // Add 2003 v3 downloads manually extracted from archived_steampowered/2003/v2/getsteamnow_v3.html
 $downloads2003v3 = [
     [
-        'title' => 'Minimal Steam Installer',
+        'title' => 'Steam Installer',
         'size' => 'Approx. 500 KB',
         'url' => 'http://www.steampowered.com/download/SteamInstall.exe',
         'mirrors' => [
@@ -247,7 +265,7 @@ foreach($downloads2003v3 as $d2003){
 // Add 2003 v2 downloads manually extracted from archived_steampowered/2003/v2/getsteamnow_v2.html
 $downloads2003v2 = [
     [
-        'title' => 'Minimal Steam Installer',
+        'title' => 'Steam Installer',
         'size' => '500kB',
         'url' => '',
         'mirrors' => [
@@ -289,10 +307,17 @@ foreach($downloads2003v2 as $d2003v2){
 
 $downloads[] = ['title'=>'Windows HLDS Update Tool','size'=>'<3 MB','url'=>'https://web.archive.org/download/hlds_updatetool.exe','mirrors'=>[]];
 $downloads[] = ['title'=>'Linux HLDS Update Tool','size'=>'<3 MB','url'=>'https://web.archive.org/download/hldsupdatetool.bin','mirrors'=>[]];
-$fileStmt = $pdo->prepare('INSERT IGNORE INTO download_files(title,file_size,main_url,visibleontheme,usingbutton,buttonText,created,updated) VALUES(?,?,?,?,?,?,NOW(),NOW())');
+$fileStmt = $pdo->prepare('INSERT INTO download_files(title,file_size,main_url,visibleontheme,usingbutton,buttonText,created,updated) VALUES(?,?,?,?,?,?,NOW(),NOW())');
 $mirStmt   = $pdo->prepare('INSERT IGNORE INTO download_file_mirrors(file_id,host,url,ord) VALUES(?,?,?,?)');
+$existingTitleStmt = $pdo->prepare('SELECT id FROM download_files WHERE title=? LIMIT 1');
 foreach ($downloads as $d) {
     $title = $d['title'];
+    // download_files has no unique key on title; guard here so re-running the
+    // installer doesn't insert duplicate rows for the same download every time.
+    $existingTitleStmt->execute([$title]);
+    if ($existingTitleStmt->fetchColumn()) {
+        continue;
+    }
     if (in_array($title, ['Windows HLDS Update Tool','Linux HLDS Update Tool'])) {
         $visible = '2004';
     } elseif (in_array($title, [
@@ -325,27 +350,27 @@ foreach ($downloads as $d) {
 }
 
 // New visibility system with proper configuration for each theme/version
-$fileIds = $pdo->query('SELECT id,title FROM download_files')->fetchAll(PDO::FETCH_KEY_PAIR);
+$fileIds = $pdo->query('SELECT title,id FROM download_files')->fetchAll(PDO::FETCH_KEY_PAIR);
 
 // Default configurations for each theme and version based on archived pages analysis
 $themeConfigs = [
     '2003_v2' => [
         'v1' => [
-            'visible_files' => ['Minimal Steam Installer', 'Full Steam Installer (includes caches for all games)'],
+            'visible_files' => ['Steam Installer', 'Full Steam Installer (includes caches for all games)'],
             'render_types' => [
-                'Minimal Steam Installer' => 'title_size_mirrors_links',
+                'Steam Installer' => 'title_size_mirrors_links',
                 'Full Steam Installer (includes caches for all games)' => 'title_size_mirrors_links',
             ]
         ],
         'v2' => [
-            'visible_files' => ['Minimal Steam Installer'],
+            'visible_files' => ['Steam Installer'],
             'render_types' => [
-                'Minimal Steam Installer' => 'black_buttons_table',
+                'Steam Installer' => 'black_buttons_table',
             ]
         ],
         'v3' => [
             'visible_files' => [
-                'Minimal Steam Installer',
+                'Steam Installer',
                 'Full Steam Installer (includes caches for all games)',
                 'Counter-Strike Steam Installer',
                 'Half-Life Steam Installer',
@@ -358,7 +383,7 @@ $themeConfigs = [
                 'Dedicated Server (Linux)'
             ],
             'render_types' => [
-                'Minimal Steam Installer' => 'title_size_mirrors_links',
+                'Steam Installer' => 'title_size_mirrors_links',
                 'Full Steam Installer (includes caches for all games)' => 'title_size_mirrors_links',
                 'Counter-Strike Steam Installer' => 'title_size_mirrors_links',
                 'Half-Life Steam Installer' => 'title_size_mirrors_links',
@@ -374,30 +399,30 @@ $themeConfigs = [
     ],
     '2004' => [
         'v1' => [
-            'visible_files' => ['Minimal Steam Installer', 'Dedicated Server (Windows)', 'Dedicated Server (Linux)'],
+            'visible_files' => ['Steam Installer', 'Dedicated Server (Windows)', 'Dedicated Server (Linux)'],
             'render_types' => [
-                'Minimal Steam Installer' => 'single_button',
+                'Steam Installer' => 'single_button',
                 'Dedicated Server (Windows)' => 'title_no_size_mirrors_links',
                 'Dedicated Server (Linux)' => 'title_no_size_mirrors_links',
             ]
         ],
         'v2' => [
-            'visible_files' => ['Minimal Steam Installer', 'Dedicated Server (Windows)', 'Dedicated Server (Linux)'],
+            'visible_files' => ['Steam Installer', 'Dedicated Server (Windows)', 'Dedicated Server (Linux)'],
             'render_types' => [
-                'Minimal Steam Installer' => 'single_button',
+                'Steam Installer' => 'single_button',
                 'Dedicated Server (Windows)' => 'floating_box_title_mirrors_links',
                 'Dedicated Server (Linux)' => 'floating_box_title_mirrors_links',
             ],
             'locations' => [
-                'Minimal Steam Installer' => 'main_content',
+                'Steam Installer' => 'main_content',
                 'Dedicated Server (Windows)' => 'floating_box',
                 'Dedicated Server (Linux)' => 'floating_box',
             ]
         ],
         'v3' => [
-            'visible_files' => ['Minimal Steam Installer', 'Dedicated Server (Windows)', 'Dedicated Server (Linux)'],
+            'visible_files' => ['Steam Installer', 'Dedicated Server (Windows)', 'Dedicated Server (Linux)'],
             'render_types' => [
-                'Minimal Steam Installer' => 'single_button',
+                'Steam Installer' => 'single_button',
                 'Dedicated Server (Windows)' => 'title_size_mirrors_buttons',
                 'Dedicated Server (Linux)' => 'title_size_mirrors_buttons',
             ]
@@ -458,7 +483,7 @@ foreach ($themeConfigs as $theme => $versions) {
             if (isset($fileIds[$title])) {
                 $renderType = $config['render_types'][$title] ?? 'title_size_mirrors_buttons';
                 $location = ($config['locations'][$title] ?? 'main_content');
-                
+
                 $versionStmt->execute([
                     $fileIds[$title],
                     $theme,
@@ -469,6 +494,21 @@ foreach ($themeConfigs as $theme => $versions) {
                     $sortOrder++
                 ]);
             }
+        }
+        // Explicitly hide every other download for this theme/version so it
+        // doesn't fall back to the "visible by default" COALESCE behaviour
+        // used when no download_file_versions row exists for a file.
+        $hiddenTitles = array_diff(array_keys($fileIds), $config['visible_files']);
+        foreach ($hiddenTitles as $title) {
+            $versionStmt->execute([
+                $fileIds[$title],
+                $theme,
+                $version,
+                0, // is_visible
+                'title_size_mirrors_buttons',
+                'main_content',
+                0
+            ]);
         }
     }
 }

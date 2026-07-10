@@ -28,13 +28,14 @@ if(isset($_POST['add_category'])){
     $name = trim($_POST['new_name']);
     if($name!==''){
         $ord = (int)$db->query('SELECT IFNULL(MAX(ord),0)+1 FROM store_categories')->fetchColumn();
-        $db->prepare('INSERT INTO store_categories(name,ord,visible) VALUES(?,?,1)')->execute([$name,$ord]);
+        $db->prepare('INSERT INTO store_categories(id,name,ord,visible) VALUES(NULL,?,?,1)')->execute([$name,$ord]);
     }
 }
 
 $categories = $db->query('SELECT * FROM store_categories ORDER BY ord,id')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Store Categories</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage storefront category listings.</p>
 <form method="post" id="catForm">
 <input type="hidden" name="order" id="cat-order">
 <table class="table" id="cat-table">

@@ -44,6 +44,7 @@ $stmt->execute();
 $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Activity Log</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">View a chronological log of administrator actions performed across the CMS.</p>
 <form method="get" style="margin-bottom:10px;">
 <label>User:
 <select name="user">

@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <h2>Import News</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Bulk import news articles from a file.</p>
 <form method="post" enctype="multipart/form-data">
     <input type="file" name="file" required>
     <button type="submit" name="preview" class="btn btn-primary">Preview</button>

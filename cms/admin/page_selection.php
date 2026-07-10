@@ -75,6 +75,7 @@ $current_theme = cms_get_setting('theme', '2004');
 $img_base = cms_base_url() . '/cms/admin/';
 ?>
 <h2>Page Version Management</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Choose which template version is active for versioned pages (e.g. cafe sign-up).</p>
 <form method="post" id="pageForm">
 <?php foreach ($pages as $key => $info):
     $versions = [];
@@ -118,7 +119,7 @@ $img_base = cms_base_url() . '/cms/admin/';
   <hr>
 <?php endforeach; ?>
   <button type="submit" name="save" class="btn btn-primary">Save</button>
-  <a href="index.php" class="btn">Cancel</a>
+  <a href="index.php" class="btn btn-danger">Cancel</a>
 </form>
 <style>
 .page-options{display:flex;gap:20px;margin-top:5px;}

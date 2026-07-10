@@ -62,7 +62,7 @@ if ($err === '' && $_SERVER['REQUEST_METHOD']==='POST'){
             header('Location: '.$dest);
             exit;
         }else{
-            cms_admin_log('login failed', 0);
+            cms_admin_log('login failed');
             $err='Invalid credentials';
             $attempts = $_SESSION['login_attempts'] ?? ['count'=>0, 'last'=>0];
             $attempts['count']++;

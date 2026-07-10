@@ -161,8 +161,8 @@ foreach ($rows as $i => $row) {
     $style = $p != $page ? ' style="display:none"' : '';
     $tbodyHtml .= "<tr data-id='{$row['id']}' data-page='{$p}'{$style}>";
     $tbodyHtml .= '<td class="handle">☰</td>';
-    $tbodyHtml .= '<td>' . htmlspecialchars($row['title']) . '</td>';
-    $tbodyHtml .= '<td>' . htmlspecialchars($row['author']) . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($row['title'] ?? '') . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($row['author'] ?? '') . '</td>';
     $tbodyHtml .= '<td>' . htmlspecialchars($row['category'] ?? '') . '</td>';
     // Format Unix timestamp to readable date
     $timestamp = is_numeric($row['publish_date']) ? (int)$row['publish_date'] : strtotime($row['publish_date']);
@@ -215,6 +215,7 @@ if (isset($_GET['ajax'])) {
 }
 ?>
 <h2>News Articles</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage news articles shown on the site.</p>
 <?php if(cms_has_permission('news_create')): ?>
 <?php $fmt = cms_get_setting('news_date_format','long'); ?>
 <div id="news-date-format" style="margin-bottom:15px;">
@@ -254,20 +255,38 @@ if (isset($_GET['ajax'])) {
 </form>
 <?php echo $paginationHtml; ?>
 <p><a href="index.php">Back</a></p>
-<div id="newsModalOverlay" class="modal-overlay" style="display:none;">
-  <div class="modal" role="dialog" aria-modal="true">
+<div id="newsModalOverlay" class="modal-overlay" style="display:none;background:rgba(0,0,0,0.7);position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;justify-content:center;align-items:center;">
+  <div class="modal" role="dialog" aria-modal="true" style="background:white;border-radius:8px;padding:0;width:90%;max-width:600px;box-shadow:0 4px 12px rgba(0,0,0,0.3);">
     <form id="newsForm">
       <input type="hidden" name="id" id="newsId">
-      <div class="modal-body">
-        <label>Title: <input type="text" name="title" id="newsTitle"></label>
-        <label>Author: <input type="text" name="author" id="newsAuthor"></label>
-        <label>Publish Date: <input type="datetime-local" name="publish_at" id="newsPublish"></label>
-        <label>Content:</label>
-        <textarea name="content" id="newsContent" style="width:100%;height:200px;"></textarea>
+      <div style="padding:20px;border-bottom:1px solid #ddd;">
+        <h3 style="margin:0;">Article Editor</h3>
       </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" id="newsCancel" class="btn">Cancel</button>
+      <div class="modal-body" style="padding:20px;max-height:600px;overflow-y:auto;">
+        <div style="margin-bottom:15px;">
+          <label style="display:block;margin-bottom:5px;font-weight:bold;">Title:</label>
+          <input type="text" name="title" id="newsTitle" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
+        </div>
+        <div style="margin-bottom:15px;">
+          <label style="display:block;margin-bottom:5px;font-weight:bold;">Author:</label>
+          <input type="text" name="author" id="newsAuthor" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
+        </div>
+        <div style="margin-bottom:15px;">
+          <label style="display:block;margin-bottom:5px;font-weight:bold;">App IDs:</label>
+          <input type="text" name="appids" id="newsAppIDs" placeholder="Comma-separated app IDs" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
+        </div>
+        <div style="margin-bottom:15px;">
+          <label style="display:block;margin-bottom:5px;font-weight:bold;">Publish Date:</label>
+          <input type="datetime-local" name="publish_at" id="newsPublish" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
+        </div>
+        <div style="margin-bottom:15px;">
+          <label style="display:block;margin-bottom:5px;font-weight:bold;">Content:</label>
+          <textarea name="content" id="newsContent" style="width:100%;height:250px;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer" style="padding:15px 20px;border-top:1px solid #ddd;display:flex;justify-content:flex-end;gap:10px;">
+        <button type="button" id="newsCancel" class="btn" style="padding:8px 16px;border:1px solid #ccc;border-radius:4px;background:#f5f5f5;cursor:pointer;">Cancel</button>
+        <button type="submit" class="btn btn-primary" style="padding:8px 16px;border:none;border-radius:4px;background:#007bff;color:white;cursor:pointer;">Save</button>
       </div>
     </form>
   </div>
@@ -279,6 +298,7 @@ document.addEventListener('DOMContentLoaded',function(){
     var body=document.getElementById('news-body');
     var currentPage=<?php echo $page; ?>;
     var sortable;
+    var formHasChanges = false;
     function showPage(p){
         body.querySelectorAll('tr').forEach(function(tr){
             tr.style.display=(p==='all' || tr.dataset.page==p)?'' : 'none';
@@ -288,11 +308,9 @@ document.addEventListener('DOMContentLoaded',function(){
     function sendOrder(){
         var ids=[];
         body.querySelectorAll('tr').forEach(function(tr){ids.push(tr.dataset.id);});
-        var data=new URLSearchParams();
-        data.set('reorder','1');
-        data.set('order',ids.join(','));
-        data.set('csrf_token', csrfToken);
-        fetch('news.php',{method:'POST',body:data});
+        $.post('news.php',{reorder:1,order:ids.join(','),csrf_token:csrfToken}).fail(function(xhr){
+            console.error('news.php: reorder save failed', xhr.status, xhr.responseText);
+        });
     }
     function initSortable(){
         if(sortable){sortable.destroy();}
@@ -335,27 +353,46 @@ document.addEventListener('DOMContentLoaded',function(){
     function openModal(id){
         $('#newsForm')[0].reset();
         $('#newsId').val('');
+        formHasChanges = false;
         if(CKEDITOR.instances.newsContent){CKEDITOR.instances.newsContent.destroy(true);}
         if(id){
             $.get('news_edit.php',{id:id,ajax:1},function(d){
                 $('#newsId').val(d.id);
-                $('#newsTitle').val(d.title);
-                $('#newsAuthor').val(d.author);
-                $('#newsPublish').val(d.publish_at.replace(' ','T'));
-                $('#newsContent').val(d.content);
-                CKEDITOR.replace('newsContent');
-                $('#newsModalOverlay').show();
-            },'json');
+                $('#newsTitle').val(d.title || '');
+                $('#newsAuthor').val(d.author || '');
+                var publishAt = d.publish_at;
+                if (typeof publishAt === 'number') {
+                    var dt = new Date(publishAt * 1000);
+                    publishAt = dt.toISOString().slice(0,16);
+                } else {
+                    publishAt = String(publishAt || '').replace(' ','T').slice(0,16);
+                }
+                $('#newsPublish').val(publishAt);
+                $('#newsContent').val(d.content || '');
+                $('#newsAppIDs').val(d.associated_appids || '');
+                CKEDITOR.replace('newsContent', {baseHref: '/' });
+                CKEDITOR.instances.newsContent.setData(d.content || '');
+                $('#newsModalOverlay').css('display','flex');
+                formHasChanges = false;
+            },'json').fail(function(xhr){
+                console.error('news.php: edit load failed', xhr.status, xhr.responseText);
+                alert('Failed to load article for editing.');
+            });
         }else{
             $('#newsAuthor').val(<?php echo json_encode(getenv('USER') ?: 'Admin'); ?>);
             $('#newsPublish').val(new Date().toISOString().slice(0,16));
-            CKEDITOR.replace('newsContent');
-            $('#newsModalOverlay').show();
+            CKEDITOR.replace('newsContent', {baseHref: '/' });
+            $('#newsModalOverlay').css('display','flex');
+            formHasChanges = false;
         }
     }
     function closeModal(){
+        if(formHasChanges && !confirm('You have unsaved changes. Are you sure you want to discard them?')){
+            return;
+        }
         $('#newsModalOverlay').hide();
         $('#newsForm')[0].reset();
+        formHasChanges = false;
         if(CKEDITOR.instances.newsContent){
             CKEDITOR.instances.newsContent.destroy(true);
             delete CKEDITOR.instances.newsContent;
@@ -373,6 +410,16 @@ document.addEventListener('DOMContentLoaded',function(){
         $.each(rows,function(i,r){$('#news-body').append(r);});
         $(this).data('asc',asc?0:1);
     });
+    // Track form changes for unsaved changes warning
+    $('#newsForm input, #newsForm textarea').on('change keyup',function(){ formHasChanges = true; });
+
+    // Close modal when clicking on the overlay background
+    $('#newsModalOverlay').on('click',function(e){
+        if(e.target.id === 'newsModalOverlay'){
+            closeModal();
+        }
+    });
+
     $('#apply-filter').on('click',function(){ refreshList(); });
     $('#add-news').on('click',function(){ openModal(); });
     $('#news-body').on('click','.edit-btn',function(){ openModal($(this).data('id')); });
@@ -380,9 +427,18 @@ document.addEventListener('DOMContentLoaded',function(){
     $('#newsForm').on('submit',function(e){
         e.preventDefault();
         var id=$('#newsId').val();
-        var data={save:1,title:$('#newsTitle').val(),author:$('#newsAuthor').val(),publish_at:$('#newsPublish').val(),content:CKEDITOR.instances.newsContent.getData(),csrf_token:csrfToken};
+        var data={
+            save:1,
+            title:$('#newsTitle').val(),
+            author:$('#newsAuthor').val(),
+            publish_at:$('#newsPublish').val(),
+            associated_appids:$('#newsAppIDs').val(),
+            content:CKEDITOR.instances.newsContent.getData(),
+            csrf_token:csrfToken
+        };
         var url='news_edit.php'+(id?'?id='+id:'');
         $.post(url,data,function(){
+            formHasChanges = false;
             closeModal();
             refreshList();
         },'json');

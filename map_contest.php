@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/cms/db.php';
 session_start();
+session_write_close(); // PERFORMANCE OPTIMIZATION: Release file lock
 $db   = cms_get_db();
 $theme = cms_get_setting('theme','2004');
 $base  = cms_base_url();

@@ -72,6 +72,7 @@ $developers = $db->query('SELECT * FROM store_developers ORDER BY name')->fetchA
 $sidebar_links = $db->query('SELECT * FROM store_sidebar_links ORDER BY ord,id')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Storefront</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage general storefront settings.</p>
 <ul class="tabs">
 <li><a href="#main">Main</a></li>
 <li><a href="#categories">Categories</a></li>

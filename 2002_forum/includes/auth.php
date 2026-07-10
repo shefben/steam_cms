@@ -210,7 +210,7 @@ function cb_get_rank(int $postCount) : string {
  * Get user's post count
  */
 function cb_get_post_count(int $userId) : int {
-    $stmt = cb_db()->prepare('SELECT COUNT(*) FROM posts WHERE user_id=?');
+    $stmt = cb_db()->prepare('SELECT post_count FROM users WHERE id=?');
     $stmt->execute([$userId]);
     return (int)$stmt->fetchColumn();
 }
@@ -291,8 +291,7 @@ function cb_get_users(int $offset = 0, int $limit = 50, ?string $search = null) 
     $stmt->execute($params);
     $total = (int)$stmt->fetchColumn();
 
-    $sql = "SELECT u.*, (SELECT COUNT(*) FROM posts WHERE user_id=u.id) as post_count
-            FROM users u $where ORDER BY u.registered DESC LIMIT $limit OFFSET $offset";
+    $sql = "SELECT u.* FROM users u $where ORDER BY u.registered DESC LIMIT $limit OFFSET $offset";
     $stmt = cb_db()->prepare($sql);
     $stmt->execute($params);
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);

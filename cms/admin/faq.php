@@ -1,5 +1,6 @@
 <?php
-require_once 'admin_header.php';
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/admin_auth.php';
 cms_require_any_permission(['manage_faq','faq_add','faq_edit','faq_delete']);
 $db=cms_get_db();
 require_once __DIR__.'/faq_order.php';
@@ -86,6 +87,9 @@ if (isset($_POST['ajax_save'])) {
     ]);
     exit;
 }
+
+require_once 'admin_header.php';
+
 $rows=$db->query('SELECT f.*,c.name as catname FROM faq_content f JOIN faq_categories c ON c.id1=f.catid1 AND c.id2=f.catid2 ORDER BY c.name,title')->fetchAll(PDO::FETCH_ASSOC);
 $cats=$db->query('SELECT * FROM faq_categories ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
 $order = cms_get_setting('faq_order','');
@@ -104,6 +108,7 @@ $pages = max(1, (int)ceil($total/$perPage));
 $rows = array_slice($rows, ($page-1)*$perPage, $perPage);
 ?>
 <h2>FAQs</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage frequently asked questions shown on the support pages, including categories and display order.</p>
 <?php if(cms_has_permission('faq_edit') || cms_has_permission('faq_add')): ?>
 <p>
     <?php if(cms_has_permission('faq_edit')): ?>
@@ -151,24 +156,30 @@ $rows = array_slice($rows, ($page-1)*$perPage, $perPage);
 <?php endfor; ?>
 <?php if($page<$pages): ?><a href="?page=<?php echo $page+1; ?>">Next &raquo;</a><?php endif; ?>
 </div>
-<div id="faq-modal" style="display:none;" aria-modal="true" role="dialog">
+<div id="faq-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;justify-content:center;align-items:center;" aria-modal="true" role="dialog">
+<div class="modal" style="background:white;border-radius:8px;padding:0;width:90%;max-width:600px;box-shadow:0 4px 12px rgba(0,0,0,0.3);">
 <form id="faq-form">
     <input type="hidden" name="faqid1" id="faqid1">
     <input type="hidden" name="faqid2" id="faqid2">
-    <label>Category:
-        <select name="category" id="faq-category">
+    <div style="padding:20px;border-bottom:1px solid #ddd;"><h3 id="faqModalTitle" style="margin:0;">Add FAQ</h3></div>
+    <div class="modal-body" style="padding:20px;max-height:600px;overflow-y:auto;">
+    <div style="margin-bottom:12px;"><label style="display:block;margin-bottom:4px;font-weight:bold;">Category:</label>
+        <select name="category" id="faq-category" style="width:100%;padding:8px;">
             <?php foreach($cats as $c): ?>
             <option value="<?php echo $c['id1'].','.$c['id2']; ?>"><?php echo htmlspecialchars($c['name']); ?></option>
             <?php endforeach; ?>
         </select>
-    </label>
-    <br>
-    <label>Title:<br><input type="text" name="title" id="faq-title"></label><br>
-    <label>Body:<br><textarea name="body" id="faq-text" rows="10"></textarea></label><br>
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="button" id="faq-cancel" class="btn btn-secondary">Cancel</button>
+    </div>
+    <div style="margin-bottom:12px;"><label style="display:block;margin-bottom:4px;font-weight:bold;">Title:</label><input type="text" name="title" id="faq-title" style="width:100%;padding:8px;"></div>
+    <div style="margin-bottom:12px;"><label style="display:block;margin-bottom:4px;font-weight:bold;">Body:</label><textarea name="body" id="faq-text" rows="10" style="width:100%;padding:8px;"></textarea></div>
+    </div>
+    <div class="modal-footer" style="padding:15px 20px;border-top:1px solid #ddd;display:flex;justify-content:flex-end;gap:10px;">
+        <button type="button" id="faq-cancel" class="btn" style="padding:8px 16px;border:1px solid #ccc;border-radius:4px;background:#f5f5f5;cursor:pointer;">Cancel</button>
+        <button type="submit" class="btn btn-primary" style="padding:8px 16px;border:none;border-radius:4px;background:#007bff;color:white;cursor:pointer;">Save</button>
+    </div>
     <input type="hidden" name="ajax_save" value="1">
 </form>
+</div>
 </div>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
@@ -192,16 +203,20 @@ document.addEventListener('DOMContentLoaded',function(){
     var form=document.getElementById('faq-form');
     var addBtn=document.getElementById('add-faq');
     var cancelBtn=document.getElementById('faq-cancel');
-    var editor=CKEDITOR.replace('faq-text');
+    var editor=CKEDITOR.replace('faq-text', {baseHref: '/' });
 
     function openModal(faq){
+        document.getElementById('faqModalTitle').textContent = faq ? 'Edit FAQ' : 'Add FAQ';
         document.getElementById('faqid1').value=faq?faq.faqid1:'';
         document.getElementById('faqid2').value=faq?faq.faqid2:'';
         document.getElementById('faq-category').value=faq?(faq.catid1+','+faq.catid2):'';
         document.getElementById('faq-title').value=faq?faq.title:'';
         editor.setData(faq?faq.body:'');
-        modal.style.display='block';
+        modal.style.display='flex';
     }
+    modal.addEventListener('click',function(e){
+        if(e.target.id === 'faq-modal'){ modal.style.display='none'; }
+    });
     if(addBtn){addBtn.addEventListener('click',function(){openModal(null);});}
     body.addEventListener('click',function(e){
         if(e.target.classList.contains('edit-btn')){

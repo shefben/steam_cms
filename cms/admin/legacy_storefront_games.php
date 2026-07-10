@@ -61,9 +61,27 @@ if(isset($_POST['save_game'])){
     $stmt=$db->prepare('REPLACE INTO `0405_storefront_games`(appid,title,description,image_thumb,image_screenshot,purchaseButtonStr,isHidden) VALUES(?,?,?,?,?,?,0)');
     $stmt->execute([$appid,$title,$desc,$thumb,$screen,$purchase]);
 }
-$games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
+$page = max(1, (int)($_GET['page'] ?? 1));
+$limit = 50;
+$offset = ($page - 1) * $limit;
+$total = (int)$db->query('SELECT COUNT(*) FROM `0405_storefront_games`')->fetchColumn();
+$pages = max(1, ceil($total / $limit));
+
+$games=$db->query("SELECT * FROM `0405_storefront_games` ORDER BY id LIMIT $limit OFFSET $offset")->fetchAll(PDO::FETCH_ASSOC);
+
+ob_start();
+echo '<div class="pagination" style="margin-top:15px; margin-bottom:15px;">';
+if ($page > 1) echo '<a href="?page='.($page-1).'" class="btn btn-small">&laquo; Prev</a> ';
+for($i=max(1, $page-3); $i<=min($pages, $page+3); $i++) {
+    $class = ($i == $page) ? 'btn btn-small btn-primary' : 'btn btn-small';
+    echo '<a href="?page='.$i.'" class="'.$class.'">'.$i.'</a> ';
+}
+if ($page < $pages) echo '<a href="?page='.($page+1).'" class="btn btn-small">Next &raquo;</a>';
+echo '</div>';
+$paginationHtml = ob_get_clean();
 ?>
 <h2>Legacy Storefront Game Management</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage legacy storefront game listings (pre-2006 storefront).</p>
 <table class="data-table" id="games-table">
 <thead><tr><th class="sortable">App ID</th><th class="sortable">Title</th><th>Image Preview</th><th>Hidden</th><th>Tasks</th></tr></thead>
 <tbody>
@@ -87,6 +105,7 @@ $games=$db->query('SELECT * FROM `0405_storefront_games` ORDER BY id')->fetchAll
 <?php endforeach; ?>
 </tbody>
 </table>
+<?php echo $paginationHtml; ?>
 <hr>
 <h3>Add or Edit Games</h3>
 <form method="post" enctype="multipart/form-data" id="gameForm">
@@ -179,23 +198,24 @@ $(function () {
             cache: false,
             success: function (d) {
                 $('#appid').val(d.appid);
-                if (d.title.match(/^\/storefront\/images\//)) {
+                var title = d.title || '';
+                if (title.match(/^\/storefront\/images\//)) {
                     $('#title_mode_image').prop('checked', true);
-                    $('#title_image').val(d.title);
-                    $('#titleImgPrev').html('<img src="' + d.title + '" width="32">');
+                    $('#title_image').val(title);
+                    $('#titleImgPrev').html('<img src="' + title + '" width="32">');
                     $('#title_text').val('');
                 } else {
                     $('#title_mode_text').prop('checked', true);
-                    $('#title_text').val(d.title);
+                    $('#title_text').val(title);
                     $('#title_image').val('');
                     $('#titleImgPrev').html('No Image selected');
                 }
-                $('#current_thumb').val(d.image_thumb);
+                $('#current_thumb').val(d.image_thumb || '');
                 $('#thumbPrev').html(d.image_thumb ? '<img src="' + d.image_thumb + '" width="32">' : '');
-                $('#current_screen').val(d.image_screenshot);
+                $('#current_screen').val(d.image_screenshot || '');
                 $('#screenPrev').html(d.image_screenshot ? '<img src="' + d.image_screenshot + '" width="32">' : '');
-                $('#description').val(d.description);
-                var pb = d.purchaseButtonStr;
+                $('#description').val(d.description || '');
+                var pb = d.purchaseButtonStr || '';
                 if (pb == "CLICK for PURCHASE OPTIONS") {
                     $('#pb1').prop('checked', true);
                 } else if (pb == "DOWNLOAD & INSTALL NOW") {
@@ -205,6 +225,9 @@ $(function () {
                     $('#custom_purchase').val(pb);
                 }
                 $('#removeShot').prop('disabled', !d.image_screenshot);
+            },
+            error: function(xhr){
+                console.error('legacy_storefront_games: load failed', xhr.status, xhr.responseText);
             }
         });
     });

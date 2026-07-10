@@ -9,8 +9,8 @@ if(isset($_POST['save_sidebar'])){
             $db->prepare('DELETE FROM store_sidebar_links WHERE id=?')->execute([$id]);
             continue;
         }
-        $label = trim($_POST['label'][$i]);
-        $url = trim($_POST['url'][$i]);
+        $label = trim($_POST['label'][$i] ?? '');
+        $url = trim($_POST['url'][$i] ?? '');
         $type = $_POST['type'][$i]=='spacer'?'spacer':'link';
         $ord = $i+1;
         $vis = empty($_POST['hide'][$i]) ? 1 : 0;
@@ -29,6 +29,7 @@ if(isset($_POST['add_sidebar']) || isset($_POST['add_spacer'])){
 $sidebar_links = $db->query('SELECT * FROM store_sidebar_links ORDER BY ord,id')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Storefront Sidebar</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage storefront sidebar link content.</p>
 <form method="post">
 <table class="table" id="sidebar-list">
 <tr><th></th><th>Label</th><th>URL</th><th>Type</th><th>Hide</th><th>Remove</th></tr>

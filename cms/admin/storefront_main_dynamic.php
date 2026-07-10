@@ -84,6 +84,7 @@ if($is2007){
 }
 ?>
 <h2>Main Page</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage the dynamic storefront homepage layout and content.</p>
 <form method="post" style="margin-bottom:15px;">
   <fieldset>
     <legend>Page Titles</legend>

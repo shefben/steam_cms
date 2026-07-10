@@ -61,17 +61,18 @@ $rows = $db->query('SELECT msgtype, language FROM marketing ORDER BY msgtype, la
 ?>
 <link rel="stylesheet" href="css/missing.css">
 <h2>Preload Marketing Content</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage preload marketing content shown before app downloads.</p>
 <table class="data-table" id="marketingTable">
 <tr><th>Message Type</th><th>Language</th><th>Action</th></tr>
 <?php foreach ($rows as $r) : ?>
 <tr data-msgtype="<?php echo htmlspecialchars($r['msgtype']); ?>" data-language="<?php echo htmlspecialchars($r['language']); ?>">
 <td><?php echo htmlspecialchars($r['msgtype']); ?></td>
 <td><?php echo htmlspecialchars($r['language']); ?></td>
-<td><button class="edit-btn">Edit</button> <button class="delete-btn">Delete</button></td>
+<td><button type="button" class="edit-btn btn btn-primary btn-small">Edit</button> <button type="button" class="delete-btn btn btn-danger btn-small">Delete</button></td>
 </tr>
 <?php endforeach; ?>
 </table>
-<button id="addBtn">Add New Preload Content</button>
+<button type="button" id="addBtn" class="btn btn-secondary">Add New Preload Content</button>
 <div id="modalOverlay" class="modal-overlay" style="display:none;">
   <div class="modal" role="dialog" aria-modal="true">
     <form id="contentForm">
@@ -82,7 +83,7 @@ $rows = $db->query('SELECT msgtype, language FROM marketing ORDER BY msgtype, la
       <label>Content:</label>
       <textarea name="content" id="content" style="width:100%;height:300px;"></textarea>
       <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" id="cancelBtn">Cancel</button>
+      <button type="button" id="cancelBtn" class="btn">Cancel</button>
     </form>
   </div>
 </div>

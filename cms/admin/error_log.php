@@ -33,6 +33,7 @@ $stmt->execute();
 $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Error Log</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">View recorded PHP and application errors for troubleshooting.</p>
 <table class="data-table">
 <tr><th>Time</th><th>Level</th><th>Message</th><th>File</th><th>Line</th><th>Actions</th></tr>
 <?php foreach ($logs as $log): ?>

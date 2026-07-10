@@ -39,11 +39,29 @@ if (isset($_POST['ajax'])) {
     exit;
 }
 
-$reports = $db->query('SELECT id,email_address,os,connection_type,file_system,created FROM bug_reports ORDER BY created DESC')->fetchAll(PDO::FETCH_ASSOC);
+$page = max(1, (int)($_GET['page'] ?? 1));
+$limit = 50;
+$offset = ($page - 1) * $limit;
+$total = (int)$db->query('SELECT COUNT(*) FROM bug_reports')->fetchColumn();
+$pages = max(1, ceil($total / $limit));
+
+$reports = $db->query("SELECT id,email_address,os,connection_type,file_system,created FROM bug_reports ORDER BY created DESC LIMIT $limit OFFSET $offset")->fetchAll(PDO::FETCH_ASSOC);
+
+ob_start();
+echo '<div class="pagination" style="margin-top:15px; margin-bottom:15px;">';
+if ($page > 1) echo '<a href="?page='.($page-1).'">&laquo; Prev</a> ';
+for($i=max(1, $page-3); $i<=min($pages, $page+3); $i++) {
+    if ($i == $page) echo '<strong>'.$i.'</strong> ';
+    else echo '<a href="?page='.$i.'">'.$i.'</a> ';
+}
+if ($page < $pages) echo '<a href="?page='.($page+1).'">Next &raquo;</a>';
+echo '</div>';
+$paginationHtml = ob_get_clean();
 
 echo $admin_header;
 ?>
 <h2>Bug Reports</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Review bug reports submitted by players and users.</p>
 <table class="data-table" id="reportsTable">
 <tr><th>ID</th><th>Email</th><th>OS</th><th>Connection</th><th>File System</th><th>Created</th><th>Actions</th></tr>
 <?php foreach ($reports as $r): ?>
@@ -58,6 +76,7 @@ echo $admin_header;
 </tr>
 <?php endforeach; ?>
 </table>
+<?php echo $paginationHtml; ?>
 <div id="bugModal" style="display:none;" aria-modal="true" role="dialog">
 <form id="bugForm">
 <input type="hidden" name="id" id="reportId">

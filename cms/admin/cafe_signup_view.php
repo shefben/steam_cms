@@ -19,6 +19,7 @@ if(isset($_POST['deny'])){
 }
 ?>
 <h2>Cafe Signup Detail</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">View details of a submitted Internet Cafe sign-up application.</p>
 <table>
 <?php foreach($entry as $k=>$v): ?>
 <tr><th><?php echo htmlspecialchars($k); ?></th><td><?php echo htmlspecialchars($v); ?></td></tr>

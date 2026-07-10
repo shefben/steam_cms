@@ -430,15 +430,35 @@ function cms_load_plugins(?string $context = null): void
 
     // Get list of all plugins (from cache or filesystem)
     if (file_exists($cache_file) && filemtime($cache_file) >= time() - 3600) {
-        $allPlugins = include $cache_file;
+        $cacheData = include $cache_file;
+        if (isset($cacheData['paths'])) {
+            $allPlugins = $cacheData['paths'];
+            global $cms_plugin_types;
+            $cms_plugin_types = $cacheData['types'] ?? [];
+        } else {
+            $allPlugins = $cacheData;
+        }
     } else {
         $allPlugins = glob($pluginDir . '/*/plugin.php') ?: [];
+
+        global $cms_plugin_types;
+        foreach ($allPlugins as $plugin_path) {
+            $plugin_name = basename(dirname($plugin_path));
+            if (!isset($cms_plugin_types[$plugin_name])) {
+                $contents = @file_get_contents($plugin_path, false, null, 0, 2048);
+                if ($contents && preg_match('/cms_declare_plugin_type\s*\(\s*[\'"]([^\'"]+)[\'"]\s*,\s*[\'"]([^\'"]+)[\'"]/', $contents, $m)) {
+                    $cms_plugin_types[$plugin_name] = $m[2];
+                } else {
+                    $cms_plugin_types[$plugin_name] = CMS_PLUGIN_TYPE_GLOBAL;
+                }
+            }
+        }
 
         // Cache the plugin list
         if (!is_dir(dirname($cache_file))) {
             mkdir(dirname($cache_file), 0777, true);
         }
-        file_put_contents($cache_file, '<?php return ' . var_export($allPlugins, true) . ';');
+        file_put_contents($cache_file, '<?php return ' . var_export(['paths' => $allPlugins, 'types' => $cms_plugin_types], true) . ';');
     }
 
     // Load plugins that match the context

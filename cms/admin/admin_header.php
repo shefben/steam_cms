@@ -6,22 +6,8 @@ require_once __DIR__ . '/../db.php';
 require_once __DIR__ . '/../template_engine.php';
 require_once __DIR__ . '/../plugin_api.php'; // load plugin system
 require_once __DIR__ . '/../cache_manager.php'; // load cache system
+require_once __DIR__ . '/admin_auth.php';
 require_once __DIR__ . '/breadcrumbs.php';
-
-if (!cms_current_admin()) {
-    if (isset($_COOKIE['cms_admin_token'])) {
-        $uid = cms_validate_admin_token($_COOKIE['cms_admin_token']);
-        if ($uid) {
-            session_regenerate_id(true);
-            $_SESSION['admin_id'] = $uid;
-        }
-    }
-    if (!cms_current_admin()) {
-        $ret = urlencode($_SERVER['REQUEST_URI']);
-        header('Location: ../login.php?return=' . $ret);
-        exit;
-    }
-}
 
 $admin_theme = cms_get_setting('admin_theme', 'v2');
 $theme_dir   = dirname(__DIR__, 2) . "/themes/{$admin_theme}_admin";
@@ -35,7 +21,15 @@ if (!is_dir($theme_dir)) {
 $page_id     = basename($_SERVER['SCRIPT_NAME'], '.php');
 $page_title  = ucwords(str_replace('_', ' ', $page_id));
 $admin_layout = cms_admin_layout($page_id . '.twig', $admin_theme);
-if ($admin_layout) {
+
+// AJAX requests (jQuery sends X-Requested-With automatically) must never have
+// the full HTML document buffered/emitted around them. Pages that echo JSON
+// or plain text and exit() rely on nothing else having written to the output
+// buffer first, otherwise the buffered HTML preamble gets flushed alongside
+// their response and corrupts it (breaks dataType:'json' parsing silently).
+$is_xhr = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+$admin_header_buffering = ($admin_layout && !$is_xhr);
+if ($admin_header_buffering) {
     ob_start();
 }
 
@@ -164,24 +158,29 @@ $use_spans = ($admin_theme === 'neon');
 
 // Determine if a menu branch contains the active page
 $has_active = function (string $file) use (&$has_active, $items_by_parent): bool {
+    static $cache = [];
+    if (isset($cache[$file])) return $cache[$file];
+    
     foreach ($items_by_parent[$file] ?? [] as $child) {
         $chk = $child['url'] ?? $child['file'];
         if (strpos($_SERVER['REQUEST_URI'], $chk) !== false || $has_active($child['file'])) {
-            return true;
+            return $cache[$file] = true;
         }
     }
-    return false;
+    return $cache[$file] = false;
 };
 
 // Render menu items recursively
-$render_items = function (string $parent) use (&$render_items, $items_by_parent, $use_spans, $has_active): string {
+$render_items = function (string $parent, int $depth = 0) use (&$render_items, $items_by_parent, $use_spans, $has_active): string {
+    if ($depth > 10) return ''; // Prevent infinite recursion
     $html = '';
     foreach ($items_by_parent[$parent] ?? [] as $item) {
         $file = $item['file'];
         $label = cms_admin_translate($item['label']);
         $url = $item['url'] ?? $file;
         $icon = $item['icon'] ?? '';
-        $children = $items_by_parent[$file] ?? [];
+        // Prevent item from being its own parent
+        $children = ($file !== $parent) ? ($items_by_parent[$file] ?? []) : [];
         $link = $children ? '#' : $url;
         $active = strpos($_SERVER['REQUEST_URI'], $url) !== false ? ' class="active"' : '';
         $open = $children && ($active || $has_active($file));
@@ -201,7 +200,7 @@ $render_items = function (string $parent) use (&$render_items, $items_by_parent,
             $html .= '<li id="' . $parent_id . '"><a href="' . $link . '"' . $active . '>' . $text . '</a>';
             $html .= '<button class="submenu-toggle" aria-expanded="' . ($open ? 'true' : 'false') . '" aria-controls="' . $sub_id . '"></button>';
             $style = $open ? 'display:block' : 'display:none';
-            $html .= '<ul class="sub-menu" id="' . $sub_id . '" style="' . $style . '">' . $render_items($file) . '</ul></li>';
+            $html .= '<ul class="sub-menu" id="' . $sub_id . '" style="' . $style . '">' . $render_items($file, $depth + 1) . '</ul></li>';
         } else {
             $html .= '<li><a href="' . $link . '"' . $active . '>' . $text . '</a></li>';
         }
@@ -212,7 +211,7 @@ $render_items = function (string $parent) use (&$render_items, $items_by_parent,
 $nav_html = '<ul class="nav-menu">' . $render_items('') . '</ul>';
 
 // Load universal admin CSS and JavaScript resources
-if ($admin_layout) {
+if ($admin_header_buffering) {
     // Add standard HTML document elements
     echo '<!DOCTYPE html>' . "\n";
     echo '<html lang="en">' . "\n";
@@ -229,6 +228,7 @@ if ($admin_layout) {
     
     // Add JavaScript resources
     echo '    <!-- Universal Admin JavaScript Resources -->' . "\n";
+    echo '    <script>window.CMS_BASE_URL = ' . json_encode($base_url) . ';</script>' . "\n";
     echo '    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>' . "\n";
     echo '    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>' . "\n";
     echo '    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>' . "\n";
@@ -237,7 +237,7 @@ if ($admin_layout) {
     echo '    <script src="' . $base_url . '/cms/admin/js/reliable-file-picker.js"></script>' . "\n";
 }
 
-if (!$admin_layout) {
+if (!$admin_layout && !$is_xhr) {
     include "$theme_dir/header.php";
 }
 ?>

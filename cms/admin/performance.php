@@ -16,6 +16,7 @@ if(isset($_POST['save'])){
 }
 ?>
 <h2>Performance Settings</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">View CMS performance and caching statistics.</p>
 <form method="post">
 <label><input type="checkbox" name="gzip" <?php if($gzip==='1') echo 'checked'; ?>> Enable gzip compression</label><br>
 <label><input type="checkbox" name="cache" <?php if($cache==='1') echo 'checked'; ?>> Enable page caching</label><br>

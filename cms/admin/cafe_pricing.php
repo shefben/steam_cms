@@ -25,6 +25,7 @@ $title = $page['title'] ?? 'Cyber Café Pricing and Licensing';
 $content = $page['content'] ?? '';
 ?>
 <h2>Cafe Pricing</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Configure Steam Cafe pricing plans and packages.</p>
 <?php if(isset($msg)) echo '<p>'.htmlspecialchars($msg).'</p>'; ?>
 <form method="post">
 Title:<br>
@@ -34,6 +35,6 @@ Title:<br>
 </form>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
-CKEDITOR.replace('content');
+CKEDITOR.replace('content', {baseHref: '/' });
 </script>
 <?php include 'admin_footer.php'; ?>

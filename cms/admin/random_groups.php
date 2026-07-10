@@ -59,6 +59,7 @@ $groups = $db->query('SELECT * FROM random_groups ORDER BY name')->fetchAll(PDO:
 ?>
 <link rel="stylesheet" href="css/missing.css">
 <h2>Random Groups</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage groups of images used by the random content system.</p>
 <table class="data-table" id="group-table">
 <thead><tr><th>ID</th><th>Name</th><th>Actions</th></tr></thead>
 <tbody id="group-body">
@@ -68,15 +69,20 @@ $groups = $db->query('SELECT * FROM random_groups ORDER BY name')->fetchAll(PDO:
 </tbody>
 </table>
 <button id="add-group" class="btn btn-primary">Add New Random Group</button>
-<div id="groupModal" class="modal-overlay" style="display:none;">
-    <div class="modal" role="dialog" aria-modal="true">
+<div id="groupModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;justify-content:center;align-items:center;">
+    <div class="modal" role="dialog" aria-modal="true" style="background:white;border-radius:8px;padding:20px;width:90%;max-width:400px;box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+        <h3 id="groupModalTitle" style="margin-top:0;border-bottom:1px solid #ddd;padding-bottom:10px;">Random Group</h3>
         <form id="groupForm">
             <input type="hidden" id="group-id">
-            <label for="group-name">Group Name:</label>
-            <input type="text" id="group-name">
-            <span id="group-error" style="color:red;display:none;"></span>
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="button" id="cancel-modal">Cancel</button>
+            <div style="margin-bottom:15px;">
+                <label for="group-name" style="display:block;margin-bottom:4px;font-weight:bold;">Group Name:</label>
+                <input type="text" id="group-name" style="width:100%;padding:8px;box-sizing:border-box;">
+            </div>
+            <span id="group-error" style="color:red;display:none;margin-bottom:10px;"></span>
+            <div style="display:flex;justify-content:flex-end;gap:10px;padding-top:15px;border-top:1px solid #ddd;">
+                <button type="button" id="cancel-modal" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
         </form>
     </div>
 </div>
@@ -86,8 +92,9 @@ $(function(){
     function openModal(id, name){
         $('#group-id').val(id || '');
         $('#group-name').val(name || '');
+        $('#groupModalTitle').text(id ? 'Edit Random Group' : 'Add Random Group');
         $('#group-error').hide();
-        $('#groupModal').show();
+        $('#groupModal').css('display', 'flex');
     }
     $('#add-group').on('click', function(){
         openModal('', '');

@@ -77,7 +77,7 @@ if (isset($_POST['delete_tag'])) {
 $rowsList = $db->query('SELECT DISTINCT c.tag_name, g.name AS group_name, c.group_id FROM random_content c JOIN random_groups g ON c.group_id = g.id ORDER BY g.name, c.tag_name')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Random Content</h2>
-<p><a href="random_groups.php" class="btn btn-secondary">Manage Random Groups</a></p>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Configure randomly-rotating content blocks and images used in templates.</p>
 <table class="data-table">
 <thead><tr><th>Group</th><th>Tag Name</th><th>Action</th></tr></thead>
 <tbody>
@@ -96,33 +96,65 @@ $rowsList = $db->query('SELECT DISTINCT c.tag_name, g.name AS group_name, c.grou
 </tbody>
 </table>
 <p><button type="button" class="btn btn-secondary" id="add-random-btn">Add Random Content</button></p>
-<div id="addModal" style="display:none;" aria-modal="true" role="dialog">
-  <form id="add-form">
-    <label>Name: <input type="text" id="new-name" required></label>
-    <label>Group:
-      <select id="new-group" required>
-        <option value="">Select</option>
-        <?php foreach ($groupsList as $g) { ?>
-          <option value="<?php echo (int)$g['id']; ?>"><?php echo htmlspecialchars($g['name']); ?></option>
-        <?php } ?>
-      </select>
-    </label>
-    <textarea id="new-content" rows="4" style="width:300px"></textarea>
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="button" id="cancel-new" class="btn btn-secondary">Cancel</button>
-    <span id="add-error" style="color:red;display:none;"></span>
-  </form>
-</div>
-<div id="editModal" style="display:none;" aria-modal="true" role="dialog">
-  <form id="edit-form">
-    <input type="hidden" name="tag" id="edit-tag">
-    <input type="hidden" name="group_id" id="edit-group-id">
-    <div id="edit-entries"></div>
-    <button type="button" id="edit-add" class="btn btn-secondary">Add Entry</button>
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="button" id="edit-cancel" class="btn btn-secondary">Cancel</button>
-    <span id="edit-error" style="color:red;display:none;"></span>
-  </form>
+
+<div id="modalOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;justify-content:center;align-items:center;">
+  <!-- Add Modal -->
+  <div id="addModal" class="modal" style="display:none;background:white;border-radius:8px;padding:20px;width:90%;max-width:600px;box-shadow:0 4px 12px rgba(0,0,0,0.3);" aria-modal="true" role="dialog">
+    <h3 style="margin-top:0;border-bottom:1px solid #ddd;padding-bottom:10px;">Add Random Content</h3>
+    <form id="add-form">
+      <div style="margin-bottom:12px;">
+        <label style="display:block;margin-bottom:4px;font-weight:bold;">Name:</label>
+        <input type="text" id="new-name" required style="width:100%;padding:8px;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="display:block;margin-bottom:4px;font-weight:bold;">Group:</label>
+        <select id="new-group" required style="width:100%;padding:8px;box-sizing:border-box;">
+          <option value="">Select</option>
+          <?php foreach ($groupsList as $g) { ?>
+            <option value="<?php echo (int)$g['id']; ?>"><?php echo htmlspecialchars($g['name']); ?></option>
+          <?php } ?>
+        </select>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="display:block;margin-bottom:4px;font-weight:bold;">Content:</label>
+        <textarea id="new-content" rows="6" style="width:100%;padding:8px;box-sizing:border-box;"></textarea>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:15px;padding-top:15px;border-top:1px solid #ddd;">
+        <button type="button" id="cancel-new" class="btn btn-secondary">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+      <span id="add-error" style="color:red;display:none;"></span>
+    </form>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal" style="display:none;background:white;border-radius:8px;padding:20px;width:90%;max-width:600px;box-shadow:0 4px 12px rgba(0,0,0,0.3);max-height:90vh;overflow-y:auto;" aria-modal="true" role="dialog">
+    <h3 style="margin-top:0;border-bottom:1px solid #ddd;padding-bottom:10px;">Edit Random Content</h3>
+    <form id="edit-form">
+      <div style="margin-bottom:12px;">
+        <label style="display:block;margin-bottom:4px;font-weight:bold;">Name:</label>
+        <input type="text" name="tag" id="edit-tag" readonly style="width:100%;padding:8px;box-sizing:border-box;background:#eee;">
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="display:block;margin-bottom:4px;font-weight:bold;">Group:</label>
+        <select name="group_id" id="edit-group-id" style="width:100%;padding:8px;box-sizing:border-box;">
+          <option value="">Select</option>
+          <?php foreach ($groupsList as $g) { ?>
+            <option value="<?php echo (int)$g['id']; ?>"><?php echo htmlspecialchars($g['name']); ?></option>
+          <?php } ?>
+        </select>
+      </div>
+      <div id="edit-entries"></div>
+      <div style="margin-bottom:15px;">
+        <button type="button" id="edit-add" class="btn btn-secondary btn-small">Add Entry</button>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:15px;padding-top:15px;border-top:1px solid #ddd;">
+        <button type="button" id="edit-cancel" class="btn btn-secondary">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+      <span id="edit-error" style="color:red;display:none;"></span>
+    </form>
+  </div>
 </div>
 <script>
 $(function(){
@@ -133,9 +165,11 @@ $(function(){
     $('#add-random-btn').on('click', function(){
         $('#add-form')[0].reset();
         $('#add-error').hide();
+        $('#modalOverlay').css('display', 'flex');
         $('#addModal').show();
+        $('#editModal').hide();
     });
-    $('#cancel-new').on('click', function(){ $('#addModal').hide(); });
+    $('#cancel-new').on('click', function(){ $('#modalOverlay').hide(); });
     $('#add-form').on('submit', function(e){
         e.preventDefault();
         var name = $('#new-name').val().trim();
@@ -145,7 +179,7 @@ $(function(){
             if(res.error){
                 $('#add-error').text(res.error).show();
             } else {
-                $('#addModal').hide();
+                $('#modalOverlay').hide();
                 var groupName = $('#new-group option:selected').text();
                 var row = '<tr><td>'+escapeHtml(groupName)+'</td><td>{% verbatim %}{{random_'+escapeHtml(name)+'}}{% endverbatim %}</td><td class="actions"><button type="button" class="btn btn-primary edit-btn" data-tag="'+escapeHtml(name)+'">Edit</button><form method="post" style="display:inline"><button class="btn btn-danger" name="delete_tag" value="'+escapeHtml(name)+'" onclick="return confirm(\'Delete tag?\')">Delete</button></form></td></tr>';
                 $('table.data-table tbody').append(row);
@@ -160,24 +194,28 @@ $(function(){
             $('#edit-group-id').val(res.length ? res[0].group_id : 0);
             var container = $('#edit-entries').empty();
             res.forEach(function(r){
-                var div = $('<div class="entry" data-id="'+r.uniqueid+'">');
-                var del = $('<button type="button" class="delete-entry btn btn-danger" data-id="'+r.uniqueid+'">Delete</button>');
-                var ta = $('<textarea name="content['+r.uniqueid+']" rows="4" style="width:300px"></textarea>').val(r.content);
-                div.append(del).append(ta);
+                var div = $('<div class="entry" data-id="'+r.uniqueid+'" style="margin-bottom:10px;">');
+                var label = $('<label style="display:block;margin-bottom:4px;font-weight:bold;">Entry ID: ' + r.uniqueid + '</label>');
+                var del = $('<button type="button" class="delete-entry btn btn-danger btn-small" style="float:right;" data-id="'+r.uniqueid+'">Delete</button>');
+                var ta = $('<textarea name="content['+r.uniqueid+']" rows="6" style="width:100%;padding:8px;box-sizing:border-box;"></textarea>').val(r.content);
+                div.append(del).append(label).append(ta);
                 container.append(div);
             });
+            $('#modalOverlay').css('display', 'flex');
+            $('#addModal').hide();
             $('#editModal').show();
             $('#edit-error').hide();
         }, 'json');
     });
 
-    $('#edit-cancel').on('click', function(){ $('#editModal').hide(); });
+    $('#edit-cancel').on('click', function(){ $('#modalOverlay').hide(); });
 
     $('#edit-add').on('click', function(){
-        var div = $('<div class="entry" data-id="new">');
-        var del = $('<button type="button" class="delete-entry btn btn-danger" data-id="new">Delete</button>');
-        var ta = $('<textarea name="new[]" rows="4" style="width:300px"></textarea>');
-        div.append(del).append(ta);
+        var div = $('<div class="entry" data-id="new" style="margin-bottom:10px;">');
+        var label = $('<label style="display:block;margin-bottom:4px;font-weight:bold;">New Entry</label>');
+        var del = $('<button type="button" class="delete-entry btn btn-danger btn-small" style="float:right;" data-id="new">Delete</button>');
+        var ta = $('<textarea name="new[]" rows="6" style="width:100%;padding:8px;box-sizing:border-box;"></textarea>');
+        div.append(del).append(label).append(ta);
         $('#edit-entries').append(div);
     });
 
@@ -198,17 +236,12 @@ $(function(){
             if(res.error){
                 $('#edit-error').text(res.error).show();
             } else {
-                $('#editModal').hide();
+                $('#modalOverlay').hide();
                 $('#edit-form')[0].reset();
             }
         }, 'json');
     });
 });
 </script>
-<style>
-#addModal,#editModal{background:#fff;border:1px solid #333;padding:10px;position:fixed;top:10%;left:50%;transform:translateX(-50%);z-index:1000;}
-#addModal label,#editModal label{display:block;margin-top:5px;}
-.entry{margin-bottom:10px;}
-</style>
 <?php include 'admin_footer.php'; ?>
 

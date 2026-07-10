@@ -32,6 +32,7 @@ if (isset($_POST['delete'])) {
 $roles = $db->query('SELECT * FROM admin_roles ORDER BY name')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Roles</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage admin roles and their permission sets.</p>
 <button id="addBtn">Add Role</button>
 <table>
 <tr><th>Name</th><th>Permissions</th><th>Actions</th></tr>

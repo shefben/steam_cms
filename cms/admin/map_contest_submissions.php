@@ -17,6 +17,7 @@ if(isset($_GET['delete'])){
 $rows=$db->query('SELECT id,created,full_name,map_name FROM map_contest_entries ORDER BY created DESC')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Map Contest Submissions</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Review submitted community map contest entries.</p>
 <label><input type="checkbox" id="endContest" <?php echo $map_contest==='1'?'checked':''; ?>> End 2004/2005 Map Contest</label>
 <table class="data-table">
 <tr><th>Date</th><th>First &amp; Last Name</th><th>Map Name</th><th>Actions</th></tr>

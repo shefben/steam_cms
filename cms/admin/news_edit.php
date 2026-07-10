@@ -1,5 +1,6 @@
 <?php
-require_once 'admin_header.php';
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/admin_auth.php';
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 cms_require_permission($id ? 'news_edit' : 'news_create');
 $db = cms_get_db();
@@ -13,6 +14,7 @@ if(isset($_GET['ajax']) && $id){
     echo json_encode($article);
     exit;
 }
+require_once 'admin_header.php';
 if($id){
     $stmt = $db->prepare('SELECT * FROM news WHERE id=?');
     $stmt->execute([$id]);
@@ -79,7 +81,7 @@ if(isset($_POST['save'])){
 ?>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
-CKEDITOR.replace('content');
+CKEDITOR.replace('content', {baseHref: '/' });
 function autoSave(){
     var data={
         autosave:1,
@@ -104,6 +106,7 @@ function autoSave(){
 setInterval(autoSave,30000);
 </script>
 <h2><?php echo $id ? 'Edit' : 'Add'; ?> Article</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Add or edit an individual news article.</p>
 <form method="post">
 Title: <input type="text" name="title" value="<?php echo htmlspecialchars($article['title']); ?>" size="60"><br><br>
 Author: <input type="text" name="author" value="<?php echo htmlspecialchars($article['author']); ?>"><br><br>

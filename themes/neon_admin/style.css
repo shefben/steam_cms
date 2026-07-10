@@ -742,6 +742,7 @@ nav {
     align-items: flex-start;
     transition: all 0.3s ease;
     animation: slideIn 0.3s ease forwards;
+    color: #e0e0e0;
 }
 
 .notifications li:hover {

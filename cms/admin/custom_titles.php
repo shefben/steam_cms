@@ -1,5 +1,6 @@
 <?php
-require_once 'admin_header.php';
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/admin_auth.php';
 cms_require_permission('manage_pages');
 $db = cms_get_db();
 $csrf_token = cms_get_csrf_token();
@@ -72,8 +73,10 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1 && ($_GET['fetch'] ?? '') === 'ro
 }
 
 $rows = $db->query('SELECT * FROM custom_titles ORDER BY uniqueid')->fetchAll(PDO::FETCH_ASSOC);
+require_once 'admin_header.php';
 ?>
 <h2>Custom Titles</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage custom page titles and aliases.</p>
 <form id="titles-form">
 <table id="titles-table" class="table">
 <thead>

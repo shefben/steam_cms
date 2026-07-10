@@ -1,5 +1,6 @@
 <?php
-require_once 'admin_header.php';
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/admin_auth.php';
 
 if(isset($_GET['ajax']) && isset($_GET['edit'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['edit']);
@@ -111,9 +112,11 @@ if(isset($_POST['save_page'])){
     }else{
         $stmt=$db->prepare('INSERT INTO custom_pages(slug,page_name,title,content,theme,template,header_image,created,updated,status) VALUES(?,?,?,?,?,?,?,?,NOW(),"published")');
         $stmt->execute([$slug,$page_name,$title,$content,$themeStr,$template,$header_image,date('Y-m-d H:i:s')]);
-        cms_admin_log('Created custom page '.$slug);
     }
 }
+
+require_once 'admin_header.php';
+
 if(isset($_GET['delete'])){
     $slug=preg_replace('/[^a-zA-Z0-9_-]/','',$_GET['delete']);
     $thm = isset($_GET['theme']) ? preg_replace('/[^a-zA-Z0-9_,]/','',$_GET['theme']) : null;
@@ -131,8 +134,9 @@ if(isset($_GET['edit'])){
 }
 ?>
 <h2>Custom Pages</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Create and edit standalone custom CMS pages, per-theme visibility, and header images.</p>
 <link rel="stylesheet" href="css/image-picker.css">
-<button id="addBtn">Add Custom Page</button>
+<button type="button" id="addBtn" class="btn btn-primary">Add Custom Page</button>
 <table>
 <tr><th>Slug</th><th>Themes</th><th>Title</th><th>Actions</th></tr>
 <?php foreach($pages as $p): ?>
@@ -143,37 +147,58 @@ if(isset($_GET['edit'])){
  <a href="?delete=<?php echo urlencode($p['slug']); ?>&amp;theme=<?php echo urlencode($p['theme']); ?>" class="btn btn-danger btn-small" onclick="return confirm('Delete?');">Delete</a></td></tr>
 <?php endforeach; ?>
 </table>
-<div id="editor" style="display:none;border:1px solid #333;padding:10px;background:#eee;">
-<form method="post">
-<input type="text" name="slug" id="slug" placeholder="Page ID"><br>
-<label>Page Name: <input type="text" name="page_name" id="page_name" value="<?php echo isset($edit['page_name']) ? htmlspecialchars($edit['page_name']) : ''; ?>"></label><br>
-<label>Page Title: <input type="text" name="title" id="title"></label><br><br>
-<fieldset><legend>Visible For Themes</legend>
-<?php foreach($themes as $t): ?>
-    <label><input type="checkbox" name="themes[]" value="<?php echo htmlspecialchars($t); ?>" class="themeChk"> <?php echo htmlspecialchars($t); ?></label>
-<?php endforeach; ?>
-</fieldset>
-<label>Template:
-    <select name="template" id="template">
-        <option value="">default.twig</option>
-        <?php foreach($template_files as $f): ?>
-            <option value="<?php echo htmlspecialchars($f); ?>"<?php if(isset($edit['template']) && $edit['template']===$f) echo ' selected'; ?>><?php echo htmlspecialchars($f); ?></option>
+<div id="editorOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;justify-content:center;align-items:center;">
+  <div id="editor" style="background:white;border-radius:8px;padding:0;width:90%;max-width:700px;max-height:90vh;overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+    <div style="padding:15px;border-bottom:1px solid #ddd;"><h3 style="margin:0;">Edit Custom Page</h3></div>
+    <form method="post" style="padding:20px;">
+      <div style="margin-bottom:15px;">
+        <label style="display:block;margin-bottom:5px;font-weight:bold;">Page ID (Slug):</label>
+        <input type="text" name="slug" id="slug" placeholder="Page ID" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;"><br>
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="display:block;margin-bottom:5px;font-weight:bold;">Page Name:</label>
+        <input type="text" name="page_name" id="page_name" value="<?php echo isset($edit['page_name']) ? htmlspecialchars($edit['page_name']) : ''; ?>" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="display:block;margin-bottom:5px;font-weight:bold;">Page Title:</label>
+        <input type="text" name="title" id="title" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="display:block;margin-bottom:5px;font-weight:bold;">Visible For Themes:</label>
+        <?php foreach($themes as $t): ?>
+            <label style="display:inline-block;margin-right:15px;"><input type="checkbox" name="themes[]" value="<?php echo htmlspecialchars($t); ?>" class="themeChk"> <?php echo htmlspecialchars($t); ?></label>
         <?php endforeach; ?>
-    </select>
-</label><br>
-<label>Set Content Header Image:</label><br>
-<div id="headerImagePreview"></div>
-<input type="hidden" name="header_image" id="header_image">
-<input type="file" id="headerImageFile" style="display:none;">
-<button type="button" id="uploadHeaderBtn">Upload Image</button>
-<button type="button" id="selectHeaderBtn">Select Pre-existing Image</button><br><br>
-<textarea name="content" id="content" style="width:100%;height:300px;"></textarea><br>
-<input type="submit" name="save_page" value="Save">
-<span id="lastSaved" style="margin-left:10px;color:green;"></span>
-<button type="button" id="previewBtn" style="display:none;">Preview</button>
-<button type="button" id="restoreDraft" style="display:none;">Restore Draft</button>
-<button type="button" id="cancel">Cancel</button>
-</form>
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="display:block;margin-bottom:5px;font-weight:bold;">Template:</label>
+        <select name="template" id="template" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
+            <option value="">default.twig</option>
+            <?php foreach($template_files as $f): ?>
+                <option value="<?php echo htmlspecialchars($f); ?>"<?php if(isset($edit['template']) && $edit['template']===$f) echo ' selected'; ?>><?php echo htmlspecialchars($f); ?></option>
+            <?php endforeach; ?>
+        </select>
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="display:block;margin-bottom:5px;font-weight:bold;">Content Header Image:</label>
+        <div id="headerImagePreview" style="margin-bottom:10px;"></div>
+        <input type="hidden" name="header_image" id="header_image">
+        <input type="file" id="headerImageFile" style="display:none;">
+        <button type="button" id="uploadHeaderBtn" class="btn btn-small" style="margin-right:5px;">Upload Image</button>
+        <button type="button" id="selectHeaderBtn" class="btn btn-small">Select Existing</button>
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="display:block;margin-bottom:5px;font-weight:bold;">Content:</label>
+        <textarea name="content" id="content" style="width:100%;height:250px;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;"></textarea>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;padding-top:15px;border-top:1px solid #ddd;">
+        <span id="lastSaved" style="color:green;margin-right:auto;"></span>
+        <button type="button" id="previewBtn" class="btn btn-secondary" style="display:none;">Preview</button>
+        <button type="button" id="restoreDraft" class="btn btn-secondary" style="display:none;">Restore Draft</button>
+        <button type="button" id="cancel" class="btn" style="padding:8px 16px;border:1px solid #ccc;background:#f5f5f5;border-radius:4px;cursor:pointer;">Cancel</button>
+        <input type="submit" name="save_page" value="Save" class="btn btn-primary" style="padding:8px 16px;background:#007bff;color:white;border:none;border-radius:4px;cursor:pointer;">
+      </div>
+    </form>
+    </div>
 </div>
 <div id="headerImageDialog" title="Select Header Image" style="display:none;">
     <select id="headerImageList"></select>
@@ -191,7 +216,7 @@ $(document).ready(function(){
     ckEditorScript.onload = function() {
         console.log('CKEditor loaded successfully');
         ckEditorLoaded = true;
-        CKEDITOR.replace('content');
+        CKEDITOR.replace('content', {baseHref: '/' });
     };
     ckEditorScript.onerror = function() {
         console.error('Failed to load CKEditor from CDN');
@@ -287,7 +312,7 @@ function loadPage(slug,theme){
                 }
             },'json');
         }).show();
-        $('#editor').show();
+        $('#editorOverlay').css('display','flex');
         }
     });
 }
@@ -320,14 +345,15 @@ $('#addBtn').on('click',function(){
     $('#template').val('');
     setHeaderImage('');
     $('#previewBtn,#restoreDraft').hide();
-    $('#editor').show();
+    $('#editorOverlay').css('display','flex');
 });
 
 <?php if($edit): ?>
 loadPage('<?php echo addslashes($edit['slug']); ?>','<?php echo addslashes($edit['theme'] ?? ''); ?>');
 <?php endif; ?>
 
-$('#cancel').on('click',function(){ $('#editor').hide(); });
+$('#cancel').on('click',function(){ $('#editorOverlay').hide(); });
+$('#editorOverlay').on('click',function(e){ if(e.target.id === 'editorOverlay') $('#editorOverlay').hide(); });
 
 function setHeaderImage(path){
     $('#header_image').val(path);
@@ -390,6 +416,7 @@ $('#selectHeaderBtn').on('click',function(){
             }
         });
     });
+}); // End click handler
 
 }); // End document.ready
 </script>

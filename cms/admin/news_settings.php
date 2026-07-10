@@ -11,6 +11,7 @@ if(isset($_POST['save'])){
 }
 ?>
 <h2>News Settings</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Configure news display and formatting settings.</p>
 <form method="post">
 Articles per tag: <input type="number" name="articles" value="<?php echo $settings['articles_per_page']; ?>"><br><br>
 Partial article word limit: <input type="number" name="partial_words" value="<?php echo $settings['partial_words']; ?>"><br><br>

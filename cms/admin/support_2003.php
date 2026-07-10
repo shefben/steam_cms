@@ -15,6 +15,7 @@ if($active === '2003_v1'){
 }
 ?>
 <h2>2003 Support Notification</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage the legacy 2003-era support page content.</p>
 <?php if($active === '2003_v1'): ?>
 <form method="post">
 <label><input type="checkbox" name="show" value="1" <?php echo $show==='1'?'checked':''; ?>> Show notification</label><br><br>

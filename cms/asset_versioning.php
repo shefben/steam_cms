@@ -63,7 +63,9 @@ class AssetVersioning
         }
 
         // Use file modification time + size for hash (faster than content hashing)
-        $mtime = filemtime($filepath);
+        require_once __DIR__ . '/filesystem_cache.php';
+        $mtime = cms_filemtime($filepath);
+        if ($mtime === false) $mtime = time();
         $size = filesize($filepath);
         $hash = md5($filepath . $mtime . $size);
 
@@ -109,7 +111,7 @@ class AssetVersioning
         self::$manifest[$path] = [
             'versioned' => $versionedPath,
             'hash' => $hash,
-            'mtime' => file_exists($fullPath) ? filemtime($fullPath) : time(),
+            'mtime' => file_exists($fullPath) ? (cms_filemtime($fullPath) !== false ? cms_filemtime($fullPath) : time()) : time(),
         ];
 
         self::saveManifest();

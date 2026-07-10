@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Optimized admin dashboard by caching global stats and form counts with CacheManager to reduce database load.
+- Resolved N+1 query issue in sidebar management by using eager-loading with IN clauses.
+- Implemented efficient LIMIT/OFFSET pagination for bug reports, cafe signups, and storefront games admin pages.
+- Enhanced 2002 forum schema by tracking thread and post counts on boards and users via SQL triggers, eliminating slow COUNT() subqueries.
+- Integrated filemtime caching globally via CacheManager to reduce filesystem I/O overhead on asset versioning.
+- Added pagination controls to Cafe Directory and Cafe Representatives pages to handle large datasets.
+- Incorporated forum schema changes into `2002_forum/db.sql` for automated deployment during fresh CMS installations.
 - Corrected header/footer logo preview to load from the active theme images directory.
 - Avoided cache warnings by verifying directories exist before removing them.
 - News admin add and edit actions open in an AJAX modal and update the table without page reload.

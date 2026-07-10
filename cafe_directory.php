@@ -50,14 +50,40 @@ if ($state === null && !empty($states)) {
     return;
 }
 
+$page = max(1, (int)($_GET['page'] ?? 1));
+$limit = 50;
+$offset = ($page - 1) * $limit;
+
 if ($state !== null) {
-    $stmt = $db->prepare('SELECT * FROM cafe_directory WHERE country=? AND state=? ORDER BY ord,id');
+    $totalStmt = $db->prepare('SELECT COUNT(*) FROM cafe_directory WHERE country=? AND state=?');
+    $totalStmt->execute([$country, $state]);
+    $total = (int)$totalStmt->fetchColumn();
+    $pages = max(1, ceil($total / $limit));
+
+    $stmt = $db->prepare("SELECT * FROM cafe_directory WHERE country=? AND state=? ORDER BY ord,id LIMIT $limit OFFSET $offset");
     $stmt->execute([$country, $state]);
 } else {
-    $stmt = $db->prepare('SELECT * FROM cafe_directory WHERE country=? AND (state IS NULL OR state="") ORDER BY ord,id');
+    $totalStmt = $db->prepare('SELECT COUNT(*) FROM cafe_directory WHERE country=? AND (state IS NULL OR state="")');
+    $totalStmt->execute([$country]);
+    $total = (int)$totalStmt->fetchColumn();
+    $pages = max(1, ceil($total / $limit));
+
+    $stmt = $db->prepare("SELECT * FROM cafe_directory WHERE country=? AND (state IS NULL OR state=\"\") ORDER BY ord,id LIMIT $limit OFFSET $offset");
     $stmt->execute([$country]);
 }
 $entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+ob_start();
+echo '<div class="pagination" style="margin-top:15px; margin-bottom:15px;">';
+$q = ($state !== null) ? "&country=$country&state=$state" : "&country=$country";
+if ($page > 1) echo '<a href="index.php?area=cafe_directory'.$q.'&page='.($page-1).'">&laquo; Prev</a> ';
+for($i=max(1, $page-3); $i<=min($pages, $page+3); $i++) {
+    if ($i == $page) echo "<b>$i</b> ";
+    else echo '<a href="index.php?area=cafe_directory'.$q.'&page='.$i.'">'.$i.'</a> ';
+}
+if ($page < $pages) echo '<a href="index.php?area=cafe_directory'.$q.'&page='.($page+1).'">Next &raquo;</a>';
+echo '</div>';
+$paginationHtml = ob_get_clean();
 
 echo '<div class="content" id="container">';
 echo '<h1>CYBER CAF&Eacute; DIRECTORY</h1><div class="narrower">';
@@ -75,6 +101,7 @@ foreach ($entries as $e) {
     echo htmlspecialchars($e['city_state']).'<br>';
     echo htmlspecialchars($e['zip']).'<br><br></p>';
 }
+echo $paginationHtml;
 if ($state !== null) {
     echo '&raquo; <a href="index.php?area=cafe_directory&amp;country='.$country.'">return to states</a>';
 } else {

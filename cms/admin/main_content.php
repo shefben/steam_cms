@@ -58,6 +58,7 @@ $title = $page['title'] ?? 'Home';
 $content = str_replace(['/cms/admin/','/cms/'], ['/','/'], $page['content'] ?? '');
 ?>
 <h2>Edit Home Page</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Edit the legacy homepage index content for themes without a storefront index.</p>
 <?php if($msg): ?><p><?php echo htmlspecialchars($msg); ?></p><?php endif; ?>
 <form method="post">
 Title:<br>

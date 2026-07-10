@@ -68,6 +68,7 @@ if (isset($_POST['delete'])) {
 $rows = $db->query('SELECT * FROM redirects ORDER BY created DESC')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Custom Redirects</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage URL redirect rules.</p>
 <form method="post" id="addRedirectForm">
 Slug: <input type="text" name="slug" id="slug"> Target URL: <input type="text" name="target" id="target" size="40">
 <input type="submit" name="save" value="Add/Update">

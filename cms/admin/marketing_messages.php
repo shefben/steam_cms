@@ -100,6 +100,25 @@ $offset = ($page - 1) * $perPage;
 // Get filter
 $gidFilter = trim($_GET['gid'] ?? '');
 
+// Ensure table exists
+try {
+    $db->query('SELECT 1 FROM MarketingMessages LIMIT 1');
+} catch (PDOException $e) {
+    if ($e->getCode() === '42S02') {
+        // Table doesn't exist, create it
+        $db->exec('CREATE TABLE MarketingMessages (
+            ID INT AUTO_INCREMENT PRIMARY KEY,
+            GID VARCHAR(255) NOT NULL,
+            DATETIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            HTML LONGTEXT,
+            INDEX idx_gid (GID),
+            INDEX idx_datetime (DATETIME)
+        )');
+    } else {
+        throw $e;
+    }
+}
+
 // Count total records
 $countSql = 'SELECT COUNT(*) FROM MarketingMessages';
 $countParams = [];
@@ -151,12 +170,12 @@ ob_start();
 ?>
 <div class="pagination">
 <?php if ($page > 1): ?>
-    <button type="button" class="page-nav" data-page="<?php echo $page - 1; ?>">&laquo; Prev</button>
+    <a href="?page=<?php echo $page - 1; ?>&amp;gid=<?php echo urlencode($gidFilter); ?>" class="page-nav" data-page="<?php echo $page - 1; ?>">&laquo; Prev</a>
 <?php endif; ?>
 <?php
 $firstEnd = min(5, $pages);
 for ($i = 1; $i <= $firstEnd; $i++): ?>
-    <a href="?page=<?php echo $i; ?>&gid=<?php echo urlencode($gidFilter); ?>" data-page="<?php echo $i; ?>"<?php if ($i == $page) echo ' class="current"'; ?>><?php echo $i; ?></a>
+    <a href="?page=<?php echo $i; ?>&amp;gid=<?php echo urlencode($gidFilter); ?>" data-page="<?php echo $i; ?>"<?php if ($i == $page) echo ' class="current"'; ?>><?php echo $i; ?></a>
 <?php endfor; ?>
 <?php
 $lastStart = max($pages - 4, $firstEnd + 1);
@@ -164,10 +183,10 @@ if ($lastStart > $firstEnd + 1): ?>
     <span class="ellipsis">...</span>
 <?php endif; ?>
 <?php for ($i = $lastStart; $i <= $pages; $i++): ?>
-    <a href="?page=<?php echo $i; ?>&gid=<?php echo urlencode($gidFilter); ?>" data-page="<?php echo $i; ?>"<?php if ($i == $page) echo ' class="current"'; ?>><?php echo $i; ?></a>
+    <a href="?page=<?php echo $i; ?>&amp;gid=<?php echo urlencode($gidFilter); ?>" data-page="<?php echo $i; ?>"<?php if ($i == $page) echo ' class="current"'; ?>><?php echo $i; ?></a>
 <?php endfor; ?>
 <?php if ($page < $pages): ?>
-    <button type="button" class="page-nav" data-page="<?php echo $page + 1; ?>">Next &raquo;</button>
+    <a href="?page=<?php echo $page + 1; ?>&amp;gid=<?php echo urlencode($gidFilter); ?>" class="page-nav" data-page="<?php echo $page + 1; ?>">Next &raquo;</a>
 <?php endif; ?>
 </div>
 <?php
@@ -198,6 +217,7 @@ if (isset($_GET['ajax'])) {
 </style>
 
 <h2>Marketing Messages</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage preload marketing message content shown to clients.</p>
 <p>Manage Steam client marketing message popups from the MarketingMessages database table.</p>
 
 <div id="filter-bar" style="margin-bottom: 10px;">
@@ -230,7 +250,6 @@ if (isset($_GET['ajax'])) {
     <button type="button" id="create-new" class="btn btn-success">Create New</button>
 </p>
 
-<p><a href="index.php">Back to Admin</a></p>
 
 <!-- Edit/Create Modal -->
 <div id="messageModalOverlay" style="display: none;">

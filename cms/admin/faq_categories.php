@@ -57,6 +57,7 @@ usort($cats,function($a,$b) use($cat_order){
 });
 ?>
 <h2>FAQ Categories</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage FAQ category groupings.</p>
 <form id="catOrder" method="post">
 <input type="hidden" name="order" id="cat-order">
 <table id="cat-table" class="data-table">
@@ -69,13 +70,13 @@ usort($cats,function($a,$b) use($cat_order){
   <td><input type="checkbox" class="toggle-hidden" data-id1="<?php echo $c['id1']; ?>" data-id2="<?php echo $c['id2']; ?>" <?php echo $c['hidden']?'checked':''; ?>></td>
   <td class="actions">
     <?php if(cms_has_permission('faqcat_edit')): ?>
-      <a href="#" class="edit-cat">Edit</a>
+      <button type="button" class="btn btn-primary btn-small edit-cat">Edit</button>
     <?php endif; ?>
     <?php if(cms_has_permission('faqcat_delete')): ?>
       <form method="post" class="delete-form" style="display:inline">
         <input type="hidden" name="id1" value="<?php echo $c['id1']; ?>">
         <input type="hidden" name="id2" value="<?php echo $c['id2']; ?>">
-        <input type="submit" name="delete" value="Delete">
+        <button type="submit" name="delete" value="Delete" class="btn btn-danger btn-small">Delete</button>
       </form>
     <?php endif; ?>
   </td>
@@ -135,8 +136,9 @@ document.addEventListener('DOMContentLoaded',function(){
             data.set('id1',id1);
             data.set('id2',id2);
             data.set('name',name);
-            fetch('faq_categories.php',{method:'POST',body:data,headers:{'X-Requested-With':'XMLHttpRequest'}})
-              .then(function(){row.previousElementSibling.querySelector('.cat-name').textContent=name;});
+            row.previousElementSibling.querySelector('.cat-name').textContent=name;
+            $(row).slideUp('fast');
+            fetch('faq_categories.php',{method:'POST',body:data,headers:{'X-Requested-With':'XMLHttpRequest'}});
         });
     });
     body.querySelectorAll('.toggle-hidden').forEach(function(cb){

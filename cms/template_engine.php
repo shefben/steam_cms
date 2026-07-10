@@ -475,28 +475,34 @@ function cms_theme_page_template(string $page, ?string $theme = null, ?string $v
 
 function cms_admin_layout(string $file, ?string $theme = null): ?string
 {
+    static $cache = [];
     $theme = $theme ?: cms_get_setting('admin_theme', 'v2');
     $file  = $file ?: 'default.twig';
     $file  = preg_replace('/\.tpl$/', '.twig', $file);
+    
+    $cacheKey = $theme . '|' . $file;
+    if (isset($cache[$cacheKey])) {
+        return $cache[$cacheKey];
+    }
 
     $dirs = ['layouts', 'layout'];
 
     foreach ($dirs as $dir) {
         $path = dirname(__DIR__) . "/themes/{$theme}_admin/$dir/$file";
         if (cms_file_exists($path)) {
-            return $path;
+            return $cache[$cacheKey] = $path;
         }
     }
     foreach ($dirs as $dir) {
         $path = dirname(__DIR__) . "/themes/{$theme}_admin/$dir/default.twig";
         if (cms_file_exists($path)) {
-            return $path;
+            return $cache[$cacheKey] = $path;
         }
     }
     foreach ($dirs as $dir) {
         $path = dirname(__DIR__) . "/themes/default_admin/$dir/$file";
         if (cms_file_exists($path)) {
-            return $path;
+            return $cache[$cacheKey] = $path;
         }
     }
     foreach ($dirs as $dir) {
@@ -641,7 +647,7 @@ function cms_twig_env(string $tpl_dir): Environment
         // PERFORMANCE: auto_reload disabled in production (matches twig.php config)
         $env = new Environment($loader, [
             'cache' => $cacheDir,
-            'auto_reload' => defined('DEBUG') ? DEBUG : false
+            'auto_reload' => false
         ]);
         $env->addFunction(new TwigFunction('header', cms_hookable(function(bool $withButtons = true) {
             $theme = cms_get_current_theme();
@@ -2111,7 +2117,14 @@ function cms_render_template(string $path, array $vars = []): void
     $html = $env->render($hook['template'], $hook['vars']);
     $html = cms_apply_hooks('template_post_render', $html);
 
-    $html = cms_process_all_assets($html, $vars, $theme, $base_url);
+    // Admin panel layouts (themes/{x}_admin/...) are not part of the public
+    // theme asset system - their relative paths are authored to resolve
+    // against the admin page's own URL (e.g. cms/admin/images/...), so they
+    // must not be rewritten into the public storefront theme's asset paths.
+    $isAdminLayout = (bool)preg_match('~/themes/[^/]+_admin/~', $path);
+    if (!$isAdminLayout) {
+        $html = cms_process_all_assets($html, $vars, $theme, $base_url);
+    }
 
 
     if ($cache_enabled) {

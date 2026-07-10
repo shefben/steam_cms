@@ -80,6 +80,7 @@ if(isset($_POST['save'])){
 ?>
 <?php if(isset($_GET['saved'])) echo '<p>Settings saved.</p>'; ?>
 <h2>Site Settings <?php echo cms_help_icon('settings','site'); ?></h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Configure general CMS settings.</p>
 <form method="post" enctype="multipart/form-data">
 Site Title: <input type="text" name="site_title" value="<?php echo htmlspecialchars($site_title); ?>" title="Displayed in browser titles"><br><br>
 Use STMServer CDR Date to limit displayed news:

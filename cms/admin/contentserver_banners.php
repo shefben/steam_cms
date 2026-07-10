@@ -171,6 +171,7 @@ if ($is_ajax && (($_POST['action'] ?? $_GET['action'] ?? '') === 'list')) {
 
 ?>
 <h2>ContentServer Banner Management</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage banner images shown on the content server download pages.</p>
 <style>
     .tab-links{list-style:none;margin:10px 0 0;padding:0;display:flex;}
     .tab-links li{margin-right:4px;}

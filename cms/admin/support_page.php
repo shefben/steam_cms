@@ -57,8 +57,10 @@ if($edit){
 }
 ?>
 <h2>Support Pages</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage versioned support page content per theme era and select which FAQs appear on each.</p>
 <form method="get" id="verForm">
-<select name="version" onchange="document.getElementById('verForm').submit()">
+<label for="verForm-select">Support Page Version:</label>
+<select name="version" id="verForm-select" onchange="document.getElementById('verForm').submit()">
 <?php foreach($pages as $p): ?>
 <option value="<?php echo htmlspecialchars($p['version']); ?>"<?php if($p['version']===$version) echo ' selected'; ?>><?php echo htmlspecialchars($p['version']); ?></option>
 <?php endforeach; ?>
@@ -91,7 +93,7 @@ New Version: <input type="text" name="new_version"> <button name="create" value=
 </form>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
-CKEDITOR.replace('content');
+CKEDITOR.replace('content', {baseHref: '/' });
 $(function(){
   function updateFaq(){
     var count=$('input[name="faq[]"]:checked').length;

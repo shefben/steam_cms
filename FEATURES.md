@@ -1,5 +1,8 @@
 # Features
 
+- Global CacheManager infrastructure for reducing database queries and filesystem I/O
+- High-performance, trigger-backed counters for forum statistics to eliminate slow subqueries
+- Efficient LIMIT/OFFSET pagination across major admin panels
 - 04-05 storefront games, packages, and third-party listings seeded from archive
 - Customizable CMS themes for 2004 and 2005
 - Admin panel with styled themes and permissions

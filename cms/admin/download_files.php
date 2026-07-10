@@ -208,6 +208,7 @@ echo $admin_header;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 
 <h2>Download File Management</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage downloadable client and installer files offered to users.</p>
 
 <!-- Version Selection -->
 <div class="version-selector" style="margin-bottom: 20px;">

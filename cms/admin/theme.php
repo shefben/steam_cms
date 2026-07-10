@@ -183,6 +183,7 @@ if(isset($_POST['upload']) && isset($_FILES['theme_zip']) && is_uploaded_file($_
 </style>
 
 <h2>Theme Configuration</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Configure the active site theme.</p>
 
 <div id="theme-save-message"></div>
 

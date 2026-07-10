@@ -16,7 +16,7 @@ $sort_direction = strtoupper($sort_order) === 'DESC' ? 'DESC' : 'ASC';
 // Media items are typically trailers, demos, videos - we'll filter for media content
 $sql = "SELECT appid, name, developer, price, availability, metacritic, app_type 
         FROM store_apps 
-        WHERE app_type IN ('trailer', 'video', 'demo', 'media') OR name LIKE '%trailer%' OR name LIKE '%movie%' OR name LIKE '%video%'
+        WHERE is_media_app = 1
         ORDER BY $sort_field $sort_direction, name ASC";
 $media_items = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 

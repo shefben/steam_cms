@@ -66,7 +66,8 @@ class CacheManager
             return false;
         }
 
-        $cache_time = filemtime($cache_file);
+        require_once __DIR__ . '/filesystem_cache.php';
+        $cache_time = cms_filemtime($cache_file);
         
         // Check TTL if specified
         if ($ttl > 0 && time() - $cache_time > $ttl) {
@@ -86,7 +87,7 @@ class CacheManager
                 return false;
             }
             
-            if (filemtime($source_file) > $source_time) {
+            if (cms_filemtime($source_file) > $source_time) {
                 // Source file was modified after cache creation
                 return false;
             }
@@ -140,7 +141,7 @@ class CacheManager
         
         foreach ($source_files as $source_file) {
             if (file_exists($source_file)) {
-                $meta['sources'][$source_file] = filemtime($source_file);
+                $meta['sources'][$source_file] = cms_filemtime($source_file) !== false ? cms_filemtime($source_file) : time();
             }
         }
 

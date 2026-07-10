@@ -7,6 +7,7 @@ if(isset($_POST['save'])){
 }
 ?>
 <h2>Edit Footer</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Edit the HTML shown in the site-wide footer.</p>
 <form method="post">
 <textarea name="footer" style="width:100%;height:200px;"><?php echo htmlspecialchars($footer); ?></textarea><br>
 <input type="submit" name="save" value="Save">

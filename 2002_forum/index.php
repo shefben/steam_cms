@@ -16,7 +16,7 @@ if ($canMod) {
 }
 
 /* pull boards */
-$boards = cb_db()->query('SELECT id,name,description FROM boards ORDER BY ordering,name')
+$boards = cb_db()->query('SELECT id,name,description,thread_count,post_count FROM boards ORDER BY ordering,name')
                  ->fetchAll(PDO::FETCH_ASSOC);
 
 echo '<table border="5" cellpadding="0" cellspacing="0" width="100%" bordercolor="#4C5844"><tr><td>';
@@ -45,13 +45,12 @@ echo '
 $alt = false;
 foreach ($boards as $b) {
     /* pull stats */
-    $stats = cb_db()->prepare(
-      'SELECT (SELECT COUNT(*) FROM threads WHERE board_id=?), 
-              (SELECT COUNT(*) FROM posts p JOIN threads t ON p.thread_id=t.id WHERE t.board_id=?),
-              (SELECT MAX(p.created) FROM posts p JOIN threads t ON p.thread_id=t.id WHERE t.board_id=?)'
-    );
-    $stats->execute([$b['id'],$b['id'],$b['id']]);
-    [$topics,$posts,$last] = $stats->fetch(PDO::FETCH_NUM);
+    /* pull stats */
+    $topics = $b['thread_count'] ?? 0;
+    $posts = $b['post_count'] ?? 0;
+    $stats = cb_db()->prepare('SELECT MAX(p.created) FROM posts p JOIN threads t ON p.thread_id=t.id WHERE t.board_id=?');
+    $stats->execute([$b['id']]);
+    $last = $stats->fetchColumn();
 
 echo '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>',
      '<td style="padding:0" bgcolor="',cb_zebra($alt),'" width="50%">',

@@ -24,13 +24,7 @@ function cms_get_db(): PDO
 {
     static $db;
     if ($db instanceof PDO) {
-        try {
-            if ($db->getAttribute(PDO::ATTR_CONNECTION_STATUS)) {
-                return $db;
-            }
-        } catch (PDOException $e) {
-            // fall through to reconnect
-        }
+        return $db;
     }
     if (!file_exists(__DIR__ . '/config.php')) {
         throw new RuntimeException('CMS not installed. Please run install.php');
@@ -821,7 +815,7 @@ function cms_clear_admin_token($token){
 }
 
 function cms_current_admin(){
-    return $_SESSION['admin_id'] ?? 0;
+    return $_SESSION['admin_id'] ?? null;
 }
 
 function cms_all_permissions(){
@@ -849,20 +843,27 @@ function cms_all_permissions(){
 function cms_has_permission($perm){
     $id = cms_current_admin();
     if(!$id) return false;
-    $db = cms_get_db();
-    $row = $db->prepare('SELECT role_id, permissions FROM admin_users WHERE id=?');
-    $row->execute([$id]);
-    $info = $row->fetch(PDO::FETCH_ASSOC);
-    if(!$info) return false;
 
-    $perms = $info['permissions'];
-    if($info['role_id']){
-        $stmt = $db->prepare('SELECT permissions FROM admin_roles WHERE id=?');
-        $stmt->execute([$info['role_id']]);
-        $perms = $stmt->fetchColumn();
+    static $cache = [];
+    if(isset($cache[$id])) {
+        $perms = $cache[$id];
+    } else {
+        $db = cms_get_db();
+        $row = $db->prepare('SELECT role_id, permissions FROM admin_users WHERE id=?');
+        $row->execute([$id]);
+        $info = $row->fetch(PDO::FETCH_ASSOC);
+        if(!$info) return false;
+
+        $perms = $info['permissions'];
+        if($info['role_id']){
+            $stmt = $db->prepare('SELECT permissions FROM admin_roles WHERE id=?');
+            $stmt->execute([$info['role_id']]);
+            $perms = $stmt->fetchColumn();
+        }
+        $cache[$id] = $perms;
     }
 
-    if($perms===false || $perms==='') return false;
+    if($perms===false || $perms==='' || $perms===null) return false;
     if($perms==='all') return true;
     $list = array_map('trim', explode(',', $perms));
     if(in_array($perm,$list)) return true;
@@ -1568,11 +1569,20 @@ function cms_admin_translate(string $key): string
 
 function cms_get_unread_notifications(int $userId): array
 {
+    // PERFORMANCE: Cache unread notifications in session for 30 seconds to avoid DB hits on every page load
+    $cache_key = 'unread_notes_' . $userId;
+    if (isset($_SESSION[$cache_key]) && isset($_SESSION[$cache_key . '_time']) && time() - $_SESSION[$cache_key . '_time'] < 30) {
+        return $_SESSION[$cache_key];
+    }
+    
     $db = cms_get_db();
     try {
         $stmt = $db->prepare('SELECT id,type,message FROM notifications WHERE is_read = 0 AND (admin_id = ? OR admin_id = 0) ORDER BY created DESC');
         $stmt->execute([$userId]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $_SESSION[$cache_key] = $res;
+        $_SESSION[$cache_key . '_time'] = time();
+        return $res;
     } catch (PDOException $e) {
         if ($e->getCode() === '42S02') {
             return [];
@@ -1586,6 +1596,7 @@ function cms_mark_notification_read(int $id): void
     $db = cms_get_db();
     $stmt = $db->prepare('UPDATE notifications SET is_read=1 WHERE id=?');
     $stmt->execute([$id]);
+    unset($_SESSION['unread_notes_' . cms_current_admin()]);
 }
 
 function cms_create_notification(string $type, string $message, int $adminId = 0): void

@@ -11,7 +11,8 @@ CREATE TABLE users (
     is_admin      TINYINT(1) NOT NULL DEFAULT 0,
     banned        TINYINT(1) NOT NULL DEFAULT 0,
     reset_token   VARCHAR(64),
-    reset_expires DATETIME
+    reset_expires DATETIME,
+    post_count    INT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE boards (
@@ -19,7 +20,9 @@ CREATE TABLE boards (
     name        VARCHAR(80),
     description TEXT,
     ordering    INT DEFAULT 0,
-    moderators  TEXT
+    moderators  TEXT,
+    thread_count INT NOT NULL DEFAULT 0,
+    post_count   INT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE threads (
@@ -89,3 +92,31 @@ INSERT INTO boards(name,description,ordering) VALUES
 -- Default admin user (password: admin)
 INSERT INTO users(username, passhash, email, registered, is_admin, is_mod) VALUES
  ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@example.com', NOW(), 1, 1);
+
+DELIMITER $$
+CREATE TRIGGER trg_posts_insert AFTER INSERT ON posts
+FOR EACH ROW
+BEGIN
+    UPDATE users SET post_count = post_count + 1 WHERE id = NEW.user_id;
+    UPDATE boards b JOIN threads t ON t.board_id = b.id SET b.post_count = b.post_count + 1 WHERE t.id = NEW.thread_id;
+END$$
+
+CREATE TRIGGER trg_threads_insert AFTER INSERT ON threads
+FOR EACH ROW
+BEGIN
+    UPDATE boards SET thread_count = thread_count + 1 WHERE id = NEW.board_id;
+END$$
+
+CREATE TRIGGER trg_posts_delete AFTER DELETE ON posts
+FOR EACH ROW
+BEGIN
+    UPDATE users SET post_count = post_count - 1 WHERE id = OLD.user_id;
+    UPDATE boards b JOIN threads t ON t.board_id = b.id SET b.post_count = b.post_count - 1 WHERE t.id = OLD.thread_id;
+END$$
+
+CREATE TRIGGER trg_threads_delete AFTER DELETE ON threads
+FOR EACH ROW
+BEGIN
+    UPDATE boards SET thread_count = thread_count - 1 WHERE id = OLD.board_id;
+END$$
+DELIMITER ;

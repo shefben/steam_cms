@@ -77,9 +77,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $tbodyHtml = '';
 foreach ($rows as $r) {
     $tbodyHtml .= '<tr>';
-    $tbodyHtml .= '<td>' . htmlspecialchars($r['username']) . '</td>';
-    $tbodyHtml .= '<td>' . htmlspecialchars($r['email']) . '</td>';
-    $tbodyHtml .= '<td>' . htmlspecialchars($r['created']) . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($r['username'] ?? '') . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($r['email'] ?? '') . '</td>';
+    $tbodyHtml .= '<td>' . htmlspecialchars($r['created'] ?? '') . '</td>';
     $tbodyHtml .= '<td>';
     if ($r['role_id']) {
         $tbodyHtml .= htmlspecialchars($roleMap[$r['role_id']] ?? 'Unknown');
@@ -119,6 +119,7 @@ if (isset($_GET['ajax'])) {
 }
 ?>
 <h2>Administrators</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage admin accounts, credentials, and permission assignments.</p>
 <form method="get" id="search-form" style="margin-bottom:10px;">
     <label>Search: <input type="text" id="search-box" name="q" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search by username or email"></label>
     <button type="submit" class="btn btn-small">Search</button>

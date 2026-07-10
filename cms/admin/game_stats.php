@@ -136,6 +136,7 @@ $settings = [
 ?>
 <div class="admin-content game-stats-admin">
     <h2>Game Statistics</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">View game usage and statistics data.</p>
     <style>
         .game-stats-admin .card-grid {
             display: grid;
@@ -267,56 +268,59 @@ $settings = [
                     </tbody>
                 </table>
             </div>
+    </div>
+</div>
+<button type="button" class="btn btn-success" id="add-game-btn" style="margin-top: 20px;">Add new game entry</button>
+
+<div id="gameModal" class="modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; justify-content:center; align-items:center;">
+    <div class="modal card" style="background:#fff; padding:20px; border-radius:8px; width:400px; max-width:90%;">
+        <div class="card-header">
+            <h3 id="game-form-title" style="margin-top:0;">Add Game</h3>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h3 id="game-form-title">Add Game</h3>
-            </div>
-            <div class="card-body">
-                <form method="post" id="game-form">
-                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
-                    <input type="hidden" name="save_game" value="1">
-                    <input type="hidden" name="id" id="game-id" value="<?php echo (int)$formData['id']; ?>">
-                    <div class="form-group">
-                        <label for="game-name">Game Name</label>
-                        <input id="game-name" name="game_name" type="text" class="form-control" value="<?php echo htmlspecialchars($formData['game_name']); ?>" required>
+        <div class="card-body">
+            <form method="post" id="game-form">
+                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
+                <input type="hidden" name="save_game" value="1">
+                <input type="hidden" name="id" id="game-id" value="<?php echo (int)$formData['id']; ?>">
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="game-name" style="display:block; font-weight:bold;">Game Name</label>
+                    <input id="game-name" name="game_name" type="text" class="form-control" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;" value="<?php echo htmlspecialchars($formData['game_name']); ?>" required>
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="game-website" style="display:block; font-weight:bold;">Game Website</label>
+                    <input id="game-website" name="game_website" type="text" class="form-control" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;" value="<?php echo htmlspecialchars($formData['game_website']); ?>" placeholder="http://example.com">
+                </div>
+                <div class="form-row" style="display:flex; gap:10px; margin-bottom:10px;">
+                    <div class="form-group" style="flex:1;">
+                        <label for="game-players" style="display:block; font-weight:bold;">Current Players</label>
+                        <input id="game-players" name="current_players" type="text" class="form-control" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;" value="<?php echo htmlspecialchars($formData['current_players']); ?>" placeholder="56,612">
                     </div>
-                    <div class="form-group">
-                        <label for="game-website">Game Website</label>
-                        <input id="game-website" name="game_website" type="text" class="form-control" value="<?php echo htmlspecialchars($formData['game_website']); ?>" placeholder="http://example.com">
+                    <div class="form-group" style="flex:1;">
+                        <label for="game-servers" style="display:block; font-weight:bold;">Current Servers</label>
+                        <input id="game-servers" name="current_servers" type="text" class="form-control" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;" value="<?php echo htmlspecialchars($formData['current_servers']); ?>" placeholder="46,507">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="game-players">Current Players</label>
-                            <input id="game-players" name="current_players" type="text" class="form-control" value="<?php echo htmlspecialchars($formData['current_players']); ?>" placeholder="56,612">
-                        </div>
-                        <div class="form-group">
-                            <label for="game-servers">Current Servers</label>
-                            <input id="game-servers" name="current_servers" type="text" class="form-control" value="<?php echo htmlspecialchars($formData['current_servers']); ?>" placeholder="46,507">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="game-minutes">Player Minutes / Month</label>
-                        <input id="game-minutes" name="player_minutes_per_month" type="text" class="form-control" value="<?php echo htmlspecialchars($formData['player_minutes_per_month']); ?>" placeholder="3.454 billion">
-                    </div>
-                    <div class="form-group">
-                        <label for="game-order">Display Order</label>
-                        <input id="game-order" name="display_order" type="text" class="form-control" value="<?php echo htmlspecialchars($formData['display_order']); ?>" placeholder="Auto">
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-warning" id="game-form-reset">Clear</button>
-                        <button type="submit" class="btn btn-success">Save Game</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label for="game-minutes" style="display:block; font-weight:bold;">Player Minutes / Month</label>
+                    <input id="game-minutes" name="player_minutes_per_month" type="text" class="form-control" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;" value="<?php echo htmlspecialchars($formData['player_minutes_per_month']); ?>" placeholder="3.454 billion">
+                </div>
+                <div class="form-group" style="margin-bottom:20px;">
+                    <label for="game-order" style="display:block; font-weight:bold;">Display Order</label>
+                    <input id="game-order" name="display_order" type="text" class="form-control" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;" value="<?php echo htmlspecialchars($formData['display_order']); ?>" placeholder="Auto">
+                </div>
+                <div class="form-actions" style="text-align:right;">
+                    <button type="button" class="btn btn-secondary" id="game-form-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save Game</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 <script>
-(function () {
+$(document).ready(function() {
     const form = document.getElementById('game-form');
     const title = document.getElementById('game-form-title');
-    const resetBtn = document.getElementById('game-form-reset');
     const idField = document.getElementById('game-id');
     const nameField = document.getElementById('game-name');
     const websiteField = document.getElementById('game-website');
@@ -324,6 +328,7 @@ $settings = [
     const serversField = document.getElementById('game-servers');
     const minutesField = document.getElementById('game-minutes');
     const orderField = document.getElementById('game-order');
+    const modal = document.getElementById('gameModal');
 
     document.querySelectorAll('.edit-game').forEach(function (button) {
         button.addEventListener('click', function () {
@@ -335,20 +340,27 @@ $settings = [
             minutesField.value = button.dataset.minutes || '';
             orderField.value = button.dataset.order || '';
             title.textContent = 'Edit Game';
-            nameField.focus();
+            modal.style.display = 'flex';
         });
     });
 
-    function resetForm() {
+    document.getElementById('add-game-btn').addEventListener('click', function() {
         idField.value = '0';
         form.reset();
         title.textContent = 'Add Game';
-    }
-
-    resetBtn.addEventListener('click', function () {
-        resetForm();
+        modal.style.display = 'flex';
     });
-})();
+
+    document.getElementById('game-form-cancel').addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+            modal.style.display = 'none';
+        }
+    });
+});
 </script>
 <?php
 include 'admin_footer.php';

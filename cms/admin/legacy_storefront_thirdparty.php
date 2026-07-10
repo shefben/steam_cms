@@ -66,6 +66,7 @@ if(isset($_POST['save_game'])){
 $games=$db->query('SELECT * FROM `0405_storefront_thirdpartGames` ORDER BY id')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Legacy Storefront Thirdparty Game Management</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage legacy storefront third-party product listings.</p>
 <table class="data-table" id="tp-table">
 <thead><tr><th class="sortable">IndexID</th><th class="sortable">Title</th><th>Image Preview</th><th>Website URL</th><th>Hidden</th><th>Tasks</th></tr></thead>
 <tbody>

@@ -1,5 +1,6 @@
 <?php
-require_once 'admin_header.php';
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/admin_auth.php';
 cms_require_permission('manage_store');
 
 $theme       = cms_get_setting('theme', '2006_v1');
@@ -69,10 +70,18 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                 $ev = $db->prepare('SELECT e.entry_id FROM sidebar_section_entries e JOIN sidebar_section_variants v ON e.parent_variant_id=v.variant_id WHERE v.section_id=? ORDER BY e.entry_order');
                 $ev->execute([$id]);
                 $section['entries'] = [];
-                while ($eid = $ev->fetchColumn()) {
-                    $ef = $db->prepare('SELECT field_key,field_value FROM sidebar_section_entry_fields WHERE entry_id=?');
-                    $ef->execute([$eid]);
-                    $section['entries'][] = ['entry_id' => $eid, 'fields' => $ef->fetchAll(PDO::FETCH_KEY_PAIR)];
+                $entry_ids = $ev->fetchAll(PDO::FETCH_COLUMN);
+                if (!empty($entry_ids)) {
+                    $in = str_repeat('?,', count($entry_ids) - 1) . '?';
+                    $ef = $db->prepare("SELECT entry_id, field_key, field_value FROM sidebar_section_entry_fields WHERE entry_id IN ($in)");
+                    $ef->execute($entry_ids);
+                    $fields_by_entry = [];
+                    while ($row = $ef->fetch(PDO::FETCH_ASSOC)) {
+                        $fields_by_entry[$row['entry_id']][$row['field_key']] = $row['field_value'];
+                    }
+                    foreach ($entry_ids as $eid) {
+                        $section['entries'][] = ['entry_id' => $eid, 'fields' => $fields_by_entry[$eid] ?? []];
+                    }
                 }
                 $section['sidebar_name'] = $type;
             }
@@ -82,7 +91,6 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
         exit;
     }
 }
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
     if (!cms_verify_csrf($_POST['csrf_token'] ?? '')) {
         http_response_code(400);
@@ -209,7 +217,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
         exit;
     }
 }
+require_once 'admin_header.php';
 ?>
+<h2>Index Sidebar Management</h2>
 <style>#sidebar-preview{color:#000;}#sidebar-preview .sidebar-section{border:1px solid #ccc;margin-bottom:10px;padding:5px;}#sidebar-preview h1{font-size:1.2em;margin:0 0 5px;}</style>
 <div id="sidebar-preview" class="rightCol_1">
 <?php echo cms_get_sidebar_sections_html($theme, true); ?>

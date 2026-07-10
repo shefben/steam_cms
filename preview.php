@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_write_close(); // PERFORMANCE OPTIMIZATION: Release file lock
 require_once __DIR__ . '/cms/template_engine.php';
 require_once __DIR__ . '/cms/db.php';
 

@@ -9,9 +9,13 @@ if(isset($_POST['save'])){
 }
 ?>
 <h2>Edit Error Page Text</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Customize the content shown on the site's error page.</p>
 <form method="post">
-<textarea name="error_html" style="width:100%;height:300px;"><?php echo htmlspecialchars($html); ?></textarea><br>
-<input type="submit" name="save" value="Save">
+<textarea name="error_html" id="error_html" style="width:100%;height:300px;"><?php echo htmlspecialchars($html); ?></textarea><br>
+<button type="submit" name="save" class="btn btn-primary" value="Save">Save</button>
 </form>
-<p><a href="main_content.php">Back</a></p>
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('error_html', {baseHref: '/'});
+</script>
 <?php include 'admin_footer.php'; ?>

@@ -9,6 +9,13 @@ if (!is_file($configFile)) {
     exit;
 }
 
+// PERFORMANCE OPTIMIZATION: Full Page Cache for anonymous users
+require_once __DIR__ . '/cms/full_page_cache.php';
+if (FullPageCache::serve()) {
+    exit;
+}
+FullPageCache::start();
+
 // Single bootstrap call replaces multiple scattered requires
 require_once __DIR__ . '/cms/bootstrap.php';
 

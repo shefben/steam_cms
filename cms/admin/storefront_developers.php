@@ -8,6 +8,7 @@ $rows = $db->query('SELECT * FROM store_developers ORDER BY name')
     ->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h2>Developers</h2>
+<p class="page-description" style="color:#666;margin-bottom:15px;">Manage storefront developer listings.</p>
 <table class="data-table" id="devTable">
     <tr><th>Name</th><th>Website</th><th>Actions</th></tr>
     <?php foreach ($rows as $r): ?>

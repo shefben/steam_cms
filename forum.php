@@ -21,6 +21,7 @@ use Forum\ForumController;
 // Start session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+    session_write_close(); // PERFORMANCE OPTIMIZATION: Release file lock
 }
 
 try {

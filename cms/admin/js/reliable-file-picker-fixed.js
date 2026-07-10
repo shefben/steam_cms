@@ -3,6 +3,11 @@
  * Uses proven FilePond for uploads with a custom but reliable modal
  */
 
+function cmsApiUrl(path) {
+    var base = (typeof window.CMS_BASE_URL !== 'undefined' && window.CMS_BASE_URL) ? window.CMS_BASE_URL : '';
+    return base + path;
+}
+
 class ReliableFilePicker {
     constructor() {
         this.modal = null;
@@ -195,7 +200,7 @@ class ReliableFilePicker {
         try {
             console.log('ReliableFilePicker: Making request to simple_file_api.php');
             
-            const response = await fetch('simple_file_api.php', {
+            const response = await fetch(cmsApiUrl('/cms/admin/simple_file_api.php'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `action=list&path=${encodeURIComponent(this.currentUploadPath)}`
@@ -340,7 +345,7 @@ class ReliableFilePicker {
         // Create FilePond instance with proper drag & drop handling
         this.pondInstance = FilePond.create(inputElement, {
             server: {
-                url: 'simple_file_api.php',
+                url: cmsApiUrl('/cms/admin/simple_file_api.php'),
                 process: {
                     url: '/',
                     method: 'POST',
@@ -487,7 +492,7 @@ class ReliableFilePicker {
             formData.append('action', 'upload');
             formData.append('path', this.currentUploadPath || 'images');
             
-            const response = await fetch('simple_file_api.php', {
+            const response = await fetch(cmsApiUrl('/cms/admin/simple_file_api.php'), {
                 method: 'POST',
                 body: formData
             });

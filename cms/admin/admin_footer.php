@@ -14,7 +14,7 @@ if (!is_dir($theme_dir)) {
 }
 $current_theme = cms_get_current_theme();
 
-if (isset($admin_layout) && $admin_layout) {
+if (isset($admin_header_buffering) && $admin_header_buffering) {
     $page_content = ob_get_clean();
     // allow theme-defined widgets for this page
     ob_start();
@@ -157,6 +157,6 @@ $(function(){
         'notifications_html' => $notifications_html ?? '',
         'breadcrumbs_html' => $breadcrumbs_html,
     ]);
-} else {
+} elseif (!($is_xhr ?? false)) {
     include "$theme_dir/footer.php";
 }

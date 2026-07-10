@@ -784,6 +784,7 @@ a, a:visited { color: #f1c40f; }
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #333;
 }
 .notifications li:last-child {
     border-bottom: none;
