@@ -24,6 +24,8 @@ if(isset($_POST['ajax_auto_theme']) && isset($_SERVER['HTTP_X_REQUESTED_WITH']))
 
     $enabled = isset($_POST['auto_theme']) && $_POST['auto_theme'] === '1';
     cms_set_setting('auto_theme', $enabled ? '1' : '0');
+    require_once __DIR__.'/../cache_manager.php';
+    cms_clear_all_caches();
     $response['success'] = true;
     $response['enabled'] = $enabled;
     $response['message'] = $enabled ? 'Auto-theme enabled' : 'Auto-theme disabled';
@@ -50,6 +52,8 @@ if(isset($_POST['ajax_save']) && isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
             cms_save_theme_settings($newTheme, $_POST);
             require_once __DIR__.'/../update_htaccess.php';
             cms_update_htaccess();
+            require_once __DIR__.'/../cache_manager.php';
+            cms_clear_all_caches();
             $response['success'] = true;
             $response['message'] = 'Theme saved successfully!';
         } else {
