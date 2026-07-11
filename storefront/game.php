@@ -3,7 +3,7 @@ require_once __DIR__.'/../cms/template_engine.php';
 require_once __DIR__.'/../cms/db.php';
 
 $db = cms_get_db();
-$appid = (int)($_GET['appid'] ?? 0);
+$appid = (int)($_GET['AppId'] ?? $_GET['appid'] ?? $_GET['id'] ?? 0);
 $stmt = $db->prepare('SELECT * FROM store_apps WHERE appid=?');
 $stmt->execute([$appid]);
 $app = $stmt->fetch(PDO::FETCH_ASSOC);

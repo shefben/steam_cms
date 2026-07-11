@@ -32,19 +32,7 @@ function screenshot_popup( url, width, height )
 <img alt="" src="img/btn_preLoad_ovr.jpg"/>
 </div>
 <!-- header bar -->
-<div style="min-width:850px;">
-<div class="globalHeadBar_logo"><a href="/"><img alt="Steam main" border="0" src="img/logo_steam_header.jpg"/></a></div>
-<div class="globalHeadBar">
-<div class="globalNavItem"><a href="index.php" title="Home"><span class="globalNavLink">HOME</span></a></div>
-<div class="globalNavItem"><a href="index.php?area=news&" title="News"><span class="globalNavLink">NEWS</span></a></div>
-<div class="globalNavItem"><a href="index.php?area=getsteamnow&" title="Get Steam"><span class="globalNavLink">GET STEAM NOW</span></a></div>
-<div class="globalNavItem"><a href="https://cafe.steampowered.com/" title="Cyber Cafes"><span class="globalNavLink">CYBER CAFES</span></a></div>
-<div class="globalNavItem"><a href="/support/" title="Support"><span class="globalNavLink">SUPPORT</span></a></div>
-<div class="globalNavItem"><a href="index.php?area=forums&" title="Forums"><span class="globalNavLink">FORUMS</span></a></div>
-<div class="globalNavItem"><a href="/status/status.html" title="Status"><span class="globalNavLink">STATS</span></a></div>
-</div>
-</div>
-<br clear="all"/>
+{{ header(true) }}
 <!-- end header bar -->
 <center>
 <div class="contentBG_2">
@@ -68,7 +56,7 @@ function screenshot_popup( url, width, height )
 <table cellpadding="0" cellspacing="2" width="100%">
 <tr>
 {% for img in images %}
-<td align="center" width="20%"><img border="0" onclick="screenshot_popup('images.php?appid={{ game.appid }}&id={{ img }}', 800, 635, 0, 0);" src="gfx/apps/{{ game.appid }}/{{ img }}_thumb.jpg" style="cursor: pointer;"/></td>
+<td align="center" width="20%"><img border="0" onclick="screenshot_popup('{{ BASE }}/storefront/images.php?appid={{ game.appid }}&id={{ img }}', 800, 635, 0, 0);" src="{{ BASE }}/storefront/images/apps/{{ game.appid }}/screenshots/{{ img }}" style="cursor: pointer;"/></td>
 {% endfor %}
 </tr>
 </table>
@@ -104,7 +92,7 @@ function screenshot_popup( url, width, height )
 <!-- This Game block - links to the parent game -->
 {% if parent_game %}
 <div class="usr_edit_right_header"><div style="float:left; ">This Game</div></div>
-<a class="rightLink_game" href="game.php?appid={{ parent_game.appid }}">
+<a class="rightLink_game" href="index.php?area=game&AppId={{ parent_game.appid }}">
 <span class="rightLink_gameTitle"><img alt="{{ parent_game.name }}" border="0" height="83" src="gfx/apps/{{ parent_game.appid }}/capsule_sm.jpg" title="{{ parent_game.name }}" width="222"/></span>
 </a>
 <div class="rightCol_2_Hr"></div>

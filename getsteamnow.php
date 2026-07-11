@@ -3,7 +3,7 @@ require_once __DIR__.'/cms/db.php';
 require_once __DIR__.'/cms/template_engine.php';
 
 $page_title = 'Get Steam Now!';
-$theme = cms_get_setting('theme', '2004');
+$theme = cms_get_current_theme();
 
 // Determine version based on theme
 $version = '';

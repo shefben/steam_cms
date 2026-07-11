@@ -30,8 +30,8 @@ if (isset($_GET['area'])) {
 $storeDir = __DIR__ . '/storefront/';
 cms_require_template_engine(); // Lazy-load template engine only when needed
 
-if(in_array($area,['store','browse','search','game','package','all'])){
-    $file=['store'=>'index','browse'=>'browse','search'=>'search','game'=>'game','package'=>'package','all'=>'all'][$area];
+if(in_array($area,['store','browse','search','game','package','all','media'])){
+    $file=['store'=>'index','browse'=>'browse','search'=>'search','game'=>'game','package'=>'package','all'=>'all','media'=>'media'][$area];
     include $storeDir.$file.'.php';
     exit;
 }

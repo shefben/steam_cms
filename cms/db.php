@@ -1488,6 +1488,48 @@ function cms_set_store_page(string $slug, string $title, string $image): void
     $stmt->execute([$slug,$title,$image]);
 }
 
+/**
+ * Determine which appids the current visitor owns.
+ *
+ * The Steam client (and archived storefront links) pass the account's
+ * owned SubIds via the "s" GET parameter (comma separated), e.g.
+ * index.php?area=all&s=7,25,44 - mirrors Latest_2005_cms's HandleUserData().
+ * The list is persisted in a cookie so it survives subsequent page loads
+ * that don't repeat the ?s= parameter, then resolved to appids via
+ * subscription_apps.
+ */
+function cms_get_owned_appids(): array
+{
+    static $cache = null;
+    if ($cache !== null) {
+        return $cache;
+    }
+
+    $subids = [];
+    if (isset($_GET['s']) && preg_match('~^\d+(,\d+)*$~', $_GET['s'])) {
+        $subids = array_map('intval', explode(',', $_GET['s']));
+    }
+
+    $cookieData = json_decode($_COOKIE['owndata'] ?? '', true);
+    if (is_array($cookieData) && !empty($cookieData['s'])) {
+        $subids = array_unique(array_merge($subids, array_map('intval', (array)$cookieData['s'])));
+    }
+
+    if ($subids && (!isset($cookieData['s']) || array_map('intval', (array)$cookieData['s']) !== $subids)) {
+        setcookie('owndata', json_encode(['s' => $subids]), time() + 60 * 60 * 24 * 30, '/');
+    }
+
+    if (!$subids) {
+        return $cache = [];
+    }
+
+    $db = cms_get_db();
+    $placeholders = implode(',', array_fill(0, count($subids), '?'));
+    $stmt = $db->prepare("SELECT DISTINCT appid FROM subscription_apps WHERE subid IN ($placeholders)");
+    $stmt->execute($subids);
+    return $cache = array_flip(array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN)));
+}
+
 function cms_get_app_screenshots(int $appid): array
 {
     $db = cms_get_db();

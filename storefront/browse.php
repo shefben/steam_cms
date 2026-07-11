@@ -30,7 +30,7 @@ $content .= '</div>';
 
 $theme = cms_get_setting('theme','2005_v2');
 $page  = cms_get_store_page('browse');
-$tpl = cms_theme_layout('browse.twig', $theme);
+$tpl = cms_theme_layout('browse.twig', $theme, 'storefront');
 cms_render_template($tpl, [
     'categories' => $categories,
     'developers' => $developers,

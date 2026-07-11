@@ -4,7 +4,7 @@
 
 <head>
 	<title>Steam Games</title>
-	<script language="JavaScript" src="site\javascript.js"></script>
+	<script language="JavaScript" src="javascript.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="pragma" content="no-cache"/>
 	<meta name="ROBOTS" content="ALL"/>
@@ -13,7 +13,7 @@
 	<meta name="AUTHOR" content="Valve LLC"/>
 	<link rel="stylesheet" type="text/css" href="storefront.css"/>
 	<link rel="Shortcut Icon" type="image/png" href="webicon.png"/>
-	<script language="JavaScript" src="http://storefront.steampowered.com:80/v2/nav.js"></script>
+	<script language="JavaScript" src="nav.js"></script>
 	<link href="rss.xml" rel="alternate" type="application/rss+xml" title="Valve RSS News Feed">
       <style>
           .footer .footerfix { color: #75806f !important; }
@@ -32,7 +32,7 @@
 <td height="100%">
 <table align="center" cellpadding="0" cellspacing="0" style="height: 100%;">
 <tr>
-<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="img\storefront\sp_top_left.gif"/></td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="images/sp_top_left.gif"/></td>
 <td bgcolor="#FFFFFF" rowspan="3" valign="top">
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="height: 100%;" width="736">
 <tr>
@@ -44,17 +44,7 @@
 </tr>
 <tr>
 <td nowrap="">
-{% for ln in links %}
-  {% if ln.type == 'spacer' %}
-    <div class="menu_spacer"> </div>
-  {% elseif ln.hidden is empty %}
-    {% if ln.current is not empty %}
-      <span><font face="Wingdings 3"><span class="menu_pointer">„</span></font> <a class="menu_item_current" href="{{ ln.url }}">{{ ln.label }}</a> </span><br/>
-    {% else %}
-      <span><a class="menu_item" href="{{ ln.url }}">{{ ln.label }}</a>     </span><br/>
-    {% endif %}
-  {% endif %}
-{% endfor %}
+{{ store_sidebar() }}
 </td>
 </tr>
 </table>
@@ -66,7 +56,7 @@
 <td align="left" valign="top"><span class="text_normal">
 <table cellpadding="0" cellspacing="0" width="100%">
 <tr>
-<td background="img\title_blue.jpg" height="50" width="600"><span class="page_title">  {{ page.title }}</span></td>
+<td background="images/title_blue.jpg" height="50" width="600"><span class="page_title">  {{ page.title }}</span></td>
 </tr>
 <tr><td height="5"></td></tr>
 </table>
@@ -80,15 +70,15 @@
 </tr>
 </table>
 </td>
-<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="img\storefront\sp_top_right.gif"/></td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="top"><img src="images/sp_top_right.gif"/></td>
 </tr>
 <tr>
 <td bgcolor="#FFFFFF"></td>
 <td bgcolor="#FFFFFF"></td>
 </tr>
 <tr>
-<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="img\storefront\sp_bottom_left.gif"/></td>
-<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="img\storefront\sp_bottom_right.gif"/></td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="images/sp_bottom_left.gif"/></td>
+<td bgcolor="#FFFFFF" style="width: 10px; height: 10px;" valign="bottom"><img src="images/sp_bottom_right.gif"/></td>
 </tr>
 </table>
 </td>

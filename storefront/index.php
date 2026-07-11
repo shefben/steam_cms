@@ -35,7 +35,7 @@ if (in_array($area, ['browse', 'search', 'game', 'package', 'all'], true)) {
 }
 
 $theme = cms_get_setting('theme', '2005_v2');
-$tpl   = cms_theme_layout('index.twig', $theme);
+$tpl   = cms_theme_layout('index.twig', $theme, 'storefront');
 $links = cms_store_sidebar_links();
 
 cms_render_template($tpl, [

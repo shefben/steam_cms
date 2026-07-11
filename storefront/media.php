@@ -14,9 +14,9 @@ $sort_field = $valid_sorts[$sort_by] ?? 'name';
 $sort_direction = strtoupper($sort_order) === 'DESC' ? 'DESC' : 'ASC';
 
 // Media items are typically trailers, demos, videos - we'll filter for media content
-$sql = "SELECT appid, name, developer, price, availability, metacritic, app_type 
-        FROM store_apps 
-        WHERE is_media_app = 1
+$sql = "SELECT appid, name, developer, price, availability, metacritic
+        FROM store_apps
+        WHERE trailer_url IS NOT NULL AND trailer_url != ''
         ORDER BY $sort_field $sort_direction, name ASC";
 $media_items = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -72,7 +72,7 @@ foreach ($media_items as $item) {
         $price_display = '<span class="price_text">$' . number_format($item['price'], 2) . '</span>';
     }
     
-    $content .= '<tr bgcolor="' . $bgcolor . '" class="h" id="row_' . $item['appid'] . '" onclick=" location.href=\'game.php?appid=' . $item['appid'] . '&\' " onmouseout="HiLiteRow(\'row_' . $item['appid'] . '\', \'' . $bgcolor . '\');" onmouseover="HiLiteRow(\'row_' . $item['appid'] . '\', \'#F4F0C9\');">
+    $content .= '<tr bgcolor="' . $bgcolor . '" class="h" id="row_' . $item['appid'] . '" onclick=" location.href=\'index.php?area=game&AppId=' . $item['appid'] . '&\' " onmouseout="HiLiteRow(\'row_' . $item['appid'] . '\', \'' . $bgcolor . '\');" onmouseover="HiLiteRow(\'row_' . $item['appid'] . '\', \'#F4F0C9\');">
 <td height="20" nowrap="" width="5"></td>
 <td class="h" nowrap="" width="100%">' . htmlspecialchars($item['name']) . $new_badge . '</td>
 <td colspan="3" width="15"></td>

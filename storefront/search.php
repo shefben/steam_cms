@@ -161,6 +161,7 @@ cms_render_template($tpl, [
     'prices'        => $prices,
     'browse_price'  => $prices[$browsePrice],
     'apps'          => $apps,
+    'owned_appids'  => cms_get_owned_appids(),
     'term'          => $term,
     'developer'     => $developer,
     'category'      => $category,

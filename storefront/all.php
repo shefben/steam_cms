@@ -53,13 +53,16 @@ $content = '<table cellpadding="0" cellspacing="0" width="100%">
 
 $row_colors = ['#ffffff', '#f4f5f0'];
 $row_index = 0;
+$owned_appids = cms_get_owned_appids();
 
 foreach ($apps as $app) {
     $bgcolor = $row_colors[$row_index % 2];
     $row_index++;
-    
+
     $price_display = '';
-    if ($app['price'] && $app['price'] > 0) {
+    if (isset($owned_appids[$app['appid']])) {
+        $price_display = '<span class="owned_app">In account</span>';
+    } elseif ($app['price'] && $app['price'] > 0) {
         $price_display = '<span class="price_text">$' . number_format($app['price'], 2) . '</span>';
     } elseif ($app['developer'] && strpos($app['developer'], 'Valve') === false) {
         $price_display = '<span class="free_app">Third-party</span>';
@@ -103,7 +106,7 @@ function HiLiteRow(row_id, color) {
 }
 </script>';
 
-$tpl = cms_theme_layout('default.twig', $theme);
+$tpl = cms_theme_layout('default.twig', $theme, 'storefront');
 cms_render_template($tpl, [
     'content' => $content,
     'links' => $links,

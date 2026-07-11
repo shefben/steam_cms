@@ -319,7 +319,7 @@ INSERT INTO store_capsules(position,image,appid) VALUES('top','top/05_01_2005.pn
 INSERT INTO store_sidebar_links(label,url,type,ord,visible) VALUES
  ('Home','index.php?','link',1,1),
  ('','', 'spacer',2,1),
- ('Browser Games','index.php?area=browse&','link',3,1),
+ ('Browse Games','index.php?area=browse&','link',3,1),
  ('All Games','index.php?area=all&','link',4,1),
  ('Search','index.php?area=search&','link',5,1),
  ('','', 'spacer',6,1),

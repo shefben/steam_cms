@@ -878,28 +878,16 @@ cms_register_template_tag(
             };
         }
         
-        // Get current theme if not specified
+        // Get current theme if not specified - always follow the active
+        // theme from the template system, never hardcode a theme here.
         if (!$theme) {
-            $theme = cms_get_setting('current_theme', '2005_v1');
+            $theme = cms_get_current_theme();
         }
-        
+
         // Check for asset override
-        $optimized_path = cms_get_asset_path($theme, $type, $asset_path);
-        
-        // Generate appropriate HTML tag based on asset type
-        switch ($type) {
-            case 'css':
-                return '<link rel="stylesheet" type="text/css" href="' . htmlspecialchars($optimized_path) . '" data-optimized="true">';
-                
-            case 'js':
-                return '<script src="' . htmlspecialchars($optimized_path) . '" data-optimized="true"></script>';
-                
-            case 'image':
-                return '<img src="' . htmlspecialchars($optimized_path) . '" alt="" data-optimized="true">';
-                
-            default:
-                return '<!-- Unknown asset type: ' . htmlspecialchars($type) . ' -->';
-        }
+        // Templates embed this tag's return value inside their own
+        // href="…"/src="…" attribute, so it must resolve to a bare path.
+        return cms_get_asset_path($theme, $type, $asset_path);
     }
 );
 

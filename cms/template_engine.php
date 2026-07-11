@@ -386,19 +386,25 @@ function cms_news_archive_months(int $year, int $months = 12): string
     return $html;
 }
 
-function cms_theme_layout(?string $file, ?string $theme = null)
+function cms_theme_layout(?string $file, ?string $theme = null, ?string $preferredSubdir = null)
 {
     static $pathCache = [];
     $theme = $theme ?: cms_get_current_theme();
     $file  = $file ?: 'default.twig';
     $file  = preg_replace('/\.tpl$/', '.twig', $file);
-    $cacheKey = $theme . '|' . $file;
+    $cacheKey = $theme . '|' . $file . '|' . ($preferredSubdir ?? '');
     if (isset($pathCache[$cacheKey])) {
         return $pathCache[$cacheKey];
     }
 
     $dirs     = ['layouts', 'layout'];
-    $subdirs  = ['', 'storefront'];
+    // When the caller knows it's rendering storefront content (e.g. passes
+    // theme_subdir='storefront' to cms_render_template), the storefront-specific
+    // layout must win over a same-named root layout, since its relative asset
+    // paths are only valid resolved against the storefront theme subdirectory.
+    $subdirs  = $preferredSubdir !== null
+        ? array_values(array_unique([$preferredSubdir, '', 'storefront']))
+        : ['', 'storefront'];
 
     foreach ($subdirs as $sub) {
         foreach ($dirs as $dir) {
@@ -971,12 +977,10 @@ function cms_twig_env(string $tpl_dir): Environment
         }, ['is_safe' => ['html']]));
 
         $env->addFunction(new TwigFunction('store_sidebar', function () {
-            $file  = $_SERVER['SCRIPT_NAME'] ?? '';
-            $path = '/storefront/' . basename($file);
             $links = cms_store_sidebar_links();
             $out   = '';
             $base = cms_base_url();
-            
+
             // Add query string parameters for continuity
             $extra = [];
             foreach (['l','s','i','a'] as $p) {
@@ -985,41 +989,41 @@ function cms_twig_env(string $tpl_dir): Environment
                 }
             }
             $qs = $extra ? ('?' . http_build_query($extra, '', '&')) : '';
-            
+
+            $currentArea = $_GET['area'] ?? '';
+            // Pages routed via all.php (game/package detail pages) should
+            // still highlight "All Games" in the sidebar.
+            if (in_array($currentArea, ['game','package'], true)) {
+                $currentArea = 'all';
+            }
+
             foreach ($links as $ln) {
                 if ($ln['type'] === 'spacer') {
-                    $out .= '<div class="menu_spacer"></div>';
+                    $out .= '<div class="menu_spacer"> </div>';
                     continue;
                 }
-                
-                // Determine if this is the current page
+
+                // Determine if this is the current page by comparing the
+                // link's own ?area= value against the request's area.
                 $url = $ln['url'];
-                $target = parse_url($url, PHP_URL_PATH);
-                $current_file = basename($file);
-                $target_file = basename($target);
-                $current = ($target_file === $current_file);
-                
-                // Special case for all.php - also highlight for game.php and package.php
-                if (!$current && ($target_file === 'all.php')) {
-                    if (in_array($current_file, ['game.php','package.php','all.php'], true)) {
-                        $current = true;
-                    }
-                }
-                
+                parse_str((string)parse_url($url, PHP_URL_QUERY), $q);
+                $linkArea = $q['area'] ?? '';
+                $current = ($linkArea === $currentArea);
+
                 // Add query string
                 $url .= $qs;
-                
+
                 $label = htmlspecialchars($ln['label']);
                 if (str_starts_with($url, '/')) {
                     $url = ($base ? rtrim($base, '/') : '') . $url;
                 }
                 $url = htmlspecialchars($url);
-                
+
                 if ($current) {
-                    $out .= '<span><span class="menu_pointer">»</span> '
-                        .'<a class="menu_item_current" style="color: #34788A;" href="'.$url.'">'.$label.'</a></span><br/>';
+                    $out .= '<span><font face="Wingdings 3"><span class="menu_pointer">„</span></font> '
+                        .'<a class="menu_item_current" href="'.$url.'">'.$label.'</a> </span><br/>';
                 } else {
-                    $out .= '<span><a class="menu_item" href="'.$url.'">'.$label.'</a></span><br/>';
+                    $out .= '<span><a class="menu_item" href="'.$url.'">'.$label.'</a>     </span><br/>';
                 }
             }
             return $out;
@@ -1891,8 +1895,17 @@ function cms_process_all_assets(string $html, array $vars, string $theme, string
     if ($cssDir === '.') {
         $cssDir = '';
     }
+    // Storefront pages ship their own css/ directory with storefront-specific
+    // rules (menu_item, menu_spacer, browse_link, etc.) that don't exist in
+    // the theme-root css/ directory. Prefer it when it actually has the file.
+    if (($vars['theme_subdir'] ?? '') === 'storefront') {
+        $storefrontCssDir = dirname(__DIR__)."/themes/$theme/storefront/css";
+        if (cms_is_file($storefrontCssDir.'/storefront.css')) {
+            $cssDir = 'storefront/css';
+        }
+    }
 
-    $pattern = '/(?:(?<attr>(?:src|href|background)=)(["\'])(?<path>[^"\']+)\2|url\((["\']?)(?<urlpath>[^)"\']+)\4\)|newImage\((["\'])(?<imgpath>[^"\']+)\6\))/i';
+    $pattern = '/(?:(?<attr>(?<![.\w])(?:src|href|background)=)(["\'])(?<path>[^"\']+)\2|url\((["\']?)(?<urlpath>[^)"\']+)\4\)|newImage\((["\'])(?<imgpath>[^"\']+)\6\))/i';
 
     return preg_replace_callback($pattern, function ($m) use ($vars, $cssDir, $base_url, $theme, &$assetCache) {
         if (!empty($m['attr'])) {
